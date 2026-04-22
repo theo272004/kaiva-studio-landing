@@ -157,7 +157,7 @@ const MockupRenderer = ({ type }) => {
       <img
         src={mockups[type]}
         alt={type}
-        className="h-full w-full object-cover opacity-90 transition-opacity duration-700 hover:opacity-100"
+        className="h-full w-full object-contain p-3 opacity-90 transition-opacity duration-700 hover:opacity-100 sm:object-cover sm:p-0"
       />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
       <div className="absolute left-4 top-4 flex gap-2">
@@ -169,9 +169,9 @@ const MockupRenderer = ({ type }) => {
   );
 };
 
-const FloatingRobot = ({ src, style, delay = 0, duration = 6, amplitude = 20, rotation = 8 }) => (
+const FloatingRobot = ({ src, style, className = '', delay = 0, duration = 6, amplitude = 20, rotation = 8 }) => (
   <motion.div
-    className="pointer-events-none absolute"
+    className={`pointer-events-none absolute ${className}`}
     style={{ ...style, zIndex: 15 }}
     animate={{
       y: [0, -amplitude, amplitude * 0.5, -amplitude * 0.7, 0],
@@ -229,7 +229,7 @@ const TiltSlide = ({ slide, isActive, position, onClick }) => {
       onClick={onClick}
       className="absolute left-1/2 top-1/2 cursor-pointer"
       style={{
-        width: 'clamp(320px, 42vw, 620px)',
+        width: 'clamp(250px, 68vw, 620px)',
         aspectRatio: '4/3',
         x: '-50%',
         y: '-50%',
@@ -341,9 +341,9 @@ const PortfolioSection = () => {
       className="relative min-h-screen overflow-hidden bg-[#050505] text-white"
       style={{ fontFamily: 'Manrope, sans-serif' }}
     >
-      <div className="relative z-30 px-8 pt-8 md:px-16" aria-hidden="true" />
+      <div className="relative z-30 px-6 pt-6 md:px-16 md:pt-8" aria-hidden="true" />
 
-      <div className="relative z-20 mt-12 px-8 md:mt-20 md:px-16">
+      <div className="relative z-20 mt-10 px-6 md:mt-20 md:px-16">
         <div className="flex justify-center text-center">
           <div className="max-w-3xl">
             <h1 className="font-['Manrope'] text-[clamp(40px,5.8vw,88px)] font-extrabold leading-[0.98] tracking-[-0.06em] text-white">
@@ -355,9 +355,8 @@ const PortfolioSection = () => {
 
       <div
         ref={stageRef}
-        className="relative z-10 mt-8 md:mt-12"
+        className="relative z-10 mt-8 h-[350px] sm:h-[420px] md:mt-12 md:h-[clamp(440px,58vh,680px)]"
         style={{
-          height: 'clamp(440px, 58vh, 680px)',
           perspective: '2000px',
         }}
         onWheel={handleWheel}
@@ -366,19 +365,21 @@ const PortfolioSection = () => {
       >
         <FloatingRobot
           src={asset('KaivaTheo.png')}
-          style={{ top: '2%', left: '9%', width: '210px', height: '210px' }}
+          className="block"
+          style={{ top: '1%', left: '2%', width: 'clamp(96px, 14vw, 210px)', height: 'clamp(96px, 14vw, 210px)' }}
           delay={0}
           duration={10}
-          amplitude={10}
-          rotation={3}
+          amplitude={6}
+          rotation={2}
         />
         <FloatingRobot
           src={asset('KaivaSara.png')}
-          style={{ bottom: '16%', right: '8%', width: '210px', height: '210px' }}
+          className="block"
+          style={{ bottom: '18%', right: '2%', width: 'clamp(96px, 14vw, 210px)', height: 'clamp(96px, 14vw, 210px)' }}
           delay={2.2}
           duration={10.5}
-          amplitude={9}
-          rotation={3}
+          amplitude={6}
+          rotation={2}
         />
 
         <div className="relative h-full w-full" style={{ transformStyle: 'preserve-3d' }}>
@@ -400,7 +401,7 @@ const PortfolioSection = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.5 }}
-            className="pointer-events-none absolute bottom-[-54px] left-8 z-20 md:left-16"
+            className="pointer-events-none absolute bottom-4 left-6 z-20 hidden md:block md:bottom-[-54px] md:left-16"
           >
             <div className="flex items-end gap-4">
               <div className="font-epilogue text-[clamp(48px,7vw,92px)] font-extrabold italic leading-none opacity-90" style={{ color: active.accent }}>
@@ -422,7 +423,7 @@ const PortfolioSection = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="pointer-events-none absolute bottom-[-44px] right-8 z-20 max-w-[240px] text-right md:right-16"
+            className="pointer-events-none absolute bottom-6 right-6 z-20 hidden max-w-[240px] text-right md:block md:bottom-[-44px] md:right-16"
           >
             <div className="mb-2 font-manrope text-[11px] font-bold uppercase tracking-wider text-[#8242F5]">- {active.brand}</div>
             <div className="font-manrope text-[13px] italic leading-relaxed text-white/64">{active.description}</div>
@@ -430,8 +431,27 @@ const PortfolioSection = () => {
         </AnimatePresence>
       </div>
 
-      <div className="relative z-20 mt-28 px-8 pb-12 md:mt-32 md:px-16">
-        <div className="flex items-center gap-6">
+      <div className="px-6 md:hidden">
+        <div className="rounded-[22px] border border-white/10 bg-white/5 p-5">
+          <div className="flex items-end gap-3">
+            <div className="font-epilogue text-[42px] font-extrabold italic leading-none opacity-90" style={{ color: active.accent }}>
+              {active.number}
+            </div>
+            <div className="pb-1">
+              <div className="font-manrope text-[10px] font-extrabold uppercase tracking-[0.28em] text-white/42">Servicio</div>
+              <div className="font-epilogue text-[22px] font-bold italic leading-tight text-white">{active.label}</div>
+              <div className="mt-1 font-manrope text-[11px] tracking-wider text-white/56">{active.vibe}</div>
+            </div>
+          </div>
+          <div className="mt-4 border-t border-white/10 pt-4">
+            <div className="mb-2 font-manrope text-[11px] font-bold uppercase tracking-wider text-[#8242F5]">- {active.brand}</div>
+            <div className="font-manrope text-[13px] italic leading-relaxed text-white/68">{active.description}</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative z-20 mt-8 px-6 pb-12 md:mt-32 md:px-16">
+        <div className="flex items-center gap-4 md:gap-6">
           <button
             onClick={() => setActiveIndex((p) => (p - 1 + slides.length) % slides.length)}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-white/14 transition-colors hover:border-white/42"
@@ -942,7 +962,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section id="inicio" data-nav-theme="light" className="relative h-screen w-full overflow-hidden bg-[#ffffff] font-open-sauce text-[#080808]">
+    <section id="inicio" data-nav-theme="light" className="relative min-h-[100svh] w-full overflow-hidden bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
       <motion.img
         src={asset('degradado-lateral.png')}
         alt=""
@@ -950,7 +970,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, scale: 0.92 }}
         animate={{ opacity: 0.95, scale: 1 }}
         transition={{ duration: 0.85, ease: 'easeOut' }}
-        className="pointer-events-none absolute left-[-34%] top-[68%] z-0 w-[66vw] min-w-[460px] max-w-[1120px] -translate-y-1/2 object-contain"
+        className="pointer-events-none absolute left-[-48%] top-[70%] z-0 hidden w-[82vw] min-w-[300px] max-w-[1120px] -translate-y-1/2 object-contain md:block md:left-[-34%] md:top-[68%] md:w-[66vw] md:min-w-[460px]"
       />
       <motion.img
         src={asset('degradado-lateral.png')}
@@ -959,7 +979,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, scale: 0.92 }}
         animate={{ opacity: 0.95, scale: 1 }}
         transition={{ duration: 0.85, delay: 0.08, ease: 'easeOut' }}
-        className="pointer-events-none absolute right-[-28%] top-[22%] z-0 w-[60vw] min-w-[420px] max-w-[980px] -translate-y-1/2 object-contain"
+        className="pointer-events-none absolute right-[-40%] top-[18%] z-0 hidden w-[78vw] min-w-[280px] max-w-[980px] -translate-y-1/2 object-contain md:block md:right-[-28%] md:top-[22%] md:w-[60vw] md:min-w-[420px]"
       />
 
       <motion.div
@@ -967,7 +987,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 18 }}
         animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
         transition={{ duration: 0.55, ease: 'easeOut' }}
-        className={`fixed left-[32px] top-[28px] z-40 w-fit text-left text-[18px] leading-[0.95] transition-colors duration-200 md:left-[80px] md:top-[40px] md:text-[20px] ${
+        className={`fixed left-6 top-5 z-40 w-fit text-left text-[16px] leading-[0.95] transition-colors duration-200 md:left-[80px] md:top-[40px] md:text-[20px] ${
           isDarkNavbar ? 'text-white' : 'text-[#080808]'
         }`}
       >
@@ -1013,19 +1033,35 @@ const HeroSection = () => {
       </motion.div>
 
       <motion.div
+        initial={{ opacity: 0, y: 18 }}
+        animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
+        transition={{ duration: 0.55, delay: 0.08, ease: 'easeOut' }}
+        className="fixed right-6 top-5 z-40 flex items-center gap-3 md:hidden"
+      >
+        <a
+          href="#planes"
+          className={`inline-flex min-h-[38px] items-center justify-center rounded-full px-4 font-manrope text-[10px] font-extrabold uppercase tracking-[0.2em] transition-colors ${
+            isDarkNavbar ? 'bg-white/10 text-white' : 'bg-[#080808] text-white'
+          }`}
+        >
+          Paquetes
+        </a>
+      </motion.div>
+
+      <motion.div
         initial={{ opacity: 0, y: 22 }}
         animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 22 }}
         transition={{ duration: 0.6, delay: 0.14, ease: 'easeOut' }}
-        className="absolute left-[32px] top-[120px] z-40 flex max-w-[360px] flex-col items-start text-left md:left-[80px] md:top-[160px] md:max-w-[720px]"
+        className="absolute left-6 right-6 top-[110px] z-40 flex max-w-[360px] flex-col items-start text-left md:left-[80px] md:right-auto md:top-[160px] md:max-w-[720px]"
       >
         <h1 className="w-fit text-[30px] font-extrabold leading-[0.98] tracking-[-0.05em] text-[#080808] md:text-[54px]">
-          <span className="block whitespace-nowrap">Paginas web claras,</span>
-          <span className="block whitespace-nowrap">rapidas y profesionales</span>
+          <span className="block md:whitespace-nowrap">Paginas web claras,</span>
+          <span className="block md:whitespace-nowrap">rapidas y profesionales</span>
         </h1>
 
         <a
           href="#proyectos"
-          className="mt-5 inline-block w-fit pb-1 text-[18px] font-medium leading-none underline decoration-1 underline-offset-[5px] md:mt-6 md:text-[20px]"
+          className="mt-4 inline-block w-fit pb-1 text-[16px] font-medium leading-none underline decoration-1 underline-offset-[5px] md:mt-6 md:text-[20px]"
           style={{
             background: 'linear-gradient(135deg, #6aa8ff, #7b6dff, #d96cff)',
             WebkitBackgroundClip: 'text',
@@ -1040,18 +1076,18 @@ const HeroSection = () => {
         initial={{ opacity: 0, scale: 0.96, y: 10 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.85, delay: 0.1, ease: 'easeOut' }}
-        className="absolute left-1/2 top-[270px] z-20 w-[110vw] max-w-[1040px] -translate-x-1/2 md:top-[220px]"
+        className="absolute left-1/2 top-[290px] z-20 w-[118vw] max-w-[560px] -translate-x-1/2 px-0 md:top-[220px] md:w-[110vw] md:max-w-[1040px]"
       >
-        <div className="relative mx-auto aspect-[1.16/1] w-full">
+        <div className="relative mx-auto aspect-[1.08/1] w-full md:aspect-[1.16/1]">
           <img
             src={asset('nombre hero.png')}
             alt="Kaiva Studio"
-            className="absolute left-1/2 top-[10%] w-[50%] -translate-x-1/2 object-contain"
+            className="absolute left-1/2 top-[10%] w-[58%] -translate-x-1/2 object-contain md:top-[10%] md:w-[50%]"
           />
           <img
             src={asset('robots hero.png')}
             alt="Robots Kaiva"
-            className="absolute left-1/2 top-[8%] w-[280%] -translate-x-1/2 scale-[1.15] object-contain"
+            className="absolute left-1/2 top-[9%] w-[245%] -translate-x-1/2 scale-[1.08] object-contain md:top-[8%] md:w-[280%] md:scale-[1.15]"
           />
         </div>
       </motion.div>
@@ -1060,7 +1096,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 18 }}
         animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
         transition={{ duration: 0.55, delay: 0.22, ease: 'easeOut' }}
-        className="absolute bottom-[40px] right-[32px] z-40 max-w-[340px] text-left text-[14px] font-normal leading-[1.5] text-[#080808]/64 md:bottom-[60px] md:right-[80px] md:max-w-[420px] md:text-[15px]"
+        className="absolute bottom-4 left-6 right-6 z-40 max-w-[280px] text-left text-[12px] font-normal leading-[1.5] text-[#080808]/64 md:bottom-[60px] md:left-auto md:right-[80px] md:max-w-[420px] md:text-[15px]"
       >
         Kaiva Studio combina diseno, estructura y tecnologia
         <br />
