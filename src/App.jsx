@@ -303,54 +303,105 @@ const SectionShell = ({ id, tone = 'light', className = '', children }) => {
 };
 
 const ServicesSection = () => {
-  return (
-    <>
-      <section id="servicios" data-nav-theme="light" className="flex items-center justify-center bg-white py-16 text-center md:py-24">
-        <motion.h2 
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="flex flex-wrap items-center justify-center gap-2.5 font-epilogue text-[clamp(40px,6vw,56px)] font-extrabold tracking-[-0.04em] text-[#050505]"
-        >
-          <span>Que</span>
-          <span className="bg-[#050505] px-3 py-1 leading-[1.1] text-white">
-            ofrecemos.
-          </span>
-        </motion.h2>
-      </section>
+  const [activeService, setActiveService] = useState(null);
 
-      <section data-nav-theme="dark" className="bg-[#050505] px-6 py-20 md:px-16 md:py-32">
-        <div className="mx-auto w-full max-w-[1320px]">
-          <div className="grid gap-14 md:grid-cols-2 lg:grid-cols-4 lg:gap-12">
-            {services.map((service, index) => (
-              <motion.div
+  return (
+    <section id="servicios" data-nav-theme="dark" className="relative flex min-h-[75vh] w-full flex-col items-center justify-center bg-[#050505] py-24 md:min-h-[90vh] md:py-32">
+      <div className="mx-auto flex w-full max-w-[1600px] flex-col px-6 md:px-12 lg:px-16">
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-20 md:mb-32"
+        >
+          <SectionHeader
+            eyebrow="Servicios"
+            title="Que ofrecemos"
+            description="Ofrecemos soluciones completas de desarrollo web que integran diseno, tecnologia y estructura en un solo proceso."
+            inverse
+          />
+        </motion.div>
+
+        <motion.div
+          className="grid flex-1 gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-8 xl:gap-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.12 } },
+          }}
+          onMouseLeave={() => setActiveService(null)}
+        >
+          {services.map((service, index) => {
+            const isActive = activeService === index;
+            const isQuiet = activeService !== null && !isActive;
+
+            return (
+              <motion.article
                 key={service.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5, delay: index * 0.1, ease: 'easeOut' }}
-                className="flex flex-col"
+                variants={{
+                  hidden: { opacity: 0, y: 40 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+                  },
+                }}
+                onHoverStart={() => setActiveService(index)}
+                onFocus={() => setActiveService(index)}
+                className="group relative flex h-full flex-col overflow-hidden outline-none transition-opacity duration-500"
+                style={{ opacity: isQuiet ? 0.35 : 1 }}
+                tabIndex={0}
               >
-                <div className="font-epilogue text-[48px] font-extrabold leading-none tracking-[-0.04em] text-white md:text-[56px]">
-                  0{index + 1}<span className="text-[#8242F5]">.</span>
+                {/* Reveal Background Panel */}
+                <div
+                  className="pointer-events-none absolute inset-0 bg-white"
+                  style={{
+                    transformOrigin: 'bottom',
+                    transform: isActive ? 'scaleY(1)' : 'scaleY(0)',
+                    transition: 'transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)',
+                  }}
+                />
+
+                <div className="relative z-10 flex h-full flex-col px-6 py-12 transition-colors duration-500 md:px-8 md:py-16 lg:px-10">
+                  <div 
+                    className="font-epilogue text-[64px] font-extrabold leading-[0.85] tracking-[-0.04em] transition-colors duration-500 md:text-[80px] xl:text-[96px]"
+                    style={{ color: isActive ? '#050505' : '#ffffff' }}
+                  >
+                    0{index + 1}<span className="text-[#8242F5]">.</span>
+                  </div>
+
+                  <div 
+                    className="my-10 h-px w-full transition-colors duration-500 md:my-14"
+                    style={{ 
+                      backgroundColor: isActive ? 'rgba(5,5,5,0.15)' : 'rgba(255,255,255,0.25)',
+                    }}
+                  />
+
+                  <div className="mt-auto">
+                    <h3 
+                      className="font-epilogue text-[26px] font-extrabold leading-[1.1] tracking-[-0.04em] transition-colors duration-500 md:text-[32px]"
+                      style={{ color: isActive ? '#050505' : '#ffffff' }}
+                    >
+                      {service.title}
+                    </h3>
+
+                    <p 
+                      className="mt-6 text-[15px] leading-relaxed transition-colors duration-500 md:text-[16px] md:leading-[1.8]"
+                      style={{ color: isActive ? 'rgba(5,5,5,0.7)' : 'rgba(255,255,255,0.55)' }}
+                    >
+                      {service.description}
+                    </p>
+                  </div>
                 </div>
-                
-                <div className="my-8 h-px w-full bg-white/20" />
-                
-                <h3 className="font-epilogue text-[20px] font-bold tracking-[-0.02em] text-white">
-                  {service.title}
-                </h3>
-                
-                <p className="mt-4 text-[14px] leading-relaxed text-white/60">
-                  {service.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-    </>
+              </motion.article>
+            );
+          })}
+        </motion.div>
+      </div>
+    </section>
   );
 };
 
