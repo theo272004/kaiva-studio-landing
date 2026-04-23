@@ -541,28 +541,78 @@ const ExpandedAgencySections = () => (
     </SectionShell>
 
     <SectionShell id="servicios" tone="dark">
-      <motion.div {...sectionReveal}>
-        <SectionHeader
-          eyebrow="Servicios"
-          title="Que ofrecemos"
-          description="Ofrecemos soluciones completas de desarrollo web que integran diseno, tecnologia y estructura en un solo proceso."
-          inverse
-        />
-        <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+      <div className="flex flex-col">
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.65, ease: 'easeOut' }}
+        >
+          <SectionHeader
+            eyebrow="Servicios"
+            title="Que ofrecemos"
+            description="Ofrecemos soluciones completas de desarrollo web que integran diseno, tecnologia y estructura en un solo proceso."
+            inverse
+          />
+        </motion.div>
+
+        <motion.div 
+          className="group mt-16 grid gap-4 md:grid-cols-2 lg:grid-cols-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: { staggerChildren: 0.12 }
+            }
+          }}
+        >
           {services.map((service) => (
             <motion.article
               key={service.title}
-              whileHover={{ y: -4 }}
-              transition={{ duration: 0.24, ease: 'easeOut' }}
-              className="rounded-[28px] border border-white/14 bg-transparent p-8"
+              variants={{
+                hidden: { opacity: 0, y: 24 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
+              }}
+              className="group/card relative flex h-full flex-col justify-between rounded-[24px] border border-white/5 bg-white/[0.02] p-7 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-2 hover:border-white/15 hover:bg-white/[0.04] hover:shadow-[0_24px_48px_-24px_rgba(255,255,255,0.06)] md:p-8 md:group-hover:opacity-50 md:hover:!opacity-100"
             >
-              <div className="font-manrope text-[11px] font-extrabold uppercase tracking-[0.28em] text-white/44">Kaiva</div>
-              <h3 className="mt-6 font-epilogue text-[30px] font-extrabold tracking-[-0.05em] text-white">{service.title}</h3>
-              <p className="mt-5 text-[15px] leading-8 text-white/68">{service.description}</p>
+              <div className="flex items-start justify-between">
+                <div className="font-manrope text-[10px] font-extrabold uppercase tracking-[0.28em] text-white/40 transition-colors duration-500 group-hover/card:text-white/70">
+                  Kaiva
+                </div>
+                <div className="flex h-6 w-6 items-center justify-center overflow-hidden">
+                  <svg 
+                    width="15" 
+                    height="15" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="1.5" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    className="-translate-x-2 translate-y-2 text-white/0 opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:translate-x-0 group-hover/card:translate-y-0 group-hover/card:text-white/70 group-hover/card:opacity-100"
+                  >
+                    <path d="M7 17L17 7M17 7H9M17 7V15" />
+                  </svg>
+                </div>
+              </div>
+
+              <div className="mt-16 md:mt-24">
+                <h3 className="font-epilogue text-[24px] font-extrabold leading-[1.15] tracking-[-0.04em] text-white/90 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:translate-x-1 group-hover/card:text-white">
+                  {service.title}
+                </h3>
+                <p className="mt-4 text-[14px] leading-relaxed text-white/50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:translate-x-1 group-hover/card:text-white/70">
+                  {service.description}
+                </p>
+              </div>
+
+              {/* Optional Subtle Glow on Hover */}
+              <div className="pointer-events-none absolute inset-0 rounded-[24px] bg-gradient-to-b from-white/[0.03] to-transparent opacity-0 transition-opacity duration-500 group-hover/card:opacity-100" />
             </motion.article>
           ))}
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </SectionShell>
 
     <SectionShell id="proceso" tone="light">
