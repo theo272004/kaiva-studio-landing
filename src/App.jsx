@@ -8,9 +8,9 @@ const slides = [
     id: 1,
     number: '01',
     label: 'Inteligencia de Negocios',
-    vibe: 'Analitico · Predictivo',
+    vibe: 'Analítico · Predictivo',
     brand: 'KAIVA INSIGHTS',
-    description: 'Transformamos datos complejos en dashboards intuitivos que impulsan decisiones estrategicas.',
+    description: 'Transformamos datos complejos en dashboards intuitivos que impulsan decisiones estratégicas.',
     accent: '#8242F5',
     mockup: 'dashboard',
   },
@@ -18,9 +18,9 @@ const slides = [
     id: 2,
     number: '02',
     label: 'E-Commerce de Lujo',
-    vibe: 'Exclusivo · Conversion',
+    vibe: 'Exclusivo · Conversión',
     brand: 'KAIVA COMMERCE',
-    description: 'Experiencias de compra premium donde la estetica eleva el valor percibido de cada producto.',
+    description: 'Experiencias de compra premium donde la estética eleva el valor percibido de cada producto.',
     accent: '#8242F5',
     mockup: 'ecommerce',
   },
@@ -28,9 +28,9 @@ const slides = [
     id: 3,
     number: '03',
     label: 'Infraestructura SaaS',
-    vibe: 'Solido · Escalable',
+    vibe: 'Sólido · Escalable',
     brand: 'KAIVA CORE',
-    description: 'Plataformas tecnologicas disenadas para el rendimiento extremo y la claridad operativa.',
+    description: 'Plataformas tecnológicas diseñadas para el rendimiento extremo y la claridad operativa.',
     accent: '#8242F5',
     mockup: 'tech',
   },
@@ -55,39 +55,39 @@ const businessPillars = [
 const services = [
   {
     title: 'Desarrollo web',
-    description: 'Creamos paginas web profesionales pensadas para transmitir confianza, ordenar la presencia digital y generar oportunidades reales.',
+    description: 'Creamos páginas web profesionales pensadas para transmitir confianza, ordenar la presencia digital y generar oportunidades reales.',
   },
   {
-    title: 'Diseno UI/UX',
-    description: 'Disenamos experiencias claras, rapidas y enfocadas en conversion, con una estructura visual alineada al objetivo comercial.',
+    title: 'Diseño UI/UX',
+    description: 'Diseñamos experiencias claras, rápidas y enfocadas en conversión, con una estructura visual alineada al objetivo comercial.',
   },
   {
-    title: 'Automatizacion',
-    description: 'Integramos herramientas, respuestas y flujos para reducir friccion operativa y dejar una solucion lista para funcionar.',
+    title: 'Automatización',
+    description: 'Integramos herramientas, respuestas y flujos para reducir fricción operativa y dejar una solución lista para funcionar.',
   },
   {
-    title: 'Configuracion tecnica',
-    description: 'Resolvemos dominio, hosting, seguridad, correos corporativos y publicacion final dentro de un solo proceso.',
+    title: 'Configuración técnica',
+    description: 'Resolvemos dominio, hosting, seguridad, correos corporativos y publicación final dentro de un solo proceso.',
   },
 ];
 
-const processSteps = ['Diagnostico', 'Estructura', 'Diseno', 'Desarrollo', 'Entrega'];
+const processSteps = ['Diagnóstico', 'Estructura', 'Diseño', 'Desarrollo', 'Entrega'];
 
 const resultCases = [
   {
-    name: 'Que somos',
-    lead: 'Kaiva Studio es un estudio de desarrollo web que crea experiencias digitales enfocadas en claridad, estetica y funcionalidad.',
-    detail: 'No nos limitamos a disenar paginas web. Desarrollamos plataformas que ayudan a posicionar negocios, organizar su presencia digital y convertir visitas en oportunidades reales.',
+    name: 'Qué somos',
+    lead: 'Kaiva Studio es un estudio de desarrollo web que crea experiencias digitales enfocadas en claridad, estética y funcionalidad.',
+    detail: 'No nos limitamos a diseñar páginas web. Desarrollamos plataformas que ayudan a posicionar negocios, organizar su presencia digital y convertir visitas en oportunidades reales.',
   },
   {
-    name: 'Publico objetivo',
-    lead: 'Trabajamos con emprendedores, marcas personales, negocios en crecimiento, pymes y ecommerce en expansion.',
-    detail: 'El cliente de Kaiva busca claridad, rapidez y confianza en el proceso. Necesita una solucion integral para avanzar sin complicaciones ni multiples proveedores.',
+    name: 'Público objetivo',
+    lead: 'Trabajamos con emprendedores, marcas personales, negocios en crecimiento, pymes y ecommerce en expansión.',
+    detail: 'El cliente de Kaiva busca claridad, rapidez y confianza en el proceso. Necesita una solución integral para avanzar sin complicaciones ni múltiples proveedores.',
   },
   {
     name: 'Personalidad de marca',
-    lead: 'Kaiva se define por una personalidad clara, segura y estrategica.',
-    detail: 'Es una marca moderna, visual y eficiente, con una comunicacion directa, profesional y orientada a resultados, sin complejidad innecesaria.',
+    lead: 'Kaiva se define por una personalidad clara, segura y estratégica.',
+    detail: 'Es una marca moderna, visual y eficiente, con una comunicación directa, profesional y orientada a resultados, sin complejidad innecesaria.',
   },
 ];
 
@@ -272,11 +272,11 @@ const TiltSlide = ({ slide, isActive, position, onClick }) => {
 const SectionHeader = ({ eyebrow, title, description, align = 'left', inverse = false }) => (
   <div className={align === 'center' ? 'mx-auto max-w-3xl text-center' : 'max-w-3xl'}>
     {eyebrow ? (
-      <div className={`mb-4 text-[11px] font-manrope font-extrabold uppercase tracking-[0.32em] ${inverse ? 'text-white/64' : 'text-[#21B2C6]'}`}>
+      <div className={`mb-4 text-[11px] font-manrope font-bold uppercase tracking-[0.26em] ${inverse ? 'text-white/64' : 'text-[#21B2C6]'}`}>
         {eyebrow}
       </div>
     ) : null}
-    <h2 className={`text-[clamp(34px,5vw,78px)] font-epilogue font-extrabold leading-[0.98] tracking-[-0.065em] ${inverse ? 'text-white' : 'text-[#080808]'}`}>
+    <h2 className={`text-[clamp(34px,5vw,78px)] font-epilogue font-extrabold leading-[1.02] tracking-[-0.04em] ${inverse ? 'text-white' : 'text-[#080808]'}`}>
       {title}
     </h2>
     {description ? (
@@ -315,11 +315,15 @@ const ServicesSection = () => {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           >
-            <SectionHeader
-              eyebrow="Servicios"
-              title="Que ofrecemos"
-              description="Ofrecemos soluciones completas de desarrollo web que integran diseno, tecnologia y estructura en un solo proceso."
-            />
+            <div className="mx-auto flex max-w-4xl flex-col items-center justify-center text-center">
+              <h2 className="flex flex-wrap items-end justify-center gap-x-4 gap-y-4 font-inter text-[clamp(38px,6vw,84px)] leading-[0.98] text-[#080808]">
+                <span className="font-bold tracking-[-0.045em]">Nuestros</span>
+                <span className="inline-flex items-end gap-3 bg-[#080808] px-6 py-3 md:px-7 md:py-3.5">
+                  <span className="font-semibold tracking-[0.015em] text-white [font-kerning:normal]">servicios</span>
+                  <span className="mb-[0.08em] h-3 w-3 shrink-0 bg-[#7C3AED] md:h-3.5 md:w-3.5" aria-hidden="true" />
+                </span>
+              </h2>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -372,7 +376,7 @@ const ServicesSection = () => {
 
                   <div className="relative z-10 flex min-h-full w-full flex-col px-7 py-9 md:px-8 md:py-10 lg:px-9 lg:py-11 xl:px-10">
                     <motion.div
-                      className="font-epilogue text-[48px] font-extrabold leading-none tracking-[-0.07em] md:text-[60px] xl:text-[72px]"
+                      className="font-epilogue text-[48px] font-extrabold leading-none tracking-[-0.04em] md:text-[60px] xl:text-[72px]"
                       animate={{
                         color: isActive ? '#080808' : '#ffffff',
                         x: isActive ? 4 : 0,
@@ -380,7 +384,10 @@ const ServicesSection = () => {
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     >
                       0{index + 1}
-                      <span className="text-[#8242F5]">.</span>
+                      <span
+                        className="relative top-[0.03em] ml-2 inline-block h-[0.18em] w-[0.18em] bg-[#7C3AED] align-baseline"
+                        aria-hidden="true"
+                      />
                     </motion.div>
 
                     <motion.div
@@ -395,7 +402,7 @@ const ServicesSection = () => {
                     <div className="mt-10 flex flex-1 flex-col justify-between gap-10 md:mt-12 md:gap-12">
                       <div className="max-w-[17rem]">
                         <motion.h3
-                          className="font-epilogue text-[26px] font-extrabold leading-[1.02] tracking-[-0.055em] md:text-[30px] xl:text-[34px]"
+                          className="font-epilogue text-[26px] font-extrabold leading-[1.08] tracking-[-0.03em] md:text-[30px] xl:text-[34px]"
                           animate={{
                             color: isActive ? '#080808' : '#ffffff',
                             x: isActive ? 5 : 0,
@@ -474,7 +481,7 @@ const PortfolioSection = () => {
       <div className="relative z-20 mt-10 px-6 md:mt-20 md:px-16">
         <div className="flex justify-center text-center">
           <div className="max-w-3xl">
-            <h1 className="font-['Manrope'] text-[clamp(40px,5.8vw,88px)] font-extrabold leading-[0.98] tracking-[-0.06em] text-white">
+            <h1 className="font-['Inter Tight'] text-[clamp(40px,5.8vw,88px)] font-extrabold leading-[1.02] tracking-[-0.035em] text-white">
               Nuestras webs
             </h1>
           </div>
@@ -532,12 +539,12 @@ const PortfolioSection = () => {
             className="pointer-events-none absolute bottom-4 left-6 z-20 hidden md:block md:bottom-[-54px] md:left-16"
           >
             <div className="flex items-end gap-4">
-              <div className="font-epilogue text-[clamp(48px,7vw,92px)] font-extrabold italic leading-none opacity-90" style={{ color: active.accent }}>
+              <div className="font-epilogue text-[clamp(48px,7vw,92px)] font-extrabold italic leading-none tracking-[-0.03em] opacity-90" style={{ color: active.accent }}>
                 {active.number}
               </div>
               <div className="pb-2">
-                <div className="font-manrope text-[10px] font-extrabold uppercase tracking-[0.3em] text-white/42">Servicio</div>
-                <div className="font-epilogue text-xl font-bold italic leading-tight md:text-2xl">{active.label}</div>
+                <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.24em] text-white/42">Servicio</div>
+                <div className="font-epilogue text-xl font-semibold italic leading-[1.2] tracking-[-0.02em] md:text-2xl">{active.label}</div>
                 <div className="mt-1 font-manrope text-[11px] tracking-wider text-white/56">{active.vibe}</div>
               </div>
             </div>
@@ -562,12 +569,12 @@ const PortfolioSection = () => {
       <div className="px-6 md:hidden">
         <div className="rounded-[22px] border border-white/10 bg-white/5 p-5">
           <div className="flex items-end gap-3">
-            <div className="font-epilogue text-[42px] font-extrabold italic leading-none opacity-90" style={{ color: active.accent }}>
+            <div className="font-epilogue text-[42px] font-extrabold italic leading-none tracking-[-0.03em] opacity-90" style={{ color: active.accent }}>
               {active.number}
             </div>
             <div className="pb-1">
-              <div className="font-manrope text-[10px] font-extrabold uppercase tracking-[0.28em] text-white/42">Servicio</div>
-              <div className="font-epilogue text-[22px] font-bold italic leading-tight text-white">{active.label}</div>
+              <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.24em] text-white/42">Servicio</div>
+              <div className="font-epilogue text-[22px] font-semibold italic leading-[1.2] tracking-[-0.02em] text-white">{active.label}</div>
               <div className="mt-1 font-manrope text-[11px] tracking-wider text-white/56">{active.vibe}</div>
             </div>
           </div>
@@ -641,24 +648,24 @@ const ExpandedAgencySections = () => (
     <SectionShell id="estructura" tone="light">
       <motion.div {...sectionReveal} className="grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
         <SectionHeader
-          eyebrow="Diagnostico"
-          title="Descripcion de marca"
-          description="Kaiva Studio es un estudio de desarrollo web especializado en la creacion de paginas claras, rapidas y visualmente impactantes para negocios que buscan crecer con una presencia digital profesional."
+          eyebrow="Diagnóstico"
+          title="Descripción de marca"
+          description="Kaiva Studio es un estudio de desarrollo web especializado en la creación de páginas claras, rápidas y visualmente impactantes para negocios que buscan crecer con una presencia digital profesional."
         />
 
         <div className="rounded-[30px] border border-[#080808]/14 bg-white p-8 md:p-10">
           <div className="space-y-5">
             {businessPillars.map((item, index) => (
               <div key={item} className="flex items-start gap-5 border-b border-[#080808]/10 pb-6 last:border-b-0 last:pb-0">
-                <span className="min-w-[34px] font-manrope text-[11px] font-extrabold uppercase tracking-[0.3em] text-[#080808]/42">
+                <span className="min-w-[34px] font-manrope text-[11px] font-bold uppercase tracking-[0.24em] text-[#080808]/42">
                   0{index + 1}
                 </span>
                 <div>
-                  <div className="font-epilogue text-[26px] font-extrabold leading-tight tracking-[-0.04em] text-[#080808]">{item}</div>
+                  <div className="font-epilogue text-[26px] font-extrabold leading-[1.1] tracking-[-0.025em] text-[#080808]">{item}</div>
                   <p className="mt-3 text-[14px] leading-7 text-[#080808]/62">
-                    {index === 0 && 'Cada proceso debe ser entendible para el cliente y cada mensaje debe transmitir seguridad y proposito.'}
-                    {index === 1 && 'El proceso esta disenado para ser comprensible, estructurado y sin fricciones, evitando dependencias externas.'}
-                    {index === 2 && 'Kaiva no compite por precio. Compite por orden, estetica y resultados.'}
+                    {index === 0 && 'Cada proceso debe ser entendible para el cliente y cada mensaje debe transmitir seguridad y propósito.'}
+                    {index === 1 && 'El proceso está diseñado para ser comprensible, estructurado y sin fricciones, evitando dependencias externas.'}
+                    {index === 2 && 'Kaiva no compite por precio. Compite por orden, estética y resultados.'}
                   </p>
                 </div>
               </div>
@@ -674,25 +681,25 @@ const ExpandedAgencySections = () => (
       <motion.div {...sectionReveal}>
         <SectionHeader
           eyebrow="Proceso"
-          title="Como trabajamos"
-          description="Nuestro proceso esta pensado para ser claro, estructurado y sin fricciones, de modo que el cliente entienda que se esta haciendo, por que se hace y que resultado puede esperar."
+          title="Cómo trabajamos"
+          description="Nuestro proceso está pensado para ser claro, estructurado y sin fricciones, de modo que el cliente entienda qué se está haciendo, por qué se hace y qué resultado puede esperar."
         />
         <div className="mt-16 rounded-[32px] border border-[#080808]/14 bg-white p-8 md:p-10">
           <div className="grid gap-8 md:grid-cols-5 md:gap-6">
             {processSteps.map((step, index) => (
               <div key={step} className="relative">
                 <div className="mb-5 flex items-center gap-4 md:block">
-                  <div className="mb-0 flex h-12 w-12 items-center justify-center rounded-full border border-[#080808]/16 bg-white font-manrope text-[12px] font-extrabold tracking-[0.22em] text-[#080808] md:mb-5">
+                  <div className="mb-0 flex h-12 w-12 items-center justify-center rounded-full border border-[#080808]/16 bg-white font-manrope text-[12px] font-bold tracking-[0.18em] text-[#080808] md:mb-5">
                     0{index + 1}
                   </div>
-                  <div className="font-epilogue text-[24px] font-extrabold tracking-[-0.045em] text-[#080808] md:text-[22px]">{step}</div>
+                  <div className="font-epilogue text-[24px] font-extrabold leading-[1.12] tracking-[-0.025em] text-[#080808] md:text-[22px]">{step}</div>
                 </div>
                 <p className="max-w-[210px] text-[14px] leading-7 text-[#080808]/62">
                   {index === 0 && 'Analizamos objetivos, contexto y necesidades del negocio antes de construir.'}
-                  {index === 1 && 'Organizamos la estructura para que la presencia digital tenga un proposito claro y medible.'}
-                  {index === 2 && 'Disenamos una experiencia visual atractiva, profesional y alineada a la marca.'}
-                  {index === 3 && 'Integramos tecnologia, herramientas y configuracion tecnica completa en un solo servicio.'}
-                  {index === 4 && 'Publicamos una solucion lista para operar desde el primer dia, con soporte posterior segun el plan.'}
+                  {index === 1 && 'Organizamos la estructura para que la presencia digital tenga un propósito claro y medible.'}
+                  {index === 2 && 'Diseñamos una experiencia visual atractiva, profesional y alineada a la marca.'}
+                  {index === 3 && 'Integramos tecnología, herramientas y configuración técnica completa en un solo servicio.'}
+                  {index === 4 && 'Publicamos una solución lista para operar desde el primer día, con soporte posterior según el plan.'}
                 </p>
                 {index < processSteps.length - 1 ? (
                   <div className="hidden md:block">
@@ -714,8 +721,8 @@ const ExpandedAgencySections = () => (
       <motion.div {...sectionReveal} className="relative z-10">
         <SectionHeader
           eyebrow="Marca"
-          title="Que somos y para quien trabajamos"
-          description="Nuestro trabajo conecta lo visual con lo estrategico para construir activos digitales que no solo se ven bien, sino que funcionan a nivel de negocio."
+          title="Qué somos y para quién trabajamos"
+          description="Nuestro trabajo conecta lo visual con lo estratégico para construir activos digitales que no solo se ven bien, sino que funcionan a nivel de negocio."
           inverse
         />
         <div className="mt-14 grid gap-6 lg:grid-cols-3">
@@ -724,8 +731,8 @@ const ExpandedAgencySections = () => (
               key={item.name}
               className="rounded-[30px] border border-white/14 bg-transparent p-8"
             >
-              <div className="font-manrope text-[11px] font-extrabold uppercase tracking-[0.3em] text-white/44">Kaiva Studio</div>
-              <h3 className="mt-5 font-epilogue text-[30px] font-extrabold tracking-[-0.05em] text-white">{item.name}</h3>
+              <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.24em] text-white/44">Kaiva Studio</div>
+              <h3 className="mt-5 font-epilogue text-[30px] font-extrabold leading-[1.08] tracking-[-0.025em] text-white">{item.name}</h3>
               <div className="mt-8 grid gap-5">
                 <div>
                   <div className="font-manrope text-[11px] font-extrabold uppercase tracking-[0.24em] text-white/38">Enfoque</div>
@@ -750,8 +757,8 @@ const ExpandedAgencySections = () => (
     >
       <motion.div {...sectionReveal} className="mx-auto w-full max-w-[1180px]">
           <div className="max-w-3xl">
-            <div className="font-manrope text-[11px] font-extrabold uppercase tracking-[0.34em] text-white/68">Pricing</div>
-            <h2 className="mt-3 font-epilogue text-[clamp(44px,7vw,92px)] font-extrabold leading-[0.92] tracking-[-0.07em] text-white">
+            <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.26em] text-white/68">Pricing</div>
+            <h2 className="mt-3 font-epilogue text-[clamp(44px,7vw,92px)] font-extrabold leading-[0.98] tracking-[-0.04em] text-white">
               Planes
             </h2>
             <p className="mt-3 max-w-2xl text-[15px] leading-7 text-white/82 md:text-[17px]">
@@ -774,15 +781,15 @@ const ExpandedAgencySections = () => (
                 }`}
               >
                 {plan.featured ? (
-                  <div className="absolute right-5 top-5 rounded-full border border-[#C6FF00]/20 bg-[#C6FF00] px-3 py-1.5 font-manrope text-[10px] font-extrabold uppercase tracking-[0.2em] text-[#080808]">
+                  <div className="absolute right-5 top-5 rounded-full border border-[#C6FF00]/20 bg-[#C6FF00] px-3.5 py-2 font-manrope text-[10px] font-bold uppercase tracking-[0.16em] text-[#080808]">
                     {plan.badge}
                   </div>
                 ) : null}
 
-                <div className={`font-manrope text-[11px] font-extrabold uppercase tracking-[0.3em] ${plan.featured ? 'text-white/52' : 'text-[#080808]/44'}`}>
+                <div className={`font-manrope text-[11px] font-bold uppercase tracking-[0.22em] ${plan.featured ? 'text-white/52' : 'text-[#080808]/44'}`}>
                   {plan.name}
                 </div>
-                <div className={`mt-3 font-epilogue text-[34px] font-extrabold leading-[0.95] tracking-[-0.06em] md:text-[38px] ${plan.featured ? 'text-white' : 'text-[#080808]'}`}>
+                <div className={`mt-3 font-epilogue text-[34px] font-extrabold leading-[1] tracking-[-0.03em] md:text-[38px] ${plan.featured ? 'text-white' : 'text-[#080808]'}`}>
                   {plan.price}
                 </div>
                 <p className={`mt-3 max-w-[28ch] text-[14px] leading-6 ${plan.featured ? 'text-white/74' : 'text-[#080808]/68'}`}>
@@ -807,7 +814,7 @@ const ExpandedAgencySections = () => (
 
                 <div className="mt-auto pt-6">
                   <button
-                    className={`inline-flex min-h-[42px] items-center justify-center rounded-full px-5 py-2.5 font-manrope text-[11px] font-extrabold uppercase tracking-[0.22em] transition-all duration-300 ${
+                    className={`inline-flex min-h-[44px] items-center justify-center rounded-full px-6 py-3 font-manrope text-[11px] font-bold uppercase tracking-[0.16em] transition-all duration-300 ${
                       plan.featured
                         ? 'bg-white text-[#080808] hover:-translate-y-0.5 hover:bg-white/92'
                         : 'bg-[#080808] text-white hover:-translate-y-0.5 hover:bg-[#141414]'
@@ -827,10 +834,10 @@ const ExpandedAgencySections = () => (
           >
             <div className="grid gap-0 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.45fr)_auto] md:items-center">
               <div className="px-6 py-6 md:min-h-[148px] md:border-r md:border-white/12 md:px-8">
-                <div className="font-manrope text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#C6FF00]">
+                <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.24em] text-[#C6FF00]">
                   {ecommercePlan.label}
                 </div>
-                <div className="mt-3 font-epilogue text-[30px] font-bold leading-none tracking-[-0.04em] text-white/96 md:text-[34px]">
+                <div className="mt-3 font-epilogue text-[30px] font-semibold leading-[1.02] tracking-[-0.025em] text-white/96 md:text-[34px]">
                   {ecommercePlan.name}
                 </div>
                 <div className="mt-3 font-manrope text-[18px] font-extrabold leading-none tracking-[-0.03em] text-white/88">
@@ -869,7 +876,7 @@ const ExpandedAgencySections = () => (
       <motion.div {...sectionReveal} className="grid gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
         <SectionHeader
           eyebrow="Confianza"
-          title="Por que Kaiva"
+          title="Por qué Kaiva"
           description="Kaiva Studio se rige por principios claros que garantizan consistencia, confianza y profesionalismo en cada proyecto."
           inverse
         />
@@ -879,14 +886,14 @@ const ExpandedAgencySections = () => (
               key={point}
               className="rounded-[26px] border border-white/14 bg-transparent p-6"
             >
-              <div className="font-manrope text-[11px] font-extrabold uppercase tracking-[0.28em] text-white/42">0{index + 1}</div>
-              <div className="mt-4 font-epilogue text-[27px] font-extrabold leading-tight tracking-[-0.05em] text-white">{point}</div>
+              <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-white/42">0{index + 1}</div>
+              <div className="mt-4 font-epilogue text-[27px] font-extrabold leading-[1.08] tracking-[-0.025em] text-white">{point}</div>
               <div className="mt-3 text-[14px] leading-7 text-white/66">
                 {index === 0 && 'Cada proceso debe ser entendible para el cliente.'}
-                {index === 1 && 'Cada entrega debe cumplir un estandar alto.'}
+                {index === 1 && 'Cada entrega debe cumplir un estándar alto.'}
                 {index === 2 && 'Los tiempos se respetan y se optimizan.'}
                 {index === 3 && 'Lo prometido se cumple con orden y control.'}
-                {index === 4 && 'Cada decision tiene un proposito funcional.'}
+                {index === 4 && 'Cada decisión tiene un propósito funcional.'}
               </div>
             </div>
           ))}
@@ -897,14 +904,14 @@ const ExpandedAgencySections = () => (
     <SectionShell id="kaiva" tone="muted">
       <motion.div {...sectionReveal} className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <div className="rounded-[32px] border border-[#080808]/14 bg-[#080808] p-8 text-white md:p-10">
-          <div className="font-manrope text-[11px] font-extrabold uppercase tracking-[0.34em] text-white/44">Kaiva Studio</div>
-          <div className="mt-8 font-epilogue text-[clamp(34px,4vw,54px)] font-extrabold leading-[1.02] tracking-[-0.05em]">
+          <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.24em] text-white/44">Kaiva Studio</div>
+          <div className="mt-8 font-epilogue text-[clamp(34px,4vw,54px)] font-extrabold leading-[1.08] tracking-[-0.03em]">
             Ayudamos a negocios a construir una presencia digital profesional, funcional y alineada con sus objetivos.
           </div>
         </div>
         <div className="max-w-2xl">
           <p className="text-[17px] leading-8 text-[#080808]/68">
-            Kaiva Studio elimina la complejidad tecnica para que el cliente pueda enfocarse en hacer crecer su negocio, a traves de procesos claros, soluciones integrales y ejecucion eficiente.
+            Kaiva Studio elimina la complejidad técnica para que el cliente pueda enfocarse en hacer crecer su negocio, a través de procesos claros, soluciones integrales y ejecución eficiente.
           </p>
         </div>
       </motion.div>
@@ -914,16 +921,16 @@ const ExpandedAgencySections = () => (
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),transparent)]" />
       <motion.div {...sectionReveal} className="relative z-10 rounded-[36px] border border-white/14 bg-transparent px-8 py-16 text-center md:px-14 md:py-22">
         <div className="mx-auto max-w-4xl">
-          <div className="font-manrope text-[11px] font-extrabold uppercase tracking-[0.34em] text-white/44">Vision</div>
-          <h2 className="mt-6 font-epilogue text-[clamp(40px,5.4vw,86px)] font-extrabold leading-[0.98] tracking-[-0.065em] text-white">
-            Construimos presencia digital solida y bien ejecutada
+          <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.24em] text-white/44">Visión</div>
+          <h2 className="mt-6 font-epilogue text-[clamp(40px,5.4vw,86px)] font-extrabold leading-[1.02] tracking-[-0.04em] text-white">
+            Construimos presencia digital sólida y bien ejecutada
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-[17px] leading-8 text-white/72">
-            Buscamos consolidarnos como un estudio referente en desarrollo web para negocios que valoran la claridad, la estetica y la estructura.
+            Buscamos consolidarnos como un estudio referente en desarrollo web para negocios que valoran la claridad, la estética y la estructura.
           </p>
           <a
             href="#contacto"
-            className="mt-10 inline-flex items-center justify-center rounded-full border border-white bg-white px-8 py-4 font-manrope text-[13px] font-extrabold uppercase tracking-[0.2em] text-[#080808] transition-transform duration-300 hover:-translate-y-0.5"
+            className="mt-10 inline-flex items-center justify-center rounded-full border border-white bg-white px-9 py-4 font-manrope text-[13px] font-bold uppercase tracking-[0.15em] text-[#080808] transition-transform duration-300 hover:-translate-y-0.5"
           >
             Hablemos de tu proyecto
           </a>
@@ -936,7 +943,7 @@ const ExpandedAgencySections = () => (
         <SectionHeader
           eyebrow="Contacto"
           title="Conversemos"
-          description="La comunicacion de Kaiva Studio es directa, clara y orientada a resultados. Cuentanos sobre tu proyecto y te responderemos con precision, sin tecnicismos innecesarios."
+          description="La comunicación de Kaiva Studio es directa, clara y orientada a resultados. Cuéntanos sobre tu proyecto y te responderemos con precisión, sin tecnicismos innecesarios."
         />
         <div className="grid gap-6">
           <div className="grid gap-6 md:grid-cols-2">
@@ -944,16 +951,16 @@ const ExpandedAgencySections = () => (
               href="https://wa.me/"
               className="rounded-[26px] border border-[#080808]/14 bg-white p-6 transition-transform duration-300 hover:-translate-y-1"
             >
-              <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.28em] text-[#21B2C6]">WhatsApp</div>
-              <div className="mt-5 font-epilogue text-[30px] font-extrabold tracking-[-0.05em] text-[#080808]">Contacto directo</div>
-              <div className="mt-2 text-[15px] text-[#080808]/62">Abrir conversacion</div>
+              <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-[#21B2C6]">WhatsApp</div>
+              <div className="mt-5 font-epilogue text-[30px] font-extrabold leading-[1.08] tracking-[-0.025em] text-[#080808]">Contacto directo</div>
+              <div className="mt-2 text-[15px] text-[#080808]/62">Abrir conversación</div>
             </a>
             <a
               href="mailto:hola@kaivastudio.com"
               className="rounded-[26px] border border-[#080808]/14 bg-white p-6 transition-transform duration-300 hover:-translate-y-1"
             >
-              <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.28em] text-[#21B2C6]">Email</div>
-              <div className="mt-5 font-epilogue text-[30px] font-extrabold tracking-[-0.05em] text-[#080808]">hola@kaivastudio.com</div>
+              <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-[#21B2C6]">Email</div>
+              <div className="mt-5 font-epilogue text-[30px] font-extrabold leading-[1.08] tracking-[-0.02em] text-[#080808]">hola@kaivastudio.com</div>
               <div className="mt-2 text-[15px] text-[#080808]/62">Respuesta por correo</div>
             </a>
           </div>
@@ -961,7 +968,7 @@ const ExpandedAgencySections = () => (
           <form className="rounded-[32px] border border-[#080808]/14 bg-white p-7 md:p-8">
             <div className="grid gap-5 md:grid-cols-2">
               <label className="block">
-                <span className="font-manrope text-[11px] font-bold uppercase tracking-[0.26em] text-[#201d1a]/54">Nombre</span>
+                <span className="font-manrope text-[11px] font-bold uppercase tracking-[0.2em] text-[#201d1a]/54">Nombre</span>
                 <input
                   type="text"
                   placeholder="Tu nombre"
@@ -969,7 +976,7 @@ const ExpandedAgencySections = () => (
                 />
               </label>
               <label className="block">
-                <span className="font-manrope text-[11px] font-bold uppercase tracking-[0.26em] text-[#201d1a]/54">Email</span>
+                <span className="font-manrope text-[11px] font-bold uppercase tracking-[0.2em] text-[#201d1a]/54">Email</span>
                 <input
                   type="email"
                   placeholder="tu@email.com"
@@ -978,20 +985,20 @@ const ExpandedAgencySections = () => (
               </label>
             </div>
             <label className="mt-5 block">
-              <span className="font-manrope text-[11px] font-bold uppercase tracking-[0.26em] text-[#201d1a]/54">Proyecto</span>
+              <span className="font-manrope text-[11px] font-bold uppercase tracking-[0.2em] text-[#201d1a]/54">Proyecto</span>
               <textarea
                 rows="6"
-                placeholder="Cuantanos sobre tu negocio, objetivos y el tipo de web que necesitas."
+                placeholder="Cuéntanos sobre tu negocio, objetivos y el tipo de web que necesitas."
                 className="mt-3 w-full rounded-[24px] border border-[#201d1a]/10 bg-white px-5 py-4 text-[15px] text-[#201d1a] outline-none transition-colors focus:border-[#21B2C6]"
               />
             </label>
             <div className="mt-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <p className="max-w-lg text-[13px] leading-6 text-[#201d1a]/58">
-                Proyectos seleccionados, procesos claros y una ejecucion orientada a resultado.
+                Proyectos seleccionados, procesos claros y una ejecución orientada a resultados.
               </p>
               <button
                 type="submit"
-                className="inline-flex items-center justify-center rounded-full bg-[#201d1a] px-8 py-4 font-manrope text-[13px] font-bold uppercase tracking-[0.2em] text-[#f8f6f2] transition-transform duration-300 hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center rounded-full bg-[#201d1a] px-9 py-4 font-manrope text-[13px] font-bold uppercase tracking-[0.15em] text-[#f8f6f2] transition-transform duration-300 hover:-translate-y-0.5"
               >
                 Enviar consulta
               </button>
@@ -1005,21 +1012,61 @@ const ExpandedAgencySections = () => (
 
 export default function KaivaLanding() {
   return (
-    <div className="w-full">
+    <div className="typography-refined w-full">
       <HeroSection />
       <PortfolioSection />
       <ExpandedAgencySections />
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,300;0,400;0,600;0,800;1,400&family=Manrope:wght@300;400;600;800&family=Inter:wght@300;400;600;800&family=Montserrat:wght@300;400;600;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;600;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
         @import url('https://fonts.cdnfonts.com/css/open-sauce-one');
         html { scroll-behavior: smooth; }
-        body { background-color: #f8f6f2; }
-        .font-epilogue { font-family: 'Epilogue', sans-serif; }
-        .font-manrope { font-family: 'Manrope', sans-serif; }
-        .font-inter { font-family: 'Inter', sans-serif; }
+        html { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-kerning: normal; }
+        body { background-color: #f8f6f2; font-family: 'Inter Tight', 'Inter', sans-serif; letter-spacing: -0.01em; }
+        .font-epilogue { font-family: 'Inter Tight', 'Inter', sans-serif; font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1; }
+        .font-manrope { font-family: 'Inter', 'Inter Tight', sans-serif; font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1; }
+        .font-inter { font-family: 'Inter Tight', 'Inter', sans-serif; font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1; }
         .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        .font-open-sauce { font-family: 'Open Sauce One', sans-serif; }
+        .font-open-sauce { font-family: 'Inter Tight', 'Inter', sans-serif; font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1; }
+        button, input, textarea { font-kerning: normal; }
+        .typography-refined { font-family: 'Inter', 'Inter Tight', sans-serif; }
+        .typography-refined h1,
+        .typography-refined h2,
+        .typography-refined h3 {
+          font-family: 'Inter Tight', 'Inter', sans-serif;
+          font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+          text-rendering: optimizeLegibility;
+          text-wrap: balance;
+        }
+        .typography-refined h1 { letter-spacing: -0.035em !important; line-height: 1.02 !important; }
+        .typography-refined h2 { letter-spacing: -0.032em !important; line-height: 1.04 !important; }
+        .typography-refined h3 { letter-spacing: -0.024em !important; line-height: 1.08 !important; }
+        .typography-refined p {
+          font-family: 'Inter', 'Inter Tight', sans-serif;
+          font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+          letter-spacing: -0.006em;
+          line-height: 1.72;
+        }
+        .typography-refined a,
+        .typography-refined button,
+        .typography-refined label,
+        .typography-refined input,
+        .typography-refined textarea {
+          font-family: 'Inter', 'Inter Tight', sans-serif;
+          font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+        }
+        .typography-refined button,
+        .typography-refined a[href="#planes"],
+        .typography-refined a[href="#contacto"] {
+          letter-spacing: 0.14em !important;
+        }
+        .typography-refined .uppercase {
+          letter-spacing: 0.2em;
+        }
+        .typography-refined input::placeholder,
+        .typography-refined textarea::placeholder {
+          letter-spacing: -0.004em;
+        }
       `}</style>
     </div>
   );
@@ -1096,7 +1143,7 @@ const HeroSection = () => {
           isDarkNavbar ? 'text-white' : 'text-[#080808]'
         }`}
       >
-        <span className="block font-bold">Kaiva</span>
+        <span className="block font-semibold tracking-[-0.02em]">Kaiva</span>
         <span className="block font-normal">
           Studio<span className="text-[#7b6dff]">.</span>
         </span>
@@ -1127,7 +1174,7 @@ const HeroSection = () => {
         <a href="#contacto" className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Contacto</a>
         <a
           href="#planes"
-          className={`inline-flex h-[42px] items-center justify-center self-center rounded-full px-5 font-manrope text-[11px] font-extrabold uppercase tracking-[0.22em] transition-all duration-300 hover:-translate-y-0.5 ${
+          className={`inline-flex h-[44px] items-center justify-center self-center rounded-full px-6 font-manrope text-[11px] font-bold uppercase tracking-[0.16em] transition-all duration-300 hover:-translate-y-0.5 ${
             isDarkNavbar
               ? 'border border-white/18 bg-white/10 text-white hover:bg-white/16'
               : 'border border-[#080808]/12 bg-white/72 text-[#080808] shadow-[0_12px_28px_-20px_rgba(8,8,8,0.22)] hover:bg-white'
@@ -1145,7 +1192,7 @@ const HeroSection = () => {
       >
         <a
           href="#planes"
-          className={`inline-flex min-h-[38px] items-center justify-center rounded-full px-4 font-manrope text-[10px] font-extrabold uppercase tracking-[0.2em] transition-colors ${
+          className={`inline-flex min-h-[40px] items-center justify-center rounded-full px-5 font-manrope text-[10px] font-bold uppercase tracking-[0.16em] transition-colors ${
             isDarkNavbar ? 'bg-white/10 text-white' : 'bg-[#080808] text-white'
           }`}
         >
@@ -1159,9 +1206,9 @@ const HeroSection = () => {
         transition={{ duration: 0.6, delay: 0.14, ease: 'easeOut' }}
         className="absolute left-6 right-6 top-[110px] z-40 flex max-w-[360px] flex-col items-start text-left md:left-[80px] md:right-auto md:top-[160px] md:max-w-[720px]"
       >
-        <h1 className="w-fit text-[30px] font-extrabold leading-[0.98] tracking-[-0.05em] text-[#080808] md:text-[54px]">
-          <span className="block md:whitespace-nowrap">Paginas web claras,</span>
-          <span className="block md:whitespace-nowrap">rapidas y profesionales</span>
+        <h1 className="w-fit text-[30px] font-extrabold leading-[1.02] tracking-[-0.03em] text-[#080808] md:text-[54px]">
+          <span className="block md:whitespace-nowrap">Páginas web claras,</span>
+          <span className="block md:whitespace-nowrap">rápidas y profesionales</span>
         </h1>
 
         <a
@@ -1203,7 +1250,7 @@ const HeroSection = () => {
         transition={{ duration: 0.55, delay: 0.22, ease: 'easeOut' }}
         className="absolute bottom-4 left-6 right-6 z-40 max-w-[280px] text-left text-[12px] font-normal leading-[1.5] text-[#080808]/64 md:bottom-[60px] md:left-auto md:right-[80px] md:max-w-[420px] md:text-[15px]"
       >
-        Kaiva Studio combina diseno, estructura y tecnologia
+        Kaiva Studio combina diseño, estructura y tecnología
         <br />
         para construir activos digitales que funcionan.
       </motion.p>
