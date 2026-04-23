@@ -306,102 +306,127 @@ const ServicesSection = () => {
   const [activeService, setActiveService] = useState(null);
 
   return (
-    <section id="servicios" data-nav-theme="dark" className="relative flex min-h-[75vh] w-full flex-col items-center justify-center bg-[#050505] py-24 md:min-h-[90vh] md:py-32">
-      <div className="mx-auto flex w-full max-w-[1600px] flex-col px-6 md:px-12 lg:px-16">
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-20 md:mb-32"
-        >
-          <SectionHeader
-            eyebrow="Servicios"
-            title="Que ofrecemos"
-            description="Ofrecemos soluciones completas de desarrollo web que integran diseno, tecnologia y estructura en un solo proceso."
-            inverse
-          />
-        </motion.div>
+    <>
+      <section id="servicios" data-nav-theme="light" className="bg-white text-[#080808]">
+        <div className="mx-auto w-full max-w-[1480px] px-6 pb-10 pt-24 md:px-12 md:pb-12 md:pt-28 lg:px-16">
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <SectionHeader
+              eyebrow="Servicios"
+              title="Que ofrecemos"
+              description="Ofrecemos soluciones completas de desarrollo web que integran diseno, tecnologia y estructura en un solo proceso."
+            />
+          </motion.div>
+        </div>
+      </section>
 
-        <motion.div
-          className="grid flex-1 gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-8 xl:gap-12"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.12 } },
-          }}
-          onMouseLeave={() => setActiveService(null)}
-        >
-          {services.map((service, index) => {
-            const isActive = activeService === index;
-            const isQuiet = activeService !== null && !isActive;
+      <section data-nav-theme="light" className="bg-white text-white">
+        <div className="w-full pb-20 md:pb-24 lg:pb-28">
+          <motion.div
+            className="grid w-full gap-0 md:grid-cols-2 lg:grid-cols-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.08 } },
+            }}
+            onMouseLeave={() => setActiveService(null)}
+          >
+            {services.map((service, index) => {
+              const isActive = activeService === index;
+              const isQuiet = activeService !== null && !isActive;
 
-            return (
-              <motion.article
-                key={service.title}
-                variants={{
-                  hidden: { opacity: 0, y: 40 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-                  },
-                }}
-                onHoverStart={() => setActiveService(index)}
-                onFocus={() => setActiveService(index)}
-                className="group relative flex h-full flex-col overflow-hidden outline-none transition-opacity duration-500"
-                style={{ opacity: isQuiet ? 0.35 : 1 }}
-                tabIndex={0}
-              >
-                {/* Reveal Background Panel */}
-                <div
-                  className="pointer-events-none absolute inset-0 bg-white"
-                  style={{
-                    transformOrigin: 'bottom',
-                    transform: isActive ? 'scaleY(1)' : 'scaleY(0)',
-                    transition: 'transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)',
+              return (
+                <motion.article
+                  key={service.title}
+                  variants={{
+                    hidden: { opacity: 0, y: 24 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: { duration: 0.62, ease: [0.16, 1, 0.3, 1] },
+                    },
                   }}
-                />
-
-                <div className="relative z-10 flex h-full flex-col px-6 py-12 transition-colors duration-500 md:px-8 md:py-16 lg:px-10">
-                  <div 
-                    className="font-epilogue text-[64px] font-extrabold leading-[0.85] tracking-[-0.04em] transition-colors duration-500 md:text-[80px] xl:text-[96px]"
-                    style={{ color: isActive ? '#050505' : '#ffffff' }}
-                  >
-                    0{index + 1}<span className="text-[#8242F5]">.</span>
-                  </div>
-
-                  <div 
-                    className="my-10 h-px w-full transition-colors duration-500 md:my-14"
-                    style={{ 
-                      backgroundColor: isActive ? 'rgba(5,5,5,0.15)' : 'rgba(255,255,255,0.25)',
+                  onHoverStart={() => setActiveService(index)}
+                  onFocus={() => setActiveService(index)}
+                  className="group relative flex min-h-[360px] overflow-hidden bg-[#050505] outline-none transition-opacity duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:min-h-[400px] xl:min-h-[440px]"
+                  animate={{ opacity: isQuiet ? 0.56 : 1 }}
+                  transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                  tabIndex={0}
+                >
+                  <motion.div
+                    className="pointer-events-none absolute inset-0 bg-white"
+                    initial={{ scaleX: 0, opacity: 0 }}
+                    animate={{
+                      scaleX: isActive ? 1 : 0,
+                      opacity: isActive ? 1 : 0,
                     }}
+                    transition={{ duration: 0.42, ease: [0.2, 0.9, 0.2, 1] }}
+                    style={{ transformOrigin: 'center center' }}
                   />
 
-                  <div className="mt-auto">
-                    <h3 
-                      className="font-epilogue text-[26px] font-extrabold leading-[1.1] tracking-[-0.04em] transition-colors duration-500 md:text-[32px]"
-                      style={{ color: isActive ? '#050505' : '#ffffff' }}
+                  <div className="relative z-10 flex min-h-full w-full flex-col px-7 py-9 md:px-8 md:py-10 lg:px-9 lg:py-11 xl:px-10">
+                    <motion.div
+                      className="font-epilogue text-[48px] font-extrabold leading-none tracking-[-0.07em] md:text-[60px] xl:text-[72px]"
+                      animate={{
+                        color: isActive ? '#080808' : '#ffffff',
+                        x: isActive ? 4 : 0,
+                      }}
+                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      {service.title}
-                    </h3>
+                      0{index + 1}
+                      <span className="text-[#8242F5]">.</span>
+                    </motion.div>
 
-                    <p 
-                      className="mt-6 text-[15px] leading-relaxed transition-colors duration-500 md:text-[16px] md:leading-[1.8]"
-                      style={{ color: isActive ? 'rgba(5,5,5,0.7)' : 'rgba(255,255,255,0.55)' }}
-                    >
-                      {service.description}
-                    </p>
+                    <motion.div
+                      className="mt-8 h-px w-full origin-center"
+                      animate={{
+                        backgroundColor: isActive ? 'rgba(8,8,8,0.14)' : 'rgba(255,255,255,0.16)',
+                        scaleX: isActive ? 0.985 : 1,
+                      }}
+                      transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                    />
+
+                    <div className="mt-10 flex flex-1 flex-col justify-between gap-10 md:mt-12 md:gap-12">
+                      <div className="max-w-[17rem]">
+                        <motion.h3
+                          className="font-epilogue text-[26px] font-extrabold leading-[1.02] tracking-[-0.055em] md:text-[30px] xl:text-[34px]"
+                          animate={{
+                            color: isActive ? '#080808' : '#ffffff',
+                            x: isActive ? 5 : 0,
+                          }}
+                          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        >
+                          {service.title}
+                        </motion.h3>
+                      </div>
+
+                      <div className="max-w-[20rem]">
+                        <motion.p
+                          className="text-[14px] leading-7 md:text-[15px] md:leading-8"
+                          animate={{
+                            color: isActive ? 'rgba(8,8,8,0.72)' : 'rgba(255,255,255,0.64)',
+                            x: isActive ? 5 : 0,
+                          }}
+                          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        >
+                          {service.description}
+                        </motion.p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </motion.article>
-            );
-          })}
-        </motion.div>
-      </div>
-    </section>
+                </motion.article>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+    </>
   );
 };
 
