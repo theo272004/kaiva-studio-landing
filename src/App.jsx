@@ -618,14 +618,19 @@ const ServicesSection = () => {
                   tabIndex={0}
                 >
                   <motion.div
-                    className="aurora-hover-layer pointer-events-none absolute inset-0"
-                    initial={{ opacity: 0, scale: 1.04 }}
+                    className="aurora-hover-layer pointer-events-none absolute inset-0 overflow-hidden"
+                    initial={{ opacity: 0 }}
                     animate={{
-                      opacity: isActive ? 0.96 : 0,
-                      scale: isActive ? 1 : 1.04,
+                      opacity: isActive ? 1 : 0,
                     }}
-                    transition={{ duration: 0.38, ease: [0.2, 0.9, 0.2, 1] }}
-                  />
+                    transition={{ duration: 0.55 }}
+                  >
+                    <div className="aurora-card-blob blob-1" />
+                    <div className="aurora-card-blob blob-2" />
+                    <div className="aurora-card-blob blob-3" />
+                    <div className="aurora-card-blob blob-4" />
+                    <div className="aurora-card-blob blob-5" />
+                  </motion.div>
 
                   <motion.div
                     className="pointer-events-none absolute inset-0"
@@ -1226,106 +1231,69 @@ export default function KaivaLanding() {
           mix-blend-mode: soft-light;
         }
         .aurora-hover-layer {
-          background:
-            radial-gradient(130% 150% at 0% 10%, rgba(107, 229, 229, 0.56) 0%, rgba(107, 229, 229, 0) 56%),
-            radial-gradient(130% 130% at 100% 0%, rgba(155, 134, 255, 0.48) 0%, rgba(155, 134, 255, 0) 56%),
-            radial-gradient(120% 140% at 100% 100%, rgba(255, 164, 214, 0.42) 0%, rgba(255, 164, 214, 0) 56%),
-            linear-gradient(140deg, rgba(255,255,255,0.9) 0%, rgba(244,246,255,0.72) 100%);
-          background-size: 180% 180%;
-          animation: auroraShift 14s ease-in-out infinite alternate;
-        }
-        .font-epilogue { font-family: 'Inter Tight', 'Inter', sans-serif; font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1; }
-        .font-manrope { font-family: 'Inter', 'Inter Tight', sans-serif; font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1; }
-        .font-inter { font-family: 'Inter Tight', 'Inter', sans-serif; font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1; }
-        .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        .font-open-sauce { font-family: 'Inter Tight', 'Inter', sans-serif; font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1; }
-        button, input, textarea { font-kerning: normal; }
-        .typography-refined { font-family: 'Inter', 'Inter Tight', sans-serif; }
-        .typography-refined h1,
-        .typography-refined h2,
-        .typography-refined h3 {
-          font-family: 'Inter Tight', 'Inter', sans-serif;
-          font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
-          text-rendering: optimizeLegibility;
-          text-wrap: balance;
-        }
-        .typography-refined h1 { letter-spacing: -0.035em !important; line-height: 1.02 !important; }
-        .typography-refined h2 { letter-spacing: -0.032em !important; line-height: 1.04 !important; }
-        .typography-refined h3 { letter-spacing: -0.024em !important; line-height: 1.08 !important; }
-        .typography-refined p {
-          font-family: 'Inter', 'Inter Tight', sans-serif;
-          font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
-          letter-spacing: -0.006em;
-          line-height: 1.72;
-        }
-        .typography-refined a,
-        .typography-refined button,
-        .typography-refined label,
-        .typography-refined input,
-        .typography-refined textarea {
-          font-family: 'Inter', 'Inter Tight', sans-serif;
-          font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
-        }
-        .typography-refined button,
-        .typography-refined a[href="#planes"] {
-          letter-spacing: 0.14em !important;
-        }
-        .typography-refined .uppercase {
-          letter-spacing: 0.2em;
-        }
-        .typography-refined input::placeholder,
-        .typography-refined textarea::placeholder {
-          letter-spacing: -0.004em;
-        }
-        .contact-premium-card {
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          background: rgba(255, 255, 255, 0.68);
-          border: 1px solid rgba(255, 255, 255, 0.65);
-          box-shadow: 0 24px 64px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255,255,255,0.68), inset 0 -1px 0 rgba(255,255,255,0.14);
-          transition: transform 340ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 340ms cubic-bezier(0.22, 1, 0.36, 1), border-color 340ms cubic-bezier(0.22, 1, 0.36, 1), background-color 340ms cubic-bezier(0.22, 1, 0.36, 1);
-          will-change: transform, opacity;
-        }
-        .contact-premium-card:hover {
-          background: rgba(255,255,255,0.7);
-          box-shadow: 0 28px 74px rgba(0, 0, 0, 0.075), inset 0 1px 0 rgba(255,255,255,0.72), inset 0 -1px 0 rgba(255,255,255,0.18);
-          border-color: rgba(255,255,255,0.78);
-        }
-        .contact-input {
-          border: 1px solid rgba(8,8,8,0.08);
-          background: rgba(255, 255, 255, 0.96);
-          transition: border-color 280ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1), background-color 280ms cubic-bezier(0.22, 1, 0.36, 1), transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .contact-input:focus {
-          border-color: rgba(130,66,245,0.18);
-          background: rgba(255,255,255,1);
-          box-shadow: 0 0 0 3px rgba(130,66,245,0.045);
-        }
-        .contact-accent-button {
-          transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 320ms cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .contact-accent-button:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 20px 36px -18px rgba(130,66,245,0.5);
-        }
-        .pricing-card {
-          position: relative;
-        }
-        .pricing-card::before {
-          content: "";
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 42%;
-          height: 22%;
-          pointer-events: none;
-          border-radius: inherit;
-          background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 55%, rgba(255,255,255,0) 100%);
-          filter: blur(4px);
-          opacity: 0.72;
+          inset: 0;
+          overflow: hidden;
+          background: rgba(255, 255, 255, 0.05);
         }
-        .pricing-card::after {
-          display: none;
+        .aurora-card-blob {
+          position: absolute;
+          width: 170%;
+          height: 170%;
+          filter: blur(80px);
+          opacity: 0.8;
+          mix-blend-mode: color-burn;
+          pointer-events: none;
+          border-radius: 50%;
+        }
+        .blob-1 {
+          background: radial-gradient(circle at center, rgba(107, 229, 229, 0.95), transparent 75%);
+          top: -45%; left: -45%;
+          animation: blob-float-1 20s infinite ease-in-out;
+        }
+        .blob-2 {
+          background: radial-gradient(circle at center, rgba(155, 134, 255, 0.9), transparent 75%);
+          top: -45%; right: -45%;
+          animation: blob-float-2 24s infinite ease-in-out;
+        }
+        .blob-3 {
+          background: radial-gradient(circle at center, rgba(255, 164, 214, 0.9), transparent 75%);
+          bottom: -45%; left: -45%;
+          animation: blob-float-3 28s infinite ease-in-out;
+        }
+        .blob-4 {
+          background: radial-gradient(circle at center, rgba(6, 182, 212, 0.85), transparent 75%);
+          bottom: -45%; right: -45%;
+          animation: blob-float-4 22s infinite ease-in-out;
+        }
+        .blob-5 {
+          background: radial-gradient(circle at center, rgba(130, 66, 245, 0.7), transparent 75%);
+          top: 15%; left: 15%;
+          animation: blob-float-1 35s infinite reverse ease-in-out;
+        }
+        @keyframes blob-float-1 {
+          0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+          33% { transform: translate(15%, 20%) scale(1.1) rotate(120deg); }
+          66% { transform: translate(-10%, 15%) scale(0.95) rotate(240deg); }
+          100% { transform: translate(0, 0) scale(1) rotate(360deg); }
+        }
+        @keyframes blob-float-2 {
+          0% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(-20%, 15%) scale(0.85); }
+          66% { transform: translate(15%, -10%) scale(1.1); }
+          100% { transform: translate(0, 0) scale(1); }
+        }
+        @keyframes blob-float-3 {
+          0% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(10%, -20%) scale(1.2); }
+          66% { transform: translate(20%, 10%) scale(0.9); }
+          100% { transform: translate(0, 0) scale(1); }
+        }
+        @keyframes blob-float-4 {
+          0% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(-15%, -15%) scale(1.1); }
+          66% { transform: translate(-25%, 15%) scale(0.8); }
+          100% { transform: translate(0, 0) scale(1); }
         }
         @keyframes auroraShift {
           0% { background-position: 0% 50%, 100% 50%, 50% 100%, 50% 0%, 50% 50%; }
@@ -1559,3 +1527,4 @@ const HeroSection = () => {
     </section>
   );
 };
+
