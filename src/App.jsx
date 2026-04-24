@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
+import { motion, useMotionValue, useSpring, AnimatePresence, useReducedMotion } from 'framer-motion';
 
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 
@@ -11,7 +11,7 @@ const slides = [
     vibe: 'Analítico · Predictivo',
     brand: 'KAIVA INSIGHTS',
     description: 'Transformamos datos complejos en dashboards intuitivos que impulsan decisiones estratégicas.',
-    accent: '#8242F5',
+      accent: '#8242f5',
     mockup: 'dashboard',
   },
   {
@@ -21,7 +21,7 @@ const slides = [
     vibe: 'Exclusivo · Conversión',
     brand: 'KAIVA COMMERCE',
     description: 'Experiencias de compra premium donde la estética eleva el valor percibido de cada producto.',
-    accent: '#8242F5',
+      accent: '#8242f5',
     mockup: 'ecommerce',
   },
   {
@@ -31,7 +31,7 @@ const slides = [
     vibe: 'Sólido · Escalable',
     brand: 'KAIVA CORE',
     description: 'Plataformas tecnológicas diseñadas para el rendimiento extremo y la claridad operativa.',
-    accent: '#8242F5',
+      accent: '#8242f5',
     mockup: 'tech',
   },
   {
@@ -41,7 +41,7 @@ const slides = [
     vibe: 'Sofisticado · Narrativo',
     brand: 'KAIVA STUDIO',
     description: 'Storytelling visual para marcas que buscan destacar en un ecosistema digital saturado.',
-    accent: '#8242F5',
+      accent: '#8242f5',
     mockup: 'creative',
   },
 ];
@@ -120,6 +120,52 @@ const sectionReveal = {
   transition: { duration: 0.65, ease: 'easeOut' },
 };
 
+const gradientAccentStyle = {
+  background: 'linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+};
+
+const accentButtonStyle = {
+  background: 'linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%)',
+  boxShadow: '0 16px 34px -18px rgba(130,66,245,0.55)',
+};
+
+const premiumEase = [0.22, 1, 0.36, 1];
+
+const createGlassPanelStyle = () => ({
+  background: 'linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.05) 100%)',
+  backdropFilter: 'blur(24px) saturate(120%)',
+  WebkitBackdropFilter: 'blur(24px) saturate(120%)',
+  border: '1px solid rgba(255, 255, 255, 0.6)',
+  boxShadow: '0 32px 64px rgba(0, 0, 0, 0.12)',
+  isolation: 'isolate',
+});
+
+const GlassPanelLayers = () => (
+  <>
+    {/* Strong 3D inner bevel */}
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0"
+      style={{
+        borderRadius: 'inherit',
+        boxShadow: 'inset 2px 2px 5px rgba(255,255,255,0.9), inset -2px -2px 6px rgba(0,0,0,0.1)',
+      }}
+    />
+    {/* Diagonal light reflection (gloss) */}
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0"
+      style={{
+        borderRadius: 'inherit',
+        background: 'linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.4) 30%, transparent 40%)',
+        mixBlendMode: 'overlay',
+      }}
+    />
+  </>
+);
+
 const MockupRenderer = ({ type }) => {
   const mockups = {
     dashboard: asset('kaiva_dashboard_mockup.png'),
@@ -129,13 +175,13 @@ const MockupRenderer = ({ type }) => {
   };
 
   return (
-    <div className="relative h-full w-full overflow-hidden bg-[#1a1a1c]">
+    <div className="relative h-full w-full overflow-hidden bg-[#f8f8fa]">
       <img
         src={mockups[type]}
         alt={type}
         className="h-full w-full object-contain p-3 opacity-90 transition-opacity duration-700 hover:opacity-100 sm:object-cover sm:p-0"
       />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/10 to-transparent" />
       <div className="absolute left-4 top-4 flex gap-2">
         <div className="h-2 w-2 rounded-full bg-white/20" />
         <div className="h-2 w-2 rounded-full bg-white/20" />
@@ -245,10 +291,225 @@ const TiltSlide = ({ slide, isActive, position, onClick }) => {
   );
 };
 
+const ContactRevealSection = () => {
+  const prefersReducedMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+    const updateMobile = () => setIsMobile(mediaQuery.matches);
+    updateMobile();
+    mediaQuery.addEventListener('change', updateMobile);
+    return () => mediaQuery.removeEventListener('change', updateMobile);
+  }, []);
+
+  const textGroup = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: prefersReducedMotion ? 0.04 : 0.08,
+        delayChildren: 0.12,
+      },
+    },
+  };
+
+  const textItem = {
+    hidden: prefersReducedMotion
+      ? { opacity: 0 }
+      : { opacity: 0, y: isMobile ? 18 : 32, filter: 'blur(8px)' },
+    show: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        duration: prefersReducedMotion ? 0.24 : 1.1,
+        ease: premiumEase,
+      },
+    },
+  };
+
+  const paragraphItem = {
+    hidden: prefersReducedMotion
+      ? { opacity: 0 }
+      : { opacity: 0, y: isMobile ? 14 : 20, filter: 'blur(6px)' },
+    show: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        duration: prefersReducedMotion ? 0.22 : 0.95,
+        delay: prefersReducedMotion ? 0 : 0.15,
+        ease: premiumEase,
+      },
+    },
+  };
+
+  const formItem = {
+    hidden: prefersReducedMotion
+      ? { opacity: 0 }
+      : { opacity: 0, y: isMobile ? 18 : 28, scale: isMobile ? 1 : 0.985, filter: 'blur(6px)' },
+    show: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      filter: 'blur(0px)',
+      transition: {
+        duration: prefersReducedMotion ? 0.24 : 1.02,
+        delay: prefersReducedMotion ? 0 : 0.28,
+        ease: premiumEase,
+      },
+    },
+  };
+
+  const fieldGroup = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: prefersReducedMotion ? 0.02 : 0.05,
+        delayChildren: prefersReducedMotion ? 0 : 0.34,
+      },
+    },
+  };
+
+  const fieldItem = {
+    hidden: prefersReducedMotion
+      ? { opacity: 0 }
+      : { opacity: 0, y: 18, filter: 'blur(6px)' },
+    show: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        duration: prefersReducedMotion ? 0.18 : 0.68,
+        ease: premiumEase,
+      },
+    },
+  };
+
+  return (
+    <section id="contacto" className="relative min-h-[148vh] bg-[var(--color-dominant)]">
+      <div className="sticky top-0 z-0 h-screen overflow-hidden bg-[var(--color-dominant)]">
+        <div
+          className="mx-auto flex h-full w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
+          style={{
+            paddingTop: 'clamp(128px, 15vw, 196px)',
+            paddingBottom: 'clamp(128px, 15vw, 196px)',
+          }}
+        >
+          <div
+            className="grid w-full lg:grid-cols-[0.9fr_1.1fr] lg:items-center"
+            style={{ columnGap: 'clamp(56px, 9vw, 132px)' }}
+          >
+            <motion.div
+              variants={textGroup}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.38 }}
+              className="max-w-[560px]"
+            >
+              <motion.div variants={textItem} className="font-manrope text-[11px] font-bold uppercase tracking-[0.24em] text-[#080808]/42">
+                Contacto
+              </motion.div>
+              <motion.h2 className="mt-6 font-epilogue text-[clamp(56px,7vw,112px)] font-extrabold leading-[0.92] tracking-[-0.04em] text-[#080808] md:tracking-[-0.035em] lg:tracking-[-0.04em]">
+                <motion.span variants={textItem} className="block">Ready to</motion.span>
+                <motion.span variants={textItem} className="block">start?</motion.span>
+              </motion.h2>
+              <motion.p
+                variants={paragraphItem}
+                className="mt-7 max-w-[34ch] text-[clamp(18px,1.4vw,22px)] leading-[1.55] text-[#080808]/62"
+              >
+                Cuéntanos qué estás construyendo y te responderemos con una propuesta clara, directa y bien estructurada.
+              </motion.p>
+            </motion.div>
+
+            <motion.form
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={formItem}
+              whileHover={prefersReducedMotion || isMobile ? undefined : { y: -2 }}
+              transition={{ duration: 0.32, ease: premiumEase }}
+              className="contact-premium-card rounded-[34px] p-5 md:p-6"
+              style={isMobile ? undefined : { transformPerspective: 1600, transformStyle: 'preserve-3d' }}
+            >
+              <motion.div variants={fieldGroup} className="space-y-4">
+                <div className="grid gap-4 md:grid-cols-2">
+                  <motion.label variants={fieldItem} className="block">
+                    <span className="font-manrope text-[11px] font-bold uppercase tracking-[0.18em] text-[#080808]/46">
+                      Nombre
+                    </span>
+                    <input
+                      type="text"
+                      placeholder="Tu nombre"
+                      className="contact-input mt-3 w-full rounded-[20px] px-4 py-3.5 text-[15px] text-[#080808] outline-none"
+                    />
+                  </motion.label>
+                  <motion.label variants={fieldItem} className="block">
+                    <span className="font-manrope text-[11px] font-bold uppercase tracking-[0.18em] text-[#080808]/46">
+                      Correo electrónico
+                    </span>
+                    <input
+                      type="email"
+                      placeholder="tu@correo.com"
+                      className="contact-input mt-3 w-full rounded-[20px] px-4 py-3.5 text-[15px] text-[#080808] outline-none"
+                    />
+                  </motion.label>
+                </div>
+                <motion.label variants={fieldItem} className="block">
+                  <span className="font-manrope text-[11px] font-bold uppercase tracking-[0.18em] text-[#080808]/46">
+                    Cuéntanos sobre tu proyecto
+                  </span>
+                  <textarea
+                    rows="4"
+                    placeholder="Contexto, objetivos, tiempos y lo que necesitas construir."
+                    className="contact-input mt-3 w-full rounded-[22px] px-4 py-3.5 text-[15px] text-[#080808] outline-none"
+                  />
+                </motion.label>
+              </motion.div>
+
+              <motion.div variants={fieldItem} className="mt-5 flex items-center justify-between gap-4">
+                <p className="max-w-[28ch] text-[13px] leading-6 text-[#080808]/46">
+                  Proyectos selectos, respuestas claras y ejecución con criterio.
+                </p>
+                <button
+                  type="submit"
+                  className="contact-accent-button inline-flex min-h-[48px] items-center justify-center rounded-full px-7 py-3 font-manrope text-[11px] font-bold uppercase tracking-[0.16em] text-white"
+                  style={accentButtonStyle}
+                >
+                  Enviar
+                </button>
+              </motion.div>
+            </motion.form>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative z-10 mt-[58vh] min-h-[42vh] bg-[#111111]">
+        <div className="mx-auto flex min-h-[42vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-12 text-center md:px-12 md:py-14 lg:px-16">
+          <a
+            href="mailto:hello@kaivastudio.com"
+            className="font-epilogue text-[clamp(30px,4.2vw,58px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
+          >
+            hello@kaivastudio.com
+          </a>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-white/52">
+            <a href="#" className="transition-colors duration-300 hover:text-white">Instagram</a>
+            <a href="#" className="transition-colors duration-300 hover:text-white">Dribbble</a>
+            <a href="#" className="transition-colors duration-300 hover:text-white">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const SectionHeader = ({ eyebrow, title, description, align = 'left', inverse = false }) => (
   <div className={align === 'center' ? 'mx-auto max-w-3xl text-center' : 'max-w-3xl'}>
     {eyebrow ? (
-      <div className={`mb-4 text-[11px] font-manrope font-bold uppercase tracking-[0.26em] ${inverse ? 'text-white/64' : 'text-[#21B2C6]'}`}>
+      <div
+        className={`mb-4 inline-block w-fit text-[11px] font-manrope font-bold uppercase tracking-[0.26em] ${inverse ? 'text-white/64' : ''}`}
+        style={inverse ? undefined : gradientAccentStyle}
+      >
         {eyebrow}
       </div>
     ) : null}
@@ -264,15 +525,10 @@ const SectionHeader = ({ eyebrow, title, description, align = 'left', inverse = 
 );
 
 const SectionShell = ({ id, tone = 'light', className = '', children }) => {
-  const toneClass =
-    tone === 'dark'
-      ? 'bg-[#050505] text-[#ffffff]'
-      : tone === 'muted'
-        ? 'bg-[#ffffff] text-[#080808]'
-        : 'bg-[#ffffff] text-[#080808]';
+  const toneClass = 'bg-[var(--color-dominant)] text-[var(--color-secondary)]';
 
   return (
-    <section id={id} data-nav-theme={tone === 'dark' ? 'dark' : 'light'} className={`${toneClass} ${className}`}>
+    <section id={id} data-nav-theme="light" className={`${toneClass} ${className}`}>
       <div className="mx-auto w-full max-w-[1320px] px-6 py-28 md:px-12 md:py-36 lg:px-16">{children}</div>
     </section>
   );
@@ -283,7 +539,7 @@ const ServicesSection = () => {
 
   return (
     <>
-      <section id="servicios" data-nav-theme="light" className="bg-white text-[#080808]">
+      <section id="servicios" data-nav-theme="light" className="bg-[var(--color-dominant)] text-[var(--color-secondary)]">
         <div className="mx-auto w-full max-w-[1480px] px-6 pb-10 pt-24 md:px-12 md:pb-12 md:pt-28 lg:px-16">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
@@ -296,7 +552,7 @@ const ServicesSection = () => {
                 <span className="font-bold tracking-[-0.045em] leading-none">Nuestros</span>
                 <span className="inline-flex items-baseline gap-3 bg-[#080808] px-6 py-3 md:px-7 md:py-3.5">
                   <span className="font-semibold leading-none tracking-[0.015em] text-white [font-kerning:normal]">servicios</span>
-                  <span className="h-3 w-3 shrink-0 self-center bg-[#7C3AED] md:h-3.5 md:w-3.5" aria-hidden="true" />
+                  <span className="h-3 w-3 shrink-0 self-center bg-[#8242f5] md:h-3.5 md:w-3.5" aria-hidden="true" />
                 </span>
               </h2>
             </div>
@@ -334,7 +590,7 @@ const ServicesSection = () => {
                   }}
                   onHoverStart={() => setActiveService(index)}
                   onFocus={() => setActiveService(index)}
-                  className="group relative flex min-h-[360px] overflow-hidden bg-[#050505] outline-none transition-opacity duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:min-h-[400px] xl:min-h-[440px]"
+                  className="group relative flex min-h-[360px] overflow-hidden bg-[#080808] outline-none transition-opacity duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:min-h-[400px] xl:min-h-[440px]"
                   animate={{ opacity: isQuiet ? 0.56 : 1 }}
                   transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                   tabIndex={0}
@@ -361,7 +617,7 @@ const ServicesSection = () => {
                     >
                       0{index + 1}
                       <span
-                        className="relative top-[0.03em] ml-2 inline-block h-[0.18em] w-[0.18em] bg-[#7C3AED] align-baseline"
+                        className="relative top-[0.03em] ml-2 inline-block h-[0.18em] w-[0.18em] bg-[#8242f5] align-baseline"
                         aria-hidden="true"
                       />
                     </motion.div>
@@ -448,8 +704,8 @@ const PortfolioSection = () => {
   return (
     <div
       id="proyectos"
-      data-nav-theme="dark"
-      className="relative min-h-screen overflow-hidden bg-[#050505] text-white"
+      data-nav-theme="light"
+      className="relative min-h-screen overflow-hidden bg-white text-[#080808]"
       style={{ fontFamily: 'Manrope, sans-serif' }}
     >
       <div className="relative z-30 px-6 pt-6 md:px-16 md:pt-8" aria-hidden="true" />
@@ -457,7 +713,7 @@ const PortfolioSection = () => {
       <div className="relative z-20 mt-10 px-6 md:mt-20 md:px-16">
         <div className="flex justify-center text-center">
           <div className="max-w-3xl">
-            <h1 className="font-['Inter Tight'] text-[clamp(40px,5.8vw,88px)] font-extrabold leading-[1.02] tracking-[-0.035em] text-white">
+            <h1 className="font-['Inter Tight'] text-[clamp(40px,5.8vw,88px)] font-extrabold leading-[1.02] tracking-[-0.035em] text-[#080808]">
               Nuestras webs
             </h1>
           </div>
@@ -519,9 +775,9 @@ const PortfolioSection = () => {
                 {active.number}
               </div>
               <div className="pb-2">
-                <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.24em] text-white/42">Servicio</div>
+                <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.24em] text-[#080808]/42">Servicio</div>
                 <div className="font-epilogue text-xl font-semibold italic leading-[1.2] tracking-[-0.02em] md:text-2xl">{active.label}</div>
-                <div className="mt-1 font-manrope text-[11px] tracking-wider text-white/56">{active.vibe}</div>
+                <div className="mt-1 font-manrope text-[11px] tracking-wider text-[#080808]/56">{active.vibe}</div>
               </div>
             </div>
           </motion.div>
@@ -536,27 +792,27 @@ const PortfolioSection = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="pointer-events-none absolute bottom-6 right-6 z-20 hidden max-w-[240px] text-right md:block md:bottom-[-44px] md:right-16"
           >
-            <div className="mb-2 font-manrope text-[11px] font-bold uppercase tracking-wider text-[#8242F5]">- {active.brand}</div>
-            <div className="font-manrope text-[13px] italic leading-relaxed text-white/64">{active.description}</div>
+            <div className="mb-2 font-manrope text-[11px] font-bold uppercase tracking-wider text-[#8242f5]">- {active.brand}</div>
+            <div className="font-manrope text-[13px] italic leading-relaxed text-[#080808]/64">{active.description}</div>
           </motion.div>
         </AnimatePresence>
       </div>
 
       <div className="px-6 md:hidden">
-        <div className="rounded-[22px] border border-white/10 bg-white/5 p-5">
+        <div className="rounded-[22px] border border-[#080808]/10 bg-[var(--color-surface)] p-5 shadow-[0_18px_48px_-28px_rgba(0,0,0,0.12)]">
           <div className="flex items-end gap-3">
             <div className="font-epilogue text-[42px] font-extrabold italic leading-none tracking-[-0.03em] opacity-90" style={{ color: active.accent }}>
               {active.number}
             </div>
             <div className="pb-1">
-              <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.24em] text-white/42">Servicio</div>
-              <div className="font-epilogue text-[22px] font-semibold italic leading-[1.2] tracking-[-0.02em] text-white">{active.label}</div>
-              <div className="mt-1 font-manrope text-[11px] tracking-wider text-white/56">{active.vibe}</div>
+              <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.24em] text-[#080808]/42">Servicio</div>
+              <div className="font-epilogue text-[22px] font-semibold italic leading-[1.2] tracking-[-0.02em] text-[#080808]">{active.label}</div>
+              <div className="mt-1 font-manrope text-[11px] tracking-wider text-[#080808]/56">{active.vibe}</div>
             </div>
           </div>
-          <div className="mt-4 border-t border-white/10 pt-4">
-            <div className="mb-2 font-manrope text-[11px] font-bold uppercase tracking-wider text-[#8242F5]">- {active.brand}</div>
-            <div className="font-manrope text-[13px] italic leading-relaxed text-white/68">{active.description}</div>
+          <div className="mt-4 border-t border-[#080808]/10 pt-4">
+            <div className="mb-2 font-manrope text-[11px] font-bold uppercase tracking-wider text-[#8242f5]">- {active.brand}</div>
+            <div className="font-manrope text-[13px] italic leading-relaxed text-[#080808]/68">{active.description}</div>
           </div>
         </div>
       </div>
@@ -565,7 +821,14 @@ const PortfolioSection = () => {
         <div className="flex items-center gap-4 md:gap-6">
           <button
             onClick={() => setActiveIndex((p) => (p - 1 + slides.length) % slides.length)}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/14 transition-colors hover:border-white/42"
+            className="flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-300 hover:scale-110 text-[#080808]"
+            style={{
+              background: 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              border: '1px solid rgba(255,255,255,0.9)',
+              boxShadow: '0 8px 20px rgba(0,0,0,0.06), inset 1px 1px 2px rgba(255,255,255,1), inset -1px -1px 2px rgba(0,0,0,0.05)',
+            }}
             aria-label="Previous"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -580,7 +843,7 @@ const PortfolioSection = () => {
                 <button
                   key={s.id}
                   onClick={() => setActiveIndex(i)}
-                  className="group relative h-[2px] flex-1 cursor-pointer overflow-hidden bg-white/12"
+                  className="group relative h-[2px] flex-1 cursor-pointer overflow-hidden bg-[#080808]/12"
                 >
                   <motion.div
                     className="absolute inset-y-0 left-0 origin-left"
@@ -591,7 +854,7 @@ const PortfolioSection = () => {
                     }}
                     transition={isActive && !isHovering ? { duration: 5.5, ease: 'linear' } : { duration: 0.4 }}
                   />
-                  <div className="absolute -top-5 left-0 font-mono text-[9px] text-white opacity-0 transition-opacity group-hover:opacity-60">
+                  <div className="absolute -top-5 left-0 font-mono text-[#080808] opacity-0 transition-opacity group-hover:opacity-60">
                     {s.number}
                   </div>
                 </button>
@@ -599,13 +862,20 @@ const PortfolioSection = () => {
             })}
           </div>
 
-          <div className="font-manrope text-[11px] font-bold tracking-wider tabular-nums text-[#8242F5]">
+          <div className="font-manrope text-[11px] font-bold tracking-wider tabular-nums text-[#8242f5]">
             {String(activeIndex + 1).padStart(2, '0')} <span className="opacity-40">/ {String(slides.length).padStart(2, '0')}</span>
           </div>
 
           <button
             onClick={() => setActiveIndex((p) => (p + 1) % slides.length)}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/14 transition-colors hover:border-white/42"
+            className="flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-300 hover:scale-110 text-[#080808]"
+            style={{
+              background: 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              border: '1px solid rgba(255,255,255,0.9)',
+              boxShadow: '0 8px 20px rgba(0,0,0,0.06), inset 1px 1px 2px rgba(255,255,255,1), inset -1px -1px 2px rgba(0,0,0,0.05)',
+            }}
             aria-label="Next"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -630,12 +900,12 @@ const ExpandedAgencySections = () => (
           title="Cómo trabajamos"
           description="Nuestro proceso está pensado para ser claro, estructurado y sin fricciones, de modo que el cliente entienda qué se está haciendo, por qué se hace y qué resultado puede esperar."
         />
-        <div className="mt-16 rounded-[32px] border border-[#080808]/14 bg-white p-8 md:p-10">
+        <div className="mt-16 rounded-[32px] border border-[#080808]/14 bg-[var(--color-surface)] p-8 md:p-10">
           <div className="grid gap-8 md:grid-cols-5 md:gap-6">
             {processSteps.map((step, index) => (
               <div key={step} className="relative">
                 <div className="mb-5 flex items-center gap-4 md:block">
-                  <div className="mb-0 flex h-12 w-12 items-center justify-center rounded-full border border-[#080808]/16 bg-white font-manrope text-[12px] font-bold tracking-[0.18em] text-[#080808] md:mb-5">
+                  <div className="mb-0 flex h-12 w-12 items-center justify-center rounded-full border border-[#080808]/16 bg-[var(--color-dominant)] font-manrope text-[12px] font-bold tracking-[0.18em] text-[#080808] md:mb-5">
                     0{index + 1}
                   </div>
                   <div className="font-epilogue text-[24px] font-extrabold leading-[1.12] tracking-[-0.025em] text-[#080808] md:text-[22px]">{step}</div>
@@ -661,73 +931,93 @@ const ExpandedAgencySections = () => (
 
     <section
       id="planes"
-      data-nav-theme="dark"
-      className="bg-[#5918DF] px-4 py-12 md:px-8 md:py-16"
+      data-nav-theme="light"
+      className="relative bg-[var(--color-dominant)] px-4 py-12 md:px-8 md:py-16"
     >
       <motion.div {...sectionReveal} className="mx-auto w-full max-w-[1180px]">
           <div className="max-w-3xl">
-            <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.26em] text-white/68">Pricing</div>
-            <h2 className="mt-3 font-epilogue text-[clamp(44px,7vw,92px)] font-extrabold leading-[0.98] tracking-[-0.04em] text-white">
+            <div className="inline-block w-fit font-manrope text-[11px] font-bold uppercase tracking-[0.26em]" style={gradientAccentStyle}>Pricing</div>
+            <h2 className="mt-3 font-epilogue text-[clamp(44px,7vw,92px)] font-extrabold leading-[0.98] tracking-[-0.04em] text-[#080808]">
               Planes
             </h2>
-            <p className="mt-3 max-w-2xl text-[15px] leading-7 text-white/82 md:text-[17px]">
+            <p className="mt-3 max-w-2xl text-[15px] leading-7 text-[#080808]/72 md:text-[17px]">
               Elige la solución ideal para tu negocio.
               <br />
               Diseño premium, estructura estratégica y ejecución real.
             </p>
           </div>
 
-          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {pricingPlans.map((plan) => (
               <motion.article
                 key={plan.name}
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.28, ease: 'easeOut' }}
-                className={`relative flex h-full flex-col rounded-[24px] border p-6 md:p-7 ${
-                  plan.featured
-                    ? 'border-white/10 bg-[rgba(10,6,24,0.96)] text-white shadow-[0_28px_80px_-36px_rgba(0,0,0,0.72)]'
-                    : 'border-white/16 bg-white text-[#080808] shadow-[0_22px_64px_-38px_rgba(22,14,72,0.32)]'
-                }`}
+                whileHover={undefined}
+                transition={undefined}
+                className="pricing-card relative flex h-full flex-col overflow-hidden rounded-[34px] p-6 md:p-8"
+                style={createGlassPanelStyle()}
               >
+                <GlassPanelLayers />
+
                 {plan.featured ? (
-                  <div className="absolute right-5 top-5 rounded-full border border-[#C6FF00]/20 bg-[#C6FF00] px-3.5 py-2 font-manrope text-[10px] font-bold uppercase tracking-[0.16em] text-[#080808]">
+                  <div
+                    className="absolute right-5 top-5 rounded-full px-3.5 py-2 font-manrope text-[10px] font-bold uppercase tracking-[0.16em] text-white"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(155,109,255,0.6) 0%, rgba(130,66,245,0.4) 100%)',
+                      backdropFilter: 'blur(16px)',
+                      WebkitBackdropFilter: 'blur(16px)',
+                      border: '1px solid rgba(255,255,255,0.6)',
+                      boxShadow: '0 8px 16px rgba(130,66,245,0.2), inset 1px 1px 2px rgba(255,255,255,0.8), inset -1px -1px 2px rgba(0,0,0,0.1)',
+                    }}
+                  >
                     {plan.badge}
                   </div>
                 ) : null}
 
-                <div className={`font-manrope text-[11px] font-bold uppercase tracking-[0.22em] ${plan.featured ? 'text-white/52' : 'text-[#080808]/44'}`}>
+                <div className="relative font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-[#2a1a4e]/55">
                   {plan.name}
                 </div>
-                <div className={`mt-3 font-epilogue text-[34px] font-extrabold leading-[1] tracking-[-0.03em] md:text-[38px] ${plan.featured ? 'text-white' : 'text-[#080808]'}`}>
+                <div className="relative mt-3 font-epilogue text-[34px] font-extrabold leading-[1] tracking-[-0.03em] text-[#1a0e38] md:text-[38px]">
                   {plan.price}
                 </div>
-                <p className={`mt-3 max-w-[28ch] text-[14px] leading-6 ${plan.featured ? 'text-white/74' : 'text-[#080808]/68'}`}>
+                <p className="relative mt-3 max-w-[28ch] text-[14px] leading-6 text-[#2a1a4e]/70">
                   {plan.audience}
                 </p>
-                <p className={`mt-3 text-[14px] leading-6 ${plan.featured ? 'text-white/66' : 'text-[#080808]/58'}`}>
+                <p className="relative mt-3 text-[14px] leading-6 text-[#2a1a4e]/55">
                   {plan.description}
                 </p>
 
-                <div className={`my-5 h-px ${plan.featured ? 'bg-white/10' : 'bg-[#080808]/10'}`} />
+                <div className="relative my-5 h-px bg-white/20" />
 
-                <div className="space-y-2.5">
+                <div className="relative space-y-2.5">
                   {plan.points.map((point) => (
                     <div key={point} className="flex items-start gap-3">
-                      <span className={`mt-[4px] flex h-5 w-5 items-center justify-center rounded-full border border-[#C6FF00]/25 bg-[#C6FF00] text-[11px] font-bold text-[#080808]`}>
+                      <span
+                        className="mt-[4px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white"
+                        style={{
+                          background: 'linear-gradient(135deg, rgba(160,112,255,0.6) 0%, rgba(130,66,245,0.4) 100%)',
+                          backdropFilter: 'blur(12px)',
+                          WebkitBackdropFilter: 'blur(12px)',
+                          border: '1px solid rgba(255,255,255,0.6)',
+                          boxShadow: '0 4px 8px rgba(130,66,245,0.2), inset 1px 1px 2px rgba(255,255,255,0.8), inset -1px -1px 2px rgba(0,0,0,0.1)',
+                        }}
+                      >
                         ✓
                       </span>
-                      <span className={`text-[14px] leading-6 ${plan.featured ? 'text-white/82' : 'text-[#080808]/74'}`}>{point}</span>
+                      <span className="text-[14px] leading-6 text-[#2a1a4e]/72">{point}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-auto pt-6">
+                <div className="relative mt-auto pt-6">
                   <button
-                    className={`inline-flex min-h-[44px] items-center justify-center rounded-full px-6 py-3 font-manrope text-[11px] font-bold uppercase tracking-[0.16em] transition-all duration-300 ${
-                      plan.featured
-                        ? 'bg-white text-[#080808] hover:-translate-y-0.5 hover:bg-white/92'
-                        : 'bg-[#080808] text-white hover:-translate-y-0.5 hover:bg-[#141414]'
-                    }`}
+                    className="inline-flex min-h-[44px] items-center justify-center rounded-full px-6 py-3 font-manrope text-[11px] font-bold uppercase tracking-[0.16em] text-[#1a0e38] transition-all duration-300 hover:-translate-y-0.5"
+                    style={{
+                      background: 'rgba(255,255,255,0.45)',
+                      backdropFilter: 'blur(16px)',
+                      WebkitBackdropFilter: 'blur(16px)',
+                      border: '1px solid rgba(255,255,255,0.8)',
+                      boxShadow: '0 8px 16px rgba(0,0,0,0.08), inset 2px 2px 4px rgba(255,255,255,0.9), inset -2px -2px 4px rgba(0,0,0,0.1)',
+                    }}
                   >
                     {plan.cta}
                   </button>
@@ -737,25 +1027,27 @@ const ExpandedAgencySections = () => (
           </div>
 
           <motion.article
-            whileHover={{ y: -6 }}
-            transition={{ duration: 0.28, ease: 'easeOut' }}
-            className="mt-5 overflow-hidden rounded-[22px] border border-white/10 bg-[#050505] shadow-[0_18px_48px_-28px_rgba(0,0,0,0.6)]"
+            whileHover={undefined}
+            transition={undefined}
+            className="relative mt-5 overflow-hidden rounded-[34px]"
+            style={createGlassPanelStyle()}
           >
-            <div className="grid gap-0 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.45fr)_auto] md:items-center">
-              <div className="px-6 py-6 md:min-h-[148px] md:border-r md:border-white/12 md:px-8">
-                <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.24em] text-[#C6FF00]">
+            <GlassPanelLayers />
+            <div className="relative grid gap-0 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.45fr)_auto] md:items-center">
+              <div className="px-6 py-6 md:min-h-[148px] md:px-8" style={{ borderRight: '1px solid rgba(255,255,255,0.24)' }}>
+                <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.24em] text-[#8242f5]">
                   {ecommercePlan.label}
                 </div>
-                <div className="mt-3 font-epilogue text-[30px] font-semibold leading-[1.02] tracking-[-0.025em] text-white/96 md:text-[34px]">
+                <div className="mt-3 font-epilogue text-[30px] font-semibold leading-[1.02] tracking-[-0.025em] text-[#1a0e38] md:text-[34px]">
                   {ecommercePlan.name}
                 </div>
-                <div className="mt-3 font-manrope text-[18px] font-extrabold leading-none tracking-[-0.03em] text-white/88">
+                <div className="mt-3 font-manrope text-[18px] font-extrabold leading-none tracking-[-0.03em] text-[#2a1a4e]/85">
                   {ecommercePlan.price}
                 </div>
               </div>
 
-              <div className="px-6 py-6 md:min-h-[148px] md:border-r md:border-white/12 md:px-8 md:py-0 md:flex md:items-center">
-                <p className="max-w-[62ch] text-[14px] leading-6 text-white/68 md:text-[15px] md:leading-7">
+              <div className="px-6 py-6 md:min-h-[148px] md:flex md:items-center md:px-8 md:py-0" style={{ borderRight: '1px solid rgba(255,255,255,0.24)' }}>
+                <p className="max-w-[62ch] text-[14px] leading-6 text-[#2a1a4e]/65 md:text-[15px] md:leading-7">
                   {ecommercePlan.description}
                 </p>
               </div>
@@ -763,7 +1055,14 @@ const ExpandedAgencySections = () => (
               <div className="px-6 pb-6 md:flex md:min-h-[148px] md:items-center md:justify-center md:px-8 md:py-0">
                 <button
                   aria-label={ecommercePlan.cta}
-                  className="inline-flex h-[72px] w-[72px] items-center justify-center rounded-full bg-[#C6FF00] text-[#050505] shadow-[0_12px_28px_-18px_rgba(0,0,0,0.55)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_16px_30px_-20px_rgba(0,0,0,0.62)]"
+                  className="inline-flex h-[72px] w-[72px] items-center justify-center rounded-full text-white transition-transform duration-300 hover:scale-110"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(160,112,255,0.6) 0%, rgba(130,66,245,0.4) 100%)',
+                    backdropFilter: 'blur(16px)',
+                    WebkitBackdropFilter: 'blur(16px)',
+                    border: '1px solid rgba(255,255,255,0.6)',
+                    boxShadow: '0 12px 32px rgba(130,66,245,0.25), inset 2px 2px 4px rgba(255,255,255,0.8), inset -2px -2px 4px rgba(0,0,0,0.15)',
+                  }}
                 >
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path
@@ -781,23 +1080,22 @@ const ExpandedAgencySections = () => (
       </motion.div>
     </section>
 
-    <SectionShell id="por-que-kaiva" tone="dark">
+    <SectionShell id="por-que-kaiva" tone="light">
       <motion.div {...sectionReveal} className="grid gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
         <SectionHeader
           eyebrow="Confianza"
           title="Por qué Kaiva"
           description="Kaiva Studio se rige por principios claros que garantizan consistencia, confianza y profesionalismo en cada proyecto."
-          inverse
         />
         <div className="grid gap-4 sm:grid-cols-2">
           {trustPoints.map((point, index) => (
-            <div
-              key={point}
-              className="rounded-[26px] border border-white/14 bg-transparent p-6"
-            >
-              <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-white/42">0{index + 1}</div>
-              <div className="mt-4 font-epilogue text-[27px] font-extrabold leading-[1.08] tracking-[-0.025em] text-white">{point}</div>
-              <div className="mt-3 text-[14px] leading-7 text-white/66">
+              <div
+                key={point}
+                className="rounded-[26px] border border-[#080808]/14 bg-[var(--color-surface)] p-6"
+              >
+              <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-[#080808]/42">0{index + 1}</div>
+              <div className="mt-4 font-epilogue text-[27px] font-extrabold leading-[1.08] tracking-[-0.025em] text-[#080808]">{point}</div>
+              <div className="mt-3 text-[14px] leading-7 text-[#080808]/66">
                 {index === 0 && 'Cada proceso debe ser entendible para el cliente.'}
                 {index === 1 && 'Cada entrega debe cumplir un estándar alto.'}
                 {index === 2 && 'Los tiempos se respetan y se optimizan.'}
@@ -810,20 +1108,21 @@ const ExpandedAgencySections = () => (
       </motion.div>
     </SectionShell>
 
-    <SectionShell id="cta" tone="dark" className="relative overflow-hidden">
+    <SectionShell id="cta" tone="light" className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),transparent)]" />
-      <motion.div {...sectionReveal} className="relative z-10 rounded-[36px] border border-white/14 bg-transparent px-8 py-16 text-center md:px-14 md:py-22">
+      <motion.div {...sectionReveal} className="relative z-10 rounded-[36px] border border-[#080808]/14 bg-[var(--color-surface)] px-8 py-16 text-center md:px-14 md:py-22">
         <div className="mx-auto max-w-4xl">
-          <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.24em] text-white/44">Visión</div>
-          <h2 className="mt-6 font-epilogue text-[clamp(40px,5.4vw,86px)] font-extrabold leading-[1.02] tracking-[-0.04em] text-white">
+          <div className="inline-block w-fit font-manrope text-[11px] font-bold uppercase tracking-[0.24em]" style={gradientAccentStyle}>Visión</div>
+          <h2 className="mt-6 font-epilogue text-[clamp(40px,5.4vw,86px)] font-extrabold leading-[1.02] tracking-[-0.04em] text-[#080808]">
             Construimos presencia digital sólida y bien ejecutada
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-[17px] leading-8 text-white/72">
+          <p className="mx-auto mt-6 max-w-2xl text-[17px] leading-8 text-[#080808]/72">
             Buscamos consolidarnos como un estudio referente en desarrollo web para negocios que valoran la claridad, la estética y la estructura.
           </p>
           <a
             href="#contacto"
-            className="mt-10 inline-flex items-center justify-center rounded-full border border-white bg-white px-9 py-4 font-manrope text-[13px] font-bold uppercase tracking-[0.15em] text-[#080808] transition-transform duration-300 hover:-translate-y-0.5"
+            className="mt-10 inline-flex items-center justify-center rounded-full border border-transparent px-9 py-4 font-manrope text-[13px] font-bold uppercase tracking-[0.15em] text-white transition-transform duration-300 hover:-translate-y-0.5 hover:opacity-92"
+            style={accentButtonStyle}
           >
             Hablemos de tu proyecto
           </a>
@@ -831,75 +1130,7 @@ const ExpandedAgencySections = () => (
       </motion.div>
     </SectionShell>
 
-    <SectionShell id="contacto" tone="light">
-      <motion.div {...sectionReveal} className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-        <SectionHeader
-          eyebrow="Contacto"
-          title="Conversemos"
-          description="La comunicación de Kaiva Studio es directa, clara y orientada a resultados. Cuéntanos sobre tu proyecto y te responderemos con precisión, sin tecnicismos innecesarios."
-        />
-        <div className="grid gap-6">
-          <div className="grid gap-6 md:grid-cols-2">
-            <a
-              href="https://wa.me/"
-              className="rounded-[26px] border border-[#080808]/14 bg-white p-6 transition-transform duration-300 hover:-translate-y-1"
-            >
-              <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-[#21B2C6]">WhatsApp</div>
-              <div className="mt-5 font-epilogue text-[30px] font-extrabold leading-[1.08] tracking-[-0.025em] text-[#080808]">Contacto directo</div>
-              <div className="mt-2 text-[15px] text-[#080808]/62">Abrir conversación</div>
-            </a>
-            <a
-              href="mailto:hola@kaivastudio.com"
-              className="rounded-[26px] border border-[#080808]/14 bg-white p-6 transition-transform duration-300 hover:-translate-y-1"
-            >
-              <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-[#21B2C6]">Email</div>
-              <div className="mt-5 font-epilogue text-[30px] font-extrabold leading-[1.08] tracking-[-0.02em] text-[#080808]">hola@kaivastudio.com</div>
-              <div className="mt-2 text-[15px] text-[#080808]/62">Respuesta por correo</div>
-            </a>
-          </div>
-
-          <form className="rounded-[32px] border border-[#080808]/14 bg-white p-7 md:p-8">
-            <div className="grid gap-5 md:grid-cols-2">
-              <label className="block">
-                <span className="font-manrope text-[11px] font-bold uppercase tracking-[0.2em] text-[#201d1a]/54">Nombre</span>
-                <input
-                  type="text"
-                  placeholder="Tu nombre"
-                  className="mt-3 w-full rounded-2xl border border-[#201d1a]/10 bg-white px-5 py-4 text-[15px] text-[#201d1a] outline-none transition-colors focus:border-[#21B2C6]"
-                />
-              </label>
-              <label className="block">
-                <span className="font-manrope text-[11px] font-bold uppercase tracking-[0.2em] text-[#201d1a]/54">Email</span>
-                <input
-                  type="email"
-                  placeholder="tu@email.com"
-                  className="mt-3 w-full rounded-2xl border border-[#201d1a]/10 bg-white px-5 py-4 text-[15px] text-[#201d1a] outline-none transition-colors focus:border-[#21B2C6]"
-                />
-              </label>
-            </div>
-            <label className="mt-5 block">
-              <span className="font-manrope text-[11px] font-bold uppercase tracking-[0.2em] text-[#201d1a]/54">Proyecto</span>
-              <textarea
-                rows="6"
-                placeholder="Cuéntanos sobre tu negocio, objetivos y el tipo de web que necesitas."
-                className="mt-3 w-full rounded-[24px] border border-[#201d1a]/10 bg-white px-5 py-4 text-[15px] text-[#201d1a] outline-none transition-colors focus:border-[#21B2C6]"
-              />
-            </label>
-            <div className="mt-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              <p className="max-w-lg text-[13px] leading-6 text-[#201d1a]/58">
-                Proyectos seleccionados, procesos claros y una ejecución orientada a resultados.
-              </p>
-              <button
-                type="submit"
-                className="inline-flex items-center justify-center rounded-full bg-[#201d1a] px-9 py-4 font-manrope text-[13px] font-bold uppercase tracking-[0.15em] text-[#f8f6f2] transition-transform duration-300 hover:-translate-y-0.5"
-              >
-                Enviar consulta
-              </button>
-            </div>
-          </form>
-        </div>
-      </motion.div>
-    </SectionShell>
+    <ContactRevealSection />
   </>
 );
 
@@ -913,9 +1144,15 @@ export default function KaivaLanding() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;600;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
         @import url('https://fonts.cdnfonts.com/css/open-sauce-one');
+        :root {
+          --color-dominant: #ffffff;
+          --color-secondary: #080808;
+          --color-surface: #ffffff;
+          --color-accent: #8242f5;
+        }
         html { scroll-behavior: smooth; }
         html { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-kerning: normal; }
-        body { background-color: #f8f6f2; font-family: 'Inter Tight', 'Inter', sans-serif; letter-spacing: -0.01em; }
+        body { background-color: var(--color-dominant); font-family: 'Inter Tight', 'Inter', sans-serif; letter-spacing: -0.01em; color: var(--color-secondary); }
         .font-epilogue { font-family: 'Inter Tight', 'Inter', sans-serif; font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1; }
         .font-manrope { font-family: 'Inter', 'Inter Tight', sans-serif; font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1; }
         .font-inter { font-family: 'Inter Tight', 'Inter', sans-serif; font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1; }
@@ -959,6 +1196,68 @@ export default function KaivaLanding() {
         .typography-refined input::placeholder,
         .typography-refined textarea::placeholder {
           letter-spacing: -0.004em;
+        }
+        .contact-premium-card {
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          background: rgba(255, 255, 255, 0.68);
+          border: 1px solid rgba(255, 255, 255, 0.65);
+          box-shadow: 0 24px 64px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255,255,255,0.68), inset 0 -1px 0 rgba(255,255,255,0.14);
+          transition: transform 340ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 340ms cubic-bezier(0.22, 1, 0.36, 1), border-color 340ms cubic-bezier(0.22, 1, 0.36, 1), background-color 340ms cubic-bezier(0.22, 1, 0.36, 1);
+          will-change: transform, opacity;
+        }
+        .contact-premium-card:hover {
+          background: rgba(255,255,255,0.7);
+          box-shadow: 0 28px 74px rgba(0, 0, 0, 0.075), inset 0 1px 0 rgba(255,255,255,0.72), inset 0 -1px 0 rgba(255,255,255,0.18);
+          border-color: rgba(255,255,255,0.78);
+        }
+        .contact-input {
+          border: 1px solid rgba(8,8,8,0.08);
+          background: rgba(248, 248, 246, 0.84);
+          transition: border-color 280ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1), background-color 280ms cubic-bezier(0.22, 1, 0.36, 1), transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .contact-input:focus {
+          border-color: rgba(130,66,245,0.18);
+          background: rgba(255,255,255,0.94);
+          box-shadow: 0 0 0 3px rgba(130,66,245,0.045);
+        }
+        .contact-accent-button {
+          transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 320ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .contact-accent-button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 20px 36px -18px rgba(130,66,245,0.5);
+        }
+        .pricing-card {
+          position: relative;
+        }
+        .pricing-card::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 42%;
+          height: 22%;
+          pointer-events: none;
+          border-radius: inherit;
+          background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 55%, rgba(255,255,255,0) 100%);
+          filter: blur(4px);
+          opacity: 0.72;
+        }
+        .pricing-card::after {
+          display: none;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          html { scroll-behavior: auto; }
+          .contact-premium-card,
+          .contact-input,
+          .contact-accent-button {
+            transition: none;
+          }
+          .contact-premium-card {
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+          }
         }
       `}</style>
     </div>
@@ -1038,7 +1337,7 @@ const HeroSection = () => {
       >
         <span className="block font-semibold tracking-[-0.02em]">Kaiva</span>
         <span className="block font-normal">
-          Studio<span className="text-[#7b6dff]">.</span>
+          Studio<span style={gradientAccentStyle}>.</span>
         </span>
       </motion.div>
 
@@ -1054,11 +1353,7 @@ const HeroSection = () => {
         <a
           href="#inicio"
           className="font-medium"
-          style={{
-            background: 'linear-gradient(135deg, #6aa8ff, #7b6dff, #d96cff)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-          }}
+          style={gradientAccentStyle}
         >
           Inicio
         </a>
@@ -1085,9 +1380,7 @@ const HeroSection = () => {
       >
         <a
           href="#planes"
-          className={`inline-flex min-h-[40px] items-center justify-center rounded-full px-5 font-manrope text-[10px] font-bold uppercase tracking-[0.16em] transition-colors ${
-            isDarkNavbar ? 'bg-white/10 text-white' : 'bg-[#080808] text-white'
-          }`}
+          className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-[#080808]/12 bg-white px-5 font-manrope text-[10px] font-bold uppercase tracking-[0.16em] text-[#080808] transition-colors hover:bg-[#f7f7f7]"
         >
           Paquetes
         </a>
@@ -1107,11 +1400,7 @@ const HeroSection = () => {
         <a
           href="#proyectos"
           className="mt-4 inline-block w-fit pb-1 text-[16px] font-medium leading-none underline decoration-1 underline-offset-[5px] md:mt-6 md:text-[20px]"
-          style={{
-            background: 'linear-gradient(135deg, #6aa8ff, #7b6dff, #d96cff)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-          }}
+          style={gradientAccentStyle}
         >
           Explora nuestro trabajo ↗
         </a>
