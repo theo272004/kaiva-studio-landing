@@ -398,7 +398,7 @@ const ContactRevealSection = () => {
   };
 
   return (
-    <section id="contacto" className="relative min-h-[148vh] bg-transparent">
+    <section id="contacto" className="relative min-h-[132vh] bg-transparent">
       <div className="sticky top-0 z-0 h-screen overflow-hidden bg-transparent">
         <div
           className="mx-auto flex h-full w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
@@ -495,8 +495,8 @@ const ContactRevealSection = () => {
         </div>
       </div>
 
-      <div className="relative z-20 mt-[46vh] min-h-[42vh] bg-[#111111]">
-        <div className="mx-auto flex min-h-[42vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-12 text-center md:px-12 md:py-14 lg:px-16">
+      <div className="relative z-20 mt-[24vh] min-h-[48vh] bg-[#111111]">
+        <div className="mx-auto flex min-h-[48vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-12 text-center md:px-12 md:py-14 lg:px-16">
           <a
             href="mailto:hello@kaivastudio.com"
             className="font-epilogue text-[clamp(30px,4.2vw,58px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
@@ -1521,12 +1521,10 @@ const HeroSection = () => {
             alt="Robots Kaiva"
             className="absolute left-1/2 top-[9%] w-[245%] -translate-x-1/2 scale-[1.08] object-contain md:top-[8%] md:w-[280%] md:scale-[1.15]"
             animate={{
-              y: [0, -8, 6, -4, 0],
-              x: [0, 4, -3, 2, 0],
-              rotate: [0, 1.8, -1.2, 0.8, 0],
+              y: [0, -7, 0, 7, 0],
             }}
             transition={{
-              duration: 10,
+              duration: 8.5,
               repeat: Infinity,
               ease: 'easeInOut',
             }}
