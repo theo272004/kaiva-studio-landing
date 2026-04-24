@@ -213,6 +213,17 @@ const FloatingRobot = ({ src, style, className = '', delay = 0, duration = 6, am
   </motion.div>
 );
 
+const SectionsAuroraBackdrop = () => (
+  <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+    <div className="absolute inset-0 aurora-base" />
+    <div className="aurora-blob aurora-blob-a absolute -left-[20vw] -top-[18vh] h-[58vh] w-[56vw] rounded-full" />
+    <div className="aurora-blob aurora-blob-b absolute right-[-14vw] top-[8vh] h-[52vh] w-[52vw] rounded-full" />
+    <div className="aurora-blob aurora-blob-c absolute left-[28vw] bottom-[-22vh] h-[62vh] w-[58vw] rounded-full" />
+    <div className="absolute inset-0 aurora-blur-overlay" />
+    <div className="absolute inset-0 aurora-noise" />
+  </div>
+);
+
 const TiltSlide = ({ slide, isActive, position, onClick }) => {
   const cardRef = useRef(null);
   const rotateX = useMotionValue(0);
@@ -387,8 +398,8 @@ const ContactRevealSection = () => {
   };
 
   return (
-    <section id="contacto" className="relative min-h-[128vh] bg-[var(--color-dominant)]">
-      <div className="sticky top-0 z-0 h-screen overflow-hidden bg-[var(--color-dominant)]">
+    <section id="contacto" className="relative min-h-[148vh] bg-transparent">
+      <div className="sticky top-0 z-0 h-screen overflow-hidden bg-transparent">
         <div
           className="mx-auto flex h-full w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
           style={{
@@ -407,7 +418,7 @@ const ContactRevealSection = () => {
               viewport={{ once: true, amount: 0.38 }}
               className="max-w-[560px]"
             >
-              <motion.div variants={textItem} className="font-manrope text-[11px] font-bold uppercase tracking-[0.24em] text-[#080808]/42">
+              <motion.div variants={textItem} className="font-manrope text-[16px] font-medium tracking-normal text-[#080808]/68">
                 Contacto
               </motion.div>
               <motion.h2 className="mt-6 font-epilogue text-[clamp(56px,7vw,112px)] font-extrabold leading-[0.92] tracking-[-0.04em] text-[#080808] md:tracking-[-0.035em] lg:tracking-[-0.04em]">
@@ -484,8 +495,8 @@ const ContactRevealSection = () => {
         </div>
       </div>
 
-      <div className="relative z-10 mt-[48vh] min-h-[36vh] bg-[#111111]">
-        <div className="mx-auto flex min-h-[36vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-12 text-center md:px-12 md:py-14 lg:px-16">
+      <div className="relative z-20 mt-[58vh] min-h-[42vh] bg-[#111111]">
+        <div className="mx-auto flex min-h-[42vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-12 text-center md:px-12 md:py-14 lg:px-16">
           <a
             href="mailto:hello@kaivastudio.com"
             className="font-epilogue text-[clamp(30px,4.2vw,58px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
@@ -525,7 +536,7 @@ const SectionHeader = ({ eyebrow, title, description, align = 'left', inverse = 
 );
 
 const SectionShell = ({ id, tone = 'light', className = '', children }) => {
-  const toneClass = 'bg-[var(--color-dominant)] text-[var(--color-secondary)]';
+  const toneClass = 'bg-transparent text-[var(--color-secondary)]';
 
   return (
     <section id={id} data-nav-theme="light" className={`${toneClass} ${className}`}>
@@ -539,7 +550,7 @@ const ServicesSection = () => {
 
   return (
     <>
-      <section id="servicios" data-nav-theme="light" className="bg-[var(--color-dominant)] text-[var(--color-secondary)]">
+      <section id="servicios" data-nav-theme="light" className="bg-transparent text-[var(--color-secondary)]">
         <div className="mx-auto w-full max-w-[1480px] px-6 pb-10 pt-24 md:px-12 md:pb-12 md:pt-28 lg:px-16">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
@@ -548,19 +559,15 @@ const ServicesSection = () => {
             transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="mx-auto flex max-w-4xl flex-col items-center justify-center text-center">
-              <h2 className="flex flex-wrap items-baseline justify-center gap-x-4 gap-y-4 font-inter text-[clamp(38px,6vw,84px)] leading-[0.98] text-[#080808]">
-                <span className="font-bold tracking-[-0.045em] leading-none">Nuestros</span>
-                <span className="inline-flex items-baseline gap-3 rounded-[18px] border border-white/80 bg-white/78 px-6 py-3 shadow-[0_18px_40px_-28px_rgba(130,66,245,0.45)] backdrop-blur-[10px] md:px-7 md:py-3.5">
-                  <span className="font-semibold leading-none tracking-[0.015em] text-[#080808] [font-kerning:normal]">servicios</span>
-                  <span className="h-3 w-3 shrink-0 self-center bg-gradient-to-r from-[#21b2c6] via-[#8242f5] to-[#d96cff] md:h-3.5 md:w-3.5" aria-hidden="true" />
-                </span>
+              <h2 className="font-inter text-[clamp(38px,6vw,84px)] font-bold leading-[0.98] tracking-[-0.045em] text-[#080808]">
+                Nuestros servicios
               </h2>
             </div>
           </motion.div>
         </div>
       </section>
 
-      <section data-nav-theme="light" className="bg-white text-[#080808]">
+      <section data-nav-theme="light" className="bg-transparent text-[#080808]">
         <div className="mx-auto w-full max-w-[1480px] px-6 pb-20 md:px-12 md:pb-24 lg:px-16 lg:pb-28">
           <motion.div
             className="grid w-full gap-5 md:grid-cols-2 lg:grid-cols-4"
@@ -624,10 +631,6 @@ const ServicesSection = () => {
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     >
                       0{index + 1}
-                      <span
-                        className="relative top-[0.03em] ml-2 inline-block h-[0.18em] w-[0.18em] bg-gradient-to-r from-[#21b2c6] via-[#8242f5] to-[#d96cff] align-baseline"
-                        aria-hidden="true"
-                      />
                     </motion.div>
 
                     <motion.div
@@ -666,17 +669,6 @@ const ServicesSection = () => {
                         </motion.p>
                       </div>
 
-                      <motion.div
-                        className="inline-flex items-center gap-2 font-manrope text-[11px] font-bold uppercase tracking-[0.22em]"
-                        animate={{
-                          color: isActive ? 'rgba(8,8,8,0.72)' : 'rgba(8,8,8,0.5)',
-                          x: isActive ? 6 : 0,
-                        }}
-                        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                      >
-                        Explorar
-                        <span aria-hidden="true">↗</span>
-                      </motion.div>
                     </div>
                   </div>
                 </motion.article>
@@ -791,7 +783,7 @@ const PortfolioSection = () => {
             className="pointer-events-none absolute bottom-4 left-6 z-20 hidden md:block md:bottom-[-54px] md:left-16"
           >
             <div className="flex items-end gap-4">
-              <div className="font-epilogue text-[clamp(48px,7vw,92px)] font-extrabold italic leading-none tracking-[-0.03em] opacity-90" style={{ color: active.accent }}>
+              <div className="font-epilogue text-[clamp(48px,7vw,92px)] font-extrabold italic leading-none tracking-[-0.03em] opacity-90" style={gradientAccentStyle}>
                 {active.number}
               </div>
               <div className="pb-2">
@@ -1160,7 +1152,12 @@ export default function KaivaLanding() {
       <div className="relative z-10">
         <HeroSection />
         <PortfolioSection />
-        <ExpandedAgencySections />
+        <div className="relative">
+          <SectionsAuroraBackdrop />
+          <div className="relative z-10">
+            <ExpandedAgencySections />
+          </div>
+        </div>
       </div>
 
       <style>{`
@@ -1175,6 +1172,45 @@ export default function KaivaLanding() {
         html { scroll-behavior: smooth; }
         html { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-kerning: normal; }
         body { background-color: var(--color-dominant); font-family: 'Inter Tight', 'Inter', sans-serif; letter-spacing: -0.01em; color: var(--color-secondary); }
+        .aurora-base {
+          background:
+            radial-gradient(120% 130% at 0% 0%, rgba(126, 209, 255, 0.42) 0%, rgba(126, 209, 255, 0) 54%),
+            radial-gradient(120% 120% at 100% 0%, rgba(155, 134, 255, 0.4) 0%, rgba(155, 134, 255, 0) 56%),
+            radial-gradient(140% 150% at 100% 100%, rgba(255, 164, 214, 0.36) 0%, rgba(255, 164, 214, 0) 54%),
+            radial-gradient(120% 120% at 0% 100%, rgba(107, 229, 229, 0.34) 0%, rgba(107, 229, 229, 0) 55%),
+            linear-gradient(180deg, #ffffff 0%, #fcfcff 100%);
+          animation: auroraShift 22s ease-in-out infinite alternate;
+        }
+        .aurora-blob {
+          filter: blur(84px);
+          opacity: 0.44;
+          will-change: transform, opacity;
+        }
+        .aurora-blob-a {
+          background: radial-gradient(circle at 30% 40%, rgba(107, 229, 229, 0.8) 0%, rgba(107, 229, 229, 0.18) 42%, rgba(107, 229, 229, 0) 75%);
+          animation: floatBlobOne 24s ease-in-out infinite;
+        }
+        .aurora-blob-b {
+          background: radial-gradient(circle at 70% 35%, rgba(155, 134, 255, 0.78) 0%, rgba(155, 134, 255, 0.18) 46%, rgba(155, 134, 255, 0) 76%);
+          animation: floatBlobTwo 27s ease-in-out infinite;
+        }
+        .aurora-blob-c {
+          background: radial-gradient(circle at 50% 62%, rgba(255, 164, 214, 0.72) 0%, rgba(255, 164, 214, 0.16) 44%, rgba(255, 164, 214, 0) 76%);
+          animation: floatBlobThree 30s ease-in-out infinite;
+        }
+        .aurora-blur-overlay {
+          backdrop-filter: blur(46px) saturate(108%);
+          -webkit-backdrop-filter: blur(46px) saturate(108%);
+          background: linear-gradient(180deg, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.08) 42%, rgba(255,255,255,0.3) 100%);
+        }
+        .aurora-noise {
+          opacity: 0.17;
+          background-image:
+            radial-gradient(circle at 20% 20%, rgba(0,0,0,0.12) 0.6px, transparent 0.7px),
+            radial-gradient(circle at 80% 60%, rgba(0,0,0,0.1) 0.5px, transparent 0.6px);
+          background-size: 3px 3px, 4px 4px;
+          mix-blend-mode: soft-light;
+        }
         .aurora-hover-layer {
           background:
             radial-gradient(130% 150% at 0% 10%, rgba(107, 229, 229, 0.56) 0%, rgba(107, 229, 229, 0) 56%),
@@ -1282,8 +1318,33 @@ export default function KaivaLanding() {
           0% { background-position: 0% 50%, 100% 50%, 50% 100%, 50% 0%, 50% 50%; }
           100% { background-position: 100% 50%, 0% 60%, 50% 0%, 50% 100%, 50% 50%; }
         }
+        @keyframes floatBlobOne {
+          0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.44; }
+          50% { transform: translate3d(4vw, -3vh, 0) scale(1.06); opacity: 0.52; }
+          100% { transform: translate3d(-2vw, 2.5vh, 0) scale(0.98); opacity: 0.4; }
+        }
+        @keyframes floatBlobTwo {
+          0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.45; }
+          50% { transform: translate3d(-3.8vw, 2.8vh, 0) scale(1.05); opacity: 0.5; }
+          100% { transform: translate3d(2.4vw, -2.2vh, 0) scale(0.97); opacity: 0.4; }
+        }
+        @keyframes floatBlobThree {
+          0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.4; }
+          50% { transform: translate3d(2.6vw, -2.6vh, 0) scale(1.04); opacity: 0.48; }
+          100% { transform: translate3d(-3vw, 2vh, 0) scale(0.98); opacity: 0.38; }
+        }
+        @media (max-width: 1200px) {
+          .hero-copy-wrap { top: 136px !important; max-width: 640px !important; }
+          .hero-visual-wrap { top: 250px !important; width: 116vw !important; max-width: 920px !important; }
+        }
+        @media (max-width: 768px) {
+          .hero-copy-wrap { top: 108px !important; max-width: 360px !important; }
+          .hero-visual-wrap { top: 284px !important; width: 122vw !important; max-width: 560px !important; }
+        }
         @media (prefers-reduced-motion: reduce) {
           html { scroll-behavior: auto; }
+          .aurora-base,
+          .aurora-blob,
           .aurora-hover-layer {
             animation: none;
           }
@@ -1428,7 +1489,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 22 }}
         animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 22 }}
         transition={{ duration: 0.6, delay: 0.14, ease: 'easeOut' }}
-        className="absolute left-6 right-6 top-[110px] z-40 flex max-w-[360px] flex-col items-start text-left md:left-[80px] md:right-auto md:top-[160px] md:max-w-[720px]"
+        className="hero-copy-wrap absolute left-6 right-6 top-[110px] z-40 flex max-w-[360px] flex-col items-start text-left md:left-[80px] md:right-auto md:top-[160px] md:max-w-[720px]"
       >
         <h1 className="w-fit text-[30px] font-extrabold leading-[1.02] tracking-[-0.03em] text-[#080808] md:text-[54px]">
           <span className="block md:whitespace-nowrap">Páginas web claras,</span>
@@ -1448,7 +1509,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, scale: 0.96, y: 10 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.85, delay: 0.1, ease: 'easeOut' }}
-        className="absolute left-1/2 top-[290px] z-20 w-[118vw] max-w-[560px] -translate-x-1/2 px-0 md:top-[220px] md:w-[110vw] md:max-w-[1040px]"
+        className="hero-visual-wrap absolute left-1/2 top-[290px] z-20 w-[118vw] max-w-[560px] -translate-x-1/2 px-0 md:top-[220px] md:w-[110vw] md:max-w-[1040px]"
       >
         <div className="relative mx-auto aspect-[1.08/1] w-full md:aspect-[1.16/1]">
           <img
@@ -1456,10 +1517,20 @@ const HeroSection = () => {
             alt="Kaiva Studio"
             className="absolute left-1/2 top-[10%] w-[58%] -translate-x-1/2 object-contain md:top-[10%] md:w-[50%]"
           />
-          <img
+          <motion.img
             src={asset('robots hero.png')}
             alt="Robots Kaiva"
             className="absolute left-1/2 top-[9%] w-[245%] -translate-x-1/2 scale-[1.08] object-contain md:top-[8%] md:w-[280%] md:scale-[1.15]"
+            animate={{
+              y: [0, -8, 6, -4, 0],
+              x: [0, 4, -3, 2, 0],
+              rotate: [0, 1.8, -1.2, 0.8, 0],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
           />
         </div>
       </motion.div>
