@@ -404,12 +404,12 @@ const ContactRevealSection = () => {
   });
   const blackPanelY = useTransform(
     scrollYProgress,
-    [0, 0.12, 0.98, 1],
-    ['105%', '105%', '0%', '0%'],
+    [0, 0.08, 1],
+    ['105%', '105%', '25%'],
   );
 
   return (
-    <section ref={sectionRef} id="contacto" className="relative min-h-[130vh] bg-transparent">
+    <section ref={sectionRef} id="contacto" className="relative min-h-[120vh] bg-transparent">
       <div className="sticky top-0 z-0 h-screen overflow-hidden bg-transparent">
         <div
           className="mx-auto flex h-full w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
