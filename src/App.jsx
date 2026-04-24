@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, useMotionValue, useSpring, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, AnimatePresence, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 
@@ -305,6 +305,7 @@ const TiltSlide = ({ slide, isActive, position, onClick }) => {
 const ContactRevealSection = () => {
   const prefersReducedMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
+  const sectionRef = useRef(null);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 767px)');
@@ -397,8 +398,18 @@ const ContactRevealSection = () => {
     },
   };
 
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end end'],
+  });
+  const blackPanelY = useTransform(
+    scrollYProgress,
+    [0, 0.12, 0.85, 1],
+    ['105%', '105%', '-12%', '-18%'],
+  );
+
   return (
-    <section id="contacto" className="relative min-h-[132vh] bg-transparent">
+    <section ref={sectionRef} id="contacto" className="relative min-h-[230vh] bg-transparent">
       <div className="sticky top-0 z-0 h-screen overflow-hidden bg-transparent">
         <div
           className="mx-auto flex h-full w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
@@ -493,10 +504,12 @@ const ContactRevealSection = () => {
             </motion.form>
           </div>
         </div>
-      </div>
 
-      <div className="relative z-20 mt-[24vh] min-h-[48vh] bg-[#111111]">
-        <div className="mx-auto flex min-h-[48vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-12 text-center md:px-12 md:py-14 lg:px-16">
+        <motion.div
+          className="absolute inset-x-0 bottom-0 z-20 min-h-[52vh] bg-[#111111]"
+          style={{ y: prefersReducedMotion ? '0%' : blackPanelY }}
+        >
+          <div className="mx-auto flex min-h-[52vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-12 text-center md:px-12 md:py-14 lg:px-16">
           <a
             href="mailto:hello@kaivastudio.com"
             className="font-epilogue text-[clamp(30px,4.2vw,58px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
@@ -508,7 +521,8 @@ const ContactRevealSection = () => {
             <a href="#" className="transition-colors duration-300 hover:text-white">Dribbble</a>
             <a href="#" className="transition-colors duration-300 hover:text-white">LinkedIn</a>
           </div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
