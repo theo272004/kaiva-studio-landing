@@ -536,6 +536,7 @@ const SectionShell = ({ id, tone = 'light', className = '', children }) => {
 
 const ServicesSection = () => {
   const [activeService, setActiveService] = useState(null);
+  const hoverGradient = asset('degradado-lateral.png');
 
   return (
     <>
@@ -560,10 +561,10 @@ const ServicesSection = () => {
         </div>
       </section>
 
-      <section data-nav-theme="light" className="bg-white text-white">
-        <div className="w-full pb-20 md:pb-24 lg:pb-28">
+      <section data-nav-theme="light" className="bg-white text-[#080808]">
+        <div className="mx-auto w-full max-w-[1480px] px-6 pb-20 md:px-12 md:pb-24 lg:px-16 lg:pb-28">
           <motion.div
-            className="grid w-full gap-0 md:grid-cols-2 lg:grid-cols-4"
+            className="grid w-full gap-5 md:grid-cols-2 lg:grid-cols-4"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.15 }}
@@ -590,20 +591,32 @@ const ServicesSection = () => {
                   }}
                   onHoverStart={() => setActiveService(index)}
                   onFocus={() => setActiveService(index)}
-                  className="group relative flex min-h-[360px] overflow-hidden bg-[#080808] outline-none transition-opacity duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:min-h-[400px] xl:min-h-[440px]"
+                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-[#080808]/10 bg-[#0f0f0f] outline-none transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:min-h-[380px] xl:min-h-[420px]"
                   animate={{ opacity: isQuiet ? 0.56 : 1 }}
                   transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                   tabIndex={0}
                 >
                   <motion.div
-                    className="pointer-events-none absolute inset-0 bg-white"
-                    initial={{ scaleX: 0, opacity: 0 }}
+                    className="pointer-events-none absolute inset-0"
+                    initial={{ opacity: 0, scale: 1.04 }}
                     animate={{
-                      scaleX: isActive ? 1 : 0,
                       opacity: isActive ? 1 : 0,
+                      scale: isActive ? 1 : 1.04,
                     }}
-                    transition={{ duration: 0.42, ease: [0.2, 0.9, 0.2, 1] }}
-                    style={{ transformOrigin: 'center center' }}
+                    transition={{ duration: 0.38, ease: [0.2, 0.9, 0.2, 1] }}
+                    style={{
+                      backgroundImage: `url(${hoverGradient})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                    }}
+                  />
+
+                  <motion.div
+                    className="pointer-events-none absolute inset-0"
+                    animate={{
+                      backgroundColor: isActive ? 'rgba(255,255,255,0.14)' : 'rgba(8,8,8,0.1)',
+                    }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   />
 
                   <div className="relative z-10 flex min-h-full w-full flex-col px-7 py-9 md:px-8 md:py-10 lg:px-9 lg:py-11 xl:px-10">
@@ -611,7 +624,7 @@ const ServicesSection = () => {
                       className="font-epilogue text-[48px] font-extrabold leading-none tracking-[-0.04em] md:text-[60px] xl:text-[72px]"
                       animate={{
                         color: isActive ? '#080808' : '#ffffff',
-                        x: isActive ? 4 : 0,
+                        x: isActive ? 5 : 0,
                       }}
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     >
@@ -625,7 +638,7 @@ const ServicesSection = () => {
                     <motion.div
                       className="mt-8 h-px w-full origin-center"
                       animate={{
-                        backgroundColor: isActive ? 'rgba(8,8,8,0.14)' : 'rgba(255,255,255,0.16)',
+                        backgroundColor: isActive ? 'rgba(8,8,8,0.2)' : 'rgba(255,255,255,0.22)',
                         scaleX: isActive ? 0.985 : 1,
                       }}
                       transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
@@ -649,7 +662,7 @@ const ServicesSection = () => {
                         <motion.p
                           className="text-[14px] leading-7 md:text-[15px] md:leading-8"
                           animate={{
-                            color: isActive ? 'rgba(8,8,8,0.72)' : 'rgba(255,255,255,0.64)',
+                            color: isActive ? 'rgba(8,8,8,0.8)' : 'rgba(255,255,255,0.72)',
                             x: isActive ? 5 : 0,
                           }}
                           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -657,6 +670,18 @@ const ServicesSection = () => {
                           {service.description}
                         </motion.p>
                       </div>
+
+                      <motion.div
+                        className="inline-flex items-center gap-2 font-manrope text-[11px] font-bold uppercase tracking-[0.22em]"
+                        animate={{
+                          color: isActive ? 'rgba(8,8,8,0.72)' : 'rgba(255,255,255,0.5)',
+                          x: isActive ? 6 : 0,
+                        }}
+                        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        Explorar
+                        <span aria-hidden="true">↗</span>
+                      </motion.div>
                     </div>
                   </div>
                 </motion.article>
