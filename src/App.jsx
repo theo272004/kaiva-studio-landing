@@ -292,11 +292,11 @@ const ServicesSection = () => {
             transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="mx-auto flex max-w-4xl flex-col items-center justify-center text-center">
-              <h2 className="flex flex-wrap items-end justify-center gap-x-4 gap-y-4 font-inter text-[clamp(38px,6vw,84px)] leading-[0.98] text-[#080808]">
-                <span className="font-bold tracking-[-0.045em]">Nuestros</span>
-                <span className="inline-flex items-end gap-3 bg-[#080808] px-6 py-3 md:px-7 md:py-3.5">
-                  <span className="font-semibold tracking-[0.015em] text-white [font-kerning:normal]">servicios</span>
-                  <span className="mb-[0.08em] h-3 w-3 shrink-0 bg-[#7C3AED] md:h-3.5 md:w-3.5" aria-hidden="true" />
+              <h2 className="flex flex-wrap items-baseline justify-center gap-x-4 gap-y-4 font-inter text-[clamp(38px,6vw,84px)] leading-[0.98] text-[#080808]">
+                <span className="font-bold tracking-[-0.045em] leading-none">Nuestros</span>
+                <span className="inline-flex items-baseline gap-3 bg-[#080808] px-6 py-3 md:px-7 md:py-3.5">
+                  <span className="font-semibold leading-none tracking-[0.015em] text-white [font-kerning:normal]">servicios</span>
+                  <span className="h-3 w-3 shrink-0 self-center bg-[#7C3AED] md:h-3.5 md:w-3.5" aria-hidden="true" />
                 </span>
               </h2>
             </div>
