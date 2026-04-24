@@ -495,7 +495,7 @@ const ContactRevealSection = () => {
         </div>
       </div>
 
-      <div className="relative z-20 mt-[58vh] min-h-[42vh] bg-[#111111]">
+      <div className="relative z-20 mt-[46vh] min-h-[42vh] bg-[#111111]">
         <div className="mx-auto flex min-h-[42vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-12 text-center md:px-12 md:py-14 lg:px-16">
           <a
             href="mailto:hello@kaivastudio.com"
@@ -944,7 +944,7 @@ const ExpandedAgencySections = () => (
     <section
       id="planes"
       data-nav-theme="light"
-      className="relative bg-[var(--color-dominant)] px-4 py-12 md:px-8 md:py-16"
+      className="relative bg-transparent px-4 py-12 md:px-8 md:py-16"
     >
       <motion.div {...sectionReveal} className="mx-auto w-full max-w-[1180px]">
           <div className="max-w-3xl">
@@ -1253,8 +1253,7 @@ export default function KaivaLanding() {
           font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
         }
         .typography-refined button,
-        .typography-refined a[href="#planes"],
-        .typography-refined a[href="#contacto"] {
+        .typography-refined a[href="#planes"] {
           letter-spacing: 0.14em !important;
         }
         .typography-refined .uppercase {
