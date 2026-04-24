@@ -213,17 +213,6 @@ const FloatingRobot = ({ src, style, className = '', delay = 0, duration = 6, am
   </motion.div>
 );
 
-const AnimatedBackdrop = () => (
-  <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-    <div className="absolute inset-0 aurora-base" />
-    <div className="aurora-blob aurora-blob-a absolute -left-[20vw] -top-[18vh] h-[58vh] w-[56vw] rounded-full" />
-    <div className="aurora-blob aurora-blob-b absolute right-[-14vw] top-[8vh] h-[52vh] w-[52vw] rounded-full" />
-    <div className="aurora-blob aurora-blob-c absolute left-[28vw] bottom-[-22vh] h-[62vh] w-[58vw] rounded-full" />
-    <div className="absolute inset-0 aurora-blur-overlay" />
-    <div className="absolute inset-0 aurora-noise" />
-  </div>
-);
-
 const TiltSlide = ({ slide, isActive, position, onClick }) => {
   const cardRef = useRef(null);
   const rotateX = useMotionValue(0);
@@ -398,7 +387,7 @@ const ContactRevealSection = () => {
   };
 
   return (
-    <section id="contacto" className="relative min-h-[148vh] bg-[var(--color-dominant)]">
+    <section id="contacto" className="relative min-h-[128vh] bg-[var(--color-dominant)]">
       <div className="sticky top-0 z-0 h-screen overflow-hidden bg-[var(--color-dominant)]">
         <div
           className="mx-auto flex h-full w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
@@ -495,18 +484,18 @@ const ContactRevealSection = () => {
         </div>
       </div>
 
-      <div className="relative z-10 mt-[58vh] min-h-[42vh] border-t border-white/70 bg-white/72 backdrop-blur-[14px]">
-        <div className="mx-auto flex min-h-[42vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-12 text-center md:px-12 md:py-14 lg:px-16">
+      <div className="relative z-10 mt-[48vh] min-h-[36vh] bg-[#111111]">
+        <div className="mx-auto flex min-h-[36vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-12 text-center md:px-12 md:py-14 lg:px-16">
           <a
             href="mailto:hello@kaivastudio.com"
-            className="font-epilogue text-[clamp(30px,4.2vw,58px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-[#080808] transition-opacity duration-300 hover:opacity-80"
+            className="font-epilogue text-[clamp(30px,4.2vw,58px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
           >
             hello@kaivastudio.com
           </a>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-[#080808]/52">
-            <a href="#" className="transition-colors duration-300 hover:text-[#080808]">Instagram</a>
-            <a href="#" className="transition-colors duration-300 hover:text-[#080808]">Dribbble</a>
-            <a href="#" className="transition-colors duration-300 hover:text-[#080808]">LinkedIn</a>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-white/52">
+            <a href="#" className="transition-colors duration-300 hover:text-white">Instagram</a>
+            <a href="#" className="transition-colors duration-300 hover:text-white">Dribbble</a>
+            <a href="#" className="transition-colors duration-300 hover:text-white">LinkedIn</a>
           </div>
         </div>
       </div>
@@ -563,7 +552,7 @@ const ServicesSection = () => {
                 <span className="font-bold tracking-[-0.045em] leading-none">Nuestros</span>
                 <span className="inline-flex items-baseline gap-3 rounded-[18px] border border-white/80 bg-white/78 px-6 py-3 shadow-[0_18px_40px_-28px_rgba(130,66,245,0.45)] backdrop-blur-[10px] md:px-7 md:py-3.5">
                   <span className="font-semibold leading-none tracking-[0.015em] text-[#080808] [font-kerning:normal]">servicios</span>
-                  <span className="h-3 w-3 shrink-0 self-center bg-[#8242f5] md:h-3.5 md:w-3.5" aria-hidden="true" />
+                  <span className="h-3 w-3 shrink-0 self-center bg-gradient-to-r from-[#21b2c6] via-[#8242f5] to-[#d96cff] md:h-3.5 md:w-3.5" aria-hidden="true" />
                 </span>
               </h2>
             </div>
@@ -628,15 +617,15 @@ const ServicesSection = () => {
                   <div className="relative z-10 flex min-h-full w-full flex-col px-7 py-9 md:px-8 md:py-10 lg:px-9 lg:py-11 xl:px-10">
                     <motion.div
                       className="font-epilogue text-[48px] font-extrabold leading-none tracking-[-0.04em] md:text-[60px] xl:text-[72px]"
+                      style={gradientAccentStyle}
                       animate={{
-                        color: '#080808',
                         x: isActive ? 5 : 0,
                       }}
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     >
                       0{index + 1}
                       <span
-                        className="relative top-[0.03em] ml-2 inline-block h-[0.18em] w-[0.18em] bg-[#8242f5] align-baseline"
+                        className="relative top-[0.03em] ml-2 inline-block h-[0.18em] w-[0.18em] bg-gradient-to-r from-[#21b2c6] via-[#8242f5] to-[#d96cff] align-baseline"
                         aria-hidden="true"
                       />
                     </motion.div>
@@ -823,7 +812,7 @@ const PortfolioSection = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="pointer-events-none absolute bottom-6 right-6 z-20 hidden max-w-[240px] text-right md:block md:bottom-[-44px] md:right-16"
           >
-            <div className="mb-2 font-manrope text-[11px] font-bold uppercase tracking-wider text-[#8242f5]">- {active.brand}</div>
+            <div className="mb-2 font-manrope text-[11px] font-bold uppercase tracking-wider" style={gradientAccentStyle}>- {active.brand}</div>
             <div className="font-manrope text-[13px] italic leading-relaxed text-[#080808]/64">{active.description}</div>
           </motion.div>
         </AnimatePresence>
@@ -832,7 +821,7 @@ const PortfolioSection = () => {
       <div className="px-6 md:hidden">
         <div className="rounded-[22px] border border-[#080808]/10 bg-[var(--color-surface)] p-5 shadow-[0_18px_48px_-28px_rgba(0,0,0,0.12)]">
           <div className="flex items-end gap-3">
-            <div className="font-epilogue text-[42px] font-extrabold italic leading-none tracking-[-0.03em] opacity-90" style={{ color: active.accent }}>
+            <div className="font-epilogue text-[42px] font-extrabold italic leading-none tracking-[-0.03em] opacity-90" style={gradientAccentStyle}>
               {active.number}
             </div>
             <div className="pb-1">
@@ -842,7 +831,7 @@ const PortfolioSection = () => {
             </div>
           </div>
           <div className="mt-4 border-t border-[#080808]/10 pt-4">
-            <div className="mb-2 font-manrope text-[11px] font-bold uppercase tracking-wider text-[#8242f5]">- {active.brand}</div>
+            <div className="mb-2 font-manrope text-[11px] font-bold uppercase tracking-wider" style={gradientAccentStyle}>- {active.brand}</div>
             <div className="font-manrope text-[13px] italic leading-relaxed text-[#080808]/68">{active.description}</div>
           </div>
         </div>
@@ -878,7 +867,7 @@ const PortfolioSection = () => {
                 >
                   <motion.div
                     className="absolute inset-y-0 left-0 origin-left"
-                    style={{ background: s.accent }}
+                    style={{ background: 'linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%)' }}
                     initial={{ scaleX: 0 }}
                     animate={{
                       scaleX: i < activeIndex ? 1 : isActive ? (isHovering ? 0 : 1) : 0,
@@ -893,7 +882,7 @@ const PortfolioSection = () => {
             })}
           </div>
 
-          <div className="font-manrope text-[11px] font-bold tracking-wider tabular-nums text-[#8242f5]">
+          <div className="font-manrope text-[11px] font-bold tracking-wider tabular-nums" style={gradientAccentStyle}>
             {String(activeIndex + 1).padStart(2, '0')} <span className="opacity-40">/ {String(slides.length).padStart(2, '0')}</span>
           </div>
 
@@ -1066,7 +1055,7 @@ const ExpandedAgencySections = () => (
             <GlassPanelLayers />
             <div className="relative grid gap-0 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.45fr)_auto] md:items-center">
               <div className="px-6 py-6 md:min-h-[148px] md:px-8" style={{ borderRight: '1px solid rgba(255,255,255,0.24)' }}>
-                <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.24em] text-[#8242f5]">
+                <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.24em]" style={gradientAccentStyle}>
                   {ecommercePlan.label}
                 </div>
                 <div className="mt-3 font-epilogue text-[30px] font-semibold leading-[1.02] tracking-[-0.025em] text-[#1a0e38] md:text-[34px]">
@@ -1167,8 +1156,7 @@ const ExpandedAgencySections = () => (
 
 export default function KaivaLanding() {
   return (
-    <div className="typography-refined relative w-full overflow-hidden">
-      <AnimatedBackdrop />
+    <div className="typography-refined relative w-full overflow-x-hidden">
       <div className="relative z-10">
         <HeroSection />
         <PortfolioSection />
@@ -1179,7 +1167,7 @@ export default function KaivaLanding() {
         @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;600;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
         @import url('https://fonts.cdnfonts.com/css/open-sauce-one');
         :root {
-          --color-dominant: transparent;
+          --color-dominant: #ffffff;
           --color-secondary: #080808;
           --color-surface: #ffffff;
           --color-accent: #8242f5;
@@ -1187,45 +1175,6 @@ export default function KaivaLanding() {
         html { scroll-behavior: smooth; }
         html { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-kerning: normal; }
         body { background-color: var(--color-dominant); font-family: 'Inter Tight', 'Inter', sans-serif; letter-spacing: -0.01em; color: var(--color-secondary); }
-        .aurora-base {
-          background:
-            radial-gradient(120% 130% at 0% 0%, rgba(126, 209, 255, 0.42) 0%, rgba(126, 209, 255, 0) 54%),
-            radial-gradient(120% 120% at 100% 0%, rgba(155, 134, 255, 0.4) 0%, rgba(155, 134, 255, 0) 56%),
-            radial-gradient(140% 150% at 100% 100%, rgba(255, 164, 214, 0.36) 0%, rgba(255, 164, 214, 0) 54%),
-            radial-gradient(120% 120% at 0% 100%, rgba(107, 229, 229, 0.34) 0%, rgba(107, 229, 229, 0) 55%),
-            linear-gradient(180deg, #ffffff 0%, #fcfcff 100%);
-          animation: auroraShift 22s ease-in-out infinite alternate;
-        }
-        .aurora-blob {
-          filter: blur(84px);
-          opacity: 0.44;
-          will-change: transform, opacity;
-        }
-        .aurora-blob-a {
-          background: radial-gradient(circle at 30% 40%, rgba(107, 229, 229, 0.8) 0%, rgba(107, 229, 229, 0.18) 42%, rgba(107, 229, 229, 0) 75%);
-          animation: floatBlobOne 24s ease-in-out infinite;
-        }
-        .aurora-blob-b {
-          background: radial-gradient(circle at 70% 35%, rgba(155, 134, 255, 0.78) 0%, rgba(155, 134, 255, 0.18) 46%, rgba(155, 134, 255, 0) 76%);
-          animation: floatBlobTwo 27s ease-in-out infinite;
-        }
-        .aurora-blob-c {
-          background: radial-gradient(circle at 50% 62%, rgba(255, 164, 214, 0.72) 0%, rgba(255, 164, 214, 0.16) 44%, rgba(255, 164, 214, 0) 76%);
-          animation: floatBlobThree 30s ease-in-out infinite;
-        }
-        .aurora-blur-overlay {
-          backdrop-filter: blur(46px) saturate(108%);
-          -webkit-backdrop-filter: blur(46px) saturate(108%);
-          background: linear-gradient(180deg, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.08) 42%, rgba(255,255,255,0.3) 100%);
-        }
-        .aurora-noise {
-          opacity: 0.17;
-          background-image:
-            radial-gradient(circle at 20% 20%, rgba(0,0,0,0.12) 0.6px, transparent 0.7px),
-            radial-gradient(circle at 80% 60%, rgba(0,0,0,0.1) 0.5px, transparent 0.6px);
-          background-size: 3px 3px, 4px 4px;
-          mix-blend-mode: soft-light;
-        }
         .aurora-hover-layer {
           background:
             radial-gradient(130% 150% at 0% 10%, rgba(107, 229, 229, 0.56) 0%, rgba(107, 229, 229, 0) 56%),
@@ -1295,12 +1244,12 @@ export default function KaivaLanding() {
         }
         .contact-input {
           border: 1px solid rgba(8,8,8,0.08);
-          background: rgba(248, 248, 246, 0.84);
+          background: rgba(255, 255, 255, 0.96);
           transition: border-color 280ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1), background-color 280ms cubic-bezier(0.22, 1, 0.36, 1), transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
         }
         .contact-input:focus {
           border-color: rgba(130,66,245,0.18);
-          background: rgba(255,255,255,0.94);
+          background: rgba(255,255,255,1);
           box-shadow: 0 0 0 3px rgba(130,66,245,0.045);
         }
         .contact-accent-button {
@@ -1333,25 +1282,8 @@ export default function KaivaLanding() {
           0% { background-position: 0% 50%, 100% 50%, 50% 100%, 50% 0%, 50% 50%; }
           100% { background-position: 100% 50%, 0% 60%, 50% 0%, 50% 100%, 50% 50%; }
         }
-        @keyframes floatBlobOne {
-          0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.44; }
-          50% { transform: translate3d(4vw, -3vh, 0) scale(1.06); opacity: 0.52; }
-          100% { transform: translate3d(-2vw, 2.5vh, 0) scale(0.98); opacity: 0.4; }
-        }
-        @keyframes floatBlobTwo {
-          0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.45; }
-          50% { transform: translate3d(-3.8vw, 2.8vh, 0) scale(1.05); opacity: 0.5; }
-          100% { transform: translate3d(2.4vw, -2.2vh, 0) scale(0.97); opacity: 0.4; }
-        }
-        @keyframes floatBlobThree {
-          0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.4; }
-          50% { transform: translate3d(2.6vw, -2.6vh, 0) scale(1.04); opacity: 0.48; }
-          100% { transform: translate3d(-3vw, 2vh, 0) scale(0.98); opacity: 0.38; }
-        }
         @media (prefers-reduced-motion: reduce) {
           html { scroll-behavior: auto; }
-          .aurora-base,
-          .aurora-blob,
           .aurora-hover-layer {
             animation: none;
           }
@@ -1412,20 +1344,24 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section id="inicio" data-nav-theme="light" className="relative min-h-[100svh] w-full overflow-hidden bg-transparent font-open-sauce text-[#080808] md:h-screen">
-      <motion.div
+    <section id="inicio" data-nav-theme="light" className="relative min-h-[100svh] w-full overflow-visible bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
+      <motion.img
+        src={asset('degradado-lateral.png')}
+        alt=""
         aria-hidden="true"
         initial={{ opacity: 0, scale: 0.92 }}
-        animate={{ opacity: 0.72, scale: 1 }}
-        transition={{ duration: 0.9, ease: 'easeOut' }}
-        className="aurora-blob aurora-blob-a pointer-events-none absolute left-[-40%] top-[58%] z-0 hidden h-[54vh] w-[66vw] min-w-[340px] -translate-y-1/2 rounded-full md:block"
+        animate={{ opacity: 0.95, scale: 1 }}
+        transition={{ duration: 0.85, ease: 'easeOut' }}
+        className="pointer-events-none absolute left-[-48%] top-[70%] z-[5] hidden w-[82vw] min-w-[300px] max-w-[1120px] -translate-y-1/2 object-contain md:block md:left-[-34%] md:top-[68%] md:w-[66vw] md:min-w-[460px]"
       />
-      <motion.div
+      <motion.img
+        src={asset('degradado-lateral.png')}
+        alt=""
         aria-hidden="true"
         initial={{ opacity: 0, scale: 0.92 }}
-        animate={{ opacity: 0.66, scale: 1 }}
-        transition={{ duration: 0.95, delay: 0.08, ease: 'easeOut' }}
-        className="aurora-blob aurora-blob-b pointer-events-none absolute right-[-34%] top-[20%] z-0 hidden h-[48vh] w-[62vw] min-w-[320px] -translate-y-1/2 rounded-full md:block"
+        animate={{ opacity: 0.95, scale: 1 }}
+        transition={{ duration: 0.85, delay: 0.08, ease: 'easeOut' }}
+        className="pointer-events-none absolute right-[-40%] top-[18%] z-[5] hidden w-[78vw] min-w-[280px] max-w-[980px] -translate-y-1/2 object-contain md:block md:right-[-28%] md:top-[22%] md:w-[60vw] md:min-w-[420px]"
       />
 
       <motion.div
