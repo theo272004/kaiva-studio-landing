@@ -213,6 +213,17 @@ const FloatingRobot = ({ src, style, className = '', delay = 0, duration = 6, am
   </motion.div>
 );
 
+const AnimatedBackdrop = () => (
+  <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+    <div className="absolute inset-0 aurora-base" />
+    <div className="aurora-blob aurora-blob-a absolute -left-[20vw] -top-[18vh] h-[58vh] w-[56vw] rounded-full" />
+    <div className="aurora-blob aurora-blob-b absolute right-[-14vw] top-[8vh] h-[52vh] w-[52vw] rounded-full" />
+    <div className="aurora-blob aurora-blob-c absolute left-[28vw] bottom-[-22vh] h-[62vh] w-[58vw] rounded-full" />
+    <div className="absolute inset-0 aurora-blur-overlay" />
+    <div className="absolute inset-0 aurora-noise" />
+  </div>
+);
+
 const TiltSlide = ({ slide, isActive, position, onClick }) => {
   const cardRef = useRef(null);
   const rotateX = useMotionValue(0);
@@ -484,18 +495,18 @@ const ContactRevealSection = () => {
         </div>
       </div>
 
-      <div className="relative z-10 mt-[58vh] min-h-[42vh] bg-[#111111]">
+      <div className="relative z-10 mt-[58vh] min-h-[42vh] border-t border-white/70 bg-white/72 backdrop-blur-[14px]">
         <div className="mx-auto flex min-h-[42vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-12 text-center md:px-12 md:py-14 lg:px-16">
           <a
             href="mailto:hello@kaivastudio.com"
-            className="font-epilogue text-[clamp(30px,4.2vw,58px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
+            className="font-epilogue text-[clamp(30px,4.2vw,58px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-[#080808] transition-opacity duration-300 hover:opacity-80"
           >
             hello@kaivastudio.com
           </a>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-white/52">
-            <a href="#" className="transition-colors duration-300 hover:text-white">Instagram</a>
-            <a href="#" className="transition-colors duration-300 hover:text-white">Dribbble</a>
-            <a href="#" className="transition-colors duration-300 hover:text-white">LinkedIn</a>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-[#080808]/52">
+            <a href="#" className="transition-colors duration-300 hover:text-[#080808]">Instagram</a>
+            <a href="#" className="transition-colors duration-300 hover:text-[#080808]">Dribbble</a>
+            <a href="#" className="transition-colors duration-300 hover:text-[#080808]">LinkedIn</a>
           </div>
         </div>
       </div>
@@ -536,7 +547,6 @@ const SectionShell = ({ id, tone = 'light', className = '', children }) => {
 
 const ServicesSection = () => {
   const [activeService, setActiveService] = useState(null);
-  const hoverGradient = asset('degradado-lateral.png');
 
   return (
     <>
@@ -551,8 +561,8 @@ const ServicesSection = () => {
             <div className="mx-auto flex max-w-4xl flex-col items-center justify-center text-center">
               <h2 className="flex flex-wrap items-baseline justify-center gap-x-4 gap-y-4 font-inter text-[clamp(38px,6vw,84px)] leading-[0.98] text-[#080808]">
                 <span className="font-bold tracking-[-0.045em] leading-none">Nuestros</span>
-                <span className="inline-flex items-baseline gap-3 bg-[#080808] px-6 py-3 md:px-7 md:py-3.5">
-                  <span className="font-semibold leading-none tracking-[0.015em] text-white [font-kerning:normal]">servicios</span>
+                <span className="inline-flex items-baseline gap-3 rounded-[18px] border border-white/80 bg-white/78 px-6 py-3 shadow-[0_18px_40px_-28px_rgba(130,66,245,0.45)] backdrop-blur-[10px] md:px-7 md:py-3.5">
+                  <span className="font-semibold leading-none tracking-[0.015em] text-[#080808] [font-kerning:normal]">servicios</span>
                   <span className="h-3 w-3 shrink-0 self-center bg-[#8242f5] md:h-3.5 md:w-3.5" aria-hidden="true" />
                 </span>
               </h2>
@@ -591,30 +601,26 @@ const ServicesSection = () => {
                   }}
                   onHoverStart={() => setActiveService(index)}
                   onFocus={() => setActiveService(index)}
-                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-[#080808]/10 bg-[#0f0f0f] outline-none transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:min-h-[380px] xl:min-h-[420px]"
+                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-white/80 bg-white/82 shadow-[0_18px_48px_-34px_rgba(80,74,168,0.35)] outline-none backdrop-blur-[16px] transition-[opacity,transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white hover:shadow-[0_28px_74px_-44px_rgba(80,74,168,0.48)] md:min-h-[380px] xl:min-h-[420px]"
+                  whileHover={{ y: -4 }}
                   animate={{ opacity: isQuiet ? 0.56 : 1 }}
                   transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                   tabIndex={0}
                 >
                   <motion.div
-                    className="pointer-events-none absolute inset-0"
+                    className="aurora-hover-layer pointer-events-none absolute inset-0"
                     initial={{ opacity: 0, scale: 1.04 }}
                     animate={{
-                      opacity: isActive ? 1 : 0,
+                      opacity: isActive ? 0.96 : 0,
                       scale: isActive ? 1 : 1.04,
                     }}
                     transition={{ duration: 0.38, ease: [0.2, 0.9, 0.2, 1] }}
-                    style={{
-                      backgroundImage: `url(${hoverGradient})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                    }}
                   />
 
                   <motion.div
                     className="pointer-events-none absolute inset-0"
                     animate={{
-                      backgroundColor: isActive ? 'rgba(255,255,255,0.14)' : 'rgba(8,8,8,0.1)',
+                      backgroundColor: isActive ? 'rgba(255,255,255,0.24)' : 'rgba(255,255,255,0.46)',
                     }}
                     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   />
@@ -623,7 +629,7 @@ const ServicesSection = () => {
                     <motion.div
                       className="font-epilogue text-[48px] font-extrabold leading-none tracking-[-0.04em] md:text-[60px] xl:text-[72px]"
                       animate={{
-                        color: isActive ? '#080808' : '#ffffff',
+                        color: '#080808',
                         x: isActive ? 5 : 0,
                       }}
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -638,7 +644,7 @@ const ServicesSection = () => {
                     <motion.div
                       className="mt-8 h-px w-full origin-center"
                       animate={{
-                        backgroundColor: isActive ? 'rgba(8,8,8,0.2)' : 'rgba(255,255,255,0.22)',
+                        backgroundColor: isActive ? 'rgba(8,8,8,0.18)' : 'rgba(8,8,8,0.12)',
                         scaleX: isActive ? 0.985 : 1,
                       }}
                       transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
@@ -649,7 +655,7 @@ const ServicesSection = () => {
                         <motion.h3
                           className="font-epilogue text-[26px] font-extrabold leading-[1.08] tracking-[-0.03em] md:text-[30px] xl:text-[34px]"
                           animate={{
-                            color: isActive ? '#080808' : '#ffffff',
+                            color: '#080808',
                             x: isActive ? 5 : 0,
                           }}
                           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -662,7 +668,7 @@ const ServicesSection = () => {
                         <motion.p
                           className="text-[14px] leading-7 md:text-[15px] md:leading-8"
                           animate={{
-                            color: isActive ? 'rgba(8,8,8,0.8)' : 'rgba(255,255,255,0.72)',
+                            color: isActive ? 'rgba(8,8,8,0.82)' : 'rgba(8,8,8,0.66)',
                             x: isActive ? 5 : 0,
                           }}
                           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -674,7 +680,7 @@ const ServicesSection = () => {
                       <motion.div
                         className="inline-flex items-center gap-2 font-manrope text-[11px] font-bold uppercase tracking-[0.22em]"
                         animate={{
-                          color: isActive ? 'rgba(8,8,8,0.72)' : 'rgba(255,255,255,0.5)',
+                          color: isActive ? 'rgba(8,8,8,0.72)' : 'rgba(8,8,8,0.5)',
                           x: isActive ? 6 : 0,
                         }}
                         transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
@@ -1161,16 +1167,19 @@ const ExpandedAgencySections = () => (
 
 export default function KaivaLanding() {
   return (
-    <div className="typography-refined w-full">
-      <HeroSection />
-      <PortfolioSection />
-      <ExpandedAgencySections />
+    <div className="typography-refined relative w-full overflow-hidden">
+      <AnimatedBackdrop />
+      <div className="relative z-10">
+        <HeroSection />
+        <PortfolioSection />
+        <ExpandedAgencySections />
+      </div>
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;600;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
         @import url('https://fonts.cdnfonts.com/css/open-sauce-one');
         :root {
-          --color-dominant: #ffffff;
+          --color-dominant: transparent;
           --color-secondary: #080808;
           --color-surface: #ffffff;
           --color-accent: #8242f5;
@@ -1178,6 +1187,54 @@ export default function KaivaLanding() {
         html { scroll-behavior: smooth; }
         html { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-kerning: normal; }
         body { background-color: var(--color-dominant); font-family: 'Inter Tight', 'Inter', sans-serif; letter-spacing: -0.01em; color: var(--color-secondary); }
+        .aurora-base {
+          background:
+            radial-gradient(120% 130% at 0% 0%, rgba(126, 209, 255, 0.42) 0%, rgba(126, 209, 255, 0) 54%),
+            radial-gradient(120% 120% at 100% 0%, rgba(155, 134, 255, 0.4) 0%, rgba(155, 134, 255, 0) 56%),
+            radial-gradient(140% 150% at 100% 100%, rgba(255, 164, 214, 0.36) 0%, rgba(255, 164, 214, 0) 54%),
+            radial-gradient(120% 120% at 0% 100%, rgba(107, 229, 229, 0.34) 0%, rgba(107, 229, 229, 0) 55%),
+            linear-gradient(180deg, #ffffff 0%, #fcfcff 100%);
+          animation: auroraShift 22s ease-in-out infinite alternate;
+        }
+        .aurora-blob {
+          filter: blur(84px);
+          opacity: 0.44;
+          will-change: transform, opacity;
+        }
+        .aurora-blob-a {
+          background: radial-gradient(circle at 30% 40%, rgba(107, 229, 229, 0.8) 0%, rgba(107, 229, 229, 0.18) 42%, rgba(107, 229, 229, 0) 75%);
+          animation: floatBlobOne 24s ease-in-out infinite;
+        }
+        .aurora-blob-b {
+          background: radial-gradient(circle at 70% 35%, rgba(155, 134, 255, 0.78) 0%, rgba(155, 134, 255, 0.18) 46%, rgba(155, 134, 255, 0) 76%);
+          animation: floatBlobTwo 27s ease-in-out infinite;
+        }
+        .aurora-blob-c {
+          background: radial-gradient(circle at 50% 62%, rgba(255, 164, 214, 0.72) 0%, rgba(255, 164, 214, 0.16) 44%, rgba(255, 164, 214, 0) 76%);
+          animation: floatBlobThree 30s ease-in-out infinite;
+        }
+        .aurora-blur-overlay {
+          backdrop-filter: blur(46px) saturate(108%);
+          -webkit-backdrop-filter: blur(46px) saturate(108%);
+          background: linear-gradient(180deg, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.08) 42%, rgba(255,255,255,0.3) 100%);
+        }
+        .aurora-noise {
+          opacity: 0.17;
+          background-image:
+            radial-gradient(circle at 20% 20%, rgba(0,0,0,0.12) 0.6px, transparent 0.7px),
+            radial-gradient(circle at 80% 60%, rgba(0,0,0,0.1) 0.5px, transparent 0.6px);
+          background-size: 3px 3px, 4px 4px;
+          mix-blend-mode: soft-light;
+        }
+        .aurora-hover-layer {
+          background:
+            radial-gradient(130% 150% at 0% 10%, rgba(107, 229, 229, 0.56) 0%, rgba(107, 229, 229, 0) 56%),
+            radial-gradient(130% 130% at 100% 0%, rgba(155, 134, 255, 0.48) 0%, rgba(155, 134, 255, 0) 56%),
+            radial-gradient(120% 140% at 100% 100%, rgba(255, 164, 214, 0.42) 0%, rgba(255, 164, 214, 0) 56%),
+            linear-gradient(140deg, rgba(255,255,255,0.9) 0%, rgba(244,246,255,0.72) 100%);
+          background-size: 180% 180%;
+          animation: auroraShift 14s ease-in-out infinite alternate;
+        }
         .font-epilogue { font-family: 'Inter Tight', 'Inter', sans-serif; font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1; }
         .font-manrope { font-family: 'Inter', 'Inter Tight', sans-serif; font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1; }
         .font-inter { font-family: 'Inter Tight', 'Inter', sans-serif; font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1; }
@@ -1272,8 +1329,32 @@ export default function KaivaLanding() {
         .pricing-card::after {
           display: none;
         }
+        @keyframes auroraShift {
+          0% { background-position: 0% 50%, 100% 50%, 50% 100%, 50% 0%, 50% 50%; }
+          100% { background-position: 100% 50%, 0% 60%, 50% 0%, 50% 100%, 50% 50%; }
+        }
+        @keyframes floatBlobOne {
+          0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.44; }
+          50% { transform: translate3d(4vw, -3vh, 0) scale(1.06); opacity: 0.52; }
+          100% { transform: translate3d(-2vw, 2.5vh, 0) scale(0.98); opacity: 0.4; }
+        }
+        @keyframes floatBlobTwo {
+          0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.45; }
+          50% { transform: translate3d(-3.8vw, 2.8vh, 0) scale(1.05); opacity: 0.5; }
+          100% { transform: translate3d(2.4vw, -2.2vh, 0) scale(0.97); opacity: 0.4; }
+        }
+        @keyframes floatBlobThree {
+          0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.4; }
+          50% { transform: translate3d(2.6vw, -2.6vh, 0) scale(1.04); opacity: 0.48; }
+          100% { transform: translate3d(-3vw, 2vh, 0) scale(0.98); opacity: 0.38; }
+        }
         @media (prefers-reduced-motion: reduce) {
           html { scroll-behavior: auto; }
+          .aurora-base,
+          .aurora-blob,
+          .aurora-hover-layer {
+            animation: none;
+          }
           .contact-premium-card,
           .contact-input,
           .contact-accent-button {
@@ -1331,24 +1412,20 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section id="inicio" data-nav-theme="light" className="relative min-h-[100svh] w-full overflow-hidden bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
-      <motion.img
-        src={asset('degradado-lateral.png')}
-        alt=""
+    <section id="inicio" data-nav-theme="light" className="relative min-h-[100svh] w-full overflow-hidden bg-transparent font-open-sauce text-[#080808] md:h-screen">
+      <motion.div
         aria-hidden="true"
         initial={{ opacity: 0, scale: 0.92 }}
-        animate={{ opacity: 0.95, scale: 1 }}
-        transition={{ duration: 0.85, ease: 'easeOut' }}
-        className="pointer-events-none absolute left-[-48%] top-[70%] z-0 hidden w-[82vw] min-w-[300px] max-w-[1120px] -translate-y-1/2 object-contain md:block md:left-[-34%] md:top-[68%] md:w-[66vw] md:min-w-[460px]"
+        animate={{ opacity: 0.72, scale: 1 }}
+        transition={{ duration: 0.9, ease: 'easeOut' }}
+        className="aurora-blob aurora-blob-a pointer-events-none absolute left-[-40%] top-[58%] z-0 hidden h-[54vh] w-[66vw] min-w-[340px] -translate-y-1/2 rounded-full md:block"
       />
-      <motion.img
-        src={asset('degradado-lateral.png')}
-        alt=""
+      <motion.div
         aria-hidden="true"
         initial={{ opacity: 0, scale: 0.92 }}
-        animate={{ opacity: 0.95, scale: 1 }}
-        transition={{ duration: 0.85, delay: 0.08, ease: 'easeOut' }}
-        className="pointer-events-none absolute right-[-40%] top-[18%] z-0 hidden w-[78vw] min-w-[280px] max-w-[980px] -translate-y-1/2 object-contain md:block md:right-[-28%] md:top-[22%] md:w-[60vw] md:min-w-[420px]"
+        animate={{ opacity: 0.66, scale: 1 }}
+        transition={{ duration: 0.95, delay: 0.08, ease: 'easeOut' }}
+        className="aurora-blob aurora-blob-b pointer-events-none absolute right-[-34%] top-[20%] z-0 hidden h-[48vh] w-[62vw] min-w-[320px] -translate-y-1/2 rounded-full md:block"
       />
 
       <motion.div
