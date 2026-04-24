@@ -963,8 +963,22 @@ const ExpandedAgencySections = () => (
     <section
       id="planes"
       data-nav-theme="light"
-      className="relative bg-transparent px-4 py-12 md:px-8 md:py-16"
+      className="relative bg-transparent px-4 py-12 md:px-8 md:py-16 overflow-hidden"
     >
+      <motion.img
+        src={asset('KaivaMora1.png')}
+        alt=""
+        className="absolute -right-20 -top-20 z-0 w-[400px] opacity-60 md:-right-32 md:-top-32 md:w-[600px] lg:opacity-80"
+        animate={{
+          y: [0, 15, 0],
+          rotate: [0, 2, 0]
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
       <motion.div {...sectionReveal} className="mx-auto w-full max-w-[1180px]">
           <div className="max-w-3xl">
             <div className="inline-block w-fit font-manrope text-[11px] font-bold uppercase tracking-[0.26em]" style={gradientAccentStyle}>Pricing</div>
@@ -1527,4 +1541,5 @@ const HeroSection = () => {
     </section>
   );
 };
+
 
