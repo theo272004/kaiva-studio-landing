@@ -46,12 +46,6 @@ const slides = [
   },
 ];
 
-const businessPillars = [
-  'Claridad',
-  'Eficiencia',
-  'Valor percibido',
-];
-
 const services = [
   {
     title: 'Desarrollo web',
@@ -72,24 +66,6 @@ const services = [
 ];
 
 const processSteps = ['Diagnóstico', 'Estructura', 'Diseño', 'Desarrollo', 'Entrega'];
-
-const resultCases = [
-  {
-    name: 'Qué somos',
-    lead: 'Kaiva Studio es un estudio de desarrollo web que crea experiencias digitales enfocadas en claridad, estética y funcionalidad.',
-    detail: 'No nos limitamos a diseñar páginas web. Desarrollamos plataformas que ayudan a posicionar negocios, organizar su presencia digital y convertir visitas en oportunidades reales.',
-  },
-  {
-    name: 'Público objetivo',
-    lead: 'Trabajamos con emprendedores, marcas personales, negocios en crecimiento, pymes y ecommerce en expansión.',
-    detail: 'El cliente de Kaiva busca claridad, rapidez y confianza en el proceso. Necesita una solución integral para avanzar sin complicaciones ni múltiples proveedores.',
-  },
-  {
-    name: 'Personalidad de marca',
-    lead: 'Kaiva se define por una personalidad clara, segura y estratégica.',
-    detail: 'Es una marca moderna, visual y eficiente, con una comunicación directa, profesional y orientada a resultados, sin complejidad innecesaria.',
-  },
-];
 
 const pricingPlans = [
   {
@@ -645,36 +621,6 @@ const PortfolioSection = () => {
 
 const ExpandedAgencySections = () => (
   <>
-    <SectionShell id="estructura" tone="light">
-      <motion.div {...sectionReveal} className="grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
-        <SectionHeader
-          eyebrow="Diagnóstico"
-          title="Descripción de marca"
-          description="Kaiva Studio es un estudio de desarrollo web especializado en la creación de páginas claras, rápidas y visualmente impactantes para negocios que buscan crecer con una presencia digital profesional."
-        />
-
-        <div className="rounded-[30px] border border-[#080808]/14 bg-white p-8 md:p-10">
-          <div className="space-y-5">
-            {businessPillars.map((item, index) => (
-              <div key={item} className="flex items-start gap-5 border-b border-[#080808]/10 pb-6 last:border-b-0 last:pb-0">
-                <span className="min-w-[34px] font-manrope text-[11px] font-bold uppercase tracking-[0.24em] text-[#080808]/42">
-                  0{index + 1}
-                </span>
-                <div>
-                  <div className="font-epilogue text-[26px] font-extrabold leading-[1.1] tracking-[-0.025em] text-[#080808]">{item}</div>
-                  <p className="mt-3 text-[14px] leading-7 text-[#080808]/62">
-                    {index === 0 && 'Cada proceso debe ser entendible para el cliente y cada mensaje debe transmitir seguridad y propósito.'}
-                    {index === 1 && 'El proceso está diseñado para ser comprensible, estructurado y sin fricciones, evitando dependencias externas.'}
-                    {index === 2 && 'Kaiva no compite por precio. Compite por orden, estética y resultados.'}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </motion.div>
-    </SectionShell>
-
     <ServicesSection />
 
     <SectionShell id="proceso" tone="light">
@@ -709,43 +655,6 @@ const ExpandedAgencySections = () => (
               </div>
             ))}
           </div>
-        </div>
-      </motion.div>
-    </SectionShell>
-
-    <SectionShell id="resultados" tone="dark" className="relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 opacity-50">
-        <div className="absolute left-[8%] top-[12%] h-48 w-48 rounded-full bg-[#21B2C6]/8 blur-3xl" />
-        <div className="absolute bottom-[10%] right-[12%] h-56 w-56 rounded-full bg-[#8242F5]/8 blur-3xl" />
-      </div>
-      <motion.div {...sectionReveal} className="relative z-10">
-        <SectionHeader
-          eyebrow="Marca"
-          title="Qué somos y para quién trabajamos"
-          description="Nuestro trabajo conecta lo visual con lo estratégico para construir activos digitales que no solo se ven bien, sino que funcionan a nivel de negocio."
-          inverse
-        />
-        <div className="mt-14 grid gap-6 lg:grid-cols-3">
-          {resultCases.map((item) => (
-            <article
-              key={item.name}
-              className="rounded-[30px] border border-white/14 bg-transparent p-8"
-            >
-              <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.24em] text-white/44">Kaiva Studio</div>
-              <h3 className="mt-5 font-epilogue text-[30px] font-extrabold leading-[1.08] tracking-[-0.025em] text-white">{item.name}</h3>
-              <div className="mt-8 grid gap-5">
-                <div>
-                  <div className="font-manrope text-[11px] font-extrabold uppercase tracking-[0.24em] text-white/38">Enfoque</div>
-                  <p className="mt-2 text-[14px] leading-6 text-white/62">{item.lead}</p>
-                </div>
-                <div className="h-px bg-white/10" />
-                <div>
-                  <div className="font-manrope text-[11px] font-extrabold uppercase tracking-[0.24em] text-white/44">Detalle</div>
-                  <p className="mt-2 text-[16px] leading-7 text-white/88">{item.detail}</p>
-                </div>
-              </div>
-            </article>
-          ))}
         </div>
       </motion.div>
     </SectionShell>
@@ -897,22 +806,6 @@ const ExpandedAgencySections = () => (
               </div>
             </div>
           ))}
-        </div>
-      </motion.div>
-    </SectionShell>
-
-    <SectionShell id="kaiva" tone="muted">
-      <motion.div {...sectionReveal} className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div className="rounded-[32px] border border-[#080808]/14 bg-[#080808] p-8 text-white md:p-10">
-          <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.24em] text-white/44">Kaiva Studio</div>
-          <div className="mt-8 font-epilogue text-[clamp(34px,4vw,54px)] font-extrabold leading-[1.08] tracking-[-0.03em]">
-            Ayudamos a negocios a construir una presencia digital profesional, funcional y alineada con sus objetivos.
-          </div>
-        </div>
-        <div className="max-w-2xl">
-          <p className="text-[17px] leading-8 text-[#080808]/68">
-            Kaiva Studio elimina la complejidad técnica para que el cliente pueda enfocarse en hacer crecer su negocio, a través de procesos claros, soluciones integrales y ejecución eficiente.
-          </p>
         </div>
       </motion.div>
     </SectionShell>
