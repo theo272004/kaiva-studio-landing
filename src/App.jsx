@@ -404,12 +404,12 @@ const ContactRevealSection = () => {
   });
   const blackPanelY = useTransform(
     scrollYProgress,
-    [0, 0.08, 0.92, 1],
-    ['104%', '104%', '-8%', '-8%'],
+    [0, 0.12, 0.98, 1],
+    ['105%', '105%', '0%', '0%'],
   );
 
   return (
-    <section ref={sectionRef} id="contacto" className="relative min-h-[155vh] bg-transparent">
+    <section ref={sectionRef} id="contacto" className="relative min-h-[130vh] bg-transparent">
       <div className="sticky top-0 z-0 h-screen overflow-hidden bg-transparent">
         <div
           className="mx-auto flex h-full w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
@@ -506,10 +506,10 @@ const ContactRevealSection = () => {
         </div>
 
         <motion.div
-          className="absolute inset-x-0 bottom-0 z-20 min-h-[70vh] bg-[#111111]"
+          className="absolute inset-x-0 bottom-0 z-20 min-h-[80vh] bg-[#111111]"
           style={{ y: prefersReducedMotion ? '0%' : blackPanelY }}
         >
-          <div className="mx-auto flex min-h-[70vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-12 text-center md:px-12 md:py-14 lg:px-16">
+          <div className="mx-auto flex min-h-[80vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-12 text-center md:px-12 md:py-14 lg:px-16">
           <a
             href="mailto:hello@kaivastudio.com"
             className="font-epilogue text-[clamp(30px,4.2vw,58px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
