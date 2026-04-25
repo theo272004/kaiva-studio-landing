@@ -398,33 +398,19 @@ const ContactRevealSection = () => {
     },
   };
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end end'],
-  });
-  // progress 0→1 maps to the first 100vh of scroll through the 200vh section.
-  // The panel finishes rising at progress 0.5 (50vh of scroll) while the sticky
-  // div is still fully pinned. After that the section exits normally upward.
-  const blackPanelY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ['100%', '0%'],
-  );
-
   return (
-    <div ref={sectionRef} style={{ height: '180vh' }} className="relative">
-      <section id="contacto" className="sticky top-0 z-0 h-screen overflow-hidden bg-transparent" style={{ willChange: 'transform' }}>
+    <section id="contacto" className="relative w-full overflow-hidden bg-transparent">
+      <div
+        className="mx-auto flex w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
+        style={{
+          paddingTop: 'clamp(72px, 12vw, 196px)',
+          paddingBottom: 'clamp(72px, 12vw, 196px)',
+        }}
+      >
         <div
-          className="mx-auto flex h-full w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
-          style={{
-            paddingTop: 'clamp(72px, 12vw, 196px)',
-            paddingBottom: 'clamp(72px, 12vw, 196px)',
-          }}
+          className="grid w-full lg:grid-cols-[0.9fr_1.1fr] lg:items-center"
+          style={{ columnGap: 'clamp(56px, 9vw, 132px)' }}
         >
-          <div
-            className="grid w-full lg:grid-cols-[0.9fr_1.1fr] lg:items-center"
-            style={{ columnGap: 'clamp(56px, 9vw, 132px)' }}
-          >
             <motion.div
               variants={textGroup}
               initial="hidden"
@@ -505,27 +491,30 @@ const ContactRevealSection = () => {
             </motion.form>
           </div>
         </div>
+      </div>
 
-        <motion.div
-          className="absolute inset-x-0 bottom-0 z-20 min-h-[36vh] md:min-h-[45vh] bg-[#111111]"
-          style={{ y: prefersReducedMotion ? '0%' : blackPanelY }}
-        >
-          <div className="mx-auto flex min-h-[36vh] md:min-h-[45vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-10 text-center md:px-12 md:py-12 lg:px-16">
-            <a
-              href="mailto:hello@kaivastudio.com"
-              className="font-epilogue text-[clamp(28px,4vw,60px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
-            >
-              hello@kaivastudio.com
-            </a>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-white/52">
-              <a href="#" className="transition-colors duration-300 hover:text-white">Instagram</a>
-              <a href="#" className="transition-colors duration-300 hover:text-white">Dribbble</a>
-              <a href="#" className="transition-colors duration-300 hover:text-white">LinkedIn</a>
-            </div>
+      <motion.div
+        className="w-full bg-[#111111]"
+        initial={prefersReducedMotion ? { opacity: 0 } : { y: '100%' }}
+        whileInView={prefersReducedMotion ? { opacity: 1 } : { y: '0%' }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.9, ease: premiumEase, delay: 0.1 }}
+      >
+        <div className="mx-auto flex min-h-[36vh] md:min-h-[45vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-10 text-center md:px-12 md:py-12 lg:px-16">
+          <a
+            href="mailto:hello@kaivastudio.com"
+            className="font-epilogue text-[clamp(28px,4vw,60px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
+          >
+            hello@kaivastudio.com
+          </a>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-white/52">
+            <a href="#" className="transition-colors duration-300 hover:text-white">Instagram</a>
+            <a href="#" className="transition-colors duration-300 hover:text-white">Dribbble</a>
+            <a href="#" className="transition-colors duration-300 hover:text-white">LinkedIn</a>
           </div>
-        </motion.div>
-      </section>
-    </div>
+        </div>
+      </motion.div>
+    </section>
   );
 };
 
