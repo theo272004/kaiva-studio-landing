@@ -1423,7 +1423,7 @@ const ProblemSection = () => {
         </p>
 
         <div className="mt-10 w-full grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
-          <div className="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-3">
+          <div className="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col items-center text-center sm:items-start sm:text-left gap-3">
             <div className="font-epilogue text-[42px] sm:text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
               <CountUpAnimation endValue={75} suffix="%" />
             </div>
@@ -1431,7 +1431,7 @@ const ProblemSection = () => {
               de los colombianos busca productos y servicios en internet antes de comprar
             </p>
           </div>
-          <div className="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-3">
+          <div className="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col items-center text-center sm:items-start sm:text-left gap-3">
             <div className="font-epilogue text-[42px] sm:text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
               <CountUpAnimation endValue={83} suffix="%" />
             </div>
@@ -1439,7 +1439,7 @@ const ProblemSection = () => {
               de los emprendedores colombianos planea invertir más en presencia digital este año
             </p>
           </div>
-          <div className="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-3">
+          <div className="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col items-center text-center sm:items-start sm:text-left gap-3">
             <div className="font-epilogue text-[42px] sm:text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
               <CountUpAnimation endValue={1.7} prefix="+" suffix="M" decimal={true} />
             </div>
@@ -1689,7 +1689,7 @@ const HeroSection = () => {
       </motion.div>
 
       <motion.div
-        className="absolute left-1/2 bottom-[8%] md:bottom-[6%] z-[60] -translate-x-1/2 w-full flex justify-center"
+        className="absolute left-1/2 bottom-[110px] md:bottom-[6%] z-[60] -translate-x-1/2 w-full flex justify-center"
         initial={{ opacity: 0, y: 15 }}
         animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
         transition={{ duration: 0.6, delay: 0.28, ease: 'easeOut' }}
