@@ -168,10 +168,10 @@ const GlassPanelLayers = () => (
 
 const MockupRenderer = ({ type }) => {
   const mockups = {
-    dashboard: asset('kaiva_dashboard_mockup.png'),
-    ecommerce: asset('kaiva_ecommerce_mockup.png'),
-    tech: asset('kaiva_tech_mockup.png'),
-    creative: asset('kaiva_creative_mockup.png'),
+    dashboard: asset('kaiva_dashboard_mockup.webp'),
+    ecommerce: asset('kaiva_ecommerce_mockup.webp'),
+    tech: asset('kaiva_tech_mockup.webp'),
+    creative: asset('kaiva_creative_mockup.webp'),
   };
 
   return (
@@ -179,6 +179,8 @@ const MockupRenderer = ({ type }) => {
       <img
         src={mockups[type]}
         alt={type}
+        loading="lazy"
+        decoding="async"
         className="h-full w-full object-contain p-3 opacity-90 transition-opacity duration-700 hover:opacity-100 sm:object-cover sm:p-0"
       />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/10 to-transparent" />
@@ -208,7 +210,7 @@ const FloatingRobot = ({ src, style, className = '', delay = 0, duration = 6, am
     }}
   >
     <div className="h-full w-full">
-      <img src={src} alt="Kaiva Character" className="h-full w-full object-contain" />
+      <img src={src} alt="Kaiva Character" loading="lazy" decoding="async" className="h-full w-full object-contain" />
     </div>
   </motion.div>
 );
@@ -262,7 +264,7 @@ const TiltSlide = ({ slide, isActive, position, onClick }) => {
       onClick={onClick}
       className="absolute left-1/2 top-1/2 cursor-pointer"
       style={{
-        width: 'clamp(250px, 68vw, 620px)',
+        width: 'clamp(220px, 72vw, 620px)',
         aspectRatio: '4/3',
         x: '-50%',
         y: '-50%',
@@ -414,8 +416,8 @@ const ContactRevealSection = () => {
         <div
           className="mx-auto flex h-full w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
           style={{
-            paddingTop: 'clamp(128px, 15vw, 196px)',
-            paddingBottom: 'clamp(128px, 15vw, 196px)',
+            paddingTop: 'clamp(72px, 12vw, 196px)',
+            paddingBottom: 'clamp(72px, 12vw, 196px)',
           }}
         >
           <div
@@ -432,7 +434,7 @@ const ContactRevealSection = () => {
               <motion.div variants={textItem} className="font-manrope text-[16px] font-medium tracking-normal text-[#080808]/68">
                 Contacto
               </motion.div>
-              <motion.h2 className="mt-6 font-epilogue text-[clamp(56px,7vw,112px)] font-extrabold leading-[0.92] tracking-[-0.04em] text-[#080808] md:tracking-[-0.035em] lg:tracking-[-0.04em]">
+              <motion.h2 className="mt-6 font-epilogue text-[clamp(40px,7vw,112px)] font-extrabold leading-[0.92] tracking-[-0.04em] text-[#080808] md:tracking-[-0.035em] lg:tracking-[-0.04em]">
                 <motion.span variants={textItem} className="block">Ready to</motion.span>
                 <motion.span variants={textItem} className="block">start?</motion.span>
               </motion.h2>
@@ -504,10 +506,10 @@ const ContactRevealSection = () => {
         </div>
 
         <motion.div
-          className="absolute inset-x-0 bottom-0 z-20 min-h-[45vh] bg-[#111111]"
+          className="absolute inset-x-0 bottom-0 z-20 min-h-[36vh] md:min-h-[45vh] bg-[#111111]"
           style={{ y: prefersReducedMotion ? '0%' : blackPanelY }}
         >
-          <div className="mx-auto flex min-h-[45vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-10 text-center md:px-12 md:py-12 lg:px-16">
+          <div className="mx-auto flex min-h-[36vh] md:min-h-[45vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-10 text-center md:px-12 md:py-12 lg:px-16">
             <a
               href="mailto:hello@kaivastudio.com"
               className="font-epilogue text-[clamp(28px,4vw,60px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
@@ -552,7 +554,7 @@ const SectionShell = ({ id, tone = 'light', className = '', children }) => {
 
   return (
     <section id={id} data-nav-theme="light" className={`${toneClass} ${className}`}>
-      <div className="mx-auto w-full max-w-[1320px] px-6 py-28 md:px-12 md:py-36 lg:px-16">{children}</div>
+      <div className="mx-auto w-full max-w-[1320px] px-6 py-14 md:px-12 md:py-36 lg:px-16">{children}</div>
     </section>
   );
 };
@@ -612,7 +614,7 @@ const ServicesSection = () => {
                   transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                   tabIndex={0}
                 >
-                  <div className="relative z-10 flex min-h-full w-full flex-col px-7 py-9 md:px-8 md:py-10 lg:px-9 lg:py-11 xl:px-10">
+                  <div className="relative z-10 flex min-h-full w-full flex-col px-6 py-8 md:px-8 md:py-10 lg:px-9 lg:py-11 xl:px-10">
                     <motion.div
                       className="font-epilogue text-[48px] font-extrabold leading-none tracking-[-0.04em] md:text-[60px] xl:text-[72px]"
                       style={gradientAccentStyle}
@@ -725,7 +727,7 @@ const PortfolioSection = () => {
 
       <div
         ref={stageRef}
-        className="relative z-10 mt-8 h-[350px] sm:h-[420px] md:mt-12 md:h-[clamp(440px,58vh,680px)]"
+        className="relative z-10 mt-6 h-[320px] sm:h-[400px] md:mt-12 md:h-[clamp(440px,58vh,680px)]"
         style={{
           perspective: '2000px',
         }}
@@ -734,18 +736,18 @@ const PortfolioSection = () => {
         onMouseLeave={() => setIsHovering(false)}
       >
         <FloatingRobot
-          src={asset('KaivaTheo.png')}
-          className="block"
-          style={{ top: '1%', left: '2%', width: 'clamp(96px, 14vw, 210px)', height: 'clamp(96px, 14vw, 210px)' }}
+          src={asset('KaivaTheo.webp')}
+          className="hidden sm:block"
+          style={{ top: '1%', left: '2%', width: 'clamp(72px, 11vw, 210px)', height: 'clamp(72px, 11vw, 210px)' }}
           delay={0}
           duration={10}
           amplitude={6}
           rotation={2}
         />
         <FloatingRobot
-          src={asset('KaivaSara.png')}
-          className="block"
-          style={{ bottom: '18%', right: '2%', width: 'clamp(96px, 14vw, 210px)', height: 'clamp(96px, 14vw, 210px)' }}
+          src={asset('KaivaSara.webp')}
+          className="hidden sm:block"
+          style={{ bottom: '18%', right: '2%', width: 'clamp(72px, 11vw, 210px)', height: 'clamp(72px, 11vw, 210px)' }}
           delay={2.2}
           duration={10.5}
           amplitude={6}
@@ -801,8 +803,8 @@ const PortfolioSection = () => {
         </AnimatePresence>
       </div>
 
-      <div className="px-6 md:hidden">
-        <div className="rounded-[22px] border border-[#080808]/10 bg-[var(--color-surface)] p-5 shadow-[0_18px_48px_-28px_rgba(0,0,0,0.12)]">
+      <div className="mt-4 px-4 sm:px-6 md:hidden">
+        <div className="rounded-[20px] border border-[#080808]/10 bg-[var(--color-surface)] p-4 shadow-[0_18px_48px_-28px_rgba(0,0,0,0.12)]">
           <div className="flex items-end gap-3">
             <div className="font-epilogue text-[42px] font-extrabold italic leading-none tracking-[-0.03em] opacity-90" style={gradientAccentStyle}>
               {active.number}
@@ -929,7 +931,7 @@ const ExpandedAgencySections = () => (
                   </div>
                   <div className="font-epilogue text-[24px] font-extrabold leading-[1.12] tracking-[-0.025em] text-[#080808] md:text-[22px]">{step}</div>
                 </div>
-                <p className="max-w-[210px] text-[14px] leading-7 text-[#080808]/62">
+                <p className="text-[14px] leading-7 text-[#080808]/62 md:max-w-[210px]">
                   {index === 0 && 'Analizamos objetivos, contexto y necesidades del negocio antes de construir.'}
                   {index === 1 && 'Organizamos la estructura para que la presencia digital tenga un propósito claro y medible.'}
                   {index === 2 && 'Diseñamos una experiencia visual atractiva, profesional y alineada a la marca.'}
@@ -951,12 +953,14 @@ const ExpandedAgencySections = () => (
     <section
       id="planes"
       data-nav-theme="light"
-      className="relative bg-transparent px-4 py-12 md:px-8 md:py-16"
+      className="relative overflow-hidden bg-transparent px-4 py-12 md:px-8 md:py-16"
     >
       <motion.img
-        src={asset('KaivaMora1.png')}
+        src={asset('KaivaMora1.webp')}
         alt=""
-        className="absolute -right-[8%] top-[15%] z-50 w-[380px] opacity-100 md:-right-[6%] md:top-[10%] md:w-[600px] pointer-events-none"
+        loading="lazy"
+        decoding="async"
+        className="absolute right-0 top-[6%] z-50 hidden w-[200px] opacity-90 sm:block md:right-[-2%] md:top-[4%] md:w-[320px] lg:right-[-3%] lg:w-[460px] pointer-events-none"
         animate={{
           y: [0, 15, 0],
           rotate: [0, 2, 0]
@@ -980,7 +984,7 @@ const ExpandedAgencySections = () => (
             </p>
           </div>
 
-          <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-8 grid gap-4 sm:gap-5 md:grid-cols-2 xl:grid-cols-3">
             {pricingPlans.map((plan) => (
                 <article
                   key={plan.name}
@@ -1054,10 +1058,10 @@ const ExpandedAgencySections = () => (
 
 const WhyUsSection = () => {
   return (
-    <section className="relative w-full bg-transparent text-[#080808] px-6 py-24 md:py-32 lg:px-16 overflow-hidden">
-      <div className="mx-auto flex w-full max-w-[1240px] flex-col gap-12 md:flex-row md:items-center md:justify-between">
+    <section className="relative w-full bg-transparent text-[#080808] px-6 py-14 md:py-28 lg:px-16 overflow-hidden">
+      <div className="mx-auto flex w-full max-w-[1240px] flex-col gap-8 md:flex-row md:items-center md:gap-12 md:justify-between">
         <div className="flex-1 max-w-[500px]">
-          <h2 className="font-epilogue text-[40px] md:text-[56px] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#080808]">
+          <h2 className="font-epilogue text-[clamp(32px,6vw,56px)] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#080808]">
             El mundo digital te está esperando. Nosotros te llevamos.
           </h2>
           <p className="mt-8 text-[15px] md:text-[16px] leading-[1.6] text-[#080808]/70">
@@ -1112,7 +1116,7 @@ const AliadosSection = () => {
           <div className="mb-4 inline-block font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#a482ff]">
             ALIADOS ESTRATÉGICOS
           </div>
-          <h2 className="font-epilogue text-[40px] md:text-[56px] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#080808]">
+          <h2 className="font-epilogue text-[clamp(32px,6vw,56px)] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#080808]">
             Trabajamos con los mejores en SEO
           </h2>
           <p className="mt-6 text-[15px] md:text-[16px] leading-[1.6] text-[#080808]/70">
@@ -1264,7 +1268,6 @@ const App = () => {
         </div>
       </div>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;600;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
         @import url('https://fonts.cdnfonts.com/css/open-sauce-one');
         :root {
           --color-dominant: #ffffff;
@@ -1339,8 +1342,16 @@ const App = () => {
           .hero-visual-wrap { top: 250px !important; width: 116vw !important; max-width: 920px !important; }
         }
         @media (max-width: 768px) {
-          .hero-copy-wrap { top: 108px !important; max-width: 360px !important; }
-          .hero-visual-wrap { top: 284px !important; width: 122vw !important; max-width: 560px !important; }
+          .hero-copy-wrap { top: 108px !important; max-width: calc(100vw - 48px) !important; }
+          .hero-visual-wrap { top: 275px !important; width: 114vw !important; max-width: 520px !important; }
+        }
+        @media (max-width: 400px) {
+          .hero-copy-wrap { top: 96px !important; }
+          .hero-visual-wrap { top: 255px !important; width: 108vw !important; max-width: 420px !important; }
+        }
+        @media (max-height: 700px) and (max-width: 768px) {
+          .hero-copy-wrap { top: 86px !important; }
+          .hero-visual-wrap { top: 220px !important; }
         }
           .contact-premium-card {
             background: rgba(255, 255, 255, 0.85);
@@ -1410,7 +1421,7 @@ const CountUpAnimation = ({ endValue, suffix = "", prefix = "", decimal = false 
 
 const ProblemSection = () => {
   return (
-    <section id="problema" className="relative w-full bg-transparent text-[#080808] px-6 py-24 md:py-32 lg:px-16">
+    <section id="problema" className="relative w-full bg-transparent text-[#080808] px-6 py-14 md:py-24 lg:px-16">
       <div className="mx-auto w-full max-w-[1240px] relative z-10 flex flex-col items-center">
         
         <h2 className="font-epilogue text-[clamp(40px,6vw,72px)] font-extrabold leading-[0.98] tracking-[-0.04em] text-center max-w-[800px] mt-4">
@@ -1422,39 +1433,39 @@ const ProblemSection = () => {
           negocio no aparece, ese cliente se va a la competencia. Así de simple.
         </p>
 
-        <div className="mt-16 w-full grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-[24px] p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-4">
-            <div className="font-epilogue text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
+        <div className="mt-10 w-full grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+          <div className="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-3">
+            <div className="font-epilogue text-[42px] sm:text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
               <CountUpAnimation endValue={75} suffix="%" />
             </div>
-            <p className="text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
+            <p className="text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
               de los colombianos busca productos y servicios en internet antes de comprar
             </p>
           </div>
-          <div className="bg-white rounded-[24px] p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-4">
-            <div className="font-epilogue text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
+          <div className="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-3">
+            <div className="font-epilogue text-[42px] sm:text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
               <CountUpAnimation endValue={83} suffix="%" />
             </div>
-            <p className="text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
+            <p className="text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
               de los emprendedores colombianos planea invertir más en presencia digital este año
             </p>
           </div>
-          <div className="bg-white rounded-[24px] p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-4">
-            <div className="font-epilogue text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
+          <div className="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-3">
+            <div className="font-epilogue text-[42px] sm:text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
               <CountUpAnimation endValue={1.7} prefix="+" suffix="M" decimal={true} />
             </div>
-            <p className="text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
+            <p className="text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
               de empresas registradas en Colombia. La mayoría sin presencia digital real
             </p>
           </div>
         </div>
 
-        <div className="w-full mt-24">
-          <h3 className="text-[14px] font-bold text-[#080808]/50 uppercase tracking-[0.15em] mb-6 md:mb-8 text-center md:text-left">
+        <div className="w-full mt-14 md:mt-20">
+          <h3 className="text-[12px] sm:text-[14px] font-bold text-[#080808]/50 uppercase tracking-[0.15em] mb-5 md:mb-8 text-center md:text-left">
             POR QUÉ MUCHOS NEGOCIOS SIGUEN SIN WEB
           </h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
             <div className="bg-white rounded-[20px] p-6 md:p-8 flex items-start gap-4 shadow-sm border border-[#080808]/5">
               <span className="text-[24px]">💸</span>
               <div>
@@ -1542,21 +1553,25 @@ const HeroSection = () => {
   return (
     <section id="inicio" data-nav-theme="light" className="relative z-30 min-h-[100svh] w-full overflow-visible bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
       <motion.img
-        src={asset('degradado-lateral.png')}
+        src={asset('degradado-lateral.webp')}
         alt=""
         aria-hidden="true"
         initial={{ opacity: 0, scale: 0.92 }}
         animate={{ opacity: 0.95, scale: 1 }}
         transition={{ duration: 0.85, ease: 'easeOut' }}
+        loading="lazy"
+        decoding="async"
         className="pointer-events-none absolute left-[-48%] top-[72%] z-[5] hidden w-[82vw] min-w-[300px] max-w-[1120px] -translate-y-1/2 object-contain md:block md:left-[-34%] md:top-[71%] md:w-[66vw] md:min-w-[460px]"
       />
       <motion.img
-        src={asset('degradado-lateral.png')}
+        src={asset('degradado-lateral.webp')}
         alt=""
         aria-hidden="true"
         initial={{ opacity: 0, scale: 0.92 }}
         animate={{ opacity: 0.95, scale: 1 }}
         transition={{ duration: 0.85, delay: 0.08, ease: 'easeOut' }}
+        loading="lazy"
+        decoding="async"
         className="pointer-events-none absolute right-[-40%] top-[18%] z-[5] hidden w-[78vw] min-w-[280px] max-w-[980px] -translate-y-1/2 object-contain md:block md:right-[-28%] md:top-[22%] md:w-[60vw] md:min-w-[420px]"
       />
 
@@ -1626,7 +1641,7 @@ const HeroSection = () => {
         transition={{ duration: 0.6, delay: 0.14, ease: 'easeOut' }}
         className="hero-copy-wrap absolute left-6 right-6 top-[110px] z-40 flex max-w-[360px] flex-col items-start text-left md:left-[80px] md:right-auto md:top-[160px] md:max-w-[720px]"
       >
-        <h1 className="w-fit font-extrabold leading-[1.02] tracking-[-0.03em] text-[#080808] text-[30px] md:text-[54px] flex flex-col items-start gap-1">
+        <h1 className="w-fit font-extrabold leading-[1.02] tracking-[-0.03em] text-[#080808] text-[clamp(26px,7vw,54px)] flex flex-col items-start gap-1">
           <AnimatedText text="Páginas web claras," startAnimation={introComplete} className="md:whitespace-nowrap" />
           <AnimatedText text="rápidas y profesionales" startAnimation={introComplete} className="md:whitespace-nowrap" />
         </h1>
@@ -1648,13 +1663,17 @@ const HeroSection = () => {
       >
         <div className="relative mx-auto aspect-[1.08/1] w-full md:aspect-[1.16/1]">
           <img
-            src={asset('nombre hero.png')}
+            src={asset('nombre hero.webp')}
             alt="Kaiva Studio"
+            fetchpriority="high"
+            decoding="sync"
             className="absolute left-1/2 top-[10%] w-[58%] -translate-x-1/2 object-contain md:top-[10%] md:w-[50%]"
           />
           <motion.img
-            src={asset('robots hero.png')}
+            src={asset('robots hero.webp')}
             alt="Robots Kaiva"
+            fetchpriority="high"
+            decoding="sync"
             className="absolute left-1/2 top-[9%] w-[245%] -translate-x-1/2 scale-[1.08] object-contain md:top-[8%] md:w-[280%] md:scale-[1.15]"
             animate={{
               y: [0, -7, 0, 7, 0],
@@ -1683,7 +1702,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 18 }}
         animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
         transition={{ duration: 0.55, delay: 0.22, ease: 'easeOut' }}
-        className="absolute bottom-4 left-6 right-6 z-40 max-w-[280px] text-left text-[12px] font-normal leading-[1.5] text-[#080808]/64 md:bottom-[60px] md:left-auto md:right-[80px] md:max-w-[420px] md:text-[15px]"
+        className="absolute bottom-4 left-6 right-6 z-40 max-w-[260px] text-left text-[11px] font-normal leading-[1.5] text-[#080808]/64 sm:max-w-[280px] sm:text-[12px] md:bottom-[60px] md:left-auto md:right-[80px] md:max-w-[420px] md:text-[15px]"
       >
         Deja de perder clientes por no estar en internet. Diseñamos y desarrollamos tu página web con criterio profesional, entrega rápida y un precio justo.
       </motion.p>
