@@ -404,8 +404,8 @@ const ContactRevealSection = () => {
   });
   const blackPanelY = useTransform(
     scrollYProgress,
-    [0, 0.08, 1],
-    ['105%', '105%', '25%'],
+    [0.6, 0.95],
+    ['100%', '72%'],
   );
 
   return (
@@ -1092,7 +1092,7 @@ const WhyUsSection = () => {
 
 const AliadosSection = () => {
   return (
-    <section className="relative w-full bg-white text-[#080808] px-6 py-16 md:py-24 lg:px-16 overflow-hidden">
+    <section className="relative w-full bg-transparent text-[#080808] px-6 py-16 md:py-24 lg:px-16 overflow-hidden">
       <div className="mx-auto flex w-full max-w-[1240px] flex-col gap-12 md:flex-row md:items-center md:justify-between">
         <div className="flex-1 max-w-[460px]">
           <div className="mb-4 inline-block font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#a482ff]">
@@ -1328,23 +1328,40 @@ const App = () => {
           .hero-copy-wrap { top: 108px !important; max-width: 360px !important; }
           .hero-visual-wrap { top: 284px !important; width: 122vw !important; max-width: 560px !important; }
         }
-        @media (prefers-reduced-motion: reduce) {
-          html { scroll-behavior: auto; }
-          .aurora-base,
-          .aurora-blob,
-          .aurora-hover-layer {
-            animation: none;
-          }
-          .contact-premium-card,
-          .contact-input,
-          .contact-accent-button {
-            transition: none;
-          }
           .contact-premium-card {
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
           }
-        }
+          .contact-input {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+          }
+          .contact-input:focus {
+            background: #ffffff;
+            border-color: #8242f5;
+            box-shadow: 0 0 0 4px rgba(130, 66, 245, 0.1);
+          }
+          @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .aurora-base,
+            .aurora-blob,
+            .aurora-hover-layer {
+              animation: none;
+            }
+            .contact-premium-card,
+            .contact-input,
+            .contact-accent-button {
+              transition: none;
+            }
+            .contact-premium-card {
+              backdrop-filter: none;
+              -webkit-backdrop-filter: none;
+            }
+          }
       `}</style>
     </div>
   );
