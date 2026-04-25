@@ -942,7 +942,7 @@ const ExpandedAgencySections = () => (
       <motion.img
         src={asset('KaivaMora1.png')}
         alt=""
-        className="absolute -left-[5%] top-[15%] z-50 w-[380px] opacity-100 md:-left-[12%] md:top-[18%] md:w-[600px] pointer-events-none"
+        className="absolute -right-[8%] top-[15%] z-50 w-[380px] opacity-100 md:-right-[6%] md:top-[10%] md:w-[600px] pointer-events-none"
         animate={{
           y: [0, 15, 0],
           rotate: [0, 2, 0]
@@ -970,7 +970,7 @@ const ExpandedAgencySections = () => (
             {pricingPlans.map((plan) => (
                 <article
                   key={plan.name}
-                  className={`group relative flex min-h-[340px] flex-col overflow-hidden rounded-[30px] border ${plan.featured ? 'border-[var(--color-accent)]' : 'border-black/10'} bg-white shadow-[0_18px_48px_-34px_rgba(0,0,0,0.1)] outline-none transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-2 hover:border-black/20 hover:shadow-[0_28px_74px_-44px_rgba(0,0,0,0.15)] md:min-h-[380px]`}
+                  className={`group relative flex min-h-[340px] flex-col overflow-hidden rounded-[30px] border ${plan.featured ? 'border-[var(--color-accent)]' : 'border-white/80'} bg-white/82 shadow-[0_18px_48px_-34px_rgba(80,74,168,0.35)] outline-none backdrop-blur-[16px] transition-[opacity,transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white hover:shadow-[0_28px_74px_-44px_rgba(80,74,168,0.48)] md:min-h-[380px] xl:min-h-[420px]`}
                 >
                   <div className="flex flex-1 flex-col p-8 md:p-10">
                     {plan.badge && (
@@ -1129,7 +1129,7 @@ const App = () => {
 
 const ProblemSection = () => {
   return (
-    <section id="problema" className="relative w-full bg-[#f8f8fa] text-[#080808] px-6 py-24 md:py-32 lg:px-16 overflow-hidden">
+    <section id="problema" className="relative w-full bg-[#f8f8fa] text-[#080808] px-6 py-24 md:py-32 lg:px-16">
       <div className="mx-auto w-full max-w-[1240px] relative z-10 flex flex-col items-center">
         <div className="mb-4 inline-block text-[11px] font-manrope font-bold uppercase tracking-[0.2em] text-[#8242f5] md:text-[13px]">
           EL PROBLEMA
@@ -1262,7 +1262,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section id="inicio" data-nav-theme="light" className="relative min-h-[100svh] w-full overflow-visible bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
+    <section id="inicio" data-nav-theme="light" className="relative z-30 min-h-[100svh] w-full overflow-visible bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
       <motion.img
         src={asset('degradado-lateral.png')}
         alt=""
@@ -1388,12 +1388,17 @@ const HeroSection = () => {
             }}
           />
         </div>
-        
-        <div className="mt-8 md:mt-12 w-full flex justify-center">
-          <button className="flex min-h-[44px] items-center justify-center rounded-[30px] bg-[#0c0c0c] px-7 font-inter text-[13px] font-semibold text-white transition-transform duration-300 hover:scale-105 active:scale-95 shadow-xl sm:px-8 sm:text-[14px]">
-            Quiero mi web
-          </button>
-        </div>
+      </motion.div>
+
+      <motion.div
+        className="absolute left-1/2 bottom-[8%] md:bottom-[6%] z-[60] -translate-x-1/2 w-full flex justify-center"
+        initial={{ opacity: 0, y: 15 }}
+        animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+        transition={{ duration: 0.6, delay: 0.28, ease: 'easeOut' }}
+      >
+        <button className="flex min-h-[48px] sm:min-h-[52px] items-center justify-center rounded-[30px] bg-[#0c0c0c] px-8 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-105 active:scale-95 shadow-[0_16px_32px_-8px_rgba(0,0,0,0.3)] sm:px-9 sm:text-[15px] whitespace-nowrap">
+          Quiero mi web
+        </button>
       </motion.div>
 
       <motion.p
