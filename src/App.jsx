@@ -942,7 +942,7 @@ const ExpandedAgencySections = () => (
       <motion.img
         src={asset('KaivaMora1.png')}
         alt=""
-        className="absolute -right-[5%] top-[5%] z-50 w-[380px] opacity-100 md:-right-[12%] md:top-[8%] md:w-[600px] pointer-events-none"
+        className="absolute -left-[5%] top-[15%] z-50 w-[380px] opacity-100 md:-left-[12%] md:top-[18%] md:w-[600px] pointer-events-none"
         animate={{
           y: [0, 15, 0],
           rotate: [0, 2, 0]
@@ -968,32 +968,64 @@ const ExpandedAgencySections = () => (
 
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {pricingPlans.map((plan) => (
-              <motion.article
-                  key={service.title}
-                  variants={{
-                    hidden: { opacity: 0, y: 24 },
-                    visible: {
-                      opacity: 1,
-                      y: 0,
-                      transition: { duration: 0.62, ease: [0.16, 1, 0.3, 1] },
-                    },
-                  }}
-                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-white/80 bg-white/82 shadow-[0_18px_48px_-34px_rgba(80,74,168,0.35)] outline-none backdrop-blur-[16px] transition-[opacity,transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white hover:shadow-[0_28px_74px_-44px_rgba(80,74,168,0.48)] md:min-h-[380px] xl:min-h-[420px]"
-                  whileHover={{ y: -12 }}
-                  transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                  tabIndex={0}
+                <article
+                  key={plan.name}
+                  className={`group relative flex min-h-[340px] flex-col overflow-hidden rounded-[30px] border ${plan.featured ? 'border-[var(--color-accent)]' : 'border-black/10'} bg-white shadow-[0_18px_48px_-34px_rgba(0,0,0,0.1)] outline-none transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-2 hover:border-black/20 hover:shadow-[0_28px_74px_-44px_rgba(0,0,0,0.15)] md:min-h-[380px]`}
                 >
-                  <div className="relative z-10">
-        <HeroSection />
-        <PortfolioSection />
-        <div className="relative">
-          <SectionsAuroraBackdrop />
-          <div className="relative z-10">
-            <ExpandedAgencySections />
-          </div>
+                  <div className="flex flex-1 flex-col p-8 md:p-10">
+                    {plan.badge && (
+                      <div className="mb-4 inline-block w-fit rounded-full bg-[#f8f8f8] px-3 py-1 font-manrope text-[10px] font-bold uppercase tracking-wider text-[#080808]">
+                        {plan.badge}
+                      </div>
+                    )}
+                    <h3 className="font-epilogue text-[24px] font-extrabold leading-none tracking-[-0.03em] md:text-[28px]">
+                      {plan.name}
+                    </h3>
+                    <p className="mt-2 text-[14px] leading-tight text-[#080808]/60">
+                      {plan.audience}
+                    </p>
+                    <div className="mt-6 mb-6 h-px w-full bg-black/10" />
+                    <div className="font-epilogue text-[20px] font-bold md:text-[24px]">
+                      {plan.price}
+                    </div>
+                    <p className="mt-3 text-[14px] leading-relaxed text-[#080808]/70">
+                      {plan.description}
+                    </p>
+                    <ul className="mt-6 flex-1 space-y-3">
+                      {plan.points.map((pt, i) => (
+                        <li key={i} className="flex flex-start gap-3 text-[14px] leading-tight text-[#080808]/80">
+                          <svg className="mt-0.5 h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span>{pt}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <button className="mt-8 flex h-12 w-full items-center justify-center rounded-full bg-[#080808] font-manrope text-[12px] font-bold uppercase tracking-widest text-white transition-colors duration-300 hover:bg-[#222222]">
+                      {plan.cta}
+                    </button>
+                  </div>
+                </article>
+              ))}
+            </div>
+        </motion.div>
+    </section>
+  </>
+);
+
+const App = () => {
+  return (
+    <div className="relative z-10 w-full bg-white">
+      <HeroSection />
+      <ProblemSection />
+      <PortfolioSection />
+      <div className="relative">
+        <SectionsAuroraBackdrop />
+        <div className="relative z-10">
+          <ExpandedAgencySections />
         </div>
       </div>
-
+      <ContactRevealSection />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;600;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
         @import url('https://fonts.cdnfonts.com/css/open-sauce-one');
@@ -1094,6 +1126,99 @@ const ExpandedAgencySections = () => (
     </div>
   );
 }
+
+const ProblemSection = () => {
+  return (
+    <section id="problema" className="relative w-full bg-[#f8f8fa] text-[#080808] px-6 py-24 md:py-32 lg:px-16 overflow-hidden">
+      <div className="mx-auto w-full max-w-[1240px] relative z-10 flex flex-col items-center">
+        <div className="mb-4 inline-block text-[11px] font-manrope font-bold uppercase tracking-[0.2em] text-[#8242f5] md:text-[13px]">
+          EL PROBLEMA
+        </div>
+        
+        <h2 className="font-epilogue text-[clamp(40px,6vw,72px)] font-extrabold leading-[0.98] tracking-[-0.04em] text-center max-w-[800px] mt-4">
+          El 91% de las empresas en Colombia son pymes. La mayoría no existe en internet.
+        </h2>
+        
+        <p className="mt-8 text-[16px] md:text-[18px] leading-[1.6] text-center max-w-[650px] text-[#080808]/70">
+          Cada día, miles de colombianos buscan productos y servicios en Google. Si tu
+          negocio no aparece, ese cliente se va a la competencia. Así de simple.
+        </p>
+
+        <div className="mt-16 w-full grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white rounded-[24px] p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-4">
+            <div className="font-epilogue text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em] text-[#8242f5]">
+              75%
+            </div>
+            <p className="text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
+              de los colombianos busca productos y servicios en internet antes de comprar
+            </p>
+          </div>
+          <div className="bg-white rounded-[24px] p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-4">
+            <div className="font-epilogue text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em] text-[#8242f5]">
+              83%
+            </div>
+            <p className="text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
+              de los emprendedores colombianos planea invertir más en presencia digital este año
+            </p>
+          </div>
+          <div className="bg-white rounded-[24px] p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-4">
+            <div className="font-epilogue text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em] text-[#8242f5]">
+              +1.7M
+            </div>
+            <p className="text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
+              de empresas registradas en Colombia. La mayoría sin presencia digital real
+            </p>
+          </div>
+        </div>
+
+        <div className="w-full mt-24">
+          <h3 className="text-[14px] font-bold text-[#080808]/50 uppercase tracking-[0.15em] mb-6 md:mb-8 text-center md:text-left">
+            POR QUÉ MUCHOS NEGOCIOS SIGUEN SIN WEB
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            <div className="bg-white rounded-[20px] p-6 md:p-8 flex items-start gap-4 shadow-sm border border-[#080808]/5">
+              <span className="text-[24px]">💸</span>
+              <div>
+                <h4 className="font-bold text-[16px] md:text-[18px] text-[#080808] mb-2">"Es muy caro"</h4>
+                <p className="text-[14px] md:text-[15px] text-[#080808]/70 leading-relaxed">
+                  Muchos negocios creen que tener una web profesional está fuera de su presupuesto. No tiene por qué serlo.
+                </p>
+              </div>
+            </div>
+            <div className="bg-white rounded-[20px] p-6 md:p-8 flex items-start gap-4 shadow-sm border border-[#080808]/5">
+              <span className="text-[24px]">🤷‍♂️</span>
+              <div>
+                <h4 className="font-bold text-[16px] md:text-[18px] text-[#080808] mb-2">"No sé cómo funciona"</h4>
+                <p className="text-[14px] md:text-[15px] text-[#080808]/70 leading-relaxed">
+                  Dominios, hosting, SEO, diseño... el lenguaje técnico aleja a dueños de negocio que simplemente quieren más clientes.
+                </p>
+              </div>
+            </div>
+            <div className="bg-white rounded-[20px] p-6 md:p-8 flex items-start gap-4 shadow-sm border border-[#080808]/5">
+              <span className="text-[24px]">😤</span>
+              <div>
+                <h4 className="font-bold text-[16px] md:text-[18px] text-[#080808] mb-2">"Ya intenté y no funcionó"</h4>
+                <p className="text-[14px] md:text-[15px] text-[#080808]/70 leading-relaxed">
+                  Malas experiencias con freelancers o plantillas genéricas que no reflejan el negocio ni generan resultados.
+                </p>
+              </div>
+            </div>
+            <div className="bg-white rounded-[20px] p-6 md:p-8 flex items-start gap-4 shadow-sm border border-[#080808]/5">
+              <span className="text-[24px]">⏳</span>
+              <div>
+                <h4 className="font-bold text-[16px] md:text-[18px] text-[#080808] mb-2">"No tengo tiempo"</h4>
+                <p className="text-[14px] md:text-[15px] text-[#080808]/70 leading-relaxed">
+                  Gestionar un negocio ya es suficiente trabajo. No debería necesitarse un equipo técnico propio para tener presencia digital.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const HeroSection = () => {
   const [introComplete, setIntroComplete] = useState(false);
@@ -1263,6 +1388,12 @@ const HeroSection = () => {
             }}
           />
         </div>
+        
+        <div className="mt-8 md:mt-12 w-full flex justify-center">
+          <button className="flex min-h-[44px] items-center justify-center rounded-[30px] bg-[#0c0c0c] px-7 font-inter text-[13px] font-semibold text-white transition-transform duration-300 hover:scale-105 active:scale-95 shadow-xl sm:px-8 sm:text-[14px]">
+            Quiero mi web
+          </button>
+        </div>
       </motion.div>
 
       <motion.p
@@ -1279,6 +1410,7 @@ const HeroSection = () => {
   );
 };
 
+export default App;
 
 
 
