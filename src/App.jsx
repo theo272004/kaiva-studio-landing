@@ -404,8 +404,8 @@ const ContactRevealSection = () => {
   });
   const blackPanelY = useTransform(
     scrollYProgress,
-    [0.75, 0.98],
-    ['100%', '86%'],
+    [0.7, 0.96],
+    ['100%', '15%'],
   );
 
   return (
@@ -427,7 +427,7 @@ const ContactRevealSection = () => {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.38 }}
-              className="max-w-[560px]"
+              className="relative z-10 max-w-[560px]"
             >
               <motion.div variants={textItem} className="font-manrope text-[16px] font-medium tracking-normal text-[#080808]/68">
                 Contacto
@@ -449,7 +449,7 @@ const ContactRevealSection = () => {
               variants={formItem}
               whileHover={prefersReducedMotion || isMobile ? undefined : { y: -2 }}
               transition={{ duration: 0.32, ease: premiumEase }}
-              className="contact-premium-card rounded-[34px] p-5 md:p-6"
+              className="contact-premium-card relative z-30 rounded-[34px] p-5 md:p-6"
               style={isMobile ? undefined : { transformPerspective: 1600, transformStyle: 'preserve-3d' }}
             >
               <motion.div variants={fieldGroup} className="space-y-4">
@@ -504,17 +504,17 @@ const ContactRevealSection = () => {
         </div>
 
         <motion.div
-          className="absolute inset-x-0 bottom-0 z-20 min-h-[80vh] bg-[#111111]"
+          className="absolute inset-x-0 bottom-0 z-20 min-h-[85vh] bg-[#111111]"
           style={{ y: prefersReducedMotion ? '0%' : blackPanelY }}
         >
-          <div className="mx-auto flex min-h-[80vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-12 text-center md:px-12 md:py-14 lg:px-16">
+          <div className="mx-auto flex min-h-[85vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-12 text-center md:px-12 md:py-14 lg:px-16">
           <a
             href="mailto:hello@kaivastudio.com"
-            className="font-epilogue text-[clamp(30px,4.2vw,58px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
+            className="font-epilogue text-[clamp(40px,7vw,110px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
           >
             hello@kaivastudio.com
           </a>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-white/52">
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-12 gap-y-6 font-manrope text-[14px] font-bold uppercase tracking-[0.22em] text-white/52">
             <a href="#" className="transition-colors duration-300 hover:text-white">Instagram</a>
             <a href="#" className="transition-colors duration-300 hover:text-white">Dribbble</a>
             <a href="#" className="transition-colors duration-300 hover:text-white">LinkedIn</a>
