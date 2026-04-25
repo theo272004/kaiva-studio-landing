@@ -1131,9 +1131,128 @@ const AliadosSection = () => {
   );
 };
 
+const AnimatedText = ({ text, className, startAnimation }) => {
+  const words = text.split(" ");
+  
+  const container = {
+    hidden: { opacity: 0 },
+    visible: (i = 1) => ({
+      opacity: 1,
+      transition: { staggerChildren: 0.12, delayChildren: 0.04 * i },
+    }),
+  };
+
+  const child = {
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", damping: 12, stiffness: 100 },
+    },
+    hidden: {
+      opacity: 0,
+      y: 20,
+      transition: { type: "spring", damping: 12, stiffness: 100 },
+    },
+  };
+
+  return (
+    <motion.div style={{ overflow: "hidden", display: "flex", flexWrap: "wrap", gap: "0.26em" }} variants={container} initial="hidden" animate={startAnimation ? "visible" : "hidden"} className={className}>
+      {words.map((word, index) => (
+        <motion.span variants={child} style={{ display: "inline-block" }} key={index}>
+          {word}
+        </motion.span>
+      ))}
+    </motion.div>
+  );
+};
+
+const CustomCursor = () => {
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  const [hoveredNode, setHoveredNode] = useState(false);
+  const [isTouch, setIsTouch] = useState(true);
+
+  useEffect(() => {
+    if (window.matchMedia("(pointer: fine)").matches) {
+      setIsTouch(false);
+    }
+    
+    const moveCursor = (e) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+      
+      const target = e.target;
+      if (target.closest('a') || target.closest('button')) {
+        setHoveredNode(true);
+      } else {
+        setHoveredNode(false);
+      }
+    };
+
+    window.addEventListener('mousemove', moveCursor);
+    return () => window.removeEventListener('mousemove', moveCursor);
+  }, []);
+
+  if (isTouch) return null;
+
+  return (
+    <>
+      <motion.div
+        className="pointer-events-none fixed top-0 left-0 z-[9999] rounded-full drop-shadow-md mix-blend-difference"
+        style={{
+          x: useSpring(cursorX, { damping: 25, stiffness: 400 }),
+          y: useSpring(cursorY, { damping: 25, stiffness: 400 }),
+          width: 14,
+          height: 14,
+          translateX: "-50%",
+          translateY: "-50%",
+          scale: hoveredNode ? 3.5 : 1,
+          backgroundColor: "#ffffff",
+        }}
+      />
+      <motion.div
+        className="pointer-events-none fixed top-0 left-0 z-[9998] rounded-full mix-blend-difference"
+        style={{
+          x: useSpring(cursorX, { damping: 40, stiffness: 150 }),
+          y: useSpring(cursorY, { damping: 40, stiffness: 150 }),
+          width: 32,
+          height: 32,
+          translateX: "-50%",
+          translateY: "-50%",
+          scale: hoveredNode ? 1.5 : 1,
+          border: "1px solid rgba(255, 255, 255, 0.4)",
+        }}
+      />
+    </>
+  );
+};
+
 const App = () => {
+  useEffect(() => {
+    if (window.Lenis) {
+      const lenis = new window.Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smooth: true,
+      })
+
+      function raf(time) {
+        lenis.raf(time)
+        requestAnimationFrame(raf)
+      }
+      requestAnimationFrame(raf)
+
+      return () => {
+        lenis.destroy();
+      };
+    }
+  }, []);
+
   return (
     <div className="relative z-10 w-full bg-white">
+      <CustomCursor />
       <HeroSection />
       <ProblemSection />
       <WhyUsSection />
@@ -1465,9 +1584,9 @@ const HeroSection = () => {
         transition={{ duration: 0.6, delay: 0.14, ease: 'easeOut' }}
         className="hero-copy-wrap absolute left-6 right-6 top-[110px] z-40 flex max-w-[360px] flex-col items-start text-left md:left-[80px] md:right-auto md:top-[160px] md:max-w-[720px]"
       >
-        <h1 className="w-fit text-[30px] font-extrabold leading-[1.02] tracking-[-0.03em] text-[#080808] md:text-[54px]">
-          <span className="block md:whitespace-nowrap">Páginas web claras,</span>
-          <span className="block md:whitespace-nowrap">rápidas y profesionales</span>
+        <h1 className="w-fit font-extrabold leading-[1.02] tracking-[-0.03em] text-[#080808] text-[30px] md:text-[54px] flex flex-col items-start gap-1">
+          <AnimatedText text="Páginas web claras," startAnimation={introComplete} className="md:whitespace-nowrap" />
+          <AnimatedText text="rápidas y profesionales" startAnimation={introComplete} className="md:whitespace-nowrap" />
         </h1>
 
         <a
