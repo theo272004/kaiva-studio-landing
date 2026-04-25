@@ -924,7 +924,7 @@ const ExpandedAgencySections = () => (
                 }}
               >
                 <div className="mb-5 flex items-center gap-4 md:block">
-                  <div className="mb-0 flex h-12 w-12 items-center justify-center rounded-full border border-[#080808]/16 bg-[var(--color-dominant)] font-manrope text-[12px] font-bold tracking-[0.18em] text-[#080808] md:mb-5">
+                  <div className="mb-0 flex h-12 w-12 items-center justify-center rounded-full border border-[#080808]/16 bg-[var(--color-dominant)] font-manrope text-[12px] font-bold tracking-[0.18em] md:mb-5" style={gradientAccentStyle}>
                     0{index + 1}
                   </div>
                   <div className="font-epilogue text-[24px] font-extrabold leading-[1.12] tracking-[-0.025em] text-[#080808] md:text-[22px]">{step}</div>
@@ -1126,9 +1126,11 @@ const AliadosSection = () => {
               <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#080808]/40 mb-2">
                 SEO
               </div>
-              <h3 className="font-epilogue text-[22px] md:text-[26px] font-extrabold leading-none tracking-[-0.02em] text-[#080808]">
-                SEO for Startups
-              </h3>
+              <a href="https://seoforstartups.co" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                <h3 className="font-epilogue text-[22px] md:text-[26px] font-extrabold leading-none tracking-[-0.02em] text-[#080808]">
+                  SEO for Startups
+                </h3>
+              </a>
               <p className="mt-3 text-[13px] md:text-[14px] leading-relaxed text-[#080808]/60">
                 Posicionamiento orgánico para negocios que quieren crecer con criterio.
               </p>
