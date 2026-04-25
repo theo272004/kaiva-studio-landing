@@ -609,42 +609,11 @@ const ServicesSection = () => {
                       transition: { duration: 0.62, ease: [0.16, 1, 0.3, 1] },
                     },
                   }}
-                  onHoverStart={() => setActiveService(index)}
-                  onFocus={() => setActiveService(index)}
-                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-white/60 shadow-[0_18px_48px_-34px_rgba(80,74,168,0.2)] outline-none backdrop-blur-[20px] transition-[opacity,transform,box-shadow,border-color,background-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white/80 hover:shadow-[0_28px_74px_-44px_rgba(80,74,168,0.3)] md:min-h-[380px] xl:min-h-[420px]"
-                  animate={{ 
-                    opacity: isQuiet ? 0.56 : 1,
-                    backgroundColor: isActive ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.65)"
-                  }}
+                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-white/80 bg-white/82 shadow-[0_18px_48px_-34px_rgba(80,74,168,0.35)] outline-none backdrop-blur-[16px] transition-[opacity,transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white hover:shadow-[0_28px_74px_-44px_rgba(80,74,168,0.48)] md:min-h-[380px] xl:min-h-[420px]"
                   whileHover={{ y: -12 }}
-                  
                   transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                   tabIndex={0}
                 >
-                  <motion.div
-                    className="aurora-hover-layer pointer-events-none absolute inset-0 overflow-hidden"
-                    initial={{ opacity: 0, y: 120 }}
-                    animate={{
-                      opacity: isActive ? 1 : 0,
-                      y: isActive ? 0 : 120,
-                    }}
-                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    <div className="aurora-card-blob blob-1" />
-                    <div className="aurora-card-blob blob-2" />
-                    <div className="aurora-card-blob blob-3" />
-                    <div className="aurora-card-blob blob-4" />
-                    <div className="aurora-card-blob blob-5" />
-                  </motion.div>
-
-                  <motion.div
-                    className="pointer-events-none absolute inset-0"
-                    animate={{
-                      backgroundColor: isActive ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.46)',
-                    }}
-                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  />
-
                   <div className="relative z-10 flex min-h-full w-full flex-col px-7 py-9 md:px-8 md:py-10 lg:px-9 lg:py-11 xl:px-10">
                     <motion.div
                       className="font-epilogue text-[48px] font-extrabold leading-none tracking-[-0.04em] md:text-[60px] xl:text-[72px]"
@@ -1000,194 +969,21 @@ const ExpandedAgencySections = () => (
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {pricingPlans.map((plan) => (
               <motion.article
-                key={plan.name}
-                whileHover={undefined}
-                transition={undefined}
-                className="pricing-card relative flex h-full flex-col overflow-hidden rounded-[34px] p-6 md:p-8"
-                style={createGlassPanelStyle()}
-              >
-                <GlassPanelLayers />
-
-                {plan.featured ? (
-                  <div
-                    className="absolute right-5 top-5 rounded-full px-3.5 py-2 font-manrope text-[10px] font-bold uppercase tracking-[0.16em] text-white"
-                    style={{
-                      background: 'linear-gradient(135deg, rgba(155,109,255,0.6) 0%, rgba(130,66,245,0.4) 100%)',
-                      backdropFilter: 'blur(16px)',
-                      WebkitBackdropFilter: 'blur(16px)',
-                      border: '1px solid rgba(255,255,255,0.6)',
-                      boxShadow: '0 8px 16px rgba(130,66,245,0.2), inset 1px 1px 2px rgba(255,255,255,0.8), inset -1px -1px 2px rgba(0,0,0,0.1)',
-                    }}
-                  >
-                    {plan.badge}
-                  </div>
-                ) : null}
-
-                <div className="relative font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-[#2a1a4e]/55">
-                  {plan.name}
-                </div>
-                <div className="relative mt-3 font-epilogue text-[34px] font-extrabold leading-[1] tracking-[-0.03em] text-[#1a0e38] md:text-[38px]">
-                  {plan.price}
-                </div>
-                <p className="relative mt-3 max-w-[28ch] text-[14px] leading-6 text-[#2a1a4e]/70">
-                  {plan.audience}
-                </p>
-                <p className="relative mt-3 text-[14px] leading-6 text-[#2a1a4e]/55">
-                  {plan.description}
-                </p>
-
-                <div className="relative my-5 h-px bg-white/20" />
-
-                <div className="relative space-y-2.5">
-                  {plan.points.map((point) => (
-                    <div key={point} className="flex items-start gap-3">
-                      <span
-                        className="mt-[4px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white"
-                        style={{
-                          background: 'linear-gradient(135deg, rgba(160,112,255,0.6) 0%, rgba(130,66,245,0.4) 100%)',
-                          backdropFilter: 'blur(12px)',
-                          WebkitBackdropFilter: 'blur(12px)',
-                          border: '1px solid rgba(255,255,255,0.6)',
-                          boxShadow: '0 4px 8px rgba(130,66,245,0.2), inset 1px 1px 2px rgba(255,255,255,0.8), inset -1px -1px 2px rgba(0,0,0,0.1)',
-                        }}
-                      >
-                        ✓
-                      </span>
-                      <span className="text-[14px] leading-6 text-[#2a1a4e]/72">{point}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="relative mt-auto pt-6">
-                  <button
-                    className="inline-flex min-h-[44px] items-center justify-center rounded-full px-6 py-3 font-manrope text-[11px] font-bold uppercase tracking-[0.16em] text-[#1a0e38] transition-all duration-300 hover:-translate-y-0.5"
-                    style={{
-                      background: 'rgba(255,255,255,0.45)',
-                      backdropFilter: 'blur(16px)',
-                      WebkitBackdropFilter: 'blur(16px)',
-                      border: '1px solid rgba(255,255,255,0.8)',
-                      boxShadow: '0 8px 16px rgba(0,0,0,0.08), inset 2px 2px 4px rgba(255,255,255,0.9), inset -2px -2px 4px rgba(0,0,0,0.1)',
-                    }}
-                  >
-                    {plan.cta}
-                  </button>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-
-          <motion.article
-            whileHover={undefined}
-            transition={undefined}
-            className="relative mt-5 overflow-hidden rounded-[34px]"
-            style={createGlassPanelStyle()}
-          >
-            <GlassPanelLayers />
-            <div className="relative grid gap-0 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.45fr)_auto] md:items-center">
-              <div className="px-6 py-6 md:min-h-[148px] md:px-8" style={{ borderRight: '1px solid rgba(255,255,255,0.24)' }}>
-                <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.24em]" style={gradientAccentStyle}>
-                  {ecommercePlan.label}
-                </div>
-                <div className="mt-3 font-epilogue text-[30px] font-semibold leading-[1.02] tracking-[-0.025em] text-[#1a0e38] md:text-[34px]">
-                  {ecommercePlan.name}
-                </div>
-                <div className="mt-3 font-manrope text-[18px] font-extrabold leading-none tracking-[-0.03em] text-[#2a1a4e]/85">
-                  {ecommercePlan.price}
-                </div>
-              </div>
-
-              <div className="px-6 py-6 md:min-h-[148px] md:flex md:items-center md:px-8 md:py-0" style={{ borderRight: '1px solid rgba(255,255,255,0.24)' }}>
-                <p className="max-w-[62ch] text-[14px] leading-6 text-[#2a1a4e]/65 md:text-[15px] md:leading-7">
-                  {ecommercePlan.description}
-                </p>
-              </div>
-
-              <div className="px-6 pb-6 md:flex md:min-h-[148px] md:items-center md:justify-center md:px-8 md:py-0">
-                <button
-                  aria-label={ecommercePlan.cta}
-                  className="inline-flex h-[72px] w-[72px] items-center justify-center rounded-full text-white transition-transform duration-300 hover:scale-110"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(160,112,255,0.6) 0%, rgba(130,66,245,0.4) 100%)',
-                    backdropFilter: 'blur(16px)',
-                    WebkitBackdropFilter: 'blur(16px)',
-                    border: '1px solid rgba(255,255,255,0.6)',
-                    boxShadow: '0 12px 32px rgba(130,66,245,0.25), inset 2px 2px 4px rgba(255,255,255,0.8), inset -2px -2px 4px rgba(0,0,0,0.15)',
+                  key={service.title}
+                  variants={{
+                    hidden: { opacity: 0, y: 24 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: { duration: 0.62, ease: [0.16, 1, 0.3, 1] },
+                    },
                   }}
+                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-white/80 bg-white/82 shadow-[0_18px_48px_-34px_rgba(80,74,168,0.35)] outline-none backdrop-blur-[16px] transition-[opacity,transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white hover:shadow-[0_28px_74px_-44px_rgba(80,74,168,0.48)] md:min-h-[380px] xl:min-h-[420px]"
+                  whileHover={{ y: -12 }}
+                  transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                  tabIndex={0}
                 >
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path
-                      d="M7 17L17 7M17 7H9M17 7V15"
-                      stroke="currentColor"
-                      strokeWidth="2.2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </motion.article>
-      </motion.div>
-    </section>
-
-    <SectionShell id="por-que-kaiva" tone="light">
-      <motion.div {...sectionReveal} className="grid gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-        <SectionHeader
-          eyebrow="Confianza"
-          title="Por qué Kaiva"
-          description="Kaiva Studio se rige por principios claros que garantizan consistencia, confianza y profesionalismo en cada proyecto."
-        />
-        <div className="grid gap-4 sm:grid-cols-2">
-          {trustPoints.map((point, index) => (
-              <div
-                key={point}
-                className="rounded-[26px] border border-[#080808]/14 bg-[var(--color-surface)] p-6"
-              >
-              <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-[#080808]/42">0{index + 1}</div>
-              <div className="mt-4 font-epilogue text-[27px] font-extrabold leading-[1.08] tracking-[-0.025em] text-[#080808]">{point}</div>
-              <div className="mt-3 text-[14px] leading-7 text-[#080808]/66">
-                {index === 0 && 'Cada proceso debe ser entendible para el cliente.'}
-                {index === 1 && 'Cada entrega debe cumplir un estándar alto.'}
-                {index === 2 && 'Los tiempos se respetan y se optimizan.'}
-                {index === 3 && 'Lo prometido se cumple con orden y control.'}
-                {index === 4 && 'Cada decisión tiene un propósito funcional.'}
-              </div>
-            </div>
-          ))}
-        </div>
-      </motion.div>
-    </SectionShell>
-
-    <SectionShell id="cta" tone="light" className="relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),transparent)]" />
-      <motion.div {...sectionReveal} className="relative z-10 rounded-[36px] border border-[#080808]/14 bg-[var(--color-surface)] px-8 py-16 text-center md:px-14 md:py-22">
-        <div className="mx-auto max-w-4xl">
-          <div className="inline-block w-fit font-manrope text-[11px] font-bold uppercase tracking-[0.24em]" style={gradientAccentStyle}>Visión</div>
-          <h2 className="mt-6 font-epilogue text-[clamp(40px,5.4vw,86px)] font-extrabold leading-[1.02] tracking-[-0.04em] text-[#080808]">
-            Construimos presencia digital sólida y bien ejecutada
-          </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-[17px] leading-8 text-[#080808]/72">
-            Buscamos consolidarnos como un estudio referente en desarrollo web para negocios que valoran la claridad, la estética y la estructura.
-          </p>
-          <a
-            href="#contacto"
-            className="mt-10 inline-flex items-center justify-center rounded-full border border-transparent px-9 py-4 font-manrope text-[13px] font-bold uppercase tracking-[0.15em] text-white transition-transform duration-300 hover:-translate-y-0.5 hover:opacity-92"
-            style={accentButtonStyle}
-          >
-            Hablemos de tu proyecto
-          </a>
-        </div>
-      </motion.div>
-    </SectionShell>
-
-    <ContactRevealSection />
-  </>
-);
-
-export default function KaivaLanding() {
-  return (
-    <div className="typography-refined relative w-full overflow-x-hidden">
-      <div className="relative z-10">
+                  <div className="relative z-10">
         <HeroSection />
         <PortfolioSection />
         <div className="relative">
@@ -1249,48 +1045,7 @@ export default function KaivaLanding() {
           background-size: 3px 3px, 4px 4px;
           mix-blend-mode: soft-light;
         }
-        .aurora-hover-layer {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 60%;
-          overflow: hidden;
-          pointer-events: none;
-          z-index: 0;
-        }
-        .aurora-card-blob {
-          position: absolute;
-          width: 250px;
-          height: 250px;
-          filter: blur(100px);
-          opacity: 0.4;
-          mix-blend-mode: screen;
-          border-radius: 50%;
-        }
-        .blob-1 {
-          background: #21b2c6;
-          bottom: -80px; left: -10%;
-          animation: blob-float-1 9s infinite ease-in-out;
-        }
-        .blob-2 {
-          background: #8242f5;
-          bottom: -60px; right: -5%;
-          animation: blob-float-2 11s infinite ease-in-out;
-        }
-        .blob-3 {
-          background: #d96cff;
-          bottom: -100px; left: 25%;
-          animation: blob-float-1 13s infinite reverse ease-in-out;
-        }
-        @keyframes blob-float-1 {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          50% { transform: translate(40px, -20px) scale(1.3); }
-        }
-        @keyframes blob-float-2 {
-          0%, 100% { transform: translate(0, 0) scale(1.2); }
-          50% { transform: translate(-30px, -15px) scale(0.9); }
-        }
+        
         @keyframes auroraShift {
           0% { background-position: 0% 50%, 100% 50%, 50% 100%, 50% 0%, 50% 50%; }
           100% { background-position: 100% 50%, 0% 60%, 50% 0%, 50% 100%, 50% 50%; }
@@ -1523,6 +1278,7 @@ const HeroSection = () => {
     </section>
   );
 };
+
 
 
 
