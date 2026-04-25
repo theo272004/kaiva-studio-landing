@@ -968,7 +968,7 @@ const ExpandedAgencySections = () => (
       <motion.img
         src={asset('KaivaMora1.png')}
         alt=""
-        className="absolute -right-10 top-0 z-0 w-[350px] opacity-80 md:-right-20 md:top-10 md:w-[500px] lg:opacity-90"
+        className="absolute right-0 top-[10%] z-50 w-[380px] opacity-100 md:right-[5%] md:top-[15%] md:w-[550px] pointer-events-none"
         animate={{
           y: [0, 15, 0],
           rotate: [0, 2, 0]
@@ -1246,46 +1246,46 @@ export default function KaivaLanding() {
         }
         .aurora-hover-layer {
           position: absolute;
-          bottom: 0;
+          bottom: -10%;
           left: 0;
           right: 0;
-          height: 45%;
+          height: 60%;
           overflow: hidden;
-          background: linear-gradient(to top, rgba(255, 255, 255, 0.4), transparent);
+          background: linear-gradient(to top, rgba(130, 66, 245, 0.15), transparent);
           pointer-events: none;
           z-index: 0;
         }
         .aurora-card-blob {
           position: absolute;
-          width: 100px;
-          height: 100px;
-          filter: blur(40px);
-          opacity: 0.6;
-          mix-blend-mode: screen;
+          width: 140px;
+          height: 140px;
+          filter: blur(35px);
+          opacity: 0.95;
+          mix-blend-mode: hard-light;
           border-radius: 50%;
         }
         .blob-1 {
-          background: rgba(107, 229, 229, 0.8);
-          bottom: -20px; left: 10%;
-          animation: blob-float-1 10s infinite ease-in-out;
+          background: #21b2c6;
+          bottom: -20px; left: 5%;
+          animation: blob-float-1 7s infinite ease-in-out;
         }
         .blob-2 {
-          background: rgba(155, 134, 255, 0.7);
-          bottom: -10px; right: 20%;
-          animation: blob-float-2 12s infinite ease-in-out;
+          background: #8242f5;
+          bottom: -10px; right: 10%;
+          animation: blob-float-2 9s infinite ease-in-out;
         }
         .blob-3 {
-          background: rgba(255, 164, 214, 0.7);
-          bottom: -30px; left: 40%;
-          animation: blob-float-1 15s infinite reverse ease-in-out;
+          background: #d96cff;
+          bottom: -40px; left: 35%;
+          animation: blob-float-1 11s infinite reverse ease-in-out;
         }
         @keyframes blob-float-1 {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          50% { transform: translate(30px, -20px) scale(1.3); }
+          0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+          50% { transform: translate(40px, -40px) scale(1.4) rotate(15deg); }
         }
         @keyframes blob-float-2 {
-          0%, 100% { transform: translate(0, 0) scale(1.2); }
-          50% { transform: translate(-40px, -15px) scale(0.9); }
+          0%, 100% { transform: translate(0, 0) scale(1.3) rotate(0deg); }
+          50% { transform: translate(-50px, -30px) scale(0.9) rotate(-15deg); }
         }
         @keyframes auroraShift {
           0% { background-position: 0% 50%, 100% 50%, 50% 100%, 50% 0%, 50% 50%; }
@@ -1519,6 +1519,7 @@ const HeroSection = () => {
     </section>
   );
 };
+
 
 
 
