@@ -611,9 +611,13 @@ const ServicesSection = () => {
                   }}
                   onHoverStart={() => setActiveService(index)}
                   onFocus={() => setActiveService(index)}
-                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-white/80 bg-white/82 shadow-[0_18px_48px_-34px_rgba(80,74,168,0.35)] outline-none backdrop-blur-[16px] transition-[opacity,transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white hover:shadow-[0_28px_74px_-44px_rgba(80,74,168,0.48)] md:min-h-[380px] xl:min-h-[420px]"
+                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-white/80 shadow-[0_18px_48px_-34px_rgba(80,74,168,0.35)] outline-none backdrop-blur-[16px] transition-[opacity,transform,box-shadow,border-color,background-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white hover:shadow-[0_28px_74px_-44px_rgba(80,74,168,0.48)] md:min-h-[380px] xl:min-h-[420px]"
+                  animate={{ 
+                    opacity: isQuiet ? 0.56 : 1,
+                    backgroundColor: isActive ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.82)"
+                  }}
                   whileHover={{ y: -12 }}
-                  animate={{ opacity: isQuiet ? 0.56 : 1 }}
+                  
                   transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                   tabIndex={0}
                 >
@@ -969,7 +973,7 @@ const ExpandedAgencySections = () => (
       <motion.img
         src={asset('KaivaMora1.png')}
         alt=""
-        className="absolute -right-[15%] top-[10%] z-50 w-[380px] opacity-100 md:-right-[12%] md:top-[15%] md:w-[600px] pointer-events-none"
+        className="absolute -right-[15%] top-[10%] z-50 w-[380px] opacity-100 md:-right-[18%] md:top-[15%] md:w-[600px] pointer-events-none"
         animate={{
           y: [0, 15, 0],
           rotate: [0, 2, 0]
@@ -1250,43 +1254,43 @@ export default function KaivaLanding() {
           bottom: 0;
           left: 0;
           right: 0;
-          height: 50%;
+          height: 55%;
           overflow: hidden;
-          background: linear-gradient(to top, rgba(130, 66, 245, 0.1), transparent);
+          background: linear-gradient(to top, rgba(130, 66, 245, 0.2), rgba(130, 66, 245, 0.05) 40%, transparent);
           pointer-events: none;
           z-index: 0;
         }
         .aurora-card-blob {
           position: absolute;
-          width: 180px;
-          height: 180px;
-          filter: blur(40px);
+          width: 220px;
+          height: 220px;
+          filter: blur(45px);
           opacity: 1;
-          mix-blend-mode: hard-light;
+          mix-blend-mode: normal;
           border-radius: 50%;
         }
         .blob-1 {
-          background: #21b2c6;
-          bottom: -40px; left: -10%;
-          animation: blob-float-1 6s infinite ease-in-out;
+          background: rgba(33, 178, 198, 0.9);
+          bottom: -60px; left: -15%;
+          animation: blob-float-1 5s infinite ease-in-out;
         }
         .blob-2 {
-          background: #8242f5;
-          bottom: -30px; right: -5%;
-          animation: blob-float-2 8s infinite ease-in-out;
+          background: rgba(130, 66, 245, 0.85);
+          bottom: -40px; right: -10%;
+          animation: blob-float-2 7s infinite ease-in-out;
         }
         .blob-3 {
-          background: #d96cff;
-          bottom: -60px; left: 25%;
-          animation: blob-float-1 10s infinite reverse ease-in-out;
+          background: rgba(217, 108, 255, 0.85);
+          bottom: -80px; left: 20%;
+          animation: blob-float-1 9s infinite reverse ease-in-out;
         }
         @keyframes blob-float-1 {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          50% { transform: translate(40px, -30px) scale(1.4); }
+          0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+          50% { transform: translate(50px, -40px) scale(1.5) rotate(15deg); }
         }
         @keyframes blob-float-2 {
-          0%, 100% { transform: translate(0, 0) scale(1.3); }
-          50% { transform: translate(-50px, -20px) scale(0.9); }
+          0%, 100% { transform: translate(0, 0) scale(1.4) rotate(0deg); }
+          50% { transform: translate(-60px, -30px) scale(0.8) rotate(-15deg); }
         }
         @keyframes auroraShift {
           0% { background-position: 0% 50%, 100% 50%, 50% 100%, 50% 0%, 50% 50%; }
@@ -1520,6 +1524,7 @@ const HeroSection = () => {
     </section>
   );
 };
+
 
 
 
