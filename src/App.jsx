@@ -404,8 +404,8 @@ const ContactRevealSection = () => {
   });
   const blackPanelY = useTransform(
     scrollYProgress,
-    [0.6, 0.95],
-    ['100%', '72%'],
+    [0.75, 0.98],
+    ['100%', '86%'],
   );
 
   return (
@@ -903,10 +903,26 @@ const ExpandedAgencySections = () => (
           title="Cómo trabajamos"
           description="Nuestro proceso está pensado para ser claro, estructurado y sin fricciones, de modo que el cliente entienda qué se está haciendo, por qué se hace y qué resultado puede esperar."
         />
-        <div className="mt-16 rounded-[32px] border border-[#080808]/14 bg-[var(--color-surface)] p-8 md:p-10">
+        <motion.div 
+          className="mt-16 rounded-[32px] border border-[#080808]/14 bg-[var(--color-surface)] p-8 md:p-10"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={{
+            visible: { transition: { staggerChildren: 0.15 } },
+            hidden: {}
+          }}
+        >
           <div className="grid gap-8 md:grid-cols-5 md:gap-6">
             {processSteps.map((step, index) => (
-              <div key={step} className="relative">
+              <motion.div 
+                key={step} 
+                className="relative"
+                variants={{
+                  hidden: { opacity: 0, x: -20 },
+                  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
+                }}
+              >
                 <div className="mb-5 flex items-center gap-4 md:block">
                   <div className="mb-0 flex h-12 w-12 items-center justify-center rounded-full border border-[#080808]/16 bg-[var(--color-dominant)] font-manrope text-[12px] font-bold tracking-[0.18em] text-[#080808] md:mb-5">
                     0{index + 1}
@@ -925,10 +941,10 @@ const ExpandedAgencySections = () => (
                     <div className="absolute left-[58px] top-6 h-px w-[calc(100%-24px)] bg-gradient-to-r from-[#080808]/18 to-[#080808]/4" />
                   </div>
                 ) : null}
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </motion.div>
     </SectionShell>
 
