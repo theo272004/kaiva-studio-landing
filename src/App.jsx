@@ -412,8 +412,8 @@ const ContactRevealSection = () => {
   );
 
   return (
-    <section ref={sectionRef} id="contacto" className="relative min-h-[180vh] bg-transparent">
-      <div className="sticky top-0 z-0 h-screen overflow-hidden bg-transparent" style={{ willChange: 'transform' }}>
+    <div ref={sectionRef} style={{ height: '200vh' }} className="relative">
+      <section id="contacto" className="sticky top-0 z-0 h-screen overflow-hidden bg-transparent" style={{ willChange: 'transform' }}>
         <div
           className="mx-auto flex h-full w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
           style={{
@@ -524,8 +524,8 @@ const ContactRevealSection = () => {
             </div>
           </div>
         </motion.div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 };
 
