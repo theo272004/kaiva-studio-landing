@@ -1156,7 +1156,7 @@ const AnimatedText = ({ text, className, startAnimation }) => {
   };
 
   return (
-    <motion.div style={{ overflow: "hidden", display: "flex", flexWrap: "wrap", gap: "0.26em" }} variants={container} initial="hidden" animate={startAnimation ? "visible" : "hidden"} className={className}>
+    <motion.div style={{ overflow: "hidden", display: "flex", flexWrap: "wrap", gap: "0.26em" }} variants={container} initial="hidden" animate="visible" className={className}>
       {words.map((word, index) => (
         <motion.span variants={child} style={{ display: "inline-block" }} key={index}>
           {word}
@@ -1233,27 +1233,6 @@ const CustomCursor = () => {
 };
 
 const App = () => {
-  useEffect(() => {
-    if (window.Lenis) {
-      const lenis = new window.Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-        direction: 'vertical',
-        gestureDirection: 'vertical',
-        smooth: true,
-      })
-
-      function raf(time) {
-        lenis.raf(time)
-        requestAnimationFrame(raf)
-      }
-      requestAnimationFrame(raf)
-
-      return () => {
-        lenis.destroy();
-      };
-    }
-  }, []);
 
   return (
     <div className="relative z-10 w-full bg-white">
