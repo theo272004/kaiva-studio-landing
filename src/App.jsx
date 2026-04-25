@@ -253,8 +253,7 @@ const TiltSlide = ({ slide, isActive, position, onClick }) => {
   const scale = isActive ? 1 : 1 - absOffset * 0.12;
   const translateX = position * 55;
   const translateZ = isActive ? 0 : -absOffset * 180;
-  const opacity = absOffset > 2 ? 0 : isActive ? 1 : 0.55 - absOffset * 0.15;
-  const blur = isActive ? 0 : absOffset * 2;
+  const opacity = absOffset > 2 ? 0 : isActive ? 1 : 0.5 - absOffset * 0.12;
 
   return (
     <motion.div
@@ -277,7 +276,6 @@ const TiltSlide = ({ slide, isActive, position, onClick }) => {
         scale,
         z: translateZ,
         opacity,
-        filter: `blur(${blur}px)`,
       }}
       transition={{ type: 'spring', stiffness: 120, damping: 20 }}
     >
@@ -612,7 +610,7 @@ const ServicesSection = () => {
                       transition: { duration: 0.62, ease: [0.16, 1, 0.3, 1] },
                     },
                   }}
-                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-white/80 bg-white/82 shadow-[0_18px_48px_-34px_rgba(80,74,168,0.35)] outline-none backdrop-blur-[16px] transition-[opacity,transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white hover:shadow-[0_28px_74px_-44px_rgba(80,74,168,0.48)] md:min-h-[380px] xl:min-h-[420px]"
+                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-white/80 bg-white shadow-[0_18px_48px_-34px_rgba(80,74,168,0.28)] outline-none transition-[opacity,transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white hover:shadow-[0_28px_74px_-44px_rgba(80,74,168,0.42)] md:min-h-[380px] xl:min-h-[420px]"
                   whileHover={{ y: -12 }}
                   transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                   tabIndex={0}
@@ -831,11 +829,9 @@ const PortfolioSection = () => {
             onClick={() => setActiveIndex((p) => (p - 1 + slides.length) % slides.length)}
             className="flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-300 hover:scale-110 text-[#080808]"
             style={{
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%)',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
+              background: 'rgba(255,255,255,0.92)',
               border: '1px solid rgba(255,255,255,0.9)',
-              boxShadow: '0 8px 20px rgba(0,0,0,0.06), inset 1px 1px 2px rgba(255,255,255,1), inset -1px -1px 2px rgba(0,0,0,0.05)',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.06), inset 1px 1px 2px rgba(255,255,255,1)',
             }}
             aria-label="Previous"
           >
@@ -878,11 +874,9 @@ const PortfolioSection = () => {
             onClick={() => setActiveIndex((p) => (p + 1) % slides.length)}
             className="flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-300 hover:scale-110 text-[#080808]"
             style={{
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%)',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
+              background: 'rgba(255,255,255,0.92)',
               border: '1px solid rgba(255,255,255,0.9)',
-              boxShadow: '0 8px 20px rgba(0,0,0,0.06), inset 1px 1px 2px rgba(255,255,255,1), inset -1px -1px 2px rgba(0,0,0,0.05)',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.06), inset 1px 1px 2px rgba(255,255,255,1)',
             }}
             aria-label="Next"
           >
@@ -991,7 +985,7 @@ const ExpandedAgencySections = () => (
             {pricingPlans.map((plan) => (
                 <article
                   key={plan.name}
-                  className={`group relative flex min-h-[340px] flex-col rounded-[32px] border ${plan.featured ? 'border-[#a482ff]/50' : 'border-white/80'} bg-white/85 shadow-[0_18px_48px_-24px_rgba(32,29,26,0.12)] outline-none backdrop-blur-[16px] transition-[transform,shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:border-black/5 hover:shadow-[0_28px_74px_-34px_rgba(32,29,26,0.18)] md:min-h-[380px] xl:min-h-[420px]`}
+                  className={`group relative flex min-h-[340px] flex-col rounded-[32px] border ${plan.featured ? 'border-[#a482ff]/50' : 'border-[#e8e5ff]/70'} bg-white shadow-[0_18px_48px_-24px_rgba(32,29,26,0.10)] outline-none transition-[transform,shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:border-black/5 hover:shadow-[0_28px_74px_-34px_rgba(32,29,26,0.16)] md:min-h-[380px] xl:min-h-[420px]`}
                 >
                   <div className="relative flex flex-1 flex-col p-8 md:p-10">
                     {plan.badge && (
@@ -1030,7 +1024,7 @@ const ExpandedAgencySections = () => (
             </div>
 
             <div className="mx-auto mt-6 w-full max-w-[1180px]">
-              <article className="group relative flex flex-col items-center justify-between gap-6 rounded-[32px] border border-white/80 bg-white/85 p-6 shadow-[0_18px_48px_-24px_rgba(32,29,26,0.12)] outline-none backdrop-blur-[16px] transition-[transform,shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_28px_74px_-34px_rgba(32,29,26,0.18)] md:flex-row md:p-8 lg:px-12">
+              <article className="group relative flex flex-col items-center justify-between gap-6 rounded-[32px] border border-[#e8e5ff]/70 bg-white p-6 shadow-[0_18px_48px_-24px_rgba(32,29,26,0.10)] outline-none transition-[transform,shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_28px_74px_-34px_rgba(32,29,26,0.16)] md:flex-row md:p-8 lg:px-12">
                 <div className="flex flex-col items-center text-center md:items-start md:text-left md:max-w-[280px]">
                   <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#a482ff]">
                     {ecommercePlan.label}
@@ -1291,11 +1285,12 @@ const App = () => {
           animation: auroraShift 22s ease-in-out infinite alternate;
         }
         .aurora-blob {
-          filter: blur(62px);
-          opacity: 0.44;
+          filter: blur(48px);
+          opacity: 0.42;
           will-change: transform;
           transform: translateZ(0);
           backface-visibility: hidden;
+          contain: strict;
         }
         .aurora-blob-a {
           background: radial-gradient(circle at 30% 40%, rgba(107, 229, 229, 0.8) 0%, rgba(107, 229, 229, 0.18) 42%, rgba(107, 229, 229, 0) 75%);
@@ -1310,9 +1305,7 @@ const App = () => {
           animation: floatBlobThree 30s ease-in-out infinite;
         }
         .aurora-blur-overlay {
-          backdrop-filter: blur(18px);
-          -webkit-backdrop-filter: blur(18px);
-          background: linear-gradient(180deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.06) 42%, rgba(255,255,255,0.24) 100%);
+          background: linear-gradient(180deg, rgba(255,255,255,0.32) 0%, rgba(255,255,255,0.06) 42%, rgba(255,255,255,0.28) 100%);
         }
         .aurora-noise {
           opacity: 0.17;
@@ -1359,11 +1352,9 @@ const App = () => {
           .hero-visual-wrap { top: 220px !important; }
         }
           .contact-premium-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(0, 0, 0, 0.12);
-            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.08);
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.09);
+            box-shadow: 0 32px 80px -20px rgba(0, 0, 0, 0.10), 0 0 0 1px rgba(0,0,0,0.03);
           }
           .contact-input {
             background: #ffffff;

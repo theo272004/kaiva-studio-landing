@@ -4,7 +4,9 @@
   background-color: #f8f6f2;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
@@ -17,6 +19,17 @@ img, video {
 html {
   background-color: #f8f6f2;
   overflow-x: hidden;
+  /* Hide scrollbar across all browsers */
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE / Edge */
+  /* GPU-accelerated scrolling on iOS/macOS */
+  -webkit-overflow-scrolling: touch;
+  /* Smooth anchor scroll */
+  scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar {
+  display: none;                  /* Chrome / Safari / Opera */
 }
 
 body {
@@ -24,8 +37,14 @@ body {
   overflow-x: hidden;
   background-color: #f8f6f2;
   color: #201d1a;
+  /* Promote the body to its own compositor layer */
+  transform: translateZ(0);
+  /* Hint to browser that scroll position will change */
+  will-change: scroll-position;
 }
 
 #root {
   min-height: 100vh;
+  /* Isolate stacking context so layers don't bleed */
+  isolation: isolate;
 }
