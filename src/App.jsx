@@ -216,7 +216,7 @@ const FloatingRobot = ({ src, style, className = '', delay = 0, duration = 6, am
 );
 
 const SectionsAuroraBackdrop = () => (
-  <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden" style={{ contain: 'strict', willChange: 'transform' }}>
+  <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
     <div className="absolute inset-0 aurora-base" />
     <div className="aurora-blob aurora-blob-a absolute -left-[20vw] -top-[18vh] h-[58vh] w-[56vw] rounded-full" />
     <div className="aurora-blob aurora-blob-b absolute right-[-14vw] top-[8vh] h-[52vh] w-[52vw] rounded-full" />
@@ -407,12 +407,12 @@ const ContactRevealSection = () => {
   // div is still fully pinned. After that the section exits normally upward.
   const blackPanelY = useTransform(
     scrollYProgress,
-    [0, 0.5],
+    [0, 1],
     ['100%', '0%'],
   );
 
   return (
-    <section ref={sectionRef} id="contacto" className="relative min-h-[200vh] bg-transparent">
+    <section ref={sectionRef} id="contacto" className="relative min-h-[180vh] bg-transparent">
       <div className="sticky top-0 z-0 h-screen overflow-hidden bg-transparent" style={{ willChange: 'transform' }}>
         <div
           className="mx-auto flex h-full w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
@@ -1277,31 +1277,28 @@ const App = () => {
         body { background-color: var(--color-dominant); font-family: 'Inter Tight', 'Inter', sans-serif; letter-spacing: -0.01em; color: var(--color-secondary); }
         .aurora-base {
           background:
-            radial-gradient(120% 130% at 0% 0%, rgba(126, 209, 255, 0.42) 0%, rgba(126, 209, 255, 0) 54%),
-            radial-gradient(120% 120% at 100% 0%, rgba(155, 134, 255, 0.4) 0%, rgba(155, 134, 255, 0) 56%),
-            radial-gradient(140% 150% at 100% 100%, rgba(255, 164, 214, 0.36) 0%, rgba(255, 164, 214, 0) 54%),
-            radial-gradient(120% 120% at 0% 100%, rgba(107, 229, 229, 0.34) 0%, rgba(107, 229, 229, 0) 55%),
+            radial-gradient(120% 130% at 0% 0%, rgba(126, 209, 255, 0.36) 0%, rgba(126, 209, 255, 0) 54%),
+            radial-gradient(120% 120% at 100% 0%, rgba(155, 134, 255, 0.34) 0%, rgba(155, 134, 255, 0) 56%),
+            radial-gradient(140% 150% at 100% 100%, rgba(255, 164, 214, 0.30) 0%, rgba(255, 164, 214, 0) 54%),
+            radial-gradient(120% 120% at 0% 100%, rgba(107, 229, 229, 0.28) 0%, rgba(107, 229, 229, 0) 55%),
             linear-gradient(180deg, #ffffff 0%, #fcfcff 100%);
-          animation: auroraShift 22s ease-in-out infinite alternate;
         }
         .aurora-blob {
-          filter: blur(48px);
-          opacity: 0.42;
+          opacity: 1;
           will-change: transform;
           transform: translateZ(0);
           backface-visibility: hidden;
-          contain: strict;
         }
         .aurora-blob-a {
-          background: radial-gradient(circle at 30% 40%, rgba(107, 229, 229, 0.8) 0%, rgba(107, 229, 229, 0.18) 42%, rgba(107, 229, 229, 0) 75%);
+          background: radial-gradient(circle at 30% 40%, rgba(107, 229, 229, 0.38) 0%, rgba(107, 229, 229, 0.10) 50%, rgba(107, 229, 229, 0) 80%);
           animation: floatBlobOne 24s ease-in-out infinite;
         }
         .aurora-blob-b {
-          background: radial-gradient(circle at 70% 35%, rgba(155, 134, 255, 0.78) 0%, rgba(155, 134, 255, 0.18) 46%, rgba(155, 134, 255, 0) 76%);
+          background: radial-gradient(circle at 70% 35%, rgba(155, 134, 255, 0.34) 0%, rgba(155, 134, 255, 0.08) 52%, rgba(155, 134, 255, 0) 80%);
           animation: floatBlobTwo 27s ease-in-out infinite;
         }
         .aurora-blob-c {
-          background: radial-gradient(circle at 50% 62%, rgba(255, 164, 214, 0.72) 0%, rgba(255, 164, 214, 0.16) 44%, rgba(255, 164, 214, 0) 76%);
+          background: radial-gradient(circle at 50% 62%, rgba(255, 164, 214, 0.32) 0%, rgba(255, 164, 214, 0.08) 50%, rgba(255, 164, 214, 0) 80%);
           animation: floatBlobThree 30s ease-in-out infinite;
         }
         .aurora-blur-overlay {
@@ -1316,10 +1313,6 @@ const App = () => {
           mix-blend-mode: soft-light;
         }
         
-        @keyframes auroraShift {
-          0% { background-position: 0% 50%, 100% 50%, 50% 100%, 50% 0%, 50% 50%; }
-          100% { background-position: 100% 50%, 0% 60%, 50% 0%, 50% 100%, 50% 50%; }
-        }
         @keyframes floatBlobOne {
           0% { transform: translate3d(0, 0, 0) scale(1); }
           50% { transform: translate3d(4vw, -3vh, 0) scale(1.06); }
@@ -1508,15 +1501,27 @@ const ProblemSection = () => {
 const HeroSection = () => {
   const [introComplete, setIntroComplete] = useState(false);
   const [isDarkNavbar, setIsDarkNavbar] = useState(false);
+  const [navHidden, setNavHidden] = useState(false);
   const logoRef = useRef(null);
   const navRef = useRef(null);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
       setIntroComplete(true);
     }, 1100);
-
     return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const handleScrollDir = () => {
+      const y = window.scrollY;
+      const goingDown = y > lastScrollY.current;
+      setNavHidden(goingDown && y > 80);
+      lastScrollY.current = y;
+    };
+    window.addEventListener('scroll', handleScrollDir, { passive: true });
+    return () => window.removeEventListener('scroll', handleScrollDir);
   }, []);
 
   useEffect(() => {
@@ -1574,8 +1579,8 @@ const HeroSection = () => {
       <motion.div
         ref={logoRef}
         initial={{ opacity: 0, y: 18 }}
-        animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-        transition={{ duration: 0.55, ease: 'easeOut' }}
+        animate={introComplete ? { opacity: 1, y: navHidden ? -80 : 0 } : { opacity: 0, y: 18 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed left-6 top-5 z-40 w-fit text-left text-[16px] leading-[0.95] transition-colors duration-200 md:left-[80px] md:top-[40px] md:text-[20px] ${
           isDarkNavbar ? 'text-white' : 'text-[#080808]'
         }`}
@@ -1589,8 +1594,8 @@ const HeroSection = () => {
       <motion.div
         ref={navRef}
         initial={{ opacity: 0, y: 18 }}
-        animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-        transition={{ duration: 0.55, delay: 0.08, ease: 'easeOut' }}
+        animate={introComplete ? { opacity: 1, y: navHidden ? -80 : 0 } : { opacity: 0, y: 18 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed right-[32px] top-[32px] z-40 hidden items-center gap-10 text-[16px] transition-colors duration-200 md:flex md:right-[80px] md:top-[45px] ${
           isDarkNavbar ? 'text-white/72' : 'text-[#080808]/68'
         }`}
@@ -1619,8 +1624,8 @@ const HeroSection = () => {
 
       <motion.div
         initial={{ opacity: 0, y: 18 }}
-        animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-        transition={{ duration: 0.55, delay: 0.08, ease: 'easeOut' }}
+        animate={introComplete ? { opacity: 1, y: navHidden ? -80 : 0 } : { opacity: 0, y: 18 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         className="fixed right-6 top-5 z-40 flex items-center gap-3 md:hidden"
       >
         <a
