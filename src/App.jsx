@@ -619,11 +619,12 @@ const ServicesSection = () => {
                 >
                   <motion.div
                     className="aurora-hover-layer pointer-events-none absolute inset-0 overflow-hidden"
-                    initial={{ opacity: 0 }}
+                    initial={{ opacity: 0, y: 60 }}
                     animate={{
                       opacity: isActive ? 1 : 0,
+                      y: isActive ? 0 : 60,
                     }}
-                    transition={{ duration: 0.55 }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <div className="aurora-card-blob blob-1" />
                     <div className="aurora-card-blob blob-2" />
@@ -968,7 +969,7 @@ const ExpandedAgencySections = () => (
       <motion.img
         src={asset('KaivaMora1.png')}
         alt=""
-        className="absolute right-0 top-[10%] z-50 w-[380px] opacity-100 md:right-[5%] md:top-[15%] md:w-[550px] pointer-events-none"
+        className="absolute -right-[5%] top-[10%] z-50 w-[380px] opacity-100 md:right-[1%] md:top-[15%] md:w-[550px] pointer-events-none"
         animate={{
           y: [0, 15, 0],
           rotate: [0, 2, 0]
@@ -1246,46 +1247,46 @@ export default function KaivaLanding() {
         }
         .aurora-hover-layer {
           position: absolute;
-          bottom: -10%;
+          bottom: 0;
           left: 0;
           right: 0;
-          height: 60%;
+          height: 55%;
           overflow: hidden;
-          background: linear-gradient(to top, rgba(130, 66, 245, 0.15), transparent);
+          background: linear-gradient(to top, rgba(130, 66, 245, 0.08), transparent);
           pointer-events: none;
           z-index: 0;
         }
         .aurora-card-blob {
           position: absolute;
-          width: 140px;
-          height: 140px;
-          filter: blur(35px);
-          opacity: 0.95;
+          width: 150px;
+          height: 150px;
+          filter: blur(45px);
+          opacity: 0.9;
           mix-blend-mode: hard-light;
           border-radius: 50%;
         }
         .blob-1 {
           background: #21b2c6;
-          bottom: -20px; left: 5%;
-          animation: blob-float-1 7s infinite ease-in-out;
+          bottom: -30px; left: 0%;
+          animation: blob-float-1 8s infinite ease-in-out;
         }
         .blob-2 {
           background: #8242f5;
-          bottom: -10px; right: 10%;
-          animation: blob-float-2 9s infinite ease-in-out;
+          bottom: -20px; right: 5%;
+          animation: blob-float-2 10s infinite ease-in-out;
         }
         .blob-3 {
           background: #d96cff;
-          bottom: -40px; left: 35%;
-          animation: blob-float-1 11s infinite reverse ease-in-out;
+          bottom: -50px; left: 30%;
+          animation: blob-float-1 12s infinite reverse ease-in-out;
         }
         @keyframes blob-float-1 {
           0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-          50% { transform: translate(40px, -40px) scale(1.4) rotate(15deg); }
+          50% { transform: translate(30px, -25px) scale(1.3) rotate(10deg); }
         }
         @keyframes blob-float-2 {
-          0%, 100% { transform: translate(0, 0) scale(1.3) rotate(0deg); }
-          50% { transform: translate(-50px, -30px) scale(0.9) rotate(-15deg); }
+          0%, 100% { transform: translate(0, 0) scale(1.2) rotate(0deg); }
+          50% { transform: translate(-40px, -20px) scale(0.95) rotate(-10deg); }
         }
         @keyframes auroraShift {
           0% { background-position: 0% 50%, 100% 50%, 50% 100%, 50% 0%, 50% 50%; }
@@ -1519,6 +1520,7 @@ const HeroSection = () => {
     </section>
   );
 };
+
 
 
 
