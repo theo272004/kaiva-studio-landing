@@ -404,14 +404,17 @@ const ContactRevealSection = () => {
     target: sectionRef,
     offset: ['start start', 'end end'],
   });
+  // progress 0→1 maps to the first 100vh of scroll through the 200vh section.
+  // The panel finishes rising at progress 0.5 (50vh of scroll) while the sticky
+  // div is still fully pinned. After that the section exits normally upward.
   const blackPanelY = useTransform(
     scrollYProgress,
-    [0.12, 1],
+    [0, 0.5],
     ['100%', '0%'],
   );
 
   return (
-    <section ref={sectionRef} id="contacto" className="relative min-h-[140vh] bg-transparent">
+    <section ref={sectionRef} id="contacto" className="relative min-h-[200vh] bg-transparent">
       <div className="sticky top-0 z-0 h-screen overflow-hidden bg-transparent" style={{ willChange: 'transform' }}>
         <div
           className="mx-auto flex h-full w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
