@@ -6,10 +6,17 @@
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
 }
 
 html {
   background-color: #f8f6f2;
+  overflow-x: hidden;
 }
 
 body {

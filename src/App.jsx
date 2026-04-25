@@ -216,7 +216,7 @@ const FloatingRobot = ({ src, style, className = '', delay = 0, duration = 6, am
 );
 
 const SectionsAuroraBackdrop = () => (
-  <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+  <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden" style={{ contain: 'strict', willChange: 'transform' }}>
     <div className="absolute inset-0 aurora-base" />
     <div className="aurora-blob aurora-blob-a absolute -left-[20vw] -top-[18vh] h-[58vh] w-[56vw] rounded-full" />
     <div className="aurora-blob aurora-blob-b absolute right-[-14vw] top-[8vh] h-[52vh] w-[52vw] rounded-full" />
@@ -404,15 +404,16 @@ const ContactRevealSection = () => {
     target: sectionRef,
     offset: ['start start', 'end end'],
   });
-  const blackPanelY = useTransform(
+  const blackPanelRaw = useTransform(
     scrollYProgress,
-    [0.85, 1],
+    [0.52, 1],
     ['100%', '0%'],
   );
+  const blackPanelY = useSpring(blackPanelRaw, { stiffness: 60, damping: 20, mass: 0.8 });
 
   return (
-    <section ref={sectionRef} id="contacto" className="relative min-h-[120vh] bg-transparent">
-      <div className="sticky top-0 z-0 h-screen overflow-hidden bg-transparent">
+    <section ref={sectionRef} id="contacto" className="relative min-h-[210vh] bg-transparent">
+      <div className="sticky top-0 z-0 h-screen overflow-hidden bg-transparent" style={{ willChange: 'transform' }}>
         <div
           className="mx-auto flex h-full w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
           style={{
@@ -1288,9 +1289,11 @@ const App = () => {
           animation: auroraShift 22s ease-in-out infinite alternate;
         }
         .aurora-blob {
-          filter: blur(84px);
+          filter: blur(62px);
           opacity: 0.44;
-          will-change: transform, opacity;
+          will-change: transform;
+          transform: translateZ(0);
+          backface-visibility: hidden;
         }
         .aurora-blob-a {
           background: radial-gradient(circle at 30% 40%, rgba(107, 229, 229, 0.8) 0%, rgba(107, 229, 229, 0.18) 42%, rgba(107, 229, 229, 0) 75%);
@@ -1305,9 +1308,9 @@ const App = () => {
           animation: floatBlobThree 30s ease-in-out infinite;
         }
         .aurora-blur-overlay {
-          backdrop-filter: blur(46px) saturate(108%);
-          -webkit-backdrop-filter: blur(46px) saturate(108%);
-          background: linear-gradient(180deg, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.08) 42%, rgba(255,255,255,0.3) 100%);
+          backdrop-filter: blur(18px);
+          -webkit-backdrop-filter: blur(18px);
+          background: linear-gradient(180deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.06) 42%, rgba(255,255,255,0.24) 100%);
         }
         .aurora-noise {
           opacity: 0.17;
@@ -1323,19 +1326,19 @@ const App = () => {
           100% { background-position: 100% 50%, 0% 60%, 50% 0%, 50% 100%, 50% 50%; }
         }
         @keyframes floatBlobOne {
-          0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.44; }
-          50% { transform: translate3d(4vw, -3vh, 0) scale(1.06); opacity: 0.52; }
-          100% { transform: translate3d(-2vw, 2.5vh, 0) scale(0.98); opacity: 0.4; }
+          0% { transform: translate3d(0, 0, 0) scale(1); }
+          50% { transform: translate3d(4vw, -3vh, 0) scale(1.06); }
+          100% { transform: translate3d(-2vw, 2.5vh, 0) scale(0.98); }
         }
         @keyframes floatBlobTwo {
-          0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.45; }
-          50% { transform: translate3d(-3.8vw, 2.8vh, 0) scale(1.05); opacity: 0.5; }
-          100% { transform: translate3d(2.4vw, -2.2vh, 0) scale(0.97); opacity: 0.4; }
+          0% { transform: translate3d(0, 0, 0) scale(1); }
+          50% { transform: translate3d(-3.8vw, 2.8vh, 0) scale(1.05); }
+          100% { transform: translate3d(2.4vw, -2.2vh, 0) scale(0.97); }
         }
         @keyframes floatBlobThree {
-          0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.4; }
-          50% { transform: translate3d(2.6vw, -2.6vh, 0) scale(1.04); opacity: 0.48; }
-          100% { transform: translate3d(-3vw, 2vh, 0) scale(0.98); opacity: 0.38; }
+          0% { transform: translate3d(0, 0, 0) scale(1); }
+          50% { transform: translate3d(2.6vw, -2.6vh, 0) scale(1.04); }
+          100% { transform: translate3d(-3vw, 2vh, 0) scale(0.98); }
         }
         @media (max-width: 1200px) {
           .hero-copy-wrap { top: 136px !important; max-width: 640px !important; }
@@ -1551,7 +1554,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section id="inicio" data-nav-theme="light" className="relative z-30 min-h-[100svh] w-full overflow-visible bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
+    <section id="inicio" data-nav-theme="light" className="relative z-30 min-h-[100svh] w-full overflow-hidden bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
       <motion.img
         src={asset('degradado-lateral.webp')}
         alt=""
