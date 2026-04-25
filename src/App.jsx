@@ -611,10 +611,10 @@ const ServicesSection = () => {
                   }}
                   onHoverStart={() => setActiveService(index)}
                   onFocus={() => setActiveService(index)}
-                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-white/80 shadow-[0_18px_48px_-34px_rgba(80,74,168,0.35)] outline-none backdrop-blur-[16px] transition-[opacity,transform,box-shadow,border-color,background-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white hover:shadow-[0_28px_74px_-44px_rgba(80,74,168,0.48)] md:min-h-[380px] xl:min-h-[420px]"
+                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-white/60 shadow-[0_18px_48px_-34px_rgba(80,74,168,0.2)] outline-none backdrop-blur-[20px] transition-[opacity,transform,box-shadow,border-color,background-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white/80 hover:shadow-[0_28px_74px_-44px_rgba(80,74,168,0.3)] md:min-h-[380px] xl:min-h-[420px]"
                   animate={{ 
                     opacity: isQuiet ? 0.56 : 1,
-                    backgroundColor: isActive ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.82)"
+                    backgroundColor: isActive ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.65)"
                   }}
                   whileHover={{ y: -12 }}
                   
@@ -1254,43 +1254,42 @@ export default function KaivaLanding() {
           bottom: 0;
           left: 0;
           right: 0;
-          height: 55%;
+          height: 60%;
           overflow: hidden;
-          background: linear-gradient(to top, rgba(130, 66, 245, 0.2), rgba(130, 66, 245, 0.05) 40%, transparent);
           pointer-events: none;
           z-index: 0;
         }
         .aurora-card-blob {
           position: absolute;
-          width: 220px;
-          height: 220px;
-          filter: blur(45px);
-          opacity: 1;
-          mix-blend-mode: normal;
+          width: 250px;
+          height: 250px;
+          filter: blur(100px);
+          opacity: 0.4;
+          mix-blend-mode: screen;
           border-radius: 50%;
         }
         .blob-1 {
-          background: rgba(33, 178, 198, 0.9);
-          bottom: -60px; left: -15%;
-          animation: blob-float-1 5s infinite ease-in-out;
+          background: #21b2c6;
+          bottom: -80px; left: -10%;
+          animation: blob-float-1 9s infinite ease-in-out;
         }
         .blob-2 {
-          background: rgba(130, 66, 245, 0.85);
-          bottom: -40px; right: -10%;
-          animation: blob-float-2 7s infinite ease-in-out;
+          background: #8242f5;
+          bottom: -60px; right: -5%;
+          animation: blob-float-2 11s infinite ease-in-out;
         }
         .blob-3 {
-          background: rgba(217, 108, 255, 0.85);
-          bottom: -80px; left: 20%;
-          animation: blob-float-1 9s infinite reverse ease-in-out;
+          background: #d96cff;
+          bottom: -100px; left: 25%;
+          animation: blob-float-1 13s infinite reverse ease-in-out;
         }
         @keyframes blob-float-1 {
-          0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-          50% { transform: translate(50px, -40px) scale(1.5) rotate(15deg); }
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          50% { transform: translate(40px, -20px) scale(1.3); }
         }
         @keyframes blob-float-2 {
-          0%, 100% { transform: translate(0, 0) scale(1.4) rotate(0deg); }
-          50% { transform: translate(-60px, -30px) scale(0.8) rotate(-15deg); }
+          0%, 100% { transform: translate(0, 0) scale(1.2); }
+          50% { transform: translate(-30px, -15px) scale(0.9); }
         }
         @keyframes auroraShift {
           0% { background-position: 0% 50%, 100% 50%, 50% 100%, 50% 0%, 50% 50%; }
@@ -1524,6 +1523,7 @@ const HeroSection = () => {
     </section>
   );
 };
+
 
 
 
