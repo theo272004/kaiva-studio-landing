@@ -1131,27 +1131,27 @@ const AliadosSection = () => {
   );
 };
 
-const AnimatedText = ({ text, className, startAnimation }) => {
+const AnimatedText = ({ text, className }) => {
   const words = text.split(" ");
   
   const container = {
     hidden: { opacity: 0 },
-    visible: (i = 1) => ({
+    visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.12, delayChildren: 0.04 * i },
-    }),
+      transition: { staggerChildren: 0.06, delayChildren: 0.1 },
+    },
   };
 
   const child = {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: "spring", damping: 12, stiffness: 100 },
+      transition: { type: "spring", damping: 16, stiffness: 80 },
     },
     hidden: {
       opacity: 0,
       y: 20,
-      transition: { type: "spring", damping: 12, stiffness: 100 },
+      transition: { type: "spring", damping: 16, stiffness: 80 },
     },
   };
 
@@ -1350,9 +1350,35 @@ const App = () => {
   );
 }
 
+const CountUpAnimation = ({ endValue, suffix = "", prefix = "", decimal = false }) => {
+  const ref = useRef(null);
+  const motionValue = useMotionValue(0);
+  const springValue = useSpring(motionValue, { damping: 40, stiffness: 60 });
+  const [display, setDisplay] = useState("0");
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        motionValue.set(endValue);
+        observer.disconnect();
+      }
+    });
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [endValue, motionValue]);
+
+  useEffect(() => {
+    return springValue.on("change", (latest) => {
+      setDisplay(decimal ? latest.toFixed(1) : Math.round(latest).toString());
+    });
+  }, [springValue, decimal]);
+
+  return <span ref={ref}>{prefix}{display}{suffix}</span>;
+};
+
 const ProblemSection = () => {
   return (
-    <section id="problema" className="relative w-full bg-[#f8f8fa] text-[#080808] px-6 py-24 md:py-32 lg:px-16">
+    <section id="problema" className="relative w-full bg-transparent text-[#080808] px-6 py-24 md:py-32 lg:px-16">
       <div className="mx-auto w-full max-w-[1240px] relative z-10 flex flex-col items-center">
         
         <h2 className="font-epilogue text-[clamp(40px,6vw,72px)] font-extrabold leading-[0.98] tracking-[-0.04em] text-center max-w-[800px] mt-4">
@@ -1367,7 +1393,7 @@ const ProblemSection = () => {
         <div className="mt-16 w-full grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white rounded-[24px] p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-4">
             <div className="font-epilogue text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
-              75%
+              <CountUpAnimation endValue={75} suffix="%" />
             </div>
             <p className="text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
               de los colombianos busca productos y servicios en internet antes de comprar
@@ -1375,7 +1401,7 @@ const ProblemSection = () => {
           </div>
           <div className="bg-white rounded-[24px] p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-4">
             <div className="font-epilogue text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
-              83%
+              <CountUpAnimation endValue={83} suffix="%" />
             </div>
             <p className="text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
               de los emprendedores colombianos planea invertir más en presencia digital este año
@@ -1383,7 +1409,7 @@ const ProblemSection = () => {
           </div>
           <div className="bg-white rounded-[24px] p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-4">
             <div className="font-epilogue text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
-              +1.7M
+              <CountUpAnimation endValue={1.7} prefix="+" suffix="M" decimal={true} />
             </div>
             <p className="text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
               de empresas registradas en Colombia. La mayoría sin presencia digital real
