@@ -942,7 +942,7 @@ const ExpandedAgencySections = () => (
       <motion.img
         src={asset('KaivaMora1.png')}
         alt=""
-        className="absolute -right-[15%] top-[10%] z-50 w-[380px] opacity-100 md:-right-[22%] md:top-[15%] md:w-[600px] pointer-events-none"
+        className="absolute -right-[5%] top-[5%] z-50 w-[380px] opacity-100 md:-right-[12%] md:top-[8%] md:w-[600px] pointer-events-none"
         animate={{
           y: [0, 15, 0],
           rotate: [0, 2, 0]
@@ -1278,6 +1278,7 @@ const HeroSection = () => {
     </section>
   );
 };
+
 
 
 
