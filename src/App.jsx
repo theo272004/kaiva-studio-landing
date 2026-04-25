@@ -436,12 +436,10 @@ const ContactRevealSection = () => {
                 <motion.span variants={textItem} className="block">Ready to</motion.span>
                 <motion.span variants={textItem} className="block">start?</motion.span>
               </motion.h2>
-              <motion.p
-                variants={paragraphItem}
-                className="mt-7 max-w-[34ch] text-[clamp(18px,1.4vw,22px)] leading-[1.55] text-[#080808]/62"
-              >
-                Cuéntanos qué estás construyendo y te responderemos con una propuesta clara, directa y bien estructurada.
-              </motion.p>
+              <AnimatedText 
+                text="Cuéntanos qué estás construyendo y te responderemos con una propuesta clara, directa y bien estructurada."
+                className="mt-7 max-w-[40ch] text-[clamp(18px,1.4vw,22px)] leading-[1.55] text-[#080808]/62"
+              />
             </motion.div>
 
             <motion.form
@@ -1040,7 +1038,7 @@ const ExpandedAgencySections = () => (
 
 const WhyUsSection = () => {
   return (
-    <section className="relative w-full bg-white text-[#080808] px-6 py-24 md:py-32 lg:px-16 overflow-hidden">
+    <section className="relative w-full bg-transparent text-[#080808] px-6 py-24 md:py-32 lg:px-16 overflow-hidden">
       <div className="mx-auto flex w-full max-w-[1240px] flex-col gap-12 md:flex-row md:items-center md:justify-between">
         <div className="flex-1 max-w-[500px]">
           <h2 className="font-epilogue text-[40px] md:text-[56px] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#080808]">
@@ -1239,16 +1237,16 @@ const App = () => {
       <CustomCursor />
       <HeroSection />
       <ProblemSection />
-      <WhyUsSection />
-      <PortfolioSection />
       <div className="relative">
         <SectionsAuroraBackdrop />
         <div className="relative z-10">
+          <WhyUsSection />
+          <PortfolioSection />
           <ExpandedAgencySections />
+          <AliadosSection />
+          <ContactRevealSection />
         </div>
       </div>
-      <AliadosSection />
-      <ContactRevealSection />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;600;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
         @import url('https://fonts.cdnfonts.com/css/open-sauce-one');
@@ -1329,21 +1327,22 @@ const App = () => {
           .hero-visual-wrap { top: 284px !important; width: 122vw !important; max-width: 560px !important; }
         }
           .contact-premium-card {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.08);
           }
           .contact-input {
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            background: #ffffff;
+            border: 1.5px solid rgba(0, 0, 0, 0.06);
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);
           }
           .contact-input:focus {
             background: #ffffff;
             border-color: #8242f5;
-            box-shadow: 0 0 0 4px rgba(130, 66, 245, 0.1);
+            box-shadow: 0 0 0 4px rgba(130, 66, 245, 0.12), 0 4px 12px rgba(130, 66, 245, 0.06);
           }
           @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
