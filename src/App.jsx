@@ -1172,6 +1172,11 @@ const CustomCursor = () => {
   const [hoveredNode, setHoveredNode] = useState(false);
   const [isTouch, setIsTouch] = useState(true);
 
+  const smoothXSm = useSpring(cursorX, { damping: 25, stiffness: 400 });
+  const smoothYSm = useSpring(cursorY, { damping: 25, stiffness: 400 });
+  const smoothXLg = useSpring(cursorX, { damping: 40, stiffness: 150 });
+  const smoothYLg = useSpring(cursorY, { damping: 40, stiffness: 150 });
+
   useEffect(() => {
     if (window.matchMedia("(pointer: fine)").matches) {
       setIsTouch(false);
@@ -1200,8 +1205,8 @@ const CustomCursor = () => {
       <motion.div
         className="pointer-events-none fixed top-0 left-0 z-[9999] rounded-full drop-shadow-md mix-blend-difference"
         style={{
-          x: useSpring(cursorX, { damping: 25, stiffness: 400 }),
-          y: useSpring(cursorY, { damping: 25, stiffness: 400 }),
+          x: smoothXSm,
+          y: smoothYSm,
           width: 14,
           height: 14,
           translateX: "-50%",
@@ -1213,8 +1218,8 @@ const CustomCursor = () => {
       <motion.div
         className="pointer-events-none fixed top-0 left-0 z-[9998] rounded-full mix-blend-difference"
         style={{
-          x: useSpring(cursorX, { damping: 40, stiffness: 150 }),
-          y: useSpring(cursorY, { damping: 40, stiffness: 150 }),
+          x: smoothXLg,
+          y: smoothYLg,
           width: 32,
           height: 32,
           translateX: "-50%",
