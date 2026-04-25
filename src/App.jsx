@@ -491,14 +491,13 @@ const ContactRevealSection = () => {
             </motion.form>
           </div>
         </div>
-      </div>
 
       <motion.div
         className="w-full bg-[#111111]"
         initial={prefersReducedMotion ? { opacity: 0 } : { y: '100%' }}
         whileInView={prefersReducedMotion ? { opacity: 1 } : { y: '0%' }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.9, ease: premiumEase, delay: 0.1 }}
+        viewport={{ once: true, amount: 0 }}
+        transition={{ duration: 0.9, ease: premiumEase }}
       >
         <div className="mx-auto flex min-h-[36vh] md:min-h-[45vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-10 text-center md:px-12 md:py-12 lg:px-16">
           <a
