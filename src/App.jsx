@@ -404,8 +404,8 @@ const ContactRevealSection = () => {
   });
   const blackPanelY = useTransform(
     scrollYProgress,
-    [0.7, 0.96],
-    ['100%', '15%'],
+    [0.9, 1],
+    ['100%', '80%'],
   );
 
   return (
@@ -510,7 +510,7 @@ const ContactRevealSection = () => {
           <div className="mx-auto flex min-h-[85vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-12 text-center md:px-12 md:py-14 lg:px-16">
           <a
             href="mailto:hello@kaivastudio.com"
-            className="font-epilogue text-[clamp(40px,7vw,110px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
+            className="font-epilogue text-[clamp(28px,4.5vw,72px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
           >
             hello@kaivastudio.com
           </a>
