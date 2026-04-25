@@ -507,18 +507,18 @@ const ContactRevealSection = () => {
           className="absolute inset-x-0 bottom-0 z-20 min-h-[85vh] bg-[#111111]"
           style={{ y: prefersReducedMotion ? '0%' : blackPanelY }}
         >
-          <div className="mx-auto flex min-h-[85vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-12 text-center md:px-12 md:py-14 lg:px-16">
-          <a
-            href="mailto:hello@kaivastudio.com"
-            className="font-epilogue text-[clamp(28px,4.5vw,72px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
-          >
-            hello@kaivastudio.com
-          </a>
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-12 gap-y-6 font-manrope text-[14px] font-bold uppercase tracking-[0.22em] text-white/52">
-            <a href="#" className="transition-colors duration-300 hover:text-white">Instagram</a>
-            <a href="#" className="transition-colors duration-300 hover:text-white">Dribbble</a>
-            <a href="#" className="transition-colors duration-300 hover:text-white">LinkedIn</a>
-          </div>
+          <div className="mx-auto flex w-full max-w-[1320px] flex-col items-center px-6 pt-24 pb-12 text-center md:px-12 md:pt-32 lg:px-16">
+            <a
+              href="mailto:hello@kaivastudio.com"
+              className="font-epilogue text-[clamp(28px,4.5vw,72px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
+            >
+              hello@kaivastudio.com
+            </a>
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-x-12 gap-y-6 font-manrope text-[14px] font-bold uppercase tracking-[0.22em] text-white/52">
+              <a href="#" className="transition-colors duration-300 hover:text-white">Instagram</a>
+              <a href="#" className="transition-colors duration-300 hover:text-white">Dribbble</a>
+              <a href="#" className="transition-colors duration-300 hover:text-white">LinkedIn</a>
+            </div>
           </div>
         </motion.div>
       </div>
