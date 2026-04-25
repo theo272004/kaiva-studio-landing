@@ -404,15 +404,14 @@ const ContactRevealSection = () => {
     target: sectionRef,
     offset: ['start start', 'end end'],
   });
-  const blackPanelRaw = useTransform(
+  const blackPanelY = useTransform(
     scrollYProgress,
-    [0.52, 1],
+    [0.12, 1],
     ['100%', '0%'],
   );
-  const blackPanelY = useSpring(blackPanelRaw, { stiffness: 60, damping: 20, mass: 0.8 });
 
   return (
-    <section ref={sectionRef} id="contacto" className="relative min-h-[210vh] bg-transparent">
+    <section ref={sectionRef} id="contacto" className="relative min-h-[140vh] bg-transparent">
       <div className="sticky top-0 z-0 h-screen overflow-hidden bg-transparent" style={{ willChange: 'transform' }}>
         <div
           className="mx-auto flex h-full w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
