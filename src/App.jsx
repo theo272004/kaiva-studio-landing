@@ -1126,20 +1126,18 @@ const AliadosSection = () => {
               <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#080808]/40 mb-2">
                 SEO
               </div>
-              <a href="https://seoforstartups.co" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-                <h3 className="font-epilogue text-[22px] md:text-[26px] font-extrabold leading-none tracking-[-0.02em] text-[#080808]">
-                  SEO for Startups
-                </h3>
-              </a>
+              <h3 className="font-epilogue text-[22px] md:text-[26px] font-extrabold leading-none tracking-[-0.02em] text-[#080808]">
+                SEO for Startups
+              </h3>
               <p className="mt-3 text-[13px] md:text-[14px] leading-relaxed text-[#080808]/60">
                 Posicionamiento orgánico para negocios que quieren crecer con criterio.
               </p>
             </div>
-            <div className="flex shrink-0 h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-[#f4f2ff] text-[#a482ff]">
+            <a href="https://seoforstartups.co" target="_blank" rel="noopener noreferrer" className="flex shrink-0 h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-[#f4f2ff] text-[#a482ff] hover:bg-[#eae6ff] transition-colors">
               <svg className="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
-            </div>
+            </a>
           </div>
         </div>
       </div>
