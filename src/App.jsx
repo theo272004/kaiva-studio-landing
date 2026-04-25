@@ -1548,7 +1548,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, scale: 0.92 }}
         animate={{ opacity: 0.95, scale: 1 }}
         transition={{ duration: 0.85, ease: 'easeOut' }}
-        className="pointer-events-none absolute left-[-48%] top-[70%] z-[5] hidden w-[82vw] min-w-[300px] max-w-[1120px] -translate-y-1/2 object-contain md:block md:left-[-34%] md:top-[68%] md:w-[66vw] md:min-w-[460px]"
+        className="pointer-events-none absolute left-[-48%] top-[72%] z-[5] hidden w-[82vw] min-w-[300px] max-w-[1120px] -translate-y-1/2 object-contain md:block md:left-[-34%] md:top-[71%] md:w-[66vw] md:min-w-[460px]"
       />
       <motion.img
         src={asset('degradado-lateral.png')}
