@@ -598,17 +598,17 @@ const ServicesSection = () => {
                       transition: { duration: 0.62, ease: [0.16, 1, 0.3, 1] },
                     },
                   }}
-                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-white/80 bg-white shadow-[0_18px_48px_-34px_rgba(80,74,168,0.28)] outline-none transition-[opacity,transform,box-shadow,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-[#FF00D6]/30 hover:shadow-[0_28px_74px_-44px_rgba(255,0,214,0.35)] md:min-h-[380px] xl:min-h-[420px]"
+                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-white/80 bg-white shadow-[0_18px_48px_-34px_rgba(80,74,168,0.28)] outline-none transition-[opacity,transform,box-shadow,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-[#8242f5]/30 hover:shadow-[0_28px_74px_-44px_rgba(130,66,245,0.4)] md:min-h-[380px] xl:min-h-[420px]"
                   whileHover={{ y: -12 }}
                   transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                   tabIndex={0}
                   onMouseEnter={() => setActiveService(index)}
                 >
-                  {/* Glowing Effect Blobs */}
-                  <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[30px] bg-white transition-colors duration-500 group-hover:bg-transparent">
-                    <div className="absolute -bottom-[20%] -right-[20%] h-[140%] w-[140%] translate-x-1/4 translate-y-1/4 rounded-full bg-[#FF00D6] opacity-0 blur-[90px] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-[0.25]" />
-                    <div className="absolute -bottom-[10%] -left-[20%] h-[120%] w-[120%] -translate-x-1/4 translate-y-1/4 rounded-full bg-[#FF7A00] opacity-0 blur-[90px] transition-all duration-700 delay-75 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-[0.2]" />
-                    <div className="absolute -right-[20%] -top-[10%] h-[120%] w-[120%] translate-x-1/4 -translate-y-1/4 rounded-full bg-[#FFD600] opacity-0 blur-[90px] transition-all duration-700 delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-[0.15]" />
+                  {/* Glowing Effect Blobs (Bottom Half) */}
+                  <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[30px]">
+                    <div className="absolute -bottom-[20%] -right-[10%] h-[70%] w-[70%] translate-x-1/4 translate-y-1/4 rounded-full bg-[#d96cff] opacity-0 blur-[60px] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-[0.35]" />
+                    <div className="absolute -bottom-[20%] left-[15%] h-[70%] w-[70%] translate-y-1/4 rounded-full bg-[#8242f5] opacity-0 blur-[60px] transition-all duration-700 delay-75 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-[0.25]" />
+                    <div className="absolute -bottom-[20%] -left-[10%] h-[70%] w-[70%] -translate-x-1/4 translate-y-1/4 rounded-full bg-[#21b2c6] opacity-0 blur-[60px] transition-all duration-700 delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-[0.35]" />
                   </div>
 
                   <div className="relative z-10 flex min-h-full w-full flex-col px-6 py-8 md:px-8 md:py-10 lg:px-9 lg:py-11 xl:px-10">
