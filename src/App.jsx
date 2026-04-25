@@ -970,43 +970,68 @@ const ExpandedAgencySections = () => (
             {pricingPlans.map((plan) => (
                 <article
                   key={plan.name}
-                  className={`group relative flex min-h-[340px] flex-col overflow-hidden rounded-[30px] border ${plan.featured ? 'border-[var(--color-accent)]' : 'border-white/80'} bg-white/82 shadow-[0_18px_48px_-34px_rgba(80,74,168,0.35)] outline-none backdrop-blur-[16px] transition-[opacity,transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white hover:shadow-[0_28px_74px_-44px_rgba(80,74,168,0.48)] md:min-h-[380px] xl:min-h-[420px]`}
+                  className={`group relative flex min-h-[340px] flex-col rounded-[32px] border ${plan.featured ? 'border-[#a482ff]/50' : 'border-white/80'} bg-white/85 shadow-[0_18px_48px_-24px_rgba(32,29,26,0.12)] outline-none backdrop-blur-[16px] transition-[transform,shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:border-black/5 hover:shadow-[0_28px_74px_-34px_rgba(32,29,26,0.18)] md:min-h-[380px] xl:min-h-[420px]`}
                 >
-                  <div className="flex flex-1 flex-col p-8 md:p-10">
+                  <div className="relative flex flex-1 flex-col p-8 md:p-10">
                     {plan.badge && (
-                      <div className="mb-4 inline-block w-fit rounded-full bg-[#f8f8f8] px-3 py-1 font-manrope text-[10px] font-bold uppercase tracking-wider text-[#080808]">
+                      <div className="absolute -top-[14px] right-6 z-10 rounded-full px-4 py-[6px] font-manrope text-[10px] font-bold uppercase tracking-[0.15em] text-white shadow-md shadow-[#a482ff]/20" style={{ background: 'linear-gradient(135deg, #b891ff 0%, #a482ff 100%)' }}>
                         {plan.badge}
                       </div>
                     )}
-                    <h3 className="font-epilogue text-[24px] font-extrabold leading-none tracking-[-0.03em] md:text-[28px]">
+                    <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#080808]/50">
                       {plan.name}
+                    </div>
+                    <h3 className="mt-3 font-epilogue text-[36px] font-extrabold leading-[1.05] tracking-[-0.04em] text-[#080808] md:text-[42px]">
+                      {plan.price}
                     </h3>
-                    <p className="mt-2 text-[14px] leading-tight text-[#080808]/60">
+                    <p className="mt-4 text-[13px] leading-tight text-[#080808]/60">
                       {plan.audience}
                     </p>
-                    <div className="mt-6 mb-6 h-px w-full bg-black/10" />
-                    <div className="font-epilogue text-[20px] font-bold md:text-[24px]">
-                      {plan.price}
-                    </div>
-                    <p className="mt-3 text-[14px] leading-relaxed text-[#080808]/70">
+                    <p className="mt-5 text-[13px] leading-relaxed text-[#080808]/70">
                       {plan.description}
                     </p>
-                    <ul className="mt-6 flex-1 space-y-3">
+                    <ul className="mt-8 flex-1 space-y-3.5">
                       {plan.points.map((pt, i) => (
-                        <li key={i} className="flex flex-start gap-3 text-[14px] leading-tight text-[#080808]/80">
-                          <svg className="mt-0.5 h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        <li key={i} className="flex items-start gap-3 text-[13px] leading-snug text-[#080808]/80">
+                          <svg className="h-4 w-4 shrink-0 text-[#b891ff]" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                           </svg>
                           <span>{pt}</span>
                         </li>
                       ))}
                     </ul>
-                    <button className="mt-8 flex h-12 w-full items-center justify-center rounded-full bg-[#080808] font-manrope text-[12px] font-bold uppercase tracking-widest text-white transition-colors duration-300 hover:bg-[#222222]">
+                    <a href="#contacto" className="mt-10 inline-flex w-fit items-center justify-center rounded-full bg-white px-7 py-3 font-manrope text-[11px] font-bold uppercase tracking-widest text-[#080808] shadow-[0_4px_14px_rgba(0,0,0,0.06)] border border-[#080808]/5 transition-[shadow,transform] duration-300 hover:shadow-[0_6px_20px_rgba(0,0,0,0.08)] hover:-translate-y-[1px]">
                       {plan.cta}
-                    </button>
+                    </a>
                   </div>
                 </article>
               ))}
+            </div>
+
+            <div className="mx-auto mt-6 w-full max-w-[1180px]">
+              <article className="group relative flex flex-col items-center justify-between gap-6 rounded-[32px] border border-white/80 bg-white/85 p-6 shadow-[0_18px_48px_-24px_rgba(32,29,26,0.12)] outline-none backdrop-blur-[16px] transition-[transform,shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_28px_74px_-34px_rgba(32,29,26,0.18)] md:flex-row md:p-8 lg:px-12">
+                <div className="flex flex-col items-center text-center md:items-start md:text-left md:max-w-[280px]">
+                  <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#a482ff]">
+                    {ecommercePlan.label}
+                  </div>
+                  <h3 className="mt-1 font-epilogue text-[24px] font-extrabold leading-none tracking-[-0.03em] md:text-[28px]">
+                    {ecommercePlan.name}
+                  </h3>
+                  <div className="mt-2 text-[14px] font-bold text-[#080808]">
+                    {ecommercePlan.price}
+                  </div>
+                </div>
+                <div className="flex flex-1 flex-col items-center gap-6 md:flex-row md:justify-between md:pl-10 text-center md:text-left">
+                  <p className="max-w-[500px] text-[14px] leading-relaxed text-[#080808]/70">
+                    {ecommercePlan.description}
+                  </p>
+                  <a href="#contacto" className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full shadow-[0_8px_20px_-6px_rgba(164,130,255,0.5)] transition-transform hover:scale-105" style={{ background: 'linear-gradient(135deg, #d49fff 0%, #a482ff 100%)' }}>
+                    <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </a>
+                </div>
+              </article>
             </div>
         </motion.div>
     </section>
@@ -1396,9 +1421,9 @@ const HeroSection = () => {
         animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
         transition={{ duration: 0.6, delay: 0.28, ease: 'easeOut' }}
       >
-        <button className="flex min-h-[48px] sm:min-h-[52px] items-center justify-center rounded-[30px] bg-[#0c0c0c] px-8 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-105 active:scale-95 shadow-[0_16px_32px_-8px_rgba(0,0,0,0.3)] sm:px-9 sm:text-[15px] whitespace-nowrap">
+        <a href="#contacto" className="flex min-h-[48px] sm:min-h-[52px] items-center justify-center rounded-[30px] bg-[#0c0c0c] px-8 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-105 active:scale-95 shadow-[0_16px_32px_-8px_rgba(0,0,0,0.3)] sm:px-9 sm:text-[15px] whitespace-nowrap">
           Quiero mi web
-        </button>
+        </a>
       </motion.div>
 
       <motion.p
