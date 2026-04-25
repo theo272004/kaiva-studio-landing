@@ -37,14 +37,8 @@ body {
   overflow-x: hidden;
   background-color: #f8f6f2;
   color: #201d1a;
-  /* Promote the body to its own compositor layer */
-  transform: translateZ(0);
-  /* Hint to browser that scroll position will change */
-  will-change: scroll-position;
 }
 
 #root {
   min-height: 100vh;
-  /* Isolate stacking context so layers don't bleed */
-  isolation: isolate;
 }
