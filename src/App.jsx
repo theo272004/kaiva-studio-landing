@@ -619,12 +619,12 @@ const ServicesSection = () => {
                 >
                   <motion.div
                     className="aurora-hover-layer pointer-events-none absolute inset-0 overflow-hidden"
-                    initial={{ opacity: 0, y: 60 }}
+                    initial={{ opacity: 0, y: 120 }}
                     animate={{
                       opacity: isActive ? 1 : 0,
-                      y: isActive ? 0 : 60,
+                      y: isActive ? 0 : 120,
                     }}
-                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                   >
                     <div className="aurora-card-blob blob-1" />
                     <div className="aurora-card-blob blob-2" />
@@ -636,7 +636,7 @@ const ServicesSection = () => {
                   <motion.div
                     className="pointer-events-none absolute inset-0"
                     animate={{
-                      backgroundColor: isActive ? 'rgba(255,255,255,0.24)' : 'rgba(255,255,255,0.46)',
+                      backgroundColor: isActive ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.46)',
                     }}
                     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   />
@@ -969,7 +969,7 @@ const ExpandedAgencySections = () => (
       <motion.img
         src={asset('KaivaMora1.png')}
         alt=""
-        className="absolute -right-[5%] top-[10%] z-50 w-[380px] opacity-100 md:right-[1%] md:top-[15%] md:w-[550px] pointer-events-none"
+        className="absolute -right-[15%] top-[10%] z-50 w-[380px] opacity-100 md:-right-[12%] md:top-[15%] md:w-[600px] pointer-events-none"
         animate={{
           y: [0, 15, 0],
           rotate: [0, 2, 0]
@@ -1250,43 +1250,43 @@ export default function KaivaLanding() {
           bottom: 0;
           left: 0;
           right: 0;
-          height: 55%;
+          height: 50%;
           overflow: hidden;
-          background: linear-gradient(to top, rgba(130, 66, 245, 0.08), transparent);
+          background: linear-gradient(to top, rgba(130, 66, 245, 0.1), transparent);
           pointer-events: none;
           z-index: 0;
         }
         .aurora-card-blob {
           position: absolute;
-          width: 150px;
-          height: 150px;
-          filter: blur(45px);
-          opacity: 0.9;
+          width: 180px;
+          height: 180px;
+          filter: blur(40px);
+          opacity: 1;
           mix-blend-mode: hard-light;
           border-radius: 50%;
         }
         .blob-1 {
           background: #21b2c6;
-          bottom: -30px; left: 0%;
-          animation: blob-float-1 8s infinite ease-in-out;
+          bottom: -40px; left: -10%;
+          animation: blob-float-1 6s infinite ease-in-out;
         }
         .blob-2 {
           background: #8242f5;
-          bottom: -20px; right: 5%;
-          animation: blob-float-2 10s infinite ease-in-out;
+          bottom: -30px; right: -5%;
+          animation: blob-float-2 8s infinite ease-in-out;
         }
         .blob-3 {
           background: #d96cff;
-          bottom: -50px; left: 30%;
-          animation: blob-float-1 12s infinite reverse ease-in-out;
+          bottom: -60px; left: 25%;
+          animation: blob-float-1 10s infinite reverse ease-in-out;
         }
         @keyframes blob-float-1 {
-          0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-          50% { transform: translate(30px, -25px) scale(1.3) rotate(10deg); }
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          50% { transform: translate(40px, -30px) scale(1.4); }
         }
         @keyframes blob-float-2 {
-          0%, 100% { transform: translate(0, 0) scale(1.2) rotate(0deg); }
-          50% { transform: translate(-40px, -20px) scale(0.95) rotate(-10deg); }
+          0%, 100% { transform: translate(0, 0) scale(1.3); }
+          50% { transform: translate(-50px, -20px) scale(0.9); }
         }
         @keyframes auroraShift {
           0% { background-position: 0% 50%, 100% 50%, 50% 100%, 50% 0%, 50% 50%; }
@@ -1520,6 +1520,7 @@ const HeroSection = () => {
     </section>
   );
 };
+
 
 
 
