@@ -1552,7 +1552,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section id="inicio" data-nav-theme="light" className="relative z-30 min-h-[100svh] w-full overflow-hidden bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
+    <section id="inicio" data-nav-theme="light" className="relative z-30 min-h-[100svh] w-full [overflow-x:clip] overflow-y-visible bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
       <motion.img
         src={asset('degradado-lateral.webp')}
         alt=""
