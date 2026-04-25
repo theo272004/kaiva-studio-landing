@@ -1038,11 +1038,105 @@ const ExpandedAgencySections = () => (
   </>
 );
 
+const WhyUsSection = () => {
+  return (
+    <section className="relative w-full bg-white text-[#080808] px-6 py-24 md:py-32 lg:px-16 overflow-hidden">
+      <div className="mx-auto flex w-full max-w-[1240px] flex-col gap-12 md:flex-row md:items-center md:justify-between">
+        <div className="flex-1 max-w-[500px]">
+          <h2 className="font-epilogue text-[40px] md:text-[56px] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#080808]">
+            El mundo digital te está esperando. Nosotros te llevamos.
+          </h2>
+          <p className="mt-8 text-[15px] md:text-[16px] leading-[1.6] text-[#080808]/70">
+            Kaiva existe porque creemos que cualquier negocio colombiano, sin importar su tamaño, merece estar bien representado en internet. No como hobby, sino como motor real de ventas.
+          </p>
+          <p className="mt-6 text-[15px] md:text-[16px] leading-[1.6] text-[#080808]/70">
+            Hacemos todo el trabajo técnico y creativo para que tú te concentres en lo que sabes hacer: tu negocio.
+          </p>
+        </div>
+        <div className="flex-1 flex flex-col gap-4">
+          {[
+            {
+              title: "Visible en Google desde el día uno",
+              desc: "Construimos sitios optimizados para SEO para que tus clientes te encuentren cuando te buscan."
+            },
+            {
+              title: "Flujos de atención automatizados",
+              desc: "Tu web responde, cotiza y agenda aunque estés atendiendo otro cliente o sea medianoche."
+            },
+            {
+              title: "Sin tecnicismos, sin enredos",
+              desc: "Manejamos todo lo técnico. Tú solo revisas, apruebas y recibes tu web funcionando."
+            },
+            {
+              title: "Hecho para el mercado colombiano",
+              desc: "Planes desde $320 USD pensados para la realidad de las pymes en Colombia."
+            }
+          ].map((item, i) => (
+            <div key={i} className="flex items-start gap-4 rounded-[24px] border border-[#080808]/5 bg-white p-6 shadow-sm">
+              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#f4f2ff]">
+                <svg className="h-3 w-3 text-[#a482ff]" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="flex-1 mt-[-2px]">
+                <h4 className="font-bold text-[15px] md:text-[16px] text-[#080808] leading-tight">{item.title}</h4>
+                <p className="mt-1.5 text-[13px] md:text-[14px] leading-relaxed text-[#080808]/60">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const AliadosSection = () => {
+  return (
+    <section className="relative w-full bg-white text-[#080808] px-6 py-16 md:py-24 lg:px-16 overflow-hidden">
+      <div className="mx-auto flex w-full max-w-[1240px] flex-col gap-12 md:flex-row md:items-center md:justify-between">
+        <div className="flex-1 max-w-[460px]">
+          <div className="mb-4 inline-block font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#a482ff]">
+            ALIADOS ESTRATÉGICOS
+          </div>
+          <h2 className="font-epilogue text-[40px] md:text-[56px] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#080808]">
+            Trabajamos con los mejores en SEO
+          </h2>
+          <p className="mt-6 text-[15px] md:text-[16px] leading-[1.6] text-[#080808]/70">
+            Para garantizar que tu web no solo se vea bien sino que también sea encontrada, trabajamos de la mano con especialistas en posicionamiento orgánico.
+          </p>
+        </div>
+        
+        <div className="flex-1 flex justify-center md:justify-end">
+          <div className="w-full max-w-[500px] rounded-[28px] border border-[#080808]/5 bg-white p-6 md:p-8 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] flex items-center justify-between gap-6">
+            <div className="flex-1">
+              <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#080808]/40 mb-2">
+                SEO
+              </div>
+              <h3 className="font-epilogue text-[22px] md:text-[26px] font-extrabold leading-none tracking-[-0.02em] text-[#080808]">
+                SEO for Startups
+              </h3>
+              <p className="mt-3 text-[13px] md:text-[14px] leading-relaxed text-[#080808]/60">
+                Posicionamiento orgánico para negocios que quieren crecer con criterio.
+              </p>
+            </div>
+            <div className="flex shrink-0 h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-[#f4f2ff] text-[#a482ff]">
+              <svg className="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const App = () => {
   return (
     <div className="relative z-10 w-full bg-white">
       <HeroSection />
       <ProblemSection />
+      <WhyUsSection />
       <PortfolioSection />
       <div className="relative">
         <SectionsAuroraBackdrop />
@@ -1050,6 +1144,7 @@ const App = () => {
           <ExpandedAgencySections />
         </div>
       </div>
+      <AliadosSection />
       <ContactRevealSection />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;600;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
@@ -1156,9 +1251,6 @@ const ProblemSection = () => {
   return (
     <section id="problema" className="relative w-full bg-[#f8f8fa] text-[#080808] px-6 py-24 md:py-32 lg:px-16">
       <div className="mx-auto w-full max-w-[1240px] relative z-10 flex flex-col items-center">
-        <div className="mb-4 inline-block text-[11px] font-manrope font-bold uppercase tracking-[0.2em] text-[#8242f5] md:text-[13px]">
-          EL PROBLEMA
-        </div>
         
         <h2 className="font-epilogue text-[clamp(40px,6vw,72px)] font-extrabold leading-[0.98] tracking-[-0.04em] text-center max-w-[800px] mt-4">
           El 91% de las empresas en Colombia son pymes. La mayoría no existe en internet.
@@ -1171,7 +1263,7 @@ const ProblemSection = () => {
 
         <div className="mt-16 w-full grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white rounded-[24px] p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-4">
-            <div className="font-epilogue text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em] text-[#8242f5]">
+            <div className="font-epilogue text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
               75%
             </div>
             <p className="text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
@@ -1179,7 +1271,7 @@ const ProblemSection = () => {
             </p>
           </div>
           <div className="bg-white rounded-[24px] p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-4">
-            <div className="font-epilogue text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em] text-[#8242f5]">
+            <div className="font-epilogue text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
               83%
             </div>
             <p className="text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
@@ -1187,7 +1279,7 @@ const ProblemSection = () => {
             </p>
           </div>
           <div className="bg-white rounded-[24px] p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-4">
-            <div className="font-epilogue text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em] text-[#8242f5]">
+            <div className="font-epilogue text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
               +1.7M
             </div>
             <p className="text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
@@ -1432,9 +1524,7 @@ const HeroSection = () => {
         transition={{ duration: 0.55, delay: 0.22, ease: 'easeOut' }}
         className="absolute bottom-4 left-6 right-6 z-40 max-w-[280px] text-left text-[12px] font-normal leading-[1.5] text-[#080808]/64 md:bottom-[60px] md:left-auto md:right-[80px] md:max-w-[420px] md:text-[15px]"
       >
-        Kaiva Studio combina diseño, estructura y tecnología
-        <br />
-        para construir activos digitales que funcionan.
+        Deja de perder clientes por no estar en internet. Diseñamos y desarrollamos tu página web con criterio profesional, entrega rápida y un precio justo.
       </motion.p>
     </section>
   );
