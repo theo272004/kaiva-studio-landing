@@ -62,19 +62,15 @@ const slides = [
 const services = [
   {
     title: 'Desarrollo web',
-    description: 'Creamos páginas web profesionales pensadas para transmitir confianza, ordenar la presencia digital y generar oportunidades reales.',
+    description: 'Creamos páginas web estratégicas diseñadas para transmitir confianza y generar oportunidades reales.',
   },
   {
-    title: 'Diseño UI/UX',
-    description: 'Diseñamos experiencias claras, rápidas y enfocadas en conversión, con una estructura visual alineada al objetivo comercial.',
+    title: 'Diseño UI/UX + Marca',
+    description: 'Diseñamos experiencias claras y enfocadas en conversión, alineadas con tu identidad de marca.',
   },
   {
-    title: 'Automatización',
-    description: 'Integramos herramientas, respuestas y flujos para reducir fricción operativa y dejar una solución lista para funcionar.',
-  },
-  {
-    title: 'Configuración técnica',
-    description: 'Resolvemos dominio, hosting, seguridad, correos corporativos y publicación final dentro de un solo proceso.',
+    title: 'Automatización y sistemas',
+    description: 'Implementamos herramientas y sistemas (como bots de WhatsApp y flujos automatizados) para responder, organizar y vender sin fricción.',
   },
 ];
 
@@ -894,30 +890,30 @@ const PortfolioSection = () => {
 const ProcessStepCard = ({ step, index, progress, total }) => {
   const start = index / total;
   const end = (index + 1) / total;
+  const center = (start + end) / 2;
   
-  // Highlight card when progress is within its range
-  // We use a narrower range for the highlight to make it feel more "snappy"
-  const highlight = useTransform(progress, [start, start + 0.05, end - 0.05, end], [0, 1, 1, 0]);
+  // Highlight card when progress is near its center
+  const highlight = useTransform(progress, [start, center, end], [0, 1, 0]);
   
   const backgroundColor = useTransform(highlight, [0, 1], ["rgba(255,255,255,0)", "rgba(255,255,255,1)"]);
   const boxShadow = useTransform(highlight, [0, 1], ["0 0px 0px rgba(0,0,0,0)", "0 20px 60px rgba(0,0,0,0.06)"]);
   const opacity = useTransform(highlight, [0, 1], [0.35, 1]);
-  const scale = useTransform(highlight, [0, 1], [0.97, 1]);
+  const scale = useTransform(highlight, [0, 1], [0.85, 1.15]); // Larger scale when active
   const border = useTransform(highlight, [0, 1], ["1px solid rgba(0,0,0,0)", "1px solid rgba(0,0,0,0.04)"]);
 
   return (
     <motion.div
       style={{ backgroundColor, boxShadow, opacity, scale, border }}
-      className="flex items-center gap-6 rounded-[32px] p-6 transition-all duration-500 md:p-8"
+      className="flex items-center gap-6 rounded-[32px] p-6 transition-all duration-500 md:p-10"
     >
       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#080808]/5 bg-white/40 font-epilogue text-[16px] font-bold text-[#080808]/40 shadow-sm backdrop-blur-sm">
         0{index + 1}
       </div>
       <div className="flex flex-col gap-1">
-        <h3 className="font-epilogue text-[22px] font-extrabold tracking-tight text-[#080808] md:text-[28px]">
+        <h3 className="font-epilogue text-[22px] font-extrabold tracking-tight text-[#080808] md:text-[32px]">
           {step.title}
         </h3>
-        <p className="max-w-[400px] text-[14px] leading-relaxed text-[#080808]/50 md:text-[15px]">
+        <p className="max-w-[380px] text-[14px] leading-relaxed text-[#080808]/50 md:text-[16px]">
           {step.description}
         </p>
       </div>
@@ -940,27 +936,20 @@ const ProcessRedesignSection = () => {
     { title: 'Entrega', description: 'Publicamos una solución lista para operar desde el primer día, con soporte posterior según el plan.' },
   ];
 
+  // Animate the vertical position of the list to keep the active item centered
+  // Range: from first item centered to last item centered
+  // Adjust 300 to match the approximate height of the cards/spacing
+  const listY = useTransform(scrollYProgress, [0, 1], [200, -200]);
+
   return (
     <section ref={sectionRef} id="proceso" className="relative w-full bg-[#fbfbfd]">
-      <div className="relative h-[300vh] w-full">
+      <div className="relative h-[250vh] w-full">
         <div className="sticky top-0 flex h-screen w-full items-center overflow-hidden px-6 lg:px-16">
           
           {/* Background Decorative Elements */}
           <div className="absolute left-[20%] top-[10%] h-[500px] w-[500px] rounded-full bg-[#8242f5]/5 blur-[120px]" />
           <div className="absolute right-[5%] bottom-[10%] h-[400px] w-[400px] rounded-full bg-[#21b2c6]/5 blur-[100px]" />
           
-          {/* Floating 3D-like elements as in the reference */}
-          <motion.div 
-            animate={{ y: [0, -25, 0], rotate: [0, 15, 0], scale: [1, 1.05, 1] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute bottom-[20%] left-[8%] h-14 w-14 rounded-2xl bg-gradient-to-br from-[#8242f5]/40 to-[#d96cff]/40 shadow-[0_10px_30px_rgba(130,66,245,0.2)] blur-[0.5px]"
-          />
-          <motion.div 
-            animate={{ y: [0, 35, 0], rotate: [0, -20, 0], scale: [1, 1.1, 1] }}
-            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute top-[15%] right-[12%] h-20 w-20 rounded-3xl bg-gradient-to-br from-[#21b2c6]/30 to-[#8242f5]/30 shadow-[0_15px_40px_rgba(33,178,198,0.15)] blur-[1px]"
-          />
-
           <div className="mx-auto flex w-full max-w-[1240px] flex-col items-center justify-between gap-12 md:flex-row">
             
             {/* Left side: Large number and vertical text */}
@@ -978,9 +967,9 @@ const ProcessRedesignSection = () => {
               </div>
             </div>
 
-            {/* Right side: Steps List (Corrected layout: static list with moving highlight) */}
+            {/* Right side: Carousel List */}
             <div className="relative flex w-full flex-col justify-center md:max-w-[620px]">
-              <div className="flex flex-col gap-3 md:gap-4">
+              <motion.div style={{ y: listY }} className="flex flex-col gap-6 md:gap-8">
                 {stepsContent.map((step, i) => (
                   <ProcessStepCard 
                     key={i}
@@ -990,7 +979,7 @@ const ProcessRedesignSection = () => {
                     progress={scrollYProgress} 
                   />
                 ))}
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
