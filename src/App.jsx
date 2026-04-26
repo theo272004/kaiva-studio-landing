@@ -890,15 +890,21 @@ const PortfolioSection = () => {
 const stepLabels = ['Primer paso', 'Segundo paso', 'Tercer paso', 'Cuarto paso', 'Quinto paso'];
 
 const ProcessStepCard = ({ step, index, activeProgress }) => {
-  const distance = useTransform(activeProgress, (value) => index - value);
-  const y = useTransform(distance, (value) => value * 150);
-  const scale = useTransform(distance, (value) => Math.max(0.86, 1 - Math.min(Math.abs(value), 1.5) * 0.12));
+  const distance = useTransform(activeProgress, (value) => {
+    const total = processSteps.length;
+    let offset = index - value;
+    if (offset > total / 2) offset -= total;
+    if (offset < -total / 2) offset += total;
+    return offset;
+  });
+  const y = useTransform(distance, (value) => value * -138);
+  const scale = useTransform(distance, (value) => Math.max(0.88, 1 - Math.min(Math.abs(value), 1.35) * 0.1));
   const opacity = useTransform(distance, (value) => {
     const absolute = Math.abs(value);
-    if (absolute > 1.55) return 0;
-    return Math.max(0.18, 1 - absolute * 0.46);
+    if (absolute > 1.35) return 0;
+    return Math.max(0.34, 1 - absolute * 0.42);
   });
-  const blur = useTransform(distance, (value) => `blur(${Math.min(Math.abs(value) * 3.5, 7)}px)`);
+  const blur = useTransform(distance, (value) => `blur(${Math.min(Math.abs(value) * 2.2, 4)}px)`);
   const zIndex = useTransform(distance, (value) => Math.round(20 - Math.abs(value) * 10));
   const backgroundColor = useTransform(distance, (value) => (
     Math.abs(value) < 0.5 ? "rgba(255,255,255,0.96)" : "rgba(255,255,255,0.62)"
@@ -915,7 +921,7 @@ const ProcessStepCard = ({ step, index, activeProgress }) => {
   return (
     <motion.div
       style={{ y, scale, opacity, filter: blur, zIndex, backgroundColor, boxShadow, borderColor }}
-      className="absolute left-0 top-1/2 flex w-full -translate-y-1/2 items-center gap-4 rounded-[28px] border p-5 backdrop-blur-xl md:gap-6 md:rounded-[32px] md:p-8"
+      className="absolute left-0 top-1/2 flex w-full -translate-y-1/2 items-center gap-4 rounded-[24px] border p-4 backdrop-blur-xl sm:p-5 md:gap-6 md:rounded-[30px] md:p-7"
     >
       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#080808]/6 bg-white font-epilogue text-[15px] font-bold text-[#080808]/45 shadow-sm md:h-14 md:w-14 md:text-[16px]">
         0{index + 1}
@@ -958,11 +964,11 @@ const ProcessRedesignSection = () => {
 
   return (
     <section ref={sectionRef} id="proceso" className="relative w-full bg-[#fbfbfd]">
-      <div className="relative h-[420vh] w-full">
-        <div className="sticky top-0 flex h-screen w-full items-center overflow-hidden px-6 lg:px-16">
+      <div className="relative h-[300vh] w-full md:h-[320vh]">
+        <div className="sticky top-0 flex h-[100svh] w-full items-center overflow-hidden px-6 py-14 lg:px-16">
           <div className="absolute inset-0 bg-[radial-gradient(80%_70%_at_50%_0%,rgba(255,255,255,0.96)_0%,rgba(251,251,253,0.7)_48%,rgba(244,247,255,0.88)_100%)]" />
 
-          <div className="relative z-10 mx-auto grid w-full max-w-[1240px] items-center gap-10 md:grid-cols-[0.85fr_1.15fr] md:gap-14">
+          <div className="relative z-10 mx-auto grid w-full max-w-[1240px] items-center gap-6 md:grid-cols-[0.85fr_1.15fr] md:gap-14">
             <motion.div
               key={activeStep}
               initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
@@ -970,20 +976,18 @@ const ProcessRedesignSection = () => {
               transition={{ duration: 0.55, ease: premiumEase }}
               className="flex items-center justify-center gap-5 md:justify-start md:gap-10"
             >
-              <div className="font-epilogue text-[150px] font-extrabold leading-none tracking-[-0.08em] text-[#8242f5]/16 sm:text-[190px] md:text-[300px]">
+              <div className="font-epilogue text-[120px] font-extrabold leading-none tracking-[-0.08em] text-[#8242f5]/16 sm:text-[170px] md:text-[280px]">
                 {activeStep + 1}
               </div>
               <div
-                className="font-epilogue text-[32px] font-extrabold uppercase leading-[0.95] tracking-[0.12em] text-[#080808] sm:text-[42px] md:text-[70px]"
+                className="font-epilogue text-[28px] font-extrabold uppercase leading-[0.95] tracking-[0.12em] text-[#080808] sm:text-[38px] md:text-[66px]"
                 style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
               >
                 {stepLabels[activeStep]}
               </div>
             </motion.div>
 
-            <div className="relative h-[440px] w-full overflow-hidden md:h-[520px]">
-              <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-24 bg-gradient-to-b from-[#fbfbfd] to-transparent" />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-24 bg-gradient-to-t from-[#fbfbfd] to-transparent" />
+            <div className="relative h-[430px] w-full overflow-visible md:h-[540px]">
               <div className="relative mx-auto h-full w-full max-w-[660px]">
                 {stepsContent.map((step, i) => (
                   <ProcessStepCard 
