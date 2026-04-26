@@ -892,62 +892,107 @@ const PortfolioSection = () => {
   );
 };
 
+const ProcessStepCard = ({ step, index, progress, total }) => {
+  const start = index / total;
+  const end = (index + 1) / total;
+  
+  // Use a range that makes the card active when it's around the center of the scroll container
+  const isActiveProgress = useTransform(progress, [start, start + 0.05, end - 0.05, end], [0, 1, 1, 0]);
+  const scale = useTransform(progress, [start, start + 0.1, end - 0.1, end], [0.95, 1, 1, 0.95]);
+  const opacity = useTransform(progress, [start, start + 0.1, end - 0.1, end], [0.5, 1, 1, 0.5]);
+  
+  // Custom styles for the "active" state card as seen in the image
+  const backgroundColor = useTransform(progress, [start, start + 0.05, end - 0.05, end], ["rgba(255,255,255,0)", "rgba(255,255,255,1)", "rgba(255,255,255,1)", "rgba(255,255,255,0)"]);
+  const boxShadow = useTransform(progress, [start, start + 0.05, end - 0.05, end], ["0 0px 0px rgba(0,0,0,0)", "0 20px 50px rgba(0,0,0,0.08)", "0 20px 50px rgba(0,0,0,0.08)", "0 0px 0px rgba(0,0,0,0)"]);
+  const border = useTransform(progress, [start, start + 0.05, end - 0.05, end], ["1px solid rgba(0,0,0,0)", "1px solid rgba(0,0,0,0.05)", "1px solid rgba(0,0,0,0.05)", "1px solid rgba(0,0,0,0)"]);
+
+  return (
+    <motion.div
+      style={{ backgroundColor, boxShadow, border, scale, opacity }}
+      className="relative flex items-center gap-6 rounded-[40px] p-8 transition-shadow duration-300 md:p-10"
+    >
+      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#f4f2ff] font-epilogue text-[18px] font-bold text-[#080808]/40 shadow-inner">
+        0{index + 1}
+      </div>
+      <div className="flex flex-col gap-2">
+        <h3 className="font-epilogue text-[26px] font-extrabold tracking-tight text-[#080808] md:text-[32px]">
+          {step.title}
+        </h3>
+        <p className="max-w-[420px] text-[15px] leading-relaxed text-[#080808]/60 md:text-[16px]">
+          {step.description}
+        </p>
+      </div>
+    </motion.div>
+  );
+};
+
+const ProcessRedesignSection = () => {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"]
+  });
+
+  const stepsContent = [
+    { title: 'Diagnóstico', description: 'Analizamos objetivos, contexto y necesidades del negocio antes de construir.' },
+    { title: 'Estructura', description: 'Organizamos la estructura para que la presencia digital tenga un propósito claro y medible.' },
+    { title: 'Diseño', description: 'Diseñamos una experiencia visual atractiva, profesional y alineada a la marca.' },
+    { title: 'Desarrollo', description: 'Integramos tecnología, herramientas y configuración técnica completa en un solo servicio.' },
+    { title: 'Entrega', description: 'Publicamos una solución lista para operar desde el primer día, con soporte posterior según el plan.' },
+  ];
+
+  return (
+    <section ref={sectionRef} id="proceso" className="relative w-full bg-white">
+      <div className="relative h-[400vh] w-full">
+        <div className="sticky top-0 flex h-screen w-full items-center overflow-hidden px-6 lg:px-16">
+          
+          {/* Background Decorative Blobs */}
+          <div className="absolute left-[30%] top-[20%] h-64 w-64 rounded-full bg-[#a482ff]/10 blur-[80px]" />
+          <div className="absolute right-[10%] top-[40%] h-96 w-96 rounded-full bg-[#21b2c6]/5 blur-[100px]" />
+
+          <div className="mx-auto flex w-full max-w-[1240px] flex-col items-center justify-between gap-12 md:flex-row">
+            
+            {/* Left side: Large number and vertical text */}
+            <div className="flex items-center gap-4 md:gap-10">
+              <div className="font-epilogue text-[180px] font-extrabold leading-none tracking-[-0.08em] text-[#8242f5]/10 md:text-[280px]">
+                {stepsContent.length}
+              </div>
+              <div className="flex flex-col">
+                <div 
+                  className="font-epilogue text-[40px] font-extrabold uppercase tracking-[0.25em] text-[#080808] md:text-[72px]" 
+                  style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+                >
+                  PASOS
+                </div>
+              </div>
+            </div>
+
+            {/* Right side: Steps (Stacked and changing with scroll) */}
+            <div className="relative flex w-full flex-col justify-center md:max-w-[600px]">
+              <div className="relative h-[400px] w-full md:h-[500px]">
+                {stepsContent.map((step, i) => (
+                  <div key={i} className="absolute inset-0 flex items-center">
+                    <ProcessStepCard 
+                      step={step} 
+                      index={i} 
+                      total={stepsContent.length} 
+                      progress={scrollYProgress} 
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const ExpandedAgencySections = () => (
   <>
     <ServicesSection />
-
-    <SectionShell id="proceso" tone="light">
-      <motion.div {...sectionReveal}>
-        <SectionHeader
-          eyebrow="Proceso"
-          title="Cómo trabajamos"
-          description="Nuestro proceso está pensado para ser claro, estructurado y sin fricciones, de modo que el cliente entienda qué se está haciendo, por qué se hace y qué resultado puede esperar."
-        />
-        <motion.div 
-          className="mt-16 rounded-[32px] border border-[#080808]/14 bg-[var(--color-surface)] p-8 md:p-10"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={{
-            visible: { transition: { staggerChildren: 0.15 } },
-            hidden: {}
-          }}
-        >
-          <div className="grid gap-8 md:grid-cols-5 md:gap-6">
-            {processSteps.map((step, index) => (
-              <motion.div 
-                key={step} 
-                className="relative"
-                variants={{
-                  hidden: { opacity: 0, x: -20 },
-                  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
-                }}
-              >
-                <div className="mb-5 flex items-center gap-4 md:block">
-                  <div className="mb-0 flex h-12 w-12 items-center justify-center rounded-full border border-[#080808]/16 bg-[var(--color-dominant)] font-manrope text-[12px] font-bold tracking-[0.18em] md:mb-5" style={gradientAccentStyle}>
-                    0{index + 1}
-                  </div>
-                  <div className="font-epilogue text-[24px] font-extrabold leading-[1.12] tracking-[-0.025em] text-[#080808] md:text-[22px]">{step}</div>
-                </div>
-                <p className="max-w-[210px] text-[14px] leading-7 text-[#080808]/62">
-                  {index === 0 && 'Analizamos objetivos, contexto y necesidades del negocio antes de construir.'}
-                  {index === 1 && 'Organizamos la estructura para que la presencia digital tenga un propósito claro y medible.'}
-                  {index === 2 && 'Diseñamos una experiencia visual atractiva, profesional y alineada a la marca.'}
-                  {index === 3 && 'Integramos tecnología, herramientas y configuración técnica completa en un solo servicio.'}
-                  {index === 4 && 'Publicamos una solución lista para operar desde el primer día, con soporte posterior según el plan.'}
-                </p>
-                {index < processSteps.length - 1 ? (
-                  <div className="hidden md:block">
-                    <div className="absolute left-[58px] top-6 h-px w-[calc(100%-24px)] bg-gradient-to-r from-[#080808]/18 to-[#080808]/4" />
-                  </div>
-                ) : null}
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </motion.div>
-    </SectionShell>
-
+    <ProcessRedesignSection />
     <section
       id="planes"
       data-nav-theme="light"
@@ -1177,6 +1222,40 @@ const AnimatedText = ({ text, className }) => {
         </motion.span>
       ))}
     </motion.div>
+  );
+};
+
+const ScrollRevealHeadline = ({ text }) => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 0.9", "end 0.4"],
+  });
+
+  const words = text.split(" ");
+  
+  return (
+    <h2 ref={containerRef} className="font-epilogue text-[clamp(40px,6vw,72px)] font-extrabold leading-[0.98] tracking-[-0.04em] text-center max-w-[900px] mt-4 flex flex-wrap justify-center">
+      {words.map((word, i) => {
+        return <RevealWord key={i} word={word} index={i} total={words.length} progress={scrollYProgress} />;
+      })}
+    </h2>
+  );
+};
+
+const RevealWord = ({ word, index, total, progress }) => {
+  const start = index / total;
+  const end = (index + 1) / total;
+  const color = useTransform(progress, [start, end], ["#d1d1d1", "#080808"]);
+  const opacity = useTransform(progress, [start, end], [0.3, 1]);
+  
+  return (
+    <motion.span 
+      style={{ color, opacity }}
+      className="inline-block mr-[0.25em]"
+    >
+      {word}
+    </motion.span>
   );
 };
 
@@ -1413,9 +1492,7 @@ const ProblemSection = () => {
     <section id="problema" className="relative w-full bg-transparent text-[#080808] px-6 py-24 md:py-32 lg:px-16">
       <div className="mx-auto w-full max-w-[1240px] relative z-10 flex flex-col items-center">
         
-        <h2 className="font-epilogue text-[clamp(40px,6vw,72px)] font-extrabold leading-[0.98] tracking-[-0.04em] text-center max-w-[800px] mt-4">
-          El 91% de las empresas en Colombia son pymes. La mayoría no existe en internet.
-        </h2>
+        <ScrollRevealHeadline text="El 91% de las empresas en Colombia son pymes. La mayoría no existe en internet." />
         
         <p className="mt-8 text-[16px] md:text-[18px] leading-[1.6] text-center max-w-[650px] text-[#080808]/70">
           Cada día, miles de colombianos buscan productos y servicios en Google. Si tu
