@@ -2,6 +2,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, AnimatePresence, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
+const PROJECTS_PAGE_HREF = './proyectos/';
+const HOME_PAGE_HREF_FROM_PROJECTS = '../';
+const isProjectsPath = () => {
+  if (typeof window === 'undefined') return false;
+  return /\/proyectos(?:\/|$|\/index\.html$)/.test(window.location.pathname);
+};
 
 const slides = [
   {
@@ -306,6 +312,12 @@ const ContactRevealSection = () => {
   const prefersReducedMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
   const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start 90%', 'end end'],
+  });
+  const footerY = useTransform(scrollYProgress, [0.12, 0.72], ['24%', '0%']);
+  const footerOpacity = useTransform(scrollYProgress, [0.08, 0.35], [0.15, 1]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 767px)');
@@ -335,22 +347,6 @@ const ContactRevealSection = () => {
       filter: 'blur(0px)',
       transition: {
         duration: prefersReducedMotion ? 0.24 : 1.1,
-        ease: premiumEase,
-      },
-    },
-  };
-
-  const paragraphItem = {
-    hidden: prefersReducedMotion
-      ? { opacity: 0 }
-      : { opacity: 0, y: isMobile ? 14 : 20, filter: 'blur(6px)' },
-    show: {
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      transition: {
-        duration: prefersReducedMotion ? 0.22 : 0.95,
-        delay: prefersReducedMotion ? 0 : 0.15,
         ease: premiumEase,
       },
     },
@@ -399,12 +395,12 @@ const ContactRevealSection = () => {
   };
 
   return (
-    <section id="contacto" className="relative w-full overflow-hidden bg-transparent">
+    <section id="contacto" ref={sectionRef} className="relative w-full overflow-x-clip bg-transparent">
       <div
         className="mx-auto flex w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
         style={{
-          paddingTop: 'clamp(72px, 12vw, 196px)',
-          paddingBottom: 'clamp(72px, 12vw, 196px)',
+          paddingTop: 'clamp(72px, 10vw, 172px)',
+          paddingBottom: 'clamp(52px, 8vw, 124px)',
         }}
       >
         <div
@@ -493,13 +489,14 @@ const ContactRevealSection = () => {
         </div>
 
       <motion.div
-        className="w-full bg-[#111111]"
-        initial={prefersReducedMotion ? { opacity: 0 } : { y: '100%' }}
-        whileInView={prefersReducedMotion ? { opacity: 1 } : { y: '0%' }}
-        viewport={{ once: true, amount: 0 }}
-        transition={{ duration: 0.9, ease: premiumEase }}
+        className="w-full bg-[#111111] pb-[max(env(safe-area-inset-bottom),0px)]"
+        style={prefersReducedMotion ? undefined : { y: footerY, opacity: footerOpacity }}
+        initial={prefersReducedMotion ? { opacity: 0 } : false}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: false, amount: 0.06 }}
+        transition={{ duration: 0.7, ease: premiumEase }}
       >
-        <div className="mx-auto flex min-h-[36vh] md:min-h-[45vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-10 text-center md:px-12 md:py-12 lg:px-16">
+        <div className="mx-auto flex min-h-[34vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-10 text-center md:min-h-[40vh] md:px-12 md:py-12 lg:px-16">
           <a
             href="mailto:hello@kaivastudio.com"
             className="font-epilogue text-[clamp(28px,4vw,60px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
@@ -1243,23 +1240,48 @@ const CustomCursor = () => {
   );
 };
 
+const ProjectsPage = () => {
+  return (
+    <>
+      <header className="sticky top-0 z-50 border-b border-[#080808]/8 bg-white/88 backdrop-blur-xl">
+        <div className="mx-auto flex h-[72px] w-full max-w-[1320px] items-center justify-between px-6 md:px-12 lg:px-16">
+          <a href={HOME_PAGE_HREF_FROM_PROJECTS} className="font-epilogue text-[24px] font-extrabold tracking-[-0.03em] text-[#080808]">
+            Kaiva<span style={gradientAccentStyle}>Studio.</span>
+          </a>
+          <div className="flex items-center gap-5 text-[14px] font-medium text-[#080808]/72">
+            <a href={HOME_PAGE_HREF_FROM_PROJECTS} className="transition-colors hover:text-[#080808]">Inicio</a>
+            <a href={`${HOME_PAGE_HREF_FROM_PROJECTS}#contacto`} className="transition-colors hover:text-[#080808]">Contacto</a>
+          </div>
+        </div>
+      </header>
+      <PortfolioSection />
+    </>
+  );
+};
+
 const App = () => {
+  const showProjectsPage = isProjectsPath();
 
   return (
     <div className="relative z-10 w-full bg-white">
       <CustomCursor />
-      <HeroSection />
-      <ProblemSection />
-      <div className="relative">
-        <SectionsAuroraBackdrop />
-        <div className="relative z-10">
-          <WhyUsSection />
-          <PortfolioSection />
-          <ExpandedAgencySections />
-          <AliadosSection />
-          <ContactRevealSection />
-        </div>
-      </div>
+      {showProjectsPage ? (
+        <ProjectsPage />
+      ) : (
+        <>
+          <HeroSection />
+          <ProblemSection />
+          <div className="relative">
+            <SectionsAuroraBackdrop />
+            <div className="relative z-10">
+              <WhyUsSection />
+              <ExpandedAgencySections />
+              <AliadosSection />
+              <ContactRevealSection />
+            </div>
+          </div>
+        </>
+      )}
       <style>{`
         @import url('https://fonts.cdnfonts.com/css/open-sauce-one');
         :root {
@@ -1446,8 +1468,12 @@ const ProblemSection = () => {
         </div>
 
         <div className="w-full mt-14 md:mt-20">
-          <h3 className="text-[12px] sm:text-[14px] font-bold text-[#080808]/50 uppercase tracking-[0.15em] mb-5 md:mb-8 text-center md:text-left">
-            POR QUÉ MUCHOS NEGOCIOS SIGUEN SIN WEB
+          <h3 className="mb-6 text-center font-manrope text-[clamp(24px,3.6vw,42px)] font-extrabold uppercase tracking-[0.04em] text-[#080808] md:mb-10">
+            POR QUÉ MUCHOS NEGOCIOS{' '}
+            <span className="font-epilogue italic tracking-[-0.03em]" style={gradientAccentStyle}>
+              SIGUEN
+            </span>{' '}
+            SIN WEB
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
@@ -1604,7 +1630,7 @@ const HeroSection = () => {
           Inicio
         </a>
         <a href="#kaiva" className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Nosotros</a>
-        <a href="#proyectos" className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Proyectos</a>
+        <a href={PROJECTS_PAGE_HREF} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Proyectos</a>
         <a href="#contacto" className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Contacto</a>
         <a
           href="#planes"
@@ -1644,11 +1670,23 @@ const HeroSection = () => {
         </h1>
 
         <a
-          href="#proyectos"
-          className="mt-4 inline-block w-fit pb-1 text-[16px] font-medium leading-none underline decoration-1 underline-offset-[5px] md:mt-6 md:text-[20px]"
+          href={PROJECTS_PAGE_HREF}
+          className="mt-4 inline-flex w-fit items-center gap-2 pb-1 text-[16px] font-medium leading-none underline decoration-1 underline-offset-[5px] md:mt-6 md:text-[20px]"
           style={gradientAccentStyle}
         >
-          Explora nuestro trabajo ↗
+          <span>Explora nuestro trabajo</span>
+          <svg
+            aria-hidden="true"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="shrink-0"
+            style={{ color: '#8242f5' }}
+          >
+            <path d="M7 17L17 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <path d="M9 7H17V15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </a>
       </motion.div>
 
