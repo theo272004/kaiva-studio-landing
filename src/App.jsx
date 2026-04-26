@@ -8,6 +8,13 @@ const isProjectsPath = () => {
   if (typeof window === 'undefined') return false;
   return /\/proyectos(?:\/|$|\/index\.html$)/.test(window.location.pathname);
 };
+const scrollToSection = (event, id) => {
+  if (typeof window === 'undefined') return;
+  event.preventDefault();
+  const target = document.getElementById(id);
+  if (!target) return;
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
 
 const slides = [
   {
@@ -1008,7 +1015,7 @@ const ExpandedAgencySections = () => (
                         </li>
                       ))}
                     </ul>
-                    <a href="#contacto" className="mt-10 inline-flex w-fit items-center justify-center rounded-full bg-white px-7 py-3 font-manrope text-[11px] font-bold uppercase tracking-widest text-[#080808] shadow-[0_4px_14px_rgba(0,0,0,0.06)] border border-[#080808]/5 transition-[shadow,transform] duration-300 hover:shadow-[0_6px_20px_rgba(0,0,0,0.08)] hover:-translate-y-[1px]">
+                    <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className="mt-10 inline-flex w-fit items-center justify-center rounded-full bg-white px-7 py-3 font-manrope text-[11px] font-bold uppercase tracking-widest text-[#080808] shadow-[0_4px_14px_rgba(0,0,0,0.06)] border border-[#080808]/5 transition-[shadow,transform] duration-300 hover:shadow-[0_6px_20px_rgba(0,0,0,0.08)] hover:-translate-y-[1px]">
                       {plan.cta}
                     </a>
                   </div>
@@ -1033,7 +1040,7 @@ const ExpandedAgencySections = () => (
                   <p className="max-w-[500px] text-[14px] leading-relaxed text-[#080808]/70">
                     {ecommercePlan.description}
                   </p>
-                  <a href="#contacto" className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full shadow-[0_8px_20px_-6px_rgba(164,130,255,0.5)] transition-transform hover:scale-105" style={{ background: 'linear-gradient(135deg, #d49fff 0%, #a482ff 100%)' }}>
+                  <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full shadow-[0_8px_20px_-6px_rgba(164,130,255,0.5)] transition-transform hover:scale-105" style={{ background: 'linear-gradient(135deg, #d49fff 0%, #a482ff 100%)' }}>
                     <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
@@ -1240,20 +1247,51 @@ const CustomCursor = () => {
   );
 };
 
+const FixedNavbar = ({ projectsActive = false }) => (
+  <>
+    <a
+      href={projectsActive ? HOME_PAGE_HREF_FROM_PROJECTS : '#inicio'}
+      onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'inicio')}
+      className="fixed left-6 top-5 z-40 w-fit text-left text-[16px] leading-[0.95] text-[#080808] transition-colors duration-200 md:left-[80px] md:top-[40px] md:text-[20px]"
+    >
+      <span className="block font-semibold tracking-[-0.02em]">Kaiva</span>
+      <span className="block font-normal">
+        Studio<span style={gradientAccentStyle}>.</span>
+      </span>
+    </a>
+
+    <nav className="fixed right-[32px] top-[32px] z-40 hidden items-center gap-10 text-[16px] text-[#080808]/68 transition-colors duration-200 md:flex md:right-[80px] md:top-[45px]">
+      <a href={projectsActive ? HOME_PAGE_HREF_FROM_PROJECTS : '#inicio'} onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'inicio')} className="font-medium" style={projectsActive ? undefined : gradientAccentStyle}>
+        Inicio
+      </a>
+      <a href={projectsActive ? `${HOME_PAGE_HREF_FROM_PROJECTS}#kaiva` : '#kaiva'} onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'kaiva')} className="transition-colors hover:text-[#080808]">Nosotros</a>
+      <a href={projectsActive ? './' : PROJECTS_PAGE_HREF} className="transition-colors hover:text-[#080808]" style={projectsActive ? gradientAccentStyle : undefined}>Proyectos</a>
+      <a href={projectsActive ? `${HOME_PAGE_HREF_FROM_PROJECTS}#contacto` : '#contacto'} onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'contacto')} className="transition-colors hover:text-[#080808]">Contacto</a>
+      <a
+        href={projectsActive ? `${HOME_PAGE_HREF_FROM_PROJECTS}#planes` : '#planes'}
+        onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'planes')}
+        className="inline-flex h-[44px] items-center justify-center self-center rounded-full border border-[#080808]/12 bg-white/72 px-6 font-manrope text-[11px] font-bold uppercase tracking-[0.16em] text-[#080808] shadow-[0_12px_28px_-20px_rgba(8,8,8,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white"
+      >
+        Paquetes
+      </a>
+    </nav>
+
+    <div className="fixed right-6 top-5 z-40 flex items-center gap-3 md:hidden">
+      <a
+        href={projectsActive ? `${HOME_PAGE_HREF_FROM_PROJECTS}#planes` : '#planes'}
+        onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'planes')}
+        className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-[#080808]/12 bg-white px-5 font-manrope text-[10px] font-bold uppercase tracking-[0.16em] text-[#080808] transition-colors hover:bg-[#f7f7f7]"
+      >
+        Paquetes
+      </a>
+    </div>
+  </>
+);
+
 const ProjectsPage = () => {
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-[#080808]/8 bg-white/88 backdrop-blur-xl">
-        <div className="mx-auto flex h-[72px] w-full max-w-[1320px] items-center justify-between px-6 md:px-12 lg:px-16">
-          <a href={HOME_PAGE_HREF_FROM_PROJECTS} className="font-epilogue text-[24px] font-extrabold tracking-[-0.03em] text-[#080808]">
-            Kaiva<span style={gradientAccentStyle}>Studio.</span>
-          </a>
-          <div className="flex items-center gap-5 text-[14px] font-medium text-[#080808]/72">
-            <a href={HOME_PAGE_HREF_FROM_PROJECTS} className="transition-colors hover:text-[#080808]">Inicio</a>
-            <a href={`${HOME_PAGE_HREF_FROM_PROJECTS}#contacto`} className="transition-colors hover:text-[#080808]">Contacto</a>
-          </div>
-        </div>
-      </header>
+      <FixedNavbar projectsActive />
       <PortfolioSection />
     </>
   );
@@ -1264,7 +1302,6 @@ const App = () => {
 
   return (
     <div className="relative z-10 w-full bg-white">
-      <CustomCursor />
       {showProjectsPage ? (
         <ProjectsPage />
       ) : (
@@ -1522,55 +1559,16 @@ const ProblemSection = () => {
 
 const HeroSection = () => {
   const [introComplete, setIntroComplete] = useState(false);
-  const [isDarkNavbar, setIsDarkNavbar] = useState(false);
-  const [navHidden, setNavHidden] = useState(false);
+  const isDarkNavbar = false;
+  const navHidden = false;
   const logoRef = useRef(null);
   const navRef = useRef(null);
-  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
       setIntroComplete(true);
     }, 1100);
     return () => window.clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const handleScrollDir = () => {
-      const y = window.scrollY;
-      const goingDown = y > lastScrollY.current;
-      setNavHidden(goingDown && y > 80);
-      lastScrollY.current = y;
-    };
-    window.addEventListener('scroll', handleScrollDir, { passive: true });
-    return () => window.removeEventListener('scroll', handleScrollDir);
-  }, []);
-
-  useEffect(() => {
-    const resolveThemeAtPoint = (x, y) => {
-      const stack = document.elementsFromPoint(x, y);
-      const match = stack.find((element) => {
-        if (logoRef.current?.contains(element) || navRef.current?.contains(element)) return false;
-        return element.closest?.('[data-nav-theme]');
-      });
-
-      return match?.closest?.('[data-nav-theme]')?.getAttribute('data-nav-theme') ?? 'light';
-    };
-
-    const updateNavbarTone = () => {
-      const leftTone = resolveThemeAtPoint(120, 52);
-      const rightTone = resolveThemeAtPoint(Math.max(window.innerWidth - 160, 120), 58);
-      setIsDarkNavbar(leftTone === 'dark' || rightTone === 'dark');
-    };
-
-    updateNavbarTone();
-    window.addEventListener('scroll', updateNavbarTone, { passive: true });
-    window.addEventListener('resize', updateNavbarTone);
-
-    return () => {
-      window.removeEventListener('scroll', updateNavbarTone);
-      window.removeEventListener('resize', updateNavbarTone);
-    };
   }, []);
 
   return (
@@ -1624,16 +1622,18 @@ const HeroSection = () => {
       >
         <a
           href="#inicio"
+          onClick={(event) => scrollToSection(event, 'inicio')}
           className="font-medium"
           style={gradientAccentStyle}
         >
           Inicio
         </a>
-        <a href="#kaiva" className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Nosotros</a>
+        <a href="#kaiva" onClick={(event) => scrollToSection(event, 'kaiva')} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Nosotros</a>
         <a href={PROJECTS_PAGE_HREF} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Proyectos</a>
-        <a href="#contacto" className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Contacto</a>
+        <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Contacto</a>
         <a
           href="#planes"
+          onClick={(event) => scrollToSection(event, 'planes')}
           className={`inline-flex h-[44px] items-center justify-center self-center rounded-full px-6 font-manrope text-[11px] font-bold uppercase tracking-[0.16em] transition-all duration-300 hover:-translate-y-0.5 ${
             isDarkNavbar
               ? 'border border-white/18 bg-white/10 text-white hover:bg-white/16'
@@ -1652,6 +1652,7 @@ const HeroSection = () => {
       >
         <a
           href="#planes"
+          onClick={(event) => scrollToSection(event, 'planes')}
           className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-[#080808]/12 bg-white px-5 font-manrope text-[10px] font-bold uppercase tracking-[0.16em] text-[#080808] transition-colors hover:bg-[#f7f7f7]"
         >
           Paquetes
@@ -1728,7 +1729,7 @@ const HeroSection = () => {
         animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
         transition={{ duration: 0.6, delay: 0.28, ease: 'easeOut' }}
       >
-        <a href="#contacto" className="flex min-h-[48px] sm:min-h-[52px] items-center justify-center rounded-[30px] bg-[#0c0c0c] px-8 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-105 active:scale-95 shadow-[0_16px_32px_-8px_rgba(0,0,0,0.3)] sm:px-9 sm:text-[15px] whitespace-nowrap">
+        <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className="flex min-h-[48px] sm:min-h-[52px] items-center justify-center rounded-[30px] bg-[#0c0c0c] px-8 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-105 active:scale-95 shadow-[0_16px_32px_-8px_rgba(0,0,0,0.3)] sm:px-9 sm:text-[15px] whitespace-nowrap">
           Quiero mi web
         </a>
       </motion.div>
