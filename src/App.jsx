@@ -937,13 +937,12 @@ const ProcessRedesignSection = () => {
   ];
 
   // Animate the vertical position of the list to keep the active item centered
-  // Range: from first item centered to last item centered
-  // Adjust 300 to match the approximate height of the cards/spacing
-  const listY = useTransform(scrollYProgress, [0, 1], [200, -200]);
+  // These values ensure the first card starts centered and the last card ends centered
+  const listY = useTransform(scrollYProgress, [0, 1], [300, -700]);
 
   return (
-    <section ref={sectionRef} id="proceso" className="relative w-full bg-[#fbfbfd]">
-      <div className="relative h-[250vh] w-full">
+    <section ref={sectionRef} id="proceso" className="relative w-full bg-[#fbfbfd] py-0">
+      <div className="relative h-[500vh] w-full">
         <div className="sticky top-0 flex h-screen w-full items-center overflow-hidden px-6 lg:px-16">
           
           {/* Background Decorative Elements */}
@@ -995,7 +994,7 @@ const ExpandedAgencySections = () => (
     <section
       id="planes"
       data-nav-theme="light"
-      className="relative overflow-hidden bg-transparent px-4 py-12 md:px-8 md:py-16"
+      className="relative overflow-hidden bg-transparent px-4 pb-12 pt-0 md:px-8 md:pb-16"
     >
       <motion.img
         src={asset('KaivaMora1.webp')}
