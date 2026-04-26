@@ -891,31 +891,27 @@ const stepLabels = ['Primer paso', 'Segundo paso', 'Tercer paso', 'Cuarto paso',
 
 const ProcessStepCard = ({ step, index, activeProgress }) => {
   const distance = useTransform(activeProgress, (value) => {
-    const total = processSteps.length;
-    let offset = index - value;
-    if (offset > total / 2) offset -= total;
-    if (offset < -total / 2) offset += total;
-    return offset;
+    return index - value;
   });
-  const y = useTransform(distance, (value) => value * -138);
-  const scale = useTransform(distance, (value) => Math.max(0.88, 1 - Math.min(Math.abs(value), 1.35) * 0.1));
+  const y = useTransform(distance, (value) => value * -160);
+  const scale = useTransform(distance, (value) => Math.max(0.85, 1 - Math.abs(value) * 0.12));
   const opacity = useTransform(distance, (value) => {
     const absolute = Math.abs(value);
-    if (absolute > 1.35) return 0;
-    return Math.max(0.34, 1 - absolute * 0.42);
+    if (absolute > 2) return 0;
+    return Math.max(0, 1 - absolute * 0.5);
   });
-  const blur = useTransform(distance, (value) => `blur(${Math.min(Math.abs(value) * 2.2, 4)}px)`);
+  const blur = useTransform(distance, (value) => `blur(${Math.min(Math.abs(value) * 3, 6)}px)`);
   const zIndex = useTransform(distance, (value) => Math.round(20 - Math.abs(value) * 10));
   const backgroundColor = useTransform(distance, (value) => (
-    Math.abs(value) < 0.5 ? "rgba(255,255,255,0.96)" : "rgba(255,255,255,0.62)"
+    Math.abs(value) < 0.4 ? "rgba(255,255,255,1)" : "rgba(255,255,255,0.4)"
   ));
   const boxShadow = useTransform(distance, (value) => (
-    Math.abs(value) < 0.5
-      ? "0 30px 90px rgba(8,8,8,0.10), inset 0 1px 0 rgba(255,255,255,0.9)"
-      : "0 14px 44px rgba(8,8,8,0.05)"
+    Math.abs(value) < 0.4
+      ? "0 30px 90px rgba(130,66,245,0.12), inset 0 1px 0 rgba(255,255,255,1)"
+      : "0 10px 30px rgba(0,0,0,0.02)"
   ));
   const borderColor = useTransform(distance, (value) => (
-    Math.abs(value) < 0.5 ? "rgba(130,66,245,0.16)" : "rgba(8,8,8,0.06)"
+    Math.abs(value) < 0.4 ? "rgba(130,66,245,0.2)" : "rgba(0,0,0,0.05)"
   ));
 
   return (
@@ -954,19 +950,21 @@ const ProcessRedesignSection = () => {
     { title: 'Entrega', description: 'Publicamos una solución lista para operar desde el primer día, con soporte posterior según el plan.' },
   ];
 
-  const activeProgressRaw = useTransform(scrollYProgress, [0, 1], [0, stepsContent.length - 1]);
-  const activeProgress = useSpring(activeProgressRaw, { stiffness: 110, damping: 28, mass: 0.35 });
+  // Tighten the scroll range: map 0-0.9 scroll to steps 0-4
+  // This ensures Step 5 stays visible for the last 10% of the scroll before un-sticking
+  const activeProgressRaw = useTransform(scrollYProgress, [0, 0.9], [0, stepsContent.length - 1]);
+  const activeProgress = useSpring(activeProgressRaw, { stiffness: 90, damping: 24, mass: 0.4 });
 
   useMotionValueEvent(activeProgressRaw, 'change', (latest) => {
     const nextStep = Math.min(stepsContent.length - 1, Math.max(0, Math.round(latest)));
-    setActiveStep((current) => (current === nextStep ? current : nextStep));
+    setActiveStep(nextStep);
   });
 
   return (
     <section ref={sectionRef} id="proceso" className="relative w-full bg-[#fbfbfd] py-0">
-      <div className="relative h-[400vh] w-full">
+      <div className="relative h-[450vh] w-full">
         <div className="sticky top-0 flex h-screen w-full items-center overflow-hidden px-6 lg:px-16">
-          <div className="absolute inset-0 bg-[radial-gradient(80%_70%_at_50%_0%,rgba(255,255,255,0.96)_0%,rgba(251,251,253,0.7)_48%,rgba(244,247,255,0.88)_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(80%_70%_at_50%_0%,rgba(255,255,255,1)_0%,rgba(251,251,253,0.8)_48%,rgba(244,247,255,0.9)_100%)]" />
 
           <div className="relative z-10 mx-auto grid w-full max-w-[1240px] items-center gap-6 md:grid-cols-[0.85fr_1.15fr] md:gap-14">
             <motion.div
