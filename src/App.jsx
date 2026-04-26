@@ -896,18 +896,21 @@ const ProcessStepCard = ({ step, index, progress, total }) => {
   const end = (index + 1) / total;
   
   // Use a range that makes the card active when it's around the center of the scroll container
-  const isActiveProgress = useTransform(progress, [start, start + 0.05, end - 0.05, end], [0, 1, 1, 0]);
+  const opacity = useTransform(progress, [start, start + 0.05, end - 0.05, end], [0, 1, 1, 0]);
   const scale = useTransform(progress, [start, start + 0.1, end - 0.1, end], [0.95, 1, 1, 0.95]);
-  const opacity = useTransform(progress, [start, start + 0.1, end - 0.1, end], [0.5, 1, 1, 0.5]);
+  const y = useTransform(progress, [start, end], [20, -20]);
   
   // Custom styles for the "active" state card as seen in the image
   const backgroundColor = useTransform(progress, [start, start + 0.05, end - 0.05, end], ["rgba(255,255,255,0)", "rgba(255,255,255,1)", "rgba(255,255,255,1)", "rgba(255,255,255,0)"]);
   const boxShadow = useTransform(progress, [start, start + 0.05, end - 0.05, end], ["0 0px 0px rgba(0,0,0,0)", "0 20px 50px rgba(0,0,0,0.08)", "0 20px 50px rgba(0,0,0,0.08)", "0 0px 0px rgba(0,0,0,0)"]);
   const border = useTransform(progress, [start, start + 0.05, end - 0.05, end], ["1px solid rgba(0,0,0,0)", "1px solid rgba(0,0,0,0.05)", "1px solid rgba(0,0,0,0.05)", "1px solid rgba(0,0,0,0)"]);
 
+  // Only allow interactions when the card is visible
+  const pointerEvents = useTransform(progress, [start, start + 0.05, end - 0.05, end], ["none", "auto", "auto", "none"]);
+
   return (
     <motion.div
-      style={{ backgroundColor, boxShadow, border, scale, opacity }}
+      style={{ backgroundColor, boxShadow, border, scale, opacity, y, pointerEvents }}
       className="relative flex items-center gap-6 rounded-[40px] p-8 transition-shadow duration-300 md:p-10"
     >
       <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#f4f2ff] font-epilogue text-[18px] font-bold text-[#080808]/40 shadow-inner">
