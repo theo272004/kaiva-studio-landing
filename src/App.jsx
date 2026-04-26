@@ -895,32 +895,29 @@ const ProcessStepCard = ({ step, index, progress, total }) => {
   const start = index / total;
   const end = (index + 1) / total;
   
-  // Use a range that makes the card active when it's around the center of the scroll container
-  const opacity = useTransform(progress, [start, start + 0.05, end - 0.05, end], [0, 1, 1, 0]);
-  const scale = useTransform(progress, [start, start + 0.1, end - 0.1, end], [0.95, 1, 1, 0.95]);
-  const y = useTransform(progress, [start, end], [20, -20]);
+  // Highlight card when progress is within its range
+  // We use a narrower range for the highlight to make it feel more "snappy"
+  const highlight = useTransform(progress, [start, start + 0.05, end - 0.05, end], [0, 1, 1, 0]);
   
-  // Custom styles for the "active" state card as seen in the image
-  const backgroundColor = useTransform(progress, [start, start + 0.05, end - 0.05, end], ["rgba(255,255,255,0)", "rgba(255,255,255,1)", "rgba(255,255,255,1)", "rgba(255,255,255,0)"]);
-  const boxShadow = useTransform(progress, [start, start + 0.05, end - 0.05, end], ["0 0px 0px rgba(0,0,0,0)", "0 20px 50px rgba(0,0,0,0.08)", "0 20px 50px rgba(0,0,0,0.08)", "0 0px 0px rgba(0,0,0,0)"]);
-  const border = useTransform(progress, [start, start + 0.05, end - 0.05, end], ["1px solid rgba(0,0,0,0)", "1px solid rgba(0,0,0,0.05)", "1px solid rgba(0,0,0,0.05)", "1px solid rgba(0,0,0,0)"]);
-
-  // Only allow interactions when the card is visible
-  const pointerEvents = useTransform(progress, [start, start + 0.05, end - 0.05, end], ["none", "auto", "auto", "none"]);
+  const backgroundColor = useTransform(highlight, [0, 1], ["rgba(255,255,255,0)", "rgba(255,255,255,1)"]);
+  const boxShadow = useTransform(highlight, [0, 1], ["0 0px 0px rgba(0,0,0,0)", "0 20px 60px rgba(0,0,0,0.06)"]);
+  const opacity = useTransform(highlight, [0, 1], [0.35, 1]);
+  const scale = useTransform(highlight, [0, 1], [0.97, 1]);
+  const border = useTransform(highlight, [0, 1], ["1px solid rgba(0,0,0,0)", "1px solid rgba(0,0,0,0.04)"]);
 
   return (
     <motion.div
-      style={{ backgroundColor, boxShadow, border, scale, opacity, y, pointerEvents }}
-      className="relative flex items-center gap-6 rounded-[40px] p-8 transition-shadow duration-300 md:p-10"
+      style={{ backgroundColor, boxShadow, opacity, scale, border }}
+      className="flex items-center gap-6 rounded-[32px] p-6 transition-all duration-500 md:p-8"
     >
-      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#f4f2ff] font-epilogue text-[18px] font-bold text-[#080808]/40 shadow-inner">
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#080808]/5 bg-white/40 font-epilogue text-[16px] font-bold text-[#080808]/40 shadow-sm backdrop-blur-sm">
         0{index + 1}
       </div>
-      <div className="flex flex-col gap-2">
-        <h3 className="font-epilogue text-[26px] font-extrabold tracking-tight text-[#080808] md:text-[32px]">
+      <div className="flex flex-col gap-1">
+        <h3 className="font-epilogue text-[22px] font-extrabold tracking-tight text-[#080808] md:text-[28px]">
           {step.title}
         </h3>
-        <p className="max-w-[420px] text-[15px] leading-relaxed text-[#080808]/60 md:text-[16px]">
+        <p className="max-w-[400px] text-[14px] leading-relaxed text-[#080808]/50 md:text-[15px]">
           {step.description}
         </p>
       </div>
@@ -944,24 +941,36 @@ const ProcessRedesignSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} id="proceso" className="relative w-full bg-white">
-      <div className="relative h-[400vh] w-full">
+    <section ref={sectionRef} id="proceso" className="relative w-full bg-[#fbfbfd]">
+      <div className="relative h-[300vh] w-full">
         <div className="sticky top-0 flex h-screen w-full items-center overflow-hidden px-6 lg:px-16">
           
-          {/* Background Decorative Blobs */}
-          <div className="absolute left-[30%] top-[20%] h-64 w-64 rounded-full bg-[#a482ff]/10 blur-[80px]" />
-          <div className="absolute right-[10%] top-[40%] h-96 w-96 rounded-full bg-[#21b2c6]/5 blur-[100px]" />
+          {/* Background Decorative Elements */}
+          <div className="absolute left-[20%] top-[10%] h-[500px] w-[500px] rounded-full bg-[#8242f5]/5 blur-[120px]" />
+          <div className="absolute right-[5%] bottom-[10%] h-[400px] w-[400px] rounded-full bg-[#21b2c6]/5 blur-[100px]" />
+          
+          {/* Floating 3D-like elements as in the reference */}
+          <motion.div 
+            animate={{ y: [0, -25, 0], rotate: [0, 15, 0], scale: [1, 1.05, 1] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-[20%] left-[8%] h-14 w-14 rounded-2xl bg-gradient-to-br from-[#8242f5]/40 to-[#d96cff]/40 shadow-[0_10px_30px_rgba(130,66,245,0.2)] blur-[0.5px]"
+          />
+          <motion.div 
+            animate={{ y: [0, 35, 0], rotate: [0, -20, 0], scale: [1, 1.1, 1] }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            className="absolute top-[15%] right-[12%] h-20 w-20 rounded-3xl bg-gradient-to-br from-[#21b2c6]/30 to-[#8242f5]/30 shadow-[0_15px_40px_rgba(33,178,198,0.15)] blur-[1px]"
+          />
 
           <div className="mx-auto flex w-full max-w-[1240px] flex-col items-center justify-between gap-12 md:flex-row">
             
             {/* Left side: Large number and vertical text */}
-            <div className="flex items-center gap-4 md:gap-10">
-              <div className="font-epilogue text-[180px] font-extrabold leading-none tracking-[-0.08em] text-[#8242f5]/10 md:text-[280px]">
+            <div className="flex items-center gap-4 md:gap-14">
+              <div className="font-epilogue text-[220px] font-extrabold leading-none tracking-[-0.08em] text-[#8242f5]/15 md:text-[380px]">
                 {stepsContent.length}
               </div>
               <div className="flex flex-col">
                 <div 
-                  className="font-epilogue text-[40px] font-extrabold uppercase tracking-[0.25em] text-[#080808] md:text-[72px]" 
+                  className="font-epilogue text-[44px] font-extrabold uppercase tracking-[0.3em] text-[#080808] md:text-[86px]" 
                   style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
                 >
                   PASOS
@@ -969,18 +978,17 @@ const ProcessRedesignSection = () => {
               </div>
             </div>
 
-            {/* Right side: Steps (Stacked and changing with scroll) */}
-            <div className="relative flex w-full flex-col justify-center md:max-w-[600px]">
-              <div className="relative h-[400px] w-full md:h-[500px]">
+            {/* Right side: Steps List (Corrected layout: static list with moving highlight) */}
+            <div className="relative flex w-full flex-col justify-center md:max-w-[620px]">
+              <div className="flex flex-col gap-3 md:gap-4">
                 {stepsContent.map((step, i) => (
-                  <div key={i} className="absolute inset-0 flex items-center">
-                    <ProcessStepCard 
-                      step={step} 
-                      index={i} 
-                      total={stepsContent.length} 
-                      progress={scrollYProgress} 
-                    />
-                  </div>
+                  <ProcessStepCard 
+                    key={i}
+                    step={step} 
+                    index={i} 
+                    total={stepsContent.length} 
+                    progress={scrollYProgress} 
+                  />
                 ))}
               </div>
             </div>
