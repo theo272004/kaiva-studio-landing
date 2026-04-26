@@ -963,8 +963,8 @@ const ProcessRedesignSection = () => {
   });
 
   return (
-    <section ref={sectionRef} id="proceso" className="relative w-full bg-[#fbfbfd]">
-      <div className="relative h-[500vh] w-full">
+    <section ref={sectionRef} id="proceso" className="relative w-full bg-[#fbfbfd] py-0">
+      <div className="relative h-[400vh] w-full">
         <div className="sticky top-0 flex h-screen w-full items-center overflow-hidden px-6 lg:px-16">
           <div className="absolute inset-0 bg-[radial-gradient(80%_70%_at_50%_0%,rgba(255,255,255,0.96)_0%,rgba(251,251,253,0.7)_48%,rgba(244,247,255,0.88)_100%)]" />
 
@@ -1013,7 +1013,7 @@ const ExpandedAgencySections = () => (
     <section
       id="planes"
       data-nav-theme="light"
-      className="relative overflow-hidden bg-transparent px-4 pb-12 pt-0 md:px-8 md:pb-16"
+      className="relative m-0 overflow-hidden bg-transparent px-4 pb-12 pt-0 md:px-8 md:pb-16"
     >
       <motion.img
         src={asset('KaivaMora1.webp')}
