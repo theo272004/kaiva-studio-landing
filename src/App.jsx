@@ -168,10 +168,10 @@ const GlassPanelLayers = () => (
 
 const MockupRenderer = ({ type }) => {
   const mockups = {
-    dashboard: asset('kaiva_dashboard_mockup.png'),
-    ecommerce: asset('kaiva_ecommerce_mockup.png'),
-    tech: asset('kaiva_tech_mockup.png'),
-    creative: asset('kaiva_creative_mockup.png'),
+    dashboard: asset('kaiva_dashboard_mockup.webp'),
+    ecommerce: asset('kaiva_ecommerce_mockup.webp'),
+    tech: asset('kaiva_tech_mockup.webp'),
+    creative: asset('kaiva_creative_mockup.webp'),
   };
 
   return (
@@ -179,6 +179,8 @@ const MockupRenderer = ({ type }) => {
       <img
         src={mockups[type]}
         alt={type}
+        loading="lazy"
+        decoding="async"
         className="h-full w-full object-contain p-3 opacity-90 transition-opacity duration-700 hover:opacity-100 sm:object-cover sm:p-0"
       />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/10 to-transparent" />
@@ -208,7 +210,7 @@ const FloatingRobot = ({ src, style, className = '', delay = 0, duration = 6, am
     }}
   >
     <div className="h-full w-full">
-      <img src={src} alt="Kaiva Character" className="h-full w-full object-contain" />
+      <img src={src} alt="Kaiva Character" loading="lazy" decoding="async" className="h-full w-full object-contain" />
     </div>
   </motion.div>
 );
@@ -251,8 +253,7 @@ const TiltSlide = ({ slide, isActive, position, onClick }) => {
   const scale = isActive ? 1 : 1 - absOffset * 0.12;
   const translateX = position * 55;
   const translateZ = isActive ? 0 : -absOffset * 180;
-  const opacity = absOffset > 2 ? 0 : isActive ? 1 : 0.55 - absOffset * 0.15;
-  const blur = isActive ? 0 : absOffset * 2;
+  const opacity = absOffset > 2 ? 0 : isActive ? 1 : 0.5 - absOffset * 0.12;
 
   return (
     <motion.div
@@ -262,7 +263,7 @@ const TiltSlide = ({ slide, isActive, position, onClick }) => {
       onClick={onClick}
       className="absolute left-1/2 top-1/2 cursor-pointer"
       style={{
-        width: 'clamp(250px, 68vw, 620px)',
+        width: 'clamp(220px, 72vw, 620px)',
         aspectRatio: '4/3',
         x: '-50%',
         y: '-50%',
@@ -275,7 +276,6 @@ const TiltSlide = ({ slide, isActive, position, onClick }) => {
         scale,
         z: translateZ,
         opacity,
-        filter: `blur(${blur}px)`,
       }}
       transition={{ type: 'spring', stiffness: 120, damping: 20 }}
     >
@@ -398,55 +398,37 @@ const ContactRevealSection = () => {
     },
   };
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end end'],
-  });
-  const blackPanelY = useTransform(
-    scrollYProgress,
-    [0, 0.12, 1],
-    ['106%', '106%', '0%'],
-  );
-
   return (
-    <section
-      ref={sectionRef}
-      id="contacto"
-      className="relative bg-transparent"
-      style={{ minHeight: isMobile ? '190svh' : '170svh' }}
-    >
-      <div className="sticky top-0 z-0 h-screen overflow-hidden bg-transparent">
+    <section id="contacto" className="relative w-full overflow-hidden bg-transparent">
+      <div
+        className="mx-auto flex w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
+        style={{
+          paddingTop: 'clamp(72px, 12vw, 196px)',
+          paddingBottom: 'clamp(72px, 12vw, 196px)',
+        }}
+      >
         <div
-          className="mx-auto flex h-full w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
-          style={{
-            paddingTop: 'clamp(128px, 15vw, 196px)',
-            paddingBottom: 'clamp(128px, 15vw, 196px)',
-          }}
+          className="grid w-full lg:grid-cols-[0.9fr_1.1fr] lg:items-center"
+          style={{ columnGap: 'clamp(56px, 9vw, 132px)' }}
         >
-          <div
-            className="grid w-full lg:grid-cols-[0.9fr_1.1fr] lg:items-center"
-            style={{ columnGap: 'clamp(56px, 9vw, 132px)' }}
-          >
             <motion.div
               variants={textGroup}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.38 }}
-              className="max-w-[560px]"
+              className="relative z-10 max-w-[560px]"
             >
               <motion.div variants={textItem} className="font-manrope text-[16px] font-medium tracking-normal text-[#080808]/68">
                 Contacto
               </motion.div>
-              <motion.h2 className="mt-6 font-epilogue text-[clamp(56px,7vw,112px)] font-extrabold leading-[0.92] tracking-[-0.04em] text-[#080808] md:tracking-[-0.035em] lg:tracking-[-0.04em]">
+              <motion.h2 className="mt-6 font-epilogue text-[clamp(40px,7vw,112px)] font-extrabold leading-[0.92] tracking-[-0.04em] text-[#080808] md:tracking-[-0.035em] lg:tracking-[-0.04em]">
                 <motion.span variants={textItem} className="block">Ready to</motion.span>
                 <motion.span variants={textItem} className="block">start?</motion.span>
               </motion.h2>
-              <motion.p
-                variants={paragraphItem}
-                className="mt-7 max-w-[34ch] text-[clamp(18px,1.4vw,22px)] leading-[1.55] text-[#080808]/62"
-              >
-                Cuéntanos qué estás construyendo y te responderemos con una propuesta clara, directa y bien estructurada.
-              </motion.p>
+              <AnimatedText 
+                text="Cuéntanos qué estás construyendo y te responderemos con una propuesta clara, directa y bien estructurada."
+                className="mt-7 max-w-[40ch] text-[clamp(18px,1.4vw,22px)] leading-[1.55] text-[#080808]/62"
+              />
             </motion.div>
 
             <motion.form
@@ -456,7 +438,7 @@ const ContactRevealSection = () => {
               variants={formItem}
               whileHover={prefersReducedMotion || isMobile ? undefined : { y: -2 }}
               transition={{ duration: 0.32, ease: premiumEase }}
-              className="contact-premium-card rounded-[34px] p-5 md:p-6"
+              className="contact-premium-card relative z-30 rounded-[34px] p-5 md:p-6"
               style={isMobile ? undefined : { transformPerspective: 1600, transformStyle: 'preserve-3d' }}
             >
               <motion.div variants={fieldGroup} className="space-y-4">
@@ -510,31 +492,27 @@ const ContactRevealSection = () => {
           </div>
         </div>
 
-        <motion.div
-          className="absolute inset-x-0 bottom-0 z-20 bg-[#111111]"
-          style={{
-            y: prefersReducedMotion ? '0%' : blackPanelY,
-            minHeight: isMobile ? '54vh' : '48vh',
-          }}
-        >
-          <div
-            className="mx-auto flex w-full max-w-[1320px] flex-col items-center justify-center px-6 py-12 text-center md:px-12 md:py-14 lg:px-16"
-            style={{ minHeight: isMobile ? '54vh' : '48vh' }}
-          >
+      <motion.div
+        className="w-full bg-[#111111]"
+        initial={prefersReducedMotion ? { opacity: 0 } : { y: '100%' }}
+        whileInView={prefersReducedMotion ? { opacity: 1 } : { y: '0%' }}
+        viewport={{ once: true, amount: 0 }}
+        transition={{ duration: 0.9, ease: premiumEase }}
+      >
+        <div className="mx-auto flex min-h-[36vh] md:min-h-[45vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-10 text-center md:px-12 md:py-12 lg:px-16">
           <a
             href="mailto:hello@kaivastudio.com"
-            className="font-epilogue text-[clamp(30px,4.2vw,58px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
+            className="font-epilogue text-[clamp(28px,4vw,60px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
           >
             hello@kaivastudio.com
           </a>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-white/52">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-white/52">
             <a href="#" className="transition-colors duration-300 hover:text-white">Instagram</a>
             <a href="#" className="transition-colors duration-300 hover:text-white">Dribbble</a>
             <a href="#" className="transition-colors duration-300 hover:text-white">LinkedIn</a>
           </div>
-          </div>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </section>
   );
 };
@@ -565,7 +543,7 @@ const SectionShell = ({ id, tone = 'light', className = '', children }) => {
 
   return (
     <section id={id} data-nav-theme="light" className={`${toneClass} ${className}`}>
-      <div className="mx-auto w-full max-w-[1320px] px-6 py-28 md:px-12 md:py-36 lg:px-16">{children}</div>
+      <div className="mx-auto w-full max-w-[1320px] px-6 py-14 md:px-12 md:py-36 lg:px-16">{children}</div>
     </section>
   );
 };
@@ -620,38 +598,20 @@ const ServicesSection = () => {
                       transition: { duration: 0.62, ease: [0.16, 1, 0.3, 1] },
                     },
                   }}
-                  onHoverStart={() => setActiveService(index)}
-                  onFocus={() => setActiveService(index)}
-                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-white/80 bg-white/82 shadow-[0_18px_48px_-34px_rgba(80,74,168,0.35)] outline-none backdrop-blur-[16px] transition-[opacity,transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white hover:shadow-[0_28px_74px_-44px_rgba(80,74,168,0.48)] md:min-h-[380px] xl:min-h-[420px]"
-                  whileHover={{ y: -4 }}
-                  animate={{ opacity: isQuiet ? 0.56 : 1 }}
-                  transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-white/80 bg-white shadow-[0_18px_48px_-34px_rgba(80,74,168,0.28)] outline-none transition-[opacity,transform,box-shadow,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-[#8242f5]/30 hover:shadow-[0_28px_74px_-44px_rgba(130,66,245,0.4)] md:min-h-[380px] xl:min-h-[420px]"
+                  whileHover={{ y: -12 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                   tabIndex={0}
+                  onMouseEnter={() => setActiveService(index)}
                 >
-                  <motion.div
-                    className="aurora-hover-layer pointer-events-none absolute inset-0 overflow-hidden"
-                    initial={{ opacity: 0 }}
-                    animate={{
-                      opacity: isActive ? 1 : 0,
-                    }}
-                    transition={{ duration: 0.55 }}
-                  >
-                    <div className="aurora-card-blob blob-1" />
-                    <div className="aurora-card-blob blob-2" />
-                    <div className="aurora-card-blob blob-3" />
-                    <div className="aurora-card-blob blob-4" />
-                    <div className="aurora-card-blob blob-5" />
-                  </motion.div>
+                  {/* Glowing Effect Blobs (Bottom Half) */}
+                  <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[30px]">
+                    <div className="absolute -bottom-[20%] -right-[10%] h-[70%] w-[70%] translate-x-1/4 translate-y-1/4 rounded-full bg-[#d96cff] opacity-0 blur-[60px] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-[0.35]" />
+                    <div className="absolute -bottom-[20%] left-[15%] h-[70%] w-[70%] translate-y-1/4 rounded-full bg-[#8242f5] opacity-0 blur-[60px] transition-all duration-700 delay-75 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-[0.25]" />
+                    <div className="absolute -bottom-[20%] -left-[10%] h-[70%] w-[70%] -translate-x-1/4 translate-y-1/4 rounded-full bg-[#21b2c6] opacity-0 blur-[60px] transition-all duration-700 delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-[0.35]" />
+                  </div>
 
-                  <motion.div
-                    className="pointer-events-none absolute inset-0"
-                    animate={{
-                      backgroundColor: isActive ? 'rgba(255,255,255,0.24)' : 'rgba(255,255,255,0.46)',
-                    }}
-                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  />
-
-                  <div className="relative z-10 flex min-h-full w-full flex-col px-7 py-9 md:px-8 md:py-10 lg:px-9 lg:py-11 xl:px-10">
+                  <div className="relative z-10 flex min-h-full w-full flex-col px-6 py-8 md:px-8 md:py-10 lg:px-9 lg:py-11 xl:px-10">
                     <motion.div
                       className="font-epilogue text-[48px] font-extrabold leading-none tracking-[-0.04em] md:text-[60px] xl:text-[72px]"
                       style={gradientAccentStyle}
@@ -764,7 +724,7 @@ const PortfolioSection = () => {
 
       <div
         ref={stageRef}
-        className="relative z-10 mt-8 h-[350px] sm:h-[420px] md:mt-12 md:h-[clamp(440px,58vh,680px)]"
+        className="relative z-10 mt-6 h-[320px] sm:h-[400px] md:mt-12 md:h-[clamp(440px,58vh,680px)]"
         style={{
           perspective: '2000px',
         }}
@@ -773,18 +733,18 @@ const PortfolioSection = () => {
         onMouseLeave={() => setIsHovering(false)}
       >
         <FloatingRobot
-          src={asset('KaivaTheo.png')}
-          className="block"
-          style={{ top: '1%', left: '2%', width: 'clamp(96px, 14vw, 210px)', height: 'clamp(96px, 14vw, 210px)' }}
+          src={asset('KaivaTheo.webp')}
+          className="hidden sm:block"
+          style={{ top: '1%', left: '2%', width: 'clamp(72px, 11vw, 210px)', height: 'clamp(72px, 11vw, 210px)' }}
           delay={0}
           duration={10}
           amplitude={6}
           rotation={2}
         />
         <FloatingRobot
-          src={asset('KaivaSara.png')}
-          className="block"
-          style={{ bottom: '18%', right: '2%', width: 'clamp(96px, 14vw, 210px)', height: 'clamp(96px, 14vw, 210px)' }}
+          src={asset('KaivaSara.webp')}
+          className="hidden sm:block"
+          style={{ bottom: '18%', right: '2%', width: 'clamp(72px, 11vw, 210px)', height: 'clamp(72px, 11vw, 210px)' }}
           delay={2.2}
           duration={10.5}
           amplitude={6}
@@ -840,8 +800,8 @@ const PortfolioSection = () => {
         </AnimatePresence>
       </div>
 
-      <div className="px-6 md:hidden">
-        <div className="rounded-[22px] border border-[#080808]/10 bg-[var(--color-surface)] p-5 shadow-[0_18px_48px_-28px_rgba(0,0,0,0.12)]">
+      <div className="mt-4 px-4 sm:px-6 md:hidden">
+        <div className="rounded-[20px] border border-[#080808]/10 bg-[var(--color-surface)] p-4 shadow-[0_18px_48px_-28px_rgba(0,0,0,0.12)]">
           <div className="flex items-end gap-3">
             <div className="font-epilogue text-[42px] font-extrabold italic leading-none tracking-[-0.03em] opacity-90" style={gradientAccentStyle}>
               {active.number}
@@ -865,11 +825,9 @@ const PortfolioSection = () => {
             onClick={() => setActiveIndex((p) => (p - 1 + slides.length) % slides.length)}
             className="flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-300 hover:scale-110 text-[#080808]"
             style={{
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%)',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
+              background: 'rgba(255,255,255,0.92)',
               border: '1px solid rgba(255,255,255,0.9)',
-              boxShadow: '0 8px 20px rgba(0,0,0,0.06), inset 1px 1px 2px rgba(255,255,255,1), inset -1px -1px 2px rgba(0,0,0,0.05)',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.06), inset 1px 1px 2px rgba(255,255,255,1)',
             }}
             aria-label="Previous"
           >
@@ -912,11 +870,9 @@ const PortfolioSection = () => {
             onClick={() => setActiveIndex((p) => (p + 1) % slides.length)}
             className="flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-300 hover:scale-110 text-[#080808]"
             style={{
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%)',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
+              background: 'rgba(255,255,255,0.92)',
               border: '1px solid rgba(255,255,255,0.9)',
-              boxShadow: '0 8px 20px rgba(0,0,0,0.06), inset 1px 1px 2px rgba(255,255,255,1), inset -1px -1px 2px rgba(0,0,0,0.05)',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.06), inset 1px 1px 2px rgba(255,255,255,1)',
             }}
             aria-label="Next"
           >
@@ -931,20 +887,6 @@ const PortfolioSection = () => {
   );
 };
 
-const PortfolioPage = () => (
-  <div className="relative min-h-screen bg-white">
-    <div className="mx-auto w-full max-w-[1320px] px-6 pt-8 md:px-12 lg:px-16">
-      <a
-        href="/"
-        className="inline-flex items-center gap-2 rounded-full border border-[#080808]/12 bg-white/80 px-5 py-2 font-manrope text-[11px] font-bold uppercase tracking-[0.14em] text-[#080808]"
-      >
-        ← Volver
-      </a>
-    </div>
-    <PortfolioSection />
-  </div>
-);
-
 const ExpandedAgencySections = () => (
   <>
     <ServicesSection />
@@ -956,17 +898,33 @@ const ExpandedAgencySections = () => (
           title="Cómo trabajamos"
           description="Nuestro proceso está pensado para ser claro, estructurado y sin fricciones, de modo que el cliente entienda qué se está haciendo, por qué se hace y qué resultado puede esperar."
         />
-        <div className="mt-16 rounded-[32px] border border-[#080808]/14 bg-[var(--color-surface)] p-8 md:p-10">
+        <motion.div 
+          className="mt-16 rounded-[32px] border border-[#080808]/14 bg-[var(--color-surface)] p-8 md:p-10"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={{
+            visible: { transition: { staggerChildren: 0.15 } },
+            hidden: {}
+          }}
+        >
           <div className="grid gap-8 md:grid-cols-5 md:gap-6">
             {processSteps.map((step, index) => (
-              <div key={step} className="relative">
+              <motion.div 
+                key={step} 
+                className="relative"
+                variants={{
+                  hidden: { opacity: 0, x: -20 },
+                  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
+                }}
+              >
                 <div className="mb-5 flex items-center gap-4 md:block">
-                  <div className="mb-0 flex h-12 w-12 items-center justify-center rounded-full border border-[#080808]/16 bg-[var(--color-dominant)] font-manrope text-[12px] font-bold tracking-[0.18em] text-[#080808] md:mb-5">
+                  <div className="mb-0 flex h-12 w-12 items-center justify-center rounded-full border border-[#080808]/16 bg-[var(--color-dominant)] font-manrope text-[12px] font-bold tracking-[0.18em] md:mb-5" style={gradientAccentStyle}>
                     0{index + 1}
                   </div>
                   <div className="font-epilogue text-[24px] font-extrabold leading-[1.12] tracking-[-0.025em] text-[#080808] md:text-[22px]">{step}</div>
                 </div>
-                <p className="max-w-[210px] text-[14px] leading-7 text-[#080808]/62">
+                <p className="text-[14px] leading-7 text-[#080808]/62 md:max-w-[210px]">
                   {index === 0 && 'Analizamos objetivos, contexto y necesidades del negocio antes de construir.'}
                   {index === 1 && 'Organizamos la estructura para que la presencia digital tenga un propósito claro y medible.'}
                   {index === 2 && 'Diseñamos una experiencia visual atractiva, profesional y alineada a la marca.'}
@@ -978,18 +936,34 @@ const ExpandedAgencySections = () => (
                     <div className="absolute left-[58px] top-6 h-px w-[calc(100%-24px)] bg-gradient-to-r from-[#080808]/18 to-[#080808]/4" />
                   </div>
                 ) : null}
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </motion.div>
     </SectionShell>
 
     <section
       id="planes"
       data-nav-theme="light"
-      className="relative bg-transparent px-4 py-12 md:px-8 md:py-16"
+      className="relative overflow-hidden bg-transparent px-4 py-12 md:px-8 md:py-16"
     >
+      <motion.img
+        src={asset('KaivaMora1.webp')}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        className="absolute right-0 top-[6%] z-50 hidden w-[200px] opacity-90 sm:block md:right-[-2%] md:top-[4%] md:w-[320px] lg:right-[-3%] lg:w-[460px] pointer-events-none"
+        animate={{
+          y: [0, 15, 0],
+          rotate: [0, 2, 0]
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
       <motion.div {...sectionReveal} className="mx-auto w-full max-w-[1180px]">
           <div className="max-w-3xl">
             <div className="inline-block w-fit font-manrope text-[11px] font-bold uppercase tracking-[0.26em]" style={gradientAccentStyle}>Pricing</div>
@@ -1003,224 +977,290 @@ const ExpandedAgencySections = () => (
             </p>
           </div>
 
-          <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-8 grid gap-4 sm:gap-5 md:grid-cols-2 xl:grid-cols-3">
             {pricingPlans.map((plan) => (
-              <motion.article
-                key={plan.name}
-                whileHover={undefined}
-                transition={undefined}
-                className="pricing-card relative flex h-full flex-col overflow-hidden rounded-[34px] p-6 md:p-8"
-                style={createGlassPanelStyle()}
-              >
-                <GlassPanelLayers />
-
-                {plan.featured ? (
-                  <div
-                    className="absolute right-5 top-5 rounded-full px-3.5 py-2 font-manrope text-[10px] font-bold uppercase tracking-[0.16em] text-white"
-                    style={{
-                      background: 'linear-gradient(135deg, rgba(155,109,255,0.6) 0%, rgba(130,66,245,0.4) 100%)',
-                      backdropFilter: 'blur(16px)',
-                      WebkitBackdropFilter: 'blur(16px)',
-                      border: '1px solid rgba(255,255,255,0.6)',
-                      boxShadow: '0 8px 16px rgba(130,66,245,0.2), inset 1px 1px 2px rgba(255,255,255,0.8), inset -1px -1px 2px rgba(0,0,0,0.1)',
-                    }}
-                  >
-                    {plan.badge}
-                  </div>
-                ) : null}
-
-                <div className="relative font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-[#2a1a4e]/55">
-                  {plan.name}
-                </div>
-                <div className="relative mt-3 font-epilogue text-[34px] font-extrabold leading-[1] tracking-[-0.03em] text-[#1a0e38] md:text-[38px]">
-                  {plan.price}
-                </div>
-                <p className="relative mt-3 max-w-[28ch] text-[14px] leading-6 text-[#2a1a4e]/70">
-                  {plan.audience}
-                </p>
-                <p className="relative mt-3 text-[14px] leading-6 text-[#2a1a4e]/55">
-                  {plan.description}
-                </p>
-
-                <div className="relative my-5 h-px bg-white/20" />
-
-                <div className="relative space-y-2.5">
-                  {plan.points.map((point) => (
-                    <div key={point} className="flex items-start gap-3">
-                      <span
-                        className="mt-[4px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white"
-                        style={{
-                          background: 'linear-gradient(135deg, rgba(160,112,255,0.6) 0%, rgba(130,66,245,0.4) 100%)',
-                          backdropFilter: 'blur(12px)',
-                          WebkitBackdropFilter: 'blur(12px)',
-                          border: '1px solid rgba(255,255,255,0.6)',
-                          boxShadow: '0 4px 8px rgba(130,66,245,0.2), inset 1px 1px 2px rgba(255,255,255,0.8), inset -1px -1px 2px rgba(0,0,0,0.1)',
-                        }}
-                      >
-                        ✓
-                      </span>
-                      <span className="text-[14px] leading-6 text-[#2a1a4e]/72">{point}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="relative mt-auto pt-6">
-                  <button
-                    className="inline-flex min-h-[44px] items-center justify-center rounded-full px-6 py-3 font-manrope text-[11px] font-bold uppercase tracking-[0.16em] text-[#1a0e38] transition-all duration-300 hover:-translate-y-0.5"
-                    style={{
-                      background: 'rgba(255,255,255,0.45)',
-                      backdropFilter: 'blur(16px)',
-                      WebkitBackdropFilter: 'blur(16px)',
-                      border: '1px solid rgba(255,255,255,0.8)',
-                      boxShadow: '0 8px 16px rgba(0,0,0,0.08), inset 2px 2px 4px rgba(255,255,255,0.9), inset -2px -2px 4px rgba(0,0,0,0.1)',
-                    }}
-                  >
-                    {plan.cta}
-                  </button>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-
-          <motion.article
-            whileHover={undefined}
-            transition={undefined}
-            className="relative mt-5 overflow-hidden rounded-[34px]"
-            style={createGlassPanelStyle()}
-          >
-            <GlassPanelLayers />
-            <div className="relative grid gap-0 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.45fr)_auto] md:items-center">
-              <div className="px-6 py-6 md:min-h-[148px] md:px-8" style={{ borderRight: '1px solid rgba(255,255,255,0.24)' }}>
-                <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.24em]" style={gradientAccentStyle}>
-                  {ecommercePlan.label}
-                </div>
-                <div className="mt-3 font-epilogue text-[30px] font-semibold leading-[1.02] tracking-[-0.025em] text-[#1a0e38] md:text-[34px]">
-                  {ecommercePlan.name}
-                </div>
-                <div className="mt-3 font-manrope text-[18px] font-extrabold leading-none tracking-[-0.03em] text-[#2a1a4e]/85">
-                  {ecommercePlan.price}
-                </div>
-              </div>
-
-              <div className="px-6 py-6 md:min-h-[148px] md:flex md:items-center md:px-8 md:py-0" style={{ borderRight: '1px solid rgba(255,255,255,0.24)' }}>
-                <p className="max-w-[62ch] text-[14px] leading-6 text-[#2a1a4e]/65 md:text-[15px] md:leading-7">
-                  {ecommercePlan.description}
-                </p>
-              </div>
-
-              <div className="px-6 pb-6 md:flex md:min-h-[148px] md:items-center md:justify-center md:px-8 md:py-0">
-                <button
-                  aria-label={ecommercePlan.cta}
-                  className="inline-flex h-[72px] w-[72px] items-center justify-center rounded-full text-white transition-transform duration-300 hover:scale-110"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(160,112,255,0.6) 0%, rgba(130,66,245,0.4) 100%)',
-                    backdropFilter: 'blur(16px)',
-                    WebkitBackdropFilter: 'blur(16px)',
-                    border: '1px solid rgba(255,255,255,0.6)',
-                    boxShadow: '0 12px 32px rgba(130,66,245,0.25), inset 2px 2px 4px rgba(255,255,255,0.8), inset -2px -2px 4px rgba(0,0,0,0.15)',
-                  }}
+                <article
+                  key={plan.name}
+                  className={`group relative flex min-h-[340px] flex-col rounded-[32px] border ${plan.featured ? 'border-[#a482ff]/50' : 'border-[#e8e5ff]/70'} bg-white shadow-[0_18px_48px_-24px_rgba(32,29,26,0.10)] outline-none transition-[transform,shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:border-black/5 hover:shadow-[0_28px_74px_-34px_rgba(32,29,26,0.16)] md:min-h-[380px] xl:min-h-[420px]`}
                 >
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path
-                      d="M7 17L17 7M17 7H9M17 7V15"
-                      stroke="currentColor"
-                      strokeWidth="2.2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-              </div>
+                  <div className="relative flex flex-1 flex-col p-8 md:p-10">
+                    {plan.badge && (
+                      <div className="absolute -top-[14px] right-6 z-10 rounded-full px-4 py-[6px] font-manrope text-[10px] font-bold uppercase tracking-[0.15em] text-white shadow-md shadow-[#a482ff]/20" style={{ background: 'linear-gradient(135deg, #b891ff 0%, #a482ff 100%)' }}>
+                        {plan.badge}
+                      </div>
+                    )}
+                    <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#080808]/50">
+                      {plan.name}
+                    </div>
+                    <h3 className="mt-3 font-epilogue text-[36px] font-extrabold leading-[1.05] tracking-[-0.04em] text-[#080808] md:text-[42px]">
+                      {plan.price}
+                    </h3>
+                    <p className="mt-4 text-[13px] leading-tight text-[#080808]/60">
+                      {plan.audience}
+                    </p>
+                    <p className="mt-5 text-[13px] leading-relaxed text-[#080808]/70">
+                      {plan.description}
+                    </p>
+                    <ul className="mt-8 flex-1 space-y-3.5">
+                      {plan.points.map((pt, i) => (
+                        <li key={i} className="flex items-start gap-3 text-[13px] leading-snug text-[#080808]/80">
+                          <svg className="h-4 w-4 shrink-0 text-[#b891ff]" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                          </svg>
+                          <span>{pt}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <a href="#contacto" className="mt-10 inline-flex w-fit items-center justify-center rounded-full bg-white px-7 py-3 font-manrope text-[11px] font-bold uppercase tracking-widest text-[#080808] shadow-[0_4px_14px_rgba(0,0,0,0.06)] border border-[#080808]/5 transition-[shadow,transform] duration-300 hover:shadow-[0_6px_20px_rgba(0,0,0,0.08)] hover:-translate-y-[1px]">
+                      {plan.cta}
+                    </a>
+                  </div>
+                </article>
+              ))}
             </div>
-          </motion.article>
-      </motion.div>
-    </section>
 
-    <SectionShell id="por-que-kaiva" tone="light">
-      <motion.div {...sectionReveal} className="space-y-12">
-        <div className="mx-auto max-w-5xl text-center">
-          <div className="mb-4 inline-block w-fit font-manrope text-[11px] font-bold uppercase tracking-[0.24em]" style={gradientAccentStyle}>
-            Confianza
-          </div>
-          <h2 className="font-epilogue text-[clamp(42px,6.4vw,92px)] font-extrabold leading-[1.02] tracking-[-0.03em] text-[#080808]">
-            Por qué muchos negocios{' '}
-            <span className="font-montserrat font-semibold italic text-[#111111]">siguen</span>{' '}
-            sin web
+            <div className="mx-auto mt-6 w-full max-w-[1180px]">
+              <article className="group relative flex flex-col items-center justify-between gap-6 rounded-[32px] border border-[#e8e5ff]/70 bg-white p-6 shadow-[0_18px_48px_-24px_rgba(32,29,26,0.10)] outline-none transition-[transform,shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_28px_74px_-34px_rgba(32,29,26,0.16)] md:flex-row md:p-8 lg:px-12">
+                <div className="flex flex-col items-center text-center md:items-start md:text-left md:max-w-[280px]">
+                  <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#a482ff]">
+                    {ecommercePlan.label}
+                  </div>
+                  <h3 className="mt-1 font-epilogue text-[24px] font-extrabold leading-none tracking-[-0.03em] md:text-[28px]">
+                    {ecommercePlan.name}
+                  </h3>
+                  <div className="mt-2 text-[14px] font-bold text-[#080808]">
+                    {ecommercePlan.price}
+                  </div>
+                </div>
+                <div className="flex flex-1 flex-col items-center gap-6 md:flex-row md:justify-between md:pl-10 text-center md:text-left">
+                  <p className="max-w-[500px] text-[14px] leading-relaxed text-[#080808]/70">
+                    {ecommercePlan.description}
+                  </p>
+                  <a href="#contacto" className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full shadow-[0_8px_20px_-6px_rgba(164,130,255,0.5)] transition-transform hover:scale-105" style={{ background: 'linear-gradient(135deg, #d49fff 0%, #a482ff 100%)' }}>
+                    <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </a>
+                </div>
+              </article>
+            </div>
+        </motion.div>
+    </section>
+  </>
+);
+
+const WhyUsSection = () => {
+  return (
+    <section className="relative w-full bg-transparent text-[#080808] px-6 py-14 md:py-28 lg:px-16 overflow-hidden">
+      <div className="mx-auto flex w-full max-w-[1240px] flex-col gap-8 md:flex-row md:items-center md:gap-12 md:justify-between">
+        <div className="flex-1 max-w-[500px]">
+          <h2 className="font-epilogue text-[clamp(32px,6vw,56px)] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#080808]">
+            El mundo digital te está esperando. Nosotros te llevamos.
           </h2>
-          <p className="mx-auto mt-5 max-w-3xl text-[16px] leading-8 text-[#080808]/68">
-            Kaiva Studio se rige por principios claros que garantizan consistencia, confianza y profesionalismo en cada proyecto.
+          <p className="mt-8 text-[15px] md:text-[16px] leading-[1.6] text-[#080808]/70">
+            Kaiva existe porque creemos que cualquier negocio colombiano, sin importar su tamaño, merece estar bien representado en internet. No como hobby, sino como motor real de ventas.
+          </p>
+          <p className="mt-6 text-[15px] md:text-[16px] leading-[1.6] text-[#080808]/70">
+            Hacemos todo el trabajo técnico y creativo para que tú te concentres en lo que sabes hacer: tu negocio.
           </p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {trustPoints.map((point, index) => (
-              <div
-                key={point}
-                className="rounded-[26px] border border-[#080808]/14 bg-[var(--color-surface)] p-6"
-              >
-              <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-[#080808]/42">0{index + 1}</div>
-              <div className="mt-4 font-epilogue text-[27px] font-extrabold leading-[1.08] tracking-[-0.025em] text-[#080808]">{point}</div>
-              <div className="mt-3 text-[14px] leading-7 text-[#080808]/66">
-                {index === 0 && 'Cada proceso debe ser entendible para el cliente.'}
-                {index === 1 && 'Cada entrega debe cumplir un estándar alto.'}
-                {index === 2 && 'Los tiempos se respetan y se optimizan.'}
-                {index === 3 && 'Lo prometido se cumple con orden y control.'}
-                {index === 4 && 'Cada decisión tiene un propósito funcional.'}
+        <div className="flex-1 flex flex-col gap-4">
+          {[
+            {
+              title: "Visible en Google desde el día uno",
+              desc: "Construimos sitios optimizados para SEO para que tus clientes te encuentren cuando te buscan."
+            },
+            {
+              title: "Flujos de atención automatizados",
+              desc: "Tu web responde, cotiza y agenda aunque estés atendiendo otro cliente o sea medianoche."
+            },
+            {
+              title: "Sin tecnicismos, sin enredos",
+              desc: "Manejamos todo lo técnico. Tú solo revisas, apruebas y recibes tu web funcionando."
+            },
+            {
+              title: "Hecho para el mercado colombiano",
+              desc: "Planes desde $320 USD pensados para la realidad de las pymes en Colombia."
+            }
+          ].map((item, i) => (
+            <div key={i} className="flex items-start gap-4 rounded-[24px] border border-[#080808]/5 bg-white p-6 shadow-sm">
+              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#f4f2ff]">
+                <svg className="h-3 w-3 text-[#a482ff]" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="flex-1 mt-[-2px]">
+                <h4 className="font-bold text-[15px] md:text-[16px] text-[#080808] leading-tight">{item.title}</h4>
+                <p className="mt-1.5 text-[13px] md:text-[14px] leading-relaxed text-[#080808]/60">{item.desc}</p>
               </div>
             </div>
           ))}
         </div>
-      </motion.div>
-    </SectionShell>
+      </div>
+    </section>
+  );
+};
 
-    <SectionShell id="cta" tone="light" className="relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),transparent)]" />
-      <motion.div {...sectionReveal} className="relative z-10 rounded-[36px] border border-[#080808]/14 bg-[var(--color-surface)] px-8 py-16 text-center md:px-14 md:py-22">
-        <div className="mx-auto max-w-4xl">
-          <div className="inline-block w-fit font-manrope text-[11px] font-bold uppercase tracking-[0.24em]" style={gradientAccentStyle}>Visión</div>
-          <h2 className="mt-6 font-epilogue text-[clamp(40px,5.4vw,86px)] font-extrabold leading-[1.02] tracking-[-0.04em] text-[#080808]">
-            Construimos presencia digital sólida y bien ejecutada
+const AliadosSection = () => {
+  return (
+    <section className="relative w-full bg-transparent text-[#080808] px-6 py-16 md:py-24 lg:px-16 overflow-hidden">
+      <div className="mx-auto flex w-full max-w-[1240px] flex-col gap-12 md:flex-row md:items-center md:justify-between">
+        <div className="flex-1 max-w-[460px]">
+          <div className="mb-4 inline-block font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#a482ff]">
+            ALIADOS ESTRATÉGICOS
+          </div>
+          <h2 className="font-epilogue text-[clamp(32px,6vw,56px)] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#080808]">
+            Trabajamos con los mejores en SEO
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-[17px] leading-8 text-[#080808]/72">
-            Buscamos consolidarnos como un estudio referente en desarrollo web para negocios que valoran la claridad, la estética y la estructura.
+          <p className="mt-6 text-[15px] md:text-[16px] leading-[1.6] text-[#080808]/70">
+            Para garantizar que tu web no solo se vea bien sino que también sea encontrada, trabajamos de la mano con especialistas en posicionamiento orgánico.
           </p>
-          <a
-            href="#contacto"
-            className="mt-10 inline-flex items-center justify-center rounded-full border border-transparent px-9 py-4 font-manrope text-[13px] font-bold uppercase tracking-[0.15em] text-white transition-transform duration-300 hover:-translate-y-0.5 hover:opacity-92"
-            style={accentButtonStyle}
-          >
-            Hablemos de tu proyecto
-          </a>
         </div>
-      </motion.div>
-    </SectionShell>
+        
+        <div className="flex-1 flex justify-center md:justify-end">
+          <div className="w-full max-w-[500px] rounded-[28px] border border-[#080808]/5 bg-white p-6 md:p-8 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] flex items-center justify-between gap-6">
+            <div className="flex-1">
+              <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#080808]/40 mb-2">
+                SEO
+              </div>
+              <h3 className="font-epilogue text-[22px] md:text-[26px] font-extrabold leading-none tracking-[-0.02em] text-[#080808]">
+                SEO for Startups
+              </h3>
+              <p className="mt-3 text-[13px] md:text-[14px] leading-relaxed text-[#080808]/60">
+                Posicionamiento orgánico para negocios que quieren crecer con criterio.
+              </p>
+            </div>
+            <a href="https://seoforstartups.co" target="_blank" rel="noopener noreferrer" className="flex shrink-0 h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-[#f4f2ff] text-[#a482ff] hover:bg-[#eae6ff] transition-colors">
+              <svg className="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
-    <ContactRevealSection />
-  </>
-);
+const AnimatedText = ({ text, className }) => {
+  const words = text.split(" ");
+  
+  const container = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.06, delayChildren: 0.1 },
+    },
+  };
 
-export default function KaivaLanding() {
-  const isPortfolioPage = typeof window !== 'undefined' && window.location.hash === '#/nuestras-webs';
+  const child = {
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", damping: 16, stiffness: 80 },
+    },
+    hidden: {
+      opacity: 0,
+      y: 20,
+      transition: { type: "spring", damping: 16, stiffness: 80 },
+    },
+  };
 
   return (
-    <div className="typography-refined relative w-full overflow-x-hidden">
-      <div className="relative z-10">
-        {isPortfolioPage ? (
-          <PortfolioPage />
-        ) : (
-          <>
-            <HeroSection />
-            <div className="relative">
-              <SectionsAuroraBackdrop />
-              <div className="relative z-10">
-                <ExpandedAgencySections />
-              </div>
-            </div>
-          </>
-        )}
-      </div>
+    <motion.div style={{ overflow: "hidden", display: "flex", flexWrap: "wrap", gap: "0.26em" }} variants={container} initial="hidden" animate="visible" className={className}>
+      {words.map((word, index) => (
+        <motion.span variants={child} style={{ display: "inline-block" }} key={index}>
+          {word}
+        </motion.span>
+      ))}
+    </motion.div>
+  );
+};
 
+const CustomCursor = () => {
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  const [hoveredNode, setHoveredNode] = useState(false);
+  const [isTouch, setIsTouch] = useState(true);
+
+  const smoothXSm = useSpring(cursorX, { damping: 25, stiffness: 400 });
+  const smoothYSm = useSpring(cursorY, { damping: 25, stiffness: 400 });
+  const smoothXLg = useSpring(cursorX, { damping: 40, stiffness: 150 });
+  const smoothYLg = useSpring(cursorY, { damping: 40, stiffness: 150 });
+
+  useEffect(() => {
+    if (window.matchMedia("(pointer: fine)").matches) {
+      setIsTouch(false);
+    }
+    
+    const moveCursor = (e) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+      
+      const target = e.target;
+      if (target.closest('a') || target.closest('button')) {
+        setHoveredNode(true);
+      } else {
+        setHoveredNode(false);
+      }
+    };
+
+    window.addEventListener('mousemove', moveCursor);
+    return () => window.removeEventListener('mousemove', moveCursor);
+  }, []);
+
+  if (isTouch) return null;
+
+  return (
+    <>
+      <motion.div
+        className="pointer-events-none fixed top-0 left-0 z-[9999] rounded-full drop-shadow-md mix-blend-difference"
+        style={{
+          x: smoothXSm,
+          y: smoothYSm,
+          width: 14,
+          height: 14,
+          translateX: "-50%",
+          translateY: "-50%",
+          scale: hoveredNode ? 3.5 : 1,
+          backgroundColor: "#ffffff",
+        }}
+      />
+      <motion.div
+        className="pointer-events-none fixed top-0 left-0 z-[9998] rounded-full mix-blend-difference"
+        style={{
+          x: smoothXLg,
+          y: smoothYLg,
+          width: 32,
+          height: 32,
+          translateX: "-50%",
+          translateY: "-50%",
+          scale: hoveredNode ? 1.5 : 1,
+          border: "1px solid rgba(255, 255, 255, 0.4)",
+        }}
+      />
+    </>
+  );
+};
+
+const App = () => {
+
+  return (
+    <div className="relative z-10 w-full bg-white">
+      <CustomCursor />
+      <HeroSection />
+      <ProblemSection />
+      <div className="relative">
+        <SectionsAuroraBackdrop />
+        <div className="relative z-10">
+          <WhyUsSection />
+          <PortfolioSection />
+          <ExpandedAgencySections />
+          <AliadosSection />
+          <ContactRevealSection />
+        </div>
+      </div>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;600;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
         @import url('https://fonts.cdnfonts.com/css/open-sauce-one');
         :root {
           --color-dominant: #ffffff;
@@ -1233,34 +1273,32 @@ export default function KaivaLanding() {
         body { background-color: var(--color-dominant); font-family: 'Inter Tight', 'Inter', sans-serif; letter-spacing: -0.01em; color: var(--color-secondary); }
         .aurora-base {
           background:
-            radial-gradient(120% 130% at 0% 0%, rgba(126, 209, 255, 0.42) 0%, rgba(126, 209, 255, 0) 54%),
-            radial-gradient(120% 120% at 100% 0%, rgba(155, 134, 255, 0.4) 0%, rgba(155, 134, 255, 0) 56%),
-            radial-gradient(140% 150% at 100% 100%, rgba(255, 164, 214, 0.36) 0%, rgba(255, 164, 214, 0) 54%),
-            radial-gradient(120% 120% at 0% 100%, rgba(107, 229, 229, 0.34) 0%, rgba(107, 229, 229, 0) 55%),
+            radial-gradient(120% 130% at 0% 0%, rgba(126, 209, 255, 0.36) 0%, rgba(126, 209, 255, 0) 54%),
+            radial-gradient(120% 120% at 100% 0%, rgba(155, 134, 255, 0.34) 0%, rgba(155, 134, 255, 0) 56%),
+            radial-gradient(140% 150% at 100% 100%, rgba(255, 164, 214, 0.30) 0%, rgba(255, 164, 214, 0) 54%),
+            radial-gradient(120% 120% at 0% 100%, rgba(107, 229, 229, 0.28) 0%, rgba(107, 229, 229, 0) 55%),
             linear-gradient(180deg, #ffffff 0%, #fcfcff 100%);
-          animation: auroraShift 22s ease-in-out infinite alternate;
         }
         .aurora-blob {
-          filter: blur(84px);
-          opacity: 0.44;
-          will-change: transform, opacity;
+          opacity: 1;
+          will-change: transform;
+          transform: translateZ(0);
+          backface-visibility: hidden;
         }
         .aurora-blob-a {
-          background: radial-gradient(circle at 30% 40%, rgba(107, 229, 229, 0.8) 0%, rgba(107, 229, 229, 0.18) 42%, rgba(107, 229, 229, 0) 75%);
+          background: radial-gradient(circle at 30% 40%, rgba(107, 229, 229, 0.38) 0%, rgba(107, 229, 229, 0.10) 50%, rgba(107, 229, 229, 0) 80%);
           animation: floatBlobOne 24s ease-in-out infinite;
         }
         .aurora-blob-b {
-          background: radial-gradient(circle at 70% 35%, rgba(155, 134, 255, 0.78) 0%, rgba(155, 134, 255, 0.18) 46%, rgba(155, 134, 255, 0) 76%);
+          background: radial-gradient(circle at 70% 35%, rgba(155, 134, 255, 0.34) 0%, rgba(155, 134, 255, 0.08) 52%, rgba(155, 134, 255, 0) 80%);
           animation: floatBlobTwo 27s ease-in-out infinite;
         }
         .aurora-blob-c {
-          background: radial-gradient(circle at 50% 62%, rgba(255, 164, 214, 0.72) 0%, rgba(255, 164, 214, 0.16) 44%, rgba(255, 164, 214, 0) 76%);
+          background: radial-gradient(circle at 50% 62%, rgba(255, 164, 214, 0.32) 0%, rgba(255, 164, 214, 0.08) 50%, rgba(255, 164, 214, 0) 80%);
           animation: floatBlobThree 30s ease-in-out infinite;
         }
         .aurora-blur-overlay {
-          backdrop-filter: blur(46px) saturate(108%);
-          -webkit-backdrop-filter: blur(46px) saturate(108%);
-          background: linear-gradient(180deg, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.08) 42%, rgba(255,255,255,0.3) 100%);
+          background: linear-gradient(180deg, rgba(255,255,255,0.32) 0%, rgba(255,255,255,0.06) 42%, rgba(255,255,255,0.28) 100%);
         }
         .aurora-noise {
           opacity: 0.17;
@@ -1270,132 +1308,216 @@ export default function KaivaLanding() {
           background-size: 3px 3px, 4px 4px;
           mix-blend-mode: soft-light;
         }
-        .aurora-hover-layer {
-          position: absolute;
-          inset: 0;
-          overflow: hidden;
-          background: rgba(255, 255, 255, 0.05);
-        }
-        .aurora-card-blob {
-          position: absolute;
-          width: 170%;
-          height: 170%;
-          filter: blur(80px);
-          opacity: 0.8;
-          mix-blend-mode: color-burn;
-          pointer-events: none;
-          border-radius: 50%;
-        }
-        .blob-1 {
-          background: radial-gradient(circle at center, rgba(107, 229, 229, 0.95), transparent 75%);
-          top: -45%; left: -45%;
-          animation: blob-float-1 20s infinite ease-in-out;
-        }
-        .blob-2 {
-          background: radial-gradient(circle at center, rgba(155, 134, 255, 0.9), transparent 75%);
-          top: -45%; right: -45%;
-          animation: blob-float-2 24s infinite ease-in-out;
-        }
-        .blob-3 {
-          background: radial-gradient(circle at center, rgba(255, 164, 214, 0.9), transparent 75%);
-          bottom: -45%; left: -45%;
-          animation: blob-float-3 28s infinite ease-in-out;
-        }
-        .blob-4 {
-          background: radial-gradient(circle at center, rgba(6, 182, 212, 0.85), transparent 75%);
-          bottom: -45%; right: -45%;
-          animation: blob-float-4 22s infinite ease-in-out;
-        }
-        .blob-5 {
-          background: radial-gradient(circle at center, rgba(130, 66, 245, 0.7), transparent 75%);
-          top: 15%; left: 15%;
-          animation: blob-float-1 35s infinite reverse ease-in-out;
-        }
-        @keyframes blob-float-1 {
-          0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-          33% { transform: translate(15%, 20%) scale(1.1) rotate(120deg); }
-          66% { transform: translate(-10%, 15%) scale(0.95) rotate(240deg); }
-          100% { transform: translate(0, 0) scale(1) rotate(360deg); }
-        }
-        @keyframes blob-float-2 {
-          0% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(-20%, 15%) scale(0.85); }
-          66% { transform: translate(15%, -10%) scale(1.1); }
-          100% { transform: translate(0, 0) scale(1); }
-        }
-        @keyframes blob-float-3 {
-          0% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(10%, -20%) scale(1.2); }
-          66% { transform: translate(20%, 10%) scale(0.9); }
-          100% { transform: translate(0, 0) scale(1); }
-        }
-        @keyframes blob-float-4 {
-          0% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(-15%, -15%) scale(1.1); }
-          66% { transform: translate(-25%, 15%) scale(0.8); }
-          100% { transform: translate(0, 0) scale(1); }
-        }
-        @keyframes auroraShift {
-          0% { background-position: 0% 50%, 100% 50%, 50% 100%, 50% 0%, 50% 50%; }
-          100% { background-position: 100% 50%, 0% 60%, 50% 0%, 50% 100%, 50% 50%; }
-        }
+        
         @keyframes floatBlobOne {
-          0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.44; }
-          50% { transform: translate3d(4vw, -3vh, 0) scale(1.06); opacity: 0.52; }
-          100% { transform: translate3d(-2vw, 2.5vh, 0) scale(0.98); opacity: 0.4; }
+          0% { transform: translate3d(0, 0, 0) scale(1); }
+          50% { transform: translate3d(4vw, -3vh, 0) scale(1.06); }
+          100% { transform: translate3d(-2vw, 2.5vh, 0) scale(0.98); }
         }
         @keyframes floatBlobTwo {
-          0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.45; }
-          50% { transform: translate3d(-3.8vw, 2.8vh, 0) scale(1.05); opacity: 0.5; }
-          100% { transform: translate3d(2.4vw, -2.2vh, 0) scale(0.97); opacity: 0.4; }
+          0% { transform: translate3d(0, 0, 0) scale(1); }
+          50% { transform: translate3d(-3.8vw, 2.8vh, 0) scale(1.05); }
+          100% { transform: translate3d(2.4vw, -2.2vh, 0) scale(0.97); }
         }
         @keyframes floatBlobThree {
-          0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.4; }
-          50% { transform: translate3d(2.6vw, -2.6vh, 0) scale(1.04); opacity: 0.48; }
-          100% { transform: translate3d(-3vw, 2vh, 0) scale(0.98); opacity: 0.38; }
+          0% { transform: translate3d(0, 0, 0) scale(1); }
+          50% { transform: translate3d(2.6vw, -2.6vh, 0) scale(1.04); }
+          100% { transform: translate3d(-3vw, 2vh, 0) scale(0.98); }
         }
         @media (max-width: 1200px) {
           .hero-copy-wrap { top: 136px !important; max-width: 640px !important; }
           .hero-visual-wrap { top: 250px !important; width: 116vw !important; max-width: 920px !important; }
         }
         @media (max-width: 768px) {
-          .hero-copy-wrap { top: 108px !important; max-width: 360px !important; }
-          .hero-visual-wrap { top: 284px !important; width: 122vw !important; max-width: 560px !important; }
+          .hero-copy-wrap { top: 108px !important; max-width: calc(100vw - 48px) !important; }
+          .hero-visual-wrap { top: 275px !important; width: 114vw !important; max-width: 520px !important; }
         }
-        @media (prefers-reduced-motion: reduce) {
-          html { scroll-behavior: auto; }
-          .aurora-base,
-          .aurora-blob,
-          .aurora-hover-layer {
-            animation: none;
-          }
-          .contact-premium-card,
-          .contact-input,
-          .contact-accent-button {
-            transition: none;
-          }
+        @media (max-width: 400px) {
+          .hero-copy-wrap { top: 96px !important; }
+          .hero-visual-wrap { top: 255px !important; width: 108vw !important; max-width: 420px !important; }
+        }
+        @media (max-height: 700px) and (max-width: 768px) {
+          .hero-copy-wrap { top: 86px !important; }
+          .hero-visual-wrap { top: 220px !important; }
+        }
           .contact-premium-card {
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.09);
+            box-shadow: 0 32px 80px -20px rgba(0, 0, 0, 0.10), 0 0 0 1px rgba(0,0,0,0.03);
           }
-        }
+          .contact-input {
+            background: #ffffff;
+            border: 1.5px solid rgba(0, 0, 0, 0.06);
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);
+          }
+          .contact-input:focus {
+            background: #ffffff;
+            border-color: #8242f5;
+            box-shadow: 0 0 0 4px rgba(130, 66, 245, 0.12), 0 4px 12px rgba(130, 66, 245, 0.06);
+          }
+          @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .aurora-base,
+            .aurora-blob,
+            .aurora-hover-layer {
+              animation: none;
+            }
+            .contact-premium-card,
+            .contact-input,
+            .contact-accent-button {
+              transition: none;
+            }
+            .contact-premium-card {
+              backdrop-filter: none;
+              -webkit-backdrop-filter: none;
+            }
+          }
       `}</style>
     </div>
   );
 }
 
+const CountUpAnimation = ({ endValue, suffix = "", prefix = "", decimal = false }) => {
+  const ref = useRef(null);
+  const motionValue = useMotionValue(0);
+  const springValue = useSpring(motionValue, { damping: 40, stiffness: 60 });
+  const [display, setDisplay] = useState("0");
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        motionValue.set(endValue);
+        observer.disconnect();
+      }
+    });
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [endValue, motionValue]);
+
+  useEffect(() => {
+    return springValue.on("change", (latest) => {
+      setDisplay(decimal ? latest.toFixed(1) : Math.round(latest).toString());
+    });
+  }, [springValue, decimal]);
+
+  return <span ref={ref}>{prefix}{display}{suffix}</span>;
+};
+
+const ProblemSection = () => {
+  return (
+    <section id="problema" className="relative w-full bg-transparent text-[#080808] px-6 py-14 md:py-24 lg:px-16">
+      <div className="mx-auto w-full max-w-[1240px] relative z-10 flex flex-col items-center">
+        
+        <h2 className="font-epilogue text-[clamp(40px,6vw,72px)] font-extrabold leading-[0.98] tracking-[-0.04em] text-center max-w-[800px] mt-4">
+          El 91% de las empresas en Colombia son pymes. La mayoría no existe en internet.
+        </h2>
+        
+        <p className="mt-8 text-[16px] md:text-[18px] leading-[1.6] text-center max-w-[650px] text-[#080808]/70">
+          Cada día, miles de colombianos buscan productos y servicios en Google. Si tu
+          negocio no aparece, ese cliente se va a la competencia. Así de simple.
+        </p>
+
+        <div className="mt-10 w-full grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+          <div className="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col items-center text-center sm:items-start sm:text-left gap-3">
+            <div className="font-epilogue text-[42px] sm:text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
+              <CountUpAnimation endValue={75} suffix="%" />
+            </div>
+            <p className="text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
+              de los colombianos busca productos y servicios en internet antes de comprar
+            </p>
+          </div>
+          <div className="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col items-center text-center sm:items-start sm:text-left gap-3">
+            <div className="font-epilogue text-[42px] sm:text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
+              <CountUpAnimation endValue={83} suffix="%" />
+            </div>
+            <p className="text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
+              de los emprendedores colombianos planea invertir más en presencia digital este año
+            </p>
+          </div>
+          <div className="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col items-center text-center sm:items-start sm:text-left gap-3">
+            <div className="font-epilogue text-[42px] sm:text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
+              <CountUpAnimation endValue={1.7} prefix="+" suffix="M" decimal={true} />
+            </div>
+            <p className="text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
+              de empresas registradas en Colombia. La mayoría sin presencia digital real
+            </p>
+          </div>
+        </div>
+
+        <div className="w-full mt-14 md:mt-20">
+          <h3 className="text-[12px] sm:text-[14px] font-bold text-[#080808]/50 uppercase tracking-[0.15em] mb-5 md:mb-8 text-center md:text-left">
+            POR QUÉ MUCHOS NEGOCIOS SIGUEN SIN WEB
+          </h3>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+            <div className="bg-white rounded-[20px] p-6 md:p-8 flex items-start gap-4 shadow-sm border border-[#080808]/5">
+              <span className="text-[24px]">💸</span>
+              <div>
+                <h4 className="font-bold text-[16px] md:text-[18px] text-[#080808] mb-2">"Es muy caro"</h4>
+                <p className="text-[14px] md:text-[15px] text-[#080808]/70 leading-relaxed">
+                  Muchos negocios creen que tener una web profesional está fuera de su presupuesto. No tiene por qué serlo.
+                </p>
+              </div>
+            </div>
+            <div className="bg-white rounded-[20px] p-6 md:p-8 flex items-start gap-4 shadow-sm border border-[#080808]/5">
+              <span className="text-[24px]">🤷‍♂️</span>
+              <div>
+                <h4 className="font-bold text-[16px] md:text-[18px] text-[#080808] mb-2">"No sé cómo funciona"</h4>
+                <p className="text-[14px] md:text-[15px] text-[#080808]/70 leading-relaxed">
+                  Dominios, hosting, SEO, diseño... el lenguaje técnico aleja a dueños de negocio que simplemente quieren más clientes.
+                </p>
+              </div>
+            </div>
+            <div className="bg-white rounded-[20px] p-6 md:p-8 flex items-start gap-4 shadow-sm border border-[#080808]/5">
+              <span className="text-[24px]">😤</span>
+              <div>
+                <h4 className="font-bold text-[16px] md:text-[18px] text-[#080808] mb-2">"Ya intenté y no funcionó"</h4>
+                <p className="text-[14px] md:text-[15px] text-[#080808]/70 leading-relaxed">
+                  Malas experiencias con freelancers o plantillas genéricas que no reflejan el negocio ni generan resultados.
+                </p>
+              </div>
+            </div>
+            <div className="bg-white rounded-[20px] p-6 md:p-8 flex items-start gap-4 shadow-sm border border-[#080808]/5">
+              <span className="text-[24px]">⏳</span>
+              <div>
+                <h4 className="font-bold text-[16px] md:text-[18px] text-[#080808] mb-2">"No tengo tiempo"</h4>
+                <p className="text-[14px] md:text-[15px] text-[#080808]/70 leading-relaxed">
+                  Gestionar un negocio ya es suficiente trabajo. No debería necesitarse un equipo técnico propio para tener presencia digital.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const HeroSection = () => {
   const [introComplete, setIntroComplete] = useState(false);
   const [isDarkNavbar, setIsDarkNavbar] = useState(false);
+  const [navHidden, setNavHidden] = useState(false);
   const logoRef = useRef(null);
   const navRef = useRef(null);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
       setIntroComplete(true);
     }, 1100);
-
     return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const handleScrollDir = () => {
+      const y = window.scrollY;
+      const goingDown = y > lastScrollY.current;
+      setNavHidden(goingDown && y > 80);
+      lastScrollY.current = y;
+    };
+    window.addEventListener('scroll', handleScrollDir, { passive: true });
+    return () => window.removeEventListener('scroll', handleScrollDir);
   }, []);
 
   useEffect(() => {
@@ -1426,31 +1548,35 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section id="inicio" data-nav-theme="light" className="relative min-h-[100svh] w-full overflow-visible bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
+    <section id="inicio" data-nav-theme="light" className="relative z-30 min-h-[100svh] w-full [overflow-x:clip] overflow-y-visible bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
       <motion.img
-        src={asset('degradado-lateral.png')}
+        src={asset('degradado-lateral.webp')}
         alt=""
         aria-hidden="true"
         initial={{ opacity: 0, scale: 0.92 }}
         animate={{ opacity: 0.95, scale: 1 }}
         transition={{ duration: 0.85, ease: 'easeOut' }}
-        className="pointer-events-none absolute left-[-48%] top-[70%] z-[5] hidden w-[82vw] min-w-[300px] max-w-[1120px] -translate-y-1/2 object-contain md:block md:left-[-34%] md:top-[68%] md:w-[66vw] md:min-w-[460px]"
+        loading="lazy"
+        decoding="async"
+        className="pointer-events-none absolute left-[-48%] top-[72%] z-[5] hidden w-[82vw] min-w-[300px] max-w-[1120px] -translate-y-1/2 object-contain md:block md:left-[-34%] md:top-[71%] md:w-[66vw] md:min-w-[460px]"
       />
       <motion.img
-        src={asset('degradado-lateral.png')}
+        src={asset('degradado-lateral.webp')}
         alt=""
         aria-hidden="true"
         initial={{ opacity: 0, scale: 0.92 }}
         animate={{ opacity: 0.95, scale: 1 }}
         transition={{ duration: 0.85, delay: 0.08, ease: 'easeOut' }}
+        loading="lazy"
+        decoding="async"
         className="pointer-events-none absolute right-[-40%] top-[18%] z-[5] hidden w-[78vw] min-w-[280px] max-w-[980px] -translate-y-1/2 object-contain md:block md:right-[-28%] md:top-[22%] md:w-[60vw] md:min-w-[420px]"
       />
 
       <motion.div
         ref={logoRef}
         initial={{ opacity: 0, y: 18 }}
-        animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-        transition={{ duration: 0.55, ease: 'easeOut' }}
+        animate={introComplete ? { opacity: 1, y: navHidden ? -80 : 0 } : { opacity: 0, y: 18 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed left-6 top-5 z-40 w-fit text-left text-[16px] leading-[0.95] transition-colors duration-200 md:left-[80px] md:top-[40px] md:text-[20px] ${
           isDarkNavbar ? 'text-white' : 'text-[#080808]'
         }`}
@@ -1464,8 +1590,8 @@ const HeroSection = () => {
       <motion.div
         ref={navRef}
         initial={{ opacity: 0, y: 18 }}
-        animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-        transition={{ duration: 0.55, delay: 0.08, ease: 'easeOut' }}
+        animate={introComplete ? { opacity: 1, y: navHidden ? -80 : 0 } : { opacity: 0, y: 18 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed right-[32px] top-[32px] z-40 hidden items-center gap-10 text-[16px] transition-colors duration-200 md:flex md:right-[80px] md:top-[45px] ${
           isDarkNavbar ? 'text-white/72' : 'text-[#080808]/68'
         }`}
@@ -1478,7 +1604,7 @@ const HeroSection = () => {
           Inicio
         </a>
         <a href="#kaiva" className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Nosotros</a>
-        <a href="/#/nuestras-webs" className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Proyectos</a>
+        <a href="#proyectos" className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Proyectos</a>
         <a href="#contacto" className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Contacto</a>
         <a
           href="#planes"
@@ -1494,8 +1620,8 @@ const HeroSection = () => {
 
       <motion.div
         initial={{ opacity: 0, y: 18 }}
-        animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-        transition={{ duration: 0.55, delay: 0.08, ease: 'easeOut' }}
+        animate={introComplete ? { opacity: 1, y: navHidden ? -80 : 0 } : { opacity: 0, y: 18 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         className="fixed right-6 top-5 z-40 flex items-center gap-3 md:hidden"
       >
         <a
@@ -1512,17 +1638,17 @@ const HeroSection = () => {
         transition={{ duration: 0.6, delay: 0.14, ease: 'easeOut' }}
         className="hero-copy-wrap absolute left-6 right-6 top-[110px] z-40 flex max-w-[360px] flex-col items-start text-left md:left-[80px] md:right-auto md:top-[160px] md:max-w-[720px]"
       >
-        <h1 className="w-fit text-[30px] font-extrabold leading-[1.02] tracking-[-0.03em] text-[#080808] md:text-[54px]">
-          <span className="block md:whitespace-nowrap">Páginas web claras,</span>
-          <span className="block md:whitespace-nowrap">rápidas y profesionales</span>
+        <h1 className="w-fit font-extrabold leading-[1.02] tracking-[-0.03em] text-[#080808] text-[clamp(26px,7vw,54px)] flex flex-col items-start gap-1">
+          <AnimatedText text="Páginas web claras," startAnimation={introComplete} className="md:whitespace-nowrap" />
+          <AnimatedText text="rápidas y profesionales" startAnimation={introComplete} className="md:whitespace-nowrap" />
         </h1>
 
         <a
-          href="/#/nuestras-webs"
+          href="#proyectos"
           className="mt-4 inline-block w-fit pb-1 text-[16px] font-medium leading-none underline decoration-1 underline-offset-[5px] md:mt-6 md:text-[20px]"
           style={gradientAccentStyle}
         >
-          Explora nuestro trabajo {'->'}
+          Explora nuestro trabajo ↗
         </a>
       </motion.div>
 
@@ -1534,13 +1660,17 @@ const HeroSection = () => {
       >
         <div className="relative mx-auto aspect-[1.08/1] w-full md:aspect-[1.16/1]">
           <img
-            src={asset('nombre hero.png')}
+            src={asset('nombre hero.webp')}
             alt="Kaiva Studio"
+            fetchpriority="high"
+            decoding="sync"
             className="absolute left-1/2 top-[10%] w-[58%] -translate-x-1/2 object-contain md:top-[10%] md:w-[50%]"
           />
           <motion.img
-            src={asset('robots hero.png')}
+            src={asset('robots hero.webp')}
             alt="Robots Kaiva"
+            fetchpriority="high"
+            decoding="sync"
             className="absolute left-1/2 top-[9%] w-[245%] -translate-x-1/2 scale-[1.08] object-contain md:top-[8%] md:w-[280%] md:scale-[1.15]"
             animate={{
               y: [0, -7, 0, 7, 0],
@@ -1554,17 +1684,37 @@ const HeroSection = () => {
         </div>
       </motion.div>
 
+      <motion.div
+        className="absolute left-1/2 bottom-[110px] md:bottom-[6%] z-[60] -translate-x-1/2 w-full flex justify-center"
+        initial={{ opacity: 0, y: 15 }}
+        animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+        transition={{ duration: 0.6, delay: 0.28, ease: 'easeOut' }}
+      >
+        <a href="#contacto" className="flex min-h-[48px] sm:min-h-[52px] items-center justify-center rounded-[30px] bg-[#0c0c0c] px-8 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-105 active:scale-95 shadow-[0_16px_32px_-8px_rgba(0,0,0,0.3)] sm:px-9 sm:text-[15px] whitespace-nowrap">
+          Quiero mi web
+        </a>
+      </motion.div>
+
       <motion.p
         initial={{ opacity: 0, y: 18 }}
         animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
         transition={{ duration: 0.55, delay: 0.22, ease: 'easeOut' }}
-        className="absolute bottom-4 left-6 right-6 z-40 max-w-[280px] text-left text-[12px] font-normal leading-[1.5] text-[#080808]/64 md:bottom-[60px] md:left-auto md:right-[80px] md:max-w-[420px] md:text-[15px]"
+        className="absolute bottom-4 left-6 right-6 z-40 max-w-[260px] text-left text-[11px] font-normal leading-[1.5] text-[#080808]/64 sm:max-w-[280px] sm:text-[12px] md:bottom-[60px] md:left-auto md:right-[80px] md:max-w-[420px] md:text-[15px]"
       >
-        Kaiva Studio combina diseño, estructura y tecnología
-        <br />
-        para construir activos digitales que funcionan.
+        Deja de perder clientes por no estar en internet. Diseñamos y desarrollamos tu página web con criterio profesional, entrega rápida y un precio justo.
       </motion.p>
     </section>
   );
 };
+
+export default App;
+
+
+
+
+
+
+
+
+
 
