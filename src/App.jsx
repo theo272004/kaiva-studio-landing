@@ -2,6 +2,19 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, AnimatePresence, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
+const PROJECTS_PAGE_HREF = './proyectos/';
+const HOME_PAGE_HREF_FROM_PROJECTS = '../';
+const isProjectsPath = () => {
+  if (typeof window === 'undefined') return false;
+  return /\/proyectos(?:\/|$|\/index\.html$)/.test(window.location.pathname);
+};
+const scrollToSection = (event, id) => {
+  if (typeof window === 'undefined') return;
+  event.preventDefault();
+  const target = document.getElementById(id);
+  if (!target) return;
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
 
 const slides = [
   {
@@ -168,10 +181,10 @@ const GlassPanelLayers = () => (
 
 const MockupRenderer = ({ type }) => {
   const mockups = {
-    dashboard: asset('kaiva_dashboard_mockup.png'),
-    ecommerce: asset('kaiva_ecommerce_mockup.png'),
-    tech: asset('kaiva_tech_mockup.png'),
-    creative: asset('kaiva_creative_mockup.png'),
+    dashboard: asset('kaiva_dashboard_mockup.webp'),
+    ecommerce: asset('kaiva_ecommerce_mockup.webp'),
+    tech: asset('kaiva_tech_mockup.webp'),
+    creative: asset('kaiva_creative_mockup.webp'),
   };
 
   return (
@@ -179,6 +192,8 @@ const MockupRenderer = ({ type }) => {
       <img
         src={mockups[type]}
         alt={type}
+        loading="lazy"
+        decoding="async"
         className="h-full w-full object-contain p-3 opacity-90 transition-opacity duration-700 hover:opacity-100 sm:object-cover sm:p-0"
       />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/10 to-transparent" />
@@ -208,7 +223,7 @@ const FloatingRobot = ({ src, style, className = '', delay = 0, duration = 6, am
     }}
   >
     <div className="h-full w-full">
-      <img src={src} alt="Kaiva Character" className="h-full w-full object-contain" />
+      <img src={src} alt="Kaiva Character" loading="lazy" decoding="async" className="h-full w-full object-contain" />
     </div>
   </motion.div>
 );
@@ -251,8 +266,7 @@ const TiltSlide = ({ slide, isActive, position, onClick }) => {
   const scale = isActive ? 1 : 1 - absOffset * 0.12;
   const translateX = position * 55;
   const translateZ = isActive ? 0 : -absOffset * 180;
-  const opacity = absOffset > 2 ? 0 : isActive ? 1 : 0.55 - absOffset * 0.15;
-  const blur = isActive ? 0 : absOffset * 2;
+  const opacity = absOffset > 2 ? 0 : isActive ? 1 : 0.5 - absOffset * 0.12;
 
   return (
     <motion.div
@@ -262,7 +276,7 @@ const TiltSlide = ({ slide, isActive, position, onClick }) => {
       onClick={onClick}
       className="absolute left-1/2 top-1/2 cursor-pointer"
       style={{
-        width: 'clamp(250px, 68vw, 620px)',
+        width: 'clamp(220px, 72vw, 620px)',
         aspectRatio: '4/3',
         x: '-50%',
         y: '-50%',
@@ -275,7 +289,6 @@ const TiltSlide = ({ slide, isActive, position, onClick }) => {
         scale,
         z: translateZ,
         opacity,
-        filter: `blur(${blur}px)`,
       }}
       transition={{ type: 'spring', stiffness: 120, damping: 20 }}
     >
@@ -306,6 +319,12 @@ const ContactRevealSection = () => {
   const prefersReducedMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
   const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start 90%', 'end end'],
+  });
+  const footerY = useTransform(scrollYProgress, [0.12, 0.72], ['24%', '0%']);
+  const footerOpacity = useTransform(scrollYProgress, [0.08, 0.35], [0.15, 1]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 767px)');
@@ -335,22 +354,6 @@ const ContactRevealSection = () => {
       filter: 'blur(0px)',
       transition: {
         duration: prefersReducedMotion ? 0.24 : 1.1,
-        ease: premiumEase,
-      },
-    },
-  };
-
-  const paragraphItem = {
-    hidden: prefersReducedMotion
-      ? { opacity: 0 }
-      : { opacity: 0, y: isMobile ? 14 : 20, filter: 'blur(6px)' },
-    show: {
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      transition: {
-        duration: prefersReducedMotion ? 0.22 : 0.95,
-        delay: prefersReducedMotion ? 0 : 0.15,
         ease: premiumEase,
       },
     },
@@ -398,30 +401,19 @@ const ContactRevealSection = () => {
     },
   };
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end end'],
-  });
-  const blackPanelY = useTransform(
-    scrollYProgress,
-    [0.85, 1],
-    ['100%', '0%'],
-  );
-
   return (
-    <section ref={sectionRef} id="contacto" className="relative min-h-[120vh] bg-transparent">
-      <div className="sticky top-0 z-0 h-screen overflow-hidden bg-transparent">
+    <section id="contacto" ref={sectionRef} className="relative w-full overflow-x-clip bg-transparent">
+      <div
+        className="mx-auto flex w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
+        style={{
+          paddingTop: 'clamp(72px, 10vw, 172px)',
+          paddingBottom: 'clamp(52px, 8vw, 124px)',
+        }}
+      >
         <div
-          className="mx-auto flex h-full w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
-          style={{
-            paddingTop: 'clamp(128px, 15vw, 196px)',
-            paddingBottom: 'clamp(128px, 15vw, 196px)',
-          }}
+          className="grid w-full lg:grid-cols-[0.9fr_1.1fr] lg:items-center"
+          style={{ columnGap: 'clamp(56px, 9vw, 132px)' }}
         >
-          <div
-            className="grid w-full lg:grid-cols-[0.9fr_1.1fr] lg:items-center"
-            style={{ columnGap: 'clamp(56px, 9vw, 132px)' }}
-          >
             <motion.div
               variants={textGroup}
               initial="hidden"
@@ -432,7 +424,7 @@ const ContactRevealSection = () => {
               <motion.div variants={textItem} className="font-manrope text-[16px] font-medium tracking-normal text-[#080808]/68">
                 Contacto
               </motion.div>
-              <motion.h2 className="mt-6 font-epilogue text-[clamp(56px,7vw,112px)] font-extrabold leading-[0.92] tracking-[-0.04em] text-[#080808] md:tracking-[-0.035em] lg:tracking-[-0.04em]">
+              <motion.h2 className="mt-6 font-epilogue text-[clamp(40px,7vw,112px)] font-extrabold leading-[0.92] tracking-[-0.04em] text-[#080808] md:tracking-[-0.035em] lg:tracking-[-0.04em]">
                 <motion.span variants={textItem} className="block">Ready to</motion.span>
                 <motion.span variants={textItem} className="block">start?</motion.span>
               </motion.h2>
@@ -503,25 +495,28 @@ const ContactRevealSection = () => {
           </div>
         </div>
 
-        <motion.div
-          className="absolute inset-x-0 bottom-0 z-20 min-h-[45vh] bg-[#111111]"
-          style={{ y: prefersReducedMotion ? '0%' : blackPanelY }}
-        >
-          <div className="mx-auto flex min-h-[45vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-10 text-center md:px-12 md:py-12 lg:px-16">
-            <a
-              href="mailto:hello@kaivastudio.com"
-              className="font-epilogue text-[clamp(28px,4vw,60px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
-            >
-              hello@kaivastudio.com
-            </a>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-white/52">
-              <a href="#" className="transition-colors duration-300 hover:text-white">Instagram</a>
-              <a href="#" className="transition-colors duration-300 hover:text-white">Dribbble</a>
-              <a href="#" className="transition-colors duration-300 hover:text-white">LinkedIn</a>
-            </div>
+      <motion.div
+        className="w-full bg-[#111111] pb-[max(env(safe-area-inset-bottom),0px)]"
+        style={prefersReducedMotion ? undefined : { y: footerY, opacity: footerOpacity }}
+        initial={prefersReducedMotion ? { opacity: 0 } : false}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: false, amount: 0.06 }}
+        transition={{ duration: 0.7, ease: premiumEase }}
+      >
+        <div className="mx-auto flex min-h-[34vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-10 text-center md:min-h-[40vh] md:px-12 md:py-12 lg:px-16">
+          <a
+            href="mailto:hello@kaivastudio.com"
+            className="font-epilogue text-[clamp(28px,4vw,60px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
+          >
+            hello@kaivastudio.com
+          </a>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-white/52">
+            <a href="#" className="transition-colors duration-300 hover:text-white">Instagram</a>
+            <a href="#" className="transition-colors duration-300 hover:text-white">Dribbble</a>
+            <a href="#" className="transition-colors duration-300 hover:text-white">LinkedIn</a>
           </div>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </section>
   );
 };
@@ -552,7 +547,7 @@ const SectionShell = ({ id, tone = 'light', className = '', children }) => {
 
   return (
     <section id={id} data-nav-theme="light" className={`${toneClass} ${className}`}>
-      <div className="mx-auto w-full max-w-[1320px] px-6 py-28 md:px-12 md:py-36 lg:px-16">{children}</div>
+      <div className="mx-auto w-full max-w-[1320px] px-6 py-14 md:px-12 md:py-36 lg:px-16">{children}</div>
     </section>
   );
 };
@@ -607,12 +602,20 @@ const ServicesSection = () => {
                       transition: { duration: 0.62, ease: [0.16, 1, 0.3, 1] },
                     },
                   }}
-                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-white/80 bg-white/82 shadow-[0_18px_48px_-34px_rgba(80,74,168,0.35)] outline-none backdrop-blur-[16px] transition-[opacity,transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white hover:shadow-[0_28px_74px_-44px_rgba(80,74,168,0.48)] md:min-h-[380px] xl:min-h-[420px]"
+                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-white/80 bg-white shadow-[0_18px_48px_-34px_rgba(80,74,168,0.28)] outline-none transition-[opacity,transform,box-shadow,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-[#8242f5]/30 hover:shadow-[0_28px_74px_-44px_rgba(130,66,245,0.4)] md:min-h-[380px] xl:min-h-[420px]"
                   whileHover={{ y: -12 }}
-                  transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                   tabIndex={0}
+                  onMouseEnter={() => setActiveService(index)}
                 >
-                  <div className="relative z-10 flex min-h-full w-full flex-col px-7 py-9 md:px-8 md:py-10 lg:px-9 lg:py-11 xl:px-10">
+                  {/* Glowing Effect Blobs (Bottom Half) */}
+                  <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[30px]">
+                    <div className="absolute -bottom-[20%] -right-[10%] h-[70%] w-[70%] translate-x-1/4 translate-y-1/4 rounded-full bg-[#d96cff] opacity-0 blur-[60px] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-[0.35]" />
+                    <div className="absolute -bottom-[20%] left-[15%] h-[70%] w-[70%] translate-y-1/4 rounded-full bg-[#8242f5] opacity-0 blur-[60px] transition-all duration-700 delay-75 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-[0.25]" />
+                    <div className="absolute -bottom-[20%] -left-[10%] h-[70%] w-[70%] -translate-x-1/4 translate-y-1/4 rounded-full bg-[#21b2c6] opacity-0 blur-[60px] transition-all duration-700 delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-[0.35]" />
+                  </div>
+
+                  <div className="relative z-10 flex min-h-full w-full flex-col px-6 py-8 md:px-8 md:py-10 lg:px-9 lg:py-11 xl:px-10">
                     <motion.div
                       className="font-epilogue text-[48px] font-extrabold leading-none tracking-[-0.04em] md:text-[60px] xl:text-[72px]"
                       style={gradientAccentStyle}
@@ -725,7 +728,7 @@ const PortfolioSection = () => {
 
       <div
         ref={stageRef}
-        className="relative z-10 mt-8 h-[350px] sm:h-[420px] md:mt-12 md:h-[clamp(440px,58vh,680px)]"
+        className="relative z-10 mt-6 h-[320px] sm:h-[400px] md:mt-12 md:h-[clamp(440px,58vh,680px)]"
         style={{
           perspective: '2000px',
         }}
@@ -734,18 +737,18 @@ const PortfolioSection = () => {
         onMouseLeave={() => setIsHovering(false)}
       >
         <FloatingRobot
-          src={asset('KaivaTheo.png')}
-          className="block"
-          style={{ top: '1%', left: '2%', width: 'clamp(96px, 14vw, 210px)', height: 'clamp(96px, 14vw, 210px)' }}
+          src={asset('KaivaTheo.webp')}
+          className="hidden sm:block"
+          style={{ top: '1%', left: '2%', width: 'clamp(72px, 11vw, 210px)', height: 'clamp(72px, 11vw, 210px)' }}
           delay={0}
           duration={10}
           amplitude={6}
           rotation={2}
         />
         <FloatingRobot
-          src={asset('KaivaSara.png')}
-          className="block"
-          style={{ bottom: '18%', right: '2%', width: 'clamp(96px, 14vw, 210px)', height: 'clamp(96px, 14vw, 210px)' }}
+          src={asset('KaivaSara.webp')}
+          className="hidden sm:block"
+          style={{ bottom: '18%', right: '2%', width: 'clamp(72px, 11vw, 210px)', height: 'clamp(72px, 11vw, 210px)' }}
           delay={2.2}
           duration={10.5}
           amplitude={6}
@@ -801,8 +804,8 @@ const PortfolioSection = () => {
         </AnimatePresence>
       </div>
 
-      <div className="px-6 md:hidden">
-        <div className="rounded-[22px] border border-[#080808]/10 bg-[var(--color-surface)] p-5 shadow-[0_18px_48px_-28px_rgba(0,0,0,0.12)]">
+      <div className="mt-4 px-4 sm:px-6 md:hidden">
+        <div className="rounded-[20px] border border-[#080808]/10 bg-[var(--color-surface)] p-4 shadow-[0_18px_48px_-28px_rgba(0,0,0,0.12)]">
           <div className="flex items-end gap-3">
             <div className="font-epilogue text-[42px] font-extrabold italic leading-none tracking-[-0.03em] opacity-90" style={gradientAccentStyle}>
               {active.number}
@@ -826,11 +829,9 @@ const PortfolioSection = () => {
             onClick={() => setActiveIndex((p) => (p - 1 + slides.length) % slides.length)}
             className="flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-300 hover:scale-110 text-[#080808]"
             style={{
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%)',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
+              background: 'rgba(255,255,255,0.92)',
               border: '1px solid rgba(255,255,255,0.9)',
-              boxShadow: '0 8px 20px rgba(0,0,0,0.06), inset 1px 1px 2px rgba(255,255,255,1), inset -1px -1px 2px rgba(0,0,0,0.05)',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.06), inset 1px 1px 2px rgba(255,255,255,1)',
             }}
             aria-label="Previous"
           >
@@ -873,11 +874,9 @@ const PortfolioSection = () => {
             onClick={() => setActiveIndex((p) => (p + 1) % slides.length)}
             className="flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-300 hover:scale-110 text-[#080808]"
             style={{
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%)',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
+              background: 'rgba(255,255,255,0.92)',
               border: '1px solid rgba(255,255,255,0.9)',
-              boxShadow: '0 8px 20px rgba(0,0,0,0.06), inset 1px 1px 2px rgba(255,255,255,1), inset -1px -1px 2px rgba(0,0,0,0.05)',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.06), inset 1px 1px 2px rgba(255,255,255,1)',
             }}
             aria-label="Next"
           >
@@ -996,12 +995,14 @@ const ExpandedAgencySections = () => (
     <section
       id="planes"
       data-nav-theme="light"
-      className="relative bg-transparent px-4 py-12 md:px-8 md:py-16"
+      className="relative overflow-hidden bg-transparent px-4 py-12 md:px-8 md:py-16"
     >
       <motion.img
-        src={asset('KaivaMora1.png')}
+        src={asset('KaivaMora1.webp')}
         alt=""
-        className="absolute -right-[8%] top-[15%] z-50 w-[380px] opacity-100 md:-right-[6%] md:top-[10%] md:w-[600px] pointer-events-none"
+        loading="lazy"
+        decoding="async"
+        className="absolute right-0 top-[6%] z-50 hidden w-[200px] opacity-90 sm:block md:right-[-2%] md:top-[4%] md:w-[320px] lg:right-[-3%] lg:w-[460px] pointer-events-none"
         animate={{
           y: [0, 15, 0],
           rotate: [0, 2, 0]
@@ -1025,11 +1026,11 @@ const ExpandedAgencySections = () => (
             </p>
           </div>
 
-          <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-8 grid gap-4 sm:gap-5 md:grid-cols-2 xl:grid-cols-3">
             {pricingPlans.map((plan) => (
                 <article
                   key={plan.name}
-                  className={`group relative flex min-h-[340px] flex-col rounded-[32px] border ${plan.featured ? 'border-[#a482ff]/50' : 'border-white/80'} bg-white/85 shadow-[0_18px_48px_-24px_rgba(32,29,26,0.12)] outline-none backdrop-blur-[16px] transition-[transform,shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:border-black/5 hover:shadow-[0_28px_74px_-34px_rgba(32,29,26,0.18)] md:min-h-[380px] xl:min-h-[420px]`}
+                  className={`group relative flex min-h-[340px] flex-col rounded-[32px] border ${plan.featured ? 'border-[#a482ff]/50' : 'border-[#e8e5ff]/70'} bg-white shadow-[0_18px_48px_-24px_rgba(32,29,26,0.10)] outline-none transition-[transform,shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:border-black/5 hover:shadow-[0_28px_74px_-34px_rgba(32,29,26,0.16)] md:min-h-[380px] xl:min-h-[420px]`}
                 >
                   <div className="relative flex flex-1 flex-col p-8 md:p-10">
                     {plan.badge && (
@@ -1059,7 +1060,7 @@ const ExpandedAgencySections = () => (
                         </li>
                       ))}
                     </ul>
-                    <a href="#contacto" className="mt-10 inline-flex w-fit items-center justify-center rounded-full bg-white px-7 py-3 font-manrope text-[11px] font-bold uppercase tracking-widest text-[#080808] shadow-[0_4px_14px_rgba(0,0,0,0.06)] border border-[#080808]/5 transition-[shadow,transform] duration-300 hover:shadow-[0_6px_20px_rgba(0,0,0,0.08)] hover:-translate-y-[1px]">
+                    <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className="mt-10 inline-flex w-fit items-center justify-center rounded-full bg-white px-7 py-3 font-manrope text-[11px] font-bold uppercase tracking-widest text-[#080808] shadow-[0_4px_14px_rgba(0,0,0,0.06)] border border-[#080808]/5 transition-[shadow,transform] duration-300 hover:shadow-[0_6px_20px_rgba(0,0,0,0.08)] hover:-translate-y-[1px]">
                       {plan.cta}
                     </a>
                   </div>
@@ -1068,7 +1069,7 @@ const ExpandedAgencySections = () => (
             </div>
 
             <div className="mx-auto mt-6 w-full max-w-[1180px]">
-              <article className="group relative flex flex-col items-center justify-between gap-6 rounded-[32px] border border-white/80 bg-white/85 p-6 shadow-[0_18px_48px_-24px_rgba(32,29,26,0.12)] outline-none backdrop-blur-[16px] transition-[transform,shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_28px_74px_-34px_rgba(32,29,26,0.18)] md:flex-row md:p-8 lg:px-12">
+              <article className="group relative flex flex-col items-center justify-between gap-6 rounded-[32px] border border-[#e8e5ff]/70 bg-white p-6 shadow-[0_18px_48px_-24px_rgba(32,29,26,0.10)] outline-none transition-[transform,shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_28px_74px_-34px_rgba(32,29,26,0.16)] md:flex-row md:p-8 lg:px-12">
                 <div className="flex flex-col items-center text-center md:items-start md:text-left md:max-w-[280px]">
                   <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#a482ff]">
                     {ecommercePlan.label}
@@ -1084,7 +1085,7 @@ const ExpandedAgencySections = () => (
                   <p className="max-w-[500px] text-[14px] leading-relaxed text-[#080808]/70">
                     {ecommercePlan.description}
                   </p>
-                  <a href="#contacto" className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full shadow-[0_8px_20px_-6px_rgba(164,130,255,0.5)] transition-transform hover:scale-105" style={{ background: 'linear-gradient(135deg, #d49fff 0%, #a482ff 100%)' }}>
+                  <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full shadow-[0_8px_20px_-6px_rgba(164,130,255,0.5)] transition-transform hover:scale-105" style={{ background: 'linear-gradient(135deg, #d49fff 0%, #a482ff 100%)' }}>
                     <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
@@ -1099,10 +1100,10 @@ const ExpandedAgencySections = () => (
 
 const WhyUsSection = () => {
   return (
-    <section className="relative w-full bg-transparent text-[#080808] px-6 py-24 md:py-32 lg:px-16 overflow-hidden">
-      <div className="mx-auto flex w-full max-w-[1240px] flex-col gap-12 md:flex-row md:items-center md:justify-between">
+    <section className="relative w-full bg-transparent text-[#080808] px-6 py-14 md:py-28 lg:px-16 overflow-hidden">
+      <div className="mx-auto flex w-full max-w-[1240px] flex-col gap-8 md:flex-row md:items-center md:gap-12 md:justify-between">
         <div className="flex-1 max-w-[500px]">
-          <h2 className="font-epilogue text-[40px] md:text-[56px] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#080808]">
+          <h2 className="font-epilogue text-[clamp(32px,6vw,56px)] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#080808]">
             El mundo digital te está esperando. Nosotros te llevamos.
           </h2>
           <p className="mt-8 text-[15px] md:text-[16px] leading-[1.6] text-[#080808]/70">
@@ -1157,7 +1158,7 @@ const AliadosSection = () => {
           <div className="mb-4 inline-block font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#a482ff]">
             ALIADOS ESTRATÉGICOS
           </div>
-          <h2 className="font-epilogue text-[40px] md:text-[56px] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#080808]">
+          <h2 className="font-epilogue text-[clamp(32px,6vw,56px)] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#080808]">
             Trabajamos con los mejores en SEO
           </h2>
           <p className="mt-6 text-[15px] md:text-[16px] leading-[1.6] text-[#080808]/70">
@@ -1325,25 +1326,79 @@ const CustomCursor = () => {
   );
 };
 
+const FixedNavbar = ({ projectsActive = false }) => (
+  <>
+    <a
+      href={projectsActive ? HOME_PAGE_HREF_FROM_PROJECTS : '#inicio'}
+      onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'inicio')}
+      className="fixed left-6 top-5 z-40 w-fit text-left text-[16px] leading-[0.95] text-[#080808] transition-colors duration-200 md:left-[80px] md:top-[40px] md:text-[20px]"
+    >
+      <span className="block font-semibold tracking-[-0.02em]">Kaiva</span>
+      <span className="block font-normal">
+        Studio<span style={gradientAccentStyle}>.</span>
+      </span>
+    </a>
+
+    <nav className="fixed right-[32px] top-[32px] z-40 hidden items-center gap-10 text-[16px] text-[#080808]/68 transition-colors duration-200 md:flex md:right-[80px] md:top-[45px]">
+      <a href={projectsActive ? HOME_PAGE_HREF_FROM_PROJECTS : '#inicio'} onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'inicio')} className="font-medium" style={projectsActive ? undefined : gradientAccentStyle}>
+        Inicio
+      </a>
+      <a href={projectsActive ? `${HOME_PAGE_HREF_FROM_PROJECTS}#kaiva` : '#kaiva'} onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'kaiva')} className="transition-colors hover:text-[#080808]">Nosotros</a>
+      <a href={projectsActive ? './' : PROJECTS_PAGE_HREF} className="transition-colors hover:text-[#080808]" style={projectsActive ? gradientAccentStyle : undefined}>Proyectos</a>
+      <a href={projectsActive ? `${HOME_PAGE_HREF_FROM_PROJECTS}#contacto` : '#contacto'} onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'contacto')} className="transition-colors hover:text-[#080808]">Contacto</a>
+      <a
+        href={projectsActive ? `${HOME_PAGE_HREF_FROM_PROJECTS}#planes` : '#planes'}
+        onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'planes')}
+        className="inline-flex h-[44px] items-center justify-center self-center rounded-full border border-[#080808]/12 bg-white/72 px-6 font-manrope text-[11px] font-bold uppercase tracking-[0.16em] text-[#080808] shadow-[0_12px_28px_-20px_rgba(8,8,8,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white"
+      >
+        Paquetes
+      </a>
+    </nav>
+
+    <div className="fixed right-6 top-5 z-40 flex items-center gap-3 md:hidden">
+      <a
+        href={projectsActive ? `${HOME_PAGE_HREF_FROM_PROJECTS}#planes` : '#planes'}
+        onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'planes')}
+        className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-[#080808]/12 bg-white px-5 font-manrope text-[10px] font-bold uppercase tracking-[0.16em] text-[#080808] transition-colors hover:bg-[#f7f7f7]"
+      >
+        Paquetes
+      </a>
+    </div>
+  </>
+);
+
+const ProjectsPage = () => {
+  return (
+    <>
+      <FixedNavbar projectsActive />
+      <PortfolioSection />
+    </>
+  );
+};
+
 const App = () => {
+  const showProjectsPage = isProjectsPath();
 
   return (
     <div className="relative z-10 w-full bg-white">
-      <CustomCursor />
-      <HeroSection />
-      <ProblemSection />
-      <div className="relative">
-        <SectionsAuroraBackdrop />
-        <div className="relative z-10">
-          <WhyUsSection />
-          <PortfolioSection />
-          <ExpandedAgencySections />
-          <AliadosSection />
-          <ContactRevealSection />
-        </div>
-      </div>
+      {showProjectsPage ? (
+        <ProjectsPage />
+      ) : (
+        <>
+          <HeroSection />
+          <ProblemSection />
+          <div className="relative">
+            <SectionsAuroraBackdrop />
+            <div className="relative z-10">
+              <WhyUsSection />
+              <ExpandedAgencySections />
+              <AliadosSection />
+              <ContactRevealSection />
+            </div>
+          </div>
+        </>
+      )}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;600;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
         @import url('https://fonts.cdnfonts.com/css/open-sauce-one');
         :root {
           --color-dominant: #ffffff;
@@ -1356,34 +1411,32 @@ const App = () => {
         body { background-color: var(--color-dominant); font-family: 'Inter Tight', 'Inter', sans-serif; letter-spacing: -0.01em; color: var(--color-secondary); }
         .aurora-base {
           background:
-            radial-gradient(120% 130% at 0% 0%, rgba(126, 209, 255, 0.42) 0%, rgba(126, 209, 255, 0) 54%),
-            radial-gradient(120% 120% at 100% 0%, rgba(155, 134, 255, 0.4) 0%, rgba(155, 134, 255, 0) 56%),
-            radial-gradient(140% 150% at 100% 100%, rgba(255, 164, 214, 0.36) 0%, rgba(255, 164, 214, 0) 54%),
-            radial-gradient(120% 120% at 0% 100%, rgba(107, 229, 229, 0.34) 0%, rgba(107, 229, 229, 0) 55%),
+            radial-gradient(120% 130% at 0% 0%, rgba(126, 209, 255, 0.36) 0%, rgba(126, 209, 255, 0) 54%),
+            radial-gradient(120% 120% at 100% 0%, rgba(155, 134, 255, 0.34) 0%, rgba(155, 134, 255, 0) 56%),
+            radial-gradient(140% 150% at 100% 100%, rgba(255, 164, 214, 0.30) 0%, rgba(255, 164, 214, 0) 54%),
+            radial-gradient(120% 120% at 0% 100%, rgba(107, 229, 229, 0.28) 0%, rgba(107, 229, 229, 0) 55%),
             linear-gradient(180deg, #ffffff 0%, #fcfcff 100%);
-          animation: auroraShift 22s ease-in-out infinite alternate;
         }
         .aurora-blob {
-          filter: blur(84px);
-          opacity: 0.44;
-          will-change: transform, opacity;
+          opacity: 1;
+          will-change: transform;
+          transform: translateZ(0);
+          backface-visibility: hidden;
         }
         .aurora-blob-a {
-          background: radial-gradient(circle at 30% 40%, rgba(107, 229, 229, 0.8) 0%, rgba(107, 229, 229, 0.18) 42%, rgba(107, 229, 229, 0) 75%);
+          background: radial-gradient(circle at 30% 40%, rgba(107, 229, 229, 0.38) 0%, rgba(107, 229, 229, 0.10) 50%, rgba(107, 229, 229, 0) 80%);
           animation: floatBlobOne 24s ease-in-out infinite;
         }
         .aurora-blob-b {
-          background: radial-gradient(circle at 70% 35%, rgba(155, 134, 255, 0.78) 0%, rgba(155, 134, 255, 0.18) 46%, rgba(155, 134, 255, 0) 76%);
+          background: radial-gradient(circle at 70% 35%, rgba(155, 134, 255, 0.34) 0%, rgba(155, 134, 255, 0.08) 52%, rgba(155, 134, 255, 0) 80%);
           animation: floatBlobTwo 27s ease-in-out infinite;
         }
         .aurora-blob-c {
-          background: radial-gradient(circle at 50% 62%, rgba(255, 164, 214, 0.72) 0%, rgba(255, 164, 214, 0.16) 44%, rgba(255, 164, 214, 0) 76%);
+          background: radial-gradient(circle at 50% 62%, rgba(255, 164, 214, 0.32) 0%, rgba(255, 164, 214, 0.08) 50%, rgba(255, 164, 214, 0) 80%);
           animation: floatBlobThree 30s ease-in-out infinite;
         }
         .aurora-blur-overlay {
-          backdrop-filter: blur(46px) saturate(108%);
-          -webkit-backdrop-filter: blur(46px) saturate(108%);
-          background: linear-gradient(180deg, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.08) 42%, rgba(255,255,255,0.3) 100%);
+          background: linear-gradient(180deg, rgba(255,255,255,0.32) 0%, rgba(255,255,255,0.06) 42%, rgba(255,255,255,0.28) 100%);
         }
         .aurora-noise {
           opacity: 0.17;
@@ -1394,39 +1447,41 @@ const App = () => {
           mix-blend-mode: soft-light;
         }
         
-        @keyframes auroraShift {
-          0% { background-position: 0% 50%, 100% 50%, 50% 100%, 50% 0%, 50% 50%; }
-          100% { background-position: 100% 50%, 0% 60%, 50% 0%, 50% 100%, 50% 50%; }
-        }
         @keyframes floatBlobOne {
-          0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.44; }
-          50% { transform: translate3d(4vw, -3vh, 0) scale(1.06); opacity: 0.52; }
-          100% { transform: translate3d(-2vw, 2.5vh, 0) scale(0.98); opacity: 0.4; }
+          0% { transform: translate3d(0, 0, 0) scale(1); }
+          50% { transform: translate3d(4vw, -3vh, 0) scale(1.06); }
+          100% { transform: translate3d(-2vw, 2.5vh, 0) scale(0.98); }
         }
         @keyframes floatBlobTwo {
-          0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.45; }
-          50% { transform: translate3d(-3.8vw, 2.8vh, 0) scale(1.05); opacity: 0.5; }
-          100% { transform: translate3d(2.4vw, -2.2vh, 0) scale(0.97); opacity: 0.4; }
+          0% { transform: translate3d(0, 0, 0) scale(1); }
+          50% { transform: translate3d(-3.8vw, 2.8vh, 0) scale(1.05); }
+          100% { transform: translate3d(2.4vw, -2.2vh, 0) scale(0.97); }
         }
         @keyframes floatBlobThree {
-          0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.4; }
-          50% { transform: translate3d(2.6vw, -2.6vh, 0) scale(1.04); opacity: 0.48; }
-          100% { transform: translate3d(-3vw, 2vh, 0) scale(0.98); opacity: 0.38; }
+          0% { transform: translate3d(0, 0, 0) scale(1); }
+          50% { transform: translate3d(2.6vw, -2.6vh, 0) scale(1.04); }
+          100% { transform: translate3d(-3vw, 2vh, 0) scale(0.98); }
         }
         @media (max-width: 1200px) {
           .hero-copy-wrap { top: 136px !important; max-width: 640px !important; }
           .hero-visual-wrap { top: 250px !important; width: 116vw !important; max-width: 920px !important; }
         }
         @media (max-width: 768px) {
-          .hero-copy-wrap { top: 108px !important; max-width: 360px !important; }
-          .hero-visual-wrap { top: 284px !important; width: 122vw !important; max-width: 560px !important; }
+          .hero-copy-wrap { top: 108px !important; max-width: calc(100vw - 48px) !important; }
+          .hero-visual-wrap { top: 275px !important; width: 114vw !important; max-width: 520px !important; }
+        }
+        @media (max-width: 400px) {
+          .hero-copy-wrap { top: 96px !important; }
+          .hero-visual-wrap { top: 255px !important; width: 108vw !important; max-width: 420px !important; }
+        }
+        @media (max-height: 700px) and (max-width: 768px) {
+          .hero-copy-wrap { top: 86px !important; }
+          .hero-visual-wrap { top: 220px !important; }
         }
           .contact-premium-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(0, 0, 0, 0.12);
-            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.08);
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.09);
+            box-shadow: 0 32px 80px -20px rgba(0, 0, 0, 0.10), 0 0 0 1px rgba(0,0,0,0.03);
           }
           .contact-input {
             background: #ffffff;
@@ -1489,7 +1544,7 @@ const CountUpAnimation = ({ endValue, suffix = "", prefix = "", decimal = false 
 
 const ProblemSection = () => {
   return (
-    <section id="problema" className="relative w-full bg-transparent text-[#080808] px-6 py-24 md:py-32 lg:px-16">
+    <section id="problema" className="relative w-full bg-transparent text-[#080808] px-6 py-14 md:py-24 lg:px-16">
       <div className="mx-auto w-full max-w-[1240px] relative z-10 flex flex-col items-center">
         
         <ScrollRevealHeadline text="El 91% de las empresas en Colombia son pymes. La mayoría no existe en internet." />
@@ -1499,39 +1554,43 @@ const ProblemSection = () => {
           negocio no aparece, ese cliente se va a la competencia. Así de simple.
         </p>
 
-        <div className="mt-16 w-full grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-[24px] p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-4">
-            <div className="font-epilogue text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
+        <div className="mt-10 w-full grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+          <div className="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col items-center text-center sm:items-start sm:text-left gap-3">
+            <div className="font-epilogue text-[42px] sm:text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
               <CountUpAnimation endValue={75} suffix="%" />
             </div>
-            <p className="text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
+            <p className="text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
               de los colombianos busca productos y servicios en internet antes de comprar
             </p>
           </div>
-          <div className="bg-white rounded-[24px] p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-4">
-            <div className="font-epilogue text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
+          <div className="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col items-center text-center sm:items-start sm:text-left gap-3">
+            <div className="font-epilogue text-[42px] sm:text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
               <CountUpAnimation endValue={83} suffix="%" />
             </div>
-            <p className="text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
+            <p className="text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
               de los emprendedores colombianos planea invertir más en presencia digital este año
             </p>
           </div>
-          <div className="bg-white rounded-[24px] p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col gap-4">
-            <div className="font-epilogue text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
+          <div className="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col items-center text-center sm:items-start sm:text-left gap-3">
+            <div className="font-epilogue text-[42px] sm:text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
               <CountUpAnimation endValue={1.7} prefix="+" suffix="M" decimal={true} />
             </div>
-            <p className="text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
+            <p className="text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
               de empresas registradas en Colombia. La mayoría sin presencia digital real
             </p>
           </div>
         </div>
 
-        <div className="w-full mt-24">
-          <h3 className="text-[14px] font-bold text-[#080808]/50 uppercase tracking-[0.15em] mb-6 md:mb-8 text-center md:text-left">
-            POR QUÉ MUCHOS NEGOCIOS SIGUEN SIN WEB
+        <div className="w-full mt-14 md:mt-20">
+          <h3 className="mb-6 text-center font-manrope text-[clamp(24px,3.6vw,42px)] font-extrabold uppercase tracking-[0.04em] text-[#080808] md:mb-10">
+            POR QUÉ MUCHOS NEGOCIOS{' '}
+            <span className="font-epilogue italic tracking-[-0.03em]" style={gradientAccentStyle}>
+              SIGUEN
+            </span>{' '}
+            SIN WEB
           </h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
             <div className="bg-white rounded-[20px] p-6 md:p-8 flex items-start gap-4 shadow-sm border border-[#080808]/5">
               <span className="text-[24px]">💸</span>
               <div>
@@ -1577,7 +1636,8 @@ const ProblemSection = () => {
 
 const HeroSection = () => {
   const [introComplete, setIntroComplete] = useState(false);
-  const [isDarkNavbar, setIsDarkNavbar] = useState(false);
+  const isDarkNavbar = false;
+  const navHidden = false;
   const logoRef = useRef(null);
   const navRef = useRef(null);
 
@@ -1585,63 +1645,39 @@ const HeroSection = () => {
     const timer = window.setTimeout(() => {
       setIntroComplete(true);
     }, 1100);
-
     return () => window.clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    const resolveThemeAtPoint = (x, y) => {
-      const stack = document.elementsFromPoint(x, y);
-      const match = stack.find((element) => {
-        if (logoRef.current?.contains(element) || navRef.current?.contains(element)) return false;
-        return element.closest?.('[data-nav-theme]');
-      });
-
-      return match?.closest?.('[data-nav-theme]')?.getAttribute('data-nav-theme') ?? 'light';
-    };
-
-    const updateNavbarTone = () => {
-      const leftTone = resolveThemeAtPoint(120, 52);
-      const rightTone = resolveThemeAtPoint(Math.max(window.innerWidth - 160, 120), 58);
-      setIsDarkNavbar(leftTone === 'dark' || rightTone === 'dark');
-    };
-
-    updateNavbarTone();
-    window.addEventListener('scroll', updateNavbarTone, { passive: true });
-    window.addEventListener('resize', updateNavbarTone);
-
-    return () => {
-      window.removeEventListener('scroll', updateNavbarTone);
-      window.removeEventListener('resize', updateNavbarTone);
-    };
-  }, []);
-
   return (
-    <section id="inicio" data-nav-theme="light" className="relative z-30 min-h-[100svh] w-full overflow-visible bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
+    <section id="inicio" data-nav-theme="light" className="relative z-30 min-h-[100svh] w-full [overflow-x:clip] overflow-y-visible bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
       <motion.img
-        src={asset('degradado-lateral.png')}
+        src={asset('degradado-lateral.webp')}
         alt=""
         aria-hidden="true"
         initial={{ opacity: 0, scale: 0.92 }}
         animate={{ opacity: 0.95, scale: 1 }}
         transition={{ duration: 0.85, ease: 'easeOut' }}
+        loading="lazy"
+        decoding="async"
         className="pointer-events-none absolute left-[-48%] top-[72%] z-[5] hidden w-[82vw] min-w-[300px] max-w-[1120px] -translate-y-1/2 object-contain md:block md:left-[-34%] md:top-[71%] md:w-[66vw] md:min-w-[460px]"
       />
       <motion.img
-        src={asset('degradado-lateral.png')}
+        src={asset('degradado-lateral.webp')}
         alt=""
         aria-hidden="true"
         initial={{ opacity: 0, scale: 0.92 }}
         animate={{ opacity: 0.95, scale: 1 }}
         transition={{ duration: 0.85, delay: 0.08, ease: 'easeOut' }}
+        loading="lazy"
+        decoding="async"
         className="pointer-events-none absolute right-[-40%] top-[18%] z-[5] hidden w-[78vw] min-w-[280px] max-w-[980px] -translate-y-1/2 object-contain md:block md:right-[-28%] md:top-[22%] md:w-[60vw] md:min-w-[420px]"
       />
 
       <motion.div
         ref={logoRef}
         initial={{ opacity: 0, y: 18 }}
-        animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-        transition={{ duration: 0.55, ease: 'easeOut' }}
+        animate={introComplete ? { opacity: 1, y: navHidden ? -80 : 0 } : { opacity: 0, y: 18 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed left-6 top-5 z-40 w-fit text-left text-[16px] leading-[0.95] transition-colors duration-200 md:left-[80px] md:top-[40px] md:text-[20px] ${
           isDarkNavbar ? 'text-white' : 'text-[#080808]'
         }`}
@@ -1655,24 +1691,26 @@ const HeroSection = () => {
       <motion.div
         ref={navRef}
         initial={{ opacity: 0, y: 18 }}
-        animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-        transition={{ duration: 0.55, delay: 0.08, ease: 'easeOut' }}
+        animate={introComplete ? { opacity: 1, y: navHidden ? -80 : 0 } : { opacity: 0, y: 18 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed right-[32px] top-[32px] z-40 hidden items-center gap-10 text-[16px] transition-colors duration-200 md:flex md:right-[80px] md:top-[45px] ${
           isDarkNavbar ? 'text-white/72' : 'text-[#080808]/68'
         }`}
       >
         <a
           href="#inicio"
+          onClick={(event) => scrollToSection(event, 'inicio')}
           className="font-medium"
           style={gradientAccentStyle}
         >
           Inicio
         </a>
-        <a href="#kaiva" className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Nosotros</a>
-        <a href="#proyectos" className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Proyectos</a>
-        <a href="#contacto" className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Contacto</a>
+        <a href="#kaiva" onClick={(event) => scrollToSection(event, 'kaiva')} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Nosotros</a>
+        <a href={PROJECTS_PAGE_HREF} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Proyectos</a>
+        <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Contacto</a>
         <a
           href="#planes"
+          onClick={(event) => scrollToSection(event, 'planes')}
           className={`inline-flex h-[44px] items-center justify-center self-center rounded-full px-6 font-manrope text-[11px] font-bold uppercase tracking-[0.16em] transition-all duration-300 hover:-translate-y-0.5 ${
             isDarkNavbar
               ? 'border border-white/18 bg-white/10 text-white hover:bg-white/16'
@@ -1685,12 +1723,13 @@ const HeroSection = () => {
 
       <motion.div
         initial={{ opacity: 0, y: 18 }}
-        animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-        transition={{ duration: 0.55, delay: 0.08, ease: 'easeOut' }}
+        animate={introComplete ? { opacity: 1, y: navHidden ? -80 : 0 } : { opacity: 0, y: 18 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         className="fixed right-6 top-5 z-40 flex items-center gap-3 md:hidden"
       >
         <a
           href="#planes"
+          onClick={(event) => scrollToSection(event, 'planes')}
           className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-[#080808]/12 bg-white px-5 font-manrope text-[10px] font-bold uppercase tracking-[0.16em] text-[#080808] transition-colors hover:bg-[#f7f7f7]"
         >
           Paquetes
@@ -1703,17 +1742,29 @@ const HeroSection = () => {
         transition={{ duration: 0.6, delay: 0.14, ease: 'easeOut' }}
         className="hero-copy-wrap absolute left-6 right-6 top-[110px] z-40 flex max-w-[360px] flex-col items-start text-left md:left-[80px] md:right-auto md:top-[160px] md:max-w-[720px]"
       >
-        <h1 className="w-fit font-extrabold leading-[1.02] tracking-[-0.03em] text-[#080808] text-[30px] md:text-[54px] flex flex-col items-start gap-1">
+        <h1 className="w-fit font-extrabold leading-[1.02] tracking-[-0.03em] text-[#080808] text-[clamp(26px,7vw,54px)] flex flex-col items-start gap-1">
           <AnimatedText text="Páginas web claras," startAnimation={introComplete} className="md:whitespace-nowrap" />
           <AnimatedText text="rápidas y profesionales" startAnimation={introComplete} className="md:whitespace-nowrap" />
         </h1>
 
         <a
-          href="#proyectos"
-          className="mt-4 inline-block w-fit pb-1 text-[16px] font-medium leading-none underline decoration-1 underline-offset-[5px] md:mt-6 md:text-[20px]"
+          href={PROJECTS_PAGE_HREF}
+          className="mt-4 inline-flex w-fit items-center gap-2 pb-1 text-[16px] font-medium leading-none underline decoration-1 underline-offset-[5px] md:mt-6 md:text-[20px]"
           style={gradientAccentStyle}
         >
-          Explora nuestro trabajo ↗
+          <span>Explora nuestro trabajo</span>
+          <svg
+            aria-hidden="true"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="shrink-0"
+            style={{ color: '#8242f5' }}
+          >
+            <path d="M7 17L17 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <path d="M9 7H17V15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </a>
       </motion.div>
 
@@ -1725,13 +1776,17 @@ const HeroSection = () => {
       >
         <div className="relative mx-auto aspect-[1.08/1] w-full md:aspect-[1.16/1]">
           <img
-            src={asset('nombre hero.png')}
+            src={asset('nombre hero.webp')}
             alt="Kaiva Studio"
+            fetchpriority="high"
+            decoding="sync"
             className="absolute left-1/2 top-[10%] w-[58%] -translate-x-1/2 object-contain md:top-[10%] md:w-[50%]"
           />
           <motion.img
-            src={asset('robots hero.png')}
+            src={asset('robots hero.webp')}
             alt="Robots Kaiva"
+            fetchpriority="high"
+            decoding="sync"
             className="absolute left-1/2 top-[9%] w-[245%] -translate-x-1/2 scale-[1.08] object-contain md:top-[8%] md:w-[280%] md:scale-[1.15]"
             animate={{
               y: [0, -7, 0, 7, 0],
@@ -1746,12 +1801,12 @@ const HeroSection = () => {
       </motion.div>
 
       <motion.div
-        className="absolute left-1/2 bottom-[8%] md:bottom-[6%] z-[60] -translate-x-1/2 w-full flex justify-center"
+        className="absolute left-1/2 bottom-[110px] md:bottom-[6%] z-[60] -translate-x-1/2 w-full flex justify-center"
         initial={{ opacity: 0, y: 15 }}
         animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
         transition={{ duration: 0.6, delay: 0.28, ease: 'easeOut' }}
       >
-        <a href="#contacto" className="flex min-h-[48px] sm:min-h-[52px] items-center justify-center rounded-[30px] bg-[#0c0c0c] px-8 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-105 active:scale-95 shadow-[0_16px_32px_-8px_rgba(0,0,0,0.3)] sm:px-9 sm:text-[15px] whitespace-nowrap">
+        <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className="flex min-h-[48px] sm:min-h-[52px] items-center justify-center rounded-[30px] bg-[#0c0c0c] px-8 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-105 active:scale-95 shadow-[0_16px_32px_-8px_rgba(0,0,0,0.3)] sm:px-9 sm:text-[15px] whitespace-nowrap">
           Quiero mi web
         </a>
       </motion.div>
@@ -1760,7 +1815,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 18 }}
         animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
         transition={{ duration: 0.55, delay: 0.22, ease: 'easeOut' }}
-        className="absolute bottom-4 left-6 right-6 z-40 max-w-[280px] text-left text-[12px] font-normal leading-[1.5] text-[#080808]/64 md:bottom-[60px] md:left-auto md:right-[80px] md:max-w-[420px] md:text-[15px]"
+        className="absolute bottom-4 left-6 right-6 z-40 max-w-[260px] text-left text-[11px] font-normal leading-[1.5] text-[#080808]/64 sm:max-w-[280px] sm:text-[12px] md:bottom-[60px] md:left-auto md:right-[80px] md:max-w-[420px] md:text-[15px]"
       >
         Deja de perder clientes por no estar en internet. Diseñamos y desarrollamos tu página web con criterio profesional, entrega rápida y un precio justo.
       </motion.p>

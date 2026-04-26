@@ -4,12 +4,32 @@
   background-color: #f8f6f2;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
 }
 
 html {
   background-color: #f8f6f2;
+  overflow-x: hidden;
+  /* Hide scrollbar across all browsers */
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE / Edge */
+  /* GPU-accelerated scrolling on iOS/macOS */
+  -webkit-overflow-scrolling: touch;
+  /* Smooth anchor scroll */
+  scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar {
+  display: none;                  /* Chrome / Safari / Opera */
 }
 
 body {
