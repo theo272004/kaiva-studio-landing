@@ -1604,43 +1604,111 @@ const ProblemSection = () => {
             SIN WEB
           </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-            <div className="bg-white rounded-[20px] p-6 md:p-8 flex items-start gap-4 shadow-sm border border-[#080808]/5">
-              <span className="text-[24px]">💸</span>
-              <div>
-                <h4 className="font-bold text-[16px] md:text-[18px] text-[#080808] mb-2">"Es muy caro"</h4>
-                <p className="text-[14px] md:text-[15px] text-[#080808]/70 leading-relaxed">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            
+            {/* Card 1 */}
+            <div className="relative overflow-hidden bg-gradient-to-br from-[#ff8b8b] to-[#fa5e5e] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-transform duration-300 hover:-translate-y-1">
+              <div className="relative z-10 w-full md:w-[70%]">
+                <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
+                  Es muy caro.
+                </h4>
+                <p className="font-manrope text-[14px] md:text-[15px] leading-[1.6] opacity-90 mb-8">
                   Muchos negocios creen que tener una web profesional está fuera de su presupuesto. No tiene por qué serlo.
                 </p>
               </div>
+              <div className="relative z-10">
+                <button className="flex items-center gap-3 text-[11px] font-bold tracking-widest uppercase text-white hover:opacity-80 transition-opacity">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 transition-colors group-hover:bg-white/30">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7M17 7H7M17 7V17" />
+                    </svg>
+                  </span>
+                  SABER MÁS
+                </button>
+              </div>
+              <div className="absolute right-[-5%] bottom-[-10%] text-[140px] md:text-[180px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3 pointer-events-none">
+                🐖
+              </div>
             </div>
-            <div className="bg-white rounded-[20px] p-6 md:p-8 flex items-start gap-4 shadow-sm border border-[#080808]/5">
-              <span className="text-[24px]">🤷‍♂️</span>
-              <div>
-                <h4 className="font-bold text-[16px] md:text-[18px] text-[#080808] mb-2">"No sé cómo funciona"</h4>
-                <p className="text-[14px] md:text-[15px] text-[#080808]/70 leading-relaxed">
+
+            {/* Card 2 */}
+            <div className="relative overflow-hidden bg-gradient-to-br from-[#76d5c5] to-[#54b8a7] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-transform duration-300 hover:-translate-y-1">
+              <div className="relative z-10 w-full md:w-[70%]">
+                <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
+                  <span className="inline-block mr-2 text-[32px] md:text-[40px]">🤷‍♂️</span>
+                  No sé cómo funciona.
+                </h4>
+                <p className="font-manrope text-[14px] md:text-[15px] leading-[1.6] opacity-90 mb-8">
                   Dominios, hosting, SEO, diseño... el lenguaje técnico aleja a dueños de negocio que simplemente quieren más clientes.
                 </p>
               </div>
+              <div className="relative z-10">
+                <button className="flex items-center gap-3 text-[11px] font-bold tracking-widest uppercase text-white hover:opacity-80 transition-opacity">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 transition-colors group-hover:bg-white/30">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7M17 7H7M17 7V17" />
+                    </svg>
+                  </span>
+                  SABER MÁS
+                </button>
+              </div>
+              <div className="absolute right-[-5%] bottom-[-5%] text-[140px] md:text-[180px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3 pointer-events-none">
+                🔌
+              </div>
             </div>
-            <div className="bg-white rounded-[20px] p-6 md:p-8 flex items-start gap-4 shadow-sm border border-[#080808]/5">
-              <span className="text-[24px]">😤</span>
-              <div>
-                <h4 className="font-bold text-[16px] md:text-[18px] text-[#080808] mb-2">"Ya intenté y no funcionó"</h4>
-                <p className="text-[14px] md:text-[15px] text-[#080808]/70 leading-relaxed">
+
+            {/* Card 3 */}
+            <div className="relative overflow-hidden bg-gradient-to-br from-[#85a4e6] to-[#6084c7] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-transform duration-300 hover:-translate-y-1">
+              <div className="relative z-10 w-full md:w-[70%]">
+                <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
+                  <span className="inline-block mr-2 text-[32px] md:text-[40px]">😤</span>
+                  Ya intenté y no funcionó.
+                </h4>
+                <p className="font-manrope text-[14px] md:text-[15px] leading-[1.6] opacity-90 mb-8">
                   Malas experiencias con freelancers o plantillas genéricas que no reflejan el negocio ni generan resultados.
                 </p>
               </div>
+              <div className="relative z-10">
+                <button className="flex items-center gap-3 text-[11px] font-bold tracking-widest uppercase text-white hover:opacity-80 transition-opacity">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 transition-colors group-hover:bg-white/30">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7M17 7H7M17 7V17" />
+                    </svg>
+                  </span>
+                  SABER MÁS
+                </button>
+              </div>
+              <div className="absolute right-[0%] bottom-[-5%] text-[140px] md:text-[180px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 pointer-events-none">
+                📱
+              </div>
             </div>
-            <div className="bg-white rounded-[20px] p-6 md:p-8 flex items-start gap-4 shadow-sm border border-[#080808]/5">
-              <span className="text-[24px]">⏳</span>
-              <div>
-                <h4 className="font-bold text-[16px] md:text-[18px] text-[#080808] mb-2">"No tengo tiempo"</h4>
-                <p className="text-[14px] md:text-[15px] text-[#080808]/70 leading-relaxed">
+
+            {/* Card 4 */}
+            <div className="relative overflow-hidden bg-gradient-to-br from-[#b878e8] to-[#9955d6] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-transform duration-300 hover:-translate-y-1">
+              <div className="relative z-10 w-full md:w-[70%]">
+                <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
+                  <span className="inline-block mr-2 text-[32px] md:text-[40px]">⏳</span>
+                  No tengo tiempo.
+                </h4>
+                <p className="font-manrope text-[14px] md:text-[15px] leading-[1.6] opacity-90 mb-8">
                   Gestionar un negocio ya es suficiente trabajo. No debería necesitarse un equipo técnico propio para tener presencia digital.
                 </p>
               </div>
+              <div className="relative z-10">
+                <button className="flex items-center gap-3 text-[11px] font-bold tracking-widest uppercase text-white hover:opacity-80 transition-opacity">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 transition-colors group-hover:bg-white/30">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17L17 7M17 7H7M17 7V17" />
+                    </svg>
+                  </span>
+                  SABER MÁS
+                </button>
+              </div>
+              <div className="absolute right-[5%] bottom-[-10%] text-[140px] md:text-[180px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6 pointer-events-none">
+                ⌛
+              </div>
             </div>
+
           </div>
         </div>
       </div>
