@@ -1648,7 +1648,7 @@ const ProblemSection = () => {
                 </p>
               </div>
                 <button 
-                  className="inline-flex items-center gap-3 rounded-full bg-black/[0.04] py-1.5 pl-1.5 pr-5 transition-all duration-300 hover:bg-black/[0.08]"
+                  className="inline-flex w-fit items-center gap-3 rounded-full bg-black/[0.04] py-1.5 pl-1.5 pr-7 transition-all duration-300 hover:bg-black/[0.08]"
                   style={{
                     boxShadow: 'inset 2px 2px 6px rgba(0,0,0,0.16), inset -2px -2px 6px rgba(255,255,255,0.35)'
                   }}
@@ -1679,7 +1679,7 @@ const ProblemSection = () => {
                 </p>
               </div>
                 <button 
-                  className="inline-flex items-center gap-3 rounded-full bg-black/[0.04] py-1.5 pl-1.5 pr-5 transition-all duration-300 hover:bg-black/[0.08]"
+                  className="inline-flex w-fit items-center gap-3 rounded-full bg-black/[0.04] py-1.5 pl-1.5 pr-7 transition-all duration-300 hover:bg-black/[0.08]"
                   style={{
                     boxShadow: 'inset 2px 2px 6px rgba(0,0,0,0.16), inset -2px -2px 6px rgba(255,255,255,0.35)'
                   }}
@@ -1710,7 +1710,7 @@ const ProblemSection = () => {
                 </p>
               </div>
                 <button 
-                  className="inline-flex items-center gap-3 rounded-full bg-black/[0.04] py-1.5 pl-1.5 pr-5 transition-all duration-300 hover:bg-black/[0.08]"
+                  className="inline-flex w-fit items-center gap-3 rounded-full bg-black/[0.04] py-1.5 pl-1.5 pr-7 transition-all duration-300 hover:bg-black/[0.08]"
                   style={{
                     boxShadow: 'inset 2px 2px 6px rgba(0,0,0,0.16), inset -2px -2px 6px rgba(255,255,255,0.35)'
                   }}
