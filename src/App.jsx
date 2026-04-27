@@ -1631,9 +1631,14 @@ const ProblemSection = () => {
                     SABER MÁS
                   </span>
                 </button>
-              <div className="absolute right-[-5%] bottom-[-10%] text-[140px] md:text-[180px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3 pointer-events-none">
-                🐖
-              </div>
+              <FloatingRobot
+                src={asset('card-es-muy-caro.webp')}
+                className="right-[-2%] bottom-[-5%] w-[200px] md:w-[280px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
+                delay={0}
+                duration={7}
+                amplitude={12}
+                rotation={3}
+              />
             </div>
 
             {/* Card 2 */}
@@ -1662,9 +1667,14 @@ const ProblemSection = () => {
                     SABER MÁS
                   </span>
                 </button>
-              <div className="absolute right-[-5%] bottom-[-5%] text-[140px] md:text-[180px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3 pointer-events-none">
-                🔌
-              </div>
+              <FloatingRobot
+                src={asset('card-no-se-como-funciona.webp')}
+                className="right-[-2%] bottom-[-5%] w-[200px] md:w-[280px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
+                delay={0.5}
+                duration={7.5}
+                amplitude={14}
+                rotation={4}
+              />
             </div>
 
             {/* Card 3 */}
@@ -1693,9 +1703,14 @@ const ProblemSection = () => {
                     SABER MÁS
                   </span>
                 </button>
-              <div className="absolute right-[0%] bottom-[-5%] text-[140px] md:text-[180px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 pointer-events-none">
-                📱
-              </div>
+              <FloatingRobot
+                src={asset('card-ya-intente.webp')}
+                className="right-[-2%] bottom-[-5%] w-[200px] md:w-[280px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
+                delay={1}
+                duration={8}
+                amplitude={10}
+                rotation={3}
+              />
             </div>
 
             {/* Card 4 */}
@@ -1724,9 +1739,14 @@ const ProblemSection = () => {
                     SABER MÁS
                   </span>
                 </button>
-              <div className="absolute right-[5%] bottom-[-10%] text-[140px] md:text-[180px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6 pointer-events-none">
-                ⌛
-              </div>
+              <FloatingRobot
+                src={asset('card-no-tengo-tiempo.webp')}
+                className="right-[2%] bottom-[-5%] w-[180px] md:w-[240px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
+                delay={1.5}
+                duration={6.5}
+                amplitude={15}
+                rotation={5}
+              />
             </div>
 
           </div>
