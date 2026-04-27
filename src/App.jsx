@@ -573,7 +573,7 @@ const ServicesSection = () => {
       <section data-nav-theme="light" className="bg-transparent text-[#080808]">
         <div className="mx-auto w-full max-w-[1480px] px-6 pb-20 md:px-12 md:pb-24 lg:px-16 lg:pb-28">
           <motion.div
-            className="grid w-full gap-5 md:grid-cols-2 lg:grid-cols-4"
+            className="grid w-full gap-5 md:grid-cols-2 lg:grid-cols-3"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.15 }}
@@ -950,9 +950,7 @@ const ProcessRedesignSection = () => {
     { title: 'Entrega', description: 'Publicamos una solución lista para operar desde el primer día, con soporte posterior según el plan.' },
   ];
 
-  // Tighten the scroll range: map 0-0.9 scroll to steps 0-4
-  // This ensures Step 5 stays visible for the last 10% of the scroll before un-sticking
-  const activeProgressRaw = useTransform(scrollYProgress, [0, 0.9], [0, stepsContent.length - 1]);
+  const activeProgressRaw = useTransform(scrollYProgress, [0, 1], [0, stepsContent.length - 1]);
   const activeProgress = useSpring(activeProgressRaw, { stiffness: 90, damping: 24, mass: 0.4 });
 
   useMotionValueEvent(activeProgressRaw, 'change', (latest) => {
@@ -1665,7 +1663,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section id="inicio" data-nav-theme="light" className="relative z-30 min-h-[100svh] w-full [overflow-x:clip] overflow-y-visible bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
+    <section id="inicio" data-nav-theme="light" className="relative z-30 min-h-[100svh] w-full overflow-hidden bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
       <motion.img
         src={asset('degradado-lateral.webp')}
         alt=""
