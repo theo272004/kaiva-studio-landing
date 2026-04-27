@@ -1004,7 +1004,6 @@ const ProcessRedesignSection = () => {
 
 const ExpandedAgencySections = () => (
   <>
-    <ServicesSection />
     <ProcessRedesignSection />
     <section
       id="planes"
@@ -1334,6 +1333,7 @@ const ProjectsPage = () => {
     <>
       <FixedNavbar projectsActive />
       <PortfolioSection />
+      <ServicesSection />
     </>
   );
 };
