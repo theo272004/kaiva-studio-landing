@@ -1969,6 +1969,14 @@ const HeroSection = () => {
         </a>
       </motion.div>
 
+      <motion.p
+        initial={{ opacity: 0, y: 18 }}
+        animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
+        transition={{ duration: 0.55, delay: 0.22, ease: 'easeOut' }}
+        className="absolute bottom-4 left-6 right-6 z-40 hidden md:block md:bottom-[60px] md:left-auto md:right-[80px] md:max-w-[420px] md:text-[15px] text-left font-normal leading-[1.5] text-[#080808]/64"
+      >
+        Deja de perder clientes por no estar en internet. Diseñamos y desarrollamos tu página web con criterio profesional, entrega rápida y un precio justo.
+      </motion.p>
     </section>
   );
 };
