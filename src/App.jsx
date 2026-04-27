@@ -1616,16 +1616,21 @@ const ProblemSection = () => {
                   Muchos negocios creen que tener una web profesional está fuera de su presupuesto. No tiene por qué serlo.
                 </p>
               </div>
-              <div className="relative z-10">
-                <button className="flex items-center gap-3 text-[11px] font-bold tracking-widest uppercase text-white hover:opacity-80 transition-opacity">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 transition-colors group-hover:bg-white/30">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <button 
+                  className="inline-flex items-center gap-3 rounded-full bg-black/[0.04] py-1.5 pl-1.5 pr-5 transition-all duration-300 hover:bg-black/[0.08]"
+                  style={{
+                    boxShadow: 'inset 2px 2px 6px rgba(0,0,0,0.16), inset -2px -2px 6px rgba(255,255,255,0.35)'
+                  }}
+                >
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#111111] text-white shadow-sm">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </span>
-                  SABER MÁS
+                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#111111]/80">
+                    SABER MÁS
+                  </span>
                 </button>
-              </div>
               <div className="absolute right-[-5%] bottom-[-10%] text-[140px] md:text-[180px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3 pointer-events-none">
                 🐖
               </div>
@@ -1642,16 +1647,21 @@ const ProblemSection = () => {
                   Dominios, hosting, SEO, diseño... el lenguaje técnico aleja a dueños de negocio que simplemente quieren más clientes.
                 </p>
               </div>
-              <div className="relative z-10">
-                <button className="flex items-center gap-3 text-[11px] font-bold tracking-widest uppercase text-white hover:opacity-80 transition-opacity">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 transition-colors group-hover:bg-white/30">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <button 
+                  className="inline-flex items-center gap-3 rounded-full bg-black/[0.04] py-1.5 pl-1.5 pr-5 transition-all duration-300 hover:bg-black/[0.08]"
+                  style={{
+                    boxShadow: 'inset 2px 2px 6px rgba(0,0,0,0.16), inset -2px -2px 6px rgba(255,255,255,0.35)'
+                  }}
+                >
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#111111] text-white shadow-sm">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </span>
-                  SABER MÁS
+                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#111111]/80">
+                    SABER MÁS
+                  </span>
                 </button>
-              </div>
               <div className="absolute right-[-5%] bottom-[-5%] text-[140px] md:text-[180px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3 pointer-events-none">
                 🔌
               </div>
@@ -1668,16 +1678,21 @@ const ProblemSection = () => {
                   Malas experiencias con freelancers o plantillas genéricas que no reflejan el negocio ni generan resultados.
                 </p>
               </div>
-              <div className="relative z-10">
-                <button className="flex items-center gap-3 text-[11px] font-bold tracking-widest uppercase text-white hover:opacity-80 transition-opacity">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 transition-colors group-hover:bg-white/30">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <button 
+                  className="inline-flex items-center gap-3 rounded-full bg-black/[0.04] py-1.5 pl-1.5 pr-5 transition-all duration-300 hover:bg-black/[0.08]"
+                  style={{
+                    boxShadow: 'inset 2px 2px 6px rgba(0,0,0,0.16), inset -2px -2px 6px rgba(255,255,255,0.35)'
+                  }}
+                >
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#111111] text-white shadow-sm">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </span>
-                  SABER MÁS
+                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#111111]/80">
+                    SABER MÁS
+                  </span>
                 </button>
-              </div>
               <div className="absolute right-[0%] bottom-[-5%] text-[140px] md:text-[180px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 pointer-events-none">
                 📱
               </div>
@@ -1694,16 +1709,21 @@ const ProblemSection = () => {
                   Gestionar un negocio ya es suficiente trabajo. No debería necesitarse un equipo técnico propio para tener presencia digital.
                 </p>
               </div>
-              <div className="relative z-10">
-                <button className="flex items-center gap-3 text-[11px] font-bold tracking-widest uppercase text-white hover:opacity-80 transition-opacity">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 transition-colors group-hover:bg-white/30">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <button 
+                  className="inline-flex items-center gap-3 rounded-full bg-black/[0.04] py-1.5 pl-1.5 pr-5 transition-all duration-300 hover:bg-black/[0.08]"
+                  style={{
+                    boxShadow: 'inset 2px 2px 6px rgba(0,0,0,0.16), inset -2px -2px 6px rgba(255,255,255,0.35)'
+                  }}
+                >
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#111111] text-white shadow-sm">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </span>
-                  SABER MÁS
+                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#111111]/80">
+                    SABER MÁS
+                  </span>
                 </button>
-              </div>
               <div className="absolute right-[5%] bottom-[-10%] text-[140px] md:text-[180px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6 pointer-events-none">
                 ⌛
               </div>
