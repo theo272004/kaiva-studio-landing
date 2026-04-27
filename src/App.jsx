@@ -13,7 +13,7 @@ const scrollToSection = (event, id) => {
   event.preventDefault();
   const target = document.getElementById(id);
   if (!target) return;
-  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  target.scrollIntoView({ behavior: 'instant', block: 'start' });
 };
 
 const slides = [
@@ -1341,28 +1341,31 @@ const ProjectsPage = () => {
 const App = () => {
   const showProjectsPage = isProjectsPath();
 
+  useEffect(() => {
+    if (!showProjectsPage) {
+      const hash = window.location.hash;
+      if (hash) {
+        const id = hash.slice(1);
+        const timer = setTimeout(() => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.scrollIntoView({ behavior: 'instant', block: 'start' });
+            window.history.replaceState(null, '', window.location.pathname);
+          }
+        }, 150);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, []);
+
   return (
     <div className="relative z-10 w-full bg-white">
       {showProjectsPage ? (
         <ProjectsPage />
       ) : (
         <>
-          <div className="relative">
-            <HeroSection />
-            <motion.img
-              src={asset('degradado-lateral.webp')}
-              alt=""
-              aria-hidden="true"
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={{ opacity: 0.95, scale: 1 }}
-              transition={{ duration: 0.85, ease: 'easeOut' }}
-              loading="lazy"
-              decoding="async"
-              className="pointer-events-none absolute hidden md:block left-[-34%] z-[5] w-[66vw] min-w-[460px] -translate-y-1/2 object-contain"
-              style={{ top: '71vh' }}
-            />
-            <ProblemSection />
-          </div>
+          <HeroSection />
+          <ProblemSection />
           <div className="relative">
             <SectionsAuroraBackdrop />
             <div className="relative z-10">
@@ -1707,10 +1710,12 @@ const ProblemSection = () => {
 
 const HeroSection = () => {
   const [introComplete, setIntroComplete] = useState(false);
+  const [navHidden, setNavHidden] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isDarkNavbar = false;
-  const navHidden = false;
   const logoRef = useRef(null);
   const navRef = useRef(null);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -1719,8 +1724,36 @@ const HeroSection = () => {
     return () => window.clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      if (currentY <= 10) {
+        setNavHidden(false);
+      } else if (currentY > lastScrollY.current + 6) {
+        setNavHidden(true);
+      } else if (currentY < lastScrollY.current - 6) {
+        setNavHidden(false);
+      }
+      lastScrollY.current = currentY;
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <section id="inicio" data-nav-theme="light" className="relative z-30 min-h-[100svh] w-full overflow-hidden bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
+    <section id="inicio" data-nav-theme="light" className="relative z-30 min-h-[100svh] w-full [overflow-x:clip] bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
+      {/* Gradiente izquierdo — sin overflow-hidden permite que sangre hacia la siguiente sección */}
+      <motion.img
+        src={asset('degradado-lateral.webp')}
+        alt=""
+        aria-hidden="true"
+        initial={{ opacity: 0, scale: 0.92 }}
+        animate={{ opacity: 0.95, scale: 1 }}
+        transition={{ duration: 0.85, ease: 'easeOut' }}
+        loading="lazy"
+        decoding="async"
+        className="pointer-events-none absolute left-[-48%] top-[72%] z-[5] hidden w-[82vw] min-w-[300px] max-w-[1120px] -translate-y-1/2 object-contain md:block md:left-[-34%] md:top-[71%] md:w-[66vw] md:min-w-[460px]"
+      />
       <motion.img
         src={asset('degradado-lateral.webp')}
         alt=""
@@ -1785,16 +1818,81 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 18 }}
         animate={introComplete ? { opacity: 1, y: navHidden ? -80 : 0 } : { opacity: 0, y: 18 }}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed right-6 top-5 z-40 flex items-center gap-3 md:hidden"
+        className="fixed right-6 top-5 z-50 flex items-center gap-3 md:hidden"
       >
-        <a
-          href="#planes"
-          onClick={(event) => scrollToSection(event, 'planes')}
-          className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-[#080808]/12 bg-white px-5 font-manrope text-[10px] font-bold uppercase tracking-[0.16em] text-[#080808] transition-colors hover:bg-[#f7f7f7]"
+        <button
+          aria-label="Abrir menú"
+          onClick={() => setMobileMenuOpen(true)}
+          className="flex h-[40px] w-[40px] items-center justify-center rounded-full border border-[#080808]/12 bg-white text-[#080808] shadow-[0_4px_14px_-8px_rgba(0,0,0,0.18)]"
         >
-          Paquetes
-        </a>
+          <svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true">
+            <rect y="0" width="18" height="2" rx="1" fill="currentColor" />
+            <rect y="6" width="13" height="2" rx="1" fill="currentColor" />
+            <rect y="12" width="18" height="2" rx="1" fill="currentColor" />
+          </svg>
+        </button>
       </motion.div>
+
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            className="fixed inset-0 z-[100] flex flex-col bg-white px-6 pt-8 pb-10"
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="flex items-center justify-between">
+              <div className="text-[16px] leading-[0.95]">
+                <span className="block font-semibold tracking-[-0.02em]">Kaiva</span>
+                <span className="block font-normal">Studio<span style={gradientAccentStyle}>.</span></span>
+              </div>
+              <button
+                aria-label="Cerrar menú"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex h-[40px] w-[40px] items-center justify-center rounded-full border border-[#080808]/12 bg-[#f7f7f7] text-[#080808]"
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
+            <nav className="mt-12 flex flex-col gap-1">
+              {[
+                { label: 'Inicio', id: 'inicio' },
+                { label: 'Nosotros', id: 'kaiva' },
+                { label: 'Contacto', id: 'contacto' },
+                { label: 'Paquetes', id: 'planes' },
+              ].map(({ label, id }) => (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  onClick={(e) => { scrollToSection(e, id); setMobileMenuOpen(false); }}
+                  className="py-4 text-[22px] font-semibold tracking-[-0.02em] text-[#080808] border-b border-[#080808]/6"
+                >
+                  {label}
+                </a>
+              ))}
+              <a
+                href={PROJECTS_PAGE_HREF}
+                className="py-4 text-[22px] font-semibold tracking-[-0.02em] text-[#080808] border-b border-[#080808]/6"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Proyectos
+              </a>
+            </nav>
+            <div className="mt-auto">
+              <a
+                href="#contacto"
+                onClick={(e) => { scrollToSection(e, 'contacto'); setMobileMenuOpen(false); }}
+                className="flex w-full items-center justify-center rounded-[30px] bg-[#0c0c0c] px-8 py-4 font-inter text-[14px] font-semibold text-white"
+              >
+                Quiero mi web
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <motion.div
         initial={{ opacity: 0, y: 22 }}
@@ -1871,14 +1969,6 @@ const HeroSection = () => {
         </a>
       </motion.div>
 
-      <motion.p
-        initial={{ opacity: 0, y: 18 }}
-        animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-        transition={{ duration: 0.55, delay: 0.22, ease: 'easeOut' }}
-        className="absolute bottom-4 left-6 right-6 z-40 max-w-[260px] text-left text-[11px] font-normal leading-[1.5] text-[#080808]/64 sm:max-w-[280px] sm:text-[12px] md:bottom-[60px] md:left-auto md:right-[80px] md:max-w-[420px] md:text-[15px]"
-      >
-        Deja de perder clientes por no estar en internet. Diseñamos y desarrollamos tu página web con criterio profesional, entrega rápida y un precio justo.
-      </motion.p>
     </section>
   );
 };
