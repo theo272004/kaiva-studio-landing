@@ -1604,7 +1604,7 @@ const ProblemSection = () => {
             
             {/* Card 1 */}
             <div className="relative overflow-hidden bg-gradient-to-br from-[#ff8b8b] to-[#fa5e5e] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-transform duration-300 hover:-translate-y-1">
-              <div className="relative z-10 w-full md:w-[70%]">
+              <div className="relative z-10 w-[90%] md:w-[55%]">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   Es muy caro.
                 </h4>
@@ -1631,13 +1631,13 @@ const ProblemSection = () => {
                 src={asset('card-es-muy-caro.webp')}
                 alt="Es muy caro"
                 loading="lazy"
-                className="absolute right-[-4%] bottom-[-4%] w-[160px] md:w-[220px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-2 pointer-events-none"
+                className="absolute right-[-2%] bottom-[-5%] w-[200px] md:w-[280px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-2 pointer-events-none z-0"
               />
             </div>
 
             {/* Card 2 */}
             <div className="relative overflow-hidden bg-gradient-to-br from-[#76d5c5] to-[#54b8a7] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-transform duration-300 hover:-translate-y-1">
-              <div className="relative z-10 w-full md:w-[70%]">
+              <div className="relative z-10 w-[90%] md:w-[55%]">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   <span className="inline-block mr-2 text-[32px] md:text-[40px]">🤷‍♂️</span>
                   No sé cómo funciona.
@@ -1665,13 +1665,13 @@ const ProblemSection = () => {
                 src={asset('card-no-se-como-funciona.webp')}
                 alt="No sé cómo funciona"
                 loading="lazy"
-                className="absolute right-[-8%] bottom-[-10%] w-[180px] md:w-[250px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-2 pointer-events-none z-0"
+                className="absolute right-[-2%] bottom-[-5%] w-[200px] md:w-[280px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-2 pointer-events-none z-0"
               />
             </div>
 
             {/* Card 3 */}
             <div className="relative overflow-hidden bg-gradient-to-br from-[#85a4e6] to-[#6084c7] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-transform duration-300 hover:-translate-y-1">
-              <div className="relative z-10 w-full md:w-[70%]">
+              <div className="relative z-10 w-[90%] md:w-[55%]">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   <span className="inline-block mr-2 text-[32px] md:text-[40px]">😤</span>
                   Ya intenté y no funcionó.
@@ -1699,13 +1699,13 @@ const ProblemSection = () => {
                 src={asset('card-ya-intente.webp')}
                 alt="Ya intenté y no funcionó"
                 loading="lazy"
-                className="absolute right-[-4%] bottom-[-8%] w-[160px] md:w-[230px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-2 pointer-events-none z-0"
+                className="absolute right-[-2%] bottom-[-5%] w-[200px] md:w-[280px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-2 pointer-events-none z-0"
               />
             </div>
 
             {/* Card 4 */}
             <div className="relative overflow-hidden bg-gradient-to-br from-[#b878e8] to-[#9955d6] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-transform duration-300 hover:-translate-y-1">
-              <div className="relative z-10 w-full md:w-[70%]">
+              <div className="relative z-10 w-[90%] md:w-[55%]">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   <span className="inline-block mr-2 text-[32px] md:text-[40px]">⏳</span>
                   No tengo tiempo.
@@ -1733,7 +1733,7 @@ const ProblemSection = () => {
                 src={asset('card-no-tengo-tiempo.webp')}
                 alt="No tengo tiempo"
                 loading="lazy"
-                className="absolute right-[2%] bottom-[-5%] w-[110px] md:w-[150px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-2 pointer-events-none z-0"
+                className="absolute right-[2%] bottom-[-5%] w-[180px] md:w-[240px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-2 pointer-events-none z-0"
               />
             </div>
 
