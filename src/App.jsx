@@ -1112,58 +1112,6 @@ const ExpandedAgencySections = () => (
   </>
 );
 
-const WhyUsSection = () => {
-  return (
-    <section className="relative w-full bg-transparent text-[#080808] px-6 py-14 md:py-28 lg:px-16 overflow-hidden">
-      <div className="mx-auto flex w-full max-w-[1240px] flex-col gap-8 md:flex-row md:items-center md:gap-12 md:justify-between">
-        <div className="flex-1 max-w-[500px]">
-          <h2 className="font-epilogue text-[clamp(32px,6vw,56px)] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#080808]">
-            El mundo digital te está esperando. Nosotros te llevamos.
-          </h2>
-          <p className="mt-8 text-[15px] md:text-[16px] leading-[1.6] text-[#080808]/70">
-            Kaiva existe porque creemos que cualquier negocio colombiano, sin importar su tamaño, merece estar bien representado en internet. No como hobby, sino como motor real de ventas.
-          </p>
-          <p className="mt-6 text-[15px] md:text-[16px] leading-[1.6] text-[#080808]/70">
-            Hacemos todo el trabajo técnico y creativo para que tú te concentres en lo que sabes hacer: tu negocio.
-          </p>
-        </div>
-        <div className="flex-1 flex flex-col gap-4">
-          {[
-            {
-              title: "Visible en Google desde el día uno",
-              desc: "Construimos sitios optimizados para SEO para que tus clientes te encuentren cuando te buscan."
-            },
-            {
-              title: "Flujos de atención automatizados",
-              desc: "Tu web responde, cotiza y agenda aunque estés atendiendo otro cliente o sea medianoche."
-            },
-            {
-              title: "Sin tecnicismos, sin enredos",
-              desc: "Manejamos todo lo técnico. Tú solo revisas, apruebas y recibes tu web funcionando."
-            },
-            {
-              title: "Hecho para el mercado colombiano",
-              desc: "Planes desde $320 USD pensados para la realidad de las pymes en Colombia."
-            }
-          ].map((item, i) => (
-            <div key={i} className="flex items-start gap-4 rounded-[24px] border border-[#080808]/5 bg-white p-6 shadow-sm">
-              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#f4f2ff]">
-                <svg className="h-3 w-3 text-[#a482ff]" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div className="flex-1 mt-[-2px]">
-                <h4 className="font-bold text-[15px] md:text-[16px] text-[#080808] leading-tight">{item.title}</h4>
-                <p className="mt-1.5 text-[13px] md:text-[14px] leading-relaxed text-[#080808]/60">{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
 const AliadosSection = () => {
   return (
     <section className="relative w-full bg-transparent text-[#080808] px-6 py-16 md:py-24 lg:px-16 overflow-hidden">
@@ -1399,12 +1347,25 @@ const App = () => {
         <ProjectsPage />
       ) : (
         <>
-          <HeroSection />
-          <ProblemSection />
+          <div className="relative">
+            <HeroSection />
+            <motion.img
+              src={asset('degradado-lateral.webp')}
+              alt=""
+              aria-hidden="true"
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 0.95, scale: 1 }}
+              transition={{ duration: 0.85, ease: 'easeOut' }}
+              loading="lazy"
+              decoding="async"
+              className="pointer-events-none absolute hidden md:block left-[-34%] z-[5] w-[66vw] min-w-[460px] -translate-y-1/2 object-contain"
+              style={{ top: '71vh' }}
+            />
+            <ProblemSection />
+          </div>
           <div className="relative">
             <SectionsAuroraBackdrop />
             <div className="relative z-10">
-              <WhyUsSection />
               <ExpandedAgencySections />
               <AliadosSection />
               <ContactRevealSection />
@@ -1760,17 +1721,6 @@ const HeroSection = () => {
 
   return (
     <section id="inicio" data-nav-theme="light" className="relative z-30 min-h-[100svh] w-full overflow-hidden bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
-      <motion.img
-        src={asset('degradado-lateral.webp')}
-        alt=""
-        aria-hidden="true"
-        initial={{ opacity: 0, scale: 0.92 }}
-        animate={{ opacity: 0.95, scale: 1 }}
-        transition={{ duration: 0.85, ease: 'easeOut' }}
-        loading="lazy"
-        decoding="async"
-        className="pointer-events-none absolute left-[-48%] top-[72%] z-[5] hidden w-[82vw] min-w-[300px] max-w-[1120px] -translate-y-1/2 object-contain md:block md:left-[-34%] md:top-[71%] md:w-[66vw] md:min-w-[460px]"
-      />
       <motion.img
         src={asset('degradado-lateral.webp')}
         alt=""
