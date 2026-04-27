@@ -1597,11 +1597,7 @@ const ProblemSection = () => {
 
         <div className="w-full mt-14 md:mt-20">
           <h3 className="mb-6 text-center font-manrope text-[clamp(24px,3.6vw,42px)] font-extrabold uppercase tracking-[0.04em] text-[#080808] md:mb-10">
-            POR QUÉ MUCHOS NEGOCIOS{' '}
-            <span className="font-epilogue italic tracking-[-0.03em]" style={gradientAccentStyle}>
-              SIGUEN
-            </span>{' '}
-            SIN WEB
+            POR QUÉ MUCHOS NEGOCIOS SIGUEN SIN WEB
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
@@ -1631,13 +1627,11 @@ const ProblemSection = () => {
                     SABER MÁS
                   </span>
                 </button>
-              <FloatingRobot
+              <img
                 src={asset('card-es-muy-caro.webp')}
-                className="right-[-2%] bottom-[-5%] w-[200px] md:w-[280px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
-                delay={0}
-                duration={7}
-                amplitude={12}
-                rotation={3}
+                alt="Es muy caro"
+                loading="lazy"
+                className="absolute right-[-4%] bottom-[-4%] w-[160px] md:w-[220px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-2 pointer-events-none"
               />
             </div>
 
@@ -1667,13 +1661,11 @@ const ProblemSection = () => {
                     SABER MÁS
                   </span>
                 </button>
-              <FloatingRobot
+              <img
                 src={asset('card-no-se-como-funciona.webp')}
-                className="right-[-2%] bottom-[-5%] w-[200px] md:w-[280px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
-                delay={0.5}
-                duration={7.5}
-                amplitude={14}
-                rotation={4}
+                alt="No sé cómo funciona"
+                loading="lazy"
+                className="absolute right-[-8%] bottom-[-10%] w-[180px] md:w-[250px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-2 pointer-events-none z-0"
               />
             </div>
 
@@ -1703,13 +1695,11 @@ const ProblemSection = () => {
                     SABER MÁS
                   </span>
                 </button>
-              <FloatingRobot
+              <img
                 src={asset('card-ya-intente.webp')}
-                className="right-[-2%] bottom-[-5%] w-[200px] md:w-[280px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
-                delay={1}
-                duration={8}
-                amplitude={10}
-                rotation={3}
+                alt="Ya intenté y no funcionó"
+                loading="lazy"
+                className="absolute right-[-4%] bottom-[-8%] w-[160px] md:w-[230px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-2 pointer-events-none z-0"
               />
             </div>
 
@@ -1739,13 +1729,11 @@ const ProblemSection = () => {
                     SABER MÁS
                   </span>
                 </button>
-              <FloatingRobot
+              <img
                 src={asset('card-no-tengo-tiempo.webp')}
-                className="right-[2%] bottom-[-5%] w-[180px] md:w-[240px] drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
-                delay={1.5}
-                duration={6.5}
-                amplitude={15}
-                rotation={5}
+                alt="No tengo tiempo"
+                loading="lazy"
+                className="absolute right-[2%] bottom-[-5%] w-[110px] md:w-[150px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-2 pointer-events-none z-0"
               />
             </div>
 
