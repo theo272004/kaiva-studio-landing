@@ -893,7 +893,7 @@ const ProcessStepCard = ({ step, index, activeProgress }) => {
   const distance = useTransform(activeProgress, (value) => {
     return index - value;
   });
-  const y = useTransform(distance, (value) => value * -160);
+  const y = useTransform(distance, (value) => value * 160);
   const scale = useTransform(distance, (value) => Math.max(0.85, 1 - Math.abs(value) * 0.12));
   const opacity = useTransform(distance, (value) => {
     const absolute = Math.abs(value);
