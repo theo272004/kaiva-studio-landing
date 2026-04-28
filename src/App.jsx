@@ -1533,40 +1533,146 @@ const App = () => {
           .hero-visual-wrap { top: 250px !important; width: 116vw !important; max-width: 920px !important; }
         }
         @media (min-width: 1024px) and (max-width: 1440px) {
+          .hero-logo {
+            left: 52px !important;
+            top: 28px !important;
+            font-size: 18px !important;
+          }
+          .hero-nav {
+            right: 52px !important;
+            top: 32px !important;
+            gap: 28px !important;
+            font-size: 14px !important;
+          }
           .hero-copy-wrap {
-            top: 128px !important;
-            left: 56px !important;
-            max-width: min(42vw, 560px) !important;
+            top: 118px !important;
+            left: 52px !important;
+            max-width: min(38vw, 500px) !important;
+          }
+          .hero-copy-wrap h1 {
+            font-size: clamp(34px, 3.25vw, 48px) !important;
+            line-height: 0.98 !important;
+          }
+          .hero-copy-wrap a {
+            margin-top: 18px !important;
+            font-size: 18px !important;
           }
           .hero-visual-wrap {
-            top: 210px !important;
-            width: min(90vw, 980px) !important;
-            max-width: 980px !important;
+            top: 198px !important;
+            width: min(82vw, 860px) !important;
+            max-width: 860px !important;
+          }
+          .hero-visual-wrap > div {
+            aspect-ratio: 1.2 / 1 !important;
           }
           .hero-cta-wrap {
-            bottom: 72px !important;
+            bottom: 60px !important;
           }
           .hero-support-copy {
-            right: 56px !important;
-            bottom: 28px !important;
-            max-width: 360px !important;
+            right: 52px !important;
+            bottom: 18px !important;
+            max-width: 300px !important;
+            font-size: 14px !important;
+            line-height: 1.42 !important;
           }
         }
         @media (min-width: 1024px) and (max-width: 1440px) and (max-height: 900px) {
+          .hero-logo {
+            top: 22px !important;
+            font-size: 17px !important;
+          }
+          .hero-nav {
+            top: 26px !important;
+            gap: 22px !important;
+            font-size: 13px !important;
+          }
           .hero-copy-wrap {
-            top: 112px !important;
-            max-width: min(40vw, 500px) !important;
+            top: 96px !important;
+            max-width: min(36vw, 440px) !important;
+          }
+          .hero-copy-wrap h1 {
+            font-size: clamp(30px, 2.85vw, 42px) !important;
+          }
+          .hero-copy-wrap a {
+            margin-top: 14px !important;
+            font-size: 16px !important;
           }
           .hero-visual-wrap {
-            top: 185px !important;
-            width: min(84vw, 900px) !important;
+            top: 158px !important;
+            width: min(76vw, 760px) !important;
+            max-width: 760px !important;
           }
           .hero-cta-wrap {
-            bottom: 46px !important;
+            bottom: 38px !important;
           }
           .hero-support-copy {
+            bottom: 10px !important;
+            max-width: 260px !important;
+            font-size: 13px !important;
+          }
+        }
+        @media (min-width: 1024px) and (max-width: 1320px) and (max-height: 820px) {
+          .hero-copy-wrap {
+            top: 82px !important;
+            max-width: min(34vw, 390px) !important;
+          }
+          .hero-copy-wrap h1 {
+            font-size: clamp(26px, 2.35vw, 36px) !important;
+          }
+          .hero-copy-wrap a {
+            margin-top: 12px !important;
+            font-size: 15px !important;
+          }
+          .hero-visual-wrap {
+            top: 132px !important;
+            width: min(68vw, 640px) !important;
+            max-width: 640px !important;
+          }
+          .hero-cta-wrap {
+            bottom: 22px !important;
+          }
+          .hero-cta-wrap a {
+            min-height: 46px !important;
+            padding-left: 28px !important;
+            padding-right: 28px !important;
+            font-size: 14px !important;
+          }
+          .hero-support-copy {
+            display: none !important;
+          }
+        }
+        @media (min-width: 1024px) and (max-width: 1280px) and (max-height: 760px) {
+          .hero-logo {
+            top: 18px !important;
+            left: 40px !important;
+          }
+          .hero-nav {
+            top: 22px !important;
+            right: 40px !important;
+            gap: 18px !important;
+            font-size: 12px !important;
+          }
+          .hero-copy-wrap {
+            top: 74px !important;
+            left: 40px !important;
+            max-width: min(34vw, 360px) !important;
+          }
+          .hero-copy-wrap h1 {
+            font-size: clamp(24px, 2.15vw, 32px) !important;
+          }
+          .hero-visual-wrap {
+            top: 122px !important;
+            width: min(64vw, 580px) !important;
+            max-width: 580px !important;
+          }
+          .hero-cta-wrap {
             bottom: 18px !important;
-            max-width: 320px !important;
+          }
+          .hero-cta-wrap a {
+            min-height: 44px !important;
+            padding-left: 24px !important;
+            padding-right: 24px !important;
+            font-size: 13px !important;
           }
         }
         @media (max-width: 768px) {
@@ -1896,7 +2002,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 18 }}
         animate={introComplete ? { opacity: 1, y: navHidden ? -80 : 0 } : { opacity: 0, y: 18 }}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed left-6 top-5 z-40 w-fit text-left text-[16px] leading-[0.95] transition-colors duration-200 md:left-[80px] md:top-[40px] md:text-[20px] ${
+        className={`hero-logo fixed left-6 top-5 z-40 w-fit text-left text-[16px] leading-[0.95] transition-colors duration-200 md:left-[80px] md:top-[40px] md:text-[20px] ${
           isDarkNavbar ? 'text-white' : 'text-[#080808]'
         }`}
       >
@@ -1911,7 +2017,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 18 }}
         animate={introComplete ? { opacity: 1, y: navHidden ? -80 : 0 } : { opacity: 0, y: 18 }}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed right-[32px] top-[32px] z-40 hidden items-center gap-10 text-[16px] transition-colors duration-200 md:flex md:right-[80px] md:top-[45px] ${
+        className={`hero-nav fixed right-[32px] top-[32px] z-40 hidden items-center gap-10 text-[16px] transition-colors duration-200 md:flex md:right-[80px] md:top-[45px] ${
           isDarkNavbar ? 'text-white/72' : 'text-[#080808]/68'
         }`}
       >
