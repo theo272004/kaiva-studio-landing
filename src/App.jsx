@@ -1147,17 +1147,15 @@ const ExpandedAgencySections = () => (
 
 const AliadosSection = () => {
   return (
-    <section className="allies-section relative w-full overflow-hidden bg-[linear-gradient(180deg,#6f22ef_0%,#9e6df0_100%)] px-4 py-14 md:px-8 md:py-16">
-      <div className="mx-auto w-full max-w-[1380px] rounded-[34px] bg-[#07071f] px-7 py-12 text-white shadow-[0_35px_90px_-42px_rgba(6,2,26,0.95)] ring-1 ring-white/10 md:px-14 md:py-16 lg:px-20">
-        <div className="pointer-events-none absolute inset-0 opacity-40">
-          <div className="absolute left-4 top-4 h-10 w-10 border border-white/20 md:left-8 md:top-8 md:h-14 md:w-14" />
-          <div className="absolute right-4 top-4 h-10 w-10 border border-white/20 md:right-8 md:top-8 md:h-14 md:w-14" />
-          <div className="absolute left-4 bottom-4 h-10 w-10 border border-white/20 md:left-8 md:bottom-8 md:h-14 md:w-14" />
-          <div className="absolute right-4 bottom-4 h-10 w-10 border border-white/20 md:right-8 md:bottom-8 md:h-14 md:w-14" />
-        </div>
-        <div className="pointer-events-none absolute inset-x-10 top-[50%] h-px bg-gradient-to-r from-transparent via-white/16 to-transparent" />
-        <div className="pointer-events-none absolute inset-y-10 left-[52%] hidden w-px bg-gradient-to-b from-transparent via-white/14 to-transparent lg:block" />
-        <div className="absolute inset-0 rounded-[34px]" style={{ background: 'radial-gradient(70% 85% at 22% 44%, rgba(138,73,255,0.22) 0%, rgba(138,73,255,0) 70%), radial-gradient(56% 70% at 82% 58%, rgba(107,43,235,0.30) 0%, rgba(107,43,235,0) 72%)' }} />
+    <section
+      className="allies-section relative w-full overflow-hidden px-4 py-14 md:px-8 md:py-16"
+      style={{
+        background:
+          'linear-gradient(180deg, #6f22ef 0%, #8b4df0 34%, #9f68f1 56%, #c5a9f7 76%, #ede5fb 90%, #ffffff 100%)'
+      }}
+    >
+      <div className="mx-auto w-full max-w-[1380px] rounded-[34px] bg-[#06060b] px-7 py-12 text-white shadow-[0_35px_90px_-42px_rgba(6,2,26,0.95)] ring-1 ring-white/10 md:px-14 md:py-16 lg:px-20">
+        <div className="absolute inset-0 rounded-[34px]" style={{ background: 'radial-gradient(72% 80% at 22% 44%, rgba(126,60,245,0.20) 0%, rgba(126,60,245,0) 72%), radial-gradient(52% 68% at 82% 58%, rgba(88,27,201,0.34) 0%, rgba(88,27,201,0) 74%)' }} />
 
         <div className="relative z-10 grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="text-left">
@@ -1166,11 +1164,11 @@ const AliadosSection = () => {
               <br />
               <span className="relative inline-block pb-3 md:pb-4">
                 for Startups
-                <span className="absolute bottom-0 left-0 h-[8px] w-full rounded-full bg-white/95 md:h-[10px]" />
+                <span className="absolute bottom-0 left-0 h-[8px] w-full rounded-full bg-white md:h-[10px]" />
               </span>
             </h2>
 
-            <div className="mt-7 inline-flex rounded-full bg-black/60 px-6 py-2.5 font-manrope text-[12px] font-bold uppercase tracking-[0.14em] text-white/95 ring-1 ring-white/12 md:mt-9 md:text-[14px]">
+            <div className="mt-7 inline-flex rounded-full bg-black px-6 py-2.5 font-manrope text-[12px] font-bold uppercase tracking-[0.14em] text-white/95 ring-1 ring-white/12 md:mt-9 md:text-[14px]">
               ALIANZA ESTRATÉGICA
             </div>
 
