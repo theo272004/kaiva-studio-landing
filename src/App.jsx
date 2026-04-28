@@ -1567,7 +1567,7 @@ const ProblemSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             
             {/* Card 1 */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-[#ff8b8b] to-[#fa5e5e] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-transform duration-300 hover:-translate-y-1">
+            <div className="relative overflow-hidden bg-gradient-to-br from-[#ff8b8b] to-[#fa5e5e] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(250,94,94,0.4)] hover:shadow-[0_20px_50px_-12px_rgba(250,94,94,0.6)]">
               <div className="relative z-10 w-[90%] md:w-[55%]">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   Es muy caro.
@@ -1600,7 +1600,7 @@ const ProblemSection = () => {
             </div>
 
             {/* Card 2 */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-[#76d5c5] to-[#54b8a7] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-transform duration-300 hover:-translate-y-1">
+            <div className="relative overflow-hidden bg-gradient-to-br from-[#76d5c5] to-[#54b8a7] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(84,184,167,0.4)] hover:shadow-[0_20px_50px_-12px_rgba(84,184,167,0.6)]">
               <div className="relative z-10 w-[90%] md:w-[55%]">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   <span className="inline-block mr-2 text-[32px] md:text-[40px]">🤷‍♂️</span>
@@ -1634,7 +1634,7 @@ const ProblemSection = () => {
             </div>
 
             {/* Card 3 */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-[#85a4e6] to-[#6084c7] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-transform duration-300 hover:-translate-y-1">
+            <div className="relative overflow-hidden bg-gradient-to-br from-[#85a4e6] to-[#6084c7] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(96,132,199,0.4)] hover:shadow-[0_20px_50px_-12px_rgba(96,132,199,0.6)]">
               <div className="relative z-10 w-[90%] md:w-[55%]">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   <span className="inline-block mr-2 text-[32px] md:text-[40px]">😤</span>
@@ -1668,7 +1668,7 @@ const ProblemSection = () => {
             </div>
 
             {/* Card 4 */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-[#b878e8] to-[#9955d6] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-transform duration-300 hover:-translate-y-1">
+            <div className="relative overflow-hidden bg-gradient-to-br from-[#b878e8] to-[#9955d6] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(153,85,214,0.4)] hover:shadow-[0_20px_50px_-12px_rgba(153,85,214,0.6)]">
               <div className="relative z-10 w-[90%] md:w-[55%]">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   <span className="inline-block mr-2 text-[32px] md:text-[40px]">⏳</span>
