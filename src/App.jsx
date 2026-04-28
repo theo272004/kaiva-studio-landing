@@ -1096,41 +1096,46 @@ const ExpandedAgencySections = () => (
 
 const AliadosSection = () => {
   return (
-    <section className="relative w-full bg-transparent text-[#080808] px-6 py-16 md:py-24 lg:px-16 overflow-hidden">
-      <div className="mx-auto flex w-full max-w-[1240px] flex-col gap-12 md:flex-row md:items-center md:justify-between">
-        <div className="flex-1 max-w-[460px]">
-          <div className="mb-4 inline-block font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#a482ff]">
-            ALIADOS ESTRATÉGICOS
-          </div>
-          <h2 className="font-epilogue text-[clamp(32px,6vw,56px)] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#080808]">
-            Trabajamos con los mejores en SEO
-          </h2>
-          <p className="mt-6 text-[15px] md:text-[16px] leading-[1.6] text-[#080808]/70">
-            Para garantizar que tu web no solo se vea bien sino que también sea encontrada, trabajamos de la mano con especialistas en posicionamiento orgánico.
-          </p>
-        </div>
-        
-        <div className="flex-1 flex justify-center md:justify-end">
-          <div className="w-full max-w-[500px] rounded-[28px] border border-[#080808]/5 bg-white p-6 md:p-8 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] flex items-center justify-between gap-6">
-            <div className="flex-1">
-              <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#080808]/40 mb-2">
-                SEO
-              </div>
-              <h3 className="font-epilogue text-[22px] md:text-[26px] font-extrabold leading-none tracking-[-0.02em] text-[#080808]">
-                SEO for Startups
-              </h3>
-              <p className="mt-3 text-[13px] md:text-[14px] leading-relaxed text-[#080808]/60">
-                Posicionamiento orgánico para negocios que quieren crecer con criterio.
-              </p>
-            </div>
-            <a href="https://seoforstartups.co" target="_blank" rel="noopener noreferrer" className="flex shrink-0 h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-[#f4f2ff] text-[#a482ff] hover:bg-[#eae6ff] transition-colors">
-              <svg className="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </a>
-          </div>
-        </div>
+    <section className="relative w-full bg-transparent text-[#080808] px-6 py-20 md:py-32 overflow-hidden flex flex-col items-center justify-center text-center">
+      {/* Headline */}
+      <h2 className="font-epilogue text-[clamp(50px,9vw,110px)] font-extrabold leading-[0.95] tracking-[-0.04em] text-[#080808]">
+        Kaiva
+        <br />
+        <span className="relative inline-block pb-2 md:pb-3">
+          for Startups
+          <div className="absolute bottom-0 left-0 right-0 h-[5px] md:h-[8px] rounded-full bg-[#8242f5]" style={{ background: 'linear-gradient(90deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%)' }} />
+        </span>
+      </h2>
+
+      {/* Pill */}
+      <div className="mt-8 md:mt-10 rounded-full bg-[#0c0c0c] px-6 py-2.5 font-manrope text-[12px] md:text-[14px] font-bold uppercase tracking-widest text-white shadow-xl">
+        ALIANZA ESTRATÉGICA
       </div>
+
+      {/* Unified Logo Graphic */}
+      <div className="mt-12 md:mt-16 relative w-full max-w-[340px] md:max-w-[480px]">
+        <img 
+          src={asset('Kaiva seo.png')} 
+          alt="Kaiva x SEO for Startups" 
+          loading="lazy"
+          className="w-full object-contain drop-shadow-2xl transition-transform duration-500 hover:scale-105 hover:-translate-y-2"
+        />
+      </div>
+
+      {/* Call to Action */}
+      <a 
+        href="https://seoforstartups.co" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="mt-12 inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 font-inter text-[14px] md:text-[15px] font-bold text-[#080808] shadow-[0_12px_28px_-12px_rgba(0,0,0,0.12)] transition-all hover:-translate-y-1 hover:shadow-[0_20px_40px_-16px_rgba(0,0,0,0.2)] border border-[#080808]/5 group"
+      >
+        Conoce más de SEO for Startups
+        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#f4f2ff] text-[#8242f5] transition-colors group-hover:bg-[#8242f5] group-hover:text-white">
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </span>
+      </a>
     </section>
   );
 };
