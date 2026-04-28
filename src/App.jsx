@@ -398,7 +398,7 @@ const ContactRevealSection = () => {
   };
 
   return (
-    <section id="contacto" ref={sectionRef} className="relative w-full overflow-x-clip bg-transparent">
+    <section id="contacto" ref={sectionRef} className="contact-section relative w-full overflow-x-clip bg-transparent">
       <div
         className="mx-auto flex w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
         style={{
@@ -959,12 +959,12 @@ const ProcessRedesignSection = () => {
   });
 
   return (
-    <section ref={sectionRef} id="proceso" className="relative w-full bg-transparent py-0">
+    <section ref={sectionRef} id="proceso" className="process-section relative w-full bg-transparent py-0">
       {/* Desktop Sticky Carousel */}
-      <div className="hidden md:block relative h-[250vh] w-full">
+      <div className="process-sticky-stage hidden md:block relative h-[250vh] w-full">
         <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden px-6 lg:px-16">
           <div className="relative z-10 mx-auto flex w-full max-w-[800px] items-center justify-center gap-6">
-            <div className="relative h-[430px] w-full overflow-visible md:h-[540px]">
+            <div className="process-card-stack relative h-[430px] w-full overflow-visible md:h-[540px]">
               <div className="relative mx-auto h-full w-full max-w-[660px]">
                 {stepsContent.map((step, i) => (
                   <ProcessStepCard 
@@ -1010,7 +1010,7 @@ const ExpandedAgencySections = () => (
     <section
       id="planes"
       data-nav-theme="light"
-      className="relative m-0 overflow-hidden bg-transparent px-4 pb-12 pt-0 md:px-8 md:pb-16"
+      className="plans-section relative m-0 overflow-hidden bg-transparent px-4 pb-12 pt-0 md:px-8 md:pb-16"
     >
       <motion.img
         src={asset('KaivaMora1.webp')}
@@ -1133,7 +1133,7 @@ const ExpandedAgencySections = () => (
 
 const AliadosSection = () => {
   return (
-    <section className="relative w-full bg-transparent text-[#080808] px-6 py-20 md:py-32 overflow-hidden">
+    <section className="allies-section relative w-full bg-transparent text-[#080808] px-6 py-20 md:py-32 overflow-hidden">
       <div className="mx-auto flex w-full max-w-[1240px] flex-col items-center md:flex-row md:items-center md:justify-between gap-12 md:gap-8">
         
         {/* Left Column (Text & Button) */}
@@ -1629,7 +1629,7 @@ const App = () => {
             max-width: 640px !important;
           }
           .hero-cta-wrap {
-            bottom: 22px !important;
+            bottom: 42px !important;
           }
           .hero-cta-wrap a {
             min-height: 46px !important;
@@ -1638,7 +1638,13 @@ const App = () => {
             font-size: 14px !important;
           }
           .hero-support-copy {
-            display: none !important;
+            display: -webkit-box !important;
+            right: 40px !important;
+            bottom: 8px !important;
+            max-width: 255px !important;
+            font-size: 12px !important;
+            line-height: 1.36 !important;
+            -webkit-line-clamp: 3 !important;
           }
         }
         @media (min-width: 1024px) and (max-width: 1280px) and (max-height: 760px) {
@@ -1666,13 +1672,92 @@ const App = () => {
             max-width: 580px !important;
           }
           .hero-cta-wrap {
-            bottom: 18px !important;
+            bottom: 34px !important;
           }
           .hero-cta-wrap a {
             min-height: 44px !important;
             padding-left: 24px !important;
             padding-right: 24px !important;
             font-size: 13px !important;
+          }
+          .hero-support-copy {
+            display: -webkit-box !important;
+            right: 40px !important;
+            bottom: 6px !important;
+            max-width: 235px !important;
+            font-size: 11px !important;
+            line-height: 1.34 !important;
+            -webkit-line-clamp: 3 !important;
+          }
+        }
+        @media (min-width: 1024px) and (max-width: 1440px) and (max-height: 860px) {
+          .problem-section {
+            padding-top: 48px !important;
+            padding-bottom: 68px !important;
+          }
+          .problem-section h2 {
+            margin-top: 0 !important;
+            max-width: 760px !important;
+            font-size: clamp(34px, 4.4vw, 56px) !important;
+          }
+          .problem-section p {
+            max-width: 600px !important;
+          }
+          .problem-section h3 {
+            margin-bottom: 24px !important;
+            font-size: clamp(22px, 2.4vw, 32px) !important;
+          }
+          .process-sticky-stage {
+            height: 212vh !important;
+          }
+          .process-card-stack {
+            height: 440px !important;
+          }
+          .plans-section {
+            padding-bottom: 52px !important;
+          }
+          .plans-section h2 {
+            font-size: clamp(34px, 4vw, 52px) !important;
+          }
+          .plans-section .grid {
+            gap: 20px !important;
+          }
+          .allies-section {
+            padding-top: 72px !important;
+            padding-bottom: 86px !important;
+          }
+          .allies-section h2 {
+            font-size: clamp(42px, 6vw, 86px) !important;
+          }
+          .contact-section > div {
+            padding-top: clamp(52px, 7vw, 108px) !important;
+            padding-bottom: clamp(42px, 6vw, 88px) !important;
+          }
+          .contact-section h2 {
+            font-size: clamp(36px, 5vw, 88px) !important;
+          }
+        }
+        @media (min-width: 1024px) and (max-width: 1280px) and (max-height: 760px) {
+          .problem-section {
+            padding-top: 42px !important;
+            padding-bottom: 56px !important;
+          }
+          .process-sticky-stage {
+            height: 196vh !important;
+          }
+          .process-card-stack {
+            height: 390px !important;
+          }
+          .plans-section {
+            padding-bottom: 44px !important;
+          }
+          .allies-section {
+            padding-top: 60px !important;
+            padding-bottom: 72px !important;
+          }
+          .contact-section > div {
+            padding-top: 46px !important;
+            padding-bottom: 52px !important;
           }
         }
         @media (max-width: 768px) {
@@ -1768,7 +1853,7 @@ const CountUpAnimation = ({ endValue, suffix = "", prefix = "", decimal = false 
 
 const ProblemSection = () => {
   return (
-    <section id="problema" className="relative w-full bg-transparent text-[#080808] px-6 py-14 md:py-24 lg:px-16">
+    <section id="problema" className="problem-section relative w-full bg-transparent text-[#080808] px-6 py-14 md:py-24 lg:px-16">
       <div className="mx-auto w-full max-w-[1240px] relative z-10 flex flex-col items-center">
         
         <ScrollRevealHeadline text="El 91% de las empresas en Colombia son pymes. La mayoría no existe en internet." />
