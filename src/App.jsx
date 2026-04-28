@@ -961,27 +961,10 @@ const ProcessRedesignSection = () => {
   return (
     <section ref={sectionRef} id="proceso" className="relative w-full bg-[#fbfbfd] py-0">
       <div className="relative h-[450vh] w-full">
-        <div className="sticky top-0 flex h-screen w-full items-center overflow-hidden px-6 lg:px-16">
+        <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden px-6 lg:px-16">
           <div className="absolute inset-0 bg-[radial-gradient(80%_70%_at_50%_0%,rgba(255,255,255,1)_0%,rgba(251,251,253,0.8)_48%,rgba(244,247,255,0.9)_100%)]" />
 
-          <div className="relative z-10 mx-auto grid w-full max-w-[1240px] items-center gap-6 md:grid-cols-[0.85fr_1.15fr] md:gap-14">
-            <motion.div
-              key={activeStep}
-              initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              transition={{ duration: 0.55, ease: premiumEase }}
-              className="flex items-center justify-center gap-5 md:justify-start md:gap-10"
-            >
-              <div className="font-epilogue text-[120px] font-extrabold leading-none tracking-[-0.08em] text-[#8242f5]/16 sm:text-[170px] md:text-[280px]">
-                {activeStep + 1}
-              </div>
-              <div
-                className="font-epilogue text-[28px] font-extrabold uppercase leading-[0.95] tracking-[0.12em] text-[#080808] sm:text-[38px] md:text-[66px]"
-                style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
-              >
-                {stepLabels[activeStep]}
-              </div>
-            </motion.div>
+          <div className="relative z-10 mx-auto flex w-full max-w-[800px] items-center justify-center gap-6">
 
             <div className="relative h-[430px] w-full overflow-visible md:h-[540px]">
               <div className="relative mx-auto h-full w-full max-w-[660px]">
@@ -1177,7 +1160,7 @@ const AnimatedText = ({ text, className }) => {
   };
 
   return (
-    <motion.div style={{ overflow: "hidden", display: "flex", flexWrap: "wrap", gap: "0.26em" }} variants={container} initial="hidden" animate="visible" className={className}>
+    <motion.div style={{ overflow: "visible", display: "flex", flexWrap: "wrap", gap: "0.26em" }} variants={container} initial="hidden" animate="visible" className={className}>
       {words.map((word, index) => (
         <motion.span variants={child} style={{ display: "inline-block" }} key={index}>
           {word}
@@ -1567,7 +1550,7 @@ const ProblemSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             
             {/* Card 1 */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-[#ff8b8b] to-[#fa5e5e] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(250,94,94,0.4)] hover:shadow-[0_20px_50px_-12px_rgba(250,94,94,0.6)]">
+            <div className="relative overflow-hidden bg-white rounded-[32px] p-8 md:p-10 text-[#080808] min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] border border-[#080808]/5">
               <div className="relative z-10 w-[90%] md:w-[55%]">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   Es muy caro.
@@ -1600,7 +1583,7 @@ const ProblemSection = () => {
             </div>
 
             {/* Card 2 */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-[#76d5c5] to-[#54b8a7] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(84,184,167,0.4)] hover:shadow-[0_20px_50px_-12px_rgba(84,184,167,0.6)]">
+            <div className="relative overflow-hidden bg-white rounded-[32px] p-8 md:p-10 text-[#080808] min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] border border-[#080808]/5">
               <div className="relative z-10 w-[90%] md:w-[55%]">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   <span className="inline-block mr-2 text-[32px] md:text-[40px]">🤷‍♂️</span>
@@ -1634,7 +1617,7 @@ const ProblemSection = () => {
             </div>
 
             {/* Card 3 */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-[#85a4e6] to-[#6084c7] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(96,132,199,0.4)] hover:shadow-[0_20px_50px_-12px_rgba(96,132,199,0.6)]">
+            <div className="relative overflow-hidden bg-white rounded-[32px] p-8 md:p-10 text-[#080808] min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] border border-[#080808]/5">
               <div className="relative z-10 w-[90%] md:w-[55%]">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   <span className="inline-block mr-2 text-[32px] md:text-[40px]">😤</span>
@@ -1668,7 +1651,7 @@ const ProblemSection = () => {
             </div>
 
             {/* Card 4 */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-[#b878e8] to-[#9955d6] rounded-[32px] p-8 md:p-10 text-white min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(153,85,214,0.4)] hover:shadow-[0_20px_50px_-12px_rgba(153,85,214,0.6)]">
+            <div className="relative overflow-hidden bg-white rounded-[32px] p-8 md:p-10 text-[#080808] min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] border border-[#080808]/5">
               <div className="relative z-10 w-[90%] md:w-[55%]">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   <span className="inline-block mr-2 text-[32px] md:text-[40px]">⏳</span>
@@ -1974,6 +1957,12 @@ const HeroSection = () => {
         animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
         transition={{ duration: 0.55, delay: 0.22, ease: 'easeOut' }}
         className="absolute bottom-4 left-6 right-6 z-40 hidden md:block md:bottom-[60px] md:left-auto md:right-[80px] md:max-w-[420px] md:text-[15px] text-left font-normal leading-[1.5] text-[#080808]/64"
+        style={{
+          display: "-webkit-box",
+          WebkitLineClamp: 2,
+          WebkitBoxOrient: "vertical",
+          overflow: "hidden"
+        }}
       >
         Deja de perder clientes por no estar en internet. Diseñamos y desarrollamos tu página web con criterio profesional, entrega rápida y un precio justo.
       </motion.p>
