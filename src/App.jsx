@@ -890,15 +890,29 @@ const PortfolioSection = () => {
 const stepLabels = ['Primer paso', 'Segundo paso', 'Tercer paso', 'Cuarto paso', 'Quinto paso'];
 
 const ProcessStepCard = ({ step, index, activeProgress }) => {
-  const distance = useTransform(activeProgress, (value) => index - value);
-  const y = useTransform(distance, (value) => { if (value > 0) return value * 250; return value * 25; });
-  const scale = useTransform(distance, (value) => { if (value > 0) return 1; return Math.max(0.8, 1 + value * 0.06); });
-  const opacity = useTransform(distance, (value) => { if (value > 0) return Math.max(0, 1 - value * 0.8); return Math.max(0.4, 1 + value * 0.2); });
-  const blur = useTransform(distance, (value) => { if (value > 0) return 'blur(0px)'; return \`blur(\${Math.min(Math.abs(value) * 3, 6)}px)\`; });
-  const zIndex = index;
-  const backgroundColor = "rgba(255,255,255,0.65)";
-  const boxShadow = "0 30px 90px rgba(130,66,245,0.12), inset 0 1px 0 rgba(255,255,255,1)";
-  const borderColor = "rgba(255,255,255,0.5)";
+  const distance = useTransform(activeProgress, (value) => {
+    return index - value;
+  });
+  const y = useTransform(distance, (value) => value * 160);
+  const scale = useTransform(distance, (value) => Math.max(0.85, 1 - Math.abs(value) * 0.12));
+  const opacity = useTransform(distance, (value) => {
+    const absolute = Math.abs(value);
+    if (absolute > 2) return 0;
+    return Math.max(0, 1 - absolute * 0.5);
+  });
+  const blur = useTransform(distance, (value) => `blur(${Math.min(Math.abs(value) * 3, 6)}px)`);
+  const zIndex = useTransform(distance, (value) => Math.round(20 - Math.abs(value) * 10));
+  const backgroundColor = useTransform(distance, (value) => (
+    Math.abs(value) < 0.4 ? "rgba(255,255,255,1)" : "rgba(255,255,255,0.4)"
+  ));
+  const boxShadow = useTransform(distance, (value) => (
+    Math.abs(value) < 0.4
+      ? "0 30px 90px rgba(130,66,245,0.12), inset 0 1px 0 rgba(255,255,255,1)"
+      : "0 10px 30px rgba(0,0,0,0.02)"
+  ));
+  const borderColor = useTransform(distance, (value) => (
+    Math.abs(value) < 0.4 ? "rgba(130,66,245,0.2)" : "rgba(0,0,0,0.05)"
+  ));
 
   return (
     <motion.div
