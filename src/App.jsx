@@ -951,7 +951,7 @@ const ProcessRedesignSection = () => {
   ];
 
   const activeProgressRaw = useTransform(scrollYProgress, [0, 1], [0, stepsContent.length - 1]);
-  const activeProgress = useSpring(activeProgressRaw, { stiffness: 90, damping: 24, mass: 0.4 });
+  const activeProgress = useSpring(activeProgressRaw, { stiffness: 150, damping: 22, mass: 0.1 });
 
   useMotionValueEvent(activeProgressRaw, 'change', (latest) => {
     const nextStep = Math.min(stepsContent.length - 1, Math.max(0, Math.round(latest)));
@@ -959,10 +959,10 @@ const ProcessRedesignSection = () => {
   });
 
   return (
-    <section ref={sectionRef} id="proceso" className="relative w-full bg-[#fbfbfd] py-0">
-      <div className="relative h-[450vh] w-full">
+    <section ref={sectionRef} id="proceso" className="relative w-full bg-transparent py-0">
+      <div className="relative h-[250vh] w-full">
         <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden px-6 lg:px-16">
-          <div className="absolute inset-0 bg-[radial-gradient(80%_70%_at_50%_0%,rgba(255,255,255,1)_0%,rgba(251,251,253,0.8)_48%,rgba(244,247,255,0.9)_100%)]" />
+          {/* Background removed to make transition seamless with aurora */}
 
           <div className="relative z-10 mx-auto flex w-full max-w-[800px] items-center justify-center gap-6">
 
@@ -1550,7 +1550,7 @@ const ProblemSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             
             {/* Card 1 */}
-            <div className="relative overflow-hidden bg-white rounded-[32px] p-8 md:p-10 text-[#080808] min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] border border-[#080808]/5">
+            <div className="relative overflow-hidden bg-white rounded-[32px] p-8 md:p-10 text-[#080808] min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] border-[1.5px] border-[#8242f5]/40 hover:border-[#8242f5]">
               <div className="relative z-10 w-[90%] md:w-[55%]">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   Es muy caro.
@@ -1583,7 +1583,7 @@ const ProblemSection = () => {
             </div>
 
             {/* Card 2 */}
-            <div className="relative overflow-hidden bg-white rounded-[32px] p-8 md:p-10 text-[#080808] min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] border border-[#080808]/5">
+            <div className="relative overflow-hidden bg-white rounded-[32px] p-8 md:p-10 text-[#080808] min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] border-[1.5px] border-[#8242f5]/40 hover:border-[#8242f5]">
               <div className="relative z-10 w-[90%] md:w-[55%]">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   <span className="inline-block mr-2 text-[32px] md:text-[40px]">🤷‍♂️</span>
@@ -1617,7 +1617,7 @@ const ProblemSection = () => {
             </div>
 
             {/* Card 3 */}
-            <div className="relative overflow-hidden bg-white rounded-[32px] p-8 md:p-10 text-[#080808] min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] border border-[#080808]/5">
+            <div className="relative overflow-hidden bg-white rounded-[32px] p-8 md:p-10 text-[#080808] min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] border-[1.5px] border-[#8242f5]/40 hover:border-[#8242f5]">
               <div className="relative z-10 w-[90%] md:w-[55%]">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   <span className="inline-block mr-2 text-[32px] md:text-[40px]">😤</span>
@@ -1651,7 +1651,7 @@ const ProblemSection = () => {
             </div>
 
             {/* Card 4 */}
-            <div className="relative overflow-hidden bg-white rounded-[32px] p-8 md:p-10 text-[#080808] min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] border border-[#080808]/5">
+            <div className="relative overflow-hidden bg-white rounded-[32px] p-8 md:p-10 text-[#080808] min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] border-[1.5px] border-[#8242f5]/40 hover:border-[#8242f5]">
               <div className="relative z-10 w-[90%] md:w-[55%]">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   <span className="inline-block mr-2 text-[32px] md:text-[40px]">⏳</span>
