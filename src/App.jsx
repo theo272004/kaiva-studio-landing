@@ -1797,11 +1797,6 @@ const App = () => {
             display: flex;
             align-items: center;
           }
-          .contact-section {
-            min-height: 100svh;
-            display: flex;
-            align-items: center;
-          }
         }
         @media (min-width: 1024px) and (max-width: 1440px) and (max-height: 860px) {
           .problem-section {
@@ -1836,7 +1831,7 @@ const App = () => {
           .allies-section h2 {
             font-size: clamp(42px, 6vw, 86px) !important;
           }
-          .contact-section > div {
+          .contact-section > div:first-child {
             padding-top: clamp(52px, 7vw, 108px) !important;
             padding-bottom: clamp(42px, 6vw, 88px) !important;
           }
@@ -1859,7 +1854,7 @@ const App = () => {
             padding-top: 60px !important;
             padding-bottom: 72px !important;
           }
-          .contact-section > div {
+          .contact-section > div:first-child {
             padding-top: 46px !important;
             padding-bottom: 52px !important;
           }
