@@ -1005,7 +1005,11 @@ const ExpandedAgencySections = () => (
         }}
         transition={{
           duration: 7,
-          repeat: Infini      <motion.div {...sectionReveal} className="mx-auto w-full max-w-[1180px]">
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div {...sectionReveal} className="mx-auto w-full max-w-[1180px]">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-epilogue text-[clamp(40px,6vw,60px)] font-bold leading-[1.05] tracking-tight text-[#080808]">
               Elige el plan <span className="italic font-serif font-light">ideal</span> para tu <span className="italic font-serif font-light">negocio</span>
