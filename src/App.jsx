@@ -1049,7 +1049,7 @@ const ExpandedAgencySections = () => (
                   className={`group relative flex flex-col rounded-[24px] bg-white shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] overflow-hidden`}
                 >
                   {isMiddle && (
-                    <img src={asset('degradado-tarjeta.png')} alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0 opacity-90" />
+                    <img src={asset('degradado-tarjeta.png')} alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0" />
                   )}
 
                   <div className="relative z-10 flex flex-1 flex-col p-8 md:p-10">
@@ -1069,7 +1069,7 @@ const ExpandedAgencySections = () => (
                       Pago único
                     </div>
 
-                    <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#0a0a0a] px-6 py-4 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-[1.02]">
+                    <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className={`mt-6 flex w-full items-center justify-center gap-2 rounded-xl ${isMiddle ? 'bg-black/30 backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]' : 'bg-[#0a0a0a]'} px-6 py-4 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-[1.02]`}>
                       {plan.cta}
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M7 17L17 7M17 7H7M17 7V17" />
