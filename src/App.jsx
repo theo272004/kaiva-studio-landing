@@ -1020,6 +1020,7 @@ const ProcessRedesignSection = () => {
 const ExpandedAgencySections = () => (
   <>
     <ProcessRedesignSection />
+    <AliadosSection />
     <section
       id="planes"
       data-nav-theme="light"
@@ -1146,69 +1147,57 @@ const ExpandedAgencySections = () => (
 
 const AliadosSection = () => {
   return (
-    <section className="allies-section relative w-full bg-transparent text-[#080808] px-6 py-20 md:py-32 overflow-hidden">
-      <div className="mx-auto flex w-full max-w-[1240px] flex-col items-center md:flex-row md:items-center md:justify-between gap-12 md:gap-8">
-        
-        {/* Left Column (Text & Button) */}
-        <div className="flex flex-1 flex-col items-center text-center md:items-start md:text-left order-1">
-          {/* Headline */}
-          <h2 className="font-epilogue text-[clamp(50px,9vw,110px)] font-extrabold leading-[0.95] tracking-[-0.04em] text-[#080808]">
-            Kaiva
-            <br />
-            <span className="relative inline-block pb-2 md:pb-3">
-              for Startups
-              <div className="absolute bottom-0 left-0 right-0 h-[5px] md:h-[8px] rounded-full bg-[#8242f5]" style={{ background: 'linear-gradient(90deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%)' }} />
-            </span>
-          </h2>
+    <section className="allies-section relative w-full overflow-hidden bg-[linear-gradient(180deg,#6f22ef_0%,#9e6df0_100%)] px-4 py-14 md:px-8 md:py-16">
+      <div className="mx-auto w-full max-w-[1380px] rounded-[34px] bg-[#07071f] px-7 py-12 text-white shadow-[0_35px_90px_-42px_rgba(6,2,26,0.95)] ring-1 ring-white/10 md:px-14 md:py-16 lg:px-20">
+        <div className="pointer-events-none absolute inset-0 opacity-40">
+          <div className="absolute left-4 top-4 h-10 w-10 border border-white/20 md:left-8 md:top-8 md:h-14 md:w-14" />
+          <div className="absolute right-4 top-4 h-10 w-10 border border-white/20 md:right-8 md:top-8 md:h-14 md:w-14" />
+          <div className="absolute left-4 bottom-4 h-10 w-10 border border-white/20 md:left-8 md:bottom-8 md:h-14 md:w-14" />
+          <div className="absolute right-4 bottom-4 h-10 w-10 border border-white/20 md:right-8 md:bottom-8 md:h-14 md:w-14" />
+        </div>
+        <div className="pointer-events-none absolute inset-x-10 top-[50%] h-px bg-gradient-to-r from-transparent via-white/16 to-transparent" />
+        <div className="pointer-events-none absolute inset-y-10 left-[52%] hidden w-px bg-gradient-to-b from-transparent via-white/14 to-transparent lg:block" />
+        <div className="absolute inset-0 rounded-[34px]" style={{ background: 'radial-gradient(70% 85% at 22% 44%, rgba(138,73,255,0.22) 0%, rgba(138,73,255,0) 70%), radial-gradient(56% 70% at 82% 58%, rgba(107,43,235,0.30) 0%, rgba(107,43,235,0) 72%)' }} />
 
-          {/* Pill */}
-          <div className="mt-8 md:mt-10 rounded-full bg-[#0c0c0c] px-6 py-2.5 font-manrope text-[12px] md:text-[14px] font-bold uppercase tracking-widest text-white shadow-xl">
-            ALIANZA ESTRATÉGICA
+        <div className="relative z-10 grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="text-left">
+            <h2 className="font-epilogue text-[clamp(52px,9.2vw,132px)] font-extrabold leading-[0.92] tracking-[-0.045em] text-white">
+              Kaiva
+              <br />
+              <span className="relative inline-block pb-3 md:pb-4">
+                for Startups
+                <span className="absolute bottom-0 left-0 h-[8px] w-full rounded-full bg-white/95 md:h-[10px]" />
+              </span>
+            </h2>
+
+            <div className="mt-7 inline-flex rounded-full bg-black/60 px-6 py-2.5 font-manrope text-[12px] font-bold uppercase tracking-[0.14em] text-white/95 ring-1 ring-white/12 md:mt-9 md:text-[14px]">
+              ALIANZA ESTRATÉGICA
+            </div>
+
+            <a
+              href="https://seoforstartups.co"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 font-inter text-[14px] font-bold text-[#121222] shadow-[0_16px_40px_-20px_rgba(0,0,0,0.75)] transition-transform duration-300 hover:-translate-y-0.5 md:mt-11 md:px-10 md:py-4 md:text-[15px]"
+            >
+              Conoce más de SEO for Startups
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#efe8ff] text-[#7f41f0]">
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </span>
+            </a>
           </div>
 
-          {/* Call to Action (Desktop only - Mobile has it below the image) */}
-          <a 
-            href="https://seoforstartups.co" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="mt-10 md:mt-12 hidden md:inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 font-inter text-[14px] md:text-[15px] font-bold text-[#080808] shadow-[0_12px_28px_-12px_rgba(0,0,0,0.12)] transition-all hover:-translate-y-1 hover:shadow-[0_20px_40px_-16px_rgba(0,0,0,0.2)] border border-[#080808]/5 group"
-          >
-            Conoce más de SEO for Startups
-            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#f4f2ff] text-[#8242f5] transition-colors group-hover:bg-[#8242f5] group-hover:text-white">
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </span>
-          </a>
-        </div>
-
-        {/* Right Column (Unified Logo Graphic) */}
-        <div className="flex-1 w-full flex justify-center order-2">
-          <div className="relative w-full max-w-[340px] md:max-w-[480px]">
-            <img 
-              src={asset('Kaiva seo.png')} 
-              alt="Kaiva x SEO for Startups" 
+          <div className="relative mx-auto w-full max-w-[340px] md:max-w-[520px] lg:max-w-[620px]">
+            <img
+              src={asset('Kaiva seo.png')}
+              alt="Kaiva x SEO for Startups"
               loading="lazy"
-              className="w-full object-contain drop-shadow-2xl transition-transform duration-500 hover:scale-105 hover:-translate-y-2"
+              className="w-full object-contain drop-shadow-[0_20px_40px_rgba(56,14,136,0.55)]"
             />
           </div>
         </div>
-
-        {/* Call to Action (Mobile only) */}
-        <a 
-          href="https://seoforstartups.co" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="mt-2 flex md:hidden items-center gap-3 rounded-full bg-white px-8 py-4 font-inter text-[14px] font-bold text-[#080808] shadow-[0_12px_28px_-12px_rgba(0,0,0,0.12)] border border-[#080808]/5 group order-3 w-fit"
-        >
-          Conoce más de SEO for Startups
-          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#f4f2ff] text-[#8242f5]">
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </span>
-        </a>
-
       </div>
     </section>
   );
@@ -1432,7 +1421,6 @@ const App = () => {
             <SectionsAuroraBackdrop />
             <div className="relative z-10">
               <ExpandedAgencySections />
-              <AliadosSection />
               <ContactRevealSection />
             </div>
           </div>
