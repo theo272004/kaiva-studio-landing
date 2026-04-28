@@ -1497,19 +1497,18 @@ const App = () => {
           position: relative;
           z-index: 10;
           color: #ffffff;
-          background: linear-gradient(180deg, rgba(255,255,255,0.24) 0%, rgba(255,255,255,0.11) 100%);
-          border: 1px solid rgba(255,255,255,0.18);
+          background: linear-gradient(180deg, rgba(92, 34, 196, 0.92) 0%, rgba(68, 20, 154, 0.96) 100%);
+          border: 1px solid rgba(255,255,255,0.08);
           box-shadow:
-            0 18px 26px -18px rgba(27, 6, 65, 0.9),
-            inset 1px 1px 0 rgba(255,255,255,0.24),
-            inset -3px -4px 10px rgba(56, 16, 132, 0.45);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
+            inset 0 2px 3px rgba(20, 4, 49, 0.72),
+            inset 0 14px 18px rgba(144, 92, 255, 0.18),
+            inset 0 -10px 18px rgba(18, 2, 48, 0.48),
+            0 1px 0 rgba(255,255,255,0.08);
         }
         .problem-card-button-icon {
           background: linear-gradient(180deg, #a970ff 0%, #7a3ef0 100%);
           box-shadow:
-            0 10px 18px -10px rgba(28, 5, 70, 0.9),
+            0 8px 14px -10px rgba(28, 5, 70, 0.9),
             inset 0 1px 0 rgba(255,255,255,0.2),
             inset 0 -3px 8px rgba(63, 17, 150, 0.45);
         }
@@ -1708,12 +1707,12 @@ const ProblemSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             
             {/* Card 1 */}
-            <div className="problem-card relative overflow-hidden rounded-[32px] p-6 sm:p-8 md:p-8 xl:p-10 text-white min-h-[340px] sm:min-h-[360px] md:min-h-[380px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
+            <div className="problem-card relative overflow-hidden rounded-[30px] p-5 sm:p-6 md:p-7 xl:p-8 text-white min-h-[312px] sm:min-h-[330px] md:min-h-[348px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
               <div className="problem-card-copy relative z-10">
-                <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
+                <h4 className="font-epilogue text-[28px] md:text-[34px] font-extrabold leading-[1.05] tracking-tight mb-3">
                   Es muy caro.
                 </h4>
-                <p className="font-manrope text-[14px] md:text-[15px] leading-[1.6] text-white/88 mb-8">
+                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.55] text-white/88 mb-6">
                   Muchos negocios creen que tener una web profesional está fuera de su presupuesto. No tiene por qué serlo.
                 </p>
               </div>
@@ -1733,18 +1732,17 @@ const ProblemSection = () => {
                 src={asset('card-es-muy-caro.webp')}
                 alt="Es muy caro"
                 loading="lazy"
-                className="absolute right-[-4%] bottom-[-3%] w-[150px] sm:w-[180px] md:w-[190px] lg:w-[220px] xl:w-[260px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-2 pointer-events-none z-0"
+                className="absolute right-[-4%] bottom-[-3%] w-[140px] sm:w-[170px] md:w-[178px] lg:w-[205px] xl:w-[238px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-2 pointer-events-none z-0"
               />
             </div>
 
             {/* Card 2 */}
-            <div className="problem-card relative overflow-hidden rounded-[32px] p-6 sm:p-8 md:p-8 xl:p-10 text-white min-h-[340px] sm:min-h-[360px] md:min-h-[380px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
+            <div className="problem-card relative overflow-hidden rounded-[30px] p-5 sm:p-6 md:p-7 xl:p-8 text-white min-h-[312px] sm:min-h-[330px] md:min-h-[348px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
               <div className="problem-card-copy relative z-10">
-                <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
-                  <span className="inline-block mr-2 text-[32px] md:text-[40px]">🤷‍♂️</span>
+                <h4 className="font-epilogue text-[28px] md:text-[34px] font-extrabold leading-[1.05] tracking-tight mb-3">
                   No sé cómo funciona.
                 </h4>
-                <p className="font-manrope text-[14px] md:text-[15px] leading-[1.6] text-white/88 mb-8">
+                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.55] text-white/88 mb-6">
                   Dominios, hosting, SEO, diseño... el lenguaje técnico aleja a dueños de negocio que simplemente quieren más clientes.
                 </p>
               </div>
@@ -1764,18 +1762,17 @@ const ProblemSection = () => {
                 src={asset('card-no-se-como-funciona.webp')}
                 alt="No sé cómo funciona"
                 loading="lazy"
-                className="absolute right-[-4%] bottom-0 w-[150px] sm:w-[180px] md:w-[190px] lg:w-[220px] xl:w-[260px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-2 pointer-events-none z-0"
+                className="absolute right-[-4%] bottom-0 w-[140px] sm:w-[170px] md:w-[178px] lg:w-[205px] xl:w-[238px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-2 pointer-events-none z-0"
               />
             </div>
 
             {/* Card 3 */}
-            <div className="problem-card relative overflow-hidden rounded-[32px] p-6 sm:p-8 md:p-8 xl:p-10 text-white min-h-[340px] sm:min-h-[360px] md:min-h-[380px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
+            <div className="problem-card relative overflow-hidden rounded-[30px] p-5 sm:p-6 md:p-7 xl:p-8 text-white min-h-[312px] sm:min-h-[330px] md:min-h-[348px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
               <div className="problem-card-copy relative z-10">
-                <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
-                  <span className="inline-block mr-2 text-[32px] md:text-[40px]">😤</span>
+                <h4 className="font-epilogue text-[28px] md:text-[34px] font-extrabold leading-[1.05] tracking-tight mb-3">
                   Ya intenté y no funcionó.
                 </h4>
-                <p className="font-manrope text-[14px] md:text-[15px] leading-[1.6] text-white/88 mb-8">
+                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.55] text-white/88 mb-6">
                   Malas experiencias con freelancers o plantillas genéricas que no reflejan el negocio ni generan resultados.
                 </p>
               </div>
@@ -1795,18 +1792,17 @@ const ProblemSection = () => {
                 src={asset('card-ya-intente.webp')}
                 alt="Ya intenté y no funcionó"
                 loading="lazy"
-                className="absolute right-[-4%] bottom-[-2%] w-[150px] sm:w-[180px] md:w-[190px] lg:w-[220px] xl:w-[260px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-2 pointer-events-none z-0"
+                className="absolute right-[-4%] bottom-[-2%] w-[140px] sm:w-[170px] md:w-[178px] lg:w-[205px] xl:w-[238px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-2 pointer-events-none z-0"
               />
             </div>
 
             {/* Card 4 */}
-            <div className="problem-card relative overflow-hidden rounded-[32px] p-6 sm:p-8 md:p-8 xl:p-10 text-white min-h-[340px] sm:min-h-[360px] md:min-h-[380px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
+            <div className="problem-card relative overflow-hidden rounded-[30px] p-5 sm:p-6 md:p-7 xl:p-8 text-white min-h-[312px] sm:min-h-[330px] md:min-h-[348px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
               <div className="problem-card-copy relative z-10">
-                <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
-                  <span className="inline-block mr-2 text-[32px] md:text-[40px]">⏳</span>
+                <h4 className="font-epilogue text-[28px] md:text-[34px] font-extrabold leading-[1.05] tracking-tight mb-3">
                   No tengo tiempo.
                 </h4>
-                <p className="font-manrope text-[14px] md:text-[15px] leading-[1.6] text-white/88 mb-8">
+                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.55] text-white/88 mb-6">
                   Gestionar un negocio ya es suficiente trabajo. No debería necesitarse un equipo técnico propio para tener presencia digital.
                 </p>
               </div>
@@ -1826,7 +1822,7 @@ const ProblemSection = () => {
                 src={asset('card-no-tengo-tiempo.webp')}
                 alt="No tengo tiempo"
                 loading="lazy"
-                className="absolute right-[0%] bottom-0 w-[140px] sm:w-[165px] md:w-[175px] lg:w-[200px] xl:w-[225px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-2 pointer-events-none z-0"
+                className="absolute right-[0%] bottom-0 w-[130px] sm:w-[155px] md:w-[165px] lg:w-[188px] xl:w-[212px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-2 pointer-events-none z-0"
               />
             </div>
 
