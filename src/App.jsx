@@ -1571,8 +1571,16 @@ const App = () => {
           .hero-support-copy {
             right: 52px !important;
             bottom: 18px !important;
-            max-width: 300px !important;
+            max-width: 360px !important;
             font-size: 14px !important;
+            line-height: 1.42 !important;
+          }
+        }
+        @media (min-width: 1441px) {
+          .hero-support-copy {
+            right: 80px !important;
+            max-width: 520px !important;
+            font-size: 15px !important;
             line-height: 1.42 !important;
           }
         }
@@ -1692,9 +1700,10 @@ const App = () => {
         }
         @media (min-width: 1024px) {
           .hero-support-copy {
-            display: -webkit-box;
-            overflow: hidden;
-            -webkit-box-orient: vertical;
+            display: block;
+            overflow: visible;
+            -webkit-line-clamp: unset;
+            -webkit-box-orient: initial;
           }
         }
         @media (min-width: 1024px) and (max-width: 1600px) {
@@ -2389,12 +2398,6 @@ const HeroSection = () => {
         animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
         transition={{ duration: 0.55, delay: 0.22, ease: 'easeOut' }}
         className="hero-support-copy absolute bottom-4 left-6 right-6 z-40 hidden md:block md:bottom-[60px] md:left-auto md:right-[80px] md:max-w-[420px] md:text-[15px] text-left font-normal leading-[1.5] text-[#080808]/64"
-        style={{
-          display: "-webkit-box",
-          WebkitLineClamp: 2,
-          WebkitBoxOrient: "vertical",
-          overflow: "hidden"
-        }}
       >
         Deja de perder clientes por no estar en internet. Diseñamos y desarrollamos tu página web con criterio profesional, entrega rápida y un precio justo.
       </motion.p>
