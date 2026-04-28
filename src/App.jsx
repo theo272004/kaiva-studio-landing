@@ -952,6 +952,11 @@ const ProcessRedesignSection = () => {
 
   const activeProgressRaw = useTransform(scrollYProgress, [0, 1], [0, stepsContent.length - 1]);
   const activeProgress = useSpring(activeProgressRaw, { stiffness: 150, damping: 22, mass: 0.1 });
+  const purpleStageOpacity = useTransform(
+    activeProgressRaw,
+    [0, 1, 2, 3, 4],
+    [0, 0.25, 0.5, 0.75, 1]
+  );
 
   useMotionValueEvent(activeProgressRaw, 'change', (latest) => {
     const nextStep = Math.min(stepsContent.length - 1, Math.max(0, Math.round(latest)));
@@ -963,15 +968,12 @@ const ProcessRedesignSection = () => {
             {/* Desktop Sticky Carousel */}
       <div className="process-sticky-stage hidden md:block relative h-[250vh] w-full">
         <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden px-6 lg:px-16">
-          {/* Animated Purple Gradient Transition */}
+          {/* Progressive giant gradient: white on step 1 to full purple on step 5 */}
           <motion.div 
             className="absolute inset-0 pointer-events-none transition-all duration-300"
             style={{
-              background: 'linear-gradient(135deg, rgba(130,66,245,0.4) 0%, rgba(217,108,255,0.2) 50%, rgba(33,178,198,0.1) 100%)',
-              opacity: useTransform(activeProgressRaw, 
-                [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4], 
-                [0, 1, 0, 1, 0, 1, 0, 1, 0]
-              )
+              background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(130,66,245,0.32) 42%, rgba(130,66,245,0.66) 72%, rgba(104,34,222,0.98) 100%)',
+              opacity: purpleStageOpacity
             }}
           />
           <div className="relative z-10 mx-auto flex w-full max-w-[800px] items-center justify-center gap-6">
