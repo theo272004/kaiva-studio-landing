@@ -1005,89 +1005,103 @@ const ExpandedAgencySections = () => (
         }}
         transition={{
           duration: 7,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div {...sectionReveal} className="mx-auto w-full max-w-[1180px]">
-          <div className="max-w-3xl">
-            <div className="inline-block w-fit font-manrope text-[11px] font-bold uppercase tracking-[0.26em]" style={gradientAccentStyle}>Pricing</div>
-            <h2 className="mt-3 font-epilogue text-[clamp(44px,7vw,92px)] font-extrabold leading-[0.98] tracking-[-0.04em] text-[#080808]">
-              Planes
+          repeat: Infini      <motion.div {...sectionReveal} className="mx-auto w-full max-w-[1180px]">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="font-epilogue text-[clamp(40px,6vw,60px)] font-bold leading-[1.05] tracking-tight text-[#080808]">
+              Elige el plan <span className="italic font-serif font-light">ideal</span> para tu <span className="italic font-serif font-light">negocio</span>
             </h2>
-            <p className="mt-3 max-w-2xl text-[15px] leading-7 text-[#080808]/72 md:text-[17px]">
-              Elige la solución ideal para tu negocio.
-              <br />
-              Diseño premium, estructura estratégica y ejecución real.
+            <p className="mt-4 text-[15px] leading-relaxed text-[#080808]/70">
+              Diseño premium, estructura estratégica y ejecución real. <br className="hidden md:block" /> Selecciona la solución que mejor se adapte a ti.
             </p>
           </div>
 
-          <div className="mt-8 grid gap-4 sm:gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {pricingPlans.map((plan) => (
+          <div className="mt-12 grid gap-6 sm:gap-8 md:grid-cols-2 xl:grid-cols-3">
+            {pricingPlans.map((plan, index) => {
+              const isMiddle = index === 1;
+              return (
                 <article
                   key={plan.name}
-                  className={`group relative flex min-h-[340px] flex-col rounded-[32px] border ${plan.featured ? 'border-[#a482ff]/50' : 'border-[#e8e5ff]/70'} bg-white shadow-[0_18px_48px_-24px_rgba(32,29,26,0.10)] outline-none transition-[transform,shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:border-black/5 hover:shadow-[0_28px_74px_-34px_rgba(32,29,26,0.16)] md:min-h-[380px] xl:min-h-[420px]`}
+                  className={`group relative flex flex-col rounded-[24px] bg-white shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] overflow-hidden`}
                 >
-                  <div className="relative flex flex-1 flex-col p-8 md:p-10">
-                    {plan.badge && (
-                      <div className="absolute -top-[14px] right-6 z-10 rounded-full px-4 py-[6px] font-manrope text-[10px] font-bold uppercase tracking-[0.15em] text-white shadow-md shadow-[#a482ff]/20" style={{ background: 'linear-gradient(135deg, #b891ff 0%, #a482ff 100%)' }}>
-                        {plan.badge}
-                      </div>
-                    )}
-                    <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#080808]/50">
+                  {isMiddle && (
+                    <div className="absolute top-0 bottom-0 right-0 w-[70%] bg-[#8242f5]/15 blur-[60px] rounded-full translate-x-1/4 pointer-events-none" />
+                  )}
+
+                  <div className="relative z-10 flex flex-1 flex-col p-8 md:p-10">
+                    <h3 className="font-epilogue text-[24px] font-bold tracking-tight text-[#080808]">
                       {plan.name}
-                    </div>
-                    <h3 className="mt-3 font-epilogue text-[36px] font-extrabold leading-[1.05] tracking-[-0.04em] text-[#080808] md:text-[42px]">
-                      {plan.price}
                     </h3>
-                    <p className="mt-4 text-[13px] leading-tight text-[#080808]/60">
+                    <p className="mt-2 text-[14px] leading-snug text-[#080808]/60 min-h-[42px]">
                       {plan.audience}
                     </p>
-                    <p className="mt-5 text-[13px] leading-relaxed text-[#080808]/70">
-                      {plan.description}
-                    </p>
-                    <ul className="mt-8 flex-1 space-y-3.5">
+                    
+                    <div className="my-6 h-[1px] w-full bg-[#080808]/5" />
+
+                    <div className="font-epilogue text-[36px] font-extrabold leading-none tracking-[-0.04em] text-[#080808]">
+                      {plan.price}
+                    </div>
+                    <div className="mt-2 text-[13px] font-medium text-[#080808]/50">
+                      Pago único
+                    </div>
+
+                    <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#0a0a0a] px-6 py-4 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-[1.02]">
+                      {plan.cta}
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M7 17L17 7M17 7H7M17 7V17" />
+                      </svg>
+                    </a>
+
+                    <div className="mt-8 text-[13px] font-bold uppercase tracking-wider text-[#080808]">
+                      Incluye:
+                    </div>
+                    <ul className="mt-4 flex-1 space-y-3.5">
                       {plan.points.map((pt, i) => (
-                        <li key={i} className="flex items-start gap-3 text-[13px] leading-snug text-[#080808]/80">
-                          <svg className="h-4 w-4 shrink-0 text-[#b891ff]" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        <li key={i} className="flex items-start gap-3 text-[14px] text-[#080808]/80">
+                          <svg className="h-5 w-5 shrink-0 text-[#080808]/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <circle cx="12" cy="12" r="9" strokeWidth="1.5" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12l2 2 4-4" />
                           </svg>
                           <span>{pt}</span>
                         </li>
                       ))}
                     </ul>
-                    <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className="mt-10 inline-flex w-fit items-center justify-center rounded-full bg-white px-7 py-3 font-manrope text-[11px] font-bold uppercase tracking-widest text-[#080808] shadow-[0_4px_14px_rgba(0,0,0,0.06)] border border-[#080808]/5 transition-[shadow,transform] duration-300 hover:shadow-[0_6px_20px_rgba(0,0,0,0.08)] hover:-translate-y-[1px]">
-                      {plan.cta}
-                    </a>
+
+                    <div className="mt-auto pt-8 text-center text-[12px] text-[#080808]/40">
+                      Soporte y garantía incluidos.
+                    </div>
                   </div>
                 </article>
-              ))}
-            </div>
+              );
+            })}
+          </div>
 
-            <div className="mx-auto mt-6 w-full max-w-[1180px]">
-              <article className="group relative flex flex-col items-center justify-between gap-6 rounded-[32px] border border-[#e8e5ff]/70 bg-white p-6 shadow-[0_18px_48px_-24px_rgba(32,29,26,0.10)] outline-none transition-[transform,shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_28px_74px_-34px_rgba(32,29,26,0.16)] md:flex-row md:p-8 lg:px-12">
-                <div className="flex flex-col items-center text-center md:items-start md:text-left md:max-w-[280px]">
-                  <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#a482ff]">
-                    {ecommercePlan.label}
-                  </div>
-                  <h3 className="mt-1 font-epilogue text-[24px] font-extrabold leading-none tracking-[-0.03em] md:text-[28px]">
-                    {ecommercePlan.name}
-                  </h3>
-                  <div className="mt-2 text-[14px] font-bold text-[#080808]">
-                    {ecommercePlan.price}
-                  </div>
+          <div className="mx-auto mt-8 w-full max-w-[1180px]">
+            <article className="group relative flex flex-col items-center justify-between gap-6 rounded-[24px] bg-white p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-[transform,shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] md:flex-row md:p-8 lg:px-12 overflow-hidden">
+              <div className="flex flex-col items-center text-center md:items-start md:text-left md:max-w-[280px] relative z-10">
+                <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#8242f5]">
+                  {ecommercePlan.label}
                 </div>
-                <div className="flex flex-1 flex-col items-center gap-6 md:flex-row md:justify-between md:pl-10 text-center md:text-left">
-                  <p className="max-w-[500px] text-[14px] leading-relaxed text-[#080808]/70">
-                    {ecommercePlan.description}
-                  </p>
-                  <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full shadow-[0_8px_20px_-6px_rgba(164,130,255,0.5)] transition-transform hover:scale-105" style={{ background: 'linear-gradient(135deg, #d49fff 0%, #a482ff 100%)' }}>
-                    <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </a>
+                <h3 className="mt-1 font-epilogue text-[24px] font-bold leading-none tracking-tight md:text-[28px]">
+                  {ecommercePlan.name}
+                </h3>
+                <div className="mt-2 text-[14px] font-bold text-[#080808]">
+                  {ecommercePlan.price}
                 </div>
-              </article>
+              </div>
+              <div className="flex flex-1 flex-col items-center gap-6 md:flex-row md:justify-between md:pl-10 text-center md:text-left relative z-10">
+                <p className="max-w-[500px] text-[14px] leading-relaxed text-[#080808]/70">
+                  {ecommercePlan.description}
+                </p>
+                <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className="flex shrink-0 items-center justify-center gap-2 rounded-xl bg-[#0a0a0a] px-6 py-3 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-[1.02]">
+                  {ecommercePlan.cta}
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                </a>
+              </div>
+            </article>
+          </div>
+      </motion.div>       </article>
             </div>
         </motion.div>
     </section>
