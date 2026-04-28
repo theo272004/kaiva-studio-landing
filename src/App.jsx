@@ -972,7 +972,7 @@ const ProcessRedesignSection = () => {
           <motion.div 
             className="absolute inset-0 pointer-events-none transition-all duration-300"
             style={{
-              background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(130,66,245,0.32) 42%, rgba(130,66,245,0.66) 72%, #06060b 100%)',
+              background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(130,66,245,0.32) 42%, rgba(130,66,245,0.66) 72%, rgba(104,34,222,0.98) 100%)',
               opacity: purpleStageOpacity
             }}
           />
@@ -1024,8 +1024,7 @@ const ExpandedAgencySections = () => (
     <section
       id="planes"
       data-nav-theme="light"
-      className="plans-section relative m-0 overflow-hidden px-4 pb-12 pt-0 md:px-8 md:pb-16"
-      style={{ background: 'linear-gradient(180deg, #f8f5ff 0%, #ffffff 100%)' }}
+      className="plans-section relative m-0 overflow-hidden bg-transparent px-4 pb-12 pt-0 md:px-8 md:pb-16"
     >
       <motion.img
         src={asset('KaivaMora1.webp')}
@@ -1152,11 +1151,11 @@ const AliadosSection = () => {
       className="allies-section relative w-full overflow-hidden px-4 py-14 md:px-8 md:py-16"
       style={{
         background:
-          'linear-gradient(180deg, #06060b 0%, #06060b 80%, #f8f5ff 100%)'
+          'linear-gradient(180deg, #6f22ef 0%, #8b4df0 34%, #9f68f1 56%, #c5a9f7 76%, #ede5fb 90%, #ffffff 100%)'
       }}
     >
-      <div className="mx-auto w-full max-w-[1380px] rounded-[34px] bg-[#06060b] px-7 py-12 text-white shadow-[0_35px_100px_-42px_rgba(0,0,0,1)] ring-1 ring-white/10 md:px-14 md:py-16 lg:px-20">
-        <div className="absolute inset-0 rounded-[34px]" style={{ background: 'radial-gradient(72% 80% at 22% 44%, rgba(130,66,245,0.12) 0%, rgba(130,66,245,0) 72%), radial-gradient(52% 68% at 82% 58%, rgba(130,66,245,0.18) 0%, rgba(130,66,245,0) 74%)' }} />
+      <div className="mx-auto w-full max-w-[1380px] rounded-[34px] bg-[#06060b] px-7 py-12 text-white shadow-[0_35px_90px_-42px_rgba(6,2,26,0.95)] ring-1 ring-white/10 md:px-14 md:py-16 lg:px-20">
+        <div className="absolute inset-0 rounded-[34px]" style={{ background: 'radial-gradient(72% 80% at 22% 44%, rgba(126,60,245,0.20) 0%, rgba(126,60,245,0) 72%), radial-gradient(52% 68% at 82% 58%, rgba(88,27,201,0.34) 0%, rgba(88,27,201,0) 74%)' }} />
 
         <div className="relative z-10 grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="text-left">
