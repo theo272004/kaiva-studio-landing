@@ -16,46 +16,43 @@ const scrollToSection = (event, id) => {
   target.scrollIntoView({ behavior: 'instant', block: 'start' });
 };
 
-const slides = [
+const serviceShowcase = [
   {
-    id: 1,
+    id: 'web',
     number: '01',
-    label: 'Inteligencia de Negocios',
-    vibe: 'Analítico · Predictivo',
-    brand: 'KAIVA INSIGHTS',
-    description: 'Transformamos datos complejos en dashboards intuitivos que impulsan decisiones estratégicas.',
-      accent: '#8242f5',
-    mockup: 'dashboard',
-  },
-  {
-    id: 2,
-    number: '02',
-    label: 'E-Commerce de Lujo',
-    vibe: 'Exclusivo · Conversión',
-    brand: 'KAIVA COMMERCE',
-    description: 'Experiencias de compra premium donde la estética eleva el valor percibido de cada producto.',
-      accent: '#8242f5',
+    label: 'Desarrollo web',
+    vibe: 'Rendimiento · Conversión',
+    brand: 'KAIVA WEB',
+    description:
+      'Landing pages y sitios corporativos con estructura clara, velocidad real y una narrativa diseñada para convertir visitas en conversaciones.',
+    accent: '#8242f5',
     mockup: 'ecommerce',
+    title: 'Webs que se sienten serias y ayudan a vender mejor.',
+    points: ['Copy y estructura', 'Responsive premium', 'SEO base', 'Entrega lista para crecer'],
   },
   {
-    id: 3,
+    id: 'design',
+    number: '02',
+    label: 'Diseño',
+    vibe: 'Percepción · Claridad',
+    brand: 'KAIVA DESIGN',
+    description:
+      'Dirección visual, identidad y sistemas de interfaz para que la marca se vea cohesionada y transmita más valor en cada punto de contacto.',
+    accent: '#d96cff',
+    title: 'Diseño visual y de interfaz para que la marca tenga presencia.',
+    points: ['Dirección de arte', 'UI systems', 'Brand boards', 'Presentaciones y assets'],
+  },
+  {
+    id: 'automation',
     number: '03',
-    label: 'Infraestructura SaaS',
-    vibe: 'Sólido · Escalable',
-    brand: 'KAIVA CORE',
-    description: 'Plataformas tecnológicas diseñadas para el rendimiento extremo y la claridad operativa.',
-      accent: '#8242f5',
-    mockup: 'tech',
-  },
-  {
-    id: 4,
-    number: '04',
-    label: 'Editorial Creativo',
-    vibe: 'Sofisticado · Narrativo',
-    brand: 'KAIVA STUDIO',
-    description: 'Storytelling visual para marcas que buscan destacar en un ecosistema digital saturado.',
-      accent: '#8242f5',
-    mockup: 'creative',
+    label: 'Automatización',
+    vibe: 'Operación · Sistemas',
+    brand: 'KAIVA SYSTEMS',
+    description:
+      'Conectamos formularios, CRM, mensajes y procesos internos para que el negocio responda más rápido y pierda menos tiempo en tareas repetitivas.',
+    accent: '#21b2c6',
+    title: 'Sistemas que ordenan la operación y ejecutan procesos repetitivos.',
+    points: ['Bots y flujos', 'Integraciones', 'Dashboards internos', 'Automatización comercial'],
   },
 ];
 
@@ -199,6 +196,186 @@ const MockupRenderer = ({ type }) => {
         <div className="h-2 w-2 rounded-full bg-white/20" />
       </div>
     </div>
+  );
+};
+
+const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
+  const panelTransition = prefersReducedMotion
+    ? { duration: 0 }
+    : { duration: 0.55, ease: premiumEase };
+
+  if (service.id === 'web') {
+    return (
+      <motion.div
+        key={service.id}
+        initial={prefersReducedMotion ? false : { opacity: 0, y: 18, scale: 0.985 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: 0.985 }}
+        transition={panelTransition}
+        className="overflow-hidden rounded-[30px] border border-white/10 bg-[#0d1020] shadow-[0_32px_90px_-44px_rgba(17,24,39,0.82)]"
+      >
+        <div className="flex items-center gap-2 border-b border-white/8 px-5 py-4">
+          <span className="h-2.5 w-2.5 rounded-full bg-[#ff6b6b]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#ffd166]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#06d6a0]" />
+          <div className="ml-3 rounded-full bg-white/7 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/46">
+            Landing premium
+          </div>
+        </div>
+        <div className="grid gap-4 bg-[radial-gradient(circle_at_top_left,_rgba(130,66,245,0.38),_transparent_42%),linear-gradient(180deg,_#12162a_0%,_#090b14_100%)] p-5 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="rounded-[24px] bg-white p-4 shadow-[0_18px_48px_-28px_rgba(0,0,0,0.46)]">
+            <div className="mb-3 h-4 w-24 rounded-full bg-[#ede9fe]" />
+            <div className="mb-4 h-10 max-w-[15rem] rounded-2xl bg-[#111827]" />
+            <div className="space-y-2">
+              <div className="h-3 rounded-full bg-[#dbe4ff]" />
+              <div className="h-3 w-4/5 rounded-full bg-[#dbe4ff]" />
+              <div className="h-3 w-2/3 rounded-full bg-[#e7e5ff]" />
+            </div>
+            <div className="mt-5 flex gap-2">
+              <div className="h-9 w-28 rounded-full bg-[#111827]" />
+              <div className="h-9 w-24 rounded-full border border-[#c7d2fe]" />
+            </div>
+          </div>
+          <div className="grid gap-3">
+            <div className="overflow-hidden rounded-[24px] border border-white/10 bg-white/8 p-2 backdrop-blur-xl">
+              <MockupRenderer type={service.mockup} />
+            </div>
+            <div className="grid grid-cols-3 gap-3">
+              <div className="h-16 rounded-[18px] bg-white/12" />
+              <div className="h-16 rounded-[18px] bg-white/8" />
+              <div className="h-16 rounded-[18px] bg-white/12" />
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
+
+  if (service.id === 'design') {
+    return (
+      <motion.div
+        key={service.id}
+        initial={prefersReducedMotion ? false : { opacity: 0, y: 18, scale: 0.985 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: 0.985 }}
+        transition={panelTransition}
+        className="grid gap-4 lg:grid-cols-[0.88fr_1.12fr]"
+      >
+        <div className="rounded-[28px] border border-[#111827]/8 bg-[#fffdf9] p-5 shadow-[0_26px_72px_-40px_rgba(15,23,42,0.28)]">
+          <div className="mb-5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#8b5cf6]">Brand board</div>
+          <div className="space-y-3">
+            <div className="font-epilogue text-4xl font-extrabold tracking-[-0.04em] text-[#16151f]">Kaiva</div>
+            <div className="text-lg font-semibold tracking-[-0.03em] text-[#16151f]">Systems with character</div>
+            <div className="max-w-[15rem] text-sm leading-6 text-[#5b556e]">
+              Dirección visual, color, tipografía y piezas listas para web, decks o redes.
+            </div>
+          </div>
+          <div className="mt-6 grid grid-cols-4 gap-2">
+            {['#16151f', '#8242f5', '#d96cff', '#f3ede4'].map((color) => (
+              <div key={color} className="h-12 rounded-2xl border border-black/5" style={{ background: color }} />
+            ))}
+          </div>
+        </div>
+        <div className="overflow-hidden rounded-[28px] border border-[#111827]/8 bg-[#f5f0ff] p-5 shadow-[0_28px_74px_-40px_rgba(91,33,182,0.34)]">
+          <div className="grid gap-4 md:grid-cols-[0.92fr_1.08fr]">
+            <div className="rounded-[24px] bg-white p-4 shadow-[0_18px_48px_-32px_rgba(15,23,42,0.32)]">
+              <div className="mb-4 h-36 rounded-[20px] bg-[linear-gradient(160deg,_#111827,_#6d28d9_58%,_#f5d0fe_120%)]" />
+              <div className="space-y-2">
+                <div className="h-4 w-24 rounded-full bg-[#111827]" />
+                <div className="h-3 rounded-full bg-[#d8ccff]" />
+                <div className="h-3 w-4/5 rounded-full bg-[#eadcff]" />
+              </div>
+            </div>
+            <div className="grid gap-4">
+              <div className="rounded-[24px] bg-[#151225] p-4 text-white">
+                <div className="mb-3 text-[11px] uppercase tracking-[0.16em] text-white/52">UI kit</div>
+                <div className="flex gap-2">
+                  <div className="h-10 flex-1 rounded-full bg-white text-[#121212]" />
+                  <div className="h-10 w-12 rounded-full bg-white/10" />
+                </div>
+              </div>
+              <div className="rounded-[24px] bg-white p-4">
+                <div className="mb-3 h-3 w-20 rounded-full bg-[#d8ccff]" />
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="h-20 rounded-[18px] bg-[linear-gradient(135deg,_#ede9fe,_#ffffff)]" />
+                  <div className="h-20 rounded-[18px] bg-[linear-gradient(135deg,_#111827,_#334155)]" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.div
+      key={service.id}
+      initial={prefersReducedMotion ? false : { opacity: 0, y: 18, scale: 0.985 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: 0.985 }}
+      transition={panelTransition}
+      className="overflow-hidden rounded-[30px] border border-[#0f172a]/8 bg-[#09111f] p-5 shadow-[0_32px_90px_-42px_rgba(2,8,23,0.92)]"
+    >
+      <div className="mb-5 flex items-center justify-between">
+        <div>
+          <div className="text-[11px] uppercase tracking-[0.18em] text-[#7dd3fc]">Automation flow</div>
+          <div className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-white">Sistemas que ejecutan</div>
+        </div>
+        <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.14em] text-white/48">
+          24/7
+        </div>
+      </div>
+      <div className="grid gap-4 lg:grid-cols-[0.82fr_1.18fr]">
+        <div className="rounded-[24px] border border-white/10 bg-white/6 p-4 backdrop-blur-xl">
+          <div className="mb-4 flex items-center gap-2">
+            <div className="h-9 w-9 rounded-full bg-[linear-gradient(135deg,_#38bdf8,_#6366f1)]" />
+            <div>
+              <div className="h-3 w-24 rounded-full bg-white/18" />
+              <div className="mt-2 h-2 w-16 rounded-full bg-white/10" />
+            </div>
+          </div>
+          <div className="space-y-3">
+            <div className="rounded-[18px] bg-[#0f172a] px-4 py-3 text-sm text-white/86">Nuevo lead desde la web</div>
+            <div className="rounded-[18px] bg-white/10 px-4 py-3 text-sm text-white/74">Clasificar, etiquetar y notificar</div>
+            <div className="rounded-[18px] bg-white/10 px-4 py-3 text-sm text-white/74">Disparar respuesta o tarea interna</div>
+          </div>
+        </div>
+        <div className="rounded-[24px] bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.22),_transparent_32%),linear-gradient(180deg,_#0f172a_0%,_#050814_100%)] p-4">
+          <div className="grid gap-3 md:grid-cols-3">
+            {['Lead', 'CRM', 'Ops'].map((item, index) => (
+              <div key={item} className="rounded-[18px] border border-white/10 bg-white/6 p-4">
+                <div className="mb-3 flex items-center gap-2">
+                  <div
+                    className="h-9 w-9 rounded-2xl"
+                    style={{
+                      background:
+                        index === 0
+                          ? 'linear-gradient(135deg, #38bdf8, #0ea5e9)'
+                          : index === 1
+                            ? 'linear-gradient(135deg, #818cf8, #8b5cf6)'
+                            : 'linear-gradient(135deg, #34d399, #10b981)',
+                    }}
+                  />
+                  <div className="h-3 w-14 rounded-full bg-white/16" />
+                </div>
+                <div className="space-y-2">
+                  <div className="h-3 rounded-full bg-white/12" />
+                  <div className="h-3 w-4/5 rounded-full bg-white/8" />
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-white/34">
+            <div className="h-px bg-white/12" />
+            <span>Sync</span>
+            <div className="h-px bg-white/12" />
+            <span>Route</span>
+            <div className="h-px bg-white/12" />
+          </div>
+        </div>
+      </div>
+    </motion.div>
   );
 };
 
@@ -672,216 +849,130 @@ const ServicesSection = () => {
 };
 
 const PortfolioSection = () => {
-  const [activeIndex, setActiveIndex] = useState(1);
-  const [isHovering, setIsHovering] = useState(false);
-  const stageRef = useRef(null);
-
-  useEffect(() => {
-    if (isHovering) return;
-    const timer = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % slides.length);
-    }, 5500);
-    return () => clearInterval(timer);
-  }, [isHovering]);
-
-  useEffect(() => {
-    const handleKey = (e) => {
-      if (e.key === 'ArrowRight') setActiveIndex((p) => (p + 1) % slides.length);
-      if (e.key === 'ArrowLeft') setActiveIndex((p) => (p - 1 + slides.length) % slides.length);
-    };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, []);
-
-  const handleWheel = (e) => {
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-      e.preventDefault();
-      if (e.deltaX > 30) setActiveIndex((p) => Math.min(p + 1, slides.length - 1));
-      if (e.deltaX < -30) setActiveIndex((p) => Math.max(p - 1, 0));
-    }
-  };
-
-  const active = slides[activeIndex];
+  const prefersReducedMotion = useReducedMotion();
+  const [activeServiceId, setActiveServiceId] = useState('web');
+  const activeService = serviceShowcase.find((service) => service.id === activeServiceId) || serviceShowcase[0];
 
   return (
     <div
       id="proyectos"
       data-nav-theme="light"
-      className="relative min-h-screen overflow-hidden bg-white text-[#080808]"
+      className="relative overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f7f3ff_44%,#f7f5fb_100%)] pb-20 text-[#080808]"
       style={{ fontFamily: 'Manrope, sans-serif' }}
     >
-      <div className="relative z-30 px-6 pt-6 md:px-16 md:pt-8" aria-hidden="true" />
+      <div
+        className="pointer-events-none absolute left-[-10%] top-[16%] h-[320px] w-[320px] rounded-full blur-[95px]"
+        style={{ background: 'rgba(130,66,245,0.18)' }}
+      />
+      <div
+        className="pointer-events-none absolute right-[-8%] top-[28%] h-[280px] w-[280px] rounded-full blur-[95px]"
+        style={{ background: 'rgba(33,178,198,0.12)' }}
+      />
 
-      <div className="relative z-20 mt-10 px-6 md:mt-20 md:px-16">
-        <div className="flex justify-center text-center">
-          <div className="max-w-3xl">
-            <h1 className="font-['Inter Tight'] text-[clamp(40px,5.8vw,88px)] font-extrabold leading-[1.02] tracking-[-0.035em] text-[#080808]">
-              Nuestras webs
-            </h1>
+      <div className="relative z-20 mx-auto max-w-[1380px] px-6 pt-12 md:px-16 md:pt-20">
+        <div className="max-w-3xl">
+          <div className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#8242f5]">Servicios</div>
+          <h1 className="mt-4 font-['Inter Tight'] text-[clamp(40px,5.8vw,88px)] font-extrabold leading-[1.02] tracking-[-0.035em] text-[#080808]">
+            Elegimos el sistema visual según lo que necesitas resolver.
+          </h1>
+          <p className="mt-5 max-w-2xl text-[15px] leading-7 text-[#080808]/66 md:text-[18px]">
+            Aquí no vas a ver proyectos sueltos. Vas a ver cómo presentamos cada línea de servicio:
+            desarrollo web, diseño y automatización, cada una con su propio lenguaje visual.
+          </p>
+        </div>
+
+        <div className="mt-10 flex flex-wrap gap-3">
+          {serviceShowcase.map((service) => {
+            const isActive = service.id === activeService.id;
+            return (
+              <button
+                key={service.id}
+                type="button"
+                onClick={() => setActiveServiceId(service.id)}
+                className={`rounded-full px-5 py-3 text-sm font-semibold tracking-[-0.02em] transition-all duration-300 ${
+                  isActive
+                    ? 'text-white shadow-[0_18px_42px_-22px_rgba(91,33,182,0.55)]'
+                    : 'border border-[#080808]/10 bg-white/88 text-[#374151] hover:-translate-y-0.5 hover:border-[#8242f5]/20'
+                }`}
+                style={isActive ? { background: 'linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%)' } : undefined}
+              >
+                {service.label}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="mt-10 grid gap-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
+          <motion.div
+            key={activeService.id}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.45, ease: premiumEase }}
+            className="rounded-[34px] border border-[#080808]/8 bg-white/84 p-6 shadow-[0_26px_70px_-38px_rgba(15,23,42,0.22)] backdrop-blur-xl md:p-8"
+          >
+            <div className="flex items-center gap-4">
+              <div
+                className="flex h-14 w-14 items-center justify-center rounded-[18px] text-lg font-bold text-white shadow-[0_18px_40px_-20px_rgba(0,0,0,0.34)]"
+                style={{ background: 'linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%)' }}
+              >
+                {activeService.number}
+              </div>
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#8242f5]">{activeService.brand}</div>
+                <div className="mt-1 text-sm tracking-wide text-[#080808]/54">{activeService.vibe}</div>
+              </div>
+            </div>
+
+            <h2 className="mt-8 max-w-[14ch] font-epilogue text-[clamp(34px,4.4vw,58px)] font-extrabold leading-[0.94] tracking-[-0.045em] text-[#080808]">
+              {activeService.title}
+            </h2>
+            <p className="mt-5 max-w-xl text-[15px] leading-7 text-[#080808]/68 md:text-[16px]">
+              {activeService.description}
+            </p>
+
+            <div className="mt-8 grid gap-3">
+              {activeService.points.map((point) => (
+                <div
+                  key={point}
+                  className="flex items-center gap-3 rounded-[20px] border border-[#080808]/6 bg-[#f8f6ff] px-4 py-3 text-sm text-[#1f2937]"
+                >
+                  <span
+                    className="h-2.5 w-2.5 rounded-full"
+                    style={{ background: activeService.id === 'automation' ? '#21b2c6' : '#8242f5' }}
+                  />
+                  {point}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          <div className="relative">
+            <AnimatePresence mode="wait">
+              <ServiceShowcaseVisual service={activeService} prefersReducedMotion={prefersReducedMotion} />
+            </AnimatePresence>
           </div>
         </div>
       </div>
 
-      <div
-        ref={stageRef}
-        className="relative z-10 mt-6 h-[320px] sm:h-[400px] md:mt-12 md:h-[clamp(440px,58vh,680px)]"
-        style={{
-          perspective: '2000px',
-        }}
-        onWheel={handleWheel}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-      >
+      <div className="pointer-events-none relative z-10 mt-12 hidden h-[240px] md:block">
         <FloatingRobot
           src={asset('KaivaTheo.webp')}
           className="hidden sm:block"
-          style={{ top: '1%', left: '2%', width: 'clamp(72px, 11vw, 210px)', height: 'clamp(72px, 11vw, 210px)' }}
-          delay={0}
-          duration={10}
-          amplitude={6}
-          rotation={2}
+          style={{ top: '6%', left: '4%', width: 'clamp(72px, 11vw, 190px)', height: 'clamp(72px, 11vw, 190px)' }}
+          delay={0.4}
+          duration={10.5}
+          amplitude={7}
+          rotation={3}
         />
         <FloatingRobot
           src={asset('KaivaSara.webp')}
           className="hidden sm:block"
-          style={{ bottom: '18%', right: '2%', width: 'clamp(72px, 11vw, 210px)', height: 'clamp(72px, 11vw, 210px)' }}
+          style={{ bottom: '4%', right: '4%', width: 'clamp(72px, 11vw, 190px)', height: 'clamp(72px, 11vw, 190px)' }}
           delay={2.2}
           duration={10.5}
-          amplitude={6}
-          rotation={2}
+          amplitude={7}
+          rotation={3}
         />
-
-        <div className="relative h-full w-full" style={{ transformStyle: 'preserve-3d' }}>
-          {slides.map((slide, i) => (
-            <TiltSlide
-              key={slide.id}
-              slide={slide}
-              isActive={i === activeIndex}
-              position={i - activeIndex}
-              onClick={() => setActiveIndex(i)}
-            />
-          ))}
-        </div>
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.5 }}
-            className="pointer-events-none absolute bottom-4 left-6 z-20 hidden md:block md:bottom-[-54px] md:left-16"
-          >
-            <div className="flex items-end gap-4">
-              <div className="font-epilogue text-[clamp(48px,7vw,92px)] font-extrabold italic leading-none tracking-[-0.03em] opacity-90" style={gradientAccentStyle}>
-                {active.number}
-              </div>
-              <div className="pb-2">
-                <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.24em] text-[#080808]/42">Servicio</div>
-                <div className="font-epilogue text-xl font-semibold italic leading-[1.2] tracking-[-0.02em] md:text-2xl">{active.label}</div>
-                <div className="mt-1 font-manrope text-[11px] tracking-wider text-[#080808]/56">{active.vibe}</div>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`${active.id}-desc`}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="pointer-events-none absolute bottom-6 right-6 z-20 hidden max-w-[240px] text-right md:block md:bottom-[-44px] md:right-16"
-          >
-            <div className="mb-2 font-manrope text-[11px] font-bold uppercase tracking-wider" style={gradientAccentStyle}>- {active.brand}</div>
-            <div className="font-manrope text-[13px] italic leading-relaxed text-[#080808]/64">{active.description}</div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      <div className="mt-4 px-4 sm:px-6 md:hidden">
-        <div className="rounded-[20px] border border-[#080808]/10 bg-[var(--color-surface)] p-4 shadow-[0_18px_48px_-28px_rgba(0,0,0,0.12)]">
-          <div className="flex items-end gap-3">
-            <div className="font-epilogue text-[42px] font-extrabold italic leading-none tracking-[-0.03em] opacity-90" style={gradientAccentStyle}>
-              {active.number}
-            </div>
-            <div className="pb-1">
-              <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.24em] text-[#080808]/42">Servicio</div>
-              <div className="font-epilogue text-[22px] font-semibold italic leading-[1.2] tracking-[-0.02em] text-[#080808]">{active.label}</div>
-              <div className="mt-1 font-manrope text-[11px] tracking-wider text-[#080808]/56">{active.vibe}</div>
-            </div>
-          </div>
-          <div className="mt-4 border-t border-[#080808]/10 pt-4">
-            <div className="mb-2 font-manrope text-[11px] font-bold uppercase tracking-wider" style={gradientAccentStyle}>- {active.brand}</div>
-            <div className="font-manrope text-[13px] italic leading-relaxed text-[#080808]/68">{active.description}</div>
-          </div>
-        </div>
-      </div>
-
-      <div className="relative z-20 mt-8 px-6 pb-12 md:mt-32 md:px-16">
-        <div className="flex items-center gap-4 md:gap-6">
-          <button
-            onClick={() => setActiveIndex((p) => (p - 1 + slides.length) % slides.length)}
-            className="flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-300 hover:scale-110 text-[#080808]"
-            style={{
-              background: 'rgba(255,255,255,0.92)',
-              border: '1px solid rgba(255,255,255,0.9)',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.06), inset 1px 1px 2px rgba(255,255,255,1)',
-            }}
-            aria-label="Previous"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-
-          <div className="flex flex-1 gap-1.5">
-            {slides.map((s, i) => {
-              const isActive = i === activeIndex;
-              return (
-                <button
-                  key={s.id}
-                  onClick={() => setActiveIndex(i)}
-                  className="group relative h-[2px] flex-1 cursor-pointer overflow-hidden bg-[#080808]/12"
-                >
-                  <motion.div
-                    className="absolute inset-y-0 left-0 origin-left"
-                    style={{ background: 'linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%)' }}
-                    initial={{ scaleX: 0 }}
-                    animate={{
-                      scaleX: i < activeIndex ? 1 : isActive ? (isHovering ? 0 : 1) : 0,
-                    }}
-                    transition={isActive && !isHovering ? { duration: 5.5, ease: 'linear' } : { duration: 0.4 }}
-                  />
-                  <div className="absolute -top-5 left-0 font-mono text-[#080808] opacity-0 transition-opacity group-hover:opacity-60">
-                    {s.number}
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="font-manrope text-[11px] font-bold tracking-wider tabular-nums" style={gradientAccentStyle}>
-            {String(activeIndex + 1).padStart(2, '0')} <span className="opacity-40">/ {String(slides.length).padStart(2, '0')}</span>
-          </div>
-
-          <button
-            onClick={() => setActiveIndex((p) => (p + 1) % slides.length)}
-            className="flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-300 hover:scale-110 text-[#080808]"
-            style={{
-              background: 'rgba(255,255,255,0.92)',
-              border: '1px solid rgba(255,255,255,0.9)',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.06), inset 1px 1px 2px rgba(255,255,255,1)',
-            }}
-            aria-label="Next"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
-        </div>
-
       </div>
     </div>
   );
@@ -1354,7 +1445,7 @@ const FixedNavbar = ({ projectsActive = false }) => (
         Inicio
       </a>
       <a href={projectsActive ? `${HOME_PAGE_HREF_FROM_PROJECTS}#kaiva` : '#kaiva'} onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'kaiva')} className="transition-colors hover:text-[#080808]">Nosotros</a>
-      <a href={projectsActive ? './' : PROJECTS_PAGE_HREF} className="transition-colors hover:text-[#080808]" style={projectsActive ? gradientAccentStyle : undefined}>Proyectos</a>
+          <a href={projectsActive ? './' : PROJECTS_PAGE_HREF} className="transition-colors hover:text-[#080808]" style={projectsActive ? gradientAccentStyle : undefined}>Servicios</a>
       <a href={projectsActive ? `${HOME_PAGE_HREF_FROM_PROJECTS}#contacto` : '#contacto'} onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'contacto')} className="transition-colors hover:text-[#080808]">Contacto</a>
       <a
         href={projectsActive ? `${HOME_PAGE_HREF_FROM_PROJECTS}#planes` : '#planes'}
@@ -2222,7 +2313,7 @@ const HeroSection = () => {
           Inicio
         </a>
         <a href="#kaiva" onClick={(event) => scrollToSection(event, 'kaiva')} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Nosotros</a>
-        <a href={PROJECTS_PAGE_HREF} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Proyectos</a>
+          <a href={PROJECTS_PAGE_HREF} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Servicios</a>
         <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Contacto</a>
         <a
           href="#planes"
@@ -2301,7 +2392,7 @@ const HeroSection = () => {
                 className="py-4 text-[22px] font-semibold tracking-[-0.02em] text-[#080808] border-b border-[#080808]/6"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Proyectos
+                Servicios
               </a>
             </nav>
             <div className="mt-auto">
