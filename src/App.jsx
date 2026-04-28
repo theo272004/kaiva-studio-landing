@@ -400,7 +400,7 @@ const ContactRevealSection = () => {
   return (
     <section id="contacto" ref={sectionRef} className="contact-section relative w-full overflow-x-clip bg-transparent">
       <div
-        className="mx-auto flex w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
+        className="contact-main-block mx-auto flex w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
         style={{
           paddingTop: 'clamp(72px, 10vw, 172px)',
           paddingBottom: 'clamp(52px, 8vw, 124px)',
@@ -492,7 +492,7 @@ const ContactRevealSection = () => {
         </div>
 
       <motion.div
-        className="w-full bg-[#111111] pb-[max(env(safe-area-inset-bottom),0px)]"
+        className="contact-footer-block w-full bg-[#111111] pb-[max(env(safe-area-inset-bottom),0px)]"
         style={prefersReducedMotion ? undefined : { y: footerY, opacity: footerOpacity }}
         initial={prefersReducedMotion ? { opacity: 0 } : false}
         whileInView={{ opacity: 1 }}
@@ -1831,7 +1831,7 @@ const App = () => {
           .allies-section h2 {
             font-size: clamp(42px, 6vw, 86px) !important;
           }
-          .contact-section > div:first-child {
+          .contact-main-block {
             padding-top: clamp(52px, 7vw, 108px) !important;
             padding-bottom: clamp(42px, 6vw, 88px) !important;
           }
@@ -1854,7 +1854,7 @@ const App = () => {
             padding-top: 60px !important;
             padding-bottom: 72px !important;
           }
-          .contact-section > div:first-child {
+          .contact-main-block {
             padding-top: 46px !important;
             padding-bottom: 52px !important;
           }
