@@ -1028,7 +1028,7 @@ const ExpandedAgencySections = () => (
           ease: "easeInOut"
         }}
       />
-      <motion.div {...sectionReveal} className="mx-auto w-full max-w-[1180px]">
+      <motion.div {...sectionReveal} className="plans-shell mx-auto w-full max-w-[1180px]">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-epilogue text-[clamp(40px,6vw,60px)] font-bold leading-[1.05] tracking-tight text-[#080808]">
               Elige el plan <span className="italic font-serif font-light">ideal</span>
@@ -1040,13 +1040,13 @@ const ExpandedAgencySections = () => (
             </p>
           </div>
 
-          <div className="mt-12 grid gap-6 sm:gap-8 md:grid-cols-2 xl:grid-cols-3">
+          <div className="plans-grid mt-12 grid gap-6 sm:gap-8 md:grid-cols-2 xl:grid-cols-3">
             {pricingPlans.map((plan, index) => {
               const isMiddle = index === 1;
               return (
                 <article
                   key={plan.name}
-                  className={`group relative flex flex-col rounded-[24px] bg-white shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] overflow-hidden`}
+                  className={`plan-card group relative flex flex-col rounded-[24px] bg-white shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] overflow-hidden`}
                 >
                   {isMiddle && (
                     <img src={asset('degradado-tarjeta.png')} alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0" />
@@ -1062,7 +1062,7 @@ const ExpandedAgencySections = () => (
                     
                     <div className="my-6 h-[1px] w-full bg-[#080808]/5" />
 
-                    <div className="font-epilogue text-[36px] font-extrabold leading-none tracking-[-0.04em] text-[#080808]">
+                    <div className="plan-price font-epilogue text-[36px] font-extrabold leading-none tracking-[-0.04em] text-[#080808]">
                       {plan.price}
                     </div>
                     <div className="mt-2 text-[13px] font-medium text-[#080808]/50">
@@ -1101,7 +1101,7 @@ const ExpandedAgencySections = () => (
           </div>
 
           <div className="mx-auto mt-8 w-full max-w-[1180px]">
-            <article className="group relative flex flex-col items-center justify-between gap-6 rounded-[24px] bg-white p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-[transform,shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] md:flex-row md:p-8 lg:px-12 overflow-hidden">
+            <article className="plans-addon group relative flex flex-col items-center justify-between gap-6 rounded-[24px] bg-white p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-[transform,shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] md:flex-row md:p-8 lg:px-12 overflow-hidden">
               <div className="flex flex-col items-center text-center md:items-start md:text-left md:max-w-[280px] relative z-10">
                 <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#8242f5]">
                   {ecommercePlan.label}
@@ -1690,6 +1690,119 @@ const App = () => {
             -webkit-line-clamp: 3 !important;
           }
         }
+        @media (min-width: 1024px) {
+          .hero-support-copy {
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+          }
+        }
+        @media (min-width: 1024px) and (max-width: 1600px) {
+          #inicio {
+            height: 100svh !important;
+            min-height: 100svh !important;
+          }
+        }
+        @media (min-width: 1024px) and (max-width: 1600px) and (max-height: 900px) {
+          .problem-section {
+            min-height: 100svh;
+            display: flex;
+            align-items: center;
+          }
+          .problem-section > div {
+            width: 100%;
+          }
+          .problem-stats-grid {
+            margin-top: 24px !important;
+            gap: 14px !important;
+          }
+          .problem-stat-card {
+            padding: 18px 20px !important;
+            gap: 8px !important;
+          }
+          .problem-stat-card > div:first-child {
+            font-size: clamp(34px, 3.8vw, 50px) !important;
+          }
+          .problem-reasons-grid {
+            gap: 14px !important;
+          }
+          .problem-card {
+            min-height: 246px !important;
+            padding: 18px 20px !important;
+          }
+          .problem-card h4 {
+            font-size: clamp(22px, 2vw, 28px) !important;
+            margin-bottom: 10px !important;
+          }
+          .problem-card p {
+            font-size: 12px !important;
+            line-height: 1.45 !important;
+            margin-bottom: 14px !important;
+          }
+          .problem-card-button {
+            transform: scale(0.92);
+            transform-origin: left center;
+          }
+          .plans-section {
+            min-height: 100svh;
+            display: flex;
+            align-items: center;
+          }
+          .plans-shell {
+            width: 100%;
+          }
+          .plans-shell > div:first-child h2 {
+            font-size: clamp(28px, 3vw, 42px) !important;
+          }
+          .plans-shell > div:first-child p {
+            margin-top: 10px !important;
+            font-size: 13px !important;
+          }
+          .plans-grid {
+            margin-top: 24px !important;
+            gap: 16px !important;
+          }
+          .plan-card .relative.z-10.flex {
+            padding: 20px 18px !important;
+          }
+          .plan-card h3 {
+            font-size: 20px !important;
+          }
+          .plan-card p {
+            font-size: 12px !important;
+          }
+          .plan-price {
+            font-size: 28px !important;
+          }
+          .plan-card ul {
+            margin-top: 12px !important;
+            gap: 10px !important;
+          }
+          .plan-card li {
+            font-size: 12px !important;
+          }
+          .plan-card a {
+            margin-top: 16px !important;
+            padding-top: 12px !important;
+            padding-bottom: 12px !important;
+            font-size: 13px !important;
+          }
+          .plans-addon {
+            margin-top: 18px !important;
+            padding: 18px 22px !important;
+            gap: 16px !important;
+          }
+          .allies-section {
+            min-height: 100svh;
+            display: flex;
+            align-items: center;
+          }
+          .contact-section {
+            min-height: 100svh;
+            display: flex;
+            align-items: center;
+          }
+        }
         @media (min-width: 1024px) and (max-width: 1440px) and (max-height: 860px) {
           .problem-section {
             padding-top: 48px !important;
@@ -1713,14 +1826,8 @@ const App = () => {
           .process-card-stack {
             height: 440px !important;
           }
-          .plans-section {
-            padding-bottom: 52px !important;
-          }
           .plans-section h2 {
             font-size: clamp(34px, 4vw, 52px) !important;
-          }
-          .plans-section .grid {
-            gap: 20px !important;
           }
           .allies-section {
             padding-top: 72px !important;
@@ -1747,9 +1854,6 @@ const App = () => {
           }
           .process-card-stack {
             height: 390px !important;
-          }
-          .plans-section {
-            padding-bottom: 44px !important;
           }
           .allies-section {
             padding-top: 60px !important;
@@ -1863,8 +1967,8 @@ const ProblemSection = () => {
           negocio no aparece, ese cliente se va a la competencia. Así de simple.
         </p>
 
-        <div className="mt-10 w-full grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
-          <div className="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col items-center text-center sm:items-start sm:text-left gap-3">
+        <div className="problem-stats-grid mt-10 w-full grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+          <div className="problem-stat-card bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col items-center text-center sm:items-start sm:text-left gap-3">
             <div className="font-epilogue text-[42px] sm:text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
               <CountUpAnimation endValue={75} suffix="%" />
             </div>
@@ -1872,7 +1976,7 @@ const ProblemSection = () => {
               de los colombianos busca productos y servicios en internet antes de comprar
             </p>
           </div>
-          <div className="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col items-center text-center sm:items-start sm:text-left gap-3">
+          <div className="problem-stat-card bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col items-center text-center sm:items-start sm:text-left gap-3">
             <div className="font-epilogue text-[42px] sm:text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
               <CountUpAnimation endValue={83} suffix="%" />
             </div>
@@ -1880,7 +1984,7 @@ const ProblemSection = () => {
               de los emprendedores colombianos planea invertir más en presencia digital este año
             </p>
           </div>
-          <div className="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col items-center text-center sm:items-start sm:text-left gap-3">
+          <div className="problem-stat-card bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col items-center text-center sm:items-start sm:text-left gap-3">
             <div className="font-epilogue text-[42px] sm:text-[48px] md:text-[64px] font-extrabold leading-none tracking-[-0.04em]" style={gradientAccentStyle}>
               <CountUpAnimation endValue={1.7} prefix="+" suffix="M" decimal={true} />
             </div>
@@ -1895,7 +1999,7 @@ const ProblemSection = () => {
             POR QUÉ MUCHOS NEGOCIOS SIGUEN SIN WEB
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          <div className="problem-reasons-grid grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             
             {/* Card 1 */}
             <div className="problem-card relative overflow-hidden rounded-[30px] p-5 sm:p-6 md:p-7 xl:p-8 text-white min-h-[312px] sm:min-h-[330px] md:min-h-[348px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
