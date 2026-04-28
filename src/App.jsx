@@ -1031,7 +1031,9 @@ const ExpandedAgencySections = () => (
       <motion.div {...sectionReveal} className="mx-auto w-full max-w-[1180px]">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-epilogue text-[clamp(40px,6vw,60px)] font-bold leading-[1.05] tracking-tight text-[#080808]">
-              Elige el plan <span className="italic font-serif font-light">ideal</span> para tu <span className="italic font-serif font-light">negocio</span>
+              Elige el plan <span className="italic font-serif font-light">ideal</span>
+              <br />
+              para <span className="italic font-serif font-light">tu</span> negocio
             </h2>
             <p className="mt-4 text-[15px] leading-relaxed text-[#080808]/70">
               Diseño premium, estructura estratégica y ejecución real. <br className="hidden md:block" /> Selecciona la solución que mejor se adapte a ti.
@@ -1047,7 +1049,7 @@ const ExpandedAgencySections = () => (
                   className={`group relative flex flex-col rounded-[24px] bg-white shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] overflow-hidden`}
                 >
                   {isMiddle && (
-                    <div className="absolute top-0 bottom-0 right-0 w-[70%] bg-[#8242f5]/15 blur-[60px] rounded-full translate-x-1/4 pointer-events-none" />
+                    <img src={asset('degradado-tarjeta.png')} alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0 opacity-90" />
                   )}
 
                   <div className="relative z-10 flex flex-1 flex-col p-8 md:p-10">
