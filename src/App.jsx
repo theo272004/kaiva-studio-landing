@@ -960,9 +960,20 @@ const ProcessRedesignSection = () => {
 
   return (
     <section ref={sectionRef} id="proceso" className="process-section relative w-full bg-transparent py-0">
-      {/* Desktop Sticky Carousel */}
+            {/* Desktop Sticky Carousel */}
       <div className="process-sticky-stage hidden md:block relative h-[250vh] w-full">
         <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden px-6 lg:px-16">
+          {/* Animated Purple Gradient Transition */}
+          <motion.div 
+            className="absolute inset-0 pointer-events-none transition-all duration-300"
+            style={{
+              background: 'radial-gradient(circle at 50% 50%, rgba(130,66,245,0.12) 0%, rgba(217,108,255,0.06) 40%, transparent 80%)',
+              opacity: useTransform(activeProgressRaw, 
+                [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4], 
+                [0, 1, 0, 1, 0, 1, 0, 1, 0]
+              )
+            }}
+          />
           <div className="relative z-10 mx-auto flex w-full max-w-[800px] items-center justify-center gap-6">
             <div className="process-card-stack relative h-[430px] w-full overflow-visible md:h-[540px]">
               <div className="relative mx-auto h-full w-full max-w-[660px]">
