@@ -967,7 +967,7 @@ const ProcessRedesignSection = () => {
           <motion.div 
             className="absolute inset-0 pointer-events-none transition-all duration-300"
             style={{
-              background: 'radial-gradient(circle at 50% 50%, rgba(130,66,245,0.12) 0%, rgba(217,108,255,0.06) 40%, transparent 80%)',
+              background: 'linear-gradient(135deg, rgba(130,66,245,0.4) 0%, rgba(217,108,255,0.2) 50%, rgba(33,178,198,0.1) 100%)',
               opacity: useTransform(activeProgressRaw, 
                 [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4], 
                 [0, 1, 0, 1, 0, 1, 0, 1, 0]
