@@ -1473,6 +1473,46 @@ const App = () => {
           background-size: 3px 3px, 4px 4px;
           mix-blend-mode: soft-light;
         }
+        .problem-card {
+          background:
+            radial-gradient(120% 140% at 0% 0%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 44%),
+            linear-gradient(145deg, #9b61ff 0%, #8242f5 46%, #6930d3 100%);
+          border: 1px solid rgba(255, 255, 255, 0.16);
+          box-shadow:
+            0 22px 48px -18px rgba(71, 18, 160, 0.42),
+            inset 0 1px 0 rgba(255,255,255,0.24),
+            inset 0 -10px 24px rgba(52, 14, 122, 0.16);
+        }
+        .problem-card::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(140deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 36%, rgba(42, 8, 98, 0.12) 100%);
+          pointer-events: none;
+        }
+        .problem-card-copy {
+          width: min(100%, calc(100% - 110px));
+        }
+        .problem-card-button {
+          position: relative;
+          z-index: 10;
+          color: #ffffff;
+          background: linear-gradient(180deg, rgba(255,255,255,0.24) 0%, rgba(255,255,255,0.11) 100%);
+          border: 1px solid rgba(255,255,255,0.18);
+          box-shadow:
+            0 18px 26px -18px rgba(27, 6, 65, 0.9),
+            inset 1px 1px 0 rgba(255,255,255,0.24),
+            inset -3px -4px 10px rgba(56, 16, 132, 0.45);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+        }
+        .problem-card-button-icon {
+          background: linear-gradient(180deg, #a970ff 0%, #7a3ef0 100%);
+          box-shadow:
+            0 10px 18px -10px rgba(28, 5, 70, 0.9),
+            inset 0 1px 0 rgba(255,255,255,0.2),
+            inset 0 -3px 8px rgba(63, 17, 150, 0.45);
+        }
         
         @keyframes floatBlobOne {
           0% { transform: translate3d(0, 0, 0) scale(1); }
@@ -1493,9 +1533,56 @@ const App = () => {
           .hero-copy-wrap { top: 136px !important; max-width: 640px !important; }
           .hero-visual-wrap { top: 250px !important; width: 116vw !important; max-width: 920px !important; }
         }
+        @media (min-width: 1024px) and (max-width: 1440px) {
+          .hero-copy-wrap {
+            top: 128px !important;
+            left: 56px !important;
+            max-width: min(42vw, 560px) !important;
+          }
+          .hero-visual-wrap {
+            top: 210px !important;
+            width: min(90vw, 980px) !important;
+            max-width: 980px !important;
+          }
+          .hero-cta-wrap {
+            bottom: 72px !important;
+          }
+          .hero-support-copy {
+            right: 56px !important;
+            bottom: 28px !important;
+            max-width: 360px !important;
+          }
+        }
+        @media (min-width: 1024px) and (max-width: 1440px) and (max-height: 900px) {
+          .hero-copy-wrap {
+            top: 112px !important;
+            max-width: min(40vw, 500px) !important;
+          }
+          .hero-visual-wrap {
+            top: 185px !important;
+            width: min(84vw, 900px) !important;
+          }
+          .hero-cta-wrap {
+            bottom: 46px !important;
+          }
+          .hero-support-copy {
+            bottom: 18px !important;
+            max-width: 320px !important;
+          }
+        }
         @media (max-width: 768px) {
           .hero-copy-wrap { top: 108px !important; max-width: calc(100vw - 48px) !important; }
           .hero-visual-wrap { top: 275px !important; width: 114vw !important; max-width: 520px !important; }
+        }
+        @media (min-width: 768px) and (max-width: 1180px) {
+          .problem-card-copy {
+            width: min(100%, calc(100% - 148px));
+          }
+        }
+        @media (min-width: 1181px) {
+          .problem-card-copy {
+            width: min(100%, calc(100% - 190px));
+          }
         }
         @media (max-width: 400px) {
           .hero-copy-wrap { top: 96px !important; }
@@ -1504,6 +1591,11 @@ const App = () => {
         @media (max-height: 700px) and (max-width: 768px) {
           .hero-copy-wrap { top: 86px !important; }
           .hero-visual-wrap { top: 220px !important; }
+        }
+        @media (max-width: 767px) {
+          .problem-card-copy {
+            width: min(100%, calc(100% - 100px));
+          }
         }
           .contact-premium-card {
             background: #ffffff;
@@ -1616,24 +1708,24 @@ const ProblemSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             
             {/* Card 1 */}
-            <div className="relative overflow-hidden bg-white rounded-[32px] p-8 md:p-10 text-[#080808] min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] border-[1.5px] border-[#8242f5]/40 hover:border-[#8242f5]">
-              <div className="relative z-10 w-[90%] md:w-[55%]">
+            <div className="problem-card relative overflow-hidden rounded-[32px] p-6 sm:p-8 md:p-8 xl:p-10 text-white min-h-[340px] sm:min-h-[360px] md:min-h-[380px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
+              <div className="problem-card-copy relative z-10">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   Es muy caro.
                 </h4>
-                <p className="font-manrope text-[14px] md:text-[15px] leading-[1.6] opacity-90 mb-8">
+                <p className="font-manrope text-[14px] md:text-[15px] leading-[1.6] text-white/88 mb-8">
                   Muchos negocios creen que tener una web profesional está fuera de su presupuesto. No tiene por qué serlo.
                 </p>
               </div>
                 <button 
-                  className="inline-flex w-fit items-center gap-3 rounded-full bg-[#8242f5]/10 py-1.5 pl-1.5 pr-7 transition-all duration-300 hover:bg-[#8242f5]/20"
+                  className="problem-card-button inline-flex w-fit items-center gap-3 rounded-full py-1.5 pl-1.5 pr-7 transition-all duration-300 hover:-translate-y-0.5"
                 >
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#8242f5] text-white shadow-sm">
+                  <span className="problem-card-button-icon flex h-8 w-8 items-center justify-center rounded-full text-white shadow-sm">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </span>
-                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#8242f5]">
+                  <span className="text-[11px] font-bold tracking-widest uppercase text-white/92">
                     SABER MÁS
                   </span>
                 </button>
@@ -1641,33 +1733,30 @@ const ProblemSection = () => {
                 src={asset('card-es-muy-caro.webp')}
                 alt="Es muy caro"
                 loading="lazy"
-                className="absolute right-[-2%] bottom-[-5%] w-[200px] md:w-[280px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-2 pointer-events-none z-0"
+                className="absolute right-[-4%] bottom-[-3%] w-[150px] sm:w-[180px] md:w-[190px] lg:w-[220px] xl:w-[260px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-2 pointer-events-none z-0"
               />
             </div>
 
             {/* Card 2 */}
-            <div className="relative overflow-hidden bg-white rounded-[32px] p-8 md:p-10 text-[#080808] min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] border-[1.5px] border-[#8242f5]/40 hover:border-[#8242f5]">
-              <div className="relative z-10 w-[90%] md:w-[55%]">
+            <div className="problem-card relative overflow-hidden rounded-[32px] p-6 sm:p-8 md:p-8 xl:p-10 text-white min-h-[340px] sm:min-h-[360px] md:min-h-[380px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
+              <div className="problem-card-copy relative z-10">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   <span className="inline-block mr-2 text-[32px] md:text-[40px]">🤷‍♂️</span>
                   No sé cómo funciona.
                 </h4>
-                <p className="font-manrope text-[14px] md:text-[15px] leading-[1.6] opacity-90 mb-8">
+                <p className="font-manrope text-[14px] md:text-[15px] leading-[1.6] text-white/88 mb-8">
                   Dominios, hosting, SEO, diseño... el lenguaje técnico aleja a dueños de negocio que simplemente quieren más clientes.
                 </p>
               </div>
                 <button 
-                  className="inline-flex w-fit items-center gap-3 rounded-full bg-black/[0.04] py-1.5 pl-1.5 pr-7 transition-all duration-300 hover:bg-black/[0.08]"
-                  style={{
-                    boxShadow: 'inset 2px 2px 6px rgba(0,0,0,0.16), inset -2px -2px 6px rgba(255,255,255,0.35)'
-                  }}
+                  className="problem-card-button inline-flex w-fit items-center gap-3 rounded-full py-1.5 pl-1.5 pr-7 transition-all duration-300 hover:-translate-y-0.5"
                 >
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#111111] text-white shadow-sm">
+                  <span className="problem-card-button-icon flex h-8 w-8 items-center justify-center rounded-full text-white shadow-sm">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </span>
-                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#111111]/80">
+                  <span className="text-[11px] font-bold tracking-widest uppercase text-white/92">
                     SABER MÁS
                   </span>
                 </button>
@@ -1675,33 +1764,30 @@ const ProblemSection = () => {
                 src={asset('card-no-se-como-funciona.webp')}
                 alt="No sé cómo funciona"
                 loading="lazy"
-                className="absolute right-[-2%] bottom-[2%] w-[200px] md:w-[280px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-2 pointer-events-none z-0"
+                className="absolute right-[-4%] bottom-0 w-[150px] sm:w-[180px] md:w-[190px] lg:w-[220px] xl:w-[260px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-2 pointer-events-none z-0"
               />
             </div>
 
             {/* Card 3 */}
-            <div className="relative overflow-hidden bg-white rounded-[32px] p-8 md:p-10 text-[#080808] min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] border-[1.5px] border-[#8242f5]/40 hover:border-[#8242f5]">
-              <div className="relative z-10 w-[90%] md:w-[55%]">
+            <div className="problem-card relative overflow-hidden rounded-[32px] p-6 sm:p-8 md:p-8 xl:p-10 text-white min-h-[340px] sm:min-h-[360px] md:min-h-[380px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
+              <div className="problem-card-copy relative z-10">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   <span className="inline-block mr-2 text-[32px] md:text-[40px]">😤</span>
                   Ya intenté y no funcionó.
                 </h4>
-                <p className="font-manrope text-[14px] md:text-[15px] leading-[1.6] opacity-90 mb-8">
+                <p className="font-manrope text-[14px] md:text-[15px] leading-[1.6] text-white/88 mb-8">
                   Malas experiencias con freelancers o plantillas genéricas que no reflejan el negocio ni generan resultados.
                 </p>
               </div>
                 <button 
-                  className="inline-flex w-fit items-center gap-3 rounded-full bg-black/[0.04] py-1.5 pl-1.5 pr-7 transition-all duration-300 hover:bg-black/[0.08]"
-                  style={{
-                    boxShadow: 'inset 2px 2px 6px rgba(0,0,0,0.16), inset -2px -2px 6px rgba(255,255,255,0.35)'
-                  }}
+                  className="problem-card-button inline-flex w-fit items-center gap-3 rounded-full py-1.5 pl-1.5 pr-7 transition-all duration-300 hover:-translate-y-0.5"
                 >
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#111111] text-white shadow-sm">
+                  <span className="problem-card-button-icon flex h-8 w-8 items-center justify-center rounded-full text-white shadow-sm">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </span>
-                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#111111]/80">
+                  <span className="text-[11px] font-bold tracking-widest uppercase text-white/92">
                     SABER MÁS
                   </span>
                 </button>
@@ -1709,33 +1795,30 @@ const ProblemSection = () => {
                 src={asset('card-ya-intente.webp')}
                 alt="Ya intenté y no funcionó"
                 loading="lazy"
-                className="absolute right-[-2%] bottom-[-5%] w-[200px] md:w-[280px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-2 pointer-events-none z-0"
+                className="absolute right-[-4%] bottom-[-2%] w-[150px] sm:w-[180px] md:w-[190px] lg:w-[220px] xl:w-[260px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-2 pointer-events-none z-0"
               />
             </div>
 
             {/* Card 4 */}
-            <div className="relative overflow-hidden bg-white rounded-[32px] p-8 md:p-10 text-[#080808] min-h-[320px] md:min-h-[360px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] border-[1.5px] border-[#8242f5]/40 hover:border-[#8242f5]">
-              <div className="relative z-10 w-[90%] md:w-[55%]">
+            <div className="problem-card relative overflow-hidden rounded-[32px] p-6 sm:p-8 md:p-8 xl:p-10 text-white min-h-[340px] sm:min-h-[360px] md:min-h-[380px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
+              <div className="problem-card-copy relative z-10">
                 <h4 className="font-epilogue text-[32px] md:text-[40px] font-extrabold leading-[1.05] tracking-tight mb-4">
                   <span className="inline-block mr-2 text-[32px] md:text-[40px]">⏳</span>
                   No tengo tiempo.
                 </h4>
-                <p className="font-manrope text-[14px] md:text-[15px] leading-[1.6] opacity-90 mb-8">
+                <p className="font-manrope text-[14px] md:text-[15px] leading-[1.6] text-white/88 mb-8">
                   Gestionar un negocio ya es suficiente trabajo. No debería necesitarse un equipo técnico propio para tener presencia digital.
                 </p>
               </div>
                 <button 
-                  className="inline-flex w-fit items-center gap-3 rounded-full bg-black/[0.04] py-1.5 pl-1.5 pr-7 transition-all duration-300 hover:bg-black/[0.08]"
-                  style={{
-                    boxShadow: 'inset 2px 2px 6px rgba(0,0,0,0.16), inset -2px -2px 6px rgba(255,255,255,0.35)'
-                  }}
+                  className="problem-card-button inline-flex w-fit items-center gap-3 rounded-full py-1.5 pl-1.5 pr-7 transition-all duration-300 hover:-translate-y-0.5"
                 >
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#111111] text-white shadow-sm">
+                  <span className="problem-card-button-icon flex h-8 w-8 items-center justify-center rounded-full text-white shadow-sm">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </span>
-                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#111111]/80">
+                  <span className="text-[11px] font-bold tracking-widest uppercase text-white/92">
                     SABER MÁS
                   </span>
                 </button>
@@ -1743,7 +1826,7 @@ const ProblemSection = () => {
                 src={asset('card-no-tengo-tiempo.webp')}
                 alt="No tengo tiempo"
                 loading="lazy"
-                className="absolute right-[2%] bottom-[2%] w-[180px] md:w-[240px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-2 pointer-events-none z-0"
+                className="absolute right-[0%] bottom-0 w-[140px] sm:w-[165px] md:w-[175px] lg:w-[200px] xl:w-[225px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-2 pointer-events-none z-0"
               />
             </div>
 
@@ -1787,7 +1870,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section id="inicio" data-nav-theme="light" className="relative z-30 min-h-[100svh] w-full [overflow-x:clip] bg-[#ffffff] font-open-sauce text-[#080808] md:h-screen">
+    <section id="inicio" data-nav-theme="light" className="relative z-30 min-h-[100svh] w-full [overflow-x:clip] bg-[#ffffff] font-open-sauce text-[#080808] md:min-h-[860px]">
       {/* Gradiente izquierdo — sin overflow-hidden permite que sangre hacia la siguiente sección */}
       <motion.img
         src={asset('degradado-lateral.webp')}
@@ -2005,7 +2088,7 @@ const HeroSection = () => {
       </motion.div>
 
       <motion.div
-        className="absolute left-1/2 bottom-[110px] md:bottom-[6%] z-[60] -translate-x-1/2 w-full flex justify-center"
+        className="hero-cta-wrap absolute left-1/2 bottom-[110px] md:bottom-[6%] z-[60] -translate-x-1/2 w-full flex justify-center"
         initial={{ opacity: 0, y: 15 }}
         animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
         transition={{ duration: 0.6, delay: 0.28, ease: 'easeOut' }}
@@ -2019,7 +2102,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 18 }}
         animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
         transition={{ duration: 0.55, delay: 0.22, ease: 'easeOut' }}
-        className="absolute bottom-4 left-6 right-6 z-40 hidden md:block md:bottom-[60px] md:left-auto md:right-[80px] md:max-w-[420px] md:text-[15px] text-left font-normal leading-[1.5] text-[#080808]/64"
+        className="hero-support-copy absolute bottom-4 left-6 right-6 z-40 hidden md:block md:bottom-[60px] md:left-auto md:right-[80px] md:max-w-[420px] md:text-[15px] text-left font-normal leading-[1.5] text-[#080808]/64"
         style={{
           display: "-webkit-box",
           WebkitLineClamp: 2,
