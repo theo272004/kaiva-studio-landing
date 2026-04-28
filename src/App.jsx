@@ -1069,7 +1069,7 @@ const ExpandedAgencySections = () => (
                       Pago único
                     </div>
 
-                    <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className={`mt-6 flex w-full items-center justify-center gap-2 rounded-xl ${isMiddle ? 'bg-black/30 backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]' : 'bg-[#0a0a0a]'} px-6 py-4 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-[1.02]`}>
+                    <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#0a0a0a] px-6 py-4 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-[1.02]">
                       {plan.cta}
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M7 17L17 7M17 7H7M17 7V17" />
