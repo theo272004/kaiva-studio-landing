@@ -1055,15 +1055,15 @@ const ProcessRedesignSection = () => {
   });
 
   return (
-    <section ref={sectionRef} id="proceso" className="process-section relative w-full bg-transparent py-0">
+    <section ref={sectionRef} id="proceso" className="process-section relative w-full bg-white py-0">
             {/* Desktop Sticky Carousel */}
       <div className="process-sticky-stage hidden md:block relative h-[250vh] w-full">
-        <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden px-6 lg:px-16">
+        <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden bg-white px-6 lg:px-16">
           {/* Progressive giant gradient: white on step 1 to full purple on step 5 */}
           <motion.div 
             className="absolute inset-0 pointer-events-none transition-all duration-300"
             style={{
-              background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(130,66,245,0.32) 42%, rgba(130,66,245,0.66) 72%, rgba(104,34,222,0.98) 100%)',
+              background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 28%, rgba(130,66,245,0.18) 58%, rgba(130,66,245,0.48) 80%, rgba(104,34,222,0.92) 100%)',
               opacity: purpleStageOpacity
             }}
           />
@@ -1085,7 +1085,7 @@ const ProcessRedesignSection = () => {
       </div>
 
       {/* Mobile Vertical Stack */}
-      <div className="md:hidden relative w-full px-6 py-16">
+      <div className="relative w-full bg-white px-6 py-16 md:hidden">
         <div className="flex flex-col gap-6">
           {stepsContent.map((step, i) => (
             <div key={i} className="flex flex-col gap-4 rounded-[24px] border border-[#080808]/5 bg-white p-6 shadow-md transition-shadow hover:shadow-lg">
