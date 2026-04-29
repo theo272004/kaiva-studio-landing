@@ -24,41 +24,42 @@ const serviceShowcase = [
     vibe: 'Rendimiento · Conversión',
     brand: 'KAIVA WEB',
     description:
-      'Landing pages y sitios corporativos con estructura clara, velocidad real y una narrativa diseñada para convertir visitas en conversaciones.',
+      'Páginas web con estructura clara, diseño responsive y SEO integrado. Una narrativa diseñada estratégicamente para destacar el valor de tu negocio y convertir visitas en clientes.',
     accent: '#8242f5',
     mockup: 'ecommerce',
     title: 'Rendimiento & Conversión',
-    points: ['Copy y estructura', 'Responsive premium', 'SEO base', 'Entrega lista para crecer'],
+    points: ['Copy y estructura', 'Responsive premium', 'SEO base', 'Optimización total'],
   },
   {
     id: 'design',
     number: '02',
     label: 'Diseño',
-    vibe: 'Percepción · Claridad',
+    vibe: 'Percepción · Identidad',
     brand: 'KAIVA DESIGN',
     description:
-      'Dirección visual, identidad y sistemas de interfaz para que la marca se vea cohesionada y transmita más valor en cada punto de contacto.',
+      'Desde publicidad, portadas y logos hasta la conceptualización completa de la identidad de tu marca, expresando exactamente quién eres y el porqué de tu negocio.',
     accent: '#d96cff',
-    title: 'Diseño visual y de interfaz para que la marca tenga presencia.',
-    points: ['Dirección de arte', 'UI systems', 'Brand boards', 'Presentaciones y assets'],
+    title: 'Diseño integral de marca y sistemas de interfaz.',
+    points: ['Identidad conceptual', 'UI systems', 'Publicidad y logos', 'Estructura visual'],
   },
   {
     id: 'automation',
     number: '03',
     label: 'Automatización',
-    vibe: 'Operación · Sistemas',
+    vibe: 'Operación · Escalabilidad',
     brand: 'KAIVA SYSTEMS',
     description:
-      'Conectamos formularios, CRM, mensajes y procesos internos para que el negocio responda más rápido y pierda menos tiempo en tareas repetitivas.',
+      'Sistemas a medida, dashboards analíticos y flujos de automatización. Conectamos tus herramientas para que operes de forma inteligente y rápida.',
     accent: '#21b2c6',
-    title: 'Sistemas que ordenan la operación y ejecutan procesos repetitivos.',
-    points: ['Bots y flujos', 'Integraciones', 'Dashboards internos', 'Automatización comercial'],
+    title: 'Sistemas que expanden las posibilidades de tu operación.',
+    points: ['Dashboards', 'Automatizaciones', 'Sistemas a medida', 'Bots inteligentes'],
   },
 ];
 
 const webSlides = [
   {
     id: 1,
+    category: 'systems',
     number: '01',
     label: 'Inteligencia de Negocios',
     vibe: 'Analítico · Predictivo',
@@ -69,6 +70,7 @@ const webSlides = [
   },
   {
     id: 2,
+    category: 'web',
     number: '02',
     label: 'E-Commerce de Lujo',
     vibe: 'Exclusivo · Conversión',
@@ -79,6 +81,7 @@ const webSlides = [
   },
   {
     id: 3,
+    category: 'systems',
     number: '03',
     label: 'Infraestructura SaaS',
     vibe: 'Sólido · Escalable',
@@ -89,6 +92,7 @@ const webSlides = [
   },
   {
     id: 4,
+    category: 'design',
     number: '04',
     label: 'Editorial Creativo',
     vibe: 'Sofisticado · Narrativo',
@@ -276,29 +280,41 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
         className="service-visual-web w-full overflow-hidden rounded-[30px] bg-[#eae6df]"
       >
         <div
-          className="transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform"
+          className="transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform h-full w-full"
           style={{ transform: 'perspective(700px) rotateY(var(--service-rotate-y,0deg)) rotateX(var(--service-rotate-x,0deg)) translateZ(8px)' }}
         >
-          <div className="portfolio-web-visual-stage flex min-h-[390px] items-center justify-center bg-[#eae6df] p-8">
-            <div className="mockup-browser w-[85%] max-w-[480px] overflow-hidden rounded-[12px] border border-[#d9d3ca] bg-white shadow-[0_20px_50px_rgba(57,53,44,0.15)]">
-              <div className="bar flex h-[30px] items-center gap-[7px] bg-[#f7f5f2] px-[14px]">
-                <span className="block h-[10px] w-[10px] rounded-full bg-[#ff5f57]" />
-                <span className="block h-[10px] w-[10px] rounded-full bg-[#febc2e]" />
-                <span className="block h-[10px] w-[10px] rounded-full bg-[#28c840]" />
-              </div>
-              <div className="content flex flex-col gap-[0.7rem] p-[1.6rem]">
-                <div className="line h-[8px] w-[80%] rounded-[4px] bg-[#eae6df]" />
-                <div className="line short h-[8px] w-[60%] rounded-[4px] bg-[#eae6df]" />
-                <div className="line accent h-[8px] w-[35%] rounded-[4px] bg-[#792fec] shadow-[0_0_12px_rgba(121,47,236,0.25)]" />
-                <div className="card-mini mt-[0.4rem] flex items-center gap-[0.8rem] rounded-[8px] border border-[#e0dbd2] bg-[#f9f8f6] p-[1rem]">
-                  <div className="avatar h-[32px] w-[32px] rounded-full bg-[#d9d3ca]" />
-                  <div className="text-group flex-1">
-                    <div className="l mb-[4px] h-[6px] w-[70%] rounded-[3px] bg-[#d9d3ca]" />
-                    <div className="l short h-[6px] w-[50%] rounded-[3px] bg-[#d9d3ca]" />
-                  </div>
+          <div className="flex min-h-[390px] items-center justify-center bg-[#eae6df] p-6 sm:p-8 overflow-hidden h-full">
+            <div className="relative flex items-center justify-center w-full max-w-[480px]">
+              <div className="mockup-browser w-[90%] sm:w-[85%] overflow-hidden rounded-[12px] border border-[#d9d3ca] bg-white shadow-[0_20px_50px_rgba(57,53,44,0.15)] relative z-10">
+                <div className="bar flex h-[30px] items-center gap-[7px] bg-[#f7f5f2] px-[14px]">
+                  <span className="block h-[10px] w-[10px] rounded-full bg-[#ff5f57]" />
+                  <span className="block h-[10px] w-[10px] rounded-full bg-[#febc2e]" />
+                  <span className="block h-[10px] w-[10px] rounded-full bg-[#28c840]" />
                 </div>
-                <div className="line h-[8px] w-[50%] rounded-[4px] bg-[#eae6df]" />
-                <div className="line short h-[8px] w-[60%] rounded-[4px] bg-[#eae6df]" />
+                <div className="content flex flex-col gap-[0.7rem] p-[1.6rem]">
+                  <div className="line h-[8px] w-[80%] rounded-[4px] bg-[#eae6df]" />
+                  <div className="line short h-[8px] w-[60%] rounded-[4px] bg-[#eae6df]" />
+                  <div className="line accent h-[8px] w-[35%] rounded-[4px] bg-[#792fec] shadow-[0_0_12px_rgba(121,47,236,0.25)]" />
+                  <div className="card-mini mt-[0.4rem] flex items-center gap-[0.8rem] rounded-[8px] border border-[#e0dbd2] bg-[#f9f8f6] p-[1rem]">
+                    <div className="avatar h-[32px] w-[32px] shrink-0 rounded-full bg-[#d9d3ca]" />
+                    <div className="text-group flex-1">
+                      <div className="l mb-[4px] h-[6px] w-[70%] rounded-[3px] bg-[#d9d3ca]" />
+                      <div className="l short h-[6px] w-[50%] rounded-[3px] bg-[#d9d3ca]" />
+                    </div>
+                  </div>
+                  <div className="line h-[8px] w-[50%] rounded-[4px] bg-[#eae6df]" />
+                  <div className="line short h-[8px] w-[60%] rounded-[4px] bg-[#eae6df]" />
+                </div>
+              </div>
+              <div className="absolute -bottom-8 -right-2 sm:-right-8 z-20 h-[240px] w-[115px] sm:w-[125px] rounded-[24px] border-[6px] border-[#1f1f1f] bg-white shadow-[0_30px_60px_rgba(0,0,0,0.35)] flex flex-col">
+                <div className="absolute left-1/2 top-2 h-[4px] w-10 -translate-x-1/2 rounded-full bg-[#1f1f1f]"></div>
+                <div className="p-3 pt-7 flex flex-col gap-2.5 h-full">
+                   <div className="h-2 w-1/2 rounded-full bg-[#d9d3ca]"></div>
+                   <div className="h-[76px] w-full shrink-0 rounded-[8px] bg-[#eae6df]"></div>
+                   <div className="h-2 w-4/5 rounded-full bg-[#eae6df]"></div>
+                   <div className="h-2 w-3/5 rounded-full bg-[#eae6df]"></div>
+                   <div className="h-6 w-1/2 mt-auto rounded-[5px] bg-[#792fec] opacity-95 shadow-sm"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -376,67 +392,49 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: 0.985 }}
       transition={panelTransition}
-      className="w-full overflow-hidden rounded-[30px] border border-[#0f172a]/8 bg-[#09111f] p-5 shadow-[0_32px_90px_-42px_rgba(2,8,23,0.92)]"
+      className="w-full overflow-hidden rounded-[30px] border border-[#0f172a]/8 bg-[#fdfdfd] shadow-[0_32px_90px_-42px_rgba(2,8,23,0.12)]"
     >
       <div
-        className="automation-flow service-visual-flow transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform"
+        className="service-visual-dashboard transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform h-full"
         style={{ transform: 'translate(calc(var(--service-move-x,0px) * 0.4), calc(var(--service-move-y,0px) * 0.3))' }}
       >
-        <div className="mb-5 flex items-center justify-between">
-          <div>
-            <div className="text-[11px] uppercase tracking-[0.18em] text-[#7dd3fc]">Automation flow</div>
-            <div className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-white">Sistemas que ejecutan</div>
-          </div>
-          <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.14em] text-white/48">
-            24/7
-          </div>
-        </div>
-        <div className="grid gap-4 lg:grid-cols-[0.82fr_1.18fr]">
-          <div className="rounded-[24px] border border-white/10 bg-white/6 p-4 backdrop-blur-xl">
-            <div className="mb-4 flex items-center gap-2">
-              <div className="h-9 w-9 rounded-full bg-[linear-gradient(135deg,_#38bdf8,_#6366f1)]" />
-              <div>
-                <div className="h-3 w-24 rounded-full bg-white/18" />
-                <div className="mt-2 h-2 w-16 rounded-full bg-white/10" />
+        <div className="flex min-h-[390px] h-full items-center justify-center bg-[#f7f9fc] p-6 lg:p-8">
+          <div className="w-full max-w-[500px] overflow-hidden rounded-[16px] border border-[#e2e8f0] bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+            <div className="flex h-10 items-center border-b border-[#f1f5f9] bg-[#f8fafc] px-4">
+              <div className="flex gap-1.5">
+                <div className="h-2.5 w-2.5 rounded-full bg-[#cbd5e1]" />
+                <div className="h-2.5 w-2.5 rounded-full bg-[#cbd5e1]" />
+                <div className="h-2.5 w-2.5 rounded-full bg-[#cbd5e1]" />
               </div>
             </div>
-            <div className="space-y-3">
-              <div className="rounded-[18px] bg-[#0f172a] px-4 py-3 text-sm text-white/86">Nuevo lead desde la web</div>
-              <div className="rounded-[18px] bg-white/10 px-4 py-3 text-sm text-white/74">Clasificar, etiquetar y notificar</div>
-              <div className="rounded-[18px] bg-white/10 px-4 py-3 text-sm text-white/74">Disparar respuesta o tarea interna</div>
-            </div>
-          </div>
-          <div className="rounded-[24px] bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.22),_transparent_32%),linear-gradient(180deg,_#0f172a_0%,_#050814_100%)] p-4">
-            <div className="grid gap-3 md:grid-cols-3">
-              {['Lead', 'CRM', 'Ops'].map((item, index) => (
-                <div key={item} className="rounded-[18px] border border-white/10 bg-white/6 p-4">
-                  <div className="mb-3 flex items-center gap-2">
-                    <div
-                      className="h-9 w-9 rounded-2xl"
-                      style={{
-                        background:
-                          index === 0
-                            ? 'linear-gradient(135deg, #38bdf8, #0ea5e9)'
-                            : index === 1
-                              ? 'linear-gradient(135deg, #818cf8, #8b5cf6)'
-                              : 'linear-gradient(135deg, #34d399, #10b981)',
-                      }}
-                    />
-                    <div className="h-3 w-14 rounded-full bg-white/16" />
+            <div className="flex p-4 gap-4 h-[280px]">
+              <div className="hidden sm:flex flex-col gap-3 border-r border-[#f1f5f9] pr-4 w-1/4 pt-1">
+                <div className="h-4 w-full rounded bg-[#e2e8f0]" />
+                <div className="h-4 w-3/4 rounded bg-[#f1f5f9]" />
+                <div className="h-4 w-5/6 rounded bg-[#f1f5f9]" />
+                <div className="h-4 w-2/3 rounded bg-[#f1f5f9]" />
+              </div>
+              <div className="flex-1 flex flex-col gap-4">
+                <div className="flex gap-4">
+                  <div className="flex-1 rounded-[12px] bg-[#f8fafc] p-3 border border-[#f1f5f9]">
+                    <div className="h-3 w-1/2 rounded bg-[#94a3b8] mb-2" />
+                    <div className="h-5 w-3/4 rounded bg-[#334155]" />
                   </div>
-                  <div className="space-y-2">
-                    <div className="h-3 rounded-full bg-white/12" />
-                    <div className="h-3 w-4/5 rounded-full bg-white/8" />
+                  <div className="flex-1 rounded-[12px] bg-[#f8fafc] p-3 border border-[#f1f5f9]">
+                    <div className="h-3 w-1/2 rounded bg-[#94a3b8] mb-2" />
+                    <div className="h-5 w-2/3 rounded bg-[#0ea5e9]" />
+                  </div>
+                  <div className="hidden md:block flex-1 rounded-[12px] bg-[#f8fafc] p-3 border border-[#f1f5f9]">
+                    <div className="h-3 w-1/2 rounded bg-[#94a3b8] mb-2" />
+                    <div className="h-5 w-3/4 rounded bg-[#10b981]" />
                   </div>
                 </div>
-              ))}
-            </div>
-            <div className="mt-4 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-white/34">
-              <div className="h-px bg-white/12" />
-              <span>Sync</span>
-              <div className="h-px bg-white/12" />
-              <span>Route</span>
-              <div className="h-px bg-white/12" />
+                <div className="rounded-[12px] bg-white p-4 border border-[#e2e8f0] flex-1 flex items-end gap-2 px-6">
+                  {[40, 70, 45, 90, 65, 80, 55, 100].map((h, i) => (
+                    <div key={i} className="flex-1 rounded-t-sm bg-gradient-to-t from-[#21b2c6]/20 to-[#21b2c6]" style={{ height: `${h}%` }} />
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -641,7 +639,12 @@ const ContactRevealSection = () => {
   };
 
   return (
-    <section id="contacto" ref={sectionRef} className="contact-section relative w-full overflow-x-clip bg-transparent">
+    <section 
+      id="contacto" 
+      ref={sectionRef} 
+      className="contact-section relative w-full overflow-x-clip"
+      style={{ background: 'linear-gradient(180deg, #ffffff 0%, #faf7ff 40%, #f1e9ff 100%)' }}
+    >
       <div
         className="contact-main-block mx-auto flex w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
         style={{
@@ -680,8 +683,11 @@ const ContactRevealSection = () => {
               variants={formItem}
               whileHover={prefersReducedMotion || isMobile ? undefined : { y: -2 }}
               transition={{ duration: 0.32, ease: premiumEase }}
-              className="contact-premium-card relative z-30 rounded-[34px] p-5 md:p-6"
-              style={isMobile ? undefined : { transformPerspective: 1600, transformStyle: 'preserve-3d' }}
+              className="relative z-30 rounded-[34px] p-5 md:p-6 shadow-[0_32px_80px_-20px_rgba(130,66,245,0.15)] border border-white/60 backdrop-blur-[24px]"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%)',
+                ...(isMobile ? {} : { transformPerspective: 1600, transformStyle: 'preserve-3d' })
+              }}
             >
               <motion.div variants={fieldGroup} className="space-y-4">
                 <div className="grid gap-4 md:grid-cols-2">
@@ -692,7 +698,7 @@ const ContactRevealSection = () => {
                     <input
                       type="text"
                       placeholder="Tu nombre"
-                      className="contact-input mt-3 w-full rounded-[20px] px-4 py-3.5 text-[15px] text-[#080808] outline-none"
+                      className="contact-input mt-3 w-full rounded-[20px] px-4 py-3.5 text-[15px] text-[#080808] outline-none bg-white/60 backdrop-blur-md border border-white/80 focus:bg-white transition-all shadow-sm"
                     />
                   </motion.label>
                   <motion.label variants={fieldItem} className="block">
@@ -702,7 +708,7 @@ const ContactRevealSection = () => {
                     <input
                       type="email"
                       placeholder="tu@correo.com"
-                      className="contact-input mt-3 w-full rounded-[20px] px-4 py-3.5 text-[15px] text-[#080808] outline-none"
+                      className="contact-input mt-3 w-full rounded-[20px] px-4 py-3.5 text-[15px] text-[#080808] outline-none bg-white/60 backdrop-blur-md border border-white/80 focus:bg-white transition-all shadow-sm"
                     />
                   </motion.label>
                 </div>
@@ -713,15 +719,23 @@ const ContactRevealSection = () => {
                   <textarea
                     rows="4"
                     placeholder="Contexto, objetivos, tiempos y lo que necesitas construir."
-                    className="contact-input mt-3 w-full rounded-[22px] px-4 py-3.5 text-[15px] text-[#080808] outline-none"
+                    className="contact-input mt-3 w-full rounded-[22px] px-4 py-3.5 text-[15px] text-[#080808] outline-none bg-white/60 backdrop-blur-md border border-white/80 focus:bg-white transition-all shadow-sm resize-none"
                   />
                 </motion.label>
               </motion.div>
 
-              <motion.div variants={fieldItem} className="mt-5 flex items-center justify-between gap-4">
-                <p className="max-w-[28ch] text-[13px] leading-6 text-[#080808]/46">
-                  Proyectos selectos, respuestas claras y ejecución con criterio.
-                </p>
+              <motion.div variants={fieldItem} className="mt-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <label className="flex items-start gap-3 max-w-[34ch] cursor-pointer group">
+                  <div className="relative flex items-center justify-center h-5 w-5 rounded border border-[#080808]/20 bg-white/50 shrink-0 group-hover:border-[#8242f5] transition-colors mt-0.5">
+                    <input type="checkbox" className="peer opacity-0 absolute inset-0 cursor-pointer" required />
+                    <svg className="w-3.5 h-3.5 text-[#8242f5] opacity-0 peer-checked:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-[12px] leading-5 text-[#080808]/60">
+                    Acepto las políticas de privacidad y el tratamiento de mis datos.
+                  </span>
+                </label>
                 <button
                   type="submit"
                   className="contact-accent-button inline-flex min-h-[48px] items-center justify-center rounded-full px-7 py-3 font-manrope text-[11px] font-bold uppercase tracking-[0.16em] text-white"
@@ -899,26 +913,35 @@ const ServicesSection = () => {
 
 const PortfolioSection = () => {
   const prefersReducedMotion = useReducedMotion();
-  const [activeWebSlide, setActiveWebSlide] = useState(1);
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeWebSlide, setActiveWebSlide] = useState(0);
   const [isWebCarouselHovering, setIsWebCarouselHovering] = useState(false);
 
+  const filteredSlides = activeCategory === 'all' 
+    ? webSlides 
+    : webSlides.filter(slide => slide.category === activeCategory);
+
   useEffect(() => {
-    if (isWebCarouselHovering) return undefined;
+    setActiveWebSlide(0);
+  }, [activeCategory]);
+
+  useEffect(() => {
+    if (isWebCarouselHovering || filteredSlides.length === 0) return undefined;
     const timer = setInterval(() => {
-      setActiveWebSlide((prev) => (prev + 1) % webSlides.length);
+      setActiveWebSlide((prev) => (prev + 1) % filteredSlides.length);
     }, 5500);
     return () => clearInterval(timer);
-  }, [isWebCarouselHovering]);
+  }, [isWebCarouselHovering, filteredSlides.length]);
 
   const handleWebCarouselWheel = (event) => {
-    if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) {
+    if (Math.abs(event.deltaX) > Math.abs(event.deltaY) && filteredSlides.length > 0) {
       event.preventDefault();
-      if (event.deltaX > 30) setActiveWebSlide((prev) => Math.min(prev + 1, webSlides.length - 1));
+      if (event.deltaX > 30) setActiveWebSlide((prev) => Math.min(prev + 1, filteredSlides.length - 1));
       if (event.deltaX < -30) setActiveWebSlide((prev) => Math.max(prev - 1, 0));
     }
   };
 
-  const currentWebSlide = webSlides[activeWebSlide];
+  const currentWebSlide = filteredSlides[activeWebSlide] || filteredSlides[0];
 
   return (
     <div
@@ -958,11 +981,11 @@ const PortfolioSection = () => {
                     </div>
                     <div className="portfolio-service-copy relative z-10 flex h-full flex-col justify-center px-8 py-10 xl:px-12 xl:py-12">
                       <div
-                        className="inline-flex rounded-full border px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em]"
+                        className="inline-flex w-fit rounded-full border px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em]"
                         style={{
-                          color: service.id === 'design' ? '#21b2c6' : '#792fec',
-                          background: service.id === 'design' ? 'rgba(33,178,198,0.08)' : 'rgba(121,47,236,0.06)',
-                          borderColor: service.id === 'design' ? 'rgba(33,178,198,0.16)' : 'rgba(121,47,236,0.15)',
+                          color: service.accent,
+                          background: `${service.accent}14`,
+                          borderColor: `${service.accent}26`,
                         }}
                       >
                         {service.brand}
@@ -1011,7 +1034,14 @@ const PortfolioSection = () => {
                       {service.number}
                     </div>
                     <div className="relative z-10">
-                      <div className="inline-flex rounded-full border border-[#8242f5]/12 bg-[#8242f5]/[0.06] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#8242f5]">
+                      <div 
+                        className="inline-flex w-fit rounded-full border px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em]"
+                        style={{
+                          color: service.accent,
+                          background: `${service.accent}14`,
+                          borderColor: `${service.accent}26`,
+                        }}
+                      >
                         {service.brand}
                       </div>
                       <div className="mt-5 text-[13px] font-semibold uppercase tracking-[0.16em] text-[#080808]/45">
@@ -1055,17 +1085,38 @@ const PortfolioSection = () => {
           transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.45, ease: premiumEase }}
           className="mt-16"
         >
-              <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+              <div className="mb-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
                 <div className="max-w-2xl">
-                  <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#8242f5]">Nuestras webs</div>
+                  <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#8242f5]">Casos de éxito</div>
                   <h3 className="mt-3 font-epilogue text-[clamp(28px,3.8vw,52px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-[#080808]">
-                    El carrusel sigue aquí, ahora como respaldo visual del servicio.
+                    Explora nuestros proyectos recientes.
                   </h3>
+                  
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {[
+                      { id: 'all', label: 'Todos' },
+                      { id: 'web', label: 'Web' },
+                      { id: 'design', label: 'Diseño & Marca' },
+                      { id: 'systems', label: 'Sistemas' }
+                    ].map(cat => (
+                      <button
+                        key={cat.id}
+                        onClick={() => setActiveCategory(cat.id)}
+                        className={`rounded-full px-5 py-2 text-[13px] font-semibold transition-all duration-300 ${
+                          activeCategory === cat.id 
+                            ? 'bg-[#080808] text-white shadow-md' 
+                            : 'bg-white border border-[#080808]/10 text-[#080808]/70 hover:bg-[#f3f4f6]'
+                        }`}
+                      >
+                        {cat.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-                <div className="text-right">
+                <div className="text-right hidden md:block">
                   <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.24em] text-[#080808]/42">Vista activa</div>
                   <div className="mt-2 font-epilogue text-[22px] font-semibold italic tracking-[-0.02em] text-[#080808]">
-                    {currentWebSlide.label}
+                    {currentWebSlide ? currentWebSlide.label : ''}
                   </div>
                 </div>
               </div>
@@ -1096,7 +1147,7 @@ const PortfolioSection = () => {
                 />
 
                 <div className="relative h-full w-full" style={{ transformStyle: 'preserve-3d' }}>
-                  {webSlides.map((slide, index) => (
+                  {filteredSlides.map((slide, index) => (
                     <TiltSlide
                       key={slide.id}
                       slide={slide}
@@ -1135,7 +1186,7 @@ const PortfolioSection = () => {
                   <div className="mt-4 flex items-center gap-4">
                     <button
                       type="button"
-                      onClick={() => setActiveWebSlide((prev) => (prev - 1 + webSlides.length) % webSlides.length)}
+                      onClick={() => setActiveWebSlide((prev) => (prev - 1 + filteredSlides.length) % filteredSlides.length)}
                       className="flex h-10 w-10 items-center justify-center rounded-full border border-[#080808]/10 bg-white text-[#080808] transition-transform duration-300 hover:scale-110"
                       aria-label="Anterior"
                     >
@@ -1145,7 +1196,7 @@ const PortfolioSection = () => {
                     </button>
 
                     <div className="flex flex-1 gap-1.5">
-                      {webSlides.map((slide, index) => {
+                      {filteredSlides.map((slide, index) => {
                         const isActive = index === activeWebSlide;
                         return (
                           <button
@@ -1170,7 +1221,7 @@ const PortfolioSection = () => {
 
                     <button
                       type="button"
-                      onClick={() => setActiveWebSlide((prev) => (prev + 1) % webSlides.length)}
+                      onClick={() => setActiveWebSlide((prev) => (prev + 1) % filteredSlides.length)}
                       className="flex h-10 w-10 items-center justify-center rounded-full border border-[#080808]/10 bg-white text-[#080808] transition-transform duration-300 hover:scale-110"
                       aria-label="Siguiente"
                     >
@@ -1351,10 +1402,6 @@ const ExpandedAgencySections = () => (
       }}
     >
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 z-[60] h-[10px]"
-        style={{ background: '#ede4fb' }}
-      />
-      <div
         className="pointer-events-none absolute right-0 top-0 z-[59] h-[56px] w-[34%]"
         style={{ background: 'linear-gradient(180deg, #ede4fb 0%, rgba(237,228,251,0.96) 48%, rgba(237,228,251,0) 100%)' }}
       />
@@ -1487,14 +1534,6 @@ const AliadosSection = () => {
           'linear-gradient(180deg, #6f22ef 0%, #8242f5 30%, #9c67f2 54%, #d9ccfb 78%, #f2ebff 90%, #ede4fb 100%)'
       }}
     >
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 z-[60] h-[6px]"
-        style={{ background: '#6f22ef' }}
-      />
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[60] h-[6px]"
-        style={{ background: '#ede4fb' }}
-      />
       <div className="mx-auto w-full max-w-[1680px] rounded-[34px] bg-[#050505] px-7 py-12 text-white shadow-[0_28px_70px_-48px_rgba(6,2,26,0.7)] ring-1 ring-white/10 md:px-14 md:py-16 lg:min-h-[82vh] lg:px-20 lg:py-24 xl:min-h-[86vh] xl:px-24">
         <div className="absolute inset-0 rounded-[34px]" style={{ background: 'radial-gradient(72% 80% at 22% 44%, rgba(126,60,245,0.20) 0%, rgba(126,60,245,0) 72%), radial-gradient(52% 68% at 82% 58%, rgba(88,27,201,0.34) 0%, rgba(88,27,201,0) 74%)' }} />
 
