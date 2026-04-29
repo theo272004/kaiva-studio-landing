@@ -1595,7 +1595,7 @@ const ScrollRevealHeadline = ({ text, lines }) => {
   return (
     <h2 ref={containerRef} className="font-epilogue text-[clamp(20px,5.8vw,72px)] font-extrabold leading-[1.02] tracking-[-0.04em] text-center max-w-[980px] mt-4 mx-auto flex flex-col items-center">
       {resolvedLines.map((line, lineIndex) => (
-        <span key={lineIndex} className="flex flex-wrap justify-center w-full gap-x-[0.25em]">
+        <span key={lineIndex} className="flex justify-center w-full whitespace-nowrap gap-x-[0.25em]">
           {line.split(" ").map((word) => {
             const currentIndex = wordIndex;
             wordIndex += 1;
@@ -2319,8 +2319,8 @@ const ProblemSection = () => {
         <ScrollRevealHeadline
           lines={[
             'El 91% de las empresas en Colombia',
-            'son pymes. La mayoría',
-            'no existen en\u00A0internet',
+            'son pymes. La mayoría no',
+            'existen en internet.',
           ]}
         />
         
@@ -2732,7 +2732,7 @@ const HeroSection = () => {
         transition={{ duration: 0.55, delay: 0.22, ease: 'easeOut' }}
         className="hero-support-copy absolute bottom-4 left-6 right-6 z-40 hidden md:block md:bottom-[60px] md:left-auto md:right-[80px] md:max-w-[420px] md:text-[15px] text-justify font-normal leading-[1.5] text-[#080808]/64"
       >
-        Deja de perder clientes por no estar en internet. Diseñamos y desarrollamos tu página web con criterio profesional, entrega rápida y un precio justo.
+        Deja de perder clientes por no estar en internet. Diseñamos tu página web con criterio profesional, entrega rápida y un precio justo.
       </motion.p>
     </section>
   );
