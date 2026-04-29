@@ -35,7 +35,7 @@ const serviceShowcase = [
     description:
       'Desde publicidad, portadas y logos hasta la conceptualización completa de la identidad de tu marca, expresando exactamente quién eres y el porqué de tu negocio.',
     accent: '#d96cff',
-    title: 'Diseño de Marca e Interfaces',
+    title: 'Diseño de Marca',
     points: ['Identidad de marca', 'Interfaces UI/UX', 'Piezas publicitarias', 'Sistemas de diseño'],
   },
   {
@@ -45,7 +45,7 @@ const serviceShowcase = [
     description:
       'Sistemas a medida, dashboards analíticos y flujos de automatización. Conectamos tus herramientas para que operes de forma inteligente y rápida.',
     accent: '#21b2c6',
-    title: 'Sistemas y Automatizaciones',
+    title: 'Sistemas y Automatización',
     points: ['Dashboards', 'Integraciones', 'Sistemas a medida', 'Bots de WhatsApp'],
   },
 ];
@@ -661,8 +661,7 @@ const ContactRevealSection = () => {
                 Contacto
               </motion.div>
               <motion.h2 className="mt-6 font-epilogue text-[clamp(40px,7vw,112px)] font-extrabold leading-[0.92] tracking-[-0.04em] text-[#080808] md:tracking-[-0.035em] lg:tracking-[-0.04em]">
-                <motion.span variants={textItem} className="block">Ready to</motion.span>
-                <motion.span variants={textItem} className="block">start?</motion.span>
+                <motion.span variants={textItem} className="block">Hablemos.</motion.span>
               </motion.h2>
               <AnimatedText 
                 text="Cuéntanos qué estás construyendo y te responderemos con una propuesta clara, directa y bien estructurada."
@@ -2095,6 +2094,9 @@ const App = () => {
             transform: scale(0.92);
             transform-origin: left center;
           }
+          .problem-flip-inner.problem-flipped {
+            transform: rotateY(180deg);
+          }
           .plans-section {
             min-height: 100svh;
             display: flex;
@@ -2431,6 +2433,93 @@ const CountUpAnimation = ({ endValue, suffix = "", prefix = "", decimal = false 
   return <span ref={ref}>{prefix}{display}{suffix}</span>;
 };
 
+const ProblemFlipCard = ({ card, index }) => {
+  const [flipped, setFlipped] = useState(false);
+  return (
+    <motion.div
+      className="problem-flip-wrapper"
+      style={{ perspective: '1000px' }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.5, delay: index * 0.08, ease: premiumEase }}
+    >
+      <div
+        className={`problem-flip-inner relative w-full min-h-[240px] md:min-h-[260px] transition-transform duration-700 ${flipped ? 'problem-flipped' : ''}`}
+        style={{ transformStyle: 'preserve-3d' }}
+      >
+        {/* FRONT — Problem */}
+        <div
+          className="problem-flip-face problem-card absolute inset-0 overflow-hidden rounded-[22px] p-5 md:p-6 text-[#080808] flex flex-col justify-between group"
+          style={{ backfaceVisibility: 'hidden' }}
+        >
+          <div className="problem-card-copy relative z-10">
+            <h4 className="font-epilogue text-[20px] md:text-[24px] font-extrabold leading-[1.05] tracking-tight mb-2">
+              {card.problem}
+            </h4>
+            <p className="font-manrope text-[13px] md:text-[14px] leading-[1.5] text-[#080808]/66">
+              {card.problemDesc}
+            </p>
+          </div>
+          <button
+            onClick={() => setFlipped(true)}
+            className="problem-card-button mt-4 inline-flex w-fit items-center gap-3 rounded-full py-1.5 pl-1.5 pr-6 transition-all duration-300 hover:-translate-y-0.5"
+          >
+            <span className="problem-card-button-icon flex h-8 w-8 items-center justify-center rounded-full text-white shadow-sm">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M23 4v6h-6M1 20v-6h6" />
+                <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
+              </svg>
+            </span>
+            <span className="text-[11px] font-bold tracking-widest uppercase text-[#080808]/72">
+              VER SOLUCIÓN
+            </span>
+          </button>
+        </div>
+
+        {/* BACK — Solution */}
+        <div
+          className="problem-flip-face absolute inset-0 overflow-hidden rounded-[22px] p-5 md:p-6 flex flex-col justify-between"
+          style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', background: 'linear-gradient(145deg, #8242f5 0%, #6f22ef 100%)' }}
+        >
+          <div className="relative z-10">
+            <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-white/60 mb-2">
+              Nuestra solución
+            </div>
+            <h4 className="font-epilogue text-[20px] md:text-[24px] font-extrabold leading-[1.05] tracking-tight text-white mb-2">
+              {card.solution}
+            </h4>
+            <p className="font-manrope text-[13px] md:text-[14px] leading-[1.5] text-white/80">
+              {card.solutionDesc}
+            </p>
+          </div>
+          <div className="mt-4 flex items-center gap-3">
+            <button
+              onClick={() => setFlipped(false)}
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/15 text-white transition-colors hover:bg-white/25"
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M23 4v6h-6M1 20v-6h6" />
+                <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
+              </svg>
+            </button>
+            <a
+              href="#planes"
+              onClick={(e) => scrollToSection(e, 'planes')}
+              className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#8242f5] transition-transform hover:scale-105"
+            >
+              Ver planes
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 const ProblemSection = () => {
   return (
     <section id="problema" className="problem-section relative w-full bg-transparent text-[#080808] px-6 py-14 md:py-24 lg:px-16">
@@ -2482,103 +2571,34 @@ const ProblemSection = () => {
           </h3>
 
           <div className="problem-reasons-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-            
-            {/* Card 1 */}
-            <div className="problem-card relative overflow-hidden rounded-[22px] p-5 text-[#080808] min-h-[210px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 md:p-6">
-              <div className="problem-card-copy relative z-10">
-                <h4 className="font-epilogue text-[22px] md:text-[26px] font-extrabold leading-[1.05] tracking-tight mb-2">
-                  Es muy caro.
-                </h4>
-                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.5] text-[#080808]/66 mb-5">
-                  Muchos negocios creen que tener una web profesional está fuera de su presupuesto. No tiene por qué serlo.
-                </p>
-              </div>
-                <button 
-                  className="problem-card-button inline-flex w-fit items-center gap-3 rounded-full py-1.5 pl-1.5 pr-7 transition-all duration-300 hover:-translate-y-0.5"
-                >
-                  <span className="problem-card-button-icon flex h-8 w-8 items-center justify-center rounded-full text-white shadow-sm">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M7 17L17 7M17 7H7M17 7V17" />
-                    </svg>
-                  </span>
-                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#080808]/72">
-                    SABER MÁS
-                  </span>
-                </button>
-            </div>
-
-            {/* Card 2 */}
-            <div className="problem-card relative overflow-hidden rounded-[22px] p-5 text-[#080808] min-h-[210px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 md:p-6">
-              <div className="problem-card-copy relative z-10">
-                <h4 className="font-epilogue text-[22px] md:text-[26px] font-extrabold leading-[1.05] tracking-tight mb-2">
-                  No sé cómo funciona.
-                </h4>
-                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.5] text-[#080808]/66 mb-5">
-                  Dominios, hosting, SEO, diseño... el lenguaje técnico aleja a dueños de negocio que simplemente quieren más clientes.
-                </p>
-              </div>
-                <button 
-                  className="problem-card-button inline-flex w-fit items-center gap-3 rounded-full py-1.5 pl-1.5 pr-7 transition-all duration-300 hover:-translate-y-0.5"
-                >
-                  <span className="problem-card-button-icon flex h-8 w-8 items-center justify-center rounded-full text-white shadow-sm">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M7 17L17 7M17 7H7M17 7V17" />
-                    </svg>
-                  </span>
-                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#080808]/72">
-                    SABER MÁS
-                  </span>
-                </button>
-            </div>
-
-            {/* Card 3 */}
-            <div className="problem-card relative overflow-hidden rounded-[22px] p-5 text-[#080808] min-h-[210px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 md:p-6">
-              <div className="problem-card-copy relative z-10">
-                <h4 className="font-epilogue text-[22px] md:text-[26px] font-extrabold leading-[1.05] tracking-tight mb-2">
-                  Ya intenté y no funcionó.
-                </h4>
-                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.5] text-[#080808]/66 mb-5">
-                  Malas experiencias con freelancers o plantillas genéricas que no reflejan el negocio ni generan resultados.
-                </p>
-              </div>
-                <button 
-                  className="problem-card-button inline-flex w-fit items-center gap-3 rounded-full py-1.5 pl-1.5 pr-7 transition-all duration-300 hover:-translate-y-0.5"
-                >
-                  <span className="problem-card-button-icon flex h-8 w-8 items-center justify-center rounded-full text-white shadow-sm">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M7 17L17 7M17 7H7M17 7V17" />
-                    </svg>
-                  </span>
-                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#080808]/72">
-                    SABER MÁS
-                  </span>
-                </button>
-            </div>
-
-            {/* Card 4 */}
-            <div className="problem-card relative overflow-hidden rounded-[22px] p-5 text-[#080808] min-h-[210px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 md:p-6">
-              <div className="problem-card-copy relative z-10">
-                <h4 className="font-epilogue text-[22px] md:text-[26px] font-extrabold leading-[1.05] tracking-tight mb-2">
-                  No tengo tiempo.
-                </h4>
-                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.5] text-[#080808]/66 mb-5">
-                  Gestionar un negocio ya es suficiente trabajo. No debería necesitarse un equipo técnico propio para tener presencia digital.
-                </p>
-              </div>
-                <button 
-                  className="problem-card-button inline-flex w-fit items-center gap-3 rounded-full py-1.5 pl-1.5 pr-7 transition-all duration-300 hover:-translate-y-0.5"
-                >
-                  <span className="problem-card-button-icon flex h-8 w-8 items-center justify-center rounded-full text-white shadow-sm">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M7 17L17 7M17 7H7M17 7V17" />
-                    </svg>
-                  </span>
-                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#080808]/72">
-                    SABER MÁS
-                  </span>
-                </button>
-            </div>
-
+            {[
+              {
+                problem: 'Es muy caro.',
+                problemDesc: 'Muchos negocios creen que una web profesional está fuera de su alcance.',
+                solution: 'Inversión con retorno real.',
+                solutionDesc: 'Desde $320 USD. Una web profesional que trabaja 24/7 captando clientes. Se paga sola.',
+              },
+              {
+                problem: 'No sé cómo funciona.',
+                problemDesc: 'Dominios, hosting, SEO... el lenguaje técnico aleja a quienes solo quieren más clientes.',
+                solution: 'Nos encargamos de todo.',
+                solutionDesc: 'Tú solo nos cuentas tu negocio. Nosotros hacemos el resto: dominio, diseño y publicación.',
+              },
+              {
+                problem: 'Ya intenté y no funcionó.',
+                problemDesc: 'Malas experiencias con freelancers o plantillas que no reflejan tu negocio.',
+                solution: 'Estrategia, no plantillas.',
+                solutionDesc: 'Cada proyecto tiene estructura, copy estratégico y diseño pensado para convertir.',
+              },
+              {
+                problem: 'No tengo tiempo.',
+                problemDesc: 'Gestionar un negocio ya es suficiente. No deberías necesitar un equipo técnico.',
+                solution: 'Entrega lista para operar.',
+                solutionDesc: 'En semanas tienes tu web publicada y funcionando. Sin reuniones infinitas.',
+              },
+            ].map((card, i) => (
+              <ProblemFlipCard key={i} card={card} index={i} />
+            ))}
           </div>
         </div>
       </div>
