@@ -56,6 +56,49 @@ const serviceShowcase = [
   },
 ];
 
+const webSlides = [
+  {
+    id: 1,
+    number: '01',
+    label: 'Inteligencia de Negocios',
+    vibe: 'Analítico · Predictivo',
+    brand: 'KAIVA INSIGHTS',
+    description: 'Transformamos datos complejos en dashboards intuitivos que impulsan decisiones estratégicas.',
+    accent: '#8242f5',
+    mockup: 'dashboard',
+  },
+  {
+    id: 2,
+    number: '02',
+    label: 'E-Commerce de Lujo',
+    vibe: 'Exclusivo · Conversión',
+    brand: 'KAIVA COMMERCE',
+    description: 'Experiencias de compra premium donde la estética eleva el valor percibido de cada producto.',
+    accent: '#8242f5',
+    mockup: 'ecommerce',
+  },
+  {
+    id: 3,
+    number: '03',
+    label: 'Infraestructura SaaS',
+    vibe: 'Sólido · Escalable',
+    brand: 'KAIVA CORE',
+    description: 'Plataformas tecnológicas diseñadas para el rendimiento extremo y la claridad operativa.',
+    accent: '#8242f5',
+    mockup: 'tech',
+  },
+  {
+    id: 4,
+    number: '04',
+    label: 'Editorial Creativo',
+    vibe: 'Sofisticado · Narrativo',
+    brand: 'KAIVA STUDIO',
+    description: 'Storytelling visual para marcas que buscan destacar en un ecosistema digital saturado.',
+    accent: '#8242f5',
+    mockup: 'creative',
+  },
+];
+
 const services = [
   {
     title: 'Desarrollo web',
@@ -851,22 +894,46 @@ const ServicesSection = () => {
 const PortfolioSection = () => {
   const prefersReducedMotion = useReducedMotion();
   const [activeServiceId, setActiveServiceId] = useState('web');
+  const [activeWebSlide, setActiveWebSlide] = useState(1);
+  const [isWebCarouselHovering, setIsWebCarouselHovering] = useState(false);
   const activeService = serviceShowcase.find((service) => service.id === activeServiceId) || serviceShowcase[0];
+
+  useEffect(() => {
+    if (activeService.id !== 'web' || isWebCarouselHovering) return undefined;
+    const timer = setInterval(() => {
+      setActiveWebSlide((prev) => (prev + 1) % webSlides.length);
+    }, 5500);
+    return () => clearInterval(timer);
+  }, [activeService.id, isWebCarouselHovering]);
+
+  const handleWebCarouselWheel = (event) => {
+    if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) {
+      event.preventDefault();
+      if (event.deltaX > 30) setActiveWebSlide((prev) => Math.min(prev + 1, webSlides.length - 1));
+      if (event.deltaX < -30) setActiveWebSlide((prev) => Math.max(prev - 1, 0));
+    }
+  };
+
+  const currentWebSlide = webSlides[activeWebSlide];
 
   return (
     <div
       id="proyectos"
       data-nav-theme="light"
-      className="relative overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f7f3ff_44%,#f7f5fb_100%)] pb-20 text-[#080808]"
+      className="relative overflow-hidden bg-[linear-gradient(180deg,#ede4fb_0%,#f2ebff_14%,#f6f0ff_30%,#f7f3ff_46%,#f7f5fb_100%)] pb-20 text-[#080808]"
       style={{ fontFamily: 'Manrope, sans-serif' }}
     >
       <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-[220px]"
+        style={{ background: 'linear-gradient(180deg, rgba(139,77,240,0.18) 0%, rgba(139,77,240,0.08) 36%, rgba(255,255,255,0) 100%)' }}
+      />
+      <div
         className="pointer-events-none absolute left-[-10%] top-[16%] h-[320px] w-[320px] rounded-full blur-[95px]"
-        style={{ background: 'rgba(130,66,245,0.18)' }}
+        style={{ background: 'rgba(130,66,245,0.2)' }}
       />
       <div
         className="pointer-events-none absolute right-[-8%] top-[28%] h-[280px] w-[280px] rounded-full blur-[95px]"
-        style={{ background: 'rgba(33,178,198,0.12)' }}
+        style={{ background: 'rgba(186,145,255,0.16)' }}
       />
 
       <div className="relative z-20 mx-auto max-w-[1380px] px-6 pt-12 md:px-16 md:pt-20">
@@ -952,27 +1019,146 @@ const PortfolioSection = () => {
             </AnimatePresence>
           </div>
         </div>
-      </div>
 
-      <div className="pointer-events-none relative z-10 mt-12 hidden h-[240px] md:block">
-        <FloatingRobot
-          src={asset('KaivaTheo.webp')}
-          className="hidden sm:block"
-          style={{ top: '6%', left: '4%', width: 'clamp(72px, 11vw, 190px)', height: 'clamp(72px, 11vw, 190px)' }}
-          delay={0.4}
-          duration={10.5}
-          amplitude={7}
-          rotation={3}
-        />
-        <FloatingRobot
-          src={asset('KaivaSara.webp')}
-          className="hidden sm:block"
-          style={{ bottom: '4%', right: '4%', width: 'clamp(72px, 11vw, 190px)', height: 'clamp(72px, 11vw, 190px)' }}
-          delay={2.2}
-          duration={10.5}
-          amplitude={7}
-          rotation={3}
-        />
+        <AnimatePresence initial={false}>
+          {activeService.id === 'web' && (
+            <motion.div
+              key="web-carousel"
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -18 }}
+              transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.45, ease: premiumEase }}
+              className="mt-16"
+            >
+              <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                <div className="max-w-2xl">
+                  <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#8242f5]">Nuestras webs</div>
+                  <h3 className="mt-3 font-epilogue text-[clamp(28px,3.8vw,52px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-[#080808]">
+                    El carrusel sigue aquí, ahora como respaldo visual del servicio.
+                  </h3>
+                </div>
+                <div className="text-right">
+                  <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.24em] text-[#080808]/42">Vista activa</div>
+                  <div className="mt-2 font-epilogue text-[22px] font-semibold italic tracking-[-0.02em] text-[#080808]">
+                    {currentWebSlide.label}
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className="relative h-[360px] overflow-hidden rounded-[34px] border border-white/55 bg-[linear-gradient(180deg,#f7f3ff_0%,#ffffff_100%)] px-4 py-6 shadow-[0_34px_90px_-46px_rgba(91,33,182,0.24)] sm:h-[420px] md:px-8 md:py-8 lg:h-[520px]"
+                onWheel={handleWebCarouselWheel}
+                onMouseEnter={() => setIsWebCarouselHovering(true)}
+                onMouseLeave={() => setIsWebCarouselHovering(false)}
+              >
+                <FloatingRobot
+                  src={asset('KaivaTheo.webp')}
+                  className="hidden md:block"
+                  style={{ top: '5%', left: '2%', width: 'clamp(66px, 9vw, 170px)', height: 'clamp(66px, 9vw, 170px)' }}
+                  delay={0.2}
+                  duration={10}
+                  amplitude={6}
+                  rotation={2}
+                />
+                <FloatingRobot
+                  src={asset('KaivaSara.webp')}
+                  className="hidden md:block"
+                  style={{ bottom: '8%', right: '2%', width: 'clamp(66px, 9vw, 170px)', height: 'clamp(66px, 9vw, 170px)' }}
+                  delay={1.8}
+                  duration={10.4}
+                  amplitude={6}
+                  rotation={2}
+                />
+
+                <div className="relative h-full w-full" style={{ transformStyle: 'preserve-3d' }}>
+                  {webSlides.map((slide, index) => (
+                    <TiltSlide
+                      key={slide.id}
+                      slide={slide}
+                      isActive={index === activeWebSlide}
+                      position={index - activeWebSlide}
+                      onClick={() => setActiveWebSlide(index)}
+                    />
+                  ))}
+                </div>
+
+                <div className="absolute inset-x-4 bottom-4 z-20 rounded-[24px] border border-white/70 bg-white/88 px-4 py-4 shadow-[0_18px_44px_-30px_rgba(15,23,42,0.2)] backdrop-blur-xl md:left-8 md:right-8 md:bottom-8 md:px-5">
+                  <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                    <div className="flex items-end gap-3">
+                      <div className="font-epilogue text-[40px] font-extrabold italic leading-none tracking-[-0.03em] opacity-90 md:text-[58px]" style={gradientAccentStyle}>
+                        {currentWebSlide.number}
+                      </div>
+                      <div className="pb-1">
+                        <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.24em] text-[#080808]/42">Caso visual</div>
+                        <div className="font-epilogue text-[22px] font-semibold italic leading-[1.1] tracking-[-0.02em] text-[#080808] md:text-[28px]">
+                          {currentWebSlide.label}
+                        </div>
+                        <div className="mt-1 font-manrope text-[11px] tracking-wider text-[#080808]/56">{currentWebSlide.vibe}</div>
+                      </div>
+                    </div>
+
+                    <div className="md:max-w-[260px] md:text-right">
+                      <div className="mb-2 font-manrope text-[11px] font-bold uppercase tracking-wider" style={gradientAccentStyle}>
+                        - {currentWebSlide.brand}
+                      </div>
+                      <div className="font-manrope text-[13px] italic leading-relaxed text-[#080808]/66">
+                        {currentWebSlide.description}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex items-center gap-4">
+                    <button
+                      type="button"
+                      onClick={() => setActiveWebSlide((prev) => (prev - 1 + webSlides.length) % webSlides.length)}
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-[#080808]/10 bg-white text-[#080808] transition-transform duration-300 hover:scale-110"
+                      aria-label="Anterior"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                        <path d="M15 18l-6-6 6-6" />
+                      </svg>
+                    </button>
+
+                    <div className="flex flex-1 gap-1.5">
+                      {webSlides.map((slide, index) => {
+                        const isActive = index === activeWebSlide;
+                        return (
+                          <button
+                            key={slide.id}
+                            type="button"
+                            onClick={() => setActiveWebSlide(index)}
+                            className="group relative h-[2px] flex-1 overflow-hidden bg-[#080808]/12"
+                          >
+                            <motion.div
+                              className="absolute inset-y-0 left-0 origin-left"
+                              style={{ background: 'linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%)' }}
+                              initial={{ scaleX: 0 }}
+                              animate={{
+                                scaleX: index < activeWebSlide ? 1 : isActive ? (isWebCarouselHovering ? 0 : 1) : 0,
+                              }}
+                              transition={isActive && !isWebCarouselHovering ? { duration: 5.5, ease: 'linear' } : { duration: 0.4 }}
+                            />
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setActiveWebSlide((prev) => (prev + 1) % webSlides.length)}
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-[#080808]/10 bg-white text-[#080808] transition-transform duration-300 hover:scale-110"
+                      aria-label="Siguiente"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                        <path d="M9 18l6-6-6-6" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
