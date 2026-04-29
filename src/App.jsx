@@ -636,9 +636,11 @@ const ContactRevealSection = () => {
     <section 
       id="contacto" 
       ref={sectionRef} 
-      className="contact-section relative w-full overflow-x-clip"
-      style={{ background: 'linear-gradient(180deg, #ffffff 0%, #faf7ff 40%, #f1e9ff 100%)' }}
+      className="contact-section relative w-full overflow-x-clip bg-[#f9f8fc]"
     >
+      {/* Decorative orb behind the glass to make the blur visible */}
+      <div className="absolute right-[5%] top-1/2 -translate-y-1/2 w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] bg-[#8242f5] opacity-[0.15] blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute right-[15%] top-[30%] w-[30vw] h-[30vw] max-w-[400px] max-h-[400px] bg-[#d96cff] opacity-[0.12] blur-[80px] rounded-full pointer-events-none" />
       <div
         className="contact-main-block mx-auto flex w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
         style={{
@@ -676,11 +678,11 @@ const ContactRevealSection = () => {
               variants={formItem}
               whileHover={prefersReducedMotion || isMobile ? undefined : { y: -2 }}
               transition={{ duration: 0.32, ease: premiumEase }}
-              className="relative z-30 rounded-[34px] p-5 md:p-6 shadow-2xl border border-white/40"
+              className="relative z-30 rounded-[34px] p-6 md:p-8 shadow-[0_24px_60px_-16px_rgba(130,66,245,0.15)] border border-white/60"
               style={{
-                background: 'rgba(255, 255, 255, 0.15)',
-                backdropFilter: 'blur(40px)',
-                WebkitBackdropFilter: 'blur(40px)',
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 100%)',
+                backdropFilter: 'blur(32px)',
+                WebkitBackdropFilter: 'blur(32px)',
                 ...(isMobile ? {} : { transformPerspective: 1600, transformStyle: 'preserve-3d' })
               }}
             >
@@ -1368,14 +1370,14 @@ const ExpandedAgencySections = () => (
     </div>
     <div style={{ marginTop: '-2px', position: 'relative', zIndex: 1 }}>
       <section
-      id="planes"
-      data-nav-theme="light"
-      className="plans-section relative overflow-hidden px-4 pb-12 pt-14 md:px-8 md:pb-16 md:pt-20"
-      style={{
-        background:
-          'linear-gradient(180deg, #ede4fb 0%, #f1e9ff 18%, #faf7ff 42%, #ffffff 100%)'
-      }}
-    >
+        id="planes"
+        data-nav-theme="light"
+        className="plans-section relative overflow-hidden px-4 pb-12 pt-14 md:px-8 md:pb-16 md:pt-20"
+        style={{
+          background:
+            'linear-gradient(180deg, #ede4fb 0%, #ffffff 40%, #ffffff 100%)'
+        }}
+      >
       <motion.img
         src={asset('KaivaMora1.webp')}
         alt=""
@@ -1874,6 +1876,7 @@ const ProjectsPage = () => {
   return (
     <>
       <FixedNavbar projectsActive />
+      <ServicesSection />
       <ProjectsGallery />
     </>
   );
