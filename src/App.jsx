@@ -1301,7 +1301,11 @@ const ExpandedAgencySections = () => (
     <section
       id="planes"
       data-nav-theme="light"
-      className="plans-section relative m-0 overflow-hidden bg-transparent px-4 pb-12 pt-0 md:px-8 md:pb-16"
+      className="plans-section relative -mt-px overflow-hidden px-4 pb-12 pt-14 md:px-8 md:pb-16 md:pt-20"
+      style={{
+        background:
+          'linear-gradient(180deg, #ede4fb 0%, #f2ebff 18%, #faf7ff 42%, #ffffff 100%)'
+      }}
     >
       <motion.img
         src={asset('KaivaMora1.webp')}
