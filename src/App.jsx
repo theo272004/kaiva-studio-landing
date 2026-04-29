@@ -1301,12 +1301,16 @@ const ExpandedAgencySections = () => (
     <section
       id="planes"
       data-nav-theme="light"
-      className="plans-section relative -mt-px overflow-hidden px-4 pb-12 pt-14 md:px-8 md:pb-16 md:pt-20"
+      className="plans-section relative -mt-[3px] overflow-hidden px-4 pb-12 pt-14 md:px-8 md:pb-16 md:pt-20"
       style={{
         background:
-          'linear-gradient(180deg, #ede4fb 0%, #f2ebff 18%, #faf7ff 42%, #ffffff 100%)'
+          'linear-gradient(180deg, #ede4fb 0%, #f1e9ff 18%, #faf7ff 42%, #ffffff 100%)'
       }}
     >
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-10 h-[4px]"
+        style={{ background: '#ede4fb' }}
+      />
       <motion.img
         src={asset('KaivaMora1.webp')}
         alt=""
@@ -1433,13 +1437,21 @@ const ExpandedAgencySections = () => (
 const AliadosSection = () => {
   return (
     <section
-      className="allies-section relative w-full overflow-hidden px-4 py-12 md:px-8 md:py-16 lg:py-20"
+      className="allies-section relative -mt-[3px] overflow-hidden px-4 py-12 md:px-8 md:py-16 lg:py-20"
       style={{
         background:
           'linear-gradient(180deg, #6f22ef 0%, #8242f5 30%, #9c67f2 54%, #d9ccfb 78%, #f2ebff 90%, #ede4fb 100%)'
       }}
     >
-      <div className="mx-auto w-full max-w-[1680px] rounded-[34px] bg-[#050505] px-7 py-12 text-white shadow-[0_35px_90px_-42px_rgba(6,2,26,0.95)] ring-1 ring-white/10 md:px-14 md:py-16 lg:min-h-[82vh] lg:px-20 lg:py-24 xl:min-h-[86vh] xl:px-24">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-10 h-[4px]"
+        style={{ background: '#6f22ef' }}
+      />
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[4px]"
+        style={{ background: '#ede4fb' }}
+      />
+      <div className="mx-auto w-full max-w-[1680px] rounded-[34px] bg-[#050505] px-7 py-12 text-white shadow-[0_28px_70px_-48px_rgba(6,2,26,0.7)] ring-1 ring-white/10 md:px-14 md:py-16 lg:min-h-[82vh] lg:px-20 lg:py-24 xl:min-h-[86vh] xl:px-24">
         <div className="absolute inset-0 rounded-[34px]" style={{ background: 'radial-gradient(72% 80% at 22% 44%, rgba(126,60,245,0.20) 0%, rgba(126,60,245,0) 72%), radial-gradient(52% 68% at 82% 58%, rgba(88,27,201,0.34) 0%, rgba(88,27,201,0) 74%)' }} />
 
         <div className="relative z-10 grid items-center gap-10 lg:min-h-[calc(82vh-12rem)] lg:grid-cols-[1.18fr_0.82fr] lg:gap-12 xl:min-h-[calc(86vh-12rem)]">
