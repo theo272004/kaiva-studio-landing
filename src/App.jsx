@@ -1551,9 +1551,9 @@ const ScrollRevealHeadline = ({ text, lines }) => {
   let wordIndex = 0;
   
   return (
-    <h2 ref={containerRef} className="font-epilogue text-[clamp(36px,6vw,72px)] font-extrabold leading-[1.02] tracking-[-0.04em] text-center max-w-[980px] mt-4">
+    <h2 ref={containerRef} className="font-epilogue text-[clamp(20px,5.8vw,72px)] font-extrabold leading-[1.02] tracking-[-0.04em] text-center max-w-[980px] mt-4">
       {resolvedLines.map((line, lineIndex) => (
-        <span key={lineIndex} className="block">
+        <span key={lineIndex} className="block whitespace-nowrap">
           {line.split(" ").map((word) => {
             const currentIndex = wordIndex;
             wordIndex += 1;
