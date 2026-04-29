@@ -27,7 +27,7 @@ const serviceShowcase = [
       'Landing pages y sitios corporativos con estructura clara, velocidad real y una narrativa diseñada para convertir visitas en conversaciones.',
     accent: '#8242f5',
     mockup: 'ecommerce',
-    title: 'Webs que se sienten serias y ayudan a vender mejor.',
+    title: 'Rendimiento & Conversión',
     points: ['Copy y estructura', 'Responsive premium', 'SEO base', 'Entrega lista para crecer'],
   },
   {
@@ -287,17 +287,17 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
                 <span className="block h-[10px] w-[10px] rounded-full bg-[#28c840]" />
               </div>
               <div className="content flex flex-col gap-[0.7rem] p-[1.6rem]">
-                <div className="line h-[8px] rounded-[4px] bg-[#eae6df]" />
+                <div className="line h-[8px] w-[80%] rounded-[4px] bg-[#eae6df]" />
                 <div className="line short h-[8px] w-[60%] rounded-[4px] bg-[#eae6df]" />
                 <div className="line accent h-[8px] w-[35%] rounded-[4px] bg-[#792fec] shadow-[0_0_12px_rgba(121,47,236,0.25)]" />
                 <div className="card-mini mt-[0.4rem] flex items-center gap-[0.8rem] rounded-[8px] border border-[#e0dbd2] bg-[#f9f8f6] p-[1rem]">
                   <div className="avatar h-[32px] w-[32px] rounded-full bg-[#d9d3ca]" />
                   <div className="text-group flex-1">
-                    <div className="l mb-[4px] h-[6px] rounded-[3px] bg-[#d9d3ca]" />
+                    <div className="l mb-[4px] h-[6px] w-[70%] rounded-[3px] bg-[#d9d3ca]" />
                     <div className="l short h-[6px] w-[50%] rounded-[3px] bg-[#d9d3ca]" />
                   </div>
                 </div>
-                <div className="line h-[8px] rounded-[4px] bg-[#eae6df]" />
+                <div className="line h-[8px] w-[50%] rounded-[4px] bg-[#eae6df]" />
                 <div className="line short h-[8px] w-[60%] rounded-[4px] bg-[#eae6df]" />
               </div>
             </div>
@@ -959,21 +959,21 @@ const PortfolioSection = () => {
 
       <div className="relative z-20 mx-auto max-w-[1280px] px-6 pt-6 md:px-12 md:pt-8">
         <div className="mt-0">
-          <div className="relative hidden md:block h-[310vh]">
+          <div className="sticky-container relative hidden h-[310vh] md:block">
             {serviceShowcase.map((service, index) => (
               <article
                 key={service.id}
-                className="service-stack-card group sticky top-[20px] mb-[10px] overflow-hidden rounded-[28px] border border-[#d9d3ca] bg-white shadow-[0_12px_30px_rgba(57,53,44,0.06)] transition-[border-color,box-shadow,transform] duration-[600ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-[#792fec]/30 hover:shadow-[0_24px_60px_rgba(57,53,44,0.08),0_0_0_1px_rgba(121,47,236,0.12)]"
+                className="service-card group sticky top-[20px] mb-[10px] overflow-hidden rounded-[28px] border border-[#d9d3ca] bg-white shadow-[0_12px_30px_rgba(57,53,44,0.06)] transition-[border-color,box-shadow] duration-[600ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-[#792fec]/30 hover:shadow-[0_24px_60px_rgba(57,53,44,0.08),0_0_0_1px_rgba(121,47,236,0.12)]"
                 style={{ zIndex: index + 1 }}
                 onMouseMove={handleServiceCardMouseMove}
                 onMouseLeave={resetServiceCardMouseMove}
               >
                 <div className="flex h-[calc(100vh-60px)] min-h-[520px]">
-                  <div className="relative flex-[1] flex flex-col justify-center overflow-hidden px-10 py-12 lg:px-14 lg:py-16">
+                  <div className="service-info relative flex-[1] overflow-hidden">
                     <div className="pointer-events-none absolute left-8 top-6 font-['Inter Tight'] text-[88px] font-extrabold leading-none tracking-[-0.06em] text-[#39352c]/[0.03] lg:text-[110px]">
                       {service.number}
                     </div>
-                    <div className="relative z-10">
+                    <div className="relative z-10 flex flex-col justify-center px-10 py-12 lg:px-14 lg:py-16">
                       <div
                         className="inline-flex rounded-full border px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em]"
                         style={{
@@ -1002,9 +1002,9 @@ const PortfolioSection = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="relative flex-[1.1] border-l border-[#d9d3ca] bg-[#eae6df]">
+                  <div className="service-visual relative flex-[1.1] border-l border-[#d9d3ca] bg-[#eae6df]">
                     <div className="flex h-full w-full items-center justify-center p-6 lg:p-8">
-                    <ServiceShowcaseVisual service={service} prefersReducedMotion={prefersReducedMotion} />
+                      <ServiceShowcaseVisual service={service} prefersReducedMotion={prefersReducedMotion} />
                     </div>
                   </div>
                 </div>
