@@ -273,32 +273,32 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: 0.985 }}
         transition={panelTransition}
-        className="service-visual-web w-full overflow-hidden rounded-[30px] border border-[#ddd6cd] bg-[#eae6df] shadow-[0_24px_60px_-34px_rgba(57,53,44,0.12)]"
+        className="service-visual-web w-full overflow-hidden rounded-[30px] bg-[#eae6df]"
       >
         <div
           className="transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform"
           style={{ transform: 'perspective(700px) rotateY(var(--service-rotate-y,0deg)) rotateX(var(--service-rotate-x,0deg)) translateZ(8px)' }}
         >
           <div className="flex min-h-[390px] items-center justify-center bg-[#eae6df] p-8">
-            <div className="mockup-browser w-[84%] max-w-[500px] overflow-hidden rounded-[16px] border border-white/85 bg-white shadow-[0_24px_60px_rgba(57,53,44,0.10)]">
-              <div className="bar flex h-[34px] items-center gap-[7px] bg-[linear-gradient(180deg,_#fbfaf8_0%,_#f4f0ea_100%)] px-[16px]">
+            <div className="mockup-browser w-[85%] max-w-[480px] overflow-hidden rounded-[12px] border border-[#d9d3ca] bg-white shadow-[0_20px_50px_rgba(57,53,44,0.15)]">
+              <div className="bar flex h-[30px] items-center gap-[7px] bg-[#f7f5f2] px-[14px]">
                 <span className="block h-[10px] w-[10px] rounded-full bg-[#ff5f57]" />
                 <span className="block h-[10px] w-[10px] rounded-full bg-[#febc2e]" />
                 <span className="block h-[10px] w-[10px] rounded-full bg-[#28c840]" />
               </div>
-              <div className="content flex flex-col gap-[0.85rem] bg-[linear-gradient(135deg,_#ffffff_0%,_#fbfaf8_42%,_#eef7ff_100%)] p-[1.8rem]">
-                <div className="line h-[8px] rounded-[999px] bg-[#e6e1d8]" />
-                <div className="line short h-[8px] w-[62%] rounded-[999px] bg-[#ebe6de]" />
-                <div className="line accent h-[10px] w-[36%] rounded-[999px] bg-[#792fec] shadow-[0_0_18px_rgba(121,47,236,0.24)]" />
-                <div className="card-mini mt-[0.45rem] flex items-center gap-[0.9rem] rounded-[12px] border border-[#e5ded4] bg-[#f9f7f3] p-[1rem] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
-                  <div className="avatar h-[34px] w-[34px] rounded-full bg-[#d9d3ca]" />
+              <div className="content flex flex-col gap-[0.7rem] p-[1.6rem]">
+                <div className="line h-[8px] rounded-[4px] bg-[#eae6df]" />
+                <div className="line short h-[8px] w-[60%] rounded-[4px] bg-[#eae6df]" />
+                <div className="line accent h-[8px] w-[35%] rounded-[4px] bg-[#792fec] shadow-[0_0_12px_rgba(121,47,236,0.25)]" />
+                <div className="card-mini mt-[0.4rem] flex items-center gap-[0.8rem] rounded-[8px] border border-[#e0dbd2] bg-[#f9f8f6] p-[1rem]">
+                  <div className="avatar h-[32px] w-[32px] rounded-full bg-[#d9d3ca]" />
                   <div className="text-group flex-1">
-                    <div className="l mb-[6px] h-[6px] rounded-[999px] bg-[#d5cec4]" />
-                    <div className="l short h-[6px] w-[52%] rounded-[999px] bg-[#d5cec4]" />
+                    <div className="l mb-[4px] h-[6px] rounded-[3px] bg-[#d9d3ca]" />
+                    <div className="l short h-[6px] w-[50%] rounded-[3px] bg-[#d9d3ca]" />
                   </div>
                 </div>
-                <div className="line h-[8px] rounded-[999px] bg-[#e8e3da]" />
-                <div className="line short h-[8px] w-[62%] rounded-[999px] bg-[#ece7df]" />
+                <div className="line h-[8px] rounded-[4px] bg-[#eae6df]" />
+                <div className="line short h-[8px] w-[60%] rounded-[4px] bg-[#eae6df]" />
               </div>
             </div>
           </div>
@@ -961,19 +961,15 @@ const PortfolioSection = () => {
         <div className="mt-0">
           <div className="relative hidden md:block h-[310vh]">
             {serviceShowcase.map((service, index) => (
-              <motion.article
+              <article
                 key={service.id}
-                initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.18 }}
-                transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, ease: premiumEase, delay: index * 0.04 }}
                 className="service-stack-card group sticky top-[20px] mb-[10px] overflow-hidden rounded-[28px] border border-[#d9d3ca] bg-white shadow-[0_12px_30px_rgba(57,53,44,0.06)] transition-[border-color,box-shadow,transform] duration-[600ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-[#792fec]/30 hover:shadow-[0_24px_60px_rgba(57,53,44,0.08),0_0_0_1px_rgba(121,47,236,0.12)]"
                 style={{ zIndex: index + 1 }}
                 onMouseMove={handleServiceCardMouseMove}
                 onMouseLeave={resetServiceCardMouseMove}
               >
-                <div className="grid h-[calc(100vh-60px)] min-h-[520px] gap-0 lg:grid-cols-[0.94fr_1.06fr]">
-                  <div className="relative flex flex-col justify-center overflow-hidden border-r border-[#e5ded4] px-10 py-12 lg:px-14 lg:py-16">
+                <div className="flex h-[calc(100vh-60px)] min-h-[520px]">
+                  <div className="relative flex-[1] flex flex-col justify-center overflow-hidden px-10 py-12 lg:px-14 lg:py-16">
                     <div className="pointer-events-none absolute left-8 top-6 font-['Inter Tight'] text-[88px] font-extrabold leading-none tracking-[-0.06em] text-[#39352c]/[0.03] lg:text-[110px]">
                       {service.number}
                     </div>
@@ -1006,11 +1002,13 @@ const PortfolioSection = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center justify-center bg-[#eae6df] p-6 lg:p-8">
+                  <div className="relative flex-[1.1] border-l border-[#d9d3ca] bg-[#eae6df]">
+                    <div className="flex h-full w-full items-center justify-center p-6 lg:p-8">
                     <ServiceShowcaseVisual service={service} prefersReducedMotion={prefersReducedMotion} />
+                    </div>
                   </div>
                 </div>
-              </motion.article>
+              </article>
             ))}
           </div>
 
