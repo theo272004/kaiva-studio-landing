@@ -185,8 +185,8 @@ const premiumEase = [0.22, 1, 0.36, 1];
 const handleServiceCardMouseMove = (event) => {
   if (typeof window !== 'undefined' && window.innerWidth < 769) return;
   const rect = event.currentTarget.getBoundingClientRect();
-  const moveX = ((event.clientX - rect.left) / rect.width - 0.5) * 24;
-  const moveY = ((event.clientY - rect.top) / rect.height - 0.5) * 20;
+  const moveX = ((event.clientX - rect.left) / rect.width - 0.5) * 36;
+  const moveY = ((event.clientY - rect.top) / rect.height - 0.5) * 28;
   event.currentTarget.style.setProperty('--service-move-x', `${moveX}px`);
   event.currentTarget.style.setProperty('--service-move-y', `${moveY}px`);
   event.currentTarget.style.setProperty('--service-rotate-y', `${moveX * 0.45}deg`);
@@ -277,38 +277,28 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
       >
         <div
           className="transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform"
-          style={{ transform: 'perspective(700px) rotateY(var(--service-rotate-y,0deg)) rotateX(var(--service-rotate-x,0deg)) translateZ(8px)' }}
+          style={{ transform: 'perspective(700px) rotateY(var(--service-rotate-y,0deg)) rotateX(var(--service-rotate-x,0deg)) translateZ(14px)' }}
         >
-          <div className="flex items-center gap-2 border-b border-white/8 px-5 py-4">
-            <span className="h-2.5 w-2.5 rounded-full bg-[#ff6b6b]" />
-            <span className="h-2.5 w-2.5 rounded-full bg-[#ffd166]" />
-            <span className="h-2.5 w-2.5 rounded-full bg-[#06d6a0]" />
-            <div className="ml-3 rounded-full bg-white/7 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/46">
-              Landing premium
-            </div>
-          </div>
-          <div className="grid gap-4 bg-[radial-gradient(circle_at_top_left,_rgba(130,66,245,0.38),_transparent_42%),linear-gradient(180deg,_#12162a_0%,_#090b14_100%)] p-5 lg:grid-cols-[1.2fr_0.8fr]">
-            <div className="rounded-[24px] bg-white p-4 shadow-[0_18px_48px_-28px_rgba(0,0,0,0.46)]">
-              <div className="mb-3 h-4 w-24 rounded-full bg-[#ede9fe]" />
-              <div className="mb-4 h-10 max-w-[15rem] rounded-2xl bg-[#111827]" />
-              <div className="space-y-2">
-                <div className="h-3 rounded-full bg-[#dbe4ff]" />
-                <div className="h-3 w-4/5 rounded-full bg-[#dbe4ff]" />
-                <div className="h-3 w-2/3 rounded-full bg-[#e7e5ff]" />
+          <div className="flex min-h-[390px] items-center justify-center bg-[radial-gradient(circle_at_top_left,_rgba(130,66,245,0.38),_transparent_42%),linear-gradient(180deg,_#12162a_0%,_#090b14_100%)] p-8">
+            <div className="mockup-browser w-[85%] max-w-[480px] overflow-hidden rounded-[12px] border border-[#d9d3ca] bg-white shadow-[0_20px_50px_rgba(57,53,44,0.15)]">
+              <div className="bar flex h-[30px] items-center gap-[7px] bg-[#f7f5f2] px-[14px]">
+                <span className="block h-[10px] w-[10px] rounded-full bg-[#ff5f57]" />
+                <span className="block h-[10px] w-[10px] rounded-full bg-[#febc2e]" />
+                <span className="block h-[10px] w-[10px] rounded-full bg-[#28c840]" />
               </div>
-              <div className="mt-5 flex gap-2">
-                <div className="h-9 w-28 rounded-full bg-[#111827]" />
-                <div className="h-9 w-24 rounded-full border border-[#c7d2fe]" />
-              </div>
-            </div>
-            <div className="grid gap-3">
-              <div className="overflow-hidden rounded-[24px] border border-white/10 bg-white/8 p-2 backdrop-blur-xl">
-                <MockupRenderer type={service.mockup} />
-              </div>
-              <div className="grid grid-cols-3 gap-3">
-                <div className="h-16 rounded-[18px] bg-white/12" />
-                <div className="h-16 rounded-[18px] bg-white/8" />
-                <div className="h-16 rounded-[18px] bg-white/12" />
+              <div className="content flex flex-col gap-[0.7rem] p-[1.6rem]">
+                <div className="line h-[8px] rounded-[4px] bg-[#eae6df]" />
+                <div className="line short h-[8px] w-[60%] rounded-[4px] bg-[#eae6df]" />
+                <div className="line accent h-[8px] w-[35%] rounded-[4px] bg-[#792fec] shadow-[0_0_12px_rgba(121,47,236,0.25)]" />
+                <div className="card-mini mt-[0.4rem] flex items-center gap-[0.8rem] rounded-[8px] border border-[#e0dbd2] bg-[#f9f8f6] p-[1rem]">
+                  <div className="avatar h-[32px] w-[32px] rounded-full bg-[#d9d3ca]" />
+                  <div className="text-group flex-1">
+                    <div className="l mb-[4px] h-[6px] rounded-[3px] bg-[#d9d3ca]" />
+                    <div className="l short h-[6px] w-[50%] rounded-[3px] bg-[#d9d3ca]" />
+                  </div>
+                </div>
+                <div className="line h-[8px] rounded-[4px] bg-[#eae6df]" />
+                <div className="line short h-[8px] w-[60%] rounded-[4px] bg-[#eae6df]" />
               </div>
             </div>
           </div>
@@ -328,7 +318,7 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
         className="w-full"
       >
         <div
-          className="service-visual-design grid gap-4 transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform lg:grid-cols-[0.88fr_1.12fr]"
+          className="design-composition service-visual-design grid gap-4 transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform lg:grid-cols-[0.88fr_1.12fr]"
           style={{ transform: 'translate(var(--service-move-x,0px), var(--service-move-y,0px))' }}
         >
           <div className="rounded-[28px] border border-[#111827]/8 bg-[#fffdf9] p-5 shadow-[0_26px_72px_-40px_rgba(15,23,42,0.28)]">
@@ -389,7 +379,7 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
       className="w-full overflow-hidden rounded-[30px] border border-[#0f172a]/8 bg-[#09111f] p-5 shadow-[0_32px_90px_-42px_rgba(2,8,23,0.92)]"
     >
       <div
-        className="service-visual-flow transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform"
+        className="automation-flow service-visual-flow transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform"
         style={{ transform: 'translate(calc(var(--service-move-x,0px) * 0.55), calc(var(--service-move-y,0px) * 0.4))' }}
       >
         <div className="mb-5 flex items-center justify-between">
