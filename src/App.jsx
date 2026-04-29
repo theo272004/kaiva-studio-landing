@@ -946,56 +946,111 @@ const PortfolioSection = () => {
           </p>
         </div>
 
-        <div className="mt-10 space-y-5 md:space-y-6">
-          {serviceShowcase.map((service, index) => (
-            <motion.article
-              key={service.id}
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.18 }}
-              transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, ease: premiumEase, delay: index * 0.04 }}
-              className="service-stack-card sticky top-5 overflow-hidden rounded-[28px] border border-[#d8d0ee] bg-white/88 shadow-[0_18px_48px_-28px_rgba(66,52,111,0.14)] backdrop-blur-[10px]"
-            >
-              <div className="grid min-h-[560px] gap-0 lg:grid-cols-[0.94fr_1.06fr]">
-                <div className="relative flex flex-col justify-center overflow-hidden border-b border-[#e8e1f7] px-6 py-8 md:px-8 md:py-10 lg:border-b-0 lg:border-r lg:px-12 lg:py-14">
-                  <div className="pointer-events-none absolute left-7 top-5 font-['Inter Tight'] text-[72px] font-extrabold leading-none tracking-[-0.06em] text-[#080808]/[0.035] md:text-[88px] lg:text-[110px]">
-                    {service.number}
+        <div className="mt-10">
+          <div className="relative hidden md:block">
+            {serviceShowcase.map((service, index) => (
+              <motion.article
+                key={service.id}
+                initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.18 }}
+                transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, ease: premiumEase, delay: index * 0.04 }}
+                className="service-stack-card sticky top-5 mb-3 overflow-hidden rounded-[28px] border border-[#d8d0ee] bg-white/88 shadow-[0_18px_48px_-28px_rgba(66,52,111,0.14)] backdrop-blur-[10px]"
+                style={{ zIndex: index + 1 }}
+              >
+                <div className="grid min-h-[calc(100vh-52px)] gap-0 lg:grid-cols-[0.94fr_1.06fr]">
+                  <div className="relative flex flex-col justify-center overflow-hidden border-r border-[#e8e1f7] px-8 py-10 lg:px-12 lg:py-14">
+                    <div className="pointer-events-none absolute left-7 top-5 font-['Inter Tight'] text-[88px] font-extrabold leading-none tracking-[-0.06em] text-[#080808]/[0.035] lg:text-[110px]">
+                      {service.number}
+                    </div>
+                    <div className="relative z-10">
+                      <div className="inline-flex rounded-full border border-[#8242f5]/12 bg-[#8242f5]/[0.06] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#8242f5]">
+                        {service.brand}
+                      </div>
+                      <div className="mt-5 text-[13px] font-semibold uppercase tracking-[0.16em] text-[#080808]/45">
+                        {service.vibe}
+                      </div>
+                      <h2 className="mt-4 max-w-[14ch] font-['Inter Tight'] text-[clamp(40px,4.8vw,64px)] font-extrabold leading-[0.96] tracking-[-0.045em] text-[#080808]">
+                        {service.title}
+                      </h2>
+                      <p className="mt-5 max-w-[31rem] text-[15px] leading-7 text-[#080808]/66 md:text-[16px]">
+                        {service.description}
+                      </p>
+                      <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                        {service.points.map((point) => (
+                          <div
+                            key={point}
+                            className="flex items-center gap-3 rounded-[18px] border border-[#080808]/6 bg-[#faf8ff] px-4 py-3 text-sm text-[#1f2937]"
+                          >
+                            <span
+                              className="h-2.5 w-2.5 rounded-full"
+                              style={{ background: service.id === 'automation' ? '#21b2c6' : '#8242f5' }}
+                            />
+                            {point}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <div className="relative z-10">
-                    <div className="inline-flex rounded-full border border-[#8242f5]/12 bg-[#8242f5]/[0.06] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#8242f5]">
-                      {service.brand}
-                    </div>
-                    <div className="mt-5 text-[13px] font-semibold uppercase tracking-[0.16em] text-[#080808]/45">
-                      {service.vibe}
-                    </div>
-                    <h2 className="mt-4 max-w-[14ch] font-['Inter Tight'] text-[clamp(34px,4.6vw,64px)] font-extrabold leading-[0.96] tracking-[-0.045em] text-[#080808]">
-                      {service.title}
-                    </h2>
-                    <p className="mt-5 max-w-[31rem] text-[15px] leading-7 text-[#080808]/66 md:text-[16px]">
-                      {service.description}
-                    </p>
-                    <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                      {service.points.map((point) => (
-                        <div
-                          key={point}
-                          className="flex items-center gap-3 rounded-[18px] border border-[#080808]/6 bg-[#faf8ff] px-4 py-3 text-sm text-[#1f2937]"
-                        >
-                          <span
-                            className="h-2.5 w-2.5 rounded-full"
-                            style={{ background: service.id === 'automation' ? '#21b2c6' : '#8242f5' }}
-                          />
-                          {point}
-                        </div>
-                      ))}
-                    </div>
+                  <div className="bg-[linear-gradient(180deg,rgba(247,243,255,0.88)_0%,rgba(255,255,255,0.92)_100%)] p-5 lg:p-6">
+                    <ServiceShowcaseVisual service={service} prefersReducedMotion={prefersReducedMotion} />
                   </div>
                 </div>
-                <div className="bg-[linear-gradient(180deg,rgba(247,243,255,0.88)_0%,rgba(255,255,255,0.92)_100%)] p-4 md:p-5 lg:p-6">
-                  <ServiceShowcaseVisual service={service} prefersReducedMotion={prefersReducedMotion} />
+              </motion.article>
+            ))}
+          </div>
+
+          <div className="space-y-5 md:hidden">
+            {serviceShowcase.map((service, index) => (
+              <motion.article
+                key={service.id}
+                initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.18 }}
+                transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, ease: premiumEase, delay: index * 0.04 }}
+                className="overflow-hidden rounded-[28px] border border-[#d8d0ee] bg-white/88 shadow-[0_18px_48px_-28px_rgba(66,52,111,0.14)] backdrop-blur-[10px]"
+              >
+                <div className="grid gap-0">
+                  <div className="relative flex flex-col justify-center overflow-hidden border-b border-[#e8e1f7] px-6 py-8">
+                    <div className="pointer-events-none absolute left-7 top-5 font-['Inter Tight'] text-[72px] font-extrabold leading-none tracking-[-0.06em] text-[#080808]/[0.035]">
+                      {service.number}
+                    </div>
+                    <div className="relative z-10">
+                      <div className="inline-flex rounded-full border border-[#8242f5]/12 bg-[#8242f5]/[0.06] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#8242f5]">
+                        {service.brand}
+                      </div>
+                      <div className="mt-5 text-[13px] font-semibold uppercase tracking-[0.16em] text-[#080808]/45">
+                        {service.vibe}
+                      </div>
+                      <h2 className="mt-4 max-w-[14ch] font-['Inter Tight'] text-[clamp(34px,8vw,46px)] font-extrabold leading-[0.96] tracking-[-0.045em] text-[#080808]">
+                        {service.title}
+                      </h2>
+                      <p className="mt-5 text-[15px] leading-7 text-[#080808]/66">
+                        {service.description}
+                      </p>
+                      <div className="mt-8 grid gap-3">
+                        {service.points.map((point) => (
+                          <div
+                            key={point}
+                            className="flex items-center gap-3 rounded-[18px] border border-[#080808]/6 bg-[#faf8ff] px-4 py-3 text-sm text-[#1f2937]"
+                          >
+                            <span
+                              className="h-2.5 w-2.5 rounded-full"
+                              style={{ background: service.id === 'automation' ? '#21b2c6' : '#8242f5' }}
+                            />
+                            {point}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-[linear-gradient(180deg,rgba(247,243,255,0.88)_0%,rgba(255,255,255,0.92)_100%)] p-4">
+                    <ServiceShowcaseVisual service={service} prefersReducedMotion={prefersReducedMotion} />
+                  </div>
                 </div>
-              </div>
-            </motion.article>
-          ))}
+              </motion.article>
+            ))}
+          </div>
         </div>
 
         <motion.div
