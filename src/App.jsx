@@ -1321,7 +1321,7 @@ const ExpandedAgencySections = () => (
     <section
       id="planes"
       data-nav-theme="light"
-      className="plans-section relative -mt-[3px] overflow-hidden px-4 pb-12 pt-14 md:px-8 md:pb-16 md:pt-20"
+      className="plans-section relative overflow-hidden px-4 pb-12 pt-14 md:-mt-[3px] md:px-8 md:pb-16 md:pt-20"
       style={{
         background:
           'linear-gradient(180deg, #ede4fb 0%, #f1e9ff 18%, #faf7ff 42%, #ffffff 100%)'
@@ -1457,7 +1457,7 @@ const ExpandedAgencySections = () => (
 const AliadosSection = () => {
   return (
     <section
-      className="allies-section relative -mt-[3px] overflow-hidden px-4 py-12 md:px-8 md:py-16 lg:py-20"
+      className="allies-section relative overflow-hidden px-4 py-12 md:-mt-[3px] md:px-8 md:py-16 lg:py-20"
       style={{
         background:
           'linear-gradient(180deg, #6f22ef 0%, #8242f5 30%, #9c67f2 54%, #d9ccfb 78%, #f2ebff 90%, #ede4fb 100%)'
