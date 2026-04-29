@@ -826,15 +826,18 @@ const ServicesSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                  className={`services-sticky-card group relative flex flex-col overflow-hidden rounded-[40px] border border-white/80 bg-white shadow-[0_22px_60px_-30px_rgba(80,74,168,0.18)] transition-shadow duration-500 hover:shadow-[0_32px_80px_-40px_rgba(130,66,245,0.25)]`}
+                  className={`services-sticky-card group relative flex flex-col overflow-hidden rounded-[40px] border border-white/80 bg-white shadow-[0_22px_60px_-30px_rgba(80,74,168,0.18)] transition-[box-shadow,transform] duration-500 hover:shadow-[0_32px_80px_-40px_rgba(130,66,245,0.25)] ${isActive ? 'services-card-active shadow-[0_32px_80px_-40px_rgba(130,66,245,0.25)]' : ''}`}
+                  onViewportEnter={() => setActiveService(index)}
                   onMouseEnter={() => setActiveService(index)}
                   onMouseLeave={() => setActiveService(null)}
+                  onFocus={() => setActiveService(index)}
+                  onTouchStart={() => setActiveService(index)}
                 >
                   {/* Glowing Effect Blobs (Bottom Half) */}
                   <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[40px]">
-                    <div className="absolute -bottom-[20%] -right-[10%] h-[70%] w-[70%] translate-x-1/4 translate-y-1/4 rounded-full bg-[#d96cff] opacity-0 blur-[100px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-[0.25]" />
-                    <div className="absolute -bottom-[20%] left-[15%] h-[70%] w-[70%] translate-y-1/4 rounded-full bg-[#8242f5] opacity-0 blur-[100px] transition-all duration-1000 delay-75 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-[0.2]" />
-                    <div className="absolute -bottom-[20%] -left-[10%] h-[70%] w-[70%] -translate-x-1/4 translate-y-1/4 rounded-full bg-[#21b2c6] opacity-0 blur-[100px] transition-all duration-1000 delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-[0.25]" />
+                    <div className={`services-glow-a absolute -bottom-[20%] -right-[10%] h-[70%] w-[70%] translate-x-1/4 translate-y-1/4 rounded-full bg-[#d96cff] opacity-0 blur-[100px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-[0.25] ${isActive ? 'translate-x-0 translate-y-0 opacity-[0.25]' : ''}`} />
+                    <div className={`services-glow-b absolute -bottom-[20%] left-[15%] h-[70%] w-[70%] translate-y-1/4 rounded-full bg-[#8242f5] opacity-0 blur-[100px] transition-all duration-1000 delay-75 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-[0.2] ${isActive ? 'translate-y-0 opacity-[0.2]' : ''}`} />
+                    <div className={`services-glow-c absolute -bottom-[20%] -left-[10%] h-[70%] w-[70%] -translate-x-1/4 translate-y-1/4 rounded-full bg-[#21b2c6] opacity-0 blur-[100px] transition-all duration-1000 delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-[0.25] ${isActive ? 'translate-x-0 translate-y-0 opacity-[0.25]' : ''}`} />
                   </div>
 
                   <div className="relative z-10 flex h-full w-full flex-col justify-between p-8 md:p-12 lg:p-16">
@@ -2347,6 +2350,9 @@ const App = () => {
           .services-sticky-card:nth-child(1) { z-index: 1; }
           .services-sticky-card:nth-child(2) { z-index: 2; }
           .services-sticky-card:nth-child(3) { z-index: 3; }
+          .services-sticky-card.services-card-active {
+            transform: translateY(-4px);
+          }
           
           @media (max-width: 768px) {
             .services-sticky-container {
@@ -2354,11 +2360,38 @@ const App = () => {
               margin-top: 20px;
             }
             .services-sticky-card {
-              position: relative;
-              top: auto !important;
-              height: auto;
-              min-height: auto;
-              margin-bottom: 24px;
+              position: sticky;
+              top: 84px !important;
+              height: calc(100svh - 112px);
+              min-height: 430px;
+              max-height: 560px;
+              margin-bottom: 28px;
+              border-radius: 28px !important;
+              touch-action: pan-y;
+            }
+            .services-sticky-card > .relative.z-10 {
+              padding: 28px !important;
+            }
+            .services-sticky-card h3 {
+              margin-top: 22px !important;
+              font-size: clamp(30px, 9vw, 42px) !important;
+            }
+            .services-sticky-card p {
+              font-size: 15px !important;
+              line-height: 1.55 !important;
+            }
+            .services-sticky-card button {
+              padding: 13px 22px !important;
+              font-size: 13px !important;
+            }
+            .services-card-active .services-glow-a,
+            .services-card-active .services-glow-c {
+              opacity: 0.25 !important;
+              transform: translate(0, 0) !important;
+            }
+            .services-card-active .services-glow-b {
+              opacity: 0.2 !important;
+              transform: translateY(0) !important;
             }
           }
       `}</style>
@@ -2637,7 +2670,7 @@ const HeroSection = () => {
         >
           Inicio
         </a>
-                  <a href={PROJECTS_PAGE_HREF} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Servicios</a>
+        <a href="#servicios" onClick={(event) => scrollToSection(event, 'servicios')} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Servicios</a>
         <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Contacto</a>
         <a
           href="#planes"
@@ -2658,6 +2691,13 @@ const HeroSection = () => {
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         className="fixed right-6 top-5 z-50 flex items-center gap-3 md:hidden"
       >
+        <a
+          href="#servicios"
+          onClick={(event) => scrollToSection(event, 'servicios')}
+          className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-[#080808]/12 bg-white px-4 font-manrope text-[10px] font-bold uppercase tracking-[0.16em] text-[#080808] shadow-[0_4px_14px_-8px_rgba(0,0,0,0.18)]"
+        >
+          Servicios
+        </a>
         <button
           aria-label="Abrir menú"
           onClick={() => setMobileMenuOpen(true)}
@@ -2698,7 +2738,7 @@ const HeroSection = () => {
             <nav className="mt-12 flex flex-col gap-1">
               {[
                 { label: 'Inicio', id: 'inicio' },
-                { label: 'Nosotros', id: 'kaiva' },
+                { label: 'Servicios', id: 'servicios' },
                 { label: 'Contacto', id: 'contacto' },
                 { label: 'Paquetes', id: 'planes' },
               ].map(({ label, id }) => (
@@ -2716,7 +2756,7 @@ const HeroSection = () => {
                 className="py-4 text-[22px] font-semibold tracking-[-0.02em] text-[#080808] border-b border-[#080808]/6"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Servicios
+                Proyectos
               </a>
             </nav>
             <div className="mt-auto">
