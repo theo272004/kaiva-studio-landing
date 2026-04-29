@@ -273,39 +273,43 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: 0.985 }}
         transition={panelTransition}
-        className="service-visual-web overflow-hidden rounded-[30px] border border-white/10 bg-[#0d1020] shadow-[0_32px_90px_-44px_rgba(17,24,39,0.82)]"
-        style={{ transform: 'perspective(700px) rotateY(var(--service-rotate-y,0deg)) rotateX(var(--service-rotate-x,0deg)) translateZ(8px)' }}
+        className="service-visual-web w-full overflow-hidden rounded-[30px] border border-white/10 bg-[#0d1020] shadow-[0_32px_90px_-44px_rgba(17,24,39,0.82)]"
       >
-        <div className="flex items-center gap-2 border-b border-white/8 px-5 py-4">
-          <span className="h-2.5 w-2.5 rounded-full bg-[#ff6b6b]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#ffd166]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#06d6a0]" />
-          <div className="ml-3 rounded-full bg-white/7 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/46">
-            Landing premium
-          </div>
-        </div>
-        <div className="grid gap-4 bg-[radial-gradient(circle_at_top_left,_rgba(130,66,245,0.38),_transparent_42%),linear-gradient(180deg,_#12162a_0%,_#090b14_100%)] p-5 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="rounded-[24px] bg-white p-4 shadow-[0_18px_48px_-28px_rgba(0,0,0,0.46)]">
-            <div className="mb-3 h-4 w-24 rounded-full bg-[#ede9fe]" />
-            <div className="mb-4 h-10 max-w-[15rem] rounded-2xl bg-[#111827]" />
-            <div className="space-y-2">
-              <div className="h-3 rounded-full bg-[#dbe4ff]" />
-              <div className="h-3 w-4/5 rounded-full bg-[#dbe4ff]" />
-              <div className="h-3 w-2/3 rounded-full bg-[#e7e5ff]" />
-            </div>
-            <div className="mt-5 flex gap-2">
-              <div className="h-9 w-28 rounded-full bg-[#111827]" />
-              <div className="h-9 w-24 rounded-full border border-[#c7d2fe]" />
+        <div
+          className="transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform"
+          style={{ transform: 'perspective(700px) rotateY(var(--service-rotate-y,0deg)) rotateX(var(--service-rotate-x,0deg)) translateZ(8px)' }}
+        >
+          <div className="flex items-center gap-2 border-b border-white/8 px-5 py-4">
+            <span className="h-2.5 w-2.5 rounded-full bg-[#ff6b6b]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-[#ffd166]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-[#06d6a0]" />
+            <div className="ml-3 rounded-full bg-white/7 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/46">
+              Landing premium
             </div>
           </div>
-          <div className="grid gap-3">
-            <div className="overflow-hidden rounded-[24px] border border-white/10 bg-white/8 p-2 backdrop-blur-xl">
-              <MockupRenderer type={service.mockup} />
+          <div className="grid gap-4 bg-[radial-gradient(circle_at_top_left,_rgba(130,66,245,0.38),_transparent_42%),linear-gradient(180deg,_#12162a_0%,_#090b14_100%)] p-5 lg:grid-cols-[1.2fr_0.8fr]">
+            <div className="rounded-[24px] bg-white p-4 shadow-[0_18px_48px_-28px_rgba(0,0,0,0.46)]">
+              <div className="mb-3 h-4 w-24 rounded-full bg-[#ede9fe]" />
+              <div className="mb-4 h-10 max-w-[15rem] rounded-2xl bg-[#111827]" />
+              <div className="space-y-2">
+                <div className="h-3 rounded-full bg-[#dbe4ff]" />
+                <div className="h-3 w-4/5 rounded-full bg-[#dbe4ff]" />
+                <div className="h-3 w-2/3 rounded-full bg-[#e7e5ff]" />
+              </div>
+              <div className="mt-5 flex gap-2">
+                <div className="h-9 w-28 rounded-full bg-[#111827]" />
+                <div className="h-9 w-24 rounded-full border border-[#c7d2fe]" />
+              </div>
             </div>
-            <div className="grid grid-cols-3 gap-3">
-              <div className="h-16 rounded-[18px] bg-white/12" />
-              <div className="h-16 rounded-[18px] bg-white/8" />
-              <div className="h-16 rounded-[18px] bg-white/12" />
+            <div className="grid gap-3">
+              <div className="overflow-hidden rounded-[24px] border border-white/10 bg-white/8 p-2 backdrop-blur-xl">
+                <MockupRenderer type={service.mockup} />
+              </div>
+              <div className="grid grid-cols-3 gap-3">
+                <div className="h-16 rounded-[18px] bg-white/12" />
+                <div className="h-16 rounded-[18px] bg-white/8" />
+                <div className="h-16 rounded-[18px] bg-white/12" />
+              </div>
             </div>
           </div>
         </div>
@@ -321,47 +325,51 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: 0.985 }}
         transition={panelTransition}
-        className="service-visual-design grid gap-4 lg:grid-cols-[0.88fr_1.12fr]"
-        style={{ transform: 'translate(var(--service-move-x,0px), var(--service-move-y,0px))' }}
+        className="w-full"
       >
-        <div className="rounded-[28px] border border-[#111827]/8 bg-[#fffdf9] p-5 shadow-[0_26px_72px_-40px_rgba(15,23,42,0.28)]">
-          <div className="mb-5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#8b5cf6]">Brand board</div>
-          <div className="space-y-3">
-            <div className="font-epilogue text-4xl font-extrabold tracking-[-0.04em] text-[#16151f]">Kaiva</div>
-            <div className="text-lg font-semibold tracking-[-0.03em] text-[#16151f]">Systems with character</div>
-            <div className="max-w-[15rem] text-sm leading-6 text-[#5b556e]">
-              Dirección visual, color, tipografía y piezas listas para web, decks o redes.
-            </div>
-          </div>
-          <div className="mt-6 grid grid-cols-4 gap-2">
-            {['#16151f', '#8242f5', '#d96cff', '#f3ede4'].map((color) => (
-              <div key={color} className="h-12 rounded-2xl border border-black/5" style={{ background: color }} />
-            ))}
-          </div>
-        </div>
-        <div className="overflow-hidden rounded-[28px] border border-[#111827]/8 bg-[#f5f0ff] p-5 shadow-[0_28px_74px_-40px_rgba(91,33,182,0.34)]">
-          <div className="grid gap-4 md:grid-cols-[0.92fr_1.08fr]">
-            <div className="rounded-[24px] bg-white p-4 shadow-[0_18px_48px_-32px_rgba(15,23,42,0.32)]">
-              <div className="mb-4 h-36 rounded-[20px] bg-[linear-gradient(160deg,_#111827,_#6d28d9_58%,_#f5d0fe_120%)]" />
-              <div className="space-y-2">
-                <div className="h-4 w-24 rounded-full bg-[#111827]" />
-                <div className="h-3 rounded-full bg-[#d8ccff]" />
-                <div className="h-3 w-4/5 rounded-full bg-[#eadcff]" />
+        <div
+          className="service-visual-design grid gap-4 transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform lg:grid-cols-[0.88fr_1.12fr]"
+          style={{ transform: 'translate(var(--service-move-x,0px), var(--service-move-y,0px))' }}
+        >
+          <div className="rounded-[28px] border border-[#111827]/8 bg-[#fffdf9] p-5 shadow-[0_26px_72px_-40px_rgba(15,23,42,0.28)]">
+            <div className="mb-5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#8b5cf6]">Brand board</div>
+            <div className="space-y-3">
+              <div className="font-epilogue text-4xl font-extrabold tracking-[-0.04em] text-[#16151f]">Kaiva</div>
+              <div className="text-lg font-semibold tracking-[-0.03em] text-[#16151f]">Systems with character</div>
+              <div className="max-w-[15rem] text-sm leading-6 text-[#5b556e]">
+                Dirección visual, color, tipografía y piezas listas para web, decks o redes.
               </div>
             </div>
-            <div className="grid gap-4">
-              <div className="rounded-[24px] bg-[#151225] p-4 text-white">
-                <div className="mb-3 text-[11px] uppercase tracking-[0.16em] text-white/52">UI kit</div>
-                <div className="flex gap-2">
-                  <div className="h-10 flex-1 rounded-full bg-white text-[#121212]" />
-                  <div className="h-10 w-12 rounded-full bg-white/10" />
+            <div className="mt-6 grid grid-cols-4 gap-2">
+              {['#16151f', '#8242f5', '#d96cff', '#f3ede4'].map((color) => (
+                <div key={color} className="h-12 rounded-2xl border border-black/5" style={{ background: color }} />
+              ))}
+            </div>
+          </div>
+          <div className="overflow-hidden rounded-[28px] border border-[#111827]/8 bg-[#f5f0ff] p-5 shadow-[0_28px_74px_-40px_rgba(91,33,182,0.34)]">
+            <div className="grid gap-4 md:grid-cols-[0.92fr_1.08fr]">
+              <div className="rounded-[24px] bg-white p-4 shadow-[0_18px_48px_-32px_rgba(15,23,42,0.32)]">
+                <div className="mb-4 h-36 rounded-[20px] bg-[linear-gradient(160deg,_#111827,_#6d28d9_58%,_#f5d0fe_120%)]" />
+                <div className="space-y-2">
+                  <div className="h-4 w-24 rounded-full bg-[#111827]" />
+                  <div className="h-3 rounded-full bg-[#d8ccff]" />
+                  <div className="h-3 w-4/5 rounded-full bg-[#eadcff]" />
                 </div>
               </div>
-              <div className="rounded-[24px] bg-white p-4">
-                <div className="mb-3 h-3 w-20 rounded-full bg-[#d8ccff]" />
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="h-20 rounded-[18px] bg-[linear-gradient(135deg,_#ede9fe,_#ffffff)]" />
-                  <div className="h-20 rounded-[18px] bg-[linear-gradient(135deg,_#111827,_#334155)]" />
+              <div className="grid gap-4">
+                <div className="rounded-[24px] bg-[#151225] p-4 text-white">
+                  <div className="mb-3 text-[11px] uppercase tracking-[0.16em] text-white/52">UI kit</div>
+                  <div className="flex gap-2">
+                    <div className="h-10 flex-1 rounded-full bg-white text-[#121212]" />
+                    <div className="h-10 w-12 rounded-full bg-white/10" />
+                  </div>
+                </div>
+                <div className="rounded-[24px] bg-white p-4">
+                  <div className="mb-3 h-3 w-20 rounded-full bg-[#d8ccff]" />
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="h-20 rounded-[18px] bg-[linear-gradient(135deg,_#ede9fe,_#ffffff)]" />
+                    <div className="h-20 rounded-[18px] bg-[linear-gradient(135deg,_#111827,_#334155)]" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -378,64 +386,68 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: 0.985 }}
       transition={panelTransition}
-      className="service-visual-flow overflow-hidden rounded-[30px] border border-[#0f172a]/8 bg-[#09111f] p-5 shadow-[0_32px_90px_-42px_rgba(2,8,23,0.92)]"
-      style={{ transform: 'translate(calc(var(--service-move-x,0px) * 0.55), calc(var(--service-move-y,0px) * 0.4))' }}
+      className="w-full overflow-hidden rounded-[30px] border border-[#0f172a]/8 bg-[#09111f] p-5 shadow-[0_32px_90px_-42px_rgba(2,8,23,0.92)]"
     >
-      <div className="mb-5 flex items-center justify-between">
-        <div>
-          <div className="text-[11px] uppercase tracking-[0.18em] text-[#7dd3fc]">Automation flow</div>
-          <div className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-white">Sistemas que ejecutan</div>
+      <div
+        className="service-visual-flow transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform"
+        style={{ transform: 'translate(calc(var(--service-move-x,0px) * 0.55), calc(var(--service-move-y,0px) * 0.4))' }}
+      >
+        <div className="mb-5 flex items-center justify-between">
+          <div>
+            <div className="text-[11px] uppercase tracking-[0.18em] text-[#7dd3fc]">Automation flow</div>
+            <div className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-white">Sistemas que ejecutan</div>
+          </div>
+          <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.14em] text-white/48">
+            24/7
+          </div>
         </div>
-        <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.14em] text-white/48">
-          24/7
-        </div>
-      </div>
-      <div className="grid gap-4 lg:grid-cols-[0.82fr_1.18fr]">
-        <div className="rounded-[24px] border border-white/10 bg-white/6 p-4 backdrop-blur-xl">
-          <div className="mb-4 flex items-center gap-2">
-            <div className="h-9 w-9 rounded-full bg-[linear-gradient(135deg,_#38bdf8,_#6366f1)]" />
-            <div>
-              <div className="h-3 w-24 rounded-full bg-white/18" />
-              <div className="mt-2 h-2 w-16 rounded-full bg-white/10" />
+        <div className="grid gap-4 lg:grid-cols-[0.82fr_1.18fr]">
+          <div className="rounded-[24px] border border-white/10 bg-white/6 p-4 backdrop-blur-xl">
+            <div className="mb-4 flex items-center gap-2">
+              <div className="h-9 w-9 rounded-full bg-[linear-gradient(135deg,_#38bdf8,_#6366f1)]" />
+              <div>
+                <div className="h-3 w-24 rounded-full bg-white/18" />
+                <div className="mt-2 h-2 w-16 rounded-full bg-white/10" />
+              </div>
+            </div>
+            <div className="space-y-3">
+              <div className="rounded-[18px] bg-[#0f172a] px-4 py-3 text-sm text-white/86">Nuevo lead desde la web</div>
+              <div className="rounded-[18px] bg-white/10 px-4 py-3 text-sm text-white/74">Clasificar, etiquetar y notificar</div>
+              <div className="rounded-[18px] bg-white/10 px-4 py-3 text-sm text-white/74">Disparar respuesta o tarea interna</div>
             </div>
           </div>
-          <div className="space-y-3">
-            <div className="rounded-[18px] bg-[#0f172a] px-4 py-3 text-sm text-white/86">Nuevo lead desde la web</div>
-            <div className="rounded-[18px] bg-white/10 px-4 py-3 text-sm text-white/74">Clasificar, etiquetar y notificar</div>
-            <div className="rounded-[18px] bg-white/10 px-4 py-3 text-sm text-white/74">Disparar respuesta o tarea interna</div>
-          </div>
-        </div>
-        <div className="rounded-[24px] bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.22),_transparent_32%),linear-gradient(180deg,_#0f172a_0%,_#050814_100%)] p-4">
-          <div className="grid gap-3 md:grid-cols-3">
-            {['Lead', 'CRM', 'Ops'].map((item, index) => (
-              <div key={item} className="rounded-[18px] border border-white/10 bg-white/6 p-4">
-                <div className="mb-3 flex items-center gap-2">
-                  <div
-                    className="h-9 w-9 rounded-2xl"
-                    style={{
-                      background:
-                        index === 0
-                          ? 'linear-gradient(135deg, #38bdf8, #0ea5e9)'
-                          : index === 1
-                            ? 'linear-gradient(135deg, #818cf8, #8b5cf6)'
-                            : 'linear-gradient(135deg, #34d399, #10b981)',
-                    }}
-                  />
-                  <div className="h-3 w-14 rounded-full bg-white/16" />
+          <div className="rounded-[24px] bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.22),_transparent_32%),linear-gradient(180deg,_#0f172a_0%,_#050814_100%)] p-4">
+            <div className="grid gap-3 md:grid-cols-3">
+              {['Lead', 'CRM', 'Ops'].map((item, index) => (
+                <div key={item} className="rounded-[18px] border border-white/10 bg-white/6 p-4">
+                  <div className="mb-3 flex items-center gap-2">
+                    <div
+                      className="h-9 w-9 rounded-2xl"
+                      style={{
+                        background:
+                          index === 0
+                            ? 'linear-gradient(135deg, #38bdf8, #0ea5e9)'
+                            : index === 1
+                              ? 'linear-gradient(135deg, #818cf8, #8b5cf6)'
+                              : 'linear-gradient(135deg, #34d399, #10b981)',
+                      }}
+                    />
+                    <div className="h-3 w-14 rounded-full bg-white/16" />
+                  </div>
+                  <div className="space-y-2">
+                    <div className="h-3 rounded-full bg-white/12" />
+                    <div className="h-3 w-4/5 rounded-full bg-white/8" />
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <div className="h-3 rounded-full bg-white/12" />
-                  <div className="h-3 w-4/5 rounded-full bg-white/8" />
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-4 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-white/34">
-            <div className="h-px bg-white/12" />
-            <span>Sync</span>
-            <div className="h-px bg-white/12" />
-            <span>Route</span>
-            <div className="h-px bg-white/12" />
+              ))}
+            </div>
+            <div className="mt-4 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-white/34">
+              <div className="h-px bg-white/12" />
+              <span>Sync</span>
+              <div className="h-px bg-white/12" />
+              <span>Route</span>
+              <div className="h-px bg-white/12" />
+            </div>
           </div>
         </div>
       </div>
