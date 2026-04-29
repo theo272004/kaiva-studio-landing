@@ -1316,7 +1316,7 @@ const ProcessRedesignSection = () => {
   });
 
   return (
-    <section ref={sectionRef} id="proceso" className="process-section relative w-full bg-white py-0">
+    <section ref={sectionRef} id="proceso" className="process-section relative w-full bg-[#6f22ef] py-0">
       <div className="process-sticky-stage relative hidden h-[225vh] w-full md:block lg:h-[240vh]">
         <div className="sticky top-0 flex h-[100svh] w-full items-center justify-center overflow-hidden bg-white px-4 sm:px-6 lg:px-16">
           {/* Progressive giant gradient: white on step 1 to full purple on step 5 */}
@@ -1395,16 +1395,12 @@ const ExpandedAgencySections = () => (
     <section
       id="planes"
       data-nav-theme="light"
-      className="plans-section relative overflow-hidden px-4 pb-12 pt-14 md:-mt-[3px] md:px-8 md:pb-16 md:pt-20"
+      className="plans-section relative overflow-hidden px-4 pb-12 pt-14 md:px-8 md:pb-16 md:pt-20"
       style={{
         background:
           'linear-gradient(180deg, #ede4fb 0%, #f1e9ff 18%, #faf7ff 42%, #ffffff 100%)'
       }}
     >
-      <div
-        className="pointer-events-none absolute right-0 top-0 z-[59] h-[56px] w-[34%]"
-        style={{ background: 'linear-gradient(180deg, #ede4fb 0%, rgba(237,228,251,0.96) 48%, rgba(237,228,251,0) 100%)' }}
-      />
       <motion.img
         src={asset('KaivaMora1.webp')}
         alt=""
@@ -1528,7 +1524,7 @@ const ExpandedAgencySections = () => (
 const AliadosSection = () => {
   return (
     <section
-      className="allies-section relative overflow-hidden px-4 py-12 md:-mt-[3px] md:px-8 md:py-16 lg:py-20"
+      className="allies-section relative overflow-hidden px-4 py-12 md:px-8 md:py-16 lg:py-20"
       style={{
         background:
           'linear-gradient(180deg, #6f22ef 0%, #8242f5 30%, #9c67f2 54%, #d9ccfb 78%, #f2ebff 90%, #ede4fb 100%)'
