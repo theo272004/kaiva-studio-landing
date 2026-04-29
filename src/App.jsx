@@ -2733,7 +2733,7 @@ const HeroSection = () => {
         className="hero-support-copy absolute bottom-4 left-6 right-6 z-40 hidden md:block md:bottom-[60px] md:left-auto md:right-[80px] md:max-w-[420px] md:text-[15px] text-justify font-normal leading-[1.5] text-[#080808]/64"
       >
         Deja de perder clientes por no estar en el internet. Diseñamos tu<br />
-        página web con criterio profesional, entrega rápida y un precio justo.
+        página web con criterio profesional, entrega rápida y precio justo.
       </motion.p>
     </section>
   );
