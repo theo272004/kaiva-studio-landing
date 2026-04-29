@@ -21,38 +21,32 @@ const serviceShowcase = [
     id: 'web',
     number: '01',
     label: 'Desarrollo web',
-    vibe: 'Rendimiento · Conversión',
-    brand: 'KAIVA WEB',
     description:
       'Páginas web con estructura clara, diseño responsive y SEO integrado. Una narrativa diseñada estratégicamente para destacar el valor de tu negocio y convertir visitas en clientes.',
     accent: '#8242f5',
     mockup: 'ecommerce',
-    title: 'Rendimiento & Conversión',
-    points: ['Copy y estructura', 'Responsive premium', 'SEO base', 'Optimización total'],
+    title: 'Desarrollo Web',
+    points: ['Estrategia digital', 'Responsive premium', 'SEO integrado', 'Optimización total'],
   },
   {
     id: 'design',
     number: '02',
     label: 'Diseño',
-    vibe: 'Percepción · Identidad',
-    brand: 'KAIVA DESIGN',
     description:
       'Desde publicidad, portadas y logos hasta la conceptualización completa de la identidad de tu marca, expresando exactamente quién eres y el porqué de tu negocio.',
     accent: '#d96cff',
-    title: 'Diseño integral de marca y sistemas de interfaz.',
-    points: ['Identidad conceptual', 'UI systems', 'Publicidad y logos', 'Estructura visual'],
+    title: 'Diseño de Marca e Interfaces',
+    points: ['Identidad de marca', 'Interfaces UI/UX', 'Piezas publicitarias', 'Sistemas de diseño'],
   },
   {
     id: 'automation',
     number: '03',
-    label: 'Automatización',
-    vibe: 'Operación · Escalabilidad',
-    brand: 'KAIVA SYSTEMS',
+    label: 'Sistemas',
     description:
       'Sistemas a medida, dashboards analíticos y flujos de automatización. Conectamos tus herramientas para que operes de forma inteligente y rápida.',
     accent: '#21b2c6',
-    title: 'Sistemas que expanden las posibilidades de tu operación.',
-    points: ['Dashboards', 'Automatizaciones', 'Sistemas a medida', 'Bots inteligentes'],
+    title: 'Sistemas y Automatizaciones',
+    points: ['Dashboards', 'Integraciones', 'Sistemas a medida', 'Bots de WhatsApp'],
   },
 ];
 
@@ -963,7 +957,7 @@ const PortfolioSection = () => {
         style={{ background: 'rgba(186,145,255,0.16)' }}
       />
 
-      <div className="relative z-20 mx-auto max-w-[1280px] px-5 pt-24 sm:px-6 sm:pt-28 md:px-10 lg:px-12 lg:pt-32">
+      <div className="relative z-20 mx-auto max-w-[1380px] px-5 pt-32 sm:px-6 sm:pt-36 md:px-10 lg:px-12 lg:pt-40">
         <div className="mt-0">
           <div className="portfolio-sticky-container sticky-container relative hidden lg:block">
             {serviceShowcase.map((service, index) => (
@@ -980,17 +974,7 @@ const PortfolioSection = () => {
                       {service.number}
                     </div>
                     <div className="portfolio-service-copy relative z-10 flex h-full flex-col justify-center px-8 py-10 xl:px-12 xl:py-12">
-                      <div
-                        className="inline-flex w-fit rounded-full border px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em]"
-                        style={{
-                          color: service.accent,
-                          background: `${service.accent}14`,
-                          borderColor: `${service.accent}26`,
-                        }}
-                      >
-                        {service.brand}
-                      </div>
-                      <h2 className="portfolio-service-title mt-10 max-w-[13ch] font-['Inter Tight'] text-[clamp(38px,4.4vw,58px)] font-extrabold leading-[0.98] tracking-[-0.045em] text-[#39352c]">
+                      <h2 className="portfolio-service-title mt-0 max-w-[13ch] font-['Inter Tight'] text-[clamp(38px,4.4vw,58px)] font-extrabold leading-[0.98] tracking-[-0.045em] text-[#39352c]">
                         {service.title}
                       </h2>
                       <p className="mt-5 max-w-[31rem] text-[15px] leading-7 text-[#5e584e] md:text-[16px]">
@@ -1034,20 +1018,7 @@ const PortfolioSection = () => {
                       {service.number}
                     </div>
                     <div className="relative z-10">
-                      <div 
-                        className="inline-flex w-fit rounded-full border px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em]"
-                        style={{
-                          color: service.accent,
-                          background: `${service.accent}14`,
-                          borderColor: `${service.accent}26`,
-                        }}
-                      >
-                        {service.brand}
-                      </div>
-                      <div className="mt-5 text-[13px] font-semibold uppercase tracking-[0.16em] text-[#080808]/45">
-                        {service.vibe}
-                      </div>
-                      <h2 className="mt-4 max-w-[14ch] font-['Inter Tight'] text-[clamp(30px,8vw,46px)] font-extrabold leading-[0.96] tracking-[-0.045em] text-[#080808]">
+                      <h2 className="mt-2 max-w-[14ch] font-['Inter Tight'] text-[clamp(30px,8vw,46px)] font-extrabold leading-[0.96] tracking-[-0.045em] text-[#080808]">
                         {service.title}
                       </h2>
                       <p className="mt-5 text-[15px] leading-7 text-[#080808]/66">
@@ -1061,7 +1032,7 @@ const PortfolioSection = () => {
                           >
                             <span
                               className="h-2.5 w-2.5 rounded-full"
-                              style={{ background: service.id === 'automation' ? '#21b2c6' : '#8242f5' }}
+                              style={{ background: service.accent }}
                             />
                             {point}
                           </div>
@@ -2290,7 +2261,7 @@ const App = () => {
             height: 360vh;
           }
           .portfolio-service-card {
-            top: clamp(82px, 11vh, 118px);
+            top: clamp(100px, 14vh, 140px);
             margin-bottom: 28vh;
           }
           .portfolio-service-layout {
@@ -2510,7 +2481,7 @@ const ProblemSection = () => {
             POR QUÉ MUCHOS NEGOCIOS SIGUEN SIN WEB
           </h3>
 
-          <div className="problem-reasons-grid grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          <div className="problem-reasons-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
             
             {/* Card 1 */}
             <div className="problem-card relative overflow-hidden rounded-[22px] p-5 text-[#080808] min-h-[210px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 md:p-6">
