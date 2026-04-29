@@ -1249,7 +1249,7 @@ const ProcessRedesignSection = () => {
           <motion.div 
             className="absolute inset-0 pointer-events-none transition-all duration-300"
             style={{
-              background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 12%, rgba(111,34,239,0.14) 30%, rgba(111,34,239,0.34) 48%, rgba(139,77,240,0.62) 70%, rgba(111,34,239,0.96) 100%)',
+              background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 12%, rgba(111,34,239,0.14) 30%, rgba(111,34,239,0.34) 48%, rgba(111,34,239,0.68) 70%, #6f22ef 100%)',
               opacity: purpleStageOpacity
             }}
           />
