@@ -1734,7 +1734,6 @@ const ProjectsPage = () => {
     <>
       <FixedNavbar projectsActive />
       <PortfolioSection />
-      <ServicesSection />
     </>
   );
 };
