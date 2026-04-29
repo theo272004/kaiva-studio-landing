@@ -791,100 +791,80 @@ const ServicesSection = () => {
       </section>
 
       <section data-nav-theme="light" className="bg-transparent text-[#080808]">
-        <div className="mx-auto w-full max-w-[1480px] px-6 pb-20 md:px-12 md:pb-24 lg:px-16 lg:pb-28">
-          <motion.div
-            className="grid w-full gap-5 md:grid-cols-2 lg:grid-cols-3"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.08 } },
-            }}
-            onMouseLeave={() => setActiveService(null)}
-          >
+        <div className="mx-auto w-full max-w-[1240px] px-6 pb-20 md:px-12 md:pb-24 lg:px-16 lg:pb-28">
+          <div className="services-sticky-container relative">
             {services.map((service, index) => {
               const isActive = activeService === index;
-              const isQuiet = activeService !== null && !isActive;
 
               return (
                 <motion.article
                   key={service.title}
-                  variants={{
-                    hidden: { opacity: 0, y: 24 },
-                    visible: {
-                      opacity: 1,
-                      y: 0,
-                      transition: { duration: 0.62, ease: [0.16, 1, 0.3, 1] },
-                    },
-                  }}
-                  className="group relative flex min-h-[340px] overflow-hidden rounded-[30px] border border-white/80 bg-white shadow-[0_18px_48px_-34px_rgba(80,74,168,0.28)] outline-none transition-[opacity,transform,box-shadow,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-[#8242f5]/30 hover:shadow-[0_28px_74px_-44px_rgba(130,66,245,0.4)] md:min-h-[380px] xl:min-h-[420px]"
-                  whileHover={{ y: -12 }}
-                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  tabIndex={0}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  className={`services-sticky-card group relative flex flex-col overflow-hidden rounded-[40px] border border-white/80 bg-white shadow-[0_22px_60px_-30px_rgba(80,74,168,0.18)] transition-shadow duration-500 hover:shadow-[0_32px_80px_-40px_rgba(130,66,245,0.25)]`}
                   onMouseEnter={() => setActiveService(index)}
+                  onMouseLeave={() => setActiveService(null)}
                 >
                   {/* Glowing Effect Blobs (Bottom Half) */}
-                  <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[30px]">
-                    <div className="absolute -bottom-[20%] -right-[10%] h-[70%] w-[70%] translate-x-1/4 translate-y-1/4 rounded-full bg-[#d96cff] opacity-0 blur-[60px] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-[0.35]" />
-                    <div className="absolute -bottom-[20%] left-[15%] h-[70%] w-[70%] translate-y-1/4 rounded-full bg-[#8242f5] opacity-0 blur-[60px] transition-all duration-700 delay-75 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-[0.25]" />
-                    <div className="absolute -bottom-[20%] -left-[10%] h-[70%] w-[70%] -translate-x-1/4 translate-y-1/4 rounded-full bg-[#21b2c6] opacity-0 blur-[60px] transition-all duration-700 delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-[0.35]" />
+                  <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[40px]">
+                    <div className="absolute -bottom-[20%] -right-[10%] h-[70%] w-[70%] translate-x-1/4 translate-y-1/4 rounded-full bg-[#d96cff] opacity-0 blur-[100px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-[0.25]" />
+                    <div className="absolute -bottom-[20%] left-[15%] h-[70%] w-[70%] translate-y-1/4 rounded-full bg-[#8242f5] opacity-0 blur-[100px] transition-all duration-1000 delay-75 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-[0.2]" />
+                    <div className="absolute -bottom-[20%] -left-[10%] h-[70%] w-[70%] -translate-x-1/4 translate-y-1/4 rounded-full bg-[#21b2c6] opacity-0 blur-[100px] transition-all duration-1000 delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-[0.25]" />
                   </div>
 
-                  <div className="relative z-10 flex min-h-full w-full flex-col px-6 py-8 md:px-8 md:py-10 lg:px-9 lg:py-11 xl:px-10">
-                    <motion.div
-                      className="font-epilogue text-[48px] font-extrabold leading-none tracking-[-0.04em] md:text-[60px] xl:text-[72px]"
-                      style={gradientAccentStyle}
-                      animate={{
-                        x: isActive ? 5 : 0,
-                      }}
-                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                      0{index + 1}
-                    </motion.div>
-
-                    <motion.div
-                      className="mt-8 h-px w-full origin-center"
-                      animate={{
-                        backgroundColor: isActive ? 'rgba(8,8,8,0.18)' : 'rgba(8,8,8,0.12)',
-                        scaleX: isActive ? 0.985 : 1,
-                      }}
-                      transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-                    />
-
-                    <div className="mt-10 flex flex-1 flex-col justify-between gap-10 md:mt-12 md:gap-12">
-                      <div className="max-w-[17rem]">
-                        <motion.h3
-                          className="font-epilogue text-[26px] font-extrabold leading-[1.08] tracking-[-0.03em] md:text-[30px] xl:text-[34px]"
+                  <div className="relative z-10 flex h-full w-full flex-col justify-between p-8 md:p-12 lg:p-16">
+                    <div className="flex items-start justify-between">
+                      <div className="max-w-2xl">
+                        <motion.div
+                          className="font-epilogue text-[64px] font-extrabold leading-none tracking-[-0.04em] md:text-[84px] lg:text-[110px]"
+                          style={gradientAccentStyle}
                           animate={{
-                            color: '#080808',
-                            x: isActive ? 5 : 0,
+                            x: isActive ? 10 : 0,
                           }}
-                          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                        >
+                          0{index + 1}
+                        </motion.div>
+                        <motion.h3
+                          className="mt-8 font-epilogue text-[32px] font-extrabold leading-[1.05] tracking-[-0.04em] md:text-[48px] lg:text-[64px] xl:text-[72px]"
+                          animate={{
+                            x: isActive ? 12 : 0,
+                          }}
+                          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                         >
                           {service.title}
                         </motion.h3>
                       </div>
+                    </div>
 
-                      <div className="max-w-[20rem]">
-                        <motion.p
-                          className="text-[14px] leading-7 md:text-[15px] md:leading-8"
-                          animate={{
-                            color: isActive ? 'rgba(8,8,8,0.82)' : 'rgba(8,8,8,0.66)',
-                            x: isActive ? 5 : 0,
-                          }}
-                          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                        >
-                          {service.description}
-                        </motion.p>
+                    <div className="mt-12 max-w-xl">
+                      <motion.p
+                        className="text-[16px] leading-[1.6] text-[#080808]/60 md:text-[20px] lg:text-[22px]"
+                        animate={{
+                          color: isActive ? 'rgba(8,8,8,0.85)' : 'rgba(8,8,8,0.60)',
+                          x: isActive ? 12 : 0,
+                        }}
+                        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        {service.description}
+                      </motion.p>
+                      
+                      <div className="mt-10 flex gap-4">
+                        <button className="flex items-center gap-2 rounded-full bg-[#080808] px-8 py-4 font-manrope text-[14px] font-bold text-white transition-transform duration-300 hover:scale-105">
+                          Saber más
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M7 17L17 7M17 7H7M17 7V17" />
+                          </svg>
+                        </button>
                       </div>
-
                     </div>
                   </div>
                 </motion.article>
               );
             })}
-          </motion.div>
+          </div>
         </div>
       </section>
     </>
@@ -2224,6 +2204,38 @@ const App = () => {
             .contact-premium-card {
               backdrop-filter: none;
               -webkit-backdrop-filter: none;
+            }
+          }
+          
+          /* Sticky Services Stacking Effect */
+          .services-sticky-container {
+            height: 310vh; /* Allow enough scroll space for 3 cards */
+            position: relative;
+            margin-top: 40px;
+          }
+          .services-sticky-card {
+            position: sticky;
+            top: 100px;
+            height: 75vh;
+            min-height: 520px;
+            width: 100%;
+            margin-bottom: 40px;
+          }
+          .services-sticky-card:nth-child(1) { z-index: 1; }
+          .services-sticky-card:nth-child(2) { z-index: 2; }
+          .services-sticky-card:nth-child(3) { z-index: 3; }
+          
+          @media (max-width: 768px) {
+            .services-sticky-container {
+              height: auto;
+              margin-top: 20px;
+            }
+            .services-sticky-card {
+              position: relative;
+              top: auto !important;
+              height: auto;
+              min-height: auto;
+              margin-bottom: 24px;
             }
           }
       `}</style>
