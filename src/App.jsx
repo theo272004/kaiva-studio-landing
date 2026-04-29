@@ -1234,6 +1234,7 @@ const ProcessRedesignSection = () => {
     [0, 1, 2, 3, 4],
     [0, 0.25, 0.5, 0.75, 1]
   );
+  const currentStep = stepsContent[activeStep];
 
   useMotionValueEvent(activeProgressRaw, 'change', (latest) => {
     const nextStep = Math.min(stepsContent.length - 1, Math.max(0, Math.round(latest)));
@@ -1242,7 +1243,7 @@ const ProcessRedesignSection = () => {
 
   return (
     <section ref={sectionRef} id="proceso" className="process-section relative w-full bg-white py-0">
-      <div className="process-sticky-stage relative h-[205vh] w-full md:h-[225vh] lg:h-[240vh]">
+      <div className="process-sticky-stage relative hidden h-[225vh] w-full md:block lg:h-[240vh]">
         <div className="sticky top-0 flex h-[100svh] w-full items-center justify-center overflow-hidden bg-white px-4 sm:px-6 lg:px-16">
           {/* Progressive giant gradient: white on step 1 to full purple on step 5 */}
           <motion.div 
@@ -1265,6 +1266,47 @@ const ProcessRedesignSection = () => {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative h-[170vh] w-full md:hidden">
+        <div className="sticky top-0 flex h-[100svh] w-full items-center justify-center overflow-hidden bg-white px-5">
+          <motion.div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 10%, rgba(111,34,239,0.14) 28%, rgba(111,34,239,0.34) 48%, rgba(111,34,239,0.68) 70%, #6f22ef 100%)',
+              opacity: purpleStageOpacity
+            }}
+          />
+          <div className="relative z-10 mx-auto flex w-full max-w-[420px] flex-col items-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeStep}
+                initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -18, scale: 0.97 }}
+                transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full rounded-[28px] border border-[#8242f5]/12 bg-white/92 p-6 shadow-[0_24px_60px_-34px_rgba(130,66,245,0.18)] backdrop-blur-md"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#080808]/6 bg-white font-epilogue text-[15px] font-bold text-[#080808]/45 shadow-sm">
+                    0{activeStep + 1}
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.16em] text-[#8242f5]">
+                      {stepLabels[activeStep]}
+                    </div>
+                    <h3 className="font-epilogue text-[28px] font-extrabold leading-[1.02] tracking-[-0.035em] text-[#080808]">
+                      {currentStep.title}
+                    </h3>
+                    <p className="text-[14px] leading-relaxed text-[#080808]/62">
+                      {currentStep.description}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>
