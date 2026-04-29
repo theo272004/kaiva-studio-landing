@@ -920,12 +920,12 @@ const PortfolioSection = () => {
     <div
       id="proyectos"
       data-nav-theme="light"
-      className="relative overflow-hidden bg-[linear-gradient(180deg,#ede4fb_0%,#f2ebff_14%,#f6f0ff_30%,#f7f3ff_46%,#f7f5fb_100%)] pb-20 text-[#080808]"
+      className="relative overflow-hidden bg-[linear-gradient(180deg,#ede4fb_0%,#f1e8ff_10%,#f4edff_24%,#f7f3ff_42%,#f7f5fb_100%)] pb-20 text-[#080808]"
       style={{ fontFamily: 'Manrope, sans-serif' }}
     >
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-[220px]"
-        style={{ background: 'linear-gradient(180deg, rgba(139,77,240,0.18) 0%, rgba(139,77,240,0.08) 36%, rgba(255,255,255,0) 100%)' }}
+        style={{ background: 'linear-gradient(180deg, rgba(130,66,245,0.24) 0%, rgba(130,66,245,0.12) 36%, rgba(255,255,255,0) 100%)' }}
       />
       <div
         className="pointer-events-none absolute left-[-10%] top-[16%] h-[320px] w-[320px] rounded-full blur-[95px]"
@@ -1249,7 +1249,7 @@ const ProcessRedesignSection = () => {
           <motion.div 
             className="absolute inset-0 pointer-events-none transition-all duration-300"
             style={{
-              background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 18%, rgba(111,34,239,0.12) 38%, rgba(111,34,239,0.28) 54%, rgba(139,77,240,0.52) 72%, rgba(111,34,239,0.92) 100%)',
+              background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 12%, rgba(111,34,239,0.14) 30%, rgba(111,34,239,0.34) 48%, rgba(139,77,240,0.62) 70%, rgba(111,34,239,0.96) 100%)',
               opacity: purpleStageOpacity
             }}
           />
@@ -1428,40 +1428,55 @@ const AliadosSection = () => {
       className="allies-section relative w-full overflow-hidden px-4 py-12 md:px-8 md:py-16 lg:py-20"
       style={{
         background:
-          'linear-gradient(180deg, #6f22ef 0%, #8b4df0 34%, #9f68f1 56%, #c5a9f7 76%, #ede5fb 90%, #ffffff 100%)'
+          'linear-gradient(180deg, #6f22ef 0%, #8242f5 30%, #9c67f2 54%, #d9ccfb 78%, #f2ebff 90%, #ede4fb 100%)'
       }}
     >
-      <div className="mx-auto w-full max-w-[1560px] rounded-[34px] bg-[#06060b] px-7 py-12 text-white shadow-[0_35px_90px_-42px_rgba(6,2,26,0.95)] ring-1 ring-white/10 md:px-14 md:py-16 lg:min-h-[74vh] lg:px-20 lg:py-20 xl:min-h-[78vh] xl:px-24">
+      <div className="mx-auto w-full max-w-[1680px] rounded-[34px] bg-[#050505] px-7 py-12 text-white shadow-[0_35px_90px_-42px_rgba(6,2,26,0.95)] ring-1 ring-white/10 md:px-14 md:py-16 lg:min-h-[82vh] lg:px-20 lg:py-24 xl:min-h-[86vh] xl:px-24">
         <div className="absolute inset-0 rounded-[34px]" style={{ background: 'radial-gradient(72% 80% at 22% 44%, rgba(126,60,245,0.20) 0%, rgba(126,60,245,0) 72%), radial-gradient(52% 68% at 82% 58%, rgba(88,27,201,0.34) 0%, rgba(88,27,201,0) 74%)' }} />
 
-        <div className="relative z-10 grid items-center gap-10 lg:min-h-[calc(74vh-10rem)] lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 xl:min-h-[calc(78vh-11rem)]">
+        <div className="relative z-10 grid items-center gap-10 lg:min-h-[calc(82vh-12rem)] lg:grid-cols-[1.18fr_0.82fr] lg:gap-12 xl:min-h-[calc(86vh-12rem)]">
           <div className="text-left">
             <h2 className="font-epilogue text-[clamp(52px,9.2vw,132px)] font-extrabold leading-[0.92] tracking-[-0.045em] text-white">
               Kaiva
               <br />
-              <span className="relative inline-block whitespace-nowrap pb-3 md:pb-4">
+              <span className="relative inline-block whitespace-nowrap pb-8 md:pb-10">
                 for Startups
-                <span className="absolute bottom-0 left-0 h-[8px] w-full rounded-full bg-white md:h-[10px]" />
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 760 72"
+                  className="absolute -bottom-1 left-[-1.5%] h-[22px] w-[108%] md:h-[28px]"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M18 54 C168 18, 378 18, 742 50"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="18"
+                    strokeLinecap="round"
+                  />
+                </svg>
               </span>
             </h2>
 
-            <div className="mt-7 inline-flex rounded-full bg-black px-6 py-2.5 font-manrope text-[12px] font-bold uppercase tracking-[0.14em] text-white/95 ring-1 ring-white/12 md:mt-9 md:text-[14px]">
-              ALIANZA ESTRATÉGICA
-            </div>
+            <div className="mt-7 flex flex-col items-start gap-4 md:mt-9 md:gap-5">
+              <div className="inline-flex rounded-full bg-black px-6 py-2.5 font-manrope text-[12px] font-bold uppercase tracking-[0.14em] text-white/95 ring-1 ring-white/12 md:text-[14px]">
+                ALIANZA ESTRATÉGICA
+              </div>
 
-            <a
-              href="https://seoforstartups.co"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 font-inter text-[14px] font-bold text-[#121222] shadow-[0_16px_40px_-20px_rgba(0,0,0,0.75)] transition-transform duration-300 hover:-translate-y-0.5 md:mt-11 md:px-10 md:py-4 md:text-[15px]"
-            >
-              Conoce más de SEO for Startups
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#efe8ff] text-[#7f41f0]">
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </span>
-            </a>
+              <a
+                href="https://seoforstartups.co"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex w-fit items-center gap-3 rounded-full bg-white px-6 py-3.5 font-inter text-[14px] font-bold text-[#121222] shadow-[0_16px_40px_-20px_rgba(0,0,0,0.75)] transition-transform duration-300 hover:-translate-y-0.5 md:px-10 md:py-4 md:text-[15px]"
+              >
+                Conoce más de SEO for Startups
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#efe8ff] text-[#7f41f0]">
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </span>
+              </a>
+            </div>
           </div>
 
           <div className="relative mx-auto w-full max-w-[340px] md:max-w-[560px] lg:max-w-[700px] xl:max-w-[760px]">
