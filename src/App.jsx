@@ -1772,43 +1772,27 @@ const App = () => {
           mix-blend-mode: soft-light;
         }
         .problem-card {
-          background:
-            radial-gradient(120% 140% at 0% 0%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 44%),
-            linear-gradient(145deg, #9b61ff 0%, #8242f5 46%, #6930d3 100%);
-          border: 1px solid rgba(255, 255, 255, 0.16);
-          box-shadow:
-            0 22px 48px -18px rgba(71, 18, 160, 0.42),
-            inset 0 1px 0 rgba(255,255,255,0.24),
-            inset 0 -10px 24px rgba(52, 14, 122, 0.16);
+          background: #ffffff;
+          border: 1px solid rgba(8, 8, 8, 0.06);
+          box-shadow: 0 16px 44px -28px rgba(8, 8, 8, 0.18);
         }
         .problem-card::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(140deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 36%, rgba(42, 8, 98, 0.12) 100%);
-          pointer-events: none;
+          display: none;
         }
         .problem-card-copy {
-          width: min(100%, calc(100% - 110px));
+          width: 100%;
         }
         .problem-card-button {
           position: relative;
           z-index: 10;
-          color: #ffffff;
-          background: linear-gradient(180deg, rgba(92, 34, 196, 0.92) 0%, rgba(68, 20, 154, 0.96) 100%);
-          border: 1px solid rgba(255,255,255,0.08);
-          box-shadow:
-            inset 0 2px 3px rgba(20, 4, 49, 0.72),
-            inset 0 14px 18px rgba(144, 92, 255, 0.18),
-            inset 0 -10px 18px rgba(18, 2, 48, 0.48),
-            0 1px 0 rgba(255,255,255,0.08);
+          color: #080808;
+          background: #ffffff;
+          border: 1px solid rgba(8, 8, 8, 0.08);
+          box-shadow: 0 10px 24px -18px rgba(8, 8, 8, 0.2);
         }
         .problem-card-button-icon {
-          background: linear-gradient(180deg, #a970ff 0%, #7a3ef0 100%);
-          box-shadow:
-            0 8px 14px -10px rgba(28, 5, 70, 0.9),
-            inset 0 1px 0 rgba(255,255,255,0.2),
-            inset 0 -3px 8px rgba(63, 17, 150, 0.45);
+          background: linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%);
+          box-shadow: 0 10px 18px -12px rgba(130, 66, 245, 0.55);
         }
         
         @keyframes floatBlobOne {
@@ -2034,7 +2018,7 @@ const App = () => {
             gap: 14px !important;
           }
           .problem-card {
-            min-height: 246px !important;
+            min-height: 210px !important;
             padding: 18px 20px !important;
           }
           .problem-card h4 {
@@ -2170,16 +2154,6 @@ const App = () => {
           .hero-copy-wrap { top: 108px !important; max-width: calc(100vw - 48px) !important; }
           .hero-visual-wrap { top: 275px !important; width: 114vw !important; max-width: 520px !important; }
         }
-        @media (min-width: 768px) and (max-width: 1180px) {
-          .problem-card-copy {
-            width: min(100%, calc(100% - 148px));
-          }
-        }
-        @media (min-width: 1181px) {
-          .problem-card-copy {
-            width: min(100%, calc(100% - 190px));
-          }
-        }
         @media (max-width: 400px) {
           .hero-copy-wrap { top: 96px !important; }
           .hero-visual-wrap { top: 255px !important; width: 108vw !important; max-width: 420px !important; }
@@ -2187,11 +2161,6 @@ const App = () => {
         @media (max-height: 700px) and (max-width: 768px) {
           .hero-copy-wrap { top: 86px !important; }
           .hero-visual-wrap { top: 220px !important; }
-        }
-        @media (max-width: 767px) {
-          .problem-card-copy {
-            width: min(100%, calc(100% - 100px));
-          }
         }
           .contact-premium-card {
             background: #ffffff;
@@ -2304,12 +2273,12 @@ const ProblemSection = () => {
           <div className="problem-reasons-grid grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             
             {/* Card 1 */}
-            <div className="problem-card relative overflow-hidden rounded-[30px] p-5 sm:p-6 md:p-7 xl:p-8 text-white min-h-[312px] sm:min-h-[330px] md:min-h-[348px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
+            <div className="problem-card relative overflow-hidden rounded-[22px] p-5 text-[#080808] min-h-[210px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 md:p-6">
               <div className="problem-card-copy relative z-10">
-                <h4 className="font-epilogue text-[28px] md:text-[34px] font-extrabold leading-[1.05] tracking-tight mb-3">
+                <h4 className="font-epilogue text-[22px] md:text-[26px] font-extrabold leading-[1.05] tracking-tight mb-2">
                   Es muy caro.
                 </h4>
-                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.55] text-white/88 mb-6">
+                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.5] text-[#080808]/66 mb-5">
                   Muchos negocios creen que tener una web profesional está fuera de su presupuesto. No tiene por qué serlo.
                 </p>
               </div>
@@ -2321,25 +2290,19 @@ const ProblemSection = () => {
                       <path d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </span>
-                  <span className="text-[11px] font-bold tracking-widest uppercase text-white/92">
+                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#080808]/72">
                     SABER MÁS
                   </span>
                 </button>
-              <img
-                src={asset('card-es-muy-caro.webp')}
-                alt="Es muy caro"
-                loading="lazy"
-                className="absolute right-[-4%] bottom-[-3%] w-[140px] sm:w-[170px] md:w-[178px] lg:w-[205px] xl:w-[238px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-2 pointer-events-none z-0"
-              />
             </div>
 
             {/* Card 2 */}
-            <div className="problem-card relative overflow-hidden rounded-[30px] p-5 sm:p-6 md:p-7 xl:p-8 text-white min-h-[312px] sm:min-h-[330px] md:min-h-[348px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
+            <div className="problem-card relative overflow-hidden rounded-[22px] p-5 text-[#080808] min-h-[210px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 md:p-6">
               <div className="problem-card-copy relative z-10">
-                <h4 className="font-epilogue text-[28px] md:text-[34px] font-extrabold leading-[1.05] tracking-tight mb-3">
+                <h4 className="font-epilogue text-[22px] md:text-[26px] font-extrabold leading-[1.05] tracking-tight mb-2">
                   No sé cómo funciona.
                 </h4>
-                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.55] text-white/88 mb-6">
+                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.5] text-[#080808]/66 mb-5">
                   Dominios, hosting, SEO, diseño... el lenguaje técnico aleja a dueños de negocio que simplemente quieren más clientes.
                 </p>
               </div>
@@ -2351,25 +2314,19 @@ const ProblemSection = () => {
                       <path d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </span>
-                  <span className="text-[11px] font-bold tracking-widest uppercase text-white/92">
+                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#080808]/72">
                     SABER MÁS
                   </span>
                 </button>
-              <img
-                src={asset('card-no-se-como-funciona.webp')}
-                alt="No sé cómo funciona"
-                loading="lazy"
-                className="absolute right-[-4%] bottom-0 w-[140px] sm:w-[170px] md:w-[178px] lg:w-[205px] xl:w-[238px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-2 pointer-events-none z-0"
-              />
             </div>
 
             {/* Card 3 */}
-            <div className="problem-card relative overflow-hidden rounded-[30px] p-5 sm:p-6 md:p-7 xl:p-8 text-white min-h-[312px] sm:min-h-[330px] md:min-h-[348px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
+            <div className="problem-card relative overflow-hidden rounded-[22px] p-5 text-[#080808] min-h-[210px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 md:p-6">
               <div className="problem-card-copy relative z-10">
-                <h4 className="font-epilogue text-[28px] md:text-[34px] font-extrabold leading-[1.05] tracking-tight mb-3">
+                <h4 className="font-epilogue text-[22px] md:text-[26px] font-extrabold leading-[1.05] tracking-tight mb-2">
                   Ya intenté y no funcionó.
                 </h4>
-                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.55] text-white/88 mb-6">
+                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.5] text-[#080808]/66 mb-5">
                   Malas experiencias con freelancers o plantillas genéricas que no reflejan el negocio ni generan resultados.
                 </p>
               </div>
@@ -2381,25 +2338,19 @@ const ProblemSection = () => {
                       <path d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </span>
-                  <span className="text-[11px] font-bold tracking-widest uppercase text-white/92">
+                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#080808]/72">
                     SABER MÁS
                   </span>
                 </button>
-              <img
-                src={asset('card-ya-intente.webp')}
-                alt="Ya intenté y no funcionó"
-                loading="lazy"
-                className="absolute right-[-4%] bottom-[-2%] w-[140px] sm:w-[170px] md:w-[178px] lg:w-[205px] xl:w-[238px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-2 pointer-events-none z-0"
-              />
             </div>
 
             {/* Card 4 */}
-            <div className="problem-card relative overflow-hidden rounded-[30px] p-5 sm:p-6 md:p-7 xl:p-8 text-white min-h-[312px] sm:min-h-[330px] md:min-h-[348px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
+            <div className="problem-card relative overflow-hidden rounded-[22px] p-5 text-[#080808] min-h-[210px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 md:p-6">
               <div className="problem-card-copy relative z-10">
-                <h4 className="font-epilogue text-[28px] md:text-[34px] font-extrabold leading-[1.05] tracking-tight mb-3">
+                <h4 className="font-epilogue text-[22px] md:text-[26px] font-extrabold leading-[1.05] tracking-tight mb-2">
                   No tengo tiempo.
                 </h4>
-                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.55] text-white/88 mb-6">
+                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.5] text-[#080808]/66 mb-5">
                   Gestionar un negocio ya es suficiente trabajo. No debería necesitarse un equipo técnico propio para tener presencia digital.
                 </p>
               </div>
@@ -2411,16 +2362,10 @@ const ProblemSection = () => {
                       <path d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </span>
-                  <span className="text-[11px] font-bold tracking-widest uppercase text-white/92">
+                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#080808]/72">
                     SABER MÁS
                   </span>
                 </button>
-              <img
-                src={asset('card-no-tengo-tiempo.webp')}
-                alt="No tengo tiempo"
-                loading="lazy"
-                className="absolute right-[0%] bottom-0 w-[130px] sm:w-[155px] md:w-[165px] lg:w-[188px] xl:w-[212px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-2 pointer-events-none z-0"
-              />
             </div>
 
           </div>
