@@ -2,11 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, AnimatePresence, useReducedMotion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
-const PROJECTS_PAGE_HREF = './proyectos/';
-const HOME_PAGE_HREF_FROM_PROJECTS = '../';
-const isProjectsPath = () => {
+const SERVICES_PAGE_HREF = './servicios/';
+const HOME_PAGE_HREF_FROM_SERVICES = '../';
+const isServicesPath = () => {
   if (typeof window === 'undefined') return false;
-  return /\/proyectos(?:\/|$|\/index\.html$)/.test(window.location.pathname);
+  return /\/servicios(?:\/|$|\/index\.html$)/.test(window.location.pathname);
 };
 const scrollToSection = (event, id) => {
   if (typeof window === 'undefined') return;
@@ -1695,7 +1695,7 @@ const CustomCursor = () => {
 const FixedNavbar = ({ projectsActive = false }) => (
   <>
     <a
-      href={projectsActive ? HOME_PAGE_HREF_FROM_PROJECTS : '#inicio'}
+      href={projectsActive ? HOME_PAGE_HREF_FROM_SERVICES : '#inicio'}
       onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'inicio')}
       className="fixed left-6 top-5 z-40 w-fit text-left text-[16px] leading-[0.95] text-[#080808] transition-colors duration-200 md:left-[80px] md:top-[40px] md:text-[20px]"
     >
@@ -1706,13 +1706,13 @@ const FixedNavbar = ({ projectsActive = false }) => (
     </a>
 
     <nav className="fixed right-[32px] top-[32px] z-40 hidden items-center gap-10 text-[16px] text-[#080808]/68 transition-colors duration-200 md:flex md:right-[80px] md:top-[45px]">
-      <a href={projectsActive ? HOME_PAGE_HREF_FROM_PROJECTS : '#inicio'} onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'inicio')} className="font-medium" style={projectsActive ? undefined : gradientAccentStyle}>
+      <a href={projectsActive ? HOME_PAGE_HREF_FROM_SERVICES : '#inicio'} onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'inicio')} className="font-medium" style={projectsActive ? undefined : gradientAccentStyle}>
         Inicio
       </a>
-              <a href={projectsActive ? './' : PROJECTS_PAGE_HREF} className="transition-colors hover:text-[#080808]" style={projectsActive ? gradientAccentStyle : undefined}>Servicios</a>
-      <a href={projectsActive ? `${HOME_PAGE_HREF_FROM_PROJECTS}#contacto` : '#contacto'} onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'contacto')} className="transition-colors hover:text-[#080808]">Contacto</a>
+              <a href={projectsActive ? './' : SERVICES_PAGE_HREF} className="transition-colors hover:text-[#080808]" style={projectsActive ? gradientAccentStyle : undefined}>Servicios</a>
+      <a href={projectsActive ? `${HOME_PAGE_HREF_FROM_SERVICES}#contacto` : '#contacto'} onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'contacto')} className="transition-colors hover:text-[#080808]">Contacto</a>
       <a
-        href={projectsActive ? `${HOME_PAGE_HREF_FROM_PROJECTS}#planes` : '#planes'}
+        href={projectsActive ? `${HOME_PAGE_HREF_FROM_SERVICES}#planes` : '#planes'}
         onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'planes')}
         className="inline-flex h-[44px] items-center justify-center self-center rounded-full border border-[#080808]/12 bg-white/72 px-6 font-manrope text-[11px] font-bold uppercase tracking-[0.16em] text-[#080808] shadow-[0_12px_28px_-20px_rgba(8,8,8,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white"
       >
@@ -1722,7 +1722,7 @@ const FixedNavbar = ({ projectsActive = false }) => (
 
     <div className="fixed right-6 top-5 z-40 flex items-center gap-3 md:hidden">
       <a
-        href={projectsActive ? `${HOME_PAGE_HREF_FROM_PROJECTS}#planes` : '#planes'}
+        href={projectsActive ? `${HOME_PAGE_HREF_FROM_SERVICES}#planes` : '#planes'}
         onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'planes')}
         className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-[#080808]/12 bg-white px-5 font-manrope text-[10px] font-bold uppercase tracking-[0.16em] text-[#080808] transition-colors hover:bg-[#f7f7f7]"
       >
@@ -1742,7 +1742,7 @@ const ProjectsPage = () => {
 };
 
 const App = () => {
-  const showProjectsPage = isProjectsPath();
+  const showProjectsPage = isServicesPath();
 
   useEffect(() => {
     if (!showProjectsPage) {
@@ -2670,7 +2670,7 @@ const HeroSection = () => {
         >
           Inicio
         </a>
-        <a href="#servicios" onClick={(event) => scrollToSection(event, 'servicios')} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Servicios</a>
+        <a href={SERVICES_PAGE_HREF} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Servicios</a>
         <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Contacto</a>
         <a
           href="#planes"
@@ -2729,9 +2729,21 @@ const HeroSection = () => {
               </button>
             </div>
             <nav className="mt-12 flex flex-col gap-1">
+              <a
+                href="#inicio"
+                onClick={(e) => { scrollToSection(e, 'inicio'); setMobileMenuOpen(false); }}
+                className="py-4 text-[22px] font-semibold tracking-[-0.02em] text-[#080808] border-b border-[#080808]/6"
+              >
+                Inicio
+              </a>
+              <a
+                href={SERVICES_PAGE_HREF}
+                className="py-4 text-[22px] font-semibold tracking-[-0.02em] text-[#080808] border-b border-[#080808]/6"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Servicios
+              </a>
               {[
-                { label: 'Inicio', id: 'inicio' },
-                { label: 'Servicios', id: 'servicios' },
                 { label: 'Paquetes', id: 'planes' },
                 { label: 'Contacto', id: 'contacto' },
               ].map(({ label, id }) => (
@@ -2744,13 +2756,6 @@ const HeroSection = () => {
                   {label}
                 </a>
               ))}
-              <a
-                href={PROJECTS_PAGE_HREF}
-                className="py-4 text-[22px] font-semibold tracking-[-0.02em] text-[#080808] border-b border-[#080808]/6"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Proyectos
-              </a>
             </nav>
             <div className="mt-auto">
               <a
@@ -2777,7 +2782,7 @@ const HeroSection = () => {
         </h1>
 
         <a
-          href={PROJECTS_PAGE_HREF}
+          href={SERVICES_PAGE_HREF}
           className="mt-4 inline-flex w-fit items-center gap-2 pb-1 text-[16px] font-medium leading-none underline decoration-1 underline-offset-[5px] md:mt-6 md:text-[20px]"
           style={gradientAccentStyle}
         >

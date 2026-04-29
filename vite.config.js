@@ -23,7 +23,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve('index.html'),
-        proyectos: resolve('proyectos/index.html'),
+        servicios: resolve('servicios/index.html'),
       },
       output: {
         manualChunks(id) {
