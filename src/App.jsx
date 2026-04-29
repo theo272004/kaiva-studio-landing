@@ -182,6 +182,24 @@ const accentButtonStyle = {
 
 const premiumEase = [0.22, 1, 0.36, 1];
 
+const handleServiceCardMouseMove = (event) => {
+  if (typeof window !== 'undefined' && window.innerWidth < 769) return;
+  const rect = event.currentTarget.getBoundingClientRect();
+  const moveX = ((event.clientX - rect.left) / rect.width - 0.5) * 24;
+  const moveY = ((event.clientY - rect.top) / rect.height - 0.5) * 20;
+  event.currentTarget.style.setProperty('--service-move-x', `${moveX}px`);
+  event.currentTarget.style.setProperty('--service-move-y', `${moveY}px`);
+  event.currentTarget.style.setProperty('--service-rotate-y', `${moveX * 0.45}deg`);
+  event.currentTarget.style.setProperty('--service-rotate-x', `${moveY * -0.38}deg`);
+};
+
+const resetServiceCardMouseMove = (event) => {
+  event.currentTarget.style.setProperty('--service-move-x', '0px');
+  event.currentTarget.style.setProperty('--service-move-y', '0px');
+  event.currentTarget.style.setProperty('--service-rotate-y', '0deg');
+  event.currentTarget.style.setProperty('--service-rotate-x', '0deg');
+};
+
 const createGlassPanelStyle = () => ({
   background: 'linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.05) 100%)',
   backdropFilter: 'blur(24px) saturate(120%)',
@@ -255,7 +273,8 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: 0.985 }}
         transition={panelTransition}
-        className="overflow-hidden rounded-[30px] border border-white/10 bg-[#0d1020] shadow-[0_32px_90px_-44px_rgba(17,24,39,0.82)]"
+        className="service-visual-web overflow-hidden rounded-[30px] border border-white/10 bg-[#0d1020] shadow-[0_32px_90px_-44px_rgba(17,24,39,0.82)]"
+        style={{ transform: 'perspective(700px) rotateY(var(--service-rotate-y,0deg)) rotateX(var(--service-rotate-x,0deg)) translateZ(8px)' }}
       >
         <div className="flex items-center gap-2 border-b border-white/8 px-5 py-4">
           <span className="h-2.5 w-2.5 rounded-full bg-[#ff6b6b]" />
@@ -302,7 +321,8 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: 0.985 }}
         transition={panelTransition}
-        className="grid gap-4 lg:grid-cols-[0.88fr_1.12fr]"
+        className="service-visual-design grid gap-4 lg:grid-cols-[0.88fr_1.12fr]"
+        style={{ transform: 'translate(var(--service-move-x,0px), var(--service-move-y,0px))' }}
       >
         <div className="rounded-[28px] border border-[#111827]/8 bg-[#fffdf9] p-5 shadow-[0_26px_72px_-40px_rgba(15,23,42,0.28)]">
           <div className="mb-5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#8b5cf6]">Brand board</div>
@@ -358,7 +378,8 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: 0.985 }}
       transition={panelTransition}
-      className="overflow-hidden rounded-[30px] border border-[#0f172a]/8 bg-[#09111f] p-5 shadow-[0_32px_90px_-42px_rgba(2,8,23,0.92)]"
+      className="service-visual-flow overflow-hidden rounded-[30px] border border-[#0f172a]/8 bg-[#09111f] p-5 shadow-[0_32px_90px_-42px_rgba(2,8,23,0.92)]"
+      style={{ transform: 'translate(calc(var(--service-move-x,0px) * 0.55), calc(var(--service-move-y,0px) * 0.4))' }}
     >
       <div className="mb-5 flex items-center justify-between">
         <div>
@@ -957,6 +978,8 @@ const PortfolioSection = () => {
                 transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, ease: premiumEase, delay: index * 0.04 }}
                 className="service-stack-card group sticky top-5 mb-[10px] overflow-hidden rounded-[28px] border border-[#d8d0ee] bg-white/88 shadow-[0_12px_30px_rgba(57,53,44,0.06)] backdrop-blur-[10px] transition-[border-color,box-shadow,transform] duration-[600ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-[#792fec]/30 hover:shadow-[0_24px_60px_rgba(57,53,44,0.08),0_0_0_1px_rgba(121,47,236,0.12)]"
                 style={{ zIndex: index + 1 }}
+                onMouseMove={handleServiceCardMouseMove}
+                onMouseLeave={resetServiceCardMouseMove}
               >
                 <div className="grid h-[calc(100vh-60px)] min-h-[520px] gap-0 lg:grid-cols-[0.94fr_1.06fr]">
                   <div className="relative flex flex-col justify-center overflow-hidden border-r border-[#e8e1f7] px-8 py-10 lg:px-12 lg:py-14">
@@ -992,7 +1015,7 @@ const PortfolioSection = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="bg-[linear-gradient(180deg,rgba(247,243,255,0.88)_0%,rgba(255,255,255,0.92)_100%)] p-5 lg:p-6">
+                  <div className="flex items-center justify-center bg-[linear-gradient(180deg,rgba(247,243,255,0.88)_0%,rgba(255,255,255,0.92)_100%)] p-5 lg:p-6">
                     <ServiceShowcaseVisual service={service} prefersReducedMotion={prefersReducedMotion} />
                   </div>
                 </div>
@@ -1044,7 +1067,7 @@ const PortfolioSection = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="bg-[linear-gradient(180deg,rgba(247,243,255,0.88)_0%,rgba(255,255,255,0.92)_100%)] p-4">
+                  <div className="flex items-center justify-center bg-[linear-gradient(180deg,rgba(247,243,255,0.88)_0%,rgba(255,255,255,0.92)_100%)] p-4">
                     <ServiceShowcaseVisual service={service} prefersReducedMotion={prefersReducedMotion} />
                   </div>
                 </div>
