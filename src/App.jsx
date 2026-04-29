@@ -676,9 +676,9 @@ const ContactRevealSection = () => {
               variants={formItem}
               whileHover={prefersReducedMotion || isMobile ? undefined : { y: -2 }}
               transition={{ duration: 0.32, ease: premiumEase }}
-              className="relative z-30 rounded-[34px] p-5 md:p-6 shadow-[0_32px_80px_-20px_rgba(130,66,245,0.15)] border border-white/60 backdrop-blur-[24px]"
+              className="relative z-30 rounded-[34px] p-5 md:p-6 shadow-[0_8px_32px_-8px_rgba(130,66,245,0.12),0_2px_8px_rgba(0,0,0,0.04)] border border-white/50 backdrop-blur-[32px]"
               style={{
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%)',
+                background: 'linear-gradient(135deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.30) 100%)',
                 ...(isMobile ? {} : { transformPerspective: 1600, transformStyle: 'preserve-3d' })
               }}
             >
@@ -1361,7 +1361,9 @@ const ProcessRedesignSection = () => {
 const ExpandedAgencySections = () => (
   <>
     <ProcessRedesignSection />
-    <AliadosSection />
+    <div style={{ marginTop: '-1px', position: 'relative', zIndex: 2 }}>
+      <AliadosSection />
+    </div>
     <section
       id="planes"
       data-nav-theme="light"
@@ -1737,11 +1739,139 @@ const FixedNavbar = ({ projectsActive = false }) => (
   </>
 );
 
+const projectGalleryItems = [
+  { id: 1, category: 'web', title: 'Restaurante Gourmet', desc: 'Landing page premium con sistema de reservas integrado.', image: 'project-web-1.webp' },
+  { id: 2, category: 'web', title: 'E-commerce Skincare', desc: 'Tienda online con diseño minimalista y checkout optimizado.', image: 'project-web-2.webp' },
+  { id: 3, category: 'web', title: 'Firma Legal', desc: 'Sitio corporativo con formulario de consultas y blog SEO.', image: 'project-web-3.webp' },
+  { id: 4, category: 'design', title: 'Identidad Corporativa', desc: 'Logo, papelería y manual de marca completo.', image: 'project-design-1.webp' },
+  { id: 5, category: 'design', title: 'Contenido Social', desc: 'Plantillas de redes sociales y piezas publicitarias.', image: 'project-design-2.webp' },
+  { id: 6, category: 'systems', title: 'Dashboard Analítico', desc: 'Panel de control con KPIs en tiempo real e integraciones.', image: 'project-system-1.webp' },
+];
+
+const ProjectsGallery = () => {
+  const [filter, setFilter] = useState('all');
+  const filtered = filter === 'all' ? projectGalleryItems : projectGalleryItems.filter(p => p.category === filter);
+
+  return (
+    <section className="relative bg-white px-6 pb-20 pt-16 md:px-12 lg:px-16">
+      <div className="mx-auto max-w-[1280px]">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.2em] text-[#8242f5]">Portfolio</div>
+            <h2 className="mt-3 font-epilogue text-[clamp(32px,5vw,56px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-[#080808]">
+              Proyectos recientes
+            </h2>
+            <p className="mt-4 max-w-[500px] text-[15px] leading-relaxed text-[#080808]/60">
+              Una muestra de lo que hacemos. Cada proyecto se diseña con estrategia, estética y propósito.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { id: 'all', label: 'Todos' },
+              { id: 'web', label: 'Web' },
+              { id: 'design', label: 'Diseño' },
+              { id: 'systems', label: 'Sistemas' },
+            ].map(cat => (
+              <button
+                key={cat.id}
+                onClick={() => setFilter(cat.id)}
+                className={`rounded-full px-5 py-2.5 text-[13px] font-semibold transition-all duration-300 ${
+                  filter === cat.id
+                    ? 'bg-[#080808] text-white shadow-md'
+                    : 'bg-[#f7f5fb] border border-[#080808]/8 text-[#080808]/70 hover:bg-[#ede4fb]'
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((project) => (
+              <motion.article
+                key={project.id}
+                layout
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.35, ease: premiumEase }}
+                className="group relative overflow-hidden rounded-[24px] border border-[#080808]/6 bg-white shadow-[0_8px_30px_-16px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_-20px_rgba(130,66,245,0.15)]"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden bg-[#f7f5fb]">
+                  <img
+                    src={asset(project.image)}
+                    alt={project.title}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                </div>
+                <div className="p-5 md:p-6">
+                  <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#8242f5]">
+                    {project.category === 'web' ? 'Desarrollo Web' : project.category === 'design' ? 'Diseño' : 'Sistemas'}
+                  </div>
+                  <h3 className="mt-2 font-epilogue text-[20px] font-extrabold leading-[1.1] tracking-[-0.02em] text-[#080808]">
+                    {project.title}
+                  </h3>
+                  <p className="mt-2 text-[14px] leading-relaxed text-[#080808]/55">
+                    {project.desc}
+                  </p>
+                </div>
+              </motion.article>
+            ))}
+          </AnimatePresence>
+        </div>
+
+        {/* CTA Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: premiumEase }}
+          className="mt-16 relative overflow-hidden rounded-[28px] px-8 py-12 md:px-14 md:py-16 text-center"
+          style={{ background: 'linear-gradient(135deg, #8242f5 0%, #6f22ef 60%, #5a18d0 100%)' }}
+        >
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            <div className="absolute -right-[15%] -top-[30%] h-[300px] w-[300px] rounded-full bg-white/8 blur-[80px]" />
+            <div className="absolute -left-[10%] -bottom-[20%] h-[250px] w-[250px] rounded-full bg-white/6 blur-[60px]" />
+          </div>
+          <div className="relative z-10">
+            <h3 className="font-epilogue text-[clamp(28px,4vw,44px)] font-extrabold leading-[1.05] tracking-[-0.03em] text-white">
+              ¿Tienes un proyecto en mente?
+            </h3>
+            <p className="mx-auto mt-4 max-w-[500px] text-[15px] leading-relaxed text-white/75">
+              Cada proyecto comienza con una conversación. Cuéntanos tu idea y te damos una propuesta sin compromiso.
+            </p>
+            <a
+              href={`${HOME_PAGE_HREF_FROM_SERVICES}#contacto`}
+              className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 font-manrope text-[13px] font-bold uppercase tracking-[0.12em] text-[#8242f5] shadow-[0_12px_30px_-10px_rgba(0,0,0,0.3)] transition-transform duration-300 hover:scale-105"
+            >
+              Hablemos
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </a>
+          </div>
+          <img
+            src={asset('KaivaSara.webp')}
+            alt=""
+            loading="lazy"
+            className="pointer-events-none absolute -right-4 -bottom-4 hidden w-[180px] opacity-30 md:block lg:w-[240px]"
+          />
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
 const ProjectsPage = () => {
   return (
     <>
       <FixedNavbar projectsActive />
       <PortfolioSection />
+      <ProjectsGallery />
     </>
   );
 };
