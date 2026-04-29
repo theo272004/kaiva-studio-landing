@@ -636,11 +636,11 @@ const ContactRevealSection = () => {
     <section 
       id="contacto" 
       ref={sectionRef} 
-      className="contact-section relative w-full overflow-x-clip bg-[#f9f8fc]"
+      className="contact-section relative w-full overflow-x-clip bg-white"
     >
-      {/* Decorative orb behind the glass to make the blur visible */}
-      <div className="absolute right-[5%] top-1/2 -translate-y-1/2 w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] bg-[#8242f5] opacity-[0.15] blur-[100px] rounded-full pointer-events-none" />
-      <div className="absolute right-[15%] top-[30%] w-[30vw] h-[30vw] max-w-[400px] max-h-[400px] bg-[#d96cff] opacity-[0.12] blur-[80px] rounded-full pointer-events-none" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[140px] bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.92)_72%,#ffffff_100%)]" />
+      <div className="pointer-events-none absolute right-[8%] top-1/2 h-[360px] w-[360px] -translate-y-1/2 rounded-full bg-[#8242f5]/[0.08] blur-[88px]" />
+      <div className="pointer-events-none absolute right-[12%] top-[34%] h-[220px] w-[220px] rounded-full bg-[#d96cff]/[0.06] blur-[72px]" />
       <div
         className="contact-main-block mx-auto flex w-full max-w-[1320px] items-center px-6 md:px-12 lg:px-16"
         style={{
@@ -680,7 +680,7 @@ const ContactRevealSection = () => {
               transition={{ duration: 0.32, ease: premiumEase }}
               className="relative z-30 rounded-[34px] p-6 md:p-8 shadow-[0_24px_60px_-16px_rgba(130,66,245,0.15)] border border-white/60"
               style={{
-                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 100%)',
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 243, 255, 0.88) 100%)',
                 backdropFilter: 'blur(32px)',
                 WebkitBackdropFilter: 'blur(32px)',
                 ...(isMobile ? {} : { transformPerspective: 1600, transformStyle: 'preserve-3d' })
@@ -1195,9 +1195,10 @@ const ExpandedAgencySections = () => (
         className="plans-section relative overflow-hidden px-4 pb-12 pt-14 md:px-8 md:pb-16 md:pt-20"
         style={{
           background:
-            'linear-gradient(180deg, #ede4fb 0%, #ffffff 40%, #ffffff 100%)'
+            'linear-gradient(180deg, #f3edff 0%, #f7f4ff 18%, #fcfbff 38%, #ffffff 62%, #ffffff 100%)'
         }}
       >
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[180px] bg-[linear-gradient(180deg,#f3edff_0%,rgba(243,237,255,0.86)_28%,rgba(255,255,255,0)_100%)]" />
       <motion.img
         src={asset('KaivaMora1.webp')}
         alt=""
@@ -1325,10 +1326,10 @@ const AliadosSection = () => {
       className="allies-section relative overflow-hidden px-4 py-12 md:px-8 md:py-16 lg:py-20"
       style={{
         background:
-          'linear-gradient(180deg, #6f22ef 0%, #8242f5 30%, #9c67f2 54%, #d9ccfb 78%, #f2ebff 90%, #ede4fb 100%)'
+          'linear-gradient(180deg, #6f22ef 0%, #8242f5 30%, #9c67f2 54%, #d9ccfb 78%, #eee4ff 90%, #f3edff 100%)'
       }}
     >
-      <div className="mx-auto w-full max-w-[1680px] rounded-[34px] bg-[#050505] px-7 py-12 text-white shadow-[0_28px_70px_-48px_rgba(6,2,26,0.7)] ring-1 ring-white/10 md:px-14 md:py-16 lg:min-h-[82vh] lg:px-20 lg:py-24 xl:min-h-[86vh] xl:px-24">
+      <div className="mx-auto w-full max-w-[1680px] rounded-[34px] bg-[#050505] px-7 py-12 text-white shadow-[0_16px_38px_-30px_rgba(6,2,26,0.52)] ring-1 ring-white/10 md:px-14 md:py-16 lg:min-h-[82vh] lg:px-20 lg:py-24 xl:min-h-[86vh] xl:px-24">
         <div className="absolute inset-0 rounded-[34px]" style={{ background: 'radial-gradient(72% 80% at 22% 44%, rgba(126,60,245,0.20) 0%, rgba(126,60,245,0) 72%), radial-gradient(52% 68% at 82% 58%, rgba(88,27,201,0.34) 0%, rgba(88,27,201,0) 74%)' }} />
 
         <div className="relative z-10 grid items-center gap-10 lg:min-h-[calc(82vh-12rem)] lg:grid-cols-[1.18fr_0.82fr] lg:gap-12 xl:min-h-[calc(86vh-12rem)]">
