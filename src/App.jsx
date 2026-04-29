@@ -959,16 +959,16 @@ const PortfolioSection = () => {
 
       <div className="relative z-20 mx-auto max-w-[1280px] px-6 pt-6 md:px-12 md:pt-8">
         <div className="mt-0">
-          <div className="sticky-container relative hidden h-[310vh] md:block">
+          <div className="sticky-container relative hidden h-[330vh] md:block">
             {serviceShowcase.map((service, index) => (
               <article
                 key={service.id}
-                className="service-card group sticky top-[20px] mb-[10px] overflow-hidden rounded-[28px] border border-[#d9d3ca] bg-white shadow-[0_12px_30px_rgba(57,53,44,0.06)] transition-[border-color,box-shadow] duration-[600ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-[#792fec]/30 hover:shadow-[0_24px_60px_rgba(57,53,44,0.08),0_0_0_1px_rgba(121,47,236,0.12)]"
+                className="service-card group sticky top-[84px] mb-[10px] overflow-hidden rounded-[28px] border border-[#d9d3ca] bg-white shadow-[0_12px_30px_rgba(57,53,44,0.06)] transition-[border-color,box-shadow] duration-[600ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-[#792fec]/30 hover:shadow-[0_24px_60px_rgba(57,53,44,0.08),0_0_0_1px_rgba(121,47,236,0.12)]"
                 style={{ zIndex: index + 1 }}
                 onMouseMove={handleServiceCardMouseMove}
                 onMouseLeave={resetServiceCardMouseMove}
               >
-                <div className="flex h-[calc(100vh-60px)] min-h-[520px]">
+                <div className="flex h-[calc(100vh-124px)] min-h-[520px]">
                   <div className="service-info relative flex-[1] overflow-hidden">
                     <div className="pointer-events-none absolute left-8 top-6 font-['Inter Tight'] text-[88px] font-extrabold leading-none tracking-[-0.06em] text-[#39352c]/[0.03] lg:text-[110px]">
                       {service.number}
