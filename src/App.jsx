@@ -941,7 +941,7 @@ const PortfolioSection = () => {
     <div
       id="proyectos"
       data-nav-theme="light"
-      className="relative overflow-hidden bg-[linear-gradient(180deg,#ede4fb_0%,#f1e8ff_10%,#f4edff_24%,#f7f3ff_42%,#f7f5fb_100%)] pb-20 text-[#080808]"
+      className="relative overflow-x-hidden bg-[linear-gradient(180deg,#ede4fb_0%,#f1e8ff_10%,#f4edff_24%,#f7f3ff_42%,#f7f5fb_100%)] pb-20 text-[#080808]"
       style={{ fontFamily: 'Manrope, sans-serif' }}
     >
       <div
@@ -957,19 +957,8 @@ const PortfolioSection = () => {
         style={{ background: 'rgba(186,145,255,0.16)' }}
       />
 
-      <div className="relative z-20 mx-auto max-w-[1380px] px-6 pt-12 md:px-16 md:pt-20">
-        <div className="max-w-3xl">
-          <div className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#8242f5]">Servicios</div>
-          <h1 className="mt-4 font-['Inter Tight'] text-[clamp(40px,5.8vw,88px)] font-extrabold leading-[1.02] tracking-[-0.035em] text-[#080808]">
-            Elegimos el sistema visual según lo que necesitas resolver.
-          </h1>
-          <p className="mt-5 max-w-2xl text-[15px] leading-7 text-[#080808]/66 md:text-[18px]">
-            Aquí no vas a ver proyectos sueltos. Vas a ver cómo presentamos cada línea de servicio:
-            desarrollo web, diseño y automatización, cada una con su propio lenguaje visual.
-          </p>
-        </div>
-
-        <div className="mt-10">
+      <div className="relative z-20 mx-auto max-w-[1380px] px-6 pt-6 md:px-16 md:pt-8">
+        <div className="mt-0">
           <div className="relative hidden md:block h-[310vh]">
             {serviceShowcase.map((service, index) => (
               <motion.article
