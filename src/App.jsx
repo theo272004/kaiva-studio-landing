@@ -910,6 +910,7 @@ const ServicesSection = () => {
 
 const PortfolioSection = () => {
   const prefersReducedMotion = useReducedMotion();
+  const [openMobileService, setOpenMobileService] = useState(serviceShowcase[0]?.id ?? null);
 
   return (
     <div
@@ -983,41 +984,93 @@ const PortfolioSection = () => {
                 initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.18 }}
-                transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, ease: premiumEase, delay: index * 0.04 }}
-                className="overflow-hidden rounded-[24px] border border-[#d8d0ee] bg-white/88 shadow-[0_18px_48px_-28px_rgba(66,52,111,0.14)] backdrop-blur-[10px] sm:rounded-[28px]"
+                transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.42, ease: premiumEase, delay: index * 0.04 }}
+                className="overflow-hidden rounded-[24px] border border-[#d8d0ee] bg-white shadow-[0_18px_40px_-30px_rgba(66,52,111,0.16)] sm:rounded-[28px]"
               >
-                <div className="grid gap-0">
-                  <div className="relative flex flex-col justify-center overflow-hidden border-b border-[#e8e1f7] px-6 py-8">
-                    <div className="pointer-events-none absolute left-7 top-5 font-['Inter Tight'] text-[72px] font-extrabold leading-none tracking-[-0.06em] text-[#080808]/[0.035]">
+                <button
+                  type="button"
+                  onClick={() => setOpenMobileService(service.id)}
+                  className="flex w-full flex-col gap-5 px-5 py-5 text-left sm:px-6 sm:py-6"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] border border-[#080808]/8 bg-[#faf7ff] font-['Inter Tight'] text-[24px] font-extrabold tracking-[-0.05em] text-[#080808]/60">
                       {service.number}
                     </div>
-                    <div className="relative z-10">
-                      <h2 className="mt-2 max-w-[14ch] font-['Inter Tight'] text-[clamp(30px,8vw,46px)] font-extrabold leading-[0.96] tracking-[-0.045em] text-[#080808]">
-                        {service.title}
-                      </h2>
-                      <p className="mt-5 text-[15px] leading-7 text-[#080808]/66">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center justify-between gap-4">
+                        <div>
+                          <div className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#8242f5]">
+                            {service.label}
+                          </div>
+                          <h2 className="mt-1 font-['Inter Tight'] text-[clamp(28px,8vw,40px)] font-extrabold leading-[0.96] tracking-[-0.045em] text-[#080808]">
+                            {service.title}
+                          </h2>
+                        </div>
+                        <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#080808]/8 bg-[#faf7ff] text-[#080808]/70">
+                          <motion.svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            animate={{ rotate: openMobileService === service.id ? 180 : 0 }}
+                            transition={{ duration: 0.22 }}
+                          >
+                            <path d="M6 9l6 6 6-6" />
+                          </motion.svg>
+                        </div>
+                      </div>
+                      <p className="mt-3 pr-2 text-[14px] leading-6 text-[#080808]/68">
                         {service.description}
                       </p>
-                      <div className="mt-8 grid gap-3">
-                        {service.points.map((point) => (
-                          <div
-                            key={point}
-                            className="flex items-center gap-3 rounded-[18px] border border-[#080808]/6 bg-[#faf8ff] px-4 py-3 text-sm text-[#1f2937]"
-                          >
-                            <span
-                              className="h-2.5 w-2.5 rounded-full"
-                              style={{ background: service.accent }}
-                            />
-                            {point}
-                          </div>
-                        ))}
-                      </div>
                     </div>
                   </div>
-                  <div className="flex items-center justify-center bg-[linear-gradient(180deg,rgba(247,243,255,0.88)_0%,rgba(255,255,255,0.92)_100%)] p-4">
-                    <ServiceShowcaseVisual service={service} prefersReducedMotion={prefersReducedMotion} />
+                  <div className="flex flex-wrap gap-2.5">
+                    {service.points.slice(0, 2).map((point) => (
+                      <div
+                        key={point}
+                        className="rounded-full border border-[#080808]/8 bg-[#faf7ff] px-3.5 py-2 text-[12px] font-medium text-[#39352c]/78"
+                      >
+                        {point}
+                      </div>
+                    ))}
                   </div>
-                </div>
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {openMobileService === service.id && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.28, ease: premiumEase }}
+                      className="overflow-hidden"
+                    >
+                      <div className="border-t border-[#ece5fb] px-5 pb-5 pt-4 sm:px-6 sm:pb-6">
+                        <div className="grid gap-3">
+                          {service.points.map((point) => (
+                            <div
+                              key={point}
+                              className="flex items-center gap-3 rounded-[16px] border border-[#080808]/6 bg-[#faf8ff] px-4 py-3 text-[13px] text-[#1f2937]"
+                            >
+                              <span
+                                className="h-2.5 w-2.5 rounded-full"
+                                style={{ background: service.accent }}
+                              />
+                              {point}
+                            </div>
+                          ))}
+                        </div>
+                        <div className="mt-4 rounded-[22px] bg-[linear-gradient(180deg,rgba(247,243,255,0.96)_0%,rgba(255,255,255,1)_100%)] p-4">
+                          <ServiceShowcaseVisual service={service} prefersReducedMotion={prefersReducedMotion} />
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.article>
             ))}
           </div>
@@ -1808,6 +1861,25 @@ const App = () => {
           background: linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%);
           box-shadow: 0 10px 18px -12px rgba(130, 66, 245, 0.55);
         }
+
+        @media (max-width: 767px) {
+          .problem-flip-wrapper {
+            transform: translateZ(0);
+          }
+          .problem-card-mobile {
+            box-shadow: 0 16px 36px -30px rgba(8, 8, 8, 0.2);
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+          }
+          .problem-reasons-grid {
+            gap: 12px !important;
+          }
+          .problem-card,
+          .problem-flip-face {
+            box-shadow: 0 14px 30px -24px rgba(8, 8, 8, 0.18) !important;
+            filter: none !important;
+          }
+        }
         
         @keyframes floatBlobOne {
           0% { transform: translate3d(0, 0, 0) scale(1); }
@@ -2389,6 +2461,70 @@ const CountUpAnimation = ({ endValue, suffix = "", prefix = "", decimal = false 
 
 const ProblemFlipCard = ({ card, index }) => {
   const [flipped, setFlipped] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => (
+    typeof window !== 'undefined' ? window.innerWidth < 768 : false
+  ));
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  if (isMobile) {
+    return (
+      <motion.div
+        className="problem-flip-wrapper"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.45, delay: index * 0.08, ease: premiumEase }}
+      >
+        <div className={`problem-card-mobile overflow-hidden rounded-[22px] border p-5 ${flipped ? 'bg-[linear-gradient(145deg,#8242f5_0%,#6f22ef_100%)] border-[#8242f5]/30' : 'bg-white border-[#080808]/8'}`}>
+          <div className="flex flex-col gap-4">
+            <div>
+              <div className={`text-[10px] font-bold uppercase tracking-[0.2em] ${flipped ? 'text-white/65' : 'text-[#080808]/42'}`}>
+                {flipped ? 'Nuestra solución' : 'Problema común'}
+              </div>
+              <h4 className={`mt-2 font-epilogue text-[22px] font-extrabold leading-[1.05] tracking-tight ${flipped ? 'text-white' : 'text-[#080808]'}`}>
+                {flipped ? card.solution : card.problem}
+              </h4>
+              <p className={`mt-3 font-manrope text-[14px] leading-[1.58] ${flipped ? 'text-white/84' : 'text-[#080808]/72'}`}>
+                {flipped ? card.solutionDesc : card.problemDesc}
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setFlipped(!flipped)}
+                className={`inline-flex items-center gap-3 rounded-full py-2 pl-2 pr-5 text-[11px] font-bold uppercase tracking-[0.14em] transition-transform active:scale-[0.98] ${flipped ? 'bg-white text-[#8242f5]' : 'bg-[#faf7ff] text-[#080808] border border-[#080808]/8'}`}
+              >
+                <span className={`flex h-8 w-8 items-center justify-center rounded-full ${flipped ? 'bg-[#8242f5] text-white' : 'problem-card-button-icon text-white'}`}>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M23 4v6h-6M1 20v-6h6" />
+                    <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
+                  </svg>
+                </span>
+                {flipped ? 'Ver problema' : 'Ver solución'}
+              </button>
+              {flipped && (
+                <a
+                  href="#planes"
+                  onClick={(e) => scrollToSection(e, 'planes')}
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#8242f5]"
+                >
+                  Ver planes
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
+
   return (
     <motion.div
       className="problem-flip-wrapper"
@@ -2399,7 +2535,7 @@ const ProblemFlipCard = ({ card, index }) => {
       transition={{ duration: 0.5, delay: index * 0.08, ease: premiumEase }}
     >
       <div
-        className="relative w-full min-h-[240px] md:min-h-[260px] transition-transform duration-700"
+        className="problem-flip-inner relative w-full min-h-[240px] md:min-h-[260px] transition-transform duration-700"
         style={{ transformStyle: 'preserve-3d', transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
       >
         {/* FRONT — Problem */}
