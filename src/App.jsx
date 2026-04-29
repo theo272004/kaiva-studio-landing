@@ -2691,13 +2691,6 @@ const HeroSection = () => {
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         className="fixed right-6 top-5 z-50 flex items-center gap-3 md:hidden"
       >
-        <a
-          href="#servicios"
-          onClick={(event) => scrollToSection(event, 'servicios')}
-          className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-[#080808]/12 bg-white px-4 font-manrope text-[10px] font-bold uppercase tracking-[0.16em] text-[#080808] shadow-[0_4px_14px_-8px_rgba(0,0,0,0.18)]"
-        >
-          Servicios
-        </a>
         <button
           aria-label="Abrir menú"
           onClick={() => setMobileMenuOpen(true)}
@@ -2739,8 +2732,8 @@ const HeroSection = () => {
               {[
                 { label: 'Inicio', id: 'inicio' },
                 { label: 'Servicios', id: 'servicios' },
-                { label: 'Contacto', id: 'contacto' },
                 { label: 'Paquetes', id: 'planes' },
+                { label: 'Contacto', id: 'contacto' },
               ].map(({ label, id }) => (
                 <a
                   key={id}
