@@ -130,7 +130,7 @@ const pricingPlans = [
     audience: 'Para empresas establecidas que necesitan crecer.',
     price: 'Desde $700 USD',
     description: 'Una solución con más estructura, mejor narrativa y una ejecución visual pensada para elevar percepción y conversión.',
-    points: ['Hasta 5 subpáginas', 'SEO básico', 'Copy estratégico', 'Animaciones avanzadas', 'Formulario automatizado', 'Soporte por 30 días'],
+    points: ['Hasta 5 subpáginas', 'SEO básico', 'Copy estratégico', 'Formulario automatizado', 'Soporte por 30 días'],
     cta: 'Comenzar',
     featured: true,
     badge: 'Más elegido',
@@ -140,7 +140,7 @@ const pricingPlans = [
     audience: 'Para marcas posicionadas que necesitan presencia premium.',
     price: 'Desde $1,200 USD',
     description: 'Pensado para marcas que necesitan una presencia más robusta, con sistema, orden y una ejecución a la altura.',
-    points: ['Hasta 10 subpáginas', 'SEO', 'Automatizaciones', 'Cambio de idioma', 'Publicación del sitio', 'Soporte por 60 días'],
+    points: ['Hasta 10 subpáginas', 'SEO', 'Automatizaciones', 'Cambio de idioma', 'Animaciones avanzadas', 'Soporte por 60 días'],
     cta: 'Comenzar',
   },
 ];
@@ -1409,7 +1409,7 @@ const ExpandedAgencySections = () => (
                     
                     <div className="my-6 h-[1px] w-full bg-[#080808]/5" />
 
-                    <div className="plan-price font-epilogue text-[36px] font-extrabold leading-none tracking-[-0.04em] text-[#080808]">
+                    <div className="plan-price font-epilogue text-[30px] font-extrabold leading-none tracking-[-0.04em] text-[#080808]">
                       {plan.price}
                     </div>
                     <div className="mt-2 text-[13px] font-medium text-[#080808]/50">
@@ -2115,7 +2115,7 @@ const App = () => {
             font-size: 12px !important;
           }
           .plan-price {
-            font-size: 28px !important;
+            font-size: 24px !important;
           }
           .plan-card ul {
             margin-top: 12px !important;
