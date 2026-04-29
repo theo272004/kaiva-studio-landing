@@ -921,7 +921,7 @@ const PortfolioSection = () => {
     <div
       id="proyectos"
       data-nav-theme="light"
-      className="relative overflow-x-hidden bg-[linear-gradient(180deg,#ede4fb_0%,#f1e8ff_10%,#f4edff_24%,#f7f3ff_42%,#f7f5fb_100%)] pb-20 text-[#080808]"
+      className="relative [overflow-x:clip] bg-[linear-gradient(180deg,#ede4fb_0%,#f1e8ff_10%,#f4edff_24%,#f7f3ff_42%,#f7f5fb_100%)] pb-20 text-[#080808]"
       style={{ fontFamily: 'Manrope, sans-serif' }}
     >
       <div
