@@ -120,28 +120,28 @@ const pricingPlans = [
   {
     name: 'Plan Inicial',
     audience: 'Ideal para marcas personales y negocios nuevos.',
-    price: 'From $320 USD',
+    price: 'Desde $320 USD',
     description: 'Solución clara, profesional y lista para presentar tu negocio con seriedad desde el primer contacto.',
-    points: ['Landing page profesional', 'Responsive design', 'Entrega rápida', 'Soporte inicial'],
+    points: ['Landing page profesional', 'Diseño responsive', 'Entrega rápida', 'Soporte por 15 días', 'Asesoría para publicación'],
     cta: 'Comenzar',
   },
   {
     name: 'Plan Negocio',
     audience: 'Para empresas establecidas que necesitan crecer.',
-    price: 'From $700 USD',
+    price: 'Desde $700 USD',
     description: 'Una solución con más estructura, mejor narrativa y una ejecución visual pensada para elevar percepción y conversión.',
-    points: ['Hasta 5 páginas', 'SEO base', 'Copy estratégico', 'Diseño premium', '30 días soporte'],
-    cta: 'Elegir plan',
+    points: ['Hasta 5 subpáginas', 'SEO básico', 'Copy estratégico', 'Animaciones avanzadas', 'Formulario automatizado', 'Soporte por 30 días'],
+    cta: 'Comenzar',
     featured: true,
     badge: 'Más elegido',
   },
   {
     name: 'Plan Pro',
-    audience: 'Para marcas serias que necesitan presencia premium.',
-    price: 'From $1,200 USD',
+    audience: 'Para marcas posicionadas que necesitan presencia premium.',
+    price: 'Desde $1,200 USD',
     description: 'Pensado para marcas que necesitan una presencia más robusta, con sistema, orden y una ejecución a la altura.',
-    points: ['Hasta 10 páginas', 'Automatizaciones básicas', 'Arquitectura completa', 'Soporte extendido'],
-    cta: 'Escalar ahora',
+    points: ['Hasta 10 subpáginas', 'SEO', 'Automatizaciones', 'Cambio de idioma', 'Publicación del sitio', 'Soporte por 60 días'],
+    cta: 'Comenzar',
   },
 ];
 
@@ -1438,9 +1438,6 @@ const ExpandedAgencySections = () => (
                       ))}
                     </ul>
 
-                    <div className="mt-auto pt-8 text-center text-[12px] text-[#080808]/40">
-                      Soporte y garantía incluidos.
-                    </div>
                   </div>
                 </article>
               );
