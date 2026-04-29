@@ -939,7 +939,7 @@ const PortfolioSection = () => {
 
       <div className="relative z-20 mx-auto max-w-[1280px] px-6 pt-28 md:px-12 md:pt-36">
         <div className="mt-0">
-          <div className="sticky-container relative hidden h-[340vh] md:block">
+          <div className="sticky-container relative hidden h-[400vh] md:block">
             {serviceShowcase.map((service, index) => (
               <article
                 key={service.id}
