@@ -2245,8 +2245,9 @@ const ProblemSection = () => {
         
         <ScrollRevealHeadline
           lines={[
-            'El 91% de las empresas en Colombia son pymes. La mayoría',
-            'no existe en\u00A0internet.',
+            'El 91% de las empresas en Colombia',
+            'son pymes. La mayoría',
+            'no existen en\u00A0internet',
           ]}
         />
         
