@@ -1170,7 +1170,7 @@ const ProcessStepCard = ({ step, index, activeProgress }) => {
   const distance = useTransform(activeProgress, (value) => {
     return index - value;
   });
-  const y = useTransform(distance, (value) => value * 160);
+  const y = useTransform(distance, (value) => value * 138);
   const scale = useTransform(distance, (value) => Math.max(0.85, 1 - Math.abs(value) * 0.12));
   const opacity = useTransform(distance, (value) => {
     const absolute = Math.abs(value);
@@ -1228,7 +1228,7 @@ const ProcessRedesignSection = () => {
   ];
 
   const activeProgressRaw = useTransform(scrollYProgress, [0, 1], [0, stepsContent.length - 1]);
-  const activeProgress = useSpring(activeProgressRaw, { stiffness: 150, damping: 22, mass: 0.1 });
+  const activeProgress = useSpring(activeProgressRaw, { stiffness: 190, damping: 24, mass: 0.08 });
   const purpleStageOpacity = useTransform(
     activeProgressRaw,
     [0, 1, 2, 3, 4],
@@ -1242,9 +1242,8 @@ const ProcessRedesignSection = () => {
 
   return (
     <section ref={sectionRef} id="proceso" className="process-section relative w-full bg-white py-0">
-            {/* Desktop Sticky Carousel */}
-      <div className="process-sticky-stage hidden md:block relative h-[250vh] w-full">
-        <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden bg-white px-6 lg:px-16">
+      <div className="process-sticky-stage relative h-[205vh] w-full md:h-[225vh] lg:h-[240vh]">
+        <div className="sticky top-0 flex h-[100svh] w-full items-center justify-center overflow-hidden bg-white px-4 sm:px-6 lg:px-16">
           {/* Progressive giant gradient: white on step 1 to full purple on step 5 */}
           <motion.div 
             className="absolute inset-0 pointer-events-none transition-all duration-300"
@@ -1254,7 +1253,7 @@ const ProcessRedesignSection = () => {
             }}
           />
           <div className="relative z-10 mx-auto flex w-full max-w-[800px] items-center justify-center gap-6">
-            <div className="process-card-stack relative h-[430px] w-full overflow-visible md:h-[540px]">
+            <div className="process-card-stack relative h-[360px] w-full overflow-visible sm:h-[410px] md:h-[540px]">
               <div className="relative mx-auto h-full w-full max-w-[660px]">
                 {stepsContent.map((step, i) => (
                   <ProcessStepCard 
@@ -1267,27 +1266,6 @@ const ProcessRedesignSection = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Mobile Vertical Stack */}
-      <div className="relative w-full bg-white px-6 py-16 md:hidden">
-        <div className="flex flex-col gap-6">
-          {stepsContent.map((step, i) => (
-            <div key={i} className="flex flex-col gap-4 rounded-[24px] border border-[#080808]/5 bg-white p-6 shadow-md transition-shadow hover:shadow-lg">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#080808]/6 bg-white font-epilogue text-[15px] font-bold text-[#080808]/45 shadow-sm">
-                0{i + 1}
-              </div>
-              <div className="flex flex-col gap-1">
-                <h3 className="font-epilogue text-[22px] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#080808]">
-                  {step.title}
-                </h3>
-                <p className="text-[14px] leading-relaxed text-[#080808]/60">
-                  {step.description}
-                </p>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </section>
@@ -1308,7 +1286,7 @@ const ExpandedAgencySections = () => (
       }}
     >
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 z-10 h-[4px]"
+        className="pointer-events-none absolute inset-x-0 top-0 z-[60] h-[6px]"
         style={{ background: '#ede4fb' }}
       />
       <motion.img
@@ -1316,7 +1294,7 @@ const ExpandedAgencySections = () => (
         alt=""
         loading="lazy"
         decoding="async"
-        className="absolute right-0 top-[6%] z-50 hidden w-[200px] opacity-90 sm:block md:right-[-2%] md:top-[4%] md:w-[320px] lg:right-[-3%] lg:w-[460px] pointer-events-none"
+        className="absolute right-0 top-[6%] z-40 hidden w-[200px] opacity-90 sm:block md:right-[-2%] md:top-[4%] md:w-[320px] lg:right-[-3%] lg:w-[460px] pointer-events-none"
         animate={{
           y: [0, 15, 0],
           rotate: [0, 2, 0]
@@ -1444,11 +1422,11 @@ const AliadosSection = () => {
       }}
     >
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 z-10 h-[4px]"
+        className="pointer-events-none absolute inset-x-0 top-0 z-[60] h-[6px]"
         style={{ background: '#6f22ef' }}
       />
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[4px]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[60] h-[6px]"
         style={{ background: '#ede4fb' }}
       />
       <div className="mx-auto w-full max-w-[1680px] rounded-[34px] bg-[#050505] px-7 py-12 text-white shadow-[0_28px_70px_-48px_rgba(6,2,26,0.7)] ring-1 ring-white/10 md:px-14 md:py-16 lg:min-h-[82vh] lg:px-20 lg:py-24 xl:min-h-[86vh] xl:px-24">
