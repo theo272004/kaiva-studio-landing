@@ -1195,16 +1195,15 @@ const ExpandedAgencySections = () => (
         className="plans-section relative overflow-hidden px-4 pb-12 pt-14 md:px-8 md:pb-16 md:pt-20"
         style={{
           background:
-            'linear-gradient(180deg, #f3edff 0%, #f7f4ff 18%, #fcfbff 38%, #ffffff 62%, #ffffff 100%)'
+            'linear-gradient(180deg, #f3edff 0%, #f5f0ff 18%, #fbf9ff 40%, #ffffff 64%, #ffffff 100%)'
         }}
       >
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[180px] bg-[linear-gradient(180deg,#f3edff_0%,rgba(243,237,255,0.86)_28%,rgba(255,255,255,0)_100%)]" />
       <motion.img
         src={asset('KaivaMora1.webp')}
         alt=""
         loading="lazy"
         decoding="async"
-        className="absolute right-0 top-[6%] z-40 hidden w-[200px] opacity-90 sm:block md:right-[-2%] md:top-[6.5%] md:w-[320px] lg:right-[-3%] lg:top-[6%] lg:w-[460px] pointer-events-none"
+        className="absolute right-0 top-[6%] z-20 hidden w-[200px] opacity-90 sm:block md:right-[-2%] md:top-[6.5%] md:w-[320px] lg:right-[-3%] lg:top-[6%] lg:w-[460px] pointer-events-none"
         animate={{
           y: [0, 15, 0],
           rotate: [0, 2, 0]
@@ -1215,7 +1214,7 @@ const ExpandedAgencySections = () => (
           ease: "easeInOut"
         }}
       />
-      <motion.div {...sectionReveal} className="plans-shell mx-auto w-full max-w-[1180px]">
+      <motion.div {...sectionReveal} className="plans-shell relative z-30 mx-auto w-full max-w-[1180px]">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-epilogue text-[clamp(40px,6vw,60px)] font-bold leading-[1.05] tracking-tight text-[#080808]">
               Elige el plan <span className="italic font-serif font-light">ideal</span>
@@ -1326,7 +1325,7 @@ const AliadosSection = () => {
       className="allies-section relative overflow-hidden px-4 py-12 md:px-8 md:py-16 lg:py-20"
       style={{
         background:
-          'linear-gradient(180deg, #6f22ef 0%, #8242f5 30%, #9c67f2 54%, #d9ccfb 78%, #eee4ff 90%, #f3edff 100%)'
+          'linear-gradient(180deg, #6f22ef 0%, #8242f5 30%, #9c67f2 54%, #d9ccfb 78%, #efe6ff 90%, #f3edff 100%)'
       }}
     >
       <div className="mx-auto w-full max-w-[1680px] rounded-[34px] bg-[#050505] px-7 py-12 text-white shadow-[0_16px_38px_-30px_rgba(6,2,26,0.52)] ring-1 ring-white/10 md:px-14 md:py-16 lg:min-h-[82vh] lg:px-20 lg:py-24 xl:min-h-[86vh] xl:px-24">
@@ -1569,13 +1568,15 @@ const FixedNavbar = ({ projectsActive = false }) => {
           <rect y="12" width="18" height="2" rx="1" fill="currentColor" />
         </svg>
       </button>
-      <a
-        href={projectsActive ? `${HOME_PAGE_HREF_FROM_SERVICES}#planes` : '#planes'}
-        onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'planes')}
-        className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-[#080808]/12 bg-white px-5 font-manrope text-[10px] font-bold uppercase tracking-[0.16em] text-[#080808] transition-colors hover:bg-[#f7f7f7]"
+      {!projectsActive && (
+        <a
+          href="#planes"
+          onClick={(event) => scrollToSection(event, 'planes')}
+          className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-[#080808]/12 bg-white px-5 font-manrope text-[10px] font-bold uppercase tracking-[0.16em] text-[#080808] transition-colors hover:bg-[#f7f7f7]"
         >
-        Paquetes
-      </a>
+          Paquetes
+        </a>
+      )}
     </div>
 
     <AnimatePresence>
@@ -1894,11 +1895,11 @@ const App = () => {
 
         @media (max-width: 767px) {
           .portfolio-mobile-stack {
-            height: 252vh;
+            height: 338vh;
           }
           .portfolio-mobile-card {
-            top: 88px;
-            margin-bottom: 18vh;
+            top: 74px;
+            margin-bottom: 26vh;
           }
           .problem-flip-wrapper {
             transform: translateZ(0);
