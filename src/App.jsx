@@ -1063,7 +1063,14 @@ const ExpandedAgencySections = () => (
                   className={`plan-card group relative flex flex-col rounded-[24px] bg-white shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] overflow-hidden`}
                 >
                   {isMiddle && (
-                    <img src={asset('degradado-tarjeta.png')} alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0" />
+                    <>
+                      <img src={asset('degradado-tarjeta.png')} alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0" />
+                      <img 
+                        src={asset('degradado-negocio.png')} 
+                        alt="" 
+                        className="absolute right-0 top-0 h-full w-auto object-contain object-right pointer-events-none z-0 opacity-80" 
+                      />
+                    </>
                   )}
 
                   <div className="relative z-10 flex flex-1 flex-col p-8 md:p-10">
