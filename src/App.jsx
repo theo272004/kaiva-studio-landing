@@ -1249,7 +1249,7 @@ const ProcessRedesignSection = () => {
           <motion.div 
             className="absolute inset-0 pointer-events-none transition-all duration-300"
             style={{
-              background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 28%, rgba(130,66,245,0.18) 58%, rgba(130,66,245,0.48) 80%, rgba(104,34,222,0.92) 100%)',
+              background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 18%, rgba(111,34,239,0.12) 38%, rgba(111,34,239,0.28) 54%, rgba(139,77,240,0.52) 72%, rgba(111,34,239,0.92) 100%)',
               opacity: purpleStageOpacity
             }}
           />
@@ -1425,21 +1425,21 @@ const ExpandedAgencySections = () => (
 const AliadosSection = () => {
   return (
     <section
-      className="allies-section relative w-full overflow-hidden px-4 py-14 md:px-8 md:py-16"
+      className="allies-section relative w-full overflow-hidden px-4 py-12 md:px-8 md:py-16 lg:py-20"
       style={{
         background:
           'linear-gradient(180deg, #6f22ef 0%, #8b4df0 34%, #9f68f1 56%, #c5a9f7 76%, #ede5fb 90%, #ffffff 100%)'
       }}
     >
-      <div className="mx-auto w-full max-w-[1380px] rounded-[34px] bg-[#06060b] px-7 py-12 text-white shadow-[0_35px_90px_-42px_rgba(6,2,26,0.95)] ring-1 ring-white/10 md:px-14 md:py-16 lg:px-20">
+      <div className="mx-auto w-full max-w-[1560px] rounded-[34px] bg-[#06060b] px-7 py-12 text-white shadow-[0_35px_90px_-42px_rgba(6,2,26,0.95)] ring-1 ring-white/10 md:px-14 md:py-16 lg:min-h-[74vh] lg:px-20 lg:py-20 xl:min-h-[78vh] xl:px-24">
         <div className="absolute inset-0 rounded-[34px]" style={{ background: 'radial-gradient(72% 80% at 22% 44%, rgba(126,60,245,0.20) 0%, rgba(126,60,245,0) 72%), radial-gradient(52% 68% at 82% 58%, rgba(88,27,201,0.34) 0%, rgba(88,27,201,0) 74%)' }} />
 
-        <div className="relative z-10 grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="relative z-10 grid items-center gap-10 lg:min-h-[calc(74vh-10rem)] lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 xl:min-h-[calc(78vh-11rem)]">
           <div className="text-left">
             <h2 className="font-epilogue text-[clamp(52px,9.2vw,132px)] font-extrabold leading-[0.92] tracking-[-0.045em] text-white">
               Kaiva
               <br />
-              <span className="relative inline-block pb-3 md:pb-4">
+              <span className="relative inline-block whitespace-nowrap pb-3 md:pb-4">
                 for Startups
                 <span className="absolute bottom-0 left-0 h-[8px] w-full rounded-full bg-white md:h-[10px]" />
               </span>
@@ -1464,7 +1464,7 @@ const AliadosSection = () => {
             </a>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[340px] md:max-w-[520px] lg:max-w-[620px]">
+          <div className="relative mx-auto w-full max-w-[340px] md:max-w-[560px] lg:max-w-[700px] xl:max-w-[760px]">
             <img
               src={asset('Kaiva seo.png')}
               alt="Kaiva x SEO for Startups"
