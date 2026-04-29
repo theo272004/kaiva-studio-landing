@@ -1270,7 +1270,7 @@ const ProcessRedesignSection = () => {
         </div>
       </div>
 
-      <div className="relative h-[152vh] w-full bg-[#6f22ef] md:hidden">
+      <div className="relative h-[170vh] w-full bg-[#6f22ef] md:hidden">
         <div className="sticky top-0 flex h-[100svh] w-full items-center justify-center overflow-hidden bg-white px-5">
           <motion.div
             className="absolute inset-0 pointer-events-none"
@@ -1328,15 +1328,19 @@ const ExpandedAgencySections = () => (
       }}
     >
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 z-[60] h-[6px]"
+        className="pointer-events-none absolute inset-x-0 top-0 z-[60] h-[10px]"
         style={{ background: '#ede4fb' }}
+      />
+      <div
+        className="pointer-events-none absolute right-0 top-0 z-[59] h-[56px] w-[34%]"
+        style={{ background: 'linear-gradient(180deg, #ede4fb 0%, rgba(237,228,251,0.96) 48%, rgba(237,228,251,0) 100%)' }}
       />
       <motion.img
         src={asset('KaivaMora1.webp')}
         alt=""
         loading="lazy"
         decoding="async"
-        className="absolute right-0 top-[6%] z-40 hidden w-[200px] opacity-90 sm:block md:right-[-2%] md:top-[4%] md:w-[320px] lg:right-[-3%] lg:w-[460px] pointer-events-none"
+        className="absolute right-0 top-[6%] z-40 hidden w-[200px] opacity-90 sm:block md:right-[-2%] md:top-[6.5%] md:w-[320px] lg:right-[-3%] lg:top-[6%] lg:w-[460px] pointer-events-none"
         animate={{
           y: [0, 15, 0],
           rotate: [0, 2, 0]
