@@ -279,7 +279,7 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
           className="transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform"
           style={{ transform: 'perspective(700px) rotateY(var(--service-rotate-y,0deg)) rotateX(var(--service-rotate-x,0deg)) translateZ(8px)' }}
         >
-          <div className="flex min-h-[390px] items-center justify-center bg-[#eae6df] p-8">
+          <div className="portfolio-web-visual-stage flex min-h-[390px] items-center justify-center bg-[#eae6df] p-8">
             <div className="mockup-browser w-[85%] max-w-[480px] overflow-hidden rounded-[12px] border border-[#d9d3ca] bg-white shadow-[0_20px_50px_rgba(57,53,44,0.15)]">
               <div className="bar flex h-[30px] items-center gap-[7px] bg-[#f7f5f2] px-[14px]">
                 <span className="block h-[10px] w-[10px] rounded-full bg-[#ff5f57]" />
@@ -937,23 +937,23 @@ const PortfolioSection = () => {
         style={{ background: 'rgba(186,145,255,0.16)' }}
       />
 
-      <div className="relative z-20 mx-auto max-w-[1280px] px-6 pt-28 md:px-12 md:pt-36">
+      <div className="relative z-20 mx-auto max-w-[1280px] px-5 pt-24 sm:px-6 sm:pt-28 md:px-10 lg:px-12 lg:pt-32">
         <div className="mt-0">
-          <div className="sticky-container relative hidden h-[400vh] md:block">
+          <div className="portfolio-sticky-container sticky-container relative hidden lg:block">
             {serviceShowcase.map((service, index) => (
               <article
                 key={service.id}
-                className="service-card group sticky top-[120px] mb-[35vh] overflow-hidden rounded-[28px] border border-[#d9d3ca] bg-white shadow-[0_12px_30px_rgba(57,53,44,0.06)] transition-[border-color,box-shadow] duration-[600ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-[#792fec]/30 hover:shadow-[0_24px_60px_rgba(57,53,44,0.08),0_0_0_1px_rgba(121,47,236,0.12)]"
+                className="portfolio-service-card service-card group sticky overflow-hidden rounded-[28px] border border-[#d9d3ca] bg-white shadow-[0_12px_30px_rgba(57,53,44,0.06)] transition-[border-color,box-shadow] duration-[600ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-[#792fec]/30 hover:shadow-[0_24px_60px_rgba(57,53,44,0.08),0_0_0_1px_rgba(121,47,236,0.12)]"
                 style={{ zIndex: index + 1 }}
                 onMouseMove={handleServiceCardMouseMove}
                 onMouseLeave={resetServiceCardMouseMove}
               >
-                <div className="flex h-[calc(100vh-124px)] min-h-[520px]">
+                <div className="portfolio-service-layout flex min-h-0">
                   <div className="service-info relative flex-[1] overflow-hidden">
                     <div className="pointer-events-none absolute left-8 top-6 font-['Inter Tight'] text-[88px] font-extrabold leading-none tracking-[-0.06em] text-[#39352c]/[0.03] lg:text-[110px]">
                       {service.number}
                     </div>
-                    <div className="relative z-10 flex flex-col justify-center px-10 py-12 lg:px-14 lg:py-16">
+                    <div className="portfolio-service-copy relative z-10 flex h-full flex-col justify-center px-8 py-10 xl:px-12 xl:py-12">
                       <div
                         className="inline-flex rounded-full border px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em]"
                         style={{
@@ -964,13 +964,13 @@ const PortfolioSection = () => {
                       >
                         {service.brand}
                       </div>
-                      <h2 className="mt-14 max-w-[13ch] font-['Inter Tight'] text-[clamp(40px,4.8vw,60px)] font-extrabold leading-[0.98] tracking-[-0.045em] text-[#39352c]">
+                      <h2 className="portfolio-service-title mt-10 max-w-[13ch] font-['Inter Tight'] text-[clamp(38px,4.4vw,58px)] font-extrabold leading-[0.98] tracking-[-0.045em] text-[#39352c]">
                         {service.title}
                       </h2>
                       <p className="mt-5 max-w-[31rem] text-[15px] leading-7 text-[#5e584e] md:text-[16px]">
                         {service.description}
                       </p>
-                      <div className="mt-8 flex max-w-[32rem] flex-wrap gap-3">
+                      <div className="portfolio-service-points mt-7 flex max-w-[32rem] flex-wrap gap-3">
                         {service.points.map((point) => (
                           <div
                             key={point}
@@ -992,7 +992,7 @@ const PortfolioSection = () => {
             ))}
           </div>
 
-          <div className="space-y-5 md:hidden">
+          <div className="space-y-5 lg:hidden">
             {serviceShowcase.map((service, index) => (
               <motion.article
                 key={service.id}
@@ -1000,7 +1000,7 @@ const PortfolioSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.18 }}
                 transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, ease: premiumEase, delay: index * 0.04 }}
-                className="overflow-hidden rounded-[28px] border border-[#d8d0ee] bg-white/88 shadow-[0_18px_48px_-28px_rgba(66,52,111,0.14)] backdrop-blur-[10px]"
+                className="overflow-hidden rounded-[24px] border border-[#d8d0ee] bg-white/88 shadow-[0_18px_48px_-28px_rgba(66,52,111,0.14)] backdrop-blur-[10px] sm:rounded-[28px]"
               >
                 <div className="grid gap-0">
                   <div className="relative flex flex-col justify-center overflow-hidden border-b border-[#e8e1f7] px-6 py-8">
@@ -1014,7 +1014,7 @@ const PortfolioSection = () => {
                       <div className="mt-5 text-[13px] font-semibold uppercase tracking-[0.16em] text-[#080808]/45">
                         {service.vibe}
                       </div>
-                      <h2 className="mt-4 max-w-[14ch] font-['Inter Tight'] text-[clamp(34px,8vw,46px)] font-extrabold leading-[0.96] tracking-[-0.045em] text-[#080808]">
+                      <h2 className="mt-4 max-w-[14ch] font-['Inter Tight'] text-[clamp(30px,8vw,46px)] font-extrabold leading-[0.96] tracking-[-0.045em] text-[#080808]">
                         {service.title}
                       </h2>
                       <p className="mt-5 text-[15px] leading-7 text-[#080808]/66">
@@ -2245,6 +2245,88 @@ const App = () => {
             .contact-premium-card {
               backdrop-filter: none;
               -webkit-backdrop-filter: none;
+            }
+          }
+
+          .portfolio-sticky-container {
+            height: 360vh;
+          }
+          .portfolio-service-card {
+            top: clamp(82px, 11vh, 118px);
+            margin-bottom: 28vh;
+          }
+          .portfolio-service-layout {
+            height: min(680px, calc(100svh - clamp(108px, 15vh, 148px)));
+            min-height: 500px;
+          }
+          .portfolio-service-copy {
+            min-height: 0;
+          }
+          .portfolio-service-title {
+            overflow-wrap: anywhere;
+          }
+          .portfolio-service-points > div {
+            padding-block: 0.7rem;
+          }
+
+          @media (min-width: 1024px) and (max-width: 1366px) {
+            .portfolio-sticky-container {
+              height: 330vh;
+            }
+            .portfolio-service-card {
+              top: 88px;
+              margin-bottom: 24vh;
+            }
+            .portfolio-service-layout {
+              height: min(610px, calc(100svh - 112px));
+              min-height: 460px;
+            }
+            .portfolio-service-copy {
+              padding: 34px 36px !important;
+            }
+            .portfolio-service-title {
+              margin-top: 28px !important;
+              font-size: clamp(34px, 4vw, 48px) !important;
+            }
+            .portfolio-service-points {
+              margin-top: 22px !important;
+              gap: 10px !important;
+            }
+            .portfolio-service-points > div {
+              padding: 0.58rem 0.85rem !important;
+              font-size: 13px !important;
+            }
+            .service-visual > div {
+              padding: 20px !important;
+            }
+            .service-visual-web .portfolio-web-visual-stage {
+              min-height: 300px !important;
+            }
+          }
+
+          @media (min-width: 1024px) and (max-height: 760px) {
+            .portfolio-service-card {
+              top: 74px;
+            }
+            .portfolio-service-layout {
+              height: calc(100svh - 92px);
+              min-height: 420px;
+            }
+            .portfolio-service-copy {
+              padding-top: 26px !important;
+              padding-bottom: 26px !important;
+            }
+            .portfolio-service-title {
+              margin-top: 20px !important;
+              font-size: clamp(30px, 3.4vw, 42px) !important;
+            }
+            .portfolio-service-copy p {
+              margin-top: 14px !important;
+              font-size: 14px !important;
+              line-height: 1.55 !important;
+            }
+            .portfolio-service-points {
+              margin-top: 18px !important;
             }
           }
           
