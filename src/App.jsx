@@ -893,18 +893,16 @@ const ServicesSection = () => {
 
 const PortfolioSection = () => {
   const prefersReducedMotion = useReducedMotion();
-  const [activeServiceId, setActiveServiceId] = useState('web');
   const [activeWebSlide, setActiveWebSlide] = useState(1);
   const [isWebCarouselHovering, setIsWebCarouselHovering] = useState(false);
-  const activeService = serviceShowcase.find((service) => service.id === activeServiceId) || serviceShowcase[0];
 
   useEffect(() => {
-    if (activeService.id !== 'web' || isWebCarouselHovering) return undefined;
+    if (isWebCarouselHovering) return undefined;
     const timer = setInterval(() => {
       setActiveWebSlide((prev) => (prev + 1) % webSlides.length);
     }, 5500);
     return () => clearInterval(timer);
-  }, [activeService.id, isWebCarouselHovering]);
+  }, [isWebCarouselHovering]);
 
   const handleWebCarouselWheel = (event) => {
     if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) {
@@ -948,88 +946,65 @@ const PortfolioSection = () => {
           </p>
         </div>
 
-        <div className="mt-10 flex flex-wrap gap-3">
-          {serviceShowcase.map((service) => {
-            const isActive = service.id === activeService.id;
-            return (
-              <button
-                key={service.id}
-                type="button"
-                onClick={() => setActiveServiceId(service.id)}
-                className={`rounded-full px-5 py-3 text-sm font-semibold tracking-[-0.02em] transition-all duration-300 ${
-                  isActive
-                    ? 'text-white shadow-[0_18px_42px_-22px_rgba(91,33,182,0.55)]'
-                    : 'border border-[#080808]/10 bg-white/88 text-[#374151] hover:-translate-y-0.5 hover:border-[#8242f5]/20'
-                }`}
-                style={isActive ? { background: 'linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%)' } : undefined}
-              >
-                {service.label}
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="mt-10 grid gap-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
-          <motion.div
-            key={activeService.id}
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.45, ease: premiumEase }}
-            className="rounded-[34px] border border-[#080808]/8 bg-white/84 p-6 shadow-[0_26px_70px_-38px_rgba(15,23,42,0.22)] backdrop-blur-xl md:p-8"
-          >
-            <div className="flex items-center gap-4">
-              <div
-                className="flex h-14 w-14 items-center justify-center rounded-[18px] text-lg font-bold text-white shadow-[0_18px_40px_-20px_rgba(0,0,0,0.34)]"
-                style={{ background: 'linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%)' }}
-              >
-                {activeService.number}
-              </div>
-              <div>
-                <div className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#8242f5]">{activeService.brand}</div>
-                <div className="mt-1 text-sm tracking-wide text-[#080808]/54">{activeService.vibe}</div>
-              </div>
-            </div>
-
-            <h2 className="mt-8 max-w-[14ch] font-epilogue text-[clamp(34px,4.4vw,58px)] font-extrabold leading-[0.94] tracking-[-0.045em] text-[#080808]">
-              {activeService.title}
-            </h2>
-            <p className="mt-5 max-w-xl text-[15px] leading-7 text-[#080808]/68 md:text-[16px]">
-              {activeService.description}
-            </p>
-
-            <div className="mt-8 grid gap-3">
-              {activeService.points.map((point) => (
-                <div
-                  key={point}
-                  className="flex items-center gap-3 rounded-[20px] border border-[#080808]/6 bg-[#f8f6ff] px-4 py-3 text-sm text-[#1f2937]"
-                >
-                  <span
-                    className="h-2.5 w-2.5 rounded-full"
-                    style={{ background: activeService.id === 'automation' ? '#21b2c6' : '#8242f5' }}
-                  />
-                  {point}
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          <div className="relative">
-            <AnimatePresence mode="wait">
-              <ServiceShowcaseVisual service={activeService} prefersReducedMotion={prefersReducedMotion} />
-            </AnimatePresence>
-          </div>
-        </div>
-
-        <AnimatePresence initial={false}>
-          {activeService.id === 'web' && (
-            <motion.div
-              key="web-carousel"
+        <div className="mt-10 space-y-5 md:space-y-6">
+          {serviceShowcase.map((service, index) => (
+            <motion.article
+              key={service.id}
               initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -18 }}
-              transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.45, ease: premiumEase }}
-              className="mt-16"
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.18 }}
+              transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, ease: premiumEase, delay: index * 0.04 }}
+              className="service-stack-card sticky top-5 overflow-hidden rounded-[28px] border border-[#d8d0ee] bg-white/88 shadow-[0_18px_48px_-28px_rgba(66,52,111,0.14)] backdrop-blur-[10px]"
             >
+              <div className="grid min-h-[560px] gap-0 lg:grid-cols-[0.94fr_1.06fr]">
+                <div className="relative flex flex-col justify-center overflow-hidden border-b border-[#e8e1f7] px-6 py-8 md:px-8 md:py-10 lg:border-b-0 lg:border-r lg:px-12 lg:py-14">
+                  <div className="pointer-events-none absolute left-7 top-5 font-['Inter Tight'] text-[72px] font-extrabold leading-none tracking-[-0.06em] text-[#080808]/[0.035] md:text-[88px] lg:text-[110px]">
+                    {service.number}
+                  </div>
+                  <div className="relative z-10">
+                    <div className="inline-flex rounded-full border border-[#8242f5]/12 bg-[#8242f5]/[0.06] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#8242f5]">
+                      {service.brand}
+                    </div>
+                    <div className="mt-5 text-[13px] font-semibold uppercase tracking-[0.16em] text-[#080808]/45">
+                      {service.vibe}
+                    </div>
+                    <h2 className="mt-4 max-w-[14ch] font-['Inter Tight'] text-[clamp(34px,4.6vw,64px)] font-extrabold leading-[0.96] tracking-[-0.045em] text-[#080808]">
+                      {service.title}
+                    </h2>
+                    <p className="mt-5 max-w-[31rem] text-[15px] leading-7 text-[#080808]/66 md:text-[16px]">
+                      {service.description}
+                    </p>
+                    <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                      {service.points.map((point) => (
+                        <div
+                          key={point}
+                          className="flex items-center gap-3 rounded-[18px] border border-[#080808]/6 bg-[#faf8ff] px-4 py-3 text-sm text-[#1f2937]"
+                        >
+                          <span
+                            className="h-2.5 w-2.5 rounded-full"
+                            style={{ background: service.id === 'automation' ? '#21b2c6' : '#8242f5' }}
+                          />
+                          {point}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-[linear-gradient(180deg,rgba(247,243,255,0.88)_0%,rgba(255,255,255,0.92)_100%)] p-4 md:p-5 lg:p-6">
+                  <ServiceShowcaseVisual service={service} prefersReducedMotion={prefersReducedMotion} />
+                </div>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+
+        <motion.div
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.45, ease: premiumEase }}
+          className="mt-16"
+        >
               <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
                 <div className="max-w-2xl">
                   <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#8242f5]">Nuestras webs</div>
@@ -1156,9 +1131,7 @@ const PortfolioSection = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        </motion.div>
       </div>
     </div>
   );
