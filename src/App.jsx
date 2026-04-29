@@ -1237,7 +1237,7 @@ const ProcessRedesignSection = () => {
   const currentStep = stepsContent[activeStep];
 
   useMotionValueEvent(activeProgressRaw, 'change', (latest) => {
-    const nextStep = Math.min(stepsContent.length - 1, Math.max(0, Math.round(latest)));
+    const nextStep = Math.min(stepsContent.length - 1, Math.max(0, Math.floor(latest + 0.2)));
     setActiveStep(nextStep);
   });
 
@@ -1270,7 +1270,7 @@ const ProcessRedesignSection = () => {
         </div>
       </div>
 
-      <div className="relative h-[170vh] w-full md:hidden">
+      <div className="relative h-[152vh] w-full bg-[#6f22ef] md:hidden">
         <div className="sticky top-0 flex h-[100svh] w-full items-center justify-center overflow-hidden bg-white px-5">
           <motion.div
             className="absolute inset-0 pointer-events-none"
@@ -1286,7 +1286,7 @@ const ProcessRedesignSection = () => {
                 initial={{ opacity: 0, y: 24, scale: 0.96 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -18, scale: 0.97 }}
-                transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full rounded-[28px] border border-[#8242f5]/12 bg-white/92 p-6 shadow-[0_24px_60px_-34px_rgba(130,66,245,0.18)] backdrop-blur-md"
               >
                 <div className="flex items-start gap-4">
