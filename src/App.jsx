@@ -947,7 +947,7 @@ const PortfolioSection = () => {
         </div>
 
         <div className="mt-10">
-          <div className="relative hidden md:block">
+          <div className="relative hidden md:block h-[310vh]">
             {serviceShowcase.map((service, index) => (
               <motion.article
                 key={service.id}
@@ -955,10 +955,10 @@ const PortfolioSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.18 }}
                 transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, ease: premiumEase, delay: index * 0.04 }}
-                className="service-stack-card sticky top-5 mb-3 overflow-hidden rounded-[28px] border border-[#d8d0ee] bg-white/88 shadow-[0_18px_48px_-28px_rgba(66,52,111,0.14)] backdrop-blur-[10px]"
+                className="service-stack-card group sticky top-5 mb-[10px] overflow-hidden rounded-[28px] border border-[#d8d0ee] bg-white/88 shadow-[0_12px_30px_rgba(57,53,44,0.06)] backdrop-blur-[10px] transition-[border-color,box-shadow,transform] duration-[600ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-[#792fec]/30 hover:shadow-[0_24px_60px_rgba(57,53,44,0.08),0_0_0_1px_rgba(121,47,236,0.12)]"
                 style={{ zIndex: index + 1 }}
               >
-                <div className="grid min-h-[calc(100vh-52px)] gap-0 lg:grid-cols-[0.94fr_1.06fr]">
+                <div className="grid h-[calc(100vh-60px)] min-h-[520px] gap-0 lg:grid-cols-[0.94fr_1.06fr]">
                   <div className="relative flex flex-col justify-center overflow-hidden border-r border-[#e8e1f7] px-8 py-10 lg:px-12 lg:py-14">
                     <div className="pointer-events-none absolute left-7 top-5 font-['Inter Tight'] text-[88px] font-extrabold leading-none tracking-[-0.06em] text-[#080808]/[0.035] lg:text-[110px]">
                       {service.number}
