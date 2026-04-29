@@ -27,7 +27,7 @@ const serviceShowcase = [
       'Landing pages y sitios corporativos con estructura clara, velocidad real y una narrativa diseñada para convertir visitas en conversaciones.',
     accent: '#8242f5',
     mockup: 'ecommerce',
-    title: 'Webs que se sienten serias y ayudan a vender mejor.',
+    title: 'Rendimiento & Conversión',
     points: ['Copy y estructura', 'Responsive premium', 'SEO base', 'Entrega lista para crecer'],
   },
   {
@@ -182,6 +182,24 @@ const accentButtonStyle = {
 
 const premiumEase = [0.22, 1, 0.36, 1];
 
+const handleServiceCardMouseMove = (event) => {
+  if (typeof window !== 'undefined' && window.innerWidth < 769) return;
+  const rect = event.currentTarget.getBoundingClientRect();
+  const moveX = ((event.clientX - rect.left) / rect.width - 0.5) * 42;
+  const moveY = ((event.clientY - rect.top) / rect.height - 0.5) * 32;
+  event.currentTarget.style.setProperty('--service-move-x', `${moveX}px`);
+  event.currentTarget.style.setProperty('--service-move-y', `${moveY}px`);
+  event.currentTarget.style.setProperty('--service-rotate-y', `${moveX * 0.5}deg`);
+  event.currentTarget.style.setProperty('--service-rotate-x', `${moveY * -0.4}deg`);
+};
+
+const resetServiceCardMouseMove = (event) => {
+  event.currentTarget.style.setProperty('--service-move-x', '0px');
+  event.currentTarget.style.setProperty('--service-move-y', '0px');
+  event.currentTarget.style.setProperty('--service-rotate-y', '0deg');
+  event.currentTarget.style.setProperty('--service-rotate-x', '0deg');
+};
+
 const createGlassPanelStyle = () => ({
   background: 'linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.05) 100%)',
   backdropFilter: 'blur(24px) saturate(120%)',
@@ -255,38 +273,33 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: 0.985 }}
         transition={panelTransition}
-        className="overflow-hidden rounded-[30px] border border-white/10 bg-[#0d1020] shadow-[0_32px_90px_-44px_rgba(17,24,39,0.82)]"
+        className="service-visual-web w-full overflow-hidden rounded-[30px] bg-[#eae6df]"
       >
-        <div className="flex items-center gap-2 border-b border-white/8 px-5 py-4">
-          <span className="h-2.5 w-2.5 rounded-full bg-[#ff6b6b]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#ffd166]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#06d6a0]" />
-          <div className="ml-3 rounded-full bg-white/7 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/46">
-            Landing premium
-          </div>
-        </div>
-        <div className="grid gap-4 bg-[radial-gradient(circle_at_top_left,_rgba(130,66,245,0.38),_transparent_42%),linear-gradient(180deg,_#12162a_0%,_#090b14_100%)] p-5 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="rounded-[24px] bg-white p-4 shadow-[0_18px_48px_-28px_rgba(0,0,0,0.46)]">
-            <div className="mb-3 h-4 w-24 rounded-full bg-[#ede9fe]" />
-            <div className="mb-4 h-10 max-w-[15rem] rounded-2xl bg-[#111827]" />
-            <div className="space-y-2">
-              <div className="h-3 rounded-full bg-[#dbe4ff]" />
-              <div className="h-3 w-4/5 rounded-full bg-[#dbe4ff]" />
-              <div className="h-3 w-2/3 rounded-full bg-[#e7e5ff]" />
-            </div>
-            <div className="mt-5 flex gap-2">
-              <div className="h-9 w-28 rounded-full bg-[#111827]" />
-              <div className="h-9 w-24 rounded-full border border-[#c7d2fe]" />
-            </div>
-          </div>
-          <div className="grid gap-3">
-            <div className="overflow-hidden rounded-[24px] border border-white/10 bg-white/8 p-2 backdrop-blur-xl">
-              <MockupRenderer type={service.mockup} />
-            </div>
-            <div className="grid grid-cols-3 gap-3">
-              <div className="h-16 rounded-[18px] bg-white/12" />
-              <div className="h-16 rounded-[18px] bg-white/8" />
-              <div className="h-16 rounded-[18px] bg-white/12" />
+        <div
+          className="transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform"
+          style={{ transform: 'perspective(700px) rotateY(var(--service-rotate-y,0deg)) rotateX(var(--service-rotate-x,0deg)) translateZ(8px)' }}
+        >
+          <div className="flex min-h-[390px] items-center justify-center bg-[#eae6df] p-8">
+            <div className="mockup-browser w-[85%] max-w-[480px] overflow-hidden rounded-[12px] border border-[#d9d3ca] bg-white shadow-[0_20px_50px_rgba(57,53,44,0.15)]">
+              <div className="bar flex h-[30px] items-center gap-[7px] bg-[#f7f5f2] px-[14px]">
+                <span className="block h-[10px] w-[10px] rounded-full bg-[#ff5f57]" />
+                <span className="block h-[10px] w-[10px] rounded-full bg-[#febc2e]" />
+                <span className="block h-[10px] w-[10px] rounded-full bg-[#28c840]" />
+              </div>
+              <div className="content flex flex-col gap-[0.7rem] p-[1.6rem]">
+                <div className="line h-[8px] w-[80%] rounded-[4px] bg-[#eae6df]" />
+                <div className="line short h-[8px] w-[60%] rounded-[4px] bg-[#eae6df]" />
+                <div className="line accent h-[8px] w-[35%] rounded-[4px] bg-[#792fec] shadow-[0_0_12px_rgba(121,47,236,0.25)]" />
+                <div className="card-mini mt-[0.4rem] flex items-center gap-[0.8rem] rounded-[8px] border border-[#e0dbd2] bg-[#f9f8f6] p-[1rem]">
+                  <div className="avatar h-[32px] w-[32px] rounded-full bg-[#d9d3ca]" />
+                  <div className="text-group flex-1">
+                    <div className="l mb-[4px] h-[6px] w-[70%] rounded-[3px] bg-[#d9d3ca]" />
+                    <div className="l short h-[6px] w-[50%] rounded-[3px] bg-[#d9d3ca]" />
+                  </div>
+                </div>
+                <div className="line h-[8px] w-[50%] rounded-[4px] bg-[#eae6df]" />
+                <div className="line short h-[8px] w-[60%] rounded-[4px] bg-[#eae6df]" />
+              </div>
             </div>
           </div>
         </div>
@@ -302,46 +315,51 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: 0.985 }}
         transition={panelTransition}
-        className="grid gap-4 lg:grid-cols-[0.88fr_1.12fr]"
+        className="w-full"
       >
-        <div className="rounded-[28px] border border-[#111827]/8 bg-[#fffdf9] p-5 shadow-[0_26px_72px_-40px_rgba(15,23,42,0.28)]">
-          <div className="mb-5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#8b5cf6]">Brand board</div>
-          <div className="space-y-3">
-            <div className="font-epilogue text-4xl font-extrabold tracking-[-0.04em] text-[#16151f]">Kaiva</div>
-            <div className="text-lg font-semibold tracking-[-0.03em] text-[#16151f]">Systems with character</div>
-            <div className="max-w-[15rem] text-sm leading-6 text-[#5b556e]">
-              Dirección visual, color, tipografía y piezas listas para web, decks o redes.
-            </div>
-          </div>
-          <div className="mt-6 grid grid-cols-4 gap-2">
-            {['#16151f', '#8242f5', '#d96cff', '#f3ede4'].map((color) => (
-              <div key={color} className="h-12 rounded-2xl border border-black/5" style={{ background: color }} />
-            ))}
-          </div>
-        </div>
-        <div className="overflow-hidden rounded-[28px] border border-[#111827]/8 bg-[#f5f0ff] p-5 shadow-[0_28px_74px_-40px_rgba(91,33,182,0.34)]">
-          <div className="grid gap-4 md:grid-cols-[0.92fr_1.08fr]">
-            <div className="rounded-[24px] bg-white p-4 shadow-[0_18px_48px_-32px_rgba(15,23,42,0.32)]">
-              <div className="mb-4 h-36 rounded-[20px] bg-[linear-gradient(160deg,_#111827,_#6d28d9_58%,_#f5d0fe_120%)]" />
-              <div className="space-y-2">
-                <div className="h-4 w-24 rounded-full bg-[#111827]" />
-                <div className="h-3 rounded-full bg-[#d8ccff]" />
-                <div className="h-3 w-4/5 rounded-full bg-[#eadcff]" />
+        <div
+          className="design-composition service-visual-design grid gap-4 transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform lg:grid-cols-[0.88fr_1.12fr]"
+          style={{ transform: 'translate(calc(var(--service-move-x,0px) * 0.7), calc(var(--service-move-y,0px) * 0.5))' }}
+        >
+          <div className="rounded-[28px] border border-[#111827]/8 bg-[#fffdf9] p-5 shadow-[0_26px_72px_-40px_rgba(15,23,42,0.28)]">
+            <div className="mb-5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#8b5cf6]">Brand board</div>
+            <div className="space-y-3">
+              <div className="font-epilogue text-4xl font-extrabold tracking-[-0.04em] text-[#16151f]">Kaiva</div>
+              <div className="text-lg font-semibold tracking-[-0.03em] text-[#16151f]">Systems with character</div>
+              <div className="max-w-[15rem] text-sm leading-6 text-[#5b556e]">
+                Dirección visual, color, tipografía y piezas listas para web, decks o redes.
               </div>
             </div>
-            <div className="grid gap-4">
-              <div className="rounded-[24px] bg-[#151225] p-4 text-white">
-                <div className="mb-3 text-[11px] uppercase tracking-[0.16em] text-white/52">UI kit</div>
-                <div className="flex gap-2">
-                  <div className="h-10 flex-1 rounded-full bg-white text-[#121212]" />
-                  <div className="h-10 w-12 rounded-full bg-white/10" />
+            <div className="mt-6 grid grid-cols-4 gap-2">
+              {['#16151f', '#8242f5', '#d96cff', '#f3ede4'].map((color) => (
+                <div key={color} className="h-12 rounded-2xl border border-black/5" style={{ background: color }} />
+              ))}
+            </div>
+          </div>
+          <div className="overflow-hidden rounded-[28px] border border-[#111827]/8 bg-[#f5f0ff] p-5 shadow-[0_28px_74px_-40px_rgba(91,33,182,0.34)]">
+            <div className="grid gap-4 md:grid-cols-[0.92fr_1.08fr]">
+              <div className="rounded-[24px] bg-white p-4 shadow-[0_18px_48px_-32px_rgba(15,23,42,0.32)]">
+                <div className="mb-4 h-36 rounded-[20px] bg-[linear-gradient(160deg,_#111827,_#6d28d9_58%,_#f5d0fe_120%)]" />
+                <div className="space-y-2">
+                  <div className="h-4 w-24 rounded-full bg-[#111827]" />
+                  <div className="h-3 rounded-full bg-[#d8ccff]" />
+                  <div className="h-3 w-4/5 rounded-full bg-[#eadcff]" />
                 </div>
               </div>
-              <div className="rounded-[24px] bg-white p-4">
-                <div className="mb-3 h-3 w-20 rounded-full bg-[#d8ccff]" />
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="h-20 rounded-[18px] bg-[linear-gradient(135deg,_#ede9fe,_#ffffff)]" />
-                  <div className="h-20 rounded-[18px] bg-[linear-gradient(135deg,_#111827,_#334155)]" />
+              <div className="grid gap-4">
+                <div className="rounded-[24px] bg-[#151225] p-4 text-white">
+                  <div className="mb-3 text-[11px] uppercase tracking-[0.16em] text-white/52">UI kit</div>
+                  <div className="flex gap-2">
+                    <div className="h-10 flex-1 rounded-full bg-white text-[#121212]" />
+                    <div className="h-10 w-12 rounded-full bg-white/10" />
+                  </div>
+                </div>
+                <div className="rounded-[24px] bg-white p-4">
+                  <div className="mb-3 h-3 w-20 rounded-full bg-[#d8ccff]" />
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="h-20 rounded-[18px] bg-[linear-gradient(135deg,_#ede9fe,_#ffffff)]" />
+                    <div className="h-20 rounded-[18px] bg-[linear-gradient(135deg,_#111827,_#334155)]" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -358,63 +376,68 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: 0.985 }}
       transition={panelTransition}
-      className="overflow-hidden rounded-[30px] border border-[#0f172a]/8 bg-[#09111f] p-5 shadow-[0_32px_90px_-42px_rgba(2,8,23,0.92)]"
+      className="w-full overflow-hidden rounded-[30px] border border-[#0f172a]/8 bg-[#09111f] p-5 shadow-[0_32px_90px_-42px_rgba(2,8,23,0.92)]"
     >
-      <div className="mb-5 flex items-center justify-between">
-        <div>
-          <div className="text-[11px] uppercase tracking-[0.18em] text-[#7dd3fc]">Automation flow</div>
-          <div className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-white">Sistemas que ejecutan</div>
+      <div
+        className="automation-flow service-visual-flow transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform"
+        style={{ transform: 'translate(calc(var(--service-move-x,0px) * 0.4), calc(var(--service-move-y,0px) * 0.3))' }}
+      >
+        <div className="mb-5 flex items-center justify-between">
+          <div>
+            <div className="text-[11px] uppercase tracking-[0.18em] text-[#7dd3fc]">Automation flow</div>
+            <div className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-white">Sistemas que ejecutan</div>
+          </div>
+          <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.14em] text-white/48">
+            24/7
+          </div>
         </div>
-        <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.14em] text-white/48">
-          24/7
-        </div>
-      </div>
-      <div className="grid gap-4 lg:grid-cols-[0.82fr_1.18fr]">
-        <div className="rounded-[24px] border border-white/10 bg-white/6 p-4 backdrop-blur-xl">
-          <div className="mb-4 flex items-center gap-2">
-            <div className="h-9 w-9 rounded-full bg-[linear-gradient(135deg,_#38bdf8,_#6366f1)]" />
-            <div>
-              <div className="h-3 w-24 rounded-full bg-white/18" />
-              <div className="mt-2 h-2 w-16 rounded-full bg-white/10" />
+        <div className="grid gap-4 lg:grid-cols-[0.82fr_1.18fr]">
+          <div className="rounded-[24px] border border-white/10 bg-white/6 p-4 backdrop-blur-xl">
+            <div className="mb-4 flex items-center gap-2">
+              <div className="h-9 w-9 rounded-full bg-[linear-gradient(135deg,_#38bdf8,_#6366f1)]" />
+              <div>
+                <div className="h-3 w-24 rounded-full bg-white/18" />
+                <div className="mt-2 h-2 w-16 rounded-full bg-white/10" />
+              </div>
+            </div>
+            <div className="space-y-3">
+              <div className="rounded-[18px] bg-[#0f172a] px-4 py-3 text-sm text-white/86">Nuevo lead desde la web</div>
+              <div className="rounded-[18px] bg-white/10 px-4 py-3 text-sm text-white/74">Clasificar, etiquetar y notificar</div>
+              <div className="rounded-[18px] bg-white/10 px-4 py-3 text-sm text-white/74">Disparar respuesta o tarea interna</div>
             </div>
           </div>
-          <div className="space-y-3">
-            <div className="rounded-[18px] bg-[#0f172a] px-4 py-3 text-sm text-white/86">Nuevo lead desde la web</div>
-            <div className="rounded-[18px] bg-white/10 px-4 py-3 text-sm text-white/74">Clasificar, etiquetar y notificar</div>
-            <div className="rounded-[18px] bg-white/10 px-4 py-3 text-sm text-white/74">Disparar respuesta o tarea interna</div>
-          </div>
-        </div>
-        <div className="rounded-[24px] bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.22),_transparent_32%),linear-gradient(180deg,_#0f172a_0%,_#050814_100%)] p-4">
-          <div className="grid gap-3 md:grid-cols-3">
-            {['Lead', 'CRM', 'Ops'].map((item, index) => (
-              <div key={item} className="rounded-[18px] border border-white/10 bg-white/6 p-4">
-                <div className="mb-3 flex items-center gap-2">
-                  <div
-                    className="h-9 w-9 rounded-2xl"
-                    style={{
-                      background:
-                        index === 0
-                          ? 'linear-gradient(135deg, #38bdf8, #0ea5e9)'
-                          : index === 1
-                            ? 'linear-gradient(135deg, #818cf8, #8b5cf6)'
-                            : 'linear-gradient(135deg, #34d399, #10b981)',
-                    }}
-                  />
-                  <div className="h-3 w-14 rounded-full bg-white/16" />
+          <div className="rounded-[24px] bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.22),_transparent_32%),linear-gradient(180deg,_#0f172a_0%,_#050814_100%)] p-4">
+            <div className="grid gap-3 md:grid-cols-3">
+              {['Lead', 'CRM', 'Ops'].map((item, index) => (
+                <div key={item} className="rounded-[18px] border border-white/10 bg-white/6 p-4">
+                  <div className="mb-3 flex items-center gap-2">
+                    <div
+                      className="h-9 w-9 rounded-2xl"
+                      style={{
+                        background:
+                          index === 0
+                            ? 'linear-gradient(135deg, #38bdf8, #0ea5e9)'
+                            : index === 1
+                              ? 'linear-gradient(135deg, #818cf8, #8b5cf6)'
+                              : 'linear-gradient(135deg, #34d399, #10b981)',
+                      }}
+                    />
+                    <div className="h-3 w-14 rounded-full bg-white/16" />
+                  </div>
+                  <div className="space-y-2">
+                    <div className="h-3 rounded-full bg-white/12" />
+                    <div className="h-3 w-4/5 rounded-full bg-white/8" />
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <div className="h-3 rounded-full bg-white/12" />
-                  <div className="h-3 w-4/5 rounded-full bg-white/8" />
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-4 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-white/34">
-            <div className="h-px bg-white/12" />
-            <span>Sync</span>
-            <div className="h-px bg-white/12" />
-            <span>Route</span>
-            <div className="h-px bg-white/12" />
+              ))}
+            </div>
+            <div className="mt-4 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-white/34">
+              <div className="h-px bg-white/12" />
+              <span>Sync</span>
+              <div className="h-px bg-white/12" />
+              <span>Route</span>
+              <div className="h-px bg-white/12" />
+            </div>
           </div>
         </div>
       </div>
@@ -873,18 +896,16 @@ const ServicesSection = () => {
 
 const PortfolioSection = () => {
   const prefersReducedMotion = useReducedMotion();
-  const [activeServiceId, setActiveServiceId] = useState('web');
   const [activeWebSlide, setActiveWebSlide] = useState(1);
   const [isWebCarouselHovering, setIsWebCarouselHovering] = useState(false);
-  const activeService = serviceShowcase.find((service) => service.id === activeServiceId) || serviceShowcase[0];
 
   useEffect(() => {
-    if (activeService.id !== 'web' || isWebCarouselHovering) return undefined;
+    if (isWebCarouselHovering) return undefined;
     const timer = setInterval(() => {
       setActiveWebSlide((prev) => (prev + 1) % webSlides.length);
     }, 5500);
     return () => clearInterval(timer);
-  }, [activeService.id, isWebCarouselHovering]);
+  }, [isWebCarouselHovering]);
 
   const handleWebCarouselWheel = (event) => {
     if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) {
@@ -900,7 +921,7 @@ const PortfolioSection = () => {
     <div
       id="proyectos"
       data-nav-theme="light"
-      className="relative overflow-hidden bg-[linear-gradient(180deg,#ede4fb_0%,#f1e8ff_10%,#f4edff_24%,#f7f3ff_42%,#f7f5fb_100%)] pb-20 text-[#080808]"
+      className="relative overflow-x-hidden bg-[linear-gradient(180deg,#ede4fb_0%,#f1e8ff_10%,#f4edff_24%,#f7f3ff_42%,#f7f5fb_100%)] pb-20 text-[#080808]"
       style={{ fontFamily: 'Manrope, sans-serif' }}
     >
       <div
@@ -916,100 +937,121 @@ const PortfolioSection = () => {
         style={{ background: 'rgba(186,145,255,0.16)' }}
       />
 
-      <div className="relative z-20 mx-auto max-w-[1380px] px-6 pt-12 md:px-16 md:pt-20">
-        <div className="max-w-3xl">
-          <div className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#8242f5]">Servicios</div>
-          <h1 className="mt-4 font-['Inter Tight'] text-[clamp(40px,5.8vw,88px)] font-extrabold leading-[1.02] tracking-[-0.035em] text-[#080808]">
-            Elegimos el sistema visual según lo que necesitas resolver.
-          </h1>
-          <p className="mt-5 max-w-2xl text-[15px] leading-7 text-[#080808]/66 md:text-[18px]">
-            Aquí no vas a ver proyectos sueltos. Vas a ver cómo presentamos cada línea de servicio:
-            desarrollo web, diseño y automatización, cada una con su propio lenguaje visual.
-          </p>
-        </div>
-
-        <div className="mt-10 flex flex-wrap gap-3">
-          {serviceShowcase.map((service) => {
-            const isActive = service.id === activeService.id;
-            return (
-              <button
+      <div className="relative z-20 mx-auto max-w-[1280px] px-6 pt-6 md:px-12 md:pt-8">
+        <div className="mt-0">
+          <div className="sticky-container relative hidden h-[330vh] md:block">
+            {serviceShowcase.map((service, index) => (
+              <article
                 key={service.id}
-                type="button"
-                onClick={() => setActiveServiceId(service.id)}
-                className={`rounded-full px-5 py-3 text-sm font-semibold tracking-[-0.02em] transition-all duration-300 ${
-                  isActive
-                    ? 'text-white shadow-[0_18px_42px_-22px_rgba(91,33,182,0.55)]'
-                    : 'border border-[#080808]/10 bg-white/88 text-[#374151] hover:-translate-y-0.5 hover:border-[#8242f5]/20'
-                }`}
-                style={isActive ? { background: 'linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%)' } : undefined}
+                className="service-card group sticky top-[84px] mb-[10px] overflow-hidden rounded-[28px] border border-[#d9d3ca] bg-white shadow-[0_12px_30px_rgba(57,53,44,0.06)] transition-[border-color,box-shadow] duration-[600ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-[#792fec]/30 hover:shadow-[0_24px_60px_rgba(57,53,44,0.08),0_0_0_1px_rgba(121,47,236,0.12)]"
+                style={{ zIndex: index + 1 }}
+                onMouseMove={handleServiceCardMouseMove}
+                onMouseLeave={resetServiceCardMouseMove}
               >
-                {service.label}
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="mt-10 grid gap-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
-          <motion.div
-            key={activeService.id}
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.45, ease: premiumEase }}
-            className="rounded-[34px] border border-[#080808]/8 bg-white/84 p-6 shadow-[0_26px_70px_-38px_rgba(15,23,42,0.22)] backdrop-blur-xl md:p-8"
-          >
-            <div className="flex items-center gap-4">
-              <div
-                className="flex h-14 w-14 items-center justify-center rounded-[18px] text-lg font-bold text-white shadow-[0_18px_40px_-20px_rgba(0,0,0,0.34)]"
-                style={{ background: 'linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%)' }}
-              >
-                {activeService.number}
-              </div>
-              <div>
-                <div className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#8242f5]">{activeService.brand}</div>
-                <div className="mt-1 text-sm tracking-wide text-[#080808]/54">{activeService.vibe}</div>
-              </div>
-            </div>
-
-            <h2 className="mt-8 max-w-[14ch] font-epilogue text-[clamp(34px,4.4vw,58px)] font-extrabold leading-[0.94] tracking-[-0.045em] text-[#080808]">
-              {activeService.title}
-            </h2>
-            <p className="mt-5 max-w-xl text-[15px] leading-7 text-[#080808]/68 md:text-[16px]">
-              {activeService.description}
-            </p>
-
-            <div className="mt-8 grid gap-3">
-              {activeService.points.map((point) => (
-                <div
-                  key={point}
-                  className="flex items-center gap-3 rounded-[20px] border border-[#080808]/6 bg-[#f8f6ff] px-4 py-3 text-sm text-[#1f2937]"
-                >
-                  <span
-                    className="h-2.5 w-2.5 rounded-full"
-                    style={{ background: activeService.id === 'automation' ? '#21b2c6' : '#8242f5' }}
-                  />
-                  {point}
+                <div className="flex h-[calc(100vh-124px)] min-h-[520px]">
+                  <div className="service-info relative flex-[1] overflow-hidden">
+                    <div className="pointer-events-none absolute left-8 top-6 font-['Inter Tight'] text-[88px] font-extrabold leading-none tracking-[-0.06em] text-[#39352c]/[0.03] lg:text-[110px]">
+                      {service.number}
+                    </div>
+                    <div className="relative z-10 flex flex-col justify-center px-10 py-12 lg:px-14 lg:py-16">
+                      <div
+                        className="inline-flex rounded-full border px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em]"
+                        style={{
+                          color: service.id === 'design' ? '#21b2c6' : '#792fec',
+                          background: service.id === 'design' ? 'rgba(33,178,198,0.08)' : 'rgba(121,47,236,0.06)',
+                          borderColor: service.id === 'design' ? 'rgba(33,178,198,0.16)' : 'rgba(121,47,236,0.15)',
+                        }}
+                      >
+                        {service.brand}
+                      </div>
+                      <h2 className="mt-14 max-w-[13ch] font-['Inter Tight'] text-[clamp(40px,4.8vw,60px)] font-extrabold leading-[0.98] tracking-[-0.045em] text-[#39352c]">
+                        {service.title}
+                      </h2>
+                      <p className="mt-5 max-w-[31rem] text-[15px] leading-7 text-[#5e584e] md:text-[16px]">
+                        {service.description}
+                      </p>
+                      <div className="mt-8 flex max-w-[32rem] flex-wrap gap-3">
+                        {service.points.map((point) => (
+                          <div
+                            key={point}
+                            className="rounded-full border border-[#d9d3ca] bg-[#f6f2ec] px-4 py-3 text-sm text-[#5e584e]"
+                          >
+                            {point}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="service-visual relative flex-[1.1] border-l border-[#d9d3ca] bg-[#eae6df]">
+                    <div className="flex h-full w-full items-center justify-center p-6 lg:p-8">
+                      <ServiceShowcaseVisual service={service} prefersReducedMotion={prefersReducedMotion} />
+                    </div>
+                  </div>
                 </div>
-              ))}
-            </div>
-          </motion.div>
+              </article>
+            ))}
+          </div>
 
-          <div className="relative">
-            <AnimatePresence mode="wait">
-              <ServiceShowcaseVisual service={activeService} prefersReducedMotion={prefersReducedMotion} />
-            </AnimatePresence>
+          <div className="space-y-5 md:hidden">
+            {serviceShowcase.map((service, index) => (
+              <motion.article
+                key={service.id}
+                initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.18 }}
+                transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, ease: premiumEase, delay: index * 0.04 }}
+                className="overflow-hidden rounded-[28px] border border-[#d8d0ee] bg-white/88 shadow-[0_18px_48px_-28px_rgba(66,52,111,0.14)] backdrop-blur-[10px]"
+              >
+                <div className="grid gap-0">
+                  <div className="relative flex flex-col justify-center overflow-hidden border-b border-[#e8e1f7] px-6 py-8">
+                    <div className="pointer-events-none absolute left-7 top-5 font-['Inter Tight'] text-[72px] font-extrabold leading-none tracking-[-0.06em] text-[#080808]/[0.035]">
+                      {service.number}
+                    </div>
+                    <div className="relative z-10">
+                      <div className="inline-flex rounded-full border border-[#8242f5]/12 bg-[#8242f5]/[0.06] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#8242f5]">
+                        {service.brand}
+                      </div>
+                      <div className="mt-5 text-[13px] font-semibold uppercase tracking-[0.16em] text-[#080808]/45">
+                        {service.vibe}
+                      </div>
+                      <h2 className="mt-4 max-w-[14ch] font-['Inter Tight'] text-[clamp(34px,8vw,46px)] font-extrabold leading-[0.96] tracking-[-0.045em] text-[#080808]">
+                        {service.title}
+                      </h2>
+                      <p className="mt-5 text-[15px] leading-7 text-[#080808]/66">
+                        {service.description}
+                      </p>
+                      <div className="mt-8 grid gap-3">
+                        {service.points.map((point) => (
+                          <div
+                            key={point}
+                            className="flex items-center gap-3 rounded-[18px] border border-[#080808]/6 bg-[#faf8ff] px-4 py-3 text-sm text-[#1f2937]"
+                          >
+                            <span
+                              className="h-2.5 w-2.5 rounded-full"
+                              style={{ background: service.id === 'automation' ? '#21b2c6' : '#8242f5' }}
+                            />
+                            {point}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center bg-[linear-gradient(180deg,rgba(247,243,255,0.88)_0%,rgba(255,255,255,0.92)_100%)] p-4">
+                    <ServiceShowcaseVisual service={service} prefersReducedMotion={prefersReducedMotion} />
+                  </div>
+                </div>
+              </motion.article>
+            ))}
           </div>
         </div>
 
-        <AnimatePresence initial={false}>
-          {activeService.id === 'web' && (
-            <motion.div
-              key="web-carousel"
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -18 }}
-              transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.45, ease: premiumEase }}
-              className="mt-16"
-            >
+        <motion.div
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.45, ease: premiumEase }}
+          className="mt-16"
+        >
               <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
                 <div className="max-w-2xl">
                   <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#8242f5]">Nuestras webs</div>
@@ -1136,9 +1178,7 @@ const PortfolioSection = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        </motion.div>
       </div>
     </div>
   );
@@ -1150,7 +1190,7 @@ const ProcessStepCard = ({ step, index, activeProgress }) => {
   const distance = useTransform(activeProgress, (value) => {
     return index - value;
   });
-  const y = useTransform(distance, (value) => value * 160);
+  const y = useTransform(distance, (value) => value * 138);
   const scale = useTransform(distance, (value) => Math.max(0.85, 1 - Math.abs(value) * 0.12));
   const opacity = useTransform(distance, (value) => {
     const absolute = Math.abs(value);
@@ -1208,23 +1248,23 @@ const ProcessRedesignSection = () => {
   ];
 
   const activeProgressRaw = useTransform(scrollYProgress, [0, 1], [0, stepsContent.length - 1]);
-  const activeProgress = useSpring(activeProgressRaw, { stiffness: 150, damping: 22, mass: 0.1 });
+  const activeProgress = useSpring(activeProgressRaw, { stiffness: 190, damping: 24, mass: 0.08 });
   const purpleStageOpacity = useTransform(
     activeProgressRaw,
     [0, 1, 2, 3, 4],
     [0, 0.25, 0.5, 0.75, 1]
   );
+  const currentStep = stepsContent[activeStep];
 
   useMotionValueEvent(activeProgressRaw, 'change', (latest) => {
-    const nextStep = Math.min(stepsContent.length - 1, Math.max(0, Math.round(latest)));
+    const nextStep = Math.min(stepsContent.length - 1, Math.max(0, Math.floor(latest + 0.2)));
     setActiveStep(nextStep);
   });
 
   return (
     <section ref={sectionRef} id="proceso" className="process-section relative w-full bg-white py-0">
-            {/* Desktop Sticky Carousel */}
-      <div className="process-sticky-stage hidden md:block relative h-[250vh] w-full">
-        <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden bg-white px-6 lg:px-16">
+      <div className="process-sticky-stage relative hidden h-[225vh] w-full md:block lg:h-[240vh]">
+        <div className="sticky top-0 flex h-[100svh] w-full items-center justify-center overflow-hidden bg-white px-4 sm:px-6 lg:px-16">
           {/* Progressive giant gradient: white on step 1 to full purple on step 5 */}
           <motion.div 
             className="absolute inset-0 pointer-events-none transition-all duration-300"
@@ -1234,7 +1274,7 @@ const ProcessRedesignSection = () => {
             }}
           />
           <div className="relative z-10 mx-auto flex w-full max-w-[800px] items-center justify-center gap-6">
-            <div className="process-card-stack relative h-[430px] w-full overflow-visible md:h-[540px]">
+            <div className="process-card-stack relative h-[360px] w-full overflow-visible sm:h-[410px] md:h-[540px]">
               <div className="relative mx-auto h-full w-full max-w-[660px]">
                 {stepsContent.map((step, i) => (
                   <ProcessStepCard 
@@ -1250,24 +1290,44 @@ const ProcessRedesignSection = () => {
         </div>
       </div>
 
-      {/* Mobile Vertical Stack */}
-      <div className="relative w-full bg-white px-6 py-16 md:hidden">
-        <div className="flex flex-col gap-6">
-          {stepsContent.map((step, i) => (
-            <div key={i} className="flex flex-col gap-4 rounded-[24px] border border-[#080808]/5 bg-white p-6 shadow-md transition-shadow hover:shadow-lg">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#080808]/6 bg-white font-epilogue text-[15px] font-bold text-[#080808]/45 shadow-sm">
-                0{i + 1}
-              </div>
-              <div className="flex flex-col gap-1">
-                <h3 className="font-epilogue text-[22px] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#080808]">
-                  {step.title}
-                </h3>
-                <p className="text-[14px] leading-relaxed text-[#080808]/60">
-                  {step.description}
-                </p>
-              </div>
-            </div>
-          ))}
+      <div className="relative h-[170vh] w-full bg-[#6f22ef] md:hidden">
+        <div className="sticky top-0 flex h-[100svh] w-full items-center justify-center overflow-hidden bg-white px-5">
+          <motion.div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 10%, rgba(111,34,239,0.14) 28%, rgba(111,34,239,0.34) 48%, rgba(111,34,239,0.68) 70%, #6f22ef 100%)',
+              opacity: purpleStageOpacity
+            }}
+          />
+          <div className="relative z-10 mx-auto flex w-full max-w-[420px] flex-col items-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeStep}
+                initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -18, scale: 0.97 }}
+                transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full rounded-[28px] border border-[#8242f5]/12 bg-white/92 p-6 shadow-[0_24px_60px_-34px_rgba(130,66,245,0.18)] backdrop-blur-md"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#080808]/6 bg-white font-epilogue text-[15px] font-bold text-[#080808]/45 shadow-sm">
+                    0{activeStep + 1}
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <div className="font-manrope text-[11px] font-bold uppercase tracking-[0.16em] text-[#8242f5]">
+                      {stepLabels[activeStep]}
+                    </div>
+                    <h3 className="font-epilogue text-[28px] font-extrabold leading-[1.02] tracking-[-0.035em] text-[#080808]">
+                      {currentStep.title}
+                    </h3>
+                    <p className="text-[14px] leading-relaxed text-[#080808]/62">
+                      {currentStep.description}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </section>
@@ -1281,14 +1341,26 @@ const ExpandedAgencySections = () => (
     <section
       id="planes"
       data-nav-theme="light"
-      className="plans-section relative m-0 overflow-hidden bg-transparent px-4 pb-12 pt-0 md:px-8 md:pb-16"
+      className="plans-section relative overflow-hidden px-4 pb-12 pt-14 md:-mt-[3px] md:px-8 md:pb-16 md:pt-20"
+      style={{
+        background:
+          'linear-gradient(180deg, #ede4fb 0%, #f1e9ff 18%, #faf7ff 42%, #ffffff 100%)'
+      }}
     >
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-[60] h-[10px]"
+        style={{ background: '#ede4fb' }}
+      />
+      <div
+        className="pointer-events-none absolute right-0 top-0 z-[59] h-[56px] w-[34%]"
+        style={{ background: 'linear-gradient(180deg, #ede4fb 0%, rgba(237,228,251,0.96) 48%, rgba(237,228,251,0) 100%)' }}
+      />
       <motion.img
         src={asset('KaivaMora1.webp')}
         alt=""
         loading="lazy"
         decoding="async"
-        className="absolute right-0 top-[6%] z-50 hidden w-[200px] opacity-90 sm:block md:right-[-2%] md:top-[4%] md:w-[320px] lg:right-[-3%] lg:w-[460px] pointer-events-none"
+        className="absolute right-0 top-[6%] z-40 hidden w-[200px] opacity-90 sm:block md:right-[-2%] md:top-[6.5%] md:w-[320px] lg:right-[-3%] lg:top-[6%] lg:w-[460px] pointer-events-none"
         animate={{
           y: [0, 15, 0],
           rotate: [0, 2, 0]
@@ -1320,14 +1392,11 @@ const ExpandedAgencySections = () => (
                   className={`plan-card group relative flex flex-col rounded-[24px] bg-white shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] overflow-hidden`}
                 >
                   {isMiddle && (
-                    <>
-                      <img src={asset('degradado-tarjeta.png')} alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0" />
-                      <img 
-                        src={asset('degradado-negocio.png')} 
-                        alt="" 
-                        className="absolute right-0 top-0 h-full w-auto object-contain object-right pointer-events-none z-0 opacity-80" 
-                      />
-                    </>
+                    <img
+                      src={asset('plan-negocio-gradient.png')}
+                      alt=""
+                      className="absolute inset-0 h-full w-full object-cover object-bottom pointer-events-none z-0"
+                    />
                   )}
 
                   <div className="relative z-10 flex flex-1 flex-col p-8 md:p-10">
@@ -1412,13 +1481,21 @@ const ExpandedAgencySections = () => (
 const AliadosSection = () => {
   return (
     <section
-      className="allies-section relative w-full overflow-hidden px-4 py-12 md:px-8 md:py-16 lg:py-20"
+      className="allies-section relative overflow-hidden px-4 py-12 md:-mt-[3px] md:px-8 md:py-16 lg:py-20"
       style={{
         background:
           'linear-gradient(180deg, #6f22ef 0%, #8242f5 30%, #9c67f2 54%, #d9ccfb 78%, #f2ebff 90%, #ede4fb 100%)'
       }}
     >
-      <div className="mx-auto w-full max-w-[1680px] rounded-[34px] bg-[#050505] px-7 py-12 text-white shadow-[0_35px_90px_-42px_rgba(6,2,26,0.95)] ring-1 ring-white/10 md:px-14 md:py-16 lg:min-h-[82vh] lg:px-20 lg:py-24 xl:min-h-[86vh] xl:px-24">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-[60] h-[6px]"
+        style={{ background: '#6f22ef' }}
+      />
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[60] h-[6px]"
+        style={{ background: '#ede4fb' }}
+      />
+      <div className="mx-auto w-full max-w-[1680px] rounded-[34px] bg-[#050505] px-7 py-12 text-white shadow-[0_28px_70px_-48px_rgba(6,2,26,0.7)] ring-1 ring-white/10 md:px-14 md:py-16 lg:min-h-[82vh] lg:px-20 lg:py-24 xl:min-h-[86vh] xl:px-24">
         <div className="absolute inset-0 rounded-[34px]" style={{ background: 'radial-gradient(72% 80% at 22% 44%, rgba(126,60,245,0.20) 0%, rgba(126,60,245,0) 72%), radial-gradient(52% 68% at 82% 58%, rgba(88,27,201,0.34) 0%, rgba(88,27,201,0) 74%)' }} />
 
         <div className="relative z-10 grid items-center gap-10 lg:min-h-[calc(82vh-12rem)] lg:grid-cols-[1.18fr_0.82fr] lg:gap-12 xl:min-h-[calc(86vh-12rem)]">
@@ -1428,20 +1505,12 @@ const AliadosSection = () => {
               <br />
               <span className="relative inline-block whitespace-nowrap pb-8 md:pb-10">
                 for Startups
-                <svg
+                <img
+                  src={asset('linea-startups.png')}
+                  alt=""
                   aria-hidden="true"
-                  viewBox="0 0 760 72"
-                  className="absolute -bottom-1 left-[-1.5%] h-[22px] w-[108%] md:h-[28px]"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M18 54 C168 18, 378 18, 742 50"
-                    fill="none"
-                    stroke="white"
-                    strokeWidth="18"
-                    strokeLinecap="round"
-                  />
-                </svg>
+                  className="absolute -bottom-1 left-[-2%] h-[22px] w-[110%] object-contain md:h-[28px]"
+                />
               </span>
             </h2>
 
@@ -1515,20 +1584,28 @@ const AnimatedText = ({ text, className }) => {
   );
 };
 
-const ScrollRevealHeadline = ({ text }) => {
+const ScrollRevealHeadline = ({ text, lines }) => {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start 0.9", "end 0.4"],
   });
 
-  const words = text.split(" ");
+  const resolvedLines = lines ?? [text];
+  const words = resolvedLines.flatMap((line) => line.split(" "));
+  let wordIndex = 0;
   
   return (
-    <h2 ref={containerRef} className="font-epilogue text-[clamp(40px,6vw,72px)] font-extrabold leading-[0.98] tracking-[-0.04em] text-center max-w-[900px] mt-4 flex flex-wrap justify-center">
-      {words.map((word, i) => {
-        return <RevealWord key={i} word={word} index={i} total={words.length} progress={scrollYProgress} />;
-      })}
+    <h2 ref={containerRef} className="font-epilogue text-[clamp(20px,5.8vw,72px)] font-extrabold leading-[1.02] tracking-[-0.04em] text-center max-w-[980px] mt-4">
+      {resolvedLines.map((line, lineIndex) => (
+        <span key={lineIndex} className="block whitespace-nowrap">
+          {line.split(" ").map((word) => {
+            const currentIndex = wordIndex;
+            wordIndex += 1;
+            return <RevealWord key={`${lineIndex}-${currentIndex}`} word={word} index={currentIndex} total={words.length} progress={scrollYProgress} />;
+          })}
+        </span>
+      ))}
     </h2>
   );
 };
@@ -1632,8 +1709,7 @@ const FixedNavbar = ({ projectsActive = false }) => (
       <a href={projectsActive ? HOME_PAGE_HREF_FROM_PROJECTS : '#inicio'} onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'inicio')} className="font-medium" style={projectsActive ? undefined : gradientAccentStyle}>
         Inicio
       </a>
-      <a href={projectsActive ? `${HOME_PAGE_HREF_FROM_PROJECTS}#kaiva` : '#kaiva'} onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'kaiva')} className="transition-colors hover:text-[#080808]">Nosotros</a>
-          <a href={projectsActive ? './' : PROJECTS_PAGE_HREF} className="transition-colors hover:text-[#080808]" style={projectsActive ? gradientAccentStyle : undefined}>Servicios</a>
+              <a href={projectsActive ? './' : PROJECTS_PAGE_HREF} className="transition-colors hover:text-[#080808]" style={projectsActive ? gradientAccentStyle : undefined}>Servicios</a>
       <a href={projectsActive ? `${HOME_PAGE_HREF_FROM_PROJECTS}#contacto` : '#contacto'} onClick={projectsActive ? undefined : (event) => scrollToSection(event, 'contacto')} className="transition-colors hover:text-[#080808]">Contacto</a>
       <a
         href={projectsActive ? `${HOME_PAGE_HREF_FROM_PROJECTS}#planes` : '#planes'}
@@ -1752,43 +1828,27 @@ const App = () => {
           mix-blend-mode: soft-light;
         }
         .problem-card {
-          background:
-            radial-gradient(120% 140% at 0% 0%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 44%),
-            linear-gradient(145deg, #9b61ff 0%, #8242f5 46%, #6930d3 100%);
-          border: 1px solid rgba(255, 255, 255, 0.16);
-          box-shadow:
-            0 22px 48px -18px rgba(71, 18, 160, 0.42),
-            inset 0 1px 0 rgba(255,255,255,0.24),
-            inset 0 -10px 24px rgba(52, 14, 122, 0.16);
+          background: #ffffff;
+          border: 1px solid rgba(8, 8, 8, 0.06);
+          box-shadow: 0 16px 44px -28px rgba(8, 8, 8, 0.18);
         }
         .problem-card::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(140deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 36%, rgba(42, 8, 98, 0.12) 100%);
-          pointer-events: none;
+          display: none;
         }
         .problem-card-copy {
-          width: min(100%, calc(100% - 110px));
+          width: 100%;
         }
         .problem-card-button {
           position: relative;
           z-index: 10;
-          color: #ffffff;
-          background: linear-gradient(180deg, rgba(92, 34, 196, 0.92) 0%, rgba(68, 20, 154, 0.96) 100%);
-          border: 1px solid rgba(255,255,255,0.08);
-          box-shadow:
-            inset 0 2px 3px rgba(20, 4, 49, 0.72),
-            inset 0 14px 18px rgba(144, 92, 255, 0.18),
-            inset 0 -10px 18px rgba(18, 2, 48, 0.48),
-            0 1px 0 rgba(255,255,255,0.08);
+          color: #080808;
+          background: #ffffff;
+          border: 1px solid rgba(8, 8, 8, 0.08);
+          box-shadow: 0 10px 24px -18px rgba(8, 8, 8, 0.2);
         }
         .problem-card-button-icon {
-          background: linear-gradient(180deg, #a970ff 0%, #7a3ef0 100%);
-          box-shadow:
-            0 8px 14px -10px rgba(28, 5, 70, 0.9),
-            inset 0 1px 0 rgba(255,255,255,0.2),
-            inset 0 -3px 8px rgba(63, 17, 150, 0.45);
+          background: linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%);
+          box-shadow: 0 10px 18px -12px rgba(130, 66, 245, 0.55);
         }
         
         @keyframes floatBlobOne {
@@ -2014,7 +2074,7 @@ const App = () => {
             gap: 14px !important;
           }
           .problem-card {
-            min-height: 246px !important;
+            min-height: 210px !important;
             padding: 18px 20px !important;
           }
           .problem-card h4 {
@@ -2150,16 +2210,6 @@ const App = () => {
           .hero-copy-wrap { top: 108px !important; max-width: calc(100vw - 48px) !important; }
           .hero-visual-wrap { top: 275px !important; width: 114vw !important; max-width: 520px !important; }
         }
-        @media (min-width: 768px) and (max-width: 1180px) {
-          .problem-card-copy {
-            width: min(100%, calc(100% - 148px));
-          }
-        }
-        @media (min-width: 1181px) {
-          .problem-card-copy {
-            width: min(100%, calc(100% - 190px));
-          }
-        }
         @media (max-width: 400px) {
           .hero-copy-wrap { top: 96px !important; }
           .hero-visual-wrap { top: 255px !important; width: 108vw !important; max-width: 420px !important; }
@@ -2167,11 +2217,6 @@ const App = () => {
         @media (max-height: 700px) and (max-width: 768px) {
           .hero-copy-wrap { top: 86px !important; }
           .hero-visual-wrap { top: 220px !important; }
-        }
-        @media (max-width: 767px) {
-          .problem-card-copy {
-            width: min(100%, calc(100% - 100px));
-          }
         }
           .contact-premium-card {
             background: #ffffff;
@@ -2274,7 +2319,13 @@ const ProblemSection = () => {
     <section id="problema" className="problem-section relative w-full bg-transparent text-[#080808] px-6 py-14 md:py-24 lg:px-16">
       <div className="mx-auto w-full max-w-[1240px] relative z-10 flex flex-col items-center">
         
-        <ScrollRevealHeadline text="El 91% de las empresas en Colombia son pymes. La mayoría no existe en internet." />
+        <ScrollRevealHeadline
+          lines={[
+            'El 91% de las empresas en Colombia',
+            'son pymes. La mayoría',
+            'no existen en\u00A0internet',
+          ]}
+        />
         
         <p className="mt-8 text-[16px] md:text-[18px] leading-[1.6] text-center max-w-[650px] text-[#080808]/70">
           Cada día, miles de colombianos buscan productos y servicios en Google. Si tu
@@ -2316,12 +2367,12 @@ const ProblemSection = () => {
           <div className="problem-reasons-grid grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             
             {/* Card 1 */}
-            <div className="problem-card relative overflow-hidden rounded-[30px] p-5 sm:p-6 md:p-7 xl:p-8 text-white min-h-[312px] sm:min-h-[330px] md:min-h-[348px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
+            <div className="problem-card relative overflow-hidden rounded-[22px] p-5 text-[#080808] min-h-[210px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 md:p-6">
               <div className="problem-card-copy relative z-10">
-                <h4 className="font-epilogue text-[28px] md:text-[34px] font-extrabold leading-[1.05] tracking-tight mb-3">
+                <h4 className="font-epilogue text-[22px] md:text-[26px] font-extrabold leading-[1.05] tracking-tight mb-2">
                   Es muy caro.
                 </h4>
-                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.55] text-white/88 mb-6">
+                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.5] text-[#080808]/66 mb-5">
                   Muchos negocios creen que tener una web profesional está fuera de su presupuesto. No tiene por qué serlo.
                 </p>
               </div>
@@ -2333,25 +2384,19 @@ const ProblemSection = () => {
                       <path d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </span>
-                  <span className="text-[11px] font-bold tracking-widest uppercase text-white/92">
+                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#080808]/72">
                     SABER MÁS
                   </span>
                 </button>
-              <img
-                src={asset('card-es-muy-caro.webp')}
-                alt="Es muy caro"
-                loading="lazy"
-                className="absolute right-[-4%] bottom-[-3%] w-[140px] sm:w-[170px] md:w-[178px] lg:w-[205px] xl:w-[238px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-2 pointer-events-none z-0"
-              />
             </div>
 
             {/* Card 2 */}
-            <div className="problem-card relative overflow-hidden rounded-[30px] p-5 sm:p-6 md:p-7 xl:p-8 text-white min-h-[312px] sm:min-h-[330px] md:min-h-[348px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
+            <div className="problem-card relative overflow-hidden rounded-[22px] p-5 text-[#080808] min-h-[210px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 md:p-6">
               <div className="problem-card-copy relative z-10">
-                <h4 className="font-epilogue text-[28px] md:text-[34px] font-extrabold leading-[1.05] tracking-tight mb-3">
+                <h4 className="font-epilogue text-[22px] md:text-[26px] font-extrabold leading-[1.05] tracking-tight mb-2">
                   No sé cómo funciona.
                 </h4>
-                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.55] text-white/88 mb-6">
+                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.5] text-[#080808]/66 mb-5">
                   Dominios, hosting, SEO, diseño... el lenguaje técnico aleja a dueños de negocio que simplemente quieren más clientes.
                 </p>
               </div>
@@ -2363,25 +2408,19 @@ const ProblemSection = () => {
                       <path d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </span>
-                  <span className="text-[11px] font-bold tracking-widest uppercase text-white/92">
+                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#080808]/72">
                     SABER MÁS
                   </span>
                 </button>
-              <img
-                src={asset('card-no-se-como-funciona.webp')}
-                alt="No sé cómo funciona"
-                loading="lazy"
-                className="absolute right-[-4%] bottom-0 w-[140px] sm:w-[170px] md:w-[178px] lg:w-[205px] xl:w-[238px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-2 pointer-events-none z-0"
-              />
             </div>
 
             {/* Card 3 */}
-            <div className="problem-card relative overflow-hidden rounded-[30px] p-5 sm:p-6 md:p-7 xl:p-8 text-white min-h-[312px] sm:min-h-[330px] md:min-h-[348px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
+            <div className="problem-card relative overflow-hidden rounded-[22px] p-5 text-[#080808] min-h-[210px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 md:p-6">
               <div className="problem-card-copy relative z-10">
-                <h4 className="font-epilogue text-[28px] md:text-[34px] font-extrabold leading-[1.05] tracking-tight mb-3">
+                <h4 className="font-epilogue text-[22px] md:text-[26px] font-extrabold leading-[1.05] tracking-tight mb-2">
                   Ya intenté y no funcionó.
                 </h4>
-                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.55] text-white/88 mb-6">
+                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.5] text-[#080808]/66 mb-5">
                   Malas experiencias con freelancers o plantillas genéricas que no reflejan el negocio ni generan resultados.
                 </p>
               </div>
@@ -2393,25 +2432,19 @@ const ProblemSection = () => {
                       <path d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </span>
-                  <span className="text-[11px] font-bold tracking-widest uppercase text-white/92">
+                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#080808]/72">
                     SABER MÁS
                   </span>
                 </button>
-              <img
-                src={asset('card-ya-intente.webp')}
-                alt="Ya intenté y no funcionó"
-                loading="lazy"
-                className="absolute right-[-4%] bottom-[-2%] w-[140px] sm:w-[170px] md:w-[178px] lg:w-[205px] xl:w-[238px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-2 pointer-events-none z-0"
-              />
             </div>
 
             {/* Card 4 */}
-            <div className="problem-card relative overflow-hidden rounded-[30px] p-5 sm:p-6 md:p-7 xl:p-8 text-white min-h-[312px] sm:min-h-[330px] md:min-h-[348px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-2">
+            <div className="problem-card relative overflow-hidden rounded-[22px] p-5 text-[#080808] min-h-[210px] flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 md:p-6">
               <div className="problem-card-copy relative z-10">
-                <h4 className="font-epilogue text-[28px] md:text-[34px] font-extrabold leading-[1.05] tracking-tight mb-3">
+                <h4 className="font-epilogue text-[22px] md:text-[26px] font-extrabold leading-[1.05] tracking-tight mb-2">
                   No tengo tiempo.
                 </h4>
-                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.55] text-white/88 mb-6">
+                <p className="font-manrope text-[13px] md:text-[14px] leading-[1.5] text-[#080808]/66 mb-5">
                   Gestionar un negocio ya es suficiente trabajo. No debería necesitarse un equipo técnico propio para tener presencia digital.
                 </p>
               </div>
@@ -2423,16 +2456,10 @@ const ProblemSection = () => {
                       <path d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </span>
-                  <span className="text-[11px] font-bold tracking-widest uppercase text-white/92">
+                  <span className="text-[11px] font-bold tracking-widest uppercase text-[#080808]/72">
                     SABER MÁS
                   </span>
                 </button>
-              <img
-                src={asset('card-no-tengo-tiempo.webp')}
-                alt="No tengo tiempo"
-                loading="lazy"
-                className="absolute right-[0%] bottom-0 w-[130px] sm:w-[155px] md:w-[165px] lg:w-[188px] xl:w-[212px] drop-shadow-2xl transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-2 pointer-events-none z-0"
-              />
             </div>
 
           </div>
@@ -2532,8 +2559,7 @@ const HeroSection = () => {
         >
           Inicio
         </a>
-        <a href="#kaiva" onClick={(event) => scrollToSection(event, 'kaiva')} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Nosotros</a>
-          <a href={PROJECTS_PAGE_HREF} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Servicios</a>
+                  <a href={PROJECTS_PAGE_HREF} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Servicios</a>
         <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Contacto</a>
         <a
           href="#planes"
