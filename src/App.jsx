@@ -1344,14 +1344,11 @@ const ExpandedAgencySections = () => (
                   className={`plan-card group relative flex flex-col rounded-[24px] bg-white shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] overflow-hidden`}
                 >
                   {isMiddle && (
-                    <>
-                      <img src={asset('degradado-tarjeta.png')} alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0" />
-                      <img 
-                        src={asset('degradado-negocio.png')} 
-                        alt="" 
-                        className="absolute right-0 top-0 h-full w-auto object-contain object-right pointer-events-none z-0 opacity-80" 
-                      />
-                    </>
+                    <img
+                      src={asset('plan-negocio-gradient.png')}
+                      alt=""
+                      className="absolute inset-0 h-full w-full object-cover object-bottom pointer-events-none z-0"
+                    />
                   )}
 
                   <div className="relative z-10 flex flex-1 flex-col p-8 md:p-10">
@@ -1452,20 +1449,12 @@ const AliadosSection = () => {
               <br />
               <span className="relative inline-block whitespace-nowrap pb-8 md:pb-10">
                 for Startups
-                <svg
+                <img
+                  src={asset('linea-startups.png')}
+                  alt=""
                   aria-hidden="true"
-                  viewBox="0 0 760 72"
-                  className="absolute -bottom-1 left-[-1.5%] h-[22px] w-[108%] md:h-[28px]"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M18 54 C168 18, 378 18, 742 50"
-                    fill="none"
-                    stroke="white"
-                    strokeWidth="18"
-                    strokeLinecap="round"
-                  />
-                </svg>
+                  className="absolute -bottom-1 left-[-2%] h-[22px] w-[110%] object-contain md:h-[28px]"
+                />
               </span>
             </h2>
 
