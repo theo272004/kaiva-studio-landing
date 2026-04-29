@@ -632,6 +632,9 @@ const ContactRevealSection = () => {
     },
   };
 
+  const contactTextViewport = { once: true, amount: 0.16 };
+  const contactFormViewport = { once: true, amount: 0.12 };
+
   return (
     <section 
       id="contacto" 
@@ -656,7 +659,7 @@ const ContactRevealSection = () => {
               variants={textGroup}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true, amount: 0.38 }}
+              viewport={contactTextViewport}
               className="relative z-10 max-w-[560px]"
             >
               <motion.div variants={textItem} className="font-manrope text-[16px] font-medium tracking-normal text-[#080808]/68">
@@ -674,7 +677,7 @@ const ContactRevealSection = () => {
             <motion.form
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={contactFormViewport}
               variants={formItem}
               whileHover={prefersReducedMotion || isMobile ? undefined : { y: -2 }}
               transition={{ duration: 0.32, ease: premiumEase }}
@@ -987,6 +990,18 @@ const PortfolioSection = () => {
                 className="portfolio-mobile-card sticky overflow-hidden rounded-[24px] border border-[#d8d0ee] bg-white shadow-[0_20px_44px_-32px_rgba(66,52,111,0.18)] sm:rounded-[28px]"
                 style={{ zIndex: index + 1 }}
               >
+                {(() => {
+                  const mobileDescription =
+                    service.id === 'design'
+                      ? 'Identidad visual, UI y piezas clave para que la marca se vea coherente, seria y lista para vender.'
+                      : service.description;
+                  const mobilePoints =
+                    service.id === 'design'
+                      ? service.points.slice(0, 2)
+                      : service.points;
+                  const visualScale = service.id === 'design' ? 'scale-[0.8]' : service.id === 'automation' ? 'scale-[0.86]' : 'scale-[0.9]';
+
+                  return (
                 <div className="grid gap-0">
                   <div className="relative overflow-hidden border-b border-[#ece5fb] px-5 py-5 sm:px-6 sm:py-6">
                     <div className="flex items-start gap-4">
@@ -1001,12 +1016,12 @@ const PortfolioSection = () => {
                           {service.title}
                         </h2>
                         <p className="mt-3 pr-2 text-[14px] leading-6 text-[#080808]/68">
-                          {service.description}
+                          {mobileDescription}
                         </p>
                       </div>
                     </div>
                     <div className="mt-5 flex flex-wrap gap-2.5">
-                      {service.points.map((point) => (
+                      {mobilePoints.map((point) => (
                         <div
                           key={point}
                           className="rounded-full border border-[#080808]/8 bg-[#faf7ff] px-3.5 py-2 text-[12px] font-medium text-[#39352c]/78"
@@ -1017,11 +1032,13 @@ const PortfolioSection = () => {
                     </div>
                   </div>
                   <div className="flex items-center justify-center bg-[linear-gradient(180deg,rgba(247,243,255,0.96)_0%,rgba(255,255,255,1)_100%)] p-4">
-                    <div className="w-full scale-[0.94] origin-center">
+                    <div className={`w-full origin-center ${visualScale}`}>
                       <ServiceShowcaseVisual service={service} prefersReducedMotion={prefersReducedMotion} />
                     </div>
                   </div>
                 </div>
+                  );
+                })()}
               </motion.article>
             ))}
           </div>
@@ -1214,7 +1231,13 @@ const ExpandedAgencySections = () => (
           ease: "easeInOut"
         }}
       />
-      <motion.div {...sectionReveal} className="plans-shell relative z-30 mx-auto w-full max-w-[1180px]">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.08 }}
+        transition={{ duration: 0.48, ease: premiumEase }}
+        className="plans-shell relative z-30 mx-auto w-full max-w-[1180px]"
+      >
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-epilogue text-[clamp(40px,6vw,60px)] font-bold leading-[1.05] tracking-tight text-[#080808]">
               Elige el plan <span className="italic font-serif font-light">ideal</span>
@@ -1895,11 +1918,11 @@ const App = () => {
 
         @media (max-width: 767px) {
           .portfolio-mobile-stack {
-            height: 338vh;
+            height: 306vh;
           }
           .portfolio-mobile-card {
-            top: 74px;
-            margin-bottom: 26vh;
+            top: 68px;
+            margin-bottom: 16vh;
           }
           .problem-flip-wrapper {
             transform: translateZ(0);
