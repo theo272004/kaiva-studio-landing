@@ -676,9 +676,11 @@ const ContactRevealSection = () => {
               variants={formItem}
               whileHover={prefersReducedMotion || isMobile ? undefined : { y: -2 }}
               transition={{ duration: 0.32, ease: premiumEase }}
-              className="relative z-30 rounded-[34px] p-5 md:p-6 shadow-[0_8px_32px_-8px_rgba(130,66,245,0.12),0_2px_8px_rgba(0,0,0,0.04)] border border-white/50 backdrop-blur-[32px]"
+              className="relative z-30 rounded-[34px] p-5 md:p-6 shadow-2xl border border-white/40"
               style={{
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.30) 100%)',
+                background: 'rgba(255, 255, 255, 0.15)',
+                backdropFilter: 'blur(40px)',
+                WebkitBackdropFilter: 'blur(40px)',
                 ...(isMobile ? {} : { transformPerspective: 1600, transformStyle: 'preserve-3d' })
               }}
             >
@@ -1361,10 +1363,11 @@ const ProcessRedesignSection = () => {
 const ExpandedAgencySections = () => (
   <>
     <ProcessRedesignSection />
-    <div style={{ marginTop: '-1px', position: 'relative', zIndex: 2 }}>
+    <div style={{ marginTop: '-2px', position: 'relative', zIndex: 2 }}>
       <AliadosSection />
     </div>
-    <section
+    <div style={{ marginTop: '-2px', position: 'relative', zIndex: 1 }}>
+      <section
       id="planes"
       data-nav-theme="light"
       className="plans-section relative overflow-hidden px-4 pb-12 pt-14 md:px-8 md:pb-16 md:pt-20"
@@ -1462,34 +1465,35 @@ const ExpandedAgencySections = () => (
             })}
           </div>
 
-          <div className="mx-auto mt-8 w-full max-w-[1180px]">
-            <article className="plans-addon group relative flex flex-col items-center justify-between gap-6 rounded-[24px] bg-white p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-[transform,shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] md:flex-row md:p-8 lg:px-12 overflow-hidden">
-              <div className="flex flex-col items-center text-center md:items-start md:text-left md:max-w-[280px] relative z-10">
-                <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#8242f5]">
-                  {ecommercePlan.label}
-                </div>
-                <h3 className="mt-1 font-epilogue text-[24px] font-bold leading-none tracking-tight md:text-[28px]">
-                  {ecommercePlan.name}
-                </h3>
-                <div className="mt-2 text-[14px] font-bold text-[#080808]">
-                  {ecommercePlan.price}
-                </div>
+        <div className="mx-auto mt-8 w-full max-w-[1180px]">
+          <article className="plans-addon group relative flex flex-col items-center justify-between gap-6 rounded-[24px] bg-white p-6 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-[transform,shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] md:flex-row md:p-8 lg:px-12 overflow-hidden">
+            <div className="flex flex-col items-center text-center md:items-start md:text-left md:max-w-[280px] relative z-10">
+              <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#8242f5]">
+                {ecommercePlan.label}
               </div>
-              <div className="flex flex-1 flex-col items-center gap-6 md:flex-row md:justify-between md:pl-10 text-center md:text-left relative z-10">
-                <p className="max-w-[500px] text-[14px] leading-relaxed text-[#080808]/70">
-                  {ecommercePlan.description}
-                </p>
-                <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className="flex shrink-0 items-center justify-center gap-2 rounded-xl bg-[#0a0a0a] px-6 py-3 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-[1.02]">
-                  {ecommercePlan.cta}
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </a>
+              <h3 className="mt-1 font-epilogue text-[24px] font-bold leading-none tracking-tight md:text-[28px]">
+                {ecommercePlan.name}
+              </h3>
+              <div className="mt-2 text-[14px] font-bold text-[#080808]">
+                {ecommercePlan.price}
               </div>
-            </article>
-          </div>
+            </div>
+            <div className="flex flex-1 flex-col items-center gap-6 md:flex-row md:justify-between md:pl-10 text-center md:text-left relative z-10">
+              <p className="max-w-[500px] text-[14px] leading-relaxed text-[#080808]/70">
+                {ecommercePlan.description}
+              </p>
+              <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className="flex shrink-0 items-center justify-center gap-2 rounded-xl bg-[#0a0a0a] px-6 py-3 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-[1.02]">
+                {ecommercePlan.cta}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M7 17L17 7M17 7H7M17 7V17" />
+                </svg>
+              </a>
+            </div>
+          </article>
+        </div>
       </motion.div>
     </section>
+    </div>
   </>
 );
 
@@ -1870,7 +1874,6 @@ const ProjectsPage = () => {
   return (
     <>
       <FixedNavbar projectsActive />
-      <PortfolioSection />
       <ProjectsGallery />
     </>
   );
@@ -1908,7 +1911,9 @@ const App = () => {
             <SectionsAuroraBackdrop />
             <div className="relative z-10">
               <ExpandedAgencySections />
-              <ContactRevealSection />
+              <div style={{ marginTop: '-2px', position: 'relative', zIndex: 0 }}>
+                <ContactRevealSection />
+              </div>
             </div>
           </div>
         </>
@@ -2575,8 +2580,8 @@ const ProblemFlipCard = ({ card, index }) => {
       transition={{ duration: 0.5, delay: index * 0.08, ease: premiumEase }}
     >
       <div
-        className={`problem-flip-inner relative w-full min-h-[240px] md:min-h-[260px] transition-transform duration-700 ${flipped ? 'problem-flipped' : ''}`}
-        style={{ transformStyle: 'preserve-3d' }}
+        className="relative w-full min-h-[240px] md:min-h-[260px] transition-transform duration-700"
+        style={{ transformStyle: 'preserve-3d', transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
       >
         {/* FRONT — Problem */}
         <div
