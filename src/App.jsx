@@ -185,12 +185,12 @@ const premiumEase = [0.22, 1, 0.36, 1];
 const handleServiceCardMouseMove = (event) => {
   if (typeof window !== 'undefined' && window.innerWidth < 769) return;
   const rect = event.currentTarget.getBoundingClientRect();
-  const moveX = ((event.clientX - rect.left) / rect.width - 0.5) * 36;
-  const moveY = ((event.clientY - rect.top) / rect.height - 0.5) * 28;
+  const moveX = ((event.clientX - rect.left) / rect.width - 0.5) * 42;
+  const moveY = ((event.clientY - rect.top) / rect.height - 0.5) * 32;
   event.currentTarget.style.setProperty('--service-move-x', `${moveX}px`);
   event.currentTarget.style.setProperty('--service-move-y', `${moveY}px`);
-  event.currentTarget.style.setProperty('--service-rotate-y', `${moveX * 0.45}deg`);
-  event.currentTarget.style.setProperty('--service-rotate-x', `${moveY * -0.38}deg`);
+  event.currentTarget.style.setProperty('--service-rotate-y', `${moveX * 0.5}deg`);
+  event.currentTarget.style.setProperty('--service-rotate-x', `${moveY * -0.4}deg`);
 };
 
 const resetServiceCardMouseMove = (event) => {
@@ -273,32 +273,32 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: 0.985 }}
         transition={panelTransition}
-        className="service-visual-web w-full overflow-hidden rounded-[30px] border border-white/10 bg-[#0d1020] shadow-[0_32px_90px_-44px_rgba(17,24,39,0.82)]"
+        className="service-visual-web w-full overflow-hidden rounded-[30px] border border-[#ddd6cd] bg-[#eae6df] shadow-[0_24px_60px_-34px_rgba(57,53,44,0.12)]"
       >
         <div
           className="transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform"
-          style={{ transform: 'perspective(700px) rotateY(var(--service-rotate-y,0deg)) rotateX(var(--service-rotate-x,0deg)) translateZ(14px)' }}
+          style={{ transform: 'perspective(700px) rotateY(var(--service-rotate-y,0deg)) rotateX(var(--service-rotate-x,0deg)) translateZ(8px)' }}
         >
-          <div className="flex min-h-[390px] items-center justify-center bg-[radial-gradient(circle_at_top_left,_rgba(130,66,245,0.38),_transparent_42%),linear-gradient(180deg,_#12162a_0%,_#090b14_100%)] p-8">
-            <div className="mockup-browser w-[85%] max-w-[480px] overflow-hidden rounded-[12px] border border-[#d9d3ca] bg-white shadow-[0_20px_50px_rgba(57,53,44,0.15)]">
-              <div className="bar flex h-[30px] items-center gap-[7px] bg-[#f7f5f2] px-[14px]">
+          <div className="flex min-h-[390px] items-center justify-center bg-[#eae6df] p-8">
+            <div className="mockup-browser w-[84%] max-w-[500px] overflow-hidden rounded-[16px] border border-white/85 bg-white shadow-[0_24px_60px_rgba(57,53,44,0.10)]">
+              <div className="bar flex h-[34px] items-center gap-[7px] bg-[linear-gradient(180deg,_#fbfaf8_0%,_#f4f0ea_100%)] px-[16px]">
                 <span className="block h-[10px] w-[10px] rounded-full bg-[#ff5f57]" />
                 <span className="block h-[10px] w-[10px] rounded-full bg-[#febc2e]" />
                 <span className="block h-[10px] w-[10px] rounded-full bg-[#28c840]" />
               </div>
-              <div className="content flex flex-col gap-[0.7rem] p-[1.6rem]">
-                <div className="line h-[8px] rounded-[4px] bg-[#eae6df]" />
-                <div className="line short h-[8px] w-[60%] rounded-[4px] bg-[#eae6df]" />
-                <div className="line accent h-[8px] w-[35%] rounded-[4px] bg-[#792fec] shadow-[0_0_12px_rgba(121,47,236,0.25)]" />
-                <div className="card-mini mt-[0.4rem] flex items-center gap-[0.8rem] rounded-[8px] border border-[#e0dbd2] bg-[#f9f8f6] p-[1rem]">
-                  <div className="avatar h-[32px] w-[32px] rounded-full bg-[#d9d3ca]" />
+              <div className="content flex flex-col gap-[0.85rem] bg-[linear-gradient(135deg,_#ffffff_0%,_#fbfaf8_42%,_#eef7ff_100%)] p-[1.8rem]">
+                <div className="line h-[8px] rounded-[999px] bg-[#e6e1d8]" />
+                <div className="line short h-[8px] w-[62%] rounded-[999px] bg-[#ebe6de]" />
+                <div className="line accent h-[10px] w-[36%] rounded-[999px] bg-[#792fec] shadow-[0_0_18px_rgba(121,47,236,0.24)]" />
+                <div className="card-mini mt-[0.45rem] flex items-center gap-[0.9rem] rounded-[12px] border border-[#e5ded4] bg-[#f9f7f3] p-[1rem] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
+                  <div className="avatar h-[34px] w-[34px] rounded-full bg-[#d9d3ca]" />
                   <div className="text-group flex-1">
-                    <div className="l mb-[4px] h-[6px] rounded-[3px] bg-[#d9d3ca]" />
-                    <div className="l short h-[6px] w-[50%] rounded-[3px] bg-[#d9d3ca]" />
+                    <div className="l mb-[6px] h-[6px] rounded-[999px] bg-[#d5cec4]" />
+                    <div className="l short h-[6px] w-[52%] rounded-[999px] bg-[#d5cec4]" />
                   </div>
                 </div>
-                <div className="line h-[8px] rounded-[4px] bg-[#eae6df]" />
-                <div className="line short h-[8px] w-[60%] rounded-[4px] bg-[#eae6df]" />
+                <div className="line h-[8px] rounded-[999px] bg-[#e8e3da]" />
+                <div className="line short h-[8px] w-[62%] rounded-[999px] bg-[#ece7df]" />
               </div>
             </div>
           </div>
@@ -319,7 +319,7 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
       >
         <div
           className="design-composition service-visual-design grid gap-4 transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform lg:grid-cols-[0.88fr_1.12fr]"
-          style={{ transform: 'translate(var(--service-move-x,0px), var(--service-move-y,0px))' }}
+          style={{ transform: 'translate(calc(var(--service-move-x,0px) * 0.7), calc(var(--service-move-y,0px) * 0.5))' }}
         >
           <div className="rounded-[28px] border border-[#111827]/8 bg-[#fffdf9] p-5 shadow-[0_26px_72px_-40px_rgba(15,23,42,0.28)]">
             <div className="mb-5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#8b5cf6]">Brand board</div>
@@ -380,7 +380,7 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
     >
       <div
         className="automation-flow service-visual-flow transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform"
-        style={{ transform: 'translate(calc(var(--service-move-x,0px) * 0.55), calc(var(--service-move-y,0px) * 0.4))' }}
+        style={{ transform: 'translate(calc(var(--service-move-x,0px) * 0.4), calc(var(--service-move-y,0px) * 0.3))' }}
       >
         <div className="mb-5 flex items-center justify-between">
           <div>
@@ -957,7 +957,7 @@ const PortfolioSection = () => {
         style={{ background: 'rgba(186,145,255,0.16)' }}
       />
 
-      <div className="relative z-20 mx-auto max-w-[1380px] px-6 pt-6 md:px-16 md:pt-8">
+      <div className="relative z-20 mx-auto max-w-[1280px] px-6 pt-6 md:px-12 md:pt-8">
         <div className="mt-0">
           <div className="relative hidden md:block h-[310vh]">
             {serviceShowcase.map((service, index) => (
@@ -967,46 +967,46 @@ const PortfolioSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.18 }}
                 transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, ease: premiumEase, delay: index * 0.04 }}
-                className="service-stack-card group sticky top-5 mb-[10px] overflow-hidden rounded-[28px] border border-[#d8d0ee] bg-white/88 shadow-[0_12px_30px_rgba(57,53,44,0.06)] backdrop-blur-[10px] transition-[border-color,box-shadow,transform] duration-[600ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-[#792fec]/30 hover:shadow-[0_24px_60px_rgba(57,53,44,0.08),0_0_0_1px_rgba(121,47,236,0.12)]"
+                className="service-stack-card group sticky top-[20px] mb-[10px] overflow-hidden rounded-[28px] border border-[#d9d3ca] bg-white shadow-[0_12px_30px_rgba(57,53,44,0.06)] transition-[border-color,box-shadow,transform] duration-[600ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:border-[#792fec]/30 hover:shadow-[0_24px_60px_rgba(57,53,44,0.08),0_0_0_1px_rgba(121,47,236,0.12)]"
                 style={{ zIndex: index + 1 }}
                 onMouseMove={handleServiceCardMouseMove}
                 onMouseLeave={resetServiceCardMouseMove}
               >
                 <div className="grid h-[calc(100vh-60px)] min-h-[520px] gap-0 lg:grid-cols-[0.94fr_1.06fr]">
-                  <div className="relative flex flex-col justify-center overflow-hidden border-r border-[#e8e1f7] px-8 py-10 lg:px-12 lg:py-14">
-                    <div className="pointer-events-none absolute left-7 top-5 font-['Inter Tight'] text-[88px] font-extrabold leading-none tracking-[-0.06em] text-[#080808]/[0.035] lg:text-[110px]">
+                  <div className="relative flex flex-col justify-center overflow-hidden border-r border-[#e5ded4] px-10 py-12 lg:px-14 lg:py-16">
+                    <div className="pointer-events-none absolute left-8 top-6 font-['Inter Tight'] text-[88px] font-extrabold leading-none tracking-[-0.06em] text-[#39352c]/[0.03] lg:text-[110px]">
                       {service.number}
                     </div>
                     <div className="relative z-10">
-                      <div className="inline-flex rounded-full border border-[#8242f5]/12 bg-[#8242f5]/[0.06] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#8242f5]">
+                      <div
+                        className="inline-flex rounded-full border px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em]"
+                        style={{
+                          color: service.id === 'design' ? '#21b2c6' : '#792fec',
+                          background: service.id === 'design' ? 'rgba(33,178,198,0.08)' : 'rgba(121,47,236,0.06)',
+                          borderColor: service.id === 'design' ? 'rgba(33,178,198,0.16)' : 'rgba(121,47,236,0.15)',
+                        }}
+                      >
                         {service.brand}
                       </div>
-                      <div className="mt-5 text-[13px] font-semibold uppercase tracking-[0.16em] text-[#080808]/45">
-                        {service.vibe}
-                      </div>
-                      <h2 className="mt-4 max-w-[14ch] font-['Inter Tight'] text-[clamp(40px,4.8vw,64px)] font-extrabold leading-[0.96] tracking-[-0.045em] text-[#080808]">
+                      <h2 className="mt-14 max-w-[13ch] font-['Inter Tight'] text-[clamp(40px,4.8vw,60px)] font-extrabold leading-[0.98] tracking-[-0.045em] text-[#39352c]">
                         {service.title}
                       </h2>
-                      <p className="mt-5 max-w-[31rem] text-[15px] leading-7 text-[#080808]/66 md:text-[16px]">
+                      <p className="mt-5 max-w-[31rem] text-[15px] leading-7 text-[#5e584e] md:text-[16px]">
                         {service.description}
                       </p>
-                      <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                      <div className="mt-8 flex max-w-[32rem] flex-wrap gap-3">
                         {service.points.map((point) => (
                           <div
                             key={point}
-                            className="flex items-center gap-3 rounded-[18px] border border-[#080808]/6 bg-[#faf8ff] px-4 py-3 text-sm text-[#1f2937]"
+                            className="rounded-full border border-[#d9d3ca] bg-[#f6f2ec] px-4 py-3 text-sm text-[#5e584e]"
                           >
-                            <span
-                              className="h-2.5 w-2.5 rounded-full"
-                              style={{ background: service.id === 'automation' ? '#21b2c6' : '#8242f5' }}
-                            />
                             {point}
                           </div>
                         ))}
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center justify-center bg-[linear-gradient(180deg,rgba(247,243,255,0.88)_0%,rgba(255,255,255,0.92)_100%)] p-5 lg:p-6">
+                  <div className="flex items-center justify-center bg-[#eae6df] p-6 lg:p-8">
                     <ServiceShowcaseVisual service={service} prefersReducedMotion={prefersReducedMotion} />
                   </div>
                 </div>
