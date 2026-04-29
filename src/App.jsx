@@ -1539,20 +1539,28 @@ const AnimatedText = ({ text, className }) => {
   );
 };
 
-const ScrollRevealHeadline = ({ text }) => {
+const ScrollRevealHeadline = ({ text, lines }) => {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start 0.9", "end 0.4"],
   });
 
-  const words = text.split(" ");
+  const resolvedLines = lines ?? [text];
+  const words = resolvedLines.flatMap((line) => line.split(" "));
+  let wordIndex = 0;
   
   return (
-    <h2 ref={containerRef} className="font-epilogue text-[clamp(40px,6vw,72px)] font-extrabold leading-[0.98] tracking-[-0.04em] text-center max-w-[900px] mt-4 flex flex-wrap justify-center">
-      {words.map((word, i) => {
-        return <RevealWord key={i} word={word} index={i} total={words.length} progress={scrollYProgress} />;
-      })}
+    <h2 ref={containerRef} className="font-epilogue text-[clamp(36px,6vw,72px)] font-extrabold leading-[1.02] tracking-[-0.04em] text-center max-w-[980px] mt-4">
+      {resolvedLines.map((line, lineIndex) => (
+        <span key={lineIndex} className="block">
+          {line.split(" ").map((word) => {
+            const currentIndex = wordIndex;
+            wordIndex += 1;
+            return <RevealWord key={`${lineIndex}-${currentIndex}`} word={word} index={currentIndex} total={words.length} progress={scrollYProgress} />;
+          })}
+        </span>
+      ))}
     </h2>
   );
 };
@@ -2235,7 +2243,12 @@ const ProblemSection = () => {
     <section id="problema" className="problem-section relative w-full bg-transparent text-[#080808] px-6 py-14 md:py-24 lg:px-16">
       <div className="mx-auto w-full max-w-[1240px] relative z-10 flex flex-col items-center">
         
-        <ScrollRevealHeadline text="El 91% de las empresas en Colombia son pymes. La mayoría no existe en internet." />
+        <ScrollRevealHeadline
+          lines={[
+            'El 91% de las empresas en Colombia son pymes. La mayoría',
+            'no existe en\u00A0internet.',
+          ]}
+        />
         
         <p className="mt-8 text-[16px] md:text-[18px] leading-[1.6] text-center max-w-[650px] text-[#080808]/70">
           Cada día, miles de colombianos buscan productos y servicios en Google. Si tu
