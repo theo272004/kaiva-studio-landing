@@ -3068,8 +3068,8 @@ const ProblemSection = () => {
           </div>
         </div>
 
-        <div className="relative mt-14 w-full overflow-hidden pb-12 md:mt-20 md:pb-20">
-          <div aria-hidden="true" className="pointer-events-none absolute inset-x-[-14%] top-[34px] hidden h-[430px] opacity-95 md:block">
+        <div className="relative mt-14 w-full overflow-hidden pb-20 md:mt-20 md:pb-32">
+          <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[34px] hidden h-[430px] w-screen -translate-x-1/2 opacity-95 md:block">
             <svg
               viewBox="0 0 1600 420"
               className="h-full w-full"
@@ -3104,7 +3104,7 @@ const ProblemSection = () => {
             </svg>
           </div>
 
-          <div aria-hidden="true" className="pointer-events-none absolute inset-x-[-24%] top-[76px] h-[260px] opacity-75 md:hidden">
+          <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[76px] h-[260px] w-screen -translate-x-1/2 opacity-75 md:hidden">
             <svg
               viewBox="0 0 900 260"
               className="h-full w-full"
@@ -3404,7 +3404,7 @@ const HeroSection = () => {
             className="left-[2%] top-[20%] z-20 w-[40%] md:left-[10%] md:top-[18%] md:w-[34%]"
             floatY={[0, -5, 0, 5, 0]}
             floatX={[0, 0, 0, 0, 0]}
-            floatRotate={[0, 0, 0, 0, 0]}
+            floatRotate={[-7, -7, -7, -7, -7]}
             duration={8.6}
             delay={0.15}
           />
@@ -3415,7 +3415,7 @@ const HeroSection = () => {
             className="right-[-4%] top-[6%] z-30 w-[41%] md:right-[2%] md:top-[8%] md:w-[34%]"
             floatY={[0, -6, 0, 6, 0]}
             floatX={[0, 0, 0, 0, 0]}
-            floatRotate={[0, 0, 0, 0, 0]}
+            floatRotate={[-5, -5, -5, -5, -5]}
             duration={7.8}
             delay={0.35}
           />
