@@ -942,15 +942,15 @@ const ContactRevealSection = () => {
   const formItem = {
     hidden: prefersReducedMotion
       ? { opacity: 0 }
-      : { opacity: 0, y: isMobile ? 18 : 28, scale: isMobile ? 1 : 0.985, filter: 'blur(6px)' },
+      : { opacity: 0, y: isMobile ? 12 : 24, scale: isMobile ? 1 : 0.985, filter: isMobile ? 'blur(3px)' : 'blur(6px)' },
     show: {
       opacity: 1,
       y: 0,
       scale: 1,
       filter: 'blur(0px)',
       transition: {
-        duration: prefersReducedMotion ? 0.24 : 1.02,
-        delay: prefersReducedMotion ? 0 : 0.28,
+        duration: prefersReducedMotion ? 0.24 : isMobile ? 0.54 : 0.74,
+        delay: prefersReducedMotion ? 0 : isMobile ? 0.08 : 0.14,
         ease: premiumEase,
       },
     },
@@ -960,8 +960,8 @@ const ContactRevealSection = () => {
     hidden: {},
     show: {
       transition: {
-        staggerChildren: prefersReducedMotion ? 0.02 : 0.05,
-        delayChildren: prefersReducedMotion ? 0 : 0.34,
+        staggerChildren: prefersReducedMotion ? 0.02 : isMobile ? 0.03 : 0.05,
+        delayChildren: prefersReducedMotion ? 0 : isMobile ? 0.12 : 0.2,
       },
     },
   };
@@ -969,20 +969,20 @@ const ContactRevealSection = () => {
   const fieldItem = {
     hidden: prefersReducedMotion
       ? { opacity: 0 }
-      : { opacity: 0, y: 18, filter: 'blur(6px)' },
+      : { opacity: 0, y: isMobile ? 10 : 18, filter: isMobile ? 'blur(3px)' : 'blur(6px)' },
     show: {
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
       transition: {
-        duration: prefersReducedMotion ? 0.18 : 0.68,
+        duration: prefersReducedMotion ? 0.18 : isMobile ? 0.38 : 0.56,
         ease: premiumEase,
       },
     },
   };
 
-  const contactTextViewport = { once: true, amount: 0.16 };
-  const contactFormViewport = { once: true, amount: 0.12 };
+  const contactTextViewport = { once: true, amount: isMobile ? 0.05 : 0.1 };
+  const contactFormViewport = { once: true, amount: isMobile ? 0.03 : 0.08 };
   const socialLinks = [
     {
       label: 'Instagram',
@@ -1065,9 +1065,11 @@ const ContactRevealSection = () => {
               transition={{ duration: 0.32, ease: premiumEase }}
               className="relative z-30 rounded-[34px] p-6 md:p-8 shadow-[0_24px_60px_-16px_rgba(130,66,245,0.15)] border border-white/60"
               style={{
-                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 243, 255, 0.88) 100%)',
-                backdropFilter: 'blur(32px)',
-                WebkitBackdropFilter: 'blur(32px)',
+                background: isMobile
+                  ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 243, 255, 0.93) 100%)'
+                  : 'linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 243, 255, 0.88) 100%)',
+                backdropFilter: isMobile ? 'blur(18px)' : 'blur(32px)',
+                WebkitBackdropFilter: isMobile ? 'blur(18px)' : 'blur(32px)',
                 ...(isMobile ? {} : { transformPerspective: 1600, transformStyle: 'preserve-3d' })
               }}
             >
@@ -1519,7 +1521,7 @@ const ProcessRedesignSection = () => {
   ];
 
   const activeProgressRaw = useTransform(scrollYProgress, [0, 1], [0, stepsContent.length - 1]);
-  const activeProgress = useSpring(activeProgressRaw, { stiffness: 190, damping: 24, mass: 0.08 });
+  const activeProgress = useSpring(activeProgressRaw, { stiffness: 138, damping: 28, mass: 0.14 });
   const purpleStageOpacity = useTransform(
     activeProgressRaw,
     [0, 1, 2, 3, 4],
@@ -1527,9 +1529,9 @@ const ProcessRedesignSection = () => {
   );
   const currentStep = stepsContent[activeStep];
 
-  useMotionValueEvent(activeProgressRaw, 'change', (latest) => {
-    const nextStep = Math.min(stepsContent.length - 1, Math.max(0, Math.floor(latest + 0.2)));
-    setActiveStep(nextStep);
+  useMotionValueEvent(activeProgress, 'change', (latest) => {
+    const nextStep = Math.min(stepsContent.length - 1, Math.max(0, Math.round(latest)));
+    setActiveStep((current) => (current === nextStep ? current : nextStep));
   });
 
   return (
@@ -1561,7 +1563,7 @@ const ProcessRedesignSection = () => {
         </div>
       </div>
 
-      <div className="relative h-[170vh] w-full bg-[#6f22ef] md:hidden">
+      <div className="process-mobile-stage relative h-[186vh] w-full bg-[#6f22ef] md:hidden">
         <div className="sticky top-0 flex h-[100svh] w-full items-center justify-center overflow-hidden bg-white px-5">
           <motion.div
             className="absolute inset-0 pointer-events-none"
@@ -1574,10 +1576,10 @@ const ProcessRedesignSection = () => {
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeStep}
-                initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                initial={{ opacity: 0, y: 14, scale: 0.985 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -18, scale: 0.97 }}
-                transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                exit={{ opacity: 0, y: -10, scale: 0.99 }}
+                transition={{ duration: 0.14, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full rounded-[28px] border border-[#8242f5]/12 bg-white/92 p-6 shadow-[0_24px_60px_-34px_rgba(130,66,245,0.18)] backdrop-blur-md"
               >
                 <div className="flex items-start gap-4">
@@ -2332,6 +2334,9 @@ const App = () => {
         }
 
         @media (max-width: 767px) {
+          .process-mobile-stage {
+            height: 186vh;
+          }
           .portfolio-mobile-stack {
             height: 282vh;
           }
@@ -2354,6 +2359,11 @@ const App = () => {
             filter: none !important;
             -webkit-font-smoothing: antialiased;
             text-rendering: optimizeLegibility;
+          }
+        }
+        @media (max-width: 767px) and (min-height: 860px) {
+          .process-mobile-stage {
+            height: 196vh !important;
           }
         }
         
