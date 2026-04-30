@@ -3173,7 +3173,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 18 }}
         animate={introComplete ? { opacity: 1, y: navHidden ? -80 : 0 } : { opacity: 0, y: 18 }}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed left-1/2 top-4 z-50 flex w-[calc(100%-32px)] max-w-[1040px] -translate-x-1/2 items-center justify-between rounded-full border border-[#080808]/[0.06] bg-white/95 px-5 py-3 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.1)] backdrop-blur-md md:top-6 md:w-[calc(100%-80px)] md:px-8 md:py-3.5 transition-colors duration-200 ${
+        className={`fixed left-1/2 top-4 z-[100] flex w-[calc(100%-32px)] max-w-none -translate-x-1/2 items-center justify-between rounded-full border border-[#080808]/[0.06] bg-white/95 px-5 py-3 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.1)] backdrop-blur-md md:top-6 md:w-[calc(100%-80px)] md:px-8 md:py-3.5 transition-colors duration-200 ${
           isDarkNavbar ? 'bg-[#080808]/90 border-white/10' : ''
         }`}
       >
@@ -3199,8 +3199,15 @@ const HeroSection = () => {
             style={gradientAccentStyle}
           >
             Paquetes
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-0.5">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="transition-transform group-hover:translate-x-0.5">
+              <defs>
+                <linearGradient id="nav-arrow-grad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#21b2c6" />
+                  <stop offset="58%" stopColor="#8242f5" />
+                  <stop offset="100%" stopColor="#d96cff" />
+                </linearGradient>
+              </defs>
+              <path d="M5 12h14M12 5l7 7-7 7" stroke="url(#nav-arrow-grad)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </a>
         </div>
@@ -3222,7 +3229,7 @@ const HeroSection = () => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-[100] flex flex-col bg-white px-6 pt-8 pb-10"
+            className="fixed inset-0 z-[110] flex flex-col bg-white px-6 pt-8 pb-10"
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
