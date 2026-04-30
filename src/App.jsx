@@ -761,6 +761,39 @@ const ContactRevealSection = () => {
 
   const contactTextViewport = { once: true, amount: 0.16 };
   const contactFormViewport = { once: true, amount: 0.12 };
+  const socialLinks = [
+    {
+      label: 'Instagram',
+      href: 'https://www.instagram.com/kaivastudio/',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" strokeWidth="1.8" />
+          <circle cx="12" cy="12" r="4.2" stroke="currentColor" strokeWidth="1.8" />
+          <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" />
+        </svg>
+      ),
+    },
+    {
+      label: 'Dribbble',
+      href: '#',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" />
+          <path d="M8 4.5c2.7 3.2 5.1 7 6.8 11.7M5 9.2c4.8-.2 9.4.5 13.7 2.1M9.7 18.7c1.5-3.8 4.5-6.8 8.5-8.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        </svg>
+      ),
+    },
+    {
+      label: 'LinkedIn',
+      href: '#',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" strokeWidth="1.8" />
+          <path d="M8 10v6M8 8.2v.1M12 16v-3.2c0-1.3.8-2.1 1.9-2.1 1 0 1.7.7 1.7 2.1V16M12 10v.9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      ),
+    },
+  ];
 
   return (
     <section 
@@ -876,24 +909,49 @@ const ContactRevealSection = () => {
         </div>
 
       <motion.div
-        className="contact-footer-block w-full bg-[#111111] pb-[max(env(safe-area-inset-bottom),0px)]"
+        className="contact-footer-block relative w-full overflow-hidden bg-[#111111] pb-[max(env(safe-area-inset-bottom),0px)]"
         style={prefersReducedMotion ? undefined : { y: footerY, opacity: footerOpacity }}
         initial={prefersReducedMotion ? { opacity: 0 } : false}
         whileInView={{ opacity: 1 }}
         viewport={{ once: false, amount: 0.06 }}
         transition={{ duration: 0.7, ease: premiumEase }}
       >
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-70"
+          animate={prefersReducedMotion ? undefined : { backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+          transition={prefersReducedMotion ? undefined : { duration: 16, ease: 'linear', repeat: Infinity }}
+          style={{
+            backgroundImage:
+              'radial-gradient(circle at 18% 28%, rgba(33,178,198,0.18) 0%, rgba(33,178,198,0) 28%), radial-gradient(circle at 82% 36%, rgba(130,66,245,0.22) 0%, rgba(130,66,245,0) 32%), radial-gradient(circle at 54% 82%, rgba(217,108,255,0.18) 0%, rgba(217,108,255,0) 28%)',
+            backgroundSize: '140% 140%',
+          }}
+        />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0)_22%,rgba(255,255,255,0)_100%)]" />
         <div className="mx-auto flex min-h-[34vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-10 text-center md:min-h-[40vh] md:px-12 md:py-12 lg:px-16">
           <a
             href="mailto:hello@kaivastudio.com"
-            className="font-epilogue text-[clamp(28px,4vw,60px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
+            className="relative z-10 font-epilogue text-[clamp(28px,4vw,60px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
           >
             hello@kaivastudio.com
           </a>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 font-manrope text-[11px] font-bold uppercase tracking-[0.22em] text-white/52">
-            <a href="#" className="transition-colors duration-300 hover:text-white">Instagram</a>
-            <a href="#" className="transition-colors duration-300 hover:text-white">Dribbble</a>
-            <a href="#" className="transition-colors duration-300 hover:text-white">LinkedIn</a>
+          <div className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4">
+            {socialLinks.map((item, index) => (
+              <motion.a
+                key={item.label}
+                href={item.href}
+                target={item.href.startsWith('http') ? '_blank' : undefined}
+                rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                aria-label={item.label}
+                initial={prefersReducedMotion ? false : { opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.35, delay: index * 0.06, ease: premiumEase }}
+                className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/72 transition-all duration-300 hover:-translate-y-1 hover:border-white/22 hover:bg-white/10 hover:text-white"
+              >
+                {item.icon}
+              </motion.a>
+            ))}
           </div>
         </div>
       </motion.div>
