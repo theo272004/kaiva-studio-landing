@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { memo, useState, useRef, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, AnimatePresence, useReducedMotion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
@@ -182,20 +182,32 @@ const premiumEase = [0.22, 1, 0.36, 1];
 
 const handleServiceCardMouseMove = (event) => {
   if (typeof window !== 'undefined' && window.innerWidth < 769) return;
-  const rect = event.currentTarget.getBoundingClientRect();
+  const node = event.currentTarget;
+  const rect = node.getBoundingClientRect();
   const moveX = ((event.clientX - rect.left) / rect.width - 0.5) * 42;
   const moveY = ((event.clientY - rect.top) / rect.height - 0.5) * 32;
-  event.currentTarget.style.setProperty('--service-move-x', `${moveX}px`);
-  event.currentTarget.style.setProperty('--service-move-y', `${moveY}px`);
-  event.currentTarget.style.setProperty('--service-rotate-y', `${moveX * 0.5}deg`);
-  event.currentTarget.style.setProperty('--service-rotate-x', `${moveY * -0.4}deg`);
+  node.__serviceMoveX = moveX;
+  node.__serviceMoveY = moveY;
+  if (node.__serviceRaf) return;
+  node.__serviceRaf = window.requestAnimationFrame(() => {
+    node.style.setProperty('--service-move-x', `${node.__serviceMoveX ?? 0}px`);
+    node.style.setProperty('--service-move-y', `${node.__serviceMoveY ?? 0}px`);
+    node.style.setProperty('--service-rotate-y', `${(node.__serviceMoveX ?? 0) * 0.5}deg`);
+    node.style.setProperty('--service-rotate-x', `${(node.__serviceMoveY ?? 0) * -0.4}deg`);
+    node.__serviceRaf = null;
+  });
 };
 
 const resetServiceCardMouseMove = (event) => {
-  event.currentTarget.style.setProperty('--service-move-x', '0px');
-  event.currentTarget.style.setProperty('--service-move-y', '0px');
-  event.currentTarget.style.setProperty('--service-rotate-y', '0deg');
-  event.currentTarget.style.setProperty('--service-rotate-x', '0deg');
+  const node = event.currentTarget;
+  if (node.__serviceRaf) {
+    window.cancelAnimationFrame(node.__serviceRaf);
+    node.__serviceRaf = null;
+  }
+  node.style.setProperty('--service-move-x', '0px');
+  node.style.setProperty('--service-move-y', '0px');
+  node.style.setProperty('--service-rotate-y', '0deg');
+  node.style.setProperty('--service-rotate-x', '0deg');
 };
 
 const createGlassPanelStyle = () => ({
@@ -231,7 +243,7 @@ const GlassPanelLayers = () => (
   </>
 );
 
-const MockupRenderer = ({ type }) => {
+const MockupRenderer = memo(({ type }) => {
   const mockups = {
     dashboard: asset('kaiva_dashboard_mockup.webp'),
     ecommerce: asset('kaiva_ecommerce_mockup.webp'),
@@ -256,9 +268,9 @@ const MockupRenderer = ({ type }) => {
       </div>
     </div>
   );
-};
+});
 
-const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
+const ServiceShowcaseVisual = memo(({ service, prefersReducedMotion }) => {
   const panelTransition = prefersReducedMotion
     ? { duration: 0 }
     : { duration: 0.55, ease: premiumEase };
@@ -435,9 +447,9 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
       </div>
     </motion.div>
   );
-};
+});
 
-const MobileServiceShowcaseVisual = ({ service }) => {
+const MobileServiceShowcaseVisual = memo(({ service }) => {
   if (service.id === 'web') {
     return (
       <div className="mx-auto w-full max-w-[290px] overflow-hidden rounded-[22px] border border-[#d9d3ca] bg-[#eae6df] shadow-[0_18px_40px_-26px_rgba(57,53,44,0.18)]">
@@ -550,9 +562,9 @@ const MobileServiceShowcaseVisual = ({ service }) => {
       </div>
     </div>
   );
-};
+});
 
-const FloatingRobot = ({ src, style, className = '', delay = 0, duration = 6, amplitude = 20, rotation = 8 }) => (
+const FloatingRobot = memo(({ src, style, className = '', delay = 0, duration = 6, amplitude = 20, rotation = 8 }) => (
   <motion.div
     className={`pointer-events-none absolute ${className}`}
     style={{ ...style, zIndex: 15 }}
@@ -572,7 +584,7 @@ const FloatingRobot = ({ src, style, className = '', delay = 0, duration = 6, am
       <img src={src} alt="Kaiva Character" loading="lazy" decoding="async" className="h-full w-full object-contain" />
     </div>
   </motion.div>
-);
+));
 
 const SectionsAuroraBackdrop = () => (
   <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
@@ -1372,11 +1384,11 @@ const ExpandedAgencySections = () => (
                   className={`plan-card group relative flex flex-col rounded-[24px] bg-white shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] overflow-hidden`}
                 >
                   {isMiddle && (
-                    <img
-                      src={asset('plan-negocio-gradient.png')}
-                      alt=""
-                      className="absolute inset-0 h-full w-full object-cover object-bottom pointer-events-none z-0"
-                    />
+            <img
+              src={asset('plan-negocio-gradient.webp')}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover object-bottom pointer-events-none z-0"
+            />
                   )}
 
                   <div className="relative z-10 flex flex-1 flex-col p-8 md:p-10">
@@ -1507,9 +1519,10 @@ const AliadosSection = () => {
 
           <div className="relative mx-auto w-full max-w-[340px] md:max-w-[560px] lg:max-w-[700px] xl:max-w-[760px]">
             <img
-              src={asset('Kaiva seo.png')}
+              src={asset('Kaiva seo.webp')}
               alt="Kaiva x SEO for Startups"
               loading="lazy"
+              decoding="async"
               className="w-full object-contain drop-shadow-[0_20px_40px_rgba(56,14,136,0.55)]"
             />
           </div>
@@ -1601,6 +1614,7 @@ const CustomCursor = () => {
   const cursorY = useMotionValue(-100);
   const [hoveredNode, setHoveredNode] = useState(false);
   const [isTouch, setIsTouch] = useState(true);
+  const hoveredRef = useRef(false);
 
   const smoothXSm = useSpring(cursorX, { damping: 25, stiffness: 400 });
   const smoothYSm = useSpring(cursorY, { damping: 25, stiffness: 400 });
@@ -1617,14 +1631,14 @@ const CustomCursor = () => {
       cursorY.set(e.clientY);
       
       const target = e.target;
-      if (target.closest('a') || target.closest('button')) {
-        setHoveredNode(true);
-      } else {
-        setHoveredNode(false);
+      const nextHovered = !!(target.closest('a') || target.closest('button'));
+      if (nextHovered !== hoveredRef.current) {
+        hoveredRef.current = nextHovered;
+        setHoveredNode(nextHovered);
       }
     };
 
-    window.addEventListener('mousemove', moveCursor);
+    window.addEventListener('mousemove', moveCursor, { passive: true });
     return () => window.removeEventListener('mousemove', moveCursor);
   }, []);
 
