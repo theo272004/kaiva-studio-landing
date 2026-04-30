@@ -353,14 +353,6 @@ const AUTOMATION_THEMES = [
 const ResponsiveWebShowcase = memo(({ mobile = false, prefersReducedMotion = false }) => {
   const [responsiveMode, setResponsiveMode] = useState(false);
 
-  useEffect(() => {
-    if (prefersReducedMotion) return undefined;
-    const timer = window.setInterval(() => {
-      setResponsiveMode((current) => !current);
-    }, 2300);
-    return () => window.clearInterval(timer);
-  }, [prefersReducedMotion]);
-
   const browserWidth = mobile ? '90%' : '84%';
   const phoneWidth = mobile ? 66 : 126;
   const phoneHeight = mobile ? 124 : 236;
@@ -372,6 +364,15 @@ const ResponsiveWebShowcase = memo(({ mobile = false, prefersReducedMotion = fal
       >
         <div className={`relative flex w-full items-center justify-center ${mobile ? 'max-w-[220px]' : 'max-w-[500px]'}`}>
           <motion.div
+            onMouseEnter={() => setResponsiveMode(false)}
+            onFocus={() => setResponsiveMode(false)}
+            onClick={() => setResponsiveMode(false)}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                setResponsiveMode(false);
+              }
+            }}
             animate={
               prefersReducedMotion
                 ? { scale: 1, x: 0, opacity: 1 }
@@ -382,6 +383,9 @@ const ResponsiveWebShowcase = memo(({ mobile = false, prefersReducedMotion = fal
             transition={{ duration: prefersReducedMotion ? 0 : 0.7, ease: premiumEase }}
             className="relative z-10"
             style={{ width: browserWidth }}
+            role="button"
+            tabIndex={0}
+            aria-label="Ver versión de escritorio"
           >
             <div className={`mockup-browser overflow-hidden border border-[#e1e5eb] bg-white ${mobile ? 'rounded-[10px] shadow-none' : 'rounded-[12px] shadow-[0_10px_22px_-18px_rgba(57,53,44,0.12)]'}`}>
               <div className={`bar flex items-center bg-[#f7f5f2] ${mobile ? 'h-[24px] gap-[6px] px-[12px]' : 'h-[30px] gap-[7px] px-[14px]'}`}>
@@ -411,6 +415,15 @@ const ResponsiveWebShowcase = memo(({ mobile = false, prefersReducedMotion = fal
           </motion.div>
 
           <motion.div
+            onMouseEnter={() => setResponsiveMode(true)}
+            onFocus={() => setResponsiveMode(true)}
+            onClick={() => setResponsiveMode(true)}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                setResponsiveMode(true);
+              }
+            }}
             animate={
               prefersReducedMotion
                 ? { scale: 1, x: 0, y: 0, opacity: 1 }
@@ -420,6 +433,9 @@ const ResponsiveWebShowcase = memo(({ mobile = false, prefersReducedMotion = fal
             }
             transition={{ duration: prefersReducedMotion ? 0 : 0.7, ease: premiumEase }}
             className={`absolute z-20 ${mobile ? '-bottom-4 -right-4' : '-bottom-8 -right-8'}`}
+            role="button"
+            tabIndex={0}
+            aria-label="Ver versión móvil"
           >
             <div
               className="relative flex flex-col bg-white"
