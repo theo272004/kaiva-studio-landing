@@ -609,11 +609,19 @@ const AutomationShowcase = memo(({ mobile = false, prefersReducedMotion = false 
 
             <div className={`${mobile ? 'space-y-3 bg-[#f7f9fc] p-4' : 'flex h-[280px] gap-4 p-4'}`}>
               {!mobile && (
-                <div className="hidden w-1/4 flex-col gap-3 border-r border-[#f1f5f9] pr-4 pt-1 sm:flex">
+                <div className="hidden w-[28%] flex-col gap-3 border-r border-[#f1f5f9] pr-4 pt-1 sm:flex">
                   <div className="h-4 w-full rounded bg-[#e2e8f0]" />
                   <div className="h-4 w-3/4 rounded bg-[#f1f5f9]" />
                   <div className="h-4 w-5/6 rounded bg-[#f1f5f9]" />
                   <div className="h-4 w-2/3 rounded bg-[#f1f5f9]" />
+                  <div className="mt-auto rounded-[12px] border border-[#e2e8f0] bg-white p-3">
+                    <motion.div
+                      animate={{ background: `conic-gradient(${donutStops.join(', ')})` }}
+                      transition={{ duration: prefersReducedMotion ? 0 : 0.4 }}
+                      className="mx-auto h-24 w-24 rounded-full"
+                      style={{ mask: 'radial-gradient(circle at center, transparent 56%, black 58%)', WebkitMask: 'radial-gradient(circle at center, transparent 56%, black 58%)' }}
+                    />
+                  </div>
                 </div>
               )}
 
@@ -651,25 +659,27 @@ const AutomationShowcase = memo(({ mobile = false, prefersReducedMotion = false 
                   </div>
                 </div>
 
-                <div className={`${mobile ? 'grid grid-cols-[1.18fr_0.82fr] gap-3' : 'grid grid-cols-[1.38fr_0.62fr] gap-4 flex-1'}`}>
-                  <div className={`${mobile ? 'flex h-[124px] items-end gap-2.5 rounded-[12px] border border-[#e2e8f0] bg-white px-3 pb-4 pt-3' : 'flex items-end gap-3 rounded-[12px] border border-[#e2e8f0] bg-white px-5 pb-4 pt-3'}`}>
+                <div className={`${mobile ? 'grid grid-cols-[1.12fr_0.88fr] gap-3' : 'flex-1'}`}>
+                  <div className={`${mobile ? 'flex h-[124px] items-end gap-2.5 rounded-[12px] border border-[#e2e8f0] bg-white px-3 pb-4 pt-3' : 'flex h-full items-end gap-3 rounded-[12px] border border-[#e2e8f0] bg-white px-5 pb-4 pt-3'}`}>
                     {activeTheme.bars.map((height, index) => (
                       <motion.div
                         key={`${activeTheme.id}-${index}`}
                         animate={{ height: `${height}%`, backgroundColor: index % 3 === 0 ? activeTheme.metricA : index % 2 === 0 ? activeTheme.metricB : activeTheme.metricC }}
                         transition={{ duration: prefersReducedMotion ? 0 : 0.4, ease: premiumEase }}
-                        className="flex-1 rounded-t-[6px]"
+                        className="flex-1 rounded-t-[7px]"
                       />
                     ))}
                   </div>
-                  <div className={`rounded-[12px] border border-[#e2e8f0] bg-white ${mobile ? 'flex items-center justify-center p-3' : 'flex items-center justify-center p-4'}`}>
-                    <motion.div
-                      animate={{ background: `conic-gradient(${donutStops.join(', ')})` }}
-                      transition={{ duration: prefersReducedMotion ? 0 : 0.4 }}
-                      className={`${mobile ? 'h-[78px] w-[78px]' : 'h-32 w-32'} rounded-full`}
-                      style={{ mask: 'radial-gradient(circle at center, transparent 56%, black 58%)', WebkitMask: 'radial-gradient(circle at center, transparent 56%, black 58%)' }}
-                    />
-                  </div>
+                  {mobile && (
+                    <div className="flex items-center justify-center rounded-[12px] border border-[#e2e8f0] bg-white p-3">
+                      <motion.div
+                        animate={{ background: `conic-gradient(${donutStops.join(', ')})` }}
+                        transition={{ duration: prefersReducedMotion ? 0 : 0.4 }}
+                        className="h-[78px] w-[78px] rounded-full"
+                        style={{ mask: 'radial-gradient(circle at center, transparent 56%, black 58%)', WebkitMask: 'radial-gradient(circle at center, transparent 56%, black 58%)' }}
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
