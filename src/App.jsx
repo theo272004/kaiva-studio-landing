@@ -586,6 +586,52 @@ const FloatingRobot = memo(({ src, style, className = '', delay = 0, duration = 
   </motion.div>
 ));
 
+const HeroDraggableRobot = memo(({
+  src,
+  alt,
+  className = '',
+  floatY = [0, -8, 0, 8, 0],
+  floatX = [0, 6, -4, 3, 0],
+  floatRotate = [0, 3, -2, 1, 0],
+  duration = 8,
+  delay = 0,
+  constraintsRef,
+}) => (
+  <motion.div
+    className={`absolute ${className}`}
+    animate={{
+      y: floatY,
+      x: floatX,
+      rotate: floatRotate,
+    }}
+    transition={{
+      duration,
+      repeat: Infinity,
+      ease: 'easeInOut',
+      delay,
+    }}
+  >
+    <motion.div
+      drag
+      dragConstraints={constraintsRef}
+      dragElastic={0.18}
+      dragMomentum={false}
+      dragSnapToOrigin
+      whileTap={{ cursor: 'grabbing', scale: 1.02 }}
+      className="cursor-grab touch-none"
+    >
+      <img
+        src={src}
+        alt={alt}
+        fetchpriority="high"
+        decoding="sync"
+        className="h-full w-full object-contain select-none pointer-events-none drop-shadow-[0_18px_34px_rgba(0,0,0,0.18)]"
+        draggable="false"
+      />
+    </motion.div>
+  </motion.div>
+));
+
 const SectionsAuroraBackdrop = () => (
   <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
     <div className="absolute inset-0 aurora-base" />
@@ -2887,6 +2933,7 @@ const HeroSection = () => {
   const isDarkNavbar = false;
   const logoRef = useRef(null);
   const navRef = useRef(null);
+  const heroRobotBoundsRef = useRef(null);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -3108,7 +3155,7 @@ const HeroSection = () => {
         transition={{ duration: 0.85, delay: 0.1, ease: 'easeOut' }}
         className="hero-visual-wrap absolute left-1/2 top-[290px] z-20 w-[118vw] max-w-[560px] -translate-x-1/2 px-0 md:top-[220px] md:w-[110vw] md:max-w-[1040px]"
       >
-        <div className="relative mx-auto aspect-[1.08/1] w-full md:aspect-[1.16/1]">
+        <div ref={heroRobotBoundsRef} className="relative mx-auto aspect-[1.08/1] w-full md:aspect-[1.16/1]">
           <img
             src={asset('nombre hero.webp')}
             alt="Kaiva Studio"
@@ -3116,20 +3163,27 @@ const HeroSection = () => {
             decoding="sync"
             className="absolute left-1/2 top-[10%] w-[58%] -translate-x-1/2 object-contain md:top-[10%] md:w-[50%]"
           />
-          <motion.img
-            src={asset('robots hero.webp')}
-            alt="Robots Kaiva"
-            fetchpriority="high"
-            decoding="sync"
-            className="absolute left-1/2 top-[9%] w-[245%] -translate-x-1/2 scale-[1.08] object-contain md:top-[8%] md:w-[280%] md:scale-[1.15]"
-            animate={{
-              y: [0, -7, 0, 7, 0],
-            }}
-            transition={{
-              duration: 8.5,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
+          <HeroDraggableRobot
+            src={asset('KaivaTheo.webp')}
+            alt="Robot Kaiva Theo"
+            constraintsRef={heroRobotBoundsRef}
+            className="left-[-12%] top-[30%] z-20 w-[54%] md:left-[-6%] md:top-[34%] md:w-[46%]"
+            floatY={[0, -8, 0, 7, 0]}
+            floatX={[0, 6, -5, 3, 0]}
+            floatRotate={[0, 2.8, -1.6, 1, 0]}
+            duration={8.6}
+            delay={0.15}
+          />
+          <HeroDraggableRobot
+            src={asset('KaivaSara.webp')}
+            alt="Robot Kaiva Sara"
+            constraintsRef={heroRobotBoundsRef}
+            className="right-[-4%] top-[6%] z-30 w-[41%] md:right-[2%] md:top-[8%] md:w-[34%]"
+            floatY={[0, -10, 0, 8, 0]}
+            floatX={[0, -4, 5, -3, 0]}
+            floatRotate={[0, -2.5, 1.8, -1, 0]}
+            duration={7.8}
+            delay={0.35}
           />
         </div>
       </motion.div>
