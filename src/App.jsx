@@ -366,9 +366,9 @@ const ResponsiveWebShowcase = memo(({ mobile = false, prefersReducedMotion = fal
   const phoneHeight = mobile ? 124 : 236;
 
   return (
-    <div className={`mx-auto w-full ${mobile ? 'max-w-[290px] overflow-hidden rounded-[22px] border border-[#d9d3ca] bg-[#eae6df] shadow-[0_18px_40px_-26px_rgba(57,53,44,0.18)]' : 'service-visual-web overflow-hidden rounded-[30px] bg-[#eae6df]'}`}>
+    <div className={`mx-auto w-full ${mobile ? 'max-w-[290px] overflow-hidden rounded-[22px] border border-[#e3e6eb] bg-[#f3f4f6]' : 'service-visual-web overflow-hidden rounded-[30px] bg-[#f3f4f6]'}`}>
       <div
-        className={`${mobile ? 'min-h-[210px] p-4' : 'min-h-[390px] p-6 sm:p-8'} flex h-full items-center justify-center overflow-hidden bg-[#eae6df]`}
+        className={`${mobile ? 'min-h-[210px] p-4' : 'min-h-[390px] p-6 sm:p-8'} flex h-full items-center justify-center overflow-hidden bg-[#f3f4f6]`}
       >
         <div className={`relative flex w-full items-center justify-center ${mobile ? 'max-w-[220px]' : 'max-w-[500px]'}`}>
           <motion.div
@@ -383,29 +383,29 @@ const ResponsiveWebShowcase = memo(({ mobile = false, prefersReducedMotion = fal
             className="relative z-10"
             style={{ width: browserWidth }}
           >
-            <div className={`mockup-browser overflow-hidden border border-[#d9d3ca] bg-white ${mobile ? 'rounded-[10px] shadow-[0_16px_34px_rgba(57,53,44,0.12)]' : 'rounded-[12px] shadow-[0_20px_50px_rgba(57,53,44,0.15)]'}`}>
+            <div className={`mockup-browser overflow-hidden border border-[#e1e5eb] bg-white ${mobile ? 'rounded-[10px] shadow-none' : 'rounded-[12px] shadow-[0_10px_22px_-18px_rgba(57,53,44,0.12)]'}`}>
               <div className={`bar flex items-center bg-[#f7f5f2] ${mobile ? 'h-[24px] gap-[6px] px-[12px]' : 'h-[30px] gap-[7px] px-[14px]'}`}>
                 <span className={`block rounded-full bg-[#ff5f57] ${mobile ? 'h-[8px] w-[8px]' : 'h-[10px] w-[10px]'}`} />
                 <span className={`block rounded-full bg-[#febc2e] ${mobile ? 'h-[8px] w-[8px]' : 'h-[10px] w-[10px]'}`} />
                 <span className={`block rounded-full bg-[#28c840] ${mobile ? 'h-[8px] w-[8px]' : 'h-[10px] w-[10px]'}`} />
               </div>
               <div className={`content flex flex-col ${mobile ? 'gap-2 p-4' : 'gap-[0.7rem] p-[1.6rem]'}`}>
-                <div className={`rounded-full bg-[#eae6df] ${mobile ? 'h-[6px] w-[78%]' : 'h-[8px] w-[80%] rounded-[4px]'}`} />
-                <div className={`rounded-full bg-[#eae6df] ${mobile ? 'h-[6px] w-[58%]' : 'h-[8px] w-[60%] rounded-[4px]'}`} />
+                <div className={`rounded-full bg-[#e7eaef] ${mobile ? 'h-[6px] w-[78%]' : 'h-[8px] w-[80%] rounded-[4px]'}`} />
+                <div className={`rounded-full bg-[#e7eaef] ${mobile ? 'h-[6px] w-[58%]' : 'h-[8px] w-[60%] rounded-[4px]'}`} />
                 <motion.div
                   animate={prefersReducedMotion ? { width: mobile ? '34%' : '35%' } : responsiveMode ? { width: mobile ? '54%' : '56%' } : { width: mobile ? '34%' : '35%' }}
                   transition={{ duration: prefersReducedMotion ? 0 : 0.7, ease: premiumEase }}
                   className={`rounded-full bg-[#792fec] shadow-[0_0_12px_rgba(121,47,236,0.25)] ${mobile ? 'h-[6px]' : 'h-[8px] rounded-[4px]'}`}
                 />
-                <div className={`flex items-center rounded-[8px] border border-[#e0dbd2] bg-[#f9f8f6] ${mobile ? 'gap-2 p-3' : 'mt-[0.4rem] gap-[0.8rem] p-[1rem]'}`}>
-                  <div className={`shrink-0 rounded-full bg-[#d9d3ca] ${mobile ? 'h-[24px] w-[24px]' : 'h-[32px] w-[32px]'}`} />
+                <div className={`flex items-center rounded-[8px] border border-[#e4e8ee] bg-[#f8f9fb] ${mobile ? 'gap-2 p-3' : 'mt-[0.4rem] gap-[0.8rem] p-[1rem]'}`}>
+                  <div className={`shrink-0 rounded-full bg-[#d7dbe2] ${mobile ? 'h-[24px] w-[24px]' : 'h-[32px] w-[32px]'}`} />
                   <div className="flex-1">
-                    <div className={`rounded-full bg-[#d9d3ca] ${mobile ? 'mb-1.5 h-[5px] w-[70%]' : 'mb-[4px] h-[6px] w-[70%] rounded-[3px]'}`} />
-                    <div className={`rounded-full bg-[#d9d3ca] ${mobile ? 'h-[5px] w-[46%]' : 'h-[6px] w-[50%] rounded-[3px]'}`} />
+                    <div className={`rounded-full bg-[#d7dbe2] ${mobile ? 'mb-1.5 h-[5px] w-[70%]' : 'mb-[4px] h-[6px] w-[70%] rounded-[3px]'}`} />
+                    <div className={`rounded-full bg-[#d7dbe2] ${mobile ? 'h-[5px] w-[46%]' : 'h-[6px] w-[50%] rounded-[3px]'}`} />
                   </div>
                 </div>
-                <div className={`rounded-full bg-[#eae6df] ${mobile ? 'h-[6px] w-[46%]' : 'h-[8px] w-[50%] rounded-[4px]'}`} />
-                <div className={`rounded-full bg-[#eae6df] ${mobile ? 'h-[6px] w-[62%]' : 'h-[8px] w-[60%] rounded-[4px]'}`} />
+                <div className={`rounded-full bg-[#e7eaef] ${mobile ? 'h-[6px] w-[46%]' : 'h-[8px] w-[50%] rounded-[4px]'}`} />
+                <div className={`rounded-full bg-[#e7eaef] ${mobile ? 'h-[6px] w-[62%]' : 'h-[8px] w-[60%] rounded-[4px]'}`} />
               </div>
             </div>
           </motion.div>
@@ -428,7 +428,7 @@ const ResponsiveWebShowcase = memo(({ mobile = false, prefersReducedMotion = fal
                 width: `${phoneWidth}px`,
                 borderRadius: mobile ? '14px' : '24px',
                 border: mobile ? '4px solid #1f1f1f' : '6px solid #1f1f1f',
-                boxShadow: mobile ? '0 20px 36px rgba(0,0,0,0.18)' : '0 30px 60px rgba(0,0,0,0.35)',
+                boxShadow: mobile ? '0 10px 22px rgba(0,0,0,0.12)' : '0 16px 34px rgba(0,0,0,0.16)',
               }}
             >
               <div className={`absolute left-1/2 -translate-x-1/2 rounded-full bg-[#1f1f1f] ${mobile ? 'top-1.5 h-[3px] w-7' : 'top-2 h-[4px] w-10'}`} />
@@ -437,10 +437,10 @@ const ResponsiveWebShowcase = memo(({ mobile = false, prefersReducedMotion = fal
                 <motion.div
                   animate={prefersReducedMotion ? { height: mobile ? 38 : 76 } : responsiveMode ? { height: mobile ? 58 : 112 } : { height: mobile ? 38 : 76 }}
                   transition={{ duration: prefersReducedMotion ? 0 : 0.7, ease: premiumEase }}
-                  className="w-full rounded-[8px] bg-[#eae6df]"
+                  className="w-full rounded-[8px] bg-[#e7eaef]"
                 />
-                <div className={`rounded-full bg-[#eae6df] ${mobile ? 'h-[5px] w-4/5' : 'h-2 w-4/5'}`} />
-                <div className={`rounded-full bg-[#eae6df] ${mobile ? 'h-[5px] w-3/5' : 'h-2 w-3/5'}`} />
+                <div className={`rounded-full bg-[#e7eaef] ${mobile ? 'h-[5px] w-4/5' : 'h-2 w-4/5'}`} />
+                <div className={`rounded-full bg-[#e7eaef] ${mobile ? 'h-[5px] w-3/5' : 'h-2 w-3/5'}`} />
                 <motion.div
                   animate={prefersReducedMotion ? { width: mobile ? '50%' : '50%' } : responsiveMode ? { width: mobile ? '72%' : '74%' } : { width: mobile ? '50%' : '50%' }}
                   transition={{ duration: prefersReducedMotion ? 0 : 0.7, ease: premiumEase }}
@@ -450,15 +450,6 @@ const ResponsiveWebShowcase = memo(({ mobile = false, prefersReducedMotion = fal
             </div>
           </motion.div>
 
-          {!mobile && (
-            <motion.div
-              animate={prefersReducedMotion ? { opacity: 0.7 } : responsiveMode ? { opacity: 1 } : { opacity: 0.7 }}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.7, ease: premiumEase }}
-              className="pointer-events-none absolute bottom-3 left-8 rounded-full border border-[#d8d0ee] bg-white/80 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-[#6d28d9]"
-            >
-              Responsive motion
-            </motion.div>
-          )}
         </div>
       </div>
     </div>
@@ -505,7 +496,7 @@ const DesignShowcase = memo(({ mobile = false, prefersReducedMotion = false }) =
         <motion.div
           animate={prefersReducedMotion ? false : { boxShadow: ['0 28px 74px -40px rgba(91,33,182,0.22)', '0 32px 88px -42px rgba(91,33,182,0.3)', '0 28px 74px -40px rgba(91,33,182,0.22)'] }}
           transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
-          className={`${mobile ? 'rounded-[20px] p-4 shadow-[0_18px_40px_-28px_rgba(91,33,182,0.26)]' : 'overflow-hidden rounded-[28px] p-5 shadow-[0_28px_74px_-40px_rgba(91,33,182,0.34)]'} border border-[#111827]/8 bg-[#f5f0ff]`}
+          className={`${mobile ? 'rounded-[20px] p-4 shadow-[0_18px_40px_-28px_rgba(91,33,182,0.18)]' : 'overflow-hidden rounded-[28px] p-5 shadow-[0_20px_40px_-32px_rgba(15,23,42,0.12)]'} border border-[#e2e6ec] bg-[#f3f4f6]`}
         >
           <div className={`grid gap-3 ${mobile ? 'grid-cols-[1.05fr_0.95fr]' : 'md:grid-cols-[0.92fr_1.08fr] gap-4'}`}>
             <div className={`${mobile ? 'rounded-[18px] p-3' : 'rounded-[24px] p-4'} bg-white shadow-[0_18px_48px_-32px_rgba(15,23,42,0.32)]`}>
@@ -1369,7 +1360,7 @@ const PortfolioSection = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="service-visual relative flex-[1.1] border-l border-[#d9d3ca] bg-[#eae6df]">
+                  <div className="service-visual relative flex-[1.1] border-l border-[#e3e6eb] bg-[#f3f4f6]">
                     <div className="flex h-full w-full items-center justify-center p-6 lg:p-8">
                       <ServiceShowcaseVisual service={service} prefersReducedMotion={prefersReducedMotion} />
                     </div>
