@@ -3170,62 +3170,46 @@ const HeroSection = () => {
       />
 
       <motion.div
-        ref={logoRef}
         initial={{ opacity: 0, y: 18 }}
         animate={introComplete ? { opacity: 1, y: navHidden ? -80 : 0 } : { opacity: 0, y: 18 }}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className={`hero-logo fixed left-6 top-5 z-40 w-fit text-left text-[16px] leading-[0.95] transition-colors duration-200 md:left-[80px] md:top-[40px] md:text-[20px] ${
-          isDarkNavbar ? 'text-white' : 'text-[#080808]'
+        className={`fixed left-1/2 top-4 z-50 flex w-[calc(100%-32px)] max-w-[1040px] -translate-x-1/2 items-center justify-between rounded-full border border-[#080808]/[0.06] bg-white/95 px-5 py-3 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.1)] backdrop-blur-md md:top-6 md:w-[calc(100%-80px)] md:px-8 md:py-3.5 transition-colors duration-200 ${
+          isDarkNavbar ? 'bg-[#080808]/90 border-white/10' : ''
         }`}
       >
-        <span className="block font-semibold tracking-[-0.02em]">Kaiva</span>
-        <span className="block font-normal">
-          Studio<span style={gradientAccentStyle}>.</span>
-        </span>
-      </motion.div>
+        {/* Logo */}
+        <div ref={logoRef} className={`hero-logo text-left text-[16px] leading-[0.95] transition-colors duration-200 md:text-[20px] ${isDarkNavbar ? 'text-white' : 'text-[#080808]'}`}>
+          <span className="block font-semibold tracking-[-0.02em]">Kaiva</span>
+          <span className="block font-normal">
+            Studio<span style={gradientAccentStyle}>.</span>
+          </span>
+        </div>
 
-      <motion.div
-        ref={navRef}
-        initial={{ opacity: 0, y: 18 }}
-        animate={introComplete ? { opacity: 1, y: navHidden ? -80 : 0 } : { opacity: 0, y: 18 }}
-        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className={`hero-nav fixed right-[32px] top-[32px] z-40 hidden items-center gap-10 text-[16px] transition-colors duration-200 md:flex md:right-[80px] md:top-[45px] ${
-          isDarkNavbar ? 'text-white/72' : 'text-[#080808]/68'
-        }`}
-      >
-        <a
-          href="#inicio"
-          onClick={(event) => scrollToSection(event, 'inicio')}
-          className="font-medium"
-          style={gradientAccentStyle}
-        >
-          Inicio
-        </a>
-        <a href={SERVICES_PAGE_HREF} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Servicios</a>
-        <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Contacto</a>
-        <a
-          href="#planes"
-          onClick={(event) => scrollToSection(event, 'planes')}
-          className={`inline-flex h-[44px] items-center justify-center self-center rounded-full px-6 font-manrope text-[11px] font-bold uppercase tracking-[0.16em] transition-all duration-300 hover:-translate-y-0.5 ${
-            isDarkNavbar
-              ? 'border border-white/18 bg-white/10 text-white hover:bg-white/16'
-              : 'border border-[#080808]/12 bg-white/72 text-[#080808] shadow-[0_12px_28px_-20px_rgba(8,8,8,0.22)] hover:bg-white'
-          }`}
-        >
-          Paquetes
-        </a>
-      </motion.div>
+        {/* Desktop Links */}
+        <div ref={navRef} className={`hero-nav hidden items-center gap-10 text-[15px] transition-colors duration-200 md:flex ${isDarkNavbar ? 'text-white/72' : 'text-[#080808]/68'}`}>
+          <a href="#inicio" onClick={(event) => scrollToSection(event, 'inicio')} className="font-medium" style={gradientAccentStyle}>
+            Inicio
+          </a>
+          <a href={SERVICES_PAGE_HREF} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Servicios</a>
+          <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className={`transition-colors ${isDarkNavbar ? 'hover:text-white' : 'hover:text-[#080808]'}`}>Contacto</a>
+          <a
+            href="#planes"
+            onClick={(event) => scrollToSection(event, 'planes')}
+            className="group flex items-center gap-1.5 font-inter text-[15px] font-semibold transition-opacity hover:opacity-80"
+            style={gradientAccentStyle}
+          >
+            Paquetes
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-0.5">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 18 }}
-        animate={introComplete ? { opacity: 1, y: navHidden ? -80 : 0 } : { opacity: 0, y: 18 }}
-        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed right-6 top-5 z-50 flex items-center gap-3 md:hidden"
-      >
+        {/* Mobile menu button */}
         <button
           aria-label="Abrir menú"
           onClick={() => setMobileMenuOpen(true)}
-          className="flex h-[40px] w-[40px] items-center justify-center rounded-full border border-[#080808]/12 bg-white text-[#080808] shadow-[0_4px_14px_-8px_rgba(0,0,0,0.18)]"
+          className="flex h-[38px] w-[38px] items-center justify-center rounded-full border border-[#080808]/12 bg-white text-[#080808] shadow-sm md:hidden"
         >
           <svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true">
             <rect y="0" width="18" height="2" rx="1" fill="currentColor" />
