@@ -3069,7 +3069,7 @@ const ProblemSection = () => {
         </div>
 
         <div className="relative mt-14 w-full overflow-hidden pb-6 md:mt-20 md:pb-10">
-          <div aria-hidden="true" className="pointer-events-none absolute inset-x-[-4%] top-[78px] hidden h-[360px] opacity-95 md:block">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-x-[-4%] top-[46px] hidden h-[380px] opacity-95 md:block">
             <svg
               viewBox="0 0 1600 420"
               className="h-full w-full"
@@ -3088,23 +3088,23 @@ const ProblemSection = () => {
                 </filter>
               </defs>
               <path
-                d="M-40 300 C 130 150, 330 120, 500 152 C 690 188, 720 370, 920 386 C 1120 400, 1240 210, 1400 120 C 1498 66, 1565 58, 1640 70"
+                d="M-40 308 C 140 128, 350 88, 540 126 C 720 162, 740 390, 950 408 C 1168 426, 1280 214, 1440 114 C 1522 62, 1588 56, 1648 64"
                 stroke="url(#problemLineGradient)"
-                strokeWidth="24"
+                strokeWidth="34"
                 strokeLinecap="round"
                 filter="url(#problemLineGlow)"
-                opacity="0.22"
+                opacity="0.24"
               />
               <path
-                d="M-40 300 C 130 150, 330 120, 500 152 C 690 188, 720 370, 920 386 C 1120 400, 1240 210, 1400 120 C 1498 66, 1565 58, 1640 70"
+                d="M-40 308 C 140 128, 350 88, 540 126 C 720 162, 740 390, 950 408 C 1168 426, 1280 214, 1440 114 C 1522 62, 1588 56, 1648 64"
                 stroke="url(#problemLineGradient)"
-                strokeWidth="6"
+                strokeWidth="8"
                 strokeLinecap="round"
               />
             </svg>
           </div>
 
-          <div aria-hidden="true" className="pointer-events-none absolute inset-x-[-16%] top-[102px] h-[220px] opacity-75 md:hidden">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-x-[-16%] top-[82px] h-[240px] opacity-75 md:hidden">
             <svg
               viewBox="0 0 900 260"
               className="h-full w-full"
@@ -3119,11 +3119,11 @@ const ProblemSection = () => {
                 </linearGradient>
               </defs>
               <path
-                d="M-30 180 C 100 92, 250 78, 380 100 C 510 122, 560 220, 690 228 C 790 234, 850 194, 930 136"
+                d="M-30 194 C 98 88, 250 64, 392 90 C 530 116, 572 238, 710 244 C 808 250, 866 198, 930 138"
                 stroke="url(#problemLineGradientMobile)"
-                strokeWidth="4"
+                strokeWidth="6"
                 strokeLinecap="round"
-                opacity="0.55"
+                opacity="0.62"
               />
             </svg>
           </div>
