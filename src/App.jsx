@@ -1021,7 +1021,7 @@ const ContactRevealSection = () => {
               viewport={contactTextViewport}
               className="relative z-10 max-w-[560px]"
             >
-              <motion.div variants={textItem} className="font-manrope text-[16px] font-medium tracking-normal text-[#080808]/68">
+              <motion.div variants={textItem} className="font-manrope text-[16px] font-medium tracking-normal" style={gradientAccentStyle}>
                 Contacto
               </motion.div>
               <motion.h2 className="mt-6 font-epilogue text-[clamp(40px,7vw,112px)] font-extrabold leading-[0.92] tracking-[-0.04em] text-[#080808] md:tracking-[-0.035em] lg:tracking-[-0.04em]">
@@ -1678,9 +1678,16 @@ const ExpandedAgencySections = () => (
                     <ul className="mt-4 flex-1 space-y-3.5">
                       {plan.points.map((pt, i) => (
                         <li key={i} className="flex items-start gap-3 text-[14px] text-[#080808]/80">
-                          <svg className="h-5 w-5 shrink-0 text-[#080808]/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <circle cx="12" cy="12" r="9" strokeWidth="1.5" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12l2 2 4-4" />
+                          <svg className="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24">
+                            <defs>
+                              <linearGradient id={`grad-${index}-${i}`} x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stopColor="#21b2c6" />
+                                <stop offset="58%" stopColor="#8242f5" />
+                                <stop offset="100%" stopColor="#d96cff" />
+                              </linearGradient>
+                            </defs>
+                            <circle cx="12" cy="12" r="9" strokeWidth="1.5" stroke={`url(#grad-${index}-${i})`} />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12l2 2 4-4" stroke={`url(#grad-${index}-${i})`} />
                           </svg>
                           <span>{pt}</span>
                         </li>
@@ -1753,9 +1760,25 @@ const AliadosSection = () => {
               </span>
             </h2>
 
-            <p className="mt-7 max-w-[34ch] text-[16px] leading-[1.65] text-white/72 md:mt-9 md:text-[18px] lg:text-[20px] lg:max-w-[38ch]">
-              Alianza estratégica con Seo4Startups enfocada en potenciar la visibilidad digital mediante SEO, posicionamiento y presencia online.
-            </p>
+            <div className="mt-6 flex flex-col items-start gap-5 md:mt-8 md:gap-6">
+              <p className="max-w-[34ch] text-[16px] leading-[1.65] text-white/72 md:text-[18px] lg:text-[20px] lg:max-w-[38ch]">
+                Alianza estratégica con Seo4Startups enfocada en potenciar la visibilidad digital mediante SEO, posicionamiento y presencia online.
+              </p>
+
+              <a
+                href="https://seoforstartups.co"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex w-fit items-center gap-3 rounded-full bg-white px-6 py-3.5 font-inter text-[14px] font-bold text-[#121222] shadow-[0_16px_40px_-20px_rgba(0,0,0,0.75)] transition-transform duration-300 hover:-translate-y-0.5 md:px-10 md:py-4 md:text-[15px]"
+              >
+                Conoce más de SEO for Startups
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#efe8ff] text-[#7f41f0]">
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </span>
+              </a>
+            </div>
           </div>
 
           <div className="relative mx-auto w-full max-w-[340px] md:max-w-[560px] lg:max-w-[700px] xl:max-w-[760px]">
@@ -2534,8 +2557,8 @@ const App = () => {
             gap: 14px !important;
           }
           .problem-card {
-            min-height: 210px !important;
-            padding: 18px 20px !important;
+            min-height: 180px !important;
+            padding: 16px 18px !important;
           }
           .problem-card h4 {
             font-size: clamp(22px, 2vw, 28px) !important;
@@ -2902,7 +2925,7 @@ const ProblemFlipCard = ({ card, index }) => {
       transition={{ duration: 0.5, delay: index * 0.08, ease: premiumEase }}
     >
       <div
-        className="problem-flip-inner relative w-full min-h-[240px] md:min-h-[260px] transition-transform duration-700"
+        className="problem-flip-inner relative w-full min-h-[200px] md:min-h-[220px] transition-transform duration-700"
         style={{ transformStyle: 'preserve-3d', transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
       >
         {/* FRONT — Problem */}
