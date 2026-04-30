@@ -3068,12 +3068,71 @@ const ProblemSection = () => {
           </div>
         </div>
 
-        <div className="w-full mt-14 md:mt-20">
-          <h3 className="mb-6 text-center font-manrope text-[clamp(24px,3.6vw,42px)] font-extrabold uppercase tracking-[0.04em] text-[#080808] md:mb-10">
+        <div className="relative mt-14 w-full overflow-hidden pb-6 md:mt-20 md:pb-10">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-x-[-4%] top-[78px] hidden h-[360px] opacity-95 md:block">
+            <svg
+              viewBox="0 0 1600 420"
+              className="h-full w-full"
+              fill="none"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="problemLineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#21b2c6" />
+                  <stop offset="38%" stopColor="#8242f5" />
+                  <stop offset="72%" stopColor="#d96cff" />
+                  <stop offset="100%" stopColor="#8b5cf6" />
+                </linearGradient>
+                <filter id="problemLineGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="10" result="blur" />
+                </filter>
+              </defs>
+              <path
+                d="M-40 300 C 130 150, 330 120, 500 152 C 690 188, 720 370, 920 386 C 1120 400, 1240 210, 1400 120 C 1498 66, 1565 58, 1640 70"
+                stroke="url(#problemLineGradient)"
+                strokeWidth="24"
+                strokeLinecap="round"
+                filter="url(#problemLineGlow)"
+                opacity="0.22"
+              />
+              <path
+                d="M-40 300 C 130 150, 330 120, 500 152 C 690 188, 720 370, 920 386 C 1120 400, 1240 210, 1400 120 C 1498 66, 1565 58, 1640 70"
+                stroke="url(#problemLineGradient)"
+                strokeWidth="6"
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
+
+          <div aria-hidden="true" className="pointer-events-none absolute inset-x-[-16%] top-[102px] h-[220px] opacity-75 md:hidden">
+            <svg
+              viewBox="0 0 900 260"
+              className="h-full w-full"
+              fill="none"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="problemLineGradientMobile" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#21b2c6" />
+                  <stop offset="40%" stopColor="#8242f5" />
+                  <stop offset="100%" stopColor="#d96cff" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M-30 180 C 100 92, 250 78, 380 100 C 510 122, 560 220, 690 228 C 790 234, 850 194, 930 136"
+                stroke="url(#problemLineGradientMobile)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                opacity="0.55"
+              />
+            </svg>
+          </div>
+
+          <h3 className="relative z-10 mb-6 text-center font-manrope text-[clamp(24px,3.6vw,42px)] font-extrabold uppercase tracking-[0.04em] text-[#080808] md:mb-10">
             POR QUÉ MUCHOS NEGOCIOS SIGUEN SIN WEB
           </h3>
 
-          <div className="problem-reasons-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+          <div className="problem-reasons-grid relative z-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-4">
             {[
               {
                 problem: 'Es muy caro.',
