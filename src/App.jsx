@@ -1778,7 +1778,7 @@ const AliadosSection = () => {
                   src={asset('linea-startups.png')}
                   alt=""
                   aria-hidden="true"
-                  className="absolute -bottom-1 left-[-2%] h-[22px] w-[110%] object-contain md:h-[28px] lg:-bottom-[9px]"
+                  className="absolute -bottom-[2px] left-[-2%] h-[22px] w-[110%] object-contain md:h-[28px] lg:-bottom-[11px]"
                 />
               </span>
             </h2>
@@ -3038,7 +3038,7 @@ const ProblemFlipCard = ({ card, index }) => {
 
 const ProblemSection = () => {
   return (
-    <section id="problema" className="problem-section relative w-full bg-transparent text-[#080808] px-6 py-14 md:py-24 lg:px-16">
+    <section id="problema" className="problem-section relative z-20 mb-[-56px] w-full bg-transparent px-6 pb-28 pt-14 text-[#080808] md:mb-[-88px] md:pb-40 md:pt-24 lg:mb-[-112px] lg:px-16">
       <div className="mx-auto w-full max-w-[1240px] relative z-10 flex flex-col items-center">
         
         <ScrollRevealHeadline
@@ -3081,10 +3081,10 @@ const ProblemSection = () => {
           </div>
         </div>
 
-        <div className="relative mt-14 w-full overflow-visible pb-20 md:mt-20 md:pb-32">
-          <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[34px] hidden h-[430px] w-screen -translate-x-1/2 opacity-95 md:block">
+        <div className="relative mt-14 w-full overflow-visible pb-28 md:mt-20 md:pb-44">
+          <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[28px] hidden h-[520px] w-[108vw] -translate-x-1/2 opacity-95 md:block">
             <svg
-              viewBox="0 0 1600 420"
+              viewBox="0 0 1800 520"
               className="h-full w-full"
               fill="none"
               preserveAspectRatio="none"
@@ -3096,30 +3096,30 @@ const ProblemSection = () => {
                   <stop offset="72%" stopColor="#d96cff" />
                   <stop offset="100%" stopColor="#8b5cf6" />
                 </linearGradient>
-                <filter id="problemLineGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="10" result="blur" />
+                <filter id="problemLineGlow" x="-24%" y="-24%" width="148%" height="148%">
+                  <feGaussianBlur stdDeviation="13" result="blur" />
                 </filter>
               </defs>
               <path
-                d="M-120 300 C 80 116, 330 86, 562 122 C 734 150, 782 408, 972 416 C 1188 424, 1286 204, 1478 98 C 1590 36, 1686 28, 1768 40"
+                d="M-180 344 C 70 126, 360 92, 640 126 C 824 150, 872 470, 1070 478 C 1290 486, 1404 232, 1608 112 C 1728 42, 1848 30, 1940 48"
                 stroke="url(#problemLineGradient)"
-                strokeWidth="40"
+                strokeWidth="50"
                 strokeLinecap="round"
                 filter="url(#problemLineGlow)"
-                opacity="0.24"
+                opacity="0.28"
               />
               <path
-                d="M-120 300 C 80 116, 330 86, 562 122 C 734 150, 782 408, 972 416 C 1188 424, 1286 204, 1478 98 C 1590 36, 1686 28, 1768 40"
+                d="M-180 344 C 70 126, 360 92, 640 126 C 824 150, 872 470, 1070 478 C 1290 486, 1404 232, 1608 112 C 1728 42, 1848 30, 1940 48"
                 stroke="url(#problemLineGradient)"
-                strokeWidth="10"
+                strokeWidth="12"
                 strokeLinecap="round"
               />
             </svg>
           </div>
 
-          <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[76px] h-[260px] w-screen -translate-x-1/2 opacity-75 md:hidden">
+          <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[68px] h-[300px] w-[110vw] -translate-x-1/2 opacity-80 md:hidden">
             <svg
-              viewBox="0 0 900 260"
+              viewBox="0 0 980 300"
               className="h-full w-full"
               fill="none"
               preserveAspectRatio="none"
@@ -3132,11 +3132,11 @@ const ProblemSection = () => {
                 </linearGradient>
               </defs>
               <path
-                d="M-90 196 C 72 84, 268 62, 430 90 C 566 114, 608 252, 740 252 C 834 252, 900 196, 980 132"
+                d="M-130 224 C 78 84, 314 56, 500 94 C 646 124, 702 284, 840 286 C 930 286, 1010 228, 1104 154"
                 stroke="url(#problemLineGradientMobile)"
-                strokeWidth="7"
+                strokeWidth="10"
                 strokeLinecap="round"
-                opacity="0.62"
+                opacity="0.72"
               />
             </svg>
           </div>
@@ -3414,10 +3414,10 @@ const HeroSection = () => {
             src={asset('KaivaTheo.webp')}
             alt="Robot Kaiva Theo"
             constraintsRef={heroSectionRef}
-            className="left-[2%] top-[20%] z-20 w-[40%] md:left-[10%] md:top-[18%] md:w-[34%]"
+            className="left-[2%] top-[22%] z-20 w-[40%] md:left-[10%] md:top-[20%] md:w-[34%]"
             floatY={[0, -5, 0, 5, 0]}
             floatX={[0, 0, 0, 0, 0]}
-            floatRotate={[-7, -7, -7, -7, -7]}
+            floatRotate={[-11, -11, -11, -11, -11]}
             duration={8.6}
             delay={0.15}
           />
@@ -3428,7 +3428,7 @@ const HeroSection = () => {
             className="right-[-4%] top-[6%] z-30 w-[41%] md:right-[2%] md:top-[8%] md:w-[34%]"
             floatY={[0, -6, 0, 6, 0]}
             floatX={[0, 0, 0, 0, 0]}
-            floatRotate={[-5, -5, -5, -5, -5]}
+            floatRotate={[-8, -8, -8, -8, -8]}
             duration={7.8}
             delay={0.35}
           />
