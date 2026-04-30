@@ -1771,7 +1771,7 @@ const AliadosSection = () => {
                   src={asset('linea-startups.png')}
                   alt=""
                   aria-hidden="true"
-                  className="absolute -bottom-1 left-[-2%] h-[22px] w-[110%] object-contain md:h-[28px]"
+                  className="absolute -bottom-1 left-[-2%] h-[22px] w-[110%] object-contain md:h-[28px] lg:-bottom-[9px]"
                 />
               </span>
             </h2>
@@ -1787,7 +1787,7 @@ const AliadosSection = () => {
                 rel="noopener noreferrer"
                 className="flex w-fit items-center gap-3 rounded-full bg-white px-6 py-3.5 font-inter text-[14px] font-bold text-[#121222] shadow-[0_16px_40px_-20px_rgba(0,0,0,0.75)] transition-transform duration-300 hover:-translate-y-0.5 md:px-10 md:py-4 md:text-[15px]"
               >
-                Conoce más de SEO 4 Startups
+                Conoce más de Seo4Startups
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1a1a2e] text-white/80">
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
