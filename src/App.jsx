@@ -618,7 +618,7 @@ const AutomationShowcase = memo(({ mobile = false, prefersReducedMotion = false 
               )}
 
               <div className="flex flex-1 flex-col gap-4">
-                <div className={`grid ${mobile ? 'grid-cols-[1fr_auto] gap-3' : 'grid-cols-[repeat(4,minmax(0,1fr))] gap-4'}`}>
+                <div className={`grid ${mobile ? 'grid-cols-[1fr_1fr_auto] gap-3' : 'grid-cols-[repeat(4,minmax(0,1fr))] gap-4'}`}>
                   <div className={`rounded-[12px] border border-[#f1f5f9] bg-white ${mobile ? 'p-3' : 'p-3'}`}>
                     <div className="mb-2 h-3 w-1/2 rounded bg-[#94a3b8]" />
                     <motion.div animate={{ backgroundColor: activeTheme.metricA }} transition={{ duration: prefersReducedMotion ? 0 : 0.35 }} className="h-5 w-3/4 rounded" />
@@ -633,7 +633,7 @@ const AutomationShowcase = memo(({ mobile = false, prefersReducedMotion = false 
                       <motion.div animate={{ backgroundColor: activeTheme.metricC }} transition={{ duration: prefersReducedMotion ? 0 : 0.35 }} className="h-5 w-3/4 rounded" />
                     </div>
                   )}
-                  <div className={`${mobile ? 'col-span-1 flex flex-col gap-2 self-stretch justify-between rounded-[12px] border border-[#f1f5f9] bg-white p-2' : 'rounded-[12px] border border-[#f1f5f9] bg-white p-3'}`}>
+                  <div className={`${mobile ? 'col-span-1 flex flex-col gap-2 rounded-[12px] border border-[#f1f5f9] bg-white p-2' : 'rounded-[12px] border border-[#f1f5f9] bg-white p-3'}`}>
                     <div className={`flex ${mobile ? 'flex-col gap-1.5' : 'gap-2'}`}>
                       {AUTOMATION_THEMES.map((theme) => (
                         <button
@@ -648,38 +648,28 @@ const AutomationShowcase = memo(({ mobile = false, prefersReducedMotion = false 
                         />
                       ))}
                     </div>
-                    {mobile && (
-                      <motion.div
-                        animate={{ background: `conic-gradient(${donutStops.join(', ')})` }}
-                        transition={{ duration: prefersReducedMotion ? 0 : 0.4 }}
-                        className="mx-auto h-16 w-16 rounded-full"
-                        style={{ mask: 'radial-gradient(circle at center, transparent 54%, black 56%)', WebkitMask: 'radial-gradient(circle at center, transparent 54%, black 56%)' }}
-                      />
-                    )}
                   </div>
                 </div>
 
-                <div className={`${mobile ? 'grid grid-cols-[1.15fr_0.85fr] gap-3' : 'grid grid-cols-[1.2fr_0.8fr] gap-4 flex-1'}`}>
-                  <div className={`${mobile ? 'flex h-[120px] items-end gap-2 rounded-[12px] border border-[#e2e8f0] bg-white px-4 pb-4 pt-3' : 'flex items-end gap-2 rounded-[12px] border border-[#e2e8f0] bg-white px-6 pb-4 pt-3'}`}>
+                <div className={`${mobile ? 'grid grid-cols-[1.18fr_0.82fr] gap-3' : 'grid grid-cols-[1.38fr_0.62fr] gap-4 flex-1'}`}>
+                  <div className={`${mobile ? 'flex h-[124px] items-end gap-2.5 rounded-[12px] border border-[#e2e8f0] bg-white px-3 pb-4 pt-3' : 'flex items-end gap-3 rounded-[12px] border border-[#e2e8f0] bg-white px-5 pb-4 pt-3'}`}>
                     {activeTheme.bars.map((height, index) => (
                       <motion.div
                         key={`${activeTheme.id}-${index}`}
-                        animate={{ height: `${height}%`, backgroundColor: index % 2 === 0 ? activeTheme.metricB : activeTheme.metricA }}
+                        animate={{ height: `${height}%`, backgroundColor: index % 3 === 0 ? activeTheme.metricA : index % 2 === 0 ? activeTheme.metricB : activeTheme.metricC }}
                         transition={{ duration: prefersReducedMotion ? 0 : 0.4, ease: premiumEase }}
-                        className="flex-1 rounded-t-md"
+                        className="flex-1 rounded-t-[6px]"
                       />
                     ))}
                   </div>
-                  {!mobile && (
-                    <div className="flex items-center justify-center rounded-[12px] border border-[#e2e8f0] bg-white p-4">
-                      <motion.div
-                        animate={{ background: `conic-gradient(${donutStops.join(', ')})` }}
-                        transition={{ duration: prefersReducedMotion ? 0 : 0.4 }}
-                        className="h-36 w-36 rounded-full"
-                        style={{ mask: 'radial-gradient(circle at center, transparent 56%, black 58%)', WebkitMask: 'radial-gradient(circle at center, transparent 56%, black 58%)' }}
-                      />
-                    </div>
-                  )}
+                  <div className={`rounded-[12px] border border-[#e2e8f0] bg-white ${mobile ? 'flex items-center justify-center p-3' : 'flex items-center justify-center p-4'}`}>
+                    <motion.div
+                      animate={{ background: `conic-gradient(${donutStops.join(', ')})` }}
+                      transition={{ duration: prefersReducedMotion ? 0 : 0.4 }}
+                      className={`${mobile ? 'h-[78px] w-[78px]' : 'h-32 w-32'} rounded-full`}
+                      style={{ mask: 'radial-gradient(circle at center, transparent 56%, black 58%)', WebkitMask: 'radial-gradient(circle at center, transparent 56%, black 58%)' }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
