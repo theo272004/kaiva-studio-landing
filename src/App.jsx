@@ -437,6 +437,121 @@ const ServiceShowcaseVisual = ({ service, prefersReducedMotion }) => {
   );
 };
 
+const MobileServiceShowcaseVisual = ({ service }) => {
+  if (service.id === 'web') {
+    return (
+      <div className="mx-auto w-full max-w-[290px] overflow-hidden rounded-[22px] border border-[#d9d3ca] bg-[#eae6df] shadow-[0_18px_40px_-26px_rgba(57,53,44,0.18)]">
+        <div className="relative flex min-h-[210px] items-center justify-center bg-[#eae6df] p-4">
+          <div className="relative w-full max-w-[220px]">
+            <div className="mockup-browser overflow-hidden rounded-[10px] border border-[#d9d3ca] bg-white shadow-[0_16px_34px_rgba(57,53,44,0.12)]">
+              <div className="bar flex h-[24px] items-center gap-[6px] bg-[#f7f5f2] px-[12px]">
+                <span className="block h-[8px] w-[8px] rounded-full bg-[#ff5f57]" />
+                <span className="block h-[8px] w-[8px] rounded-full bg-[#febc2e]" />
+                <span className="block h-[8px] w-[8px] rounded-full bg-[#28c840]" />
+              </div>
+              <div className="space-y-2 p-4">
+                <div className="h-[6px] w-[78%] rounded-full bg-[#eae6df]" />
+                <div className="h-[6px] w-[58%] rounded-full bg-[#eae6df]" />
+                <div className="h-[6px] w-[34%] rounded-full bg-[#792fec]" />
+                <div className="flex items-center gap-2 rounded-[8px] border border-[#e0dbd2] bg-[#f9f8f6] p-3">
+                  <div className="h-[24px] w-[24px] rounded-full bg-[#d9d3ca]" />
+                  <div className="flex-1 space-y-1.5">
+                    <div className="h-[5px] w-[70%] rounded-full bg-[#d9d3ca]" />
+                    <div className="h-[5px] w-[46%] rounded-full bg-[#d9d3ca]" />
+                  </div>
+                </div>
+                <div className="h-[6px] w-[46%] rounded-full bg-[#eae6df]" />
+              </div>
+            </div>
+            <div className="absolute -bottom-4 -right-4 h-[108px] w-[58px] rounded-[14px] border-[4px] border-[#1f1f1f] bg-white shadow-[0_20px_36px_rgba(0,0,0,0.18)]">
+              <div className="absolute left-1/2 top-1.5 h-[3px] w-7 -translate-x-1/2 rounded-full bg-[#1f1f1f]" />
+              <div className="space-y-1.5 p-2 pt-5">
+                <div className="h-[5px] w-1/2 rounded-full bg-[#d9d3ca]" />
+                <div className="h-[38px] rounded-[6px] bg-[#eae6df]" />
+                <div className="h-[5px] w-4/5 rounded-full bg-[#eae6df]" />
+                <div className="h-[14px] w-1/2 rounded-[4px] bg-[#792fec]" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (service.id === 'design') {
+    return (
+      <div className="mx-auto grid w-full max-w-[292px] gap-3">
+        <div className="rounded-[20px] border border-[#111827]/8 bg-[#fffdf9] p-4 shadow-[0_16px_34px_-24px_rgba(15,23,42,0.22)]">
+          <div className="mb-3 text-[10px] font-bold uppercase tracking-[0.18em] text-[#8b5cf6]">Brand board</div>
+          <div className="font-epilogue text-[30px] font-extrabold leading-none tracking-[-0.04em] text-[#16151f]">Kaiva</div>
+          <div className="mt-2 text-[14px] font-semibold tracking-[-0.02em] text-[#16151f]">Systems with character</div>
+          <div className="mt-4 grid grid-cols-4 gap-2">
+            {['#16151f', '#8242f5', '#d96cff', '#f3ede4'].map((color) => (
+              <div key={color} className="h-9 rounded-[14px] border border-black/5" style={{ background: color }} />
+            ))}
+          </div>
+        </div>
+        <div className="rounded-[20px] border border-[#111827]/8 bg-[#f5f0ff] p-4 shadow-[0_18px_40px_-28px_rgba(91,33,182,0.26)]">
+          <div className="grid grid-cols-[1.05fr_0.95fr] gap-3">
+            <div className="rounded-[18px] bg-white p-3">
+              <div className="mb-3 h-20 rounded-[16px] bg-[linear-gradient(160deg,_#111827,_#6d28d9_58%,_#f5d0fe_120%)]" />
+              <div className="space-y-2">
+                <div className="h-3 w-16 rounded-full bg-[#111827]" />
+                <div className="h-2.5 rounded-full bg-[#d8ccff]" />
+              </div>
+            </div>
+            <div className="grid gap-3">
+              <div className="rounded-[18px] bg-[#151225] p-3 text-white">
+                <div className="mb-2 text-[9px] uppercase tracking-[0.16em] text-white/52">UI kit</div>
+                <div className="flex gap-2">
+                  <div className="h-8 flex-1 rounded-full bg-white" />
+                  <div className="h-8 w-10 rounded-full bg-white/10" />
+                </div>
+              </div>
+              <div className="rounded-[18px] bg-white p-3">
+                <div className="mb-2 h-2.5 w-14 rounded-full bg-[#d8ccff]" />
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="h-14 rounded-[14px] bg-[linear-gradient(135deg,_#ede9fe,_#ffffff)]" />
+                  <div className="h-14 rounded-[14px] bg-[linear-gradient(135deg,_#111827,_#334155)]" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mx-auto w-full max-w-[292px] overflow-hidden rounded-[20px] border border-[#dfe7f1] bg-white shadow-[0_18px_42px_-28px_rgba(15,23,42,0.14)]">
+      <div className="flex h-8 items-center border-b border-[#f1f5f9] bg-[#f8fafc] px-3">
+        <div className="flex gap-1.5">
+          <div className="h-2 w-2 rounded-full bg-[#cbd5e1]" />
+          <div className="h-2 w-2 rounded-full bg-[#cbd5e1]" />
+          <div className="h-2 w-2 rounded-full bg-[#cbd5e1]" />
+        </div>
+      </div>
+      <div className="space-y-3 bg-[#f7f9fc] p-4">
+        <div className="grid grid-cols-2 gap-3">
+          <div className="rounded-[12px] border border-[#f1f5f9] bg-white p-3">
+            <div className="mb-2 h-2.5 w-10 rounded-full bg-[#94a3b8]" />
+            <div className="h-4 w-16 rounded bg-[#334155]" />
+          </div>
+          <div className="rounded-[12px] border border-[#f1f5f9] bg-white p-3">
+            <div className="mb-2 h-2.5 w-10 rounded-full bg-[#94a3b8]" />
+            <div className="h-4 w-14 rounded bg-[#21b2c6]" />
+          </div>
+        </div>
+        <div className="flex h-[120px] items-end gap-2 rounded-[12px] border border-[#e2e8f0] bg-white px-4 pb-4 pt-3">
+          {[38, 70, 46, 88, 62, 78, 52, 96].map((h, i) => (
+            <div key={i} className="flex-1 rounded-t-sm bg-gradient-to-t from-[#21b2c6]/20 to-[#21b2c6]" style={{ height: `${h}%` }} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const FloatingRobot = ({ src, style, className = '', delay = 0, duration = 6, amplitude = 20, rotation = 8 }) => (
   <motion.div
     className={`pointer-events-none absolute ${className}`}
@@ -979,14 +1094,14 @@ const PortfolioSection = () => {
             ))}
           </div>
 
-          <div className="portfolio-mobile-stack relative h-[240vh] lg:hidden">
+          <div className="portfolio-mobile-stack relative lg:hidden">
             {serviceShowcase.map((service, index) => (
               <motion.article
                 key={service.id}
                 initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.18 }}
-                transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.42, ease: premiumEase, delay: index * 0.04 }}
+                viewport={{ once: true, amount: 0.08 }}
+                transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.32, ease: premiumEase, delay: index * 0.03 }}
                 className="portfolio-mobile-card sticky overflow-hidden rounded-[24px] border border-[#d8d0ee] bg-white shadow-[0_20px_44px_-32px_rgba(66,52,111,0.18)] sm:rounded-[28px]"
                 style={{ zIndex: index + 1 }}
               >
@@ -999,10 +1114,9 @@ const PortfolioSection = () => {
                     service.id === 'design'
                       ? service.points.slice(0, 2)
                       : service.points;
-                  const visualScale = service.id === 'design' ? 'scale-[0.8]' : service.id === 'automation' ? 'scale-[0.86]' : 'scale-[0.9]';
 
                   return (
-                <div className="grid gap-0">
+                <div className="grid min-h-[560px] gap-0">
                   <div className="relative overflow-hidden border-b border-[#ece5fb] px-5 py-5 sm:px-6 sm:py-6">
                     <div className="flex items-start gap-4">
                       <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] border border-[#080808]/8 bg-[#faf7ff] font-['Inter Tight'] text-[24px] font-extrabold tracking-[-0.05em] text-[#080808]/60">
@@ -1031,9 +1145,9 @@ const PortfolioSection = () => {
                       ))}
                     </div>
                   </div>
-                  <div className="flex items-center justify-center bg-[linear-gradient(180deg,rgba(247,243,255,0.96)_0%,rgba(255,255,255,1)_100%)] p-4">
-                    <div className={`w-full origin-center ${visualScale}`}>
-                      <ServiceShowcaseVisual service={service} prefersReducedMotion={prefersReducedMotion} />
+                  <div className="flex flex-1 items-center justify-center bg-[linear-gradient(180deg,rgba(247,243,255,0.96)_0%,rgba(255,255,255,1)_100%)] px-4 pb-5 pt-4">
+                    <div className="w-full">
+                      <MobileServiceShowcaseVisual service={service} />
                     </div>
                   </div>
                 </div>
@@ -1918,11 +2032,11 @@ const App = () => {
 
         @media (max-width: 767px) {
           .portfolio-mobile-stack {
-            height: 306vh;
+            height: 282vh;
           }
           .portfolio-mobile-card {
-            top: 68px;
-            margin-bottom: 16vh;
+            top: 66px;
+            margin-bottom: 12vh;
           }
           .problem-flip-wrapper {
             transform: translateZ(0);
