@@ -872,7 +872,7 @@ const ContactRevealSection = () => {
                 Contacto
               </motion.div>
               <motion.h2 className="mt-6 font-epilogue text-[clamp(40px,7vw,112px)] font-extrabold leading-[0.92] tracking-[-0.04em] text-[#080808] md:tracking-[-0.035em] lg:tracking-[-0.04em]">
-                <motion.span variants={textItem} className="block">Hablemos.</motion.span>
+                <motion.span variants={textItem} className="block">¡Hablemos!</motion.span>
               </motion.h2>
               <AnimatedText 
                 text="Cuéntanos qué estás construyendo y te responderemos con una propuesta clara, directa y bien estructurada."
@@ -1512,7 +1512,7 @@ const ExpandedAgencySections = () => (
                       Pago único
                     </div>
 
-                    <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#0a0a0a] px-6 py-4 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-[1.02]">
+                    <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className={`mt-6 flex w-full items-center justify-center gap-2 rounded-xl px-6 py-4 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-[1.02] ${isMiddle ? '' : 'bg-[#0a0a0a]'}`} style={isMiddle ? accentButtonStyle : undefined}>
                       {plan.cta}
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M7 17L17 7M17 7H7M17 7V17" />
@@ -1600,25 +1600,9 @@ const AliadosSection = () => {
               </span>
             </h2>
 
-            <div className="mt-7 flex flex-col items-start gap-4 md:mt-9 md:gap-5">
-              <div className="inline-flex rounded-full bg-black px-6 py-2.5 font-manrope text-[12px] font-bold uppercase tracking-[0.14em] text-white/95 ring-1 ring-white/12 md:text-[14px]">
-                ALIANZA ESTRATÉGICA
-              </div>
-
-              <a
-                href="https://seoforstartups.co"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex w-fit items-center gap-3 rounded-full bg-white px-6 py-3.5 font-inter text-[14px] font-bold text-[#121222] shadow-[0_16px_40px_-20px_rgba(0,0,0,0.75)] transition-transform duration-300 hover:-translate-y-0.5 md:px-10 md:py-4 md:text-[15px]"
-              >
-                Conoce más de SEO for Startups
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#efe8ff] text-[#7f41f0]">
-                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </span>
-              </a>
-            </div>
+            <p className="mt-7 max-w-[34ch] text-[16px] leading-[1.65] text-white/72 md:mt-9 md:text-[18px] lg:text-[20px] lg:max-w-[38ch]">
+              Alianza estratégica con Seo4Startups enfocada en potenciar la visibilidad digital mediante SEO, posicionamiento y presencia online.
+            </p>
           </div>
 
           <div className="relative mx-auto w-full max-w-[340px] md:max-w-[560px] lg:max-w-[700px] xl:max-w-[760px]">
@@ -3190,7 +3174,7 @@ const HeroSection = () => {
       </motion.div>
 
       <motion.div
-        className="hero-cta-wrap absolute left-1/2 bottom-[110px] md:bottom-[6%] z-[60] -translate-x-1/2 w-full flex justify-center"
+        className="hero-cta-wrap absolute left-1/2 bottom-[92px] md:bottom-[4.5%] z-[60] -translate-x-1/2 w-full flex justify-center"
         initial={{ opacity: 0, y: 15 }}
         animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
         transition={{ duration: 0.6, delay: 0.28, ease: 'easeOut' }}
