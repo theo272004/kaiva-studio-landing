@@ -3173,8 +3173,8 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 18 }}
         animate={introComplete ? { opacity: 1, y: navHidden ? -80 : 0 } : { opacity: 0, y: 18 }}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed left-1/2 top-4 z-[100] flex w-[calc(100%-32px)] max-w-none -translate-x-1/2 items-center justify-between rounded-full border border-[#080808]/[0.06] bg-white/95 px-5 py-3 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.1)] backdrop-blur-md md:top-6 md:w-[calc(100%-80px)] md:px-8 md:py-3.5 transition-colors duration-200 ${
-          isDarkNavbar ? 'bg-[#080808]/90 border-white/10' : ''
+        className={`fixed left-1/2 top-4 z-[100] flex w-[calc(100%-32px)] max-w-none -translate-x-1/2 items-center justify-between rounded-full border border-[#080808]/[0.06] bg-white/65 px-5 py-3 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.1)] backdrop-blur-xl md:top-6 md:w-[calc(100%-80px)] md:px-8 md:py-3.5 transition-colors duration-200 ${
+          isDarkNavbar ? 'bg-[#080808]/70 border-white/10' : ''
         }`}
       >
         {/* Logo */}
