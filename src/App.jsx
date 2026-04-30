@@ -981,8 +981,8 @@ const ContactRevealSection = () => {
     },
   };
 
-  const contactTextViewport = { once: true, amount: isMobile ? 0.05 : 0.1 };
-  const contactFormViewport = { once: true, amount: isMobile ? 0.03 : 0.08 };
+  const contactTextViewport = { once: true, amount: isMobile ? 0.02 : 0.08 };
+  const contactFormViewport = { once: true, amount: isMobile ? 0.01 : 0.06 };
   const socialLinks = [
     {
       label: 'Instagram',
@@ -1039,9 +1039,10 @@ const ContactRevealSection = () => {
         >
             <motion.div
               variants={textGroup}
-              initial="hidden"
-              whileInView="show"
-              viewport={contactTextViewport}
+              initial={isMobile ? 'show' : 'hidden'}
+              animate={isMobile ? 'show' : undefined}
+              whileInView={isMobile ? undefined : 'show'}
+              viewport={isMobile ? undefined : contactTextViewport}
               className="relative z-10 max-w-[560px]"
             >
               <motion.div variants={textItem} className="font-manrope text-[16px] font-medium tracking-normal" style={gradientAccentStyle}>
@@ -1057,9 +1058,10 @@ const ContactRevealSection = () => {
             </motion.div>
 
             <motion.form
-              initial="hidden"
-              whileInView="show"
-              viewport={contactFormViewport}
+              initial={isMobile ? 'show' : 'hidden'}
+              animate={isMobile ? 'show' : undefined}
+              whileInView={isMobile ? undefined : 'show'}
+              viewport={isMobile ? undefined : contactFormViewport}
               variants={formItem}
               whileHover={prefersReducedMotion || isMobile ? undefined : { y: -2 }}
               transition={{ duration: 0.32, ease: premiumEase }}
@@ -1537,7 +1539,7 @@ const ProcessRedesignSection = () => {
   return (
     <section ref={sectionRef} id="proceso" className="process-section relative w-full bg-[#6f22ef] py-0">
       <div className="process-sticky-stage relative hidden h-[225vh] w-full md:block lg:h-[240vh]">
-        <div className="sticky top-0 flex h-[100svh] w-full items-center justify-center overflow-hidden bg-white px-4 sm:px-6 lg:px-16">
+        <div className="sticky top-0 flex h-[100dvh] min-h-screen w-full items-center justify-center overflow-hidden bg-white px-4 sm:px-6 lg:px-16">
           {/* Progressive giant gradient: white on step 1 to full purple on step 5 */}
           <motion.div 
             className="absolute inset-0 pointer-events-none transition-all duration-300"
@@ -1563,8 +1565,8 @@ const ProcessRedesignSection = () => {
         </div>
       </div>
 
-      <div className="process-mobile-stage relative h-[186vh] w-full bg-[#6f22ef] md:hidden">
-        <div className="sticky top-0 flex h-[100svh] w-full items-center justify-center overflow-hidden bg-white px-5">
+      <div className="process-mobile-stage relative h-[214vh] w-full bg-[#6f22ef] md:hidden">
+        <div className="sticky top-0 flex h-[100dvh] min-h-screen w-full items-center justify-center overflow-hidden bg-white px-5">
           <motion.div
             className="absolute inset-0 pointer-events-none"
             style={{
@@ -2335,14 +2337,14 @@ const App = () => {
 
         @media (max-width: 767px) {
           .process-mobile-stage {
-            height: 186vh;
+            height: 214vh;
           }
           .portfolio-mobile-stack {
-            height: 282vh;
+            height: 326vh;
           }
           .portfolio-mobile-card {
             top: 66px;
-            margin-bottom: 12vh;
+            margin-bottom: 10vh;
           }
           .problem-flip-wrapper {
             transform: translateZ(0);
@@ -2363,7 +2365,10 @@ const App = () => {
         }
         @media (max-width: 767px) and (min-height: 860px) {
           .process-mobile-stage {
-            height: 196vh !important;
+            height: 228vh !important;
+          }
+          .portfolio-mobile-stack {
+            height: 344vh !important;
           }
         }
         
@@ -3424,10 +3429,10 @@ const HeroSection = () => {
             src={asset('KaivaTheo.webp')}
             alt="Robot Kaiva Theo"
             constraintsRef={heroSectionRef}
-            className="left-[2%] top-[22%] z-20 w-[40%] md:left-[10%] md:top-[20%] md:w-[34%]"
+            className="left-[0%] top-[22%] z-20 w-[40%] md:left-[7%] md:top-[20%] md:w-[34%]"
             floatY={[0, -5, 0, 5, 0]}
             floatX={[0, 0, 0, 0, 0]}
-            floatRotate={[-11, -11, -11, -11, -11]}
+            floatRotate={[-15, -15, -15, -15, -15]}
             duration={8.6}
             delay={0.15}
           />
@@ -3438,7 +3443,7 @@ const HeroSection = () => {
             className="right-[-4%] top-[6%] z-30 w-[41%] md:right-[2%] md:top-[8%] md:w-[34%]"
             floatY={[0, -6, 0, 6, 0]}
             floatX={[0, 0, 0, 0, 0]}
-            floatRotate={[-8, -8, -8, -8, -8]}
+            floatRotate={[-12, -12, -12, -12, -12]}
             duration={7.8}
             delay={0.35}
           />
