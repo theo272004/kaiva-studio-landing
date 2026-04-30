@@ -1354,7 +1354,7 @@ const PortfolioSection = () => {
               >
                 <div className="portfolio-service-layout flex min-h-0">
                   <div className="service-info relative flex-[1] overflow-hidden">
-                    <div className="pointer-events-none absolute left-8 top-6 font-['Inter Tight'] text-[88px] font-extrabold leading-none tracking-[-0.06em] text-[#39352c]/[0.03] lg:text-[110px]">
+                    <div className="pointer-events-none absolute left-8 top-6 font-['Inter Tight'] text-[88px] font-extrabold leading-none tracking-[-0.06em] text-[#c7cdd6] lg:text-[110px]">
                       {service.number}
                     </div>
                     <div className="portfolio-service-copy relative z-10 flex h-full flex-col justify-center px-8 py-10 xl:px-12 xl:py-12">
@@ -1368,7 +1368,7 @@ const PortfolioSection = () => {
                         {service.points.map((point) => (
                           <div
                             key={point}
-                            className="rounded-full border border-[#d9d3ca] bg-[#f6f2ec] px-4 py-3 text-sm text-[#5e584e]"
+                            className="rounded-full border border-[#d5d8dd] bg-[#e8eaed] px-4 py-3 text-sm text-[#59606b]"
                           >
                             {point}
                           </div>
@@ -1411,7 +1411,7 @@ const PortfolioSection = () => {
                 <div className="grid min-h-[560px] gap-0">
                   <div className="relative overflow-hidden border-b border-[#ece5fb] px-5 py-5 sm:px-6 sm:py-6">
                     <div className="flex items-start gap-4">
-                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] border border-[#080808]/8 bg-[#faf7ff] font-['Inter Tight'] text-[24px] font-extrabold tracking-[-0.05em] text-[#080808]/60">
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] border border-[#dfe4ea] bg-[#f3f4f6] font-['Inter Tight'] text-[24px] font-extrabold tracking-[-0.05em] text-[#a6aebb]">
                         {service.number}
                       </div>
                       <div className="min-w-0 flex-1">
@@ -1430,7 +1430,7 @@ const PortfolioSection = () => {
                       {mobilePoints.map((point) => (
                         <div
                           key={point}
-                          className="rounded-full border border-[#080808]/8 bg-[#faf7ff] px-3.5 py-2 text-[12px] font-medium text-[#39352c]/78"
+                          className="rounded-full border border-[#d5d8dd] bg-[#e8eaed] px-3.5 py-2 text-[12px] font-medium text-[#59606b]"
                         >
                           {point}
                         </div>
@@ -1618,7 +1618,7 @@ const ExpandedAgencySections = () => (
         className="plans-section relative overflow-hidden px-4 pb-12 pt-14 md:px-8 md:pb-16 md:pt-20"
         style={{
           background:
-            'linear-gradient(180deg, #f3edff 0%, #f5f0ff 18%, #fbf9ff 40%, #ffffff 64%, #ffffff 100%)'
+            'linear-gradient(180deg, #f3edff 0%, #f4eeff 8%, #f5f0ff 18%, #fbf9ff 40%, #ffffff 64%, #ffffff 100%)'
         }}
       >
       <motion.img
@@ -1626,7 +1626,7 @@ const ExpandedAgencySections = () => (
         alt=""
         loading="lazy"
         decoding="async"
-        className="absolute right-0 top-[6%] z-20 hidden w-[200px] opacity-90 sm:block md:right-[-2%] md:top-[6.5%] md:w-[320px] lg:right-[-3%] lg:top-[6%] lg:w-[460px] pointer-events-none"
+        className="absolute right-0 top-[6%] z-20 hidden w-[200px] opacity-90 sm:block md:right-[-2%] md:top-[6.5%] md:w-[280px] lg:right-[-1%] lg:top-[6%] lg:w-[340px] xl:right-[-3%] xl:w-[420px] 2xl:w-[460px] pointer-events-none"
         animate={{
           y: [0, 15, 0],
           rotate: [0, 2, 0]
@@ -1761,7 +1761,7 @@ const AliadosSection = () => {
       className="allies-section relative overflow-hidden px-4 py-12 md:px-8 md:py-16 lg:py-20"
       style={{
         background:
-          'linear-gradient(180deg, #6f22ef 0%, #8242f5 30%, #9c67f2 54%, #d9ccfb 78%, #efe6ff 90%, #f3edff 100%)'
+          'linear-gradient(180deg, #6f22ef 0%, #8242f5 28%, #9c67f2 50%, #c9b4f5 68%, #e2d8fb 80%, #ede4fb 90%, #f3edff 100%)'
       }}
     >
       <div className="mx-auto w-full max-w-[1680px] rounded-[34px] bg-[#050505] px-7 py-12 text-white shadow-[0_16px_38px_-30px_rgba(6,2,26,0.52)] ring-1 ring-white/10 md:px-14 md:py-16 lg:min-h-[82vh] lg:px-20 lg:py-24 xl:min-h-[86vh] xl:px-24">
@@ -1810,7 +1810,7 @@ const AliadosSection = () => {
               alt="Kaiva x SEO for Startups"
               loading="lazy"
               decoding="async"
-              className="w-full object-contain drop-shadow-[0_20px_40px_rgba(56,14,136,0.55)]"
+              className="w-full max-w-full object-contain drop-shadow-[0_20px_40px_rgba(56,14,136,0.55)]"
             />
           </div>
         </div>
@@ -3068,7 +3068,7 @@ const ProblemSection = () => {
           </div>
         </div>
 
-        <div className="relative mt-14 w-full overflow-hidden pb-20 md:mt-20 md:pb-32">
+        <div className="relative mt-14 w-full overflow-visible pb-20 md:mt-20 md:pb-32">
           <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[34px] hidden h-[430px] w-screen -translate-x-1/2 opacity-95 md:block">
             <svg
               viewBox="0 0 1600 420"
@@ -3214,7 +3214,7 @@ const HeroSection = () => {
         transition={{ duration: 0.85, ease: 'easeOut' }}
         loading="lazy"
         decoding="async"
-        className="pointer-events-none absolute left-[-48%] top-[72%] z-[5] hidden w-[82vw] min-w-[300px] max-w-[1120px] -translate-y-1/2 object-contain md:block md:left-[-34%] md:top-[71%] md:w-[66vw] md:min-w-[460px]"
+        className="pointer-events-none absolute left-[-48%] top-[72%] z-[5] hidden w-[82vw] min-w-[300px] max-w-[1120px] -translate-y-1/2 object-contain md:block md:left-[-34%] md:top-[71%] md:w-[66vw] md:min-w-[460px] lg:left-[-30%] lg:w-[58vw]"
       />
       <motion.img
         src={asset('degradado-lateral.webp')}
@@ -3225,7 +3225,7 @@ const HeroSection = () => {
         transition={{ duration: 0.85, delay: 0.08, ease: 'easeOut' }}
         loading="lazy"
         decoding="async"
-        className="pointer-events-none absolute right-[-40%] top-[18%] z-[5] hidden w-[78vw] min-w-[280px] max-w-[980px] -translate-y-1/2 object-contain md:block md:right-[-28%] md:top-[22%] md:w-[60vw] md:min-w-[420px]"
+        className="pointer-events-none absolute right-[-40%] top-[18%] z-[5] hidden w-[78vw] min-w-[280px] max-w-[980px] -translate-y-1/2 object-contain md:block md:right-[-28%] md:top-[22%] md:w-[60vw] md:min-w-[420px] lg:right-[-24%] lg:w-[52vw]"
       />
 
       <motion.div
@@ -3404,7 +3404,7 @@ const HeroSection = () => {
             className="left-[2%] top-[20%] z-20 w-[40%] md:left-[10%] md:top-[18%] md:w-[34%]"
             floatY={[0, -5, 0, 5, 0]}
             floatX={[0, 0, 0, 0, 0]}
-            floatRotate={[-7, -7, -7, -7, -7]}
+            floatRotate={[-5, -8, -6, -9, -5]}
             duration={8.6}
             delay={0.15}
           />
@@ -3415,7 +3415,7 @@ const HeroSection = () => {
             className="right-[-4%] top-[6%] z-30 w-[41%] md:right-[2%] md:top-[8%] md:w-[34%]"
             floatY={[0, -6, 0, 6, 0]}
             floatX={[0, 0, 0, 0, 0]}
-            floatRotate={[-5, -5, -5, -5, -5]}
+            floatRotate={[-3, -7, -4, -8, -3]}
             duration={7.8}
             delay={0.35}
           />
