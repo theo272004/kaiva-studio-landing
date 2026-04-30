@@ -1777,7 +1777,7 @@ const AliadosSection = () => {
             </h2>
 
             <div className="mt-6 flex flex-col items-start gap-5 md:mt-8 md:gap-6">
-              <p className="max-w-[34ch] text-[16px] leading-[1.65] text-white/72 md:text-[18px] lg:text-[20px] lg:max-w-[38ch]">
+              <p className="max-w-[48ch] text-[16px] leading-[1.65] text-white/72 md:text-[18px] lg:text-[20px] lg:max-w-[52ch]">
                 Alianza estratégica con Seo4Startups enfocada en potenciar la visibilidad digital mediante SEO, posicionamiento y presencia online.
               </p>
 
@@ -1787,8 +1787,8 @@ const AliadosSection = () => {
                 rel="noopener noreferrer"
                 className="flex w-fit items-center gap-3 rounded-full bg-white px-6 py-3.5 font-inter text-[14px] font-bold text-[#121222] shadow-[0_16px_40px_-20px_rgba(0,0,0,0.75)] transition-transform duration-300 hover:-translate-y-0.5 md:px-10 md:py-4 md:text-[15px]"
               >
-                Conoce más de SEO for Startups
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#efe8ff] text-[#7f41f0]">
+                Conoce más de SEO 4 Startups
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1a1a2e] text-white/80">
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
@@ -3072,25 +3072,25 @@ const ProblemSection = () => {
                 problem: 'Es muy caro.',
                 problemDesc: 'Muchos negocios creen que una web profesional está fuera de su alcance.',
                 solution: 'Inversión con retorno real.',
-                solutionDesc: 'Desde $320 USD. Una web profesional que trabaja 24/7 captando clientes. Se paga sola.',
+                solutionDesc: 'Tendrás una web profesional que trabaja 24/7 captando clientes.',
               },
               {
                 problem: 'No sé cómo funciona.',
                 problemDesc: 'Dominios, hosting, SEO... el lenguaje técnico aleja a quienes solo quieren más clientes.',
                 solution: 'Nos encargamos de todo.',
-                solutionDesc: 'Tú solo nos cuentas tu negocio. Nosotros hacemos el resto: dominio, diseño y publicación.',
+                solutionDesc: 'Cuéntanos tu negocio y nosotros hacemos el resto.',
               },
               {
                 problem: 'Ya intenté y no funcionó.',
                 problemDesc: 'Malas experiencias con freelancers o plantillas que no reflejan tu negocio.',
                 solution: 'Estrategia, no plantillas.',
-                solutionDesc: 'Cada proyecto tiene estructura, copy estratégico y diseño pensado para convertir.',
+                solutionDesc: 'Cada proyecto tiene estructura, copy y diseño estratégico.',
               },
               {
                 problem: 'No tengo tiempo.',
                 problemDesc: 'Gestionar un negocio ya es suficiente. No deberías necesitar un equipo técnico.',
                 solution: 'Entrega lista para operar.',
-                solutionDesc: 'En semanas tienes tu web publicada y funcionando. Sin reuniones infinitas.',
+                solutionDesc: 'En semanas tienes tu web publicada y funcionando, sin reuniones infinitas.',
               },
             ].map((card, i) => (
               <ProblemFlipCard key={i} card={card} index={i} />
