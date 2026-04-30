@@ -627,31 +627,47 @@ const AutomationShowcase = memo(({ mobile = false, prefersReducedMotion = false 
 
               <div className="flex flex-1 flex-col gap-4">
                 <div className={`grid ${mobile ? 'grid-cols-[1fr_1fr_auto] gap-3' : 'grid-cols-[repeat(4,minmax(0,1fr))] gap-4'}`}>
-                  <div className={`rounded-[12px] border border-[#f1f5f9] bg-white ${mobile ? 'p-3' : 'p-3'}`}>
+                  <button
+                    type="button"
+                    aria-label={`Ver dashboard ${AUTOMATION_THEMES[0].label}`}
+                    onMouseEnter={() => setActiveThemeId(AUTOMATION_THEMES[0].id)}
+                    onFocus={() => setActiveThemeId(AUTOMATION_THEMES[0].id)}
+                    onClick={() => setActiveThemeId(AUTOMATION_THEMES[0].id)}
+                    className={`rounded-[12px] border border-[#f1f5f9] bg-white p-3 text-left transition-all duration-300 ${activeTheme.id === AUTOMATION_THEMES[0].id ? 'scale-[1.02] ring-2 ring-black/8 shadow-[0_10px_24px_-18px_rgba(15,23,42,0.25)]' : 'hover:-translate-y-0.5'}`}
+                  >
                     <div className="mb-2 h-3 w-1/2 rounded bg-[#94a3b8]" />
-                    <motion.div animate={{ backgroundColor: activeTheme.metricA }} transition={{ duration: prefersReducedMotion ? 0 : 0.35 }} className="h-5 w-3/4 rounded" />
-                  </div>
-                  <div className={`rounded-[12px] border border-[#f1f5f9] bg-white ${mobile ? 'p-3' : 'p-3'}`}>
+                    <motion.div animate={{ backgroundColor: AUTOMATION_THEMES[0].metricA }} transition={{ duration: prefersReducedMotion ? 0 : 0.35 }} className="h-5 w-3/4 rounded" />
+                  </button>
+                  <button
+                    type="button"
+                    aria-label={`Ver dashboard ${AUTOMATION_THEMES[1].label}`}
+                    onMouseEnter={() => setActiveThemeId(AUTOMATION_THEMES[1].id)}
+                    onFocus={() => setActiveThemeId(AUTOMATION_THEMES[1].id)}
+                    onClick={() => setActiveThemeId(AUTOMATION_THEMES[1].id)}
+                    className={`rounded-[12px] border border-[#f1f5f9] bg-white p-3 text-left transition-all duration-300 ${activeTheme.id === AUTOMATION_THEMES[1].id ? 'scale-[1.02] ring-2 ring-black/8 shadow-[0_10px_24px_-18px_rgba(15,23,42,0.25)]' : 'hover:-translate-y-0.5'}`}
+                  >
                     <div className="mb-2 h-3 w-1/2 rounded bg-[#94a3b8]" />
-                    <motion.div animate={{ backgroundColor: activeTheme.metricB }} transition={{ duration: prefersReducedMotion ? 0 : 0.35 }} className="h-5 w-2/3 rounded" />
-                  </div>
+                    <motion.div animate={{ backgroundColor: AUTOMATION_THEMES[1].metricB }} transition={{ duration: prefersReducedMotion ? 0 : 0.35 }} className="h-5 w-2/3 rounded" />
+                  </button>
                   {!mobile && (
-                    <div className="rounded-[12px] border border-[#f1f5f9] bg-white p-3">
+                    <button
+                      type="button"
+                      aria-label={`Ver dashboard ${AUTOMATION_THEMES[2].label}`}
+                      onMouseEnter={() => setActiveThemeId(AUTOMATION_THEMES[2].id)}
+                      onFocus={() => setActiveThemeId(AUTOMATION_THEMES[2].id)}
+                      onClick={() => setActiveThemeId(AUTOMATION_THEMES[2].id)}
+                      className={`rounded-[12px] border border-[#f1f5f9] bg-white p-3 text-left transition-all duration-300 ${activeTheme.id === AUTOMATION_THEMES[2].id ? 'scale-[1.02] ring-2 ring-black/8 shadow-[0_10px_24px_-18px_rgba(15,23,42,0.25)]' : 'hover:-translate-y-0.5'}`}
+                    >
                       <div className="mb-2 h-3 w-1/2 rounded bg-[#94a3b8]" />
-                      <motion.div animate={{ backgroundColor: activeTheme.metricC }} transition={{ duration: prefersReducedMotion ? 0 : 0.35 }} className="h-5 w-3/4 rounded" />
-                    </div>
+                      <motion.div animate={{ backgroundColor: AUTOMATION_THEMES[2].metricC }} transition={{ duration: prefersReducedMotion ? 0 : 0.35 }} className="h-5 w-3/4 rounded" />
+                    </button>
                   )}
                   <div className={`${mobile ? 'col-span-1 flex flex-col gap-2 rounded-[12px] border border-[#f1f5f9] bg-white p-2' : 'rounded-[12px] border border-[#f1f5f9] bg-white p-3'}`}>
-                    <div className={`flex ${mobile ? 'flex-col gap-1.5' : 'gap-2'}`}>
+                    <div className={`flex items-center ${mobile ? 'flex-col gap-1.5' : 'gap-2'}`}>
                       {AUTOMATION_THEMES.map((theme) => (
-                        <button
+                        <div
                           key={theme.id}
-                          type="button"
-                          aria-label={`Ver dashboard ${theme.label}`}
-                          onMouseEnter={() => setActiveThemeId(theme.id)}
-                          onFocus={() => setActiveThemeId(theme.id)}
-                          onClick={() => setActiveThemeId(theme.id)}
-                          className={`${mobile ? 'h-6 w-6 rounded-full' : 'h-8 flex-1 rounded-full'} border border-black/5 transition-transform duration-300 ${activeTheme.id === theme.id ? 'scale-[1.04] ring-2 ring-black/8' : 'opacity-75 hover:opacity-100'}`}
+                          className={`${mobile ? 'h-6 w-6 rounded-full' : 'h-8 flex-1 rounded-full'} border border-black/5 transition-all duration-300 ${activeTheme.id === theme.id ? 'opacity-100 shadow-[0_8px_18px_-12px_rgba(15,23,42,0.35)]' : 'opacity-65'}`}
                           style={{ backgroundColor: theme.tabColor }}
                         />
                       ))}
