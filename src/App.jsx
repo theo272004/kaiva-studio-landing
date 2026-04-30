@@ -2194,7 +2194,7 @@ const ProjectsGallery = () => {
             </p>
             <a
               href={`${HOME_PAGE_HREF_FROM_SERVICES}#contacto`}
-              className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 font-manrope text-[13px] font-bold uppercase tracking-[0.12em] text-[#8242f5] shadow-[0_12px_30px_-10px_rgba(0,0,0,0.3)] transition-transform duration-300 hover:scale-105"
+              className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 font-inter text-[14px] font-semibold tracking-normal text-[#8242f5] shadow-[0_12px_30px_-10px_rgba(0,0,0,0.3)] transition-transform duration-300 hover:scale-105"
             >
               Hablemos
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -3429,10 +3429,10 @@ const HeroSection = () => {
             src={asset('KaivaTheo.webp')}
             alt="Robot Kaiva Theo"
             constraintsRef={heroSectionRef}
-            className="left-[0%] top-[22%] z-20 w-[40%] md:left-[7%] md:top-[20%] md:w-[34%]"
+            className="left-[-2%] top-[22%] z-20 w-[40%] md:left-[4%] md:top-[20%] md:w-[34%]"
             floatY={[0, -5, 0, 5, 0]}
             floatX={[0, 0, 0, 0, 0]}
-            floatRotate={[-15, -15, -15, -15, -15]}
+            floatRotate={[-18, -18, -18, -18, -18]}
             duration={8.6}
             delay={0.15}
           />
@@ -3443,7 +3443,7 @@ const HeroSection = () => {
             className="right-[-4%] top-[6%] z-30 w-[41%] md:right-[2%] md:top-[8%] md:w-[34%]"
             floatY={[0, -6, 0, 6, 0]}
             floatX={[0, 0, 0, 0, 0]}
-            floatRotate={[-12, -12, -12, -12, -12]}
+            floatRotate={[-15, -15, -15, -15, -15]}
             duration={7.8}
             delay={0.35}
           />
