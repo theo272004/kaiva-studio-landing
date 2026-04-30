@@ -2904,6 +2904,19 @@ const App = () => {
               transform: translateY(0) !important;
             }
           }
+
+          /* Problem section: clip horizontal but allow vertical for gradient line */
+          .problem-section {
+            overflow-x: clip;
+            overflow-y: visible;
+          }
+
+          /* Allies SEO image responsive for laptops */
+          @media (min-width: 1024px) and (max-width: 1366px) {
+            .allies-section .relative.mx-auto {
+              max-width: 480px !important;
+            }
+          }
       `}</style>
     </div>
   );
@@ -3404,7 +3417,7 @@ const HeroSection = () => {
             className="left-[2%] top-[20%] z-20 w-[40%] md:left-[10%] md:top-[18%] md:w-[34%]"
             floatY={[0, -5, 0, 5, 0]}
             floatX={[0, 0, 0, 0, 0]}
-            floatRotate={[-5, -8, -6, -9, -5]}
+            floatRotate={[-7, -7, -7, -7, -7]}
             duration={8.6}
             delay={0.15}
           />
@@ -3415,7 +3428,7 @@ const HeroSection = () => {
             className="right-[-4%] top-[6%] z-30 w-[41%] md:right-[2%] md:top-[8%] md:w-[34%]"
             floatY={[0, -6, 0, 6, 0]}
             floatX={[0, 0, 0, 0, 0]}
-            floatRotate={[-3, -7, -4, -8, -3]}
+            floatRotate={[-5, -5, -5, -5, -5]}
             duration={7.8}
             delay={0.35}
           />
