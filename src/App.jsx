@@ -270,126 +270,430 @@ const MockupRenderer = memo(({ type }) => {
   );
 });
 
+const DESIGN_THEMES = [
+  {
+    id: 'ink',
+    swatch: '#16151f',
+    label: 'Ink',
+    board: 'linear-gradient(160deg, #16151f 0%, #3b2b63 58%, #d96cff 125%)',
+    uiSurface: '#151225',
+    chip: '#16151f',
+    secondary: '#d9cdf7',
+    soft: '#f3ede4',
+    accent: '#8b5cf6',
+  },
+  {
+    id: 'violet',
+    swatch: '#8242f5',
+    label: 'Violet',
+    board: 'linear-gradient(160deg, #31205c 0%, #8242f5 55%, #d6b7ff 125%)',
+    uiSurface: '#24153f',
+    chip: '#8242f5',
+    secondary: '#e8dcff',
+    soft: '#f7f2ff',
+    accent: '#8242f5',
+  },
+  {
+    id: 'rose',
+    swatch: '#d96cff',
+    label: 'Rose',
+    board: 'linear-gradient(160deg, #3f2244 0%, #d96cff 52%, #ffe0f1 122%)',
+    uiSurface: '#2b1830',
+    chip: '#d96cff',
+    secondary: '#f4d6ff',
+    soft: '#fff3fb',
+    accent: '#d96cff',
+  },
+  {
+    id: 'sand',
+    swatch: '#f3ede4',
+    label: 'Sand',
+    board: 'linear-gradient(160deg, #322b24 0%, #a68a63 52%, #f3ede4 122%)',
+    uiSurface: '#2a261f',
+    chip: '#d5b48b',
+    secondary: '#efe3d0',
+    soft: '#fdf8f2',
+    accent: '#d5b48b',
+  },
+];
+
+const AUTOMATION_THEMES = [
+  {
+    id: 'black',
+    label: 'Core',
+    tabColor: '#111827',
+    metricA: '#0f172a',
+    metricB: '#334155',
+    metricC: '#64748b',
+    bars: [44, 78, 52, 92, 68, 86, 58, 100],
+    donut: [48, 28, 24],
+  },
+  {
+    id: 'blue',
+    label: 'Flow',
+    tabColor: '#2563eb',
+    metricA: '#1d4ed8',
+    metricB: '#38bdf8',
+    metricC: '#7dd3fc',
+    bars: [56, 82, 60, 88, 76, 94, 62, 98],
+    donut: [56, 22, 22],
+  },
+  {
+    id: 'green',
+    label: 'Ops',
+    tabColor: '#10b981',
+    metricA: '#059669',
+    metricB: '#34d399',
+    metricC: '#a7f3d0',
+    bars: [42, 74, 48, 84, 64, 90, 58, 96],
+    donut: [38, 34, 28],
+  },
+];
+
+const ResponsiveWebShowcase = memo(({ mobile = false, prefersReducedMotion = false }) => {
+  const [responsiveMode, setResponsiveMode] = useState(false);
+
+  useEffect(() => {
+    if (prefersReducedMotion) return undefined;
+    const timer = window.setInterval(() => {
+      setResponsiveMode((current) => !current);
+    }, 2300);
+    return () => window.clearInterval(timer);
+  }, [prefersReducedMotion]);
+
+  const browserWidth = mobile ? '90%' : '84%';
+  const phoneWidth = mobile ? 66 : 126;
+  const phoneHeight = mobile ? 124 : 236;
+
+  return (
+    <div className={`mx-auto w-full ${mobile ? 'max-w-[290px] overflow-hidden rounded-[22px] border border-[#d9d3ca] bg-[#eae6df] shadow-[0_18px_40px_-26px_rgba(57,53,44,0.18)]' : 'service-visual-web overflow-hidden rounded-[30px] bg-[#eae6df]'}`}>
+      <div
+        className={`${mobile ? 'min-h-[210px] p-4' : 'min-h-[390px] p-6 sm:p-8'} flex h-full items-center justify-center overflow-hidden bg-[#eae6df]`}
+      >
+        <div className={`relative flex w-full items-center justify-center ${mobile ? 'max-w-[220px]' : 'max-w-[500px]'}`}>
+          <motion.div
+            animate={
+              prefersReducedMotion
+                ? { scale: 1, x: 0, opacity: 1 }
+                : responsiveMode
+                  ? { scale: mobile ? 0.9 : 0.88, x: mobile ? -16 : -34, opacity: 0.96 }
+                  : { scale: 1, x: 0, opacity: 1 }
+            }
+            transition={{ duration: prefersReducedMotion ? 0 : 0.7, ease: premiumEase }}
+            className="relative z-10"
+            style={{ width: browserWidth }}
+          >
+            <div className={`mockup-browser overflow-hidden border border-[#d9d3ca] bg-white ${mobile ? 'rounded-[10px] shadow-[0_16px_34px_rgba(57,53,44,0.12)]' : 'rounded-[12px] shadow-[0_20px_50px_rgba(57,53,44,0.15)]'}`}>
+              <div className={`bar flex items-center bg-[#f7f5f2] ${mobile ? 'h-[24px] gap-[6px] px-[12px]' : 'h-[30px] gap-[7px] px-[14px]'}`}>
+                <span className={`block rounded-full bg-[#ff5f57] ${mobile ? 'h-[8px] w-[8px]' : 'h-[10px] w-[10px]'}`} />
+                <span className={`block rounded-full bg-[#febc2e] ${mobile ? 'h-[8px] w-[8px]' : 'h-[10px] w-[10px]'}`} />
+                <span className={`block rounded-full bg-[#28c840] ${mobile ? 'h-[8px] w-[8px]' : 'h-[10px] w-[10px]'}`} />
+              </div>
+              <div className={`content flex flex-col ${mobile ? 'gap-2 p-4' : 'gap-[0.7rem] p-[1.6rem]'}`}>
+                <div className={`rounded-full bg-[#eae6df] ${mobile ? 'h-[6px] w-[78%]' : 'h-[8px] w-[80%] rounded-[4px]'}`} />
+                <div className={`rounded-full bg-[#eae6df] ${mobile ? 'h-[6px] w-[58%]' : 'h-[8px] w-[60%] rounded-[4px]'}`} />
+                <motion.div
+                  animate={prefersReducedMotion ? { width: mobile ? '34%' : '35%' } : responsiveMode ? { width: mobile ? '54%' : '56%' } : { width: mobile ? '34%' : '35%' }}
+                  transition={{ duration: prefersReducedMotion ? 0 : 0.7, ease: premiumEase }}
+                  className={`rounded-full bg-[#792fec] shadow-[0_0_12px_rgba(121,47,236,0.25)] ${mobile ? 'h-[6px]' : 'h-[8px] rounded-[4px]'}`}
+                />
+                <div className={`flex items-center rounded-[8px] border border-[#e0dbd2] bg-[#f9f8f6] ${mobile ? 'gap-2 p-3' : 'mt-[0.4rem] gap-[0.8rem] p-[1rem]'}`}>
+                  <div className={`shrink-0 rounded-full bg-[#d9d3ca] ${mobile ? 'h-[24px] w-[24px]' : 'h-[32px] w-[32px]'}`} />
+                  <div className="flex-1">
+                    <div className={`rounded-full bg-[#d9d3ca] ${mobile ? 'mb-1.5 h-[5px] w-[70%]' : 'mb-[4px] h-[6px] w-[70%] rounded-[3px]'}`} />
+                    <div className={`rounded-full bg-[#d9d3ca] ${mobile ? 'h-[5px] w-[46%]' : 'h-[6px] w-[50%] rounded-[3px]'}`} />
+                  </div>
+                </div>
+                <div className={`rounded-full bg-[#eae6df] ${mobile ? 'h-[6px] w-[46%]' : 'h-[8px] w-[50%] rounded-[4px]'}`} />
+                <div className={`rounded-full bg-[#eae6df] ${mobile ? 'h-[6px] w-[62%]' : 'h-[8px] w-[60%] rounded-[4px]'}`} />
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            animate={
+              prefersReducedMotion
+                ? { scale: 1, x: 0, y: 0, opacity: 1 }
+                : responsiveMode
+                  ? { scale: mobile ? 1.05 : 1.12, x: mobile ? -8 : -28, y: mobile ? -10 : -16, opacity: 1 }
+                  : { scale: mobile ? 0.86 : 0.88, x: mobile ? 0 : 0, y: 0, opacity: 0.92 }
+            }
+            transition={{ duration: prefersReducedMotion ? 0 : 0.7, ease: premiumEase }}
+            className={`absolute z-20 ${mobile ? '-bottom-4 -right-4' : '-bottom-8 -right-8'}`}
+          >
+            <div
+              className="relative flex flex-col bg-white"
+              style={{
+                height: `${phoneHeight}px`,
+                width: `${phoneWidth}px`,
+                borderRadius: mobile ? '14px' : '24px',
+                border: mobile ? '4px solid #1f1f1f' : '6px solid #1f1f1f',
+                boxShadow: mobile ? '0 20px 36px rgba(0,0,0,0.18)' : '0 30px 60px rgba(0,0,0,0.35)',
+              }}
+            >
+              <div className={`absolute left-1/2 -translate-x-1/2 rounded-full bg-[#1f1f1f] ${mobile ? 'top-1.5 h-[3px] w-7' : 'top-2 h-[4px] w-10'}`} />
+              <div className={`flex h-full flex-col ${mobile ? 'space-y-1.5 p-2 pt-5' : 'gap-2.5 p-3 pt-7'}`}>
+                <div className={`rounded-full bg-[#d9d3ca] ${mobile ? 'h-[5px] w-1/2' : 'h-2 w-1/2'}`} />
+                <motion.div
+                  animate={prefersReducedMotion ? { height: mobile ? 38 : 76 } : responsiveMode ? { height: mobile ? 58 : 112 } : { height: mobile ? 38 : 76 }}
+                  transition={{ duration: prefersReducedMotion ? 0 : 0.7, ease: premiumEase }}
+                  className="w-full rounded-[8px] bg-[#eae6df]"
+                />
+                <div className={`rounded-full bg-[#eae6df] ${mobile ? 'h-[5px] w-4/5' : 'h-2 w-4/5'}`} />
+                <div className={`rounded-full bg-[#eae6df] ${mobile ? 'h-[5px] w-3/5' : 'h-2 w-3/5'}`} />
+                <motion.div
+                  animate={prefersReducedMotion ? { width: mobile ? '50%' : '50%' } : responsiveMode ? { width: mobile ? '72%' : '74%' } : { width: mobile ? '50%' : '50%' }}
+                  transition={{ duration: prefersReducedMotion ? 0 : 0.7, ease: premiumEase }}
+                  className={`mt-auto rounded-[5px] bg-[#792fec] shadow-sm ${mobile ? 'h-[14px]' : 'h-6 opacity-95'}`}
+                />
+              </div>
+            </div>
+          </motion.div>
+
+          {!mobile && (
+            <motion.div
+              animate={prefersReducedMotion ? { opacity: 0.7 } : responsiveMode ? { opacity: 1 } : { opacity: 0.7 }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.7, ease: premiumEase }}
+              className="pointer-events-none absolute bottom-3 left-8 rounded-full border border-[#d8d0ee] bg-white/80 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-[#6d28d9]"
+            >
+              Responsive motion
+            </motion.div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+});
+
+const DesignShowcase = memo(({ mobile = false, prefersReducedMotion = false }) => {
+  const [activeThemeId, setActiveThemeId] = useState(DESIGN_THEMES[1].id);
+  const activeTheme = DESIGN_THEMES.find((theme) => theme.id === activeThemeId) ?? DESIGN_THEMES[1];
+
+  return (
+    <div className={`mx-auto w-full ${mobile ? 'max-w-[292px]' : ''}`}>
+      <div
+        className={`design-composition service-visual-design ${mobile ? 'grid gap-3' : 'grid gap-4 lg:grid-cols-[0.88fr_1.12fr] transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform'}`}
+        style={mobile ? undefined : { transform: 'translate(calc(var(--service-move-x,0px) * 0.7), calc(var(--service-move-y,0px) * 0.5))' }}
+      >
+        <div className={`${mobile ? 'rounded-[20px] p-4 shadow-[0_16px_34px_-24px_rgba(15,23,42,0.22)]' : 'rounded-[28px] p-5 shadow-[0_26px_72px_-40px_rgba(15,23,42,0.28)]'} border border-[#111827]/8 bg-[#fffdf9]`}>
+          <div className={`font-bold uppercase tracking-[0.2em] text-[#8b5cf6] ${mobile ? 'mb-3 text-[10px]' : 'mb-5 text-[11px]'}`}>Brand board</div>
+          <div className="space-y-3">
+            <div className={`font-epilogue font-extrabold tracking-[-0.04em] text-[#16151f] ${mobile ? 'text-[30px] leading-none' : 'text-4xl'}`}>Kaiva</div>
+            <div className={`${mobile ? 'mt-2 text-[14px]' : 'text-lg'} font-semibold tracking-[-0.03em] text-[#16151f]`}>Systems with character</div>
+            {!mobile && (
+              <div className="max-w-[15rem] text-sm leading-6 text-[#5b556e]">
+                Dirección visual, color, tipografía y piezas listas para web, decks o redes.
+              </div>
+            )}
+          </div>
+          <div className={`mt-4 grid grid-cols-4 gap-2 ${mobile ? '' : 'mt-6'}`}>
+            {DESIGN_THEMES.map((theme) => (
+              <button
+                key={theme.id}
+                type="button"
+                aria-label={`Activar paleta ${theme.label}`}
+                onMouseEnter={() => setActiveThemeId(theme.id)}
+                onFocus={() => setActiveThemeId(theme.id)}
+                onClick={() => setActiveThemeId(theme.id)}
+                className={`${mobile ? 'h-9 rounded-[14px]' : 'h-12 rounded-2xl'} border border-black/5 transition-all duration-300 ${activeTheme.id === theme.id ? 'scale-[1.04] ring-2 ring-black/10' : 'scale-100 opacity-85 hover:opacity-100'}`}
+                style={{ background: theme.swatch }}
+              />
+            ))}
+          </div>
+        </div>
+
+        <motion.div
+          animate={prefersReducedMotion ? false : { boxShadow: ['0 28px 74px -40px rgba(91,33,182,0.22)', '0 32px 88px -42px rgba(91,33,182,0.3)', '0 28px 74px -40px rgba(91,33,182,0.22)'] }}
+          transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
+          className={`${mobile ? 'rounded-[20px] p-4 shadow-[0_18px_40px_-28px_rgba(91,33,182,0.26)]' : 'overflow-hidden rounded-[28px] p-5 shadow-[0_28px_74px_-40px_rgba(91,33,182,0.34)]'} border border-[#111827]/8 bg-[#f5f0ff]`}
+        >
+          <div className={`grid gap-3 ${mobile ? 'grid-cols-[1.05fr_0.95fr]' : 'md:grid-cols-[0.92fr_1.08fr] gap-4'}`}>
+            <div className={`${mobile ? 'rounded-[18px] p-3' : 'rounded-[24px] p-4'} bg-white shadow-[0_18px_48px_-32px_rgba(15,23,42,0.32)]`}>
+              <motion.div
+                animate={{ background: activeTheme.board }}
+                transition={{ duration: prefersReducedMotion ? 0 : 0.45, ease: premiumEase }}
+                className={`${mobile ? 'mb-3 h-20 rounded-[16px]' : 'mb-4 h-36 rounded-[20px]'}`}
+              />
+              <div className="space-y-2">
+                <motion.div
+                  animate={{ backgroundColor: activeTheme.chip }}
+                  transition={{ duration: prefersReducedMotion ? 0 : 0.45, ease: premiumEase }}
+                  className={`${mobile ? 'h-3 w-16' : 'h-4 w-24'} rounded-full`}
+                />
+                <motion.div
+                  animate={{ backgroundColor: activeTheme.secondary }}
+                  transition={{ duration: prefersReducedMotion ? 0 : 0.45, ease: premiumEase }}
+                  className={`${mobile ? 'h-2.5' : 'h-3'} rounded-full`}
+                />
+                {!mobile && (
+                  <motion.div
+                    animate={{ backgroundColor: activeTheme.soft }}
+                    transition={{ duration: prefersReducedMotion ? 0 : 0.45, ease: premiumEase }}
+                    className="h-3 w-4/5 rounded-full"
+                  />
+                )}
+              </div>
+            </div>
+            <div className="grid gap-3 md:gap-4">
+              <motion.div
+                animate={{ backgroundColor: activeTheme.uiSurface }}
+                transition={{ duration: prefersReducedMotion ? 0 : 0.45, ease: premiumEase }}
+                className={`${mobile ? 'rounded-[18px] p-3' : 'rounded-[24px] p-4'} text-white`}
+              >
+                <div className={`${mobile ? 'mb-2 text-[9px]' : 'mb-3 text-[11px]'} uppercase tracking-[0.16em] text-white/52`}>UI kit</div>
+                <div className="flex gap-2">
+                  <motion.div
+                    animate={{ backgroundColor: activeTheme.soft }}
+                    transition={{ duration: prefersReducedMotion ? 0 : 0.45, ease: premiumEase }}
+                    className={`${mobile ? 'h-8' : 'h-10'} flex-1 rounded-full`}
+                  />
+                  <motion.div
+                    animate={{ backgroundColor: activeTheme.accent }}
+                    transition={{ duration: prefersReducedMotion ? 0 : 0.45, ease: premiumEase }}
+                    className={`${mobile ? 'h-8 w-10' : 'h-10 w-12'} rounded-full`}
+                  />
+                </div>
+              </motion.div>
+              <div className={`${mobile ? 'rounded-[18px] p-3' : 'rounded-[24px] p-4'} bg-white`}>
+                <motion.div
+                  animate={{ backgroundColor: activeTheme.secondary }}
+                  transition={{ duration: prefersReducedMotion ? 0 : 0.45, ease: premiumEase }}
+                  className={`${mobile ? 'mb-2 h-2.5 w-14' : 'mb-3 h-3 w-20'} rounded-full`}
+                />
+                <div className={`grid grid-cols-2 ${mobile ? 'gap-2' : 'gap-3'}`}>
+                  <motion.div
+                    animate={{ background: `linear-gradient(135deg, ${activeTheme.soft}, #ffffff)` }}
+                    transition={{ duration: prefersReducedMotion ? 0 : 0.45, ease: premiumEase }}
+                    className={`${mobile ? 'h-14 rounded-[14px]' : 'h-20 rounded-[18px]'}`}
+                  />
+                  <motion.div
+                    animate={{ background: `linear-gradient(135deg, ${activeTheme.chip}, ${activeTheme.uiSurface})` }}
+                    transition={{ duration: prefersReducedMotion ? 0 : 0.45, ease: premiumEase }}
+                    className={`${mobile ? 'h-14 rounded-[14px]' : 'h-20 rounded-[18px]'}`}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+});
+
+const AutomationShowcase = memo(({ mobile = false, prefersReducedMotion = false }) => {
+  const [activeThemeId, setActiveThemeId] = useState(AUTOMATION_THEMES[1].id);
+  const activeTheme = AUTOMATION_THEMES.find((theme) => theme.id === activeThemeId) ?? AUTOMATION_THEMES[1];
+  const donutStops = [];
+  let offset = 0;
+  activeTheme.donut.forEach((value, index) => {
+    donutStops.push(`${[activeTheme.metricA, activeTheme.metricB, activeTheme.metricC][index]} ${offset}% ${offset + value}%`);
+    offset += value;
+  });
+
+  return (
+    <div className={`mx-auto w-full ${mobile ? 'max-w-[292px] overflow-hidden rounded-[20px] border border-[#dfe7f1] bg-white shadow-[0_18px_42px_-28px_rgba(15,23,42,0.14)]' : 'overflow-hidden rounded-[30px] border border-[#0f172a]/8 bg-[#fdfdfd] shadow-[0_32px_90px_-42px_rgba(2,8,23,0.12)]'}`}>
+      <div
+        className={`${mobile ? '' : 'service-visual-dashboard transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform h-full'}`}
+        style={mobile ? undefined : { transform: 'translate(calc(var(--service-move-x,0px) * 0.4), calc(var(--service-move-y,0px) * 0.3))' }}
+      >
+        <div className={`${mobile ? 'space-y-3 bg-[#f7f9fc] p-4' : 'flex min-h-[390px] h-full items-center justify-center bg-[#f7f9fc] p-6 lg:p-8'}`}>
+          <div className={`${mobile ? '' : 'w-full max-w-[500px] overflow-hidden rounded-[16px] border border-[#e2e8f0] bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]'}`}>
+            <div className={`flex items-center border-b border-[#f1f5f9] bg-[#f8fafc] ${mobile ? 'h-8 px-3' : 'h-10 px-4'}`}>
+              <div className="flex gap-1.5">
+                <div className={`${mobile ? 'h-2 w-2' : 'h-2.5 w-2.5'} rounded-full bg-[#ff5f57]`} />
+                <div className={`${mobile ? 'h-2 w-2' : 'h-2.5 w-2.5'} rounded-full bg-[#febc2e]`} />
+                <div className={`${mobile ? 'h-2 w-2' : 'h-2.5 w-2.5'} rounded-full bg-[#28c840]`} />
+              </div>
+            </div>
+
+            <div className={`${mobile ? 'space-y-3 bg-[#f7f9fc] p-4' : 'flex h-[280px] gap-4 p-4'}`}>
+              {!mobile && (
+                <div className="hidden w-1/4 flex-col gap-3 border-r border-[#f1f5f9] pr-4 pt-1 sm:flex">
+                  <div className="h-4 w-full rounded bg-[#e2e8f0]" />
+                  <div className="h-4 w-3/4 rounded bg-[#f1f5f9]" />
+                  <div className="h-4 w-5/6 rounded bg-[#f1f5f9]" />
+                  <div className="h-4 w-2/3 rounded bg-[#f1f5f9]" />
+                </div>
+              )}
+
+              <div className="flex flex-1 flex-col gap-4">
+                <div className={`grid ${mobile ? 'grid-cols-[1fr_auto] gap-3' : 'grid-cols-[repeat(4,minmax(0,1fr))] gap-4'}`}>
+                  <div className={`rounded-[12px] border border-[#f1f5f9] bg-white ${mobile ? 'p-3' : 'p-3'}`}>
+                    <div className="mb-2 h-3 w-1/2 rounded bg-[#94a3b8]" />
+                    <motion.div animate={{ backgroundColor: activeTheme.metricA }} transition={{ duration: prefersReducedMotion ? 0 : 0.35 }} className="h-5 w-3/4 rounded" />
+                  </div>
+                  <div className={`rounded-[12px] border border-[#f1f5f9] bg-white ${mobile ? 'p-3' : 'p-3'}`}>
+                    <div className="mb-2 h-3 w-1/2 rounded bg-[#94a3b8]" />
+                    <motion.div animate={{ backgroundColor: activeTheme.metricB }} transition={{ duration: prefersReducedMotion ? 0 : 0.35 }} className="h-5 w-2/3 rounded" />
+                  </div>
+                  {!mobile && (
+                    <div className="rounded-[12px] border border-[#f1f5f9] bg-white p-3">
+                      <div className="mb-2 h-3 w-1/2 rounded bg-[#94a3b8]" />
+                      <motion.div animate={{ backgroundColor: activeTheme.metricC }} transition={{ duration: prefersReducedMotion ? 0 : 0.35 }} className="h-5 w-3/4 rounded" />
+                    </div>
+                  )}
+                  <div className={`${mobile ? 'col-span-1 flex flex-col gap-2 self-stretch justify-between rounded-[12px] border border-[#f1f5f9] bg-white p-2' : 'rounded-[12px] border border-[#f1f5f9] bg-white p-3'}`}>
+                    <div className={`flex ${mobile ? 'flex-col gap-1.5' : 'gap-2'}`}>
+                      {AUTOMATION_THEMES.map((theme) => (
+                        <button
+                          key={theme.id}
+                          type="button"
+                          aria-label={`Ver dashboard ${theme.label}`}
+                          onMouseEnter={() => setActiveThemeId(theme.id)}
+                          onFocus={() => setActiveThemeId(theme.id)}
+                          onClick={() => setActiveThemeId(theme.id)}
+                          className={`${mobile ? 'h-6 w-6 rounded-full' : 'h-8 flex-1 rounded-full'} border border-black/5 transition-transform duration-300 ${activeTheme.id === theme.id ? 'scale-[1.04] ring-2 ring-black/8' : 'opacity-75 hover:opacity-100'}`}
+                          style={{ backgroundColor: theme.tabColor }}
+                        />
+                      ))}
+                    </div>
+                    {mobile && (
+                      <motion.div
+                        animate={{ background: `conic-gradient(${donutStops.join(', ')})` }}
+                        transition={{ duration: prefersReducedMotion ? 0 : 0.4 }}
+                        className="mx-auto h-16 w-16 rounded-full"
+                        style={{ mask: 'radial-gradient(circle at center, transparent 54%, black 56%)', WebkitMask: 'radial-gradient(circle at center, transparent 54%, black 56%)' }}
+                      />
+                    )}
+                  </div>
+                </div>
+
+                <div className={`${mobile ? 'grid grid-cols-[1.15fr_0.85fr] gap-3' : 'grid grid-cols-[1.2fr_0.8fr] gap-4 flex-1'}`}>
+                  <div className={`${mobile ? 'flex h-[120px] items-end gap-2 rounded-[12px] border border-[#e2e8f0] bg-white px-4 pb-4 pt-3' : 'flex items-end gap-2 rounded-[12px] border border-[#e2e8f0] bg-white px-6 pb-4 pt-3'}`}>
+                    {activeTheme.bars.map((height, index) => (
+                      <motion.div
+                        key={`${activeTheme.id}-${index}`}
+                        animate={{ height: `${height}%`, backgroundColor: index % 2 === 0 ? activeTheme.metricB : activeTheme.metricA }}
+                        transition={{ duration: prefersReducedMotion ? 0 : 0.4, ease: premiumEase }}
+                        className="flex-1 rounded-t-md"
+                      />
+                    ))}
+                  </div>
+                  {!mobile && (
+                    <div className="flex items-center justify-center rounded-[12px] border border-[#e2e8f0] bg-white p-4">
+                      <motion.div
+                        animate={{ background: `conic-gradient(${donutStops.join(', ')})` }}
+                        transition={{ duration: prefersReducedMotion ? 0 : 0.4 }}
+                        className="h-36 w-36 rounded-full"
+                        style={{ mask: 'radial-gradient(circle at center, transparent 56%, black 58%)', WebkitMask: 'radial-gradient(circle at center, transparent 56%, black 58%)' }}
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+});
+
 const ServiceShowcaseVisual = memo(({ service, prefersReducedMotion }) => {
   const panelTransition = prefersReducedMotion
     ? { duration: 0 }
     : { duration: 0.55, ease: premiumEase };
-
-  if (service.id === 'web') {
-    return (
-      <motion.div
-        key={service.id}
-        initial={prefersReducedMotion ? false : { opacity: 0, y: 18, scale: 0.985 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: 0.985 }}
-        transition={panelTransition}
-        className="service-visual-web w-full overflow-hidden rounded-[30px] bg-[#eae6df]"
-      >
-        <div
-          className="transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform h-full w-full"
-          style={{ transform: 'perspective(700px) rotateY(var(--service-rotate-y,0deg)) rotateX(var(--service-rotate-x,0deg)) translateZ(8px)' }}
-        >
-          <div className="flex min-h-[390px] items-center justify-center bg-[#eae6df] p-6 sm:p-8 overflow-hidden h-full">
-            <div className="relative flex items-center justify-center w-full max-w-[480px]">
-              <div className="mockup-browser w-[90%] sm:w-[85%] overflow-hidden rounded-[12px] border border-[#d9d3ca] bg-white shadow-[0_20px_50px_rgba(57,53,44,0.15)] relative z-10">
-                <div className="bar flex h-[30px] items-center gap-[7px] bg-[#f7f5f2] px-[14px]">
-                  <span className="block h-[10px] w-[10px] rounded-full bg-[#ff5f57]" />
-                  <span className="block h-[10px] w-[10px] rounded-full bg-[#febc2e]" />
-                  <span className="block h-[10px] w-[10px] rounded-full bg-[#28c840]" />
-                </div>
-                <div className="content flex flex-col gap-[0.7rem] p-[1.6rem]">
-                  <div className="line h-[8px] w-[80%] rounded-[4px] bg-[#eae6df]" />
-                  <div className="line short h-[8px] w-[60%] rounded-[4px] bg-[#eae6df]" />
-                  <div className="line accent h-[8px] w-[35%] rounded-[4px] bg-[#792fec] shadow-[0_0_12px_rgba(121,47,236,0.25)]" />
-                  <div className="card-mini mt-[0.4rem] flex items-center gap-[0.8rem] rounded-[8px] border border-[#e0dbd2] bg-[#f9f8f6] p-[1rem]">
-                    <div className="avatar h-[32px] w-[32px] shrink-0 rounded-full bg-[#d9d3ca]" />
-                    <div className="text-group flex-1">
-                      <div className="l mb-[4px] h-[6px] w-[70%] rounded-[3px] bg-[#d9d3ca]" />
-                      <div className="l short h-[6px] w-[50%] rounded-[3px] bg-[#d9d3ca]" />
-                    </div>
-                  </div>
-                  <div className="line h-[8px] w-[50%] rounded-[4px] bg-[#eae6df]" />
-                  <div className="line short h-[8px] w-[60%] rounded-[4px] bg-[#eae6df]" />
-                </div>
-              </div>
-              <div className="absolute -bottom-8 -right-2 sm:-right-8 z-20 h-[240px] w-[115px] sm:w-[125px] rounded-[24px] border-[6px] border-[#1f1f1f] bg-white shadow-[0_30px_60px_rgba(0,0,0,0.35)] flex flex-col">
-                <div className="absolute left-1/2 top-2 h-[4px] w-10 -translate-x-1/2 rounded-full bg-[#1f1f1f]"></div>
-                <div className="p-3 pt-7 flex flex-col gap-2.5 h-full">
-                   <div className="h-2 w-1/2 rounded-full bg-[#d9d3ca]"></div>
-                   <div className="h-[76px] w-full shrink-0 rounded-[8px] bg-[#eae6df]"></div>
-                   <div className="h-2 w-4/5 rounded-full bg-[#eae6df]"></div>
-                   <div className="h-2 w-3/5 rounded-full bg-[#eae6df]"></div>
-                   <div className="h-6 w-1/2 mt-auto rounded-[5px] bg-[#792fec] opacity-95 shadow-sm"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    );
-  }
-
-  if (service.id === 'design') {
-    return (
-      <motion.div
-        key={service.id}
-        initial={prefersReducedMotion ? false : { opacity: 0, y: 18, scale: 0.985 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: 0.985 }}
-        transition={panelTransition}
-        className="w-full"
-      >
-        <div
-          className="design-composition service-visual-design grid gap-4 transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform lg:grid-cols-[0.88fr_1.12fr]"
-          style={{ transform: 'translate(calc(var(--service-move-x,0px) * 0.7), calc(var(--service-move-y,0px) * 0.5))' }}
-        >
-          <div className="rounded-[28px] border border-[#111827]/8 bg-[#fffdf9] p-5 shadow-[0_26px_72px_-40px_rgba(15,23,42,0.28)]">
-            <div className="mb-5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#8b5cf6]">Brand board</div>
-            <div className="space-y-3">
-              <div className="font-epilogue text-4xl font-extrabold tracking-[-0.04em] text-[#16151f]">Kaiva</div>
-              <div className="text-lg font-semibold tracking-[-0.03em] text-[#16151f]">Systems with character</div>
-              <div className="max-w-[15rem] text-sm leading-6 text-[#5b556e]">
-                Dirección visual, color, tipografía y piezas listas para web, decks o redes.
-              </div>
-            </div>
-            <div className="mt-6 grid grid-cols-4 gap-2">
-              {['#16151f', '#8242f5', '#d96cff', '#f3ede4'].map((color) => (
-                <div key={color} className="h-12 rounded-2xl border border-black/5" style={{ background: color }} />
-              ))}
-            </div>
-          </div>
-          <div className="overflow-hidden rounded-[28px] border border-[#111827]/8 bg-[#f5f0ff] p-5 shadow-[0_28px_74px_-40px_rgba(91,33,182,0.34)]">
-            <div className="grid gap-4 md:grid-cols-[0.92fr_1.08fr]">
-              <div className="rounded-[24px] bg-white p-4 shadow-[0_18px_48px_-32px_rgba(15,23,42,0.32)]">
-                <div className="mb-4 h-36 rounded-[20px] bg-[linear-gradient(160deg,_#111827,_#6d28d9_58%,_#f5d0fe_120%)]" />
-                <div className="space-y-2">
-                  <div className="h-4 w-24 rounded-full bg-[#111827]" />
-                  <div className="h-3 rounded-full bg-[#d8ccff]" />
-                  <div className="h-3 w-4/5 rounded-full bg-[#eadcff]" />
-                </div>
-              </div>
-              <div className="grid gap-4">
-                <div className="rounded-[24px] bg-[#151225] p-4 text-white">
-                  <div className="mb-3 text-[11px] uppercase tracking-[0.16em] text-white/52">UI kit</div>
-                  <div className="flex gap-2">
-                    <div className="h-10 flex-1 rounded-full bg-white text-[#121212]" />
-                    <div className="h-10 w-12 rounded-full bg-white/10" />
-                  </div>
-                </div>
-                <div className="rounded-[24px] bg-white p-4">
-                  <div className="mb-3 h-3 w-20 rounded-full bg-[#d8ccff]" />
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="h-20 rounded-[18px] bg-[linear-gradient(135deg,_#ede9fe,_#ffffff)]" />
-                    <div className="h-20 rounded-[18px] bg-[linear-gradient(135deg,_#111827,_#334155)]" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    );
-  }
 
   return (
     <motion.div
@@ -398,170 +702,19 @@ const ServiceShowcaseVisual = memo(({ service, prefersReducedMotion }) => {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -12, scale: 0.985 }}
       transition={panelTransition}
-      className="w-full overflow-hidden rounded-[30px] border border-[#0f172a]/8 bg-[#fdfdfd] shadow-[0_32px_90px_-42px_rgba(2,8,23,0.12)]"
+      className="w-full"
     >
-      <div
-        className="service-visual-dashboard transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] will-change-transform h-full"
-        style={{ transform: 'translate(calc(var(--service-move-x,0px) * 0.4), calc(var(--service-move-y,0px) * 0.3))' }}
-      >
-        <div className="flex min-h-[390px] h-full items-center justify-center bg-[#f7f9fc] p-6 lg:p-8">
-          <div className="w-full max-w-[500px] overflow-hidden rounded-[16px] border border-[#e2e8f0] bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
-            <div className="flex h-10 items-center border-b border-[#f1f5f9] bg-[#f8fafc] px-4">
-              <div className="flex gap-1.5">
-                <div className="h-2.5 w-2.5 rounded-full bg-[#cbd5e1]" />
-                <div className="h-2.5 w-2.5 rounded-full bg-[#cbd5e1]" />
-                <div className="h-2.5 w-2.5 rounded-full bg-[#cbd5e1]" />
-              </div>
-            </div>
-            <div className="flex p-4 gap-4 h-[280px]">
-              <div className="hidden sm:flex flex-col gap-3 border-r border-[#f1f5f9] pr-4 w-1/4 pt-1">
-                <div className="h-4 w-full rounded bg-[#e2e8f0]" />
-                <div className="h-4 w-3/4 rounded bg-[#f1f5f9]" />
-                <div className="h-4 w-5/6 rounded bg-[#f1f5f9]" />
-                <div className="h-4 w-2/3 rounded bg-[#f1f5f9]" />
-              </div>
-              <div className="flex-1 flex flex-col gap-4">
-                <div className="flex gap-4">
-                  <div className="flex-1 rounded-[12px] bg-[#f8fafc] p-3 border border-[#f1f5f9]">
-                    <div className="h-3 w-1/2 rounded bg-[#94a3b8] mb-2" />
-                    <div className="h-5 w-3/4 rounded bg-[#334155]" />
-                  </div>
-                  <div className="flex-1 rounded-[12px] bg-[#f8fafc] p-3 border border-[#f1f5f9]">
-                    <div className="h-3 w-1/2 rounded bg-[#94a3b8] mb-2" />
-                    <div className="h-5 w-2/3 rounded bg-[#0ea5e9]" />
-                  </div>
-                  <div className="hidden md:block flex-1 rounded-[12px] bg-[#f8fafc] p-3 border border-[#f1f5f9]">
-                    <div className="h-3 w-1/2 rounded bg-[#94a3b8] mb-2" />
-                    <div className="h-5 w-3/4 rounded bg-[#10b981]" />
-                  </div>
-                </div>
-                <div className="rounded-[12px] bg-white p-4 border border-[#e2e8f0] flex-1 flex items-end gap-2 px-6">
-                  {[40, 70, 45, 90, 65, 80, 55, 100].map((h, i) => (
-                    <div key={i} className="flex-1 rounded-t-sm bg-gradient-to-t from-[#21b2c6]/20 to-[#21b2c6]" style={{ height: `${h}%` }} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {service.id === 'web' && <ResponsiveWebShowcase prefersReducedMotion={prefersReducedMotion} />}
+      {service.id === 'design' && <DesignShowcase prefersReducedMotion={prefersReducedMotion} />}
+      {service.id === 'automation' && <AutomationShowcase prefersReducedMotion={prefersReducedMotion} />}
     </motion.div>
   );
 });
 
-const MobileServiceShowcaseVisual = memo(({ service }) => {
-  if (service.id === 'web') {
-    return (
-      <div className="mx-auto w-full max-w-[290px] overflow-hidden rounded-[22px] border border-[#d9d3ca] bg-[#eae6df] shadow-[0_18px_40px_-26px_rgba(57,53,44,0.18)]">
-        <div className="relative flex min-h-[210px] items-center justify-center bg-[#eae6df] p-4">
-          <div className="relative w-full max-w-[220px]">
-            <div className="mockup-browser overflow-hidden rounded-[10px] border border-[#d9d3ca] bg-white shadow-[0_16px_34px_rgba(57,53,44,0.12)]">
-              <div className="bar flex h-[24px] items-center gap-[6px] bg-[#f7f5f2] px-[12px]">
-                <span className="block h-[8px] w-[8px] rounded-full bg-[#ff5f57]" />
-                <span className="block h-[8px] w-[8px] rounded-full bg-[#febc2e]" />
-                <span className="block h-[8px] w-[8px] rounded-full bg-[#28c840]" />
-              </div>
-              <div className="space-y-2 p-4">
-                <div className="h-[6px] w-[78%] rounded-full bg-[#eae6df]" />
-                <div className="h-[6px] w-[58%] rounded-full bg-[#eae6df]" />
-                <div className="h-[6px] w-[34%] rounded-full bg-[#792fec]" />
-                <div className="flex items-center gap-2 rounded-[8px] border border-[#e0dbd2] bg-[#f9f8f6] p-3">
-                  <div className="h-[24px] w-[24px] rounded-full bg-[#d9d3ca]" />
-                  <div className="flex-1 space-y-1.5">
-                    <div className="h-[5px] w-[70%] rounded-full bg-[#d9d3ca]" />
-                    <div className="h-[5px] w-[46%] rounded-full bg-[#d9d3ca]" />
-                  </div>
-                </div>
-                <div className="h-[6px] w-[46%] rounded-full bg-[#eae6df]" />
-              </div>
-            </div>
-            <div className="absolute -bottom-4 -right-4 h-[108px] w-[58px] rounded-[14px] border-[4px] border-[#1f1f1f] bg-white shadow-[0_20px_36px_rgba(0,0,0,0.18)]">
-              <div className="absolute left-1/2 top-1.5 h-[3px] w-7 -translate-x-1/2 rounded-full bg-[#1f1f1f]" />
-              <div className="space-y-1.5 p-2 pt-5">
-                <div className="h-[5px] w-1/2 rounded-full bg-[#d9d3ca]" />
-                <div className="h-[38px] rounded-[6px] bg-[#eae6df]" />
-                <div className="h-[5px] w-4/5 rounded-full bg-[#eae6df]" />
-                <div className="h-[14px] w-1/2 rounded-[4px] bg-[#792fec]" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (service.id === 'design') {
-    return (
-      <div className="mx-auto grid w-full max-w-[292px] gap-3">
-        <div className="rounded-[20px] border border-[#111827]/8 bg-[#fffdf9] p-4 shadow-[0_16px_34px_-24px_rgba(15,23,42,0.22)]">
-          <div className="mb-3 text-[10px] font-bold uppercase tracking-[0.18em] text-[#8b5cf6]">Brand board</div>
-          <div className="font-epilogue text-[30px] font-extrabold leading-none tracking-[-0.04em] text-[#16151f]">Kaiva</div>
-          <div className="mt-2 text-[14px] font-semibold tracking-[-0.02em] text-[#16151f]">Systems with character</div>
-          <div className="mt-4 grid grid-cols-4 gap-2">
-            {['#16151f', '#8242f5', '#d96cff', '#f3ede4'].map((color) => (
-              <div key={color} className="h-9 rounded-[14px] border border-black/5" style={{ background: color }} />
-            ))}
-          </div>
-        </div>
-        <div className="rounded-[20px] border border-[#111827]/8 bg-[#f5f0ff] p-4 shadow-[0_18px_40px_-28px_rgba(91,33,182,0.26)]">
-          <div className="grid grid-cols-[1.05fr_0.95fr] gap-3">
-            <div className="rounded-[18px] bg-white p-3">
-              <div className="mb-3 h-20 rounded-[16px] bg-[linear-gradient(160deg,_#111827,_#6d28d9_58%,_#f5d0fe_120%)]" />
-              <div className="space-y-2">
-                <div className="h-3 w-16 rounded-full bg-[#111827]" />
-                <div className="h-2.5 rounded-full bg-[#d8ccff]" />
-              </div>
-            </div>
-            <div className="grid gap-3">
-              <div className="rounded-[18px] bg-[#151225] p-3 text-white">
-                <div className="mb-2 text-[9px] uppercase tracking-[0.16em] text-white/52">UI kit</div>
-                <div className="flex gap-2">
-                  <div className="h-8 flex-1 rounded-full bg-white" />
-                  <div className="h-8 w-10 rounded-full bg-white/10" />
-                </div>
-              </div>
-              <div className="rounded-[18px] bg-white p-3">
-                <div className="mb-2 h-2.5 w-14 rounded-full bg-[#d8ccff]" />
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="h-14 rounded-[14px] bg-[linear-gradient(135deg,_#ede9fe,_#ffffff)]" />
-                  <div className="h-14 rounded-[14px] bg-[linear-gradient(135deg,_#111827,_#334155)]" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="mx-auto w-full max-w-[292px] overflow-hidden rounded-[20px] border border-[#dfe7f1] bg-white shadow-[0_18px_42px_-28px_rgba(15,23,42,0.14)]">
-      <div className="flex h-8 items-center border-b border-[#f1f5f9] bg-[#f8fafc] px-3">
-        <div className="flex gap-1.5">
-          <div className="h-2 w-2 rounded-full bg-[#cbd5e1]" />
-          <div className="h-2 w-2 rounded-full bg-[#cbd5e1]" />
-          <div className="h-2 w-2 rounded-full bg-[#cbd5e1]" />
-        </div>
-      </div>
-      <div className="space-y-3 bg-[#f7f9fc] p-4">
-        <div className="grid grid-cols-2 gap-3">
-          <div className="rounded-[12px] border border-[#f1f5f9] bg-white p-3">
-            <div className="mb-2 h-2.5 w-10 rounded-full bg-[#94a3b8]" />
-            <div className="h-4 w-16 rounded bg-[#334155]" />
-          </div>
-          <div className="rounded-[12px] border border-[#f1f5f9] bg-white p-3">
-            <div className="mb-2 h-2.5 w-10 rounded-full bg-[#94a3b8]" />
-            <div className="h-4 w-14 rounded bg-[#21b2c6]" />
-          </div>
-        </div>
-        <div className="flex h-[120px] items-end gap-2 rounded-[12px] border border-[#e2e8f0] bg-white px-4 pb-4 pt-3">
-          {[38, 70, 46, 88, 62, 78, 52, 96].map((h, i) => (
-            <div key={i} className="flex-1 rounded-t-sm bg-gradient-to-t from-[#21b2c6]/20 to-[#21b2c6]" style={{ height: `${h}%` }} />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+const MobileServiceShowcaseVisual = memo(({ service, prefersReducedMotion }) => {
+  if (service.id === 'web') return <ResponsiveWebShowcase mobile prefersReducedMotion={prefersReducedMotion} />;
+  if (service.id === 'design') return <DesignShowcase mobile prefersReducedMotion={prefersReducedMotion} />;
+  return <AutomationShowcase mobile prefersReducedMotion={prefersReducedMotion} />;
 });
 
 const FloatingRobot = memo(({ src, style, className = '', delay = 0, duration = 6, amplitude = 20, rotation = 8 }) => (
@@ -1263,7 +1416,7 @@ const PortfolioSection = () => {
                   </div>
                   <div className="flex flex-1 items-center justify-center bg-[linear-gradient(180deg,rgba(247,243,255,0.96)_0%,rgba(255,255,255,1)_100%)] px-4 pb-5 pt-4">
                     <div className="w-full">
-                      <MobileServiceShowcaseVisual service={service} />
+                      <MobileServiceShowcaseVisual service={service} prefersReducedMotion={prefersReducedMotion} />
                     </div>
                   </div>
                 </div>
