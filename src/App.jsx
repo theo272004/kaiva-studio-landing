@@ -2933,6 +2933,7 @@ const HeroSection = () => {
   const isDarkNavbar = false;
   const logoRef = useRef(null);
   const navRef = useRef(null);
+  const heroSectionRef = useRef(null);
   const heroRobotBoundsRef = useRef(null);
   const lastScrollY = useRef(0);
 
@@ -2960,7 +2961,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section id="inicio" data-nav-theme="light" className="relative z-30 min-h-[100svh] w-full [overflow-x:clip] bg-[#ffffff] font-open-sauce text-[#080808] md:min-h-[860px]">
+    <section ref={heroSectionRef} id="inicio" data-nav-theme="light" className="relative z-30 min-h-[100svh] w-full [overflow-x:clip] bg-[#ffffff] font-open-sauce text-[#080808] md:min-h-[860px]">
       {/* Gradiente izquierdo — sin overflow-hidden permite que sangre hacia la siguiente sección */}
       <motion.img
         src={asset('degradado-lateral.webp')}
@@ -3166,8 +3167,8 @@ const HeroSection = () => {
           <HeroDraggableRobot
             src={asset('KaivaTheo.webp')}
             alt="Robot Kaiva Theo"
-            constraintsRef={heroRobotBoundsRef}
-            className="left-[-12%] top-[30%] z-20 w-[54%] md:left-[-6%] md:top-[34%] md:w-[46%]"
+            constraintsRef={heroSectionRef}
+            className="left-[4%] top-[18%] z-20 w-[40%] md:left-[12%] md:top-[16%] md:w-[34%]"
             floatY={[0, -8, 0, 7, 0]}
             floatX={[0, 6, -5, 3, 0]}
             floatRotate={[0, 2.8, -1.6, 1, 0]}
@@ -3177,7 +3178,7 @@ const HeroSection = () => {
           <HeroDraggableRobot
             src={asset('KaivaSara.webp')}
             alt="Robot Kaiva Sara"
-            constraintsRef={heroRobotBoundsRef}
+            constraintsRef={heroSectionRef}
             className="right-[-4%] top-[6%] z-30 w-[41%] md:right-[2%] md:top-[8%] md:w-[34%]"
             floatY={[0, -10, 0, 8, 0]}
             floatX={[0, -4, 5, -3, 0]}
