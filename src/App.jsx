@@ -1,4 +1,4 @@
-import React, { memo, useState, useRef, useEffect } from 'react';
+﻿import React, { memo, useState, useRef, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, AnimatePresence, useReducedMotion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
@@ -798,13 +798,14 @@ const HeroDraggableRobot = memo(({
       }}
     >
       <motion.div
-        drag={!isMobile}
-        dragConstraints={isMobile ? undefined : constraintsRef}
+        drag
+        dragConstraints={isMobile ? { top: -40, bottom: 40, left: -40, right: 40 } : constraintsRef}
         dragElastic={0.18}
         dragMomentum={false}
         dragSnapToOrigin
-        whileTap={isMobile ? undefined : { cursor: 'grabbing', scale: 1.02 }}
-        className={isMobile ? '' : 'cursor-grab touch-none'}
+        whileTap={{ cursor: 'grabbing', scale: 1.02 }}
+        style={{ touchAction: isMobile ? 'pan-y' : 'none' }}
+        className="cursor-grab"
       >
         <img
           src={src}
@@ -2995,12 +2996,12 @@ const ProblemFlipCard = ({ card, index }) => {
     >
       <div
         className="problem-flip-inner relative w-full min-h-[200px] md:min-h-[220px] transition-transform duration-700"
-        style={{ transformStyle: 'preserve-3d', transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
+        style={{ WebkitTransformStyle: 'preserve-3d', transformStyle: 'preserve-3d', transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
       >
         {/* FRONT — Problem */}
         <div
-          className="problem-flip-face problem-card absolute inset-0 overflow-hidden rounded-[22px] p-5 md:p-6 text-[#080808] flex flex-col justify-between group"
-          style={{ backfaceVisibility: 'hidden' }}
+          className="problem-flip-face problem-card absolute inset-0 rounded-[22px] p-5 md:p-6 text-[#080808] flex flex-col justify-between group"
+          style={{ WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden', transform: 'translateZ(1px)' }}
         >
           <div className="problem-card-copy relative z-10">
             <h4 className="font-epilogue text-[20px] md:text-[24px] font-extrabold leading-[1.05] tracking-tight mb-2">
@@ -3028,8 +3029,8 @@ const ProblemFlipCard = ({ card, index }) => {
 
         {/* BACK — Solution */}
         <div
-          className="problem-flip-face absolute inset-0 overflow-hidden rounded-[22px] p-5 md:p-6 flex flex-col justify-between"
-          style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', background: 'linear-gradient(145deg, #8242f5 0%, #6f22ef 100%)' }}
+          className="problem-flip-face absolute inset-0 rounded-[22px] p-5 md:p-6 flex flex-col justify-between"
+          style={{ WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden', transform: 'rotateY(180deg) translateZ(1px)', background: 'linear-gradient(145deg, #8242f5 0%, #6f22ef 100%)' }}
         >
           <div className="relative z-10">
             <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-white/60 mb-2">
