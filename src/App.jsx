@@ -772,41 +772,52 @@ const HeroDraggableRobot = memo(({
   duration = 8,
   delay = 0,
   constraintsRef,
-}) => (
-  <motion.div
-    className={`absolute ${className}`}
-    animate={{
-      y: floatY,
-      x: floatX,
-      rotate: floatRotate,
-    }}
-    transition={{
-      duration,
-      repeat: Infinity,
-      ease: 'easeInOut',
-      delay,
-    }}
-  >
+}) => {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
+  return (
     <motion.div
-      drag
-      dragConstraints={constraintsRef}
-      dragElastic={0.18}
-      dragMomentum={false}
-      dragSnapToOrigin
-      whileTap={{ cursor: 'grabbing', scale: 1.02 }}
-      className="cursor-grab touch-none"
+      className={`absolute ${className}`}
+      animate={{
+        y: floatY,
+        x: floatX,
+        rotate: floatRotate,
+      }}
+      transition={{
+        duration,
+        repeat: Infinity,
+        ease: 'easeInOut',
+        delay,
+      }}
     >
-      <img
-        src={src}
-        alt={alt}
-        fetchpriority="high"
-        decoding="sync"
-        className="h-full w-full object-contain select-none pointer-events-none drop-shadow-[0_18px_34px_rgba(0,0,0,0.18)]"
-        draggable="false"
-      />
+      <motion.div
+        drag={!isMobile}
+        dragConstraints={isMobile ? undefined : constraintsRef}
+        dragElastic={0.18}
+        dragMomentum={false}
+        dragSnapToOrigin
+        whileTap={isMobile ? undefined : { cursor: 'grabbing', scale: 1.02 }}
+        className={isMobile ? '' : 'cursor-grab touch-none'}
+      >
+        <img
+          src={src}
+          alt={alt}
+          fetchpriority="high"
+          decoding="sync"
+          className="h-full w-full object-contain select-none pointer-events-none drop-shadow-[0_18px_34px_rgba(0,0,0,0.18)]"
+          draggable="false"
+        />
+      </motion.div>
     </motion.div>
-  </motion.div>
-));
+  );
+});
 
 const SectionsAuroraBackdrop = () => (
   <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
@@ -2347,20 +2358,27 @@ const App = () => {
             margin-bottom: 10vh;
           }
           .problem-flip-wrapper {
-            transform: translateZ(0);
+            perspective: 1000px;
           }
           .problem-reasons-grid {
             gap: 12px !important;
           }
           .problem-flip-inner {
-            transform: translateZ(0);
+            transform-style: preserve-3d;
+            position: relative;
           }
-          .problem-card,
           .problem-flip-face {
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
             box-shadow: 0 14px 30px -24px rgba(8, 8, 8, 0.18) !important;
             filter: none !important;
             -webkit-font-smoothing: antialiased;
             text-rendering: optimizeLegibility;
+          }
+          .problem-card {
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            box-shadow: 0 14px 30px -24px rgba(8, 8, 8, 0.18) !important;
           }
         }
         @media (max-width: 767px) and (min-height: 860px) {
