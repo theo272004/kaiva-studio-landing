@@ -1745,7 +1745,7 @@ const ExpandedAgencySections = () => (
                     
                     <div className="my-6 h-[1px] w-full bg-[#080808]/5" />
 
-                    <div className="flex items-center gap-3">
+                    <div className="mb-3 flex items-center gap-3">
                       <span className="font-epilogue text-[15px] font-semibold text-[#080808]/40 line-through decoration-1">
                         US$ {plan.originalPrice}
                       </span>
@@ -1756,13 +1756,13 @@ const ExpandedAgencySections = () => (
                       )}
                     </div>
                     <div className="plan-price mt-1 font-epilogue text-[36px] font-extrabold leading-none tracking-[-0.04em] text-[#080808]">
-                      <span className="text-[20px] font-bold tracking-normal mr-1">US$</span>{plan.price}
+                      <span className="text-[18px] font-bold tracking-normal mr-1.5 text-[#080808]/70">Desde $</span>{plan.price}
                     </div>
                     <div className="mt-2 text-[13px] font-medium text-[#080808]/50">
                       Pago único
                     </div>
 
-                    <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className={`mt-6 flex w-full items-center justify-center gap-2 rounded-xl px-6 py-4 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-[1.02] ${isMiddle ? '' : 'bg-[#0a0a0a]'}`} style={isMiddle ? accentButtonStyle : undefined}>
+                    <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#0a0a0a] px-6 py-4 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-[1.02]">
                       {plan.cta}
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M7 17L17 7M17 7H7M17 7V17" />
@@ -1796,11 +1796,11 @@ const ExpandedAgencySections = () => (
 
               if (isMiddle) {
                 return (
-                  <div key={plan.name} className="plan-card group relative flex flex-col rounded-[26px] shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] lg:-mt-4" style={{ background: 'linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%)', padding: '3px' }}>
-                    <div className="flex h-[42px] items-center justify-center font-epilogue text-[12px] font-bold uppercase tracking-[0.15em] text-white">
+                  <div key={plan.name} className="plan-card group relative flex flex-col rounded-[24px] bg-white shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] lg:-mt-4">
+                    <div className="flex h-[42px] items-center justify-center rounded-t-[24px] font-epilogue text-[12px] font-bold uppercase tracking-[0.15em] text-white" style={{ background: 'linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%)' }}>
                       Más vendido
                     </div>
-                    <article className="relative flex flex-col flex-1 rounded-b-[23px] bg-white overflow-hidden">
+                    <article className="relative flex flex-col flex-1 rounded-b-[24px] bg-white overflow-hidden">
                       <img
                         src={asset('plan-negocio-gradient.webp')}
                         alt=""
@@ -1832,7 +1832,7 @@ const ExpandedAgencySections = () => (
               <h3 className="mt-1 font-epilogue text-[24px] font-bold leading-none tracking-tight md:text-[28px]">
                 {ecommercePlan.name}
               </h3>
-              <div className="mt-3 flex items-center justify-center md:justify-start gap-3">
+              <div className="mb-3 mt-3 flex items-center justify-center md:justify-start gap-3">
                 <span className="font-epilogue text-[15px] font-semibold text-[#080808]/40 line-through decoration-1">
                   US$ {ecommercePlan.originalPrice}
                 </span>
@@ -1843,7 +1843,7 @@ const ExpandedAgencySections = () => (
                 )}
               </div>
               <div className="mt-1 font-epilogue text-[30px] font-extrabold leading-none tracking-[-0.04em] text-[#080808]">
-                <span className="text-[18px] font-bold tracking-normal mr-1">US$</span>{ecommercePlan.price}
+                <span className="text-[18px] font-bold tracking-normal mr-1.5 text-[#080808]/70">Desde $</span>{ecommercePlan.price}
               </div>
             </div>
             <div className="flex flex-1 flex-col items-center gap-6 md:flex-row md:justify-between md:pl-10 text-center md:text-left relative z-10">
