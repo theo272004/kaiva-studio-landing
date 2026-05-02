@@ -1040,7 +1040,7 @@ const ContactRevealSection = () => {
 
       form.reset();
       setSubmitStatus('success');
-      setSubmitMessage('Mensaje enviado. Revisa info@kaivastudio.com.');
+      setSubmitMessage('Mensaje enviado ✔️ Gracias por contactarnos');
     } catch (error) {
       setSubmitStatus('error');
       setSubmitMessage('No se pudo enviar el mensaje. Intenta de nuevo en unos segundos.');
