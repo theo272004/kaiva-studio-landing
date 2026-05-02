@@ -26,30 +26,30 @@ const serviceShowcase = [
     number: '01',
     label: 'Desarrollo web',
     description:
-      'P�ginas web con estructura clara, dise�o responsive y SEO integrado. Una narrativa dise�ada estrat�gicamente para destacar el valor de tu negocio y convertir visitas en clientes.',
+      'Páginas web con estructura clara, diseño responsive y SEO integrado. Una narrativa diseñada estratégicamente para destacar el valor de tu negocio y convertir visitas en clientes.',
     accent: '#8242f5',
     mockup: 'ecommerce',
     title: 'Desarrollo Web',
-    points: ['Estrategia digital', 'Responsive premium', 'SEO integrado', 'Optimizaci�n total'],
+    points: ['Estrategia digital', 'Responsive premium', 'SEO integrado', 'Optimización total'],
   },
   {
     id: 'design',
     number: '02',
-    label: 'Dise�o',
+    label: 'Diseño',
     description:
-      'Desde publicidad, portadas y logos hasta la conceptualizaci�n completa de la identidad de tu marca, expresando exactamente qui�n eres y el porqu� de tu negocio.',
+      'Desde publicidad, portadas y logos hasta la conceptualización completa de la identidad de tu marca, expresando exactamente quién eres y el porqué de tu negocio.',
     accent: '#d96cff',
-    title: 'Dise�o de Marca',
-    points: ['Identidad de marca', 'Interfaces UI/UX', 'Piezas publicitarias', 'Sistemas de dise�o'],
+    title: 'Diseño de Marca',
+    points: ['Identidad de marca', 'Interfaces UI/UX', 'Piezas publicitarias', 'Sistemas de diseño'],
   },
   {
     id: 'automation',
     number: '03',
     label: 'Sistemas',
     description:
-      'Sistemas a medida, dashboards anal�ticos y flujos de automatizaci�n. Conectamos tus herramientas para que operes de forma inteligente y r�pida.',
+      'Sistemas a medida, dashboards analíticos y flujos de automatización. Conectamos tus herramientas para que operes de forma inteligente y rápida.',
     accent: '#21b2c6',
-    title: 'Sistemas y Automatizaci�n',
+    title: 'Sistemas y Automatización',
     points: ['Dashboards', 'Integraciones', 'Sistemas a medida', 'Bots de WhatsApp'],
   },
 ];
@@ -60,9 +60,9 @@ const webSlides = [
     category: 'systems',
     number: '01',
     label: 'Inteligencia de Negocios',
-    vibe: 'Anal�tico � Predictivo',
+    vibe: 'Analítico · Predictivo',
     brand: 'KAIVA INSIGHTS',
-    description: 'Transformamos datos complejos en dashboards intuitivos que impulsan decisiones estrat�gicas.',
+    description: 'Transformamos datos complejos en dashboards intuitivos que impulsan decisiones estratégicas.',
     accent: '#8242f5',
     mockup: 'dashboard',
   },
@@ -71,9 +71,9 @@ const webSlides = [
     category: 'web',
     number: '02',
     label: 'E-Commerce de Lujo',
-    vibe: 'Exclusivo � Conversi�n',
+    vibe: 'Exclusivo · Conversión',
     brand: 'KAIVA COMMERCE',
-    description: 'Experiencias de compra premium donde la est�tica eleva el valor percibido de cada producto.',
+    description: 'Experiencias de compra premium donde la estética eleva el valor percibido de cada producto.',
     accent: '#8242f5',
     mockup: 'ecommerce',
   },
@@ -82,9 +82,9 @@ const webSlides = [
     category: 'systems',
     number: '03',
     label: 'Infraestructura SaaS',
-    vibe: 'S�lido � Escalable',
+    vibe: 'Sólido · Escalable',
     brand: 'KAIVA CORE',
-    description: 'Plataformas tecnol�gicas dise�adas para el rendimiento extremo y la claridad operativa.',
+    description: 'Plataformas tecnológicas diseñadas para el rendimiento extremo y la claridad operativa.',
     accent: '#8242f5',
     mockup: 'tech',
   },
@@ -93,7 +93,7 @@ const webSlides = [
     category: 'design',
     number: '04',
     label: 'Editorial Creativo',
-    vibe: 'Sofisticado � Narrativo',
+    vibe: 'Sofisticado · Narrativo',
     brand: 'KAIVA STUDIO',
     description: 'Storytelling visual para marcas que buscan destacar en un ecosistema digital saturado.',
     accent: '#8242f5',
@@ -104,45 +104,45 @@ const webSlides = [
 const services = [
   {
     title: 'Desarrollo web',
-    description: 'Creamos p�ginas web estrat�gicas dise�adas para transmitir confianza y generar oportunidades reales.',
+    description: 'Creamos páginas web estratégicas diseñadas para transmitir confianza y generar oportunidades reales.',
   },
   {
-    title: 'Dise�o UI/UX + Marca',
-    description: 'Dise�amos experiencias claras y enfocadas en conversi�n, alineadas con tu identidad de marca.',
+    title: 'Diseño UI/UX + Marca',
+    description: 'Diseñamos experiencias claras y enfocadas en conversión, alineadas con tu identidad de marca.',
   },
   {
-    title: 'Automatizaci�n y sistemas',
-    description: 'Implementamos herramientas y sistemas (como bots de WhatsApp y flujos automatizados) para responder, organizar y vender sin fricci�n.',
+    title: 'Automatización y sistemas',
+    description: 'Implementamos herramientas y sistemas (como bots de WhatsApp y flujos automatizados) para responder, organizar y vender sin fricción.',
   },
 ];
 
-const processSteps = ['Diagn�stico', 'Estructura', 'Dise�o', 'Desarrollo', 'Entrega'];
+const processSteps = ['Diagnóstico', 'Estructura', 'Diseño', 'Desarrollo', 'Entrega'];
 
 const pricingPlans = [
   {
     name: 'Plan Inicial',
     audience: 'Ideal para marcas personales y negocios nuevos.',
     price: 'Desde $320 USD',
-    description: 'Soluci�n clara, profesional y lista para presentar tu negocio con seriedad desde el primer contacto.',
-    points: ['Landing page profesional', 'Dise�o responsive', 'Entrega r�pida', 'Soporte por 15 d�as', 'Asesor�a para publicaci�n'],
+    description: 'Solución clara, profesional y lista para presentar tu negocio con seriedad desde el primer contacto.',
+    points: ['Landing page profesional', 'Diseño responsive', 'Entrega rápida', 'Soporte por 15 días', 'Asesoría para publicación'],
     cta: 'Comenzar',
   },
   {
     name: 'Plan Negocio',
     audience: 'Para empresas establecidas que necesitan crecer.',
     price: 'Desde $700 USD',
-    description: 'Una soluci�n con m�s estructura, mejor narrativa y una ejecuci�n visual pensada para elevar percepci�n y conversi�n.',
-    points: ['Hasta 5 subp�ginas', 'SEO b�sico', 'Copy estrat�gico', 'Formulario automatizado', 'Soporte por 30 d�as'],
+    description: 'Una solución con más estructura, mejor narrativa y una ejecución visual pensada para elevar percepción y conversión.',
+    points: ['Hasta 5 subpáginas', 'SEO básico', 'Copy estratégico', 'Formulario automatizado', 'Soporte por 30 días'],
     cta: 'Comenzar',
     featured: true,
-    badge: 'M�s elegido',
+    badge: 'Más elegido',
   },
   {
     name: 'Plan Pro',
     audience: 'Para marcas posicionadas que necesitan presencia premium.',
     price: 'Desde $1,200 USD',
-    description: 'Pensado para marcas que necesitan una presencia m�s robusta, con sistema, orden y una ejecuci�n a la altura.',
-    points: ['Hasta 10 subp�ginas', 'SEO', 'Automatizaciones', 'Cambio de idioma', 'Animaciones avanzadas', 'Soporte por 60 d�as'],
+    description: 'Pensado para marcas que necesitan una presencia más robusta, con sistema, orden y una ejecución a la altura.',
+    points: ['Hasta 10 subpáginas', 'SEO', 'Automatizaciones', 'Cambio de idioma', 'Animaciones avanzadas', 'Soporte por 60 días'],
     cta: 'Comenzar',
   },
 ];
@@ -152,7 +152,7 @@ const ecommercePlan = {
   name: 'Plan E-Commerce',
   price: 'Desde $1,300 USD',
   description:
-    'Para negocios que quieren vender online, con cat�logo, carrito, checkout, pagos en Colombia e integraci�n con env�os.',
+    'Para negocios que quieren vender online, con catálogo, carrito, checkout, pagos en Colombia e integración con envíos.',
   cta: 'Solicitar ecommerce',
 };
 
@@ -389,7 +389,7 @@ const ResponsiveWebShowcase = memo(({ mobile = false, prefersReducedMotion = fal
             style={{ width: browserWidth }}
             role="button"
             tabIndex={0}
-            aria-label="Ver versi�n de escritorio"
+            aria-label="Ver versión de escritorio"
           >
             <div className={`mockup-browser overflow-hidden border border-[#e1e5eb] bg-white ${mobile ? 'rounded-[10px] shadow-none' : 'rounded-[12px] shadow-[0_10px_22px_-18px_rgba(57,53,44,0.12)]'}`}>
               <div className={`bar flex items-center bg-[#f7f5f2] ${mobile ? 'h-[24px] gap-[6px] px-[12px]' : 'h-[30px] gap-[7px] px-[14px]'}`}>
@@ -439,7 +439,7 @@ const ResponsiveWebShowcase = memo(({ mobile = false, prefersReducedMotion = fal
             className={`absolute z-20 ${mobile ? '-bottom-4 -right-4' : '-bottom-8 -right-8'}`}
             role="button"
             tabIndex={0}
-            aria-label="Ver versi�n m�vil"
+            aria-label="Ver versión móvil"
           >
             <div
               className="relative flex flex-col bg-white"
@@ -493,7 +493,7 @@ const DesignShowcase = memo(({ mobile = false, prefersReducedMotion = false }) =
             <div className={`${mobile ? 'mt-2 text-[14px]' : 'text-lg'} font-semibold tracking-[-0.03em] text-[#16151f]`}>Systems with character</div>
             {!mobile && (
               <div className="max-w-[15rem] text-sm leading-6 text-[#5b556e]">
-                Direcci�n visual, color, tipograf�a y piezas listas para web, decks o redes.
+                Dirección visual, color, tipografía y piezas listas para web, decks o redes.
               </div>
             )}
           </div>
@@ -1386,7 +1386,7 @@ const ServicesSection = () => {
                       
                       <div className="mt-10 flex gap-4">
                         <button className="flex items-center gap-2 rounded-full bg-[#080808] px-8 py-4 font-manrope text-[14px] font-bold text-white transition-transform duration-300 hover:scale-105">
-                          Saber m�s
+                          Saber más
                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M7 17L17 7M17 7H7M17 7V17" />
                           </svg>
@@ -1597,11 +1597,11 @@ const ProcessRedesignSection = () => {
   });
 
   const stepsContent = [
-    { title: 'Diagn�stico', description: 'Analizamos objetivos, contexto y necesidades del negocio antes de construir.' },
-    { title: 'Estructura', description: 'Organizamos la estructura para que la presencia digital tenga un prop�sito claro y medible.' },
-    { title: 'Dise�o', description: 'Dise�amos una experiencia visual atractiva, profesional y alineada a la marca.' },
-    { title: 'Desarrollo', description: 'Integramos tecnolog�a, herramientas y configuraci�n t�cnica completa en un solo servicio.' },
-    { title: 'Entrega', description: 'Publicamos una soluci�n lista para operar desde el primer d�a, con soporte posterior seg�n el plan.' },
+    { title: 'Diagnóstico', description: 'Analizamos objetivos, contexto y necesidades del negocio antes de construir.' },
+    { title: 'Estructura', description: 'Organizamos la estructura para que la presencia digital tenga un propósito claro y medible.' },
+    { title: 'Diseño', description: 'Diseñamos una experiencia visual atractiva, profesional y alineada a la marca.' },
+    { title: 'Desarrollo', description: 'Integramos tecnología, herramientas y configuración técnica completa en un solo servicio.' },
+    { title: 'Entrega', description: 'Publicamos una solución lista para operar desde el primer día, con soporte posterior según el plan.' },
   ];
 
   const activeProgressRaw = useTransform(scrollYProgress, [0, 1], [0, stepsContent.length - 1]);
@@ -1737,7 +1737,7 @@ const ExpandedAgencySections = () => (
               para <span className="italic font-serif font-light">tu</span> negocio
             </h2>
             <p className="mt-4 text-[15px] leading-relaxed text-[#080808]/70">
-              Dise�o premium, estructura estrat�gica y ejecuci�n real. <br className="hidden md:block" /> Selecciona la soluci�n que mejor se adapte a ti.
+              Diseño premium, estructura estratégica y ejecución real. <br className="hidden md:block" /> Selecciona la solución que mejor se adapte a ti.
             </p>
           </div>
 
@@ -1771,7 +1771,7 @@ const ExpandedAgencySections = () => (
                       {plan.price}
                     </div>
                     <div className="mt-2 text-[13px] font-medium text-[#080808]/50">
-                      Pago �nico
+                      Pago único
                     </div>
 
                     <a href="#contacto" onClick={(event) => scrollToSection(event, 'contacto')} className={`mt-6 flex w-full items-center justify-center gap-2 rounded-xl px-6 py-4 font-inter text-[14px] font-semibold text-white transition-transform duration-300 hover:scale-[1.02] ${isMiddle ? '' : 'bg-[#0a0a0a]'}`} style={isMiddle ? accentButtonStyle : undefined}>
@@ -1871,7 +1871,7 @@ const AliadosSection = () => {
 
             <div className="mt-6 flex flex-col items-start gap-5 md:mt-8 md:gap-6">
               <p className="max-w-[48ch] text-[16px] leading-[1.65] text-white/72 md:text-[18px] lg:text-[20px] lg:max-w-[52ch]">
-                Alianza estrat�gica con Seo4Startups enfocada en potenciar la visibilidad digital mediante SEO, posicionamiento y presencia online.
+                Alianza estratégica con Seo4Startups enfocada en potenciar la visibilidad digital mediante SEO, posicionamiento y presencia online.
               </p>
 
               <a
@@ -1880,7 +1880,7 @@ const AliadosSection = () => {
                 rel="noopener noreferrer"
                 className="flex w-fit items-center gap-3 rounded-full bg-white px-6 py-3.5 font-inter text-[14px] font-bold text-[#121222] shadow-[0_16px_40px_-20px_rgba(0,0,0,0.75)] transition-transform duration-300 hover:-translate-y-0.5 md:px-10 md:py-4 md:text-[15px]"
               >
-                Conoce m�s de Seo4Startups
+                Conoce más de Seo4Startups
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1a1a2e] text-white/80">
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -2082,7 +2082,7 @@ const FixedNavbar = ({ projectsActive = false }) => {
 
     <div className="fixed right-6 top-5 z-40 flex items-center gap-3 md:hidden">
       <button
-        aria-label="Abrir men�"
+        aria-label="Abrir menú"
         onClick={() => setMobileMenuOpen(true)}
         className="flex h-[40px] w-[40px] items-center justify-center rounded-full border border-[#080808]/12 bg-white text-[#080808] shadow-[0_4px_14px_-8px_rgba(0,0,0,0.18)]"
       >
@@ -2118,7 +2118,7 @@ const FixedNavbar = ({ projectsActive = false }) => {
               <span className="block font-normal">Studio<span style={gradientAccentStyle}>.</span></span>
             </div>
             <button
-              aria-label="Cerrar men�"
+              aria-label="Cerrar menú"
               onClick={() => setMobileMenuOpen(false)}
               className="flex h-[40px] w-[40px] items-center justify-center rounded-full border border-[#080808]/12 bg-[#f7f7f7] text-[#080808]"
             >
@@ -2171,11 +2171,11 @@ const FixedNavbar = ({ projectsActive = false }) => {
 
 const projectGalleryItems = [
   { id: 1, category: 'web', title: 'Restaurante Gourmet', desc: 'Landing page premium con sistema de reservas integrado.', image: 'project-web-1.webp' },
-  { id: 2, category: 'web', title: 'E-commerce Skincare', desc: 'Tienda online con dise�o minimalista y checkout optimizado.', image: 'project-web-2.webp' },
+  { id: 2, category: 'web', title: 'E-commerce Skincare', desc: 'Tienda online con diseño minimalista y checkout optimizado.', image: 'project-web-2.webp' },
   { id: 3, category: 'web', title: 'Firma Legal', desc: 'Sitio corporativo con formulario de consultas y blog SEO.', image: 'project-web-3.webp' },
-  { id: 4, category: 'design', title: 'Identidad Corporativa', desc: 'Logo, papeler�a y manual de marca completo.', image: 'project-design-1.webp' },
+  { id: 4, category: 'design', title: 'Identidad Corporativa', desc: 'Logo, papelería y manual de marca completo.', image: 'project-design-1.webp' },
   { id: 5, category: 'design', title: 'Contenido Social', desc: 'Plantillas de redes sociales y piezas publicitarias.', image: 'project-design-2.webp' },
-  { id: 6, category: 'systems', title: 'Dashboard Anal�tico', desc: 'Panel de control con KPIs en tiempo real e integraciones.', image: 'project-system-1.webp' },
+  { id: 6, category: 'systems', title: 'Dashboard Analítico', desc: 'Panel de control con KPIs en tiempo real e integraciones.', image: 'project-system-1.webp' },
 ];
 
 const ProjectsGallery = () => {
@@ -2192,14 +2192,14 @@ const ProjectsGallery = () => {
               Proyectos recientes
             </h2>
             <p className="mt-4 max-w-[500px] text-[15px] leading-relaxed text-[#080808]/60">
-              Una muestra de lo que hacemos. Cada proyecto se dise�a con estrategia, est�tica y prop�sito.
+              Una muestra de lo que hacemos. Cada proyecto se diseña con estrategia, estética y propósito.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
             {[
               { id: 'all', label: 'Todos' },
               { id: 'web', label: 'Web' },
-              { id: 'design', label: 'Dise�o' },
+              { id: 'design', label: 'Diseño' },
               { id: 'systems', label: 'Sistemas' },
             ].map(cat => (
               <button
@@ -2240,7 +2240,7 @@ const ProjectsGallery = () => {
                 </div>
                 <div className="p-5 md:p-6">
                   <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-[#8242f5]">
-                    {project.category === 'web' ? 'Desarrollo Web' : project.category === 'design' ? 'Dise�o' : 'Sistemas'}
+                    {project.category === 'web' ? 'Desarrollo Web' : project.category === 'design' ? 'Diseño' : 'Sistemas'}
                   </div>
                   <h3 className="mt-2 font-epilogue text-[20px] font-extrabold leading-[1.1] tracking-[-0.02em] text-[#080808]">
                     {project.title}
@@ -2269,10 +2269,10 @@ const ProjectsGallery = () => {
           </div>
           <div className="relative z-10">
             <h3 className="font-epilogue text-[clamp(28px,4vw,44px)] font-extrabold leading-[1.05] tracking-[-0.03em] text-white">
-              �Tienes un proyecto en mente?
+              ¿Tienes un proyecto en mente?
             </h3>
             <p className="mx-auto mt-4 max-w-[500px] text-[15px] leading-relaxed text-white/75">
-              Cada proyecto comienza con una conversaci�n. Cu�ntanos tu idea y te damos una propuesta sin compromiso.
+              Cada proyecto comienza con una conversación. Cuéntanos tu idea y te damos una propuesta sin compromiso.
             </p>
             <a
               href={`${HOME_PAGE_HREF_FROM_SERVICES}#contacto`}
@@ -3068,7 +3068,7 @@ const ProblemFlipCard = ({ card, index }) => {
         className="problem-flip-inner relative w-full min-h-[200px] md:min-h-[220px] transition-transform duration-700"
         style={{ WebkitTransformStyle: 'preserve-3d', transformStyle: 'preserve-3d', transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
       >
-        {/* FRONT � Problem */}
+        {/* FRONT · Problem */}
         <div
           className="problem-flip-face problem-card absolute inset-0 rounded-[22px] p-5 md:p-6 text-[#080808] flex flex-col justify-between group"
           style={{ WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden', transform: 'translateZ(1px)' }}
@@ -3092,19 +3092,19 @@ const ProblemFlipCard = ({ card, index }) => {
               </svg>
             </span>
             <span className="text-[11px] font-bold tracking-widest uppercase text-[#080808]/72">
-              VER SOLUCI�N
+              VER SOLUCIÓN
             </span>
           </button>
         </div>
 
-        {/* BACK � Solution */}
+        {/* BACK · Solution */}
         <div
           className="problem-flip-face absolute inset-0 rounded-[22px] p-5 md:p-6 flex flex-col justify-between"
           style={{ WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden', transform: 'rotateY(180deg) translateZ(1px)', background: 'linear-gradient(145deg, #8242f5 0%, #6f22ef 100%)' }}
         >
           <div className="relative z-10">
             <div className="font-manrope text-[10px] font-bold uppercase tracking-[0.2em] text-white/60 mb-2">
-              Nuestra soluci�n
+              Nuestra solución
             </div>
             <h4 className="font-epilogue text-[20px] md:text-[24px] font-extrabold leading-[1.05] tracking-tight text-white mb-2">
               {card.solution}
@@ -3148,14 +3148,14 @@ const ProblemSection = () => {
         <ScrollRevealHeadline
           lines={[
             'El 91% de las empresas en Colombia',
-            'son pymes. La mayor�a no',
+            'son pymes. La mayoría no',
             'existen en internet.',
           ]}
         />
         
         <p className="mt-8 text-[16px] md:text-[18px] leading-[1.6] text-center max-w-[650px] text-[#080808]/70">
-          Cada d�a, miles de colombianos buscan productos y servicios en Google. Si tu
-          negocio no aparece, ese cliente se va a la competencia. As� de simple.
+          Cada día, miles de colombianos buscan productos y servicios en Google. Si tu
+          negocio no aparece, ese cliente se va a la competencia. Así de simple.
         </p>
 
         <div className="problem-stats-grid mt-10 w-full grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
@@ -3172,7 +3172,7 @@ const ProblemSection = () => {
               <CountUpAnimation endValue={83} suffix="%" />
             </div>
             <p className="text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
-              de los emprendedores colombianos planea invertir m�s en presencia digital este a�o
+              de los emprendedores colombianos planea invertir más en presencia digital este año
             </p>
           </div>
           <div className="problem-stat-card bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.1)] border border-[#080808]/5 flex flex-col items-center text-center sm:items-start sm:text-left gap-3">
@@ -3180,7 +3180,7 @@ const ProblemSection = () => {
               <CountUpAnimation endValue={1.7} prefix="+" suffix="M" decimal={true} />
             </div>
             <p className="text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed text-[#080808]/70">
-              de empresas registradas en Colombia. La mayor�a sin presencia digital real
+              de empresas registradas en Colombia. La mayoría sin presencia digital real
             </p>
           </div>
         </div>
@@ -3246,32 +3246,32 @@ const ProblemSection = () => {
           </div>
 
           <h3 className="relative z-10 mb-6 text-center font-manrope text-[clamp(24px,3.6vw,42px)] font-extrabold uppercase tracking-[0.04em] text-[#080808] md:mb-10">
-            POR QU� MUCHOS NEGOCIOS SIGUEN SIN WEB
+            POR QUÉ MUCHOS NEGOCIOS SIGUEN SIN WEB
           </h3>
 
           <div className="problem-reasons-grid relative z-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-4">
             {[
               {
                 problem: 'Es muy caro.',
-                problemDesc: 'Muchos negocios creen que una web profesional est� fuera de su alcance.',
-                solution: 'Inversi�n con retorno real.',
-                solutionDesc: 'Tendr�s una web profesional que trabaja 24/7 captando clientes.',
+                problemDesc: 'Muchos negocios creen que una web profesional está fuera de su alcance.',
+                solution: 'Inversión con retorno real.',
+                solutionDesc: 'Tendrás una web profesional que trabaja 24/7 captando clientes.',
               },
               {
-                problem: 'No s� c�mo funciona.',
-                problemDesc: 'Dominios, hosting, SEO... el lenguaje t�cnico aleja a quienes solo quieren m�s clientes.',
+                problem: 'No sé cómo funciona.',
+                problemDesc: 'Dominios, hosting, SEO... el lenguaje técnico aleja a quienes solo quieren más clientes.',
                 solution: 'Nos encargamos de todo.',
-                solutionDesc: 'Cu�ntanos tu negocio y nosotros hacemos el resto.',
+                solutionDesc: 'Cuéntanos tu negocio y nosotros hacemos el resto.',
               },
               {
-                problem: 'Ya intent� y no funcion�.',
+                problem: 'Ya intenté y no funcionó.',
                 problemDesc: 'Malas experiencias con freelancers o plantillas que no reflejan tu negocio.',
                 solution: 'Estrategia, no plantillas.',
-                solutionDesc: 'Cada proyecto tiene estructura, copy y dise�o estrat�gico.',
+                solutionDesc: 'Cada proyecto tiene estructura, copy y diseño estratégico.',
               },
               {
                 problem: 'No tengo tiempo.',
-                problemDesc: 'Gestionar un negocio ya es suficiente. No deber�as necesitar un equipo t�cnico.',
+                problemDesc: 'Gestionar un negocio ya es suficiente. No deberías necesitar un equipo técnico.',
                 solution: 'Entrega lista para operar.',
                 solutionDesc: 'En semanas tienes tu web publicada y funcionando, sin reuniones infinitas.',
               },
@@ -3321,7 +3321,7 @@ const HeroSection = () => {
 
   return (
     <section ref={heroSectionRef} id="inicio" data-nav-theme="light" className="relative z-30 min-h-[100svh] w-full [overflow-x:clip] bg-[#ffffff] font-open-sauce text-[#080808] md:min-h-[860px]">
-      {/* Gradiente izquierdo � sin overflow-hidden permite que sangre hacia la siguiente secci�n */}
+      {/* Gradiente izquierdo · sin overflow-hidden permite que sangre hacia la siguiente sección */}
       <motion.img
         src={asset('degradado-lateral.webp')}
         alt=""
@@ -3390,7 +3390,7 @@ const HeroSection = () => {
 
         {/* Mobile menu button */}
         <button
-          aria-label="Abrir men�"
+          aria-label="Abrir menú"
           onClick={() => setMobileMenuOpen(true)}
           className="flex h-[38px] w-[38px] items-center justify-center rounded-full border border-[#080808]/12 bg-white text-[#080808] shadow-sm md:hidden"
         >
@@ -3417,7 +3417,7 @@ const HeroSection = () => {
                 <span className="block font-normal">Studio<span style={gradientAccentStyle}>.</span></span>
               </div>
               <button
-                aria-label="Cerrar men�"
+                aria-label="Cerrar menú"
                 onClick={() => setMobileMenuOpen(false)}
                 className="flex h-[40px] w-[40px] items-center justify-center rounded-full border border-[#080808]/12 bg-[#f7f7f7] text-[#080808]"
               >
@@ -3475,8 +3475,8 @@ const HeroSection = () => {
         className="hero-copy-wrap absolute left-6 right-6 top-[110px] z-40 flex max-w-[360px] flex-col items-start text-left md:left-[80px] md:right-auto md:top-[160px] md:max-w-[720px]"
       >
         <h1 className="w-fit font-extrabold leading-[1.02] tracking-[-0.03em] text-[#080808] text-[clamp(26px,7vw,54px)] flex flex-col items-start gap-1">
-          <AnimatedText text="P�ginas web claras," startAnimation={introComplete} className="md:whitespace-nowrap" />
-          <AnimatedText text="r�pidas y profesionales" startAnimation={introComplete} className="md:whitespace-nowrap" />
+          <AnimatedText text="Páginas web claras," startAnimation={introComplete} className="md:whitespace-nowrap" />
+          <AnimatedText text="rápidas y profesionales" startAnimation={introComplete} className="md:whitespace-nowrap" />
         </h1>
 
         <a
@@ -3556,8 +3556,8 @@ const HeroSection = () => {
         transition={{ duration: 0.55, delay: 0.22, ease: 'easeOut' }}
         className="hero-support-copy absolute bottom-4 left-6 right-6 z-40 hidden md:block md:bottom-[60px] md:left-auto md:right-[80px] md:max-w-[420px] md:text-[15px] text-justify font-normal leading-[1.5] text-[#080808]/64"
       >
-        Deja de perder clientes por no estar en el internet. Dise�amos tu<br />
-        p�gina web con criterio profesional, entrega r�pida y precio justo.
+        Deja de perder clientes por no estar en el internet. Diseñamos tu<br />
+        página web con criterio profesional, entrega rápida y precio justo.
       </motion.p>
     </section>
   );
