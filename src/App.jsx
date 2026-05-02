@@ -122,7 +122,7 @@ const pricingPlans = [
   {
     name: 'Plan Inicial',
     audience: 'Ideal para marcas personales y negocios nuevos.',
-    price: 'Desde $320 USD',
+    price: 'Desde $200 USD',
     description: 'Solución clara, profesional y lista para presentar tu negocio con seriedad desde el primer contacto.',
     points: ['Landing page profesional', 'Diseño responsive', 'Entrega rápida', 'Soporte por 15 días', 'Asesoría para publicación'],
     cta: 'Comenzar',
@@ -130,7 +130,7 @@ const pricingPlans = [
   {
     name: 'Plan Negocio',
     audience: 'Para empresas establecidas que necesitan crecer.',
-    price: 'Desde $700 USD',
+    price: 'Desde $500 USD',
     description: 'Una solución con más estructura, mejor narrativa y una ejecución visual pensada para elevar percepción y conversión.',
     points: ['Hasta 5 subpáginas', 'SEO básico', 'Copy estratégico', 'Formulario automatizado', 'Soporte por 30 días'],
     cta: 'Comenzar',
@@ -140,7 +140,7 @@ const pricingPlans = [
   {
     name: 'Plan Pro',
     audience: 'Para marcas posicionadas que necesitan presencia premium.',
-    price: 'Desde $1,200 USD',
+    price: 'Desde $700 USD',
     description: 'Pensado para marcas que necesitan una presencia más robusta, con sistema, orden y una ejecución a la altura.',
     points: ['Hasta 10 subpáginas', 'SEO', 'Automatizaciones', 'Cambio de idioma', 'Animaciones avanzadas', 'Soporte por 60 días'],
     cta: 'Comenzar',
@@ -150,7 +150,7 @@ const pricingPlans = [
 const ecommercePlan = {
   label: 'PLAN ADICIONAL',
   name: 'Plan E-Commerce',
-  price: 'Desde $1,300 USD',
+  price: 'Desde $900 USD',
   description:
     'Para negocios que quieren vender online, con catálogo, carrito, checkout, pagos en Colombia e integración con envíos.',
   cta: 'Solicitar ecommerce',
