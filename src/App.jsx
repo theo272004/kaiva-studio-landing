@@ -1732,28 +1732,10 @@ const ExpandedAgencySections = () => (
           <div className="plans-grid mt-12 grid gap-6 sm:gap-8 md:grid-cols-2 xl:grid-cols-3">
             {pricingPlans.map((plan, index) => {
               const isMiddle = index === 1;
-              return (
-                <article
-                  key={plan.name}
-                  className={`plan-card group relative flex flex-col rounded-[24px] bg-white shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] overflow-hidden ${isMiddle ? 'lg:-mt-4' : ''}`}
-                >
-                  {isMiddle && (
-                    <div className="absolute inset-0 z-20 pointer-events-none rounded-[24px] border-[2.5px] border-transparent [background:linear-gradient(135deg,#21b2c6_0%,#8242f5_58%,#d96cff_100%)_border-box] [-webkit-mask:linear-gradient(#fff_0_0)_padding-box,_linear-gradient(#fff_0_0)] [-webkit-mask-composite:destination-out] [mask-composite:exclude]" />
-                  )}
-                  {isMiddle && (
-                    <div className="absolute left-[-2.5px] right-[-2.5px] top-[-2.5px] z-20 flex h-[42px] items-center justify-center rounded-t-[24px] font-epilogue text-[12px] font-bold uppercase tracking-[0.15em] text-white" style={{ background: 'linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%)' }}>
-                      Más vendido
-                    </div>
-                  )}
-                  {isMiddle && (
-            <img
-              src={asset('plan-negocio-gradient.webp')}
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover object-bottom pointer-events-none z-0"
-            />
-                  )}
-
-                  <div className={`relative z-10 flex flex-1 flex-col p-8 md:p-10 ${isMiddle ? 'pt-14 md:pt-16' : ''}`}>
+              
+              const cardContent = (
+                <>
+                  <div className="relative z-10 flex flex-1 flex-col p-8 md:p-10">
                     <h3 className="font-epilogue text-[24px] font-bold tracking-tight text-[#080808]">
                       {plan.name}
                     </h3>
@@ -1808,8 +1790,34 @@ const ExpandedAgencySections = () => (
                         </li>
                       ))}
                     </ul>
-
                   </div>
+                </>
+              );
+
+              if (isMiddle) {
+                return (
+                  <div key={plan.name} className="plan-card group relative flex flex-col rounded-[26px] shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] lg:-mt-4" style={{ background: 'linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%)', padding: '3px' }}>
+                    <div className="flex h-[42px] items-center justify-center font-epilogue text-[12px] font-bold uppercase tracking-[0.15em] text-white">
+                      Más vendido
+                    </div>
+                    <article className="relative flex flex-col flex-1 rounded-b-[23px] bg-white overflow-hidden">
+                      <img
+                        src={asset('plan-negocio-gradient.webp')}
+                        alt=""
+                        className="absolute inset-0 h-full w-full object-cover object-bottom pointer-events-none z-0"
+                      />
+                      {cardContent}
+                    </article>
+                  </div>
+                );
+              }
+
+              return (
+                <article
+                  key={plan.name}
+                  className="plan-card group relative flex flex-col rounded-[24px] bg-white shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] overflow-hidden"
+                >
+                  {cardContent}
                 </article>
               );
             })}
