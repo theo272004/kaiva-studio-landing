@@ -122,7 +122,9 @@ const pricingPlans = [
   {
     name: 'Plan Inicial',
     audience: 'Ideal para marcas personales y negocios nuevos.',
-    price: 'Desde $200 USD',
+    originalPrice: '200',
+    price: '160',
+    discount: '20% OFF',
     description: 'Solución clara, profesional y lista para presentar tu negocio con seriedad desde el primer contacto.',
     points: ['Landing page profesional', 'Diseño responsive', 'Entrega rápida', 'Soporte por 15 días', 'Asesoría para publicación'],
     cta: 'Comenzar',
@@ -130,7 +132,9 @@ const pricingPlans = [
   {
     name: 'Plan Negocio',
     audience: 'Para empresas establecidas que necesitan crecer.',
-    price: 'Desde $500 USD',
+    originalPrice: '500',
+    price: '400',
+    discount: '20% OFF',
     description: 'Una solución con más estructura, mejor narrativa y una ejecución visual pensada para elevar percepción y conversión.',
     points: ['Hasta 5 subpáginas', 'SEO básico', 'Copy estratégico', 'Formulario automatizado', 'Soporte por 30 días'],
     cta: 'Comenzar',
@@ -140,7 +144,9 @@ const pricingPlans = [
   {
     name: 'Plan Pro',
     audience: 'Para marcas posicionadas que necesitan presencia premium.',
-    price: 'Desde $700 USD',
+    originalPrice: '700',
+    price: '560',
+    discount: '20% OFF',
     description: 'Pensado para marcas que necesitan una presencia más robusta, con sistema, orden y una ejecución a la altura.',
     points: ['Hasta 10 subpáginas', 'SEO', 'Automatizaciones', 'Cambio de idioma', 'Animaciones avanzadas', 'Soporte por 60 días'],
     cta: 'Comenzar',
@@ -150,7 +156,9 @@ const pricingPlans = [
 const ecommercePlan = {
   label: 'PLAN ADICIONAL',
   name: 'Plan E-Commerce',
-  price: 'Desde $900 USD',
+  originalPrice: '1,000',
+  price: '800',
+  discount: '20% OFF',
   description:
     'Para negocios que quieren vender online, con catálogo, carrito, checkout, pagos en Colombia e integración con envíos.',
   cta: 'Solicitar ecommerce',
@@ -1727,8 +1735,16 @@ const ExpandedAgencySections = () => (
               return (
                 <article
                   key={plan.name}
-                  className={`plan-card group relative flex flex-col rounded-[24px] bg-white shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] overflow-hidden`}
+                  className={`plan-card group relative flex flex-col rounded-[24px] bg-white shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] overflow-hidden ${isMiddle ? 'lg:-mt-4' : ''}`}
                 >
+                  {isMiddle && (
+                    <div className="absolute inset-0 z-20 pointer-events-none rounded-[24px] border-[2.5px] border-transparent [background:linear-gradient(135deg,#21b2c6_0%,#8242f5_58%,#d96cff_100%)_border-box] [-webkit-mask:linear-gradient(#fff_0_0)_padding-box,_linear-gradient(#fff_0_0)] [-webkit-mask-composite:destination-out] [mask-composite:exclude]" />
+                  )}
+                  {isMiddle && (
+                    <div className="absolute left-[-2.5px] right-[-2.5px] top-[-2.5px] z-20 flex h-[42px] items-center justify-center rounded-t-[24px] font-epilogue text-[12px] font-bold uppercase tracking-[0.15em] text-white" style={{ background: 'linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%)' }}>
+                      Más vendido
+                    </div>
+                  )}
                   {isMiddle && (
             <img
               src={asset('plan-negocio-gradient.webp')}
@@ -1737,7 +1753,7 @@ const ExpandedAgencySections = () => (
             />
                   )}
 
-                  <div className="relative z-10 flex flex-1 flex-col p-8 md:p-10">
+                  <div className={`relative z-10 flex flex-1 flex-col p-8 md:p-10 ${isMiddle ? 'pt-14 md:pt-16' : ''}`}>
                     <h3 className="font-epilogue text-[24px] font-bold tracking-tight text-[#080808]">
                       {plan.name}
                     </h3>
@@ -1747,8 +1763,18 @@ const ExpandedAgencySections = () => (
                     
                     <div className="my-6 h-[1px] w-full bg-[#080808]/5" />
 
-                    <div className="plan-price font-epilogue text-[30px] font-extrabold leading-none tracking-[-0.04em] text-[#080808]">
-                      {plan.price}
+                    <div className="flex items-center gap-3">
+                      <span className="font-epilogue text-[15px] font-semibold text-[#080808]/40 line-through decoration-1">
+                        US$ {plan.originalPrice}
+                      </span>
+                      {plan.discount && (
+                        <span className="inline-flex items-center rounded-full bg-[#ece5fb] px-2.5 py-1 font-epilogue text-[11px] font-bold text-[#8242f5] -rotate-3">
+                          {plan.discount}
+                        </span>
+                      )}
+                    </div>
+                    <div className="plan-price mt-1 font-epilogue text-[36px] font-extrabold leading-none tracking-[-0.04em] text-[#080808]">
+                      <span className="text-[20px] font-bold tracking-normal mr-1">US$</span>{plan.price}
                     </div>
                     <div className="mt-2 text-[13px] font-medium text-[#080808]/50">
                       Pago único
@@ -1798,8 +1824,18 @@ const ExpandedAgencySections = () => (
               <h3 className="mt-1 font-epilogue text-[24px] font-bold leading-none tracking-tight md:text-[28px]">
                 {ecommercePlan.name}
               </h3>
-              <div className="mt-2 text-[14px] font-bold text-[#080808]">
-                {ecommercePlan.price}
+              <div className="mt-3 flex items-center justify-center md:justify-start gap-3">
+                <span className="font-epilogue text-[15px] font-semibold text-[#080808]/40 line-through decoration-1">
+                  US$ {ecommercePlan.originalPrice}
+                </span>
+                {ecommercePlan.discount && (
+                  <span className="inline-flex items-center rounded-full bg-[#ece5fb] px-2.5 py-1 font-epilogue text-[11px] font-bold text-[#8242f5] -rotate-3">
+                    {ecommercePlan.discount}
+                  </span>
+                )}
+              </div>
+              <div className="mt-1 font-epilogue text-[30px] font-extrabold leading-none tracking-[-0.04em] text-[#080808]">
+                <span className="text-[18px] font-bold tracking-normal mr-1">US$</span>{ecommercePlan.price}
               </div>
             </div>
             <div className="flex flex-1 flex-col items-center gap-6 md:flex-row md:justify-between md:pl-10 text-center md:text-left relative z-10">
