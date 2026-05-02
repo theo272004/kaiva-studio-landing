@@ -1058,26 +1058,6 @@ const ContactRevealSection = () => {
         </svg>
       ),
     },
-    {
-      label: 'Dribbble',
-      href: '#',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" />
-          <path d="M8 4.5c2.7 3.2 5.1 7 6.8 11.7M5 9.2c4.8-.2 9.4.5 13.7 2.1M9.7 18.7c1.5-3.8 4.5-6.8 8.5-8.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-        </svg>
-      ),
-    },
-    {
-      label: 'LinkedIn',
-      href: '#',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" strokeWidth="1.8" />
-          <path d="M8 10v6M8 8.2v.1M12 16v-3.2c0-1.3.8-2.1 1.9-2.1 1 0 1.7.7 1.7 2.1V16M12 10v.9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      ),
-    },
   ];
 
   return (
