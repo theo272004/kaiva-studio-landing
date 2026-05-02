@@ -1238,10 +1238,10 @@ const ContactRevealSection = () => {
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0)_22%,rgba(255,255,255,0)_100%)]" />
         <div className="mx-auto flex min-h-[34vh] w-full max-w-[1320px] flex-col items-center justify-center px-6 py-10 text-center md:min-h-[40vh] md:px-12 md:py-12 lg:px-16">
           <a
-            href="mailto:hello@kaivastudio.com"
+            href="mailto:info@kaivastudio.com"
             className="relative z-10 font-epilogue text-[clamp(28px,4vw,60px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-white transition-opacity duration-300 hover:opacity-80"
           >
-            hello@kaivastudio.com
+            info@kaivastudio.com
           </a>
           <div className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4">
             {socialLinks.map((item, index) => (
