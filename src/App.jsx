@@ -1755,8 +1755,10 @@ const ExpandedAgencySections = () => (
                         </span>
                       )}
                     </div>
-                    <div className="plan-price mt-1 font-epilogue text-[36px] font-extrabold leading-none tracking-[-0.04em] text-[#080808]">
-                      <span className="text-[18px] font-bold tracking-normal mr-1.5 text-[#080808]/70">Desde $</span>{plan.price}
+                    <div className="plan-price mt-1 flex items-baseline gap-1.5 font-epilogue text-[36px] font-extrabold leading-none tracking-[-0.04em] text-[#080808]">
+                      <span className="text-[18px] font-bold tracking-normal text-[#080808]/70">Desde</span>
+                      <span>${plan.price}</span>
+                      <span className="text-[18px] font-bold tracking-normal text-[#080808]/70">USD</span>
                     </div>
                     <div className="mt-2 text-[13px] font-medium text-[#080808]/50">
                       Pago único
@@ -1797,7 +1799,7 @@ const ExpandedAgencySections = () => (
               if (isMiddle) {
                 return (
                   <div key={plan.name} className="plan-card group relative flex flex-col rounded-[24px] bg-white shadow-[0_12px_40px_-16px_rgba(0,0,0,0.1)] outline-none transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.15)] lg:-mt-4">
-                    <div className="flex h-[42px] items-center justify-center rounded-t-[24px] font-epilogue text-[12px] font-bold uppercase tracking-[0.15em] text-white" style={{ background: 'linear-gradient(135deg, #21b2c6 0%, #8242f5 58%, #d96cff 100%)' }}>
+                    <div className="flex h-[42px] items-center justify-center rounded-t-[24px] bg-[#0a0a0a] font-epilogue text-[12px] font-bold uppercase tracking-[0.15em] text-white">
                       Más vendido
                     </div>
                     <article className="relative flex flex-col flex-1 rounded-b-[24px] bg-white overflow-hidden">
@@ -1842,8 +1844,10 @@ const ExpandedAgencySections = () => (
                   </span>
                 )}
               </div>
-              <div className="mt-1 font-epilogue text-[30px] font-extrabold leading-none tracking-[-0.04em] text-[#080808]">
-                <span className="text-[18px] font-bold tracking-normal mr-1.5 text-[#080808]/70">Desde $</span>{ecommercePlan.price}
+              <div className="mt-1 flex items-baseline justify-center md:justify-start gap-1.5 font-epilogue text-[30px] font-extrabold leading-none tracking-[-0.04em] text-[#080808]">
+                <span className="text-[16px] font-bold tracking-normal text-[#080808]/70">Desde</span>
+                <span>${ecommercePlan.price}</span>
+                <span className="text-[16px] font-bold tracking-normal text-[#080808]/70">USD</span>
               </div>
             </div>
             <div className="flex flex-1 flex-col items-center gap-6 md:flex-row md:justify-between md:pl-10 text-center md:text-left relative z-10">
