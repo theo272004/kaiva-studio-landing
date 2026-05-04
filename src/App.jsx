@@ -919,6 +919,79 @@ const TiltSlide = ({ slide, isActive, position, onClick }) => {
   );
 };
 
+const ComparativaSection = () => {
+  return (
+    <section className="relative z-10 w-full bg-[#f3f4f6] px-6 py-20 md:px-16 md:py-32 overflow-hidden border-t border-[#e2e6ec]">
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-[#8242f5] opacity-[0.07] blur-[100px]"></div>
+      
+      <div className="mx-auto max-w-[1140px] relative z-10">
+        <div className="text-center mb-16 max-w-[800px] mx-auto">
+          <h2 className="font-epilogue text-[clamp(28px,5vw,46px)] font-extrabold tracking-[-0.03em] text-[#080808]">
+            No todas las páginas web <span style={gradientAccentStyle}>compiten en lo mismo</span>
+          </h2>
+          <p className="mt-4 text-[16px] md:text-[18px] text-[#080808]/70 leading-relaxed">
+            Descubre por qué una web "muy barata" termina saliendo cara, y por qué no necesitas contratar a una "agencia gigante" para tener presencia digital verdaderamente premium.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
+          {/* Freelancer Barato */}
+          <div className="rounded-[28px] border border-[#080808]/10 bg-white p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.08)] transition-transform hover:-translate-y-1 duration-300">
+            <h3 className="font-manrope text-[13px] font-bold uppercase tracking-[0.16em] text-[#080808]/50 mb-2">El "Muy Barato"</h3>
+            <div className="text-[28px] font-epilogue font-bold text-[#080808] mb-8">Riesgo Alto</div>
+            <ul className="space-y-4 text-[15px] text-[#080808]/70 font-medium">
+              <li className="flex items-start gap-3"><span className="text-red-500 font-bold mt-[2px]">✕</span> Plantillas repetidas y genéricas</li>
+              <li className="flex items-start gap-3"><span className="text-red-500 font-bold mt-[2px]">✕</span> Sin estructura comercial para vender</li>
+              <li className="flex items-start gap-3"><span className="text-red-500 font-bold mt-[2px]">✕</span> Diseño pobre que resta confianza</li>
+              <li className="flex items-start gap-3"><span className="text-red-500 font-bold mt-[2px]">✕</span> Desaparecen tras entregar el proyecto</li>
+              <li className="flex items-start gap-3"><span className="text-red-500 font-bold mt-[2px]">✕</span> Soporte inexistente</li>
+            </ul>
+          </div>
+          
+          {/* Kaiva Studio */}
+          <div className="rounded-[32px] bg-[#16151f] p-8 md:p-10 relative shadow-[0_32px_64px_-16px_rgba(130,66,245,0.4)] lg:-mt-4 lg:-mb-4 z-20 overflow-hidden transform transition-transform hover:scale-[1.02] duration-300">
+            <div className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#ffffff1a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff1a_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+            <div className="absolute -right-20 -top-20 h-[240px] w-[240px] rounded-full bg-[#8242f5] opacity-40 blur-[80px]"></div>
+            
+            <div className="relative z-10 flex flex-col h-full">
+              <div className="inline-flex w-fit items-center rounded-full bg-[#8242f5]/20 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[#d6b7ff] mb-6">
+                La Opción Inteligente
+              </div>
+              <img src={asset('nombre hero.webp')} alt="Kaiva Studio" className="h-8 object-contain object-left mb-6 filter invert opacity-90" />
+              
+              <ul className="space-y-4 text-[15px] font-medium text-white/90 mt-2 flex-1">
+                <li className="flex items-start gap-3"><span className="text-[#d96cff] font-bold mt-[2px]">✓</span> Estructura y copy estratégico para vender</li>
+                <li className="flex items-start gap-3"><span className="text-[#d96cff] font-bold mt-[2px]">✓</span> Estética premium y diseño a medida</li>
+                <li className="flex items-start gap-3"><span className="text-[#d96cff] font-bold mt-[2px]">✓</span> Rapidez y atención directa sin intermediarios</li>
+                <li className="flex items-start gap-3"><span className="text-[#d96cff] font-bold mt-[2px]">✓</span> Soporte real post-entrega</li>
+                <li className="flex items-start gap-3"><span className="text-[#d96cff] font-bold mt-[2px]">✓</span> Relación calidad-precio insuperable</li>
+              </ul>
+              
+              <a href="#planes" onClick={(e) => scrollToSection(e, 'planes')} className="mt-8 flex w-full min-h-[52px] items-center justify-center rounded-[26px] bg-white text-[#16151f] font-semibold transition-transform hover:scale-[1.03] active:scale-95 shadow-[0_12px_24px_-8px_rgba(255,255,255,0.2)]">
+                Ver paquetes
+              </a>
+            </div>
+          </div>
+          
+          {/* Agencia Grande */}
+          <div className="rounded-[28px] border border-[#080808]/10 bg-white p-8 md:p-10 shadow-[0_12px_44px_-24px_rgba(32,29,26,0.08)] transition-transform hover:-translate-y-1 duration-300">
+            <h3 className="font-manrope text-[13px] font-bold uppercase tracking-[0.16em] text-[#080808]/50 mb-2">La "Agencia Grande"</h3>
+            <div className="text-[28px] font-epilogue font-bold text-[#080808] mb-8">Costoso y Lento</div>
+            <ul className="space-y-4 text-[15px] text-[#080808]/70 font-medium">
+              <li className="flex items-start gap-3"><span className="text-[#080808]/40 font-bold mt-[2px]">✕</span> Meses de espera para entregar</li>
+              <li className="flex items-start gap-3"><span className="text-[#080808]/40 font-bold mt-[2px]">✕</span> Eres "un cliente más" en su larga lista</li>
+              <li className="flex items-start gap-3"><span className="text-[#080808]/40 font-bold mt-[2px]">✕</span> Procesos lentos y burocráticos</li>
+              <li className="flex items-start gap-3"><span className="text-[#080808]/40 font-bold mt-[2px]">✕</span> Precios inflados por sus gastos operativos</li>
+              <li className="flex items-start gap-3"><span className="text-[#080808]/40 font-bold mt-[2px]">✕</span> Contacto frío y delegación a practicantes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const ContactRevealSection = () => {
   const prefersReducedMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
@@ -1684,6 +1757,9 @@ const ExpandedAgencySections = () => (
     <ProcessRedesignSection />
     <div style={{ marginTop: '-2px', position: 'relative', zIndex: 2 }}>
       <AliadosSection />
+    </div>
+    <div style={{ marginTop: '-2px', position: 'relative', zIndex: 1 }}>
+      <ComparativaSection />
     </div>
     <div style={{ marginTop: '-2px', position: 'relative', zIndex: 1 }}>
       <section
