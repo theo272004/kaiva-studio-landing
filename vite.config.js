@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 import { resolve } from 'path'
 
 export default defineConfig({
-  base: '/kaiva-studio-landing/',
+  base: '/',
   plugins: [react({ fastRefresh: false }), tailwindcss()],
   server: {
     port: 5173,
