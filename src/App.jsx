@@ -1305,6 +1305,9 @@ const ContactRevealSection = () => {
           >
             info@kaivastudio.com
           </a>
+          <p className="relative z-10 mt-6 max-w-[700px] text-center text-[13px] leading-6 text-white/62 md:text-[14px]">
+            Estamos ubicados en Barranquilla y trabajamos con negocios en toda Colombia y clientes internacionales.
+          </p>
           <div className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4">
             {socialLinks.map((item, index) => (
               <motion.a
