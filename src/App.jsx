@@ -3305,24 +3305,14 @@ const ProblemSection = () => {
                   <stop offset="72%" stopColor="#d96cff" />
                   <stop offset="100%" stopColor="#8b5cf6" />
                 </linearGradient>
-                <filter id="problemLineGlow" x="-24%" y="-24%" width="148%" height="148%">
-                  <feGaussianBlur stdDeviation="13" result="blur" />
-                </filter>
               </defs>
               <path
                 d="M-180 344 C 70 126, 360 92, 640 126 C 824 150, 872 470, 1070 478 C 1290 486, 1404 232, 1608 112 C 1728 42, 1848 30, 1940 48"
                 stroke="url(#problemLineGradient)"
-                strokeWidth="50"
-                strokeLinecap="round"
-                filter="url(#problemLineGlow)"
-                opacity="0.28"
-              />
-              <path
-                d="M-180 344 C 70 126, 360 92, 640 126 C 824 150, 872 470, 1070 478 C 1290 486, 1404 232, 1608 112 C 1728 42, 1848 30, 1940 48"
-                stroke="url(#problemLineGradient)"
-                strokeWidth="12"
+                strokeWidth="24"
                 strokeLinecap="round"
               />
+
             </svg>
           </div>
 
@@ -3343,9 +3333,9 @@ const ProblemSection = () => {
               <path
                 d="M-130 224 C 78 84, 314 56, 500 94 C 646 124, 702 284, 840 286 C 930 286, 1010 228, 1104 154"
                 stroke="url(#problemLineGradientMobile)"
-                strokeWidth="10"
+                strokeWidth="18"
                 strokeLinecap="round"
-                opacity="0.72"
+                opacity="1"
               />
             </svg>
           </div>
