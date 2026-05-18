@@ -3294,55 +3294,6 @@ const ProblemSection = () => {
         </div>
 
         <div className="relative mt-14 w-full overflow-visible pb-28 md:mt-20 md:pb-44">
-          <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[28px] hidden h-[520px] w-[108vw] -translate-x-1/2 opacity-95 md:block">
-            <svg
-              viewBox="0 0 1800 520"
-              className="h-full w-full"
-              fill="none"
-              preserveAspectRatio="none"
-            >
-              <defs>
-                <linearGradient id="problemLineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#21b2c6" />
-                  <stop offset="38%" stopColor="#8242f5" />
-                  <stop offset="72%" stopColor="#d96cff" />
-                  <stop offset="100%" stopColor="#8b5cf6" />
-                </linearGradient>
-              </defs>
-              <path
-                d="M-180 344 C 70 126, 360 92, 640 126 C 824 150, 872 470, 1070 478 C 1290 486, 1404 232, 1608 112 C 1728 42, 1848 30, 1940 48"
-                stroke="url(#problemLineGradient)"
-                strokeWidth="24"
-                strokeLinecap="round"
-              />
-
-            </svg>
-          </div>
-
-          <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[68px] h-[300px] w-[110vw] -translate-x-1/2 opacity-80 md:hidden">
-            <svg
-              viewBox="0 0 980 300"
-              className="h-full w-full"
-              fill="none"
-              preserveAspectRatio="none"
-            >
-              <defs>
-                <linearGradient id="problemLineGradientMobile" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#21b2c6" />
-                  <stop offset="40%" stopColor="#8242f5" />
-                  <stop offset="100%" stopColor="#d96cff" />
-                </linearGradient>
-              </defs>
-              <path
-                d="M-130 224 C 78 84, 314 56, 500 94 C 646 124, 702 284, 840 286 C 930 286, 1010 228, 1104 154"
-                stroke="url(#problemLineGradientMobile)"
-                strokeWidth="18"
-                strokeLinecap="round"
-                opacity="1"
-              />
-            </svg>
-          </div>
-
           <h3 className="relative z-10 mb-6 text-center font-manrope text-[clamp(24px,3.6vw,42px)] font-extrabold uppercase tracking-[0.04em] text-[#080808] md:mb-10">
             POR QUÉ MUCHOS NEGOCIOS SIGUEN SIN WEB
           </h3>
