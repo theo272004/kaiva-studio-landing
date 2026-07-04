@@ -1763,6 +1763,7 @@ const ExpandedAgencySections = () => (
       <AliadosSection />
     </div>
     <div style={{ marginTop: '-2px', position: 'relative', zIndex: 1 }}>
+      {false && (
       <section
         id="planes"
         data-nav-theme="light"
@@ -1942,6 +1943,7 @@ const ExpandedAgencySections = () => (
         </div>
       </motion.div>
     </section>
+      )}
     </div>
     <div style={{ marginTop: '-2px', position: 'relative', zIndex: 1 }}>
       <ComparativaSection />
