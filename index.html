@@ -1901,7 +1901,7 @@
       /* El fondo vive en ::before para poder revelarlo de abajo hacia arriba
          sin deformar el radio superior. */
       background: transparent;
-      padding-top: clamp(5rem, 8vw, 7.5rem);
+      padding-top: clamp(3.25rem, 5vw, 4.5rem);
       overflow: hidden;
       position: relative;
       isolation: isolate;
@@ -1910,7 +1910,10 @@
     .footer::before {
       content: '';
       position: absolute;
-      inset: 0;
+      /* Se desborda a los lados a propósito: el arco es mucho mayor que la
+         pantalla, así que solo se ve su tramo central. El overflow del footer
+         recorta el resto. */
+      inset: 0 -12%;
       z-index: -1;
       background: var(--dark);
       clip-path: inset(100% 0 0 0 round var(--foot-r) var(--foot-r) 0 0);
@@ -1918,10 +1921,9 @@
     }
 
     .footer {
-      /* Radio amplio a propósito: cuanto mayor es, más gradual sube la curva
-         y menos se lee como esquina recortada. Se define en vw para que la
-         proporción se mantenga y no se vea circular en pantallas angostas. */
-      --foot-r: clamp(42px, 8vw, 150px);
+      /* Arco muy grande: combinado con el desborde lateral del ::before, solo
+         entra en pantalla la mitad superior de la curva. */
+      --foot-r: clamp(110px, 18vw, 340px);
     }
 
     .footer.lifted::before {
@@ -1988,7 +1990,7 @@
       line-height: 0;
       /* recorta la base para compensar el ancho completo y que el footer no
          termine tan abajo */
-      margin-bottom: -4.5%;
+      margin-bottom: -7.5%;
     }
 
     .foot-brand img {
