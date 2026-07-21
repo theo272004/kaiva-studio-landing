@@ -1918,7 +1918,8 @@
     }
 
     .footer {
-      --foot-r: clamp(22px, 3vw, 44px);
+      /* curva apenas insinuada: se percibe el corte, no el arco */
+      --foot-r: clamp(8px, 0.9vw, 14px);
     }
 
     .footer.lifted::before {
@@ -1983,13 +1984,14 @@
       display: flex;
       justify-content: center;
       line-height: 0;
-      /* recorta un poco más la base para que la marca no cuelgue tan abajo */
-      margin-bottom: -2.5%;
+      /* recorta la base para compensar el ancho completo y que el footer no
+         termine tan abajo */
+      margin-bottom: -4.5%;
     }
 
     .foot-brand img {
-      width: 88%;
-      max-width: 1500px;
+      /* de borde a borde del viewport */
+      width: 100%;
       height: auto;
       display: block;
       opacity: 0;
