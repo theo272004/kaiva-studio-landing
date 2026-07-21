@@ -1896,38 +1896,103 @@
       align-items: center;
       gap: 0.6rem;
     }
+    /* ================= FOOTER ================= */
     .footer {
-      border-top: 1px solid var(--line);
-      background: var(--surface);
-      padding-block: 2.8rem;
+      /* Cierra la página a ancho completo: sin bordes, sombras ni radios. */
+      background: #050505;
+      padding-top: clamp(5rem, 8vw, 7.5rem);
+      overflow: hidden;
+      position: relative;
     }
 
-    .foot-in {
+    .foot-top {
+      display: grid;
+      grid-template-columns: 1fr repeat(4, minmax(0, 1fr));
+      gap: clamp(2rem, 4vw, 3.5rem);
+      align-items: start;
+      padding-bottom: clamp(4rem, 7vw, 6.5rem);
+    }
+
+    .foot-copy {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.55);
+      letter-spacing: -0.01em;
+    }
+
+    .foot-col h4 {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.4rem;
+    }
+
+    .foot-col ul {
+      list-style: none;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .foot-col a {
+      font-size: 14.5px;
+      color: rgba(255, 255, 255, 0.62);
+      letter-spacing: -0.01em;
+      transition: opacity 0.25s var(--ease), color 0.25s var(--ease);
+    }
+
+    .foot-col a:hover {
+      color: #ffffff;
+    }
+
+    .foot-social a {
+      display: inline-flex;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 1.3rem;
+      gap: 0.7rem;
     }
 
-    .footer p {
-      font-size: 13.5px;
-      color: var(--ink-faint);
+    .foot-social svg {
+      flex-shrink: 0;
+      opacity: 0.85;
     }
 
-    .foot-links {
-      display: flex;
-      gap: 1.7rem;
+    /* Marca gigante: arte provisto, nunca texto ni CSS. Se ancla al borde
+       inferior y el overflow del footer la recorta, como en la referencia. */
+    .foot-brand {
+      display: block;
+      line-height: 0;
+      margin-bottom: -0.5%;
     }
 
-    .foot-links a {
-      font-size: 13.5px;
-      color: var(--ink-soft);
-      transition: color 0.2s;
+    .foot-brand img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transform: translateY(0);
+      transition: transform 0.6s var(--ease);
     }
 
-    .foot-links a:hover {
-      color: var(--ink);
+    .footer.lifted .foot-brand img {
+      transform: translateY(-3px);
+    }
+
+    @media (max-width:1080px) {
+      .foot-top {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.5rem 2rem;
+      }
+
+      .foot-copy {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width:560px) {
+      .foot-top {
+        grid-template-columns: 1fr;
+        gap: 2.2rem;
+      }
     }
 
     /* ================= RESPONSIVE ================= */
@@ -3085,19 +3150,67 @@
   </section>
 
   <!-- ============ FOOTER ============ -->
-  <footer class="footer">
-    <div class="wrap foot-in">
-      <a href="#top" class="logo" aria-label="Kaiva Studio Inicio">
-        <span class="wm">Kaiva Studio<span class="dot">.</span></span>
-      </a>
-      <p class="foot-tagline">Tu Growth Partner digital.</p>
-      <div class="foot-links">
-        <a href="#servicios">Servicios</a>
-        <a href="#trabajo">Trabajo</a>
-        <a href="herramienta.html">Herramienta</a>
-        <a href="#contacto">Contacto</a>
+  <footer class="footer" id="footer">
+    <div class="wrap foot-top">
+      <p class="foot-copy reveal">© Kaiva Studio 2026</p>
+
+      <nav class="foot-col reveal" style="--d:.05s" aria-label="Navegación">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#top">Inicio</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#statement">Nosotros</a></li>
+        </ul>
+      </nav>
+
+      <nav class="foot-col reveal" style="--d:.1s" aria-label="Enlaces rápidos">
+        <h4>Enlaces rápidos</h4>
+        <ul>
+          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="#" id="footFaq">Preguntas frecuentes</a></li>
+        </ul>
+      </nav>
+
+      <nav class="foot-col reveal" style="--d:.15s" aria-label="Legal">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Política de privacidad</a></li>
+          <li><a href="#">Términos y condiciones</a></li>
+          <li><a href="#">Política de cookies</a></li>
+        </ul>
+      </nav>
+
+      <div class="foot-col foot-social reveal" style="--d:.2s">
+        <h4>Síguenos</h4>
+        <ul>
+          <li>
+            <a href="https://www.instagram.com/kaivastudio/" target="_blank" rel="noopener noreferrer">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none" />
+              </svg>
+              @kaivastudio
+            </a>
+          </li>
+          <li>
+            <a href="#" target="_blank" rel="noopener noreferrer">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="3" />
+                <path d="M7 10.5v6.5M7 7.2v.1M11.5 17v-3.6c0-1.1.9-2 2-2s2 .9 2 2V17" />
+              </svg>
+              Kaiva Studio
+            </a>
+          </li>
+        </ul>
       </div>
-      <p>© 2026 Kaiva Studio · Barranquilla, Colombia</p>
+    </div>
+
+    <div class="foot-brand">
+      <img src="assets/kaiva-wordmark-footer.png" alt="Kaiva Studio" width="2400" height="580" loading="lazy"
+        decoding="async">
     </div>
   </footer>
 
@@ -3466,6 +3579,26 @@
             addMsg(answers[matchKey], 'bot');
           }, 350);
         });
+      }
+
+      /* footer: "Preguntas frecuentes" abre el asistente */
+      var footFaq = document.getElementById('footFaq');
+      if (footFaq && win) {
+        footFaq.addEventListener('click', function (e) {
+          e.preventDefault();
+          win.classList.add('open');
+        });
+      }
+
+      /* footer: la marca sube 3px cuando entra en pantalla */
+      var sinMovimiento = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var footer = document.getElementById('footer');
+      if (footer && !sinMovimiento && 'IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            footer.classList.toggle('lifted', en.isIntersecting);
+          });
+        }, { threshold: 0.35 }).observe(footer);
       }
     })();
   </script>
