@@ -345,9 +345,11 @@
     }
 
     .nav-in {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 0.85rem var(--pad);
+      /* A ancho completo: el logo arranca cerca del borde izquierdo y el CTA
+         termina cerca del derecho, en vez de quedar encajonados al centro. */
+      max-width: none;
+      margin: 0;
+      padding: 0.85rem clamp(1.25rem, 3vw, 3.25rem);
       display: flex;
       justify-content: space-between;
       align-items: center;
