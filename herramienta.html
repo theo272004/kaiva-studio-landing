@@ -1635,7 +1635,7 @@
       display: none;
       align-items: center;
       justify-content: center;
-      padding: clamp(2rem, 6vw, 5rem) var(--pad);
+      padding: clamp(5rem, 10vw, 7rem) var(--pad) clamp(2rem, 6vw, 5rem);
     }
 
     .kv-stage.on {
@@ -1661,35 +1661,40 @@
       }
     }
 
-    .kv-brand {
+    .kv-brand-fixed {
+      position: fixed;
+      top: clamp(1.1rem, 3vw, 1.9rem);
+      left: clamp(1.1rem, 4vw, 2.6rem);
+      z-index: 40;
       display: inline-flex;
       align-items: center;
-      gap: .55rem;
+      gap: .5rem;
       font-family: var(--epilogue);
       font-weight: 800;
-      font-size: 1.05rem;
+      font-size: .98rem;
       color: var(--ink);
-      margin-bottom: 2rem;
       text-decoration: none;
+      opacity: .9;
+      transition: opacity .2s var(--ease);
     }
 
-    .kv-brand img {
-      height: 30px;
+    .kv-brand-fixed:hover {
+      opacity: 1;
+    }
+
+    .kv-brand-fixed img {
+      height: 26px;
       width: auto;
     }
 
-    .kv-eyebrow {
-      display: inline-block;
-      font-size: .74rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--violet);
-      background: var(--violet-soft);
-      border: 1px solid rgba(130, 66, 245, .18);
-      border-radius: var(--r-btn);
-      padding: .4rem .9rem;
-      margin-bottom: 1.1rem;
+    @media (max-width:640px) {
+      .kv-brand-fixed {
+        position: absolute;
+      }
+
+      .kv-brand-fixed span {
+        display: none;
+      }
     }
 
     .kv-box h1 {
@@ -1916,19 +1921,22 @@
     }
   </style>
 
+  <!-- Marca fija en la esquina superior -->
+  <a href="index.html" class="kv-brand-fixed"><img src="assets/logo-kaiva.png" alt="Kaiva Studio"><span>Kaiva
+      Studio.</span></a>
+
   <!-- ===== 1. Bienvenida ===== -->
   <section class="kv-stage on" id="kvWelcome">
     <div class="kv-box">
-      <a href="index.html" class="kv-brand"><img src="assets/logo-kaiva.png" alt="Kaiva Studio">Kaiva Studio.</a>
-      <div class="kv-eyebrow">Radiografía Digital · Gratis</div>
       <h1>Analicemos tu web en <em>60 segundos</em></h1>
-      <p class="kv-lead">Revisamos tu sitio como lo ve un cliente, Google y las IAs: imagen, confianza y operación.
-        Te devolvemos un Índice de Salud Digital con los hallazgos priorizados. Sin registro y sin compromiso.</p>
+      <p class="kv-lead">Revisamos tu sitio como lo ve un cliente: cómo se ve tu marca, si genera confianza y si tu
+        operación está bien montada. Te devolvemos tu Índice de Salud Digital con los hallazgos priorizados.
+        Gratis, sin registro y sin compromiso.</p>
 
       <div class="kv-steps">
         <div class="kv-step"><i>PASO 1</i><b>Pega tu enlace</b><span>La dirección de tu sitio web. Nada más.</span></div>
-        <div class="kv-step"><i>PASO 2</i><b>Ejecutamos el análisis</b><span>Revisamos velocidad, diseño, seguridad y
-            visibilidad.</span></div>
+        <div class="kv-step"><i>PASO 2</i><b>Ejecutamos el análisis</b><span>Imagen, confianza y operación, punto por
+            punto.</span></div>
         <div class="kv-step"><i>PASO 3</i><b>Recibes tu panel</b><span>Tu puntaje y qué corregir primero.</span></div>
       </div>
 

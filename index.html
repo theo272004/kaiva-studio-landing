@@ -767,6 +767,572 @@
       line-height: 1.55;
     }
 
+    /* ================= SERVICIOS (tarjetas ricas 2x2) ================= */
+    .svc-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.4rem;
+    }
+
+    .svc-card {
+      display: grid;
+      grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+      gap: 1.6rem;
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      border-radius: var(--r-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+    }
+
+    .svc-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(15, 23, 42, 0.1);
+      box-shadow: var(--shadow-md);
+    }
+
+    .svc-body {
+      min-width: 0;
+    }
+
+    .svc-ic {
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      background: var(--violet-soft);
+      color: var(--violet);
+      display: grid;
+      place-items: center;
+      margin-bottom: 1.1rem;
+    }
+
+    .svc-card h3 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.12rem;
+      letter-spacing: -.01em;
+      margin-bottom: .55rem;
+      color: var(--ink);
+    }
+
+    .svc-card > .svc-body > p {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      margin-bottom: 1.1rem;
+    }
+
+    .svc-list {
+      list-style: none;
+      margin: 0 0 1.4rem;
+      padding: 0;
+      display: grid;
+      gap: .5rem;
+    }
+
+    .svc-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: .55rem;
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--ink);
+    }
+
+    .svc-list svg {
+      flex: none;
+      margin-top: 1px;
+      color: var(--violet);
+    }
+
+    .svc-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: .6rem 1.2rem;
+      border-radius: 99px;
+      background: var(--violet-soft);
+      color: var(--violet);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      border: 1px solid rgba(130, 66, 245, .16);
+      transition: background .25s var(--ease), color .25s var(--ease);
+    }
+
+    .svc-btn:hover {
+      background: var(--violet);
+      color: #fff;
+    }
+
+    /* --- Lienzo del mockup --- */
+    .svc-vis {
+      position: relative;
+      min-width: 0;
+      aspect-ratio: 4 / 3;
+      border-radius: var(--r-md);
+      background: linear-gradient(160deg, #f7f6fb, #eef0f7);
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      font-size: 10px;
+    }
+
+    .svc-vis * {
+      box-sizing: border-box;
+    }
+
+    /* Mockup 1: navegador + móvil */
+    .mk-browser {
+      width: 100%;
+      border-radius: 9px;
+      background: #fff;
+      box-shadow: 0 10px 26px rgba(15, 23, 42, .13);
+      overflow: hidden;
+    }
+
+    .mk-bar {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 8px;
+      background: #fff;
+      border-bottom: 1px solid rgba(15, 23, 42, .07);
+    }
+
+    .mk-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #d8dbe3;
+    }
+
+    .mk-nav {
+      margin-left: auto;
+      display: flex;
+      gap: 6px;
+    }
+
+    .mk-nav i {
+      display: block;
+      width: 16px;
+      height: 3px;
+      border-radius: 2px;
+      background: #e3e6ee;
+    }
+
+    .mk-hero {
+      background: #12121a;
+      padding: 14px 12px 16px;
+      color: #fff;
+    }
+
+    .mk-hero b {
+      display: block;
+      font-family: var(--display);
+      font-size: 12px;
+      line-height: 1.25;
+      font-weight: 700;
+    }
+
+    .mk-hero b em {
+      font-style: normal;
+      color: var(--violet-2, #a679ff);
+    }
+
+    .mk-hero span {
+      display: block;
+      margin-top: 6px;
+      width: 78%;
+      height: 3px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, .22);
+    }
+
+    .mk-hero span + span {
+      width: 58%;
+      margin-top: 4px;
+    }
+
+    .mk-cta {
+      display: inline-block;
+      margin-top: 9px;
+      padding: 4px 9px;
+      border-radius: 99px;
+      background: var(--violet);
+      font-size: 8px;
+      font-weight: 700;
+    }
+
+    .mk-phone {
+      position: absolute;
+      right: 9%;
+      bottom: 6%;
+      width: 27%;
+      border-radius: 8px;
+      background: #fff;
+      border: 2px solid #fff;
+      box-shadow: 0 12px 26px rgba(15, 23, 42, .2);
+      overflow: hidden;
+    }
+
+    .mk-phone-top {
+      background: #fff;
+      padding: 5px 6px 4px;
+      border-bottom: 1px solid rgba(15, 23, 42, .07);
+      font-size: 6px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .mk-phone-body {
+      padding: 7px 6px 9px;
+      background: #12121a;
+      color: #fff;
+    }
+
+    .mk-phone-body b {
+      display: block;
+      font-family: var(--display);
+      font-size: 7.5px;
+      line-height: 1.2;
+    }
+
+    .mk-phone-body i {
+      display: block;
+      margin-top: 5px;
+      height: 16px;
+      border-radius: 4px;
+      background: linear-gradient(120deg, #3b2a63, #6d4bb0);
+    }
+
+    /* Mockup 2: branding */
+    .mk-brand {
+      display: grid;
+      grid-template-columns: 1.55fr 1fr;
+      grid-template-rows: 1.15fr 1fr;
+      gap: 7px;
+      width: 100%;
+      height: 100%;
+    }
+
+    .mk-tile {
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, .09);
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      padding: 6px;
+    }
+
+    .mk-logo {
+      background: #17251d;
+      color: #fff;
+      letter-spacing: .22em;
+      font-weight: 700;
+      font-size: 9px;
+      gap: 6px;
+      grid-auto-flow: row;
+    }
+
+    .mk-logo svg {
+      opacity: .95;
+    }
+
+    .mk-swatches {
+      display: grid;
+      grid-template-rows: repeat(4, 1fr);
+      gap: 4px;
+      padding: 5px;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .mk-swatches i {
+      display: block;
+      border-radius: 5px;
+      box-shadow: 0 3px 9px rgba(15, 23, 42, .08);
+    }
+
+    .mk-type {
+      display: block;
+      padding: 7px 8px;
+      text-align: left;
+    }
+
+    .mk-type b {
+      display: block;
+      font-family: var(--display);
+      font-size: 17px;
+      line-height: 1;
+      color: var(--ink);
+    }
+
+    .mk-type u {
+      display: block;
+      text-decoration: none;
+      font-size: 7px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-top: 3px;
+    }
+
+    .mk-type s {
+      display: block;
+      text-decoration: none;
+      font-size: 5.5px;
+      color: var(--ink-faint, #94a3b8);
+      margin-top: 2px;
+      letter-spacing: .04em;
+    }
+
+    .mk-card-dark {
+      background: #12121a;
+      color: #fff;
+      font-size: 6.5px;
+      letter-spacing: .2em;
+      font-weight: 700;
+    }
+
+    /* Mockup 3: dashboard */
+    .mk-dash {
+      display: grid;
+      grid-template-columns: 26% 1fr;
+      width: 100%;
+      height: 100%;
+      border-radius: 9px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 10px 26px rgba(15, 23, 42, .13);
+    }
+
+    .mk-side {
+      background: #12121a;
+      padding: 8px 7px;
+      display: grid;
+      align-content: start;
+      gap: 5px;
+    }
+
+    .mk-side b {
+      font-size: 6.5px;
+      color: #fff;
+      font-weight: 800;
+      margin-bottom: 3px;
+    }
+
+    .mk-side i {
+      display: block;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, .16);
+    }
+
+    .mk-side i.on {
+      background: var(--violet);
+    }
+
+    .mk-main {
+      padding: 8px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 6px;
+      min-height: 0;
+    }
+
+    .mk-kpis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+    }
+
+    .mk-kpi {
+      border: 1px solid rgba(15, 23, 42, .07);
+      border-radius: 5px;
+      padding: 4px 5px;
+    }
+
+    .mk-kpi u {
+      display: block;
+      text-decoration: none;
+      font-size: 5px;
+      color: var(--ink-faint, #94a3b8);
+    }
+
+    .mk-kpi b {
+      display: block;
+      font-size: 8px;
+      color: var(--ink);
+      font-weight: 800;
+      margin-top: 1px;
+    }
+
+    .mk-kpi s {
+      display: block;
+      text-decoration: none;
+      font-size: 5px;
+      color: #10b981;
+      font-weight: 700;
+    }
+
+    .mk-chart {
+      border: 1px solid rgba(15, 23, 42, .07);
+      border-radius: 5px;
+      padding: 5px;
+      min-height: 0;
+      display: grid;
+    }
+
+    .mk-chart svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 34px;
+    }
+
+    /* Mockup 4: IA & SEO */
+    .mk-ai {
+      display: grid;
+      gap: 7px;
+      width: 100%;
+      height: 100%;
+      grid-template-rows: 1.25fr 1fr;
+    }
+
+    .mk-panel {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, .09);
+      padding: 8px 9px;
+      display: grid;
+      align-content: start;
+      gap: 4px;
+    }
+
+    .mk-panel > u {
+      display: block;
+      text-decoration: none;
+      font-size: 6px;
+      color: var(--ink-faint, #94a3b8);
+      font-weight: 600;
+    }
+
+    .mk-gpt {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .mk-gpt-av {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #10a37f;
+      flex: none;
+      display: grid;
+      place-items: center;
+      color: #fff;
+    }
+
+    .mk-gpt b {
+      display: block;
+      font-size: 7.5px;
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .mk-gpt s {
+      display: block;
+      text-decoration: none;
+      font-size: 5.5px;
+      line-height: 1.35;
+      color: var(--ink-soft);
+      margin-top: 1px;
+    }
+
+    .mk-pill {
+      justify-self: start;
+      padding: 2px 6px;
+      border-radius: 99px;
+      background: rgba(16, 185, 129, .12);
+      color: #0f9d76;
+      font-size: 5.5px;
+      font-weight: 800;
+    }
+
+    .mk-ai-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 7px;
+      min-height: 0;
+    }
+
+    .mk-spark svg {
+      display: block;
+      width: 100%;
+      height: 22px;
+    }
+
+    .mk-big {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .mk-big b {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--ink);
+      font-family: var(--display);
+    }
+
+    .mk-big s {
+      text-decoration: none;
+      font-size: 5.5px;
+      font-weight: 800;
+      color: #10b981;
+    }
+
+    .mk-ring {
+      place-items: center;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .mk-ring svg {
+      width: 34px;
+      height: 34px;
+      transform: rotate(-90deg);
+    }
+
+    .mk-ring-lbl {
+      font-size: 5.5px;
+      color: var(--ink-faint, #94a3b8);
+      margin-top: 2px;
+    }
+
+    @media (max-width: 1080px) {
+      .svc-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .svc-card {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+        gap: 1.3rem;
+      }
+
+      .svc-vis {
+        order: -1;
+        aspect-ratio: 16 / 10;
+      }
+    }
+
     /* ================= STATEMENT / INTERACTIVE TAGS ================= */
     .statement {
       position: relative;
@@ -2514,53 +3080,241 @@
         <h2 class="h2 split" data-split>Lo que construimos para ti<span class="dot">.</span></h2>
         <p class="desc reveal" style="--d:.1s">Cada empresa necesita algo distinto. Aquí están los servicios con los que más ayudamos — desde el primer sitio hasta plataformas complejas.</p>
       </div>
-      <div class="cards-4">
-        <div class="card reveal" style="--d:0s">
-          <div class="card-ic">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="18" height="14" rx="2" />
-              <path d="M3 8h18M8 21h8M12 17v4" />
-            </svg>
+      <div class="svc-grid">
+
+        <!-- 1. Diseño y desarrollo web -->
+        <article class="svc-card reveal" style="--d:0s">
+          <div class="svc-body">
+            <div class="svc-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="14" rx="2" />
+                <path d="M3 8h18M8 21h8M12 17v4" />
+              </svg>
+            </div>
+            <h3 class="h3">Diseño y desarrollo web</h3>
+            <p>Tu sitio web principal, rápido, bonito y construido para convertir visitas en clientes.</p>
+            <ul class="svc-list">
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>Sitios rápidos y responsivos</li>
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>Diseño a medida, sin plantillas</li>
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>UI/UX que convierte</li>
+            </ul>
+            <a href="#contacto" class="svc-btn">Ver ejemplos</a>
           </div>
-          <h3 class="h3">Diseño y desarrollo web</h3>
-          <p>Tu sitio web principal, rápido, bonito y construido para convertir visitas en clientes. Sin plantillas genéricas.</p>
-        </div>
-        <div class="card reveal" style="--d:.08s">
-          <div class="card-ic">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="13.5" cy="6.5" r="2.5" />
-              <circle cx="17.5" cy="14" r="2.5" />
-              <circle cx="8.5" cy="16.5" r="2.5" />
-              <circle cx="6.5" cy="8" r="2.5" />
-            </svg>
+          <div class="svc-vis" aria-hidden="true">
+            <div class="mk-browser">
+              <div class="mk-bar">
+                <span class="mk-dot"></span><span class="mk-dot"></span><span class="mk-dot"></span>
+                <span class="mk-nav"><i></i><i></i><i></i></span>
+              </div>
+              <div class="mk-hero">
+                <b>Impulsamos marcas digitales que <em>crecen.</em></b>
+                <span></span><span></span>
+                <span class="mk-cta">Hablemos</span>
+              </div>
+            </div>
+            <div class="mk-phone">
+              <div class="mk-phone-top">NEXORA</div>
+              <div class="mk-phone-body">
+                <b>Webs que se ven increíbles</b>
+                <i></i>
+              </div>
+            </div>
           </div>
-          <h3 class="h3">Branding e identidad</h3>
-          <p>Logo, colores, tipografía y sistema visual completo. Para que tu marca se vea tan buena como el negocio que representa.</p>
-        </div>
-        <div class="card reveal" style="--d:.16s">
-          <div class="card-ic">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2 2 7l10 5 10-5-10-5z" />
-              <path d="m2 17 10 5 10-5M2 12l10 5 10-5" />
-            </svg>
+        </article>
+
+        <!-- 2. Branding e identidad -->
+        <article class="svc-card reveal" style="--d:.08s">
+          <div class="svc-body">
+            <div class="svc-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="13.5" cy="6.5" r="2.5" />
+                <circle cx="17.5" cy="14" r="2.5" />
+                <circle cx="8.5" cy="16.5" r="2.5" />
+                <circle cx="6.5" cy="8" r="2.5" />
+              </svg>
+            </div>
+            <h3 class="h3">Branding e identidad</h3>
+            <p>Para que tu marca se vea tan buena como el negocio que representa.</p>
+            <ul class="svc-list">
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>Logo e identidad visual</li>
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>Paleta de colores y tipografía</li>
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>Guías de marca</li>
+            </ul>
+            <a href="#contacto" class="svc-btn">Ver ejemplos</a>
           </div>
-          <h3 class="h3">Software y plataformas</h3>
-          <p>E-commerce, dashboards, integraciones y sistemas a medida. Para cuando tu negocio necesita más que una web.</p>
-        </div>
-        <div class="card reveal" style="--d:.24s">
-          <div class="card-ic">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <rect x="4" y="8" width="16" height="12" rx="2" />
-              <path d="M12 3v5M9 13h.01M15 13h.01" />
-            </svg>
+          <div class="svc-vis" aria-hidden="true">
+            <div class="mk-brand">
+              <div class="mk-tile mk-logo">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="3.4" fill="currentColor" stroke="none" />
+                </svg>
+                NEXORA
+              </div>
+              <div class="mk-tile mk-swatches">
+                <i style="background:#17251d"></i>
+                <i style="background:#4a6152"></i>
+                <i style="background:#e8e6dd"></i>
+                <i style="background:#dcd9ea"></i>
+              </div>
+              <div class="mk-tile mk-type">
+                <b>Aa</b>
+                <u>Epilogue</u>
+                <s>Regular · Medium · Bold</s>
+              </div>
+              <div class="mk-tile mk-card-dark">NEXORA</div>
+            </div>
           </div>
-          <h3 class="h3">Visibilidad en IA & SEO</h3>
-          <p>Medimos cómo te encuentra Google — y cómo te describen ChatGPT, Claude y Gemini. Luego lo mejoramos.</p>
-        </div>
+        </article>
+
+        <!-- 3. Software y plataformas -->
+        <article class="svc-card reveal" style="--d:.16s">
+          <div class="svc-body">
+            <div class="svc-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2 2 7l10 5 10-5-10-5z" />
+                <path d="m2 17 10 5 10-5M2 12l10 5 10-5" />
+              </svg>
+            </div>
+            <h3 class="h3">Software y plataformas</h3>
+            <p>Para cuando tu negocio necesita más que una web.</p>
+            <ul class="svc-list">
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>E-commerce a medida</li>
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>Dashboards y analítica</li>
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>Integraciones y automatizaciones</li>
+            </ul>
+            <a href="#contacto" class="svc-btn">Ver ejemplos</a>
+          </div>
+          <div class="svc-vis" aria-hidden="true">
+            <div class="mk-dash">
+              <div class="mk-side">
+                <b>NEXORA</b>
+                <i class="on"></i><i></i><i></i><i></i><i></i>
+              </div>
+              <div class="mk-main">
+                <div class="mk-kpis">
+                  <div class="mk-kpi"><u>Ventas</u><b>$248.420</b><s>+12.5%</s></div>
+                  <div class="mk-kpi"><u>Pedidos</u><b>1.842</b><s>+8.1%</s></div>
+                  <div class="mk-kpi"><u>Clientes</u><b>632</b><s>+15.3%</s></div>
+                </div>
+                <div class="mk-chart">
+                  <svg viewBox="0 0 120 34" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="svcArea" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#8242f5" stop-opacity=".28" />
+                        <stop offset="100%" stop-color="#8242f5" stop-opacity="0" />
+                      </linearGradient>
+                    </defs>
+                    <path d="M2 28 L22 22 L42 25 L62 14 L82 17 L100 7 L118 4 L118 34 L2 34 Z" fill="url(#svcArea)" />
+                    <path d="M2 28 L22 22 L42 25 L62 14 L82 17 L100 7 L118 4" fill="none" stroke="#8242f5"
+                      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    <circle cx="100" cy="7" r="2.4" fill="#8242f5" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. Visibilidad en IA & SEO -->
+        <article class="svc-card reveal" style="--d:.24s">
+          <div class="svc-body">
+            <div class="svc-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 17l5-6 4 4 5-7 4 5" />
+                <path d="M3 21h18" />
+              </svg>
+            </div>
+            <h3 class="h3">Visibilidad en IA &amp; SEO</h3>
+            <p>Medimos cómo te encuentra Google — y cómo te describen ChatGPT, Claude y Gemini. Luego lo mejoramos.</p>
+            <ul class="svc-list">
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>SEO técnico y de contenido</li>
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>AEO en ChatGPT, Claude y Gemini</li>
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>Reportes y seguimiento</li>
+            </ul>
+            <a href="#contacto" class="svc-btn">Ver ejemplos</a>
+          </div>
+          <div class="svc-vis" aria-hidden="true">
+            <div class="mk-ai">
+              <div class="mk-panel">
+                <u>Tu marca en ChatGPT</u>
+                <div class="mk-gpt">
+                  <span class="mk-gpt-av">
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 3v18M3 12h18" />
+                    </svg>
+                  </span>
+                  <span>
+                    <b>Kaiva Studio</b>
+                    <s>Estudio digital especializado en diseño web, branding y soluciones a medida.</s>
+                  </span>
+                </div>
+                <span class="mk-pill">Recomendado</span>
+              </div>
+              <div class="mk-ai-row">
+                <div class="mk-panel mk-spark">
+                  <u>Presencia en Google</u>
+                  <div class="mk-big"><b>8.7</b><s>+2.4</s></div>
+                  <svg viewBox="0 0 100 22" preserveAspectRatio="none">
+                    <path d="M2 19 L18 15 L34 17 L50 10 L66 12 L82 5 L98 3" fill="none" stroke="#8242f5"
+                      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+                <div class="mk-panel mk-ring">
+                  <u>Visibilidad IA</u>
+                  <svg viewBox="0 0 36 36">
+                    <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(15,23,42,.08)" stroke-width="4" />
+                    <circle cx="18" cy="18" r="15" fill="none" stroke="#8242f5" stroke-width="4" stroke-linecap="round"
+                      pathLength="100" stroke-dasharray="76 100" />
+                  </svg>
+                  <div class="mk-ring-lbl">76%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>

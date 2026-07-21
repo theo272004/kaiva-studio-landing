@@ -30,6 +30,10 @@ server.mjs
 
 # Source folder (already deployed to root)
 nuevo kaiva studio/
+nuevo kaiva studio.zip
+
+# Documentos de trabajo (no van al sitio)
+*.pdf
 
 # Claude internal
 .claude/
