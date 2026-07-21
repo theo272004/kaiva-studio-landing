@@ -1628,8 +1628,400 @@
 
 <body>
 
-  <!-- Main Tool / Dashboard Shell -->
-  <section class="tool-shell">
+  <style>
+    /* ===== Flujo: bienvenida → carga → 404 ===== */
+    .kv-stage {
+      min-height: 100vh;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(2rem, 6vw, 5rem) var(--pad);
+    }
+
+    .kv-stage.on {
+      display: flex;
+    }
+
+    .kv-box {
+      width: 100%;
+      max-width: 720px;
+      text-align: center;
+      animation: kvUp .5s var(--ease) both;
+    }
+
+    @keyframes kvUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .kv-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      font-family: var(--epilogue);
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin-bottom: 2rem;
+      text-decoration: none;
+    }
+
+    .kv-brand img {
+      height: 30px;
+      width: auto;
+    }
+
+    .kv-eyebrow {
+      display: inline-block;
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--violet);
+      background: var(--violet-soft);
+      border: 1px solid rgba(130, 66, 245, .18);
+      border-radius: var(--r-btn);
+      padding: .4rem .9rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .kv-box h1 {
+      font-family: var(--epilogue);
+      font-weight: 800;
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      line-height: 1.08;
+      letter-spacing: -.02em;
+      color: var(--ink);
+      margin: 0 0 1rem;
+    }
+
+    .kv-box h1 em {
+      font-style: normal;
+      color: var(--violet);
+    }
+
+    .kv-box p.kv-lead {
+      font-size: clamp(1rem, 2vw, 1.12rem);
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 56ch;
+      margin: 0 auto 2rem;
+    }
+
+    .kv-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .9rem;
+      margin-bottom: 2.2rem;
+      text-align: left;
+    }
+
+    @media (max-width:640px) {
+      .kv-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .kv-step {
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-md);
+      padding: 1rem 1.1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .kv-step b {
+      display: block;
+      font-family: var(--epilogue);
+      font-size: .95rem;
+      color: var(--ink);
+      margin-bottom: .25rem;
+    }
+
+    .kv-step span {
+      font-size: .85rem;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+
+    .kv-step i {
+      font-style: normal;
+      font-weight: 800;
+      font-size: .7rem;
+      color: var(--violet);
+      letter-spacing: .1em;
+    }
+
+    .kv-form {
+      display: flex;
+      gap: .6rem;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-btn);
+      padding: .45rem .45rem .45rem 1.2rem;
+      box-shadow: var(--shadow-md);
+      max-width: 560px;
+      margin: 0 auto;
+      transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+    }
+
+    .kv-form:focus-within {
+      border-color: var(--violet);
+      box-shadow: 0 0 0 4px var(--violet-soft), var(--shadow-md);
+    }
+
+    .kv-form input {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      font-family: var(--sans);
+      font-size: 1rem;
+      color: var(--ink);
+    }
+
+    .kv-form input::placeholder {
+      color: var(--ink-faint);
+    }
+
+    .kv-form button {
+      flex: none;
+      border: 0;
+      cursor: pointer;
+      background: var(--violet);
+      color: #fff;
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: .95rem;
+      padding: .8rem 1.6rem;
+      border-radius: var(--r-btn);
+      transition: background .2s var(--ease), transform .2s var(--ease);
+    }
+
+    .kv-form button:hover {
+      background: var(--violet-hover);
+      transform: translateY(-1px);
+    }
+
+    .kv-note {
+      font-size: .82rem;
+      color: var(--ink-faint);
+      margin-top: 1rem;
+    }
+
+    .kv-err {
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--red);
+      margin-top: .9rem;
+      min-height: 1.2em;
+    }
+
+    /* Carga */
+    .kv-loader-robot {
+      width: clamp(110px, 22vw, 160px);
+      margin: 0 auto 1.4rem;
+      display: block;
+      animation: kvFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes kvFloat {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    .kv-bar {
+      height: 6px;
+      width: min(420px, 80vw);
+      margin: 1.6rem auto .9rem;
+      border-radius: 99px;
+      background: var(--line-strong);
+      overflow: hidden;
+    }
+
+    .kv-bar i {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--violet), var(--violet-2));
+      transition: width .35s var(--ease);
+    }
+
+    .kv-status {
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--ink-soft);
+    }
+
+    /* 404 */
+    .kv-404-img {
+      width: min(560px, 100%);
+      height: auto;
+      margin: 0 auto 1.8rem;
+      display: block;
+      border-radius: var(--r-lg);
+    }
+
+    .kv-404-fallback {
+      display: none;
+      font-family: var(--epilogue);
+      font-weight: 800;
+      font-size: clamp(4rem, 16vw, 9rem);
+      line-height: 1;
+      letter-spacing: -.04em;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+
+    .kv-404-fallback span {
+      color: var(--violet);
+    }
+
+    .kv-back {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      margin-top: 1.6rem;
+      padding: .85rem 1.7rem;
+      border-radius: var(--r-btn);
+      border: 1.5px solid var(--line-strong);
+      background: var(--surface);
+      color: var(--ink);
+      font-weight: 700;
+      font-size: .95rem;
+      text-decoration: none;
+      transition: border-color .2s var(--ease), transform .2s var(--ease);
+    }
+
+    .kv-back:hover {
+      border-color: var(--violet);
+      color: var(--violet);
+      transform: translateY(-1px);
+    }
+  </style>
+
+  <!-- ===== 1. Bienvenida ===== -->
+  <section class="kv-stage on" id="kvWelcome">
+    <div class="kv-box">
+      <a href="index.html" class="kv-brand"><img src="assets/logo-kaiva.png" alt="Kaiva Studio">Kaiva Studio.</a>
+      <div class="kv-eyebrow">Radiografía Digital · Gratis</div>
+      <h1>Analicemos tu web en <em>60 segundos</em></h1>
+      <p class="kv-lead">Revisamos tu sitio como lo ve un cliente, Google y las IAs: imagen, confianza y operación.
+        Te devolvemos un Índice de Salud Digital con los hallazgos priorizados. Sin registro y sin compromiso.</p>
+
+      <div class="kv-steps">
+        <div class="kv-step"><i>PASO 1</i><b>Pega tu enlace</b><span>La dirección de tu sitio web. Nada más.</span></div>
+        <div class="kv-step"><i>PASO 2</i><b>Ejecutamos el análisis</b><span>Revisamos velocidad, diseño, seguridad y
+            visibilidad.</span></div>
+        <div class="kv-step"><i>PASO 3</i><b>Recibes tu panel</b><span>Tu puntaje y qué corregir primero.</span></div>
+      </div>
+
+      <form class="kv-form" id="kvForm" novalidate>
+        <input type="text" id="kvUrl" placeholder="tuempresa.com" autocomplete="url" spellcheck="false"
+          aria-label="Dirección de tu sitio web">
+        <button type="submit">Analizar</button>
+      </form>
+      <div class="kv-err" id="kvErr" role="alert"></div>
+      <p class="kv-note">No guardamos tu información. El análisis es solo para ti.</p>
+    </div>
+  </section>
+
+  <!-- ===== 2. Cargando ===== -->
+  <section class="kv-stage" id="kvLoading">
+    <div class="kv-box">
+      <img src="assets/KaivaMora1.webp" alt="Analizando" class="kv-loader-robot">
+      <h1>Analizando tu sitio</h1>
+      <p class="kv-lead" id="kvTarget">Esto toma unos segundos.</p>
+      <div class="kv-bar"><i id="kvBar"></i></div>
+      <div class="kv-status" id="kvStatus">Conectando...</div>
+    </div>
+  </section>
+
+  <!-- ===== 3. Error 404 / en mantenimiento ===== -->
+  <section class="kv-stage" id="kv404">
+    <div class="kv-box">
+      <img src="assets/error-404.webp" alt="Error 404" class="kv-404-img" width="1200" height="670"
+        onerror="this.style.display='none';document.getElementById('kv404Fb').style.display='block';">
+      <div class="kv-404-fallback" id="kv404Fb">ERROR <span>404</span></div>
+      <h1>¡Ups! Esta página se salió de su eje.</h1>
+      <p class="kv-lead">Estamos ajustando y afinando la herramienta. El mantenimiento está en curso.
+        Vuelve a intentarlo dentro de un rato.</p>
+      <a href="index.html" class="kv-back">Volver al inicio</a>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var form = document.getElementById('kvForm'),
+        urlIn = document.getElementById('kvUrl'),
+        errEl = document.getElementById('kvErr'),
+        welcome = document.getElementById('kvWelcome'),
+        loading = document.getElementById('kvLoading'),
+        err404 = document.getElementById('kv404'),
+        bar = document.getElementById('kvBar'),
+        status = document.getElementById('kvStatus'),
+        target = document.getElementById('kvTarget');
+
+      var steps = [
+        [12, 'Conectando con el sitio...'],
+        [30, 'Midiendo velocidad de carga...'],
+        [52, 'Revisando diseño y experiencia...'],
+        [72, 'Verificando seguridad y correo...'],
+        [90, 'Evaluando visibilidad en Google e IAs...'],
+        [100, 'Generando tu informe...']
+      ];
+
+      function show(el) {
+        [welcome, loading, err404].forEach(function (s) { s.classList.remove('on'); });
+        el.classList.add('on');
+        window.scrollTo(0, 0);
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var v = urlIn.value.trim().replace(/^https?:\/\//i, '').replace(/\/+$/, '');
+        if (!/^[a-z0-9][a-z0-9.-]*\.[a-z]{2,}(\/.*)?$/i.test(v)) {
+          errEl.textContent = 'Escribe una dirección válida, por ejemplo: tuempresa.com';
+          urlIn.focus();
+          return;
+        }
+        errEl.textContent = '';
+        target.textContent = 'Revisando ' + v;
+        show(loading);
+
+        var i = 0;
+        (function next() {
+          if (i >= steps.length) {
+            setTimeout(function () { show(err404); }, 700);
+            return;
+          }
+          bar.style.width = steps[i][0] + '%';
+          status.textContent = steps[i][1];
+          i++;
+          setTimeout(next, 550 + Math.random() * 350);
+        })();
+      });
+    })();
+  </script>
+
+  <!-- Main Tool / Dashboard Shell (panel real — oculto hasta que la herramienta esté lista) -->
+  <section class="tool-shell" style="display:none;">
       <div class="app in" id="app">
 
         <!-- Top App Bar -->
@@ -1724,7 +2116,7 @@
               <img src="assets/KaivaMora1.webp" alt="Mora" class="help-robot">
               <h4>¿Necesitas ayuda?</h4>
               <p>Te ayudamos a interpretar tus resultados.</p>
-              <a href="index.html#contacto" class="help-link">Agendar sesión <span>→</span></a>
+              <a href="index.html#contacto" class="help-link">Agendar sesión</a>
             </div>
           </aside>
 
@@ -1772,7 +2164,7 @@
               <div class="pcard">
                 <div class="ph">
                   <span class="lbl">Pilares de evaluación</span>
-                  <a href="#" class="link-detail">Ver detalle →</a>
+                  <a href="#" class="link-detail">Ver detalle</a>
                 </div>
 
                 <div class="pillars-grid">
@@ -2001,7 +2393,7 @@
                   <div class="cta-btn-box">
                     <a href="index.html#contacto" class="cta-btn">
                       Agendar sesión gratis
-                      <span>→</span>
+                     
                     </a>
                     <span class="cta-subtext">Charla directa · Sin compromiso</span>
                   </div>
@@ -2175,12 +2567,12 @@
         </div>
       </div>
       <div class="faq-chips-container" id="faqChips">
-        <button class="faq-chip" data-key="diagnostico">❓ ¿Qué es el diagnóstico gratis? <span>→</span></button>
-        <button class="faq-chip" data-key="precios">💰 ¿Cuáles son las líneas y precios? <span>→</span></button>
-        <button class="faq-chip" data-key="tiempo">⏱️ ¿Cuánto tarda un proyecto web? <span>→</span></button>
-        <button class="faq-chip" data-key="mantenimiento">🌱 ¿Cómo funciona el mantenimiento? <span>→</span></button>
-        <button class="faq-chip" data-key="ia">🤖 ¿Cómo me posicionan en IAs? <span>→</span></button>
-        <button class="faq-chip" data-key="contacto">📩 Quiero hablar con un humano <span>→</span></button>
+        <button class="faq-chip" data-key="diagnostico">❓ ¿Qué es el diagnóstico gratis?</button>
+        <button class="faq-chip" data-key="precios">💰 ¿Cuáles son las líneas y precios?</button>
+        <button class="faq-chip" data-key="tiempo">⏱️ ¿Cuánto tarda un proyecto web?</button>
+        <button class="faq-chip" data-key="mantenimiento">🌱 ¿Cómo funciona el mantenimiento?</button>
+        <button class="faq-chip" data-key="ia">🤖 ¿Cómo me posicionan en IAs?</button>
+        <button class="faq-chip" data-key="contacto">📩 Quiero hablar con un humano</button>
       </div>
     </div>
 
