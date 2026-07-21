@@ -1381,7 +1381,7 @@
       display: none;
       align-items: center;
       justify-content: center;
-      padding: clamp(5rem, 10vw, 7rem) var(--pad) clamp(2rem, 6vw, 5rem);
+      padding: clamp(7rem, 11vw, 9rem) var(--pad) clamp(2.5rem, 6vw, 5rem);
     }
 
     .kv-stage.on {
@@ -1429,8 +1429,9 @@
     }
 
     .kv-brand-fixed img {
-      height: 26px;
+      height: 48px;
       width: auto;
+      display: block;
     }
 
     @media (max-width:640px) {
@@ -1438,8 +1439,8 @@
         position: absolute;
       }
 
-      .kv-brand-fixed span {
-        display: none;
+      .kv-brand-fixed img {
+        height: 40px;
       }
     }
 
@@ -1723,7 +1724,7 @@
       align-items: flex-start;
     }
 
-    .kv-mark-ic {
+    .kv-mark .kv-mark-ic {
       flex: none;
       width: 36px;
       height: 36px;
@@ -1870,10 +1871,12 @@
 
     .kv-ring-wrap {
       position: relative;
-      width: 118px;
-      height: 118px;
+      flex: none;
+      width: 122px;
+      height: 122px;
       display: grid;
       place-items: center;
+      text-align: center;
     }
 
     .kv-ring-wrap svg {
@@ -2055,7 +2058,7 @@
       box-shadow: 0 4px 12px rgba(130, 66, 245, .3);
     }
 
-    .kv-stepc-ic {
+    .kv-stepc .kv-stepc-ic {
       flex: none;
       width: 42px;
       height: 42px;
@@ -2107,7 +2110,7 @@
       padding-right: 0;
     }
 
-    .kv-strip-ic {
+    .kv-strip .kv-strip-ic {
       flex: none;
       width: 34px;
       height: 34px;
@@ -2194,8 +2197,8 @@
   </style>
 
   <!-- Marca fija en la esquina superior -->
-  <a href="index.html" class="kv-brand-fixed"><img src="assets/logo-kaiva.png" alt="Kaiva Studio"><span>Kaiva
-      Studio.</span></a>
+  <a href="index.html" class="kv-brand-fixed" aria-label="Kaiva Studio — volver al inicio"><img
+      src="assets/logo-kaiva.png" alt="Kaiva Studio"></a>
 
   <!-- ===== 1. Bienvenida ===== -->
   <section class="kv-stage on" id="kvWelcome">
@@ -2282,7 +2285,7 @@
               </svg>
               <div>
                 <div class="kv-ring-num">71</div>
-                <div class="kv-ring-sub">de 100 · grado B</div>
+                <div class="kv-ring-sub">de 100</div>
               </div>
             </div>
             <div class="kv-pv-msg">
