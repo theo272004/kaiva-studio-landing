@@ -1935,7 +1935,11 @@
       grid-template-columns: 1fr repeat(4, minmax(0, 1fr));
       gap: clamp(2rem, 4vw, 3.5rem);
       align-items: start;
-      padding-bottom: clamp(1.25rem, 2vw, 2rem);
+      /* Sin hueco: la marca sube hasta rozar el texto. No se superpone
+         porque ambos son blancos y el texto dejaría de leerse. */
+      padding-bottom: 0;
+      position: relative;
+      z-index: 1;
     }
 
     .foot-copy {
