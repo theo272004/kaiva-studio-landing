@@ -1918,8 +1918,10 @@
     }
 
     .footer {
-      /* curva apenas insinuada: se percibe el corte, no el arco */
-      --foot-r: clamp(8px, 0.9vw, 14px);
+      /* Radio amplio a propósito: cuanto mayor es, más gradual sube la curva
+         y menos se lee como esquina recortada. Se define en vw para que la
+         proporción se mantenga y no se vea circular en pantallas angostas. */
+      --foot-r: clamp(42px, 8vw, 150px);
     }
 
     .footer.lifted::before {
