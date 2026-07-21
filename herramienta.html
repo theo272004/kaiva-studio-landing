@@ -1665,6 +1665,532 @@
       color: var(--violet);
       transform: translateY(-1px);
     }
+
+    /* ===== Hero de bienvenida (2 columnas) ===== */
+    #kvWelcome {
+      align-items: flex-start;
+    }
+
+    .kv-hero {
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      text-align: left;
+      animation: kvUp .5s var(--ease) both;
+    }
+
+    .kv-hero-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr);
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+    }
+
+    .kv-hero h1 {
+      font-family: var(--epilogue);
+      font-weight: 800;
+      font-size: clamp(2rem, 4.4vw, 3.35rem);
+      line-height: 1.06;
+      letter-spacing: -.025em;
+      color: var(--ink);
+      margin: 0 0 1.1rem;
+    }
+
+    .kv-hero h1 em {
+      font-style: normal;
+      color: var(--violet);
+    }
+
+    .kv-hero-lead {
+      font-size: clamp(.95rem, 1.5vw, 1.03rem);
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 52ch;
+      margin: 0 0 1.8rem;
+    }
+
+    /* Tres sellos */
+    .kv-marks {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.9rem;
+    }
+
+    .kv-mark {
+      display: flex;
+      gap: .65rem;
+      align-items: flex-start;
+    }
+
+    .kv-mark-ic {
+      flex: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      background: var(--violet-soft);
+      color: var(--violet);
+      display: grid;
+      place-items: center;
+    }
+
+    .kv-mark b {
+      display: block;
+      font-size: .87rem;
+      color: var(--ink);
+      font-weight: 700;
+      margin-bottom: .1rem;
+    }
+
+    .kv-mark span {
+      display: block;
+      font-size: .76rem;
+      line-height: 1.4;
+      color: var(--ink-soft);
+    }
+
+    /* Campo de dominio */
+    .kv-field {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: 18px;
+      padding: .55rem .55rem .55rem 1.1rem;
+      box-shadow: var(--shadow-md);
+      max-width: 600px;
+      transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+    }
+
+    .kv-field:focus-within {
+      border-color: var(--violet);
+      box-shadow: 0 0 0 4px var(--violet-soft), var(--shadow-md);
+    }
+
+    .kv-field-ic {
+      flex: none;
+      color: var(--ink-faint);
+      display: grid;
+      place-items: center;
+    }
+
+    .kv-field-in {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .kv-field-in label {
+      display: block;
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .kv-field-in input {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      font-family: var(--sans);
+      font-size: .82rem;
+      color: var(--ink);
+      padding: 0;
+      margin-top: 1px;
+    }
+
+    .kv-field-in input::placeholder {
+      color: var(--ink-faint);
+    }
+
+    .kv-field button {
+      flex: none;
+      border: 0;
+      cursor: pointer;
+      background: var(--violet);
+      color: #fff;
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: .9rem;
+      padding: .85rem 1.5rem;
+      border-radius: 14px;
+      transition: background .2s var(--ease), transform .2s var(--ease);
+    }
+
+    .kv-field button:hover {
+      background: var(--violet-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Panel de ejemplo */
+    .kv-preview {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-lg);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, .09), 0 3px 10px rgba(15, 23, 42, .03);
+      padding: 1.5rem;
+      display: grid;
+      gap: 1rem;
+      font-size: 12px;
+    }
+
+    .kv-pv-head {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .kv-pv-head b {
+      font-family: var(--epilogue);
+      font-size: .95rem;
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .kv-pv-tag {
+      margin-left: auto;
+      font-size: .62rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      border: 1px solid var(--line-strong);
+      border-radius: 99px;
+      padding: .2rem .55rem;
+    }
+
+    .kv-pv-score {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.3rem;
+      align-items: center;
+    }
+
+    .kv-ring-wrap {
+      position: relative;
+      width: 118px;
+      height: 118px;
+      display: grid;
+      place-items: center;
+    }
+
+    .kv-ring-wrap svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .kv-ring-num {
+      font-family: var(--epilogue);
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .kv-ring-sub {
+      font-size: .62rem;
+      color: var(--ink-faint);
+      margin-top: .15rem;
+    }
+
+    .kv-pv-msg b {
+      display: block;
+      font-family: var(--epilogue);
+      font-size: .92rem;
+      color: var(--ink);
+      margin-bottom: .35rem;
+    }
+
+    .kv-pv-msg p {
+      font-size: .76rem;
+      line-height: 1.5;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+
+    .kv-pv-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .6rem;
+    }
+
+    .kv-pill {
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      padding: .6rem .7rem;
+    }
+
+    .kv-pill u {
+      display: flex;
+      align-items: center;
+      gap: .28rem;
+      text-decoration: none;
+      font-size: .63rem;
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+
+    .kv-pill em {
+      font-style: normal;
+      font-size: .55rem;
+      color: var(--ink-faint);
+      font-weight: 700;
+    }
+
+    .kv-pill b {
+      display: block;
+      font-family: var(--epilogue);
+      font-size: 1.15rem;
+      color: var(--ink);
+      font-weight: 800;
+      margin: .15rem 0 .35rem;
+    }
+
+    .kv-pill b s {
+      text-decoration: none;
+      font-size: .6rem;
+      color: var(--ink-faint);
+      font-weight: 600;
+    }
+
+    .kv-pill-bar {
+      height: 3px;
+      border-radius: 99px;
+      background: rgba(15, 23, 42, .07);
+      overflow: hidden;
+    }
+
+    .kv-pill-bar i {
+      display: block;
+      height: 100%;
+      border-radius: 99px;
+      background: var(--violet);
+    }
+
+    .kv-pv-find {
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      padding: .75rem .8rem;
+    }
+
+    .kv-pv-find > b {
+      display: block;
+      font-size: .74rem;
+      color: var(--ink);
+      margin-bottom: .5rem;
+    }
+
+    .kv-pv-find ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: .38rem;
+    }
+
+    .kv-pv-find li {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      font-size: .72rem;
+      color: var(--ink);
+    }
+
+    .kv-pv-find li svg {
+      flex: none;
+    }
+
+    .kv-locked {
+      margin-top: .6rem;
+      padding-top: .55rem;
+      border-top: 1px dashed var(--line-strong);
+      font-size: .68rem;
+      color: var(--ink-faint);
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+    }
+
+    /* Pasos */
+    .kv-steps-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(1rem, 3vw, 2.4rem);
+      margin-top: clamp(3rem, 6vw, 4.5rem);
+      position: relative;
+    }
+
+    .kv-stepc {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-md);
+      padding: 1.6rem 1.3rem 1.3rem;
+      display: flex;
+      gap: .9rem;
+      align-items: flex-start;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .kv-stepc::before {
+      content: attr(data-n);
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--violet);
+      color: #fff;
+      font-size: .78rem;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 4px 12px rgba(130, 66, 245, .3);
+    }
+
+    .kv-stepc-ic {
+      flex: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--violet-soft);
+      color: var(--violet);
+      display: grid;
+      place-items: center;
+    }
+
+    .kv-stepc b {
+      display: block;
+      font-family: var(--epilogue);
+      font-size: .93rem;
+      color: var(--ink);
+      margin-bottom: .25rem;
+    }
+
+    .kv-stepc span {
+      display: block;
+      font-size: .78rem;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+
+    /* Franja de beneficios */
+    .kv-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 1.4rem;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-md);
+      padding: 1.2rem 1.4rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .kv-strip > div {
+      display: flex;
+      gap: .7rem;
+      align-items: center;
+      padding-right: 1rem;
+      border-right: 1px solid var(--line-strong);
+    }
+
+    .kv-strip > div:last-child {
+      border-right: 0;
+      padding-right: 0;
+    }
+
+    .kv-strip-ic {
+      flex: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--violet-soft);
+      color: var(--violet);
+      display: grid;
+      place-items: center;
+    }
+
+    .kv-strip b {
+      display: block;
+      font-size: .82rem;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .kv-strip span {
+      display: block;
+      font-size: .72rem;
+      color: var(--ink-soft);
+      margin-top: .05rem;
+    }
+
+    @media (max-width: 980px) {
+      .kv-hero-top {
+        grid-template-columns: 1fr;
+        gap: 2.4rem;
+      }
+
+      .kv-preview {
+        order: -1;
+      }
+
+      .kv-steps-row {
+        grid-template-columns: 1fr;
+        gap: 1.6rem;
+      }
+
+      .kv-strip {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.2rem;
+      }
+
+      .kv-strip > div:nth-child(2n) {
+        border-right: 0;
+        padding-right: 0;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .kv-marks {
+        grid-template-columns: 1fr;
+        gap: .8rem;
+      }
+
+      .kv-pv-pillars {
+        grid-template-columns: 1fr;
+      }
+
+      .kv-pv-score {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+      }
+
+      .kv-field {
+        flex-wrap: wrap;
+      }
+
+      .kv-field button {
+        width: 100%;
+      }
+
+      .kv-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .kv-strip > div {
+        border-right: 0;
+        padding-right: 0;
+      }
+    }
   </style>
 
   <!-- Marca fija en la esquina superior -->
@@ -1673,26 +2199,231 @@
 
   <!-- ===== 1. Bienvenida ===== -->
   <section class="kv-stage on" id="kvWelcome">
-    <div class="kv-box">
-      <h1>Analicemos tu web en <em>60 segundos</em></h1>
-      <p class="kv-lead">Revisamos tu sitio como lo ve un cliente: cómo se ve tu marca, si genera confianza y si tu
-        operación está bien montada. Te devolvemos tu Índice de Salud Digital con los hallazgos priorizados.
-        Gratis, sin registro y sin compromiso.</p>
+    <div class="kv-hero">
+      <div class="kv-hero-top">
 
-      <div class="kv-steps">
-        <div class="kv-step"><i>PASO 1</i><b>Pega tu enlace</b><span>La dirección de tu sitio web. Nada más.</span></div>
-        <div class="kv-step"><i>PASO 2</i><b>Ejecutamos el análisis</b><span>Imagen, confianza y operación, punto por
-            punto.</span></div>
-        <div class="kv-step"><i>PASO 3</i><b>Recibes tu panel</b><span>Tu puntaje y qué corregir primero.</span></div>
+        <!-- Columna izquierda -->
+        <div>
+          <h1>Analicemos tu web en <em>60 segundos</em></h1>
+          <p class="kv-hero-lead">Revisamos tu sitio como lo ve un cliente: cómo se ve tu marca, si genera confianza y
+            si tu operación está bien montada. Te devolvemos tu Índice de Salud Digital con los hallazgos priorizados.
+            Gratis, sin registro y sin compromiso.</p>
+
+          <div class="kv-marks">
+            <div class="kv-mark">
+              <span class="kv-mark-ic">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" />
+                </svg>
+              </span>
+              <span><b>Rápido</b><span>Resultados en menos de 1 min</span></span>
+            </div>
+            <div class="kv-mark">
+              <span class="kv-mark-ic">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6l-8-3z" />
+                </svg>
+              </span>
+              <span><b>Privado</b><span>Sin registro. Sin spam.</span></span>
+            </div>
+            <div class="kv-mark">
+              <span class="kv-mark-ic">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="12" cy="12" r="1" fill="currentColor" />
+                </svg>
+              </span>
+              <span><b>Verificable</b><span>Cada hallazgo con su evidencia</span></span>
+            </div>
+          </div>
+
+          <form class="kv-field" id="kvForm" novalidate>
+            <span class="kv-field-ic">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M3 12h18M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18z" />
+              </svg>
+            </span>
+            <span class="kv-field-in">
+              <label for="kvUrl">Ingresa tu dominio</label>
+              <input type="text" id="kvUrl" placeholder="Ej: tuempresa.com" autocomplete="url" spellcheck="false">
+            </span>
+            <button type="submit">Analizar mi web</button>
+          </form>
+          <div class="kv-err" id="kvErr" role="alert"></div>
+          <p class="kv-note">No pedimos tarjeta ni registro. Guardamos el dominio analizado para mejorar la
+            herramienta; tu IP nunca se guarda en claro.</p>
+        </div>
+
+        <!-- Columna derecha: panel de ejemplo -->
+        <div class="kv-preview" aria-hidden="true">
+          <div class="kv-pv-head">
+            <b>Índice de Salud Digital</b>
+            <span class="kv-pv-tag">Ejemplo</span>
+          </div>
+
+          <div class="kv-pv-score">
+            <div class="kv-ring-wrap">
+              <svg viewBox="0 0 36 36">
+                <circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(15,23,42,.07)" stroke-width="3.4" />
+                <circle cx="18" cy="18" r="15.5" fill="none" stroke="url(#kvGrad)" stroke-width="3.4"
+                  stroke-linecap="round" pathLength="100" stroke-dasharray="71 100" />
+                <defs>
+                  <linearGradient id="kvGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#a679ff" />
+                    <stop offset="100%" stop-color="#8242f5" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div>
+                <div class="kv-ring-num">71</div>
+                <div class="kv-ring-sub">de 100 · grado B</div>
+              </div>
+            </div>
+            <div class="kv-pv-msg">
+              <b>Te ves bien, pero por dentro estás expuesto.</b>
+              <p>Tu imagen y tu confianza están sólidas. La operación es la que arrastra el puntaje: sin DMARC,
+                cualquiera puede enviar correos haciéndose pasar por tu dominio.</p>
+            </div>
+          </div>
+
+          <div class="kv-pv-pillars">
+            <div class="kv-pill">
+              <u>Imagen <em>35%</em></u>
+              <b>82<s>/100</s></b>
+              <div class="kv-pill-bar"><i style="width:82%"></i></div>
+            </div>
+            <div class="kv-pill">
+              <u>Confianza <em>15%</em></u>
+              <b>90<s>/100</s></b>
+              <div class="kv-pill-bar"><i style="width:90%"></i></div>
+            </div>
+            <div class="kv-pill">
+              <u>Operación <em>50%</em></u>
+              <b>58<s>/100</s></b>
+              <div class="kv-pill-bar"><i style="width:58%"></i></div>
+            </div>
+          </div>
+
+          <div class="kv-pv-find">
+            <b>Hallazgos principales</b>
+            <ul>
+              <li>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.6"
+                  stroke-linecap="round">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v6M12 16.5v.01" />
+                </svg>
+                Sin registro DMARC: pueden suplantar tu correo
+              </li>
+              <li>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.6"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" />
+                  <path d="M12 9v4M12 17h.01" />
+                </svg>
+                SPF permisivo (~all): filtra poco
+              </li>
+              <li>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M8.5 12.2l2.4 2.4 4.6-4.8" />
+                </svg>
+                Certificado SSL válido y vigente
+              </li>
+            </ul>
+            <div class="kv-locked">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="10" width="16" height="11" rx="2" />
+                <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+              </svg>
+              9 hallazgos más en el reporte completo
+            </div>
+          </div>
+        </div>
       </div>
 
-      <form class="kv-form" id="kvForm" novalidate>
-        <input type="text" id="kvUrl" placeholder="tuempresa.com" autocomplete="url" spellcheck="false"
-          aria-label="Dirección de tu sitio web">
-        <button type="submit">Analizar</button>
-      </form>
-      <div class="kv-err" id="kvErr" role="alert"></div>
-      <p class="kv-note">No guardamos tu información. El análisis es solo para ti.</p>
+      <!-- Tres pasos -->
+      <div class="kv-steps-row">
+        <div class="kv-stepc" data-n="1">
+          <span class="kv-stepc-ic">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5" />
+              <path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.5-1.5" />
+            </svg>
+          </span>
+          <span><b>Pega tu enlace</b><span>La dirección de tu sitio web. Nada más.</span></span>
+        </div>
+        <div class="kv-stepc" data-n="2">
+          <span class="kv-stepc-ic">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z" />
+              <path d="M18 16.5 18.8 19 21 19.8 18.8 20.6 18 23l-.8-2.4L15 19.8l2.2-.8L18 16.5z" />
+            </svg>
+          </span>
+          <span><b>Ejecutamos el análisis</b><span>Imagen, confianza y operación, punto por punto.</span></span>
+        </div>
+        <div class="kv-stepc" data-n="3">
+          <span class="kv-stepc-ic">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 13h4l2 4 4-11 2 7h6" />
+            </svg>
+          </span>
+          <span><b>Recibes tu panel</b><span>Tu puntaje y qué corregir primero.</span></span>
+        </div>
+      </div>
+
+      <!-- Franja de beneficios -->
+      <div class="kv-strip">
+        <div>
+          <span class="kv-strip-ic">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="10" width="16" height="11" rx="2" />
+              <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+            </svg>
+          </span>
+          <span><b>100% gratis</b><span>Sin tarjeta. Sin registro.</span></span>
+        </div>
+        <div>
+          <span class="kv-strip-ic">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6l-8-3z" />
+            </svg>
+          </span>
+          <span><b>Sin compromiso</b><span>Úsalo cuando quieras.</span></span>
+        </div>
+        <div>
+          <span class="kv-strip-ic">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v5l3 2" />
+            </svg>
+          </span>
+          <span><b>Resultados en 60s</b><span>Así de rápido.</span></span>
+        </div>
+        <div>
+          <span class="kv-strip-ic">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="m12 3 2.6 6.3 6.4.5-4.9 4.2 1.5 6.2L12 17l-5.6 3.2 1.5-6.2L3 9.8l6.4-.5L12 3z" />
+            </svg>
+          </span>
+          <span><b>Accionable</b><span>Te decimos qué mejorar.</span></span>
+        </div>
+      </div>
     </div>
   </section>
 
