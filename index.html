@@ -2752,29 +2752,30 @@
       bottom: 24px;
       right: 24px;
       z-index: 9999;
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #8242f5 0%, #6a2fe0 100%);
-      box-shadow: 0 10px 28px rgba(130, 66, 245, 0.45);
-      border: 2.5px solid #ffffff;
+      width: 72px;
+      height: 72px;
+      border-radius: 0;
+      background: none;
+      box-shadow: none;
+      border: none;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      padding: 0;
     }
 
     .faq-chatbot-fab:hover {
-      transform: scale(1.08) translateY(-3px);
-      box-shadow: 0 14px 36px rgba(130, 66, 245, 0.6);
+      transform: scale(1.12) translateY(-3px);
+      box-shadow: none;
     }
 
     .faq-chatbot-fab img {
-      width: 44px;
-      height: 44px;
+      width: 64px;
+      height: 64px;
       object-fit: contain;
-      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+      filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.25));
     }
 
     .faq-chatbot-badge {
@@ -3016,9 +3017,9 @@
         <div class="nav-links" id="navLinks">
           <a href="#servicios" class="lnk">Servicios</a>
           <a href="#trabajo" class="lnk">Trabajo</a>
-          <a href="herramienta.html" class="lnk">Herramienta</a>
+          <a href="/monitor" class="lnk">Herramienta</a>
           <a href="#contacto" class="lnk">Contacto</a>
-          <a href="herramienta.html" class="btn btn-dark">Diagnóstico gratis</a>
+          <a href="/monitor" class="btn btn-dark">Diagnóstico gratis</a>
         </div>
         <button class="nav-toggle" id="navToggle" aria-label="Menú" aria-expanded="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -3036,7 +3037,7 @@
         <h1 class="h1 hero-title split" data-split>Tu empresa tiene potencial. Nosotros la llevamos al siguiente nivel digital<span class="dot">.</span></h1>
         <p class="hero-sub reveal" style="--d:.4s">Diseñamos tu web, creamos tu marca y medimos cómo te encuentran tus clientes — en Google y en la IA. Todo en un solo equipo.</p>
         <div class="hero-ctas reveal" style="--d:.55s">
-          <a href="herramienta.html" class="btn btn-violet">Diagnóstico gratis</a>
+          <a href="/monitor" class="btn btn-violet">Diagnóstico gratis</a>
           <a href="#trabajo" class="btn btn-ghost">Ver nuestro trabajo</a>
         </div>
         <div class="hero-note reveal" style="--d:.65s">
@@ -3319,72 +3320,55 @@
     </div>
   </section>
 
-  <!-- ============ STATEMENT (con etiquetas flotantes 3D) ============ -->
+  <!-- ============ STATEMENT ============ -->
   <section class="statement" id="statement">
-    <!-- Connector Lines SVG -->
-    <svg class="statement-svg-bg" id="statementSvg">
-      <path id="curve1" d="M0,0 Q0,0 0,0"></path>
-      <path id="curve2" d="M0,0 Q0,0 0,0"></path>
-      <path id="curve3" d="M0,0 Q0,0 0,0"></path>
-      <path id="curve4" d="M0,0 Q0,0 0,0"></path>
-      <path id="curve5" d="M0,0 Q0,0 0,0"></path>
-      <path id="curve6" d="M0,0 Q0,0 0,0"></path>
-    </svg>
-
-    <div class="wrap statement-content">
-
-      <!-- Floating tags row -->
-      <div class="floating-tags-container" id="floatingTags">
-        <div class="tag-bubble tb-yellow" id="tagMarketing">marketing</div>
-        <div class="tag-bubble tb-orange" id="tagSEO">SEO</div>
-        <div class="tag-bubble tb-coral" id="tagSocial">social media</div>
-        <div class="tag-bubble tb-pink" id="tagEmail">email marketing</div>
-        <div class="tag-bubble tb-blue" id="tagConversions">conversions</div>
-        <div class="tag-bubble tb-sky" id="tagAds">ads</div>
+    <style>
+      .stmt-wrap{position:relative;max-width:900px;margin:0 auto;padding:5rem 1.5rem;text-align:center}
+      .stmt-badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8242f5;background:#f3eeff;border:1px solid rgba(130,66,245,.15);border-radius:100px;padding:6px 18px;margin-bottom:2rem}
+      .stmt-title{font-family:'Inter Tight','Inter',system-ui,sans-serif;font-size:clamp(2rem,5vw,3.6rem);line-height:1.18;font-weight:800;margin:0 0 2rem}
+      .stmt-title .vi{color:#8242f5;font-style:italic}
+      .stmt-body{max-width:520px;margin:0 auto;font-size:1rem;line-height:1.75;color:var(--ink-soft)}
+      .stmt-body .hi{color:#8242f5;font-weight:600}
+      .stmt-chips{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;overflow:hidden}
+      .stmt-chip{position:absolute;display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:8px 14px;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.06);animation:floaty 6s ease-in-out infinite;white-space:nowrap}
+      .stmt-chip svg{flex-shrink:0}
+      .stmt-chip:nth-child(1){top:6%;left:2%;animation-delay:0s}
+      .stmt-chip:nth-child(2){top:18%;right:1%;animation-delay:.8s}
+      .stmt-chip:nth-child(3){top:32%;left:0%;animation-delay:1.6s}
+      .stmt-chip:nth-child(4){top:48%;right:0%;animation-delay:.4s}
+      .stmt-chip:nth-child(5){top:62%;left:1%;animation-delay:2s}
+      .stmt-chip:nth-child(6){top:75%;right:2%;animation-delay:1.2s}
+      .stmt-chip:nth-child(7){bottom:8%;left:4%;animation-delay:2.4s}
+      .stmt-chip:nth-child(8){top:8%;left:28%;animation-delay:1.8s}
+      .stmt-chip:nth-child(9){bottom:5%;right:3%;animation-delay:.6s}
+      .stmt-chip:nth-child(10){top:42%;left:3%;animation-delay:1.4s}
+      .stmt-chip:nth-child(11){bottom:18%;right:5%;animation-delay:2.2s}
+      .stmt-chip:nth-child(12){bottom:22%;left:2%;animation-delay:1s}
+      .stmt-chip:nth-child(13){top:5%;right:22%;animation-delay:2.6s}
+      @media(max-width:768px){
+        .stmt-chips{position:static;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:2.5rem;pointer-events:auto}
+        .stmt-chip{position:static;animation:none}
+      }
+    </style>
+    <div class="stmt-wrap">
+      <div class="stmt-chips">
+        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09A6.6 6.6 0 015.5 12c0-.72.13-1.43.34-2.09V7.07H2.18A11 11 0 001 12c0 1.77.42 3.44 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google</div>
+        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="#000"><path d="M22.28 12.06a3.2 3.2 0 00-.93-2.15 3.2 3.2 0 00-2-1 3.2 3.2 0 00-.95-2.15 3.2 3.2 0 00-2.15-.95 3.2 3.2 0 00-2.15.78 3.2 3.2 0 00-2.15-.78 3.2 3.2 0 00-2.15.95 3.2 3.2 0 00-.95 2.15 3.2 3.2 0 00-2 1 3.2 3.2 0 00-.93 2.15 3.2 3.2 0 00.93 2.15 3.2 3.2 0 002 1 3.2 3.2 0 00.95 2.15 3.2 3.2 0 002.15.95 3.2 3.2 0 002.15-.78 3.2 3.2 0 002.15.78 3.2 3.2 0 002.15-.95 3.2 3.2 0 00.95-2.15 3.2 3.2 0 002-1 3.2 3.2 0 00.93-2.15zM12 13.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"/></svg> ChatGPT</div>
+        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="#D97757"><path d="M12 2L9.5 9.5 2 12l7.5 2.5L12 22l2.5-7.5L22 12l-7.5-2.5z"/></svg> Claude</div>
+        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24"><defs><linearGradient id="gm" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4285F4"/><stop offset="50%" stop-color="#9B72CB"/><stop offset="100%" stop-color="#D96570"/></linearGradient></defs><path d="M12 2C12 7.5 16.5 12 22 12 16.5 12 12 16.5 12 22 12 16.5 7.5 12 2 12 7.5 12 12 7.5 12 2z" fill="url(#gm)"/></svg> Gemini</div>
+        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> SEO</div>
+        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 4-6"/></svg> Analytics</div>
+        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Velocidad</div>
+        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Seguridad</div>
+        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg> Email</div>
+        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="m21 21-4.3-4.3"/><path d="M10 7v6"/><path d="M7 10h6"/></svg> Search Console</div>
+        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg> Conversiones</div>
+        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Contenido</div>
+        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg> E-commerce</div>
       </div>
-
-      <p class="big" id="stBig">Tu presencia digital es un <span data-accent>jardín</span>, no un <span data-accent>monumento</span>. Google cambia sus reglas. Entra un competidor nuevo. Tu certificado vence. La IA empieza a recomendar marcas y la tuya no aparece. Nada se mantiene solo para siempre — y por eso las mejores empresas tienen un <span data-accent>aliado que lo cuida</span> por ellas.</p>
-
-      <div class="cta-row" id="stCta">
-        <div class="ai-logos-container">
-          <span class="ai-logos-label">Te buscan en</span>
-          <div class="ai-logos-row">
-            <div class="ai-logo-item" title="ChatGPT">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                <path
-                  d="M21.3,10.1a3.7,3.7,0,0,0-1.1-2.5,3.8,3.8,0,0,0-2.3-1.1,3.7,3.7,0,0,0-1.1-2.5,3.8,3.8,0,0,0-2.5-1.1,3.7,3.7,0,0,0-2.5.9,3.7,3.7,0,0,0-2.5-.9A3.8,3.8,0,0,0,6.8,4A3.7,3.7,0,0,0,5.7,6.5,3.8,3.8,0,0,0,3.4,7.6,3.7,3.7,0,0,0,2.3,10.1,3.8,3.8,0,0,0,3.4,12.6a3.7,3.7,0,0,0,1.1,2.5,3.8,3.8,0,0,0,2.3,1.1,3.7,3.7,0,0,0,1.1,2.5,3.8,3.8,0,0,0,2.5,1.1,3.7,3.7,0,0,0,2.5-.9,3.7,3.7,0,0,0,2.5.9,3.8,3.8,0,0,0,2.5-1.1,3.7,3.7,0,0,0,1.1-2.5,3.8,3.8,0,0,0,2.3-1.1,3.7,3.7,0,0,0,1.1-2.5A3.8,3.8,0,0,0,21.3,10.1ZM12,13.5a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,12,13.5Z" />
-              </svg>
-              <span>ChatGPT</span>
-            </div>
-            <div class="ai-logo-item" title="Claude">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                <path
-                  d="M12 2a1 1 0 0 1 .993.883L13 3v4.277l2.846-2.847a1 1 0 0 1 1.497 1.32l-.083.094-2.847 2.846H19a1 1 0 0 1 .993.883L20 10.5a1 1 0 0 1-.883.993L19 11.5h-4.277l2.847 2.846a1 1 0 0 1-1.32 1.497l-.094-.083-2.846-2.847V17a1 1 0 0 1-.883.993L12 18a1 1 0 0 1-.993-.883L11 17v-4.277l-2.846 2.847a1 1 0 0 1-1.497-1.32l.083-.094 2.847-2.846H5a1 1 0 0 1-.993-.883L4 9.5a1 1 0 0 1 .883-.993L5 8.5h4.277L6.43 5.654a1 1 0 0 1 1.32-1.497l.094.083L11 7.086V3a1 1 0 0 1 .883-.993L12 2z" />
-              </svg>
-              <span>Claude</span>
-            </div>
-            <div class="ai-logo-item" title="Gemini">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                <path
-                  d="M12,2 C12,7.5 16.5,12 22,12 C16.5,12 12,16.5 12,22 C12,16.5 7.5,12 2,12 C7.5,12 12,7.5 12,2 Z" />
-              </svg>
-              <span>Gemini</span>
-            </div>
-            <div class="ai-logo-item" title="Perplexity">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                <path
-                  d="M12 2a1.5 1.5 0 0 1 1.5 1.5v5.53l3.91-3.91a1.5 1.5 0 1 1 2.12 2.12l-3.91 3.91h5.53a1.5 1.5 0 0 1 0 3h-5.53l3.91 3.91a1.5 1.5 0 1 1-2.12 2.12l-3.91-3.91v5.53a1.5 1.5 0 0 1-3 0v-5.53l-3.91 3.91a1.5 1.5 0 1 1-2.12-2.12l3.91-3.91H2.5a1.5 1.5 0 0 1 0-3h5.53L4.12 6.12a1.5 1.5 0 1 1 2.12-2.12l3.91 3.91V3.5A1.5 1.5 0 0 1 12 2z" />
-              </svg>
-              <span>Perplexity</span>
-            </div>
-          </div>
-        </div>
-        <div
-          style="width: 100%; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: center;">
-          <a href="herramienta.html" class="btn btn-dark">Haz tu Radiografía Digital gratis</a>
-          <span style="font-size:14px;color:var(--ink-faint)">Gratis, en 60 segundos · el seguimiento de tu visibilidad en IA va en el <b style="color:var(--violet-ink)">Plan Pro</b>.</span>
-        </div>
-      </div>
+      <span class="stmt-badge">EVOLUCIÓN CONTINUA</span>
+      <h2 class="stmt-title">Una empresa nunca<br>deja de evolucionar.<br><span class="vi">Su presencia digital<br>tampoco debería hacerlo.</span></h2>
+      <p class="stmt-body">Tu negocio cambia constantemente: aparecen nuevos servicios, cambian tus clientes, llegan nuevos competidores y evolucionan tus objetivos.<br><br>Tu sitio web, tu marca y tu estrategia digital deberían crecer al mismo ritmo. No basta con lanzar una web; hay que mantenerla <span class="hi">relevante, visible y preparada</span> para lo que viene.</p>
     </div>
   </section>
 
@@ -3422,8 +3406,7 @@
     <div class="wrap">
       <div class="sec-head" style="max-width:none">
         <h2 class="h2 split" data-split>Radiografía Digital<span class="dot">.</span></h2>
-        <p class="desc reveal" style="--d:.1s;max-width:60ch">Escribe el dominio de tu empresa y en 60 segundos te
-          decimos cómo está tu presencia digital — con nota, hallazgos reales y qué priorizar primero.</p>
+        <p class="desc reveal" style="--d:.1s;max-width:60ch">Escribe el dominio de tu empresa. En 60 segundos sabes exactamente cómo está tu presencia digital — score, hallazgos reales con evidencia, y qué priorizar primero. Todo gratis, sin registro.</p>
         <div class="tool-perks reveal" style="--d:.15s">
           <span class="perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
               stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
@@ -3456,7 +3439,7 @@
               Verificado
             </span>
           </span>
-          <a href="herramienta.html" class="app-run">Ejecutar diagnóstico</a>
+          <a href="/monitor" class="app-run">Ejecutar diagnóstico</a>
         </div>
 
         <!-- App Grid -->
@@ -3508,7 +3491,7 @@
             <div class="side-pro">
               <div class="t">Panel Pro</div>
               <div class="d">Seguimiento mensual, histórico y competencia.</div>
-              <a href="#panel-pro" class="b">Ver Panel Pro</a>
+              <a href="/monitor" class="b">Ver Panel Pro</a>
             </div>
           </aside>
 
@@ -3646,47 +3629,12 @@
       </div>
 
       <div class="tool-cta">
-        <a href="herramienta.html" class="btn btn-violet">Ejecutar diagnóstico</a>
-        <div class="note">Sin compromisos ni registros requeridos. Resultados inmediatos.</div>
+        <a href="/monitor" class="btn btn-violet">Ejecutar diagnóstico</a>
+        <div class="note">Gratis · Sin registro · Para ver el reporte completo dejas tu correo.</div>
       </div>
     </div>
   </section>
 
-  <!-- ============ PASOS ============ -->
-  <section class="section" id="pasos">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2 class="h2 split" data-split>Así trabajamos contigo<span class="dot">.</span></h2>
-        <p class="desc reveal" style="--d:.1s">Un proceso claro, sin sorpresas. Sabemos exactamente lo que necesitas
-          antes de proponer cualquier cosa.</p>
-      </div>
-      <div class="steps">
-        <div class="step reveal" style="--d:0s">
-          <div class="n">01</div>
-          <h3>Diagnóstico</h3>
-          <p>Evaluamos tu presencia digital actual — web, correo, seguridad, velocidad y visibilidad — para saber
-            exactamente dónde estás parado.</p>
-        </div>
-        <div class="step reveal" style="--d:.08s">
-          <div class="n">02</div>
-          <h3>Estrategia</h3>
-          <p>Definimos qué construir, en qué orden y con qué objetivo. Sin propuestas genéricas: cada plan es específico
-            para tu empresa.</p>
-        </div>
-        <div class="step reveal" style="--d:.16s">
-          <div class="n">03</div>
-          <h3>Diseño y construcción</h3>
-          <p>Creamos interfaces que elevan el valor percibido de tu negocio. Cada detalle tiene una razón comercial
-            detrás.</p>
-        </div>
-        <div class="step reveal" style="--d:.24s">
-          <div class="n">04</div>
-          <h3>Lanzamiento y acompañamiento</h3>
-          <p>Lanzamos todo configurado y funcionando. Luego seguimos contigo mes a mes para que siga creciendo.</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ============ PLANES & SERVICIOS ============ -->
   <section class="section" id="planes" style="padding-top:0">
@@ -3699,133 +3647,44 @@
 
         <!-- Web & Branding (Destacado) -->
         <div class="plan feat reveal" style="--d:0s">
-          <span class="badge">Más Popular</span>
+          <span class="badge">Más popular</span>
           <div class="pname">Web & Branding</div>
           <div class="psub">Para lanzarte o relanzarte con una presencia que genere confianza desde el primer clic.</div>
           <ul>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Identidad visual completa</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Web rápida, responsiva y optimizada</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Estructura comercial real</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> SEO técnico inicial</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Soporte post-lanzamiento</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Identidad visual</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Web rápida, responsiva y optimizada</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Estructura comercial real</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> SEO técnico inicial</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Revisiones hasta aprobación</li>
           </ul>
-          <a href="#contacto" class="pbtn">Agendar llamada</a>
+          <a href="#contacto" class="pbtn">Agendar llamada →</a>
         </div>
 
-        <!-- Mantenimiento Continuo -->
+        <!-- Mantenimiento Digital -->
         <div class="plan reveal" style="--d:.08s">
           <div class="pname">Mantenimiento Digital</div>
-          <div class="psub">Nos encargamos nosotros. Tu web y tu presencia digital, cuidadas y mejoradas cada mes.</div>
+          <div class="psub">Tu presencia digital, cuidada mes a mes. Nosotros ejecutamos — tú te dedicas a tu negocio.</div>
           <ul>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Monitoreo continuo de salud digital</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Actualizaciones de seguridad y SSL</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Ajustes mensuales de contenido</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Soporte técnico prioritario</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Monitoreo continuo de salud digital</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Actualizaciones de seguridad y SSL</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Ajustes mensuales de contenido</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Soporte técnico prioritario</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Reporte mensual con hallazgos y mejoras</li>
           </ul>
-          <a href="#contacto" class="pbtn">Elegir acompañamiento</a>
+          <a href="#contacto" class="pbtn">Agendar llamada →</a>
         </div>
 
-        <!-- Panel Pro (SaaS) — destino de la situación "Monitorear" y del upsell de la herramienta -->
-        <div class="plan reveal" id="panel-pro" style="--d:.16s">
-          <div class="pname">Panel Pro</div>
-          <div class="price">$150K <span style="font-size:14px;color:var(--ink-soft);font-weight:600">COP/mes</span></div>
-          <div class="psub">El software que te dice qué hacer. Para quien prefiere ver los datos y decidir.</div>
-          <ul>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Índice de Salud Digital mensual</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Velocidad, seguridad y correo medidos</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Visibilidad en IA (ChatGPT, Claude, Gemini)</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Reporte mensual con recomendaciones</li>
-          </ul>
-          <a href="#contacto" class="pbtn">Ver Panel Pro</a>
-        </div>
-
-        <!-- Software a Medida -->
-        <div class="plan reveal" style="--d:.24s">
+        <!-- Software a medida -->
+        <div class="plan reveal" style="--d:.16s">
           <div class="pname">Software a medida</div>
-          <div class="psub">E-commerce, plataformas, dashboards e integraciones complejas para cuando tu negocio necesita más.</div>
+          <div class="psub">E-commerce, plataformas, dashboards e integraciones para cuando tu negocio necesita más que una web.</div>
           <ul>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Análisis de requerimientos</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Diseño UX/UI</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Desarrollo completo</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Integración con sistemas existentes</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Análisis de requerimientos</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Diseño UX/UI</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Desarrollo completo</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Integración con sistemas existentes</li>
           </ul>
-          <a href="#contacto" class="pbtn">Agendar llamada</a>
-        </div>
-
-        <!-- Consultoría & Diagnóstico -->
-        <div class="plan reveal" style="--d:.32s">
-          <div class="pname">Consultoría & Diagnóstico</div>
-          <div class="psub">Para quien necesita claridad antes de invertir. Una sesión con mapa de ruta y prioridades definidas.</div>
-          <ul>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Diagnóstico profundo de dominio</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Hoja de ruta priorizada</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Análisis de seguridad y correo</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Sesión 1-a-1 de revisión</li>
-          </ul>
-          <a href="#contacto" class="pbtn">Solicitar diagnóstico</a>
+          <a href="#contacto" class="pbtn">Agendar llamada →</a>
         </div>
 
       </div>
@@ -3869,12 +3728,12 @@
               <div class="form-group">
                 <label class="form-label" for="cService">¿Qué te interesa?</label>
                 <select id="cService" class="form-select">
-                  <option value="web">Web &amp; Branding</option>
+                  <option value="">¿Qué te interesa?</option>
+                  <option value="web-branding">Web &amp; Branding</option>
                   <option value="mantenimiento">Mantenimiento Digital</option>
-                  <option value="panel-pro">Panel Pro</option>
                   <option value="software">Software a medida</option>
-                  <option value="diagnostico">Consultoría &amp; Diagnóstico</option>
-                  <option value="otro">Otro tipo de proyecto</option>
+                  <option value="panel-pro">Panel Pro</option>
+                  <option value="otro">Otro / No sé aún</option>
                 </select>
               </div>
             </div>
@@ -3888,7 +3747,7 @@
               Enviar mensaje
             </button>
             <p style="margin-top:1rem;font-size:13px;color:var(--ink-faint);text-align:center;line-height:1.5">
-              ¿Prefieres empezar solo? <a href="herramienta.html" style="color:var(--violet);font-weight:700">Ejecuta el
+              ¿Prefieres empezar solo? <a href="/monitor" style="color:var(--violet);font-weight:700">Ejecuta el
                 diagnóstico gratis</a> en 60 segundos — sin compromiso.
             </p>
           </form>
@@ -3935,7 +3794,7 @@
             <img src="assets/KaivaSara.webp" alt="Sara Robot Kaiva" class="float-robot-slow" width="420" height="319" loading="lazy" decoding="async">
             <div style="font-size:12.5px;color:var(--ink-soft);line-height:1.4;">
               <b style="color:var(--ink);display:block;">¿Prefieres probar primero?</b>
-              Ejecuta el <a href="herramienta.html" style="color:var(--violet);font-weight:700;">diagnóstico gratis de 60s</a> sin compromiso.
+              Ejecuta el <a href="/monitor" style="color:var(--violet);font-weight:700;">diagnóstico gratis de 60s</a> sin compromiso.
             </div>
           </div>
 
@@ -4223,16 +4082,16 @@
       /* situación interactiva */
       var sitData = [
         {
-          h: 'Construimos tu marca y tu web desde cero', p: 'Empezamos con tu marca e identidad visual. Luego construimos tu web con estructura comercial real. Al final tienes una presencia profesional lista para atraer clientes.',
+          h: '"Quiero lanzar mi empresa al mundo digital"', p: 'Empezamos con tu marca e identidad visual. Luego construimos tu web con estructura comercial real. Al final tienes una presencia profesional lista para atraer clientes.',
           li: ['Web &amp; Branding', 'Consultoría'], cta: 'Hablar con el equipo', href: '#contacto'
         },
         {
-          h: 'Diagnosticamos y mejoramos lo que ya tienes', p: 'Primero entendemos qué está fallando con la Radiografía Digital. Luego rediseñamos, optimizamos o reconstruimos lo que necesite. Y te acompañamos mes a mes para que siga mejorando.',
-          li: ['Mantenimiento', 'Web &amp; Branding'], cta: 'Ver mi diagnóstico gratis', href: 'herramienta.html'
+          h: '"Tengo web pero no me está generando clientes"', p: 'Primero entendemos qué está fallando con la Radiografía Digital. Luego rediseñamos, optimizamos o reconstruimos lo que necesite. Y te acompañamos mes a mes para que siga mejorando.',
+          li: ['Mantenimiento', 'Web &amp; Branding'], cta: 'Ver mi diagnóstico gratis', href: '/monitor'
         },
         {
-          h: 'Seguimos tu crecimiento, mes a mes', p: 'El Panel Pro mide tu salud digital mes a mes — velocidad, seguridad, correo y cómo te describe la IA — y te dice exactamente qué hacer.',
-          li: ['Panel Pro', 'Consultoría'], cta: 'Ver Panel Pro', href: '#planes'
+          h: '"Quiero saber exactamente cómo va mi presencia digital"', p: 'El Panel Pro mide tu salud digital mes a mes — velocidad, seguridad, correo y cómo te describe la IA — y te dice exactamente qué hacer.',
+          li: ['Panel Pro', 'Consultoría'], cta: 'Ver Panel Pro', href: '/monitor'
         }
       ];
       var opts = [].slice.call(document.querySelectorAll('.sit-opt'));
@@ -4282,12 +4141,14 @@
         </div>
       </div>
       <div class="faq-chips-container" id="faqChips">
-        <button class="faq-chip" data-key="diagnostico">❓ ¿Qué es el diagnóstico gratis?</button>
-        <button class="faq-chip" data-key="precios">💰 ¿Cuáles son las líneas y precios?</button>
-        <button class="faq-chip" data-key="tiempo">⏱️ ¿Cuánto tarda un proyecto web?</button>
-        <button class="faq-chip" data-key="mantenimiento">🌱 ¿Cómo funciona el mantenimiento?</button>
-        <button class="faq-chip" data-key="ia">🤖 ¿Cómo me posicionan en IAs?</button>
-        <button class="faq-chip" data-key="contacto">📩 Quiero hablar con un humano</button>
+        <button class="faq-chip" data-key="precio">💰 ¿Cuánto cuesta una página web?</button>
+        <button class="faq-chip" data-key="tiempo">⏱️ ¿Cuánto tiempo tardan en entregar?</button>
+        <button class="faq-chip" data-key="empezar">🚀 ¿Qué necesito para empezar?</button>
+        <button class="faq-chip" data-key="diferencia">🔄 ¿Mantenimiento vs Panel Pro?</button>
+        <button class="faq-chip" data-key="gratis">🔍 ¿La Radiografía es gratis?</button>
+        <button class="faq-chip" data-key="remoto">🌎 ¿Trabajan fuera de Barranquilla?</button>
+        <button class="faq-chip" data-key="pequeno">📈 ¿Puedo empezar con algo pequeño?</button>
+        <button class="faq-chip" data-key="equipo">🤝 ¿Ya tengo diseñador/developer?</button>
       </div>
     </div>
 
@@ -4320,11 +4181,14 @@
       });
 
       var answers = {
-        "diagnostico": "Evaluamos tu sitio web y dominio en 60 segundos. Analizamos certificados SSL, velocidad móvil, configuración de correo (SPF/DMARC) y metadatos sociales. Te da un puntaje de 0 a 100 con hallazgos priorizados. ¡No requiere registro!",
-        "precios": "Trabajamos con 5 líneas de servicio:\n\n• Web & Branding: tu marca y tu sitio completos\n• Mantenimiento Digital: cuidamos tu presencia cada mes\n• Panel Pro: $150K/mes COP, el software que mide tu salud digital\n• Software a medida: e-commerce, plataformas e integraciones\n• Consultoría & Diagnóstico: claridad antes de invertir\n\nCada proyecto se cotiza según lo que necesites. Agenda una llamada o escríbenos y te damos una propuesta concreta.",
-        "tiempo": "Una landing o sitio web completo se entrega entre 7 y 15 días hábiles. Proyectos de software a medida o plataformas complejas toman de 3 a 6 semanas según requerimientos.",
-        "mantenimiento": "Tu presencia digital es un jardín en movimiento. Con nuestro plan de Mantenimiento Digital nosotros monitoreamos tu seguridad, renovamos SSL, corregimos errores, actualizamos contenido y aseguramos tu velocidad cada mes. Escríbenos y lo cotizamos según tu sitio.",
-        "ia": "Optimizamos tu estructura de metadatos, Schema.org y visibilidad de marca (AEO - Answer Engine Optimization) para que motores de IA como ChatGPT, Claude, Gemini y Perplexity reconozcan y recomienden tu empresa.",
+        "precio": "Depende del alcance — cada proyecto es diferente. Lo que sí podemos decirte es que trabajamos sin plantillas genéricas. La mejor forma de saberlo es agendar una llamada de 20 minutos donde te damos un estimado real. Sin compromiso.",
+        "tiempo": "Una web estándar tarda entre 3 y 5 semanas. Proyectos de branding completo o software a medida pueden tomar más. Te damos un cronograma claro desde el primer día.",
+        "empezar": "Nada especial. Con una llamada de 20 minutos entendemos tu negocio y te decimos exactamente qué necesitas y en qué orden. Puedes empezar también con el diagnóstico gratis.",
+        "diferencia": "El Mantenimiento lo hacemos nosotros por ti — actualizamos, corregimos y optimizamos. El Panel Pro es una herramienta de auto-servicio: tú ves los datos y decides. Son productos distintos, no se reemplazan.",
+        "gratis": "Sí, completamente. Score, hallazgos reales y qué priorizar — sin costo y sin registro. Solo dejas tu correo para ver el reporte completo.",
+        "remoto": "Sí. Trabajamos 100% remoto con empresas de toda Colombia y LATAM. La ubicación no es un limitante.",
+        "pequeno": "Exactamente así trabajamos. Muchos clientes empiezan con web y branding, y después agregan mantenimiento o software. Cada paso tiene sentido por sí solo.",
+        "equipo": "Perfecto. Podemos trabajar junto a tu equipo o enfocarnos solo en lo que les falta — diagnóstico, estrategia, o un servicio específico.",
         "contacto": "¡Excelente! Puedes escribirnos a info@kaivastudio.com o llenar el formulario de contacto más arriba en la página. Te responderemos en menos de 24 horas."
       };
 
@@ -4365,11 +4229,14 @@
           
           var matchKey = 'contacto';
           var lower = val.toLowerCase();
-          if (lower.includes('gratis') || lower.includes('diagnos') || lower.includes('herramienta')) matchKey = 'diagnostico';
-          else if (lower.includes('precio') || lower.includes('cuanto') || lower.includes('costo') || lower.includes('plan')) matchKey = 'precios';
-          else if (lower.includes('tiempo') || lower.includes('tarda') || lower.includes('dias') || lower.includes('demora')) matchKey = 'tiempo';
-          else if (lower.includes('manten') || lower.includes('mes') || lower.includes('actualiz')) matchKey = 'mantenimiento';
-          else if (lower.includes('ia') || lower.includes('chatgpt') || lower.includes('gemini') || lower.includes('claude')) matchKey = 'ia';
+          if (lower.includes('precio') || lower.includes('cuanto') || lower.includes('costo') || lower.includes('cuesta')) matchKey = 'precio';
+          else if (lower.includes('tiempo') || lower.includes('tarda') || lower.includes('dias') || lower.includes('demora') || lower.includes('entreg')) matchKey = 'tiempo';
+          else if (lower.includes('empez') || lower.includes('necesito') || lower.includes('inicio') || lower.includes('comenzar')) matchKey = 'empezar';
+          else if (lower.includes('diferencia') || lower.includes('panel') || lower.includes('manten')) matchKey = 'diferencia';
+          else if (lower.includes('gratis') || lower.includes('diagnos') || lower.includes('radiograf')) matchKey = 'gratis';
+          else if (lower.includes('remoto') || lower.includes('ciudad') || lower.includes('barranquilla') || lower.includes('fuera')) matchKey = 'remoto';
+          else if (lower.includes('peque') || lower.includes('crecer') || lower.includes('poco')) matchKey = 'pequeno';
+          else if (lower.includes('equipo') || lower.includes('diseñador') || lower.includes('desarrollador') || lower.includes('developer')) matchKey = 'equipo';
 
           setTimeout(function () {
             addMsg(answers[matchKey], 'bot');
