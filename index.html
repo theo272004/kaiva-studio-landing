@@ -3036,7 +3036,7 @@
   <header class="hero" id="top">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <h1 class="h1 hero-title split" data-split>Construimos la presencia digital que tu empresa <span style="color:var(--violet)">merece</span><span class="dot">.</span></h1>
+        <h1 class="h1 hero-title split" data-split>Construimos la presencia digital que tu empresa <span style="color:var(--violet)">merece<span class="dot">.</span></span></h1>
         <p class="hero-sub reveal" style="--d:.4s">Sitios web, software y experiencias digitales diseñadas para crecer con tu negocio.</p>
         <div class="hero-ctas reveal" style="--d:.55s">
           <a href="/monitor" class="btn btn-violet">Diagnóstico gratis</a>
@@ -3642,8 +3642,8 @@
   <section class="section" id="planes">
     <div class="wrap">
       <div class="sec-head">
-        <h2 class="h2 split" data-split>Elige cómo quieres trabajar con nosotros<span class="dot">.</span></h2>
-        <p class="desc reveal" style="--d:.1s">Desde un proyecto puntual hasta acompañamiento continuo. Sin paquetes genéricos.</p>
+        <h2 class="h2 split" data-split style="text-align:center">Elige cómo quieres trabajar con nosotros<span class="dot">.</span></h2>
+        <p class="desc reveal" style="--d:.1s;text-align:center">Desde un proyecto puntual hasta acompañamiento continuo.</p>
       </div>
       <div class="plans">
 
@@ -3895,19 +3895,30 @@
 
       /* split headers word by word for reveal animation */
       document.querySelectorAll('[data-split]').forEach(function (el) {
-        var html = [];
-        var words = el.textContent.split(/(\s+)/);
         var i = 0;
-        words.forEach(function (w) {
-          if (!w) return;
-          if (/^\s+$/.test(w)) {
-            html.push(w);
-          } else {
-            html.push('<span class="w" style="--i:' + i + '">' + w + '</span>');
-            i++;
-          }
-        });
-        el.innerHTML = html.join('');
+        function splitNode(parent) {
+          var nodes = Array.prototype.slice.call(parent.childNodes);
+          nodes.forEach(function (child) {
+            if (child.nodeType === 3) {
+              var parts = child.textContent.split(/(\s+)/);
+              var frag = document.createDocumentFragment();
+              parts.forEach(function (p) {
+                if (!p) return;
+                if (/^\s+$/.test(p)) { frag.appendChild(document.createTextNode(p)); return; }
+                var s = document.createElement('span');
+                s.className = 'w';
+                s.style.setProperty('--i', i);
+                s.textContent = p;
+                frag.appendChild(s);
+                i++;
+              });
+              parent.replaceChild(frag, child);
+            } else if (child.nodeType === 1 && !child.classList.contains('dot')) {
+              splitNode(child);
+            }
+          });
+        }
+        splitNode(el);
       });
 
       /* scroll animations (reveal items on view) */
