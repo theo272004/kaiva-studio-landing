@@ -829,8 +829,9 @@
       flex: 1 1 0%;
       cursor: pointer;
       padding: 1.6rem 1.2rem;
-      transition: background .4s ease;
-      /* el cambio de tamaño lo anima la View Transitions API nativa (ver más abajo) */
+      transition: flex-grow .6s var(--ease-reveal), padding .5s var(--ease-reveal), background .4s ease;
+      /* el tamaño lo resuelve CSS (proporciones correctas); la View Transition solo
+         funde el contenido que aparece/desaparece, sin deformar la tarjeta */
     }
 
     .svc-grid.acc .svc-card.active {
@@ -881,29 +882,6 @@
     .svc-grid.acc .svc-card.active .svc-body,
     .svc-grid.acc .svc-card.active .svc-vis {
       display: revert;
-    }
-
-    /* --- View Transitions API: cada tarjeta se identifica para que el navegador
-       la morphee de forma nativa entre su tamaño colapsado y expandido --- */
-    .svc-grid.acc .svc-card:nth-child(1) { view-transition-name: svc-card-1; }
-    .svc-grid.acc .svc-card:nth-child(2) { view-transition-name: svc-card-2; }
-    .svc-grid.acc .svc-card:nth-child(3) { view-transition-name: svc-card-3; }
-    .svc-grid.acc .svc-card:nth-child(4) { view-transition-name: svc-card-4; }
-
-    ::view-transition-group(svc-card-1),
-    ::view-transition-group(svc-card-2),
-    ::view-transition-group(svc-card-3),
-    ::view-transition-group(svc-card-4) {
-      animation-duration: .6s;
-      animation-timing-function: cubic-bezier(.65, 0, .35, 1);
-    }
-
-    ::view-transition-old(svc-card-1), ::view-transition-new(svc-card-1),
-    ::view-transition-old(svc-card-2), ::view-transition-new(svc-card-2),
-    ::view-transition-old(svc-card-3), ::view-transition-new(svc-card-3),
-    ::view-transition-old(svc-card-4), ::view-transition-new(svc-card-4) {
-      animation-duration: .45s;
-      animation-timing-function: cubic-bezier(.4, 0, .2, 1);
     }
 
     @media (max-width: 1080px) {
@@ -1649,53 +1627,68 @@
 
     /* ================= SITUACIÓN ================= */
     .sit-wrap {
-      display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: clamp(2rem, 6vw, 5.5rem);
-      align-items: center;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
       position: relative;
     }
 
-    .sit-opts {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-      border-left: 2px solid rgba(15, 23, 42, 0.05);
-      padding-left: 0;
+    .sit-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
     }
 
-    .sit-opt {
+    .sit-card {
       text-align: left;
-      background: transparent;
-      border: none;
-      border-left: 3px solid transparent;
-      margin-left: -2.5px;
-      padding: 0.6rem 0 0.6rem 1.8rem;
+      background: var(--surface);
+      border: 1.5px solid rgba(15, 23, 42, 0.07);
+      border-radius: var(--r-md);
+      padding: 1.5rem 1.4rem;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: border-color .3s var(--ease-reveal), transform .3s var(--ease-reveal), box-shadow .3s var(--ease-reveal), background .3s var(--ease-reveal);
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 0.4rem;
+      gap: .7rem;
       font-family: inherit;
       width: 100%;
     }
 
-    .sit-opt:hover {
-      color: var(--ink);
+    .sit-card-ic {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--violet-soft);
+      color: var(--violet);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
     }
 
-    .sit-opt:active {
+    .sit-card:hover {
+      border-color: rgba(130, 66, 245, .3);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sit-card:active {
       transform: scale(.98);
       transition: transform .12s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .sit-opt.on {
-      border-left-color: var(--violet);
-      color: var(--ink);
+    .sit-card.on {
+      border-color: var(--violet);
+      box-shadow: 0 16px 32px -18px rgba(130, 66, 245, .45);
+      background: linear-gradient(180deg, rgba(130, 66, 245, .05), transparent 60%);
     }
 
-    .sit-opt .tag {
+    .sit-card.on .sit-card-ic {
+      background: var(--violet);
+      color: #fff;
+    }
+
+    .sit-card .tag {
       font-size: 11px;
       font-weight: 750;
       color: var(--ink-faint);
@@ -1703,30 +1696,30 @@
       letter-spacing: 0.05em;
     }
 
-    .sit-opt.on .tag {
+    .sit-card.on .tag {
       color: var(--violet);
     }
 
-    .sit-opt .ot {
-      font-size: 1.0625rem;
+    .sit-card .ot {
+      font-size: .96rem;
       font-weight: 700;
       letter-spacing: -0.015em;
-      line-height: 1.35;
+      line-height: 1.4;
       color: var(--ink-soft);
       transition: color 0.3s;
     }
 
-    .sit-opt.on .ot {
+    .sit-card.on .ot {
       color: var(--ink);
-    }
-
-    .sit-opt .oa {
-      display: none;
     }
 
     .sit-detail {
       position: relative;
-      min-height: 280px;
+      min-height: 220px;
+      background: var(--surface);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      border-radius: var(--r-lg);
+      padding: clamp(1.8rem, 4vw, 2.8rem);
     }
 
     .sit-panel {
@@ -2763,8 +2756,8 @@
 
     @media (max-width:560px) {
       .foot-top {
-        grid-template-columns: 1fr;
-        gap: 2.2rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.2rem 1.5rem;
       }
     }
 
@@ -2824,15 +2817,8 @@
         margin: 0 auto;
       }
 
-      .sit-wrap {
+      .sit-cards {
         grid-template-columns: 1fr;
-        gap: 2rem
-      }
-
-      .sit-robot {
-        position: static;
-        width: 150px;
-        margin: 1.5rem auto 0
       }
 
       .contact-grid {
@@ -2875,11 +2861,6 @@
         width: 38vw
       }
 
-      .sit-opt {
-        flex-wrap: wrap;
-        gap: .6rem
-      }
-
       .form-row {
         grid-template-columns: 1fr
       }
@@ -2916,7 +2897,9 @@
       
       .float-robot,
       .float-robot-slow,
-      .tag-bubble {
+      .tag-bubble,
+      .stmt-orbit,
+      .stmt-chip {
         animation: none;
       }
     }
@@ -3259,43 +3242,37 @@
       .stmt-body{max-width:520px;margin:0 auto;font-size:1rem;line-height:1.75;color:var(--ink-soft)}
       .stmt-body .hi{color:#8242f5;font-weight:600}
       .stmt-chips{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;overflow:hidden}
-      .stmt-chip{position:absolute;display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:8px 14px;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.06);animation:floaty 6s ease-in-out infinite;white-space:nowrap}
+      .stmt-orbit{position:absolute;top:50%;left:50%;width:0;height:0;animation:stmtSpin 60s linear infinite}
+      .stmt-arm{position:absolute;top:0;left:0;width:0;height:0}
+      .stmt-fix{width:0;height:0}
+      .stmt-chip{position:absolute;top:-17px;left:-10px;display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:8px 14px;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.06);white-space:nowrap;animation:stmtSpinRev 60s linear infinite}
       .stmt-chip svg{flex-shrink:0}
-      .stmt-chip:nth-child(1){top:6%;left:2%;animation-delay:0s}
-      .stmt-chip:nth-child(2){top:18%;right:1%;animation-delay:.8s}
-      .stmt-chip:nth-child(3){top:32%;left:0%;animation-delay:1.6s}
-      .stmt-chip:nth-child(4){top:48%;right:0%;animation-delay:.4s}
-      .stmt-chip:nth-child(5){top:62%;left:1%;animation-delay:2s}
-      .stmt-chip:nth-child(6){top:75%;right:2%;animation-delay:1.2s}
-      .stmt-chip:nth-child(7){bottom:8%;left:4%;animation-delay:2.4s}
-      .stmt-chip:nth-child(8){top:8%;left:28%;animation-delay:1.8s}
-      .stmt-chip:nth-child(9){bottom:5%;right:3%;animation-delay:.6s}
-      .stmt-chip:nth-child(10){top:42%;left:3%;animation-delay:1.4s}
-      .stmt-chip:nth-child(11){bottom:18%;right:5%;animation-delay:2.2s}
-      .stmt-chip:nth-child(12){bottom:22%;left:2%;animation-delay:1s}
-      .stmt-chip:nth-child(13){top:5%;right:22%;animation-delay:2.6s}
+      @keyframes stmtSpin{to{transform:rotate(360deg)}}
+      @keyframes stmtSpinRev{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
       @media(max-width:768px){
         .stmt-chips{position:static;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:2.5rem;pointer-events:auto}
+        .stmt-orbit,.stmt-arm,.stmt-fix{position:static;display:contents;animation:none;transform:none}
         .stmt-chip{position:static;animation:none}
       }
     </style>
     <div class="stmt-wrap">
       <div class="stmt-chips">
-        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09A6.6 6.6 0 015.5 12c0-.72.13-1.43.34-2.09V7.07H2.18A11 11 0 001 12c0 1.77.42 3.44 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google</div>
-        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="#000"><path d="M22.28 12.06a3.2 3.2 0 00-.93-2.15 3.2 3.2 0 00-2-1 3.2 3.2 0 00-.95-2.15 3.2 3.2 0 00-2.15-.95 3.2 3.2 0 00-2.15.78 3.2 3.2 0 00-2.15-.78 3.2 3.2 0 00-2.15.95 3.2 3.2 0 00-.95 2.15 3.2 3.2 0 00-2 1 3.2 3.2 0 00-.93 2.15 3.2 3.2 0 00.93 2.15 3.2 3.2 0 002 1 3.2 3.2 0 00.95 2.15 3.2 3.2 0 002.15.95 3.2 3.2 0 002.15-.78 3.2 3.2 0 002.15.78 3.2 3.2 0 002.15-.95 3.2 3.2 0 00.95-2.15 3.2 3.2 0 002-1 3.2 3.2 0 00.93-2.15zM12 13.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"/></svg> ChatGPT</div>
-        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="#D97757"><path d="M12 2L9.5 9.5 2 12l7.5 2.5L12 22l2.5-7.5L22 12l-7.5-2.5z"/></svg> Claude</div>
-        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24"><defs><linearGradient id="gm" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4285F4"/><stop offset="50%" stop-color="#9B72CB"/><stop offset="100%" stop-color="#D96570"/></linearGradient></defs><path d="M12 2C12 7.5 16.5 12 22 12 16.5 12 12 16.5 12 22 12 16.5 7.5 12 2 12 7.5 12 12 7.5 12 2z" fill="url(#gm)"/></svg> Gemini</div>
-        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> SEO</div>
-        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 4-6"/></svg> Analytics</div>
-        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Velocidad</div>
-        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Seguridad</div>
-        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg> Email</div>
-        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="m21 21-4.3-4.3"/><path d="M10 7v6"/><path d="M7 10h6"/></svg> Search Console</div>
-        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg> Conversiones</div>
-        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Contenido</div>
-        <div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg> E-commerce</div>
+        <div class="stmt-orbit" id="stmtOrbit">
+        <div class="stmt-arm" style="transform:rotate(0deg) translateX(260px)"><div class="stmt-fix" style="transform:rotate(-0.0deg)"><div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09A6.6 6.6 0 015.5 12c0-.72.13-1.43.34-2.09V7.07H2.18A11 11 0 001 12c0 1.77.42 3.44 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google</div></div></div>
+        <div class="stmt-arm" style="transform:rotate(27.7deg) translateX(260px)"><div class="stmt-fix" style="transform:rotate(-27.7deg)"><div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="#000"><path d="M22.28 12.06a3.2 3.2 0 00-.93-2.15 3.2 3.2 0 00-2-1 3.2 3.2 0 00-.95-2.15 3.2 3.2 0 00-2.15-.95 3.2 3.2 0 00-2.15.78 3.2 3.2 0 00-2.15-.78 3.2 3.2 0 00-2.15.95 3.2 3.2 0 00-.95 2.15 3.2 3.2 0 00-2 1 3.2 3.2 0 00-.93 2.15 3.2 3.2 0 00.93 2.15 3.2 3.2 0 002 1 3.2 3.2 0 00.95 2.15 3.2 3.2 0 002.15.95 3.2 3.2 0 002.15-.78 3.2 3.2 0 002.15.78 3.2 3.2 0 002.15-.95 3.2 3.2 0 00.95-2.15 3.2 3.2 0 002-1 3.2 3.2 0 00.93-2.15zM12 13.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"/></svg> ChatGPT</div></div></div>
+        <div class="stmt-arm" style="transform:rotate(55.4deg) translateX(260px)"><div class="stmt-fix" style="transform:rotate(-55.4deg)"><div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="#D97757"><path d="M12 2L9.5 9.5 2 12l7.5 2.5L12 22l2.5-7.5L22 12l-7.5-2.5z"/></svg> Claude</div></div></div>
+        <div class="stmt-arm" style="transform:rotate(83.1deg) translateX(260px)"><div class="stmt-fix" style="transform:rotate(-83.1deg)"><div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24"><defs><linearGradient id="gm" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4285F4"/><stop offset="50%" stop-color="#9B72CB"/><stop offset="100%" stop-color="#D96570"/></linearGradient></defs><path d="M12 2C12 7.5 16.5 12 22 12 16.5 12 12 16.5 12 22 12 16.5 7.5 12 2 12 7.5 12 12 7.5 12 2z" fill="url(#gm)"/></svg> Gemini</div></div></div>
+        <div class="stmt-arm" style="transform:rotate(110.8deg) translateX(260px)"><div class="stmt-fix" style="transform:rotate(-110.8deg)"><div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> SEO</div></div></div>
+        <div class="stmt-arm" style="transform:rotate(138.5deg) translateX(260px)"><div class="stmt-fix" style="transform:rotate(-138.5deg)"><div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 4-6"/></svg> Analytics</div></div></div>
+        <div class="stmt-arm" style="transform:rotate(166.2deg) translateX(260px)"><div class="stmt-fix" style="transform:rotate(-166.2deg)"><div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Velocidad</div></div></div>
+        <div class="stmt-arm" style="transform:rotate(193.8deg) translateX(260px)"><div class="stmt-fix" style="transform:rotate(-193.8deg)"><div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Seguridad</div></div></div>
+        <div class="stmt-arm" style="transform:rotate(221.5deg) translateX(260px)"><div class="stmt-fix" style="transform:rotate(-221.5deg)"><div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg> Email</div></div></div>
+        <div class="stmt-arm" style="transform:rotate(249.2deg) translateX(260px)"><div class="stmt-fix" style="transform:rotate(-249.2deg)"><div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="m21 21-4.3-4.3"/><path d="M10 7v6"/><path d="M7 10h6"/></svg> Search Console</div></div></div>
+        <div class="stmt-arm" style="transform:rotate(276.9deg) translateX(260px)"><div class="stmt-fix" style="transform:rotate(-276.9deg)"><div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg> Conversiones</div></div></div>
+        <div class="stmt-arm" style="transform:rotate(304.6deg) translateX(260px)"><div class="stmt-fix" style="transform:rotate(-304.6deg)"><div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Contenido</div></div></div>
+        <div class="stmt-arm" style="transform:rotate(332.3deg) translateX(260px)"><div class="stmt-fix" style="transform:rotate(-332.3deg)"><div class="stmt-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg> E-commerce</div></div></div>
+        </div>
       </div>
-      <span class="stmt-badge">EVOLUCIÓN CONTINUA</span>
       <h2 class="stmt-title">Una empresa nunca<br>deja de evolucionar.<br><span class="vi">Su presencia digital<br>tampoco debería hacerlo.</span></h2>
       <p class="stmt-body">Tu negocio cambia constantemente: aparecen nuevos servicios, cambian tus clientes, llegan nuevos competidores y evolucionan tus objetivos.<br><br>Tu sitio web, tu marca y tu estrategia digital deberían crecer al mismo ritmo. No basta con lanzar una web; hay que mantenerla <span class="hi">relevante, visible y preparada</span> para lo que viene.</p>
     </div>
@@ -3555,16 +3532,38 @@
         <p class="desc reveal" style="--d:.1s">Elige tu situación y te mostramos el camino exacto.</p>
       </div>
       <div class="sit-wrap reveal">
-        <div class="sit-opts" id="sitOpts">
-          <button class="sit-opt on" data-i="0">
+        <div class="sit-cards" id="sitOpts">
+          <button class="sit-card on" data-i="0">
+            <div class="sit-card-ic">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.08-2.92a2.18 2.18 0 0 0-2.92-.08z"/>
+                <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+                <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+                <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+              </svg>
+            </div>
             <span class="tag">Desde cero</span>
             <span class="ot">Quiero lanzar mi empresa al mundo digital</span>
           </button>
-          <button class="sit-opt" data-i="1">
+          <button class="sit-card" data-i="1">
+            <div class="sit-card-ic">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 6 13.5 15.5 8.5 10.5 1 18"/>
+                <path d="M17 6h6v6"/>
+              </svg>
+            </div>
             <span class="tag">Mejorar</span>
             <span class="ot">Tengo web pero no me está generando clientes</span>
           </button>
-          <button class="sit-opt" data-i="2">
+          <button class="sit-card" data-i="2">
+            <div class="sit-card-ic">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 2a10 10 0 0 1 8.66 5"/>
+                <path d="M12 12 6.5 9.5"/>
+                <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
             <span class="tag">Monitorear</span>
             <span class="ot">Quiero saber exactamente cómo va mi presencia digital</span>
           </button>
@@ -3944,17 +3943,6 @@
 
           <div class="info-box">
             <div class="info-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
-            <div class="info-detail">
-              <h4>Ubicación & Cobertura</h4>
-              <p><b>Barranquilla, Atlántico, Colombia.</b></p>
-              <p style="font-size:12px;color:var(--ink-faint);margin-top:2px;">Atendemos proyectos en toda Colombia y Latinoamérica.</p>
-            </div>
-          </div>
-
-          <div class="info-box">
-            <div class="info-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
             <div class="info-detail">
@@ -4280,7 +4268,7 @@
           li: ['Panel Pro', 'Consultoría'], cta: 'Ver Panel Pro', href: '/monitor'
         }
       ];
-      var opts = [].slice.call(document.querySelectorAll('.sit-opt'));
+      var opts = [].slice.call(document.querySelectorAll('.sit-card'));
       var panel = document.getElementById('sitPanel');
 
       function renderSit(i) {
@@ -4325,8 +4313,17 @@
           }
 
           svcAnimating = true;
+          var done = false;
+          function finishSvc() {
+            if (done) return;
+            done = true;
+            svcAnimating = false;
+          }
           var transition = document.startViewTransition(apply);
-          transition.finished.finally(function () { svcAnimating = false; });
+          transition.finished.finally(finishSvc);
+          /* red de seguridad: si la pestaña queda en 2do plano y "finished" nunca
+             resuelve, igual liberamos el acordeón */
+          setTimeout(finishSvc, 1500);
         }
 
         function startSvcAuto() {
