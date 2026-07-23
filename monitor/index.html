@@ -61,6 +61,21 @@
       --shadow-lg: 0 28px 64px rgba(15, 23, 42, 0.08), 0 8px 24px rgba(15, 23, 42, 0.03);
     }
 
+    /* Transiciones nativas entre páginas (index <-> /monitor) del mismo origen */
+    @view-transition {
+      navigation: auto;
+    }
+
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: .38s;
+      animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .kv-brand-fixed {
+      view-transition-name: kv-logo;
+    }
+
     * {
       margin: 0;
       padding: 0;

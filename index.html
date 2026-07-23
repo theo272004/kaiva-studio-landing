@@ -104,9 +104,25 @@
       --r-md: 16px;
       --r-btn: 99px;
       --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+      --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
       --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.03);
       --shadow-md: 0 12px 36px rgba(15, 23, 42, 0.05), 0 2px 8px rgba(15, 23, 42, 0.02);
       --shadow-lg: 0 28px 64px rgba(15, 23, 42, 0.08), 0 8px 24px rgba(15, 23, 42, 0.03);
+    }
+
+    /* Transiciones nativas entre páginas (index <-> /monitor) del mismo origen */
+    @view-transition {
+      navigation: auto;
+    }
+
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: .38s;
+      animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .logo, .kv-brand-fixed {
+      view-transition-name: kv-logo;
     }
 
     * {
@@ -277,6 +293,12 @@
 
     .btn:hover .arr {
       transform: translateX(4px);
+    }
+
+    /* feedback táctil al presionar, como en apps nativas */
+    .btn:active {
+      transform: scale(.96);
+      transition: transform .12s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .btn-dark {
@@ -551,8 +573,8 @@
     }
 
     .split.lit .w {
-      animation: wordUp 0.6s var(--ease) forwards;
-      animation-delay: calc(var(--i) * 0.035s);
+      animation: wordUp 0.55s var(--ease-reveal) forwards;
+      animation-delay: calc(var(--i) * 0.032s);
     }
 
     @keyframes wordUp {
@@ -564,14 +586,17 @@
 
     .reveal {
       opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+      transform: translateY(22px);
+      filter: blur(5px);
+      transition: opacity 0.75s var(--ease-reveal), transform 0.75s var(--ease-reveal), filter 0.6s var(--ease-reveal);
       transition-delay: var(--d, 0s);
+      will-change: transform, opacity, filter;
     }
 
     .reveal.in {
       opacity: 1;
       transform: none;
+      filter: blur(0);
     }
 
     /* showcase crossfade */
@@ -804,7 +829,8 @@
       flex: 1 1 0%;
       cursor: pointer;
       padding: 1.6rem 1.2rem;
-      transition: flex-grow .7s cubic-bezier(.4, 0, .2, 1), padding .5s ease, background .4s ease;
+      transition: background .4s ease;
+      /* el cambio de tamaño lo anima la View Transitions API nativa (ver más abajo) */
     }
 
     .svc-grid.acc .svc-card.active {
@@ -855,6 +881,29 @@
     .svc-grid.acc .svc-card.active .svc-body,
     .svc-grid.acc .svc-card.active .svc-vis {
       display: revert;
+    }
+
+    /* --- View Transitions API: cada tarjeta se identifica para que el navegador
+       la morphee de forma nativa entre su tamaño colapsado y expandido --- */
+    .svc-grid.acc .svc-card:nth-child(1) { view-transition-name: svc-card-1; }
+    .svc-grid.acc .svc-card:nth-child(2) { view-transition-name: svc-card-2; }
+    .svc-grid.acc .svc-card:nth-child(3) { view-transition-name: svc-card-3; }
+    .svc-grid.acc .svc-card:nth-child(4) { view-transition-name: svc-card-4; }
+
+    ::view-transition-group(svc-card-1),
+    ::view-transition-group(svc-card-2),
+    ::view-transition-group(svc-card-3),
+    ::view-transition-group(svc-card-4) {
+      animation-duration: .6s;
+      animation-timing-function: cubic-bezier(.65, 0, .35, 1);
+    }
+
+    ::view-transition-old(svc-card-1), ::view-transition-new(svc-card-1),
+    ::view-transition-old(svc-card-2), ::view-transition-new(svc-card-2),
+    ::view-transition-old(svc-card-3), ::view-transition-new(svc-card-3),
+    ::view-transition-old(svc-card-4), ::view-transition-new(svc-card-4) {
+      animation-duration: .45s;
+      animation-timing-function: cubic-bezier(.4, 0, .2, 1);
     }
 
     @media (max-width: 1080px) {
@@ -963,6 +1012,11 @@
     .svc-btn:hover {
       background: var(--violet);
       color: #fff;
+    }
+
+    .svc-btn:active {
+      transform: scale(.95);
+      transition: transform .12s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     /* --- Lienzo del mockup --- */
@@ -1631,6 +1685,11 @@
       color: var(--ink);
     }
 
+    .sit-opt:active {
+      transform: scale(.98);
+      transition: transform .12s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
     .sit-opt.on {
       border-left-color: var(--violet);
       color: var(--ink);
@@ -1840,6 +1899,11 @@
     .app-run:hover {
       background: var(--violet-ink);
       transform: translateY(-1px);
+    }
+
+    .app-run:active {
+      transform: scale(.95);
+      transition: transform .12s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .app-grid {
@@ -2838,7 +2902,8 @@
 
       .reveal {
         opacity: 1;
-        transform: none
+        transform: none;
+        filter: none
       }
 
       .shot {
@@ -4243,9 +4308,25 @@
         if (svcIdx < 0) svcIdx = 0;
         var svcTimer = null;
 
+        var svcAnimating = false;
+
         function setSvc(i) {
-          svcIdx = (i + svcCards.length) % svcCards.length;
-          svcCards.forEach(function (c, ci) { c.classList.toggle('active', ci === svcIdx); });
+          var next = (i + svcCards.length) % svcCards.length;
+          if (next === svcIdx || svcAnimating) return;
+          svcIdx = next;
+
+          function apply() {
+            svcCards.forEach(function (c, ci) { c.classList.toggle('active', ci === svcIdx); });
+          }
+
+          if (reduced || typeof document.startViewTransition !== 'function') {
+            apply();
+            return;
+          }
+
+          svcAnimating = true;
+          var transition = document.startViewTransition(apply);
+          transition.finished.finally(function () { svcAnimating = false; });
         }
 
         function startSvcAuto() {
