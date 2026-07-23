@@ -37,3 +37,6 @@ nuevo kaiva studio.zip
 
 # Claude internal
 .claude/
+
+# Copia local para probar el widget de diagnóstico contra el backend Docker
+monitor/local-test.html

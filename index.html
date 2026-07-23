@@ -826,7 +826,12 @@
       box-shadow: var(--shadow-md);
     }
 
-    /* --- Modo acordeón: la tarjeta activa crece, las demás se reducen --- */
+    /* --- Modo acordeón: la tarjeta activa crece, las demás se reducen ---
+       Técnica: el contenido expandido vive en una capa de ANCHO FIJO,
+       superpuesta (position:absolute) y recortada por overflow:hidden.
+       Así el texto nunca se re-acomoda (reflow) mientras la tarjeta cambia
+       de tamaño — solo se revela más o menos de una capa que ya está
+       totalmente maquetada. Eso es lo que hace que se sienta fluido. */
     .svc-grid.acc {
       display: flex;
       align-items: stretch;
@@ -834,81 +839,80 @@
     }
 
     .svc-grid.acc .svc-card {
+      position: relative;
+      overflow: hidden;
       flex: 1 1 0%;
+      height: 420px;
       cursor: pointer;
-      padding: 1.6rem 1.2rem;
-      transition: flex-grow .6s var(--ease-reveal), padding .5s var(--ease-reveal), background .4s ease;
-      /* el tamaño lo resuelve CSS (proporciones correctas); la View Transition solo
-         funde el contenido que aparece/desaparece, sin deformar la tarjeta */
+      padding: 0;
+      display: block;
+      transition: flex-grow .65s var(--ease-reveal);
+    }
+
+    .svc-grid.acc .svc-card:hover {
+      transform: none;
     }
 
     .svc-grid.acc .svc-card.active {
       flex-grow: 6;
-      grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr);
-      padding: 2rem;
       cursor: default;
     }
 
     .svc-grid.acc .svc-card:not(.active) {
       flex-grow: 1;
-      grid-template-columns: 1fr;
-      min-width: 0;
     }
 
     .svc-grid.acc .svc-card:not(.active):hover {
-      transform: none;
       border-color: rgba(130, 66, 245, .28);
       background: var(--violet-soft);
     }
 
-    .svc-grid.acc .svc-card:not(.active) .svc-body {
-      height: 100%;
+    /* capa colapsada: ícono + título centrados, siempre montada */
+    .svc-grid.acc .svc-collapsed {
+      position: absolute;
+      inset: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      gap: .3rem;
+      gap: .5rem;
+      padding: 1.5rem 1rem;
+      opacity: 1;
+      transition: opacity .3s ease;
     }
 
-    .svc-grid.acc .svc-card:not(.active) .svc-ic {
-      margin-bottom: .3rem;
-    }
-
-    .svc-grid.acc .svc-card:not(.active) h3 {
+    .svc-grid.acc .svc-collapsed h3 {
       font-size: .92rem;
-      margin-bottom: 0;
+      margin: 0;
     }
 
-    .svc-grid.acc .svc-card:not(.active) > .svc-body > p,
-    .svc-grid.acc .svc-card:not(.active) .svc-list,
-    .svc-grid.acc .svc-card:not(.active) .svc-btn,
-    .svc-grid.acc .svc-card:not(.active) .svc-vis,
-    .svc-grid.acc .svc-card.active:not(.show-content) > .svc-body > p,
-    .svc-grid.acc .svc-card.active:not(.show-content) .svc-list,
-    .svc-grid.acc .svc-card.active:not(.show-content) .svc-btn,
-    .svc-grid.acc .svc-card.active:not(.show-content) .svc-vis {
-      display: none;
+    .svc-grid.acc .svc-card.active .svc-collapsed {
+      opacity: 0;
+      pointer-events: none;
     }
 
-    .svc-grid.acc .svc-card.active .svc-body,
-    .svc-grid.acc .svc-card.active .svc-vis {
-      display: revert;
+    /* capa expandida: ancho fijo (el del estado activo), nunca cambia */
+    .svc-grid.acc .svc-expanded {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: var(--svc-expanded-w, 760px);
+      height: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr);
+      align-items: center;
+      gap: 1.6rem;
+      padding: 2rem;
+      opacity: 0;
+      transition: opacity .3s ease;
+      pointer-events: none;
     }
 
-    /* el texto/mockup solo aparece cuando la tarjeta ya casi terminó de crecer,
-       para que no se re-acomode (reflow) mientras el ancho está cambiando —
-       eso era lo que se veía brusco */
-    .svc-grid.acc .svc-card.show-content > .svc-body > p,
-    .svc-grid.acc .svc-card.show-content .svc-list,
-    .svc-grid.acc .svc-card.show-content .svc-btn,
-    .svc-grid.acc .svc-card.show-content .svc-vis {
-      animation: svcContentIn .45s var(--ease-reveal);
-    }
-
-    @keyframes svcContentIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: none; }
+    .svc-grid.acc .svc-card.active .svc-expanded {
+      opacity: 1;
+      transition: opacity .35s ease .22s;
+      pointer-events: auto;
     }
 
     @media (max-width: 1080px) {
@@ -916,28 +920,42 @@
         flex-direction: column;
       }
 
-      .svc-grid.acc .svc-card:not(.active) {
-        flex-grow: 0;
+      .svc-grid.acc .svc-card {
+        height: auto;
         max-height: 84px;
-        overflow: hidden;
-        padding: 1.1rem 1.4rem;
-      }
-
-      .svc-grid.acc .svc-card:not(.active) .svc-body {
-        flex-direction: row;
-        justify-content: flex-start;
-        gap: .8rem;
-      }
-
-      .svc-grid.acc .svc-card:not(.active) .svc-ic {
-        margin-bottom: 0;
-        flex-shrink: 0;
+        transition: max-height .55s var(--ease-reveal);
       }
 
       .svc-grid.acc .svc-card.active {
         flex-grow: 0;
         max-height: 1400px;
+      }
+
+      .svc-grid.acc .svc-collapsed {
+        position: static;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: .8rem;
+        height: 84px;
+      }
+
+      .svc-grid.acc .svc-card.active .svc-collapsed {
+        display: none;
+      }
+
+      .svc-grid.acc .svc-expanded {
+        position: static;
+        width: auto;
+        height: auto;
+        display: none;
         grid-template-columns: 1fr;
+        padding: 1.5rem;
+      }
+
+      .svc-grid.acc .svc-card.active .svc-expanded {
+        display: grid;
+        opacity: 1;
+        transition: none;
       }
 
       .svc-grid.acc .svc-card.active .svc-vis {
@@ -1653,91 +1671,138 @@
     }
 
     /* ================= SITUACIÓN ================= */
-    .sit-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      position: relative;
-    }
-
-    .sit-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-
-    .sit-card {
-      text-align: left;
-      background: var(--surface);
-      border: 1.5px solid rgba(15, 23, 42, 0.07);
-      border-radius: var(--r-md);
-      padding: 1.5rem 1.4rem;
-      cursor: pointer;
-      transition: border-color .3s var(--ease-reveal), transform .3s var(--ease-reveal), box-shadow .3s var(--ease-reveal), background .3s var(--ease-reveal);
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: .7rem;
-      font-family: inherit;
-      width: 100%;
-    }
-
-    .sit-card-ic {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      background: var(--violet-soft);
+    .sit-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: .1em;
+      text-transform: uppercase;
       color: var(--violet);
-      display: grid;
-      place-items: center;
+      background: var(--violet-soft);
+      border: 1px solid rgba(130, 66, 245, .15);
+      border-radius: 100px;
+      padding: .5rem 1.1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .sit-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--violet);
       flex-shrink: 0;
     }
 
-    .sit-card:hover {
-      border-color: rgba(130, 66, 245, .3);
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-sm);
+    .sit-wrap {
+      display: grid;
+      grid-template-columns: .95fr 1.15fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: start;
+      position: relative;
     }
 
-    .sit-card:active {
-      transform: scale(.98);
+    .sit-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sit-row {
+      text-align: left;
+      background: none;
+      border: none;
+      border-top: 1px solid var(--line);
+      border-left: 2px solid transparent;
+      padding: 1.4rem 0 1.4rem 1.2rem;
+      margin-left: -1px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: inherit;
+      width: 100%;
+      transition: border-color .3s var(--ease-reveal);
+    }
+
+    .sit-list .sit-row:first-child {
+      border-top: none;
+    }
+
+    .sit-row:active {
+      transform: scale(.99);
       transition: transform .12s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .sit-card.on {
-      border-color: var(--violet);
-      box-shadow: 0 16px 32px -18px rgba(130, 66, 245, .45);
-      background: linear-gradient(180deg, rgba(130, 66, 245, .05), transparent 60%);
+    .sit-row.on {
+      border-left-color: var(--violet);
     }
 
-    .sit-card.on .sit-card-ic {
-      background: var(--violet);
-      color: #fff;
+    .sit-row-body {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
     }
 
-    .sit-card .tag {
-      font-size: 11px;
-      font-weight: 750;
+    .sit-row-n {
+      font-family: var(--display);
+      font-size: 12px;
+      font-weight: 800;
       color: var(--ink-faint);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: .05em;
     }
 
-    .sit-card.on .tag {
+    .sit-row.on .sit-row-n {
       color: var(--violet);
     }
 
-    .sit-card .ot {
-      font-size: .96rem;
-      font-weight: 700;
-      letter-spacing: -0.015em;
-      line-height: 1.4;
-      color: var(--ink-soft);
-      transition: color 0.3s;
+    .sit-row-title {
+      font-family: var(--display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink-faint);
+      transition: color .3s;
     }
 
-    .sit-card.on .ot {
+    .sit-row.on .sit-row-title {
       color: var(--ink);
+    }
+
+    .sit-row.on .sit-row-title em {
+      color: var(--violet);
+      font-style: normal;
+    }
+
+    .sit-row-desc {
+      font-size: 13.5px;
+      color: var(--ink-faint);
+      line-height: 1.45;
+    }
+
+    .sit-row.on .sit-row-desc {
+      color: var(--ink-soft);
+    }
+
+    .sit-row-arrow {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(15, 23, 42, .05);
+      color: var(--ink-faint);
+      transition: background .3s, color .3s, transform .3s;
+    }
+
+    .sit-row.on .sit-row-arrow {
+      background: var(--violet);
+      color: #fff;
+      transform: rotate(-45deg);
     }
 
     .sit-detail {
@@ -1755,6 +1820,16 @@
       max-width: 65ch;
     }
 
+    .sit-panel .lbl {
+      display: block;
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin-bottom: .8rem;
+    }
+
     .sit-panel h3 {
       font-family: var(--display);
       font-size: 1.8rem;
@@ -1762,6 +1837,11 @@
       letter-spacing: -0.025em;
       line-height: 1.18;
       margin-bottom: 1rem;
+    }
+
+    .sit-panel h3 em {
+      color: var(--violet);
+      font-style: normal;
     }
 
     .sit-panel p {
@@ -1791,6 +1871,60 @@
     .sit-panel li svg {
       color: var(--violet);
       flex-shrink: 0;
+    }
+
+    .sit-panel .micro {
+      display: block;
+      margin-top: .9rem;
+      font-size: 12.5px;
+      color: var(--ink-faint);
+    }
+
+    .sit-trust {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+      padding-top: 2.4rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .sit-trust-item {
+      display: flex;
+      align-items: flex-start;
+      gap: .8rem;
+    }
+
+    .sit-trust-ic {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--violet-soft);
+      color: var(--violet);
+      display: grid;
+      place-items: center;
+    }
+
+    .sit-trust-item b {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: .15rem;
+    }
+
+    .sit-trust-item span {
+      font-size: 12px;
+      color: var(--ink-soft);
+      line-height: 1.4;
+    }
+
+    @media (max-width: 880px) {
+      .sit-trust {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     .sit-robot {
@@ -2847,7 +2981,7 @@
         margin: 0 auto;
       }
 
-      .sit-cards {
+      .sit-wrap {
         grid-template-columns: 1fr;
       }
 
@@ -3267,10 +3401,10 @@
   <section class="statement" id="statement">
     <style>
       .stmt-wrap{position:relative;max-width:1360px;margin:0 auto;padding:5rem 1.5rem;text-align:center}
-      .stmt-title{font-family:'Inter Tight','Inter',system-ui,sans-serif;font-size:clamp(1.7rem,4.2vw,3.3rem);line-height:1.22;font-weight:800;margin:0 0 1.7rem}
+      .stmt-title{font-family:'Inter Tight','Inter',system-ui,sans-serif;font-size:clamp(1.7rem,4.2vw,3.3rem);line-height:1.22;font-weight:800;margin:0 0 2.6rem}
       .stmt-title .vi{position:relative;display:inline-block;color:#8242f5}
-      .stmt-title .vi::after{content:'';position:absolute;left:1px;right:1px;bottom:-.2em;height:.2em;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 20' preserveAspectRatio='none'%3E%3Cpath d='M2 12 C 22 3, 42 3, 62 12 C 82 21, 102 21, 122 12 C 142 3, 162 3, 182 12 C 202 21, 222 21, 242 12 C 258 6, 272 6, 284 11' fill='none' stroke='%238242f5' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-size:100% 100%}
-      .stmt-body{max-width:640px;margin:0 auto;font-size:1.05rem;line-height:1.75;color:var(--ink-soft)}
+      .stmt-title .vi::after{content:'';position:absolute;left:1px;right:1px;bottom:-.22em;height:.22em;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 24' preserveAspectRatio='none'%3E%3Cpath d='M3 6 Q 150 30 297 8' fill='none' stroke='%238242f5' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-size:100% 100%}
+      .stmt-body{max-width:640px;margin:2.6rem auto 0;font-size:1.05rem;line-height:1.75;color:var(--ink-soft)}
       .stmt-body .hi{color:#8242f5;font-weight:600}
       .stmt-caption{margin:3rem 0 1.2rem;font-size:12.5px;font-weight:700;letter-spacing:.03em;color:var(--ink-faint)}
       .stmt-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.6rem}
@@ -3313,8 +3447,8 @@
       <div class="svc-grid acc" id="svcGrid">
 
         <!-- 1. Diseño y desarrollo web -->
-        <article class="svc-card active show-content reveal" style="--d:0s">
-          <div class="svc-body">
+        <article class="svc-card active reveal" style="--d:0s">
+          <div class="svc-collapsed">
             <div class="svc-ic">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -3323,7 +3457,18 @@
               </svg>
             </div>
             <h3 class="h3">Diseño y desarrollo web</h3>
-            <p>Tu sitio web principal, rápido, bonito y construido para convertir visitas en clientes.</p>
+          </div>
+          <div class="svc-expanded">
+            <div class="svc-body">
+              <div class="svc-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="14" rx="2" />
+                <path d="M3 8h18M8 21h8M12 17v4" />
+              </svg>
+            </div>
+              <h3 class="h3">Diseño y desarrollo web</h3>
+              <p>Tu sitio web principal, rápido, bonito y construido para convertir visitas en clientes.</p>
             <ul class="svc-list">
               <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
                   stroke-linecap="round" stroke-linejoin="round">
@@ -3339,8 +3484,8 @@
                 </svg>UI/UX que convierte</li>
             </ul>
             <a href="#contacto" class="svc-btn">Ver ejemplos</a>
-          </div>
-          <div class="svc-vis" aria-hidden="true">
+            </div>
+            <div class="svc-vis" aria-hidden="true">
             <div class="mk-browser">
               <div class="mk-bar">
                 <span class="mk-dot"></span><span class="mk-dot"></span><span class="mk-dot"></span>
@@ -3364,7 +3509,7 @@
 
         <!-- 2. Branding e identidad -->
         <article class="svc-card reveal" style="--d:.08s">
-          <div class="svc-body">
+          <div class="svc-collapsed">
             <div class="svc-ic">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -3375,7 +3520,20 @@
               </svg>
             </div>
             <h3 class="h3">Branding e identidad</h3>
-            <p>Para que tu marca se vea tan buena como el negocio que representa.</p>
+          </div>
+          <div class="svc-expanded">
+            <div class="svc-body">
+              <div class="svc-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="13.5" cy="6.5" r="2.5" />
+                <circle cx="17.5" cy="14" r="2.5" />
+                <circle cx="8.5" cy="16.5" r="2.5" />
+                <circle cx="6.5" cy="8" r="2.5" />
+              </svg>
+            </div>
+              <h3 class="h3">Branding e identidad</h3>
+              <p>Para que tu marca se vea tan buena como el negocio que representa.</p>
             <ul class="svc-list">
               <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
                   stroke-linecap="round" stroke-linejoin="round">
@@ -3391,8 +3549,8 @@
                 </svg>Guías de marca</li>
             </ul>
             <a href="#contacto" class="svc-btn">Ver ejemplos</a>
-          </div>
-          <div class="svc-vis" aria-hidden="true">
+            </div>
+            <div class="svc-vis" aria-hidden="true">
             <div class="mk-brand">
               <div class="mk-tile mk-logo">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -3419,7 +3577,7 @@
 
         <!-- 3. Software y plataformas -->
         <article class="svc-card reveal" style="--d:.16s">
-          <div class="svc-body">
+          <div class="svc-collapsed">
             <div class="svc-ic">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -3428,7 +3586,18 @@
               </svg>
             </div>
             <h3 class="h3">Software y plataformas</h3>
-            <p>Para cuando tu negocio necesita más que una web.</p>
+          </div>
+          <div class="svc-expanded">
+            <div class="svc-body">
+              <div class="svc-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2 2 7l10 5 10-5-10-5z" />
+                <path d="m2 17 10 5 10-5M2 12l10 5 10-5" />
+              </svg>
+            </div>
+              <h3 class="h3">Software y plataformas</h3>
+              <p>Para cuando tu negocio necesita más que una web.</p>
             <ul class="svc-list">
               <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
                   stroke-linecap="round" stroke-linejoin="round">
@@ -3444,8 +3613,8 @@
                 </svg>Integraciones y automatizaciones</li>
             </ul>
             <a href="#contacto" class="svc-btn">Ver ejemplos</a>
-          </div>
-          <div class="svc-vis" aria-hidden="true">
+            </div>
+            <div class="svc-vis" aria-hidden="true">
             <div class="mk-dash">
               <div class="mk-side">
                 <b>NEXORA</b>
@@ -3478,7 +3647,7 @@
 
         <!-- 4. Visibilidad en IA & SEO -->
         <article class="svc-card reveal" style="--d:.24s">
-          <div class="svc-body">
+          <div class="svc-collapsed">
             <div class="svc-ic">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -3487,7 +3656,18 @@
               </svg>
             </div>
             <h3 class="h3">Visibilidad en IA &amp; SEO</h3>
-            <p>Medimos cómo te encuentra Google — y cómo te describen ChatGPT, Claude y Gemini. Luego lo mejoramos.</p>
+          </div>
+          <div class="svc-expanded">
+            <div class="svc-body">
+              <div class="svc-ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 17l5-6 4 4 5-7 4 5" />
+                <path d="M3 21h18" />
+              </svg>
+            </div>
+              <h3 class="h3">Visibilidad en IA &amp; SEO</h3>
+              <p>Medimos cómo te encuentra Google — y cómo te describen ChatGPT, Claude y Gemini. Luego lo mejoramos.</p>
             <ul class="svc-list">
               <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
                   stroke-linecap="round" stroke-linejoin="round">
@@ -3503,8 +3683,8 @@
                 </svg>Reportes y seguimiento</li>
             </ul>
             <a href="#contacto" class="svc-btn">Ver ejemplos</a>
-          </div>
-          <div class="svc-vis" aria-hidden="true">
+            </div>
+            <div class="svc-vis" aria-hidden="true">
             <div class="mk-ai">
               <div class="mk-panel">
                 <u>Tu marca en ChatGPT</u>
@@ -3552,49 +3732,64 @@
   <!-- ============ SITUACIÓN ============ -->
   <section class="section" id="situacion">
     <div class="wrap">
-      <div class="sec-head">
-        <h2 class="h2 split" data-split>Empezamos desde donde estás<span class="dot">.</span></h2>
+      <div class="sec-head" style="margin-left:auto;margin-right:auto;text-align:center">
+        <span class="sit-badge reveal">Empezamos desde donde estás</span>
+        <h2 class="h2 split" data-split>Tú decides el punto de partida<span class="dot">.</span></h2>
         <p class="desc reveal" style="--d:.1s">Elige tu situación y te mostramos el camino exacto.</p>
       </div>
       <div class="sit-wrap reveal">
-        <div class="sit-cards" id="sitOpts">
-          <button class="sit-card on" data-i="0">
-            <div class="sit-card-ic">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.08-2.92a2.18 2.18 0 0 0-2.92-.08z"/>
-                <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
-                <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
-                <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
-              </svg>
+        <div class="sit-list" id="sitOpts">
+          <button class="sit-row on" data-i="0">
+            <div class="sit-row-body">
+              <span class="sit-row-n">01</span>
+              <span class="sit-row-title">Estoy <em>empezando</em>.</span>
+              <span class="sit-row-desc">Quiero lanzar mi empresa al mundo digital.</span>
             </div>
-            <span class="tag">Desde cero</span>
-            <span class="ot">Quiero lanzar mi empresa al mundo digital</span>
+            <span class="sit-row-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19 19 5M8 5h11v11"/></svg>
+            </span>
           </button>
-          <button class="sit-card" data-i="1">
-            <div class="sit-card-ic">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M23 6 13.5 15.5 8.5 10.5 1 18"/>
-                <path d="M17 6h6v6"/>
-              </svg>
+          <button class="sit-row" data-i="1">
+            <div class="sit-row-body">
+              <span class="sit-row-n">02</span>
+              <span class="sit-row-title">Ya tengo una <em>web</em>.</span>
+              <span class="sit-row-desc">Tengo presencia digital pero no veo resultados.</span>
             </div>
-            <span class="tag">Mejorar</span>
-            <span class="ot">Tengo web pero no me está generando clientes</span>
+            <span class="sit-row-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19 19 5M8 5h11v11"/></svg>
+            </span>
           </button>
-          <button class="sit-card" data-i="2">
-            <div class="sit-card-ic">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 2a10 10 0 0 1 8.66 5"/>
-                <path d="M12 12 6.5 9.5"/>
-                <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>
-              </svg>
+          <button class="sit-row" data-i="2">
+            <div class="sit-row-body">
+              <span class="sit-row-n">03</span>
+              <span class="sit-row-title">Quiero <em>crecer</em>.</span>
+              <span class="sit-row-desc">Necesito escalar y consolidar mi presencia digital.</span>
             </div>
-            <span class="tag">Monitorear</span>
-            <span class="ot">Quiero saber exactamente cómo va mi presencia digital</span>
+            <span class="sit-row-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19 19 5M8 5h11v11"/></svg>
+            </span>
           </button>
         </div>
         <div class="sit-detail">
           <div class="sit-panel" id="sitPanel"></div>
+        </div>
+        <div class="sit-trust">
+          <div class="sit-trust-item">
+            <span class="sit-trust-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+            <div><b>100% Confidencial</b><span>Tu información está segura.</span></div>
+          </div>
+          <div class="sit-trust-item">
+            <span class="sit-trust-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <div><b>Sin compromiso</b><span>Hablas, decides, avanzas.</span></div>
+          </div>
+          <div class="sit-trust-item">
+            <span class="sit-trust-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></span>
+            <div><b>Soluciones a tu medida</b><span>Estrategia alineada a tus objetivos.</span></div>
+          </div>
+          <div class="sit-trust-item">
+            <span class="sit-trust-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 4-6"/></svg></span>
+            <div><b>Resultados que importan</b><span>Crecimiento medible y sostenible.</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -3605,7 +3800,7 @@
     <div class="wrap">
       <div class="sec-head" style="max-width:none">
         <h2 class="h2 split" data-split>Radiografía Digital<span class="dot">.</span></h2>
-        <p class="desc reveal" style="--d:.1s;max-width:60ch">Escribe el dominio de tu empresa. En 60 segundos sabes exactamente cómo está tu presencia digital — score, hallazgos reales con evidencia, y qué priorizar primero. Todo gratis, sin registro.</p>
+        <p class="desc reveal" style="--d:.1s;max-width:52ch">Escribe el dominio de tu empresa. En 60 segundos tienes tu score, hallazgos con evidencia y qué priorizar primero.</p>
         <div class="tool-perks reveal" style="--d:.15s">
           <span class="perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
               stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
@@ -3838,9 +4033,9 @@
   <!-- ============ PLANES & SERVICIOS ============ -->
   <section class="section" id="planes">
     <div class="wrap">
-      <div class="sec-head">
-        <h2 class="h2 split" data-split style="text-align:center">Elige cómo quieres trabajar con nosotros<span class="dot">.</span></h2>
-        <p class="desc reveal" style="--d:.1s;text-align:center">Desde un proyecto puntual hasta acompañamiento continuo.</p>
+      <div class="sec-head" style="margin-left:auto;margin-right:auto;text-align:center">
+        <h2 class="h2 split" data-split>Elige cómo quieres trabajar con nosotros<span class="dot">.</span></h2>
+        <p class="desc reveal" style="--d:.1s">Desde un proyecto puntual hasta acompañamiento continuo.</p>
       </div>
       <div class="plans">
 
@@ -4281,24 +4476,30 @@
       /* situación interactiva */
       var sitData = [
         {
-          h: '"Quiero lanzar mi empresa al mundo digital"', p: 'Empezamos con tu marca e identidad visual. Luego construimos tu web con estructura comercial real. Al final tienes una presencia profesional lista para atraer clientes.',
-          li: ['Web &amp; Branding', 'Consultoría'], cta: 'Hablar con el equipo', href: '#contacto'
+          lbl: 'Tu primer paso', h: 'Construimos tu presencia digital <em>desde cero</em>.',
+          p: 'Creamos todo lo que necesitas para lanzar tu empresa al mundo digital, con una base sólida, profesional y enfocada en resultados.',
+          li: ['Estrategia digital a medida', 'Diseño web profesional', 'Identidad de marca', 'SEO técnico desde el inicio', 'Acompañamiento continuo'],
+          cta: 'Ver mi diagnóstico gratis', href: '/monitor', micro: 'Sin compromiso. En 60 segundos.'
         },
         {
-          h: '"Tengo web pero no me está generando clientes"', p: 'Primero entendemos qué está fallando con la Radiografía Digital. Luego rediseñamos, optimizamos o reconstruimos lo que necesite. Y te acompañamos mes a mes para que siga mejorando.',
-          li: ['Mantenimiento', 'Web &amp; Branding'], cta: 'Ver mi diagnóstico gratis', href: '/monitor'
+          lbl: 'Tu siguiente paso', h: 'Optimizamos lo que <em>ya tienes</em>.',
+          p: 'Primero entendemos qué está fallando con la Radiografía Digital. Luego rediseñamos, optimizamos o reconstruimos lo que necesite, y te acompañamos mes a mes.',
+          li: ['Radiografía Digital gratuita', 'Rediseño o rescate de tu web', 'Mantenimiento mensual', 'SEO y contenido continuo', 'Reportes de progreso mensual'],
+          cta: 'Ver mi diagnóstico gratis', href: '/monitor', micro: 'Sin compromiso. En 60 segundos.'
         },
         {
-          h: '"Quiero saber exactamente cómo va mi presencia digital"', p: 'El Panel Pro mide tu salud digital mes a mes — velocidad, seguridad, correo y cómo te describe la IA — y te dice exactamente qué hacer.',
-          li: ['Panel Pro', 'Consultoría'], cta: 'Ver Panel Pro', href: '/monitor'
+          lbl: 'Tu panel de control', h: 'Medimos y mejoramos <em>cada mes</em>.',
+          p: 'El Panel Pro mide tu salud digital mes a mes — velocidad, seguridad, correo y cómo te describe la IA — y te dice exactamente qué hacer.',
+          li: ['Panel Pro con seguimiento mensual', 'Visibilidad en Google e IA', 'Alertas de seguridad y correo', 'Comparativa con la competencia', 'Consultoría estratégica continua'],
+          cta: 'Ver Panel Pro', href: '/monitor', micro: 'Sin tarjeta. Cancelas cuando quieras.'
         }
       ];
-      var opts = [].slice.call(document.querySelectorAll('.sit-card'));
+      var opts = [].slice.call(document.querySelectorAll('.sit-row'));
       var panel = document.getElementById('sitPanel');
 
       function renderSit(i) {
         var d = sitData[i];
-        panel.innerHTML = '<h3>' + d.h + '</h3><p>' + d.p + '</p><ul>' + d.li.map(function (x) { return '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>' + x + '</li>'; }).join('') + '</ul><a href="' + d.href + '" class="btn btn-violet">' + d.cta + '</a>';
+        panel.innerHTML = '<span class="lbl">' + d.lbl + '</span><h3>' + d.h + '</h3><p>' + d.p + '</p><ul>' + d.li.map(function (x) { return '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>' + x + '</li>'; }).join('') + '</ul><a href="' + d.href + '" class="btn btn-violet">' + d.cta + '</a><span class="micro">' + d.micro + '</span>';
         panel.classList.remove('fade-swap');
         void panel.offsetWidth;
         panel.classList.add('fade-swap');
@@ -4323,28 +4524,37 @@
 
         var svcAnimating = false;
 
-        /* El tamaño lo anima una transición CSS pura sobre flex-grow (ver
-           .svc-grid.acc .svc-card): más predecible que combinarlo con la
-           View Transitions API, que aquí competía con la transición y hacía
-           que el cambio se viera cortado/brusco en vez de suave. */
+        /* El ancho de la capa expandida (.svc-expanded) debe coincidir con
+           el ancho real que tendrá la tarjeta activa en este viewport —
+           si no, el contenido queda vacío de más o recortado. Se recalcula
+           en carga y resize (nunca durante la propia transición). */
+        function updateSvcExpandedWidth() {
+          if (matchMedia('(max-width:1080px)').matches) {
+            svcGrid.style.removeProperty('--svc-expanded-w');
+            return;
+          }
+          var cs = getComputedStyle(svcGrid);
+          var gap = parseFloat(cs.columnGap || cs.gap) || 0;
+          var available = svcGrid.clientWidth - gap * (svcCards.length - 1);
+          var activeW = available * 6 / 9;
+          svcGrid.style.setProperty('--svc-expanded-w', activeW + 'px');
+        }
+        updateSvcExpandedWidth();
+        addEventListener('resize', updateSvcExpandedWidth);
+
+        /* El tamaño lo anima una transición CSS pura sobre flex-grow. El
+           contenido expandido vive en una capa de ancho fijo superpuesta
+           (.svc-expanded), así que nunca hace reflow durante el cambio de
+           tamaño — solo hace falta alternar la clase 'active'. */
         function setSvc(i) {
           var next = (i + svcCards.length) % svcCards.length;
           if (next === svcIdx || svcAnimating) return;
           svcIdx = next;
-          svcCards.forEach(function (c, ci) {
-            c.classList.toggle('active', ci === svcIdx);
-            c.classList.remove('show-content');
-          });
+          svcCards.forEach(function (c, ci) { c.classList.toggle('active', ci === svcIdx); });
 
-          if (reduced) {
-            svcCards[svcIdx].classList.add('show-content');
-            return;
-          }
+          if (reduced) return;
           svcAnimating = true;
-          setTimeout(function () {
-            svcCards[svcIdx].classList.add('show-content');
-          }, 380);
-          setTimeout(function () { svcAnimating = false; }, 650);
+          setTimeout(function () { svcAnimating = false; }, 700);
         }
 
         function startSvcAuto() {
