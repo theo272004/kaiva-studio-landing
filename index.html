@@ -793,6 +793,105 @@
       box-shadow: var(--shadow-md);
     }
 
+    /* --- Modo acordeón: la tarjeta activa crece, las demás se reducen --- */
+    .svc-grid.acc {
+      display: flex;
+      align-items: stretch;
+      gap: 1.2rem;
+    }
+
+    .svc-grid.acc .svc-card {
+      flex: 1 1 0%;
+      cursor: pointer;
+      padding: 1.6rem 1.2rem;
+      transition: flex-grow .7s cubic-bezier(.4, 0, .2, 1), padding .5s ease, background .4s ease;
+    }
+
+    .svc-grid.acc .svc-card.active {
+      flex-grow: 6;
+      grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr);
+      padding: 2rem;
+      cursor: default;
+    }
+
+    .svc-grid.acc .svc-card:not(.active) {
+      flex-grow: 1;
+      grid-template-columns: 1fr;
+      min-width: 0;
+    }
+
+    .svc-grid.acc .svc-card:not(.active):hover {
+      transform: none;
+      border-color: rgba(130, 66, 245, .28);
+      background: var(--violet-soft);
+    }
+
+    .svc-grid.acc .svc-card:not(.active) .svc-body {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: .3rem;
+    }
+
+    .svc-grid.acc .svc-card:not(.active) .svc-ic {
+      margin-bottom: .3rem;
+    }
+
+    .svc-grid.acc .svc-card:not(.active) h3 {
+      font-size: .92rem;
+      margin-bottom: 0;
+    }
+
+    .svc-grid.acc .svc-card:not(.active) > .svc-body > p,
+    .svc-grid.acc .svc-card:not(.active) .svc-list,
+    .svc-grid.acc .svc-card:not(.active) .svc-btn,
+    .svc-grid.acc .svc-card:not(.active) .svc-vis {
+      display: none;
+    }
+
+    .svc-grid.acc .svc-card.active .svc-body,
+    .svc-grid.acc .svc-card.active .svc-vis {
+      display: revert;
+    }
+
+    @media (max-width: 1080px) {
+      .svc-grid.acc {
+        flex-direction: column;
+      }
+
+      .svc-grid.acc .svc-card:not(.active) {
+        flex-grow: 0;
+        max-height: 84px;
+        overflow: hidden;
+        padding: 1.1rem 1.4rem;
+      }
+
+      .svc-grid.acc .svc-card:not(.active) .svc-body {
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: .8rem;
+      }
+
+      .svc-grid.acc .svc-card:not(.active) .svc-ic {
+        margin-bottom: 0;
+        flex-shrink: 0;
+      }
+
+      .svc-grid.acc .svc-card.active {
+        flex-grow: 0;
+        max-height: 1400px;
+        grid-template-columns: 1fr;
+      }
+
+      .svc-grid.acc .svc-card.active .svc-vis {
+        order: -1;
+        aspect-ratio: 16 / 10;
+      }
+    }
+
     .svc-body {
       min-width: 0;
     }
@@ -1645,7 +1744,7 @@
     /* ================= HERRAMIENTA DEMO (CLEAR THEME) ================= */
     .tool {
       background: var(--bg);
-      padding-block: clamp(5rem, 9vw, 8.5rem);
+      padding-block: clamp(3.5rem, 6vw, 6rem);
       position: relative;
       border-block: 1px solid var(--line);
     }
@@ -1745,8 +1844,8 @@
 
     .app-grid {
       display: grid;
-      grid-template-columns: 230px 1fr;
-      min-height: 440px;
+      grid-template-columns: 210px 1fr;
+      min-height: 360px;
     }
 
     .side {
@@ -1837,23 +1936,23 @@
     }
 
     .panel {
-      padding: 1.6rem;
+      padding: 1.25rem;
       display: grid;
-      gap: 1.2rem;
+      gap: 1rem;
       background: #ffffff;
     }
 
     .panel-row {
       display: grid;
       grid-template-columns: 1fr 1.2fr;
-      gap: 1.2rem;
+      gap: 1rem;
     }
 
     .pcard {
       background: #ffffff;
       border: 1px solid rgba(15, 23, 42, 0.05);
       border-radius: 16px;
-      padding: 1.3rem;
+      padding: 1.05rem;
       box-shadow: var(--shadow-sm);
     }
 
@@ -2671,6 +2770,11 @@
         width: 150px;
         margin: 1.5rem auto 0
       }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem
+      }
     }
 
     @media (max-width:560px) {
@@ -2710,6 +2814,10 @@
       .sit-opt {
         flex-wrap: wrap;
         gap: .6rem
+      }
+
+      .form-row {
+        grid-template-columns: 1fr
       }
     }
 
@@ -3135,10 +3243,10 @@
         <h2 class="h2 split" data-split>Lo que construimos para ti<span class="dot">.</span></h2>
         <p class="desc reveal" style="--d:.1s">Cada empresa necesita algo distinto. Aquí están los servicios con los que más ayudamos — desde el primer sitio hasta plataformas complejas.</p>
       </div>
-      <div class="svc-grid">
+      <div class="svc-grid acc" id="svcGrid">
 
         <!-- 1. Diseño y desarrollo web -->
-        <article class="svc-card reveal" style="--d:0s">
+        <article class="svc-card active reveal" style="--d:0s">
           <div class="svc-body">
             <div class="svc-ic">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
@@ -4126,6 +4234,45 @@
         });
       });
       if (opts.length) renderSit(0);
+
+      /* acordeón de servicios: la tarjeta activa crece, rota sola y se puede clicar */
+      var svcGrid = document.getElementById('svcGrid');
+      if (svcGrid) {
+        var svcCards = [].slice.call(svcGrid.querySelectorAll('.svc-card'));
+        var svcIdx = svcCards.findIndex(function (c) { return c.classList.contains('active'); });
+        if (svcIdx < 0) svcIdx = 0;
+        var svcTimer = null;
+
+        function setSvc(i) {
+          svcIdx = (i + svcCards.length) % svcCards.length;
+          svcCards.forEach(function (c, ci) { c.classList.toggle('active', ci === svcIdx); });
+        }
+
+        function startSvcAuto() {
+          if (reduced) return;
+          stopSvcAuto();
+          svcTimer = setInterval(function () { setSvc(svcIdx + 1); }, 4500);
+        }
+
+        function stopSvcAuto() {
+          if (svcTimer) { clearInterval(svcTimer); svcTimer = null; }
+        }
+
+        svcCards.forEach(function (card, i) {
+          card.addEventListener('click', function () {
+            if (card.classList.contains('active')) return;
+            setSvc(i);
+            startSvcAuto();
+          });
+        });
+
+        svcGrid.addEventListener('mouseenter', stopSvcAuto);
+        svcGrid.addEventListener('mouseleave', startSvcAuto);
+        svcGrid.addEventListener('focusin', stopSvcAuto);
+        svcGrid.addEventListener('focusout', startSvcAuto);
+
+        startSvcAuto();
+      }
     })();
   </script>
 
