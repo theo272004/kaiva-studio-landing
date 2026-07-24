@@ -2595,6 +2595,186 @@
       border-color: #fff;
     }
 
+    /* ===== Panel Pro (producto) ===== */
+    .plans-soft {
+      margin-top: 1.2rem;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .plan-pro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+      gap: clamp(1.6rem, 4vw, 3rem);
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-lg);
+      padding: clamp(1.6rem, 3.5vw, 2.4rem);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+
+    .plan-pro-soon {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--violet);
+      background: var(--violet-soft);
+      border: 1px solid rgba(130, 66, 245, .18);
+      padding: .28rem .65rem;
+      border-radius: 6px;
+      margin-bottom: .9rem;
+    }
+
+    .plan-pro h3 {
+      font-family: var(--display);
+      font-size: clamp(1.35rem, 2.6vw, 1.7rem);
+      font-weight: 800;
+      letter-spacing: -.02em;
+      color: var(--ink);
+      margin-bottom: .55rem;
+    }
+
+    .plan-pro-desc {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      margin-bottom: 1.3rem;
+    }
+
+    .plan-pro-price {
+      display: flex;
+      align-items: baseline;
+      gap: .4rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .plan-pro-price b {
+      font-family: var(--display);
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1;
+      color: var(--ink);
+    }
+
+    .plan-pro-price span {
+      font-size: 13px;
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+
+    .plan-pro-btn {
+      display: inline-block;
+      padding: .8rem 1.6rem;
+      border-radius: var(--r-btn);
+      background: var(--violet);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+      border: 0;
+      cursor: pointer;
+      transition: background .2s var(--ease), transform .2s var(--ease);
+    }
+
+    .plan-pro-btn:hover {
+      background: var(--violet-hover);
+      transform: translateY(-1px);
+    }
+
+    .plan-pro-micro {
+      display: block;
+      font-size: 11.5px;
+      color: var(--ink-faint);
+      margin-top: .7rem;
+    }
+
+    /* Comparativa gratis vs pago */
+    .cmp {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .9rem;
+    }
+
+    .cmp-col {
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-md);
+      padding: 1.1rem 1.2rem;
+      background: var(--paper);
+    }
+
+    .cmp-col.paid {
+      border-color: rgba(130, 66, 245, .3);
+      background: var(--violet-soft);
+    }
+
+    .cmp-col > b {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: .2rem;
+    }
+
+    .cmp-col.paid > b {
+      color: var(--violet);
+    }
+
+    .cmp-col > i {
+      display: block;
+      font-style: normal;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: .8rem;
+    }
+
+    .cmp-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .cmp-col li {
+      display: flex;
+      gap: .5rem;
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--ink-soft);
+    }
+
+    .cmp-col li svg {
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--green);
+    }
+
+    .cmp-col.paid li svg {
+      color: var(--violet);
+    }
+
+    @media (max-width: 900px) {
+      .plan-pro {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .cmp {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .plan.feat .pbtn:hover {
       background: var(--violet);
       color: #fff;
@@ -3885,7 +4065,7 @@
             <div class="side-pro">
               <div class="t">Panel Pro</div>
               <div class="d">Seguimiento mensual, histórico y competencia.</div>
-              <a href="/monitor" class="b">Ver Panel Pro</a>
+              <a href="#panel-pro" class="b">Ver Panel Pro</a>
             </div>
           </aside>
 
@@ -4035,7 +4215,8 @@
     <div class="wrap">
       <div class="sec-head" style="margin-left:auto;margin-right:auto;text-align:center">
         <h2 class="h2 split" data-split>Elige cómo quieres trabajar con nosotros<span class="dot">.</span></h2>
-        <p class="desc reveal" style="--d:.1s">Desde un proyecto puntual hasta acompañamiento continuo.</p>
+        <p class="desc reveal" style="--d:.1s">Servicios cuando necesitas que lo hagamos nosotros. Y un software para
+          vigilar tu presencia digital mes a mes.</p>
       </div>
       <div class="plans">
 
@@ -4051,7 +4232,7 @@
             <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> SEO técnico inicial</li>
             <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Revisiones hasta aprobación</li>
           </ul>
-          <a href="#contacto" class="pbtn">Agendar llamada →</a>
+          <a href="#contacto" class="pbtn">Agendar llamada</a>
         </div>
 
         <!-- Mantenimiento Digital -->
@@ -4065,7 +4246,7 @@
             <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Soporte técnico prioritario</li>
             <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Reporte mensual con hallazgos y mejoras</li>
           </ul>
-          <a href="#contacto" class="pbtn">Agendar llamada →</a>
+          <a href="#contacto" class="pbtn">Agendar llamada</a>
         </div>
 
         <!-- Software a medida -->
@@ -4078,10 +4259,79 @@
             <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Desarrollo completo</li>
             <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Integración con sistemas existentes</li>
           </ul>
-          <a href="#contacto" class="pbtn">Agendar llamada →</a>
+          <a href="#contacto" class="pbtn">Agendar llamada</a>
         </div>
 
       </div>
+
+      <!-- ===== Panel Pro (software) ===== -->
+      <div class="plans-soft reveal" style="--d:.24s">
+        <div class="plan-pro" id="panel-pro">
+          <div>
+            <span class="plan-pro-soon">Próximamente</span>
+            <h3>Panel Pro</h3>
+            <p class="plan-pro-desc">El diagnóstico gratis es una foto. El Panel Pro es la película: vigila tu
+              presencia digital cada mes, te avisa cuando algo se rompe y te dice qué arreglar primero.</p>
+            <div class="plan-pro-price">
+              <b>$70K</b><span>COP/mes</span>
+            </div>
+            <button type="button" class="plan-pro-btn" id="proWaitlist">Avísame cuando esté listo</button>
+            <span class="plan-pro-micro">Te escribimos solo para avisarte del lanzamiento.</span>
+          </div>
+
+          <div class="cmp">
+            <div class="cmp-col">
+              <b>Gratis</b>
+              <i>Tu diagnóstico completo, hoy</i>
+              <ul>
+                <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>Índice de Salud Digital y los 3 pilares</li>
+                <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>Correo, seguridad, imagen y velocidad</li>
+                <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>Todos los hallazgos, con su evidencia</li>
+                <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>Sin tarjeta y sin límite de uso</li>
+              </ul>
+            </div>
+            <div class="cmp-col paid">
+              <b>Panel Pro</b>
+              <i>Todo lo gratis, más el seguimiento</i>
+              <ul>
+                <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>Re-escaneo automático e historial</li>
+                <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>Alertas cuando algo cambia o se rompe</li>
+                <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>Cómo te describen ChatGPT, Claude y Gemini</li>
+                <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>Analytics y Search Console interpretados</li>
+                <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>Informe mensual y qué priorizar</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -4126,7 +4376,7 @@
                   <option value="web-branding">Web &amp; Branding</option>
                   <option value="mantenimiento">Mantenimiento Digital</option>
                   <option value="software">Software a medida</option>
-                  <option value="panel-pro">Panel Pro</option>
+                  <option value="panel-pro">Panel Pro (lista de espera)</option>
                   <option value="otro">Otro / No sé aún</option>
                 </select>
               </div>
@@ -4490,8 +4740,8 @@
         {
           lbl: 'Tu panel de control', h: 'Medimos y mejoramos <em>cada mes</em>.',
           p: 'El Panel Pro mide tu salud digital mes a mes — velocidad, seguridad, correo y cómo te describe la IA — y te dice exactamente qué hacer.',
-          li: ['Panel Pro con seguimiento mensual', 'Visibilidad en Google e IA', 'Alertas de seguridad y correo', 'Comparativa con la competencia', 'Consultoría estratégica continua'],
-          cta: 'Ver Panel Pro', href: '/monitor', micro: 'Sin tarjeta. Cancelas cuando quieras.'
+          li: ['Re-escaneo automático e historial', 'Alertas cuando algo cambia', 'Visibilidad en Google e IA', 'Analytics y Search Console interpretados', 'Informe mensual y qué priorizar'],
+          cta: 'Ver Panel Pro', href: '#panel-pro', micro: 'Próximamente. Entra a la lista de espera.'
         }
       ];
       var opts = [].slice.call(document.querySelectorAll('.sit-row'));
@@ -4653,7 +4903,7 @@
         "precio": "Depende del alcance — cada proyecto es diferente. Lo que sí podemos decirte es que trabajamos sin plantillas genéricas. La mejor forma de saberlo es agendar una llamada de 20 minutos donde te damos un estimado real. Sin compromiso.",
         "tiempo": "Una web estándar tarda entre 3 y 5 semanas. Proyectos de branding completo o software a medida pueden tomar más. Te damos un cronograma claro desde el primer día.",
         "empezar": "Nada especial. Con una llamada de 20 minutos entendemos tu negocio y te decimos exactamente qué necesitas y en qué orden. Puedes empezar también con el diagnóstico gratis.",
-        "diferencia": "El Mantenimiento lo hacemos nosotros por ti — actualizamos, corregimos y optimizamos. El Panel Pro es una herramienta de auto-servicio: tú ves los datos y decides. Son productos distintos, no se reemplazan.",
+        "diferencia": "El Mantenimiento lo hacemos nosotros por ti — actualizamos, corregimos y optimizamos. El Panel Pro es una herramienta de auto-servicio: tú ves los datos y decides. Son productos distintos, no se reemplazan.\n\nEl Panel Pro costará $70.000 COP/mes y aún no está disponible — puedes entrar a la lista de espera desde la sección de planes.",
         "gratis": "Sí, completamente. Score, hallazgos reales y qué priorizar — sin costo y sin registro. Solo dejas tu correo para ver el reporte completo.",
         "remoto": "Sí. Trabajamos 100% remoto con empresas de toda Colombia y LATAM. La ubicación no es un limitante.",
         "pequeno": "Exactamente así trabajamos. Muchos clientes empiezan con web y branding, y después agregan mantenimiento o software. Cada paso tiene sentido por sí solo.",
@@ -4741,6 +4991,24 @@
           obs.observe(footer);
         }
       }
+    })();
+  </script>
+
+  <script>
+    // Lista de espera del Panel Pro: lleva al formulario con el interés ya elegido.
+    (function () {
+      var btn = document.getElementById('proWaitlist');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var sel = document.getElementById('cService');
+        if (sel) sel.value = 'panel-pro';
+        var dest = document.getElementById('contacto');
+        if (dest) dest.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        var msg = document.getElementById('cMessage');
+        if (msg && !msg.value.trim()) {
+          msg.value = 'Quiero entrar a la lista de espera del Panel Pro.';
+        }
+      });
     })();
   </script>
 </body>

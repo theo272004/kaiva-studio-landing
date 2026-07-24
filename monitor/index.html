@@ -2046,6 +2046,74 @@
       position: relative;
     }
 
+    /* Gratis vs Panel Pro */
+    .kv-tiers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.4rem;
+    }
+
+    .kv-tier {
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-md);
+      padding: 1.1rem 1.25rem;
+      background: var(--surface);
+    }
+
+    .kv-tier.pro {
+      border-color: rgba(130, 66, 245, .28);
+      background: var(--violet-soft);
+    }
+
+    .kv-tier b {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: var(--epilogue);
+      font-size: .9rem;
+      color: var(--ink);
+      margin-bottom: .35rem;
+    }
+
+    .kv-tier i {
+      font-style: normal;
+      font-size: .6rem;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--violet);
+      background: rgba(130, 66, 245, .12);
+      border-radius: 5px;
+      padding: .18rem .45rem;
+    }
+
+    .kv-tier span {
+      display: block;
+      font-size: .78rem;
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+
+    .kv-tier a {
+      display: inline-block;
+      margin-top: .7rem;
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--violet);
+      text-decoration: none;
+    }
+
+    .kv-tier a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 700px) {
+      .kv-tiers {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .kv-stepc {
       position: relative;
       background: var(--surface);
@@ -2401,6 +2469,21 @@
             </svg>
           </span>
           <span><b>Recibes tu panel</b><span>Tu puntaje y qué corregir primero.</span></span>
+        </div>
+      </div>
+
+      <!-- Qué es gratis y qué será del Panel Pro -->
+      <div class="kv-tiers">
+        <div class="kv-tier">
+          <b>Gratis, ahora</b>
+          <span>Tu diagnóstico completo: el Índice de Salud Digital, los tres pilares y todos los hallazgos con su
+            evidencia. Sin tarjeta y sin límite de uso.</span>
+        </div>
+        <div class="kv-tier pro">
+          <b>Panel Pro <i>Próximamente</i></b>
+          <span>Esto es una foto de hoy. El Panel Pro la vuelve película: re-escaneo automático, historial, alertas
+            cuando algo se rompe y cómo te describen las IAs.</span>
+          <a href="/#panel-pro">Ver qué incluye</a>
         </div>
       </div>
     </div>
