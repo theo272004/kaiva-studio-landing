@@ -2670,6 +2670,9 @@
 
     .plan-pro-btn {
       display: inline-block;
+      appearance: none;
+      -webkit-appearance: none;
+      font-family: inherit;
       padding: .8rem 1.6rem;
       border-radius: var(--r-btn);
       background: var(--violet);
@@ -2678,6 +2681,7 @@
       font-weight: 700;
       text-align: center;
       border: 0;
+      outline: 0;
       cursor: pointer;
       transition: background .2s var(--ease), transform .2s var(--ease);
     }
@@ -2685,6 +2689,14 @@
     .plan-pro-btn:hover {
       background: var(--violet-hover);
       transform: translateY(-1px);
+    }
+
+    .plan-pro-btn:active,
+    .plan-pro-btn:focus,
+    .plan-pro-btn:focus-visible {
+      background: var(--violet-hover);
+      color: #fff;
+      outline: 0;
     }
 
     .plan-pro-micro {
