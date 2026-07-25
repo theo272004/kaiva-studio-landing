@@ -26,14 +26,29 @@
 </head>
 
 <body>
-  <header class="legal-nav">
-    <div class="wrap">
-      <a href="/" aria-label="Kaiva Studio — ir al inicio">
+  <nav class="nav" id="nav">
+    <div class="nav-in">
+      <a href="/" class="logo" aria-label="Kaiva Studio — ir al inicio">
         <img src="/assets/logo-kaiva.png" alt="Kaiva Studio" width="105" height="44">
       </a>
-      <a class="volver" href="/">← Volver al inicio</a>
+      <div class="nav-right">
+        <div class="nav-links" id="navLinks">
+          <a href="/diseno-web/" class="lnk">Diseño web</a>
+          <a href="/software-a-medida/" class="lnk">Software</a>
+          <a href="/branding/" class="lnk">Branding</a>
+          <a href="/diagnostico/" class="lnk">Diagnóstico</a>
+          <a href="/blog/" class="lnk">Blog</a>
+          <a href="/#contacto" class="lnk">Contacto</a>
+          <a href="/monitor/" class="btn btn-dark">Diagnóstico gratis</a>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menú" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
     </div>
-  </header>
+  </nav>
 
   <main class="wrap">
     <h1>Política de Cookies<span class="dot">.</span></h1>
@@ -113,6 +128,54 @@
       </nav>
     </div>
   </main>
+  <script>
+    (function () {
+      var nav = document.getElementById('nav');
+      var enlaces = document.getElementById('navLinks');
+      var boton = document.getElementById('navToggle');
+
+      var alScroll = function () {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+      };
+      alScroll();
+      window.addEventListener('scroll', alScroll, { passive: true });
+
+      boton.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var abierto = enlaces.classList.toggle('open');
+        boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!enlaces.contains(e.target) && !boton.contains(e.target)) {
+          enlaces.classList.remove('open');
+          boton.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Aparición al hacer scroll. La clase en <html> es la que activa el
+      // estado oculto en el CSS: sin JS no se esconde nada.
+      if (!('IntersectionObserver' in window)) return;
+      document.documentElement.classList.add('js-reveal');
+
+      var objetivos = document.querySelectorAll('.tarjeta, .paso, .post-item, .faq-item');
+      objetivos.forEach(function (el, i) {
+        el.classList.add('reveal');
+        // Escalona solo dentro de cada grupo para que no se acumule el retraso.
+        el.style.setProperty('--d', (i % 6) * 0.06 + 's');
+      });
+
+      var observador = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (entrada) {
+          if (!entrada.isIntersecting) return;
+          entrada.target.classList.add('dentro');
+          observador.unobserve(entrada.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+      objetivos.forEach(function (el) { observador.observe(el); });
+    })();
+  </script>
 </body>
 
 </html>

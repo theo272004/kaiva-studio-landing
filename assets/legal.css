@@ -41,16 +41,7 @@ body {
   color: var(--ink);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
-}
-
-.legal-nav {
-  border-bottom: 1px solid var(--line);
-  padding: 1.1rem 0;
-  position: sticky;
-  top: 0;
-  background: rgba(255, 255, 255, .92);
-  backdrop-filter: blur(10px);
-  z-index: 10;
+  padding-top: 74px;
 }
 
 .wrap {
@@ -59,29 +50,174 @@ body {
   padding-inline: 1.5rem;
 }
 
-.legal-nav .wrap {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+/* ---------- Navegación ----------
+   Copia literal del bloque de assets/pagina.css, que a su vez viene del home.
+   Las tres tienen que verse igual: si cambia una, cambian las tres. */
+/* ---------- Navegación ----------
+   Copiada tal cual del home (index.html). Las dos deben verse idénticas: si
+   cambia una, cambia la otra. Antes esta era sticky, encajonada al ancho del
+   contenido y con el CTA violeta «Hablemos», mientras el home la tenía fija, a
+   ancho completo y con el CTA oscuro «Diagnóstico gratis» — se notaba el salto
+   al pasar del home a una página de servicio. */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 200;
+  transition: background .3s var(--ease), border-color .3s var(--ease), backdrop-filter .3s var(--ease);
+  border-bottom: 1px solid transparent;
 }
 
-.legal-nav img {
-  height: 34px;
+.nav.scrolled {
+  background: rgba(255, 255, 255, .92);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  border-bottom-color: var(--line);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+}
+
+.nav-in {
+  max-width: none;
+  margin: 0;
+  padding: .85rem clamp(1.25rem, 3vw, 3.25rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  position: relative;
+}
+
+.nav .logo {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+}
+
+.nav img {
+  height: 44px;
   width: auto;
+  max-height: 48px;
+  object-fit: contain;
+  flex-shrink: 0;
   display: block;
 }
 
-.legal-nav a.volver {
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.2rem;
+  align-items: center;
+  list-style: none;
+}
+
+.nav-links .lnk {
   font-size: 14px;
   font-weight: 600;
   color: var(--ink-soft);
   text-decoration: none;
+  transition: color .2s var(--ease);
 }
 
-.legal-nav a.volver:hover {
+.nav-links .lnk:hover {
+  color: var(--ink);
+}
+
+.nav-links .lnk[aria-current="page"] {
   color: var(--violet);
 }
+
+.nav-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid var(--line-strong);
+  background: var(--surface);
+  border-radius: 12px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  transition: background .2s var(--ease);
+}
+
+.nav-toggle:hover {
+  background: #f8fafc;
+}
+
+.nav-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width:880px) {
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .nav-right {
+    gap: .8rem;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: clamp(1.25rem, 3vw, 3.25rem);
+    flex-direction: column;
+    align-items: stretch;
+    gap: .4rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: .8rem;
+    min-width: 210px;
+    box-shadow: 0 24px 50px -20px rgba(24, 20, 50, .25);
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity .25s var(--ease), transform .25s var(--ease);
+  }
+
+  .nav-links.open {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .nav-links .lnk {
+    padding: .6rem .7rem;
+    border-radius: 10px;
+  }
+
+  .nav-links .lnk:hover {
+    background: var(--bg);
+  }
+
+  .nav-links .btn {
+    justify-content: center;
+    margin-top: .3rem;
+  }
+}
+
+/* El CTA del nav, oscuro — igual que en el home. */
+.btn-dark {
+  background: var(--ink);
+  color: #fff;
+}
+
+.btn-dark:hover {
+  background: #000;
+  box-shadow: 0 12px 24px -10px rgba(15, 23, 42, .4);
+}
+
+.nav .btn {
+  padding: .7rem 1.35rem;
+  font-size: 14px;
+}
+
 
 main {
   padding-block: clamp(3rem, 7vw, 5rem) clamp(4rem, 9vw, 7rem);
