@@ -2,11 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://kaivastudio.com/</loc>
+    <lastmod>2026-07-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://kaivastudio.com/monitor</loc>
+    <!-- Con barra final: sin ella GitHub Pages responde 301 y se gasta
+         presupuesto de rastreo en un salto innecesario. -->
+    <loc>https://kaivastudio.com/monitor/</loc>
+    <lastmod>2026-07-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

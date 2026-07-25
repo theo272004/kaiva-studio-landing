@@ -7,13 +7,13 @@
   <title>Radiografía Digital gratis — Kaiva Studio</title>
   <meta name="description"
     content="Analiza tu web gratis en 60 segundos: tu Índice de Salud Digital en imagen, confianza y operación (seguridad, correo, cómo se comparte tu marca), con hallazgos priorizados. Sin registro.">
-  <link rel="canonical" href="https://kaivastudio.com/monitor">
+  <link rel="canonical" href="https://kaivastudio.com/monitor/">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#faf9f6">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Kaiva Studio">
   <meta property="og:locale" content="es_CO">
-  <meta property="og:url" content="https://kaivastudio.com/monitor">
+  <meta property="og:url" content="https://kaivastudio.com/monitor/">
   <meta property="og:title" content="Radiografía Digital gratis — Kaiva Studio">
   <meta property="og:description"
     content="Tu Índice de Salud Digital en 60 segundos: imagen, confianza y operación, con hallazgos priorizados. Gratis y sin registro.">
@@ -24,12 +24,28 @@
   <meta name="twitter:image" content="https://kaivastudio.com/assets/kaiva-og.jpg">
   <link rel="icon" href="../assets/favicon-64.png" type="image/png" sizes="64x64">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet">
+  <!-- Fuentes autoalojadas, mismo criterio que la home: sin orígenes externos. -->
+  <link rel="preload" href="../assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <style>
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(../assets/fonts/inter-latin-var.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    @font-face {
+      font-family: 'Inter Tight';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(../assets/fonts/inter-tight-latin-var.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
     :root {
       --bg: #ffffff;
       --paper: #ffffff;

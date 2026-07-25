@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página no encontrada — Kaiva Studio</title>
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="/assets/favicon-64.png" type="image/png" sizes="64x64">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(/assets/fonts/inter-latin-var.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    @font-face {
+      font-family: 'Inter Tight';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(/assets/fonts/inter-tight-latin-var.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --ink: #0f172a;
+      --ink-soft: #475569;
+      --violet: #8242f5;
+      --line: rgba(15, 23, 42, .12);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #fff;
+      color: var(--ink);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 2rem 1.5rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .box {
+      max-width: 560px;
+      text-align: center;
+    }
+
+    .logo {
+      display: inline-block;
+      margin-bottom: 2.5rem;
+    }
+
+    .logo img {
+      height: 42px;
+      width: auto;
+    }
+
+    .code {
+      font-family: 'Inter Tight', 'Inter', sans-serif;
+      font-size: clamp(4.5rem, 14vw, 7.5rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -.04em;
+      color: var(--violet);
+      margin-bottom: 1.2rem;
+    }
+
+    h1 {
+      font-family: 'Inter Tight', 'Inter', sans-serif;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -.02em;
+      text-wrap: balance;
+      margin-bottom: 1rem;
+    }
+
+    h1 .dot {
+      color: var(--violet);
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      margin-bottom: 2.2rem;
+      text-wrap: balance;
+    }
+
+    .acciones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: 14.5px;
+      font-weight: 600;
+      letter-spacing: -.01em;
+      padding: .85rem 1.7rem;
+      border-radius: 18px;
+      border: 1.5px solid transparent;
+      text-decoration: none;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-violet {
+      background: var(--violet);
+      color: #fff;
+    }
+
+    .btn-violet:hover {
+      background: #6a2fe0;
+    }
+
+    .btn-ghost {
+      border-color: var(--line);
+      color: var(--ink);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--violet);
+      color: var(--violet);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .btn {
+        transition: none;
+      }
+
+      .btn:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="box">
+    <a class="logo" href="/" aria-label="Kaiva Studio — ir al inicio">
+      <img src="/assets/logo-kaiva.png" alt="Kaiva Studio" width="105" height="44">
+    </a>
+
+    <div class="code">404</div>
+    <h1>Esta página se salió de su eje<span class="dot">.</span></h1>
+    <p>El enlace que seguiste no existe o cambió de sitio. Pero ya que estás aquí,
+      podemos mostrarte lo que sí construimos.</p>
+
+    <div class="acciones">
+      <a class="btn btn-violet" href="/">Volver al inicio</a>
+      <a class="btn btn-ghost" href="/#servicios">Ver servicios</a>
+      <a class="btn btn-ghost" href="/#contacto">Hablar con nosotros</a>
+    </div>
+  </main>
+</body>
+
+</html>
