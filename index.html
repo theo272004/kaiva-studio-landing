@@ -1053,7 +1053,10 @@
       cursor: pointer;
       padding: 0;
       display: block;
-      transition: flex-grow .65s var(--ease-reveal);
+      transition: flex-grow .55s var(--ease-reveal), border-color .25s ease, background .25s ease;
+      /* Aísla el repintado a la tarjeta: el navegador no tiene que revisar el
+         resto de la página en cada fotograma del cambio de tamaño. */
+      contain: paint;
     }
 
     .svc-grid.acc .svc-card:hover {
@@ -1086,7 +1089,9 @@
       gap: .5rem;
       padding: 1.5rem 1rem;
       opacity: 1;
-      transition: opacity .3s ease;
+      /* Sale rápido para dejarle el sitio al panel; entra con calma al volver
+         a cerrarse, que es cuando se nota. */
+      transition: opacity .18s ease;
     }
 
     .svc-grid.acc .svc-collapsed h3 {
@@ -1118,7 +1123,9 @@
 
     .svc-grid.acc .svc-card.active .svc-expanded {
       opacity: 1;
-      transition: opacity .35s ease .22s;
+      /* Antes esperaba .22s con el panel ya casi abierto: quedaba un hueco en
+         blanco a mitad de camino. Ahora entra mientras la tarjeta crece. */
+      transition: opacity .3s ease .1s;
       pointer-events: auto;
     }
 
@@ -1130,9 +1137,11 @@
       .svc-grid.acc .svc-card {
         height: auto;
         max-height: 84px;
-        transition: max-height .55s var(--ease-reveal);
+        transition: max-height .5s var(--ease-reveal);
       }
 
+      /* El JS escribe el alto real como estilo en línea y pisa este valor.
+         El 1400px queda solo de respaldo por si el script no corriera. */
       .svc-grid.acc .svc-card.active {
         flex-grow: 0;
         max-height: 1400px;
@@ -1150,19 +1159,25 @@
         display: none;
       }
 
+      /* Siempre montado y recortado por el max-height de la tarjeta. Antes
+         alternaba display, que no se puede animar: el contenido aparecía de
+         golpe. Así entra con un fundido acompañando la apertura. */
       .svc-grid.acc .svc-expanded {
         position: static;
         width: auto;
         height: auto;
-        display: none;
+        display: grid;
         grid-template-columns: 1fr;
         padding: 1.5rem;
+        opacity: 0;
+        transition: opacity .25s ease;
+        pointer-events: none;
       }
 
       .svc-grid.acc .svc-card.active .svc-expanded {
-        display: grid;
         opacity: 1;
-        transition: none;
+        transition: opacity .38s ease .1s;
+        pointer-events: auto;
       }
 
       .svc-grid.acc .svc-card.active .svc-vis {
@@ -1878,31 +1893,6 @@
     }
 
     /* ================= SITUACIÓN ================= */
-    .sit-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      font-size: 11px;
-      font-weight: 750;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--violet);
-      background: var(--violet-soft);
-      border: 1px solid rgba(130, 66, 245, .15);
-      border-radius: 100px;
-      padding: .5rem 1.1rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .sit-badge::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--violet);
-      flex-shrink: 0;
-    }
-
     .sit-wrap {
       display: grid;
       grid-template-columns: .95fr 1.15fr;
@@ -2085,53 +2075,6 @@
       margin-top: .9rem;
       font-size: 12.5px;
       color: var(--ink-faint);
-    }
-
-    .sit-trust {
-      grid-column: 1 / -1;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-      margin-top: 1rem;
-      padding-top: 2.4rem;
-      border-top: 1px solid var(--line);
-    }
-
-    .sit-trust-item {
-      display: flex;
-      align-items: flex-start;
-      gap: .8rem;
-    }
-
-    .sit-trust-ic {
-      flex-shrink: 0;
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: var(--violet-soft);
-      color: var(--violet);
-      display: grid;
-      place-items: center;
-    }
-
-    .sit-trust-item b {
-      display: block;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: .15rem;
-    }
-
-    .sit-trust-item span {
-      font-size: 12px;
-      color: var(--ink-soft);
-      line-height: 1.4;
-    }
-
-    @media (max-width: 880px) {
-      .sit-trust {
-        grid-template-columns: repeat(2, 1fr);
-      }
     }
 
     .sit-robot {
@@ -4011,7 +3954,7 @@
                   <path d="M20 6 9 17l-5-5" />
                 </svg>UI/UX que convierte</li>
             </ul>
-            <a href="/diseno-web-barranquilla/" class="svc-btn">Ver diseño web</a>
+            <a href="/diseno-web/" class="svc-btn">Ver diseño web</a>
             </div>
             <div class="svc-vis" aria-hidden="true">
             <div class="mk-browser">
@@ -4261,7 +4204,6 @@
   <section class="section" id="situacion">
     <div class="wrap">
       <div class="sec-head" style="margin-left:auto;margin-right:auto;text-align:center">
-        <span class="sit-badge reveal">Empezamos desde donde estás</span>
         <h2 class="h2 split" data-split>Tú decides el punto de partida<span class="dot">.</span></h2>
         <p class="desc reveal" style="--d:.1s">Elige tu situación y te mostramos el camino exacto.</p>
       </div>
@@ -4300,24 +4242,6 @@
         </div>
         <div class="sit-detail">
           <div class="sit-panel" id="sitPanel"></div>
-        </div>
-        <div class="sit-trust">
-          <div class="sit-trust-item">
-            <span class="sit-trust-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
-            <div><b>100% Confidencial</b><span>Tu información está segura.</span></div>
-          </div>
-          <div class="sit-trust-item">
-            <span class="sit-trust-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-            <div><b>Sin compromiso</b><span>Hablas, decides, avanzas.</span></div>
-          </div>
-          <div class="sit-trust-item">
-            <span class="sit-trust-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></span>
-            <div><b>Soluciones a tu medida</b><span>Estrategia alineada a tus objetivos.</span></div>
-          </div>
-          <div class="sit-trust-item">
-            <span class="sit-trust-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16l4-8 4 4 4-6"/></svg></span>
-            <div><b>Resultados que importan</b><span>Crecimiento medible y sostenible.</span></div>
-          </div>
         </div>
       </div>
     </div>
@@ -5305,21 +5229,50 @@
           svcGrid.style.setProperty('--svc-expanded-w', activeW + 'px');
         }
         updateSvcExpandedWidth();
-        addEventListener('resize', updateSvcExpandedWidth);
+        addEventListener('resize', function () {
+          updateSvcExpandedWidth();
+          ajustarAltoMovil(svcCards[svcIdx]);
+        });
 
         /* El tamaño lo anima una transición CSS pura sobre flex-grow. El
            contenido expandido vive en una capa de ancho fijo superpuesta
            (.svc-expanded), así que nunca hace reflow durante el cambio de
            tamaño — solo hace falta alternar la clase 'active'. */
+        /* En móvil el alto de la tarjeta abierta se mide de verdad en vez de
+           usar un max-height adivinado. Con un valor fijo muy alto, la curva
+           de la animación se reparte sobre una distancia que nadie ve: abre
+           rápido y frena en seco. Midiendo el contenido, la curva cae donde
+           corresponde y el movimiento se siente natural. */
+        /* En móvil el alto de la tarjeta abierta se mide de verdad y se escribe
+           como estilo en línea. Con un max-height fijo y muy alto, la curva de
+           la animación se reparte sobre una distancia que nadie ve: abre rápido
+           y frena en seco.
+
+           Va como estilo en línea y no como variable CSS a propósito: una
+           variable que cambia a la vez que arranca la transición no siempre la
+           reinicia, y la tarjeta acaba animando hacia el valor de respaldo. El
+           estilo en línea gana el cascade sin ambigüedad.
+
+           Como .svc-expanded está siempre montado (solo recortado por el
+           max-height), scrollHeight da el alto real aunque esté cerrada. */
+        function ajustarAltoMovil(objetivo) {
+          var movil = matchMedia('(max-width:1080px)').matches;
+          svcCards.forEach(function (c) {
+            if (!movil || c !== objetivo) { c.style.maxHeight = ''; return; }
+            /* Se mide el panel, no la tarjeta: al abrirse, la cabecera
+               colapsada de 84px se oculta, así que usar scrollHeight dejaría
+               ese sobrante de más al final del recorrido. */
+            var panel = c.querySelector('.svc-expanded');
+            c.style.maxHeight = (panel ? panel.offsetHeight : c.scrollHeight) + 'px';
+          });
+        }
+
         function setSvc(i) {
           var next = (i + svcCards.length) % svcCards.length;
-          if (next === svcIdx || svcAnimating) return;
+          if (next === svcIdx) return;
           svcIdx = next;
+          ajustarAltoMovil(svcCards[svcIdx]);
           svcCards.forEach(function (c, ci) { c.classList.toggle('active', ci === svcIdx); });
-
-          if (reduced) return;
-          svcAnimating = true;
-          setTimeout(function () { svcAnimating = false; }, 700);
         }
 
         function startSvcAuto() {
@@ -5340,6 +5293,7 @@
           });
         });
 
+        ajustarAltoMovil(svcCards[svcIdx]);
         svcGrid.addEventListener('mouseenter', stopSvcAuto);
         svcGrid.addEventListener('mouseleave', startSvcAuto);
         svcGrid.addEventListener('focusin', stopSvcAuto);
@@ -5535,7 +5489,12 @@
         service: 'service_94uqq2e',
         template: 'template_brvipe9',
         key: '7bRjr4NU9L0Y5gDsy',
-        endpoint: 'https://api.emailjs.com/api/v1.0/email/send'
+        endpoint: 'https://api.emailjs.com/api/v1.0/email/send',
+        /* Acuse de recibo para quien escribe. Hay que crear una segunda
+           plantilla en EmailJS con «To Email» = {{email}} y pegar su ID aquí
+           (ver CORREO-DE-CONFIRMACION.md). Mientras esté vacío no se envía
+           nada y el formulario funciona igual. */
+        plantillaAcuse: ''
       };
 
       /* Copia de cada lead a una hoja de cálculo propia. EmailJS solo envía
@@ -5643,6 +5602,29 @@
             form.reset();
             if (typeof gtag === 'function') {
               gtag('event', 'generate_lead', { form: 'contacto', interes: interes });
+            }
+
+            /* Acuse para quien escribió. Va después del envío principal y su
+               fallo no afecta al usuario: el mensaje ya llegó a Kaiva, que es
+               lo que importa. */
+            if (EJS.plantillaAcuse) {
+              fetch(EJS.endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  service_id: EJS.service,
+                  template_id: EJS.plantillaAcuse,
+                  user_id: EJS.key,
+                  template_params: {
+                    name: nombre,
+                    email: correo,
+                    interest: interes,
+                    message: mensaje
+                  }
+                })
+              }).catch(function (err) {
+                if (window.console) console.warn('[Kaiva] No salió el acuse de recibo:', err);
+              });
             }
           })
           .catch(function (err) {
