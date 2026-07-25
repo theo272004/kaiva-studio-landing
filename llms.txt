@@ -1,0 +1,52 @@
+# Kaiva Studio
+
+> Estudio digital en Barranquilla, Colombia. Diseñamos y desarrollamos sitios
+> web, marca, software a medida y e-commerce — y medimos lo que casi nadie
+> mira: si tu correo llega, si te pueden suplantar, si Google y las IAs
+> entienden qué haces. Atendemos toda Colombia y LATAM, en remoto.
+
+Kaiva no vende "páginas web bonitas". El foso es la inteligencia: medir
+parámetros que el cliente no sabía que importaban, explicárselos en lenguaje
+de negocio y arreglarlos.
+
+## Qué hacemos
+
+- [Diseño web](https://kaivastudio.com/diseno-web/): sitios a medida, sin
+  plantillas. Desde $2.000.000 COP.
+- [Software a medida](https://kaivastudio.com/software-a-medida/): plataformas
+  internas, automatizaciones e integraciones. Desde $6.000.000 COP.
+- [Branding](https://kaivastudio.com/branding/): identidad de marca completa.
+  Desde $1.500.000 COP.
+- [Radiografía Digital](https://kaivastudio.com/diagnostico/): diagnóstico
+  gratuito de la salud digital de cualquier dominio.
+
+## Radiografía Digital (gratis, sin registro)
+
+Analiza un dominio en ~60 segundos y devuelve un Índice de Salud Digital
+(0–100, grado A–F) sobre cuatro pilares, con hallazgos que cargan su evidencia:
+
+- **Visibilidad** — ¿te encuentran? Indexabilidad, sitemap, datos
+  estructurados, legibilidad para asistentes de IA.
+- **Imagen** — ¿te ves grande? Cómo se ve tu enlace al compartirlo, títulos,
+  velocidad.
+- **Confianza** — ¿inspiras seriedad? Certificado SSL, reputación del dominio.
+- **Operación** — ¿estás ordenado? SPF, DKIM, DMARC: si tu correo llega a la
+  bandeja o al spam, y si alguien puede enviar correos haciéndose pasar por ti.
+
+Es gratis y completo: no capamos hallazgos para empujar al pago. Se cobra la
+continuidad (seguimiento mensual, alertas, historial), no la información.
+
+## Contacto
+
+- Sitio: https://kaivastudio.com/
+- Correo: info@kaivastudio.com
+- WhatsApp: https://wa.me/573024137374
+- Instagram: https://www.instagram.com/kaivastudio/
+- LinkedIn: https://www.linkedin.com/in/kaiva-studio-a6a15340b/
+- Ubicación: Barranquilla, Atlántico, Colombia
+
+## Recursos
+
+- [Cuánto cuesta una página web en Colombia](https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-colombia/)
+- [Blog](https://kaivastudio.com/blog/)
+- [Política de privacidad](https://kaivastudio.com/privacidad/)
