@@ -17,10 +17,10 @@ de negocio y arreglarlos.
   internas, automatizaciones e integraciones. Desde $6.000.000 COP.
 - [Branding](https://kaivastudio.com/branding/): identidad de marca completa.
   Desde $1.500.000 COP.
-- [Radiografía Digital](https://kaivastudio.com/diagnostico/): diagnóstico
+- [Diagnóstico Digital](https://kaivastudio.com/diagnostico/): diagnóstico
   gratuito de la salud digital de cualquier dominio.
 
-## Radiografía Digital (gratis, sin registro)
+## Diagnóstico Digital (gratis, sin registro)
 
 Analiza un dominio en ~60 segundos y devuelve un Índice de Salud Digital
 (0–100, grado A–F) sobre cuatro pilares, con hallazgos que cargan su evidencia:
@@ -47,6 +47,13 @@ continuidad (seguimiento mensual, alertas, historial), no la información.
 
 ## Recursos
 
-- [Cuánto cuesta una página web en Colombia](https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-colombia/)
+- [Cuánto cuesta una página web en Colombia](https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-colombia/):
+  rangos reales del mercado colombiano y qué explica la diferencia de precio.
+- [Por qué mis correos llegan a spam](https://kaivastudio.com/blog/por-que-mis-correos-llegan-a-spam/):
+  SPF, DKIM y DMARC explicados, los requisitos de Google vigentes desde 2024 y
+  cómo revisar la autenticación de un dominio en tres minutos.
+- [Agencias de diseño web en Barranquilla](https://kaivastudio.com/blog/mejores-agencias-diseno-web-barranquilla/):
+  guía para elegir agencia, con seis estudios de la ciudad. Kaiva se excluye a
+  propósito de su propia lista.
 - [Blog](https://kaivastudio.com/blog/)
 - [Política de privacidad](https://kaivastudio.com/privacidad/)

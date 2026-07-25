@@ -788,6 +788,16 @@ body {
   color: var(--ink-soft);
 }
 
+.articulo code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .88em;
+  background: rgba(130, 66, 245, .1);
+  color: var(--violet-ink);
+  padding: .14em .42em;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
 .nota {
   background: var(--violet-soft);
   border-left: 3px solid var(--violet);
