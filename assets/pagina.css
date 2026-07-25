@@ -78,7 +78,7 @@ body {
   -webkit-font-smoothing: antialiased;
   /* El nav es fijo (igual que en el home), así que el contenido necesita
      dejarle sitio o queda tapado. */
-  padding-top: 74px;
+  padding-top: 80px;
 }
 
 /* Para que los enlaces internos (#preguntas) no dejen el título debajo del
@@ -297,9 +297,12 @@ html {
   box-shadow: 0 12px 24px -10px rgba(15, 23, 42, .4);
 }
 
+/* Estas medidas son las del botón del nav en el home. No cambiarlas sin
+   cambiarlas allá: 4px de diferencia bastan para que la barra salte de alto al
+   pasar de una página a otra. */
 .nav .btn {
-  padding: .7rem 1.35rem;
-  font-size: 14px;
+  padding: .8rem 1.6rem;
+  font-size: 14.5px;
 }
 
 /* ---------- Migas ---------- */

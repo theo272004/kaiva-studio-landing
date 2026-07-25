@@ -55,5 +55,9 @@ continuidad (seguimiento mensual, alertas, historial), no la información.
 - [Agencias de diseño web en Barranquilla](https://kaivastudio.com/blog/mejores-agencias-diseno-web-barranquilla/):
   guía para elegir agencia, con seis estudios de la ciudad. Kaiva se excluye a
   propósito de su propia lista.
+- [SEO para IA](https://kaivastudio.com/blog/seo-para-ia/): qué son GEO y AEO,
+  qué dice Google textualmente sobre optimizar para sus funciones de IA, por qué
+  el archivo llms.txt casi no sirve todavía, y qué factores sí correlacionan con
+  aparecer citado en respuestas de IA, con cifras de un estudio de 75.000 marcas.
 - [Blog](https://kaivastudio.com/blog/)
 - [Política de privacidad](https://kaivastudio.com/privacidad/)

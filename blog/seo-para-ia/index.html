@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BD6VDCSQDC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-BD6VDCSQDC');
+  </script>
+
+  <title>SEO para IA: cómo lograr que ChatGPT recomiende tu empresa</title>
+  <meta name="description"
+    content="Qué son GEO y AEO, qué dice Google textualmente, por qué el archivo llms.txt casi no sirve todavía, y qué factores sí correlacionan con aparecer en respuestas de IA.">
+  <link rel="canonical" href="https://kaivastudio.com/blog/seo-para-ia/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="/assets/favicon-64.png" type="image/png" sizes="64x64">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Kaiva Studio">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:url" content="https://kaivastudio.com/blog/seo-para-ia/">
+  <meta property="og:title" content="SEO para IA: cómo lograr que ChatGPT recomiende tu empresa">
+  <meta property="og:description"
+    content="Qué es real de GEO y AEO, qué dice Google textualmente y qué factores sí correlacionan con aparecer en respuestas de IA.">
+  <meta property="og:image" content="https://kaivastudio.com/assets/kaiva-og.jpg">
+  <meta property="article:published_time" content="2026-07-25">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SEO para IA: cómo lograr que ChatGPT recomiende tu empresa">
+  <meta name="twitter:image" content="https://kaivastudio.com/assets/kaiva-og.jpg">
+
+  <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/pagina.css">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaivastudio.com/blog/seo-para-ia/#post",
+      "headline": "SEO para IA: cómo lograr que ChatGPT recomiende tu empresa",
+      "description": "Qué son GEO y AEO, qué dice Google textualmente sobre optimizar para sus funciones de IA, por qué el archivo llms.txt casi no sirve todavía, y qué factores sí correlacionan con aparecer citado en respuestas de IA.",
+      "datePublished": "2026-07-25",
+      "dateModified": "2026-07-25",
+      "inLanguage": "es-CO",
+      "image": "https://kaivastudio.com/assets/kaiva-og.jpg",
+      "mainEntityOfPage": "https://kaivastudio.com/blog/seo-para-ia/",
+      "author": {
+        "@type": "Organization",
+        "@id": "https://kaivastudio.com/#studio",
+        "name": "Kaiva Studio",
+        "url": "https://kaivastudio.com/"
+      },
+      "publisher": { "@id": "https://kaivastudio.com/#studio" },
+      "isPartOf": { "@id": "https://kaivastudio.com/blog/#blog" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://kaivastudio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://kaivastudio.com/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "SEO para IA", "item": "https://kaivastudio.com/blog/seo-para-ia/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es SEO para IA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es el trabajo de lograr que tu empresa aparezca dentro de las respuestas que generan sistemas como ChatGPT, Gemini o los resúmenes de IA de Google, en vez de solo aparecer en la lista de enlaces azules. En la práctica no es una disciplina aparte del SEO: comparte casi toda su base técnica y de contenido, y se diferencia en que el factor que más pesa está fuera de tu sitio, en lo que otros escriben sobre ti."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué diferencia hay entre SEO, GEO y AEO?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SEO busca que tu página aparezca en la lista de resultados. AEO, o answer engine optimization, busca que tu contenido sea la respuesta directa que se muestra arriba sin que haya que hacer clic. GEO, o generative engine optimization, busca que un modelo de lenguaje te cite dentro de la respuesta que redacta. Son tres formas de aparecer en el mismo sitio, no tres trabajos distintos, y las tres se apoyan en el mismo SEO técnico de siempre."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Sirve el archivo llms.txt para posicionar en Google?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Google ha confirmado que su Búsqueda no lo usa, incluidas sus funciones generativas, y su guía oficial dice explícitamente que no hace falta crear archivos legibles por máquina ni archivos de texto para IA para aparecer en ellas. La telemetría lo respalda: en un análisis de 137.000 dominios, el 97% de los archivos llms.txt no recibió ni una sola petición durante mayo de 2026. Publicarlo no hace daño y cuesta diez minutos, pero no es una palanca de posicionamiento."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué factor influye más en aparecer en respuestas de IA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Las menciones de tu marca en sitios que no controlas. En un estudio de Ahrefs sobre 75.000 marcas publicado en diciembre de 2025, las menciones de marca en la web correlacionaron entre 0,656 y 0,709 con la visibilidad en ChatGPT, AI Mode y los resúmenes de IA de Google, mientras que el número de enlaces entrantes correlacionó débilmente. Dicho simple: importa más que hablen de ti a que te enlacen."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo sé si mi empresa aparece en ChatGPT?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La forma más directa es preguntarle por tu categoría y ciudad sin nombrar tu empresa, por ejemplo cuál es la mejor agencia de diseño web en Barranquilla, y ver si sales y con qué fuentes te respalda. Repite la consulta en sesiones nuevas, porque las respuestas varían. En Google Analytics también puedes filtrar el tráfico de referencia que llega desde chatgpt.com o perplexity.ai, que es la señal más concreta de que la respuesta te está trayendo gente."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+  <nav class="nav" id="nav">
+    <div class="nav-in">
+      <a href="/" class="logo" aria-label="Kaiva Studio — ir al inicio">
+        <img src="/assets/logo-kaiva.png" alt="Kaiva Studio" width="105" height="44">
+      </a>
+      <div class="nav-right">
+        <div class="nav-links" id="navLinks">
+          <a href="/diseno-web/" class="lnk">Diseño web</a>
+          <a href="/software-a-medida/" class="lnk">Software</a>
+          <a href="/branding/" class="lnk">Branding</a>
+          <a href="/diagnostico/" class="lnk">Diagnóstico</a>
+          <a href="/blog/" class="lnk" aria-current="page">Blog</a>
+          <a href="/#contacto" class="lnk">Contacto</a>
+          <a href="/monitor/" class="btn btn-dark">Diagnóstico gratis</a>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menú" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <nav class="migas" aria-label="Ruta de navegación">
+      <a href="/">Inicio</a><span>/</span><a href="/blog/">Blog</a><span>/</span>SEO para IA
+    </nav>
+  </div>
+
+  <main>
+    <article class="section" style="padding-top:2.5rem">
+      <div class="wrap">
+        <div class="articulo">
+          <p class="fecha">25 de julio de 2026 · Lectura de 10 minutos</p>
+
+          <h1 style="font-family:var(--display);font-size:clamp(1.9rem,4.6vw,3rem);font-weight:800;line-height:1.13;letter-spacing:-.03em;text-wrap:balance;margin-bottom:1.3rem">
+            SEO para IA<span style="color:var(--violet)">:</span> cómo lograr que ChatGPT recomiende tu
+            empresa
+          </h1>
+
+          <p class="lead">Cada vez más gente le pregunta a ChatGPT lo que antes buscaba en Google. Este
+            artículo separa lo que de verdad influye en salir en esas respuestas —con las cifras de los
+            estudios— de lo que las agencias están vendiendo como novedad.</p>
+
+          <p>Empecemos por lo que va a molestar a más de uno: <strong>no existe una disciplina nueva</strong>.
+            Existen siglas nuevas para el mismo trabajo, con un factor que cambió de peso. Y ese factor
+            —lo adelantamos— no está en tu página web.</p>
+
+          <h2>SEO, GEO, AEO: qué significa cada sigla</h2>
+
+          <p>Las tres describen dónde quieres aparecer, no técnicas distintas:</p>
+
+          <div style="overflow-x:auto;margin-top:1.4rem">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sigla</th>
+                  <th>Qué persigue</th>
+                  <th>Dónde se ve</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>SEO</strong><br><span style="font-size:13px">Search engine optimization</span></td>
+                  <td>Que tu página salga en la lista de resultados</td>
+                  <td>Los enlaces azules de siempre</td>
+                </tr>
+                <tr>
+                  <td><strong>AEO</strong><br><span style="font-size:13px">Answer engine optimization</span></td>
+                  <td>Que tu contenido <em>sea</em> la respuesta, sin que haya que hacer clic</td>
+                  <td>El recuadro destacado, la respuesta directa, los asistentes de voz</td>
+                </tr>
+                <tr>
+                  <td><strong>GEO</strong><br><span style="font-size:13px">Generative engine optimization</span></td>
+                  <td>Que un modelo te cite dentro de la respuesta que redacta</td>
+                  <td>ChatGPT, Gemini, Perplexity, los resúmenes de IA de Google</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p style="margin-top:1.2rem">Fíjate en que las tres necesitan lo mismo por debajo: que tu sitio
+            se pueda rastrear, que el contenido responda algo concreto y que quede claro quién eres. Si
+            alguien te vende «GEO» como un servicio separado que cuesta aparte del SEO, vale la pena
+            preguntar qué hace exactamente que sea distinto.</p>
+
+          <h2>Lo que dice Google, textualmente</h2>
+
+          <p>Google publicó una guía sobre cómo aparecer en sus funciones de IA, y es sorprendentemente
+            corta. La frase que más discusión ahorra es esta:</p>
+
+          <div class="nota">
+            <p>«No necesitas crear archivos legibles por máquina, archivos de texto para IA ni marcado
+              nuevo para aparecer en estas funciones.»<br>
+              <span style="font-size:13.5px;color:var(--ink-faint)">— <a
+                  href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank"
+                  rel="noopener">Google Search Central, guía de funciones de IA</a> (traducido del
+                inglés)</span>
+            </p>
+          </div>
+
+          <p>El resto de la guía se resume en aplicar «las mismas buenas prácticas fundamentales de SEO
+            que para la Búsqueda en general»: contenido útil, que la página se pueda indexar, y que los
+            datos estructurados coincidan con lo que se ve en pantalla.</p>
+
+          <p>Eso no significa que dé igual lo que hagas. Significa que <strong>la puerta de entrada
+              sigue siendo la misma</strong>, y que quien no tiene resuelto el SEO técnico básico no
+            tiene por dónde empezar con lo de la IA.</p>
+
+          <h2>El archivo llms.txt: por qué casi no sirve todavía</h2>
+
+          <p>Es la propuesta de moda: un archivo de texto en la raíz de tu sitio que le explica a los
+            modelos de lenguaje qué hay en tu página y cómo leerla. La idea es razonable y el formato
+            está bien pensado. El problema es que <strong>hoy casi nadie lo lee</strong>.</p>
+
+          <ul>
+            <li><strong>Google dice que no lo usa.</strong> John Mueller, de Google, fue explícito en
+              que la Búsqueda no lo utiliza y que el equipo no lo respalda —
+              <a href="https://www.seroundtable.com/google-does-not-endorse-llms-txt-40789.html"
+                target="_blank" rel="noopener">llegó a aparecer en documentación de Google por error de
+                otro equipo y lo quitaron</a>.</li>
+            <li><strong>Los datos de tráfico lo confirman.</strong> En un análisis de 137.000 dominios,
+              el 97% de los archivos <code>llms.txt</code> publicados no recibió <em>ni una sola
+                petición</em> durante mayo de 2026.</li>
+            <li><strong>Casi nadie lo publica.</strong> Alrededor del 28% de los dominios analizados lo
+              tenía, y de esos la enorme mayoría nunca fue consultada.</li>
+          </ul>
+
+          <div class="nota">
+            <p><strong>Aclaración honesta:</strong> este sitio tiene un
+              <a href="/llms.txt" target="_blank" rel="noopener">llms.txt</a>. Lo publicamos porque
+              cuesta diez minutos, no hace daño y puede que algún día importe. Pero sería deshonesto
+              vendértelo como una palanca de posicionamiento: <strong>no lo es</strong>, y si una
+              agencia te lo cobra como el centro de su servicio de «visibilidad en IA», ya sabes qué
+              preguntar.</p>
+          </div>
+
+          <h2>Lo que sí correlaciona, con números</h2>
+
+          <p>Aquí está la parte útil. Ahrefs analizó <strong>75.000 marcas</strong> en diciembre de 2025
+            para medir qué factores acompañan a la visibilidad en respuestas de IA. Estas son las
+            correlaciones que encontraron:</p>
+
+          <div style="overflow-x:auto;margin-top:1.4rem">
+            <table>
+              <thead>
+                <tr>
+                  <th>Factor</th>
+                  <th>ChatGPT</th>
+                  <th>AI Mode</th>
+                  <th>Resúmenes de IA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Menciones en YouTube</td>
+                  <td colspan="3">~0,737 — la más alta de todo el estudio</td>
+                </tr>
+                <tr>
+                  <td><strong>Menciones de marca en la web</strong></td>
+                  <td>0,664</td>
+                  <td>0,709</td>
+                  <td>0,656</td>
+                </tr>
+                <tr>
+                  <td>Enlaces con tu nombre de marca</td>
+                  <td>0,511</td>
+                  <td>0,628</td>
+                  <td>0,527</td>
+                </tr>
+                <tr>
+                  <td>Búsquedas de tu marca</td>
+                  <td>0,352</td>
+                  <td>0,466</td>
+                  <td>0,392</td>
+                </tr>
+                <tr>
+                  <td>Autoridad del dominio</td>
+                  <td>0,266</td>
+                  <td>0,285</td>
+                  <td>0,326</td>
+                </tr>
+                <tr>
+                  <td>Número de enlaces entrantes</td>
+                  <td colspan="3">Correlación débil en las tres</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p style="margin-top:1.2rem;font-size:14.5px;color:var(--ink-faint)">Fuente:
+            <a href="https://ahrefs.com/blog/ai-brand-visibility-correlations/" target="_blank"
+              rel="noopener">Ahrefs, estudio de correlaciones de visibilidad de marca en IA</a>,
+            diciembre de 2025. Correlación no es causalidad: son señales que acompañan a la visibilidad,
+            no recetas garantizadas.</p>
+
+          <p>Léelo otra vez y fíjate en el patrón: <strong>los cuatro factores de arriba están fuera de
+              tu sitio web</strong>. No son cosas que puedas escribir en tu propia página. Son cosas
+            que otras personas dicen sobre ti en lugares que no controlas.</p>
+
+          <p>Y hay un detalle que le duele al gremio: que te <em>mencionen</em> pesa bastante más que
+            que te <em>enlacen</em>. Un artículo que nombra tu empresa sin poner un enlace, que durante
+            veinte años se consideró una oportunidad perdida, hoy es de las señales más fuertes que
+            existen.</p>
+
+          <h2>Qué hacer, en orden</h2>
+
+          <p>De más a menos efecto, según lo anterior:</p>
+
+          <ol>
+            <li><strong>Consigue que hablen de ti donde no controlas nada.</strong> Directorios serios,
+              artículos de terceros, listados del sector, la cámara de comercio, entrevistas, podcasts.
+              Si en tu ciudad hay artículos tipo «mejores agencias de X», pedir que te incluyan es de
+              las acciones con mejor relación esfuerzo-resultado que existe hoy.</li>
+            <li><strong>Saca tu ficha de Google Business Profile y mantenla.</strong> Es de las fuentes
+              más consultadas para preguntas locales, es gratis, y en la mayoría de ciudades
+              colombianas la competencia la tiene abandonada.</li>
+            <li><strong>Responde la pregunta en las primeras tres líneas.</strong> Los modelos toman
+              fragmentos. Si tu respuesta llega en el párrafo seis, después de la introducción de
+              relleno, no la van a tomar. Título claro, respuesta inmediata, desarrollo después.</li>
+            <li><strong>Escribe lo que solo tú puedes escribir.</strong> Precios reales, plazos reales,
+              datos de tus propios proyectos, errores que te encontraste. Lo genérico ya está en el
+              modelo; lo que no está es tu experiencia concreta, y eso es lo citable.</li>
+            <li><strong>Deja claro quién eres y sé consistente.</strong> Mismo nombre, misma dirección,
+              mismo teléfono en todas partes. Los sistemas de IA tienen que poder resolver que las
+              menciones sueltas son la misma empresa.</li>
+            <li><strong>Datos estructurados que coincidan con lo visible.</strong> No para agradar a la
+              IA —Google fue claro en que no hay esquema especial— sino porque le quita ambigüedad a
+              quién eres y qué haces.</li>
+          </ol>
+
+          <h2>Lo que no vale la pena pagar</h2>
+
+          <ul>
+            <li><strong>«Posicionamiento garantizado en ChatGPT».</strong> No existe. No hay panel de
+              administración, no hay puja, y las respuestas cambian entre sesiones para la misma
+              pregunta.</li>
+            <li><strong>Llenar la web de preguntas frecuentes artificiales.</strong> Un bloque de FAQ
+              real ayuda; treinta preguntas inventadas para «alimentar a la IA» solo diluyen la página.</li>
+            <li><strong>El llms.txt como servicio.</strong> Ver arriba. Diez minutos, no una línea de
+              factura.</li>
+            <li><strong>Contenido generado en masa.</strong> Es la vía más rápida a que ni Google ni los
+              modelos tengan razón para citarte, porque no aportas nada que no esté ya.</li>
+          </ul>
+
+          <h2>Cómo medir si estás apareciendo</h2>
+
+          <p>Tres formas, ninguna perfecta:</p>
+
+          <ul>
+            <li><strong>Pregúntale directamente.</strong> Abre ChatGPT o Gemini y pregunta por tu
+              categoría y tu ciudad <em>sin</em> nombrar tu empresa. Repítelo en sesiones nuevas, porque
+              la respuesta varía. Mira también qué fuentes cita: ahí está el mapa de dónde te conviene
+              aparecer.</li>
+            <li><strong>Mira el tráfico de referencia.</strong> En Google Analytics, filtra las visitas
+              que llegan desde <code>chatgpt.com</code> o <code>perplexity.ai</code>. Es poco volumen,
+              pero suele venir con mucha intención.</li>
+            <li><strong>Search Console, con una advertencia.</strong> Las impresiones de los resúmenes
+              de IA se cuentan dentro de la búsqueda web normal, sin separar. Sirve para ver si te
+              indexan, no para medir la IA aparte.</li>
+          </ul>
+
+          <h2>Lo que de verdad se aprende de todo esto</h2>
+
+          <p>La conclusión incómoda del estudio es que <strong>la visibilidad en IA se parece más a la
+              reputación que al SEO</strong>. Se construye con menciones, con presencia en sitios
+            ajenos, con que la gente busque tu nombre. Nada de eso se resuelve escribiendo en tu propia
+            página.</p>
+
+          <p>Lo cual, si lo piensas, es una buena noticia para una empresa pequeña que hace bien su
+            trabajo, y una mala para quien esperaba comprar un atajo técnico.</p>
+
+          <p>Un último aviso: <strong>esto cambia rápido</strong>. Las cifras de este artículo son de
+            diciembre de 2025 y julio de 2026, y las plataformas mueven sus preferencias de fuentes en
+            cuestión de semanas. Cualquiera que te hable de «la fórmula» de la visibilidad en IA está
+            describiendo una foto, no una regla.</p>
+
+          <p>Si quieres empezar por lo básico —que tu sitio se pueda leer, que Google lo entienda y que
+            tu marca esté bien definida— eso se revisa en minutos con nuestro
+            <a href="/diagnostico/">Diagnóstico Digital</a>. Y si estás en Barranquilla y andas
+            comparando quién te puede ayudar, escribimos una
+            <a href="/blog/mejores-agencias-diseno-web-barranquilla/">guía para elegir agencia</a> en la
+            que, a propósito, no nos incluimos.</p>
+        </div>
+      </div>
+    </article>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap narrow">
+        <div class="cierre">
+          <h2>¿Te encuentran hoy<span class="dot">?</span></h2>
+          <p>El Diagnóstico Digital revisa si tu sitio se puede leer, si Google lo entiende y si tu
+            presencia está bien definida — que es la base sin la cual nada de lo anterior funciona.
+            Gratis, sin tarjeta y sin registro.</p>
+          <div class="hero-ctas" style="justify-content:center">
+            <a href="/diagnostico/" class="btn btn-violet">Ver el diagnóstico</a>
+            <a href="/#contacto" class="btn btn-ghost">Hablar con alguien</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="wrap">
+      <p>© Kaiva Studio 2026 · Barranquilla, Colombia</p>
+      <nav aria-label="Enlaces del pie">
+        <a href="/">Inicio</a>
+        <a href="/blog/">Blog</a>
+        <a href="/#contacto">Contacto</a>
+        <a href="/privacidad/">Privacidad</a>
+        <a href="/terminos/">Términos</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.getElementById('nav');
+      var enlaces = document.getElementById('navLinks');
+      var boton = document.getElementById('navToggle');
+
+      var alScroll = function () {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+      };
+      alScroll();
+      window.addEventListener('scroll', alScroll, { passive: true });
+
+      boton.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var abierto = enlaces.classList.toggle('open');
+        boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!enlaces.contains(e.target) && !boton.contains(e.target)) {
+          enlaces.classList.remove('open');
+          boton.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Aparición al hacer scroll. La clase en <html> es la que activa el
+      // estado oculto en el CSS: sin JS no se esconde nada.
+      if (!('IntersectionObserver' in window)) return;
+      document.documentElement.classList.add('js-reveal');
+
+      var objetivos = document.querySelectorAll('.tarjeta, .paso, .post-item, .faq-item');
+      objetivos.forEach(function (el, i) {
+        el.classList.add('reveal');
+        el.style.setProperty('--d', (i % 6) * 0.06 + 's');
+      });
+
+      var observador = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (entrada) {
+          if (!entrada.isIntersecting) return;
+          entrada.target.classList.add('dentro');
+          observador.unobserve(entrada.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+      objetivos.forEach(function (el) { observador.observe(el); });
+    })();
+  </script>
+</body>
+
+</html>
