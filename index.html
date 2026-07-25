@@ -4,6 +4,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Analytics 4. Es la misma propiedad del sitio anterior
+       (mismo dominio), recuperada del commit f259fa1. Se perdió al pasar de
+       React a HTML estático y el sitio estuvo meses sin medir nada. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BD6VDCSQDC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-BD6VDCSQDC');
+  </script>
+
   <title>Diseño de Páginas Web en Barranquilla | Kaiva Studio</title>
   <meta name="description"
     content="Diseñamos páginas web, tiendas online y marca para empresas de Barranquilla y toda Colombia. Sin plantillas, con SEO desde el día uno y acompañamiento mensual.">
@@ -4973,9 +4985,9 @@
       <nav class="foot-col reveal" style="--d:.15s" aria-label="Legal">
         <h4>Legal</h4>
         <ul>
-          <li><a href="#">Política de privacidad</a></li>
-          <li><a href="#">Términos y condiciones</a></li>
-          <li><a href="#">Política de cookies</a></li>
+          <li><a href="/privacidad/">Política de privacidad</a></li>
+          <li><a href="/terminos/">Términos y condiciones</a></li>
+          <li><a href="/cookies/">Política de cookies</a></li>
         </ul>
       </nav>
 
@@ -4993,16 +5005,8 @@
               @kaivastudio
             </a>
           </li>
-          <li>
-            <a href="#" target="_blank" rel="noopener noreferrer">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
-                stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="3" />
-                <path d="M7 10.5v6.5M7 7.2v.1M11.5 17v-3.6c0-1.1.9-2 2-2s2 .9 2 2V17" />
-              </svg>
-              Kaiva Studio
-            </a>
-          </li>
+          <!-- Aquí iba LinkedIn, pero apuntaba a "#": abría una pestaña en
+               blanco. Cuando exista el perfil, poner la URL real y devolverlo. -->
         </ul>
       </div>
     </div>
