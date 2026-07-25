@@ -851,8 +851,8 @@
     /* Circular Gauges for Pillars */
     .pillars-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.8rem;
       flex: 1;
     }
 
@@ -1366,6 +1366,11 @@
       }
 
       .footer-banner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      /* Con 4 pilares una sola fila se aprieta antes que con 3: pasa a 2x2. */
+      .pillars-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
@@ -2681,6 +2686,17 @@
 
   <script>
     (function () {
+      /* ---- Backend del diagnóstico ----------------------------------------
+         En localhost apunta al Docker de desarrollo y hace el análisis REAL.
+         En producción vale null a propósito: el backend todavía no está
+         desplegado, así que la página mantiene el flujo de lista de espera en
+         vez de intentar una llamada que no existe y dejar al visitante
+         esperando un timeout. Cuando el VPS esté arriba, esto pasa a ser la
+         URL del subdominio y el panel real se enciende solo.            */
+      var API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+        ? 'http://localhost:8080/api'
+        : null;
+
       var form = document.getElementById('kvForm'),
         urlIn = document.getElementById('kvUrl'),
         errEl = document.getElementById('kvErr'),
@@ -2711,6 +2727,162 @@
          mucho más que un correo suelto. */
       var dominio = '';
 
+      /* ---- Panel de resultados reales -------------------------------------
+         Solo se usa cuando API !== null. Traduce la respuesta de scan.php al
+         panel que ya está maquetado (oculto) más abajo.                  */
+      var SEV = {
+        critico: { sev: 'sev-crit', fi: 'fi-crit', label: 'Crítico' },
+        alto: { sev: 'sev-high', fi: 'fi-high', label: 'Alto' },
+        medio: { sev: 'sev-high', fi: 'fi-high', label: 'Medio' },
+        bajo: { sev: '', fi: '', label: 'Bajo' },
+        ok: { sev: '', fi: '', label: 'OK' }
+      };
+
+      function findingRow(f) {
+        var s = SEV[f.severity] || SEV.bajo;
+        var neutro = s.sev ? '' : 'background:#f1f5f9;color:#64748b;';
+        var div = document.createElement('div');
+        div.className = 'find';
+        div.innerHTML =
+          '<div class="fi ' + s.fi + '" style="' + (s.fi ? '' : 'background:#f1f5f9;color:#94a3b8;') + '">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/></svg>' +
+          '</div>' +
+          '<div class="ft"><div class="a"></div><div class="b"></div></div>' +
+          '<span class="sev ' + s.sev + '" style="' + neutro + '">' + s.label + '</span>';
+        // textContent, no innerHTML: el título y el detalle salen del análisis
+        // de un sitio de terceros y no deben poder inyectar marcado aquí.
+        div.querySelector('.ft .a').textContent = f.title || '';
+        div.querySelector('.ft .b').textContent = f.detail || '';
+        return div;
+      }
+
+      function gradeLabel(g) {
+        return { A: 'Excelente', B: 'Bien encaminado', C: 'Necesita atención', D: 'Urgente', F: 'Crítico' }[g] || '';
+      }
+
+      function renderDashboard(dom, scan, speed) {
+        var pillars = scan.pillars || {};
+        var score = (speed && speed.score != null) ? speed.score : scan.score;
+        var grade = (speed && speed.grade) ? speed.grade : scan.grade;
+        var imagenScore = (speed && speed.imagen != null) ? speed.imagen : pillars.imagen.score;
+        var findings = (speed && speed.findings) ? speed.findings : (scan.findings || []);
+        var visScore = pillars.visibilidad ? pillars.visibilidad.score : 0;
+
+        var addr = document.getElementById('appAddr');
+        if (addr) {
+          addr.innerHTML = '<span class="verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Verificado</span>';
+          addr.insertBefore(document.createTextNode(dom + ' '), addr.firstChild);
+        }
+
+        var el = function (id) { return document.getElementById(id); };
+        var pares = [
+          ['scoreP0', 'ringP0', visScore],
+          ['scoreP1', 'ringP1', imagenScore],
+          ['scoreP2', 'ringP2', pillars.confianza.score],
+          ['scoreP3', 'ringP3', pillars.operacion.score]
+        ];
+
+        var badge = document.querySelector('.score-badge');
+        if (badge) badge.textContent = gradeLabel(grade) + ' · Grado ' + grade;
+
+        var criticos = findings.filter(function (f) {
+          return f.severity === 'critico' || f.severity === 'alto';
+        }).length;
+
+        var st = document.querySelector('.score-status');
+        if (st) {
+          st.textContent = criticos > 0
+            ? criticos + (criticos === 1 ? ' hallazgo prioritario' : ' hallazgos prioritarios') + ' por resolver'
+            : 'Sin hallazgos prioritarios';
+        }
+
+        var finds = document.querySelector('.finds');
+        if (finds) {
+          finds.innerHTML = '';
+          if (findings.length) {
+            findings.forEach(function (f) { finds.appendChild(findingRow(f)); });
+          } else {
+            var vacio = document.createElement('div');
+            vacio.className = 'find';
+            vacio.innerHTML = '<div class="ft"><div class="a">Sin hallazgos — tu presencia digital está en buena forma.</div></div>';
+            finds.appendChild(vacio);
+          }
+        }
+
+        var critEl = document.querySelector('.growth-item:last-child .growth-text b');
+        if (critEl) {
+          critEl.textContent = criticos + (criticos === 1 ? ' Hallazgo crítico' : ' Hallazgos críticos');
+        }
+
+        function ease(t) { return 1 - Math.pow(1 - t, 3); }
+        function countUp(node, destino) {
+          var t0 = performance.now();
+          (function paso(now) {
+            var p = Math.min(1, (now - t0) / 1200);
+            node.textContent = Math.round(ease(p) * destino);
+            if (p < 1) requestAnimationFrame(paso);
+          })(performance.now());
+        }
+
+        document.querySelector('.tool-shell').style.display = 'block';
+        [welcome, loading, err404].forEach(function (s) { s.classList.remove('on'); });
+        window.scrollTo(0, 0);
+
+        var gen = el('scoreGeneral');
+        if (gen) countUp(gen, score);
+        pares.forEach(function (par) {
+          var num = el(par[0]), ring = el(par[1]), val = par[2] || 0;
+          if (num) countUp(num, val);
+          if (ring) ring.style.strokeDashoffset = 100 - val;
+        });
+
+        var fill = el('sliderFill'), node = el('sliderNode');
+        if (fill) fill.style.width = score + '%';
+        if (node) node.style.left = score + '%';
+      }
+
+      /* Corre el análisis real contra el backend. Si algo falla, cae al
+         flujo de lista de espera: nunca dejamos al visitante en blanco. */
+      function analizarDeVerdad(v) {
+        bar.style.width = '15%';
+        status.textContent = 'Conectando con el sitio...';
+
+        fetch(API + '/scan.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url: v })
+        })
+          .then(function (r) { return r.json(); })
+          .then(function (scan) {
+            if (!scan.ok) throw new Error(scan.error || 'no se pudo analizar');
+            bar.style.width = '60%';
+            status.textContent = 'Midiendo velocidad de carga...';
+
+            if (scan.pagespeed !== 'pending') {
+              bar.style.width = '100%';
+              return renderDashboard(scan.domain, scan, null);
+            }
+            return fetch(API + '/speed.php', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ scan_id: scan.scan_id })
+            })
+              .then(function (r) { return r.json(); })
+              .catch(function () { return null; })
+              .then(function (speed) {
+                bar.style.width = '100%';
+                status.textContent = 'Generando tu informe...';
+                renderDashboard(scan.domain, scan, (speed && speed.ok) ? speed : null);
+              });
+          })
+          .catch(function (err) {
+            console.error('[kaiva] diagnóstico:', err);
+            var eco = document.getElementById('kvDominioEco');
+            if (eco) eco.textContent = dominio;
+            show(err404);
+          });
+      }
+
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var v = urlIn.value.trim().replace(/^https?:\/\//i, '').replace(/\/+$/, '');
@@ -2723,6 +2895,13 @@
         dominio = v;
         target.textContent = 'Revisando ' + v;
         show(loading);
+
+        // Con backend disponible hacemos el análisis de verdad; sin él, la
+        // animación de siempre y la lista de espera.
+        if (API) {
+          analizarDeVerdad(v);
+          return;
+        }
 
         var i = 0;
         (function next() {
@@ -2891,7 +3070,7 @@
               </svg>
               Hallazgos
             </div>
-            <div class="side-item locked">
+            <div class="side-item locked" onclick="window.openLockedModal()" style="cursor:pointer">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                 stroke-linejoin="round">
                 <path d="M12 20V10M18 20V4M6 20v-4" />
@@ -2903,7 +3082,7 @@
                 <path d="M8 11V7a4 4 0 0 1 8 0v4" />
               </svg>
             </div>
-            <div class="side-item locked">
+            <div class="side-item locked" onclick="window.openLockedModal()" style="cursor:pointer">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                 stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10" />
@@ -2975,13 +3154,13 @@
 
                 <div class="pillars-grid">
 
-                  <!-- Pillar 1: Imagen -->
+                  <!-- Pillar 0: Visibilidad — "no me encuentran" -->
                   <div class="g-cell lead-cell">
                     <div class="marc">
                       <svg viewBox="0 0 100 100">
                         <circle class="track" cx="50" cy="50" r="43" stroke-width="8"></circle>
                         <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="url(#gdViolet)"
-                          stroke-linecap="round" pathLength="100" id="ringP1" data-ring="61"></circle>
+                          stroke-linecap="round" pathLength="100" id="ringP0" data-ring="0"></circle>
                         <defs>
                           <linearGradient id="gdViolet" x1="0" y1="0" x2="1" y2="1">
                             <stop offset="0%" stop-color="#8242f5"></stop>
@@ -2989,11 +3168,26 @@
                           </linearGradient>
                         </defs>
                       </svg>
+                      <div class="mnum" id="scoreP0" data-count="0">0</div>
+                    </div>
+                    <div class="pn">Visibilidad</div>
+                    <div class="pd">Google e IA te encuentran</div>
+                    <img src="../assets/KaivaTheo.webp" alt="" class="pillar-robot-img float-robot">
+                  </div>
+
+                  <!-- Pillar 1: Imagen -->
+                  <div class="g-cell">
+                    <div class="marc">
+                      <svg viewBox="0 0 100 100">
+                        <circle class="track" cx="50" cy="50" r="43" stroke-width="8"></circle>
+                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="#8242f5"
+                          stroke-linecap="round" pathLength="100" id="ringP1" data-ring="61"></circle>
+                      </svg>
                       <div class="mnum" id="scoreP1" data-count="61">0</div>
                     </div>
                     <div class="pn">Imagen</div>
                     <div class="pd">Percepción y propuesta</div>
-                    <img src="../assets/KaivaTheo.webp" alt="Theo Robot" class="pillar-robot-img float-robot">
+                    <img src="../assets/KaivaSara.webp" alt="" class="pillar-robot-img float-robot-slow">
                   </div>
 
                   <!-- Pillar 2: Confianza -->
@@ -3279,71 +3473,16 @@
     </section>
 
   <script>
-    (function () {
-      var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var app = document.getElementById('app');
-
-      var scoreGeneral = document.getElementById('scoreGeneral');
-      var scoreP1 = document.getElementById('scoreP1');
-      var scoreP2 = document.getElementById('scoreP2');
-      var scoreP3 = document.getElementById('scoreP3');
-
-      var ringP1 = document.getElementById('ringP1');
-      var ringP2 = document.getElementById('ringP2');
-      var ringP3 = document.getElementById('ringP3');
-
-      var sliderFill = document.getElementById('sliderFill');
-      var sliderNode = document.getElementById('sliderNode');
-
-      function ease(t) { return 1 - Math.pow(1 - t, 3); }
-
-      function countUp(el, target, dur) {
-        dur = dur || 1200;
-        var t0 = performance.now();
-        (function s(now) {
-          var p = Math.min(1, (now - t0) / dur);
-          el.textContent = Math.round(ease(p) * target);
-          if (p < 1) requestAnimationFrame(s);
-        })(performance.now());
-      }
-
-      function animateSliders(general, p1, p2, p3) {
-        ringP1.style.strokeDashoffset = 100 - p1;
-        ringP2.style.strokeDashoffset = 100 - p2;
-        ringP3.style.strokeDashoffset = 100 - p3;
-        sliderFill.style.width = general + '%';
-        sliderNode.style.left = general + '%';
-      }
-
-      // Auto-reveal on load
-      setTimeout(function () {
-        countUp(scoreGeneral, +scoreGeneral.dataset.count);
-        countUp(scoreP1, +scoreP1.dataset.count);
-        countUp(scoreP2, +scoreP2.dataset.count);
-        countUp(scoreP3, +scoreP3.dataset.count);
-
-        animateSliders(
-          +scoreGeneral.dataset.count,
-          +ringP1.dataset.ring,
-          +ringP2.dataset.ring,
-          +ringP3.dataset.ring
-        );
-      }, reduced ? 0 : 400);
-
-      // Locked modal handler
-      window.openLockedModal = function(featureName) {
-        var modal = document.getElementById('lockedModal');
-        if (modal) {
-          var title = modal.querySelector('.locked-modal-title');
-          if (title) title.textContent = featureName + ' — Plan Pro';
-          modal.classList.add('active');
-        }
-      };
-      window.closeLockedModal = function() {
-        var modal = document.getElementById('lockedModal');
-        if (modal) modal.classList.remove('active');
-      };
-    })();
+    // El panel ya no se auto-rellena con los números de maqueta (61/54/59):
+    // los valores reales los pinta renderDashboard() cuando responde el
+    // backend. Dejarlo animando datos de ejemplo mostraría cifras inventadas
+    // por un instante antes de las de verdad.
+    //
+    // Las secciones Pro del sidebar (Competencia, Historial) no tienen modal
+    // construido todavía: llevan a la sección del Panel Pro en el landing.
+    window.openLockedModal = function () {
+      window.location.href = '/#panel-pro';
+    };
   </script>
 
 
