@@ -1,35 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- La home presenta la agencia completa. Cada servicio tiene su propia
+       página porque Google posiciona páginas, no sitios: una sola URL no puede
+       competir a la vez por "diseño web", "software a medida" y "branding".
+       /monitor/ no está aquí a propósito — es la aplicación, marcada noindex
+       para que no compita con /radiografia-digital/. -->
+
   <url>
     <loc>https://kaivastudio.com/</loc>
     <lastmod>2026-07-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
   <url>
-    <!-- Con barra final: sin ella GitHub Pages responde 301 y se gasta
-         presupuesto de rastreo en un salto innecesario. -->
-    <loc>https://kaivastudio.com/monitor/</loc>
+    <loc>https://kaivastudio.com/diseno-web-barranquilla/</loc>
     <lastmod>2026-07-24</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://kaivastudio.com/software-a-medida/</loc>
+    <lastmod>2026-07-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://kaivastudio.com/radiografia-digital/</loc>
+    <lastmod>2026-07-24</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <url>
+    <loc>https://kaivastudio.com/branding/</loc>
+    <lastmod>2026-07-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <url>
     <loc>https://kaivastudio.com/privacidad/</loc>
     <lastmod>2026-07-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
   <url>
     <loc>https://kaivastudio.com/terminos/</loc>
     <lastmod>2026-07-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
   <url>
     <loc>https://kaivastudio.com/cookies/</loc>
     <lastmod>2026-07-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
 </urlset>
