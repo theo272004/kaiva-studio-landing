@@ -1003,6 +1003,46 @@
       overflow: hidden;
     }
 
+    /* La receta: qué hacer, para cuándo y a quién le toca. Va destacada
+       porque es la parte accionable — el resto solo describe el problema. */
+    .find .fix {
+      margin-top: 0.5rem;
+      padding: 0.55rem 0.7rem;
+      background: var(--violet-soft);
+      border-left: 2px solid var(--violet);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .find .fix-lbl {
+      display: block;
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin-bottom: 0.15rem;
+    }
+
+    .find .fix-txt {
+      display: block;
+      font-size: 11.5px;
+      line-height: 1.45;
+      color: var(--ink);
+    }
+
+    .find .fix-meta {
+      display: block;
+      font-size: 10.5px;
+      color: var(--ink-faint);
+      margin-top: 0.25rem;
+    }
+
+    /* Con la receta dentro, la fila deja de ser una línea y necesita que el
+       ícono y la etiqueta se alineen arriba en vez de al centro. */
+    .find {
+      align-items: flex-start;
+    }
+
     .find .sev {
       font-size: 11px;
       font-weight: 700;
@@ -2743,16 +2783,38 @@
         var neutro = s.sev ? '' : 'background:#f1f5f9;color:#64748b;';
         var div = document.createElement('div');
         div.className = 'find';
+
+        // La receta es la mitad que faltaba: sin el "qué hago", el hallazgo
+        // deja al dueño sabiendo que algo está mal y sin saber qué hacer.
+        var receta = '';
+        if (f.accion) {
+          receta =
+            '<div class="fix">' +
+            '<span class="fix-lbl">Qué hacer</span>' +
+            '<span class="fix-txt"></span>' +
+            '<span class="fix-meta"></span>' +
+            '</div>';
+        }
+
         div.innerHTML =
           '<div class="fi ' + s.fi + '" style="' + (s.fi ? '' : 'background:#f1f5f9;color:#94a3b8;') + '">' +
           '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/></svg>' +
           '</div>' +
-          '<div class="ft"><div class="a"></div><div class="b"></div></div>' +
+          '<div class="ft"><div class="a"></div><div class="b"></div>' + receta + '</div>' +
           '<span class="sev ' + s.sev + '" style="' + neutro + '">' + s.label + '</span>';
+
         // textContent, no innerHTML: el título y el detalle salen del análisis
         // de un sitio de terceros y no deben poder inyectar marcado aquí.
         div.querySelector('.ft .a').textContent = f.title || '';
         div.querySelector('.ft .b').textContent = f.detail || '';
+
+        if (f.accion) {
+          div.querySelector('.fix-txt').textContent = f.accion;
+          var meta = [];
+          if (f.plazo) meta.push(f.plazo);
+          meta.push(f.quien === 'tu' ? 'Lo puedes hacer tú' : 'Lo hace quien te maneja la web');
+          div.querySelector('.fix-meta').textContent = meta.join(' · ');
+        }
         return div;
       }
 
