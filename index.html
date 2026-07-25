@@ -3873,7 +3873,8 @@
     <div class="wrap hero-grid">
       <div class="hero-copy">
         <h1 class="h1 hero-title split" data-split>Construimos la presencia digital que tu empresa <span style="color:var(--violet)">merece<span class="dot">.</span></span></h1>
-        <p class="hero-sub reveal" style="--d:.4s">Sitios web, software y experiencias digitales diseñadas para crecer con tu negocio.</p>
+        <p class="hero-sub reveal" style="--d:.4s">Diseño de páginas web, tiendas online, marca y software a medida
+          para empresas de Barranquilla y toda Colombia.</p>
         <div class="hero-ctas reveal" style="--d:.55s">
           <a href="/monitor" class="btn btn-violet">Diagnóstico gratis</a>
           <a href="#trabajo" class="btn btn-ghost">Ver nuestro trabajo</a>
@@ -5533,6 +5534,13 @@
         endpoint: 'https://api.emailjs.com/api/v1.0/email/send'
       };
 
+      /* Copia de cada lead a una hoja de cálculo propia. EmailJS solo envía
+         correos: si se pierde el mensaje en la bandeja, se pierde el contacto.
+         Pega aquí la URL del despliegue de Google Apps Script
+         (ver LEADS-GOOGLE-SHEETS.md). Mientras esté vacío simplemente no se usa
+         y el formulario sigue funcionando por correo. */
+      var HOJA_LEADS = '';
+
       var okBox = document.getElementById('contactSuccessMsg');
       var errBox = document.getElementById('contactErrorMsg');
       var btn = form.querySelector('button[type="submit"]');
@@ -5583,6 +5591,27 @@
           + 'Interés: ' + interes;
 
         ocupado(true);
+
+        /* Copia a la hoja de cálculo, en paralelo y sin bloquear.
+           Va como text/plain a propósito: así el navegador no dispara la
+           petición OPTIONS previa, que Apps Script no sabe responder. */
+        if (HOJA_LEADS) {
+          fetch(HOJA_LEADS, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({
+              nombre: nombre,
+              correo: correo,
+              telefono: telefono,
+              interes: interes,
+              mensaje: mensaje,
+              origen: window.location.href,
+              referente: document.referrer || 'directo'
+            })
+          }).catch(function (err) {
+            if (window.console) console.warn('[Kaiva] No se pudo copiar el lead a la hoja:', err);
+          });
+        }
 
         fetch(EJS.endpoint, {
           method: 'POST',

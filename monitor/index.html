@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Radiografía Digital gratis — Kaiva Studio</title>
+  <title>Radiografía Digital — Analiza tu página web gratis | Kaiva Studio</title>
   <meta name="description"
-    content="Analiza tu web gratis en 60 segundos: tu Índice de Salud Digital en imagen, confianza y operación (seguridad, correo, cómo se comparte tu marca), con hallazgos priorizados. Sin registro.">
+    content="Tu Índice de Salud Digital: imagen, confianza y operación, con hallazgos priorizados. Estamos terminando la herramienta — déjanos tu correo y te avisamos apenas esté lista.">
   <link rel="canonical" href="https://kaivastudio.com/monitor/">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#faf9f6">
@@ -1679,6 +1679,118 @@
       color: var(--violet);
     }
 
+    /* ---- Lista de espera de la herramienta ---- */
+    .kv-wait {
+      max-width: 440px;
+      margin: 2rem auto 0;
+      text-align: left;
+    }
+
+    .kv-wait-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: .5rem;
+    }
+
+    .kv-wait-row {
+      display: flex;
+      gap: .6rem;
+    }
+
+    .kv-wait-input {
+      flex: 1;
+      min-width: 0;
+      padding: .85rem 1.1rem;
+      border-radius: var(--r-btn);
+      border: 1.5px solid var(--line-strong);
+      background: var(--surface);
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 15px;
+      transition: border-color .2s var(--ease);
+    }
+
+    .kv-wait-input:focus {
+      outline: none;
+      border-color: var(--violet);
+    }
+
+    .kv-wait-btn {
+      flex-shrink: 0;
+      padding: .85rem 1.5rem;
+      border-radius: var(--r-btn);
+      border: 1.5px solid transparent;
+      background: var(--violet);
+      color: #fff;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background .2s var(--ease), transform .2s var(--ease);
+    }
+
+    .kv-wait-btn:hover {
+      background: #6a2fe0;
+      transform: translateY(-2px);
+    }
+
+    .kv-wait-btn[disabled] {
+      opacity: .6;
+      cursor: progress;
+      transform: none;
+    }
+
+    .kv-wait-note {
+      margin-top: .7rem;
+      font-size: 12.5px;
+      color: var(--ink-faint);
+      line-height: 1.5;
+    }
+
+    .kv-wait-err {
+      margin-top: .6rem;
+      font-size: 13px;
+      font-weight: 600;
+      color: #b91c1c;
+      min-height: 1em;
+    }
+
+    .kv-wait-ok {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      max-width: 440px;
+      margin: 2rem auto 0;
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      background: rgba(16, 185, 129, .08);
+      border: 1px solid rgba(16, 185, 129, .22);
+      color: #065f46;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    @media (max-width:520px) {
+      .kv-wait-row {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .kv-wait-btn,
+      .kv-wait-input {
+        transition: none;
+      }
+
+      .kv-wait-btn:hover {
+        transform: none;
+      }
+    }
+
     .kv-back {
       display: inline-flex;
       align-items: center;
@@ -2517,14 +2629,38 @@
   </section>
 
   <!-- ===== 3. Error 404 / en mantenimiento ===== -->
+  <!-- La herramienta todavía está en desarrollo. En vez de dejar a la persona
+       con un error, le ofrecemos avisarle: así el tráfico que ya llega se
+       convierte en contacto y de paso mide cuánto interés real hay. -->
   <section class="kv-stage" id="kv404">
     <div class="kv-box">
-      <img src="../assets/error-404.webp" alt="Error 404" class="kv-404-img" width="1200" height="670"
+      <img src="../assets/error-404.webp" alt="" class="kv-404-img" width="1200" height="670"
         onerror="this.style.display='none';document.getElementById('kv404Fb').style.display='block';">
-      <div class="kv-404-fallback" id="kv404Fb">ERROR <span>404</span></div>
-      <h1>¡Ups! Esta página se salió de su eje.</h1>
-      <p class="kv-lead">Estamos ajustando y afinando la herramienta. El mantenimiento está en curso.
-        Vuelve a intentarlo dentro de un rato.</p>
+      <div class="kv-404-fallback" id="kv404Fb">EN <span>OBRA</span></div>
+      <h1>Tu Radiografía está casi lista.</h1>
+      <p class="kv-lead">Estamos terminando de afinar la herramienta para que los resultados sean
+        datos reales y no estimaciones. Déjanos tu correo y te avisamos apenas puedas
+        analizar <strong id="kvDominioEco">tu sitio</strong>.</p>
+
+      <form class="kv-wait" id="kvWaitForm">
+        <label class="kv-wait-label" for="kvWaitMail">Tu correo</label>
+        <div class="kv-wait-row">
+          <input type="email" id="kvWaitMail" class="kv-wait-input" placeholder="tucorreo@empresa.com"
+            required autocomplete="email">
+          <button type="submit" class="kv-wait-btn" id="kvWaitBtn">Avísenme</button>
+        </div>
+        <p class="kv-wait-note">Te escribimos una sola vez, para avisarte del lanzamiento. Nada más.</p>
+        <p class="kv-wait-err" id="kvWaitErr" role="alert"></p>
+      </form>
+
+      <div class="kv-wait-ok" id="kvWaitOk" role="status">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
+        Listo. Te avisamos apenas esté disponible.
+      </div>
+
       <a href="/" class="kv-back">Volver al inicio</a>
     </div>
   </section>
@@ -2556,6 +2692,11 @@
         window.scrollTo(0, 0);
       }
 
+      /* El dominio que escribió la persona: lo mostramos en el mensaje de
+         espera y lo guardamos junto al correo. Un lead con dominio vale
+         mucho más que un correo suelto. */
+      var dominio = '';
+
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var v = urlIn.value.trim().replace(/^https?:\/\//i, '').replace(/\/+$/, '');
@@ -2565,13 +2706,18 @@
           return;
         }
         errEl.textContent = '';
+        dominio = v;
         target.textContent = 'Revisando ' + v;
         show(loading);
 
         var i = 0;
         (function next() {
           if (i >= steps.length) {
-            setTimeout(function () { show(err404); }, 700);
+            setTimeout(function () {
+              var eco = document.getElementById('kvDominioEco');
+              if (eco) eco.textContent = dominio;
+              show(err404);
+            }, 700);
             return;
           }
           bar.style.width = steps[i][0] + '%';
@@ -2580,6 +2726,89 @@
           setTimeout(next, 550 + Math.random() * 350);
         })();
       });
+
+      /* ---- Lista de espera ---- */
+      var EJS = {
+        service: 'service_94uqq2e',
+        template: 'template_brvipe9',
+        key: '7bRjr4NU9L0Y5gDsy',
+        endpoint: 'https://api.emailjs.com/api/v1.0/email/send'
+      };
+      /* Misma hoja de cálculo que el formulario de contacto de la home.
+         Ver LEADS-GOOGLE-SHEETS.md. */
+      var HOJA_LEADS = '';
+
+      var waitForm = document.getElementById('kvWaitForm'),
+        waitMail = document.getElementById('kvWaitMail'),
+        waitBtn = document.getElementById('kvWaitBtn'),
+        waitErr = document.getElementById('kvWaitErr'),
+        waitOk = document.getElementById('kvWaitOk');
+
+      if (waitForm) {
+        waitForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (waitBtn.disabled) return;
+
+          var correo = waitMail.value.trim();
+          if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(correo)) {
+            waitErr.textContent = 'Escribe un correo válido.';
+            waitMail.focus();
+            return;
+          }
+          waitErr.textContent = '';
+          waitBtn.disabled = true;
+          waitBtn.textContent = 'Enviando…';
+
+          var sitio = dominio || 'no indicado';
+
+          if (HOJA_LEADS) {
+            fetch(HOJA_LEADS, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              body: JSON.stringify({
+                nombre: '(lista de espera)',
+                correo: correo,
+                telefono: '',
+                interes: 'Radiografía Digital — lista de espera',
+                mensaje: 'Quiere analizar: ' + sitio,
+                origen: window.location.href,
+                referente: document.referrer || 'directo'
+              })
+            }).catch(function () { });
+          }
+
+          fetch(EJS.endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              service_id: EJS.service,
+              template_id: EJS.template,
+              user_id: EJS.key,
+              template_params: {
+                name: '(lista de espera — Radiografía Digital)',
+                email: correo,
+                message: 'Alguien quiso analizar ' + sitio + ' y dejó su correo para que le avisen cuando la herramienta esté lista.',
+                phone: 'No indicado',
+                interest: 'Radiografía Digital — lista de espera',
+                subject: 'Lista de espera Radiografía — ' + sitio,
+                time: new Date().toLocaleString('es-CO', { dateStyle: 'medium', timeStyle: 'short' }),
+                page_url: window.location.href,
+                privacy: 'Aceptada'
+              }
+            })
+          })
+            .then(function (r) {
+              if (!r.ok) throw new Error('EmailJS ' + r.status);
+              waitForm.style.display = 'none';
+              waitOk.style.display = 'flex';
+            })
+            .catch(function () {
+              waitErr.innerHTML = 'No pudimos registrarte. Escríbenos a <a href="mailto:info@kaivastudio.com" style="color:inherit;text-decoration:underline">info@kaivastudio.com</a>.';
+              waitBtn.disabled = false;
+              waitBtn.textContent = 'Avísenme';
+            });
+        });
+      }
     })();
   </script>
 
