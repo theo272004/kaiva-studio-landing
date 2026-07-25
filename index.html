@@ -199,7 +199,7 @@
           "name": "¿Qué necesito para empezar?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Nada especial, y sobre todo no necesitas tener claro el detalle técnico. Con una llamada de 20 minutos entendemos tu negocio y te decimos qué necesitas y en qué orden — muchas veces lo primero no es la web. Si prefieres explorar por tu cuenta antes de hablar con nosotros, puedes empezar por la Radiografía Digital y ver el estado de tu presencia actual."
+            "text": "Nada especial, y sobre todo no necesitas tener claro el detalle técnico. Con una llamada de 20 minutos entendemos tu negocio y te decimos qué necesitas y en qué orden — muchas veces lo primero no es la web. Si prefieres explorar por tu cuenta antes de hablar con nosotros, puedes empezar por el Diagnóstico Digital y ver el estado de tu presencia actual."
           }
         },
         {
@@ -1893,63 +1893,83 @@
     }
 
     /* ================= SITUACIÓN ================= */
+    /* ================= PUNTO DE PARTIDA =================
+       Dos columnas: a la izquierda el recorrido seleccionable, a la derecha el
+       panel que cambia según la elección, con los mockups flotando al borde.
+       Bajo 1140px los mockups se retiran; en móvil pasa a acordeón y el panel
+       cae debajo de la opción activa. */
     .sit-wrap {
       display: grid;
-      grid-template-columns: .95fr 1.15fr;
-      gap: clamp(2rem, 5vw, 4rem);
+      grid-template-columns: 45fr 55fr;
+      gap: clamp(2rem, 4vw, 4rem);
       align-items: start;
       position: relative;
     }
 
+    /* ---- columna izquierda: el recorrido ---- */
     .sit-list {
       display: flex;
       flex-direction: column;
     }
 
     .sit-row {
-      text-align: left;
-      background: none;
-      border: none;
-      border-top: 1px solid var(--line);
-      border-left: 2px solid transparent;
-      padding: 1.4rem 0 1.4rem 1.2rem;
-      margin-left: -1px;
-      cursor: pointer;
+      position: relative;
       display: flex;
       align-items: center;
-      gap: 1rem;
-      font-family: inherit;
+      justify-content: space-between;
+      gap: 1.5rem;
       width: 100%;
-      transition: border-color .3s var(--ease-reveal);
+      text-align: left;
+      background: none;
+      border: 0;
+      border-top: 1px solid var(--line-strong);
+      padding: clamp(1.4rem, 2.2vw, 1.9rem) 0;
+      cursor: pointer;
+      font-family: inherit;
+      transition: padding-left .4s var(--ease);
     }
 
-    .sit-list .sit-row:first-child {
-      border-top: none;
+    .sit-row:last-child {
+      border-bottom: 1px solid var(--line-strong);
     }
 
-    .sit-row:active {
-      transform: scale(.99);
-      transition: transform .12s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Indicador vertical del activo. Va en ::before para animar su altura
+       sin empujar el contenido de la fila. */
+    .sit-row::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 3px;
+      height: 0;
+      border-radius: 3px;
+      background: var(--violet);
+      transform: translateY(-50%);
+      transition: height .4s var(--ease);
     }
 
     .sit-row.on {
-      border-left-color: var(--violet);
+      padding-left: 1.6rem;
+    }
+
+    .sit-row.on::before {
+      height: calc(100% - 2.6rem);
     }
 
     .sit-row-body {
-      flex: 1;
-      min-width: 0;
       display: flex;
       flex-direction: column;
       gap: .35rem;
+      min-width: 0;
     }
 
     .sit-row-n {
       font-family: var(--display);
-      font-size: 12px;
-      font-weight: 800;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .04em;
       color: var(--ink-faint);
-      letter-spacing: .05em;
+      transition: color .4s var(--ease);
     }
 
     .sit-row.on .sit-row-n {
@@ -1958,11 +1978,19 @@
 
     .sit-row-title {
       font-family: var(--display);
-      font-size: 1.35rem;
+      font-size: clamp(1.3rem, 2.4vw, 1.85rem);
       font-weight: 800;
-      letter-spacing: -0.02em;
+      line-height: 1.15;
+      letter-spacing: -.025em;
       color: var(--ink-faint);
-      transition: color .3s;
+      text-wrap: balance;
+      transition: color .4s var(--ease);
+    }
+
+    .sit-row-title em {
+      font-style: normal;
+      color: inherit;
+      transition: color .4s var(--ease);
     }
 
     .sit-row.on .sit-row-title {
@@ -1971,13 +1999,14 @@
 
     .sit-row.on .sit-row-title em {
       color: var(--violet);
-      font-style: normal;
     }
 
     .sit-row-desc {
-      font-size: 13.5px;
+      font-size: 14.5px;
+      line-height: 1.55;
       color: var(--ink-faint);
-      line-height: 1.45;
+      max-width: 34ch;
+      transition: color .4s var(--ease);
     }
 
     .sit-row.on .sit-row-desc {
@@ -1986,88 +2015,119 @@
 
     .sit-row-arrow {
       flex-shrink: 0;
-      width: 38px;
-      height: 38px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       display: grid;
       place-items: center;
-      background: rgba(15, 23, 42, .05);
+      border: 1.5px solid var(--line-strong);
       color: var(--ink-faint);
-      transition: background .3s, color .3s, transform .3s;
+      background: var(--surface);
+      transition: transform .4s var(--ease), background .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
+    }
+
+    .sit-row:hover .sit-row-arrow {
+      transform: scale(1.08);
+      border-color: var(--violet);
+      color: var(--violet);
     }
 
     .sit-row.on .sit-row-arrow {
       background: var(--violet);
+      border-color: var(--violet);
       color: #fff;
-      transform: rotate(-45deg);
+      box-shadow: 0 10px 26px rgba(130, 66, 245, .38);
     }
 
+    /* ---- columna derecha ---- */
     .sit-detail {
       position: relative;
-      min-height: 220px;
-      background: var(--surface);
-      border: 1px solid rgba(15, 23, 42, 0.06);
-      border-radius: var(--r-lg);
-      padding: clamp(1.8rem, 4vw, 2.8rem);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: clamp(1.5rem, 3vw, 3rem);
+      align-items: center;
     }
 
     .sit-panel {
-      position: relative;
-      z-index: 10;
-      max-width: 65ch;
+      min-width: 0;
+      max-width: 46ch;
+    }
+
+    .sit-panel .ico {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: var(--violet-soft);
+      color: var(--violet);
+      display: grid;
+      place-items: center;
+      margin-bottom: 1.5rem;
     }
 
     .sit-panel .lbl {
       display: block;
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 750;
       letter-spacing: .1em;
       text-transform: uppercase;
       color: var(--violet);
-      margin-bottom: .8rem;
+      margin-bottom: .7rem;
     }
 
     .sit-panel h3 {
       font-family: var(--display);
-      font-size: 1.8rem;
+      font-size: clamp(1.35rem, 2.2vw, 1.75rem);
       font-weight: 800;
-      letter-spacing: -0.025em;
-      line-height: 1.18;
-      margin-bottom: 1rem;
+      line-height: 1.22;
+      letter-spacing: -.025em;
+      text-wrap: balance;
+      margin-bottom: .9rem;
     }
 
     .sit-panel h3 em {
-      color: var(--violet);
       font-style: normal;
+      color: var(--violet);
     }
 
     .sit-panel p {
       font-size: 15px;
+      line-height: 1.7;
       color: var(--ink-soft);
-      line-height: 1.6;
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.5rem;
     }
 
     .sit-panel ul {
       list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin-bottom: 2rem;
+      display: grid;
+      gap: .7rem;
+      margin-bottom: 1.9rem;
     }
 
     .sit-panel li {
-      font-size: 14.5px;
-      font-weight: 500;
-      color: var(--ink);
       display: flex;
-      gap: 0.65rem;
-      align-items: center;
+      align-items: flex-start;
+      gap: .65rem;
+      font-size: 14.5px;
+      line-height: 1.5;
+      color: var(--ink-soft);
     }
 
     .sit-panel li svg {
-      color: var(--violet);
       flex-shrink: 0;
+      margin-top: .18em;
+      color: var(--violet);
+    }
+
+    .sit-panel .btn {
+      background: linear-gradient(135deg, #8242f5, #6a2fe0);
+      color: #fff;
+      border: 0;
+      box-shadow: 0 10px 26px rgba(130, 66, 245, .3);
+    }
+
+    .sit-panel .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 34px rgba(130, 66, 245, .4);
     }
 
     .sit-panel .micro {
@@ -2077,30 +2137,156 @@
       color: var(--ink-faint);
     }
 
-    .sit-robot {
-      position: absolute;
-      right: 0;
-      bottom: -5%;
-      width: 40%;
-      max-width: 200px;
-      z-index: 2;
-      filter: drop-shadow(0 20px 34px rgba(15, 23, 42, 0.15));
-      pointer-events: none;
-    }
-
+    /* El contenido se renueva con un fundido corto que además desplaza. */
     .fade-swap {
-      animation: fadeSwap 0.35s var(--ease);
+      animation: sitSwap .4s var(--ease) both;
     }
 
-    @keyframes fadeSwap {
+    @keyframes sitSwap {
       from {
         opacity: 0;
-        transform: translateY(6px);
+        transform: translateY(10px);
       }
 
       to {
         opacity: 1;
         transform: none;
+      }
+    }
+
+    /* ---- mockups flotantes ---- */
+    .sit-mocks {
+      position: relative;
+      width: clamp(200px, 21vw, 290px);
+      height: 330px;
+      flex-shrink: 0;
+    }
+
+    .sit-mock {
+      position: absolute;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, .7);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, .13), 0 4px 14px rgba(15, 23, 42, .05);
+      overflow: hidden;
+    }
+
+    .sit-mock-desk {
+      top: 20px;
+      left: 0;
+      width: 100%;
+      animation: sitFloat 7s ease-in-out infinite;
+    }
+
+    .sit-mock-mob {
+      bottom: 0;
+      right: -16px;
+      width: 46%;
+      animation: sitFloat 8s ease-in-out .9s infinite reverse;
+    }
+
+    @keyframes sitFloat {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-11px);
+      }
+    }
+
+    .sit-mock-top {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 9px 11px;
+      border-bottom: 1px solid rgba(15, 23, 42, .06);
+    }
+
+    .sit-mock-top i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, .14);
+      display: block;
+    }
+
+    .sit-mock-url {
+      margin-left: 6px;
+      height: 9px;
+      flex: 1;
+      border-radius: 99px;
+      background: rgba(15, 23, 42, .06);
+    }
+
+    .sit-mock-body {
+      padding: 13px;
+      display: grid;
+      gap: 7px;
+    }
+
+    .sit-mock-line {
+      height: 7px;
+      border-radius: 4px;
+      background: rgba(15, 23, 42, .09);
+    }
+
+    .sit-mock-line.w70 {
+      width: 70%;
+    }
+
+    .sit-mock-line.w45 {
+      width: 45%;
+    }
+
+    .sit-mock-line.acc {
+      background: rgba(130, 66, 245, .32);
+      width: 55%;
+    }
+
+    .sit-mock-block {
+      height: 52px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(130, 66, 245, .13), rgba(166, 121, 255, .05));
+      margin-top: 3px;
+    }
+
+    .sit-mock-pill {
+      height: 19px;
+      width: 60px;
+      border-radius: 99px;
+      background: var(--violet);
+      margin-top: 5px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .sit-mock-desk,
+      .sit-mock-mob {
+        animation: none;
+      }
+
+      .fade-swap {
+        animation-duration: .01ms;
+      }
+    }
+
+    /* Bajo 1140px los mockups estorban más de lo que aportan. */
+    @media (max-width: 1140px) {
+      .sit-detail {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .sit-mocks {
+        display: none;
+      }
+
+      .sit-panel {
+        max-width: none;
       }
     }
 
@@ -3808,9 +3994,11 @@
       </a>
       <div class="nav-right">
         <div class="nav-links" id="navLinks">
-          <a href="#servicios" class="lnk">Servicios</a>
-          <a href="#trabajo" class="lnk">Trabajo</a>
-          <a href="/radiografia-digital/" class="lnk">Radiografía</a>
+          <a href="/diseno-web/" class="lnk">Diseño web</a>
+          <a href="/software-a-medida/" class="lnk">Software</a>
+          <a href="/branding/" class="lnk">Branding</a>
+          <a href="/diagnostico/" class="lnk">Diagnóstico</a>
+          <a href="/blog/" class="lnk">Blog</a>
           <a href="#contacto" class="lnk">Contacto</a>
           <a href="/monitor/" class="btn btn-dark">Diagnóstico gratis</a>
         </div>
@@ -4153,7 +4341,7 @@
                   <path d="M20 6 9 17l-5-5" />
                 </svg>Reportes y seguimiento</li>
             </ul>
-            <a href="/radiografia-digital/" class="svc-btn">Ver la Radiografía</a>
+            <a href="/diagnostico/" class="svc-btn">Ver el Diagnóstico</a>
             </div>
             <div class="svc-vis" aria-hidden="true">
             <div class="mk-ai">
@@ -4204,8 +4392,10 @@
   <section class="section" id="situacion">
     <div class="wrap">
       <div class="sec-head" style="margin-left:auto;margin-right:auto;text-align:center">
-        <h2 class="h2 split" data-split>Tú decides el punto de partida<span class="dot">.</span></h2>
-        <p class="desc reveal" style="--d:.1s">Elige tu situación y te mostramos el camino exacto.</p>
+        <h2 class="h2 split" data-split>Empiezas, nosotros nos encargamos del <span
+            style="color:var(--violet)">resto</span><span class="dot">.</span></h2>
+        <p class="desc reveal" style="--d:.1s">Elige tu situación y te mostramos el camino exacto para llegar
+          a donde quieres.</p>
       </div>
       <div class="sit-wrap reveal">
         <div class="sit-list" id="sitOpts">
@@ -4242,6 +4432,32 @@
         </div>
         <div class="sit-detail">
           <div class="sit-panel" id="sitPanel"></div>
+
+          <!-- Mockups flotantes. Son decorativos: se dibujan con CSS en vez de
+               cargar imágenes, así no cuestan una sola petición de red. -->
+          <div class="sit-mocks" aria-hidden="true">
+            <div class="sit-mock sit-mock-desk">
+              <div class="sit-mock-top">
+                <i></i><i></i><i></i>
+                <span class="sit-mock-url"></span>
+              </div>
+              <div class="sit-mock-body">
+                <span class="sit-mock-line acc"></span>
+                <span class="sit-mock-line w70"></span>
+                <span class="sit-mock-line w45"></span>
+                <span class="sit-mock-block"></span>
+                <span class="sit-mock-pill"></span>
+              </div>
+            </div>
+            <div class="sit-mock sit-mock-mob">
+              <div class="sit-mock-body">
+                <span class="sit-mock-line acc"></span>
+                <span class="sit-mock-line w70"></span>
+                <span class="sit-mock-block"></span>
+                <span class="sit-mock-line w45"></span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -4251,7 +4467,7 @@
   <section class="tool" id="herramienta">
     <div class="wrap">
       <div class="sec-head" style="max-width:none">
-        <h2 class="h2 split" data-split>Radiografía Digital<span class="dot">.</span></h2>
+        <h2 class="h2 split" data-split>Diagnóstico Digital<span class="dot">.</span></h2>
         <p class="desc reveal" style="--d:.1s;max-width:52ch">Escribe el dominio de tu empresa. En 60 segundos tienes tu score, hallazgos con evidencia y qué priorizar primero.</p>
         <div class="tool-perks reveal" style="--d:.15s">
           <span class="perk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -4337,7 +4553,7 @@
             <div class="side-pro">
               <div class="t">Panel Pro</div>
               <div class="d">Seguimiento mensual, histórico y competencia.</div>
-              <a href="#panel-pro" class="b">Ver Panel Pro</a>
+              <a href="/monitor/" class="b">Ver Panel Pro</a>
             </div>
           </aside>
 
@@ -4536,73 +4752,9 @@
 
       </div>
 
-      <!-- ===== Panel Pro (software) ===== -->
-      <div class="plans-soft reveal" style="--d:.24s">
-        <div class="plan-pro" id="panel-pro">
-          <div>
-            <span class="plan-pro-soon">Próximamente</span>
-            <h3>Panel Pro</h3>
-            <p class="plan-pro-desc">El diagnóstico gratis es una foto. El Panel Pro es la película: vigila tu
-              presencia digital cada mes, te avisa cuando algo se rompe y te dice qué arreglar primero.</p>
-            <div class="plan-pro-price">
-              <b>$70K</b><span>COP/mes</span>
-            </div>
-            <button type="button" class="plan-pro-btn" id="proWaitlist">Avísame cuando esté listo</button>
-            <span class="plan-pro-micro">Te escribimos solo para avisarte del lanzamiento.</span>
-          </div>
-
-          <div class="cmp">
-            <div class="cmp-col">
-              <b>Gratis</b>
-              <i>Tu diagnóstico completo, hoy</i>
-              <ul>
-                <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>Índice de Salud Digital y los 3 pilares</li>
-                <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>Correo, seguridad, imagen y velocidad</li>
-                <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>Todos los hallazgos, con su evidencia</li>
-                <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>Sin tarjeta y sin límite de uso</li>
-              </ul>
-            </div>
-            <div class="cmp-col paid">
-              <b>Panel Pro</b>
-              <i>Todo lo gratis, más el seguimiento</i>
-              <ul>
-                <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>Re-escaneo automático e historial</li>
-                <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>Alertas cuando algo cambia o se rompe</li>
-                <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>Cómo te describen ChatGPT, Claude y Gemini</li>
-                <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>Analytics y Search Console interpretados</li>
-                <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>Informe mensual y qué priorizar</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- El Panel Pro se retiró de aquí: solo debe aparecer dentro de la
+           herramienta, cuando la persona ya vio su diagnóstico. Ofrecer un
+           SaaS que aún no existe junto a los servicios reales confundía. -->
 
     </div>
   </section>
@@ -4667,7 +4819,7 @@
               minutos entendemos tu negocio y te decimos qué necesitas y <strong>en qué orden</strong> —
               muchas veces lo primero no es la web.</p>
             <p>Si prefieres explorar por tu cuenta antes de hablar con nosotros, puedes empezar por la
-              Radiografía Digital y ver el estado de tu presencia actual.</p>
+              Diagnóstico Digital y ver el estado de tu presencia actual.</p>
           </div>
         </details>
 
@@ -4762,7 +4914,7 @@
               optimizamos y te mandamos un informe cada mes. Tú no tocas nada.</p>
             <p>El <strong>Panel Pro</strong> es una herramienta de autoservicio: tú ves los datos de tu presencia
               digital y decides qué hacer. Costará <strong>$70.000 COP al mes</strong> y todavía no está
-              disponible — puedes <a href="#panel-pro">entrar a la lista de espera</a>.</p>
+              disponible — puedes <a href="/monitor/">entrar a la lista de espera</a>.</p>
             <p>Son productos distintos y no se reemplazan: uno es que lo hagamos nosotros, el otro es que lo
               veas tú.</p>
           </div>
@@ -5165,22 +5317,22 @@
       /* situación interactiva */
       var sitData = [
         {
-          lbl: 'Tu primer paso', h: 'Construimos tu presencia digital <em>desde cero</em>.',
+          ico: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91 0z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>', lbl: 'Tu primer paso', h: 'Construimos tu presencia digital <em>desde cero</em>.',
           p: 'Creamos todo lo que necesitas para lanzar tu empresa al mundo digital, con una base sólida, profesional y enfocada en resultados.',
           li: ['Estrategia digital a medida', 'Diseño web profesional', 'Identidad de marca', 'SEO técnico desde el inicio', 'Acompañamiento continuo'],
           cta: 'Ver mi diagnóstico gratis', href: '/monitor', micro: 'Sin compromiso. En 60 segundos.'
         },
         {
-          lbl: 'Tu siguiente paso', h: 'Optimizamos lo que <em>ya tienes</em>.',
-          p: 'Primero entendemos qué está fallando con la Radiografía Digital. Luego rediseñamos, optimizamos o reconstruimos lo que necesite, y te acompañamos mes a mes.',
-          li: ['Radiografía Digital gratuita', 'Rediseño o rescate de tu web', 'Mantenimiento mensual', 'SEO y contenido continuo', 'Reportes de progreso mensual'],
+          ico: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>', lbl: 'Tu siguiente paso', h: 'Optimizamos lo que <em>ya tienes</em>.',
+          p: 'Primero entendemos qué está fallando con el Diagnóstico Digital. Luego rediseñamos, optimizamos o reconstruimos lo que necesite, y te acompañamos mes a mes.',
+          li: ['Diagnóstico Digital gratuito', 'Rediseño o rescate de tu web', 'Mantenimiento mensual', 'SEO y contenido continuo', 'Reportes de progreso mensual'],
           cta: 'Ver mi diagnóstico gratis', href: '/monitor', micro: 'Sin compromiso. En 60 segundos.'
         },
         {
-          lbl: 'Tu panel de control', h: 'Medimos y mejoramos <em>cada mes</em>.',
+          ico: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>', lbl: 'Tu panel de control', h: 'Medimos y mejoramos <em>cada mes</em>.',
           p: 'El Panel Pro mide tu salud digital mes a mes — velocidad, seguridad, correo y cómo te describe la IA — y te dice exactamente qué hacer.',
           li: ['Re-escaneo automático e historial', 'Alertas cuando algo cambia', 'Visibilidad en Google e IA', 'Analytics y Search Console interpretados', 'Informe mensual y qué priorizar'],
-          cta: 'Ver Panel Pro', href: '#panel-pro', micro: 'Próximamente. Entra a la lista de espera.'
+          cta: 'Ver el diagnóstico', href: '/monitor/', micro: 'Próximamente. Entra a la lista de espera.'
         }
       ];
       var opts = [].slice.call(document.querySelectorAll('.sit-row'));
@@ -5188,7 +5340,7 @@
 
       function renderSit(i) {
         var d = sitData[i];
-        panel.innerHTML = '<span class="lbl">' + d.lbl + '</span><h3>' + d.h + '</h3><p>' + d.p + '</p><ul>' + d.li.map(function (x) { return '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>' + x + '</li>'; }).join('') + '</ul><a href="' + d.href + '" class="btn btn-violet">' + d.cta + '</a><span class="micro">' + d.micro + '</span>';
+        panel.innerHTML = '<span class="ico">' + d.ico + '</span><span class="lbl">' + d.lbl + '</span><h3>' + d.h + '</h3><p>' + d.p + '</p><ul>' + d.li.map(function (x) { return '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>' + x + '</li>'; }).join('') + '</ul><a href="' + d.href + '" class="btn btn-violet">' + d.cta + '</a><span class="micro">' + d.micro + '</span>';
         panel.classList.remove('fade-swap');
         void panel.offsetWidth;
         panel.classList.add('fade-swap');
@@ -5329,14 +5481,12 @@
         </div>
       </div>
       <div class="faq-chips-container" id="faqChips">
+        <!-- Cuatro atajos, no ocho: el resto se resuelve escribiendo. Una
+             pared de botones parece un menú de opciones, no una conversación. -->
         <button class="faq-chip" data-key="precio">💰 ¿Cuánto cuesta una página web?</button>
-        <button class="faq-chip" data-key="tiempo">⏱️ ¿Cuánto tiempo tardan en entregar?</button>
-        <button class="faq-chip" data-key="empezar">🚀 ¿Qué necesito para empezar?</button>
-        <button class="faq-chip" data-key="diferencia">🔄 ¿Mantenimiento vs Panel Pro?</button>
-        <button class="faq-chip" data-key="gratis">🔍 ¿La Radiografía es gratis?</button>
-        <button class="faq-chip" data-key="remoto">🌎 ¿Trabajan fuera de Barranquilla?</button>
-        <button class="faq-chip" data-key="pequeno">📈 ¿Puedo empezar con algo pequeño?</button>
-        <button class="faq-chip" data-key="equipo">🤝 ¿Ya tengo diseñador/developer?</button>
+        <button class="faq-chip" data-key="tiempo">⏱️ ¿Cuánto se demoran?</button>
+        <button class="faq-chip" data-key="empezar">🚀 ¿Cómo empezamos?</button>
+        <button class="faq-chip" data-key="gratis">🔍 ¿El diagnóstico es gratis?</button>
       </div>
     </div>
 
@@ -5377,6 +5527,10 @@
         "remoto": "Sí. Trabajamos 100% remoto con empresas de toda Colombia y LATAM. La ubicación no es un limitante.",
         "pequeno": "Exactamente así trabajamos. Muchos clientes empiezan con web y branding, y después agregan mantenimiento o software. Cada paso tiene sentido por sí solo.",
         "equipo": "Perfecto. Podemos trabajar junto a tu equipo o enfocarnos solo en lo que les falta — diagnóstico, estrategia, o un servicio específico.",
+        "web": "Diseñamos y desarrollamos sitios a medida, sin plantillas: rápidos, que se ven bien en celular y con la estructura pensada para que quien entre termine escribiéndote. El detalle está en la página de diseño web.",
+        "software": "Sí: tiendas online, plataformas internas, dashboards e integraciones con lo que ya uses (pagos, facturación, WhatsApp). Y si un sistema del mercado te resuelve, te lo decimos de frente.",
+        "marca": "Hacemos identidad completa: logo en todas sus versiones, paleta, tipografía y la guía para usarla. Esa guía es lo que evita que en seis meses cada pieza se vea distinta.",
+        "seo": "Dejamos el SEO técnico resuelto en todo sitio que entregamos, y trabajamos también cómo te describen ChatGPT, Gemini y Perplexity. Si quieres ver cómo está tu sitio hoy, el diagnóstico es gratis.",
         "contacto": "¡Excelente! Puedes escribirnos a info@kaivastudio.com o llenar el formulario de contacto más arriba en la página. Te responderemos en menos de 24 horas."
       };
 
@@ -5407,6 +5561,49 @@
         });
       }
 
+      /* Buscador por puntaje. Antes era una cadena de if/else que se quedaba
+         con la PRIMERA coincidencia: "¿cuánto tarda y cuánto cuesta?" caía
+         siempre en precio y nunca en tiempo. Ahora cada tema suma puntos por
+         las palabras que aparecen y gana el que más sume. Se quitan tildes
+         para que "cuánto" y "cuanto" pesen igual. */
+      var TEMAS = [
+        { k: 'precio', p: ['precio', 'cuanto', 'costo', 'cuesta', 'vale', 'presupuesto', 'cotiza', 'tarifa', 'plata', 'barato', 'caro', 'invers'] },
+        { k: 'tiempo', p: ['tiempo', 'tarda', 'dias', 'semana', 'demora', 'entreg', 'plazo', 'rapido', 'cuando', 'listo'] },
+        { k: 'empezar', p: ['empez', 'inicio', 'comenzar', 'arrancar', 'como funciona', 'proceso', 'primer paso', 'por donde'] },
+        { k: 'diferencia', p: ['diferencia', 'panel', 'manten', 'compar', 'versus', 'mejor opcion', 'pro'] },
+        { k: 'gratis', p: ['gratis', 'diagnos', 'analiz', 'revisar', 'gratuito', 'sin costo', 'herramienta', 'escane'] },
+        { k: 'remoto', p: ['remoto', 'ciudad', 'barranquilla', 'fuera', 'bogota', 'medellin', 'cali', 'cartagena', 'presencial', 'distancia', 'pais', 'exterior', 'ubicad'] },
+        { k: 'pequeno', p: ['peque', 'crecer', 'poco', 'empresa chica', 'emprend', 'startup', 'nuevo negocio', 'por partes', 'etapas'] },
+        { k: 'equipo', p: ['equipo', 'disenador', 'desarrollador', 'developer', 'programador', 'interno', 'ya tengo a'] },
+        { k: 'web', p: ['pagina web', 'sitio web', 'landing', 'rediseñ', 'rediseno', 'web nueva'] },
+        { k: 'software', p: ['software', 'sistema', 'plataforma', 'ecommerce', 'e-commerce', 'tienda', 'app', 'dashboard', 'integra', 'automatiz'] },
+        { k: 'marca', p: ['marca', 'logo', 'branding', 'identidad', 'colores', 'tipografia', 'manual'] },
+        { k: 'seo', p: ['seo', 'google', 'posicion', 'aparecer', 'buscador', 'chatgpt', 'inteligencia artificial', ' ia ', 'visibilidad'] }
+      ];
+
+      function sinTildes(t) {
+        return t.toLowerCase()
+          .replace(/[áàä]/g, 'a').replace(/[éèë]/g, 'e').replace(/[íìï]/g, 'i')
+          .replace(/[óòö]/g, 'o').replace(/[úùü]/g, 'u').replace(/ñ/g, 'n');
+      }
+
+      function buscarTema(texto) {
+        var t = ' ' + sinTildes(texto) + ' ';
+        var mejor = null, mejorPuntaje = 0;
+        TEMAS.forEach(function (tema) {
+          var puntaje = 0;
+          tema.p.forEach(function (palabra) {
+            if (t.indexOf(sinTildes(palabra)) !== -1) {
+              /* Las frases de varias palabras son señal más fuerte que una
+                 palabra suelta, así que valen más. */
+              puntaje += palabra.indexOf(' ') !== -1 ? 3 : 2;
+            }
+          });
+          if (puntaje > mejorPuntaje) { mejorPuntaje = puntaje; mejor = tema.k; }
+        });
+        return mejorPuntaje >= 2 ? mejor : null;
+      }
+
       if (form) {
         form.addEventListener('submit', function (e) {
           e.preventDefault();
@@ -5415,19 +5612,16 @@
           input.value = '';
           addMsg(val, 'user');
           
-          var matchKey = 'contacto';
-          var lower = val.toLowerCase();
-          if (lower.includes('precio') || lower.includes('cuanto') || lower.includes('costo') || lower.includes('cuesta')) matchKey = 'precio';
-          else if (lower.includes('tiempo') || lower.includes('tarda') || lower.includes('dias') || lower.includes('demora') || lower.includes('entreg')) matchKey = 'tiempo';
-          else if (lower.includes('empez') || lower.includes('necesito') || lower.includes('inicio') || lower.includes('comenzar')) matchKey = 'empezar';
-          else if (lower.includes('diferencia') || lower.includes('panel') || lower.includes('manten')) matchKey = 'diferencia';
-          else if (lower.includes('gratis') || lower.includes('diagnos') || lower.includes('radiograf')) matchKey = 'gratis';
-          else if (lower.includes('remoto') || lower.includes('ciudad') || lower.includes('barranquilla') || lower.includes('fuera')) matchKey = 'remoto';
-          else if (lower.includes('peque') || lower.includes('crecer') || lower.includes('poco')) matchKey = 'pequeno';
-          else if (lower.includes('equipo') || lower.includes('diseñador') || lower.includes('desarrollador') || lower.includes('developer')) matchKey = 'equipo';
+          var matchKey = buscarTema(val);
 
           setTimeout(function () {
-            addMsg(answers[matchKey], 'bot');
+            if (matchKey) {
+              addMsg(answers[matchKey], 'bot');
+            } else {
+              /* Sin coincidencia clara no inventamos: se dice que no se
+                 entendió y se ofrecen los caminos reales. */
+              addMsg('No estoy seguro de haber entendido. Puedo ayudarte con precios, tiempos de entrega, cómo empezar, o contarte sobre diseño web, software y marca. Y si prefieres hablar con alguien del equipo, escríbenos a info@kaivastudio.com o déjanos un mensaje en la sección de contacto.', 'bot');
+            }
           }, 350);
         });
       }

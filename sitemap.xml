@@ -5,7 +5,7 @@
        página porque Google posiciona páginas, no sitios: una sola URL no puede
        competir a la vez por "diseño web", "software a medida" y "branding".
        /monitor/ no está aquí a propósito — es la aplicación, marcada noindex
-       para que no compita con /radiografia-digital/. -->
+       para que no compita con /diagnostico/. -->
 
   <url>
     <loc>https://kaivastudio.com/</loc>
@@ -29,7 +29,7 @@
   </url>
 
   <url>
-    <loc>https://kaivastudio.com/radiografia-digital/</loc>
+    <loc>https://kaivastudio.com/diagnostico/</loc>
     <lastmod>2026-07-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -40,6 +40,20 @@
     <lastmod>2026-07-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://kaivastudio.com/blog/</loc>
+    <lastmod>2026-07-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-colombia/</loc>
+    <lastmod>2026-07-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <url>
