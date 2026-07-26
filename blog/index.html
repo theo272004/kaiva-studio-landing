@@ -69,21 +69,29 @@
 </head>
 
 <body>
-  <header class="nav">
-    <div class="wrap">
-      <a href="/" aria-label="Kaiva Studio — ir al inicio">
+  <nav class="nav" id="nav">
+    <div class="nav-in">
+      <a href="/" class="logo" aria-label="Kaiva Studio — ir al inicio">
         <img src="/assets/logo-kaiva.png" alt="Kaiva Studio" width="105" height="44">
       </a>
-      <ul class="nav-links">
-        <li><a href="/diseno-web/">Diseño web</a></li>
-        <li><a href="/software-a-medida/">Software</a></li>
-        <li><a href="/branding/">Branding</a></li>
-        <li><a href="/diagnostico/">Diagnóstico</a></li>
-        <li><a href="/blog/" aria-current="page">Blog</a></li>
-      </ul>
-      <a href="/#contacto" class="btn btn-violet">Hablemos</a>
+      <div class="nav-right">
+        <div class="nav-links" id="navLinks">
+          <a href="/diseno-web/" class="lnk">Diseño web</a>
+          <a href="/software-a-medida/" class="lnk">Software</a>
+          <a href="/branding/" class="lnk">Branding</a>
+          <a href="/diagnostico/" class="lnk">Diagnóstico</a>
+          <a href="/blog/" class="lnk" aria-current="page">Blog</a>
+          <a href="/#contacto" class="lnk">Contacto</a>
+          <a href="/monitor/" class="btn btn-dark">Diagnóstico gratis</a>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menú" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
     </div>
-  </header>
+  </nav>
 
   <div class="wrap">
     <nav class="migas" aria-label="Ruta de navegación">
@@ -104,42 +112,57 @@
       <div class="wrap">
         <div class="post-lista">
 
-          <a class="post-item" href="/blog/seo-geo-aeo-diferencias/">
-            <div>
-              <div class="post-meta">
-                <span class="post-tag">Visibilidad</span><span>·</span><span>26 de julio de 2026</span>
-              </div>
-              <h2>SEO, GEO y AEO: qué son y cuál necesita tu negocio</h2>
-              <p>La búsqueda se partió en dos: el buscador de siempre y las respuestas de la IA. Qué
-                funciona de verdad en cada uno, y qué es humo.</p>
-            </div>
-            <span class="post-flecha" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </span>
-          </a>
-
           <a class="post-item" href="/blog/como-aparecer-en-google-maps/">
             <div>
               <div class="post-meta">
                 <span class="post-tag">Negocio local</span><span>·</span><span>26 de julio de 2026</span>
               </div>
               <h2>Cómo aparecer en Google Maps</h2>
-              <p>El mapa se lleva la mayoría de los clics y no depende de tu página web. Los tres
-                factores que deciden el orden — y por qué solo dos los controlas tú.</p>
+              <p>El mapa se lleva buena parte de los clics y no depende de tu página web. Los tres
+                factores que deciden el orden, por qué solo dos los controlas, y cómo aparecer aunque
+                no tengas local.</p>
             </div>
             <span class="post-flecha" aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </span>
           </a>
 
-          <a class="post-item" href="/blog/por-que-mis-correos-caen-en-spam/">
+          <a class="post-item" href="/blog/seo-para-ia/">
             <div>
               <div class="post-meta">
-                <span class="post-tag">Correo</span><span>·</span><span>26 de julio de 2026</span>
+                <span class="post-tag">SEO para IA</span><span>·</span><span>25 de julio de 2026</span>
               </div>
-              <h2>¿Por qué mis correos caen en spam?</h2>
-              <p>Casi nunca es por lo que escribes. Es porque tu dominio no prueba quién eres — y eso
-                también deja que cualquiera le escriba a tus clientes usando tu nombre.</p>
+              <h2>Cómo lograr que ChatGPT recomiende tu empresa</h2>
+              <p>Qué son GEO y AEO, qué dice Google textualmente, por qué el archivo llms.txt casi no
+                sirve todavía, y qué factores sí correlacionan con salir en respuestas de IA.</p>
+            </div>
+            <span class="post-flecha" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </a>
+
+          <a class="post-item" href="/blog/por-que-mis-correos-llegan-a-spam/">
+            <div>
+              <div class="post-meta">
+                <span class="post-tag">Correo</span><span>·</span><span>25 de julio de 2026</span>
+              </div>
+              <h2>¿Por qué mis correos llegan a spam?</h2>
+              <p>Desde 2024 Google exige autenticar el dominio o el correo va directo a spam. Qué son
+                SPF, DKIM y DMARC, cómo revisar los tuyos en tres minutos y en qué orden se arreglan.</p>
+            </div>
+            <span class="post-flecha" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </a>
+
+          <a class="post-item" href="/blog/mejores-agencias-diseno-web-barranquilla/">
+            <div>
+              <div class="post-meta">
+                <span class="post-tag">Cómo elegir</span><span>·</span><span>25 de julio de 2026</span>
+              </div>
+              <h2>Agencias de diseño web en Barranquilla: guía para elegir</h2>
+              <p>Seis estudios con presencia verificable en la ciudad y los criterios que separan un
+                buen proyecto de uno que toca rehacer al año. Sin ranking pagado y sin incluirnos.</p>
             </div>
             <span class="post-flecha" aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -194,6 +217,54 @@
       </nav>
     </div>
   </footer>
+  <script>
+    (function () {
+      var nav = document.getElementById('nav');
+      var enlaces = document.getElementById('navLinks');
+      var boton = document.getElementById('navToggle');
+
+      var alScroll = function () {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+      };
+      alScroll();
+      window.addEventListener('scroll', alScroll, { passive: true });
+
+      boton.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var abierto = enlaces.classList.toggle('open');
+        boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!enlaces.contains(e.target) && !boton.contains(e.target)) {
+          enlaces.classList.remove('open');
+          boton.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Aparición al hacer scroll. La clase en <html> es la que activa el
+      // estado oculto en el CSS: sin JS no se esconde nada.
+      if (!('IntersectionObserver' in window)) return;
+      document.documentElement.classList.add('js-reveal');
+
+      var objetivos = document.querySelectorAll('.tarjeta, .paso, .post-item, .faq-item');
+      objetivos.forEach(function (el, i) {
+        el.classList.add('reveal');
+        // Escalona solo dentro de cada grupo para que no se acumule el retraso.
+        el.style.setProperty('--d', (i % 6) * 0.06 + 's');
+      });
+
+      var observador = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (entrada) {
+          if (!entrada.isIntersecting) return;
+          entrada.target.classList.add('dentro');
+          observador.unobserve(entrada.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+      objetivos.forEach(function (el) { observador.observe(el); });
+    })();
+  </script>
 </body>
 
 </html>

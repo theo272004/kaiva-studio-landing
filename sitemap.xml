@@ -44,7 +44,7 @@
 
   <url>
     <loc>https://kaivastudio.com/blog/</loc>
-    <lastmod>2026-07-24</lastmod>
+    <lastmod>2026-07-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -57,21 +57,28 @@
   </url>
 
   <url>
-    <loc>https://kaivastudio.com/blog/por-que-mis-correos-caen-en-spam/</loc>
-    <lastmod>2026-07-26</lastmod>
+    <loc>https://kaivastudio.com/blog/por-que-mis-correos-llegan-a-spam/</loc>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://kaivastudio.com/blog/mejores-agencias-diseno-web-barranquilla/</loc>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://kaivastudio.com/blog/seo-para-ia/</loc>
+    <lastmod>2026-07-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://kaivastudio.com/blog/como-aparecer-en-google-maps/</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://kaivastudio.com/blog/seo-geo-aeo-diferencias/</loc>
     <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

@@ -76,6 +76,15 @@ body {
   color: var(--ink);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  /* El nav es fijo (igual que en el home), así que el contenido necesita
+     dejarle sitio o queda tapado. */
+  padding-top: 80px;
+}
+
+/* Para que los enlaces internos (#preguntas) no dejen el título debajo del
+   nav fijo. */
+html {
+  scroll-padding-top: 96px;
 }
 
 .wrap {
@@ -88,82 +97,152 @@ body {
   max-width: 980px;
 }
 
-/* ---------- Navegación ---------- */
+/* ---------- Navegación ----------
+   Copiada tal cual del home (index.html). Las dos deben verse idénticas: si
+   cambia una, cambia la otra. Antes esta era sticky, encajonada al ancho del
+   contenido y con el CTA violeta «Hablemos», mientras el home la tenía fija, a
+   ancho completo y con el CTA oscuro «Diagnóstico gratis» — se notaba el salto
+   al pasar del home a una página de servicio. */
 .nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: rgba(255, 255, 255, .9);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--line);
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 200;
+  transition: background .3s var(--ease), border-color .3s var(--ease), backdrop-filter .3s var(--ease);
+  border-bottom: 1px solid transparent;
 }
 
-.nav .wrap {
+.nav.scrolled {
+  background: rgba(255, 255, 255, .92);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  border-bottom-color: var(--line);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+}
+
+.nav-in {
+  max-width: none;
+  margin: 0;
+  padding: .85rem clamp(1.25rem, 3vw, 3.25rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  position: relative;
+}
+
+.nav .logo {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  padding-block: .9rem;
+  gap: .65rem;
 }
 
 .nav img {
-  height: 40px;
+  height: 44px;
   width: auto;
+  max-height: 48px;
+  object-fit: contain;
+  flex-shrink: 0;
   display: block;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
 }
 
 .nav-links {
   display: flex;
+  gap: 2.2rem;
   align-items: center;
-  gap: 1.8rem;
   list-style: none;
 }
 
-.nav-links a {
-  font-size: 14.5px;
+.nav-links .lnk {
+  font-size: 14px;
   font-weight: 600;
   color: var(--ink-soft);
   text-decoration: none;
   transition: color .2s var(--ease);
 }
 
-.nav-links a:hover,
-.nav-links a[aria-current="page"] {
+.nav-links .lnk:hover {
+  color: var(--ink);
+}
+
+.nav-links .lnk[aria-current="page"] {
   color: var(--violet);
 }
 
-/* En móvil los enlaces pasan a una segunda fila deslizable en vez de
-   desaparecer: con cuatro servicios, esconderlos dejaría la navegación
-   prácticamente vacía y no vale la pena un menú hamburguesa para esto. */
-@media (max-width:860px) {
-  .nav .wrap {
-    flex-wrap: wrap;
-    row-gap: .7rem;
-    padding-bottom: .6rem;
+.nav-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid var(--line-strong);
+  background: var(--surface);
+  border-radius: 12px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  transition: background .2s var(--ease);
+}
+
+.nav-toggle:hover {
+  background: #f8fafc;
+}
+
+.nav-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width:880px) {
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .nav-right {
+    gap: .8rem;
   }
 
   .nav-links {
-    order: 3;
-    width: 100%;
-    gap: 1.35rem;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 2px;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: clamp(1.25rem, 3vw, 3.25rem);
+    flex-direction: column;
+    align-items: stretch;
+    gap: .4rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: .8rem;
+    min-width: 210px;
+    box-shadow: 0 24px 50px -20px rgba(24, 20, 50, .25);
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity .25s var(--ease), transform .25s var(--ease);
   }
 
-  .nav-links::-webkit-scrollbar {
-    display: none;
+  .nav-links.open {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
   }
 
-  .nav-links a {
-    white-space: nowrap;
-    font-size: 14px;
+  .nav-links .lnk {
+    padding: .6rem .7rem;
+    border-radius: 10px;
   }
 
-  .nav .btn {
-    padding: .6rem 1.2rem;
-    font-size: 13.5px;
+  .nav-links .lnk:hover {
+    background: var(--bg);
+  }
+
+  .nav-links .btn {
+    justify-content: center;
+    margin-top: .3rem;
   }
 }
 
@@ -207,6 +286,25 @@ body {
   color: var(--violet);
 }
 
+/* El CTA del nav, oscuro — igual que en el home. */
+.btn-dark {
+  background: var(--ink);
+  color: #fff;
+}
+
+.btn-dark:hover {
+  background: #000;
+  box-shadow: 0 12px 24px -10px rgba(15, 23, 42, .4);
+}
+
+/* Estas medidas son las del botón del nav en el home. No cambiarlas sin
+   cambiarlas allá: 4px de diferencia bastan para que la barra salte de alto al
+   pasar de una página a otra. */
+.nav .btn {
+  padding: .8rem 1.6rem;
+  font-size: 14.5px;
+}
+
 /* ---------- Migas ---------- */
 .migas {
   padding-top: 1.6rem;
@@ -230,6 +328,43 @@ body {
 /* ---------- Hero ---------- */
 .hero {
   padding-block: clamp(2.5rem, 5vw, 4rem) clamp(3.5rem, 7vw, 6rem);
+  position: relative;
+  isolation: isolate;
+}
+
+/* Halo violeta muy tenue arriba a la derecha. Pegado a `right:0` a propósito:
+   con un valor negativo se salía del ancho y aparecía scroll horizontal. El
+   degradado se apaga solo antes del borde, así que no hace falta recortarlo. */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: 0;
+  width: min(680px, 72vw);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(130, 66, 245, .1), rgba(130, 66, 245, 0) 62%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero .wrap {
+  position: relative;
+}
+
+/* Línea de garantías bajo los botones, igual que en el home. */
+.hero-note {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  margin-top: 1.6rem;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-faint);
+}
+
+.hero-note svg {
+  color: var(--violet);
+  flex-shrink: 0;
 }
 
 .hero h1 {
@@ -260,6 +395,31 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: .75rem;
+}
+
+/* ---------- Aparición al hacer scroll ----------
+   El estado oculto va colgado de .js-reveal, que solo pone el script. Si el JS
+   falla o está desactivado, el contenido se ve normal en vez de quedar
+   invisible para siempre — que es lo que pasaría con un `opacity:0` suelto. */
+.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .65s var(--ease), transform .65s var(--ease);
+  transition-delay: var(--d, 0s);
+}
+
+.js-reveal .reveal.dentro {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .js-reveal .reveal,
+  .js-reveal .reveal.dentro {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* ---------- Secciones ---------- */
@@ -328,12 +488,13 @@ body {
   border-radius: var(--r-md);
   padding: 1.7rem;
   background: var(--surface);
-  transition: border-color .2s var(--ease), transform .2s var(--ease);
+  transition: border-color .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease);
 }
 
 .tarjeta:hover {
   border-color: var(--violet);
   transform: translateY(-3px);
+  box-shadow: 0 18px 40px -22px rgba(130, 66, 245, .45);
 }
 
 .tarjeta .ico {
@@ -345,6 +506,14 @@ body {
   display: grid;
   place-items: center;
   margin-bottom: 1.1rem;
+  transition: background .25s var(--ease), color .25s var(--ease);
+}
+
+/* El icono se invierte al pasar por encima: da respuesta a la tarjeta sin
+   añadir elementos nuevos. */
+.tarjeta:hover .ico {
+  background: var(--violet);
+  color: #fff;
 }
 
 .tarjeta h3 {
@@ -385,10 +554,12 @@ body {
   counter-increment: paso;
   content: counter(paso, decimal-leading-zero);
   font-family: var(--display);
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--violet);
-  line-height: 1.4;
+  line-height: 1.15;
+  opacity: .85;
+  letter-spacing: -.04em;
 }
 
 .paso h3 {
@@ -763,18 +934,6 @@ body {
   font-weight: 650;
 }
 
-/* Valores literales dentro del texto (p=none, v=DMARC1...). Sin esto se leen
-   como prosa normal y se pierde justo el detalle que hay que copiar bien. */
-.articulo code {
-  font-family: ui-monospace, "Cascadia Code", "Segoe UI Mono", Menlo, monospace;
-  font-size: .88em;
-  background: rgba(130, 66, 245, .07);
-  color: #5b2bb0;
-  padding: .12em .38em;
-  border-radius: 5px;
-  white-space: nowrap;
-}
-
 .articulo table {
   width: 100%;
   border-collapse: collapse;
@@ -798,6 +957,18 @@ body {
 
 .articulo td {
   color: var(--ink-soft);
+}
+
+/* Valores literales dentro del texto (p=none, v=DMARC1...). Sin esto se leen
+   como prosa normal y se pierde justo el detalle que hay que copiar bien. */
+.articulo code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .88em;
+  background: rgba(130, 66, 245, .1);
+  color: var(--violet-ink);
+  padding: .14em .42em;
+  border-radius: 5px;
+  white-space: nowrap;
 }
 
 .nota {
