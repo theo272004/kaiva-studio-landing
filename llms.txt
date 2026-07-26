@@ -48,6 +48,8 @@ continuidad (seguimiento mensual, alertas, historial), no la información.
 ## Recursos
 
 - [Por qué mis correos caen en spam](https://kaivastudio.com/blog/por-que-mis-correos-caen-en-spam/) — SPF, DKIM y DMARC explicados sin tecnicismos
+- [Cómo aparecer en Google Maps](https://kaivastudio.com/blog/como-aparecer-en-google-maps/) — relevancia, distancia y prominencia en el paquete local
+- [SEO, GEO y AEO](https://kaivastudio.com/blog/seo-geo-aeo-diferencias/) — qué cambió con la IA y qué funciona de verdad
 - [Cuánto cuesta una página web en Colombia](https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-colombia/)
 - [Blog](https://kaivastudio.com/blog/)
 - [Política de privacidad](https://kaivastudio.com/privacidad/)
