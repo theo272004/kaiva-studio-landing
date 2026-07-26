@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BD6VDCSQDC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-BD6VDCSQDC');
+  </script>
+
+  <title>¿Por qué mis correos caen en spam? La causa real y cómo arreglarla</title>
+  <meta name="description"
+    content="No es por las palabras que escribes ni por mandar muchos correos. En la mayoría de los casos es porque a tu dominio le faltan tres registros: SPF, DKIM y DMARC. Qué son y cómo revisarlos.">
+  <link rel="canonical" href="https://kaivastudio.com/blog/por-que-mis-correos-caen-en-spam/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="/assets/favicon-64.png" type="image/png" sizes="64x64">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Kaiva Studio">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:url" content="https://kaivastudio.com/blog/por-que-mis-correos-caen-en-spam/">
+  <meta property="og:title" content="¿Por qué mis correos caen en spam? La causa real y cómo arreglarla">
+  <meta property="og:description"
+    content="No es por las palabras que escribes. Casi siempre es porque a tu dominio le faltan tres registros que nadie te explicó.">
+  <meta property="og:image" content="https://kaivastudio.com/assets/kaiva-og.jpg">
+  <meta property="article:published_time" content="2026-07-26">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="¿Por qué mis correos caen en spam? La causa real y cómo arreglarla">
+  <meta name="twitter:image" content="https://kaivastudio.com/assets/kaiva-og.jpg">
+
+  <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/pagina.css">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaivastudio.com/blog/por-que-mis-correos-caen-en-spam/#post",
+      "headline": "¿Por qué mis correos caen en spam? La causa real y cómo arreglarla",
+      "description": "No es por las palabras que escribes ni por mandar muchos correos. En la mayoría de los casos es porque a tu dominio le faltan tres registros: SPF, DKIM y DMARC.",
+      "datePublished": "2026-07-26",
+      "dateModified": "2026-07-26",
+      "inLanguage": "es-CO",
+      "image": "https://kaivastudio.com/assets/kaiva-og.jpg",
+      "mainEntityOfPage": "https://kaivastudio.com/blog/por-que-mis-correos-caen-en-spam/",
+      "author": {
+        "@type": "Organization",
+        "@id": "https://kaivastudio.com/#studio",
+        "name": "Kaiva Studio",
+        "url": "https://kaivastudio.com/"
+      },
+      "publisher": { "@id": "https://kaivastudio.com/#studio" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Por qué mis correos caen en spam si no mando publicidad?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Porque el filtro no juzga solo el contenido. Antes de leer el mensaje, el servidor que recibe comprueba si tu dominio autoriza a quien lo envió (SPF), si el correo viene firmado digitalmente (DKIM) y qué hacer si algo falla (DMARC). Si esos registros no existen, tu correo llega sin credenciales y se le trata con desconfianza, aunque el texto sea intachable."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué son SPF, DKIM y DMARC?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Son tres textos que se publican en el DNS de tu dominio. SPF es la lista de quién puede enviar correo en tu nombre. DKIM es una firma digital que prueba que el mensaje salió de ti y no fue alterado. DMARC le dice al servidor que recibe qué hacer cuando un correo falla las dos anteriores: dejarlo pasar, mandarlo a spam o rechazarlo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cualquiera puede enviar correos haciéndose pasar por mi empresa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, si tu dominio no tiene DMARC en modo de bloqueo. El correo electrónico no verifica el remitente por diseño: escribir el nombre de tu empresa en el campo De: no requiere tu contraseña. SPF, DKIM y DMARC son justamente el mecanismo que se creó para cerrar ese hueco."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+
+<body>
+  <header class="nav">
+    <div class="wrap">
+      <a href="/" aria-label="Kaiva Studio — ir al inicio">
+        <img src="/assets/logo-kaiva.png" alt="Kaiva Studio" width="105" height="44">
+      </a>
+      <ul class="nav-links">
+        <li><a href="/diseno-web/">Diseño web</a></li>
+        <li><a href="/software-a-medida/">Software</a></li>
+        <li><a href="/branding/">Branding</a></li>
+        <li><a href="/diagnostico/">Diagnóstico</a></li>
+        <li><a href="/blog/" aria-current="page">Blog</a></li>
+      </ul>
+      <a href="/#contacto" class="btn btn-violet">Hablemos</a>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <nav class="migas" aria-label="Ruta de navegación">
+      <a href="/">Inicio</a><span>/</span><a href="/blog/">Blog</a><span>/</span>Por qué mis correos caen en spam
+    </nav>
+  </div>
+
+  <main>
+    <article class="section" style="padding-top:2.5rem">
+      <div class="wrap">
+        <div class="articulo">
+          <p class="fecha">26 de julio de 2026 · Lectura de 8 minutos</p>
+
+          <h1
+            style="font-family:var(--display);font-size:clamp(1.9rem,4.6vw,3rem);font-weight:800;line-height:1.13;letter-spacing:-.03em;text-wrap:balance;margin-bottom:1.3rem">
+            ¿Por qué mis correos caen en spam<span style="color:var(--violet)">?</span>
+          </h1>
+
+          <p class="lead">Le escribes a un cliente una cotización que llevabas días preparando. Nunca
+            responde. Dos semanas después te enteras de que el correo estaba en su carpeta de spam, y
+            que él nunca la abrió. No fue por lo que escribiste.</p>
+
+          <p>Casi todo el mundo busca la causa en el lugar equivocado. Se cree que es por escribir
+            «gratis» o «promoción», por poner muchos enlaces, o por mandar demasiados correos. Eso
+            influye, pero es la capa más superficial del filtro.</p>
+
+          <p><strong>La causa más común es anterior al contenido</strong>: cuando tu correo llega al
+            servidor de tu cliente, ese servidor primero pregunta «¿quién manda esto y puedo
+            comprobarlo?». Si tu dominio no responde esa pregunta, el mensaje entra como un
+            desconocido sin identificación.</p>
+
+          <h2>Por qué existe este problema</h2>
+
+          <p>El correo electrónico se diseñó en los años setenta, entre universidades que confiaban
+            unas en otras. Por eso arrastra una falla que hoy suena absurda: <strong>escribir el
+              nombre de tu empresa en el campo «De:» no requiere tu contraseña</strong>. Cualquiera
+            puede hacerlo, desde cualquier parte.</p>
+
+          <p>Como esa falla no se puede corregir sin romper el correo mundial, se construyó una capa
+            encima: tres registros que se publican en el DNS de tu dominio y que le permiten al
+            servidor que recibe verificar si el mensaje es legítimo. Si no los tienes, no es que
+            estés en una lista negra —es que no estás en ninguna lista.</p>
+
+          <h2>Los tres registros, sin tecnicismos</h2>
+
+          <p>Imagina que tu correo es una persona que llega a la portería de un edificio.</p>
+
+          <h3>SPF — la lista de la portería</h3>
+          <p>Es un texto que dice qué servidores están autorizados a enviar correo en nombre de tu
+            dominio: el de tu proveedor de correo, el de tu sistema de facturación, el de tu
+            plataforma de boletines. Si llega un correo desde un servidor que no está en la lista, es
+            sospechoso.</p>
+
+          <h3>DKIM — la firma en el documento</h3>
+          <p>Es una firma digital que tu servidor pone en cada mensaje. Prueba dos cosas: que salió de
+            ti, y que nadie lo modificó por el camino. Es la parte más difícil de falsificar.</p>
+
+          <h3>DMARC — la instrucción de qué hacer</h3>
+          <p>Aquí está la parte que casi nadie configura bien. SPF y DKIM detectan el problema, pero
+            no deciden nada. DMARC es la instrucción que le das al mundo: «si un correo dice ser mío y
+            falla las comprobaciones, <em>haz esto</em>».</p>
+
+          <p>Tiene tres modos posibles, y la diferencia entre ellos es enorme:</p>
+
+          <div style="overflow-x:auto;margin-top:1.4rem">
+            <table>
+              <thead>
+                <tr>
+                  <th>Modo</th>
+                  <th>Qué hace</th>
+                  <th>Para qué sirve</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>p=none</code></td>
+                  <td>Observa y reporta. No bloquea nada.</td>
+                  <td>Arranque: dejarlo unas semanas para ver quién envía en tu nombre.</td>
+                </tr>
+                <tr>
+                  <td><code>p=quarantine</code></td>
+                  <td>Manda a spam los correos que fallan.</td>
+                  <td>Protección real, con red de seguridad.</td>
+                </tr>
+                <tr>
+                  <td><code>p=reject</code></td>
+                  <td>Los rechaza: nunca llegan.</td>
+                  <td>Protección completa, una vez verificado que todo lo legítimo pasa.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="nota">
+            <p><strong>El error más frecuente:</strong> configurar DMARC en <code>p=none</code> y
+              dejarlo así para siempre. Es el modo de observación, pensado para unas semanas. Muchas
+              empresas lo pusieron hace años, nunca lo subieron, y creen que están protegidas cuando
+              solo están mirando. Nosotros mismos lo teníamos así hasta que nuestra propia herramienta
+              nos lo marcó.</p>
+          </div>
+
+          <h2>Qué cambió, y por qué esto ya no es opcional</h2>
+
+          <p>Durante años esto fue una buena práctica que casi nadie seguía. En <strong>febrero de
+              2024</strong> dejó de ser opcional: Google y Yahoo empezaron a exigir SPF, DKIM y un
+            registro DMARC a quienes envían volúmenes altos —Google define ese umbral en unos
+            <a href="https://support.google.com/a/answer/81126" target="_blank"
+              rel="noopener noreferrer">5.000 mensajes diarios a cuentas de Gmail</a>. Microsoft y
+            Apple siguieron el mismo camino.</p>
+
+          <p>Aquí conviene ser exacto, porque hay mucha desinformación: <strong>si tu empresa manda
+              cincuenta correos al día, técnicamente no eres un «remitente masivo»</strong> y esas
+            reglas no te aplican de forma estricta. Pero los mismos criterios se usan como señales de
+            reputación para todos. Según <a href="https://redsift.com/guides/bulk-email-sender-requirements"
+              target="_blank" rel="noopener noreferrer">los datos recopilados por Red Sift para
+              2026</a>, los remitentes que cumplen promedian un 89% de entrega en bandeja de entrada,
+            mientras que entre los que no cumplen, entre el 22% y el 34% de sus correos termina en
+            spam.</p>
+
+          <p>Traducido a tu negocio: de cada diez cotizaciones que envías, dos o tres podrían no estar
+            llegando.</p>
+
+          <h2>Lo que nadie te dice: el problema no es solo que no llegues</h2>
+
+          <p>Hasta aquí hablamos de tus correos. Pero hay una consecuencia peor, y es la que rara vez
+            se menciona.</p>
+
+          <p>Si tu dominio no tiene DMARC bloqueando, <strong>cualquier persona puede enviar correos
+              que parezcan tuyos</strong>. No hackea nada, no necesita tu contraseña: simplemente
+            escribe tu dirección en el remitente.</p>
+
+          <p>El fraude típico en Colombia es directo: alguien le escribe a tu cliente, firmando con el
+            nombre de tu empresa, diciendo que cambiaron los datos bancarios y que el pago de la
+            factura va a otra cuenta. El cliente paga. Y como el correo parecía tuyo, la conversación
+            que sigue es contigo.</p>
+
+          <p>No hace falta ser una empresa grande. Hace falta tener clientes que paguen por
+            transferencia.</p>
+
+          <h2>Cómo saber cómo estás</h2>
+
+          <p>Estos registros son públicos: cualquiera puede consultarlos, incluidos tus competidores y
+            quien quiera suplantarte. Eso significa que puedes revisar los tuyos en un minuto, sin
+            instalar nada.</p>
+
+          <p>Nuestra <a href="/diagnostico/">Radiografía Digital</a> los revisa gratis junto con el
+            resto de tu presencia digital: te dice si tienes SPF, si detectamos DKIM, en qué modo está
+            tu DMARC y qué hacer con cada cosa. No pedimos tarjeta ni registro.</p>
+
+          <div class="nota">
+            <p><strong>Un dato de nuestro propio mercado:</strong> analizamos las agencias digitales
+              que aparecen primero en Google en Barranquilla. La mayoría tiene el correo mal
+              configurado —DMARC en modo observación o directamente ausente— sin saberlo. Si les pasa
+              a quienes venden servicios digitales, vale la pena revisar el tuyo.</p>
+          </div>
+
+          <h2>Cómo arreglarlo</h2>
+
+          <p>Los tres registros se editan en el mismo lugar: el panel de DNS de donde tengas registrado
+            tu dominio (Hostinger, GoDaddy, Namecheap, Cloudflare o quien te lo administre). No se
+            toca la página web ni el hosting.</p>
+
+          <ol>
+            <li><strong>SPF.</strong> Tu proveedor de correo te da la línea exacta. Importante: debe
+              existir <em>un solo</em> registro SPF. Si tienes dos, el sistema los considera inválidos
+              y quedas peor que sin ninguno.</li>
+            <li><strong>DKIM.</strong> Se activa desde el panel de tu proveedor de correo, que te
+              entrega una clave para publicar en el DNS.</li>
+            <li><strong>DMARC.</strong> Empieza en <code>p=none</code> con reportes, déjalo unas
+              semanas y revisa qué aparece. Luego sube a <code>p=quarantine</code>, y cuando confirmes
+              que todo lo legítimo sigue llegando, a <code>p=reject</code>.</li>
+          </ol>
+
+          <p><strong>No saltes directo a <code>p=reject</code>.</strong> Si tienes servicios que envían
+            en tu nombre —facturación electrónica, formularios de la web, campañas de correo— y alguno
+            no está bien alineado, con <code>reject</code> esos mensajes dejan de llegar de un día
+            para otro. La escalera lenta existe por una razón.</p>
+
+          <h2>En resumen</h2>
+
+          <ul>
+            <li>Que tus correos caigan en spam casi nunca es por el texto: es porque tu dominio no
+              prueba quién eres.</li>
+            <li>SPF dice quién puede enviar por ti, DKIM firma cada mensaje, DMARC decide qué pasa
+              cuando algo falla.</li>
+            <li><code>p=none</code> no protege. Solo mira.</li>
+            <li>Sin DMARC en bloqueo, cualquiera puede escribirle a tus clientes usando tu nombre.</li>
+            <li>Se arregla en el DNS, sin tocar tu web, y no cuesta nada más que el rato de hacerlo.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap narrow">
+        <div class="cierre">
+          <h2>Revisa cómo está tu correo, gratis<span class="dot">.</span></h2>
+          <p>La Radiografía Digital analiza tu dominio en menos de un minuto y te dice si tus correos
+            están protegidos, con la evidencia y qué hacer en cada caso. Sin registro y sin tarjeta.</p>
+          <div class="hero-ctas" style="justify-content:center">
+            <a href="/diagnostico/" class="btn btn-violet">Analizar mi dominio</a>
+            <a href="/#contacto" class="btn btn-ghost">Prefiero que lo revisen ustedes</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="wrap">
+      <p>© Kaiva Studio 2026 · Barranquilla, Colombia</p>
+      <nav aria-label="Enlaces del pie">
+        <a href="/">Inicio</a>
+        <a href="/blog/">Blog</a>
+        <a href="/#contacto">Contacto</a>
+        <a href="/privacidad/">Privacidad</a>
+        <a href="/terminos/">Términos</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+
+</html>

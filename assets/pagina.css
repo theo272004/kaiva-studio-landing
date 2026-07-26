@@ -763,6 +763,18 @@ body {
   font-weight: 650;
 }
 
+/* Valores literales dentro del texto (p=none, v=DMARC1...). Sin esto se leen
+   como prosa normal y se pierde justo el detalle que hay que copiar bien. */
+.articulo code {
+  font-family: ui-monospace, "Cascadia Code", "Segoe UI Mono", Menlo, monospace;
+  font-size: .88em;
+  background: rgba(130, 66, 245, .07);
+  color: #5b2bb0;
+  padding: .12em .38em;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
 .articulo table {
   width: 100%;
   border-collapse: collapse;

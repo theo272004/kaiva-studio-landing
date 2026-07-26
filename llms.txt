@@ -47,6 +47,7 @@ continuidad (seguimiento mensual, alertas, historial), no la información.
 
 ## Recursos
 
+- [Por qué mis correos caen en spam](https://kaivastudio.com/blog/por-que-mis-correos-caen-en-spam/) — SPF, DKIM y DMARC explicados sin tecnicismos
 - [Cuánto cuesta una página web en Colombia](https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-colombia/)
 - [Blog](https://kaivastudio.com/blog/)
 - [Política de privacidad](https://kaivastudio.com/privacidad/)
