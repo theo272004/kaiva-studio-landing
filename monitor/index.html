@@ -3548,6 +3548,19 @@
   </script>
 
 
+  <!-- Si llegas desde el home con el dominio ya escrito (/monitor/?d=...),
+       el campo aparece lleno para no tener que escribirlo dos veces. -->
+  <script>
+    (function () {
+      var campo = document.getElementById('kvUrl');
+      if (!campo || campo.value) return;
+      try {
+        var d = new URLSearchParams(location.search).get('d');
+        if (d) campo.value = d.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/[/?#].*$/, '');
+      } catch (e) { /* navegador viejo: se escribe a mano y ya */ }
+    })();
+  </script>
+
 </body>
 
 </html>
