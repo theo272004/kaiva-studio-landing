@@ -62,5 +62,9 @@ continuidad (seguimiento mensual, alertas, historial), no la información.
 - [Cómo aparecer en Google Maps](https://kaivastudio.com/blog/como-aparecer-en-google-maps/):
   los tres factores del paquete local (relevancia, distancia y prominencia),
   cuáles se controlan, y cómo aparecer sin tener local físico.
+- [Mi página no aparece en Google](https://kaivastudio.com/blog/google-no-encuentra-mi-pagina/):
+  las siete causas por las que un sitio no sale en resultados, cómo comprobar
+  con site: si está indexado, y por qué noindex y robots.txt son las dos más
+  comunes y las más rápidas de arreglar.
 - [Blog](https://kaivastudio.com/blog/)
 - [Política de privacidad](https://kaivastudio.com/privacidad/)
