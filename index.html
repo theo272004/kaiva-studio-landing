@@ -351,6 +351,9 @@
       scroll-behavior: smooth;
       scroll-padding-top: 88px;
       -webkit-text-size-adjust: 100%;
+      /* Permite animar de 0 a `auto`, que es lo que necesita el acordeón de
+         preguntas para desplegarse suave. */
+      interpolate-size: allow-keywords;
     }
 
     body {
@@ -1294,13 +1297,89 @@
       box-sizing: border-box;
     }
 
-    /* Mockup 1: navegador + móvil */
+    /* Mockup 1: una página web completa.
+       Antes el navegador tenía alto automático y quedaba una tira estrecha con
+       mucho aire arriba y abajo; ahora llena la caja como el mockup de
+       visibilidad en IA. */
     .mk-browser {
       width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
       border-radius: 9px;
       background: #fff;
       box-shadow: 0 10px 26px rgba(15, 23, 42, .13);
       overflow: hidden;
+    }
+
+    /* barra de navegación del sitio */
+    .mk-topnav {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 10px;
+      border-bottom: 1px solid rgba(15, 23, 42, .05);
+    }
+
+    .mk-topnav b {
+      font-family: var(--display);
+      font-size: 7.5px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      color: var(--ink);
+      margin-right: auto;
+    }
+
+    .mk-topnav i {
+      display: block;
+      width: 13px;
+      height: 3px;
+      border-radius: 2px;
+      background: #e3e6ee;
+    }
+
+    .mk-topnav u {
+      display: block;
+      width: 22px;
+      height: 8px;
+      border-radius: 99px;
+      background: var(--violet);
+      margin-left: 3px;
+    }
+
+    /* franja de tarjetas de abajo, para que se lea como página con secciones */
+    .mk-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      padding: 0 12px 12px;
+      background: linear-gradient(160deg, #fbfaff, #f4f1fd);
+    }
+
+    .mk-cards div {
+      background: #fff;
+      border: 1px solid rgba(15, 23, 42, .06);
+      border-radius: 5px;
+      padding: 5px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .mk-cards span {
+      display: block;
+      height: 3px;
+      border-radius: 2px;
+      background: #e6e9f2;
+    }
+
+    .mk-cards span:first-child {
+      width: 60%;
+      background: rgba(130, 66, 245, .32);
+    }
+
+    .mk-cards span:last-child {
+      width: 80%;
     }
 
     .mk-bar {
@@ -1336,9 +1415,25 @@
     /* Claro, no negro: era el único mockup oscuro de las cuatro tarjetas y
        rompía con el resto. */
     .mk-hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       background: linear-gradient(160deg, #fbfaff, #f4f1fd);
-      padding: 14px 12px 16px;
+      padding: 16px 12px 14px;
       color: var(--ink);
+    }
+
+    /* el bloque grande de imagen del hero */
+    .mk-hero-img {
+      flex: 1;
+      min-height: 26px;
+      margin-top: 10px;
+      border-radius: 6px;
+      background:
+        linear-gradient(135deg, rgba(130, 66, 245, .22), rgba(166, 121, 255, .07)),
+        #fff;
+      border: 1px solid rgba(130, 66, 245, .1);
     }
 
     .mk-hero b {
@@ -1520,9 +1615,13 @@
       color: #3f4d26;
     }
 
-    /* La tarjeta de visita: papel crema con la flor en verde. */
+    /* La tarjeta de visita: blanco con el patrón de flores en gris casi blanco,
+       que es el fondo real de Thallo. Nada de crema — su paleta es blanco,
+       verde y un gris muy claro. */
     .mk-card-marca {
-      background: #efeade;
+      background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='42' viewBox='0 0 42 42'%3E%3Cg fill='%23eeeeee'%3E%3Cpath d='M10.5 1.9c1.6 0 2.7 1.2 2.7 2.8 0 1.5-.8 2.8-2.7 4.7-1.9-1.9-2.7-3.2-2.7-4.7 0-1.6 1.1-2.8 2.7-2.8z'/%3E%3Cpath d='M10.5 1.9c1.6 0 2.7 1.2 2.7 2.8 0 1.5-.8 2.8-2.7 4.7-1.9-1.9-2.7-3.2-2.7-4.7 0-1.6 1.1-2.8 2.7-2.8z' transform='rotate(72 10.5 10.5)'/%3E%3Cpath d='M10.5 1.9c1.6 0 2.7 1.2 2.7 2.8 0 1.5-.8 2.8-2.7 4.7-1.9-1.9-2.7-3.2-2.7-4.7 0-1.6 1.1-2.8 2.7-2.8z' transform='rotate(144 10.5 10.5)'/%3E%3Cpath d='M10.5 1.9c1.6 0 2.7 1.2 2.7 2.8 0 1.5-.8 2.8-2.7 4.7-1.9-1.9-2.7-3.2-2.7-4.7 0-1.6 1.1-2.8 2.7-2.8z' transform='rotate(216 10.5 10.5)'/%3E%3Cpath d='M10.5 1.9c1.6 0 2.7 1.2 2.7 2.8 0 1.5-.8 2.8-2.7 4.7-1.9-1.9-2.7-3.2-2.7-4.7 0-1.6 1.1-2.8 2.7-2.8z' transform='rotate(288 10.5 10.5)'/%3E%3Cg transform='translate(21 21)'%3E%3Cpath d='M10.5 1.9c1.6 0 2.7 1.2 2.7 2.8 0 1.5-.8 2.8-2.7 4.7-1.9-1.9-2.7-3.2-2.7-4.7 0-1.6 1.1-2.8 2.7-2.8z'/%3E%3Cpath d='M10.5 1.9c1.6 0 2.7 1.2 2.7 2.8 0 1.5-.8 2.8-2.7 4.7-1.9-1.9-2.7-3.2-2.7-4.7 0-1.6 1.1-2.8 2.7-2.8z' transform='rotate(72 10.5 10.5)'/%3E%3Cpath d='M10.5 1.9c1.6 0 2.7 1.2 2.7 2.8 0 1.5-.8 2.8-2.7 4.7-1.9-1.9-2.7-3.2-2.7-4.7 0-1.6 1.1-2.8 2.7-2.8z' transform='rotate(144 10.5 10.5)'/%3E%3Cpath d='M10.5 1.9c1.6 0 2.7 1.2 2.7 2.8 0 1.5-.8 2.8-2.7 4.7-1.9-1.9-2.7-3.2-2.7-4.7 0-1.6 1.1-2.8 2.7-2.8z' transform='rotate(216 10.5 10.5)'/%3E%3Cpath d='M10.5 1.9c1.6 0 2.7 1.2 2.7 2.8 0 1.5-.8 2.8-2.7 4.7-1.9-1.9-2.7-3.2-2.7-4.7 0-1.6 1.1-2.8 2.7-2.8z' transform='rotate(288 10.5 10.5)'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+        #fff;
       color: #3f4d26;
       gap: 4px;
       grid-auto-flow: row;
@@ -1534,6 +1633,15 @@
       font-weight: 700;
       text-transform: uppercase;
       color: #2b3418;
+    }
+
+    /* La paleta pierde el crema y gana el gris casi blanco de la marca. */
+    .mk-thallo .mk-swatches i:nth-child(3) {
+      background: #c9cec2 !important;
+    }
+
+    .mk-thallo .mk-swatches i:nth-child(4) {
+      background: #f2f2f0 !important;
     }
 
     /* Mockup 3: dashboard */
@@ -1656,6 +1764,54 @@
       width: 100%;
       height: 100%;
       min-height: 34px;
+    }
+
+    /* ---- gráfica de barras (panel de CS Travel) ---- */
+    .mk-chart-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 5px;
+    }
+
+    .mk-chart-top u {
+      text-decoration: none;
+      font-size: 6px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .mk-chart-top s {
+      text-decoration: none;
+      font-size: 6px;
+      font-weight: 700;
+      color: #3f63b5;
+    }
+
+    .mk-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      min-height: 0;
+    }
+
+    .mk-bars i {
+      flex: 1;
+      height: var(--h, 40%);
+      min-height: 2px;
+      border-radius: 2px 2px 1px 1px;
+      background: #d7e0f2;
+    }
+
+    .mk-bars i.on {
+      background: #3f63b5;
+    }
+
+    .mk-cst .mk-chart {
+      grid-template-rows: auto 1fr;
     }
 
     /* Mockup 4: IA & SEO */
@@ -2594,6 +2750,31 @@
       flex: 1;
       border-radius: 99px;
       background: rgba(15, 23, 42, .06);
+      /* Antes iba vacía: era la única escena de las tres sin una sola palabra. */
+      display: flex;
+      align-items: center;
+      padding: 0 6px;
+      font-size: 5.5px;
+      font-weight: 600;
+      color: var(--ink-faint);
+      letter-spacing: .02em;
+    }
+
+    .sit-mock-h {
+      font-family: var(--display);
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+
+    .sit-mock-h span {
+      color: var(--violet);
+    }
+
+    .sit-mock-h-sm {
+      font-size: 8px;
     }
 
     .sit-mock-body {
@@ -2634,6 +2815,12 @@
       border-radius: 99px;
       background: var(--violet);
       margin-top: 5px;
+      display: grid;
+      place-items: center;
+      font-size: 6.5px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: .01em;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -3165,11 +3352,12 @@
     /* ================= PLANES ================= */
     .plans {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      /* El del centro, un pelo más ancho además de más alto. */
+      grid-template-columns: 1fr 1.07fr 1fr;
       gap: 1.2rem;
       align-items: stretch;
       max-width: 1100px;
-      margin: 0 auto;
+      margin: 18px auto 0;
     }
 
     .plan {
@@ -3189,11 +3377,16 @@
       box-shadow: var(--shadow-lg);
     }
 
+    /* Negro puro, no el azul pizarra de --ink: sobre blanco ese tono tira a
+       azuloso y era justo lo que no gustaba. Y sobresale un poco por arriba y
+       por abajo para que el del centro pese más. */
     .plan.feat {
-      background: var(--ink);
+      background: #0b0b0e;
       color: #fff;
-      border-color: var(--ink);
-      box-shadow: 0 30px 60px -24px rgba(15, 23, 42, 0.35);
+      border-color: #0b0b0e;
+      margin-block: -18px;
+      padding-block: calc(2.2rem + 18px);
+      box-shadow: 0 34px 70px -26px rgba(11, 11, 14, 0.45);
     }
 
     .plan .badge {
@@ -3202,25 +3395,48 @@
       right: 1.5rem;
       font-size: 10.5px;
       font-weight: 800;
-      color: var(--violet-2);
-      background: rgba(130, 66, 245, 0.16);
-      padding: 0.25rem 0.6rem;
-      border-radius: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      color: #fff;
+      background: var(--violet);
+      padding: 0.3rem 0.65rem;
+      border-radius: 7px;
+      letter-spacing: 0.02em;
     }
 
+    .plan.feat .badge {
+      top: calc(1.5rem + 18px);
+    }
+
+    /* Título de verdad, no una versalita gris: en la referencia «Start» y
+       «Growth» son titulares. */
     .plan .pname {
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 1.2rem;
+      font-family: var(--display);
+      font-size: 21px;
+      font-weight: 750;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
     }
 
     .plan.feat .pname {
-      color: var(--violet-2);
+      color: #fff;
+    }
+
+    /* El pie: botón a todo el ancho y una línea pequeña debajo, como en la
+       referencia. */
+    .pfoot {
+      margin-top: auto;
+    }
+
+    .pmicro {
+      display: block;
+      text-align: center;
+      margin-top: .75rem;
+      font-size: 11.5px;
+      color: var(--ink-faint);
+    }
+
+    .plan.feat .pmicro {
+      color: rgba(255, 255, 255, .45);
     }
 
     .plan .price {
@@ -3246,15 +3462,15 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.7rem;
+      gap: 0.75rem;
       flex: 1;
-      border-top: 1px solid rgba(15, 23, 42, 0.05);
-      padding-top: 1.4rem;
-      margin-bottom: 1.8rem;
+      border-top: 1px solid rgba(15, 23, 42, 0.07);
+      padding-top: 1.5rem;
+      margin-bottom: 2rem;
     }
 
     .plan.feat ul {
-      border-top-color: rgba(255, 255, 255, 0.1);
+      border-top-color: rgba(255, 255, 255, 0.12);
     }
 
     .plan li {
@@ -3269,19 +3485,24 @@
       color: rgba(255, 255, 255, 0.8);
     }
 
+    /* Violeta y no verde: la referencia usa un solo color de acento y aquí el
+       verde era un tercer color que no aportaba nada. */
     .plan li svg {
       flex-shrink: 0;
-      color: var(--green);
+      color: var(--violet);
       margin-top: 2px;
     }
 
     .plan.feat li svg {
-      color: #6ee7a0;
+      color: var(--violet-2);
     }
 
     .plan .pbtn {
+      /* Es un <a>: sin display:block el width:100% no hace nada y el botón
+         quedaba del ancho del texto en vez de ocupar la tarjeta. */
+      display: block;
       width: 100%;
-      padding: 0.8rem;
+      padding: 0.9rem;
       border-radius: var(--r-btn);
       font-size: 14px;
       font-weight: 700;
@@ -3780,15 +4001,43 @@
       background: var(--violet-soft);
     }
 
-    .faq-item[open] .faq-icon {
+    .faq-item.abierta .faq-icon {
       transform: rotate(45deg);
       border-color: var(--violet);
       background: var(--violet-soft);
       color: var(--violet);
     }
 
+    /* Despliegue suave del acordeón.
+       No se puede animar el <details> tal cual: el navegador esconde su
+       contenido y ni ::details-content ni animar el alto desde JS lo sueltan.
+       Así que el JS deja el <details> abierto para siempre —el navegador ya no
+       esconde nada— y el que abre y cierra es este contenedor, con la clase
+       .abierta. Sin JS el contenido queda visible, que es preferible a que
+       quede inaccesible. */
+    .faq-slide {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .42s var(--ease);
+    }
+
+    .faq-item.abierta .faq-slide {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-slide>.faq-answer {
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .faq-slide {
+        transition: none;
+      }
+    }
+
     .faq-answer {
-      padding: 0 0 1.6rem;
+      padding: 0;
       max-width: 72ch;
       font-size: 15.5px;
       line-height: 1.75;
@@ -3797,6 +4046,11 @@
 
     .faq-answer p+p {
       margin-top: .85rem;
+    }
+
+    /* El aire de abajo, dentro del contenido: así el alto puede llegar a cero. */
+    .faq-answer> :last-child {
+      margin-bottom: 1.6rem;
     }
 
     .faq-answer strong {
@@ -3961,7 +4215,19 @@
       }
 
       .plans {
-        grid-template-columns: repeat(2, 1fr)
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: 0
+      }
+
+      /* Fuera de las tres columnas el destacado ya no está en el centro, así
+         que sobresalir solo lo descuadra. */
+      .plan.feat {
+        margin-block: 0;
+        padding-block: 2.2rem
+      }
+
+      .plan.feat .badge {
+        top: 1.5rem
       }
 
       .steps {
@@ -4806,10 +5072,21 @@
                 <span class="mk-dot"></span><span class="mk-dot"></span><span class="mk-dot"></span>
                 <span class="mk-nav"><i></i><i></i><i></i></span>
               </div>
+              <div class="mk-topnav">
+                <b>tuempresa</b>
+                <i></i><i></i><i></i>
+                <u></u>
+              </div>
               <div class="mk-hero">
                 <b>Impulsamos marcas digitales que <em>crecen.</em></b>
                 <span></span><span></span>
                 <span class="mk-cta">Hablemos</span>
+                <span class="mk-hero-img"></span>
+              </div>
+              <div class="mk-cards">
+                <div><span></span><span></span></div>
+                <div><span></span><span></span></div>
+                <div><span></span><span></span></div>
               </div>
             </div>
             <div class="mk-phone">
@@ -4968,19 +5245,21 @@
                   <div class="mk-kpi"><u>Cotizaciones</u><b>18</b><s>+4</s></div>
                   <div class="mk-kpi"><u>Aliados</u><b>9</b><s>+2</s></div>
                 </div>
+                <!-- Barras por mes, como en el panel real. Antes era una línea
+                     en SVG estirada sin conservar proporción y el trazo salía
+                     deformado y grueso. -->
                 <div class="mk-chart">
-                  <svg viewBox="0 0 120 34" preserveAspectRatio="none">
-                    <defs>
-                      <linearGradient id="svcArea" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#3f63b5" stop-opacity=".3" />
-                        <stop offset="100%" stop-color="#3f63b5" stop-opacity="0" />
-                      </linearGradient>
-                    </defs>
-                    <path d="M2 28 L22 22 L42 25 L62 14 L82 17 L100 7 L118 4 L118 34 L2 34 Z" fill="url(#svcArea)" />
-                    <path d="M2 28 L22 22 L42 25 L62 14 L82 17 L100 7 L118 4" fill="none" stroke="#3f63b5"
-                      stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-                    <circle cx="100" cy="7" r="2.4" fill="#3f63b5" />
-                  </svg>
+                  <div class="mk-chart-top">
+                    <u>Casos por periodo</u>
+                    <s>2026</s>
+                  </div>
+                  <div class="mk-bars">
+                    <i style="--h:22%"></i><i style="--h:34%"></i><i style="--h:28%"></i>
+                    <i style="--h:46%"></i><i style="--h:38%"></i><i style="--h:58%"></i>
+                    <i class="on" style="--h:100%"></i><i style="--h:52%"></i>
+                    <i style="--h:64%"></i><i style="--h:44%"></i><i style="--h:56%"></i>
+                    <i style="--h:36%"></i>
+                  </div>
                 </div>
               </div>
             </div>
@@ -5126,19 +5405,19 @@
               <div class="sit-mock sit-mock-desk">
                 <div class="sit-mock-top">
                   <i></i><i></i><i></i>
-                  <span class="sit-mock-url"></span>
+                  <span class="sit-mock-url">tuempresa.com</span>
                 </div>
                 <div class="sit-mock-body">
-                  <span class="sit-mock-line acc"></span>
+                  <b class="sit-mock-h">Tu empresa, en línea<span>.</span></b>
                   <span class="sit-mock-line w70"></span>
                   <span class="sit-mock-line w45"></span>
                   <span class="sit-mock-block"></span>
-                  <span class="sit-mock-pill"></span>
+                  <span class="sit-mock-pill">Hablemos</span>
                 </div>
               </div>
               <div class="sit-mock sit-mock-mob">
                 <div class="sit-mock-body">
-                  <span class="sit-mock-line acc"></span>
+                  <b class="sit-mock-h sit-mock-h-sm">Desde cero</b>
                   <span class="sit-mock-line w70"></span>
                   <span class="sit-mock-block"></span>
                   <span class="sit-mock-line w45"></span>
@@ -5470,25 +5749,12 @@
         <p class="desc reveal" style="--d:.1s">Servicios cuando necesitas que lo hagamos nosotros. Y un software para
           vigilar tu presencia digital mes a mes.</p>
       </div>
+      <!-- Orden ascendente y el destacado al medio, como en la referencia:
+           el ojo cae primero en el del centro. -->
       <div class="plans">
 
-        <!-- Web & Branding (Destacado) -->
-        <div class="plan feat reveal" style="--d:0s">
-          <span class="badge">Más popular</span>
-          <div class="pname">Web & Branding</div>
-          <div class="psub">Para lanzarte o relanzarte con una presencia que genere confianza desde el primer clic.</div>
-          <ul>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Identidad visual</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Web rápida, responsiva y optimizada</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Estructura comercial real</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> SEO técnico inicial</li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Revisiones hasta aprobación</li>
-          </ul>
-          <a href="#contacto" class="pbtn">Agendar llamada</a>
-        </div>
-
         <!-- Mantenimiento Digital -->
-        <div class="plan reveal" style="--d:.08s">
+        <div class="plan reveal" style="--d:0s">
           <div class="pname">Mantenimiento Digital</div>
           <div class="psub">Tu presencia digital, cuidada mes a mes. Nosotros ejecutamos — tú te dedicas a tu negocio.</div>
           <ul>
@@ -5498,7 +5764,28 @@
             <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Soporte técnico prioritario</li>
             <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Reporte mensual con hallazgos y mejoras</li>
           </ul>
-          <a href="#contacto" class="pbtn">Agendar llamada</a>
+          <div class="pfoot">
+            <a href="#contacto" class="pbtn">Agendar llamada</a>
+            <span class="pmicro">Mensual, sin permanencia</span>
+          </div>
+        </div>
+
+        <!-- Web & Branding (destacado, al medio) -->
+        <div class="plan feat reveal" style="--d:.08s">
+          <span class="badge">Más popular</span>
+          <div class="pname">Web &amp; Branding</div>
+          <div class="psub">Para lanzarte o relanzarte con una presencia que genere confianza desde el primer clic.</div>
+          <ul>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Identidad visual</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Web rápida, responsiva y optimizada</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Estructura comercial real</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> SEO técnico inicial</li>
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Revisiones hasta aprobación</li>
+          </ul>
+          <div class="pfoot">
+            <a href="#contacto" class="pbtn">Agendar llamada</a>
+            <span class="pmicro">Alcance por escrito antes de empezar</span>
+          </div>
         </div>
 
         <!-- Software a medida -->
@@ -5511,7 +5798,10 @@
             <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Desarrollo completo</li>
             <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Integración con sistemas existentes</li>
           </ul>
-          <a href="#contacto" class="pbtn">Agendar llamada</a>
+          <div class="pfoot">
+            <a href="#contacto" class="pbtn">Agendar llamada</a>
+            <span class="pmicro">Cotización a medida</span>
+          </div>
         </div>
 
       </div>
@@ -6637,6 +6927,39 @@
       });
     })();
   </script>
+
+  <!-- ================= ACORDEÓN DE PREGUNTAS =================
+       El <details> se queda abierto siempre para que el navegador no esconda
+       el contenido por su cuenta; quien abre y cierra es .faq-slide, que sí se
+       puede animar. Se envuelve desde aquí para no repetir el div nueve veces
+       en el HTML. -->
+  <script>
+    (function () {
+      var items = [].slice.call(document.querySelectorAll('.faq-item'));
+      if (!items.length) return;
+
+      items.forEach(function (item) {
+        var resumen = item.querySelector('summary');
+        var cuerpo = item.querySelector('.faq-answer');
+        if (!resumen || !cuerpo) return;
+
+        var carril = document.createElement('div');
+        carril.className = 'faq-slide';
+        cuerpo.parentNode.insertBefore(carril, cuerpo);
+        carril.appendChild(cuerpo);
+
+        item.open = true;
+        resumen.setAttribute('aria-expanded', 'false');
+
+        resumen.addEventListener('click', function (e) {
+          e.preventDefault();
+          var abierta = item.classList.toggle('abierta');
+          resumen.setAttribute('aria-expanded', abierta ? 'true' : 'false');
+        });
+      });
+    })();
+  </script>
+
 </body>
 
 </html>
