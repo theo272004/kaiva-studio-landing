@@ -1012,7 +1012,9 @@ html {
   line-height: 1.1;
   letter-spacing: -.035em;
   text-wrap: balance;
-  max-width: 18ch;
+  /* Da para que «Lo que nadie te explica sin cobrarte.» parta en dos líneas
+     limpias en vez de tres. */
+  max-width: 21ch;
   margin: 0 auto 1.1rem;
 }
 
