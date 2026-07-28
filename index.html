@@ -4395,22 +4395,33 @@
          debajo de los chips. Al lado del titular NO caben: esa línea mide
          1130px y solo deja 115px por lado. Por eso la sección crece de alto en
          pantallas grandes. */
-      .stmt-fx{position:absolute;inset:0;pointer-events:none;z-index:0}
+      /* --fuera es el aire que sobra a los lados del bloque de texto (1360px).
+         Solo las tarjetas con texto lo usan para separarse del centro; los
+         cuadraditos de iconos se quedan donde están. La sección ya recorta lo
+         que se salga, así que no puede provocar scroll horizontal. */
+      .stmt-fx{
+        position:absolute;inset:0;pointer-events:none;z-index:0;
+        --fuera:clamp(0px, calc((100vw - 1400px) / 2), 100px)
+      }
       .stmt-wrap>.stmt-title,
       .stmt-wrap>.stmt-body,
       .stmt-wrap>.stmt-caption,
       .stmt-wrap>.stmt-row{position:relative;z-index:1}
 
       .stmt-slot{position:absolute}
+
+      /* Sin backdrop-filter y con fondo opaco a propósito: el cristal
+         esmerilado obliga al navegador a rasterizar la tarjeta en una capa
+         aparte y luego rotarla, y el texto salía borroso. Sobre fondo blanco
+         el desenfoque no se veía de todos modos. `will-change` hace que la
+         capa se rasterice a la resolución real de la pantalla. */
       .stmt-card{
-        background:rgba(255,255,255,.86);
-        -webkit-backdrop-filter:blur(14px) saturate(1.4);
-        backdrop-filter:blur(14px) saturate(1.4);
-        border:1px solid rgba(255,255,255,.9);
-        box-shadow:0 1px 0 rgba(255,255,255,.7) inset,
-                   0 22px 46px -18px rgba(15,23,42,.18),
+        background:#fff;
+        border:1px solid rgba(15,23,42,.07);
+        box-shadow:0 22px 46px -18px rgba(15,23,42,.18),
                    0 3px 10px rgba(15,23,42,.045);
-        border-radius:20px;padding:19px 21px;text-align:left;
+        border-radius:20px;padding:18px 20px;text-align:left;
+        will-change:transform;
         animation:stmtFloat 8s ease-in-out infinite
       }
 
@@ -4424,14 +4435,15 @@
       /* ---- colocación (medidas del bloque de 1360px) ----
          Cada pieza guarda 16px sobre el texto: 10 que sube el flotar y 6 que
          crece la caja al inclinarse. */
-      /* Los 6px de margen no son estética: al inclinarse, la caja crece unos
-         3,5px por lado y con left:0 se salía del bloque. */
-      .stmt-s1{left:6px;top:26px;width:228px;--rot:-3deg}       /* Search      */
-      .stmt-s2{right:6px;top:32px;width:214px;--rot:2.6deg}     /* Assistant   */
-      .stmt-s3{left:8px;top:366px;width:210px;--rot:2.4deg}     /* Projects    */
-      .stmt-s4{right:8px;top:370px;width:210px;--rot:-3.2deg}   /* Creative    */
-      .stmt-s5{left:40px;top:628px;width:222px;--rot:3.6deg}    /* Ideas       */
-      .stmt-s6{right:34px;top:620px;width:218px;--rot:-2.4deg}  /* Connected   */
+      /* Ángulos suaves a propósito: cuanto más inclinada, más se nota el
+         remuestreo del texto. Con 1,6–2,2° la letra se ve nítida y la
+         inclinación se sigue leyendo. */
+      .stmt-s1{left:calc(6px - var(--fuera));top:26px;width:228px;--rot:-2deg}      /* Search    */
+      .stmt-s2{right:calc(6px - var(--fuera));top:32px;width:214px;--rot:1.8deg}    /* Assistant */
+      .stmt-s3{left:calc(8px - var(--fuera));top:366px;width:210px;--rot:1.6deg}    /* Projects  */
+      .stmt-s4{right:calc(8px - var(--fuera));top:370px;width:210px;--rot:-2deg}    /* Creative  */
+      .stmt-s5{left:calc(40px - var(--fuera));top:628px;width:222px;--rot:2.2deg}   /* Ideas     */
+      .stmt-s6{right:calc(34px - var(--fuera));top:620px;width:218px;--rot:-1.6deg} /* Connected */
 
       .stmt-s1 .stmt-card{animation-duration:7.4s}
       .stmt-s2 .stmt-card{animation-duration:8.6s;animation-delay:-2.1s}
@@ -4482,15 +4494,15 @@
          era una versalita gris de 10px y se leía como etiqueta de dashboard,
          no como el nombre de una tarjeta. */
       .stmt-head{display:flex;align-items:center;gap:8px;font-family:'Inter Tight','Inter',sans-serif;
-        font-size:14.5px;font-weight:750;letter-spacing:-.015em;color:var(--ink);margin-bottom:13px}
+        font-size:13.5px;font-weight:750;letter-spacing:-.015em;color:var(--ink);margin-bottom:12px}
       .stmt-head svg{flex-shrink:0;color:#94a3b8}
-      .stmt-line{font-size:13.5px;font-weight:550;color:var(--ink-soft);line-height:1.5}
+      .stmt-line{font-size:12.5px;font-weight:550;color:var(--ink-soft);line-height:1.5}
       .stmt-line.soft{color:var(--ink-faint);font-weight:500}
-      .stmt-ok{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:650;
-        color:#059669;margin-top:7px}
+      .stmt-ok{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:650;
+        color:#059669;margin-top:6px}
       .stmt-ok svg{flex-shrink:0}
-      .stmt-list{display:flex;flex-direction:column;gap:7px}
-      .stmt-item{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:550;color:var(--ink-soft)}
+      .stmt-list{display:flex;flex-direction:column;gap:6px}
+      .stmt-item{display:flex;align-items:center;gap:9px;font-size:12.5px;font-weight:550;color:var(--ink-soft)}
       .stmt-item i{width:6px;height:6px;border-radius:50%;background:#8242f5;flex-shrink:0;opacity:.5}
       .stmt-item:nth-child(2) i{opacity:.35}
       .stmt-item:nth-child(3) i{opacity:.2}
