@@ -1353,7 +1353,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 5px;
       padding: 0 12px 12px;
-      background: linear-gradient(160deg, #fbfaff, #f4f1fd);
+      background: #fafbfd;
     }
 
     .mk-cards div {
@@ -1419,47 +1419,20 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      background: linear-gradient(160deg, #fbfaff, #f4f1fd);
+      background: #fff;
       padding: 16px 12px 14px;
       color: var(--ink);
     }
 
-    /* El bloque de imagen del hero: claro, con un degradado suave y dos
-       formas apenas insinuadas para que parezca una foto y no una plancha. */
+    /* Plano y en gris, como los rellenos de las otras tres tarjetas. Tenía un
+       degradado violeta con dos círculos y desentonaba: las demás son paneles
+       blancos, líneas finas y un solo acento sólido. */
     .mk-hero-img {
       flex: 1;
       min-height: 30px;
       margin-top: 11px;
-      border-radius: 7px;
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(60% 80% at 78% 22%, rgba(130, 66, 245, .16), rgba(130, 66, 245, 0) 70%),
-        linear-gradient(150deg, #ffffff, #f3efff);
-      border: 1px solid rgba(130, 66, 245, .12);
-    }
-
-    .mk-hero-img::before,
-    .mk-hero-img::after {
-      content: '';
-      position: absolute;
-      border-radius: 50%;
-    }
-
-    .mk-hero-img::before {
-      width: 34%;
-      aspect-ratio: 1;
-      left: 9%;
-      bottom: -14%;
-      background: rgba(130, 66, 245, .13);
-    }
-
-    .mk-hero-img::after {
-      width: 20%;
-      aspect-ratio: 1;
-      right: 14%;
-      top: 16%;
-      background: rgba(166, 121, 255, .2);
+      border-radius: 6px;
+      background: #eef1f5;
     }
 
     .mk-hero b {
@@ -1576,7 +1549,7 @@
       margin-top: 5px;
       min-height: 14px;
       border-radius: 5px;
-      background: linear-gradient(150deg, rgba(130, 66, 245, .2), rgba(166, 121, 255, .06));
+      background: #eef1f5;
     }
 
     /* Mockup 2: branding */
