@@ -1424,16 +1424,42 @@
       color: var(--ink);
     }
 
-    /* el bloque grande de imagen del hero */
+    /* El bloque de imagen del hero: claro, con un degradado suave y dos
+       formas apenas insinuadas para que parezca una foto y no una plancha. */
     .mk-hero-img {
       flex: 1;
-      min-height: 26px;
-      margin-top: 10px;
-      border-radius: 6px;
+      min-height: 30px;
+      margin-top: 11px;
+      border-radius: 7px;
+      position: relative;
+      overflow: hidden;
       background:
-        linear-gradient(135deg, rgba(130, 66, 245, .22), rgba(166, 121, 255, .07)),
-        #fff;
-      border: 1px solid rgba(130, 66, 245, .1);
+        radial-gradient(60% 80% at 78% 22%, rgba(130, 66, 245, .16), rgba(130, 66, 245, 0) 70%),
+        linear-gradient(150deg, #ffffff, #f3efff);
+      border: 1px solid rgba(130, 66, 245, .12);
+    }
+
+    .mk-hero-img::before,
+    .mk-hero-img::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .mk-hero-img::before {
+      width: 34%;
+      aspect-ratio: 1;
+      left: 9%;
+      bottom: -14%;
+      background: rgba(130, 66, 245, .13);
+    }
+
+    .mk-hero-img::after {
+      width: 20%;
+      aspect-ratio: 1;
+      right: 14%;
+      top: 16%;
+      background: rgba(166, 121, 255, .2);
     }
 
     .mk-hero b {
@@ -1450,7 +1476,10 @@
       color: var(--violet);
     }
 
-    .mk-hero span {
+    /* Con clase y no `\.mk-hero span`: ese selector se comía al botón y al
+       bloque de imagen, que también son spans, y los dejaba en barritas
+       grises de 3px. */
+    .mk-hero .ln {
       display: block;
       margin-top: 6px;
       width: 78%;
@@ -1459,46 +1488,78 @@
       background: rgba(15, 23, 42, .12);
     }
 
-    .mk-hero span + span {
+    .mk-hero .ln + .ln {
       width: 58%;
       margin-top: 4px;
     }
 
+    /* align-self porque es hijo de un flex en columna: sin eso el botón se
+       estiraba a todo el ancho de la caja. */
     .mk-cta {
-      display: inline-block;
-      margin-top: 9px;
-      padding: 4px 9px;
+      align-self: flex-start;
+      margin-top: 10px;
+      padding: 5px 11px;
       border-radius: 99px;
       background: var(--violet);
+      color: #fff;
       font-size: 8px;
       font-weight: 700;
+      letter-spacing: .01em;
     }
 
+    /* Ahora sí con forma de teléfono: proporción alta, esquinas muy
+       redondeadas, marco oscuro y muesca arriba. Antes era un rectángulo más
+       ancho que alto y no se leía como un celular. */
     .mk-phone {
       position: absolute;
-      right: 9%;
-      bottom: 6%;
-      width: 27%;
-      border-radius: 8px;
-      background: #fff;
-      border: 2px solid #fff;
-      box-shadow: 0 12px 26px rgba(15, 23, 42, .2);
+      right: 6%;
+      bottom: 5%;
+      width: 21%;
+      aspect-ratio: 9 / 17.5;
+      border-radius: 13px;
+      background: #0f172a;
+      border: 0;
+      padding: 3px;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, .28);
+      display: flex;
+      flex-direction: column;
       overflow: hidden;
+    }
+
+    /* la muesca */
+    .mk-phone::before {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 34%;
+      height: 4px;
+      border-radius: 99px;
+      background: #0f172a;
+      z-index: 2;
     }
 
     .mk-phone-top {
       background: #fff;
-      padding: 5px 6px 4px;
-      border-bottom: 1px solid rgba(15, 23, 42, .07);
-      font-size: 6px;
+      padding: 7px 6px 4px;
+      border-radius: 10px 10px 0 0;
+      font-size: 5.5px;
       font-weight: 800;
-      color: var(--ink);
+      color: var(--ink-faint);
+      text-align: center;
+      letter-spacing: .04em;
+      text-transform: uppercase;
     }
 
     .mk-phone-body {
-      padding: 7px 6px 9px;
+      flex: 1;
+      padding: 6px 6px 8px;
       background: #fbfaff;
+      border-radius: 0 0 10px 10px;
       color: var(--ink);
+      display: flex;
+      flex-direction: column;
     }
 
     .mk-phone-body b {
@@ -1511,10 +1572,11 @@
 
     .mk-phone-body i {
       display: block;
+      flex: 1;
       margin-top: 5px;
-      height: 16px;
-      border-radius: 4px;
-      background: linear-gradient(120deg, rgba(130, 66, 245, .18), rgba(166, 121, 255, .07));
+      min-height: 14px;
+      border-radius: 5px;
+      background: linear-gradient(150deg, rgba(130, 66, 245, .2), rgba(166, 121, 255, .06));
     }
 
     /* Mockup 2: branding */
@@ -1640,8 +1702,11 @@
       background: #c9cec2 !important;
     }
 
+    /* Blanco puro, no roto: es el cuarto color de la marca. Lleva borde
+       porque sobre la tarjeta blanca si no, no se ve. */
     .mk-thallo .mk-swatches i:nth-child(4) {
-      background: #f2f2f0 !important;
+      background: #ffffff !important;
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, .09), 0 3px 9px rgba(15, 23, 42, .06);
     }
 
     /* Mockup 3: dashboard */
@@ -5079,7 +5144,7 @@
               </div>
               <div class="mk-hero">
                 <b>Impulsamos marcas digitales que <em>crecen.</em></b>
-                <span></span><span></span>
+                <span class="ln"></span><span class="ln"></span>
                 <span class="mk-cta">Hablemos</span>
                 <span class="mk-hero-img"></span>
               </div>
