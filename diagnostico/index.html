@@ -418,7 +418,7 @@
       if (!('IntersectionObserver' in window)) return;
       document.documentElement.classList.add('js-reveal');
 
-      var objetivos = document.querySelectorAll('.tarjeta, .paso, .post-item, .faq-item');
+      var objetivos = document.querySelectorAll('.tarjeta, .paso, .post-item, .faq-item, .blog-post');
       objetivos.forEach(function (el, i) {
         el.classList.add('reveal');
         // Escalona solo dentro de cada grupo para que no se acumule el retraso.

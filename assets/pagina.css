@@ -991,3 +991,343 @@ html {
   color: var(--ink-faint);
   margin-bottom: 1.5rem;
 }
+
+/* ============================================================
+   BLOG — índice
+   Estructura de blog de verdad: portada centrada, buscador, filtros por
+   categoría, un destacado grande y una rejilla de tarjetas con portada.
+   Las portadas son paneles planos dibujados con CSS, no fotos: el sitio
+   entero funciona sin imágenes y no vamos a meter banco de imágenes.
+   ============================================================ */
+
+.blog-hero {
+  text-align: center;
+  padding-block: clamp(3rem, 6vw, 5rem) clamp(2rem, 4vw, 3rem);
+}
+
+.blog-hero h1 {
+  font-family: var(--display);
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+  max-width: 18ch;
+  margin: 0 auto 1.1rem;
+}
+
+.blog-hero h1 .dot {
+  color: var(--violet);
+}
+
+.blog-hero p {
+  font-size: clamp(1rem, 1.4vw, 1.12rem);
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 56ch;
+  margin: 0 auto;
+  text-wrap: pretty;
+}
+
+/* ---------- buscador ---------- */
+.blog-buscar {
+  position: relative;
+  max-width: 440px;
+  margin: 2.2rem auto 0;
+}
+
+.blog-buscar svg {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-faint);
+  pointer-events: none;
+}
+
+.blog-buscar input {
+  width: 100%;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  background: #fff;
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--r-btn);
+  padding: .92rem 1.2rem .92rem 3.1rem;
+  transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+
+.blog-buscar input::placeholder {
+  color: var(--ink-faint);
+}
+
+.blog-buscar input:focus {
+  outline: none;
+  border-color: var(--violet);
+  box-shadow: 0 0 0 4px rgba(130, 66, 245, .1);
+}
+
+/* ---------- filtros ---------- */
+.blog-filtros-tit {
+  text-align: center;
+  margin: 2.6rem 0 .9rem;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--ink-faint);
+}
+
+.blog-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.blog-chip {
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 650;
+  color: var(--ink-soft);
+  background: #fff;
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--r-btn);
+  padding: .55rem 1.1rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
+}
+
+.blog-chip:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.blog-chip[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+/* ---------- portadas ----------
+   Panel plano + un icono grande. Cuatro tonos de la marca y nada más, para
+   no acabar con un color por artículo. */
+.blog-cover {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 14px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: #eef1f5;
+  color: var(--ink-faint);
+  flex-shrink: 0;
+}
+
+.blog-cover svg {
+  width: 34%;
+  height: auto;
+  max-width: 96px;
+  opacity: .9;
+}
+
+.blog-cover.t1 {
+  background: var(--violet);
+  color: #fff;
+}
+
+.blog-cover.t2 {
+  background: var(--ink);
+  color: #fff;
+}
+
+.blog-cover.t3 {
+  background: #efe8ff;
+  color: var(--violet);
+}
+
+.blog-cover.t4 {
+  background: #eef1f5;
+  color: #64748b;
+}
+
+/* ---------- destacado ---------- */
+.blog-destacado {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(1.5rem, 3vw, 2.6rem);
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-lg);
+  padding: clamp(1.1rem, 2vw, 1.5rem);
+  text-decoration: none;
+  transition: border-color .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+
+.blog-destacado:hover {
+  border-color: var(--violet);
+  transform: translateY(-3px);
+  box-shadow: 0 22px 48px -24px rgba(15, 23, 42, .22);
+}
+
+.blog-destacado .blog-cover {
+  aspect-ratio: 16 / 11;
+  border-radius: 16px;
+}
+
+.blog-destacado-txt {
+  padding-right: clamp(0rem, 2vw, 1.5rem);
+  min-width: 0;
+}
+
+.blog-destacado h2 {
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 2.4vw, 1.95rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -.03em;
+  text-wrap: balance;
+  color: var(--ink);
+  margin: .8rem 0 .7rem;
+}
+
+.blog-destacado p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin-bottom: 1.2rem;
+}
+
+/* ---------- rejilla ---------- */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.1rem, 2.2vw, 1.8rem);
+  margin-top: clamp(1.5rem, 3vw, 2.2rem);
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  padding: .85rem .85rem 1.15rem;
+  text-decoration: none;
+  transition: border-color .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+
+.blog-card:hover {
+  border-color: var(--violet);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 42px -22px rgba(15, 23, 42, .2);
+}
+
+.blog-card-txt {
+  padding: 1rem .5rem 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.blog-card h3 {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 750;
+  line-height: 1.32;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  margin: .7rem 0 .5rem;
+  text-wrap: balance;
+}
+
+.blog-card p {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  flex: 1;
+}
+
+/* ---------- etiqueta y pie de tarjeta ---------- */
+.blog-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .03em;
+  color: var(--violet);
+  background: var(--violet-soft);
+  border-radius: 99px;
+  padding: .3rem .7rem;
+}
+
+.blog-pie {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  margin-top: 1.1rem;
+  padding-top: .95rem;
+  border-top: 1px solid var(--line);
+}
+
+.blog-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--ink);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.blog-avatar img {
+  width: 17px;
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+
+.blog-autor {
+  font-size: 12.5px;
+  font-weight: 650;
+  color: var(--ink);
+}
+
+.blog-lectura {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+/* ---------- sin resultados ---------- */
+.blog-vacio {
+  display: none;
+  text-align: center;
+  padding: 3rem 0 1rem;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.blog-vacio.on {
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .blog-destacado {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .blog-destacado-txt {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .blog-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

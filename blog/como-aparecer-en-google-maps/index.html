@@ -361,7 +361,7 @@
       if (!('IntersectionObserver' in window)) return;
       document.documentElement.classList.add('js-reveal');
 
-      var objetivos = document.querySelectorAll('.tarjeta, .paso, .post-item, .faq-item');
+      var objetivos = document.querySelectorAll('.tarjeta, .paso, .post-item, .faq-item, .blog-post');
       objetivos.forEach(function (el, i) {
         el.classList.add('reveal');
         el.style.setProperty('--d', (i % 6) * 0.06 + 's');

@@ -98,109 +98,155 @@
   </div>
 
   <main>
-    <section class="hero">
+    <section class="blog-hero">
       <div class="wrap">
-        <h1>Lo que nadie te explica sin cobrarte<span class="dot">.</span></h1>
-        <p class="lead">Escribimos sobre lo que de verdad nos preguntan los clientes: cuánto cuesta una web,
-          por qué no apareces en Google, qué vale la pena y qué no. Sin jerga y sin vender humo.</p>
+        <h1>Aprende a que te encuentren<span class="dot">.</span></h1>
+        <p>Guías claras sobre lo que de verdad nos preguntan los clientes: cuánto cuesta una web, por
+          qué no apareces en Google y qué priorizar primero. Sin jerga y sin vender humo.</p>
+
+        <form class="blog-buscar" role="search" onsubmit="return false">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" id="blogBuscar" placeholder="Buscar en el blog…" autocomplete="off"
+            aria-label="Buscar artículos">
+        </form>
+
+        <p class="blog-filtros-tit">Por tema</p>
+        <div class="blog-filtros" id="blogFiltros" role="group" aria-label="Filtrar por tema">
+          <button type="button" class="blog-chip" data-tema="" aria-pressed="true">Todos</button>
+          <button type="button" class="blog-chip" data-tema="Visibilidad" aria-pressed="false">Visibilidad</button>
+          <button type="button" class="blog-chip" data-tema="Negocio local" aria-pressed="false">Negocio local</button>
+          <button type="button" class="blog-chip" data-tema="SEO para IA" aria-pressed="false">SEO para IA</button>
+          <button type="button" class="blog-chip" data-tema="Correo" aria-pressed="false">Correo</button>
+          <button type="button" class="blog-chip" data-tema="Cómo elegir" aria-pressed="false">Cómo elegir</button>
+          <button type="button" class="blog-chip" data-tema="Precios" aria-pressed="false">Precios</button>
+        </div>
       </div>
     </section>
 
     <section class="section" style="padding-top:0">
       <div class="wrap">
-        <div class="post-lista">
 
-          <a class="post-item" href="/blog/google-no-encuentra-mi-pagina/">
-            <div>
-              <div class="post-meta">
-                <span class="post-tag">Visibilidad</span><span>·</span><span>26 de julio de 2026</span>
-              </div>
-              <h2>Mi página no aparece en Google</h2>
-              <p>Antes de contratar SEO, descarta lo que se arregla en una tarde. Las siete causas, de
-                la más común a la más rara — empezando por una línea de código que deja tu web
-                invisible.</p>
+        <!-- Destacado: el más reciente -->
+        <a class="blog-destacado blog-post reveal" href="/blog/google-no-encuentra-mi-pagina/"
+          data-tema="Visibilidad"
+          data-txt="mi pagina no aparece en google visibilidad indexacion noindex robots search console">
+          <span class="blog-cover t1" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M8 11h6M11 8v6"/></svg>
+          </span>
+          <div class="blog-destacado-txt">
+            <span class="blog-tag">Visibilidad</span>
+            <h2>Mi página no aparece en Google</h2>
+            <p>Antes de contratar SEO, descarta lo que se arregla en una tarde. Las siete causas, de la
+              más común a la más rara — empezando por una línea de código que deja tu web invisible.</p>
+            <div class="blog-pie">
+              <span class="blog-avatar"><img src="/assets/favicon-64.png" alt="" width="17" height="17"></span>
+              <span class="blog-autor">Kaiva Studio</span>
+              <span class="blog-lectura">26 jul 2026 · 8 min</span>
             </div>
-            <span class="post-flecha" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </span>
-          </a>
+          </div>
+        </a>
 
-          <a class="post-item" href="/blog/como-aparecer-en-google-maps/">
-            <div>
-              <div class="post-meta">
-                <span class="post-tag">Negocio local</span><span>·</span><span>26 de julio de 2026</span>
-              </div>
-              <h2>Cómo aparecer en Google Maps</h2>
+        <div class="blog-grid" id="blogGrid">
+
+          <a class="blog-card blog-post reveal" href="/blog/como-aparecer-en-google-maps/" style="--d:.05s"
+            data-tema="Negocio local"
+            data-txt="como aparecer en google maps negocio local ficha resenas mapa paquete local">
+            <span class="blog-cover t3" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+            <div class="blog-card-txt">
+              <span class="blog-tag">Negocio local</span>
+              <h3>Cómo aparecer en Google Maps</h3>
               <p>El mapa se lleva buena parte de los clics y no depende de tu página web. Los tres
-                factores que deciden el orden, por qué solo dos los controlas, y cómo aparecer aunque
-                no tengas local.</p>
+                factores que deciden el orden y cómo aparecer aunque no tengas local.</p>
+              <div class="blog-pie">
+                <span class="blog-avatar"><img src="/assets/favicon-64.png" alt="" width="17" height="17"></span>
+                <span class="blog-autor">Kaiva Studio</span>
+                <span class="blog-lectura">7 min</span>
+              </div>
             </div>
-            <span class="post-flecha" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </span>
           </a>
 
-          <a class="post-item" href="/blog/seo-para-ia/">
-            <div>
-              <div class="post-meta">
-                <span class="post-tag">SEO para IA</span><span>·</span><span>25 de julio de 2026</span>
-              </div>
-              <h2>Cómo lograr que ChatGPT recomiende tu empresa</h2>
+          <a class="blog-card blog-post reveal" href="/blog/seo-para-ia/" style="--d:.1s"
+            data-tema="SEO para IA"
+            data-txt="seo para ia geo aeo chatgpt gemini claude llms txt menciones de marca">
+            <span class="blog-cover t2" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg>
+            </span>
+            <div class="blog-card-txt">
+              <span class="blog-tag">SEO para IA</span>
+              <h3>Cómo lograr que ChatGPT recomiende tu empresa</h3>
               <p>Qué son GEO y AEO, qué dice Google textualmente, por qué el archivo llms.txt casi no
-                sirve todavía, y qué factores sí correlacionan con salir en respuestas de IA.</p>
+                sirve todavía, y qué factores sí correlacionan.</p>
+              <div class="blog-pie">
+                <span class="blog-avatar"><img src="/assets/favicon-64.png" alt="" width="17" height="17"></span>
+                <span class="blog-autor">Kaiva Studio</span>
+                <span class="blog-lectura">10 min</span>
+              </div>
             </div>
-            <span class="post-flecha" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </span>
           </a>
 
-          <a class="post-item" href="/blog/por-que-mis-correos-llegan-a-spam/">
-            <div>
-              <div class="post-meta">
-                <span class="post-tag">Correo</span><span>·</span><span>25 de julio de 2026</span>
-              </div>
-              <h2>¿Por qué mis correos llegan a spam?</h2>
+          <a class="blog-card blog-post reveal" href="/blog/por-que-mis-correos-llegan-a-spam/" style="--d:.15s"
+            data-tema="Correo"
+            data-txt="por que mis correos llegan a spam spf dkim dmarc gmail autenticacion suplantacion">
+            <span class="blog-cover t4" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </span>
+            <div class="blog-card-txt">
+              <span class="blog-tag">Correo</span>
+              <h3>¿Por qué mis correos llegan a spam?</h3>
               <p>Desde 2024 Google exige autenticar el dominio o el correo va directo a spam. Qué son
-                SPF, DKIM y DMARC, cómo revisar los tuyos en tres minutos y en qué orden se arreglan.</p>
+                SPF, DKIM y DMARC y cómo revisar los tuyos en tres minutos.</p>
+              <div class="blog-pie">
+                <span class="blog-avatar"><img src="/assets/favicon-64.png" alt="" width="17" height="17"></span>
+                <span class="blog-autor">Kaiva Studio</span>
+                <span class="blog-lectura">9 min</span>
+              </div>
             </div>
-            <span class="post-flecha" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </span>
           </a>
 
-          <a class="post-item" href="/blog/mejores-agencias-diseno-web-barranquilla/">
-            <div>
-              <div class="post-meta">
-                <span class="post-tag">Cómo elegir</span><span>·</span><span>25 de julio de 2026</span>
-              </div>
-              <h2>Agencias de diseño web en Barranquilla: guía para elegir</h2>
+          <a class="blog-card blog-post reveal" href="/blog/mejores-agencias-diseno-web-barranquilla/" style="--d:.2s"
+            data-tema="Cómo elegir"
+            data-txt="mejores agencias de diseno web en barranquilla guia para elegir comparar estudios">
+            <span class="blog-cover t3" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h10"/><circle cx="19" cy="18" r="3"/></svg>
+            </span>
+            <div class="blog-card-txt">
+              <span class="blog-tag">Cómo elegir</span>
+              <h3>Agencias de diseño web en Barranquilla: guía para elegir</h3>
               <p>Seis estudios con presencia verificable en la ciudad y los criterios que separan un
-                buen proyecto de uno que toca rehacer al año. Sin ranking pagado y sin incluirnos.</p>
+                buen proyecto de uno que toca rehacer al año.</p>
+              <div class="blog-pie">
+                <span class="blog-avatar"><img src="/assets/favicon-64.png" alt="" width="17" height="17"></span>
+                <span class="blog-autor">Kaiva Studio</span>
+                <span class="blog-lectura">8 min</span>
+              </div>
             </div>
-            <span class="post-flecha" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </span>
           </a>
 
-          <a class="post-item" href="/blog/cuanto-cuesta-una-pagina-web-en-colombia/">
-            <div>
-              <div class="post-meta">
-                <span class="post-tag">Precios</span><span>·</span><span>24 de julio de 2026</span>
-              </div>
-              <h2>¿Cuánto cuesta una página web en Colombia?</h2>
-              <p>Los precios publicados van desde $400.000 hasta más de $50 millones. Explicamos qué
-                hay detrás de esa diferencia y cómo saber cuánto debería costar la tuya.</p>
-            </div>
-            <span class="post-flecha" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <a class="blog-card blog-post reveal" href="/blog/cuanto-cuesta-una-pagina-web-en-colombia/" style="--d:.25s"
+            data-tema="Precios"
+            data-txt="cuanto cuesta una pagina web en colombia precios presupuesto cotizacion rangos">
+            <span class="blog-cover t1" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 6.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 2.2 2.7 5 3.2 5 1.3 5 3.3-2.2 3-5 3-5-1.1-5-3"/></svg>
             </span>
+            <div class="blog-card-txt">
+              <span class="blog-tag">Precios</span>
+              <h3>¿Cuánto cuesta una página web en Colombia?</h3>
+              <p>Los precios publicados van desde $400.000 hasta más de $50 millones. Qué hay detrás de
+                esa diferencia y cómo saber cuánto debería costar la tuya.</p>
+              <div class="blog-pie">
+                <span class="blog-avatar"><img src="/assets/favicon-64.png" alt="" width="17" height="17"></span>
+                <span class="blog-autor">Kaiva Studio</span>
+                <span class="blog-lectura">7 min</span>
+              </div>
+            </div>
           </a>
 
         </div>
 
-        <p style="margin-top:2.5rem;font-size:15px;color:var(--ink-faint)">Estamos empezando este blog.
-          Si hay algo que te gustaría que expliquemos, <a href="/#contacto"
-            style="color:var(--violet);font-weight:650">dinos cuál</a> y lo escribimos.</p>
+        <p class="blog-vacio" id="blogVacio">No encontramos nada con eso. Prueba con otra palabra o
+          quita el filtro.</p>
       </div>
     </section>
 
@@ -261,7 +307,7 @@
       if (!('IntersectionObserver' in window)) return;
       document.documentElement.classList.add('js-reveal');
 
-      var objetivos = document.querySelectorAll('.tarjeta, .paso, .post-item, .faq-item');
+      var objetivos = document.querySelectorAll('.tarjeta, .paso, .post-item, .faq-item, .blog-post');
       objetivos.forEach(function (el, i) {
         el.classList.add('reveal');
         // Escalona solo dentro de cada grupo para que no se acumule el retraso.
@@ -279,6 +325,55 @@
       objetivos.forEach(function (el) { observador.observe(el); });
     })();
   </script>
+  <!-- ================= BUSCADOR Y FILTROS DEL BLOG =================
+       Todo del lado del cliente: son seis artículos, no hace falta backend.
+       Cada tarjeta lleva su tema y un `data-txt` sin tildes para buscar sin
+       que importen los acentos. -->
+  <script>
+    (function () {
+      var posts = [].slice.call(document.querySelectorAll('.blog-post'));
+      var chips = [].slice.call(document.querySelectorAll('.blog-chip'));
+      var campo = document.getElementById('blogBuscar');
+      var vacio = document.getElementById('blogVacio');
+      if (!posts.length) return;
+
+      var tema = '';
+
+      var limpiar = function (s) {
+        return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      };
+
+      var filtrar = function () {
+        var texto = limpiar(campo ? campo.value.trim() : '');
+        var visibles = 0;
+
+        posts.forEach(function (p) {
+          var coincideTema = !tema || p.dataset.tema === tema;
+          var coincideTexto = !texto ||
+            limpiar(p.dataset.txt).indexOf(texto) > -1 ||
+            limpiar(p.textContent).indexOf(texto) > -1;
+          var mostrar = coincideTema && coincideTexto;
+          p.style.display = mostrar ? '' : 'none';
+          if (mostrar) visibles++;
+        });
+
+        if (vacio) vacio.classList.toggle('on', visibles === 0);
+      };
+
+      chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          tema = chip.dataset.tema;
+          chips.forEach(function (c) {
+            c.setAttribute('aria-pressed', c === chip ? 'true' : 'false');
+          });
+          filtrar();
+        });
+      });
+
+      if (campo) campo.addEventListener('input', filtrar);
+    })();
+  </script>
+
 </body>
 
 </html>
