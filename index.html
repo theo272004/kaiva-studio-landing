@@ -4410,7 +4410,7 @@
         box-shadow:0 1px 0 rgba(255,255,255,.7) inset,
                    0 22px 46px -18px rgba(15,23,42,.18),
                    0 3px 10px rgba(15,23,42,.045);
-        border-radius:20px;padding:15px 17px;text-align:left;
+        border-radius:20px;padding:19px 21px;text-align:left;
         animation:stmtFloat 8s ease-in-out infinite
       }
 
@@ -4424,12 +4424,14 @@
       /* ---- colocación (medidas del bloque de 1360px) ----
          Cada pieza guarda 16px sobre el texto: 10 que sube el flotar y 6 que
          crece la caja al inclinarse. */
-      .stmt-s1{left:10px;top:30px;width:196px;--rot:-3deg}      /* Search      */
-      .stmt-s2{right:12px;top:36px;width:186px;--rot:2.6deg}    /* Assistant   */
-      .stmt-s3{left:24px;top:372px;width:178px;--rot:2.4deg}    /* Projects    */
-      .stmt-s4{right:22px;top:376px;width:178px;--rot:-3.2deg}  /* Creative    */
-      .stmt-s5{left:86px;top:648px;width:190px;--rot:3.6deg}    /* Ideas       */
-      .stmt-s6{right:78px;top:640px;width:186px;--rot:-2.4deg}  /* Connected   */
+      /* Los 6px de margen no son estética: al inclinarse, la caja crece unos
+         3,5px por lado y con left:0 se salía del bloque. */
+      .stmt-s1{left:6px;top:26px;width:228px;--rot:-3deg}       /* Search      */
+      .stmt-s2{right:6px;top:32px;width:214px;--rot:2.6deg}     /* Assistant   */
+      .stmt-s3{left:8px;top:366px;width:210px;--rot:2.4deg}     /* Projects    */
+      .stmt-s4{right:8px;top:370px;width:210px;--rot:-3.2deg}   /* Creative    */
+      .stmt-s5{left:40px;top:628px;width:222px;--rot:3.6deg}    /* Ideas       */
+      .stmt-s6{right:34px;top:620px;width:218px;--rot:-2.4deg}  /* Connected   */
 
       .stmt-s1 .stmt-card{animation-duration:7.4s}
       .stmt-s2 .stmt-card{animation-duration:8.6s;animation-delay:-2.1s}
@@ -4452,9 +4454,9 @@
       .stmt-mini.acc{color:#8242f5}
 
       .stmt-m1{left:268px;top:150px;--rot:-5deg;animation-delay:-1.5s}
-      .stmt-m2{right:262px;top:132px;--rot:4.5deg;animation-delay:-3.8s}
+      .stmt-m2{right:306px;top:132px;--rot:4.5deg;animation-delay:-3.8s}
       .stmt-m3{left:250px;top:452px;--rot:3.8deg;animation-delay:-5.2s}
-      .stmt-m4{right:246px;top:470px;--rot:-4.2deg;animation-delay:-2.4s}
+      .stmt-m4{right:300px;top:470px;--rot:-4.2deg;animation-delay:-2.4s}
       .stmt-m5{left:392px;top:702px;--rot:4.6deg;animation-delay:-6.1s}
       .stmt-m6{right:384px;top:690px;--rot:-3.4deg;animation-delay:-0.8s}
       /* Estos dos van en la franja de debajo de los chips, en el hueco que
@@ -4475,17 +4477,20 @@
         color:#8242f5;animation:stmtFloat 6.4s ease-in-out infinite
       }
 
-      /* ---- contenido: título diminuto y una o dos líneas, nunca más ---- */
-      .stmt-head{display:flex;align-items:center;gap:7px;font-size:10px;font-weight:700;
-        letter-spacing:.07em;text-transform:uppercase;color:#94a3b8;margin-bottom:10px}
-      .stmt-head svg{flex-shrink:0}
-      .stmt-line{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.5}
-      .stmt-line.soft{color:var(--ink-soft);font-weight:500}
-      .stmt-ok{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:650;
-        color:#059669;margin-top:5px}
+      /* ---- contenido ----
+         El título va en tamaño normal y oscuro, como en la referencia. Antes
+         era una versalita gris de 10px y se leía como etiqueta de dashboard,
+         no como el nombre de una tarjeta. */
+      .stmt-head{display:flex;align-items:center;gap:8px;font-family:'Inter Tight','Inter',sans-serif;
+        font-size:14.5px;font-weight:750;letter-spacing:-.015em;color:var(--ink);margin-bottom:13px}
+      .stmt-head svg{flex-shrink:0;color:#94a3b8}
+      .stmt-line{font-size:13.5px;font-weight:550;color:var(--ink-soft);line-height:1.5}
+      .stmt-line.soft{color:var(--ink-faint);font-weight:500}
+      .stmt-ok{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:650;
+        color:#059669;margin-top:7px}
       .stmt-ok svg{flex-shrink:0}
-      .stmt-list{display:flex;flex-direction:column;gap:5px}
-      .stmt-item{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--ink)}
+      .stmt-list{display:flex;flex-direction:column;gap:7px}
+      .stmt-item{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:550;color:var(--ink-soft)}
       .stmt-item i{width:6px;height:6px;border-radius:50%;background:#8242f5;flex-shrink:0;opacity:.5}
       .stmt-item:nth-child(2) i{opacity:.35}
       .stmt-item:nth-child(3) i{opacity:.2}
@@ -4503,12 +4508,14 @@
       /* Entre 1221 y 1399 solo caben cuatro: la franja de encima del titular se
          queda sin alto para el destello y la de abajo se come los chips. */
       @media(max-width:1399px){
-        .stmt-wrap{padding-block:10rem}
+        /* Mismo alto de bloque que en pantalla grande: con 12rem la tarjeta de
+           la derecha quedaba a 3px de la fila de chips. */
+        .stmt-wrap{padding-block:13rem}
         .stmt-s5,.stmt-s6,.stmt-mini,.stmt-spark-ai{display:none}
-        .stmt-s1{top:24px;width:186px}
-        .stmt-s2{top:28px;width:178px}
-        .stmt-s3{top:326px;width:170px}
-        .stmt-s4{top:330px;width:170px}
+        .stmt-s1{left:6px;top:20px;width:200px}
+        .stmt-s2{right:6px;top:26px;width:190px}
+        .stmt-s3{left:6px;top:368px;width:184px}
+        .stmt-s4{right:6px;top:368px;width:184px}
       }
 
       /* Más abajo ya no cabe nada sin comerse el texto. */
