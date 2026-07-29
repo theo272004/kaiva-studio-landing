@@ -134,6 +134,152 @@
        usa ninguna otra: meterlos en la hoja compartida haría que las demás
        páginas se descarguen reglas que nunca aplican. */
 
+    /* ---- casos de éxito: la carpeta ----
+       Tres capas apiladas con grid: el lomo al fondo, el abanico de capturas en
+       medio y la tapa adelante. Las tres ocupan la misma celda (grid-area 1/1),
+       que es la forma de superponerlas sin sacarlas del flujo y sin tener que
+       darle una altura fija al contenedor. */
+    .pf-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+    }
+
+    .pf-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      margin-top: 1.6rem;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--violet);
+      text-decoration: none;
+    }
+
+    .pf-link:hover svg {
+      transform: translate(2px, -2px);
+    }
+
+    .pf-link svg {
+      transition: transform .3s var(--ease);
+    }
+
+    .pf-carpeta {
+      display: grid;
+      place-items: center;
+      padding: clamp(1.5rem, 4vw, 3rem) 0;
+      perspective: 1200px;
+    }
+
+    .pf-carpeta > * {
+      grid-area: 1 / 1;
+    }
+
+    /* El lomo: el rectángulo de atrás con la pestaña, que es lo que hace que se
+       lea como carpeta y no como una pila suelta de tarjetas. */
+    .pf-lomo {
+      width: 70%;
+      aspect-ratio: 1.55;
+      background: #f1f0f6;
+      border-radius: 18px;
+      align-self: start;
+      position: relative;
+    }
+
+    .pf-lomo::before {
+      content: '';
+      position: absolute;
+      top: -14px;
+      left: 8%;
+      width: 30%;
+      height: 20px;
+      background: #f1f0f6;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .pf-fan {
+      align-self: start;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      place-items: center;
+      width: 100%;
+    }
+
+    .pf-fan li {
+      grid-area: 1 / 1;
+      width: 60%;
+      transform: translate(var(--x), var(--y)) rotate(var(--r));
+      transition: transform .55s var(--ease);
+    }
+
+    .pf-fan img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 14px;
+      border: 4px solid #fff;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, .13);
+    }
+
+    /* La tapa: translúcida y desenfocada, recorta las capturas por abajo igual
+       que la solapa de una carpeta real. */
+    .pf-tapa {
+      width: 74%;
+      aspect-ratio: 3.1;
+      align-self: end;
+      background: rgba(255, 255, 255, .62);
+      backdrop-filter: blur(9px);
+      -webkit-backdrop-filter: blur(9px);
+      border: 1px solid rgba(255, 255, 255, .85);
+      border-radius: 20px;
+      box-shadow: 0 -6px 30px rgba(15, 23, 42, .07);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 1.2rem 1.3rem;
+      transition: transform .55s var(--ease);
+    }
+
+    .pf-tapa b {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .pf-tapa i {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    /* Al pasar el mouse la carpeta se abre: la tapa baja y el abanico se despliega. */
+    .pf-carpeta:hover .pf-tapa,
+    .pf-carpeta:focus-within .pf-tapa {
+      transform: translateY(14px);
+    }
+
+    .pf-carpeta:hover .pf-fan li,
+    .pf-carpeta:focus-within .pf-fan li {
+      transform: translate(calc(var(--x) * 1.25), calc(var(--y) - 10px)) rotate(calc(var(--r) * 1.2));
+    }
+
+    @media (max-width: 900px) {
+      .pf-wrap {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* ---- qué incluye: lista + panel ---- */
     .inc-kicker {
       display: inline-block;
@@ -546,37 +692,60 @@
     <!-- En claro a propósito: son capturas de sitios reales, y sobre negro
          perdían contraste contra sus propios fondos. Además rompe la seguidilla
          de secciones oscuras que traía la página. -->
+    <!-- Casos de exito como carpeta. La idea es la de una carpeta física de la
+         que asoman los trabajos: el lomo detrás, las capturas en abanico
+         encima, y una tapa translúcida adelante que las recorta. Al pasar el
+         mouse la tapa baja y el abanico se abre.
+         Las capturas son las cuatro paginas reales que hicimos; ninguna es un
+         mockup. La tapa es decorativa y va con aria-hidden para que un lector
+         de pantalla lea la lista de proyectos, no el adorno. -->
     <section class="section" id="proyectos">
       <div class="wrap">
-        <span class="blog-kicker" style="color: var(--violet); border-color: rgba(130, 66, 245, 0.35); font-size: 11px; text-transform: uppercase; font-weight: 800; letter-spacing: 0.08em; display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.8rem; border: 1.5px solid; border-radius: 20px;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m22 4-10 10.01-3-3"/></svg>
-          Nuestro trabajo
-        </span>
-        <h2 style="margin-top: 1.2rem;">Casos de éxito destacados<span class="dot">.</span></h2>
-        <p class="desc" style="margin-bottom:2rem">Sitios web y plataformas construidas a medida y optimizadas para objetivos comerciales reales.</p>
-        
-        <div class="portfolio-list">
-          <article class="portfolio-item">
-            <div class="portfolio-img-container">
-              <img src="/assets/trabajo-cstravel-home.webp" alt="Sitio web de CS Travel Group" class="portfolio-img" loading="lazy" decoding="async">
-            </div>
-            <div class="portfolio-info">
-              <h3>CS Travel Group</h3>
-              <p>Portal de reservas corporativas internacional y sitio web comercial optimizado en velocidad de carga y embudo de conversión móvil.</p>
-              <span class="portfolio-tag">Diseño Web · SEO</span>
-            </div>
-          </article>
+        <div class="pf-wrap">
 
-          <article class="portfolio-item">
-            <div class="portfolio-info">
-              <h3>Thallo Digital</h3>
-              <p>Identidad visual de marca y portal digital interactivo con animaciones avanzadas de rendimiento nativo para consultora tecnológica.</p>
-              <span class="portfolio-tag">Branding · Desarrollo Web</span>
-            </div>
-            <div class="portfolio-img-container">
-              <img src="/assets/trabajo-thallo.webp" alt="Sitio web de Thallo Digital" class="portfolio-img" loading="lazy" decoding="async">
-            </div>
-          </article>
+          <div class="pf-texto">
+            <span class="inc-kicker">Nuestros proyectos</span>
+            <h2>Proyectos que hablan por<br>nosotros<span class="dot">.</span></h2>
+            <p class="desc">Páginas que están en linea ahora mismo, con su dominio y su cliente
+              detrás. Puedes entrar a cada una y verla funcionando.</p>
+            <a class="pf-link" href="https://www.cstravelgroup.com/" target="_blank" rel="noopener">
+              Ver el sitio de CS Travel
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+
+          <div class="pf-carpeta">
+            <span class="pf-lomo" aria-hidden="true"></span>
+            <ul class="pf-fan">
+              <li style="--r:-9deg;--x:-19%;--y:3%">
+                <a href="https://www.cstravelgroup.com/medicos/" target="_blank" rel="noopener">
+                  <img src="/assets/trabajo-cstravel-medicos.webp" alt="Página para médicos y clínicas de CS Travel Group" width="1000" height="563" loading="lazy" decoding="async">
+                </a>
+              </li>
+              <li style="--r:-3deg;--x:-7%;--y:-2%">
+                <a href="https://www.cstravelgroup.com/" target="_blank" rel="noopener">
+                  <img src="/assets/trabajo-cstravel-home.webp" alt="Portada de CS Travel Group" width="1280" height="704" loading="lazy" decoding="async">
+                </a>
+              </li>
+              <li style="--r:4deg;--x:6%;--y:-1%">
+                <a href="https://www.cstravelgroup.com/empresas/" target="_blank" rel="noopener">
+                  <img src="/assets/trabajo-cstravel-empresas.webp" alt="Página para empresas de CS Travel Group" width="1000" height="563" loading="lazy" decoding="async">
+                </a>
+              </li>
+              <li style="--r:10deg;--x:18%;--y:4%">
+                <a href="https://theo272004.github.io/thallo-digital/" target="_blank" rel="noopener">
+                  <img src="/assets/trabajo-thallo.webp" alt="Sitio de Thallo Digital" width="1280" height="800" loading="lazy" decoding="async">
+                </a>
+              </li>
+            </ul>
+            <span class="pf-tapa" aria-hidden="true">
+              <b>4 páginas en línea</b>
+              <i>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+              </i>
+            </span>
+          </div>
+
         </div>
       </div>
     </section>
