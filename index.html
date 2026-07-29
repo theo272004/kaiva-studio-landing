@@ -750,7 +750,12 @@
     }
 
     .hero-title {
-      margin-bottom: 1.5rem;
+      /* El aire hasta el collage lo pone .collage; aquí sobra. */
+      margin-bottom: 0;
+    }
+
+    .hero-tail {
+      margin-top: clamp(2rem, 4vw, 3rem);
     }
 
     .hero-sub {
@@ -849,7 +854,7 @@
        les da ese aire, y el clip (no hidden) impide que asomen scroll horizontal
        sin encerrar las sombras verticales. */
     .collage {
-      margin-top: clamp(3rem, 6vw, 5rem);
+      margin-top: clamp(2rem, 4vw, 3.25rem);
       padding-inline: var(--pad);
       overflow-x: clip;
     }
@@ -4663,24 +4668,14 @@
 
   <!-- ============ HERO ============ -->
   <header class="hero" id="top">
+    <!-- El orden del hero es titular, trabajo, texto y botones: el collage
+         entra justo debajo del titular para que la prueba llegue antes que la
+         explicación. Por eso la copia va partida en dos bloques con el collage
+         en medio, y no en un solo bloque. -->
     <div class="wrap hero-grid">
       <div class="hero-copy hero-centered">
         <h1 class="h1 hero-title split" data-split>Construimos la presencia digital que tu empresa <span style="color:var(--violet)">merece<span class="dot">.</span></span></h1>
-        <p class="hero-sub reveal" style="--d:.4s">Diseño de páginas web, tiendas online, marca y software a medida
-          para empresas de Barranquilla y toda Colombia.</p>
-        <div class="hero-ctas reveal" style="--d:.55s">
-          <a href="/monitor/" class="btn btn-violet">Diagnóstico gratis</a>
-          <a href="#trabajo" class="btn btn-ghost">Ver nuestro trabajo</a>
-        </div>
-        <div class="hero-note reveal" style="--d:.65s">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 6 9 17l-5-5" />
-          </svg>
-          Gratis · Sin registro · Resultado en 60 segundos.
-        </div>
       </div>
-
     </div>
 
     <!-- Collage de trabajo real. Cada tarjeta es una captura del sitio en vivo
@@ -4705,6 +4700,24 @@
             </a>
           </li>
       </ul>
+    </div>
+
+    <div class="wrap">
+      <div class="hero-copy hero-centered hero-tail">
+        <p class="hero-sub reveal" style="--d:.5s">Diseño de páginas web, tiendas online, marca y software a medida
+          para empresas de Barranquilla y toda Colombia.</p>
+        <div class="hero-ctas reveal" style="--d:.6s">
+          <a href="/monitor/" class="btn btn-violet">Diagnóstico gratis</a>
+          <a href="#trabajo" class="btn btn-ghost">Ver nuestro trabajo</a>
+        </div>
+        <div class="hero-note reveal" style="--d:.7s">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          Gratis · Sin registro · Resultado en 60 segundos.
+        </div>
+      </div>
     </div>
   </header>
 
