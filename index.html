@@ -296,7 +296,7 @@
        @font-face, que va emparejado con los preload de las fuentes.
        El <link> es bloqueante y esta en el <head>, asi que no hay flash de
        contenido sin estilo: la pagina pinta ya con la hoja aplicada. -->
-  <link rel="stylesheet" href="/assets/portada.css?v=20260728a">
+  <link rel="stylesheet" href="/assets/portada.css?v=20260729a">
 </head>
 
 <body>
@@ -326,9 +326,9 @@
 
   <!-- ============ HERO ============ -->
   <header class="hero" id="top">
-    <!-- El orden del hero es titular, trabajo, texto y botones: el collage
+    <!-- El orden del hero es titular, trabajo, texto y botones: la vitrina
          entra justo debajo del titular para que la prueba llegue antes que la
-         explicación. Por eso la copia va partida en dos bloques con el collage
+         explicación. Por eso la copia va partida en dos bloques con la vitrina
          en medio, y no en un solo bloque. -->
     <div class="wrap hero-grid">
       <div class="hero-copy hero-centered">
@@ -337,41 +337,51 @@
       </div>
     </div>
 
-    <!-- Collage de trabajo real. Cada tarjeta es una captura del sitio en vivo
+    <!-- Vitrina de trabajo real. Cada tarjeta es una captura del sitio en vivo
          del cliente, no un mockup: por eso llevan enlace y se abren en pestaña
-         nueva. El orden importa — la del centro es la que más se ve, así que va
-         la mejor. Las rotaciones están en el CSS, no aquí, para que el marcado
-         siga siendo una lista legible. -->
-    <div class="collage reveal" id="trabajo" style="--d:.45s">
-      <ul class="collage-track">
-          <li class="cw" style="--r:-7deg;--x:0;--y:6%;--z:1">
-            <a class="cw-card" href="https://www.cstravelgroup.com/" target="_blank" rel="noopener">
-              <img src="assets/trabajo-cstravel-home.webp" alt="Portada del sitio de CS Travel Group"
-                width="1280" height="704" fetchpriority="high" decoding="async">
-              <span class="cw-tag"><b>CS Travel Group</b></span>
+         nueva. Reglas del diseño, por si se toca luego:
+         · Las capturas NO se recortan — son páginas web y cortarlas esconde
+           justo lo que hay que enseñar. El marco de tablet se ajusta al alto
+           que pida la imagen, nunca al revés.
+         · Nada de rotaciones ni de tarjetas ladeadas: las tres van derechas.
+         · Las posiciones (centro, izquierda, derecha) las reparte el JS con
+           clases y van rotando solas; aquí solo va el orden de la baraja. -->
+    <div class="showcase reveal" id="trabajo" style="--d:.45s">
+      <ul class="sc-stage">
+          <li class="sc-item">
+            <a class="pad" href="https://www.cstravelgroup.com/" target="_blank" rel="noopener">
+              <span class="pad-cam" aria-hidden="true"></span>
+              <span class="pad-screen">
+                <img src="assets/trabajo-cstravel-home.webp" alt="Portada del sitio de CS Travel Group"
+                  width="1280" height="704" fetchpriority="high" decoding="async">
+              </span>
             </a>
+            <p class="sc-caption">CS Travel Group <span>Sitio web</span></p>
           </li>
           <!-- El panel no lleva enlace: vive detrás del login del cliente, así
                que un href solo llevaría a una pantalla de acceso. La captura es
                de un usuario de prueba y sin datos de nadie. -->
-          <li class="cw" style="--r:2deg;--x:0;--y:-6%;--z:2">
-            <div class="cw-card">
-              <img src="assets/trabajo-cstravel-software.webp" alt="Panel de la plataforma de CS Travel Group"
-                width="1280" height="800" decoding="async">
-              <span class="cw-tag"><b>CS Travel Group</b></span>
+          <li class="sc-item">
+            <div class="pad">
+              <span class="pad-cam" aria-hidden="true"></span>
+              <span class="pad-screen">
+                <img src="assets/trabajo-cstravel-software.webp" alt="Panel de la plataforma de CS Travel Group"
+                  width="1280" height="800" decoding="async">
+              </span>
             </div>
+            <p class="sc-caption">CS Travel Group <span>Software a medida</span></p>
           </li>
-          <li class="cw" style="--r:8deg;--x:0;--y:4%;--z:3">
-            <a class="cw-card" href="https://theo272004.github.io/thallo-digital/" target="_blank" rel="noopener">
-              <img src="assets/trabajo-thallo.webp" alt="Portada del sitio de Thallo Digital"
-                width="1280" height="800" decoding="async">
-              <span class="cw-tag"><b>Thallo Digital</b></span>
+          <li class="sc-item">
+            <a class="pad" href="https://theo272004.github.io/thallo-digital/" target="_blank" rel="noopener">
+              <span class="pad-cam" aria-hidden="true"></span>
+              <span class="pad-screen">
+                <img src="assets/trabajo-thallo.webp" alt="Portada del sitio de Thallo Digital"
+                  width="1280" height="800" decoding="async">
+              </span>
             </a>
+            <p class="sc-caption">Thallo Digital <span>Sitio web y marca</span></p>
           </li>
       </ul>
-      <span class="cpill cpill-1">Sitio web</span>
-      <span class="cpill cpill-2">Software a medida</span>
-      <span class="cpill cpill-3">Marca</span>
     </div>
 
     <div class="wrap">
@@ -2424,6 +2434,131 @@
           })
           .then(function () { ocupado(false); });
       });
+    })();
+  </script>
+
+  <!-- ================= VITRINA DEL HERO =================
+       Reparte las tres tabletas entre centro, izquierda y derecha, y va
+       corriendo el turno sola cada pocos segundos. Las posiciones se pintan con
+       clases (el CSS es quien sabe cuánto se desplaza y cuánto encoge cada
+       una); aquí solo se decide a quién le toca el centro.
+       Se para sola cuando el mouse está encima, cuando el foco entra por
+       teclado, cuando la pestaña no se ve y cuando el usuario pide menos
+       movimiento. En móvil no rota: allí la tira se arrastra con el dedo. -->
+  <script>
+    (function () {
+      var vitrina = document.querySelector('.showcase');
+      if (!vitrina) return;
+
+      var pista = vitrina.querySelector('.sc-stage');
+      var fichas = [].slice.call(vitrina.querySelectorAll('.sc-item'));
+      if (!pista || fichas.length < 2) return;
+
+      var TURNO = 5000;
+      var anchas = window.matchMedia('(min-width:881px)');
+      var quieto = window.matchMedia('(prefers-reduced-motion: reduce)');
+      var actual = 0;
+      var reloj = null;
+      var detenido = false;
+
+      /* Los puntos se generan aquí y no en el HTML: son un control, no
+         contenido, y así no hay que tocar el marcado si cambia la baraja. */
+      var puntos = document.createElement('div');
+      puntos.className = 'sc-dots';
+      var botones = fichas.map(function (ficha, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'sc-dot';
+        var pie = ficha.querySelector('.sc-caption');
+        b.setAttribute('aria-label', 'Ver ' + (pie ? pie.textContent.trim() : 'trabajo ' + (i + 1)));
+        b.addEventListener('click', function () { ir(i); reiniciar(); });
+        puntos.appendChild(b);
+        return b;
+      });
+      vitrina.appendChild(puntos);
+
+      function pintar() {
+        var n = fichas.length;
+        fichas.forEach(function (ficha, i) {
+          var sitio = (i - actual + n) % n;
+          var clase = sitio === 0 ? 'is-center'
+            : sitio === 1 ? 'is-right'
+              : sitio === n - 1 ? 'is-left' : 'is-hidden';
+          ficha.className = 'sc-item ' + clase;
+          /* La del centro es la única que se abre de un clic; a las de los
+             lados el teclado tampoco debería entrar. */
+          var enlace = ficha.querySelector('a.pad');
+          if (enlace) enlace.tabIndex = sitio === 0 ? 0 : -1;
+        });
+        botones.forEach(function (b, i) {
+          b.classList.toggle('on', i === actual);
+          b.setAttribute('aria-current', i === actual ? 'true' : 'false');
+        });
+      }
+
+      function ir(i) {
+        actual = (i + fichas.length) % fichas.length;
+        pintar();
+      }
+
+      function arrancar() {
+        parar();
+        if (detenido || !anchas.matches || quieto.matches) return;
+        reloj = setInterval(function () { ir(actual + 1); }, TURNO);
+      }
+
+      function parar() {
+        if (reloj) { clearInterval(reloj); reloj = null; }
+      }
+
+      function reiniciar() { arrancar(); }
+
+      /* Un clic en una tarjeta de los lados la trae al centro en vez de abrir
+         el sitio: nadie quiere irse a una web que todavía no ha podido ver. */
+      pista.addEventListener('click', function (e) {
+        if (!anchas.matches) return;
+        var ficha = e.target.closest ? e.target.closest('.sc-item') : null;
+        if (!ficha || ficha.classList.contains('is-center')) return;
+        e.preventDefault();
+        ir(fichas.indexOf(ficha));
+        reiniciar();
+      });
+
+      vitrina.addEventListener('mouseenter', function () { detenido = true; parar(); });
+      vitrina.addEventListener('mouseleave', function () { detenido = false; arrancar(); });
+      vitrina.addEventListener('focusin', function () { detenido = true; parar(); });
+      vitrina.addEventListener('focusout', function () {
+        if (!vitrina.contains(document.activeElement)) { detenido = false; arrancar(); }
+      });
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) parar(); else arrancar();
+      });
+
+      function acomodar() {
+        if (anchas.matches) {
+          puntos.hidden = false;
+          pintar();
+        } else {
+          /* En la tira todas valen igual: fuera clases de posición y fuera
+             tabIndex negativos, que si no los enlaces dejan de ser accesibles. */
+          parar();
+          fichas.forEach(function (ficha) {
+            ficha.className = 'sc-item';
+            var enlace = ficha.querySelector('a.pad');
+            if (enlace) enlace.removeAttribute('tabindex');
+          });
+        }
+        arrancar();
+      }
+
+      if (anchas.addEventListener) anchas.addEventListener('change', acomodar);
+      else if (anchas.addListener) anchas.addListener(acomodar);
+      /* Cinturón además de tirantes: algún navegador no dispara el cambio de
+         media query al redimensionar y las tarjetas se quedan a medio turno.
+         acomodar() es idempotente, así que llamarla de más no cuesta nada. */
+      window.addEventListener('resize', acomodar);
+
+      acomodar();
     })();
   </script>
 

@@ -463,7 +463,7 @@
       /* Ocupa el alto de la pantalla para que la sección siguiente no asome.
          svh evita el salto por la barra del navegador en móvil. El padding
          superior deja sitio al nav fijo. */
-      /* Ya no fuerzo 100svh: con el collage debajo de la copia, el alto lo
+      /* Ya no fuerzo 100svh: con la vitrina debajo de la copia, el alto lo
          marca el contenido. Antes el hero era media pantalla de texto y el
          100svh evitaba que asomara la sección siguiente; ahora sobra alto. */
       padding: clamp(7rem, 11vw, 9.5rem) 0 clamp(3rem, 5vw, 5rem);
@@ -477,7 +477,7 @@
       z-index: 1;
     }
 
-    /* Columna única y centrada: el collage necesita todo el ancho debajo, así
+    /* Columna única y centrada: la vitrina necesita todo el ancho debajo, así
        que la copia ya no compite por la mitad de la pantalla. */
     .hero-centered {
       max-width: 60rem;
@@ -495,7 +495,7 @@
     }
 
     .hero-title {
-      /* El aire hasta el collage lo pone .collage; aquí sobra. */
+      /* El aire hasta la vitrina lo pone .showcase; aquí sobra. */
       margin-bottom: 0;
     }
 
@@ -588,154 +588,189 @@
       min-width: 0;
     }
 
-    /* ================= COLLAGE DE TRABAJO =================
-       Abanico de capturas de los sitios que hemos entregado. La rotación y el
-       desplazamiento de cada tarjeta llegan por variables en línea (--r, --x,
-       --y, --z) para que el CSS no tenga que enumerar :nth-child. El solape
-       negativo es lo que da la sensación de baraja; al pasar el mouse la
-       tarjeta se endereza y sube por encima de las demás. */
-    /* Vive fuera de .wrap y a todo el ancho: las esquinas rotadas sobresalen del
-       ancho de maquetación y contra el borde del wrap se recortaban. El padding
-       les da ese aire, y el clip (no hidden) impide que asomen scroll horizontal
-       sin encerrar las sombras verticales. */
-    .collage {
+    /* ================= VITRINA DE TRABAJO =================
+       Tres capturas de sitios en vivo, cada una dentro de un marco de tablet.
+       Las reglas del diseño, por si alguien vuelve a tocarlo:
+       · La captura NUNCA se recorta. Nada de aspect-ratio ni de object-fit
+         sobre la imagen: el marco toma el alto que ella pida. Son páginas web
+         completas y cortarlas es esconder el trabajo.
+       · Nada de rotaciones. Las tres van derechas; la del centro es la grande
+         y las de los lados quedan detrás, algo más pequeñas y tapadas en parte.
+       · El reparto de posiciones lo hace el JS con .is-center/.is-left/
+         .is-right y va rotando solo. El CSS solo describe cada posición.
+       Vive fuera de .wrap y a todo el ancho: las tarjetas de los lados salen
+       del ancho de maquetación. El clip (no hidden) impide el scroll
+       horizontal sin encerrar las sombras verticales. */
+    .showcase {
+      /* Ancho de la tableta del centro. Todo lo demás se mide contra esto. */
+      --pad-w: clamp(280px, 46vw, 680px);
+      --bezel: clamp(9px, 1vw, 15px);
       position: relative;
       margin-top: clamp(2rem, 4vw, 3.25rem);
       padding-inline: var(--pad);
       overflow-x: clip;
     }
 
-    /* Resplandor lila detrás del abanico. Va en un pseudo-elemento para no
-       meter otro div al marcado, y el clip del contenedor ya lo recorta a los
-       lados. Puramente decorativo. */
-    .collage::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 46%;
-      width: min(1100px, 82%);
-      aspect-ratio: 1.7;
-      transform: translate(-50%, -50%);
-      background: radial-gradient(ellipse at center, rgba(130, 66, 245, .2), rgba(130, 66, 245, .07) 45%, transparent 72%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .collage-track {
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Etiquetas sueltas alrededor del abanico: nombran el tipo de trabajo sin
-       cargar más texto dentro de las tarjetas. */
-    .cpill {
-      position: absolute;
-      z-index: 2;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: #fff;
-      border-radius: 99px;
-      padding: 0.55rem 0.95rem;
-      font-size: 12.5px;
-      font-weight: 600;
-      color: var(--ink);
-      box-shadow: var(--shadow-md);
-      white-space: nowrap;
-    }
-
-    .cpill::before {
-      content: '';
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--violet);
-      flex-shrink: 0;
-    }
-
-    .cpill-1 {
-      left: max(var(--pad), 4%);
-      top: 30%;
-      animation: floaty 7s ease-in-out .4s infinite;
-    }
-
-    .cpill-2 {
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 2%;
-      animation: floaty 8s ease-in-out .1s infinite;
-    }
-
-    .cpill-3 {
-      right: max(var(--pad), 4%);
-      top: 12%;
-      animation: floaty 7.5s ease-in-out .7s infinite;
-    }
-
-    .collage-track {
+    .sc-stage {
       list-style: none;
+      position: relative;
       max-width: var(--maxw);
       margin: 0 auto;
-      padding: clamp(1.5rem, 3vw, 2.5rem) 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      padding: 0;
+      /* Las tarjetas van absolutas, así que el alto hay que declararlo: el de
+         la captura más alta (16/10) más el marco y el pie de foto. */
+      height: calc(var(--pad-w) / 1.6 + var(--bezel) * 2 + 3.4rem);
     }
 
-    .cw {
-      flex: 0 1 clamp(250px, 34vw, 500px);
-      margin-inline: clamp(-3.25rem, -2.4vw, -1rem);
-      transform: translate(var(--x, 0), var(--y, 0)) rotate(var(--r, 0deg));
-      position: relative;
-      z-index: var(--z, 1);
-      transition: transform .5s var(--ease), z-index 0s;
+    .sc-item {
+      --tx: 0px;
+      --s: 1;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: var(--pad-w);
+      transform: translate(calc(-50% + var(--tx)), -50%) scale(var(--s));
+      transition: transform .8s var(--ease), opacity .55s var(--ease);
+      will-change: transform, opacity;
     }
 
-    .cw-card {
+    .sc-item.is-center {
+      z-index: 3;
+    }
+
+    .sc-item.is-left {
+      --tx: calc(var(--pad-w) * -0.62);
+      --s: .74;
+      z-index: 2;
+    }
+
+    .sc-item.is-right {
+      --tx: calc(var(--pad-w) * 0.62);
+      --s: .74;
+      z-index: 2;
+    }
+
+    /* Reserva por si algún día la baraja pasa de tres: lo que no cabe en las
+       tres posiciones se guarda detrás del centro en vez de amontonarse. */
+    .sc-item.is-hidden {
+      --s: .6;
+      opacity: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* El marco. El bisel es padding, no un borde: así el hueco de la pantalla
+       se adapta solo a lo que mida la captura. */
+    .pad {
       display: block;
       position: relative;
-      border-radius: var(--r-md);
-      overflow: hidden;
-      background: var(--surface);
-      /* Sin borde: la línea clara que separa bien una tarjeta blanca se veía
-         como un filo blanco encima de las capturas oscuras. La sombra sola ya
-         despega la tarjeta del fondo. */
-      box-shadow: var(--shadow-lg);
+      padding: var(--bezel);
+      border-radius: calc(var(--bezel) * 2.2);
+      background: linear-gradient(158deg, #343943 0%, #171a21 46%, #262a33 100%);
+      box-shadow:
+        0 0 0 1px rgba(9, 13, 22, .5),
+        0 1px 0 rgba(255, 255, 255, .16) inset,
+        0 38px 70px -30px rgba(9, 13, 22, .5),
+        0 10px 24px -14px rgba(9, 13, 22, .3);
       text-decoration: none;
       color: inherit;
+      transition: transform .45s var(--ease), box-shadow .45s var(--ease);
     }
 
-    .cw-card img {
+    .pad-screen {
+      display: block;
+      border-radius: calc(var(--bezel) * 1.1);
+      overflow: hidden;
+      background: #fff;
+    }
+
+    /* Sin recorte: ancho al 100 % y alto libre. */
+    .pad-screen img {
       display: block;
       width: 100%;
       height: auto;
-      aspect-ratio: 16/10;
-      object-fit: cover;
-      object-position: top center;
     }
 
-    /* La etiqueta vive dentro de la tarjeta, sobre un velo, para que se lea
-       igual encima de una captura clara (Thallo) que de una oscura (CS Travel). */
-    .cw-tag {
+    /* La camarita, centrada en el bisel de arriba. Puro detalle. */
+    .pad-cam {
       position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: 1.6rem .85rem .65rem;
-      background: linear-gradient(to top, rgba(9, 13, 22, .78), rgba(9, 13, 22, 0));
-      color: #fff;
+      top: calc(var(--bezel) / 2);
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #0a0c11;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, .09);
     }
 
-    .cw-tag b {
-      font-size: 12.5px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
+    /* El pie va fuera de la tableta, no encima de la captura: tapar la web con
+       una etiqueta es justo lo contrario de enseñarla. Solo se lee el de la
+       tarjeta del centro; los de los lados sobran y ensucian. */
+    .sc-caption {
+      margin: .95rem 0 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: .5rem;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--ink);
+      opacity: 0;
+      transition: opacity .45s var(--ease);
     }
 
-    .cw:hover,
-    .cw:focus-within {
-      transform: translate(var(--x, 0), calc(var(--y, 0) - 14px)) rotate(0deg) scale(1.04);
-      z-index: 9;
+    .sc-item.is-center .sc-caption {
+      opacity: 1;
+    }
+
+    .sc-caption span {
+      font-weight: 500;
+      color: var(--ink-soft);
+    }
+
+    .sc-caption span::before {
+      content: '·';
+      margin-right: .5rem;
+    }
+
+    .sc-item.is-center .pad:hover {
+      transform: translateY(-8px);
+      box-shadow:
+        0 0 0 1px rgba(9, 13, 22, .5),
+        0 1px 0 rgba(255, 255, 255, .16) inset,
+        0 48px 80px -30px rgba(9, 13, 22, .55),
+        0 12px 28px -14px rgba(9, 13, 22, .32);
+    }
+
+    /* Las de los lados no se abren de un clic: el JS las trae al centro. El
+       cursor lo tiene que anunciar. */
+    .sc-item:not(.is-center) .pad {
+      cursor: pointer;
+    }
+
+    /* Botoncitos para saltar a una tarjeta sin esperar el turno. */
+    .sc-dots {
+      display: flex;
+      justify-content: center;
+      gap: .45rem;
+      margin-top: clamp(1rem, 2vw, 1.5rem);
+    }
+
+    .sc-dot {
+      width: 7px;
+      height: 7px;
+      padding: 0;
+      border: 0;
+      border-radius: 99px;
+      background: rgba(15, 23, 42, .18);
+      cursor: pointer;
+      transition: background .3s var(--ease), width .3s var(--ease);
+    }
+
+    .sc-dot.on {
+      width: 22px;
+      background: var(--violet);
     }
 
     .tl.r {
@@ -4073,11 +4108,13 @@
     }
 
     @media (max-width:880px) {
-      /* El abanico no funciona en pantalla estrecha: cuatro tarjetas rotadas y
-         solapadas se vuelven ilegibles. Pasa a ser una tira que se arrastra con
-         el dedo, cada tarjeta derecha y entera. */
-      .collage-track {
-        justify-content: flex-start;
+      /* El carrusel de tres no funciona en pantalla estrecha: las de los lados
+         quedarían fuera. Pasa a ser una tira que se arrastra con el dedo, cada
+         tableta entera y con su pie. El JS deja de rotar por su cuenta. */
+      .sc-stage {
+        height: auto;
+        display: flex;
+        align-items: center;
         gap: .9rem;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
@@ -4087,26 +4124,36 @@
         scrollbar-width: none;
       }
 
-      .collage-track::-webkit-scrollbar {
+      .sc-stage::-webkit-scrollbar {
         display: none;
       }
 
-      .cw {
-        flex: 0 0 76%;
-        max-width: 340px;
-        margin-inline: 0;
+      .showcase {
+        --pad-w: min(78vw, 360px);
+      }
+
+      /* Se nombran también las clases de posición: si alguien estrecha la
+         ventana con el carrusel a medio girar, las tarjetas ya vienen con
+         .is-left/.is-right puestas y sin esto se quedarían encogidas. */
+      .sc-item,
+      .sc-item.is-center,
+      .sc-item.is-left,
+      .sc-item.is-right,
+      .sc-item.is-hidden {
+        position: static;
+        flex: 0 0 var(--pad-w);
         transform: none;
+        opacity: 1;
+        pointer-events: auto;
         scroll-snap-align: center;
       }
 
-      .cw:hover,
-      .cw:focus-within {
-        transform: translateY(-6px);
+      .sc-item .sc-caption,
+      .sc-item.is-center .sc-caption {
+        opacity: 1;
       }
 
-      /* Las etiquetas sueltas cuelgan de las esquinas del abanico; con la tira
-         que se arrastra no tienen dónde posarse sin taparla. */
-      .cpill {
+      .sc-dots {
         display: none;
       }
 
