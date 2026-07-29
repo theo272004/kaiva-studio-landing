@@ -36,7 +36,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260728a">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260728b">
 
   <script type="application/ld+json">
 {
@@ -129,6 +129,81 @@
   ]
 }
 </script>
+  <style>
+    /* Estilos propios de esta página. Van aquí y no en pagina.css porque no los
+       usa ninguna otra: meterlos en la hoja compartida haría que las demás
+       páginas se descarguen reglas que nunca aplican. */
+
+    /* ---- cinta de trabajo del hero ---- */
+    .cinta {
+      margin-top: clamp(2.5rem, 5vw, 4rem);
+      overflow: hidden;
+      /* Se desvanece en los bordes en vez de cortarse en seco, para que se lea
+         como una tira que sigue más allá de la pantalla. */
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+      mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    }
+
+    .cinta-fila {
+      display: flex;
+      width: max-content;
+      animation: cinta-corre 46s linear infinite;
+    }
+
+    .cinta:hover .cinta-fila {
+      animation-play-state: paused;
+    }
+
+    .cinta-set {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .cinta-set li {
+      flex: 0 0 auto;
+      width: clamp(280px, 34vw, 520px);
+      margin-right: clamp(1rem, 2vw, 1.75rem);
+    }
+
+    .cinta-set img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: var(--r-md, 16px);
+      box-shadow: 0 24px 56px rgba(15, 23, 42, .1), 0 6px 18px rgba(15, 23, 42, .05);
+    }
+
+    .cinta-set span {
+      display: block;
+      margin-top: .8rem;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink-soft, #475569);
+    }
+
+    /* -50% y no -100%: la tira son dos copias iguales, así que al recorrer la
+       mitad el segundo juego queda calcado sobre la posición inicial. */
+    @keyframes cinta-corre {
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cinta-fila {
+        animation: none;
+      }
+
+      .cinta {
+        overflow-x: auto;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -176,6 +251,30 @@
         </div>
         <p class="hero-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> <span>Entre 3 y 5 semanas · Sin plantillas · El sitio queda a tu nombre.</span></p>
       </div>
+
+      <!-- Cinta de trabajo real, a todo el ancho y en movimiento continuo.
+           Una página que vende diseño web tenía que mostrar páginas antes de
+           explicar nada. Las capturas son las mismas de la portada, así que no
+           añade una sola petición nueva a un visitante que venga de ahí.
+           La lista va duplicada porque el bucle infinito se logra desplazando
+           la tira justo la mitad de su ancho: al llegar, la segunda copia está
+           exactamente donde estaba la primera y el salto no se ve. El
+           aria-hidden en la copia evita que un lector de pantalla lea dos
+           veces lo mismo. -->
+      <div class="cinta" aria-label="Trabajo del estudio">
+        <div class="cinta-fila">
+          <ul class="cinta-set">
+            <li><img src="/assets/trabajo-cstravel-home.webp" alt="Sitio corporativo de CS Travel Group" width="1280" height="704" decoding="async"><span>CS Travel Group — sitio corporativo</span></li>
+            <li><img src="/assets/trabajo-cstravel-software.webp" alt="Panel de la plataforma de CS Travel Group" width="1280" height="800" decoding="async"><span>CS Travel Group — plataforma interna</span></li>
+            <li><img src="/assets/trabajo-thallo.webp" alt="Sitio de Thallo Digital" width="1280" height="800" decoding="async"><span>Thallo Digital — marca y sitio</span></li>
+          </ul>
+          <ul class="cinta-set" aria-hidden="true">
+            <li><img src="/assets/trabajo-cstravel-home.webp" alt="" width="1280" height="704" decoding="async"><span>CS Travel Group — sitio corporativo</span></li>
+            <li><img src="/assets/trabajo-cstravel-software.webp" alt="" width="1280" height="800" decoding="async"><span>CS Travel Group — plataforma interna</span></li>
+            <li><img src="/assets/trabajo-thallo.webp" alt="" width="1280" height="800" decoding="async"><span>Thallo Digital — marca y sitio</span></li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <section class="section dark-section">
@@ -193,14 +292,17 @@
       </div>
     </section>
 
-    <section class="section dark-section" id="proyectos">
+    <!-- En claro a propósito: son capturas de sitios reales, y sobre negro
+         perdían contraste contra sus propios fondos. Además rompe la seguidilla
+         de secciones oscuras que traía la página. -->
+    <section class="section" id="proyectos">
       <div class="wrap">
         <span class="blog-kicker" style="color: var(--violet); border-color: rgba(130, 66, 245, 0.35); font-size: 11px; text-transform: uppercase; font-weight: 800; letter-spacing: 0.08em; display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.8rem; border: 1.5px solid; border-radius: 20px;">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m22 4-10 10.01-3-3"/></svg>
           Nuestro trabajo
         </span>
         <h2 style="margin-top: 1.2rem;">Casos de éxito destacados<span class="dot">.</span></h2>
-        <p class="desc" style="color: rgba(255, 255, 255, 0.6) !important; margin-bottom: 2rem;">Sitios web y plataformas construidas a medida y optimizadas para objetivos comerciales reales.</p>
+        <p class="desc" style="margin-bottom:2rem">Sitios web y plataformas construidas a medida y optimizadas para objetivos comerciales reales.</p>
         
         <div class="portfolio-list">
           <article class="portfolio-item">

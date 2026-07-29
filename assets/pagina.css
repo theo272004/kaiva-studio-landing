@@ -1653,7 +1653,7 @@ html {
   font-family: var(--display);
   font-size: clamp(1.4rem, 2.5vw, 1.85rem);
   font-weight: 800;
-  color: #fff;
+  color: var(--ink);
   margin-bottom: 1.1rem;
   letter-spacing: -0.02em;
 }
@@ -1661,9 +1661,21 @@ html {
 .portfolio-info p {
   font-size: 15.5px;
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--ink-soft);
   margin-bottom: 1.8rem;
   text-wrap: pretty;
+}
+
+/* El bloque de portafolio nacio dentro de una seccion oscura y traia los
+   colores quemados en blanco. Ahora el color por defecto es el de fondo claro
+   y el blanco se aplica solo cuando de verdad esta sobre oscuro, para que el
+   mismo bloque sirva en las dos situaciones. */
+.dark-section .portfolio-info h3 {
+  color: #fff;
+}
+
+.dark-section .portfolio-info p {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .portfolio-tag {
