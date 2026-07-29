@@ -375,8 +375,12 @@
             <a class="pad" href="https://theo272004.github.io/thallo-digital/" target="_blank" rel="noopener">
               <span class="pad-cam" aria-hidden="true"></span>
               <span class="pad-screen">
-                <img src="assets/trabajo-thallo.webp" alt="Portada del sitio de Thallo Digital"
-                  width="1280" height="800" decoding="async">
+                <!-- La captura venía con 229 px de blanco muerto arriba: dentro
+                     del marco parecía una tableta estirada con un hueco. Va
+                     recortada al contenido, y el ?v= es para que el navegador
+                     suelte la versión vieja que tiene en caché. -->
+                <img src="assets/trabajo-thallo.webp?v=2" alt="Portada del sitio de Thallo Digital"
+                  width="1243" height="582" decoding="async">
               </span>
             </a>
             <p class="sc-caption">Thallo Digital <span>Sitio web y marca</span></p>
@@ -2587,8 +2591,21 @@
 
         resumen.addEventListener('click', function (e) {
           e.preventDefault();
-          var abierta = item.classList.toggle('abierta');
-          resumen.setAttribute('aria-expanded', abierta ? 'true' : 'false');
+          var abrir = !item.classList.contains('abierta');
+
+          /* Acordeón de verdad: solo una respuesta abierta a la vez. Con varias
+             abiertas la lista se estiraba tanto que había que rebobinar para
+             encontrar la siguiente pregunta. */
+          items.forEach(function (otra) {
+            otra.classList.remove('abierta');
+            var s = otra.querySelector('summary');
+            if (s) s.setAttribute('aria-expanded', 'false');
+          });
+
+          if (abrir) {
+            item.classList.add('abierta');
+            resumen.setAttribute('aria-expanded', 'true');
+          }
         });
       });
     })();
