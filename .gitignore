@@ -40,3 +40,6 @@ nuevo kaiva studio.zip
 
 # Copia local para probar el widget de diagnóstico contra el backend Docker
 monitor/local-test.html
+
+# Capturas en crudo de los sitios de clientes (solo el .webp final va a assets/)
+_material/

@@ -727,35 +727,38 @@
       /* Ocupa el alto de la pantalla para que la sección siguiente no asome.
          svh evita el salto por la barra del navegador en móvil. El padding
          superior deja sitio al nav fijo. */
-      min-height: 100svh;
-      display: flex;
-      align-items: center;
-      padding: clamp(6rem, 10vw, 8rem) 0 clamp(3rem, 5vw, 5rem);
+      /* Ya no fuerzo 100svh: con el collage debajo de la copia, el alto lo
+         marca el contenido. Antes el hero era media pantalla de texto y el
+         100svh evitaba que asomara la sección siguiente; ahora sobra alto. */
+      padding: clamp(7rem, 11vw, 9.5rem) 0 clamp(3rem, 5vw, 5rem);
       position: relative;
       background: #ffffff;
     }
 
     .hero-grid {
       width: 100%;
-      display: grid;
-      grid-template-columns: 1.05fr 1.1fr;
-      gap: clamp(2rem, 4vw, 4.5rem);
-      align-items: center;
       position: relative;
       z-index: 1;
     }
 
+    /* Columna única y centrada: el collage necesita todo el ancho debajo, así
+       que la copia ya no compite por la mitad de la pantalla. */
+    .hero-centered {
+      max-width: 60rem;
+      margin: 0 auto;
+      text-align: center;
+    }
+
     .hero-title {
       margin-bottom: 1.5rem;
-      max-width: 28ch;
     }
 
     .hero-sub {
       font-size: clamp(1rem, 1.25vw, 1.15rem);
       color: var(--ink-soft);
       line-height: 1.6;
-      max-width: 68ch;
-      margin-bottom: 2.2rem;
+      max-width: 56ch;
+      margin: 0 auto 2.2rem;
     }
 
     .hero-ctas {
@@ -763,6 +766,7 @@
       gap: 0.8rem;
       flex-wrap: wrap;
       align-items: center;
+      justify-content: center;
     }
 
     .hero-note {
@@ -772,6 +776,7 @@
       color: var(--ink-soft);
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 0.5rem;
     }
 
@@ -829,31 +834,98 @@
       filter: blur(0);
     }
 
-    /* showcase crossfade */
-    .showcase {
-      position: relative;
-      min-width: 0;
-    }
-
     .hero-copy {
       min-width: 0;
     }
 
-    .frame {
-      background: var(--surface);
-      border: 1px solid rgba(15, 23, 42, 0.06);
-      border-radius: var(--r-lg);
-      box-shadow: var(--shadow-lg);
-      overflow: hidden;
+    /* ================= COLLAGE DE TRABAJO =================
+       Abanico de capturas de los sitios que hemos entregado. La rotación y el
+       desplazamiento de cada tarjeta llegan por variables en línea (--r, --x,
+       --y, --z) para que el CSS no tenga que enumerar :nth-child. El solape
+       negativo es lo que da la sensación de baraja; al pasar el mouse la
+       tarjeta se endereza y sube por encima de las demás. */
+    /* Vive fuera de .wrap y a todo el ancho: las esquinas rotadas sobresalen del
+       ancho de maquetación y contra el borde del wrap se recortaban. El padding
+       les da ese aire, y el clip (no hidden) impide que asomen scroll horizontal
+       sin encerrar las sombras verticales. */
+    .collage {
+      margin-top: clamp(3rem, 6vw, 5rem);
+      padding-inline: var(--pad);
+      overflow-x: clip;
     }
 
-    .frame-bar {
+    .collage-track {
+      list-style: none;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: clamp(1.5rem, 3vw, 2.5rem) 0;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.2rem;
-      background: #fafafb;
-      border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+      justify-content: center;
+    }
+
+    .cw {
+      flex: 0 1 clamp(250px, 34vw, 500px);
+      margin-inline: clamp(-3.25rem, -2.4vw, -1rem);
+      transform: translate(var(--x, 0), var(--y, 0)) rotate(var(--r, 0deg));
+      position: relative;
+      z-index: var(--z, 1);
+      transition: transform .5s var(--ease), z-index 0s;
+    }
+
+    .cw-card {
+      display: block;
+      position: relative;
+      border-radius: var(--r-md);
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid rgba(15, 23, 42, 0.07);
+      box-shadow: var(--shadow-lg);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .cw-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    /* La etiqueta vive dentro de la tarjeta, sobre un velo, para que se lea
+       igual encima de una captura clara (Thallo) que de una oscura (CS Travel). */
+    .cw-tag {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      padding: 1.9rem .85rem .7rem;
+      background: linear-gradient(to top, rgba(9, 13, 22, .82), rgba(9, 13, 22, 0));
+      color: #fff;
+    }
+
+    .cw-tag b {
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .cw-tag i {
+      font-style: normal;
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, .72);
+    }
+
+    .cw:hover,
+    .cw:focus-within {
+      transform: translate(var(--x, 0), calc(var(--y, 0) - 14px)) rotate(0deg) scale(1.04);
+      z-index: 9;
     }
 
     .tl.r {
@@ -866,115 +938,6 @@
 
     .tl.g {
       background: #28c840;
-    }
-
-    .frame-url {
-      margin-left: 0.7rem;
-      flex: 1;
-      min-width: 0;
-      max-width: 320px;
-      background: #fff;
-      border: 1px solid rgba(15, 23, 42, 0.05);
-      border-radius: 8px;
-      padding: 0.35rem 0.8rem;
-      font-size: 11.5px;
-      font-weight: 500;
-      color: var(--ink-soft);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .frame-cat {
-      margin-left: auto;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--violet);
-      background: var(--violet-soft);
-      padding: 0.25rem 0.6rem;
-      border-radius: 6px;
-      white-space: nowrap;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-    }
-
-    .shots {
-      position: relative;
-      aspect-ratio: 16/10;
-      background: #090d16;
-    }
-
-    .shot {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transform: scale(1.04);
-      transition: opacity 1s ease, transform 6s ease;
-    }
-
-    .shot.active {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .dots {
-      display: flex;
-      gap: 0.45rem;
-      justify-content: center;
-      margin-top: 1.2rem;
-    }
-
-    .dots button {
-      width: 28px;
-      height: 5px;
-      border-radius: 99px;
-      border: none;
-      background: var(--line-strong);
-      cursor: pointer;
-      padding: 0;
-      transition: background 0.3s;
-    }
-
-    .dots button.on {
-      background: var(--violet);
-    }
-
-    .chip {
-      position: absolute;
-      z-index: 3;
-      background: #fff;
-      border: 1px solid rgba(15, 23, 42, 0.05);
-      border-radius: 14px;
-      padding: 0.65rem 0.95rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 12.5px;
-      font-weight: 700;
-      box-shadow: var(--shadow-md);
-      color: var(--ink);
-    }
-
-    .chip .cdot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--violet);
-    }
-
-    .chip-1 {
-      top: -16px;
-      left: -14px;
-      animation: floaty 7s ease-in-out 0.5s infinite;
-    }
-
-    .chip-2 {
-      bottom: 44px;
-      right: -16px;
-      animation: floaty 8s ease-in-out 0.2s infinite;
     }
 
     /* ================= CARDS ================= */
@@ -4300,18 +4263,35 @@
     }
 
     @media (max-width:880px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem
+      /* El abanico no funciona en pantalla estrecha: cuatro tarjetas rotadas y
+         solapadas se vuelven ilegibles. Pasa a ser una tira que se arrastra con
+         el dedo, cada tarjeta derecha y entera. */
+      .collage-track {
+        justify-content: flex-start;
+        gap: .9rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-inline: var(--pad);
+        margin-inline: calc(var(--pad) * -1);
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
       }
 
-      .hero-title {
-        max-width: none
+      .collage-track::-webkit-scrollbar {
+        display: none;
       }
 
-      .showcase {
-        max-width: 560px;
-        margin: 0 auto;
+      .cw {
+        flex: 0 0 76%;
+        max-width: 340px;
+        margin-inline: 0;
+        transform: none;
+        scroll-snap-align: center;
+      }
+
+      .cw:hover,
+      .cw:focus-within {
+        transform: translateY(-6px);
       }
 
       .sit-wrap {
@@ -4346,14 +4326,6 @@
         display: none
       }
 
-      .chip-1 {
-        left: 0
-      }
-
-      .chip-2 {
-        right: 0
-      }
-
       .final-robots img {
         width: 38vw
       }
@@ -4385,9 +4357,10 @@
         filter: none
       }
 
-      .shot {
-        opacity: 1
-      }
+      /* La inclinación del abanico es composición, no animación: si la quito
+         aquí las cuatro tarjetas se apilan planas y se tapan entre ellas. Lo
+         que sí se desactiva es la transición, y de eso ya se encarga la regla
+         general de arriba. */
 
       .statement .big .w {
         color: var(--ink)
@@ -4689,7 +4662,7 @@
   <!-- ============ HERO ============ -->
   <header class="hero" id="top">
     <div class="wrap hero-grid">
-      <div class="hero-copy">
+      <div class="hero-copy hero-centered">
         <h1 class="h1 hero-title split" data-split>Construimos la presencia digital que tu empresa <span style="color:var(--violet)">merece<span class="dot">.</span></span></h1>
         <p class="hero-sub reveal" style="--d:.4s">Diseño de páginas web, tiendas online, marca y software a medida
           para empresas de Barranquilla y toda Colombia.</p>
@@ -4706,28 +4679,30 @@
         </div>
       </div>
 
-      <div class="showcase reveal" id="trabajo" style="--d:.3s">
-        <div class="frame">
-          <div class="frame-bar">
-            <span class="tl r"></span><span class="tl y"></span><span class="tl g"></span>
-            <span class="frame-url" id="shotUrl">noir-nouveau.com</span>
-            <span class="frame-cat" id="shotCat">Editorial · Marca</span>
-          </div>
-          <div class="shots" id="shots">
-            <img class="shot active" src="assets/kaiva_creative_mockup.webp" alt="Sitio editorial de marca" width="1024" height="1024" fetchpriority="high"
-              data-url="noir-nouveau.com" data-cat="Editorial · Marca">
-            <img class="shot" src="assets/kaiva_ecommerce_mockup.webp" alt="Tienda e-commerce" width="1024" height="1024" loading="lazy" decoding="async"
-              data-url="the-olive-collection.com" data-cat="E-commerce">
-            <img class="shot" src="assets/kaiva_tech_mockup.webp" alt="Sitio de tecnología" width="1024" height="1024" loading="lazy" decoding="async" data-url="datacore.ai"
-              data-cat="Tech · SaaS">
-            <img class="shot" src="assets/kaiva_dashboard_mockup.webp" alt="Panel de analítica" width="1024" height="1024" loading="lazy" decoding="async"
-              data-url="app.metrics.io" data-cat="Software · Dashboard">
-          </div>
-        </div>
-        <div class="dots" id="dots"></div>
-        <div class="chip chip-1"><span class="cdot"></span> Diseño a medida</div>
-        <div class="chip chip-2"><span class="cdot"></span> Listo para operar</div>
-      </div>
+    </div>
+
+    <!-- Collage de trabajo real. Cada tarjeta es una captura del sitio en vivo
+         del cliente, no un mockup: por eso llevan enlace y se abren en pestaña
+         nueva. El orden importa — la del centro es la que más se ve, así que va
+         la mejor. Las rotaciones están en el CSS, no aquí, para que el marcado
+         siga siendo una lista legible. -->
+    <div class="collage reveal" id="trabajo" style="--d:.45s">
+      <ul class="collage-track">
+          <li class="cw" style="--r:-6deg;--x:0;--y:5%;--z:1">
+            <a class="cw-card" href="https://www.cstravelgroup.com/" target="_blank" rel="noopener">
+              <img src="assets/trabajo-cstravel-home.webp" alt="Portada del sitio de CS Travel Group"
+                width="1280" height="704" fetchpriority="high" decoding="async">
+              <span class="cw-tag"><b>CS Travel Group</b><i>Sitio corporativo</i></span>
+            </a>
+          </li>
+          <li class="cw" style="--r:6deg;--x:0;--y:-4%;--z:2">
+            <a class="cw-card" href="https://theo272004.github.io/thallo-digital/" target="_blank" rel="noopener">
+              <img src="assets/trabajo-thallo.webp" alt="Portada del sitio de Thallo Digital"
+                width="1280" height="800" decoding="async">
+              <span class="cw-tag"><b>Thallo Digital</b><i>Marca y sitio</i></span>
+            </a>
+          </li>
+      </ul>
     </div>
   </header>
 
@@ -6409,37 +6384,6 @@
           // Delay slightly for render stability
           setTimeout(drawConnectorLines, 100);
         }
-      }
-
-      /* showcase crossfade */
-      var shots = [].slice.call(document.querySelectorAll('#shots .shot'));
-      var dotsBox = document.getElementById('dots');
-      var urlEl = document.getElementById('shotUrl');
-      var catEl = document.getElementById('shotCat');
-      if (shots.length) {
-        var cur = 0, timer = null;
-        shots.forEach(function (s, i) {
-          var b = document.createElement('button');
-          if (i === 0) b.className = 'on';
-          b.addEventListener('click', function () { go(i); restart(); });
-          dotsBox.appendChild(b);
-        });
-        var dotBtns = [].slice.call(dotsBox.children);
-        function go(i) {
-          shots[cur].classList.remove('active');
-          dotBtns[cur].classList.remove('on');
-          cur = i;
-          shots[cur].classList.add('active');
-          dotBtns[cur].classList.add('on');
-          if (urlEl) urlEl.textContent = shots[cur].dataset.url;
-          if (catEl) catEl.textContent = shots[cur].dataset.cat;
-        }
-        function next() { go((cur + 1) % shots.length); }
-        function restart() {
-          if (timer) clearInterval(timer);
-          if (!reduced) timer = setInterval(next, 3600);
-        }
-        restart();
       }
 
       /* situación interactiva */
