@@ -749,6 +749,15 @@
       text-align: center;
     }
 
+    .hero-eyebrow {
+      margin: 0 0 0.9rem;
+      font-size: 12.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--violet);
+    }
+
     .hero-title {
       /* El aire hasta el collage lo pone .collage; aquí sobra. */
       margin-bottom: 0;
@@ -854,9 +863,77 @@
        les da ese aire, y el clip (no hidden) impide que asomen scroll horizontal
        sin encerrar las sombras verticales. */
     .collage {
+      position: relative;
       margin-top: clamp(2rem, 4vw, 3.25rem);
       padding-inline: var(--pad);
       overflow-x: clip;
+    }
+
+    /* Resplandor lila detrás del abanico. Va en un pseudo-elemento para no
+       meter otro div al marcado, y el clip del contenedor ya lo recorta a los
+       lados. Puramente decorativo. */
+    .collage::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 46%;
+      width: min(1100px, 82%);
+      aspect-ratio: 1.7;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(ellipse at center, rgba(130, 66, 245, .2), rgba(130, 66, 245, .07) 45%, transparent 72%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .collage-track {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Etiquetas sueltas alrededor del abanico: nombran el tipo de trabajo sin
+       cargar más texto dentro de las tarjetas. */
+    .cpill {
+      position: absolute;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #fff;
+      border-radius: 99px;
+      padding: 0.55rem 0.95rem;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink);
+      box-shadow: var(--shadow-md);
+      white-space: nowrap;
+    }
+
+    .cpill::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--violet);
+      flex-shrink: 0;
+    }
+
+    .cpill-1 {
+      left: max(var(--pad), 4%);
+      top: 30%;
+      animation: floaty 7s ease-in-out .4s infinite;
+    }
+
+    .cpill-2 {
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 2%;
+      animation: floaty 8s ease-in-out .1s infinite;
+    }
+
+    .cpill-3 {
+      right: max(var(--pad), 4%);
+      top: 12%;
+      animation: floaty 7.5s ease-in-out .7s infinite;
     }
 
     .collage-track {
@@ -908,11 +985,8 @@
       left: 0;
       right: 0;
       bottom: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-      padding: 1.9rem .85rem .7rem;
-      background: linear-gradient(to top, rgba(9, 13, 22, .82), rgba(9, 13, 22, 0));
+      padding: 1.6rem .85rem .65rem;
+      background: linear-gradient(to top, rgba(9, 13, 22, .78), rgba(9, 13, 22, 0));
       color: #fff;
     }
 
@@ -920,13 +994,6 @@
       font-size: 12.5px;
       font-weight: 700;
       letter-spacing: -0.01em;
-    }
-
-    .cw-tag i {
-      font-style: normal;
-      font-size: 11px;
-      font-weight: 500;
-      color: rgba(255, 255, 255, .72);
     }
 
     .cw:hover,
@@ -4301,6 +4368,12 @@
         transform: translateY(-6px);
       }
 
+      /* Las etiquetas sueltas cuelgan de las esquinas del abanico; con la tira
+         que se arrastra no tienen dónde posarse sin taparla. */
+      .cpill {
+        display: none;
+      }
+
       .sit-wrap {
         grid-template-columns: 1fr;
       }
@@ -4674,6 +4747,7 @@
          en medio, y no en un solo bloque. -->
     <div class="wrap hero-grid">
       <div class="hero-copy hero-centered">
+        <p class="hero-eyebrow reveal">Estudio digital</p>
         <h1 class="h1 hero-title split" data-split>Construimos la presencia digital que tu empresa <span style="color:var(--violet)">merece<span class="dot">.</span></span></h1>
       </div>
     </div>
@@ -4689,7 +4763,7 @@
             <a class="cw-card" href="https://www.cstravelgroup.com/" target="_blank" rel="noopener">
               <img src="assets/trabajo-cstravel-home.webp" alt="Portada del sitio de CS Travel Group"
                 width="1280" height="704" fetchpriority="high" decoding="async">
-              <span class="cw-tag"><b>CS Travel Group</b><i>Sitio corporativo</i></span>
+              <span class="cw-tag"><b>CS Travel Group</b></span>
             </a>
           </li>
           <!-- El panel no lleva enlace: vive detrás del login del cliente, así
@@ -4699,17 +4773,20 @@
             <div class="cw-card">
               <img src="assets/trabajo-cstravel-software.webp" alt="Panel de la plataforma de CS Travel Group"
                 width="1280" height="800" decoding="async">
-              <span class="cw-tag"><b>CS Travel Group</b><i>Software a medida</i></span>
+              <span class="cw-tag"><b>CS Travel Group</b></span>
             </div>
           </li>
           <li class="cw" style="--r:8deg;--x:0;--y:4%;--z:3">
             <a class="cw-card" href="https://theo272004.github.io/thallo-digital/" target="_blank" rel="noopener">
               <img src="assets/trabajo-thallo.webp" alt="Portada del sitio de Thallo Digital"
                 width="1280" height="800" decoding="async">
-              <span class="cw-tag"><b>Thallo Digital</b><i>Marca y sitio</i></span>
+              <span class="cw-tag"><b>Thallo Digital</b></span>
             </a>
           </li>
       </ul>
+      <span class="cpill cpill-1">Sitio web</span>
+      <span class="cpill cpill-2">Software a medida</span>
+      <span class="cpill cpill-3">Marca</span>
     </div>
 
     <div class="wrap">
@@ -4717,7 +4794,12 @@
         <p class="hero-sub reveal" style="--d:.5s">Diseño de páginas web, tiendas online, marca y software a medida
           para empresas de Barranquilla y toda Colombia.</p>
         <div class="hero-ctas reveal" style="--d:.6s">
-          <a href="/monitor/" class="btn btn-violet">Diagnóstico gratis</a>
+          <a href="/monitor/" class="btn btn-violet">Diagnóstico gratis
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 17 17 7M9 7h8v8" />
+            </svg>
+          </a>
           <a href="#trabajo" class="btn btn-ghost">Ver nuestro trabajo</a>
         </div>
         <div class="hero-note reveal" style="--d:.7s">
