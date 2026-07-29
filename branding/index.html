@@ -249,6 +249,197 @@
         transform: translateY(-6px);
       }
     }
+
+    /* ---- mini ilustraciones de "Qué te llevas" ----
+       Las cuatro tarjetas eran icono + texto, iguales a cualquier tarjeta
+       del sitio. Cada una se lleva ahora una ilustración chiquita y propia
+       de lo que promete — el mismo espíritu de las tarjetitas flotantes de
+       Thallo (una mini interfaz distinta por tarjeta, no un icono repetido)
+       — y se dibuja sola cuando la tarjeta entra en pantalla, reusando la
+       clase .dentro que ya pone el script de scroll-reveal. */
+    .tj-visual {
+      margin-top: 1.1rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* 1. Logo y sus versiones: el mismo tres formas que promete el texto —
+       clara, oscura y a un color — como si fueran sellos. */
+    .tj-versions {
+      gap: .5rem;
+    }
+
+    .tj-v {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      transform: scale(0);
+      opacity: 0;
+      transition: transform .5s var(--ease), opacity .5s var(--ease);
+    }
+
+    .tj-v span {
+      width: 15px;
+      height: 15px;
+      border-radius: 4px;
+    }
+
+    .tj-v-light {
+      background: var(--violet);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tj-v-light span {
+      background: #fff;
+    }
+
+    .tj-v-dark {
+      background: #1c1730;
+      box-shadow: var(--shadow-sm);
+      transition-delay: .1s;
+    }
+
+    .tj-v-dark span {
+      background: #fff;
+    }
+
+    .tj-v-mono {
+      background: #e7e2f3;
+      transition-delay: .2s;
+    }
+
+    .tj-v-mono span {
+      background: var(--ink);
+    }
+
+    .tarjeta.dentro .tj-v {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    /* 2. Paleta de color: la fila real de swatches, más grande que el icono,
+       entrando con un rebote leve — como fichas de pintura cayendo. */
+    .tj-palette {
+      gap: .55rem;
+    }
+
+    .tj-chip {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 1px rgba(15, 23, 42, .07);
+      transform: translateY(14px) scale(.4);
+      opacity: 0;
+      transition: transform .55s cubic-bezier(.34, 1.56, .64, 1), opacity .4s var(--ease);
+    }
+
+    .tarjeta.dentro .tj-chip {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .tj-chip:nth-child(1) {
+      background: var(--violet);
+    }
+
+    .tj-chip:nth-child(2) {
+      background: #1c1730;
+      transition-delay: .07s;
+    }
+
+    .tj-chip:nth-child(3) {
+      background: #2a9d6f;
+      transition-delay: .14s;
+    }
+
+    .tj-chip:nth-child(4) {
+      background: #f3eeff;
+      transition-delay: .21s;
+    }
+
+    .tj-chip:nth-child(5) {
+      background: #e8b64a;
+      transition-delay: .28s;
+    }
+
+    /* 3. Tipografía: el "Aa" engrosa solo, de fino a negrita, con la misma
+       fuente variable que ya usa toda la página — no es un efecto prestado,
+       es lo que Inter Tight ya sabe hacer y nunca se había aprovechado. */
+    .tj-type {
+      font-family: var(--display);
+      font-size: 2.6rem;
+      line-height: 1;
+      color: var(--ink);
+      font-variation-settings: 'wght' 100;
+      font-weight: 100;
+      transition: font-variation-settings 1s var(--ease), font-weight 1s var(--ease);
+    }
+
+    .tarjeta.dentro .tj-type {
+      font-variation-settings: 'wght' 800;
+      font-weight: 800;
+    }
+
+    /* 4. Guía de marca: tres hojas apiladas que se abren en abanico, como un
+       folleto que se despliega. */
+    .tj-guide {
+      position: relative;
+      width: 46px;
+    }
+
+    .tj-page {
+      position: absolute;
+      left: 0;
+      width: 34px;
+      height: 44px;
+      background: #fff;
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      box-shadow: var(--shadow-sm);
+      transform: rotate(0deg);
+      opacity: 0;
+      transition: transform .6s var(--ease), opacity .5s var(--ease);
+    }
+
+    .tj-page::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      right: 6px;
+      top: 10px;
+      height: 2px;
+      background: var(--line-strong);
+      box-shadow: 0 6px 0 var(--line-strong);
+    }
+
+    .tarjeta.dentro .tj-page {
+      opacity: 1;
+    }
+
+    .tj-page-1 {
+      z-index: 1;
+    }
+
+    .tarjeta.dentro .tj-page-1 {
+      transform: rotate(-10deg) translateX(-3px);
+    }
+
+    .tj-page-2 {
+      z-index: 2;
+      transition-delay: .08s;
+    }
+
+    .tj-page-3 {
+      z-index: 3;
+      transition-delay: .16s;
+    }
+
+    .tarjeta.dentro .tj-page-3 {
+      transform: rotate(10deg) translateX(3px);
+    }
   </style>
 </head>
 
@@ -359,6 +550,11 @@
             <h3>Logo y sus versiones</h3>
             <p>Horizontal, compacta, en un solo color y para fondos oscuros. En vectorial, para que
               sirva desde una factura hasta una valla.</p>
+            <div class="tj-visual tj-versions" aria-hidden="true">
+              <span class="tj-v tj-v-light"><span></span></span>
+              <span class="tj-v tj-v-dark"><span></span></span>
+              <span class="tj-v tj-v-mono"><span></span></span>
+            </div>
           </article>
           <article class="tarjeta">
             <div class="ico" aria-hidden="true">
@@ -367,6 +563,13 @@
             <h3>Paleta de color</h3>
             <p>Los colores definidos con sus códigos exactos para pantalla e impresión. Se acabó el
               «más o menos ese azul».</p>
+            <div class="tj-visual tj-palette" aria-hidden="true">
+              <span class="tj-chip"></span>
+              <span class="tj-chip"></span>
+              <span class="tj-chip"></span>
+              <span class="tj-chip"></span>
+              <span class="tj-chip"></span>
+            </div>
           </article>
           <article class="tarjeta">
             <div class="ico" aria-hidden="true">
@@ -375,6 +578,9 @@
             <h3>Tipografía</h3>
             <p>Qué fuente usar para títulos y para texto, con sus pesos y tamaños. Y de dónde
               descargarla para que todo tu equipo use la misma.</p>
+            <div class="tj-visual" aria-hidden="true">
+              <span class="tj-type">Aa</span>
+            </div>
           </article>
           <article class="tarjeta">
             <div class="ico" aria-hidden="true">
@@ -383,6 +589,11 @@
             <h3>Guía de marca</h3>
             <p>El documento que explica cómo usar cada cosa. Se lo pasas a cualquier diseñador o
               imprenta y el resultado sale bien sin que tengas que explicar nada.</p>
+            <div class="tj-visual tj-guide" aria-hidden="true">
+              <span class="tj-page tj-page-1"></span>
+              <span class="tj-page tj-page-2"></span>
+              <span class="tj-page tj-page-3"></span>
+            </div>
           </article>
         </div>
       </div>
