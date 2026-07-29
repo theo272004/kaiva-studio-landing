@@ -1765,3 +1765,147 @@ html {
     grid-row: unset;
   }
 }
+
+/* ================= OTROS SERVICIOS =================
+   Mismo bloque al pie de las tres paginas de servicio. Solo cambian las tres
+   tarjetas: nunca se incluye la pagina donde ya estas. */
+.serv-otros {
+  padding-top: 0;
+  border-top: none;
+}
+
+.serv-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--violet);
+  background: var(--violet-soft);
+  padding: .45rem .9rem;
+  border-radius: 99px;
+  margin-bottom: 1.2rem;
+}
+
+.serv-kicker::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.serv-hi {
+  color: var(--violet);
+}
+
+.serv-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.serv-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--line-strong);
+  border-radius: 22px;
+  padding: clamp(1.6rem, 3vw, 2.2rem);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: transform .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease);
+}
+
+/* Trama de puntos de la esquina: un degradado radial repetido, sin imagen. */
+.serv-card::after {
+  content: '';
+  position: absolute;
+  right: 1.4rem;
+  bottom: 1.4rem;
+  width: 84px;
+  height: 62px;
+  background-image: radial-gradient(circle, rgba(130, 66, 245, .22) 1.2px, transparent 1.2px);
+  background-size: 11px 11px;
+  pointer-events: none;
+}
+
+.serv-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(130, 66, 245, .32);
+  box-shadow: var(--shadow-md);
+}
+
+.serv-ico {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: var(--violet-soft);
+  color: var(--violet);
+  margin-bottom: 1.6rem;
+}
+
+.serv-card b {
+  font-family: var(--display);
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  margin-bottom: .8rem;
+}
+
+.serv-raya {
+  width: 30px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--violet);
+  margin-bottom: 1rem;
+}
+
+.serv-desc {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 26ch;
+}
+
+/* auto empuja la flecha al pie, asi las tres quedan alineadas aunque los
+   textos midan distinto. */
+.serv-flecha {
+  margin-top: auto;
+  padding-top: 1.8rem;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  box-sizing: content-box;
+  border-radius: 50%;
+  color: var(--violet);
+}
+
+.serv-flecha svg {
+  width: 44px;
+  height: 44px;
+  padding: 13px;
+  border-radius: 50%;
+  background: var(--violet-soft);
+  box-sizing: border-box;
+  transition: transform .35s var(--ease), background .35s var(--ease);
+}
+
+.serv-card:hover .serv-flecha svg {
+  transform: translateX(3px);
+  background: rgba(130, 66, 245, .18);
+}
+
+@media (max-width: 860px) {
+  .serv-grid {
+    grid-template-columns: 1fr;
+  }
+}

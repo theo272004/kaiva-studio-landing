@@ -36,7 +36,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260728b">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260729c">
 
   <script type="application/ld+json">
 {
@@ -352,21 +352,47 @@
       </div>
     </section>
 
-    <section class="section" style="padding-top:0">
+    <!-- Otros servicios. Mismo componente en las tres paginas de servicio; solo
+         cambian las tres tarjetas, que nunca incluyen la pagina donde estas. -->
+    <section class="section serv-otros">
       <div class="wrap">
-        <h2 style="font-size:clamp(1.2rem,2.4vw,1.5rem);margin-bottom:1.6rem">Otros servicios</h2>
-        <div class="otros">
-          <a href="/diseno-web/">
-            <strong>Diseño web</strong>
-            <span>Páginas web a medida, rápidas y pensadas para convertir.</span>
+        <span class="serv-kicker">Servicios adicionales</span>
+        <h2>Otros <span class="serv-hi">servicios</span></h2>
+        <p class="desc">Soluciones que se complementan entre sí. Cada una resuelve una parte
+          distinta de tu presencia digital.</p>
+        <div class="serv-grid">
+          <a class="serv-card" href="/diseno-web/">
+            <span class="serv-ico" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><circle cx="6.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/><circle cx="8.8" cy="6.5" r=".6" fill="currentColor" stroke="none"/><circle cx="11.1" cy="6.5" r=".6" fill="currentColor" stroke="none"/></svg>
+            </span>
+            <b>Diseño web</b>
+            <span class="serv-raya" aria-hidden="true"></span>
+            <span class="serv-desc">Páginas web a medida, rápidas y pensadas para convertir.</span>
+            <span class="serv-flecha" aria-hidden="true">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+            </span>
           </a>
-          <a href="/software-a-medida/">
-            <strong>Software a medida</strong>
-            <span>Plataformas, e-commerce, dashboards e integraciones.</span>
+          <a class="serv-card" href="/software-a-medida/">
+            <span class="serv-ico" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 16-4-4 4-4"/><path d="m16 8 4 4-4 4"/><path d="M13.5 5.5 10.5 18.5"/></svg>
+            </span>
+            <b>Software a medida</b>
+            <span class="serv-raya" aria-hidden="true"></span>
+            <span class="serv-desc">Plataformas, paneles internos, e-commerce e integraciones.</span>
+            <span class="serv-flecha" aria-hidden="true">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+            </span>
           </a>
-          <a href="/diagnostico/">
-            <strong>Diagnóstico Digital</strong>
-            <span>Diagnóstico del estado de tu presencia digital.</span>
+          <a class="serv-card" href="/diagnostico/">
+            <span class="serv-ico" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/><path d="M9 12.5v2"/><path d="M11.5 9.5v5"/><path d="M14 11.5v3"/></svg>
+            </span>
+            <b>Diagnóstico Digital</b>
+            <span class="serv-raya" aria-hidden="true"></span>
+            <span class="serv-desc">Diagnóstico del estado de tu presencia digital.</span>
+            <span class="serv-flecha" aria-hidden="true">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+            </span>
           </a>
         </div>
       </div>
