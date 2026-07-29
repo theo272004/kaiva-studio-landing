@@ -334,20 +334,9 @@ html {
   isolation: isolate;
 }
 
-/* Halo violeta muy tenue arriba a la derecha. Pegado a `right:0` a propósito:
-   con un valor negativo se salía del ancho y aparecía scroll horizontal. El
-   degradado se apaga solo antes del borde, así que no hace falta recortarlo. */
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: 0;
-  width: min(680px, 72vw);
-  aspect-ratio: 1;
-  background: radial-gradient(circle, rgba(130, 66, 245, .1), rgba(130, 66, 245, 0) 62%);
-  pointer-events: none;
-  z-index: -1;
-}
+/* Aquí vivía un halo violeta detrás del titular. Fuera: los fondos van planos.
+   Si hace falta dar aire a una sección, se hace con espacio o con un cambio de
+   color liso (.section.alt), nunca con un degradado. */
 
 .hero .wrap {
   position: relative;
@@ -1417,65 +1406,10 @@ html {
 }
 
 /* ==========================================
-   ESTILOS INTERACTIVOS ESTILO CUBERTO (DISEÑO WEB)
+   TIMELINE DEL PROCESO (DISEÑO WEB Y OTRAS)
    ========================================== */
 
-/* 1. Cursor personalizado fluido */
-.custom-cursor {
-  width: 18px;
-  height: 18px;
-  background: rgba(130, 66, 245, 0.18);
-  border: 1.5px solid var(--violet);
-  border-radius: 50%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 99999;
-  transform: translate3d(0, 0, 0);
-  transition: width 0.35s cubic-bezier(0.215, 0.61, 0.355, 1),
-              height 0.35s cubic-bezier(0.215, 0.61, 0.355, 1),
-              background-color 0.35s ease,
-              border-color 0.35s ease;
-}
-
-.custom-cursor.cursor-hover {
-  width: 52px;
-  height: 52px;
-  background: rgba(130, 66, 245, 0.08);
-  border-color: var(--violet);
-}
-
-.custom-cursor.cursor-card-hover {
-  width: 36px;
-  height: 36px;
-  background: rgba(46, 30, 92, 0.03);
-  border-color: var(--ink-soft);
-}
-
-/* 2. Reseteos e inercias de botones magnéticos */
-.btn, .logo, .nav-toggle {
-  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
-  transform-style: preserve-3d;
-}
-.btn span, .btn svg, .logo img, .nav-toggle svg {
-  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
-  display: inline-block;
-}
-
-/* 3. Transformaciones 3D en las tarjetas de incluye */
-.tarjeta {
-  transform-style: preserve-3d;
-  transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1),
-              box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-              border-color 0.4s ease;
-}
-.tarjeta:hover {
-  border-color: var(--violet);
-  box-shadow: 0 20px 45px rgba(130, 66, 245, 0.065);
-}
-
-/* 4. Timeline del proceso fluido con scroll-reveal */
+/* Timeline del proceso fluido con scroll-reveal */
 .paso {
   opacity: 0.35;
   transform: translateY(24px);
@@ -1547,19 +1481,6 @@ html {
   position: relative;
   isolation: isolate;
   transition: background 0.4s ease, color 0.4s ease;
-}
-
-.dark-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 80% 20%, rgba(130, 66, 245, 0.06), transparent 50%),
-              radial-gradient(circle at 20% 80%, rgba(130, 66, 245, 0.03), transparent 50%);
-  pointer-events: none;
-  z-index: -1;
 }
 
 .dark-section h2 {
@@ -1693,7 +1614,6 @@ html {
 
 /* Unificación del cierre en bloque oscuro */
 .dark-section .cierre {
-  background: radial-gradient(circle at top right, rgba(130, 66, 245, 0.07), transparent 60%);
   border: 1px solid rgba(255, 255, 255, 0.06);
   padding: clamp(3rem, 7vw, 5rem) clamp(2rem, 5vw, 3.5rem);
   border-radius: 28px;

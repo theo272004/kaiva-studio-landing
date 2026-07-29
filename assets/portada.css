@@ -1808,11 +1808,7 @@
       position: relative;
       padding-block: clamp(5.5rem, 9vw, 10rem);
       overflow: hidden;
-      /* Blanco con un halo violeta casi invisible detrás del texto: da algo de
-         luz ambiental a las tarjetas flotantes sin que se note el degradado. */
-      background:
-        radial-gradient(ellipse 70% 46% at 50% 42%, rgba(130, 66, 245, .045), rgba(130, 66, 245, 0) 70%),
-        #ffffff;
+      background: #ffffff;
       border-block: 1px solid var(--line);
     }
 
@@ -3374,6 +3370,48 @@
       border-color: #fff;
     }
 
+    /* Los dos planes blancos "salen" de detrás del negro, como si el del
+       centro repartiera cartas: arrancan encogidos, girados y montados sobre
+       el negro, y al aparecer se enderezan casi del todo — queda solo un
+       giro muy leve, como una carta recién puesta sobre la mesa. Solo tiene
+       sentido con las tres columnas en fila, así que va detrás de ese
+       min-width; en 2 o 1 columna el negro ya no está al centro y estas
+       tarjetas vuelven al fade-up de siempre. */
+    @media (min-width: 1081px) {
+      .plan.feat {
+        z-index: 1;
+      }
+
+      .plans .plan:first-child.reveal {
+        transform: translateX(42%) scale(.88) rotate(-9deg);
+        z-index: 0;
+      }
+
+      .plans .plan:last-child.reveal {
+        transform: translateX(-42%) scale(.88) rotate(9deg);
+        z-index: 0;
+      }
+
+      .plans .plan:first-child.reveal.in {
+        transform: rotate(-2.2deg);
+      }
+
+      .plans .plan:last-child.reveal.in {
+        transform: rotate(2.2deg);
+      }
+
+      /* El hover de siempre (levantar la tarjeta) se suma al giro en vez de
+         reemplazarlo, si no el gesto de "carta sobre la mesa" desaparecía en
+         cuanto alguien pasaba el mouse por encima. */
+      .plans .plan:first-child.reveal.in:hover {
+        transform: rotate(-2.2deg) translateY(-6px);
+      }
+
+      .plans .plan:last-child.reveal.in:hover {
+        transform: rotate(2.2deg) translateY(-6px);
+      }
+    }
+
     /* ===== Panel Pro (producto) ===== */
     .plans-soft {
       margin-top: 1.2rem;
@@ -3579,7 +3617,6 @@
       text-align: center;
       position: relative;
       overflow: hidden;
-      background-image: radial-gradient(circle at 50% 50%, rgba(130, 66, 245, 0.05) 0%, transparent 60%);
     }
 
     .final .lead {
