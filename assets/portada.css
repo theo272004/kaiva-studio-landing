@@ -605,6 +605,9 @@
       /* Ancho de la tableta del centro. Todo lo demás se mide contra esto. */
       --pad-w: clamp(280px, 46vw, 680px);
       --bezel: clamp(9px, 1vw, 15px);
+      /* Proporción de las capturas: las tres van a 1267×704. Si cambia, hay
+         que cambiarla aquí también o el escenario reserva un alto que no es. */
+      --sc-ar: 1.8;
       position: relative;
       margin-top: clamp(2rem, 4vw, 3.25rem);
       padding-inline: var(--pad);
@@ -618,8 +621,8 @@
       margin: 0 auto;
       padding: 0;
       /* Las tarjetas van absolutas, así que el alto hay que declararlo: el de
-         la captura más alta (16/10) más el marco y el pie de foto. */
-      height: calc(var(--pad-w) / 1.6 + var(--bezel) * 2 + 3.4rem);
+         la captura más el marco y el pie de foto. */
+      height: calc(var(--pad-w) / var(--sc-ar) + var(--bezel) * 2 + 3.4rem);
     }
 
     .sc-item {
