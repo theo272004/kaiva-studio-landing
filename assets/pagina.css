@@ -1712,6 +1712,7 @@ html {
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   color: rgba(255, 255, 255, 0.5) !important;
   padding-block: clamp(2rem, 4vw, 3rem);
+  margin-top: 0 !important;
 }
 
 .dark-footer a {
