@@ -36,7 +36,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260729d">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260729e">
 
   <script type="application/ld+json">
 {
@@ -443,117 +443,10 @@
       }
     }
 
-    /* ---- cierre: qué pasa cuando escribes ----
-       En pagina.css el cierre nace oscuro (fondo negro, texto blanco) porque
-       asi vivia en todas las paginas. Aqui lo pasamos a claro, y hay que
-       desandar tambien los colores heredados: basta con el fondo, el texto
-       queda invisible. Los selectores repiten .cierre para ganarle en
-       especificidad a `.cierre p`, que si no manda su blanco. */
-    .cierre {
-      background: #fbfaff;
-      color: var(--ink);
-      border: 1px solid rgba(130, 66, 245, .12);
-      border-radius: 28px;
-      padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 3.5rem);
-      text-align: center;
-    }
+    /* El cierre claro y la "ruta" de tres pasos se movieron a pagina.css
+       (clase .cierre-light): ahora branding y software la usan también, así
+       que dejó de ser algo propio de esta página. */
 
-    .cierre p {
-      color: var(--ink-soft);
-    }
-
-    .cierre .btn-ghost {
-      border-color: var(--line-strong);
-      color: var(--ink);
-      background: #fff;
-    }
-
-    .cierre .btn-ghost:hover {
-      border-color: var(--ink);
-      background: #fff;
-    }
-
-    .cierre .cierre-sub {
-      max-width: 52ch;
-      margin: 0 auto;
-      color: var(--ink-soft);
-      line-height: 1.7;
-    }
-
-    .ruta {
-      list-style: none;
-      margin: clamp(2rem, 4vw, 3rem) 0;
-      padding: 0;
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: repeat(3, 1fr);
-      text-align: left;
-      counter-reset: paso;
-    }
-
-    .ruta li {
-      counter-increment: paso;
-      background: #fff;
-      border: 1px solid var(--line-strong);
-      border-radius: 16px;
-      padding: 1.5rem 1.4rem 1.3rem;
-      position: relative;
-    }
-
-    /* El número vive en el pseudo-elemento y no en el marcado: es orden
-       visual, no contenido que alguien necesite oír leído en voz alta. */
-    .ruta li::before {
-      content: counter(paso);
-      display: block;
-      font-family: var(--display);
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--violet);
-      margin-bottom: .7rem;
-    }
-
-    .ruta b {
-      display: block;
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      margin-bottom: .45rem;
-    }
-
-    .ruta span {
-      display: block;
-      font-size: 14.5px;
-      line-height: 1.65;
-      color: var(--ink-soft);
-    }
-
-    .ruta i {
-      display: inline-block;
-      margin-top: .9rem;
-      font-style: normal;
-      font-size: 11.5px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      color: var(--violet);
-      background: var(--violet-soft);
-      padding: .3rem .6rem;
-      border-radius: 6px;
-    }
-
-    .cierre .cierre-pie {
-      margin: 1.6rem auto 0;
-      max-width: 46ch;
-      font-size: 13.5px;
-      color: var(--ink-faint);
-    }
-
-    @media (max-width: 860px) {
-      .ruta,
-      .otros {
-        grid-template-columns: 1fr;
-      }
-    }
       /* ============================================================
        HERO DE DISEÑO WEB
        Antes era solo texto en una caja a todo el ancho: la mitad derecha
@@ -1091,7 +984,7 @@
              escribir, paso por paso, porque lo que frena a alguien en este
              punto no es la falta de ganas — es no saber en qué se está
              metiendo. Cada paso lleva su tiempo real. -->
-        <div class="cierre">
+        <div class="cierre cierre-light">
           <h2>¿Hablamos de tu proyecto<span class="dot">?</span></h2>
           <p class="cierre-sub">Esto es exactamente lo que pasa cuando nos escribes. Sin compromiso
             y sin que tengas que decidir nada en la primera conversación.</p>

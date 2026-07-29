@@ -36,7 +36,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260729d">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260729e">
 
   <script type="application/ld+json">
 {
@@ -121,6 +121,135 @@
   ]
 }
 </script>
+  <style>
+    /* Estilos propios de esta página. Van aquí y no en pagina.css porque no
+       los usa ninguna otra. */
+
+    /* ---- tablero de marca (ilustración del hero) ----
+       El hero era puro texto: nada que enseñara de qué habla la página, a
+       diferencia del home y de diseño web. Este tablero muestra los cuatro
+       entregables de "Qué te llevas" (logo, paleta, tipografía, papelería)
+       como cuatro fichas, en el mismo lenguaje visual que usan los mockups
+       del home (ficha blanca con sombra sobre un lienzo lila muy pálido) —
+       pero con una marca genérica, no la de un cliente real. */
+    .brand-board {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border-radius: 22px;
+      background: linear-gradient(160deg, #f7f6fb, #eef0f7);
+      padding: clamp(1rem, 3vw, 1.6rem);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: clamp(.7rem, 2vw, 1rem);
+    }
+
+    .bb-tile {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+      padding: 1rem;
+      text-align: center;
+      animation: bbFloat 7s ease-in-out infinite;
+    }
+
+    .bb-logo {
+      animation-delay: 0s;
+    }
+
+    .bb-swatches {
+      flex-direction: row;
+      gap: .5rem;
+      animation-delay: .6s;
+    }
+
+    .bb-type {
+      animation-delay: 1.2s;
+    }
+
+    .bb-card {
+      animation-delay: .3s;
+    }
+
+    .bb-word {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 11.5px;
+      letter-spacing: .08em;
+      color: var(--ink);
+    }
+
+    .bb-sw {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--c);
+      box-shadow: inset 0 0 0 1px rgba(15, 23, 42, .07);
+    }
+
+    .bb-aa {
+      font-family: var(--display);
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .bb-type-lbl {
+      font-size: 11px;
+      color: var(--ink-faint);
+      font-weight: 600;
+    }
+
+    .bb-card-mock {
+      width: 100%;
+      max-width: 130px;
+      aspect-ratio: 1.6;
+      background: linear-gradient(135deg, #1c1730, #322752);
+      border-radius: 9px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: .35rem;
+      padding: .65rem .75rem;
+    }
+
+    .bb-card-mark {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      background: var(--violet);
+    }
+
+    .bb-card-line {
+      height: 3px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, .5);
+      width: 70%;
+    }
+
+    .bb-card-line.short {
+      width: 42%;
+      background: rgba(255, 255, 255, .3);
+    }
+
+    @keyframes bbFloat {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -154,15 +283,51 @@
 
   <main>
     <section class="hero">
-      <div class="wrap">
-        <h1>Que tu marca se vea tan buena como tu negocio<span class="dot">.</span></h1>
-        <p class="lead">Logo, identidad visual y las reglas para usarla. Para empresas que hacen bien
-          su trabajo pero todavía no lo parecen a primera vista.</p>
-        <div class="hero-ctas">
-          <a href="/#contacto" class="btn btn-violet">Hablemos de tu marca</a>
-          <a href="#incluye" class="btn btn-ghost">Ver qué te llevas</a>
+      <div class="wrap hero-split">
+        <div class="hero-copy">
+          <h1>Que tu marca se vea tan buena como tu negocio<span class="dot">.</span></h1>
+          <p class="lead">Logo, identidad visual y las reglas para usarla. Para empresas que hacen bien
+            su trabajo pero todavía no lo parecen a primera vista.</p>
+          <div class="hero-ctas">
+            <a href="/#contacto" class="btn btn-violet">Hablemos de tu marca</a>
+            <a href="#incluye" class="btn btn-ghost">Ver qué te llevas</a>
+          </div>
+          <p class="hero-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Manual de marca · Archivos editables · Todo entregado a tu nombre.</p>
         </div>
-        <p class="hero-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Manual de marca · Archivos editables · Todo entregado a tu nombre.</p>
+
+        <!-- El tablero de marca: las cuatro cosas de "Qué te llevas" hechas
+             ilustración, no lista. Es una marca genérica, no la de un
+             cliente — para eso ya está el caso real en diseño web. -->
+        <div class="hero-visual">
+          <div class="brand-board" aria-hidden="true">
+            <div class="bb-tile bb-logo">
+              <span class="bb-mark">
+                <svg width="30" height="30" viewBox="0 0 40 40">
+                  <rect x="4" y="4" width="32" height="32" rx="9" fill="#8242f5" />
+                  <rect x="14" y="14" width="12" height="12" rx="3" fill="#fff" />
+                </svg>
+              </span>
+              <span class="bb-word">TU MARCA</span>
+            </div>
+            <div class="bb-tile bb-swatches">
+              <span class="bb-sw" style="--c:#8242f5"></span>
+              <span class="bb-sw" style="--c:#1c1730"></span>
+              <span class="bb-sw" style="--c:#f3eeff"></span>
+              <span class="bb-sw" style="--c:#2a9d6f"></span>
+            </div>
+            <div class="bb-tile bb-type">
+              <span class="bb-aa">Aa</span>
+              <span class="bb-type-lbl">Título / Texto</span>
+            </div>
+            <div class="bb-tile bb-card">
+              <span class="bb-card-mock">
+                <span class="bb-card-mark"></span>
+                <span class="bb-card-line"></span>
+                <span class="bb-card-line short"></span>
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -340,14 +505,38 @@
 
     <section class="section">
       <div class="wrap">
-        <div class="cierre">
+        <div class="cierre cierre-light">
           <h2>Muéstranos cómo se ve tu marca hoy<span class="dot">.</span></h2>
-          <p>Cuéntanos qué tienes y qué te incomoda de cómo se ve tu negocio. Te decimos qué haría
-            falta y en qué orden.</p>
+          <p class="cierre-sub">Esto es exactamente lo que pasa cuando nos escribes. Sin compromiso
+            y sin que tengas que decidir nada en la primera conversación.</p>
+
+          <ol class="ruta">
+            <li>
+              <b>Nos escribes</b>
+              <span>Cuéntanos qué tienes hoy y qué te incomoda de cómo se ve tu negocio. Respondemos
+                el mismo día hábil.</span>
+              <i>Hoy</i>
+            </li>
+            <li>
+              <b>Llamada de 20 minutos</b>
+              <span>Entendemos tu negocio y hacia dónde quieres llevarlo, antes de hablar de
+                logos.</span>
+              <i>Esta semana</i>
+            </li>
+            <li>
+              <b>Propuesta con alcance y precio</b>
+              <span>Por escrito: qué incluye, cuánto cuesta y en qué orden. De ahí decides con
+                calma.</span>
+              <i>2 a 3 días después</i>
+            </li>
+          </ol>
+
           <div class="hero-ctas" style="justify-content:center">
             <a href="/#contacto" class="btn btn-violet">Escríbenos</a>
             <a href="/diseno-web/" class="btn btn-ghost">Ver diseño web</a>
           </div>
+          <p class="cierre-pie">¿Prefieres ver primero cómo está tu presencia digital hoy? El
+            diagnóstico es gratis, no pide registro y tarda 60 segundos.</p>
         </div>
       </div>
     </section>

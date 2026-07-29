@@ -710,6 +710,152 @@ html {
   color: #fff;
 }
 
+/* Variante clara del cierre, con los tres pasos ("ruta") de qué pasa
+   exactamente después de escribir. Nació en diseño web porque un cierre
+   negro más era una seguidilla de bloques oscuros; ahora la comparten las
+   tres páginas de servicio para que cierren igual, aunque cada una cuente
+   su propia ruta. Diagnóstico se queda con el cierre negro de siempre. */
+.cierre-light {
+  background: #fbfaff;
+  color: var(--ink);
+  border: 1px solid rgba(130, 66, 245, .12);
+}
+
+.cierre-light p {
+  color: var(--ink-soft);
+}
+
+.cierre-light .cierre-sub {
+  max-width: 52ch;
+  margin: 0 auto;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+.cierre-light .btn-ghost {
+  border-color: var(--line-strong);
+  color: var(--ink);
+  background: #fff;
+}
+
+.cierre-light .btn-ghost:hover {
+  border-color: var(--ink);
+  background: #fff;
+}
+
+.cierre-light .cierre-pie {
+  margin: 1.6rem auto 0;
+  max-width: 46ch;
+  font-size: 13.5px;
+  color: var(--ink-faint);
+}
+
+.ruta {
+  list-style: none;
+  margin: clamp(2rem, 4vw, 3rem) 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: left;
+  counter-reset: paso;
+}
+
+.ruta li {
+  counter-increment: paso;
+  background: #fff;
+  border: 1px solid var(--line-strong);
+  border-radius: 16px;
+  padding: 1.5rem 1.4rem 1.3rem;
+  position: relative;
+}
+
+/* El número vive en el pseudo-elemento y no en el marcado: es orden visual,
+   no contenido que alguien necesite oír leído en voz alta. */
+.ruta li::before {
+  content: counter(paso);
+  display: block;
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--violet);
+  margin-bottom: .7rem;
+}
+
+.ruta b {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: .45rem;
+}
+
+.ruta span {
+  display: block;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+.ruta i {
+  display: inline-block;
+  margin-top: .9rem;
+  font-style: normal;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--violet);
+  background: var(--violet-soft);
+  padding: .3rem .6rem;
+  border-radius: 6px;
+}
+
+@media (max-width: 860px) {
+  .ruta {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Hero partido (texto + ilustración) ----------
+   El mismo patrón que ya usaba diseño web en su propio <style> (antes era
+   la única página que lo necesitaba): columna de texto y, al lado, una
+   ilustración propia de la página. El grid es lo único que se comparte —
+   qué va dentro de `.hero-visual` lo decide cada página. */
+.hero-split {
+  display: grid;
+  grid-template-columns: 1.02fr 1fr;
+  gap: clamp(2rem, 5vw, 5.5rem);
+  align-items: center;
+}
+
+.hero-split .hero-copy {
+  min-width: 0;
+}
+
+.hero-visual {
+  min-width: 0;
+  position: relative;
+}
+
+@media (max-width: 980px) {
+  .hero-split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.8rem;
+  }
+
+  .hero-visual {
+    /* width:100% explícito, no auto: con margin:auto centrando, un ancho
+       automático obliga al navegador a encogerse al contenido, y si la
+       ilustración de turno no tiene contenido "normal" del que medir (todo
+       hijo con position:absolute, como el diagrama de software), colapsa a
+       0. El 100% evita esa ambigüedad. */
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+
 /* ---------- Otros servicios ---------- */
 .otros {
   display: grid;
