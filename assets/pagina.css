@@ -1109,20 +1109,14 @@ html {
 }
 
 /* ---------- filtros ---------- */
-.blog-filtros-tit {
-  text-align: center;
-  margin: 2.6rem 0 .9rem;
-  font-size: 12.5px;
-  font-weight: 700;
-  letter-spacing: .04em;
-  color: var(--ink-faint);
-}
-
+/* Sin rótulo encima: unas pastillas de temas debajo de un buscador ya se
+   entienden solas. Lo que faltaba era aire entre las dos cosas. */
 .blog-filtros {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: .5rem;
+  margin-top: 1.9rem;
 }
 
 .blog-chip {
