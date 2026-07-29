@@ -1110,15 +1110,18 @@ html {
 
 /* ---------- filtros ---------- */
 /* Sin rótulo encima: unas pastillas de temas debajo de un buscador ya se
-   entienden solas. Lo que faltaba era aire entre las dos cosas. */
+   entienden solas. Con 30px seguían pegadas —los dos son píldoras y se
+   estorban—, así que el hueco sube a 54. */
 .blog-filtros {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: .5rem;
-  margin-top: 1.9rem;
+  gap: .55rem;
+  margin-top: 3.4rem;
 }
 
+/* Un poco más altas (36 -> 42px): al lado de un buscador de 50 se veían
+   canijas y la pareja quedaba descompensada. */
 .blog-chip {
   font-family: inherit;
   font-size: 13.5px;
@@ -1127,7 +1130,7 @@ html {
   background: #fff;
   border: 1.5px solid var(--line-strong);
   border-radius: var(--r-btn);
-  padding: .55rem 1.1rem;
+  padding: .72rem 1.25rem;
   cursor: pointer;
   white-space: nowrap;
   transition: color .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
