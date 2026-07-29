@@ -879,7 +879,9 @@
       border-radius: var(--r-md);
       overflow: hidden;
       background: var(--surface);
-      border: 1px solid rgba(15, 23, 42, 0.07);
+      /* Sin borde: la línea clara que separa bien una tarjeta blanca se veía
+         como un filo blanco encima de las capturas oscuras. La sombra sola ya
+         despega la tarjeta del fondo. */
       box-shadow: var(--shadow-lg);
       text-decoration: none;
       color: inherit;
