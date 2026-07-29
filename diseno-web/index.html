@@ -134,73 +134,166 @@
        usa ninguna otra: meterlos en la hoja compartida haría que las demás
        páginas se descarguen reglas que nunca aplican. */
 
-    /* ---- cinta de trabajo del hero ---- */
-    .cinta {
-      margin-top: clamp(2.5rem, 5vw, 4rem);
-      overflow: hidden;
-      /* Se desvanece en los bordes en vez de cortarse en seco, para que se lea
-         como una tira que sigue más allá de la pantalla. */
-      -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-      mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    /* ---- qué incluye: lista + panel ---- */
+    .inc-kicker {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--violet);
+      background: var(--violet-soft);
+      padding: .4rem .85rem;
+      border-radius: 99px;
+      margin-bottom: 1.1rem;
     }
 
-    .cinta-fila {
+    .inc-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(1.25rem, 3vw, 2.5rem);
+      margin-top: clamp(2rem, 4vw, 3rem);
+      align-items: start;
+    }
+
+    .inc-list {
       display: flex;
-      width: max-content;
-      animation: cinta-corre 46s linear infinite;
+      flex-direction: column;
     }
 
-    .cinta:hover .cinta-fila {
-      animation-play-state: paused;
-    }
-
-    .cinta-set {
+    .inc-row {
       display: flex;
+      gap: .9rem;
+      align-items: flex-start;
+      text-align: left;
+      background: none;
+      border: none;
+      border-bottom: 1px solid var(--line);
+      padding: 1.15rem 1rem;
+      border-radius: 14px;
+      cursor: pointer;
+      font: inherit;
+      color: inherit;
+      transition: background .3s var(--ease);
+    }
+
+    .inc-row:last-child {
+      border-bottom: none;
+    }
+
+    .inc-row.on {
+      background: #f8f6ff;
+      border-bottom-color: transparent;
+    }
+
+    .inc-check {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #eef0f4;
+      color: #fff;
+      margin-top: 2px;
+      transition: background .3s var(--ease);
+    }
+
+    .inc-row.on .inc-check {
+      background: var(--violet);
+    }
+
+    .inc-row-txt b {
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: .3rem;
+    }
+
+    .inc-row-txt span {
+      display: block;
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+
+    .inc-panels {
+      background: #fff;
+      border: 1px solid var(--line-strong);
+      border-radius: 24px;
+      padding: clamp(1.5rem, 3vw, 2.25rem);
+      /* sticky para que el panel acompañe mientras se recorre la lista larga */
+      position: sticky;
+      top: 6rem;
+    }
+
+    .inc-panel h3 {
+      font-family: var(--display);
+      font-size: clamp(1.15rem, 2vw, 1.4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: .7rem;
+    }
+
+    .inc-panel p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      margin-bottom: 1.3rem;
+    }
+
+    .inc-panel ul {
       list-style: none;
       margin: 0;
       padding: 0;
+      display: grid;
+      gap: .7rem;
     }
 
-    .cinta-set li {
-      flex: 0 0 auto;
-      width: clamp(280px, 34vw, 520px);
-      margin-right: clamp(1rem, 2vw, 1.75rem);
+    .inc-panel li {
+      position: relative;
+      padding-left: 1.6rem;
+      font-size: 14.5px;
+      line-height: 1.6;
     }
 
-    .cinta-set img {
-      display: block;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 16/10;
-      object-fit: cover;
-      object-position: top center;
-      border-radius: var(--r-md, 16px);
-      box-shadow: 0 24px 56px rgba(15, 23, 42, .1), 0 6px 18px rgba(15, 23, 42, .05);
+    .inc-panel li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: .45em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--violet);
     }
 
-    .cinta-set span {
-      display: block;
-      margin-top: .8rem;
-      font-size: 12.5px;
-      font-weight: 600;
-      color: var(--ink-soft, #475569);
+    .inc-pie {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+      margin-top: clamp(2rem, 4vw, 3rem);
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      text-align: center;
     }
 
-    /* -50% y no -100%: la tira son dos copias iguales, así que al recorrer la
-       mitad el segundo juego queda calcado sobre la posición inicial. */
-    @keyframes cinta-corre {
-      to {
-        transform: translateX(-50%);
+    .inc-pie svg {
+      color: var(--violet);
+      flex-shrink: 0;
+    }
+
+    /* En una columna el panel lateral pierde sentido: cada punto abre debajo
+       de su propia fila, como un acordeón. */
+    @media (max-width: 900px) {
+      .inc-wrap {
+        grid-template-columns: 1fr;
       }
-    }
 
-    @media (prefers-reduced-motion: reduce) {
-      .cinta-fila {
-        animation: none;
-      }
-
-      .cinta {
-        overflow-x: auto;
+      .inc-panels {
+        position: static;
       }
     }
 
@@ -433,28 +526,7 @@
         <p class="hero-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> <span>Entre 3 y 5 semanas · Sin plantillas · El sitio queda a tu nombre.</span></p>
       </div>
 
-      <!-- Cinta de trabajo real, a todo el ancho y en movimiento continuo.
-           Una página que vende diseño web tenía que mostrar páginas antes de
-           explicar nada. Las capturas son las mismas de la portada, así que no
-           añade una sola petición nueva a un visitante que venga de ahí.
-           La lista va duplicada porque el bucle infinito se logra desplazando
-           la tira justo la mitad de su ancho: al llegar, la segunda copia está
-           exactamente donde estaba la primera y el salto no se ve. El
-           aria-hidden en la copia evita que un lector de pantalla lea dos
-           veces lo mismo. -->
-      <div class="cinta" aria-label="Trabajo del estudio">
-        <div class="cinta-fila">
-          <ul class="cinta-set">
-            <li><img src="/assets/trabajo-cstravel-home.webp" alt="Sitio corporativo de CS Travel Group" width="1280" height="704" decoding="async"><span>CS Travel Group — sitio corporativo</span></li>
-            <li><img src="/assets/trabajo-thallo.webp" alt="Sitio de Thallo Digital" width="1280" height="800" decoding="async"><span>Thallo Digital — marca y sitio</span></li>
-          </ul>
-          <ul class="cinta-set" aria-hidden="true">
-            <li><img src="/assets/trabajo-cstravel-home.webp" alt="" width="1280" height="704" decoding="async"><span>CS Travel Group — sitio corporativo</span></li>
-            <li><img src="/assets/trabajo-thallo.webp" alt="" width="1280" height="800" decoding="async"><span>Thallo Digital — marca y sitio</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
+</section>
 
     <section class="section">
       <div class="wrap">
@@ -509,59 +581,115 @@
       </div>
     </section>
 
+    <!-- "Que incluye" con la misma mecanica que la seccion de situacion de la
+         portada: la lista manda a la izquierda y el panel de la derecha cambia
+         con lo que elijas. Antes eran seis tarjetas iguales que se leian todas
+         a la vez, y por eso no se leia ninguna.
+         El detalle de cada punto vive en el HTML, dentro de su propio panel, y
+         no en un objeto de JavaScript: asi lo indexa Google y lo lee un lector
+         de pantalla aunque el script nunca llegue a correr. -->
     <section class="section" id="incluye">
       <div class="wrap">
-        <h2>Qué incluye<span class="dot">.</span></h2>
-        <p class="desc">Todo lo que necesitas para salir a operar. Sin sorpresas después.</p>
-        <div class="rejilla">
-          <article class="tarjeta">
-            <div class="ico" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6M8 21h4M12 17v4M17 17l5 5M22 17l-5 5"/></svg>
+        <span class="inc-kicker">Todo lo que necesitas</span>
+        <h2>Diseñado para verse bien.<br>Construido para vender<span class="dot">.</span></h2>
+        <p class="desc">Sin extras que no usas. Esto es lo que va en cada proyecto.</p>
+
+        <div class="inc-wrap">
+          <div class="inc-list" id="incList" role="tablist" aria-label="Qué incluye">
+            <button class="inc-row on" role="tab" aria-selected="true" aria-controls="incP0" id="incT0" data-i="0">
+              <span class="inc-check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="inc-row-txt"><b>Diseño a medida</b><span>Nada de plantillas compradas. La estructura, la tipografía y el color salen de tu marca.</span></span>
+            </button>
+            <button class="inc-row" role="tab" aria-selected="false" aria-controls="incP1" id="incT1" data-i="1">
+              <span class="inc-check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="inc-row-txt"><b>Rápida de verdad</b><span>Optimizada para cargar rápido en datos móviles, que es como la va a ver la mayoría.</span></span>
+            </button>
+            <button class="inc-row" role="tab" aria-selected="false" aria-controls="incP2" id="incT2" data-i="2">
+              <span class="inc-check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="inc-row-txt"><b>Se ve bien en todo</b><span>Celular, tablet y computador. Se revisa en dispositivos reales, no redimensionando el navegador.</span></span>
+            </button>
+            <button class="inc-row" role="tab" aria-selected="false" aria-controls="incP3" id="incT3" data-i="3">
+              <span class="inc-check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="inc-row-txt"><b>SEO técnico resuelto</b><span>Títulos, descripciones, encabezados, datos estructurados y sitemap desde el primer día.</span></span>
+            </button>
+            <button class="inc-row" role="tab" aria-selected="false" aria-controls="incP4" id="incT4" data-i="4">
+              <span class="inc-check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="inc-row-txt"><b>Estructura comercial</b><span>Cada sección tiene una razón de ser: explicar, generar confianza o llevar al contacto.</span></span>
+            </button>
+            <button class="inc-row" role="tab" aria-selected="false" aria-controls="incP5" id="incT5" data-i="5">
+              <span class="inc-check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="inc-row-txt"><b>Revisiones hasta aprobar</b><span>No entregamos «como quedó». Ajustamos hasta que estés conforme con el resultado.</span></span>
+            </button>
+          </div>
+
+          <div class="inc-panels">
+            <div class="inc-panel on" id="incP0" role="tabpanel" aria-labelledby="incT0">
+              <h3>Diseño a medida</h3>
+              <p>Partimos de tu marca y de lo que tu cliente necesita entender, no de una plantilla a la que hay que cambiarle los colores.</p>
+              <ul>
+                <li>Estructura pensada para tu negocio, no genérica</li>
+                <li>Tipografía y color salidos de tu identidad</li>
+                <li>Diseño propio, sin bloques comprados</li>
+                <li>Código limpio, sin peso que no usas</li>
+              </ul>
             </div>
-            <h3>Diseño a medida</h3>
-            <p>Nada de plantillas compradas. La estructura, la tipografía y el color salen de tu
-              marca y de lo que tu cliente necesita entender.</p>
-          </article>
-          <article class="tarjeta">
-            <div class="ico" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            <div class="inc-panel" id="incP1" role="tabpanel" aria-labelledby="incT1" hidden>
+              <h3>Rápida de verdad</h3>
+              <p>La mayoría va a entrar desde el celular y con datos móviles. Si tarda, se va antes de leer nada.</p>
+              <ul>
+                <li>Imágenes en formatos modernos y del tamaño justo</li>
+                <li>Sin librerías pesadas que no aportan</li>
+                <li>Fuentes que no bloquean el dibujado</li>
+                <li>Medida con datos, no a ojo</li>
+              </ul>
             </div>
-            <h3>Rápida de verdad</h3>
-            <p>Optimizada para que cargue rápido en datos móviles, que es como la va a ver la mayoría
-              de tus clientes. La velocidad también es un factor de posicionamiento.</p>
-          </article>
-          <article class="tarjeta">
-            <div class="ico" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <div class="inc-panel" id="incP2" role="tabpanel" aria-labelledby="incT2" hidden>
+              <h3>Se ve bien en todo</h3>
+              <p>No basta con que no se rompa: tiene que leerse bien en la pantalla donde tu cliente la abra.</p>
+              <ul>
+                <li>Probado en celular, tablet y computador reales</li>
+                <li>Textos legibles sin hacer zoom</li>
+                <li>Botones del tamaño de un dedo, no de un cursor</li>
+                <li>Sin desplazamiento lateral en ninguna pantalla</li>
+              </ul>
             </div>
-            <h3>Se ve bien en todo</h3>
-            <p>Celular, tablet y computador. Se revisa en dispositivos reales, no solo redimensionando
-              la ventana del navegador.</p>
-          </article>
-          <article class="tarjeta">
-            <div class="ico" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <div class="inc-panel" id="incP3" role="tabpanel" aria-labelledby="incT3" hidden>
+              <h3>SEO técnico resuelto</h3>
+              <p>La base para que Google pueda posicionarte. El posicionamiento sostenido en el tiempo es un trabajo aparte, y también lo hacemos.</p>
+              <ul>
+                <li>Títulos y descripciones escritos uno por uno</li>
+                <li>Encabezados con jerarquía real</li>
+                <li>Datos estructurados y sitemap</li>
+                <li>Sin bloqueos que te dejen fuera del índice</li>
+              </ul>
             </div>
-            <h3>SEO técnico resuelto</h3>
-            <p>Títulos, descripciones, encabezados, datos estructurados y sitemap. La base para que
-              Google pueda encontrarte y entenderte desde el primer día.</p>
-          </article>
-          <article class="tarjeta">
-            <div class="ico" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+            <div class="inc-panel" id="incP4" role="tabpanel" aria-labelledby="incT4" hidden>
+              <h3>Estructura comercial</h3>
+              <p>Primero definimos qué tiene que pasar para que ganes un cliente. El diseño viene después, al servicio de eso.</p>
+              <ul>
+                <li>Cada sección con un propósito claro</li>
+                <li>El contacto siempre a un clic</li>
+                <li>Las objeciones respondidas antes de que las piensen</li>
+                <li>Un solo camino principal, sin distracciones</li>
+              </ul>
             </div>
-            <h3>Estructura comercial</h3>
-            <p>Cada sección tiene una razón de ser: explicar, generar confianza o llevar al contacto.
-              Nada de relleno.</p>
-          </article>
-          <article class="tarjeta">
-            <div class="ico" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.2-8.6"/><path d="M22 4 12 14l-3-3"/></svg>
+            <div class="inc-panel" id="incP5" role="tabpanel" aria-labelledby="incT5" hidden>
+              <h3>Revisiones hasta aprobar</h3>
+              <p>Te mostramos el avance por secciones y ajustamos sobre la marcha, no cuando ya está todo programado.</p>
+              <ul>
+                <li>Revisión por etapas, no una entrega final a ciegas</li>
+                <li>Cambios sobre lo que ves, no sobre descripciones</li>
+                <li>Nada se publica sin tu visto bueno</li>
+                <li>El sitio y el dominio quedan a tu nombre</li>
+              </ul>
             </div>
-            <h3>Revisiones hasta aprobar</h3>
-            <p>No entregamos «como quedó». Ajustamos hasta que estés conforme con el resultado.</p>
-          </article>
+          </div>
         </div>
+
+        <p class="inc-pie">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Certificado de seguridad, respaldos y buenas prácticas incluidos en cada proyecto.
+        </p>
       </div>
     </section>
 
@@ -846,6 +974,44 @@
       }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
 
       objetivos.forEach(function (el) { observador.observe(el); });
+    })();
+  </script>
+
+  <script>
+    /* Selector de "Qué incluye".
+       El marcado ya viene con el primero abierto y el resto con `hidden`, así
+       que si este script no corre la sección sigue mostrando algo coherente en
+       vez de quedar vacía. Las flechas mueven la selección porque son pestañas
+       de verdad (role="tab"), y ahí es lo que espera quien navega con teclado. */
+    (function () {
+      var lista = document.getElementById('incList');
+      if (!lista) return;
+
+      var pestanas = [].slice.call(lista.querySelectorAll('.inc-row'));
+      var paneles = [].slice.call(document.querySelectorAll('.inc-panel'));
+      if (!pestanas.length || pestanas.length !== paneles.length) return;
+
+      function elegir(i, mover) {
+        pestanas.forEach(function (t, n) {
+          var activa = n === i;
+          t.classList.toggle('on', activa);
+          t.setAttribute('aria-selected', activa ? 'true' : 'false');
+          paneles[n].classList.toggle('on', activa);
+          paneles[n].hidden = !activa;
+        });
+        if (mover) pestanas[i].focus();
+      }
+
+      pestanas.forEach(function (t, i) {
+        t.addEventListener('click', function () { elegir(i, false); });
+        t.addEventListener('keydown', function (e) {
+          var salto = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1
+            : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+          if (!salto) return;
+          e.preventDefault();
+          elegir((i + salto + pestanas.length) % pestanas.length, true);
+        });
+      });
     })();
   </script>
 </body>
