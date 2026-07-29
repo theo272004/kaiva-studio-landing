@@ -713,8 +713,16 @@ html {
 }
 
 /* ---------- Cierre ---------- */
+/* La foto de la sala de juntas va detrás, con un velo oscuro encima para que
+   el texto blanco se siga leyendo sobre la parte clara de la mesa. El velo
+   es más denso que transparente a propósito: la foto tiene que notarse,
+   no ser el protagonista. .cierre-light la pisa con su propio fondo claro,
+   así que esto solo se ve en las páginas con el cierre negro (diagnóstico,
+   el blog). */
 .cierre {
-  background: var(--dark);
+  background:
+    linear-gradient(rgba(11, 11, 14, .84), rgba(11, 11, 14, .88)),
+    url('/assets/cierre-fondo.webp') center / cover no-repeat;
   color: #fff;
   border-radius: var(--r-lg);
   padding: clamp(2.5rem, 6vw, 4.5rem);
