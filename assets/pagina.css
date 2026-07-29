@@ -1538,3 +1538,217 @@ html {
     transform: translateY(0);
   }
 }
+
+/* Secciones oscuras interactivas (Estilo Cuberto) */
+.dark-section {
+  background: #08070d;
+  color: #fff;
+  border-block: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  isolation: isolate;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+.dark-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 80% 20%, rgba(130, 66, 245, 0.06), transparent 50%),
+              radial-gradient(circle at 20% 80%, rgba(130, 66, 245, 0.03), transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.dark-section h2 {
+  color: #fff !important;
+}
+
+.dark-section .prosa p {
+  color: rgba(255, 255, 255, 0.72) !important;
+}
+
+.dark-section strong {
+  color: var(--violet) !important;
+}
+
+.dark-section .desc {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Timeline del proceso en secciones oscuras */
+.dark-section .paso {
+  border-top-color: rgba(255, 255, 255, 0.09) !important;
+  color: #fff !important;
+}
+
+.dark-section .paso:last-child {
+  border-bottom-color: rgba(255, 255, 255, 0.09) !important;
+}
+
+.dark-section .paso p {
+  color: rgba(255, 255, 255, 0.68) !important;
+}
+
+.dark-section .paso::before {
+  color: var(--violet) !important;
+}
+
+.dark-section .paso-activo {
+  border-top-color: var(--violet) !important;
+}
+
+/* Listado de proyectos en sección oscura */
+.portfolio-list {
+  display: grid;
+  gap: 4.5rem;
+  margin-top: 3.5rem;
+}
+
+.portfolio-item {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 4.5rem;
+}
+
+.portfolio-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.portfolio-img-container {
+  overflow: hidden;
+  border-radius: 20px;
+  background: #110e1a;
+  aspect-ratio: 16 / 10;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.portfolio-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  display: block;
+}
+
+.portfolio-item:hover .portfolio-img {
+  transform: scale(1.04);
+}
+
+.portfolio-item:hover .portfolio-img-container {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 60px rgba(130, 66, 245, 0.12);
+  border-color: rgba(130, 66, 245, 0.25);
+}
+
+.portfolio-info h3 {
+  font-family: var(--display);
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 1.1rem;
+  letter-spacing: -0.02em;
+}
+
+.portfolio-info p {
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1.8rem;
+  text-wrap: pretty;
+}
+
+.portfolio-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--violet);
+  background: rgba(130, 66, 245, 0.11);
+  padding: 0.35rem 0.9rem;
+  border-radius: 30px;
+  border: 1px solid rgba(130, 66, 245, 0.18);
+}
+
+/* Unificación del cierre en bloque oscuro */
+.dark-section .cierre {
+  background: radial-gradient(circle at top right, rgba(130, 66, 245, 0.07), transparent 60%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: clamp(3rem, 7vw, 5rem) clamp(2rem, 5vw, 3.5rem);
+  border-radius: 28px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+}
+
+.dark-section .cierre h2 {
+  color: #fff !important;
+}
+
+.dark-section .cierre p {
+  color: rgba(255, 255, 255, 0.68) !important;
+}
+
+.dark-section .btn-ghost {
+  border-color: rgba(255, 255, 255, 0.22) !important;
+  color: #fff !important;
+}
+
+.dark-section .btn-ghost:hover {
+  border-color: #fff !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Footer oscuro en sincronía */
+.dark-footer {
+  background: #06050a;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.5) !important;
+  padding-block: clamp(2rem, 4vw, 3rem);
+}
+
+.dark-footer a {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.dark-footer a:hover {
+  color: #fff !important;
+}
+
+/* Alternancia del portafolio en desktop */
+@media (min-width: 769px) {
+  .portfolio-item:nth-child(even) {
+    grid-template-columns: 1fr 1.25fr;
+  }
+  .portfolio-item:nth-child(even) .portfolio-info {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .portfolio-item:nth-child(even) .portfolio-img-container {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-item {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+    padding-bottom: 3rem;
+  }
+  .portfolio-item:nth-child(even) .portfolio-info {
+    grid-column: unset;
+    grid-row: unset;
+  }
+  .portfolio-item:nth-child(even) .portfolio-img-container {
+    grid-column: unset;
+    grid-row: unset;
+  }
+}
