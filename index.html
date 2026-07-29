@@ -296,7 +296,7 @@
        @font-face, que va emparejado con los preload de las fuentes.
        El <link> es bloqueante y esta en el <head>, asi que no hay flash de
        contenido sin estilo: la pagina pinta ya con la hoja aplicada. -->
-  <link rel="stylesheet" href="/assets/portada.css?v=20260729b">
+  <link rel="stylesheet" href="/assets/portada.css?v=20260729c">
 </head>
 
 <body>
@@ -343,11 +343,13 @@
          · Las capturas NO se recortan por CSS — son páginas web y cortarlas
            esconde justo lo que hay que enseñar. El marco se ajusta al alto que
            pida la imagen, nunca al revés.
-         · Las tres van a 1267×704 (proporción 1.8). Es la medida de la captura
-           de CS Travel, que es la que quedó bien, menos los 13 px de la barra
-           de scroll blanca que se coló en el borde derecho. Si entra una
-           captura nueva, recortarla a esa misma proporción: el escenario
-           reserva el alto contando con ella (ver --sc-ar en portada.css).
+         · Las tres van a 1440×738 (proporción 1.95), reducidas desde capturas
+           de pantalla completa del 29 jul 2026. Si entra una captura nueva,
+           recortarla a esa misma proporción: el escenario reserva el alto
+           contando con ella (ver --sc-ar en portada.css).
+         · En la del panel van difuminados el correo de quien tenía la sesión
+           abierta y el nombre del paciente de la tabla. Es software médico de
+           un cliente: esos datos no van en una portada pública.
          · Nada de rotaciones ni de tarjetas ladeadas: las tres van derechas.
          · Las posiciones (centro, izquierda, derecha) las reparte el JS con
            clases y van rotando solas; aquí solo va el orden de la baraja. -->
@@ -357,8 +359,8 @@
             <a class="pad" href="https://www.cstravelgroup.com/" target="_blank" rel="noopener">
               <span class="pad-cam" aria-hidden="true"></span>
               <span class="pad-screen">
-                <img src="assets/trabajo-cstravel-home.webp?v=3" alt="Portada del sitio de CS Travel Group"
-                  width="1267" height="704" fetchpriority="high" decoding="async">
+                <img src="assets/trabajo-cstravel-home.webp?v=4" alt="Portada del sitio de CS Travel Group"
+                  width="1440" height="738" fetchpriority="high" decoding="async">
               </span>
             </a>
             <p class="sc-caption">CS Travel Group <span>Sitio web</span></p>
@@ -370,8 +372,8 @@
             <div class="pad">
               <span class="pad-cam" aria-hidden="true"></span>
               <span class="pad-screen">
-                <img src="assets/trabajo-cstravel-software.webp?v=3" alt="Panel de la plataforma de CS Travel Group"
-                  width="1267" height="704" decoding="async">
+                <img src="assets/trabajo-cstravel-software.webp?v=4" alt="Panel de la plataforma de CS Travel Group"
+                  width="1440" height="738" decoding="async">
               </span>
             </div>
             <p class="sc-caption">CS Travel Group <span>Software a medida</span></p>
@@ -382,8 +384,8 @@
               <span class="pad-screen">
                 <!-- El ?v= es para que el navegador suelte la versión vieja que
                      tiene en caché: el archivo cambió pero el nombre no. -->
-                <img src="assets/trabajo-thallo.webp?v=3" alt="Portada del sitio de Thallo Digital"
-                  width="1267" height="704" decoding="async">
+                <img src="assets/trabajo-thallo.webp?v=4" alt="Portada del sitio de Thallo Digital"
+                  width="1440" height="738" decoding="async">
               </span>
             </a>
             <p class="sc-caption">Thallo Digital <span>Sitio web y marca</span></p>
