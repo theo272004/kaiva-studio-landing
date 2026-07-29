@@ -437,6 +437,23 @@ html {
   color: var(--violet);
 }
 
+/* Encabezado centrado, como en el home. El wrap de estas páginas es tan
+   ancho (1380px) que un h2 sin esto arrancaba pegado al borde izquierdo con
+   medio wrap de aire vacío a la derecha — no "centrado", sino descuadrado.
+   Se envuelve el h2 + .desc en esto cuando el contenido de abajo también va
+   centrado (FAQ, línea de tiempo, texto corrido); si el contenido de abajo
+   es una rejilla que ya llena el ancho, el encabezado se queda como estaba. */
+.sec-head {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.sec-head .desc {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .section .desc {
   font-size: 1.02rem;
   line-height: 1.7;
@@ -446,11 +463,17 @@ html {
   text-wrap: pretty;
 }
 
+/* El bloque se centra en el wrap ancho; el texto adentro se queda alineado a
+   la izquierda porque un párrafo largo centrado se lee peor, no mejor. */
+.prosa {
+  max-width: 68ch;
+  margin: 0 auto;
+}
+
 .prosa p {
   color: var(--ink-soft);
   font-size: 16px;
   line-height: 1.75;
-  max-width: 68ch;
 }
 
 .prosa p+p {
@@ -507,6 +530,25 @@ html {
   color: #fff;
 }
 
+/* El icono se dibuja solo al aparecer, con el mismo truco que usa la
+   gráfica de crecimiento del home (jr3-chart): el trazo arranca oculto y se
+   revela con stroke-dashoffset. Requiere pathLength="1" en la figura —
+   así se usan siempre las mismas cifras (0 a 1) sin calcular el largo real
+   de cada trazo, que cambia de un icono a otro — y el selector exige ese
+   atributo a propósito: los iconos de branding y software lo tienen, los de
+   diagnóstico no, y sin esta guardia el mismo dashoffset:1 les habría dejado
+   el trazo real (mucho más largo que 1 unidad) casi invisible. */
+.tarjeta .ico svg :is(path, circle, rect, line, polyline)[pathLength] {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset .8s var(--ease);
+  transition-delay: .1s;
+}
+
+.tarjeta.dentro .ico svg :is(path, circle, rect, line, polyline)[pathLength] {
+  stroke-dashoffset: 0;
+}
+
 .tarjeta h3 {
   font-family: var(--display);
   font-size: 1.08rem;
@@ -527,6 +569,8 @@ html {
   display: grid;
   gap: 0;
   counter-reset: paso;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .paso {
@@ -593,6 +637,7 @@ html {
 .faq-list {
   border-top: 1px solid var(--line-strong);
   max-width: 900px;
+  margin: 0 auto;
 }
 
 .faq-item {

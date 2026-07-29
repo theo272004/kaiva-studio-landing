@@ -36,7 +36,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260729e">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260729f">
 
   <script type="application/ld+json">
 {
@@ -650,7 +650,7 @@
 
     <section class="section">
       <div class="wrap">
-        <h2>Una web bonita que no vende no sirve de nada<span class="dot">.</span></h2>
+        <h2 class="sec-head">Una web bonita que no vende no sirve de nada<span class="dot">.</span></h2>
         <div class="prosa">
           <p>La mayoría de las páginas de empresa en Colombia tienen el mismo problema: se ven bien
             en la pantalla del diseñador y no hacen nada por el negocio. Cargan lento en datos
@@ -838,8 +838,14 @@
 
     <section class="section">
       <div class="wrap">
-        <h2>Cómo trabajamos<span class="dot">.</span></h2>
-        <p class="desc" style="color: rgba(255, 255, 255, 0.6) !important;">Un proceso de 3 a 5 semanas, con fechas claras desde el principio.</p>
+        <div class="sec-head">
+          <h2>Cómo trabajamos<span class="dot">.</span></h2>
+          <!-- Este texto tenía blanco al 60% de opacidad sobre fondo blanco:
+               quedaba prácticamente invisible. Era un resto de cuando esta
+               sección vivía en negro (ver commit "Diseno web: todo en claro"),
+               que se quedó sin actualizar. -->
+          <p class="desc">Un proceso de 3 a 5 semanas, con fechas claras desde el principio.</p>
+        </div>
         <div class="pasos">
           <div class="paso">
             <div>
@@ -883,7 +889,7 @@
 
     <section class="section" id="preguntas">
       <div class="wrap">
-        <h2>Preguntas frecuentes<span class="dot">.</span></h2>
+        <h2 class="sec-head">Preguntas frecuentes<span class="dot">.</span></h2>
         <div class="faq-list">
 
           <details class="faq-item">
