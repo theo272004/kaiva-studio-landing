@@ -108,22 +108,33 @@
   }
 
   function aplicar(d) {
-    if (typeof window.gtag !== 'function') return;
+    /* Lo de Google va aparte y va primero, pero si gtag no existe no se
+       puede abortar la función entera: antes el `return` estaba arriba del
+       todo y se llevaba por delante el aviso a los demás scripts, así que
+       una página a la que se le olvidara el bloque del <head> dejaba de
+       cargar el mapa de calor sin ninguna señal de por qué. Cada
+       destinatario del consentimiento tiene que ser independiente. */
+    if (typeof window.gtag === 'function') {
+      window.gtag('consent', 'update', {
+        analytics_storage: d.analitica ? 'granted' : 'denied',
+        ad_storage: d.marketing ? 'granted' : 'denied',
+        ad_user_data: d.marketing ? 'granted' : 'denied',
+        ad_personalization: d.marketing ? 'granted' : 'denied'
+      });
 
-    window.gtag('consent', 'update', {
-      analytics_storage: d.analitica ? 'granted' : 'denied',
-      ad_storage: d.marketing ? 'granted' : 'denied',
-      ad_user_data: d.marketing ? 'granted' : 'denied',
-      ad_personalization: d.marketing ? 'granted' : 'denied'
-    });
+      if (d.analitica || d.marketing) cargarGtag();
+    }
 
-    if (d.analitica || d.marketing) cargarGtag();
-
-    /* Gancho para cuando entren pixeles de Meta o Google Ads: se
+    /* Gancho para todo lo demás que dependa del permiso: hoy el mapa de
+       calor (clarity.js), mañana los pixeles de Meta o Google Ads. Se
        escucha este evento en vez de tocar este archivo.
          window.addEventListener('kv-consent', function (e) {
            if (e.detail.marketing) { ...cargar el pixel... }
-         }); */
+         });
+       Ojo con el orden: este evento se dispara al arrancar para quien ya
+       había decidido, y los scripts con defer corren en el orden en que
+       están en el HTML. Quien escuche debe además consultar el estado
+       actual con kaivaCookies.estado() por si llegó tarde al evento. */
     try {
       window.dispatchEvent(new CustomEvent('kv-consent', { detail: d }));
     } catch (e) { }
