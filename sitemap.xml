@@ -44,9 +44,16 @@
 
   <url>
     <loc>https://kaivastudio.com/blog/</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-07-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-mexico/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <url>

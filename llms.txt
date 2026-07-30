@@ -49,6 +49,8 @@ continuidad (seguimiento mensual, alertas, historial), no la información.
 
 - [Cuánto cuesta una página web en Colombia](https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-colombia/):
   rangos reales del mercado colombiano y qué explica la diferencia de precio.
+- [Cuánto cuesta una página web en México](https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-mexico/):
+  rangos reales del mercado mexicano en pesos y qué explica la diferencia de precio.
 - [Por qué mis correos llegan a spam](https://kaivastudio.com/blog/por-que-mis-correos-llegan-a-spam/):
   SPF, DKIM y DMARC explicados, los requisitos de Google vigentes desde 2024 y
   cómo revisar la autenticación de un dominio en tres minutos.
