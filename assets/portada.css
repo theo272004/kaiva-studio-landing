@@ -3691,6 +3691,42 @@
       color: var(--ink);
     }
 
+    /* Casilla de autorización de datos. Va deliberadamente sobria y sin negrita:
+       es un requisito legal, no una llamada a la acción, y compitiendo con el
+       botón violeta solo restaría envíos. Pero tampoco se esconde — el texto
+       queda legible y el enlace a la política, visible. */
+    .form-consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      margin: 0.2rem 0 1.1rem;
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: var(--ink-soft);
+      cursor: pointer;
+    }
+
+    .form-consent input {
+      flex: none;
+      width: 1.05rem;
+      height: 1.05rem;
+      margin-top: 0.12rem;
+      accent-color: var(--violet);
+      cursor: pointer;
+    }
+
+    .form-consent input:focus-visible {
+      outline: 2px solid var(--violet);
+      outline-offset: 2px;
+    }
+
+    .form-consent a {
+      color: var(--violet-ink);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
     .form-input, .form-select, .form-textarea {
       width: 100%;
       background: #f8fafc;

@@ -1617,6 +1617,20 @@
               <textarea id="cMessage" class="form-textarea" placeholder="Cuéntanos brevemente sobre tu negocio, tu web actual o la solución que necesitas..." required></textarea>
             </div>
 
+            <!-- Autorización de tratamiento de datos. No es adorno legal: la Ley
+                 1581 de 2012 y el Decreto 1377 de 2013 piden que la autorización
+                 sea previa, expresa, informada y DEMOSTRABLE. Antes este
+                 formulario no la pedía y el JS mandaba "privacy: Aceptada" fijo
+                 al correo — o sea, afirmaba que la persona autorizó sin haberle
+                 preguntado. Ahora la casilla es obligatoria (required) y lo que
+                 viaja al correo es la marca de tiempo del clic real, que es lo
+                 único que sirve como prueba. -->
+            <label class="form-consent">
+              <input type="checkbox" id="cPrivacy" required>
+              <span>Autorizo a Kaiva Studio a tratar mis datos para responder esta consulta, según la
+                <a href="/privacidad/" target="_blank" rel="noopener">política de privacidad</a>. *</span>
+            </label>
+
             <button type="submit" class="btn btn-violet" style="width: 100%; padding: 0.95rem; font-size: 15px; border-radius: 12px; margin-top: 0.5rem;">
               Enviar mensaje
             </button>
@@ -2384,6 +2398,13 @@
         var mensaje = val('cMessage');
         if (!nombre || !correo || !mensaje) return;
 
+        /* El navegador ya bloquea el envío sin la casilla (lleva required),
+           pero se comprueba igual: el required se puede saltar desde la
+           consola, y aquí no se puede tratar el dato de nadie sin permiso. */
+        var casilla = document.getElementById('cPrivacy');
+        var privacidad = !!(casilla && casilla.checked);
+        if (!privacidad) return;
+
         var telefono = val('cPhone');
         var interes = INTERES[val('cService')] || 'No especificado';
 
@@ -2408,7 +2429,11 @@
               interes: interes,
               mensaje: mensaje,
               origen: window.location.href,
-              referente: document.referrer || 'directo'
+              referente: document.referrer || 'directo',
+              /* La hoja es donde queda el registro consultable, así que la
+                 fecha de la autorización va aquí también: es la que hay que
+                 poder mostrar si algún día alguien la pide. */
+              autorizacion: new Date().toISOString()
             })
           }).catch(function (err) {
             if (window.console) console.warn('[Kaiva] No se pudo copiar el lead a la hoja:', err);
@@ -2431,7 +2456,11 @@
               subject: 'Nuevo contacto desde kaivastudio.com — ' + interes,
               time: new Date().toLocaleString('es-CO', { dateStyle: 'medium', timeStyle: 'short' }),
               page_url: window.location.href,
-              privacy: 'Aceptada'
+              /* La prueba de la autorización, no una cadena decorativa. Antes
+                 decía 'Aceptada' siempre, incluso sin casilla que marcar. */
+              privacy: privacidad
+                ? 'Autorizada el ' + new Date().toISOString()
+                : 'NO autorizada'
             }
           })
         })
