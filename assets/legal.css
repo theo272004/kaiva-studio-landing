@@ -31,8 +31,14 @@
   --ink-soft: #475569;
   --ink-faint: #94a3b8;
   --violet: #8242f5;
+  --violet-ink: #6a2fe0;
   --line: rgba(15, 23, 42, .08);
   --line-strong: rgba(15, 23, 42, .14);
+  /* Faltaba: media docena de transiciones de este archivo ya la usaban y se
+     quedaban con la curva por defecto del navegador. Es la misma que usa
+     pagina.css, así que las páginas legales ahora se mueven igual que el
+     resto del sitio. */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 body {
@@ -366,4 +372,40 @@ td {
 
 .legal-foot nav a {
   font-size: 14px;
+}
+
+/* Botón para reabrir el panel de cookies. Vive en la política de cookies,
+   dentro del texto: es la acción que la ley pide dejar siempre a mano, así
+   que no puede ser un enlace más perdido entre párrafos. */
+.btn-pref {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: var(--violet);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14.5px;
+  text-decoration: none;
+  padding: .75rem 1.4rem;
+  border-radius: 99px;
+  transition: background .2s var(--ease), transform .2s var(--ease);
+}
+
+.btn-pref::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .55);
+}
+
+.btn-pref:hover {
+  background: var(--violet-ink);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.btn-pref:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 3px;
 }

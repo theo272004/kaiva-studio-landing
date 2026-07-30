@@ -6,15 +6,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Google Analytics 4 — aquí importa especialmente: permite ver qué enlaces
-       rotos está siguiendo la gente y desde dónde llegan. -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BD6VDCSQDC"></script>
+       rotos está siguiendo la gente y desde dónde llegan.
+
+       Analytics con consentimiento previo. Aquí NO se carga el script de
+       Google: solo se fijan los valores por defecto (todo denegado) y se
+       deja que /assets/consentimiento.js lo inyecte si la persona acepta.
+       El razonamiento completo y las normas que lo obligan están comentados
+       arriba de ese archivo.
+
+       El evento page_not_found se encola de una: gtag() solo empuja al
+       dataLayer, así que si la persona acepta más tarde el evento sale con la
+       ruta correcta, y si nunca acepta se queda en la cola y no viaja. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-BD6VDCSQDC');
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
     gtag('event', 'page_not_found', { ruta: location.pathname, referente: document.referrer || 'directo' });
   </script>
+  <script defer src="/assets/consentimiento.js?v=20260729"></script>
+  <script defer src="/assets/eventos.js?v=20260729"></script>
 
   <title>Página no encontrada — Kaiva Studio</title>
   <meta name="robots" content="noindex, follow">

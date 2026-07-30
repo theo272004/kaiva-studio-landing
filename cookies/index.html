@@ -5,13 +5,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BD6VDCSQDC"></script>
+  <!-- Analytics con consentimiento previo. Aquí NO se carga el script de
+       Google: solo se fijan los valores por defecto (todo denegado) y se
+       deja que /assets/consentimiento.js lo inyecte si la persona acepta.
+       El razonamiento completo y las normas que lo obligan están comentados
+       arriba de ese archivo. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-BD6VDCSQDC');
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
   </script>
+  <script defer src="/assets/consentimiento.js?v=20260729"></script>
+  <script defer src="/assets/eventos.js?v=20260729"></script>
 
   <title>Política de Cookies | Kaiva Studio</title>
   <meta name="description"
@@ -50,16 +63,26 @@
 
   <main class="wrap">
     <h1>Política de Cookies<span class="dot">.</span></h1>
-    <p class="actualizado">Última actualización: 24 de julio de 2026</p>
+    <p class="actualizado">Última actualización: 29 de julio de 2026</p>
 
     <h2>Qué es una cookie</h2>
     <p>Una cookie es un archivo pequeño que un sitio guarda en tu navegador. Sirve para recordar
       cosas entre una visita y otra —por ejemplo, si ya estuviste aquí antes— sin identificarte por
       nombre.</p>
 
+    <h2>Tu decisión va primero</h2>
+    <p>La primera vez que entras te aparece un aviso con tres opciones: aceptar todo, dejar solo las
+      necesarias, o configurar categoría por categoría. <strong>Hasta que elijas, no cargamos
+        Analytics ni ningún script de terceros</strong> — no es que quede bloqueado a medias: el
+      navegador ni siquiera se comunica con Google.</p>
+    <p>Puedes cambiar de opinión cuando quieras:</p>
+    <p><a href="/cookies/" data-kv-cookies class="btn-pref">Cambiar mis preferencias de cookies</a></p>
+    <p>Guardamos tu elección durante doce meses. Pasado ese tiempo volvemos a preguntar, para no
+      apoyarnos en un permiso que diste hace demasiado.</p>
+
     <h2>Qué usamos en este sitio</h2>
     <p>Este sitio <strong>no usa cookies publicitarias ni de remarketing</strong>. Tampoco vendemos
-      información a terceros. Lo único que instalamos es medición de uso:</p>
+      información a terceros. Lo único que instalamos es medición de uso, y solo si la autorizas:</p>
 
     <div class="tabla-scroll">
       <table>
@@ -73,14 +96,21 @@
         </thead>
         <tbody>
           <tr>
+            <td><code>kv-consent</code></td>
+            <td>Kaiva Studio (necesaria)</td>
+            <td>Recordar qué categorías de cookies autorizaste, para no volver a preguntártelo en
+              cada página. No viaja a ningún servidor: se queda en tu navegador.</td>
+            <td>12 meses</td>
+          </tr>
+          <tr>
             <td><code>_ga</code></td>
-            <td>Google Analytics</td>
+            <td>Google Analytics (análisis)</td>
             <td>Distinguir visitantes únicos para saber cuánta gente llega al sitio</td>
             <td>2 años</td>
           </tr>
           <tr>
             <td><code>_ga_BD6VDCSQDC</code></td>
-            <td>Google Analytics</td>
+            <td>Google Analytics (análisis)</td>
             <td>Mantener el estado de la sesión de navegación</td>
             <td>2 años</td>
           </tr>
@@ -88,14 +118,20 @@
       </table>
     </div>
 
+    <p>Las dos de Analytics solo existen si aceptaste la categoría de análisis. La de consentimiento
+      es necesaria: sin ella no habría dónde guardar tu respuesta.</p>
+
     <p>Google Analytics nos muestra datos <strong>agregados</strong>: cuántas personas visitan, qué
       páginas leen, cuánto tiempo se quedan, desde qué ciudad aproximada y desde qué buscador o red
-      llegaron. No nos dice quién eres ni nos permite contactarte.</p>
+      llegaron. Le pedimos además que anonimice tu dirección IP. No nos dice quién eres ni nos
+      permite contactarte.</p>
 
     <h2>Cómo desactivarlas</h2>
-    <p>Puedes bloquear o borrar las cookies desde la configuración de tu navegador. El sitio seguirá
-      funcionando igual: no dependemos de cookies para mostrarte el contenido ni para que el
-      formulario funcione.</p>
+    <p>La vía más directa es el
+      <a href="/cookies/" data-kv-cookies>panel de preferencias</a> de este sitio: apagas la
+      categoría y listo. También puedes bloquearlas o borrarlas desde tu navegador. El sitio seguirá
+      funcionando igual en cualquiera de los dos casos: no dependemos de cookies para mostrarte el
+      contenido ni para que el formulario funcione.</p>
     <ul>
       <li><strong>Chrome:</strong> Configuración → Privacidad y seguridad → Cookies y otros datos de
         sitios.</li>
