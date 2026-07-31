@@ -47,6 +47,9 @@ continuidad (seguimiento mensual, alertas, historial), no la información.
 
 ## Recursos
 
+- [Qué es un agente de IA](https://kaivastudio.com/blog/que-es-un-agente-de-ia/): la diferencia
+  real entre un chatbot y un agente, qué tan rápido lo están adoptando las pymes (datos de España
+  y Estados Unidos en 2026), qué riesgos señalan CISA y Gartner, y cómo empezar sin quemar plata.
 - [Cuánto cuesta una página web en Colombia](https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-colombia/):
   rangos reales del mercado colombiano y qué explica la diferencia de precio.
 - [Cuánto cuesta una página web en México](https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-mexico/):
