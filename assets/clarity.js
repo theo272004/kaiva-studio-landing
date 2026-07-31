@@ -37,28 +37,18 @@
 (function () {
   'use strict';
 
-  /* Pegar aquí el identificador del proyecto de clarity.microsoft.com.
-     Mientras esté vacío, este archivo no hace absolutamente nada: no
-     carga scripts, no registra oyentes y no molesta. Se puede subir a
-     producción sin el ID puesto.
+  /* Identificador del proyecto en clarity.microsoft.com.
 
-     ⚠ AL PEGAR EL ID HAY QUE ACTUALIZAR /cookies/ EN EL MISMO COMMIT.
-     Esa página declara una por una las cookies que instala el sitio, y
-     desde el momento en que Clarity arranca instala dos más. Publicar
-     una política que no las nombra es el mismo incumplimiento que
-     teníamos con Analytics. Las filas a añadir a la tabla:
+     Si algún día se vacía, este archivo deja de hacer todo: no carga
+     scripts ni registra oyentes. Es la forma de apagar el mapa de calor
+     sin desconectar nada más.
 
-       _clck  · Microsoft Clarity (análisis) · Identifica el navegador
-                entre visitas para unir la grabación de sesión · 1 año
-       _clsk  · Microsoft Clarity (análisis) · Une las páginas de una
-                misma visita en una sola grabación · 1 día
-
-     Y donde dice "Lo único que instalamos es medición de uso" conviene
-     mencionar que la medición incluye mapa de calor y grabación de
-     sesión, porque no es lo mismo contar clics que grabar el recorrido
-     y hay que decirlo. Clarity enmascara el texto que se escribe en los
-     formularios por defecto — vale la pena dejarlo dicho también. */
-  var PROYECTO = '';
+     ⚠ SI SE CAMBIA O SE AÑADE OTRO MEDIDOR, ACTUALIZAR /cookies/ EN EL
+     MISMO COMMIT. Esa página declara una por una las cookies que instala
+     el sitio; `_clck` y `_clsk` ya están declaradas ahí desde que se
+     activó esto. Publicar una política que no nombre lo que se instala
+     es el mismo incumplimiento que teníamos con Analytics. */
+  var PROYECTO = 'xusybv5gwd';
 
   var cargado = false;
 
