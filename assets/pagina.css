@@ -2028,3 +2028,127 @@ html {
     grid-template-columns: 1fr;
   }
 }
+
+/* ===================== ÍNDICE LATERAL DEL ARTÍCULO =====================
+   Lo construye /assets/indice-blog.js leyendo los <h2>; aquí solo va el
+   aspecto. El artículo mide 720px dentro de un .wrap de 1380, así que la
+   columna de la derecha cabe sin encoger la lectura: la medida del texto
+   no se toca, que es lo que importa en un artículo largo. */
+
+.con-indice {
+  position: relative;
+}
+
+/* Hasta 1100px el índice no existe. En una pantalla estrecha un panel
+   pegajoso se come el alto justo cuando menos sobra, y ahí el gesto
+   natural es rodar. */
+@media (min-width: 1100px) {
+  .con-indice {
+    display: grid;
+    grid-template-columns: minmax(0, 720px) 1fr;
+    gap: clamp(2.5rem, 5vw, 5rem);
+    align-items: start;
+  }
+
+  .indice {
+    position: sticky;
+    top: 7rem;
+    max-height: calc(100vh - 10rem);
+    overflow-y: auto;
+    padding-left: 1.6rem;
+    border-left: 1px solid var(--line);
+    /* Entra un poco más abajo del titular para no competir con él. */
+    margin-top: 9rem;
+  }
+}
+
+.indice {
+  display: none;
+}
+
+@media (min-width: 1100px) {
+  .indice {
+    display: block;
+  }
+}
+
+.indice-tit {
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 1rem;
+}
+
+.indice ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .1rem;
+}
+
+.indice a {
+  display: block;
+  position: relative;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--ink-faint);
+  text-decoration: none;
+  padding: .45rem 0 .45rem .9rem;
+  transition: color .2s var(--ease);
+  text-wrap: pretty;
+}
+
+/* La barrita de la izquierda es el indicador de posición. Va siempre
+   presente y transparente para que al activarse no empuje el texto. */
+.indice a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .55rem;
+  bottom: .55rem;
+  width: 2px;
+  border-radius: 2px;
+  background: transparent;
+  transition: background .2s var(--ease);
+}
+
+.indice a:hover {
+  color: var(--ink);
+}
+
+.indice a:hover::before {
+  background: var(--line-strong);
+}
+
+.indice a.activo {
+  color: var(--violet-ink);
+  font-weight: 600;
+}
+
+.indice a.activo::before {
+  background: var(--violet);
+}
+
+.indice a:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Al saltar a una sección, el título no debe quedar pegado al borde
+   superior ni tapado por el nav fijo. */
+.articulo h2 {
+  scroll-margin-top: 6.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .indice a,
+  .indice a::before {
+    transition: none;
+  }
+}
