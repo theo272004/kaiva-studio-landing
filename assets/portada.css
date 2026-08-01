@@ -502,30 +502,74 @@
            no se lean como simétricos */
         radial-gradient(38rem 30rem at 106% 44%, rgba(168, 85, 247, .12), transparent 66%),
         /* halo frío bajo las tabletas: las despega del fondo */
-        radial-gradient(46rem 22rem at 50% 78%, rgba(99, 102, 241, .07), transparent 70%),
-        /* rejilla: verticales y horizontales por separado */
-        repeating-linear-gradient(to right,
-          rgba(130, 66, 245, .07) 0 1px, transparent 1px var(--rejilla, 46px)),
-        repeating-linear-gradient(to bottom,
-          rgba(130, 66, 245, .07) 0 1px, transparent 1px var(--rejilla, 46px));
+        radial-gradient(46rem 22rem at 50% 78%, rgba(99, 102, 241, .07), transparent 70%);
+    }
 
-      /* Se desvanece arriba (para no pelear con el titular), a los lados y
-         abajo (para entregar la sección siguiente sin una línea de corte). */
+    /* ---- el suelo en perspectiva ----------------------------------------
+       La primera versión puso la rejilla plana, de frente, y quedaba como
+       papel milimetrado pegado a la pared: no daba ninguna sensación de
+       espacio. Lo que hace falta es que esté ACOSTADA — un plano que se
+       aleja — para que las tabletas se lean apoyadas dentro de un lugar y
+       no flotando sobre un patrón.
+
+       Se consigue con perspectiva de verdad (rotateX sobre un plano), no
+       dibujando líneas inclinadas a mano: así las verticales convergen
+       solas hacia el punto de fuga y el espaciado se comprime con la
+       distancia, que es lo que el ojo reconoce como profundidad.
+
+       El elemento es mucho más ancho que el hero (300%) porque al inclinarse
+       los bordes se abren: si midiera lo mismo, el suelo terminaría en dos
+       diagonales visibles a los lados en vez de salirse de cuadro. */
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -2%;
+      width: 300%;
+      height: 72%;
+      z-index: 0;
+      pointer-events: none;
+
+      transform: translateX(-50%) perspective(38rem) rotateX(74deg);
+      /* El origen abajo hace que el punto de fuga quede arriba del plano,
+         que es como se ve un suelo desde la altura de los ojos. */
+      transform-origin: 50% 100%;
+
+      background-image:
+        repeating-linear-gradient(to right,
+          rgba(130, 66, 245, .16) 0 1px, transparent 1px var(--rejilla, 54px)),
+        repeating-linear-gradient(to bottom,
+          rgba(130, 66, 245, .16) 0 1px, transparent 1px var(--rejilla, 54px));
+
+      /* Se desvanece hacia el horizonte: sin esto, el fondo del plano queda
+         como una banda densa de líneas apelmazadas justo detrás del
+         titular. También se apaga por los lados. */
       -webkit-mask-image:
-        linear-gradient(to bottom, transparent 0, #000 22%, #000 82%, transparent 100%),
-        linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%);
+        linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .35) 26%, #000 100%),
+        linear-gradient(to right, transparent 0, #000 26%, #000 74%, transparent 100%);
       -webkit-mask-composite: source-in;
       mask-image:
-        linear-gradient(to bottom, transparent 0, #000 22%, #000 82%, transparent 100%),
-        linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%);
+        linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .35) 26%, #000 100%),
+        linear-gradient(to right, transparent 0, #000 26%, #000 74%, transparent 100%);
       mask-composite: intersect;
     }
 
-    /* En pantallas chicas la rejilla se aprieta: a 46px son cuadros enormes
-       comparados con el ancho, y el fondo empieza a competir con el texto. */
+    /* En pantallas chicas el suelo se aplana y se aprieta: con la
+       inclinación de escritorio, en 375px de ancho solo se ven tres líneas
+       gigantes y deja de leerse como espacio. */
     @media (max-width: 640px) {
-      .hero::before {
-        --rejilla: 30px;
+      .hero::after {
+        --rejilla: 34px;
+        height: 52%;
+        transform: translateX(-50%) perspective(26rem) rotateX(70deg);
+      }
+    }
+
+    /* El suelo es atmósfera, no información: quien pide menos movimiento o
+       navega con contraste alto no gana nada con él y sí puede molestarle. */
+    @media (prefers-contrast: more) {
+      .hero::after {
+        display: none;
       }
     }
 
