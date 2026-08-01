@@ -78,7 +78,7 @@ se comparten — la redacción, no.
 |---|-------------|-------------|--------------------------------------------------------------------|------------------|------------|
 | 1 | 2026-07-30  | Localizado  | Cuánto cuesta una página web en **México**                        | Precios          | Publicado  |
 | 2 | 2026-07-31  | IA          | Qué es un "agente de IA" y si tu negocio realmente necesita uno   | IA y tecnología  | Publicado  |
-| 3 | pendiente   | Localizado  | Cuánto cuesta una página web en **Perú**                          | Precios          | Pendiente  |
+| 3 | 2026-08-01  | Localizado  | Cuánto cuesta una página web en **Perú**                          | Precios          | Publicado  |
 | 4 | pendiente   | IA          | Modelos abiertos (Llama, DeepSeek, Qwen, Mistral): qué cambia para una pyme | IA y tecnología | Pendiente |
 | 5 | pendiente   | Localizado  | Cuánto cuesta una página web en **Chile**                         | Precios          | Pendiente  |
 | 6 | pendiente   | IA          | El "modo IA" y los AI Overviews de Google: qué significa para tu SEO | IA y tecnología | Pendiente |
@@ -97,6 +97,7 @@ se comparten — la redacción, no.
 | 19| pendiente   | Localizado  | Cuánto cuesta una página web en **Costa Rica**                    | Precios          | Pendiente  |
 | 20| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
 | 21| pendiente   | Localizado  | Mejores agencias de diseño web en **Panamá**                      | Cómo elegir      | Pendiente  |
+| 22| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
 
 Cuando la cola llegue al final, seguir el mismo patrón: más países (Panamá,
 Guatemala, República Dominicana, Uruguay...), más ciudades (Medellín,

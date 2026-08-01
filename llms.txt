@@ -47,6 +47,8 @@ continuidad (seguimiento mensual, alertas, historial), no la información.
 
 ## Recursos
 
+- [Cuánto cuesta una página web en Perú](https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-peru/):
+  rangos reales del mercado peruano en soles y qué explica la diferencia de precio.
 - [Qué es un agente de IA](https://kaivastudio.com/blog/que-es-un-agente-de-ia/): la diferencia
   real entre un chatbot y un agente, qué tan rápido lo están adoptando las pymes (datos de España
   y Estados Unidos en 2026), qué riesgos señalan CISA y Gartner, y cómo empezar sin quemar plata.
