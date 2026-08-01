@@ -26,6 +26,52 @@ publicar cada día. No es contenido del sitio: es el backlog interno.
 - Marcar la fila como `Publicado` con la fecha real al terminar, y añadir una
   fila nueva al final de la cola para que nunca se quede vacía.
 
+## Voz y estilo
+
+Los primeros ocho posts salieron todos con el mismo molde: entrada en segunda
+persona con un supuesto («si buscaste esto en Google…»), subtítulos que eran
+etiquetas, una tabla, un recuadro `.nota` y un «En resumen» con viñetas al
+final. Cada uno por separado se lee bien; los ocho juntos se leen como el mismo
+documento repetido, y eso es lo que hace que un blog se sienta genérico. Estas
+reglas existen para romper el molde.
+
+- **Prohibido el andamiaje.** Nada de «en este artículo veremos», «a
+  continuación explicaremos», «en conclusión», «en resumen». Si el texto
+  necesita anunciar lo que va a hacer, es que todavía no lo está haciendo.
+- **Nada de secciones «En resumen» con viñetas.** El cierre es un párrafo (o
+  tres) que dice algo, no un repaso de lo ya dicho. Termina con la idea más
+  incómoda o más útil del artículo, no con un índice.
+- **Los subtítulos afirman, no etiquetan.** «Nadie te está cobrando por
+  páginas» en vez de «Qué se está pagando realmente». Un subtítulo debería
+  poder leerse solo y seguir diciendo algo.
+- **Cada post entra por un lado distinto.** Rotar la forma de abrir: una
+  escena, un dato que choca, una frase que alguien dice de verdad, una
+  contradicción, una pregunta que el lector ya se hizo. Si el post anterior
+  abrió con «tú hiciste X», este no.
+- **Opinión con costo.** El texto tiene que decir al menos una cosa que a una
+  agencia le convendría callar. Es lo que separa un blog de un folleto.
+- **Concreto sobre abstracto.** «Una valla en la Circunvalar» rinde más que «un
+  medio publicitario». Nombres, cifras, lugares, plazos.
+- **Ritmo.** Párrafos de dos a cuatro líneas. Frases cortas después de una
+  larga. Se lee en celular.
+- **Sin testimonios ni anécdotas de clientes inventadas.** Nunca. Si hace falta
+  un ejemplo real y no lo hay, se usa un hecho verificable o se deja fuera.
+- **Tabla y recuadro `.nota` son opcionales, no obligatorios.** Como máximo una
+  tabla por post, y solo cuando de verdad haya datos que comparar.
+- **Comillas angulares (« »), nunca rectas.**
+
+### Regla especial para los posts localizados
+
+Las variantes por país o ciudad **no pueden ser el mismo artículo con los
+números cambiados**. Cuando salieron Colombia y México, el segundo era una
+copia con find-and-replace: mismos subtítulos, mismos párrafos, misma entrada.
+Además de aburrido, es exactamente lo que Google llama contenido a escala.
+
+Cada variante nueva necesita: **entrada propia**, **subtítulos propios** y
+**al menos un tema que solo aplique en ese país** (en México fue el CFDI; en
+Perú, Chile o Argentina será otra cosa). Las cifras y la estructura de fondo sí
+se comparten — la redacción, no.
+
 ## Cola de temas
 
 | # | Fecha       | Tipo        | Tema                                                              | Etiqueta         | Estado     |
