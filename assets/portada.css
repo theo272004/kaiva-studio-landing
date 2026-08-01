@@ -469,6 +469,70 @@
       padding: clamp(7rem, 11vw, 9.5rem) 0 clamp(3rem, 5vw, 5rem);
       position: relative;
       background: #ffffff;
+      /* La rejilla se sale por los lados si no se recorta: el hero ocupa el
+         ancho completo y los resplandores nacen fuera del área visible. */
+      overflow: hidden;
+    }
+
+    /* ---- fondo del hero: rejilla técnica y resplandor -------------------
+       El hero era blanco liso y las capturas de los clientes flotaban en el
+       vacío. Esta capa les pone suelo: una rejilla de papel milimetrado —que
+       es el lenguaje visual de "aquí se construye"— y dos resplandores
+       violeta entrando por los bordes para que el centro quede limpio y las
+       tabletas sigan siendo lo más brillante de la pantalla.
+
+       Va en un ::before y no en el background del .hero porque hace falta
+       enmascararla: sin el desvanecido, la rejilla choca con el titular
+       arriba y corta en seco abajo. Con la máscara nace y muere sola.
+
+       Todo son gradientes CSS, ni una imagen: pesa cero, escala a cualquier
+       pantalla sin pixelarse y no añade una petición al cargar la portada,
+       que es la página que más importa que abra rápido. */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+
+      background-image:
+        /* resplandor izquierdo, a la altura de la vitrina */
+        radial-gradient(42rem 32rem at -8% 58%, rgba(130, 66, 245, .13), transparent 68%),
+        /* resplandor derecho, un poco más rosado y más alto para que los dos
+           no se lean como simétricos */
+        radial-gradient(38rem 30rem at 106% 44%, rgba(168, 85, 247, .12), transparent 66%),
+        /* halo frío bajo las tabletas: las despega del fondo */
+        radial-gradient(46rem 22rem at 50% 78%, rgba(99, 102, 241, .07), transparent 70%),
+        /* rejilla: verticales y horizontales por separado */
+        repeating-linear-gradient(to right,
+          rgba(130, 66, 245, .07) 0 1px, transparent 1px var(--rejilla, 46px)),
+        repeating-linear-gradient(to bottom,
+          rgba(130, 66, 245, .07) 0 1px, transparent 1px var(--rejilla, 46px));
+
+      /* Se desvanece arriba (para no pelear con el titular), a los lados y
+         abajo (para entregar la sección siguiente sin una línea de corte). */
+      -webkit-mask-image:
+        linear-gradient(to bottom, transparent 0, #000 22%, #000 82%, transparent 100%),
+        linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%);
+      -webkit-mask-composite: source-in;
+      mask-image:
+        linear-gradient(to bottom, transparent 0, #000 22%, #000 82%, transparent 100%),
+        linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%);
+      mask-composite: intersect;
+    }
+
+    /* En pantallas chicas la rejilla se aprieta: a 46px son cuadros enormes
+       comparados con el ancho, y el fondo empieza a competir con el texto. */
+    @media (max-width: 640px) {
+      .hero::before {
+        --rejilla: 30px;
+      }
+    }
+
+    /* La vitrina tiene que quedar POR ENCIMA de la capa decorativa. Sin esto
+       las tabletas quedan enterradas bajo el resplandor. */
+    .showcase {
+      z-index: 1;
     }
 
     .hero-grid {

@@ -369,70 +369,102 @@
       transition-delay: .24s;
     }
 
-    /* 3. Integraciones: el mismo diagrama del hero, en miniatura — un centro
-       y dos puntas conectadas por una línea que se dibuja sola. */
-    .tj-hub-mini {
+    /* 3. Integraciones: un origen y tres destinos, que es literalmente lo
+       que hace una integración. Sustituye al diagrama anterior de dos puntas
+       sueltas, que no se leía como nada.
+
+       Las líneas van PUNTEADAS a propósito: una línea continua sugiere una
+       unión rígida, y lo que pasa aquí es que un dato viaja de un sistema a
+       otro. El punteado se lee como tránsito.
+
+       El dibujo entra al hacer scroll con la clase .dentro que ya usan las
+       demás tarjetas — no se anima el trazado de las líneas (dasharray ya
+       está ocupado por el punteado), sino que aparecen y las fichas caen
+       escalonadas. */
+    .tj-integra {
       position: relative;
-      width: 100px;
-      height: 56px;
+      height: 146px;
+      width: 100%;
+      max-width: 220px;
+      margin-inline: auto;
     }
 
-    .tj-hub-lines {
+    .tj-hilos {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
+      opacity: 0;
+      transition: opacity .5s var(--ease) .15s;
     }
 
-    .tj-hub-lines path {
-      fill: none;
-      stroke: rgba(130, 66, 245, .35);
-      stroke-width: 1.4;
+    .tarjeta.dentro .tj-hilos {
+      opacity: 1;
+    }
+
+    .tj-hilos path {
+      stroke: rgba(130, 66, 245, .42);
+      stroke-width: 1.5;
       stroke-linecap: round;
-      stroke-dasharray: 1;
-      stroke-dashoffset: 1;
-      transition: stroke-dashoffset .6s var(--ease) .1s;
+      stroke-dasharray: 3 5;
     }
 
-    .tarjeta.dentro .tj-hub-lines path {
-      stroke-dashoffset: 0;
-    }
-
-    .tj-hub-dot {
+    /* El origen: un solo punto lleno. Todo sale de un lugar. */
+    .tj-origen {
       position: absolute;
+      left: 8.2%;
+      top: 50%;
+      width: 26px;
+      height: 26px;
+      margin: -13px 0 0 -13px;
       border-radius: 50%;
       background: var(--violet);
       transform: scale(0);
-      transition: transform .4s cubic-bezier(.34, 1.56, .64, 1);
+      transition: transform .45s cubic-bezier(.34, 1.56, .64, 1);
     }
 
-    .tarjeta.dentro .tj-hub-dot {
+    .tarjeta.dentro .tj-origen {
       transform: scale(1);
     }
 
-    .tj-hub-center {
-      width: 20px;
-      height: 20px;
-      left: 3px;
-      top: 18px;
+    .tj-ficha {
+      position: absolute;
+      /* 68,2% de 220 = 150, que es justo donde terminan las tres líneas en el
+         viewBox. El margen negativo de media ficha la centra sobre ese punto:
+         sin él la línea moriría en la esquina y no en el centro. */
+      left: 68.2%;
+      margin-left: -22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      background: #fff;
+      color: var(--violet);
+      box-shadow: 0 6px 18px -6px rgba(15, 23, 42, .18), 0 1px 3px rgba(15, 23, 42, .06);
+      opacity: 0;
+      transform: translateY(6px) scale(.9);
+      transition: opacity .4s var(--ease), transform .45s cubic-bezier(.34, 1.56, .64, 1);
     }
 
-    .tj-hub-a {
-      width: 12px;
-      height: 12px;
-      right: 0;
-      top: 0;
-      background: var(--violet-2);
-      transition-delay: .35s;
+    .tarjeta.dentro .tj-ficha {
+      opacity: 1;
+      transform: none;
     }
 
-    .tj-hub-b {
-      width: 12px;
-      height: 12px;
-      right: 0;
-      bottom: 0;
-      background: var(--violet-2);
-      transition-delay: .45s;
+    /* Los tres tops salen de los mismos valores del viewBox (27, 73 y 119
+       sobre 146 = 18,5%, 50% y 81,5%) y los tres llevan el mismo margen
+       negativo de media ficha. La primera versión daba a cada una un margen
+       distinto y las tres quedaban descolgadas de su línea. */
+    .tj-f1 { top: 18.5%; margin-top: -22px; transition-delay: .30s; }
+    .tj-f2 { top: 50%;   margin-top: -22px; transition-delay: .40s; }
+    .tj-f3 { top: 81.5%; margin-top: -22px; transition-delay: .50s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tj-hilos, .tj-origen, .tj-ficha {
+        transition: none;
+      }
     }
 
     /* 4. Plataformas internas: dos columnas con sus tarjetitas, como un
@@ -635,22 +667,6 @@
                 </span>
               </li>
 
-              <li class="medida-item medida-item-fuerte">
-                <span class="medida-ico" aria-hidden="true">
-                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 3v18h18" />
-                    <rect x="7" y="12" width="3" height="6" rx="1" />
-                    <rect x="12" y="8" width="3" height="10" rx="1" />
-                    <rect x="17" y="5" width="3" height="13" rx="1" />
-                  </svg>
-                </span>
-                <span class="medida-cuerpo">
-                  <b>Ese último caso es el más común, el más costoso y el que más oportunidades te
-                    está quitando.</b>
-                  <s>Porque el verdadero costo está en las horas de tu gente.</s>
-                </span>
-              </li>
             </ul>
           </div>
 
@@ -704,16 +720,40 @@
             <h3>Integraciones</h3>
             <p>Conectamos lo que ya usas: facturación electrónica, contabilidad, pasarelas de pago,
               WhatsApp. Que los sistemas se hablen entre ellos.</p>
-            <div class="tj-visual" aria-hidden="true">
-              <div class="tj-hub-mini">
-                <svg class="tj-hub-lines" viewBox="0 0 100 56" preserveAspectRatio="none">
-                  <path d="M13 28 L94 6" pathLength="1" />
-                  <path d="M13 28 L94 50" pathLength="1" />
+            <!-- Un origen y tres destinos: es literalmente lo que hace una
+                 integración. Las líneas van punteadas porque el dato viaja,
+                 no es una unión rígida; y los tres iconos son los sistemas
+                 que de verdad nos piden conectar, no adornos genéricos. -->
+            <div class="tj-visual tj-integra" aria-hidden="true">
+              <span class="tj-origen"></span>
+
+              <svg class="tj-hilos" viewBox="0 0 220 146" fill="none" preserveAspectRatio="none">
+                <path d="M34 73 C 82 73, 96 27, 150 27" />
+                <path d="M34 73 L 150 73" />
+                <path d="M34 73 C 82 73, 96 119, 150 119" />
+              </svg>
+
+              <span class="tj-ficha tj-f1">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <path d="M14 2v6h6M8 13h8M8 17h5" />
                 </svg>
-                <span class="tj-hub-dot tj-hub-center"></span>
-                <span class="tj-hub-dot tj-hub-a"></span>
-                <span class="tj-hub-dot tj-hub-b"></span>
-              </div>
+              </span>
+
+              <span class="tj-ficha tj-f2">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="5" width="20" height="14" rx="2.5" />
+                  <path d="M2 10h20" />
+                </svg>
+              </span>
+
+              <span class="tj-ficha tj-f3">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2m5.8 14.16c-.25.69-1.43 1.32-1.99 1.4-.53.08-1.19.11-1.92-.12-.44-.14-1.01-.33-1.74-.64-3.06-1.32-5.06-4.4-5.21-4.6-.15-.2-1.24-1.65-1.24-3.15s.79-2.24 1.07-2.54c.28-.31.61-.38.81-.38s.41 0 .58.01c.19.01.44-.7.68.52.25.6.83 2.09.9 2.24s.12.33.02.53c-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.6.17.3.76 1.25 1.63 2.03 1.12 1 2.06 1.3 2.36 1.45.3.15.47.13.65-.08.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.28.1 1.75.83 2.05.98.3.15.5.22.57.35.07.13.07.75-.18 1.44" />
+                </svg>
+              </span>
             </div>
           </article>
           <article class="tarjeta">

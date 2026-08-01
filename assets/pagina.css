@@ -2282,28 +2282,6 @@ html {
   text-wrap: pretty;
 }
 
-/* La cuarta tarjeta es la conclusión, no una señal más. Va oscura para que
-   cierre el bloque y se lea como el remate del argumento. */
-.medida-item-fuerte {
-  margin-top: .5rem;
-  background: #17122b;
-  box-shadow: 0 16px 40px -18px rgba(130, 66, 245, .55);
-}
-
-.medida-item-fuerte .medida-ico {
-  background: rgba(130, 66, 245, .18);
-  color: #b892ff;
-  box-shadow: none;
-}
-
-.medida-item-fuerte .medida-cuerpo b {
-  color: #fff;
-}
-
-.medida-item-fuerte .medida-cuerpo s {
-  color: rgba(255, 255, 255, .62);
-}
-
 .medida-arte {
   display: none;
 }
