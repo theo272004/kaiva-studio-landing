@@ -2152,3 +2152,175 @@ html {
     transition: none;
   }
 }
+
+/* ===================== CUÁNDO VALE LA PENA A LA MEDIDA =====================
+   Dos columnas: el argumento a la izquierda y la ilustración a la derecha.
+   El texto manda — la ilustración es lo que cede cuando falta espacio, y
+   desaparece del todo en pantallas donde solo estorbaría. */
+
+.medida {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2.5rem, 5vw, 4rem);
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .medida {
+    /* La columna del texto no crece más de 44rem aunque sobre ancho: pasada
+       esa medida los renglones se vuelven incómodos de leer. */
+    grid-template-columns: minmax(0, 44rem) minmax(0, 1fr);
+  }
+}
+
+.medida-txt > p {
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.72;
+  max-width: 46ch;
+}
+
+.medida-txt > p + p {
+  margin-top: 1rem;
+}
+
+.medida-h2 {
+  font-family: var(--display);
+  font-size: clamp(1.9rem, 4.2vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+  margin-bottom: 1.4rem;
+  max-width: 15ch;
+}
+
+/* El subrayado va con gradiente y no con border-bottom para que quede
+   despegado de las letras y no choque con las descendentes (la "p" de
+   "pena", la "j"). */
+.medida-sub {
+  color: var(--violet);
+  background-image: linear-gradient(var(--violet), var(--violet));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 3px;
+  padding-bottom: .12em;
+}
+
+/* Etiqueta con la línea que se estira hasta el borde. La línea es un
+   pseudo-elemento flexible: así el texto puede cambiar de largo sin que
+   haya que recalcular nada. */
+.medida-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2.4rem 0 1.1rem;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  max-width: none;
+}
+
+.medida-eyebrow::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line-strong);
+  opacity: .55;
+}
+
+.medida-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+}
+
+.medida-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.05rem 1.2rem;
+  border-radius: 14px;
+  background: rgba(130, 66, 245, .045);
+}
+
+.medida-ico {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 11px;
+  background: #fff;
+  color: var(--violet);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, .06);
+}
+
+.medida-cuerpo b {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--ink);
+  margin-bottom: .18rem;
+  text-wrap: pretty;
+}
+
+/* <s> sin tachado: se usa por brevedad en el marcado, el estilo lo anula. */
+.medida-cuerpo s {
+  display: block;
+  text-decoration: none;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+/* La cuarta tarjeta es la conclusión, no una señal más. Va oscura para que
+   cierre el bloque y se lea como el remate del argumento. */
+.medida-item-fuerte {
+  margin-top: .5rem;
+  background: #17122b;
+  box-shadow: 0 16px 40px -18px rgba(130, 66, 245, .55);
+}
+
+.medida-item-fuerte .medida-ico {
+  background: rgba(130, 66, 245, .18);
+  color: #b892ff;
+  box-shadow: none;
+}
+
+.medida-item-fuerte .medida-cuerpo b {
+  color: #fff;
+}
+
+.medida-item-fuerte .medida-cuerpo s {
+  color: rgba(255, 255, 255, .62);
+}
+
+.medida-arte {
+  display: none;
+}
+
+/* La ilustración solo aparece cuando hay sitio de sobra. Debajo de 960px el
+   texto ocupa el ancho completo y una imagen decorativa encima solo alargaría
+   el scroll antes de llegar al argumento. */
+@media (min-width: 960px) {
+  .medida-arte {
+    display: block;
+    justify-self: center;
+  }
+
+  .medida-arte img {
+    display: block;
+    width: 100%;
+    max-width: 30rem;
+    height: auto;
+  }
+}

@@ -50,7 +50,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260729h">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260731a">
 
   <script type="application/ld+json">
 {
@@ -570,20 +570,94 @@
       </div>
     </section>
 
+    <!-- ============ CUÁNDO VALE LA PENA ============
+         Antes era un bloque de prosa centrada. Las tres señales estaban
+         enterradas dentro de un párrafo, separadas por punto y coma, y era
+         justo la parte que un prospecto necesita reconocer de un vistazo:
+         "esa tercera soy yo". Ahora cada señal es una tarjeta y la tercera
+         va destacada, porque es la más común y la que abre la conversación.
+         La ilustración no es decorativa por casualidad — va a la derecha y
+         con aria-hidden: no aporta información que no esté en el texto. -->
     <section class="section alt">
       <div class="wrap">
-        <h2 class="sec-head">Cuándo vale la pena construir a la medida<span class="dot">.</span></h2>
-        <div class="prosa">
-          <p>No siempre vale. Si un sistema del mercado resuelve tu caso, lo más sensato es usarlo —
-            y te lo vamos a decir aunque signifique no vendértelo. Construir lo que ya existe es
-            botar plata.</p>
-          <p>Ahora, hay tres señales de que tu empresa sí necesita algo propio: cuando
-            <strong>tu proceso es justamente lo que te diferencia</strong> de la competencia y ningún
-            software lo respeta; cuando estás pagando licencias por funciones que nadie usa; o cuando
-            tu equipo pierde horas cada semana <strong>pasando información de un sistema a otro a
-              mano</strong>.</p>
-          <p>Ese último caso es el más común y el más caro, porque el costo está escondido en horas
-            de gente.</p>
+        <div class="medida">
+          <div class="medida-txt">
+            <h2 class="medida-h2">Cuándo vale la pena construir
+              <span class="medida-sub">a la medida</span><span class="dot">.</span>
+            </h2>
+
+            <p>No siempre vale. Si un sistema del mercado resuelve tu caso, lo más sensato es usarlo
+              — y te lo vamos a decir aunque eso signifique no vendértelo.</p>
+            <p>Construir lo que ya existe es botar plata. Pero cuando tu operación tiene necesidades
+              reales, un software propio ya no es un lujo: es una ventaja competitiva.</p>
+
+            <p class="medida-eyebrow">3 señales de que tu empresa ya lo necesita</p>
+
+            <ul class="medida-lista">
+              <li class="medida-item">
+                <span class="medida-ico" aria-hidden="true">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                    <path d="m3.3 7 8.7 5 8.7-5M12 22V12" />
+                  </svg>
+                </span>
+                <span class="medida-cuerpo">
+                  <b>Tu proceso es lo que te diferencia.</b>
+                  <s>La competencia no lo replica y ningún software estándar lo respeta.</s>
+                </span>
+              </li>
+
+              <li class="medida-item">
+                <span class="medida-ico" aria-hidden="true">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                  </svg>
+                </span>
+                <span class="medida-cuerpo">
+                  <b>Pagas licencias por funciones que nadie usa.</b>
+                  <s>Soluciones infladas, costosas y que no encajan con tu realidad.</s>
+                </span>
+              </li>
+
+              <li class="medida-item">
+                <span class="medida-ico" aria-hidden="true">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 7v5l3.2 1.9" />
+                  </svg>
+                </span>
+                <span class="medida-cuerpo">
+                  <b>Tu equipo pierde horas cada semana.</b>
+                  <s>Pasando información de un sistema a otro, de forma manual.</s>
+                </span>
+              </li>
+
+              <li class="medida-item medida-item-fuerte">
+                <span class="medida-ico" aria-hidden="true">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 3v18h18" />
+                    <rect x="7" y="12" width="3" height="6" rx="1" />
+                    <rect x="12" y="8" width="3" height="10" rx="1" />
+                    <rect x="17" y="5" width="3" height="13" rx="1" />
+                  </svg>
+                </span>
+                <span class="medida-cuerpo">
+                  <b>Ese último caso es el más común, el más costoso y el que más oportunidades te
+                    está quitando.</b>
+                  <s>Porque el verdadero costo está en las horas de tu gente.</s>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="medida-arte" aria-hidden="true">
+            <img src="/assets/software-a-medida-plataformas.webp" alt="" width="586" height="712"
+              loading="lazy" decoding="async">
+          </div>
         </div>
       </div>
     </section>
@@ -664,10 +738,53 @@
       </div>
     </section>
 
-    <!-- Esta seccion quedo como "alt" cuando se quito "Como trabajamos", que era
-         la que llevaba el fondo gris. Sin esto quedaban dos bloques blancos
-         seguidos y la pagina perdia el ritmo de bandas. -->
-    <section class="section alt" id="preguntas">
+    <section class="section alt">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2>Cómo trabajamos<span class="dot">.</span></h2>
+          <p class="desc">Por fases funcionales: empiezas a usar lo primero mientras construimos el resto.</p>
+        </div>
+        <div class="pasos">
+          <div class="paso">
+            <div>
+              <h3>Análisis de requerimientos</h3>
+              <p>Entendemos el proceso real, no el que está en el manual. Aquí también definimos qué
+                se puede integrar con lo que ya tienes y qué no. Salimos con un alcance por escrito.</p>
+            </div>
+          </div>
+          <div class="paso">
+            <div>
+              <h3>Diseño de la experiencia</h3>
+              <p>Cómo se ve y cómo se usa, antes de programar. Que una herramienta interna sea fea y
+                confusa no es normal: si es incómoda, tu equipo termina evitándola.</p>
+            </div>
+          </div>
+          <div class="paso">
+            <div>
+              <h3>Desarrollo por fases</h3>
+              <p>Construimos primero lo que más te duele. Vas viendo avances funcionando, no
+                capturas de pantalla.</p>
+            </div>
+          </div>
+          <div class="paso">
+            <div>
+              <h3>Integración y pruebas</h3>
+              <p>Conectamos con los sistemas existentes y probamos con datos reales antes de que
+                entre en producción.</p>
+            </div>
+          </div>
+          <div class="paso">
+            <div>
+              <h3>Entrega y acompañamiento</h3>
+              <p>Capacitamos a tu equipo y dejamos el código documentado y a nombre de la empresa.
+                Después seguimos disponibles para ajustes y mejoras.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="preguntas">
       <div class="wrap">
         <h2 class="sec-head">Preguntas frecuentes<span class="dot">.</span></h2>
         <div class="faq-list">
@@ -746,6 +863,44 @@
             </div>
           </details>
 
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="cierre cierre-light">
+          <h2>Cuéntanos qué te está costando tiempo<span class="dot">.</span></h2>
+          <p class="cierre-sub">Esto es exactamente lo que pasa cuando nos escribes. Sin compromiso
+            y sin que tengas que decidir nada en la primera conversación.</p>
+
+          <ol class="ruta">
+            <li>
+              <b>Nos escribes</b>
+              <span>Cuéntanos qué proceso te está costando tiempo o plata. Respondemos el mismo día
+                hábil.</span>
+              <i>Hoy</i>
+            </li>
+            <li>
+              <b>Llamada de 20 minutos</b>
+              <span>Entendemos tu operación real, no la del manual, antes de hablar de una sola
+                pantalla.</span>
+              <i>Esta semana</i>
+            </li>
+            <li>
+              <b>Alcance por fases y precio</b>
+              <span>Por escrito: qué se construye primero, cuánto cuesta cada fase y cuándo queda
+                listo.</span>
+              <i>2 a 3 días después</i>
+            </li>
+          </ol>
+
+          <div class="hero-ctas" style="justify-content:center">
+            <a href="/#contacto" class="btn btn-violet">Escríbenos</a>
+            <a href="/diseno-web/" class="btn btn-ghost">Ver diseño web</a>
+          </div>
+          <p class="cierre-pie">¿Prefieres ver primero cómo está tu presencia digital hoy? El
+            diagnóstico es gratis, no pide registro y tarda 60 segundos.</p>
         </div>
       </div>
     </section>
