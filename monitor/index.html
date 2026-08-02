@@ -333,15 +333,21 @@
   <script>
     (function () {
       /* ---- Backend del diagnóstico ----------------------------------------
-         En localhost apunta al Docker de desarrollo y hace el análisis REAL.
-         En producción vale null a propósito: el backend todavía no está
-         desplegado, así que la página mantiene el flujo de lista de espera en
-         vez de intentar una llamada que no existe y dejar al visitante
-         esperando un timeout. Cuando el VPS esté arriba, esto pasa a ser la
-         URL del subdominio y el panel real se enciende solo.            */
+         En localhost apunta al Docker de desarrollo; en producción, al VPS.
+
+         Durante meses esto valió null a propósito, porque el backend no
+         estaba desplegado y era preferible dejar el flujo de lista de espera
+         antes que lanzar una llamada a la nada y dejar al visitante mirando
+         un timeout. El 2 de agosto de 2026 el backend entró en producción en
+         diagnostico.kaivastudio.com y el análisis real quedó encendido.
+
+         El widget vive en kaivastudio.com (GitHub Pages) y la API en otro
+         subdominio, así que las llamadas son entre orígenes distintos: si
+         algún día empiezan a fallar sin razón aparente, lo primero que hay
+         que mirar es la lista cors_origins del config del servidor.      */
       var API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
         ? 'http://localhost:8080/api'
-        : null;
+        : 'https://diagnostico.kaivastudio.com/api';
 
       var form = document.getElementById('kvForm'),
         urlIn = document.getElementById('kvUrl'),
