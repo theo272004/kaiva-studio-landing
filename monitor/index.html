@@ -483,9 +483,83 @@
           }
         }
 
-        var critEl = document.querySelector('.growth-item:last-child .growth-text b');
-        if (critEl) {
-          critEl.textContent = criticos + (criticos === 1 ? ' Hallazgo crítico' : ' Hallazgos críticos');
+        /* ---- Pie del índice ----------------------------------------------
+           Antes decía "Promedio de empresas similares: 74 · estás 16 puntos
+           por debajo del sector", con las dos cifras escritas a mano. No
+           tenemos promedios por sector, y con un puntaje de 81 el texto salía
+           visiblemente falso. Se explica cómo se compone el puntaje, que sí
+           es cierto y además enseña algo: por qué operación pesa más. */
+        var pie = el('kvPie');
+        if (pie) {
+          pie.textContent = 'Tu puntaje pondera cuatro pilares: operación 40%, imagen 25%, '
+            + 'visibilidad 20% y confianza 15%. Cada hallazgo trae la evidencia que lo prueba.';
+        }
+
+        /* ---- Oportunidades ------------------------------------------------
+           Aquí había tres tarjetas con porcentajes inventados (+31%, +18%,
+           +22%) iguales para todo el mundo. Ahora se arman con los hallazgos
+           reales agrupados por pilar, y se ordenan por dónde hay más que
+           ganar: el pilar con el puntaje más bajo primero, que es donde una
+           corrección mueve más la aguja. */
+        var opos = el('kvOportunidades');
+        if (opos) {
+          var NOMBRES = {
+            visibilidad: ['Visibilidad', 'Que Google y las IA te encuentren'],
+            imagen: ['Imagen', 'Cómo te ve quien llega'],
+            confianza: ['Confianza', 'Credibilidad y seguridad'],
+            operacion: ['Operación', 'Correo y sistemas']
+          };
+          var PUNTAJES = {
+            visibilidad: visScore,
+            imagen: imagenScore,
+            confianza: pillars.confianza ? pillars.confianza.score : null,
+            operacion: pillars.operacion ? pillars.operacion.score : null
+          };
+
+          var porPilar = {};
+          findings.forEach(function (f) {
+            var p = f.pillar || 'otros';
+            if (!porPilar[p]) porPilar[p] = 0;
+            porPilar[p]++;
+          });
+
+          var filas = Object.keys(porPilar)
+            .filter(function (p) { return NOMBRES[p]; })
+            .sort(function (a, b) { return (PUNTAJES[a] || 0) - (PUNTAJES[b] || 0); })
+            .slice(0, 4);
+
+          opos.innerHTML = '';
+          if (!filas.length) {
+            opos.innerHTML = '<div class="growth-item"><div class="growth-text">'
+              + '<b>Nada pendiente</b>No encontramos hallazgos que corregir.</div></div>';
+          } else {
+            filas.forEach(function (p) {
+              var n = porPilar[p];
+              var d = document.createElement('div');
+              d.className = 'growth-item';
+              d.innerHTML = '<span class="growth-icon">'
+                + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+                + 'stroke-width="3" stroke-linecap="round" stroke-linejoin="round">'
+                + '<path d="m3 16 7-7 4 4 7-7M14 6h6v6"/></svg></span>'
+                + '<div class="growth-text"><b>' + NOMBRES[p][0]
+                + ' · ' + PUNTAJES[p] + '/100</b>'
+                + n + (n === 1 ? ' hallazgo' : ' hallazgos') + ' · ' + NOMBRES[p][1] + '</div>';
+              opos.appendChild(d);
+            });
+          }
+
+          var opie = el('kvOportunidadesPie');
+          if (opie) {
+            /* Se cuentan críticos y altos JUNTOS —es lo que de verdad urge—
+               pero se nombran como "prioritarios", no como "críticos": la
+               versión anterior contaba los dos y los llamaba críticos a
+               todos, inflando la gravedad de lo que el propio análisis había
+               marcado como alto. */
+            opie.textContent = criticos > 0
+              ? (criticos === 1 ? 'Hay 1 hallazgo prioritario. ' : 'Hay ' + criticos + ' hallazgos prioritarios. ')
+                + 'Cada uno indica qué hacer y a quién le toca.'
+              : 'No hay nada urgente. Lo que queda son mejoras que puedes hacer con calma.';
+          }
         }
 
         function ease(t) { return 1 - Math.pow(1 - t, 3); }
@@ -752,7 +826,7 @@
               <img src="../assets/logo-kaiva.png" alt="Kaiva Studio" width="105" height="44" fetchpriority="high">
               Kaiva Studio.
             </div>
-            <div class="side-item active">
+            <div class="side-item active" data-ir="secResumen" role="button" tabindex="0">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                 stroke-linejoin="round">
                 <rect x="3" y="3" width="7" height="9" />
@@ -762,7 +836,7 @@
               </svg>
               Resumen
             </div>
-            <div class="side-item">
+            <div class="side-item" data-ir="secPilares" role="button" tabindex="0">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                 stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10" />
@@ -770,7 +844,7 @@
               </svg>
               Pilares
             </div>
-            <div class="side-item">
+            <div class="side-item" data-ir="secHallazgos" role="button" tabindex="0">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                 stroke-linejoin="round">
                 <circle cx="11" cy="11" r="8" />
@@ -820,7 +894,7 @@
             <div class="panel-top-row">
 
               <!-- Index Score Card -->
-              <div class="pcard">
+              <div class="pcard" id="secResumen">
                 <div class="ph">
                   <span class="lbl">Índice de Madurez Digital</span>
                   <span class="info"
@@ -848,13 +922,24 @@
                   </div>
                 </div>
 
-                <div class="index-footer">
-                  Promedio de empresas similares: <b>74</b> · Estás <b>16 puntos</b> por debajo del sector.
-                </div>
+                <!-- Aquí decía "Promedio de empresas similares: 74 · Estás 16
+                     puntos por debajo del sector". Las dos cifras estaban
+                     escritas a mano y se le mostraban iguales a todo el mundo.
+                     Con un puntaje de 81 el texto quedaba visiblemente falso:
+                     81 está POR ENCIMA de 74, y la diferencia sería 7, no 16.
+
+                     No tenemos promedios por sector — haría falta una muestra
+                     grande y clasificar cada dominio por industria. Cuando la
+                     tabla `scans` acumule suficientes análisis se podrá
+                     calcular uno de verdad. Hasta entonces, mejor decir algo
+                     cierto que una comparación inventada, sobre todo en un
+                     producto cuyo argumento es que cada hallazgo carga su
+                     evidencia. -->
+                <div class="index-footer" id="kvPie"></div>
               </div>
 
               <!-- Pillars Card -->
-              <div class="pcard">
+              <div class="pcard" id="secPilares">
                 <div class="ph">
                   <span class="lbl">Pilares de evaluación</span>
                   <a href="#" class="link-detail">Ver detalle</a>
@@ -937,7 +1022,7 @@
             <div class="panel-bottom-row">
 
               <!-- Findings Card -->
-              <div class="pcard">
+              <div class="pcard" id="secHallazgos">
                 <div class="ph">
                   <span class="lbl">Hallazgos principales</span>
                   <span class="info"
@@ -1025,68 +1110,20 @@
                 <div class="ph">
                   <span class="lbl">Oportunidades de crecimiento</span>
                 </div>
-                <div class="growth-list">
+                <!-- Aquí había tres tarjetas con "+31% Tráfico orgánico",
+                     "+18% Confianza de clientes" y "+22% Conversión web".
+                     Ninguna de esas cifras salía de ningún cálculo: estaban
+                     escritas a mano y se le mostraban idénticas a todo el
+                     mundo, tuviera los problemas que tuviera. En un producto
+                     que se vende como "cada hallazgo carga la evidencia que lo
+                     prueba", inventar porcentajes de mejora es lo que más
+                     rápido tumba la credibilidad — basta con que un prospecto
+                     pregunte de dónde sale el 31%.
 
-                  <div class="growth-item">
-                    <span class="growth-icon">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="m3 16 7-7 4 4 7-7M14 6h6v6" />
-                      </svg>
-                    </span>
-                    <div class="growth-text">
-                      <b>+31% Tráfico orgánico</b>
-                      Con SEO técnico estructurado.
-                    </div>
-                  </div>
-
-                  <div class="growth-item">
-                    <span class="growth-icon">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                      </svg>
-                    </span>
-                    <div class="growth-text">
-                      <b>+18% Confianza de clientes</b>
-                      Eliminando alertas de sitio inseguro.
-                    </div>
-                  </div>
-
-                  <div class="growth-item">
-                    <span class="growth-icon">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="9" cy="21" r="1" />
-                        <circle cx="20" cy="21" r="1" />
-                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                      </svg>
-                    </span>
-                    <div class="growth-text">
-                      <b>+22% Conversión web</b>
-                      Mejorando velocidad móvil.
-                    </div>
-                  </div>
-
-                  <div class="growth-item"
-                    style="border-left: 3px solid var(--red); background: rgba(239, 68, 68, 0.02)">
-                    <span class="growth-icon" style="background: var(--red-soft); color: var(--red);">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="m15 9-6 6M9 9l6 6" />
-                      </svg>
-                    </span>
-                    <div class="growth-text">
-                      <b>5 Hallazgos críticos</b>
-                      Frenan tu presencia digital ahora.
-                    </div>
-                  </div>
-
-                </div>
-                <div class="growth-footer">
-                  Corrigiendo estos puntos, tu sitio supera al sector.
-                </div>
+                     Ahora esta lista la arma renderDashboard() con los
+                     hallazgos reales del análisis, agrupados por pilar. -->
+                <div class="growth-list" id="kvOportunidades"></div>
+                <div class="growth-footer" id="kvOportunidadesPie"></div>
               </div>
 
               <!-- "Da el siguiente paso" CTA Card -->
@@ -1191,6 +1228,39 @@
     window.openLockedModal = function () {
       window.location.href = '/#panel-pro';
     };
+
+    /* ---- Navegación del menú lateral ---------------------------------
+       Resumen, Pilares y Hallazgos eran <div> sin onclick ni href: no
+       hacían absolutamente nada al pulsarlos. Solo las secciones bloqueadas
+       tenían acción, así que las tres que sí están disponibles eran las
+       únicas muertas — justo al revés de lo que la persona espera.
+
+       Llevan a su tarjeta del panel. Se marcan como role="button" y
+       tabindex para que respondan también con teclado: son controles, y
+       un <div> no lo es para un lector de pantalla si no se le dice. */
+    (function () {
+      var items = [].slice.call(document.querySelectorAll('.side-item[data-ir]'));
+      if (!items.length) return;
+
+      function ir(item) {
+        var destino = document.getElementById(item.getAttribute('data-ir'));
+        if (!destino) return;
+        items.forEach(function (i) { i.classList.remove('active'); });
+        item.classList.add('active');
+        destino.scrollIntoView({
+          block: 'start',
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+        });
+      }
+
+      items.forEach(function (item) {
+        item.style.cursor = 'pointer';
+        item.addEventListener('click', function () { ir(item); });
+        item.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ir(item); }
+        });
+      });
+    })();
   </script>
 
 
