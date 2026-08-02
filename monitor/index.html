@@ -515,8 +515,20 @@
         if (node) node.style.left = score + '%';
       }
 
-      /* Corre el análisis real contra el backend. Si algo falla, cae al
-         flujo de lista de espera: nunca dejamos al visitante en blanco. */
+      /* Corre el análisis real contra el backend.
+
+         OJO CON LO QUE SE MUESTRA AL FALLAR. La primera versión mandaba
+         cualquier error a la pantalla de lista de espera ("estamos
+         terminando de afinar la herramienta"). Eso tenía sentido cuando el
+         backend no existía, y pasó a ser una MENTIRA en cuanto se lanzó: a
+         quien se pasaba del límite de uso, o tenía un fallo de red, se le
+         decía que el producto todavía no estaba listo. Peor aún, se le pedía
+         el correo para avisarle de un lanzamiento que ya ocurrió.
+
+         Ahora cada caso dice lo suyo, porque la acción de la persona es
+         distinta en cada uno: si se pasó del límite tiene que esperar, si el
+         sitio no responde tiene que revisar la dirección, y si se cayó algo
+         nuestro no es culpa suya y no tiene sentido hacerle perder el tiempo. */
       function analizarDeVerdad(v) {
         bar.style.width = '15%';
         status.textContent = 'Conectando con el sitio...';
@@ -528,7 +540,11 @@
         })
           .then(function (r) { return r.json(); })
           .then(function (scan) {
-            if (!scan.ok) throw new Error(scan.error || 'no se pudo analizar');
+            if (!scan.ok) {
+              var e = new Error(scan.error || 'no se pudo analizar');
+              e.codigo = scan.code || '';
+              throw e;
+            }
             bar.style.width = '60%';
             status.textContent = 'Midiendo velocidad de carga...';
 
@@ -551,9 +567,27 @@
           })
           .catch(function (err) {
             console.error('[kaiva] diagnóstico:', err);
-            var eco = document.getElementById('kvDominioEco');
-            if (eco) eco.textContent = dominio;
-            show(err404);
+
+            /* Se vuelve al formulario con el motivo real escrito arriba del
+               campo, en vez de mandar a la pantalla de "próximamente". La
+               persona ya escribió su dominio y quiere que le digan qué pasó,
+               no que le pidan el correo. */
+            var motivo;
+            if (err.codigo === 'rate_limited') {
+              motivo = 'Has hecho varios análisis seguidos. Espera unos minutos y vuelve a intentarlo.';
+            } else if (err.codigo === 'unreachable' || /no responde|inaccesible/i.test(err.message || '')) {
+              motivo = 'No pudimos conectarnos a ' + dominio + '. Revisa que la dirección esté bien escrita y que el sitio esté en línea.';
+            } else if (err instanceof TypeError) {
+              /* fetch lanza TypeError cuando ni siquiera hubo respuesta:
+                 sin internet, DNS caído o el servidor abajo. */
+              motivo = 'No pudimos conectar con nuestro servidor. Revisa tu conexión e inténtalo de nuevo.';
+            } else {
+              motivo = err.message || 'No pudimos completar el análisis. Inténtalo de nuevo en un momento.';
+            }
+
+            errEl.textContent = motivo;
+            show(welcome);
+            urlIn.focus();
           });
       }
 
