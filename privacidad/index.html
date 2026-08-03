@@ -64,7 +64,7 @@
 
   <main class="wrap">
     <h1>Política de Privacidad y Tratamiento de Datos Personales<span class="dot">.</span></h1>
-    <p class="actualizado">Última actualización: 24 de julio de 2026</p>
+    <p class="actualizado">Última actualización: 2 de agosto de 2026</p>
 
     <div class="pendiente">
       <p><strong>Pendiente por completar.</strong> Faltan la razón social, el NIT y la dirección
@@ -103,15 +103,25 @@
             <td>Responder tu solicitud, preparar una propuesta y dar seguimiento comercial</td>
           </tr>
           <tr>
-            <td>Lista de espera del Diagnóstico Digital</td>
-            <td>Correo electrónico y el dominio que quieres analizar</td>
-            <td>Avisarte cuando la herramienta esté disponible</td>
+            <td>Diagnóstico Digital (al analizar un dominio)</td>
+            <td>El dominio que analizas y el resultado del análisis. Además, de forma técnica: una
+              <strong>versión cifrada e irreversible de tu dirección IP</strong>, tu navegador y
+              desde qué página llegaste. No pedimos registro ni correo para usarlo.</td>
+            <td>Entregarte el análisis, evitar el uso abusivo de la herramienta (hay un límite de
+              análisis por hora) y mejorar las señales que revisamos</td>
+          </tr>
+          <tr>
+            <td>Diagnóstico Digital (si dejas tu correo)</td>
+            <td>Correo electrónico y, si los escribes, nombre, empresa y teléfono</td>
+            <td>Enviarte el informe y hacer seguimiento comercial</td>
           </tr>
           <tr>
             <td>Navegación en el sitio</td>
             <td>Datos de uso agregados: páginas vistas, tiempo de permanencia, tipo de dispositivo,
-              ciudad aproximada y desde dónde llegaste</td>
-            <td>Entender qué contenido sirve y mejorar el sitio</td>
+              ciudad aproximada y desde dónde llegaste. Con tu autorización, también un
+              <strong>mapa de calor</strong>: por dónde mueves el cursor, dónde haces clic y hasta
+              dónde bajas en la página</td>
+            <td>Entender qué contenido sirve y arreglar lo que confunde</td>
           </tr>
         </tbody>
       </table>
@@ -121,15 +131,43 @@
       datos biométricos) ni datos de menores de edad. Si nos los envías por el formulario sin que te
       los pidamos, los eliminaremos.</p>
 
+    <h3>Sobre tu dirección IP en el Diagnóstico</h3>
+    <p>Merece una explicación aparte, porque es el dato más delicado de los que tocamos.
+      <strong>Nunca la guardamos tal cual.</strong> Antes de almacenarla la pasamos por una función
+      criptográfica junto con una clave secreta nuestra, y lo que queda es una cadena de la que
+      <em>no se puede volver atrás</em>: sirve para saber que dos análisis vinieron del mismo sitio
+      —y así frenar el abuso— pero no para saber de quién ni de dónde.</p>
+    <p>Lo hacemos así porque para lo único que necesitamos ese dato es para contar, y contar no
+      exige saber quién eres.</p>
+
+    <h3>Sobre los dominios que se analizan</h3>
+    <p>Guardamos el dominio analizado y su resultado, aunque no dejes tu correo. Son datos públicos
+      —cualquiera puede consultarlos con las mismas herramientas que usamos— y nos sirven para
+      mejorar el análisis y ver qué señales fallan más. Si analizaste un dominio tuyo y quieres que
+      borremos ese registro, escríbenos y lo hacemos.</p>
+
     <h2>3. Con qué autorización los tratamos</h2>
-    <p>Cuando envías el formulario nos das tu autorización expresa para tratar tus datos con las
-      finalidades descritas arriba, conforme al artículo 9 de la Ley 1581 de 2012. Esa autorización
-      la puedes revocar cuando quieras escribiéndonos.</p>
+    <p>Cuando envías el formulario nos das tu autorización expresa marcando la casilla
+      correspondiente, para tratar tus datos con las finalidades descritas arriba, conforme al
+      artículo 9 de la Ley 1581 de 2012. Guardamos la fecha y hora en que la diste, que es lo que
+      nos permite demostrarla. Esa autorización la puedes revocar cuando quieras escribiéndonos.</p>
+    <p>Para las cookies de análisis y el mapa de calor, la autorización la das en el aviso que
+      aparece al entrar. Puedes cambiarla en cualquier momento desde el enlace
+      <a href="/cookies/" data-kv-cookies>Preferencias de cookies</a> del pie de página.</p>
+    <p>El Diagnóstico Digital no requiere autorización previa para funcionar, porque no trata datos
+      personales tuyos: analiza un dominio, que es información pública, y de tu conexión solo
+      conserva la versión irreversible que explicamos arriba. Si decides dejarnos tu correo para
+      recibir el informe, ahí sí nos autorizas expresamente a contactarte.</p>
 
     <h2>4. Cuánto tiempo los guardamos</h2>
     <p>Conservamos los datos de contacto mientras exista una relación comercial o interés vigente, y
       hasta <strong>dos (2) años</strong> después del último contacto. Cumplido ese plazo los
       eliminamos, salvo que una obligación legal o contable nos exija conservarlos más tiempo.</p>
+    <p>Los análisis del Diagnóstico Digital —dominio, resultado y hallazgos— los conservamos de
+      forma indefinida, porque nos sirven para comparar cómo evolucionan las señales que medimos y
+      afinar la herramienta. No van asociados a ninguna persona: quien lo usa sin dejar correo es
+      anónimo para nosotros. Tu preferencia de cookies se guarda <strong>doce meses</strong> en tu
+      propio navegador; pasado ese plazo te volvemos a preguntar.</p>
 
     <h2>5. Quién más puede verlos</h2>
     <p>No vendemos ni cedemos tus datos. Para operar el sitio usamos proveedores que actúan como
@@ -138,7 +176,15 @@
       <li><strong>EmailJS</strong> — entrega a nuestro correo los mensajes del formulario.</li>
       <li><strong>Google (Sheets y Analytics)</strong> — registro de solicitudes y estadísticas de
         uso del sitio.</li>
+      <li><strong>Microsoft Clarity</strong> — el mapa de calor, solo si autorizaste las cookies de
+        análisis. Enmascara el contenido de los campos de los formularios, así que lo que escribes
+        no queda en la grabación.</li>
       <li><strong>GitHub Pages</strong> — alojamiento del sitio web.</li>
+      <li><strong>Hostinger</strong> — servidor donde corre el Diagnóstico Digital y donde se
+        guardan los análisis.</li>
+      <li><strong>Google (PageSpeed Insights y Safe Browsing)</strong> — al analizar un dominio, le
+        preguntamos a estas APIs por su velocidad y su reputación. Se les envía el dominio
+        analizado, no datos tuyos.</li>
     </ul>
     <p>Al enviarnos tus datos aceptas esa transferencia internacional, que se realiza con
       proveedores que ofrecen niveles adecuados de protección, según lo previsto en el Título VIII

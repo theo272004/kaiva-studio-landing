@@ -22,6 +22,10 @@ de negocio y arreglarlos.
 
 ## Diagnóstico Digital (gratis, sin registro)
 
+**Está en línea y funcionando** desde el 2 de agosto de 2026, en
+https://kaivastudio.com/monitor/ — se escribe un dominio y devuelve el análisis
+real. No es una lista de espera ni una demostración.
+
 Analiza un dominio en ~60 segundos y devuelve un Índice de Salud Digital
 (0–100, grado A–F) sobre cuatro pilares, con hallazgos que cargan su evidencia:
 
@@ -36,6 +40,11 @@ Analiza un dominio en ~60 segundos y devuelve un Índice de Salud Digital
 Es gratis y completo: no capamos hallazgos para empujar al pago. Se cobra la
 continuidad (seguimiento mensual, alertas, historial), no la información.
 
+Cuando un sitio bloquea el análisis automático (Cloudflare, Imperva y
+similares) o no responde, la herramienta lo dice y saca esos pilares del
+promedio, en vez de puntuarlos cero. No afirma lo que no pudo comprobar: por
+eso DKIM se reporta como "no detectamos" y nunca como "no tienes".
+
 ## Contacto
 
 - Sitio: https://kaivastudio.com/
@@ -47,6 +56,10 @@ continuidad (seguimiento mensual, alertas, historial), no la información.
 
 ## Recursos
 
+- [Modelos abiertos de IA (DeepSeek, Qwen, Llama)](https://kaivastudio.com/blog/modelos-abiertos-de-ia-para-pymes/):
+  qué son los modelos abiertos, por qué ya igualan a GPT-4 en tareas normales
+  a un costo hasta 90% menor (cifras de comparativas de 2026), y qué significa
+  eso en la práctica para un negocio pequeño.
 - [Cuánto cuesta una página web en Perú](https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-peru/):
   rangos reales del mercado peruano en soles y qué explica la diferencia de precio.
 - [Qué es un agente de IA](https://kaivastudio.com/blog/que-es-un-agente-de-ia/): la diferencia
