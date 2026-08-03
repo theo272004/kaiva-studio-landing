@@ -449,11 +449,20 @@
         }
 
         var el = function (id) { return document.getElementById(id); };
+        /* El cuarto valor dice si ese pilar se pudo medir de verdad. Un
+           pilar que quedó fuera —porque el sitio bloqueó el análisis o no
+           respondió— debe salir con una raya, no con un cero.
+
+           Sin esto pasaba algo absurdo: bancolombia.com bloquea nuestro
+           escáner, así que visibilidad e imagen no se pueden medir y quedan
+           fuera del promedio; el total daba 100/A mientras esos dos círculos
+           mostraban 0. Un puntaje perfecto al lado de dos ceros no se lo cree
+           nadie, y con razón. */
         var pares = [
-          ['scoreP0', 'ringP0', visScore],
-          ['scoreP1', 'ringP1', imagenScore],
-          ['scoreP2', 'ringP2', pillars.confianza.score],
-          ['scoreP3', 'ringP3', pillars.operacion.score]
+          ['scoreP0', 'ringP0', visScore, pillars.visibilidad && pillars.visibilidad.complete !== false],
+          ['scoreP1', 'ringP1', imagenScore, pillars.imagen && pillars.imagen.complete !== false],
+          ['scoreP2', 'ringP2', pillars.confianza.score, pillars.confianza.complete !== false],
+          ['scoreP3', 'ringP3', pillars.operacion.score, pillars.operacion.complete !== false]
         ];
 
         var badge = document.querySelector('.score-badge');
@@ -491,8 +500,17 @@
            es cierto y además enseña algo: por qué operación pesa más. */
         var pie = el('kvPie');
         if (pie) {
-          pie.textContent = 'Tu puntaje pondera cuatro pilares: operación 40%, imagen 25%, '
-            + 'visibilidad 20% y confianza 15%. Cada hallazgo trae la evidencia que lo prueba.';
+          /* Si algún pilar no se pudo medir, el puntaje sale del promedio de
+             los que sí — y hay que decirlo. Un 100 calculado sobre la mitad
+             de las señales no es un 100, y presentarlo como tal sería el
+             mismo tipo de engaño que las cifras que quitamos, solo que a
+             favor del cliente en vez de en contra. */
+          var sinMedir = pares.filter(function (p) { return !p[3]; }).length;
+          pie.textContent = sinMedir > 0
+            ? 'Análisis parcial: ' + (sinMedir === 1 ? 'un pilar no se pudo medir' : sinMedir + ' pilares no se pudieron medir')
+              + ' en tu sitio, así que el puntaje sale solo de los demás.'
+            : 'Tu puntaje pondera cuatro pilares: operación 40%, imagen 25%, '
+              + 'visibilidad 20% y confianza 15%. Cada hallazgo trae la evidencia que lo prueba.';
         }
 
         /* ---- Oportunidades ------------------------------------------------
@@ -579,7 +597,21 @@
         var gen = el('scoreGeneral');
         if (gen) countUp(gen, score);
         pares.forEach(function (par) {
-          var num = el(par[0]), ring = el(par[1]), val = par[2] || 0;
+          var num = el(par[0]), ring = el(par[1]), val = par[2] || 0, medido = par[3];
+
+          if (!medido) {
+            /* No se pudo medir: raya y anillo vacío. Decir "no lo sabemos"
+               es información; poner un cero es una acusación falsa. */
+            if (num) {
+              num.textContent = '—';
+              num.setAttribute('title', 'No pudimos medir este pilar en tu sitio');
+            }
+            if (ring) ring.style.strokeDashoffset = 100;
+            var tarjeta = num && num.closest ? num.closest('.g-cell') : null;
+            if (tarjeta) tarjeta.style.opacity = '.55';
+            return;
+          }
+
           if (num) countUp(num, val);
           if (ring) ring.style.strokeDashoffset = 100 - val;
         });
