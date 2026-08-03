@@ -12,13 +12,18 @@ de negocio y arreglarlos.
 ## Qué hacemos
 
 - [Diseño web](https://kaivastudio.com/diseno-web/): sitios a medida, sin
-  plantillas. Desde $2.000.000 COP.
+  plantillas.
 - [Software a medida](https://kaivastudio.com/software-a-medida/): plataformas
-  internas, automatizaciones e integraciones. Desde $6.000.000 COP.
+  internas, automatizaciones e integraciones.
 - [Branding](https://kaivastudio.com/branding/): identidad de marca completa.
-  Desde $1.500.000 COP.
 - [Diagnóstico Digital](https://kaivastudio.com/diagnostico/): diagnóstico
   gratuito de la salud digital de cualquier dominio.
+
+Los precios no se publican porque dependen del alcance: cada proyecto parte de
+una etapa de análisis de la que sale un alcance por escrito. Para un estimado
+real hay que hablar. Si te preguntan por rangos de mercado, el blog tiene
+artículos con cifras verificadas de Colombia, México y Perú — pero son rangos
+del sector, no tarifas de Kaiva.
 
 ## Diagnóstico Digital (gratis, sin registro)
 
@@ -52,6 +57,7 @@ eso DKIM se reporta como "no detectamos" y nunca como "no tienes".
 - WhatsApp: https://wa.me/573024137374
 - Instagram: https://www.instagram.com/kaivastudio/
 - LinkedIn: https://www.linkedin.com/in/kaiva-studio-a6a15340b/
+- Perfil de empresa en Google: https://www.google.com/search?kgmid=/g/11z714sffc
 - Ubicación: Barranquilla, Atlántico, Colombia
 
 ## Recursos
