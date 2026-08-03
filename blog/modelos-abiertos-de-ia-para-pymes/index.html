@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Analytics con consentimiento previo. Aquí NO se carga el script de
+       Google: solo se fijan los valores por defecto (todo denegado) y se
+       deja que /assets/consentimiento.js lo inyecte si la persona acepta.
+       El razonamiento completo y las normas que lo obligan están comentados
+       arriba de ese archivo. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+  </script>
+  <script defer src="/assets/consentimiento.js?v=20260729"></script>
+  <script defer src="/assets/eventos.js?v=20260729"></script>
+  <script defer src="/assets/indice-blog.js?v=20260731"></script>
+  <script defer src="/assets/clarity.js?v=20260729"></script>
+
+  <title>Modelos abiertos de IA (DeepSeek, Qwen, Llama): qué cambia para una pyme</title>
+  <meta name="description"
+    content="DeepSeek, Qwen y Llama ya igualan a GPT-4 en tareas normales a un costo hasta 90% menor. Qué significa eso en la práctica para un negocio pequeño con web propia.">
+  <link rel="canonical" href="https://kaivastudio.com/blog/modelos-abiertos-de-ia-para-pymes/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="/assets/favicon-64.png" type="image/png" sizes="64x64">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Kaiva Studio">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:url" content="https://kaivastudio.com/blog/modelos-abiertos-de-ia-para-pymes/">
+  <meta property="og:title" content="Modelos abiertos de IA (DeepSeek, Qwen, Llama): qué cambia para una pyme">
+  <meta property="og:description"
+    content="DeepSeek, Qwen y Llama ya igualan a GPT-4 en tareas normales a un costo hasta 90% menor. Qué significa eso para un negocio pequeño.">
+  <meta property="og:image" content="https://kaivastudio.com/assets/blog/ia.webp">
+  <meta property="article:published_time" content="2026-08-02">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Modelos abiertos de IA (DeepSeek, Qwen, Llama): qué cambia para una pyme">
+  <meta name="twitter:image" content="https://kaivastudio.com/assets/blog/ia.webp">
+
+  <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260729h">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaivastudio.com/blog/modelos-abiertos-de-ia-para-pymes/#post",
+      "headline": "Modelos abiertos de IA (DeepSeek, Qwen, Llama): qué cambia para una pyme",
+      "description": "DeepSeek, Qwen y Llama ya igualan a GPT-4 en tareas normales a un costo hasta 90% menor. Qué significa eso en la práctica para un negocio pequeño con web propia.",
+      "datePublished": "2026-08-02",
+      "dateModified": "2026-08-02",
+      "inLanguage": "es-CO",
+      "image": "https://kaivastudio.com/assets/blog/ia.webp",
+      "mainEntityOfPage": "https://kaivastudio.com/blog/modelos-abiertos-de-ia-para-pymes/",
+      "author": {
+        "@type": "Organization",
+        "@id": "https://kaivastudio.com/#studio",
+        "name": "Kaiva Studio",
+        "url": "https://kaivastudio.com/"
+      },
+      "publisher": { "@id": "https://kaivastudio.com/#studio" },
+      "isPartOf": { "@id": "https://kaivastudio.com/blog/#blog" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://kaivastudio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://kaivastudio.com/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Modelos abiertos de IA para pymes", "item": "https://kaivastudio.com/blog/modelos-abiertos-de-ia-para-pymes/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué significa que un modelo de IA sea 'abierto'?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Significa que la empresa que lo entrenó publica los pesos del modelo — los números que definen cómo razona — para que cualquiera los descargue y los use en su propio servidor, sin depender de la API de esa empresa. DeepSeek y modelos como GLM-5 se publican bajo licencia MIT, y Qwen bajo Apache 2.0: ambas permiten uso comercial sin pagar regalías. Un modelo 'cerrado', como GPT-5 o Claude, solo se usa a través de la API del proveedor."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿DeepSeek o Qwen son más baratos que ChatGPT?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Por token, sí, y por un margen amplio: comparaciones publicadas en 2026 ubican el costo de modelos como DeepSeek-V3.2 y Qwen3 entre 0,04 y 0,31 dólares por millón de tokens, con DeepSeek llegando a 0,07 dólares en aciertos de caché, frente a precios varias veces mayores en los modelos cerrados de punta. La diferencia se nota sobre todo en tareas de alto volumen: resúmenes automáticos, clasificación de correos, primeras respuestas de soporte."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Una pyme necesita instalar estos modelos en su propio servidor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, en la mayoría de los casos. Autoalojar un modelo abierto exige comprar o rentar GPU y tener a alguien que lo mantenga, lo cual solo compensa a partir de un volumen de uso alto y constante. Para un negocio pequeño casi siempre sale más barato y más simple usar estos mismos modelos a través de un proveedor que los sirve por API — el ahorro de costo por token se mantiene igual, sin la carga de administrar infraestructura."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Vale la pena esperar a que la IA sea más barata antes de usarla?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El patrón de los últimos dos años ha sido que el costo por token baja de forma sostenida mientras la capacidad sube, así que esperar rara vez sale gratis: se pierde el tiempo en el que se podría estar puliendo el proceso. Lo razonable es empezar con una tarea acotada y de bajo riesgo — clasificar correos, resumir reseñas, redactar primeras versiones — y crecer desde ahí, en vez de esperar una versión 'definitiva' que siempre va a estar a la vuelta de la esquina."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+  <nav class="nav" id="nav">
+    <div class="nav-in">
+      <a href="/" class="logo" aria-label="Kaiva Studio — ir al inicio">
+        <img src="/assets/logo-kaiva.png" alt="Kaiva Studio" width="105" height="44">
+      </a>
+      <div class="nav-right">
+        <div class="nav-links" id="navLinks">
+          <a href="/diseno-web/" class="lnk">Diseño web</a>
+          <a href="/software-a-medida/" class="lnk">Software</a>
+          <a href="/branding/" class="lnk">Branding</a>
+          <a href="/blog/" class="lnk" aria-current="page">Blog</a>
+          <a href="/monitor/" class="btn btn-dark">Diagnóstico Gratis</a>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menú" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <nav class="migas" aria-label="Ruta de navegación">
+      <a href="/">Inicio</a><span>/</span><a href="/blog/">Blog</a><span>/</span>Modelos abiertos de IA para pymes
+    </nav>
+  </div>
+
+  <main>
+    <article class="section" style="padding-top:2.5rem">
+      <div class="wrap">
+        <div class="articulo">
+          <p class="fecha"><time datetime="2026-08-02">2 de agosto de 2026</time> · Lectura de 9 minutos</p>
+
+          <h1 style="font-family:var(--display);font-size:clamp(1.9rem,4.6vw,3rem);font-weight:800;line-height:1.13;letter-spacing:-.03em;text-wrap:balance;margin-bottom:1.3rem">
+            Los modelos de IA que casi nadie te menciona<span style="color:var(--violet)">,</span> y por qué te
+            deberían importar
+          </h1>
+
+          <p class="lead">Cuando alguien piensa en IA piensa en ChatGPT o en Gemini. Pero buena parte del
+            trabajo pesado que hoy hacen chatbots, buscadores internos y herramientas de redacción corre
+            sobre modelos que nunca vas a ver mencionados en una valla: DeepSeek, Qwen, Llama. Y la razón
+            por la que importan no es técnica, es de plata.</p>
+
+          <p>Son modelos <strong>abiertos</strong>: la empresa que los entrenó publica los pesos —los
+            números que definen cómo el modelo razona— para que cualquiera los use libremente, incluso con
+            fines comerciales. Eso es distinto de GPT o Claude, a los que solo se accede pagando por cada
+            consulta a través de su dueño.</p>
+
+          <h2>La brecha con los modelos cerrados ya casi no existe</h2>
+
+          <p>Durante 2024 la conversación era «los modelos abiertos van dos años atrás». Ya no. En tareas
+            del día a día —resumir un texto, clasificar un correo, redactar una respuesta estándar— los
+            modelos abiertos de 2026 rinden prácticamente igual que los modelos de pago más caros. La
+            diferencia real hoy no está en qué tan bien piensan, está en cuánto cuesta cada consulta.</p>
+
+          <p>Y ahí la diferencia es enorme. Comparaciones publicadas este año ubican el precio de modelos
+            como DeepSeek-V3.2 o Qwen3 entre <strong>0,04 y 0,31 dólares por millón de tokens</strong>,
+            con DeepSeek bajando hasta 0,07 dólares cuando se repiten consultas parecidas. Los modelos
+            cerrados de punta cobran varias veces más por el mismo volumen.</p>
+
+          <p>Un millón de tokens no es una cifra abstracta: es, aproximadamente, unas 700.000 palabras.
+            Suficiente para clasificar miles de correos de soporte o generar cientos de primeras
+            respuestas a clientes. Que eso cueste centavos en vez de dólares cambia qué tareas se vuelven
+            rentables automatizar.</p>
+
+          <h2>Quién está usando esto realmente</h2>
+
+          <p>DeepSeek, en particular, se adoptó fuerte en el sudeste asiático y en África: mercados donde
+            el soporte a varios idiomas, la posibilidad de instalarlo localmente y el costo importan más
+            que tener la marca más conocida. Es la misma lógica que le aplica a cualquier negocio en
+            Latinoamérica que factura en pesos o soles y paga la IA en dólares.</p>
+
+          <p>Qwen, del lado chino de Alibaba, se volvió una referencia para quien necesita atender a
+            clientes en varios idiomas sin pagar de más: su licencia Apache 2.0 permite uso comercial sin
+            regalías, algo que no todos los modelos ofrecen. Llama, de Meta, sigue siendo el modelo abierto
+            más desplegado dentro de empresas grandes, justamente porque llegó primero y el ecosistema de
+            herramientas alrededor ya está maduro.</p>
+
+          <div class="nota">
+            <p><strong>Lo que estos nombres no significan para ti:</strong> no hace falta que sepas cuál es
+              "mejor" en abstracto, igual que no necesitas saber qué procesador tiene tu laptop para
+              usarla. Lo que importa es que la herramienta que uses —un chatbot de soporte, un asistente de
+              redacción, un buscador interno— probablemente corre sobre uno de estos modelos por debajo,
+              sin que la marca que te lo vende te lo diga.</p>
+          </div>
+
+          <h2>¿Debería tu negocio instalar uno de estos modelos?</h2>
+
+          <p>Casi seguro que no directamente. Autoalojar un modelo abierto —tenerlo corriendo en tu propio
+            servidor— exige comprar o rentar tarjetas gráficas costosas y a alguien que las mantenga. Eso
+            solo compensa cuando el volumen de consultas es altísimo y constante, algo que aplica a pocas
+            empresas medianas y a casi ninguna pyme.</p>
+
+          <p>Lo que sí aplica es que muchos proveedores —incluidos algunos que quizás ya usas sin saberlo—
+            ofrecen estos mismos modelos abiertos servidos por API, sin que tengas que administrar nada.
+            El ahorro de costo por token se mantiene, la complejidad de infraestructura desaparece. Es la
+            diferencia entre construir tu propia planta eléctrica y simplemente pagar una tarifa más
+            barata en el recibo de la luz.</p>
+
+          <h2>Dónde se nota esto en la práctica</h2>
+
+          <p>Un negocio con presencia digital normal —una web, un correo de soporte, redes sociales— tiene
+            tres puntos donde esto ya está entrando, lo pida o no. El primero es el soporte al cliente:
+            clasificar y responder las preguntas repetidas de siempre ("¿tienen envío a domicilio?",
+            "¿cuál es el horario?") es exactamente el tipo de tarea donde un modelo barato rinde igual que
+            uno caro.</p>
+
+          <p>El segundo es la redacción de primeras versiones: descripciones de producto, respuestas a
+            reseñas, borradores de publicaciones. El tercero, más silencioso, es la búsqueda interna: poder
+            preguntarle a tus propios documentos —catálogos, políticas, contratos— en vez de buscarlos a
+            mano. Ninguno de los tres necesita el modelo más caro del mercado.</p>
+
+          <h2>Lo que sí conviene revisar antes de meterse</h2>
+
+          <p>La licencia importa más de lo que parece. MIT y Apache 2.0 —las que usan DeepSeek y Qwen
+            respectivamente— permiten uso comercial libre. Otros modelos abiertos traen condiciones más
+            restrictivas sobre cuántos usuarios puedes tener antes de necesitar un acuerdo comercial
+            aparte. Vale la pena que quien te instale la herramienta te confirme bajo qué licencia corre lo
+            que estás usando, no solo el nombre de marketing.</p>
+
+          <p>También importa dónde se procesan los datos. Un modelo servido desde un proveedor con
+            infraestructura en otro continente implica que la información de tus clientes viaja hasta allá
+            y vuelve. Para la mayoría de negocios no es un problema; para quien maneja datos sensibles —
+            salud, finanzas, datos de menores— sí es una pregunta que hay que hacer antes, no después.</p>
+
+          <p>La conclusión incómoda es que la ventaja ya no está en usar IA —eso lo está haciendo todo el
+            mundo— sino en usar la IA correcta para cada tarea, sin pagar precio de modelo de punta por un
+            trabajo que un modelo cinco veces más barato resuelve igual de bien. Esperar a que "se ponga
+            más barato todavía" casi nunca compensa: el costo ya bajó lo suficiente como para empezar hoy
+            con algo pequeño y medible.</p>
+
+          <p>Si tu web o tu proceso de atención a clientes todavía dependen de revisar todo a mano, en
+            nuestro <a href="/diagnostico/">Diagnóstico Digital</a> revisamos gratis en qué punto concreto
+            valdría la pena meter algo de esto, sin venderte el paquete más caro que exista.</p>
+        </div>
+      </div>
+    </article>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="cierre">
+          <h2>¿Por dónde empezar<span class="dot">?</span></h2>
+          <p>El Diagnóstico Digital revisa tu presencia actual y te dice, en concreto, qué vale la pena
+            automatizar primero y qué no. Gratis, sin tarjeta y sin registro.</p>
+          <div class="hero-ctas" style="justify-content:center">
+            <a href="/diagnostico/" class="btn btn-violet">Ver el diagnóstico</a>
+            <a href="/#contacto" class="btn btn-ghost">Hablar con alguien</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="wrap">
+      <p>© Kaiva Studio 2026 · Barranquilla, Colombia</p>
+      <nav aria-label="Enlaces del pie">
+        <a href="/">Inicio</a>
+        <a href="/blog/">Blog</a>
+        <a href="/diagnostico/">Diagnóstico</a>
+        <a href="/#contacto">Contacto</a>
+        <a href="/privacidad/">Privacidad</a>
+        <a href="/terminos/">Términos</a>
+        <a href="/cookies/" data-kv-cookies>Preferencias</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.getElementById('nav');
+      var enlaces = document.getElementById('navLinks');
+      var boton = document.getElementById('navToggle');
+
+      var alScroll = function () {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+      };
+      alScroll();
+      window.addEventListener('scroll', alScroll, { passive: true });
+
+      boton.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var abierto = enlaces.classList.toggle('open');
+        boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!enlaces.contains(e.target) && !boton.contains(e.target)) {
+          enlaces.classList.remove('open');
+          boton.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Aparición al hacer scroll. La clase en <html> es la que activa el
+      // estado oculto en el CSS: sin JS no se esconde nada.
+      if (!('IntersectionObserver' in window)) return;
+      document.documentElement.classList.add('js-reveal');
+
+      var objetivos = document.querySelectorAll('.tarjeta, .paso, .post-item, .faq-item, .blog-post');
+      objetivos.forEach(function (el, i) {
+        el.classList.add('reveal');
+        el.style.setProperty('--d', (i % 6) * 0.06 + 's');
+      });
+
+      var observador = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (entrada) {
+          if (!entrada.isIntersecting) return;
+          entrada.target.classList.add('dentro');
+          observador.unobserve(entrada.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+      objetivos.forEach(function (el) { observador.observe(el); });
+    })();
+  </script>
+  <script src="/assets/fechas.js?v=1" defer></script>
+</body>
+
+</html>
