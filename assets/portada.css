@@ -523,12 +523,25 @@
     .hero::after {
       content: "";
       position: absolute;
+      /* OJO con estos dos valores: la caja del elemento NO es lo que se ve.
+         Al inclinarse 68°, el plano se comprime contra su borde inferior y la
+         franja realmente visible mide ~174 px hacia ARRIBA de ese borde, no
+         los 84% de alto que dice aquí.
+
+         Por eso `bottom:-2%` estaba mal: dejaba el borde cercano en el fondo
+         del hero, y con el bloque de titular y botones que hay al final, la
+         franja terminaba pintándose entre 994 y 1168 px — es decir, 167 px
+         POR DEBAJO de las tabletas y cruzando por encima de la nota de los
+         CTA. El suelo no quedaba bajo nada: quedaba colgando al final de la
+         sección.
+
+         Subiéndolo un cuarto del alto del hero, el borde cercano cae justo
+         debajo de las tabletas y la franja queda detrás de ellas, que es lo
+         que le da el apoyo. Es proporcional al hero, así que se mantiene en
+         cualquier ancho. */
       left: 50%;
-      bottom: -2%;
+      bottom: 25%;
       width: 300%;
-      /* Llega hasta poco debajo del titular. Las tabletas ocupan del 32% al
-         70% del alto del hero, así que el suelo tiene que empezar POR ENCIMA
-         de eso para quedar detrás de ellas y no como una franja a sus pies. */
       height: 84%;
       z-index: 0;
       pointer-events: none;
@@ -553,12 +566,16 @@
          y con eso borraba toda la zona que queda detrás de las tabletas —
          que es justo donde el suelo tiene que verse. Ahora entra en el
          primer 9%. */
+      /* Abajo también se desvanece, aunque poco: ese borde es la línea más
+         cercana del plano y, cortada en seco, se lee como el canto de una
+         mesa en vez de un suelo que sigue. Solo el último 8% — más adentro
+         se comería la parte que de verdad se ve. */
       -webkit-mask-image:
-        linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .5) 5%, #000 9%, #000 100%),
+        linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .5) 5%, #000 9%, #000 92%, transparent 100%),
         linear-gradient(to right, transparent 0, #000 22%, #000 78%, transparent 100%);
       -webkit-mask-composite: source-in;
       mask-image:
-        linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .5) 5%, #000 9%, #000 100%),
+        linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .5) 5%, #000 9%, #000 92%, transparent 100%),
         linear-gradient(to right, transparent 0, #000 22%, #000 78%, transparent 100%);
       mask-composite: intersect;
     }
@@ -570,6 +587,10 @@
       .hero::after {
         --rejilla: 34px;
         height: 52%;
+        /* En vertical el hero es mucho más alto y las tabletas quedan más
+           arriba en proporción, así que hay que subirlo más que en
+           escritorio para que la franja las alcance. */
+        bottom: 38%;
         transform: translateX(-50%) perspective(26rem) rotateX(70deg);
       }
     }
