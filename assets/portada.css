@@ -1218,23 +1218,26 @@
       color: var(--violet);
     }
 
+    /* Negro de reposo, mismo criterio que el resto de la página: el negro
+       carga el contraste. Antes era violeta clarito en reposo y solo pasaba
+       a negro al pasar el mouse — en móvil ese negro no se ve nunca. */
     .svc-btn {
       display: inline-flex;
       align-items: center;
       padding: .6rem 1.2rem;
       border-radius: 99px;
-      background: var(--violet-soft);
-      color: var(--violet);
+      background: var(--ink);
+      color: #fff;
       font-size: 13px;
       font-weight: 700;
       text-decoration: none;
-      border: 1px solid rgba(130, 66, 245, .16);
+      border: 1px solid var(--ink);
       transition: background .25s var(--ease), color .25s var(--ease);
     }
 
     .svc-btn:hover {
-      background: var(--ink);
-      color: #fff;
+      background: var(--violet-ink);
+      border-color: var(--violet-ink);
     }
 
     .svc-btn:active {
