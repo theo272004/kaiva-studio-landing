@@ -77,7 +77,7 @@
   <!-- El resto del CSS de esta pagina vive en assets/monitor.css. Antes eran
        51 KB incrustados en el propio HTML: no se cacheaban y viajaban en cada
        visita. Arriba solo se queda el @font-face, que va con los preload. -->
-  <link rel="stylesheet" href="/assets/monitor.css?v=20260803b">
+  <link rel="stylesheet" href="/assets/monitor.css?v=20260804a">
 </head>
 
 <body>
@@ -85,6 +85,24 @@
   <!-- Marca fija en la esquina superior -->
   <a href="/" class="kv-brand-fixed" aria-label="Kaiva Studio — volver al inicio"><img
       src="../assets/logo-kaiva.png" alt="Kaiva Studio"></a>
+
+  <!-- Entrada al Panel Pro. Hoy la usa el equipo de Kaiva: el panel existe y
+       corre en diagnostico.kaivastudio.com, pero es de un solo inquilino y
+       vive detrás del login de /admin/. Para los clientes sigue siendo
+       "próximamente" — de ahí que esto sea una puerta discreta y no un botón
+       de producto: quien no tenga cuenta no debe sentir que le falta algo.
+
+       El login está en el subdominio, no aquí: esta página se sirve desde
+       GitHub Pages (HTML estático, sin sesiones), así que autenticar tiene
+       que pasar del otro lado igual. -->
+  <a href="https://diagnostico.kaivastudio.com/admin/" class="kv-entrar" rel="nofollow">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+      stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="4" y="10" width="16" height="11" rx="2" />
+      <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+    </svg>
+    Entrar al panel
+  </a>
 
   <!-- ===== 1. Bienvenida ===== -->
   <section class="kv-stage on" id="kvWelcome">
