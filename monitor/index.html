@@ -77,7 +77,7 @@
   <!-- El resto del CSS de esta pagina vive en assets/monitor.css. Antes eran
        51 KB incrustados en el propio HTML: no se cacheaban y viajaban en cada
        visita. Arriba solo se queda el @font-face, que va con los preload. -->
-  <link rel="stylesheet" href="/assets/monitor.css?v=20260803a">
+  <link rel="stylesheet" href="/assets/monitor.css?v=20260803b">
 </head>
 
 <body>
@@ -413,44 +413,244 @@
         ok: { sev: '', fi: '', label: 'OK' }
       };
 
-      function findingRow(f) {
+      /* ---- Un hallazgo -----------------------------------------------------
+         El backend devuelve mucho más de lo que se mostraba: `causa`,
+         `riesgo` y `evidence` llegaban en cada respuesta y se tiraban a la
+         basura. Se veía el título, una línea de detalle y ya — quien lo leía
+         sabía que algo estaba mal, pero no qué le está costando ni cómo se
+         arregla, que es justo lo que vino a buscar.
+
+         Va en un <details> porque con once hallazgos abiertos el panel es un
+         muro de texto: cerrado se escanea la lista, abierto se lee el caso
+         completo. El primero abre solo, para que se note que se abren. */
+      function findingRow(f, abierto) {
         var s = SEV[f.severity] || SEV.bajo;
         var neutro = s.sev ? '' : 'background:#f1f5f9;color:#64748b;';
-        var div = document.createElement('div');
-        div.className = 'find';
+        var det = document.createElement('details');
+        det.className = 'find';
+        if (abierto) det.open = true;
 
-        // La receta es la mitad que faltaba: sin el "qué hago", el hallazgo
-        // deja al dueño sabiendo que algo está mal y sin saber qué hacer.
-        var receta = '';
-        if (f.accion) {
-          receta =
-            '<div class="fix">' +
-            '<span class="fix-lbl">Qué hacer</span>' +
-            '<span class="fix-txt"></span>' +
-            '<span class="fix-meta"></span>' +
+        function bloque(clase, etiqueta, texto) {
+          if (!texto) return '';
+          return '<div class="fb-row ' + clase + '">' +
+            '<span class="fb-lbl">' + etiqueta + '</span>' +
+            '<p class="fb-txt" data-campo="' + clase + '"></p>' +
             '</div>';
         }
 
-        div.innerHTML =
-          '<div class="fi ' + s.fi + '" style="' + (s.fi ? '' : 'background:#f1f5f9;color:#94a3b8;') + '">' +
+        var meta = [];
+        if (f.plazo) meta.push(f.plazo);
+        meta.push(f.quien === 'tu' ? 'Lo puedes hacer tú' : 'Lo hace quien te maneja la web');
+
+        det.innerHTML =
+          '<summary class="find-head">' +
+          '<span class="fi ' + s.fi + '" style="' + (s.fi ? '' : 'background:#f1f5f9;color:#94a3b8;') + '">' +
           '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/></svg>' +
-          '</div>' +
-          '<div class="ft"><div class="a"></div><div class="b"></div>' + receta + '</div>' +
-          '<span class="sev ' + s.sev + '" style="' + neutro + '">' + s.label + '</span>';
+          '</span>' +
+          '<span class="ft"><span class="a"></span></span>' +
+          '<span class="sev ' + s.sev + '" style="' + neutro + '">' + s.label + '</span>' +
+          '<span class="find-chevron" aria-hidden="true">' +
+          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>' +
+          '</span>' +
+          '</summary>' +
+          '<div class="find-body">' +
+          bloque('detalle', 'Qué encontramos', f.detail) +
+          bloque('riesgo', 'Qué te está costando', f.riesgo) +
+          bloque('causa', 'Por qué pasa', f.causa) +
+          (f.accion
+            ? '<div class="fb-row accion">' +
+            '<span class="fb-lbl">Cómo se resuelve</span>' +
+            '<p class="fb-txt" data-campo="accion"></p>' +
+            '<span class="fb-meta"></span>' +
+            '</div>'
+            : '') +
+          (f.evidence
+            ? '<div class="fb-row prueba">' +
+            '<span class="fb-lbl">La prueba</span>' +
+            '<code class="fb-code"></code>' +
+            '</div>'
+            : '') +
+          '</div>';
 
-        // textContent, no innerHTML: el título y el detalle salen del análisis
-        // de un sitio de terceros y no deben poder inyectar marcado aquí.
-        div.querySelector('.ft .a').textContent = f.title || '';
-        div.querySelector('.ft .b').textContent = f.detail || '';
+        /* textContent, no innerHTML: todo esto sale del análisis de un sitio
+           de terceros y no debe poder inyectar marcado aquí. */
+        det.querySelector('.ft .a').textContent = f.title || '';
+        var campos = { detalle: f.detail, riesgo: f.riesgo, causa: f.causa, accion: f.accion };
+        Object.keys(campos).forEach(function (k) {
+          var nodo = det.querySelector('[data-campo="' + k + '"]');
+          if (nodo) nodo.textContent = campos[k];
+        });
+        var metaNodo = det.querySelector('.fb-meta');
+        if (metaNodo) metaNodo.textContent = meta.join(' · ');
+        var code = det.querySelector('.fb-code');
+        if (code) code.textContent = f.evidence;
 
-        if (f.accion) {
-          div.querySelector('.fix-txt').textContent = f.accion;
-          var meta = [];
-          if (f.plazo) meta.push(f.plazo);
-          meta.push(f.quien === 'tu' ? 'Lo puedes hacer tú' : 'Lo hace quien te maneja la web');
-          div.querySelector('.fix-meta').textContent = meta.join(' · ');
-        }
-        return div;
+        return det;
+      }
+
+      /* ---- Qué se revisa en cada pilar -------------------------------------
+         Los pilares mostraban un número y nada más: un 61 en Imagen no dice
+         qué se miró ni por qué no es 100. Esta tabla convierte el puntaje en
+         una lista de revisiones concretas, cada una en verde, en rojo o en
+         "no se pudo".
+
+         OJO AL MANTENERLA: los identificadores tienen que coincidir con los
+         que emite el backend. Se armó verificando las respuestas reales de
+         scan.php sobre varios dominios, así que puede faltar alguna revisión
+         que no llegó a dispararse en ninguna prueba. Eso no rompe nada —
+         cualquier hallazgo cuyo id no esté aquí se añade igual como fila
+         propia—, pero una revisión que nunca falla tampoco aparece listada
+         hasta que se agregue a mano. */
+      var REVISIONES = {
+        visibilidad: [
+          ['schema_missing', 'Datos estructurados', 'Que Google y la IA entiendan qué es tu negocio'],
+          ['sitemap_missing', 'Mapa del sitio', 'La lista de tus páginas que le entregas a Google'],
+          ['canonical_missing', 'Dirección oficial de la página', 'Evita que Google vea copias de lo mismo'],
+          ['no_contact_link', 'Contacto a un clic', 'Que se pueda llamarte o escribirte sin buscar'],
+          ['llms_txt_missing', 'Presentación para las IA', 'El archivo que leen ChatGPT y similares']
+        ],
+        imagen: [
+          ['og_image_missing|og_meta_missing', 'Cómo se ve tu enlace al compartirlo', 'La tarjeta que sale en WhatsApp y redes'],
+          ['meta_desc_missing', 'Descripción en los resultados', 'El texto que Google muestra bajo tu título'],
+          ['title_length', 'Título de la página', 'Que quepa entero en el resultado de búsqueda'],
+          ['h1_missing|h1_multiple', 'Titular principal', 'Que la página diga de qué se trata'],
+          ['favicon_missing', 'Ícono en la pestaña', 'Tu marca cuando alguien tiene diez pestañas abiertas'],
+          ['__velocidad', 'Velocidad de carga', 'Medida con PageSpeed sobre tu página real']
+        ],
+        confianza: [
+          ['ssl_invalid', 'Certificado de seguridad', 'El candado del navegador, válido y vigente'],
+          ['mixed_content', 'Contenido seguro de punta a punta', 'Que una web con candado no cargue piezas sin él']
+        ],
+        operacion: [
+          ['spf_missing|spf_softfail', 'SPF', 'Quién tiene permiso de enviar correo con tu dominio'],
+          ['dkim_not_detected', 'DKIM', 'La firma que prueba que el correo salió de ti'],
+          ['dmarc_missing|dmarc_none|dmarc_quarantine', 'DMARC', 'Qué pasa con el que intenta suplantarte'],
+          ['mx_missing', 'MX', 'Que tu dominio pueda recibir correo']
+        ]
+      };
+
+      var NOMBRE_PILAR = {
+        visibilidad: 'Visibilidad',
+        imagen: 'Imagen',
+        confianza: 'Confianza',
+        operacion: 'Operación'
+      };
+
+      function filaRevision(estado, titulo, nota, sev) {
+        var ICONOS = {
+          ok: '<path d="M20 6 9 17l-5-5"/>',
+          mal: '<path d="M18 6 6 18M6 6l12 12"/>',
+          aviso: '<path d="M12 8v5M12 17h.01"/>',
+          nose: '<path d="M5 12h14"/>'
+        };
+        var d = document.createElement('div');
+        d.className = 'chk-row chk-' + estado;
+        d.innerHTML =
+          '<span class="chk-ic">' +
+          '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">' +
+          ICONOS[estado] + '</svg></span>' +
+          '<span class="chk-txt"><b></b><span></span></span>' +
+          (sev ? '<span class="chk-sev">' + sev + '</span>' : '');
+        d.querySelector('.chk-txt b').textContent = titulo;
+        d.querySelector('.chk-txt span').textContent = nota;
+        return d;
+      }
+
+      function renderChecklist(pillars, findings, imagenCompleta, imagenScore, speed) {
+        var cont = document.getElementById('kvChecklist');
+        if (!cont) return;
+        cont.innerHTML = '';
+
+        Object.keys(REVISIONES).forEach(function (clave) {
+          var pilar = pillars[clave];
+          if (!pilar) return;
+
+          var completo = clave === 'imagen' ? imagenCompleta : pilar.complete !== false;
+          /* El puntaje de imagen lo corrige speed.php; leerlo del escaneo
+             inicial dejaba la tarjeta contradiciendo a su propio gauge. */
+          var puntaje = clave === 'imagen' ? imagenScore : pilar.score;
+          var suyos = findings.filter(function (f) { return f.pillar === clave; });
+          var usados = {};
+
+          var card = document.createElement('div');
+          card.className = 'check-card';
+          card.innerHTML =
+            '<div class="chk-head">' +
+            '<b class="chk-nombre"></b>' +
+            '<span class="chk-score"></span>' +
+            '</div>' +
+            '<p class="chk-sub"></p>' +
+            '<div class="chk-list"></div>';
+
+          card.querySelector('.chk-nombre').textContent = NOMBRE_PILAR[clave];
+          card.querySelector('.chk-score').textContent = completo ? (puntaje + '/100') : 'sin medir';
+          card.querySelector('.chk-sub').textContent =
+            (pilar.label || '') + ' · pesa ' + Math.round((pilar.weight || 0) * 100) + '% del índice';
+
+          var lista = card.querySelector('.chk-list');
+
+          /* De más grave a menos: si una revisión agrupa varios ids y caen
+             dos a la vez, manda el peor. */
+          var ORDEN = ['critico', 'alto', 'medio', 'bajo', 'ok'];
+
+          REVISIONES[clave].forEach(function (rev) {
+            var ids = rev[0].split('|');
+            /* Se marcan como usados TODOS los que caen en esta fila, no solo
+               el primero: si no, el segundo hallazgo del grupo se colaba
+               abajo como fila suelta y la misma revisión salía dos veces
+               (pasaba con og:image y og:title, que son la misma cosa). */
+            var caidos = suyos.filter(function (f) {
+              if (ids.indexOf(f.id) === -1) return false;
+              usados[f.id] = true;
+              return true;
+            }).sort(function (a, b) {
+              return ORDEN.indexOf(a.severity) - ORDEN.indexOf(b.severity);
+            });
+
+            if (caidos.length) {
+              var s = SEV[caidos[0].severity] || SEV.bajo;
+              var nota = caidos[0].title;
+              if (caidos.length > 1) nota += ' (+' + (caidos.length - 1) + ' más)';
+              lista.appendChild(filaRevision('mal', rev[1], nota, s.label));
+              return;
+            }
+
+            /* La velocidad no depende del pilar sino de si PageSpeed
+               respondió: puede fallar por su cuenta y decirlo.
+
+               El verde no se reparte por no encontrar hallazgo: se usa el
+               umbral del propio PageSpeed (90 o más es bueno, por debajo hay
+               margen). Un "todo bien" al lado de un sitio que tarda cuatro
+               segundos en mostrar algo no lo defiende nadie. */
+            if (rev[0] === '__velocidad') {
+              if (speed && speed.pagespeed === 'ok' && speed.metrics) {
+                var lcp = speed.metrics.lcp_ms;
+                var perf = speed.metrics.performance;
+                var seg = lcp ? (lcp / 1000).toFixed(1).replace('.', ',') + ' s' : null;
+                var nota = seg ? 'Muestra su contenido en ' + seg : rev[2];
+                if (perf != null) nota += ' · PageSpeed le da ' + perf + '/100';
+                lista.appendChild(filaRevision(
+                  (perf == null || perf >= 90) ? 'ok' : 'aviso', rev[1], nota));
+              } else {
+                lista.appendChild(filaRevision('nose', rev[1], 'No pudimos medirla en esta pasada'));
+              }
+              return;
+            }
+
+            lista.appendChild(filaRevision(completo ? 'ok' : 'nose', rev[1],
+              completo ? rev[2] : 'No se pudo revisar en tu sitio'));
+          });
+
+          /* Un hallazgo que no esté en la tabla de arriba entra igual: antes
+             que ocultarlo, se muestra con su propio título. */
+          suyos.forEach(function (f) {
+            if (usados[f.id]) return;
+            var s = SEV[f.severity] || SEV.bajo;
+            lista.appendChild(filaRevision('mal', f.title, f.detail || '', s.label));
+          });
+
+          cont.appendChild(card);
+        });
       }
 
       function gradeLabel(g) {
@@ -481,9 +681,19 @@
            fuera del promedio; el total daba 100/A mientras esos dos círculos
            mostraban 0. Un puntaje perfecto al lado de dos ceros no se lo cree
            nadie, y con razón. */
+        /* Imagen es un caso aparte. scan.php la marca incompleta cuando deja
+           la velocidad "pendiente", y eso es correcto en ese momento; pero
+           cuando speed.php responde con su puntaje, el pilar YA está medido.
+           Al leer el `complete` del primer paso se mostraba una raya teniendo
+           el número real en la mano: un sitio con 92 de imagen salía sin
+           puntaje y el pie anunciaba "análisis parcial" sin motivo. */
+        var imagenCompleta = (speed && speed.imagen != null)
+          ? true
+          : !!(pillars.imagen && pillars.imagen.complete !== false);
+
         var pares = [
           ['scoreP0', 'ringP0', visScore, pillars.visibilidad && pillars.visibilidad.complete !== false],
-          ['scoreP1', 'ringP1', imagenScore, pillars.imagen && pillars.imagen.complete !== false],
+          ['scoreP1', 'ringP1', imagenScore, imagenCompleta],
           ['scoreP2', 'ringP2', pillars.confianza.score, pillars.confianza.complete !== false],
           ['scoreP3', 'ringP3', pillars.operacion.score, pillars.operacion.complete !== false]
         ];
@@ -502,15 +712,17 @@
             : 'Sin hallazgos prioritarios';
         }
 
+        renderChecklist(pillars, findings, imagenCompleta, imagenScore, speed);
+
         var finds = document.querySelector('.finds');
         if (finds) {
           finds.innerHTML = '';
           if (findings.length) {
-            findings.forEach(function (f) { finds.appendChild(findingRow(f)); });
+            findings.forEach(function (f, i) { finds.appendChild(findingRow(f, i === 0)); });
           } else {
             var vacio = document.createElement('div');
-            vacio.className = 'find';
-            vacio.innerHTML = '<div class="ft"><div class="a">Sin hallazgos — tu presencia digital está en buena forma.</div></div>';
+            vacio.className = 'find-vacio';
+            vacio.textContent = 'Sin hallazgos — tu presencia digital está en buena forma. Mira el detalle de cada revisión en Pilares.';
             finds.appendChild(vacio);
           }
         }
@@ -529,11 +741,18 @@
              mismo tipo de engaño que las cifras que quitamos, solo que a
              favor del cliente en vez de en contra. */
           var sinMedir = pares.filter(function (p) { return !p[3]; }).length;
-          pie.textContent = sinMedir > 0
+          var base = sinMedir > 0
             ? 'Análisis parcial: ' + (sinMedir === 1 ? 'un pilar no se pudo medir' : sinMedir + ' pilares no se pudieron medir')
               + ' en tu sitio, así que el puntaje sale solo de los demás.'
             : 'Tu puntaje pondera cuatro pilares: operación 40%, imagen 25%, '
               + 'visibilidad 20% y confianza 15%. Cada hallazgo trae la evidencia que lo prueba.';
+          /* PageSpeed se cae por su cuenta más seguido de lo que uno querría
+             (límites de cuota, sitios que tardan demasiado). Decirlo es más
+             honesto que dejar creer que la velocidad entró en el puntaje. */
+          if (speed && speed.pagespeed === 'failed') {
+            base += ' No pudimos medir la velocidad de carga en esta pasada; el resto sí.';
+          }
+          pie.textContent = base;
         }
 
         /* ---- Oportunidades ------------------------------------------------
@@ -614,6 +833,10 @@
         }
 
         document.querySelector('.tool-shell').style.display = 'flex';
+        /* Dentro del panel sobra el logo flotante de la esquina: la barra
+           superior y el menú ya llevan la marca, y encima quedaba montado
+           sobre los controles de la ventana. */
+        document.body.classList.add('kv-en-panel');
         [welcome, loading].forEach(function (s) { s.classList.remove('on'); });
         window.scrollTo(0, 0);
 
@@ -882,8 +1105,9 @@
 
           <!-- Sidebar -->
           <aside class="side">
+            <!-- Sin logo al lado: la palabra ya dice la marca, y el logotipo
+                 repetido aquí competía con el de la barra superior. -->
             <div class="side-brand">
-              <img src="../assets/logo-kaiva.png" alt="Kaiva Studio" width="105" height="44" fetchpriority="high">
               Kaiva Studio.
             </div>
             <div class="side-item active" data-ir="secResumen" role="button" tabindex="0">
@@ -1124,7 +1348,12 @@
                 </div>
               </div>
 
-            </div>
+              <!-- Qué se revisó en cada pilar. Lo llena renderChecklist() con
+                   el análisis real: un número suelto no explica de dónde
+                   sale, y la lista de revisiones sí. -->
+              <div class="pillars-check" id="kvChecklist"></div>
+
+            </div><!-- /vista Pilares -->
 
             <!-- ===== Vista: Hallazgos ===== -->
             <div class="view" id="vHallazgos">
@@ -1137,79 +1366,11 @@
                     title="Problemas técnicos y comerciales identificados en tu sitio que requieren atención prioritaria.">i</span>
                 </div>
                 <div class="finds">
-                  <div class="find">
-                    <div class="fi fi-crit">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                      </svg>
-                    </div>
-                    <div class="ft">
-                      <div class="a">SSL incompleto / inseguro</div>
-                      <div class="b">Sin redirección automática a HTTPS.</div>
-                    </div>
-                    <span class="sev sev-crit">Crítico</span>
-                  </div>
-
-                  <div class="find">
-                    <div class="fi fi-crit">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16v12H4zM4 4l8 7 8-7" />
-                      </svg>
-                    </div>
-                    <div class="ft">
-                      <div class="a">Correos se van a spam</div>
-                      <div class="b">Sin firma SPF — Gmail desconfía.</div>
-                    </div>
-                    <span class="sev sev-crit">Crítico</span>
-                  </div>
-
-                  <div class="find">
-                    <div class="fi fi-high">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M18.68 12A8.68 8.68 0 1 1 10 3.32V10h6.68Z" />
-                        <path d="M10 2a8 8 0 0 0-8 8v1h9V2Z" />
-                      </svg>
-                    </div>
-                    <div class="ft">
-                      <div class="a">SEO técnico e indexación</div>
-                      <div class="b">Faltan meta tags y descripciones clave.</div>
-                    </div>
-                    <span class="sev sev-high">Alto</span>
-                  </div>
-
-                  <div class="find">
-                    <div class="fi fi-high">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
-                        <path d="M12 18h.01" />
-                      </svg>
-                    </div>
-                    <div class="ft">
-                      <div class="a">Rendimiento móvil deficiente</div>
-                      <div class="b">Imágenes pesadas — LCP > 3s en móvil.</div>
-                    </div>
-                    <span class="sev sev-high">Alto</span>
-                  </div>
-
-                  <div class="find">
-                    <div class="fi fi-high">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-                      </svg>
-                    </div>
-                    <div class="ft">
-                      <div class="a">Enlaces y metadatos sociales</div>
-                      <div class="b">Sin og:image para WhatsApp y redes.</div>
-                    </div>
-                    <span class="sev sev-high">Alto</span>
-                  </div>
+                  <!-- Los hallazgos los pinta findingRow() con el análisis
+                       real. Aquí vivían cinco de maqueta (SSL, SPF, SEO...)
+                       que nadie llegó a ver nunca: el panel solo aparece
+                       después de renderDashboard(), que empieza vaciando
+                       este contenedor. -->
                 </div>
               </div>
 

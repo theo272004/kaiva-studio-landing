@@ -3216,12 +3216,13 @@
       color: var(--ink);
     }
 
+    /* Sin recorte: esto tenía nowrap + ellipsis y en móvil la explicación se
+       cortaba a media frase ("Tu dominio no tiene SPF: Gmail y Outlook…").
+       El renglón de más ocupa menos que la frase que falta. */
     .find .ft .b {
       font-size: 11.5px;
       color: var(--ink-soft);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      line-height: 1.45;
     }
 
     .find .sev {
