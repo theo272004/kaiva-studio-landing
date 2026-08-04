@@ -43,7 +43,7 @@
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta name="author" content="Kaiva Studio">
   <meta name="theme-color" content="#0b0b0e">
-  <link rel="icon" href="assets/favicon-64.png" type="image/png" sizes="64x64">
+  <link rel="icon" href="assets/favicon-64.png?v=20260804" type="image/png" sizes="64x64">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
   <!-- Open Graph -->
@@ -312,7 +312,7 @@
        @font-face, que va emparejado con los preload de las fuentes.
        El <link> es bloqueante y esta en el <head>, asi que no hay flash de
        contenido sin estilo: la pagina pinta ya con la hoja aplicada. -->
-  <link rel="stylesheet" href="/assets/portada.css?v=20260804b">
+  <link rel="stylesheet" href="/assets/portada.css?v=20260804c">
 </head>
 
 <body>
@@ -1130,8 +1130,12 @@
         <div class="app-grid">
           <!-- Sidebar -->
           <aside class="side">
+            <!-- La K con el punto violeta, la misma marca corta que firma los
+                 artículos del blog. Aquí había una imagen del logotipo
+                 completo encogida a 22 px: la palabra "Kaiva" se leía dos
+                 veces, una ilegible y otra al lado en texto. -->
             <div class="side-brand">
-              <img src="assets/logo-kaiva.png" alt="Kaiva Studio" width="105" height="44" fetchpriority="high">
+              <span class="side-k" aria-hidden="true">K<span class="dot">.</span></span>
               Kaiva Studio.
             </div>
             <div class="side-item active">

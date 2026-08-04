@@ -2985,6 +2985,29 @@
       height: 22px;
     }
 
+    /* La K corta, la misma que firma los artículos del blog. Va en un
+       cuadrado de tinta para que funcione como isotipo y no se confunda con
+       la primera letra de la palabra que tiene al lado. */
+    .side-k {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
+      background: var(--ink);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .side-k .dot {
+      color: var(--violet-2);
+    }
+
     .side-item {
       display: flex;
       align-items: center;
