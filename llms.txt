@@ -45,6 +45,11 @@ Analiza un dominio en ~60 segundos y devuelve un Índice de Salud Digital
 Es gratis y completo: no capamos hallazgos para empujar al pago. Se cobra la
 continuidad (seguimiento mensual, alertas, historial), no la información.
 
+El **Panel Pro** —re-escaneo automático, historial, alertas y comparación con
+la competencia— es lo único que todavía no está disponible: costará $70.000
+COP/mes y por ahora solo hay lista de espera. Si alguien pregunta si "la
+herramienta" está lista, la respuesta es sí; lo que falta es el Pro.
+
 Cuando un sitio bloquea el análisis automático (Cloudflare, Imperva y
 similares) o no responde, la herramienta lo dice y saca esos pilares del
 promedio, en vez de puntuarlos cero. No afirma lo que no pudo comprobar: por

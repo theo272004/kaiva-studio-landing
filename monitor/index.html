@@ -77,7 +77,7 @@
   <!-- El resto del CSS de esta pagina vive en assets/monitor.css. Antes eran
        51 KB incrustados en el propio HTML: no se cacheaban y viajaban en cada
        visita. Arriba solo se queda el @font-face, que va con los preload. -->
-  <link rel="stylesheet" href="/assets/monitor.css?v=20260728a">
+  <link rel="stylesheet" href="/assets/monitor.css?v=20260803a">
 </head>
 
 <body>
@@ -94,9 +94,9 @@
         <!-- Columna izquierda -->
         <div>
           <h1>Analicemos tu web en <em>60 segundos</em></h1>
-          <p class="kv-hero-lead">Revisamos tu sitio como lo ve un cliente: cómo se ve tu marca, si genera confianza y
-            si tu operación está bien montada. Te devolvemos tu Índice de Salud Digital con los hallazgos priorizados.
-            Gratis, sin registro y sin compromiso.</p>
+          <p class="kv-hero-lead">Revisamos tu sitio como lo ve un cliente: si te encuentran, cómo se ve tu marca, si
+            genera confianza y si tu operación está bien montada. Te devolvemos tu Índice de Salud Digital con los
+            hallazgos priorizados. Gratis, sin registro y sin compromiso.</p>
 
           <div class="kv-marks">
             <div class="kv-mark">
@@ -181,9 +181,18 @@
             </div>
           </div>
 
+          <!-- Los pesos son los que usa de verdad el backend (operación 40,
+               imagen 25, visibilidad 20, confianza 15). Decían 35/15/50 sobre
+               tres pilares, de cuando visibilidad no existía: el ejemplo
+               prometía un reparto distinto al que devuelve el análisis. -->
           <div class="kv-pv-pillars">
             <div class="kv-pill">
-              <u>Imagen <em>35%</em></u>
+              <u>Visibilidad <em>20%</em></u>
+              <b>64<s>/100</s></b>
+              <div class="kv-pill-bar"><i style="width:64%"></i></div>
+            </div>
+            <div class="kv-pill">
+              <u>Imagen <em>25%</em></u>
               <b>82<s>/100</s></b>
               <div class="kv-pill-bar"><i style="width:82%"></i></div>
             </div>
@@ -193,7 +202,7 @@
               <div class="kv-pill-bar"><i style="width:90%"></i></div>
             </div>
             <div class="kv-pill">
-              <u>Operación <em>50%</em></u>
+              <u>Operación <em>40%</em></u>
               <b>58<s>/100</s></b>
               <div class="kv-pill-bar"><i style="width:58%"></i></div>
             </div>
@@ -293,25 +302,51 @@
     </div>
   </section>
 
-  <!-- ===== 3. Error 404 / en mantenimiento ===== -->
-  <!-- La herramienta todavía está en desarrollo. En vez de dejar a la persona
-       con un error, le ofrecemos avisarle: así el tráfico que ya llega se
-       convierte en contacto y de paso mide cuánto interés real hay. -->
-  <section class="kv-stage" id="kv404">
-    <div class="kv-box">
-      <img src="../assets/error-404.webp" alt="" class="kv-404-img" width="1200" height="670"
-        onerror="this.style.display='none';document.getElementById('kv404Fb').style.display='block';">
-      <div class="kv-404-fallback" id="kv404Fb">EN <span>OBRA</span></div>
-      <h2>Tu Diagnóstico está casi listo.</h2>
-      <p class="kv-lead">Estamos terminando de afinar la herramienta para que los resultados sean
-        datos reales y no estimaciones. Déjanos tu correo y te avisamos apenas puedas
-        analizar <strong id="kvDominioEco">tu sitio</strong>.</p>
+  <!-- Aquí vivía una tercera pantalla, "Tu Diagnóstico está casi listo", con
+       un formulario para avisar del lanzamiento. Tenía sentido mientras el
+       backend no existía. Desde el 2 de agosto de 2026 el análisis es real y
+       esa pantalla era una mentira: se le decía "todavía no está disponible"
+       a alguien que acababa de usar la herramienta. Los errores ahora se
+       explican sobre el propio formulario (ver el catch de analizarDeVerdad).
+
+       La lista de espera no desapareció: se movió al Panel Pro (#kvPro), que
+       es lo único que de verdad falta por lanzar. -->
+
+  <!-- ===== Panel Pro: lista de espera ===== -->
+  <!-- Va aquí arriba, antes del guion que engancha el formulario. Si
+       estuviera más abajo, getElementById devolvería null y el formulario
+       quedaría mudo sin dar ni un error. -->
+  <div class="kvpro" id="kvPro" role="dialog" aria-modal="true" aria-labelledby="kvProTitulo">
+    <div class="kvpro-card">
+      <button type="button" class="kvpro-x" id="kvProCerrar" aria-label="Cerrar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+          stroke-linecap="round">
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
+      </button>
+
+      <span class="kvpro-tag">Panel Pro · $70.000 COP/mes</span>
+      <h2 id="kvProTitulo">Esto es una sección del Panel Pro.</h2>
+      <p class="kvpro-lead">El diagnóstico que acabas de correr es gratis y completo — no te
+        escondemos hallazgos. Lo que el Panel Pro agrega es el <strong>tiempo</strong>: volver a
+        medir solo, guardar el historial y avisarte cuando algo se rompa.</p>
+
+      <ul class="kvpro-list">
+        <li>Re-escaneo automático cada mes, sin que tengas que acordarte.</li>
+        <li>Historial: ves si mejoraste o si algo se dañó, y cuándo.</li>
+        <li>Alertas cuando el SSL vence, el sitio se cae o cambia tu correo.</li>
+        <li>Competencia: tu puntaje al lado del de otros de tu sector.</li>
+        <li>Informe mensual con qué atender primero.</li>
+      </ul>
+
+      <p class="kvpro-estado">Todavía no está disponible. Estamos construyéndolo; déjanos tu
+        correo y serás de los primeros en entrar.</p>
 
       <form class="kv-wait" id="kvWaitForm">
         <label class="kv-wait-label" for="kvWaitMail">Tu correo</label>
         <div class="kv-wait-row">
-          <input type="email" id="kvWaitMail" class="kv-wait-input" placeholder="tucorreo@empresa.com"
-            required autocomplete="email">
+          <input type="email" id="kvWaitMail" class="kv-wait-input" placeholder="tucorreo@empresa.com" required
+            autocomplete="email">
           <button type="submit" class="kv-wait-btn" id="kvWaitBtn">Avísenme</button>
         </div>
         <p class="kv-wait-note">Te escribimos una sola vez, para avisarte del lanzamiento. Nada más.</p>
@@ -323,12 +358,10 @@
           stroke-linecap="round" stroke-linejoin="round">
           <path d="M20 6 9 17l-5-5" />
         </svg>
-        Listo. Te avisamos apenas esté disponible.
+        Listo. Te avisamos apenas el Panel Pro esté disponible.
       </div>
-
-      <a href="/" class="kv-back">Volver al inicio</a>
     </div>
-  </section>
+  </div>
 
   <script>
     (function () {
@@ -354,22 +387,12 @@
         errEl = document.getElementById('kvErr'),
         welcome = document.getElementById('kvWelcome'),
         loading = document.getElementById('kvLoading'),
-        err404 = document.getElementById('kv404'),
         bar = document.getElementById('kvBar'),
         status = document.getElementById('kvStatus'),
         target = document.getElementById('kvTarget');
 
-      var steps = [
-        [12, 'Conectando con el sitio...'],
-        [30, 'Midiendo velocidad de carga...'],
-        [52, 'Revisando diseño y experiencia...'],
-        [72, 'Verificando seguridad y correo...'],
-        [90, 'Evaluando visibilidad en Google e IAs...'],
-        [100, 'Generando tu informe...']
-      ];
-
       function show(el) {
-        [welcome, loading, err404].forEach(function (s) { s.classList.remove('on'); });
+        [welcome, loading].forEach(function (s) { s.classList.remove('on'); });
         el.classList.add('on');
         window.scrollTo(0, 0);
       }
@@ -590,8 +613,8 @@
           })(performance.now());
         }
 
-        document.querySelector('.tool-shell').style.display = 'block';
-        [welcome, loading, err404].forEach(function (s) { s.classList.remove('on'); });
+        document.querySelector('.tool-shell').style.display = 'flex';
+        [welcome, loading].forEach(function (s) { s.classList.remove('on'); });
         window.scrollTo(0, 0);
 
         var gen = el('scoreGeneral');
@@ -734,7 +757,11 @@
         })();
       });
 
-      /* ---- Lista de espera ---- */
+      /* ---- Lista de espera del Panel Pro ----
+         El mismo formulario de antes, pero apuntando a lo único que sigue
+         sin lanzarse. El diagnóstico ya está en línea: pedir el correo "para
+         avisarte cuando esté lista" a quien acaba de usarla no tenía sentido
+         y ensuciaba la hoja de leads con interés falso. */
       var EJS = {
         service: 'service_94uqq2e',
         template: 'template_brvipe9',
@@ -773,11 +800,11 @@
               method: 'POST',
               headers: { 'Content-Type': 'text/plain;charset=utf-8' },
               body: JSON.stringify({
-                nombre: '(lista de espera)',
+                nombre: '(lista de espera Panel Pro)',
                 correo: correo,
                 telefono: '',
-                interes: 'Diagnóstico Digital — lista de espera',
-                mensaje: 'Quiere analizar: ' + sitio,
+                interes: 'Panel Pro — lista de espera',
+                mensaje: 'Analizó: ' + sitio,
                 origen: window.location.href,
                 referente: document.referrer || 'directo'
               })
@@ -792,12 +819,12 @@
               template_id: EJS.template,
               user_id: EJS.key,
               template_params: {
-                name: '(lista de espera — Diagnóstico Digital)',
+                name: '(lista de espera — Panel Pro)',
                 email: correo,
-                message: 'Alguien quiso analizar ' + sitio + ' y dejó su correo para que le avisen cuando la herramienta esté lista.',
+                message: 'Alguien corrió el diagnóstico de ' + sitio + ', intentó abrir una sección Pro y dejó su correo para que le avisen cuando el Panel Pro esté disponible.',
                 phone: 'No indicado',
-                interest: 'Diagnóstico Digital — lista de espera',
-                subject: 'Lista de espera Diagnóstico — ' + sitio,
+                interest: 'Panel Pro — lista de espera',
+                subject: 'Lista de espera Panel Pro — ' + sitio,
                 time: new Date().toLocaleString('es-CO', { dateStyle: 'medium', timeStyle: 'short' }),
                 page_url: window.location.href,
                 privacy: 'Aceptada'
@@ -819,7 +846,8 @@
     })();
   </script>
 
-  <!-- Main Tool / Dashboard Shell (panel real — oculto hasta que la herramienta esté lista) -->
+  <!-- Panel de resultados. Empieza oculto y lo enciende renderDashboard()
+       cuando el backend responde: antes de eso no hay nada que enseñar. -->
   <section class="tool-shell" style="display:none;">
       <div class="app in" id="app">
 
@@ -836,7 +864,7 @@
               Verificado
             </span>
           </span>
-          <span class="app-tag">Madurez digital</span>
+          <span class="app-tag">Diagnóstico Digital</span>
         </div>
 
         <!-- App Grid (Sidebar + Panel Content) -->
@@ -922,15 +950,24 @@
           <!-- Panel Main Content -->
           <div class="panel">
 
-            <!-- Top Row (Index Score & Pillars) -->
+            <!-- ===== Vista: Resumen ===== -->
+            <!-- El menú lateral cambia de vista, no hace scroll. Antes las
+                 tres secciones vivían en la misma pantalla: Resumen y Pilares
+                 estaban una al lado de la otra, a la misma altura, así que
+                 "ir" a Pilares no movía nada y parecía que el botón estaba
+                 roto. Ahora cada entrada del menú muestra su propio panel. -->
+            <div class="view on" id="vResumen">
             <div class="panel-top-row">
 
               <!-- Index Score Card -->
               <div class="pcard" id="secResumen">
                 <div class="ph">
-                  <span class="lbl">Índice de Madurez Digital</span>
+                  <!-- "Madurez" es el nombre viejo de la herramienta; en el
+                       resto del sitio y en la respuesta del backend es Salud
+                       Digital. Dos nombres para el mismo número confunden. -->
+                  <span class="lbl">Índice de Salud Digital</span>
                   <span class="info"
-                    title="Índice ponderado basado en más de 50 métricas de presencia y configuración técnica.">i</span>
+                    title="Índice ponderado de cuatro pilares: operación 40%, imagen 25%, visibilidad 20% y confianza 15%.">i</span>
                 </div>
                 <div class="index-card-content">
                   <div class="index-left">
@@ -969,6 +1006,45 @@
                      evidencia. -->
                 <div class="index-footer" id="kvPie"></div>
               </div>
+
+              <!-- Oportunidades de crecimiento. Vive en el Resumen: es la
+                   lectura corta del análisis, no una sección aparte.
+
+                   Aquí había tres tarjetas con "+31% Tráfico orgánico",
+                   "+18% Confianza de clientes" y "+22% Conversión web".
+                   Ninguna de esas cifras salía de ningún cálculo: estaban
+                   escritas a mano y se le mostraban idénticas a todo el
+                   mundo, tuviera los problemas que tuviera. En un producto
+                   que se vende como "cada hallazgo carga la evidencia que lo
+                   prueba", inventar porcentajes de mejora es lo que más
+                   rápido tumba la credibilidad — basta con que un prospecto
+                   pregunte de dónde sale el 31%.
+
+                   Ahora esta lista la arma renderDashboard() con los
+                   hallazgos reales del análisis, agrupados por pilar. -->
+              <div class="pcard">
+                <div class="ph">
+                  <span class="lbl">Oportunidades de crecimiento</span>
+                </div>
+                <div class="growth-list" id="kvOportunidades"></div>
+                <div class="growth-footer" id="kvOportunidadesPie"></div>
+                <!-- El Resumen resume; los hallazgos con su evidencia están en
+                     su propia vista. Sin esta salida habría que descubrir el
+                     menú lateral para llegar a lo que de verdad importa. -->
+                <button type="button" class="growth-cta" onclick="window.kvIrA('secHallazgos')">
+                  Ver los hallazgos con su evidencia
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </button>
+              </div>
+
+            </div><!-- /panel-top-row -->
+            </div><!-- /vista Resumen -->
+
+            <!-- ===== Vista: Pilares ===== -->
+            <div class="view" id="vPilares">
 
               <!-- Pillars Card -->
               <div class="pcard" id="secPilares">
@@ -1050,8 +1126,8 @@
 
             </div>
 
-            <!-- Bottom Row (Findings, Growth Opportunities & Final CTA) -->
-            <div class="panel-bottom-row">
+            <!-- ===== Vista: Hallazgos ===== -->
+            <div class="view" id="vHallazgos">
 
               <!-- Findings Card -->
               <div class="pcard" id="secHallazgos">
@@ -1137,29 +1213,11 @@
                 </div>
               </div>
 
-              <!-- Growth Opportunities Card -->
-              <div class="pcard">
-                <div class="ph">
-                  <span class="lbl">Oportunidades de crecimiento</span>
-                </div>
-                <!-- Aquí había tres tarjetas con "+31% Tráfico orgánico",
-                     "+18% Confianza de clientes" y "+22% Conversión web".
-                     Ninguna de esas cifras salía de ningún cálculo: estaban
-                     escritas a mano y se le mostraban idénticas a todo el
-                     mundo, tuviera los problemas que tuviera. En un producto
-                     que se vende como "cada hallazgo carga la evidencia que lo
-                     prueba", inventar porcentajes de mejora es lo que más
-                     rápido tumba la credibilidad — basta con que un prospecto
-                     pregunte de dónde sale el 31%.
+            </div><!-- /vista Hallazgos -->
 
-                     Ahora esta lista la arma renderDashboard() con los
-                     hallazgos reales del análisis, agrupados por pilar. -->
-                <div class="growth-list" id="kvOportunidades"></div>
-                <div class="growth-footer" id="kvOportunidadesPie"></div>
-              </div>
-
-              <!-- "Da el siguiente paso" CTA Card -->
-              <div class="pcard cta-card">
+            <!-- "Da el siguiente paso": queda fuera de las vistas, visible en
+                 las tres. Es la única salida comercial del panel. -->
+            <div class="pcard cta-card">
                 <div class="cta-card-content">
                   <div>
                     <span class="cta-head-title">Da el siguiente paso</span>
@@ -1178,8 +1236,6 @@
 
                 <!-- Floating Robot inside Card -->
                 <img src="../assets/KaivaMora1.webp" alt="Mora Robot con pantalla" class="cta-robot float-robot">
-              </div>
-
             </div>
 
             <!-- Bottom Banner (Features list) -->
@@ -1219,9 +1275,13 @@
                     <path d="M21.21 15.89A10 10 0 1 1 8 2.83M22 12A10 10 0 0 0 12 2v10z" />
                   </svg>
                 </span>
+                <!-- Decía "Benchmark de tu industria · Comparación con promedio
+                     de competidores". La comparación con la competencia es del
+                     Panel Pro, que ni siquiera existe todavía: se anunciaba
+                     como incluido algo que nadie recibía. -->
                 <div class="fb-info">
-                  <b>Benchmark de tu industria</b>
-                  Comparación con promedio de competidores.
+                  <b>Sin registro ni tarjeta</b>
+                  Escribes tu dominio y ya. Nada que crear.
                 </div>
               </div>
 
@@ -1255,34 +1315,37 @@
     // backend. Dejarlo animando datos de ejemplo mostraría cifras inventadas
     // por un instante antes de las de verdad.
     //
-    // Las secciones Pro del sidebar (Competencia, Historial) no tienen modal
-    // construido todavía: llevan a la sección del Panel Pro en el landing.
-    window.openLockedModal = function () {
-      window.location.href = '/#panel-pro';
-    };
-
     /* ---- Navegación del menú lateral ---------------------------------
        Resumen, Pilares y Hallazgos eran <div> sin onclick ni href: no
-       hacían absolutamente nada al pulsarlos. Solo las secciones bloqueadas
-       tenían acción, así que las tres que sí están disponibles eran las
-       únicas muertas — justo al revés de lo que la persona espera.
+       hacían nada al pulsarlos. Después se les puso scrollIntoView, y
+       siguieron pareciendo rotos por una razón distinta: Resumen y Pilares
+       estaban uno al lado del otro dentro de la misma fila, a la misma
+       altura, así que "ir" a Pilares desplazaba a la misma posición en la
+       que ya estabas. Cero movimiento, cero señal de que el clic sirvió.
 
-       Llevan a su tarjeta del panel. Se marcan como role="button" y
-       tabindex para que respondan también con teclado: son controles, y
-       un <div> no lo es para un lector de pantalla si no se le dice. */
+       Ahora cada entrada muestra su propia vista y oculta las demás, que es
+       lo que un menú lateral promete. Se marcan role="button" y tabindex
+       para que respondan también con teclado: son controles, y un <div> no
+       lo es para un lector de pantalla si no se le dice. */
     (function () {
       var items = [].slice.call(document.querySelectorAll('.side-item[data-ir]'));
-      if (!items.length) return;
+      var vistas = [].slice.call(document.querySelectorAll('.panel .view'));
+      if (!items.length || !vistas.length) return;
+
+      function vistaDe(item) {
+        var destino = document.getElementById(item.getAttribute('data-ir'));
+        return destino ? destino.closest('.view') : null;
+      }
 
       function ir(item) {
-        var destino = document.getElementById(item.getAttribute('data-ir'));
-        if (!destino) return;
-        items.forEach(function (i) { i.classList.remove('active'); });
-        item.classList.add('active');
-        destino.scrollIntoView({
-          block: 'start',
-          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+        var vista = vistaDe(item);
+        if (!vista) return;
+        items.forEach(function (i) {
+          var act = i === item;
+          i.classList.toggle('active', act);
+          i.setAttribute('aria-current', act ? 'true' : 'false');
         });
+        vistas.forEach(function (v) { v.classList.toggle('on', v === vista); });
       }
 
       items.forEach(function (item) {
@@ -1292,6 +1355,64 @@
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ir(item); }
         });
       });
+
+      /* Para que otras partes del panel puedan cambiar de vista sin duplicar
+         esta lógica (el botón "ver hallazgos" del resumen, por ejemplo). */
+      window.kvIrA = function (idSeccion) {
+        var item = document.querySelector('.side-item[data-ir="' + idSeccion + '"]');
+        if (item) ir(item);
+      };
+
+      /* "Ver detalle" en la tarjeta de pilares apuntaba a href="#", que
+         sube al principio de la página y nada más. Lleva a Hallazgos, que
+         es el detalle que un pilar promete. */
+      var detalle = document.querySelector('#secPilares .link-detail');
+      if (detalle) {
+        detalle.addEventListener('click', function (e) {
+          e.preventDefault();
+          var h = document.querySelector('.side-item[data-ir="secHallazgos"]');
+          if (h) ir(h);
+        });
+      }
+
+    })();
+
+    /* ---- Panel Pro (Competencia e Historial) --------------------------
+       Antes esto era `location.href = '/#panel-pro'`. Ese ancla no existe
+       en la home —la sección se retiró de los planes hace tiempo—, así que
+       el clic te sacaba de tu diagnóstico y te dejaba en el inicio, sin
+       explicación. Ahora abre el detalle aquí mismo.
+
+       Va en su propio IIFE: los <div> bloqueados lo llaman desde un onclick
+       en línea, y si compartiera bloque con la navegación cualquier salida
+       temprana de allá dejaría este botón lanzando un error. */
+    (function () {
+      var modal = document.getElementById('kvPro'),
+        abrePro = document.getElementById('kvProCerrar');
+
+      function cerrarPro() {
+        if (!modal) return;
+        modal.classList.remove('on');
+        document.body.style.overflow = '';
+      }
+
+      window.openLockedModal = function () {
+        if (!modal) { window.location.href = '/#contacto'; return; }
+        modal.classList.add('on');
+        document.body.style.overflow = 'hidden';
+        var campo = document.getElementById('kvWaitMail');
+        if (campo) campo.focus();
+      };
+
+      if (modal) {
+        if (abrePro) abrePro.addEventListener('click', cerrarPro);
+        modal.addEventListener('click', function (e) {
+          if (e.target === modal) cerrarPro();
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') cerrarPro();
+        });
+      }
     })();
   </script>
 

@@ -362,9 +362,14 @@
     }
 
     /* Dashboard Shell */
+    /* min-height, no height: el panel crece con su contenido y scrollea la
+       página, no una caja interna. Con `height:100vh` + `.panel{overflow-y:auto}`
+       el informe quedaba encerrado en un scroll propio dentro de la ventana:
+       dos barras de desplazamiento y, en portátiles, hallazgos que no se veían
+       porque la caja interior no daba señal de que hubiera más abajo. */
     .tool-shell {
       padding: 0;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
@@ -458,10 +463,12 @@
       grid-template-columns: 220px 1fr;
       flex: 1;
       min-height: 0;
-      overflow: hidden;
     }
 
     /* Sidebar */
+    /* Pegado arriba: como ahora scrollea la página entera, sin `sticky` el
+       menú se iba hacia arriba y había que volver hasta el principio para
+       cambiar de vista. */
     .side {
       background: #ffffff;
       border-right: 1px solid rgba(15, 23, 42, 0.06);
@@ -469,7 +476,12 @@
       display: flex;
       flex-direction: column;
       gap: 0.2rem;
+      position: sticky;
+      top: 0;
+      align-self: start;
+      max-height: 100vh;
       overflow-y: auto;
+      z-index: 5;
     }
 
     .side-brand {
@@ -608,8 +620,58 @@
       display: grid;
       gap: 1.2rem;
       background: #ffffff;
-      overflow-y: auto;
       align-content: start;
+      min-width: 0;
+    }
+
+    /* ---- Vistas del menú lateral ----
+       Resumen, Pilares y Hallazgos son paneles distintos, no anclas. Cuando
+       eran anclas, "ir" a Pilares no movía nada: estaba al lado de Resumen,
+       a la misma altura, y el clic parecía no hacer nada. */
+    .view {
+      display: none;
+    }
+
+    .view.on {
+      display: grid;
+      gap: 1.2rem;
+      animation: view-in 0.25s ease both;
+    }
+
+    @keyframes view-in {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+    }
+
+    /* En Resumen el índice manda y las oportunidades acompañan. */
+    #vResumen .panel-top-row {
+      grid-template-columns: 1.2fr 0.9fr;
+    }
+
+    .growth-cta {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      width: 100%;
+      padding: .8rem 1.1rem;
+      border: 1.5px solid var(--violet);
+      border-radius: var(--r-btn);
+      background: transparent;
+      color: var(--violet);
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s var(--ease), color .2s var(--ease);
+    }
+
+    .growth-cta:hover {
+      background: var(--violet);
+      color: #fff;
     }
 
     /* Cards general */
@@ -1335,7 +1397,12 @@
         grid-template-columns: 1fr;
       }
 
+      /* Sin `sticky` aquí: en columna única el menú se vuelve una barra
+         horizontal de unos 250 px y, pegada arriba, se comía un tercio de la
+         pantalla del móvil mientras se lee el informe. */
       .side {
+        position: static;
+        max-height: none;
         flex-direction: row;
         flex-wrap: wrap;
         border-right: none;
@@ -1790,6 +1857,132 @@
       }
     }
 
+    /* ---- Modal del Panel Pro ---- */
+    .kvpro {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: rgba(15, 23, 42, .55);
+      backdrop-filter: blur(3px);
+      padding: 1.2rem;
+      overflow-y: auto;
+    }
+
+    .kvpro.on {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: view-in .22s ease both;
+    }
+
+    .kvpro-card {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      margin: auto;
+      background: var(--surface);
+      border-radius: 22px;
+      padding: 2.2rem;
+      box-shadow: 0 30px 70px rgba(15, 23, 42, .28);
+    }
+
+    .kvpro-x {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 1px solid var(--line-strong);
+      background: transparent;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: background .2s var(--ease), color .2s var(--ease);
+    }
+
+    .kvpro-x:hover {
+      background: rgba(15, 23, 42, .05);
+      color: var(--ink);
+    }
+
+    .kvpro-tag {
+      display: inline-block;
+      padding: .35rem .8rem;
+      border-radius: 99px;
+      background: rgba(130, 66, 245, .1);
+      color: var(--violet);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .kvpro-card h2 {
+      font-family: var(--display);
+      font-size: clamp(1.4rem, 3.4vw, 1.9rem);
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.15;
+      color: var(--ink);
+      text-wrap: balance;
+      margin-bottom: .8rem;
+    }
+
+    .kvpro-lead {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+    }
+
+    .kvpro-list {
+      list-style: none;
+      margin: 1.3rem 0 1.2rem;
+      display: grid;
+      gap: .6rem;
+    }
+
+    .kvpro-list li {
+      position: relative;
+      padding-left: 1.6rem;
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+
+    .kvpro-list li::before {
+      content: "";
+      position: absolute;
+      left: .35rem;
+      top: .55em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--violet);
+    }
+
+    .kvpro-estado {
+      padding: .9rem 1.1rem;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, .04);
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+
+    .kvpro .kv-wait,
+    .kvpro .kv-wait-ok {
+      margin-top: 1.3rem;
+      max-width: none;
+    }
+
+    @media (max-width:560px) {
+      .kvpro-card {
+        padding: 1.8rem 1.3rem;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
 
       .kv-wait-btn,
@@ -2073,9 +2266,11 @@
       margin: 0;
     }
 
+    /* Cuatro pilares: 2x2, que en el ancho del panel de ejemplo respira
+       mucho mejor que cuatro columnas apretadas. */
     .kv-pv-pillars {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: .6rem;
     }
 

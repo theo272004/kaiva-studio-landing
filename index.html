@@ -272,7 +272,7 @@
           "name": "¿En qué se diferencia el Mantenimiento Digital del Panel Pro?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "El Mantenimiento Digital lo ejecutamos nosotros por ti: actualizamos, corregimos, optimizamos y te mandamos un informe cada mes. El Panel Pro es una herramienta de autoservicio: tú ves los datos de tu presencia digital y decides qué hacer. Costará 70.000 COP al mes y todavía no está disponible. Son productos distintos y no se reemplazan."
+            "text": "El Mantenimiento Digital lo ejecutamos nosotros por ti: actualizamos, corregimos, optimizamos y te mandamos un informe cada mes. El Panel Pro es una herramienta de autoservicio: tú ves los datos de tu presencia digital y decides qué hacer. Costará 70.000 COP al mes y todavía no está disponible; puedes entrar a la lista de espera. El Diagnóstico Digital, en cambio, ya está en línea y es gratis. Son productos distintos y no se reemplazan."
           }
         }
       ]
@@ -1172,10 +1172,13 @@
               </svg>
             </div>
 
+            <!-- Este botón decía "Ver Panel Pro" y llevaba a /monitor/, que es
+                 el diagnóstico gratis: prometía un producto y entregaba otro.
+                 El Pro todavía no existe, así que lo honesto es la espera. -->
             <div class="side-pro">
               <div class="t">Panel Pro</div>
               <div class="d">Seguimiento mensual, histórico y competencia.</div>
-              <a href="/monitor/" class="b">Ver Panel Pro</a>
+              <a href="#contacto" class="b" data-espera-pro>Entrar a la lista de espera</a>
             </div>
           </aside>
 
@@ -1314,7 +1317,10 @@
 
       <div class="tool-cta">
         <a href="/monitor/" class="btn btn-violet">Ejecutar diagnóstico</a>
-        <div class="note">Gratis · Sin registro · Para ver el reporte completo dejas tu correo.</div>
+        <!-- Decía "Para ver el reporte completo dejas tu correo". No es así:
+             el diagnóstico se entrega entero, sin pedir nada. Anunciar un
+             muro que no existe espanta justo a quien iba a usarlo. -->
+        <div class="note">Gratis · Sin registro · El reporte completo, sin dejar tu correo.</div>
       </div>
     </div>
   </section>
@@ -1547,7 +1553,8 @@
               optimizamos y te mandamos un informe cada mes. Tú no tocas nada.</p>
             <p>El <strong>Panel Pro</strong> es una herramienta de autoservicio: tú ves los datos de tu presencia
               digital y decides qué hacer. Costará <strong>$70.000 COP al mes</strong> y todavía no está
-              disponible — puedes <a href="/monitor/">entrar a la lista de espera</a>.</p>
+              disponible — puedes <a href="#contacto" data-espera-pro>entrar a la lista de espera</a>. El
+              <a href="/monitor/">Diagnóstico Digital</a>, en cambio, ya está en línea y es gratis.</p>
             <p>Son productos distintos y no se reemplazan: uno es que lo hagamos nosotros, el otro es que lo
               veas tú.</p>
           </div>
@@ -1985,7 +1992,11 @@
           lbl: 'Tu panel de control', h: 'Medimos y mejoramos <em>cada mes</em>.',
           p: 'El Panel Pro mide tu salud digital mes a mes — velocidad, seguridad, correo y cómo te describe la IA — y te dice exactamente qué hacer.',
           li: ['Re-escaneo automático e historial', 'Alertas cuando algo cambia', 'Visibilidad en Google e IA', 'Analytics y Search Console interpretados', 'Informe mensual y qué priorizar'],
-          cta: 'Ver el diagnóstico', href: '/monitor/', micro: 'Próximamente. Entra a la lista de espera.'
+          /* El Panel Pro sigue sin lanzarse, pero el diagnóstico gratis ya no:
+             mandar a "/monitor/" con el rótulo "Próximamente" contradecía a la
+             propia herramienta, que responde en 60 segundos. La espera es del
+             Pro, y se apunta al formulario, que es donde se registra. */
+          cta: 'Entrar a la lista de espera', href: '#contacto', pro: true, micro: 'El Panel Pro aún no está disponible. El diagnóstico gratis sí.'
         }
       ];
       var opts = [].slice.call(document.querySelectorAll('.sit-row'));
@@ -1997,7 +2008,7 @@
 
       function renderSit(i) {
         var d = sitData[i];
-        panel.innerHTML = '<span class="lbl">' + d.lbl + '</span><h3>' + d.h + '</h3><p>' + d.p + '</p><ul>' + d.li.map(function (x) { return '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>' + x + '</li>'; }).join('') + '</ul><a href="' + d.href + '" class="btn btn-violet">' + d.cta + '</a><span class="micro">' + d.micro + '</span>';
+        panel.innerHTML = '<span class="lbl">' + d.lbl + '</span><h3>' + d.h + '</h3><p>' + d.p + '</p><ul>' + d.li.map(function (x) { return '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>' + x + '</li>'; }).join('') + '</ul><a href="' + d.href + '" class="btn btn-violet"' + (d.pro ? ' data-espera-pro' : '') + '>' + d.cta + '</a><span class="micro">' + d.micro + '</span>';
         panel.classList.remove('fade-swap');
         void panel.offsetWidth;
         panel.classList.add('fade-swap');
@@ -2183,8 +2194,10 @@
         "precio": "Depende del alcance — cada proyecto es diferente. Lo que sí podemos decirte es que trabajamos sin plantillas genéricas. La mejor forma de saberlo es agendar una llamada de 20 minutos donde te damos un estimado real. Sin compromiso.",
         "tiempo": "Una web estándar tarda entre 3 y 5 semanas. Proyectos de branding completo o software a medida pueden tomar más. Te damos un cronograma claro desde el primer día.",
         "empezar": "Nada especial. Con una llamada de 20 minutos entendemos tu negocio y te decimos exactamente qué necesitas y en qué orden. Puedes empezar también con el diagnóstico gratis.",
-        "diferencia": "El Mantenimiento lo hacemos nosotros por ti — actualizamos, corregimos y optimizamos. El Panel Pro es una herramienta de auto-servicio: tú ves los datos y decides. Son productos distintos, no se reemplazan.\n\nEl Panel Pro costará $70.000 COP/mes y aún no está disponible — puedes entrar a la lista de espera desde la sección de planes.",
-        "gratis": "Sí, completamente. Score, hallazgos reales y qué priorizar — sin costo y sin registro. Solo dejas tu correo para ver el reporte completo.",
+        "diferencia": "El Mantenimiento lo hacemos nosotros por ti — actualizamos, corregimos y optimizamos. El Panel Pro es una herramienta de auto-servicio: tú ves los datos y decides. Son productos distintos, no se reemplazan.\n\nEl Panel Pro costará $70.000 COP/mes y aún no está disponible — puedes entrar a la lista de espera escribiéndonos desde el formulario. El Diagnóstico Digital sí está en línea y es gratis.",
+        /* Decía "Solo dejas tu correo para ver el reporte completo". Nunca fue
+           verdad y hoy menos: el diagnóstico se entrega entero sin pedir nada. */
+        "gratis": "Sí, completamente. Puntaje, hallazgos reales con su evidencia y qué priorizar — sin costo, sin registro y sin dejar tu correo. Está en línea en kaivastudio.com/monitor/ y responde en unos 60 segundos.",
         "remoto": "Sí. Trabajamos 100% remoto con empresas de toda Colombia y LATAM. La ubicación no es un limitante.",
         "pequeno": "Exactamente así trabajamos. Muchos clientes empiezan con web y branding, y después agregan mantenimiento o software. Cada paso tiene sentido por sí solo.",
         "equipo": "Perfecto. Podemos trabajar junto a tu equipo o enfocarnos solo en lo que les falta — diagnóstico, estrategia, o un servicio específico.",
@@ -2313,18 +2326,29 @@
   </script>
 
   <script>
-    // Lista de espera del Panel Pro: lleva al formulario con el interés ya elegido.
+    /* Lista de espera del Panel Pro: lleva al formulario con el interés ya
+       elegido.
+
+       Esto colgaba de un id="proWaitlist" que no existe en la página desde
+       que el Panel Pro salió de la sección de planes: el script se moría en
+       la primera línea y ningún enlace de "lista de espera" preparaba nada.
+       Ahora es delegación sobre [data-espera-pro], que se puede poner en
+       cualquier enlace —incluidos los que se pintan por JavaScript, como el
+       panel de situaciones— sin volver a tocar esto. */
     (function () {
-      var btn = document.getElementById('proWaitlist');
-      if (!btn) return;
-      btn.addEventListener('click', function () {
+      document.addEventListener('click', function (e) {
+        var btn = e.target.closest ? e.target.closest('[data-espera-pro]') : null;
+        if (!btn) return;
         var sel = document.getElementById('cService');
         if (sel) sel.value = 'panel-pro';
-        var dest = document.getElementById('contacto');
-        if (dest) dest.scrollIntoView({ behavior: 'smooth', block: 'start' });
         var msg = document.getElementById('cMessage');
         if (msg && !msg.value.trim()) {
           msg.value = 'Quiero entrar a la lista de espera del Panel Pro.';
+        }
+        var dest = document.getElementById('contacto');
+        if (dest) {
+          e.preventDefault();
+          dest.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
     })();
