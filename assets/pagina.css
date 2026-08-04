@@ -266,13 +266,19 @@ html {
   transform: translateY(-2px);
 }
 
+/* Negro, no violeta — mismo criterio que en la portada: el negro carga el
+   contraste y el violeta se reserva para los detalles (el punto de los
+   titulares, la palabra acentuada, la selección de texto). El nombre de la
+   clase se queda: la usan las 14 páginas. */
 .btn-violet {
-  background: var(--violet);
+  background: var(--ink);
   color: #fff;
+  box-shadow: 0 10px 24px -8px rgba(15, 23, 42, 0.35);
 }
 
 .btn-violet:hover {
-  background: var(--violet-ink);
+  background: var(--ink);
+  box-shadow: 0 14px 28px -8px rgba(15, 23, 42, 0.45);
 }
 
 .btn-ghost {

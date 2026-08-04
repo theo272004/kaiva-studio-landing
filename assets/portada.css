@@ -270,16 +270,30 @@
       box-shadow: 0 10px 22px -12px rgba(15, 23, 42, 0.45);
     }
 
+    /* El botón principal es NEGRO, no violeta.
+       ------------------------------------------------------------------
+       Con cada CTA en violeta, el violeta dejaba de significar algo: si
+       todo salta, no salta nada, y la página entera quedaba sin un punto
+       de contraste real. La referencia es la sección de planes: blanco,
+       encima negro, y sobre el negro un violeta que sí se ve.
+
+       Así que el negro carga el contraste y el violeta se reserva para
+       los detalles — el punto de los titulares, la palabra acentuada, la
+       selección de texto, el botón de la tarjeta negra.
+
+       El nombre de la clase se queda como está a propósito: la usan 14
+       páginas y varios scripts que arman botones con string, y renombrarla
+       es un diff enorme por cero beneficio visual. */
     .btn-violet {
-      background: var(--violet);
+      background: var(--ink);
       color: #fff;
-      box-shadow: 0 10px 24px -8px rgba(130, 66, 245, 0.35);
+      box-shadow: 0 10px 24px -8px rgba(15, 23, 42, 0.35);
     }
 
     .btn-violet:hover {
-      background: var(--violet-ink);
+      background: var(--ink);
       transform: translateY(-2px);
-      box-shadow: 0 14px 28px -8px rgba(130, 66, 245, 0.45);
+      box-shadow: 0 14px 28px -8px rgba(15, 23, 42, 0.45);
     }
 
     .btn-ghost {
@@ -1219,7 +1233,7 @@
     }
 
     .svc-btn:hover {
-      background: var(--violet);
+      background: var(--ink);
       color: #fff;
     }
 
@@ -2325,15 +2339,15 @@
     }
 
     .sit-panel .btn {
-      background: linear-gradient(135deg, #8242f5, #6a2fe0);
+      background: var(--ink);
       color: #fff;
       border: 0;
-      box-shadow: 0 10px 26px rgba(130, 66, 245, .3);
+      box-shadow: 0 10px 26px -10px rgba(15, 23, 42, .45);
     }
 
     .sit-panel .btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 16px 34px rgba(130, 66, 245, .4);
+      box-shadow: 0 16px 34px -10px rgba(15, 23, 42, .5);
     }
 
     .sit-panel .micro {
@@ -2914,7 +2928,7 @@
 
     .app-run {
       margin-left: auto;
-      background: var(--violet);
+      background: var(--ink);
       color: #fff;
       border: none;
       border-radius: 99px;
@@ -3503,10 +3517,17 @@
       background: rgba(15, 23, 42, 0.02);
     }
 
+    /* ESTE es el botón violeta de la página. Uno.
+       Sobre la tarjeta negra el violeta salta como no salta en ningún otro
+       lado — blanco, negro, violeta — y por eso se gana quedarse. Era
+       blanco y solo se ponía violeta al pasar el mouse, que es justo al
+       revés: el color estaba escondido detrás de un gesto que en móvil ni
+       existe. */
     .plan.feat .pbtn {
-      background: #fff;
-      color: var(--ink);
-      border-color: #fff;
+      background: var(--violet);
+      color: #fff;
+      border-color: var(--violet);
+      box-shadow: 0 10px 24px -10px rgba(130, 66, 245, 0.55);
     }
 
     /* Los dos planes blancos "salen" de detrás del negro, como si el del
@@ -3631,7 +3652,7 @@
       font-family: inherit;
       padding: .8rem 1.6rem;
       border-radius: var(--r-btn);
-      background: var(--violet);
+      background: var(--ink);
       color: #fff;
       font-size: 14px;
       font-weight: 700;
@@ -3744,10 +3765,10 @@
     }
 
     .plan.feat .pbtn:hover {
-      background: var(--violet);
+      background: var(--violet-ink);
       color: #fff;
-      border-color: var(--violet);
-      box-shadow: 0 8px 20px rgba(130, 66, 245, 0.35);
+      border-color: var(--violet-ink);
+      box-shadow: 0 12px 26px -8px rgba(130, 66, 245, 0.6);
     }
 
     /* ================= CTA FINAL ================= */
@@ -4693,7 +4714,7 @@
     }
 
     .faq-chat-send {
-      background: var(--violet);
+      background: var(--ink);
       color: #ffffff;
       border: none;
       border-radius: 50%;

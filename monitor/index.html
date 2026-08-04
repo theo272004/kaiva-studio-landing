@@ -77,7 +77,7 @@
   <!-- El resto del CSS de esta pagina vive en assets/monitor.css. Antes eran
        51 KB incrustados en el propio HTML: no se cacheaban y viajaban en cada
        visita. Arriba solo se queda el @font-face, que va con los preload. -->
-  <link rel="stylesheet" href="/assets/monitor.css?v=20260804a">
+  <link rel="stylesheet" href="/assets/monitor.css?v=20260804b">
 </head>
 
 <body>
@@ -178,12 +178,12 @@
             <div class="kv-ring-wrap">
               <svg viewBox="0 0 36 36">
                 <circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(15,23,42,.07)" stroke-width="3.4" />
-                <circle cx="18" cy="18" r="15.5" fill="none" stroke="url(#kvGrad)" stroke-width="3.4"
+                <circle cx="18" cy="18" r="15.5" fill="none" stroke="url(#kvGradInk)" stroke-width="3.4"
                   stroke-linecap="round" pathLength="100" stroke-dasharray="71 100" />
                 <defs>
-                  <linearGradient id="kvGrad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#a679ff" />
-                    <stop offset="100%" stop-color="#8242f5" />
+                  <linearGradient id="kvGradInk" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#334155" />
+                    <stop offset="100%" stop-color="#0f172a" />
                   </linearGradient>
                 </defs>
               </svg>
@@ -1302,12 +1302,12 @@
                     <div class="marc">
                       <svg viewBox="0 0 100 100">
                         <circle class="track" cx="50" cy="50" r="43" stroke-width="8"></circle>
-                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="url(#gdViolet)"
+                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="url(#gdInk)"
                           stroke-linecap="round" pathLength="100" id="ringP0" data-ring="0"></circle>
                         <defs>
-                          <linearGradient id="gdViolet" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stop-color="#8242f5"></stop>
-                            <stop offset="100%" stop-color="#c084fc"></stop>
+                          <linearGradient id="gdInk" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#0f172a"></stop>
+                            <stop offset="100%" stop-color="#475569"></stop>
                           </linearGradient>
                         </defs>
                       </svg>
@@ -1323,7 +1323,7 @@
                     <div class="marc">
                       <svg viewBox="0 0 100 100">
                         <circle class="track" cx="50" cy="50" r="43" stroke-width="8"></circle>
-                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="#8242f5"
+                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="#0f172a"
                           stroke-linecap="round" pathLength="100" id="ringP1" data-ring="61"></circle>
                       </svg>
                       <div class="mnum" id="scoreP1" data-count="61">0</div>
@@ -1338,7 +1338,7 @@
                     <div class="marc">
                       <svg viewBox="0 0 100 100">
                         <circle class="track" cx="50" cy="50" r="43" stroke-width="8"></circle>
-                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="#8242f5"
+                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="#0f172a"
                           stroke-linecap="round" pathLength="100" id="ringP2" data-ring="54"></circle>
                       </svg>
                       <div class="mnum" id="scoreP2" data-count="54">0</div>
@@ -1353,7 +1353,7 @@
                     <div class="marc">
                       <svg viewBox="0 0 100 100">
                         <circle class="track" cx="50" cy="50" r="43" stroke-width="8"></circle>
-                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="#a679ff"
+                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="#0f172a"
                           stroke-linecap="round" pathLength="100" id="ringP3" data-ring="59"></circle>
                       </svg>
                       <div class="mnum" id="scoreP3" data-count="59">0</div>
