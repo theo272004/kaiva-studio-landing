@@ -45,6 +45,27 @@
       --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.03);
       --shadow-md: 0 12px 36px rgba(15, 23, 42, 0.05), 0 2px 8px rgba(15, 23, 42, 0.02);
       --shadow-lg: 0 28px 64px rgba(15, 23, 42, 0.08), 0 8px 24px rgba(15, 23, 42, 0.03);
+
+      /* ---- Vocabulario "premium" para chrome de interfaz (no marketing) ----
+       Medido de verdad contra un SaaS de referencia (attio.com), no
+       adivinado: radios de 10-12px en vez de las píldoras de 24-99px que usa
+       el resto del sitio, sombra en TRES capas teñida de tinta (nunca negro
+       puro: rgba(0,22,62,x)) en vez de una sola sombra difusa, y una curva de
+       salida más seca que la del marketing (sin el rebote de --ease).
+       Se usan en chrome de aplicación: formularios, tarjetas de cuenta,
+       modales — no reemplazan --r-lg/--ease, que siguen siendo los del resto
+       del sitio y de las páginas de marketing. */
+      --r-ui: 10px;
+      --r-ui-lg: 12px;
+      --ease-ui: cubic-bezier(0.2, 0, 0, 1);
+      --shadow-ui:
+        0 0 0 1px rgba(0, 22, 62, .04),
+        0 4px 12px -1px rgba(0, 22, 62, .05),
+        0 1px 3px -1px rgba(0, 22, 62, .09);
+      --shadow-ui-hover:
+        0 0 0 1px rgba(0, 22, 62, .05),
+        0 8px 20px -2px rgba(0, 22, 62, .08),
+        0 2px 5px -1px rgba(0, 22, 62, .10);
     }
 
     /* Transiciones nativas entre páginas (index <-> /monitor) del mismo origen */
@@ -459,20 +480,26 @@
     }
 
     /* ---- Aviso de panel temporal --------------------------------------
-       Va entre la barra de la ventana y el panel, donde no se puede pasar por
-       alto pero tampoco tapa el resultado: lo primero que la persona quiere es
-       su puntaje, no que le pidan el correo. Franja ámbar y no violeta a
-       propósito — el violeta de marca es el acento de lo que funciona, y esto
-       es un aviso. */
+       REDISEÑADO 2026-08-05 sobre un vocabulario premium extraído midiendo
+       attio.com de verdad (no adivinado): radios de 10-12px en vez de
+       píldoras, sombra en tres capas teñida de tinta, texto en peso 500,
+       curva de salida seca. La primera versión usaba una franja ámbar de
+       aviso bancario a todo el ancho — funcionaba, pero desentonaba con el
+       resto del sitio y no se sentía parte del mismo producto.
+       Ahora es una tarjeta flotante con aire alrededor, como cualquier otro
+       bloque de la interfaz: avisa sin sonar a advertencia. */
     .kv-temp {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: .9rem;
-      padding: .8rem clamp(.9rem, 2.5vw, 1.4rem);
-      background: #fffbeb;
-      border-bottom: 1px solid #fde68a;
+      gap: 1rem;
+      margin: 1rem clamp(.9rem, 2.5vw, 1.4rem) 0;
+      padding: .9rem 1.1rem;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-ui-lg);
+      box-shadow: var(--shadow-ui);
       font-size: 13px;
     }
 
@@ -480,56 +507,78 @@
       display: none;
     }
 
+    .kv-temp-txt {
+      display: flex;
+      align-items: flex-start;
+      gap: .65rem;
+    }
+
+    /* El punto violeta ancla el ojo antes que el texto — el mismo principio
+       que el kicker de una sección: algo pequeño que dice "esto es un
+       estado", no un párrafo que hay que leer entero para saberlo. */
+    .kv-temp-txt::before {
+      content: '';
+      flex: none;
+      width: 8px;
+      height: 8px;
+      margin-top: .4em;
+      border-radius: 50%;
+      background: var(--violet);
+    }
+
     .kv-temp-txt b {
       display: block;
-      font-weight: 700;
-      color: #78350f;
+      font-weight: 600;
+      color: var(--ink);
       letter-spacing: -.01em;
     }
 
     .kv-temp-txt span {
-      color: #92400e;
+      color: var(--ink-soft);
+      font-weight: 500;
       line-height: 1.5;
     }
 
     .kv-temp-acciones {
       display: flex;
       align-items: center;
-      gap: .7rem;
+      gap: .6rem;
       flex: none;
     }
 
     .kv-temp-btn {
       border: 0;
       cursor: pointer;
-      background: var(--ink);
+      background: var(--violet);
       color: #fff;
       font-family: inherit;
-      font-size: 12.5px;
-      font-weight: 700;
-      padding: .55rem 1.1rem;
-      border-radius: 99px;
-      transition: transform .2s var(--ease), background .2s var(--ease);
+      font-size: 13px;
+      font-weight: 600;
+      padding: .6rem 1.15rem;
+      border-radius: var(--r-ui);
+      transition: transform .2s var(--ease-ui), background .2s var(--ease-ui), box-shadow .2s var(--ease-ui);
     }
 
     .kv-temp-btn:hover {
       transform: translateY(-1px);
-      background: #000;
+      background: var(--violet-hover);
+      box-shadow: 0 6px 16px -4px rgba(130, 66, 245, .45);
     }
 
     .kv-temp-link {
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 600;
-      color: #92400e;
+      color: var(--ink-soft);
       text-decoration: none;
-      border-bottom: 1px dashed currentColor;
+      padding: .6rem .3rem;
+      transition: color .2s var(--ease-ui);
     }
 
     .kv-temp-link:hover {
-      color: #78350f;
+      color: var(--ink);
     }
 
-    /* El formulario de guardado reusa la misma franja. */
+    /* El formulario de guardado reusa la misma tarjeta. */
     .kv-temp-form {
       display: block;
     }
@@ -537,8 +586,8 @@
     .kv-lead-lbl {
       display: block;
       font-size: 12px;
-      font-weight: 700;
-      color: #78350f;
+      font-weight: 600;
+      color: var(--ink-soft);
       margin-bottom: .35rem;
     }
 
@@ -555,14 +604,14 @@
     .kv-lead-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(160px, 1fr));
-      gap: .5rem;
+      gap: .6rem;
     }
 
     .kv-lead-fila-btn {
       display: flex;
       align-items: center;
-      gap: .8rem;
-      margin-top: .6rem;
+      gap: .9rem;
+      margin-top: .8rem;
       flex-wrap: wrap;
     }
 
@@ -576,38 +625,48 @@
       flex: 1 1 220px;
       min-width: 0;
       font-family: inherit;
-      font-size: 13.5px;
-      padding: .55rem .85rem;
-      border: 1.5px solid #fcd34d;
-      border-radius: 10px;
-      background: #fff;
+      font-size: 14px;
+      padding: .6rem .8rem;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-ui);
+      background: var(--surface);
       color: var(--ink);
+      transition: border-color .2s var(--ease-ui), box-shadow .2s var(--ease-ui);
+    }
+
+    .kv-lead-input::placeholder {
+      color: var(--ink-faint);
     }
 
     .kv-lead-input:focus {
-      outline: 2px solid var(--violet);
-      outline-offset: 1px;
-      border-color: transparent;
+      outline: none;
+      border-color: var(--violet);
+      box-shadow: 0 0 0 3px var(--violet-soft);
     }
 
     .kv-lead-nota {
-      margin-top: .45rem;
-      font-size: 11.5px;
-      color: #92400e;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink-faint);
     }
 
     .kv-lead-err {
-      margin-top: .35rem;
-      font-size: 12px;
+      margin-top: .5rem;
+      font-size: 12.5px;
       font-weight: 600;
-      color: #b91c1c;
+      color: #dc2626;
       min-height: 1em;
     }
 
-    /* Confirmación: la franja se vuelve verde y pierde los botones. */
+    /* Confirmación: la tarjeta gana un acento verde discreto, sin volverse
+       una franja de éxito a todo color — sigue siendo la misma tarjeta. */
     .kv-temp.kv-temp-ok {
-      background: #ecfdf5;
-      border-bottom-color: #a7f3d0;
+      border-color: rgba(16, 185, 129, .35);
+      background: var(--green-soft);
+    }
+
+    .kv-temp.kv-temp-ok .kv-temp-txt::before {
+      background: var(--green);
     }
 
     .kv-temp.kv-temp-ok .kv-temp-txt b {
@@ -631,6 +690,162 @@
       .kv-temp-btn {
         flex: 1;
       }
+    }
+
+    /* ---- Cabecera: candado de admin + sesión de cliente -------------------
+       Hasta hoy solo existía el candado (kv-entrar), fijo arriba a la
+       derecha. La sesión de cliente entra al lado, en el mismo carril, para
+       que las dos puertas convivan sin que una tape a la otra. */
+    .kv-header-acciones {
+      position: fixed;
+      top: clamp(1.1rem, 3vw, 1.9rem);
+      right: clamp(1.1rem, 4vw, 2.6rem);
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    body.kv-en-panel .kv-header-acciones {
+      display: none;
+    }
+
+    .kv-header-acciones .kv-entrar {
+      position: static;
+    }
+
+    .kv-sesion {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .5rem .9rem;
+      border: 0;
+      cursor: pointer;
+      border-radius: var(--r-btn);
+      background: var(--ink);
+      color: #fff;
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 650;
+      box-shadow: var(--shadow-ui);
+      transition: transform .2s var(--ease-ui), background .2s var(--ease-ui);
+    }
+
+    .kv-sesion:hover {
+      transform: translateY(-1px);
+      background: #000;
+    }
+
+    .kv-sesion svg {
+      opacity: .85;
+    }
+
+    @media (max-width: 560px) {
+      .kv-sesion {
+        padding: .5rem;
+        font-size: 0;
+        gap: 0;
+      }
+
+      .kv-sesion svg {
+        width: 15px;
+        height: 15px;
+      }
+    }
+
+    /* ---- Modal de sesión ---------------------------------------------- */
+    .kv-sesion-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 95;
+      background: rgba(15, 23, 42, .5);
+      backdrop-filter: blur(4px);
+      padding: 1.2rem;
+      overflow-y: auto;
+    }
+
+    .kv-sesion-modal.on {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: view-in .2s var(--ease-ui) both;
+    }
+
+    .kv-sesion-card {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      margin: auto;
+      background: var(--surface);
+      border-radius: var(--r-ui-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .kv-sesion-card h2 {
+      font-family: var(--display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      color: var(--ink);
+      margin-bottom: .4rem;
+    }
+
+    .kv-sesion-card h2 .dot {
+      color: var(--violet);
+    }
+
+    .kv-sesion-sub {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--ink-soft);
+      line-height: 1.5;
+      margin-bottom: 1.3rem;
+    }
+
+    #kvSesionNombre {
+      color: var(--violet);
+    }
+
+    .kv-sesion-x {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 1px solid var(--line-strong);
+      background: transparent;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: background .2s var(--ease-ui), color .2s var(--ease-ui);
+    }
+
+    .kv-sesion-x:hover {
+      background: rgba(15, 23, 42, .05);
+      color: var(--ink);
+    }
+
+    /* El enlace "¿ya tienes cuenta?" dentro del formulario de crear cuenta. */
+    .kv-lead-alt {
+      display: block;
+      margin-top: .7rem;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink-faint);
+      background: none;
+      border: 0;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      padding: 0;
+    }
+
+    .kv-lead-alt:hover {
+      color: var(--violet);
     }
 
     .app-grid {

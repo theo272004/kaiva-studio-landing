@@ -77,7 +77,7 @@
   <!-- El resto del CSS de esta pagina vive en assets/monitor.css. Antes eran
        51 KB incrustados en el propio HTML: no se cacheaban y viajaban en cada
        visita. Arriba solo se queda el @font-face, que va con los preload. -->
-  <link rel="stylesheet" href="/assets/monitor.css?v=20260805b">
+  <link rel="stylesheet" href="/assets/monitor.css?v=20260805c">
 </head>
 
 <body>
@@ -86,23 +86,74 @@
   <a href="/" class="kv-brand-fixed" aria-label="Kaiva Studio — volver al inicio"><img
       src="../assets/logo-kaiva.png" alt="Kaiva Studio"></a>
 
-  <!-- Entrada al Panel Pro. Hoy la usa el equipo de Kaiva: el panel existe y
-       corre en diagnostico.kaivastudio.com, pero es de un solo inquilino y
-       vive detrás del login de /admin/. Para los clientes sigue siendo
-       "próximamente" — de ahí que esto sea una puerta discreta y no un botón
-       de producto: quien no tenga cuenta no debe sentir que le falta algo.
+  <!-- Acciones de la cabecera: dos puertas distintas que no hay que confundir.
 
-       El login está en el subdominio, no aquí: esta página se sirve desde
-       GitHub Pages (HTML estático, sin sesiones), así que autenticar tiene
-       que pasar del otro lado igual. -->
-  <a href="https://diagnostico.kaivastudio.com/admin/" class="kv-entrar" rel="nofollow">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-      stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <rect x="4" y="10" width="16" height="11" rx="2" />
-      <path d="M8 10V7a4 4 0 0 1 8 0v3" />
-    </svg>
-    Entrar al panel
-  </a>
+       kv-entrar (candado) → el equipo de Kaiva, hacia el CRM interno de leads
+       en /admin/. Discreta a propósito, existía antes de las cuentas de
+       cliente y no tiene nada que ver con ellas.
+
+       kv-sesion (persona) → cuentas de cliente reales (migración 008,
+       src/auth.php). Hasta hoy esto NO EXISTÍA: se podía crear una cuenta
+       desde el panel temporal, pero no había ningún sitio para volver a
+       iniciar sesión. Empieza en "Iniciar sesión"; kvSesionEstado.js la
+       cambia a "Hola, {nombre}" si /api/yo.php devuelve una sesión activa. -->
+  <div class="kv-header-acciones">
+    <button type="button" class="kv-sesion" id="kvAbrirSesion">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M20 21a8 8 0 0 0-16 0" />
+        <circle cx="12" cy="7" r="4" />
+      </svg>
+      <span id="kvSesionTexto">Iniciar sesión</span>
+    </button>
+    <a href="https://diagnostico.kaivastudio.com/admin/" class="kv-entrar" rel="nofollow">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="4" y="10" width="16" height="11" rx="2" />
+        <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+      </svg>
+      Entrar al panel
+    </a>
+  </div>
+
+  <!-- Modal de sesión: iniciar sesión o cerrarla. Estructura calcada del
+       modal #kvPro (mismo patrón de apertura/cierre con ESC y click fuera),
+       pero con el vocabulario visual premium (--r-ui, --shadow-ui) en vez
+       del que usa el resto del marketing. -->
+  <div class="kv-sesion-modal" id="kvSesionModal" role="dialog" aria-modal="true" aria-labelledby="kvSesionTitulo">
+    <div class="kv-sesion-card">
+      <button type="button" class="kv-sesion-x" id="kvSesionCerrar" aria-label="Cerrar">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+          stroke-linecap="round">
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div id="kvSesionPanelForm">
+        <h2 id="kvSesionTitulo">Inicia sesión</h2>
+        <p class="kv-sesion-sub">Entra a la cuenta donde guardaste tus análisis.</p>
+        <form id="kvSesionForm" class="kv-lead">
+          <label class="kv-lead-lbl" for="kvSesionCorreo">Correo</label>
+          <input type="email" id="kvSesionCorreo" class="kv-lead-input" placeholder="tucorreo@empresa.com" required
+            autocomplete="email" style="width:100%; margin-bottom:.7rem;">
+          <label class="kv-lead-lbl" for="kvSesionClave">Contraseña</label>
+          <input type="password" id="kvSesionClave" class="kv-lead-input" placeholder="Tu contraseña" required
+            autocomplete="current-password" style="width:100%;">
+          <button type="submit" class="kv-temp-btn" id="kvSesionBtn" style="width:100%; margin-top:1rem;">Iniciar
+            sesión</button>
+          <p class="kv-lead-err" id="kvSesionErr" role="alert"></p>
+        </form>
+      </div>
+
+      <!-- Sesión ya activa: solo queda la opción de salir. -->
+      <div id="kvSesionPanelActiva" hidden>
+        <h2>Hola<span id="kvSesionNombre"></span><span class="dot">.</span></h2>
+        <p class="kv-sesion-sub" id="kvSesionCorreoActivo"></p>
+        <button type="button" class="kv-temp-btn" id="kvSesionSalir" style="width:100%; margin-top:1rem;">Cerrar
+          sesión</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ===== 1. Bienvenida ===== -->
   <section class="kv-stage on" id="kvWelcome">
@@ -1182,6 +1233,10 @@
               if (scanIdActual) {
                 try { localStorage.removeItem('kaiva_reclamo_' + scanIdActual); } catch (e) { }
               }
+              // Avisa al OTRO <script> (el de la sesión, más abajo en el
+              // documento) para que la cabecera deje de decir "Iniciar
+              // sesión" ahora mismo, sin esperar a un recargue.
+              if (window.kaivaSesionActualizar) window.kaivaSesionActualizar(res.body.usuario);
               confirmarGuardado('Cuenta creada.',
                 'Guardamos este análisis en tu cuenta. La próxima vez, inicia sesión y lo tendrás aquí.');
             })
@@ -1391,6 +1446,7 @@
               <span class="kv-lead-nota">Gratis para siempre. Sin tarjeta.</span>
             </div>
             <p class="kv-lead-err" id="kvCuentaErr" role="alert"></p>
+            <button type="button" class="kv-lead-alt" id="kvYaTengoCuenta">¿Ya tienes cuenta? Inicia sesión</button>
           </form>
         </div>
 
@@ -1876,6 +1932,155 @@
         });
         document.addEventListener('keydown', function (e) {
           if (e.key === 'Escape') cerrarPro();
+        });
+      }
+    })();
+  </script>
+
+
+  <!-- Sesión de cliente: el botón "Iniciar sesión" de la cabecera, su modal,
+       y detectar al cargar si ya hay una sesión activa.
+
+       ESTO NO EXISTÍA HASTA HOY. El sistema de cuentas (src/auth.php,
+       /api/registro.php, /api/sesion.php, /api/yo.php) se construyó en la
+       misma sesión de trabajo que esto, y se podía crear una cuenta desde
+       "Guardar análisis" — pero no había ningún camino de vuelta para quien
+       ya tenía una. Un producto donde solo se puede entrar hacia adelante,
+       nunca hacia atrás, no es un producto con cuentas todavía.
+
+       Propio <script>, con su propio API: cada <script> tiene su ámbito, la
+       variable API del bloque grande de arriba no llega hasta aquí. -->
+  <script>
+    (function () {
+      var API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+        ? 'http://localhost:8080/api'
+        : 'https://diagnostico.kaivastudio.com/api';
+
+      var abrir = document.getElementById('kvAbrirSesion'),
+        modal = document.getElementById('kvSesionModal'),
+        cerrar = document.getElementById('kvSesionCerrar'),
+        texto = document.getElementById('kvSesionTexto'),
+        panelForm = document.getElementById('kvSesionPanelForm'),
+        panelActiva = document.getElementById('kvSesionPanelActiva'),
+        form = document.getElementById('kvSesionForm'),
+        correo = document.getElementById('kvSesionCorreo'),
+        clave = document.getElementById('kvSesionClave'),
+        btn = document.getElementById('kvSesionBtn'),
+        err = document.getElementById('kvSesionErr'),
+        salir = document.getElementById('kvSesionSalir'),
+        nombreSpan = document.getElementById('kvSesionNombre'),
+        correoActivo = document.getElementById('kvSesionCorreoActivo'),
+        yaTengoCuenta = document.getElementById('kvYaTengoCuenta');
+
+      if (!modal) return;
+
+      var usuarioActivo = null; // se llena con /api/yo.php al cargar
+
+      function abrirModal() {
+        modal.classList.add('on');
+        document.body.style.overflow = 'hidden';
+        if (usuarioActivo) {
+          panelForm.hidden = true;
+          panelActiva.hidden = false;
+        } else {
+          panelForm.hidden = false;
+          panelActiva.hidden = true;
+          if (correo) correo.focus();
+        }
+      }
+
+      function cerrarModal() {
+        modal.classList.remove('on');
+        document.body.style.overflow = '';
+      }
+
+      if (abrir) abrir.addEventListener('click', abrirModal);
+      if (yaTengoCuenta) yaTengoCuenta.addEventListener('click', abrirModal);
+      if (cerrar) cerrar.addEventListener('click', cerrarModal);
+      modal.addEventListener('click', function (e) { if (e.target === modal) cerrarModal(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrarModal(); });
+
+      /* Refleja la cuenta activa en la cabecera y en el modal. Se llama al
+         cargar (vía /api/yo.php), otra vez justo después de iniciar sesión, y
+         se expone en window para que OTRO <script> —el que atiende
+         "Crear mi cuenta"— también pueda avisar. Sin esto, crear una cuenta
+         dejaba la cabecera diciendo "Iniciar sesión" hasta el próximo
+         recargue: dos bloques de script con su propio ámbito, ninguno se
+         enteraba de lo que hacía el otro. Se detectó probando el flujo
+         completo de punta a punta, no leyendo el código. */
+      window.kaivaSesionActualizar = pintarUsuario;
+
+      function pintarUsuario(u) {
+        usuarioActivo = u;
+        if (u) {
+          if (texto) texto.textContent = 'Hola, ' + u.nombre.split(' ')[0];
+          if (nombreSpan) nombreSpan.textContent = ', ' + u.nombre.split(' ')[0];
+          if (correoActivo) correoActivo.textContent = u.correo;
+
+          /* El admin ve la maqueta completa del Pro: es la decisión de
+             producto de que quien es dueño de Kaiva pueda revisar lo que se
+             está construyendo sin que un candado se lo impida. Para
+             cualquier otra cuenta, sigue sin haber nada real detrás del
+             candado — así que el mensaje deja de ser un argumento de venta
+             ("$70.000 COP/mes") y pasa a ser honesto: todavía no existe. */
+          if (u.ve_pro && window.openLockedModal) {
+            window.openLockedModal = function () {
+              window.alert('Esto todavía no está construido — es lo próximo en el mapa. '
+                + '(Lo ves este mensaje en vez del de venta porque tu cuenta tiene rol admin/pro.)');
+            };
+          }
+        } else if (texto) {
+          texto.textContent = 'Iniciar sesión';
+        }
+      }
+
+      fetch(API + '/yo.php', { credentials: 'include' })
+        .then(function (r) { return r.json(); })
+        .then(function (res) { if (res.ok) pintarUsuario(res.usuario); })
+        .catch(function (e) { console.error('[kaiva] yo.php:', e); });
+
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (btn.disabled) return;
+          err.textContent = '';
+          btn.disabled = true;
+          btn.textContent = 'Entrando…';
+
+          fetch(API + '/sesion.php', {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ correo: correo.value.trim(), password: clave.value })
+          })
+            .then(function (r) { return r.json(); })
+            .then(function (res) {
+              if (!res.ok) throw new Error(res.error || 'no se pudo iniciar sesión');
+              pintarUsuario(res.usuario);
+              panelForm.hidden = true;
+              panelActiva.hidden = false;
+              clave.value = '';
+            })
+            .catch(function (e) {
+              err.textContent = e.message || 'No pudimos iniciar sesión.';
+            })
+            .finally(function () {
+              btn.disabled = false;
+              btn.textContent = 'Iniciar sesión';
+            });
+        });
+      }
+
+      if (salir) {
+        salir.addEventListener('click', function () {
+          salir.disabled = true;
+          fetch(API + '/sesion.php', { method: 'DELETE', credentials: 'include' })
+            .then(function () {
+              pintarUsuario(null);
+              cerrarModal();
+            })
+            .catch(function (e) { console.error('[kaiva] cerrar sesión:', e); })
+            .finally(function () { salir.disabled = false; });
         });
       }
     })();
