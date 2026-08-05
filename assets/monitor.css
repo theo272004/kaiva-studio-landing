@@ -2932,6 +2932,12 @@
     .kv-field-in {
       flex: 1;
       min-width: 0;
+      /* El hero es centrado y ese text-align se colaba aqui dentro: la
+         etiqueta salia centrada y el campo alineado a la izquierda, con lo
+         que "Ingresa tu dominio" y "ej: tudominio.com" quedaban desalineados
+         entre si. Un campo de formulario se lee de izquierda a derecha
+         aunque el bloque que lo contiene este centrado. */
+      text-align: left;
     }
 
     .kv-field-in label {
