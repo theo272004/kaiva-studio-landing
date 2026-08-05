@@ -289,15 +289,26 @@ html {
    contraste y el violeta se reserva para los detalles (el punto de los
    titulares, la palabra acentuada, la selección de texto). El nombre de la
    clase se queda: la usan las 14 páginas. */
+/* UN SOLO NEGRO. Esta clase usaba var(--ink) (#0f172a) y .btn-dark usaba
+   var(--dark) (#0b0b0e). Dos negros distintos, y en las paginas de servicio
+   el MISMO texto —"Hablemos de tu marca"— salia dos veces, una en cada tono:
+   arriba en el hero y abajo en el cierre. --ink es un azul pizarra y al lado
+   del negro de marca se le nota el tinte. Tambien iban a pesos distintos
+   (600 contra 700) y quedaban con un pixel de diferencia de alto.
+
+   Se igualan los tres valores a los de .btn-dark. La clase se conserva
+   —la usan catorce paginas— pero ya no significa "violeta" ni "otro negro":
+   es el mismo boton principal. */
 .btn-violet {
-  background: var(--ink);
+  background: var(--dark);
   color: #fff;
-  box-shadow: 0 10px 24px -8px rgba(15, 23, 42, 0.35);
+  font-weight: 700;
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, .38);
 }
 
 .btn-violet:hover {
-  background: var(--ink);
-  box-shadow: 0 14px 28px -8px rgba(15, 23, 42, 0.45);
+  background: #000;
+  box-shadow: 0 14px 28px -8px rgba(0, 0, 0, .48);
 }
 
 .btn-ghost {
