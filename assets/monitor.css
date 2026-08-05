@@ -467,14 +467,14 @@
        tiñe: deja de ser una salida y pasa a ser "esta es tu cuenta". */
     .app-btn--activa {
       color: var(--violet);
-      border-color: rgba(130, 66, 245, 0.28);
-      background: var(--violet-soft);
+      border-color: rgba(130, 66, 245, 0.3);
+      background: rgba(130, 66, 245, 0.1);
     }
 
     .app-btn--activa:hover {
       color: var(--violet);
       border-color: rgba(130, 66, 245, 0.5);
-      background: var(--violet-soft);
+      background: rgba(130, 66, 245, 0.14);
     }
 
     /* En pantallas estrechas la barra no da para las dos etiquetas. Se queda
@@ -845,26 +845,54 @@
     }
 
 
+    /* SECUNDARIO, NO PRINCIPAL.
+       Este boton era negro solido, igual que "Analizar mi sitio". Los dos con
+       el mismo peso y a la misma altura: la accion por la que existe la pagina
+       y una utilidad para quien ya vino antes, compitiendo de igual a igual.
+       Sin jerarquia el ojo no sabe donde ir primero, y quien llega por primera
+       vez —que es casi todo el mundo— se encuentra dos veces con la misma
+       invitacion a pulsar.
+
+       Pasa a contorno: se ve, se alcanza, y deja el unico relleno solido de la
+       pantalla para el campo de analisis. Es ademas el mismo lenguaje de
+       .app-btn, el secundario de la barra del panel, para que entrar y salir
+       se vean igual en los dos sitios. */
     .kv-sesion {
       display: inline-flex;
       align-items: center;
       gap: .45rem;
       padding: .5rem .9rem;
-      border: 0;
       cursor: pointer;
       border-radius: var(--r-btn);
-      background: var(--ink);
-      color: #fff;
+      background: #fff;
+      border: 1px solid rgba(15, 23, 42, .14);
+      color: var(--ink-soft);
       font-family: inherit;
       font-size: 12.5px;
       font-weight: 650;
-      box-shadow: var(--shadow-ui);
-      transition: transform .2s var(--ease-ui), background .2s var(--ease-ui);
+      box-shadow: 0 1px 2px rgba(15, 23, 42, .05);
+      transition: color .2s var(--ease-ui), border-color .2s var(--ease-ui), background .2s var(--ease-ui);
     }
 
     .kv-sesion:hover {
-      transform: translateY(-1px);
-      background: #000;
+      color: var(--ink);
+      border-color: rgba(15, 23, 42, .3);
+      background: #f8fafc;
+    }
+
+    .kv-sesion:focus-visible {
+      outline: 2px solid var(--violet);
+      outline-offset: 2px;
+    }
+
+    /* Con sesion abierta el boton lleva el nombre y se tine: ya no invita a
+       entrar, dice quien eres. Mismo criterio que .app-btn--activa. */
+    .kv-sesion.kv-sesion--activa {
+      color: var(--violet);
+      border-color: rgba(130, 66, 245, .3);
+      /* No se usa --violet-soft (6 %): en una superficie de este tamano no se
+         distingue del blanco, y el estado tiene que verse de un vistazo. */
+      background: rgba(130, 66, 245, .1);
     }
 
     .kv-sesion svg {
@@ -872,15 +900,21 @@
     }
 
     @media (max-width: 560px) {
+      /* Sin texto queda solo el icono, y con el relleno de escritorio el
+         boton medía 33x33: se pulsa bien con el raton y a medias con el
+         pulgar. 44x44 es el objetivo tactil minimo. */
       .kv-sesion {
         padding: .5rem;
         font-size: 0;
         gap: 0;
+        min-width: 44px;
+        min-height: 44px;
+        justify-content: center;
       }
 
       .kv-sesion svg {
-        width: 15px;
-        height: 15px;
+        width: 16px;
+        height: 16px;
       }
     }
 
@@ -3081,9 +3115,23 @@
       transition: background .2s var(--ease), transform .2s var(--ease);
     }
 
+    /* El hover no hacia nada: ponia el mismo var(--ink) que ya tenia. Solo
+       subia un pixel, y en el unico boton principal de la pagina eso es poca
+       respuesta. Ahora se oscurece de verdad y la sombra acompana. */
     .kv-field button:hover {
-      background: var(--ink);
+      background: #000;
       transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(15, 23, 42, .22);
+    }
+
+    .kv-field button:active {
+      transform: translateY(0);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, .2);
+    }
+
+    .kv-field button:focus-visible {
+      outline: 2px solid var(--violet);
+      outline-offset: 3px;
     }
 
     /* Panel de ejemplo */
