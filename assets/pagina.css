@@ -429,6 +429,138 @@ html {
   border-block: 1px solid var(--line);
 }
 
+/* ---------- Ritmo de color: la regla 60/30/10 ----------------------------
+   60% blanco · 30% negro · 10% morado, medido como ÁREA de la página, no
+   como intención. Antes de esto las tres páginas de servicio medían 95-99%
+   blanco y 0,2% morado: el morado solo vivía en el punto de los títulos y en
+   los botones, que a esa escala no es un acento, es una anécdota.
+
+   Cómo funciona: cada variante REDEFINE los tokens de color en su propio
+   ámbito. Todo lo que ya escribe var(--ink), var(--line) o var(--surface)
+   —que es prácticamente todo el archivo— se re-tematiza solo. La alternativa
+   era escribir `.section--dark .tarjeta`, `.section--dark h2`… para cada
+   componente, que es como se pudren estas hojas de estilo.
+
+   Los fondos van planos, sin degradados, igual que el resto del archivo. */
+
+.section--dark {
+  --bg: #0b0b0e;
+  --surface: rgba(255, 255, 255, .045);
+  --ink: #ffffff;
+  --ink-soft: rgba(255, 255, 255, .66);
+  --ink-faint: rgba(255, 255, 255, .42);
+  --line: rgba(255, 255, 255, .10);
+  --line-strong: rgba(255, 255, 255, .20);
+  /* El violeta de marca sobre negro queda en ~3,3:1 de contraste: sirve para
+     un punto o un icono, no para texto. Sobre oscuro se aclara. El de marca
+     se conserva aparte para los rellenos, que no tienen que leerse. */
+  --violet: #b48cff;
+  --violet-ink: #c9aaff;
+  --violet-soft: rgba(180, 140, 255, .14);
+  /* Una sombra oscura sobre fondo oscuro no se ve; solo ensucia los bordes. */
+  --shadow-md: none;
+  background: #0b0b0e;
+  color: #fff;
+  border-block: 1px solid rgba(255, 255, 255, .08);
+}
+
+.section--violet {
+  --bg: #8242f5;
+  --surface: rgba(255, 255, 255, .10);
+  --ink: #ffffff;
+  --ink-soft: rgba(255, 255, 255, .78);
+  --ink-faint: rgba(255, 255, 255, .58);
+  --line: rgba(255, 255, 255, .18);
+  --line-strong: rgba(255, 255, 255, .30);
+  /* Dentro del bloque morado el acento no puede ser morado. Pasa a blanco. */
+  --violet: #ffffff;
+  --violet-ink: #ffffff;
+  --violet-soft: rgba(255, 255, 255, .12);
+  --shadow-md: none;
+  background: #8242f5;
+  color: #fff;
+  border-block: 1px solid rgba(255, 255, 255, .14);
+}
+
+/* El .alt es un gris de 250: a efectos de área cuenta como blanco. Cuando una
+   sección oscura o morada lo lleva, gana la variante. */
+.section.alt.section--dark,
+.section.alt.section--violet {
+  background: var(--bg);
+}
+
+/* Botones dentro de los bloques de color -------------------------------- */
+
+/* El botón violeta sobre fondo violeta desaparece. Se invierte: fondo blanco,
+   texto violeta de marca (no el aclarado, que sobre blanco no contrasta). */
+.section--violet .btn-violet {
+  background: #fff;
+  color: #6a2fe0;
+  border-color: #fff;
+}
+
+.section--violet .btn-violet:hover {
+  background: rgba(255, 255, 255, .88);
+  color: #5a24c8;
+}
+
+.section--dark .btn-violet,
+.section--violet .btn-ghost,
+.section--dark .btn-ghost {
+  color: #fff;
+}
+
+.section--dark .btn-violet {
+  background: #8242f5;
+  border-color: #8242f5;
+}
+
+.section--dark .btn-violet:hover {
+  background: #9560f7;
+  border-color: #9560f7;
+}
+
+.section--dark .btn-ghost,
+.section--violet .btn-ghost {
+  background: transparent;
+  border-color: rgba(255, 255, 255, .28);
+}
+
+.section--dark .btn-ghost:hover,
+.section--violet .btn-ghost:hover {
+  border-color: #fff;
+}
+
+/* Islas claras dentro de un bloque de color -----------------------------
+   Una tarjeta con fondo blanco OPACO dentro de una seccion oscura o morada
+   es, a efectos de contraste, una isla clara: dentro de ella los tokens
+   tienen que volver al juego claro. Si no, hereda el --ink blanco de la
+   seccion y pinta texto blanco sobre tarjeta blanca.
+
+   No es teorico: al aplicar el 60/30/10 por primera vez, .serv-card
+   (background:#fff, color:inherit) dejo SEIS elementos en contraste 1,0 —
+   literalmente invisibles. Se detecto midiendo el contraste de cada nodo de
+   texto de la pagina, no mirandola. */
+.section--dark .serv-card,
+.section--violet .serv-card {
+  --ink: #0f172a;
+  --ink-soft: #475569;
+  --ink-faint: #94a3b8;
+  --line: rgba(15, 23, 42, .05);
+  --line-strong: rgba(15, 23, 42, .12);
+  --violet: #8242f5;
+  --violet-ink: #6a2fe0;
+  --violet-soft: rgba(130, 66, 245, .06);
+  color: var(--ink);
+}
+
+/* El foco tiene que verse sobre los tres fondos, no solo sobre el blanco. */
+.section--dark :focus-visible,
+.section--violet :focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
 .section h2 {
   font-family: var(--display);
   font-size: clamp(1.6rem, 3.4vw, 2.4rem);
