@@ -35,6 +35,14 @@ nuevo kaiva studio.zip
 # Documentos de trabajo (no van al sitio)
 *.pdf
 
+# Documentacion interna de la herramienta y del despliegue.
+# ESTE REPOSITORIO ES PUBLICO: lo sirve GitHub Pages en kaivastudio.com y
+# cualquiera puede leerlo sin cuenta. Estos dos archivos traen la IP del VPS,
+# el usuario administrador, las rutas del cron y los nombres de las variables
+# de entorno de produccion. Aqui no entran.
+HERRAMIENTA-KAIVA.txt
+PENDIENTES-KAIVA-PRO.md
+
 # Claude internal
 .claude/
 
