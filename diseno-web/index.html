@@ -51,7 +51,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260805e">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260805k">
 
   <script type="application/ld+json">
 {
@@ -605,13 +605,15 @@
 
     /* ---- El problema: robot + tarjeta de diagnóstico ----------------------
        Antes esta sección era solo texto sobre fondo oscuro. El robot es
-       Mora, el mismo que ya analiza en /monitor — no una mascota nueva — y
-       la tarjeta usa el vocabulario premium (--r-ui-lg, --shadow-ui) que
-       hoy también vive en pagina.css. La tarjeta es una "isla clara" dentro
-       de la sección oscura: sus colores se fijan aquí mismo, sin depender de
-       --ink/--surface (que dentro de .section--dark significan blanco), por
-       la misma razón que ya obligó a .section--dark .serv-card en
-       pagina.css: una tarjeta blanca con texto blanco se borra sola. */
+       Mora, el mismo que ya analiza en /monitor — no una mascota nueva.
+
+       Todo este bloque estaba construido para fondo negro: la tarjeta era una
+       superficie elevada de blanco al 5%, el texto blanco a distintas
+       opacidades y el robot llevaba un halo violeta porque una sombra negra
+       sobre negro no se ve. Al pasar la seccion a blanco, esos mismos valores
+       dejaban DOCE elementos en contraste 1,0 — invisibles. Ahora la tarjeta
+       tiene fondo propio y borde, el texto usa los tokens del tema claro y el
+       robot lleva sombra de verdad. */
     .dw-problema {
       display: grid;
       grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
@@ -647,7 +649,7 @@
       margin-bottom: 1rem;
       /* Halo violeta en vez de sombra negra: sobre un fondo casi negro una
          sombra negra no se ve, solo ensucia el borde del PNG. */
-      filter: drop-shadow(0 12px 34px rgba(130, 66, 245, .35));
+      filter: drop-shadow(0 14px 30px rgba(15, 23, 42, .18));
     }
 
     /* La tarjeta era blanca sobre #0b0b0e y rechinaba — el mismo error que
@@ -659,15 +661,13 @@
       z-index: 2;
       width: min(300px, 88%);
       margin-left: auto;
-      background: rgba(255, 255, 255, .05);
-      border: 1px solid rgba(255, 255, 255, .10);
+      background: #fff;
+      border: 1px solid rgba(15, 23, 42, .10);
       border-radius: var(--r-ui-lg);
       box-shadow:
-        0 24px 60px -20px rgba(0, 0, 0, .8),
-        0 0 0 1px rgba(130, 66, 245, .12),
-        0 8px 40px -12px rgba(130, 66, 245, .22);
+        0 1px 2px rgba(15, 23, 42, .04),
+        0 22px 50px -26px rgba(15, 23, 42, .35);
       padding: 1.15rem 1.3rem 1.35rem;
-      backdrop-filter: blur(8px);
     }
 
     .dw-diag-head {
@@ -678,13 +678,13 @@
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: .07em;
-      color: rgba(255, 255, 255, .55);
+      color: var(--ink-soft);
     }
 
     .dw-diag-head--despues {
       margin-top: .95rem;
       padding-top: .9rem;
-      border-top: 1px dashed rgba(255, 255, 255, .14);
+      border-top: 1px dashed rgba(15, 23, 42, .14);
     }
 
     .dw-diag-dot {
@@ -731,22 +731,22 @@
        antes/despues sigue viviendo en el punto (rojo cuadrado vs verde
        redondo), no en cuanto cuesta leer el texto. */
     .dw-diag-lista--antes li {
-      color: rgba(255, 255, 255, .62);
+      color: var(--ink-soft);
     }
 
     .dw-diag-lista--antes li::before {
       border-radius: 2px;
-      background: #f87171;
+      background: #dc2626;
     }
 
     .dw-diag-lista--despues li {
-      color: #ffffff;
+      color: var(--ink);
       font-weight: 600;
     }
 
     .dw-diag-lista--despues li::before {
       border-radius: 50%;
-      background: #34d399;
+      background: #059669;
     }
 
     .dw-problema-texto .prosa {
@@ -882,7 +882,7 @@
          una versión corta de lo que ya se explica en detalle en "Todo lo que
          necesitas" (#incluye) más adelante en esta misma página. No hay ni un
          dato, cifra o marca que no esté respaldado en otra parte del sitio. -->
-    <section class="section section--dark">
+    <section class="section section--marcada">
       <div class="wrap dw-problema">
         <div class="dw-problema-visual">
           <img src="/assets/KaivaMora1.webp" alt="" class="dw-problema-robot" width="800" height="609"
@@ -1137,7 +1137,7 @@
       </div>
     </section>
 
-    <section class="section section--dark" id="preguntas">
+    <section class="section section--marcada" id="preguntas">
       <div class="wrap">
         <h2 class="sec-head">Preguntas frecuentes<span class="dot">.</span></h2>
         <div class="faq-list">
@@ -1249,21 +1249,21 @@
          pregunta por aquello que la persona vino a mirar, y solo si no era eso
          se le ofrece lo demas. Sin precios, que es la decision tomada para las
          tres paginas de servicio. -->
-    <section class="section cierre">
-      <div class="wrap cierre-wrap">
+    <section class="section cierre-serv">
+      <div class="wrap cierre-serv-wrap">
         <h2>¿Hablamos de tu <span class="serv-hi">página</span>?</h2>
         <p class="desc">Cuéntanos qué vendes y a quién. Con eso ya podemos decirte si necesitas una página nueva o si la que tienes se arregla, y qué implicaría cada camino.</p>
-        <div class="cierre-acciones">
+        <div class="cierre-serv-acciones">
           <a class="btn btn-dark" href="/#contacto">Cuéntanos tu proyecto</a>
           <a class="btn btn-wa" href="https://wa.me/573024137374" target="_blank" rel="noopener noreferrer"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20.5l1.8-5.2A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 9.2c.3-.7.6-.7.9-.7h.7c.2 0 .5 0 .7.6l.8 1.9c.1.3 0 .5-.1.7l-.4.5c-.1.2-.2.3 0 .6a7 7 0 0 0 2.9 2.4c.3.1.5.1.7-.1l.5-.6c.2-.2.4-.2.6-.1l1.8.9c.3.1.5.3.5.5v.6c-.1.5-.5 1.1-1 1.3-.5.2-1.2.3-3.4-.6a11 11 0 0 1-5-4.6c-.6-1-.9-2-.9-2.8 0-.5.2-.9.4-1.2z"/></svg>Escríbenos por WhatsApp</a>
         </div>
-        <p class="cierre-nota">Respondemos el mismo día hábil. La primera conversación no cuesta nada y no termina en una propuesta si no hay nada que proponer.</p>
+        <p class="cierre-serv-nota">Respondemos el mismo día hábil. La primera conversación no cuesta nada y no termina en una propuesta si no hay nada que proponer.</p>
       </div>
     </section>
 
     <!-- Otros servicios. Mismo componente en las tres paginas de servicio; solo
          cambian las tres tarjetas, que nunca incluyen la pagina donde estas. -->
-    <section class="section serv-otros section--violet">
+    <section class="section alt serv-otros">
       <div class="wrap">
         <h2>Otros <span class="serv-hi">servicios</span></h2>
         <p class="desc">Soluciones que se complementan entre sí. Cada una resuelve una parte

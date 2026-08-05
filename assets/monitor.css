@@ -22,7 +22,12 @@
       --surface: #ffffff;
       --ink: #0f172a;
       --ink-soft: #475569;
-      --ink-faint: #94a3b8;
+      /* #94a3b8 daba 2,56:1 sobre blanco, por debajo del 4,5:1 de AA, y lo llevaba
+         texto de verdad. #64748b es el tono mas claro que aun pasa (4,76:1).
+         OJO: este token esta declarado por separado en portada.css, pagina.css,
+         monitor.css y legal.css. Son cuatro copias del mismo valor sin una fuente
+         unica; si se cambia aqui hay que cambiarlo en las otras tres. */
+      --ink-faint: #64748b;
       --line: rgba(15, 23, 42, 0.05);
       --line-strong: rgba(15, 23, 42, 0.12);
       --violet: #8242f5;

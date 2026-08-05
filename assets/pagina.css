@@ -29,7 +29,13 @@
   --surface: #ffffff;
   --ink: #0f172a;
   --ink-soft: #475569;
-  --ink-faint: #94a3b8;
+  /* Era #94a3b8: 2,56:1 sobre blanco, muy por debajo del 4,5:1 de AA. El
+     nombre invita a usarlo para adorno, pero en la practica lo llevaba texto
+     de verdad —42 nodos solo en la portada: los numeros de los pasos, los
+     titulares "Ya tengo una web", los antetitulos de seccion—. #64748b es el
+     tono mas claro que aun pasa (4,76:1). El escalon con --ink-soft se
+     conserva, solo que ahora los dos se leen. */
+  --ink-faint: #64748b;
   --line: rgba(15, 23, 42, 0.05);
   --line-strong: rgba(15, 23, 42, 0.12);
   --violet: #8242f5;
@@ -305,7 +311,15 @@ html {
   color: var(--violet);
 }
 
-/* ---- Cierre de las paginas de servicio --------------------------------
+/* OJO CON EL NOMBRE. Esto se llamo .cierre y choco de frente con el bloque
+   de cierre del blog, que ya existia mas abajo en este mismo archivo con foto
+   oscura de fondo y texto blanco (lo usan diez articulos). Las tres secciones
+   nuevas heredaron ese fondo sin que se notara al medir: el oscuro viene de
+   una imagen, no de background-color, asi que una comprobacion del color de
+   fondo lo daba por transparente. Se detecto auditando el contraste de cada
+   nodo de texto, que si vio el blanco sobre blanco.
+
+   ---- Cierre de las paginas de servicio --------------------------------
    Las tres terminaban en "Otros servicios", que es un enlace cruzado: lo
    ultimo que veia alguien despues de leerlo todo era una lista de otras
    cosas que vendemos, sin un solo sitio donde decir "hablemos". Va antes del
@@ -316,24 +330,24 @@ html {
    oscura y la que sigue es violeta: meter un tercer bloque pesado entre las
    dos habria dejado tres golpes seguidos sin aire. El peso lo lleva el boton
    negro, que aqui es lo unico que tiene que destacar. */
-.cierre {
+.cierre-serv {
   text-align: center;
 }
 
-.cierre-wrap {
+.cierre-serv-wrap {
   max-width: 660px;
 }
 
-.cierre h2 {
+.cierre-serv h2 {
   margin-bottom: .9rem;
 }
 
-.cierre .desc {
+.cierre-serv .desc {
   margin-left: auto;
   margin-right: auto;
 }
 
-.cierre-acciones {
+.cierre-serv-acciones {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -356,7 +370,7 @@ html {
   color: #0b5f2f;
 }
 
-.cierre-nota {
+.cierre-serv-nota {
   margin-top: 1.5rem;
   font-size: 13.5px;
   color: var(--ink-soft);
@@ -367,11 +381,11 @@ html {
    descuadrados se ve como un error de maquetacion, no como una eleccion. A
    todo el ancho quedan alineados y cada etiqueta cabe en su renglon. */
 @media (max-width: 560px) {
-  .cierre-acciones {
+  .cierre-serv-acciones {
     flex-direction: column;
   }
 
-  .cierre-acciones .btn {
+  .cierre-serv-acciones .btn {
     width: 100%;
     justify-content: center;
     /* El relleno lateral de 1.7rem existe para dar cuerpo a un boton que se
@@ -450,7 +464,10 @@ html {
   margin-top: 1.6rem;
   font-size: 13.5px;
   font-weight: 600;
-  color: var(--ink-faint);
+  /* --ink-faint (#94a3b8) da 2,56:1 sobre blanco. Vale para una raya o un
+     icono apagado, no para una linea que dice cuanto tarda el proyecto y de
+     quien queda el sitio. --ink-soft da 7,5:1. */
+  color: var(--ink-soft);
 }
 
 .hero-note svg {
@@ -523,136 +540,69 @@ html {
   border-block: 1px solid var(--line);
 }
 
-/* ---------- Ritmo de color: la regla 60/30/10 ----------------------------
-   60% blanco · 30% negro · 10% morado, medido como ÁREA de la página, no
-   como intención. Antes de esto las tres páginas de servicio medían 95-99%
-   blanco y 0,2% morado: el morado solo vivía en el punto de los títulos y en
-   los botones, que a esa escala no es un acento, es una anécdota.
-
-   Cómo funciona: cada variante REDEFINE los tokens de color en su propio
-   ámbito. Todo lo que ya escribe var(--ink), var(--line) o var(--surface)
-   —que es prácticamente todo el archivo— se re-tematiza solo. La alternativa
-   era escribir `.section--dark .tarjeta`, `.section--dark h2`… para cada
-   componente, que es como se pudren estas hojas de estilo.
-
-   Los fondos van planos, sin degradados, igual que el resto del archivo. */
-
-.section--dark {
-  --bg: #0b0b0e;
-  --surface: rgba(255, 255, 255, .045);
-  --ink: #ffffff;
-  --ink-soft: rgba(255, 255, 255, .66);
-  --ink-faint: rgba(255, 255, 255, .42);
-  --line: rgba(255, 255, 255, .10);
-  --line-strong: rgba(255, 255, 255, .20);
-  /* El violeta de marca sobre negro queda en ~3,3:1 de contraste: sirve para
-     un punto o un icono, no para texto. Sobre oscuro se aclara. El de marca
-     se conserva aparte para los rellenos, que no tienen que leerse. */
-  --violet: #b48cff;
-  --violet-ink: #c9aaff;
-  --violet-soft: rgba(180, 140, 255, .14);
-  /* Una sombra oscura sobre fondo oscuro no se ve; solo ensucia los bordes. */
-  --shadow-md: none;
-  background: #0b0b0e;
-  color: #fff;
-  border-block: 1px solid rgba(255, 255, 255, .08);
-}
-
-.section--violet {
-  --bg: #8242f5;
-  --surface: rgba(255, 255, 255, .10);
-  --ink: #ffffff;
-  --ink-soft: rgba(255, 255, 255, .78);
-  --ink-faint: rgba(255, 255, 255, .58);
-  --line: rgba(255, 255, 255, .18);
-  --line-strong: rgba(255, 255, 255, .30);
-  /* Dentro del bloque morado el acento no puede ser morado. Pasa a blanco. */
-  --violet: #ffffff;
-  --violet-ink: #ffffff;
-  --violet-soft: rgba(255, 255, 255, .12);
-  --shadow-md: none;
-  background: #8242f5;
-  color: #fff;
-  border-block: 1px solid rgba(255, 255, 255, .14);
-}
-
-/* El .alt es un gris de 250: a efectos de área cuenta como blanco. Cuando una
-   sección oscura o morada lo lleva, gana la variante. */
-.section.alt.section--dark,
-.section.alt.section--violet {
-  background: var(--bg);
-}
-
 /* Botones dentro de los bloques de color -------------------------------- */
 
-/* El botón violeta sobre fondo violeta desaparece. Se invierte: fondo blanco,
-   texto violeta de marca (no el aclarado, que sobre blanco no contrasta). */
-.section--violet .btn-violet {
+/* ---- RITMO DE SECCIONES: todo parte del blanco --------------------------
+   Aqui vivian .section--dark y .section--violet, que pintaban la seccion
+   entera de negro o de morado redefiniendo los tokens de color en su ambito.
+   Se retiran: ya no hay secciones negras ni moradas. El sitio parte del
+   blanco y el negro y el morado entran como adiciones, no como fondos.
+
+   El problema que eso deja es el ritmo. Ocho bloques blancos seguidos se leen
+   como un unico muro sin respiracion, y era justamente lo que los bloques de
+   color venian a romper. Se resuelve con tres niveles que no salen del
+   blanco:
+
+     .section              blanco puro
+     .section.alt          #fafafa, un gris de 250 que a efectos de area
+                           sigue contando como blanco
+     .section--marcada     blanco con una regla de acento arriba
+
+   El peso de "esta seccion importa" lo llevan ahora la tipografia y un solo
+   trazo, no un cambio de fondo. Es mas trabajo de composicion y menos de
+   relleno, que es a donde apunta la correccion. */
+
+.section--marcada {
   background: #fff;
-  color: #6a2fe0;
-  border-color: #fff;
+  position: relative;
+  border-block: 1px solid var(--line);
 }
 
-.section--violet .btn-violet:hover {
-  background: rgba(255, 255, 255, .88);
-  color: #5a24c8;
+/* La regla de acento. Se degrada hacia la derecha para que sea una entrada y
+   no una raya de division: marca donde empieza la seccion sin cerrarla. */
+.section--marcada::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--violet) 0%, rgba(130, 66, 245, .35) 32%, rgba(130, 66, 245, 0) 68%);
 }
 
-.section--dark .btn-violet,
-.section--violet .btn-ghost,
-.section--dark .btn-ghost {
-  color: #fff;
+/* Cuando .alt y .marcada coinciden manda el gris: la regla de arriba sigue
+   distinguiendola de una .alt cualquiera. */
+.section.alt.section--marcada {
+  background: #fafafa;
 }
 
-.section--dark .btn-violet {
-  background: #8242f5;
-  border-color: #8242f5;
+/* Las tarjetas del cruce de servicios vivian sobre morado y se apoyaban en el
+   contraste del fondo. Sobre blanco necesitan borde propio, y el acento pasa
+   al icono y al borde de hover: morado cuando se senala, negro nunca —el
+   negro se reserva para el boton, que es la accion. */
+.serv-otros .serv-card {
+  background: #fff;
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
 }
 
-.section--dark .btn-violet:hover {
-  background: #9560f7;
-  border-color: #9560f7;
+.serv-otros .serv-card:hover {
+  border-color: var(--violet);
+  box-shadow: 0 14px 30px -18px rgba(130, 66, 245, .45);
 }
 
-.section--dark .btn-ghost,
-.section--violet .btn-ghost {
-  background: transparent;
-  border-color: rgba(255, 255, 255, .28);
-}
-
-.section--dark .btn-ghost:hover,
-.section--violet .btn-ghost:hover {
-  border-color: #fff;
-}
-
-/* Islas claras dentro de un bloque de color -----------------------------
-   Una tarjeta con fondo blanco OPACO dentro de una seccion oscura o morada
-   es, a efectos de contraste, una isla clara: dentro de ella los tokens
-   tienen que volver al juego claro. Si no, hereda el --ink blanco de la
-   seccion y pinta texto blanco sobre tarjeta blanca.
-
-   No es teorico: al aplicar el 60/30/10 por primera vez, .serv-card
-   (background:#fff, color:inherit) dejo SEIS elementos en contraste 1,0 —
-   literalmente invisibles. Se detecto midiendo el contraste de cada nodo de
-   texto de la pagina, no mirandola. */
-.section--dark .serv-card,
-.section--violet .serv-card {
-  --ink: #0f172a;
-  --ink-soft: #475569;
-  --ink-faint: #94a3b8;
-  --line: rgba(15, 23, 42, .05);
-  --line-strong: rgba(15, 23, 42, .12);
-  --violet: #8242f5;
-  --violet-ink: #6a2fe0;
-  --violet-soft: rgba(130, 66, 245, .06);
-  color: var(--ink);
-}
-
-/* El foco tiene que verse sobre los tres fondos, no solo sobre el blanco. */
-.section--dark :focus-visible,
-.section--violet :focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 3px;
+.serv-otros .serv-ico {
+  color: var(--violet);
+  background: rgba(130, 66, 245, .08);
 }
 
 .section h2 {
@@ -1194,7 +1144,13 @@ html {
 .pie p,
 .pie a {
   font-size: 13.5px;
-  color: var(--ink-faint);
+  /* Estaba en --ink-faint (#94a3b8): 2,56:1 sobre el pie claro, por debajo
+     del 4,5:1 que pide AA. No se veia porque en las paginas con pie oscuro
+     (.dark-footer) el mismo token se re-tematiza y ahi si contrasta; el fallo
+     solo aparecia donde el pie es claro. Son ocho enlaces —privacidad,
+     terminos, cookies, preferencias— que ademas son los que alguien busca
+     cuando de verdad los necesita. --ink-soft da 7,5:1. */
+  color: var(--ink-soft);
 }
 
 .pie nav {
@@ -1917,8 +1873,20 @@ html {
   margin-top: 0 !important;
 }
 
+/* El color del pie oscuro se declaraba en el <footer> y se heredaba. Pero
+   .pie p y .pie a lo ponen en el propio parrafo y en el propio enlace, y eso
+   gana a la herencia: el texto tomaba el gris del tema claro. Con
+   --ink-faint (#94a3b8) el resultado pasaba de casualidad —un gris claro
+   sobre casi negro contrasta— y al corregir ese token por el fallo del pie
+   CLARO, el pie oscuro bajo a 2,68:1. Se declara aqui, sobre el elemento
+   correcto, en vez de depender de que un token sirva para las dos caras. */
+.dark-footer p,
 .dark-footer a {
-  color: rgba(255, 255, 255, 0.6) !important;
+  color: rgba(255, 255, 255, 0.72) !important;
+}
+
+.dark-footer a {
+  color: rgba(255, 255, 255, 0.78) !important;
 }
 
 .dark-footer a:hover {
@@ -1962,12 +1930,6 @@ html {
 .serv-otros {
   padding-top: 0;
   border-top: none;
-}
-
-/* Sobre el bloque morado, el violeta de marca no contrasta consigo mismo.
-   Blanco a media opacidad: se lee como entradilla y deja que el título mande. */
-.section--violet .serv-hi {
-  color: var(--violet);
 }
 
 .serv-grid {
@@ -2555,11 +2517,6 @@ html {
   -webkit-box-decoration-break: clone;
 }
 
-.section--dark .marca,
-.section--violet .marca {
-  color: var(--ink);
-}
-
 /* Variante sólida, para cuando el titular necesita más peso que el tinte. */
 .marca-solida {
   background: var(--violet);
@@ -2598,13 +2555,6 @@ html {
   transform: rotate(3deg);
 }
 
-.section--dark .sello,
-.section--violet .sello {
-  background: var(--surface);
-  border-color: var(--line-strong);
-  color: var(--ink);
-}
-
 /* ---- 3. Cifra fantasma: número gigante de fondo -------------------------
    Ordena la lectura de una sección sin añadir texto. Va como hermano del
    contenido real, con position:absolute y el padre en position:relative. */
@@ -2621,11 +2571,6 @@ html {
   pointer-events: none;
   user-select: none;
   z-index: 0;
-}
-
-.section--violet .cifra-fantasma {
-  color: #fff;
-  opacity: .12;
 }
 
 /* El contenido real necesita quedar por encima de la cifra. */
@@ -2652,11 +2597,6 @@ html {
   opacity: .18;
   pointer-events: none;
   z-index: 0;
-}
-
-.section--dark .malla-puntos::before,
-.section--violet .malla-puntos::before {
-  opacity: .14;
 }
 
 /* Máscara en degradado: la trama se desvanece hacia el centro, para que no
@@ -2688,7 +2628,3 @@ html {
   pointer-events: none;
 }
 
-.section--dark .subrayado::after,
-.section--violet .subrayado::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12' preserveAspectRatio='none'%3E%3Cpath d='M1 8.5 Q 25 2 50 6 T 99 4' fill='none' stroke='%23ffffff' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
-}
