@@ -92,6 +92,14 @@
       "mainEntity": [
         {
           "@type": "Question",
+          "name": "¿Y si lo hago con inteligencia artificial o con una plantilla?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para una pantalla suelta o una prueba rápida, la IA la escribe hoy mismo. Para un sistema del que dependa tu operación el problema no es escribir el código, sino que aguante los casos raros, que los datos no se pierdan, que varias personas puedan usarlo a la vez y que dentro de dos años alguien pueda entenderlo para cambiarlo. Usamos IA a diario y por eso sabemos dónde deja de ayudar: escribe rápido y no responde por lo que escribió."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "¿Qué diferencia hay entre software a la medida y un sistema ya hecho?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -522,6 +530,87 @@
     .tj-col:nth-child(2) .tj-card:nth-child(2) {
       transition-delay: .24s;
     }
+  
+    /* ---- Caso: el panel de CS Travel ------------------------------------
+       Texto a la izquierda y captura a la derecha, con la captura mas ancha:
+       es lo que hay que mirar, el texto solo dice que se esta mirando. */
+    .caso-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: 2.6rem;
+      align-items: center;
+    }
+
+    .caso-cliente {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin-bottom: 1rem;
+    }
+
+    .caso-txt p {
+      color: var(--ink-soft);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+
+    .caso-lista {
+      list-style: none;
+      margin-top: 1.6rem;
+      padding: 0;
+      display: grid;
+      gap: .55rem;
+    }
+
+    .caso-lista li {
+      position: relative;
+      padding-left: 1.4rem;
+      font-size: 14.5px;
+      color: var(--ink);
+    }
+
+    .caso-lista li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .5rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--violet);
+    }
+
+    /* La captura es de un panel real y trae su propio blanco. El marco es una
+       linea fina y una sombra baja: cualquier cosa mas encima competiria con
+       la interfaz de dentro, que es lo que se quiere ensenar. */
+    .caso-shot {
+      margin: 0;
+    }
+
+    .caso-shot img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 14px;
+      border: 1px solid var(--line-strong);
+      box-shadow: 0 24px 50px -28px rgba(15, 23, 42, .45);
+    }
+
+    .caso-shot figcaption {
+      margin-top: .8rem;
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .caso-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
   </style>
 </head>
 
@@ -848,10 +937,58 @@
       </div>
     </section>
 
+    <!-- UN CASO REAL, POR FIN.
+         Esta pagina hablaba de software a medida sin ensenar ni uno solo: la
+         unica imagen era el diagrama del hero, que es la idea del servicio y
+         no un trabajo hecho. Se describe unicamente lo que la captura
+         demuestra —los estados de cada caso, la ruta, las comisiones, el
+         enlace de afiliado—, sin inventar el "antes" del cliente ni cifras de
+         resultado que no podemos sostener. -->
+    <section class="section" id="caso">
+      <div class="wrap">
+        <h2 class="sec-head">Un sistema que ya está funcionando<span class="dot">.</span></h2>
+        <div class="caso-grid">
+          <div class="caso-txt">
+            <p class="caso-cliente">CS Travel Group · Viajes médicos corporativos</p>
+            <p>Construimos el portal por donde entran los médicos que refieren pacientes.
+              Cada uno ve sus casos con su código, la ruta del paciente y en qué punto
+              está: solicitud enviada, aprobada o pendiente de pago.</p>
+            <p>Debajo, lo que lleva ganado por periodo y los pacientes que llegaron a
+              través de su enlace de afiliado. Todo en una pantalla, sin preguntar por
+              el estado de cada caso uno por uno.</p>
+            <ul class="caso-lista">
+              <li>Casos con estado y ruta</li>
+              <li>Cobros pendientes y aprobaciones</li>
+              <li>Comisiones por periodo</li>
+              <li>Enlace de afiliado con su seguimiento</li>
+            </ul>
+          </div>
+          <figure class="caso-shot">
+            <img src="/assets/trabajo-cstravel-software.webp"
+              alt="Panel de un médico en la plataforma de CS Travel Group: casos con su estado, cobros pendientes, ganancias por periodo y pacientes referidos"
+              width="1440" height="738" loading="lazy" decoding="async">
+            <figcaption>Panel del médico. Los datos del paciente van difuminados.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
     <section class="section alt" id="preguntas">
       <div class="wrap">
         <h2 class="sec-head">Preguntas frecuentes<span class="dot">.</span></h2>
         <div class="faq-list">
+
+          <details class="faq-item">
+            <summary>
+              <h3>¿Y si lo hago con inteligencia artificial o con una plantilla?</h3>
+              <span class="faq-icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+            </summary>
+            <div class="faq-answer">
+              <p>Para una pantalla suelta o una prueba rápida, la IA te la escribe hoy mismo. Para un sistema del que dependa tu operación, el problema no es escribir el código: es que aguante los casos raros, que los datos no se pierdan, que dos personas puedan usarlo a la vez sin pisarse y que dentro de dos años alguien pueda entenderlo para cambiarlo.</p>
+              <p>Usamos IA todos los días, y por eso sabemos dónde deja de ayudar. Escribe rápido y no responde por lo que escribió; si el sistema factura, cobra o guarda datos de tus clientes, alguien tiene que responder.</p>
+              <p>Y como en cualquier proyecto: si una herramienta del mercado ya resuelve tu caso, te lo decimos y no construimos nada.</p>
+            </div>
+          </details>
 
           <details class="faq-item">
             <summary>
