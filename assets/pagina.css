@@ -1754,15 +1754,12 @@ html {
               transform 0.75s cubic-bezier(0.215, 0.61, 0.355, 1),
               border-color 0.5s ease;
 }
-.paso-activo {
-  opacity: 1;
-  transform: translateY(0);
-  border-top-color: var(--violet);
-}
-.paso-activo::before {
-  transform: scale(1.15);
-  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+/* Aquí vivía .paso-activo, que ponía assets/diseno-web.js al entrar un .paso
+   en pantalla. Nunca se aplicó a nada: el único sitio con elementos .paso es
+   /branding/, y esa página no cargaba ese script; la que sí lo cargaba,
+   /diseno-web/, no tiene ni un .paso. El script se borró con la regla.
+   Quien anima los .paso de branding es el mecanismo .reveal → .dentro de más
+   arriba, que sí funciona (comprobado contra producción el 2026-08-05). */
 
 /* 5. Revelación elegante del Hero de Diseño Web */
 .diseno-web-hero h1 {
@@ -1810,170 +1807,12 @@ html {
   }
 }
 
-/* Secciones oscuras interactivas (Estilo Cuberto) */
-.dark-section {
-  background: #08070d;
-  color: #fff;
-  border-block: 1px solid rgba(255, 255, 255, 0.08);
-  position: relative;
-  isolation: isolate;
-  transition: background 0.4s ease, color 0.4s ease;
-}
-
-.dark-section h2 {
-  color: #fff !important;
-}
-
-.dark-section .prosa p {
-  color: rgba(255, 255, 255, 0.72) !important;
-}
-
-.dark-section strong {
-  color: var(--violet) !important;
-}
-
-.dark-section .desc {
-  color: rgba(255, 255, 255, 0.6) !important;
-}
-
-/* Timeline del proceso en secciones oscuras */
-.dark-section .paso {
-  border-top-color: rgba(255, 255, 255, 0.09) !important;
-  color: #fff !important;
-}
-
-.dark-section .paso:last-child {
-  border-bottom-color: rgba(255, 255, 255, 0.09) !important;
-}
-
-.dark-section .paso p {
-  color: rgba(255, 255, 255, 0.68) !important;
-}
-
-.dark-section .paso::before {
-  color: var(--violet) !important;
-}
-
-.dark-section .paso-activo {
-  border-top-color: var(--violet) !important;
-}
-
-/* Listado de proyectos en sección oscura */
-.portfolio-list {
-  display: grid;
-  gap: 4.5rem;
-  margin-top: 3.5rem;
-}
-
-.portfolio-item {
-  display: grid;
-  grid-template-columns: 1.25fr 1fr;
-  gap: 3.5rem;
-  align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding-bottom: 4.5rem;
-}
-
-.portfolio-item:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.portfolio-img-container {
-  overflow: hidden;
-  border-radius: 20px;
-  background: #110e1a;
-  aspect-ratio: 16 / 10;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.portfolio-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-  display: block;
-}
-
-.portfolio-item:hover .portfolio-img {
-  transform: scale(1.04);
-}
-
-.portfolio-item:hover .portfolio-img-container {
-  transform: translateY(-8px);
-  box-shadow: 0 25px 60px rgba(130, 66, 245, 0.12);
-  border-color: rgba(130, 66, 245, 0.25);
-}
-
-.portfolio-info h3 {
-  font-family: var(--display);
-  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
-  font-weight: 800;
-  color: var(--ink);
-  margin-bottom: 1.1rem;
-  letter-spacing: -0.02em;
-}
-
-.portfolio-info p {
-  font-size: 15.5px;
-  line-height: 1.7;
-  color: var(--ink-soft);
-  margin-bottom: 1.8rem;
-  text-wrap: pretty;
-}
-
-/* El bloque de portafolio nacio dentro de una seccion oscura y traia los
-   colores quemados en blanco. Ahora el color por defecto es el de fondo claro
-   y el blanco se aplica solo cuando de verdad esta sobre oscuro, para que el
-   mismo bloque sirva en las dos situaciones. */
-.dark-section .portfolio-info h3 {
-  color: #fff;
-}
-
-.dark-section .portfolio-info p {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.portfolio-tag {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--violet);
-  background: rgba(130, 66, 245, 0.11);
-  padding: 0.35rem 0.9rem;
-  border-radius: 30px;
-  border: 1px solid rgba(130, 66, 245, 0.18);
-}
-
-/* Unificación del cierre en bloque oscuro */
-.dark-section .cierre {
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: clamp(3rem, 7vw, 5rem) clamp(2rem, 5vw, 3.5rem);
-  border-radius: 28px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
-}
-
-.dark-section .cierre h2 {
-  color: #fff !important;
-}
-
-.dark-section .cierre p {
-  color: rgba(255, 255, 255, 0.68) !important;
-}
-
-.dark-section .btn-ghost {
-  border-color: rgba(255, 255, 255, 0.22) !important;
-  color: #fff !important;
-}
-
-.dark-section .btn-ghost:hover {
-  border-color: #fff !important;
-  background: rgba(255, 255, 255, 0.08) !important;
-}
+/* Aquí vivía el bloque .dark-section, unas 165 líneas del sistema visual
+   viejo ("estilo Cuberto"): fondo #08070d propio, sus tarjetas, su cierre y
+   sus botones. Ninguna página lo usaba — cero coincidencias en todo el HTML.
+   Lo reemplaza .section--dark de más arriba, que en vez de reescribir cada
+   componente redefine los tokens de color en su ámbito. Se borra para que
+   nadie construya encima de un sistema muerto. */
 
 /* Footer oscuro en sincronía */
 .dark-footer {

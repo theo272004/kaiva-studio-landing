@@ -2631,15 +2631,20 @@
       flex: none;
     }
 
-    .kv-locked {
+    /* Antes .kv-locked, con un candado y "9 hallazgos más en el reporte
+       completo". El backend nunca tuvo ese muro: scan.php devuelve
+       findings_locked = 0 siempre. El renombre es a propósito, para que la
+       clase no invite a volver a poner un candado ahí. */
+    .kv-unlocked {
       margin-top: .6rem;
       padding-top: .55rem;
       border-top: 1px dashed var(--line-strong);
       font-size: .68rem;
-      color: var(--ink-faint);
+      color: var(--violet-ink);
       display: flex;
       align-items: center;
       gap: .35rem;
+      font-weight: 600;
     }
 
     /* Pasos */

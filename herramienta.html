@@ -2,11 +2,21 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0;url=/monitor">
-  <link rel="canonical" href="https://kaivastudio.com/monitor">
+  <!-- Esta URL vieja apuntaba a /monitor/, que está marcada `noindex` a
+       propósito por ser la aplicación y no la página que se posiciona. Una
+       canónica hacia una página noindex es de las peores cosas que se le pueden
+       decir a Google: le pide que trate esta dirección como equivalente a una
+       que no debe indexar, así que hereda el noindex y la autoridad de los
+       enlaces que apunten aquí se pierde por el camino.
+
+       Va a /diagnostico/, que es la que lleva `index, follow` y la que está en
+       el sitemap. GitHub Pages no permite redirecciones 301 de servidor, así
+       que el meta refresh con content="0" es lo más cerca que se puede estar. -->
+  <meta http-equiv="refresh" content="0;url=/diagnostico/">
+  <link rel="canonical" href="https://kaivastudio.com/diagnostico/">
   <title>Redirigiendo…</title>
 </head>
 <body>
-  <p>Redirigiendo a <a href="/monitor">kaivastudio.com/monitor</a>…</p>
+  <p>Redirigiendo a <a href="/diagnostico/">kaivastudio.com/diagnostico</a>…</p>
 </body>
 </html>

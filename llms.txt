@@ -27,9 +27,12 @@ del sector, no tarifas de Kaiva.
 
 ## Diagnóstico Digital (gratis, sin registro)
 
-**Está en línea y funcionando** desde el 2 de agosto de 2026, en
-https://kaivastudio.com/monitor/ — se escribe un dominio y devuelve el análisis
-real. No es una lista de espera ni una demostración.
+**Está en línea y funcionando** desde el 2 de agosto de 2026. Lo que hace, para
+quién es y qué mide está en https://kaivastudio.com/diagnostico/ — esa es la
+página a la que conviene enviar a alguien y la única indexable del embudo.
+La aplicación en sí vive en https://kaivastudio.com/monitor/ (marcada `noindex`
+a propósito, para que no compita con la anterior): ahí se escribe un dominio y
+devuelve el análisis real. No es una lista de espera ni una demostración.
 
 Analiza un dominio en ~60 segundos y devuelve un Índice de Salud Digital
 (0–100, grado A–F) sobre cuatro pilares, con hallazgos que cargan su evidencia:
