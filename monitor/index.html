@@ -77,7 +77,7 @@
   <!-- El resto del CSS de esta pagina vive en assets/monitor.css. Antes eran
        51 KB incrustados en el propio HTML: no se cacheaban y viajaban en cada
        visita. Arriba solo se queda el @font-face, que va con los preload. -->
-  <link rel="stylesheet" href="/assets/monitor.css?v=20260805f">
+  <link rel="stylesheet" href="/assets/monitor.css?v=20260805g">
 </head>
 
 <body>
@@ -171,15 +171,7 @@
              lo que el producto promete de verdad segun su propia vision:
              enterarte de que esta frenando el crecimiento. -->
         <div class="kv-hero-centro">
-          <span class="kv-kicker">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" />
-            </svg>
-            Diagn&oacute;stico gratuito
-          </span>
-
-          <h1>Analiza tu<br><em>salud digital.</em></h1>
+          <h1>Analiza tu <em>salud digital.</em></h1>
           <p class="kv-hero-lead">Descubre qu&eacute; est&aacute; frenando tu crecimiento y qu&eacute; oportunidades
             est&aacute;s perdiendo.</p>
 
@@ -205,45 +197,6 @@
           </form>
           <div class="kv-err" id="kvErr" role="alert"></div>
 
-          <div class="kv-marks">
-            <div class="kv-mark">
-              <span class="kv-mark-ic">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" />
-                </svg>
-              </span>
-              <span><b>R&aacute;pido</b><span>Resultados en menos de 60s</span></span>
-            </div>
-
-            <div class="kv-mark">
-              <span class="kv-mark-ic">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="3" width="18" height="18" rx="3" />
-                  <path d="M8.5 12.5l2.5 2.5 4.5-5" />
-                </svg>
-              </span>
-              <!-- 30 y no "50+": el scoring tiene 30 factores DISTINTOS. Son 56
-                   llamadas a add() en src/scoring.php, pero signals se indexa
-                   por id, asi que colapsan a 30 claves unicas. Un numero
-                   inflado aqui es justo lo que este producto no se puede
-                   permitir: si un prospecto lo verifica y no cuadra, el
-                   diagnostico entero pierde su fuerza. -->
-              <span><b>Completo</b><span>30 factores en 4 pilares</span></span>
-            </div>
-            <div class="kv-mark">
-              <span class="kv-mark-ic">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6l-8-3z" />
-                  <path d="m9 12 2 2 4-4" />
-                </svg>
-              </span>
-              <span><b>Accionable</b><span>Cada hallazgo con su evidencia</span></span>
-            </div>
-          </div>
-
           <p class="kv-note">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -254,60 +207,6 @@
             herramienta; tu IP nunca se guarda en claro.
           </p>
 
-          <!-- Los cuatro pilares, con las preguntas EXACTAS que devuelve el
-               backend (kaiva_score, src/scoring.php lineas 156-177). El mockup
-               de referencia proponia otras ("&iquest;Que perciben?",
-               "&iquest;Pueden confiar?"): si la portada promete una pregunta y
-               el informe responde otra, la promesa y el resultado no encajan. -->
-          <div class="kv-pilares-intro">
-            <p class="kv-pilares-tit">Revisamos los <strong>4 pilares</strong> clave de tu presencia digital</p>
-            <div class="kv-pilares-fila">
-              <div class="kv-pilar">
-                <span class="kv-pilar-ic">
-                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                </span>
-                <b>Visibilidad</b>
-                <span>&iquest;Te encuentran?</span>
-              </div>
-              <div class="kv-pilar">
-                <span class="kv-pilar-ic">
-                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="4" width="18" height="16" rx="2.5" />
-                    <circle cx="8.5" cy="9.5" r="1.6" />
-                    <path d="m4 17 5-4.5 4 3.5 3-2.5 4 3.5" />
-                  </svg>
-                </span>
-                <b>Imagen</b>
-                <span>&iquest;Te ves grande?</span>
-              </div>
-              <div class="kv-pilar">
-                <span class="kv-pilar-ic">
-                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6l-8-3z" />
-                  </svg>
-                </span>
-                <b>Confianza</b>
-                <span>&iquest;Inspiras seriedad?</span>
-              </div>
-              <div class="kv-pilar">
-                <span class="kv-pilar-ic">
-                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 5h16v12H4z" />
-                    <path d="m4 6 8 6 8-6" />
-                  </svg>
-                </span>
-                <b>Operaci&oacute;n</b>
-                <span>&iquest;Est&aacute;s ordenado?</span>
-              </div>
-            </div>
-          </div>
         </div>
 
       <!-- El panel de ejemplo baja del lateral a aqui: a ancho completo
@@ -512,6 +411,66 @@
            Pro. Sobraba: quien llega a esta pantalla viene a analizar su sitio,
            no a comparar planes. Queda un solo enlace a la landing, que es donde
            está explicado el producto completo. -->
+      <!-- Los cuatro pilares bajan aqui, debajo de la demo y junto al
+           enlace que lleva a la pagina donde se explica el producto.
+           Arriba ocupaban 217px de la primera pantalla contando lo que
+           se iba a revisar, antes de que se hubiera visto la herramienta
+           siquiera; aqui llegan cuando ya se vio funcionar. -->
+          <!-- Los cuatro pilares, con las preguntas EXACTAS que devuelve el
+               backend (kaiva_score, src/scoring.php lineas 156-177). El mockup
+               de referencia proponia otras ("&iquest;Que perciben?",
+               "&iquest;Pueden confiar?"): si la portada promete una pregunta y
+               el informe responde otra, la promesa y el resultado no encajan. -->
+          <div class="kv-pilares-intro">
+            <p class="kv-pilares-tit">Revisamos los <strong>4 pilares</strong> clave de tu presencia digital</p>
+            <div class="kv-pilares-fila">
+              <div class="kv-pilar">
+                <span class="kv-pilar-ic">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </span>
+                <b>Visibilidad</b>
+                <span>&iquest;Te encuentran?</span>
+              </div>
+              <div class="kv-pilar">
+                <span class="kv-pilar-ic">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="16" rx="2.5" />
+                    <circle cx="8.5" cy="9.5" r="1.6" />
+                    <path d="m4 17 5-4.5 4 3.5 3-2.5 4 3.5" />
+                  </svg>
+                </span>
+                <b>Imagen</b>
+                <span>&iquest;Te ves grande?</span>
+              </div>
+              <div class="kv-pilar">
+                <span class="kv-pilar-ic">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6l-8-3z" />
+                  </svg>
+                </span>
+                <b>Confianza</b>
+                <span>&iquest;Inspiras seriedad?</span>
+              </div>
+              <div class="kv-pilar">
+                <span class="kv-pilar-ic">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 5h16v12H4z" />
+                    <path d="m4 6 8 6 8-6" />
+                  </svg>
+                </span>
+                <b>Operaci&oacute;n</b>
+                <span>&iquest;Est&aacute;s ordenado?</span>
+              </div>
+            </div>
+          </div>
+
       <p class="kv-saber">
         <a href="/diagnostico/">Quiero saber más sobre el Diagnóstico Digital</a>
       </p>

@@ -2731,12 +2731,15 @@
     }
 
     .kv-hero-centro h1 {
-      margin-bottom: .9rem;
+      margin-bottom: .8rem;
+      /* Una sola linea: partirlo en dos gastaba 57px de la primera pantalla
+         para no decir nada mas. */
+      text-wrap: balance;
     }
 
     .kv-hero-centro .kv-hero-lead {
       max-width: 46ch;
-      margin: 0 auto 2.2rem;
+      margin: 0 auto 1.7rem;
     }
 
     /* El campo es el protagonista: mas ancho, mas alto y con sombra propia
@@ -2762,6 +2765,7 @@
     }
 
     .kv-hero-centro .kv-note {
+      margin-top: 1.1rem;
       display: inline-flex;
       align-items: flex-start;
       gap: .45rem;
@@ -2779,7 +2783,8 @@
        Contestan "que me van a revisar" antes de que la persona escriba nada.
        Las preguntas son las que devuelve el backend, no otras. */
     .kv-pilares-intro {
-      margin-top: clamp(3rem, 7vw, 4.5rem);
+      margin-top: clamp(2rem, 4vw, 2.8rem);
+      text-align: center;
     }
 
     .kv-pilares-tit {
