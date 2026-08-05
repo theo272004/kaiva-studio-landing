@@ -692,10 +692,12 @@
       }
     }
 
-    /* ---- Cabecera: candado de admin + sesión de cliente -------------------
-       Hasta hoy solo existía el candado (kv-entrar), fijo arriba a la
-       derecha. La sesión de cliente entra al lado, en el mismo carril, para
-       que las dos puertas convivan sin que una tape a la otra. */
+    /* ---- Cabecera: una sola puerta ---------------------------------------
+       Aquí convivían dos botones, el de sesión y un candado que llevaba al
+       login de equipo en /admin/. Quedó uno solo: /api/sesion.php reconoce
+       las dos llaves y decide a dónde va cada quien. Se retiraron también las
+       ocho reglas del candado, que quedaban sin ningún elemento que las
+       usara. */
     .kv-header-acciones {
       position: fixed;
       top: clamp(1.1rem, 3vw, 1.9rem);
@@ -710,9 +712,6 @@
       display: none;
     }
 
-    .kv-header-acciones .kv-entrar {
-      position: static;
-    }
 
     .kv-sesion {
       display: inline-flex;
@@ -2124,55 +2123,16 @@
        el logo flotante quedaba encima de los controles de la ventana. La
        puerta al panel tampoco pinta nada cuando ya estás viendo un informe. */
     body.kv-en-panel .kv-brand-fixed,
-    body.kv-en-panel .kv-entrar {
-      display: none;
-    }
 
     /* Puerta al Panel Pro: discreta a propósito. Es para el equipo, y para el
        visitante que viene a analizar su web no debe competir con el campo de
        la URL, que es lo único que tiene que hacer aquí. */
-    .kv-entrar {
-      position: fixed;
-      top: clamp(1.1rem, 3vw, 1.9rem);
-      right: clamp(1.1rem, 4vw, 2.6rem);
-      z-index: 40;
-      display: inline-flex;
-      align-items: center;
-      gap: .45rem;
-      padding: .5rem .9rem;
-      border-radius: var(--r-btn);
-      border: 1px solid var(--line-strong);
-      background: rgba(255, 255, 255, .75);
-      backdrop-filter: blur(6px);
-      font-size: 12.5px;
-      font-weight: 650;
-      color: var(--ink-soft);
-      text-decoration: none;
-      transition: color .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
-    }
 
-    .kv-entrar:hover {
-      color: var(--violet);
-      border-color: var(--violet);
-      background: #fff;
-    }
 
-    .kv-entrar svg {
-      opacity: .75;
-    }
 
     @media (max-width: 560px) {
       /* En móvil el texto compite con el logo; queda solo el candado. */
-      .kv-entrar {
-        padding: .5rem;
-        font-size: 0;
-        gap: 0;
-      }
 
-      .kv-entrar svg {
-        width: 15px;
-        height: 15px;
-      }
     }
 
     .kv-brand-fixed {
@@ -2208,9 +2168,6 @@
          el mismo criterio — si una scrollea y la otra no, quedan bailando
          una respecto de la otra. */
       .kv-brand-fixed,
-      .kv-entrar {
-        position: absolute;
-      }
 
       .kv-brand-fixed img {
         height: 40px;

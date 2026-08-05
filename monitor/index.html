@@ -77,7 +77,7 @@
   <!-- El resto del CSS de esta pagina vive en assets/monitor.css. Antes eran
        51 KB incrustados en el propio HTML: no se cacheaban y viajaban en cada
        visita. Arriba solo se queda el @font-face, que va con los preload. -->
-  <link rel="stylesheet" href="/assets/monitor.css?v=20260805k">
+  <link rel="stylesheet" href="/assets/monitor.css?v=20260805l">
 </head>
 
 <body>
@@ -86,17 +86,14 @@
   <a href="/" class="kv-brand-fixed" aria-label="Kaiva Studio — volver al inicio"><img
       src="../assets/logo-kaiva.png" alt="Kaiva Studio"></a>
 
-  <!-- Acciones de la cabecera: dos puertas distintas que no hay que confundir.
+  <!-- Cabecera: UNA sola puerta.
+       Aquí hubo dos botones, "Iniciar sesión" y "Entrar al panel", uno al
+       lado del otro y para lo mismo. Ahora /api/sesion.php reconoce las dos
+       llaves —la cuenta de cliente y la del administrador— y si es la del
+       admin devuelve la ruta del Panel Pro para ir derecho.
 
-       kv-entrar (candado) → el equipo de Kaiva, hacia el CRM interno de leads
-       en /admin/. Discreta a propósito, existía antes de las cuentas de
-       cliente y no tiene nada que ver con ellas.
-
-       kv-sesion (persona) → cuentas de cliente reales (migración 008,
-       src/auth.php). Hasta hoy esto NO EXISTÍA: se podía crear una cuenta
-       desde el panel temporal, pero no había ningún sitio para volver a
-       iniciar sesión. Empieza en "Iniciar sesión"; kvSesionEstado.js la
-       cambia a "Hola, {nombre}" si /api/yo.php devuelve una sesión activa. -->
+       El botón empieza en "Iniciar sesión" y pasa a "Hola, {nombre}" cuando
+       /api/yo.php confirma que hay sesión abierta. -->
   <div class="kv-header-acciones">
     <button type="button" class="kv-sesion" id="kvAbrirSesion">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
