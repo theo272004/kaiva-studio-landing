@@ -305,6 +305,84 @@ html {
   color: var(--violet);
 }
 
+/* ---- Cierre de las paginas de servicio --------------------------------
+   Las tres terminaban en "Otros servicios", que es un enlace cruzado: lo
+   ultimo que veia alguien despues de leerlo todo era una lista de otras
+   cosas que vendemos, sin un solo sitio donde decir "hablemos". Va antes del
+   cruce, no despues: primero se pregunta por lo que la persona vino a mirar,
+   y solo si no era eso se le ofrece lo demas.
+
+   Seccion clara, no oscura. La que la precede en las tres paginas ya es
+   oscura y la que sigue es violeta: meter un tercer bloque pesado entre las
+   dos habria dejado tres golpes seguidos sin aire. El peso lo lleva el boton
+   negro, que aqui es lo unico que tiene que destacar. */
+.cierre {
+  text-align: center;
+}
+
+.cierre-wrap {
+  max-width: 660px;
+}
+
+.cierre h2 {
+  margin-bottom: .9rem;
+}
+
+.cierre .desc {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cierre-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .7rem;
+  margin-top: 2rem;
+}
+
+/* WhatsApp con su verde y no con el negro de la marca: es el unico sitio de
+   la pagina donde el color dice de que canal se trata antes de leer la
+   palabra. Se queda de contorno para no competir con el boton principal. */
+.btn-wa {
+  border-color: rgba(37, 211, 102, .45);
+  color: #0f7a3d;
+  background: var(--surface);
+}
+
+.btn-wa:hover {
+  border-color: #25d366;
+  background: rgba(37, 211, 102, .07);
+  color: #0b5f2f;
+}
+
+.cierre-nota {
+  margin-top: 1.5rem;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+
+/* En el telefono los dos botones se apilaban con anchos distintos —211 y 255
+   px— y el de WhatsApp partia su texto en dos lineas. Uno debajo de otro y
+   descuadrados se ve como un error de maquetacion, no como una eleccion. A
+   todo el ancho quedan alineados y cada etiqueta cabe en su renglon. */
+@media (max-width: 560px) {
+  .cierre-acciones {
+    flex-direction: column;
+  }
+
+  .cierre-acciones .btn {
+    width: 100%;
+    justify-content: center;
+    /* El relleno lateral de 1.7rem existe para dar cuerpo a un boton que se
+       ajusta a su texto. Aqui el ancho ya lo fija el bloque, asi que solo
+       robaba 54px al renglon y hacia que "Escríbenos por WhatsApp" cayera en
+       dos lineas. */
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 /* El CTA del nav, oscuro — igual que en el home. Se queda negro siempre: en
    hover solo levanta, nunca cambia de color ni se vuelve violeta. */
 /* Negro de verdad, no --ink. --ink es #0f172a, un azul pizarra: al lado del
