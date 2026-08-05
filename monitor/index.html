@@ -77,7 +77,7 @@
   <!-- El resto del CSS de esta pagina vive en assets/monitor.css. Antes eran
        51 KB incrustados en el propio HTML: no se cacheaban y viajaban en cada
        visita. Arriba solo se queda el @font-face, que va con los preload. -->
-  <link rel="stylesheet" href="/assets/monitor.css?v=20260804b">
+  <link rel="stylesheet" href="/assets/monitor.css?v=20260805a">
 </head>
 
 <body>
@@ -889,6 +889,56 @@
         var fill = el('sliderFill'), node = el('sliderNode');
         if (fill) fill.style.width = score + '%';
         if (node) node.style.left = score + '%';
+
+        /* EL INFORME PASA A TENER DIRECCIÓN PROPIA.
+           Hasta aquí el panel vivía solo en memoria: refrescar, cerrar la
+           pestaña o pulsar atrás lo borraba, y no había forma de volver. El
+           backend siempre guardó el scan y devolvió su identificador; era el
+           front el que lo tiraba después de pedir la velocidad.
+
+           replaceState y no pushState: la persona no navegó a ningún sitio, se
+           le llenó la misma pantalla. Con pushState, "atrás" la devolvería al
+           formulario vacío en vez de sacarla de la herramienta, que es lo que
+           espera. */
+        scanIdActual = scan.scan_id || null;
+        if (scanIdActual && window.history && history.replaceState) {
+          try {
+            history.replaceState(null, '', location.pathname + '?s=' + scanIdActual);
+          } catch (e) { /* si el navegador se queja, el panel funciona igual */ }
+        }
+        mostrarAvisoTemporal(scan.guardado === true);
+      }
+
+      /* ---- Panel temporal: guardar y compartir ---------------------------
+         El diagnóstico ya está completo y sin candados, así que aquí no se
+         cambia información por un correo. Lo que se ofrece es que el análisis
+         no se pierda. Es una diferencia que se nota en el copy y que sostiene
+         la decisión del 23 de julio de no recortar el gratis. */
+      var scanIdActual = null;
+
+      function mostrarAvisoTemporal(yaGuardado) {
+        var aviso = document.getElementById('kvTemporal');
+        if (!aviso || !scanIdActual) return;
+        if (yaGuardado) {
+          /* Se llegó por enlace: el informe ya existe en la base, así que
+             "temporal" sería mentira. Se ofrece analizar otro sitio. */
+          confirmarGuardado('Este informe está guardado.',
+            'Puedes volver a este enlace cuando quieras.');
+          return;
+        }
+        aviso.hidden = false;
+      }
+
+      function confirmarGuardado(titulo, detalle) {
+        var aviso = document.getElementById('kvTemporal');
+        var formu = document.getElementById('kvGuardarForm');
+        if (formu) formu.hidden = true;
+        if (!aviso) return;
+        aviso.hidden = false;
+        aviso.classList.add('kv-temp-ok');
+        aviso.innerHTML = '<div class="kv-temp-txt"><b>' + titulo + '</b><span>' + detalle +
+          '</span></div><div class="kv-temp-acciones">' +
+          '<a class="kv-temp-link" href="' + location.pathname + '">Analizar otro sitio</a></div>';
       }
 
       /* Corre el análisis real contra el backend.
@@ -1004,6 +1054,139 @@
         })();
       });
 
+      /* ---- Guardar el análisis y volver a él ------------------------------
+         /api/lead.php existía desde el principio, ata un correo a un scan_id y
+         devuelve el mismo informe como confirmación. NADIE lo llamaba: el
+         único formulario de correo de la página mandaba a una hoja de Google y
+         a EmailJS, así que el lead quedaba fuera de la misma base donde vive
+         su análisis y el panel de conversión (scans contra leads) no podía
+         contar nada.
+
+         TODO ESTE BLOQUE VA DENTRO DE DOMContentLoaded, y no es un adorno: el
+         marcado de #kvGuardar, #kvTemporal y #kvGuardarForm vive dentro de
+         .tool-shell, que en el documento aparece DESPUÉS de este <script>
+         (arranca en la línea ~1267, este script cierra en la ~1263). Sin este
+         envoltorio, getElementById corre mientras el parser todavía no ha
+         llegado ahí, devuelve null, y cada `if (elemento)` de aquí abajo se
+         calla el fallo en silencio: los botones existen en pantalla pero
+         ningún clic hace nada. Se detectó así: `.click()` en una pestaña
+         limpia, sin errores de consola, sin ningún efecto — el síntoma exacto
+         de un listener que nunca se enganchó. */
+      document.addEventListener('DOMContentLoaded', function () {
+      var btnGuardar = document.getElementById('kvGuardar'),
+        cajaGuardar = document.getElementById('kvGuardarForm'),
+        leadForm = document.getElementById('kvLeadForm'),
+        leadMail = document.getElementById('kvLeadMail'),
+        leadBtn = document.getElementById('kvLeadBtn'),
+        leadErr = document.getElementById('kvLeadErr'),
+        btnCopiar = document.getElementById('kvCopiar');
+
+      if (btnGuardar && cajaGuardar) {
+        btnGuardar.addEventListener('click', function () {
+          cajaGuardar.hidden = false;
+          if (leadMail) leadMail.focus();
+        });
+      }
+
+      if (btnCopiar) {
+        btnCopiar.addEventListener('click', function (e) {
+          e.preventDefault();
+          var enlace = location.href;
+          var avisar = function () {
+            btnCopiar.textContent = 'Enlace copiado';
+            setTimeout(function () { btnCopiar.textContent = 'Copiar enlace'; }, 2200);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(enlace).then(avisar, function () {
+              /* Sin permiso de portapapeles (pasa en http y en algunos
+                 navegadores embebidos) se selecciona para copiar a mano, en
+                 vez de dejar el botón mudo. */
+              window.prompt('Copia el enlace de tu informe:', enlace);
+            });
+          } else {
+            window.prompt('Copia el enlace de tu informe:', enlace);
+          }
+        });
+      }
+
+      if (leadForm) {
+        leadForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (leadBtn.disabled) return;
+
+          var correo = (leadMail.value || '').trim();
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(correo)) {
+            leadErr.textContent = 'Escribe un correo válido.';
+            leadMail.focus();
+            return;
+          }
+          if (!scanIdActual) {
+            leadErr.textContent = 'No encontramos el análisis. Vuelve a correrlo.';
+            return;
+          }
+
+          leadErr.textContent = '';
+          leadBtn.disabled = true;
+          leadBtn.textContent = 'Guardando…';
+
+          fetch(API + '/lead.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ scan_id: scanIdActual, email: correo })
+          })
+            .then(function (r) { return r.json(); })
+            .then(function (res) {
+              if (!res.ok) throw new Error(res.error || 'no se pudo guardar');
+              confirmarGuardado('Análisis guardado.',
+                'Te lo mandamos a ' + correo + '. El enlace de esta página también funciona.');
+            })
+            .catch(function (err) {
+              console.error('[kaiva] guardar informe:', err);
+              leadErr.textContent = 'No pudimos guardarlo. Inténtalo de nuevo en un momento.';
+              leadBtn.disabled = false;
+              leadBtn.textContent = 'Guardar';
+            });
+        });
+      }
+
+      /* ---- Volver a un informe guardado -----------------------------------
+         Si la dirección trae ?s=, se pinta ese informe en vez de la pantalla
+         de bienvenida. Es lo que hace que el enlace se pueda compartir y
+         volver a abrir. Se ejecuta al final, cuando renderDashboard y sus
+         ayudantes ya están definidos. */
+      (function () {
+        var sid;
+        try { sid = new URLSearchParams(location.search).get('s'); } catch (e) { return; }
+        if (!sid || !/^[0-9a-f]{32}$/.test(sid)) return;
+
+        target.textContent = 'Abriendo tu informe guardado';
+        show(loading);
+        bar.style.width = '40%';
+        status.textContent = 'Recuperando el análisis...';
+
+        fetch(API + '/informe.php?s=' + encodeURIComponent(sid))
+          .then(function (r) { return r.json(); })
+          .then(function (inf) {
+            if (!inf.ok) throw new Error(inf.error || 'no se pudo abrir');
+            bar.style.width = '100%';
+            dominio = inf.domain;
+            renderDashboard(inf.domain, inf, null);
+          })
+          .catch(function (err) {
+            console.error('[kaiva] informe guardado:', err);
+            /* Un enlace roto no puede dejar a la persona mirando una barra de
+               progreso: se la devuelve al formulario con el motivo, y la URL
+               se limpia para que refrescar no repita el fallo. */
+            errEl.textContent = 'Ese informe ya no está disponible. Puedes correr el análisis otra vez.';
+            if (window.history && history.replaceState) {
+              try { history.replaceState(null, '', location.pathname); } catch (e) { }
+            }
+            show(welcome);
+          });
+      })();
+
+      }); // fin de DOMContentLoaded (guardar análisis + reabrir informe)
+
       /* ---- Lista de espera del Panel Pro ----
          El mismo formulario de antes, pero apuntando a lo único que sigue
          sin lanzarse. El diagnóstico ya está en línea: pedir el correo "para
@@ -1112,6 +1295,39 @@
             </span>
           </span>
           <span class="app-tag">Diagnóstico Digital</span>
+        </div>
+
+        <!-- Aviso de panel temporal.
+             Nace oculto y lo enciende el guion al pintar el informe, porque
+             hasta entonces no hay nada que guardar. Dice la verdad literal: el
+             panel se pinta en memoria y desaparece al cerrar la pestaña. Lo
+             que se ofrece a cambio del correo NO es información —el
+             diagnóstico ya está completo y sin candados— sino que el análisis
+             no se pierda y podamos avisar si algo cambia. -->
+        <div class="kv-temp" id="kvTemporal" hidden>
+          <div class="kv-temp-txt">
+            <b>Este panel es temporal.</b>
+            <span>Se borra al cerrar la pestaña. Guárdalo y te lo mandamos por correo para
+              que puedas volver.</span>
+          </div>
+          <div class="kv-temp-acciones">
+            <button type="button" class="kv-temp-btn" id="kvGuardar">Guardar análisis</button>
+            <a class="kv-temp-link" id="kvCopiar" href="#" role="button">Copiar enlace</a>
+          </div>
+        </div>
+
+        <!-- Formulario de guardado. Aparece al pulsar "Guardar análisis". -->
+        <div class="kv-temp kv-temp-form" id="kvGuardarForm" hidden>
+          <form id="kvLeadForm" class="kv-lead">
+            <label class="kv-lead-lbl" for="kvLeadMail">Tu correo</label>
+            <div class="kv-lead-row">
+              <input type="email" id="kvLeadMail" class="kv-lead-input" placeholder="tucorreo@empresa.com"
+                required autocomplete="email">
+              <button type="submit" class="kv-temp-btn" id="kvLeadBtn">Guardar</button>
+            </div>
+            <p class="kv-lead-nota">Te mandamos este informe y nada más. Sin tarjeta y sin registro.</p>
+            <p class="kv-lead-err" id="kvLeadErr" role="alert"></p>
+          </form>
         </div>
 
         <!-- App Grid (Sidebar + Panel Content) -->

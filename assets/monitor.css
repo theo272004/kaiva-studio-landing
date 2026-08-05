@@ -458,6 +458,157 @@
       letter-spacing: 0.05em;
     }
 
+    /* ---- Aviso de panel temporal --------------------------------------
+       Va entre la barra de la ventana y el panel, donde no se puede pasar por
+       alto pero tampoco tapa el resultado: lo primero que la persona quiere es
+       su puntaje, no que le pidan el correo. Franja ámbar y no violeta a
+       propósito — el violeta de marca es el acento de lo que funciona, y esto
+       es un aviso. */
+    .kv-temp {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: .9rem;
+      padding: .8rem clamp(.9rem, 2.5vw, 1.4rem);
+      background: #fffbeb;
+      border-bottom: 1px solid #fde68a;
+      font-size: 13px;
+    }
+
+    .kv-temp[hidden] {
+      display: none;
+    }
+
+    .kv-temp-txt b {
+      display: block;
+      font-weight: 700;
+      color: #78350f;
+      letter-spacing: -.01em;
+    }
+
+    .kv-temp-txt span {
+      color: #92400e;
+      line-height: 1.5;
+    }
+
+    .kv-temp-acciones {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      flex: none;
+    }
+
+    .kv-temp-btn {
+      border: 0;
+      cursor: pointer;
+      background: var(--ink);
+      color: #fff;
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: .55rem 1.1rem;
+      border-radius: 99px;
+      transition: transform .2s var(--ease), background .2s var(--ease);
+    }
+
+    .kv-temp-btn:hover {
+      transform: translateY(-1px);
+      background: #000;
+    }
+
+    .kv-temp-link {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #92400e;
+      text-decoration: none;
+      border-bottom: 1px dashed currentColor;
+    }
+
+    .kv-temp-link:hover {
+      color: #78350f;
+    }
+
+    /* El formulario de guardado reusa la misma franja. */
+    .kv-temp-form {
+      display: block;
+    }
+
+    .kv-lead-lbl {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #78350f;
+      margin-bottom: .35rem;
+    }
+
+    .kv-lead-row {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+
+    .kv-lead-input {
+      flex: 1 1 220px;
+      min-width: 0;
+      font-family: inherit;
+      font-size: 13.5px;
+      padding: .55rem .85rem;
+      border: 1.5px solid #fcd34d;
+      border-radius: 10px;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .kv-lead-input:focus {
+      outline: 2px solid var(--violet);
+      outline-offset: 1px;
+      border-color: transparent;
+    }
+
+    .kv-lead-nota {
+      margin-top: .45rem;
+      font-size: 11.5px;
+      color: #92400e;
+    }
+
+    .kv-lead-err {
+      margin-top: .35rem;
+      font-size: 12px;
+      font-weight: 600;
+      color: #b91c1c;
+      min-height: 1em;
+    }
+
+    /* Confirmación: la franja se vuelve verde y pierde los botones. */
+    .kv-temp.kv-temp-ok {
+      background: #ecfdf5;
+      border-bottom-color: #a7f3d0;
+    }
+
+    .kv-temp.kv-temp-ok .kv-temp-txt b {
+      color: #065f46;
+    }
+
+    .kv-temp.kv-temp-ok .kv-temp-txt span {
+      color: #047857;
+    }
+
+    @media (max-width: 620px) {
+      .kv-temp {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .kv-temp-acciones {
+        width: 100%;
+      }
+
+      .kv-temp-btn {
+        flex: 1;
+      }
+    }
+
     .app-grid {
       display: grid;
       grid-template-columns: 220px 1fr;
