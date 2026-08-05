@@ -128,8 +128,17 @@
         <p class="kv-sesion-sub">Entra a la cuenta donde guardaste tus análisis.</p>
         <form id="kvSesionForm" class="kv-lead">
           <label class="kv-lead-lbl" for="kvSesionCorreo">Correo</label>
-          <input type="email" id="kvSesionCorreo" class="kv-lead-input" placeholder="tucorreo@empresa.com" required
-            autocomplete="email" style="width:100%; margin-bottom:.7rem;">
+          <!-- type="text", no "email", a proposito. Por esta puerta entran dos
+               llaves: la cuenta de cliente (un correo) y el acceso de equipo
+               (un usuario, que no lleva arroba). Con type="email" el navegador
+               frenaba el segundo antes de que el formulario llegara a enviarse
+               —"incluye un signo @"— y no habia forma de entrar al panel.
+               inputmode="email" conserva el teclado con @ en el movil, y el
+               registro de cuentas (kvCuentaCorreo) sigue siendo type="email",
+               que ahi si tiene que ser un correo de verdad. -->
+          <input type="text" id="kvSesionCorreo" class="kv-lead-input" placeholder="tucorreo@empresa.com" required
+            inputmode="email" autocapitalize="none" spellcheck="false"
+            autocomplete="username" style="width:100%; margin-bottom:.7rem;">
           <label class="kv-lead-lbl" for="kvSesionClave">Contraseña</label>
           <input type="password" id="kvSesionClave" class="kv-lead-input" placeholder="Tu contraseña" required
             autocomplete="current-password" style="width:100%;">
