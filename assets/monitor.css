@@ -2911,7 +2911,7 @@
       background: var(--surface);
       border: 1px solid var(--line-strong);
       border-radius: 18px;
-      padding: .55rem .55rem .55rem 1.1rem;
+      padding: .5rem .5rem .5rem 1.2rem;
       box-shadow: var(--shadow-md);
       max-width: 600px;
       transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
@@ -2929,15 +2929,29 @@
       place-items: center;
     }
 
+    /* Sin la etiqueta encima, el campo es una sola fila: globo, texto y
+       boton. Ya no hay dos lineas que alinear entre si, que era el origen del
+       descuadre. El texto se queda a la izquierda porque un dominio se
+       escribe de izquierda a derecha y verlo saltar mientras se teclea (que
+       es lo que hace un input centrado) marea. */
     .kv-field-in {
       flex: 1;
       min-width: 0;
-      /* El hero es centrado y ese text-align se colaba aqui dentro: la
-         etiqueta salia centrada y el campo alineado a la izquierda, con lo
-         que "Ingresa tu dominio" y "ej: tudominio.com" quedaban desalineados
-         entre si. Un campo de formulario se lee de izquierda a derecha
-         aunque el bloque que lo contiene este centrado. */
       text-align: left;
+    }
+
+    /* Visible solo para lectores de pantalla. El campo necesita nombre
+       aunque no se dibuje. */
+    .kv-solo-lectores {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      border: 0;
     }
 
     .kv-field-in label {
@@ -2954,7 +2968,7 @@
       outline: 0;
       background: transparent;
       font-family: var(--sans);
-      font-size: .82rem;
+      font-size: .95rem;
       color: var(--ink);
       padding: 0;
       margin-top: 1px;
