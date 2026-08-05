@@ -45,6 +45,19 @@
   --r-btn: 99px;
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   --shadow-md: 0 12px 36px rgba(15, 23, 42, 0.05), 0 2px 8px rgba(15, 23, 42, 0.02);
+
+  /* Mismo vocabulario premium que assets/monitor.css — radios ajustados,
+     sombra en capas teñida de tinta, curva de salida seca. Medido contra
+     attio.com el 2026-08-05, no adivinado. Sirve para cualquier tarjeta de
+     "chrome" (paneles, diagnósticos) que aparezca en las páginas de
+     marketing, no solo en la herramienta. */
+  --r-ui: 10px;
+  --r-ui-lg: 12px;
+  --ease-ui: cubic-bezier(0.2, 0, 0, 1);
+  --shadow-ui:
+    0 0 0 1px rgba(0, 22, 62, .04),
+    0 4px 12px -1px rgba(0, 22, 62, .05),
+    0 1px 3px -1px rgba(0, 22, 62, .09);
 }
 
 * {

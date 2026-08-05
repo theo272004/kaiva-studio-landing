@@ -50,7 +50,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260805a">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260805b">
 
   <script type="application/ld+json">
 {
@@ -594,6 +594,189 @@
       }
     }
 
+    /* ---- El problema: robot + tarjeta de diagnóstico ----------------------
+       Antes esta sección era solo texto sobre fondo oscuro. El robot es
+       Mora, el mismo que ya analiza en /monitor — no una mascota nueva — y
+       la tarjeta usa el vocabulario premium (--r-ui-lg, --shadow-ui) que
+       hoy también vive en pagina.css. La tarjeta es una "isla clara" dentro
+       de la sección oscura: sus colores se fijan aquí mismo, sin depender de
+       --ink/--surface (que dentro de .section--dark significan blanco), por
+       la misma razón que ya obligó a .section--dark .serv-card en
+       pagina.css: una tarjeta blanca con texto blanco se borra sola. */
+    .dw-problema {
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+      gap: clamp(2.5rem, 6vw, 5rem);
+      align-items: center;
+    }
+
+    .dw-problema-visual {
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      min-height: 340px;
+    }
+
+    .dw-problema-robot {
+      width: clamp(130px, 26vw, 210px);
+      height: auto;
+      position: relative;
+      z-index: 1;
+      margin-right: -34px;
+      margin-bottom: 1.2rem;
+      filter: drop-shadow(0 18px 30px rgba(0, 0, 0, .4));
+    }
+
+    .dw-diag-card {
+      position: relative;
+      z-index: 2;
+      width: min(300px, 88%);
+      margin-left: auto;
+      background: #ffffff;
+      border-radius: var(--r-ui-lg);
+      box-shadow: 0 30px 60px -16px rgba(0, 0, 0, .45), var(--shadow-ui);
+      padding: 1.15rem 1.3rem 1.35rem;
+    }
+
+    .dw-diag-head {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: #64748b;
+    }
+
+    .dw-diag-head--despues {
+      margin-top: .95rem;
+      padding-top: .9rem;
+      border-top: 1px dashed #e2e8f0;
+    }
+
+    .dw-diag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex: none;
+    }
+
+    .dw-diag-dot--antes {
+      background: #ef4444;
+    }
+
+    .dw-diag-dot--despues {
+      background: #10b981;
+    }
+
+    .dw-diag-lista {
+      list-style: none;
+      display: grid;
+      gap: .4rem;
+      margin: .55rem 0 0;
+    }
+
+    .dw-diag-lista li {
+      position: relative;
+      padding-left: 1.2rem;
+      font-size: 12.5px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .dw-diag-lista li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: .48em;
+      width: 7px;
+      height: 7px;
+    }
+
+    .dw-diag-lista--antes li {
+      /* #94a3b8 medía 2,56:1 sobre blanco — muy por debajo de AA. El "antes"
+         tiene que verse apagado frente al "después", pero apagado no puede
+         significar invisible. #475569 es --ink-soft, el mismo gris que usa
+         el sitio entero para texto secundario y que ya se sabe que pasa. La
+         diferenciación visual sigue viviendo en el punto: rojo cuadrado vs
+         verde redondo, no en cuánto se lee el texto. */
+      color: #475569;
+    }
+
+    .dw-diag-lista--antes li::before {
+      border-radius: 2px;
+      background: #fca5a5;
+    }
+
+    .dw-diag-lista--despues li {
+      color: #0f172a;
+    }
+
+    .dw-diag-lista--despues li::before {
+      border-radius: 50%;
+      background: #10b981;
+    }
+
+    .dw-problema-texto .prosa {
+      margin-top: 1rem;
+    }
+
+    .dw-feat-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .dw-feat svg {
+      color: var(--violet);
+      margin-bottom: .55rem;
+    }
+
+    .dw-feat b {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -.01em;
+      margin-bottom: .2rem;
+    }
+
+    .dw-feat span {
+      display: block;
+      font-size: 12px;
+      color: var(--ink-soft);
+      line-height: 1.45;
+    }
+
+    @media (max-width: 900px) {
+      .dw-problema {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .dw-problema-visual {
+        max-width: 360px;
+        margin: 0 auto 1.2rem;
+        min-height: 300px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .dw-feat-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 420px) {
+      .dw-feat-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
   </style>
 </head>
 
@@ -662,18 +845,91 @@
 
 </section>
 
+    <!-- Diagnóstico visual: un robot (Mora, el mismo que analiza en
+         kaivastudio.com/monitor — no es un mascota nueva) junto a una
+         tarjeta de antes/después. El contenido de la tarjeta no se inventó:
+         son las mismas cuatro promesas de la fila de abajo, y esas cuatro son
+         una versión corta de lo que ya se explica en detalle en "Todo lo que
+         necesitas" (#incluye) más adelante en esta misma página. No hay ni un
+         dato, cifra o marca que no esté respaldado en otra parte del sitio. -->
     <section class="section section--dark">
-      <div class="wrap">
-        <h2 class="sec-head">Una web bonita que no <span class="marca">vende</span> no sirve de
-          nada<span class="dot">.</span></h2>
-        <div class="prosa">
-          <p>La mayoría de las páginas de empresa en Colombia tienen el mismo problema: se ven bien
-            en la pantalla del diseñador y no hacen nada por el negocio. Cargan lento en datos
-            móviles, no explican con claridad a qué se dedica la empresa, y no le dicen al visitante
-            qué hacer después.</p>
-          <p>Nosotros empezamos al revés. Primero entendemos <strong>qué tiene que pasar para que tu
-              negocio gane un cliente</strong>, y a partir de ahí diseñamos la estructura. El diseño
-            viene después, al servicio de esa estructura — no al contrario.</p>
+      <div class="wrap dw-problema">
+        <div class="dw-problema-visual">
+          <img src="/assets/KaivaMora1.webp" alt="" class="dw-problema-robot" width="800" height="609"
+            loading="lazy" decoding="async">
+          <div class="dw-diag-card">
+            <div class="dw-diag-head">
+              <span class="dw-diag-dot dw-diag-dot--antes"></span>
+              Sin Kaiva
+            </div>
+            <ul class="dw-diag-lista dw-diag-lista--antes">
+              <li>Carga lenta en el celular</li>
+              <li>No dice a qué te dedicas</li>
+              <li>Sin ruta clara al contacto</li>
+              <li>Se ve distinto en cada pantalla</li>
+            </ul>
+            <div class="dw-diag-head dw-diag-head--despues">
+              <span class="dw-diag-dot dw-diag-dot--despues"></span>
+              Con Kaiva
+            </div>
+            <ul class="dw-diag-lista dw-diag-lista--despues">
+              <li>Carga en segundos</li>
+              <li>Dice qué haces y para quién</li>
+              <li>Un camino claro hasta escribirte</li>
+              <li>Se ve bien en cualquier pantalla</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="dw-problema-texto">
+          <span class="inc-kicker">El problema</span>
+          <h2>Una web bonita que no <span class="marca">vende</span> no sirve de
+            nada<span class="dot">.</span></h2>
+          <div class="prosa">
+            <p>La mayoría de las páginas de empresa en Colombia tienen el mismo problema: se ven bien
+              en la pantalla del diseñador y no hacen nada por el negocio. Cargan lento en datos
+              móviles, no explican con claridad a qué se dedica la empresa, y no le dicen al
+              visitante qué hacer después.</p>
+            <p>Nosotros empezamos al revés. Primero entendemos <strong>qué tiene que pasar para que
+                tu negocio gane un cliente</strong>, y a partir de ahí diseñamos la estructura. El
+              diseño viene después, al servicio de esa estructura — no al contrario.</p>
+          </div>
+
+          <div class="dw-feat-row">
+            <div class="dw-feat">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" />
+              </svg>
+              <b>Carga rápida</b>
+              <span>Optimizada para datos móviles, no en teoría.</span>
+            </div>
+            <div class="dw-feat">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+              <b>Mensaje claro</b>
+              <span>Dice a qué te dedicas y para quién, sin rodeos.</span>
+            </div>
+            <div class="dw-feat">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+              <b>SEO técnico</b>
+              <span>Google puede leerte desde el primer día.</span>
+            </div>
+            <div class="dw-feat">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 20V10M12 20V4M6 20v-6" />
+              </svg>
+              <b>Diseñada para convertir</b>
+              <span>Cada sección lleva a una decisión.</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
