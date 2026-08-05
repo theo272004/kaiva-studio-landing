@@ -77,7 +77,7 @@
   <!-- El resto del CSS de esta pagina vive en assets/monitor.css. Antes eran
        51 KB incrustados en el propio HTML: no se cacheaban y viajaban en cada
        visita. Arriba solo se queda el @font-face, que va con los preload. -->
-  <link rel="stylesheet" href="/assets/monitor.css?v=20260805d">
+  <link rel="stylesheet" href="/assets/monitor.css?v=20260805e">
 </head>
 
 <body>
@@ -314,108 +314,207 @@
            debajo del hero, en vez de competir con el campo del dominio.
            Sigue siendo un EJEMPLO y lo dice su etiqueta. -->
         <!-- Columna derecha: panel de ejemplo -->
-        <div class="kv-preview" aria-hidden="true">
-          <div class="kv-pv-head">
-            <b>Índice de Salud Digital</b>
-            <span class="kv-pv-tag">Ejemplo</span>
+      <!-- ===== Recorrido de la herramienta, guiado por scroll =====
+           Sustituye al panel de ejemplo estatico.
+
+           COMO FUNCIONA, y por que asi: el panel queda fijo (sticky) mientras
+           los pasos de texto pasan por al lado; un IntersectionObserver marca
+           cual esta a la vista y el panel cambia de vista. Todo es DOM real
+           -texto, SVG, CSS-, no un video ni una imagen: pesa nada, se lee en
+           un lector de pantalla, y actualizarlo cuando cambie la herramienta
+           es editar HTML, no volver a grabar y exportar.
+
+           LAS TRES VISTAS SON LAS QUE EXISTEN DE VERDAD: Resumen, Pilares y
+           Hallazgos. El panel real no tiene mas (Competencia e Historial estan
+           con candado), y ensenar pestanas que no existen seria prometer
+           producto que no hay. Cuando la herramienta crezca, se anaden aqui. -->
+      <section class="kv-tour" aria-label="Recorrido por la herramienta">
+        <div class="kv-tour-grid">
+
+          <!-- Los pasos: el texto que explica cada vista -->
+          <div class="kv-tour-pasos">
+            <p class="kv-tour-intro">Esto es lo que recibes</p>
+
+            <article class="kv-paso" data-vista="resumen">
+              <span class="kv-paso-num">01</span>
+              <h3>Tu puntaje, y que atender primero</h3>
+              <p>Un solo numero del 0 al 100 que resume las cuatro areas, con la lista de
+                oportunidades ordenada por lo que mas te esta costando hoy.</p>
+            </article>
+
+            <article class="kv-paso" data-vista="pilares">
+              <span class="kv-paso-num">02</span>
+              <h3>De donde sale ese numero</h3>
+              <p>Los cuatro pilares por separado, con el peso que tiene cada uno en la
+                formula. Operacion pesa 40% porque es lo que menos se ve y mas cuesta.</p>
+            </article>
+
+            <article class="kv-paso" data-vista="hallazgos">
+              <span class="kv-paso-num">03</span>
+              <h3>Cada hallazgo, con su evidencia</h3>
+              <p>Que pasa, por que paso, que te esta costando y que hacer. Con el dato
+                crudo que lo prueba, para que lo puedas verificar por tu cuenta.</p>
+            </article>
           </div>
 
-          <div class="kv-pv-score">
-            <div class="kv-ring-wrap">
-              <svg viewBox="0 0 36 36">
-                <circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(15,23,42,.07)" stroke-width="3.4" />
-                <circle cx="18" cy="18" r="15.5" fill="none" stroke="url(#kvGradInk)" stroke-width="3.4"
-                  stroke-linecap="round" pathLength="100" stroke-dasharray="71 100" />
-                <defs>
-                  <linearGradient id="kvGradInk" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#334155" />
-                    <stop offset="100%" stop-color="#0f172a" />
-                  </linearGradient>
-                </defs>
-              </svg>
-              <div>
-                <div class="kv-ring-num">71</div>
-                <div class="kv-ring-sub">de 100</div>
+          <!-- El panel que se queda fijo y va cambiando -->
+          <div class="kv-tour-sticky">
+            <div class="kv-app-demo" aria-hidden="true">
+              <div class="kv-app-bar">
+                <i></i><i></i><i></i>
+                <span class="kv-app-dom">tudominio.com</span>
+                <span class="kv-app-tag">Ejemplo</span>
+              </div>
+
+              <div class="kv-app-cuerpo">
+                <nav class="kv-app-side">
+                  <span class="kv-app-item" data-item="resumen">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                      <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                      <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                      <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                    </svg>
+                    Resumen
+                  </span>
+                  <span class="kv-app-item" data-item="pilares">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M12 3v9l6.5 3.8" />
+                    </svg>
+                    Pilares
+                  </span>
+                  <span class="kv-app-item" data-item="hallazgos">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="11" cy="11" r="7" />
+                      <path d="m20 20-3.6-3.6" />
+                    </svg>
+                    Hallazgos
+                  </span>
+                </nav>
+
+                <div class="kv-app-vista">
+
+                  <!-- VISTA 1: Resumen -->
+                  <div class="kv-vista" data-vista="resumen">
+                    <div class="kv-vista-tit">Indice de Salud Digital</div>
+                    <div class="kv-score-fila">
+                      <b class="kv-score-num">71</b>
+                      <span class="kv-score-de">/100</span>
+                      <span class="kv-score-chip">Bien</span>
+                    </div>
+                    <div class="kv-score-barra"><i></i></div>
+                    <div class="kv-vista-sub">Oportunidades de crecimiento</div>
+                    <div class="kv-op">
+                      <span class="kv-op-pt kv-op-alto"></span>
+                      <span><b>Operacion &middot; 58/100</b><s>2 hallazgos &middot; correo y sistemas</s></span>
+                    </div>
+                    <div class="kv-op">
+                      <span class="kv-op-pt kv-op-medio"></span>
+                      <span><b>Visibilidad &middot; 64/100</b><s>2 hallazgos &middot; que Google y las IA te encuentren</s></span>
+                    </div>
+                    <div class="kv-op">
+                      <span class="kv-op-pt kv-op-bajo"></span>
+                      <span><b>Imagen &middot; 82/100</b><s>1 hallazgo &middot; como te ve quien llega</s></span>
+                    </div>
+                  </div>
+
+                  <!-- VISTA 2: Pilares -->
+                  <div class="kv-vista" data-vista="pilares">
+                    <div class="kv-vista-tit">Tus cuatro pilares</div>
+                    <div class="kv-anillos">
+                      <div class="kv-anillo">
+                        <svg viewBox="0 0 36 36">
+                          <circle class="kv-a-track" cx="18" cy="18" r="15.5" />
+                          <circle class="kv-a-fill" cx="18" cy="18" r="15.5" pathLength="100"
+                            style="stroke-dashoffset:36" />
+                        </svg>
+                        <b>64</b>
+                        <span>Visibilidad</span>
+                        <s>20%</s>
+                      </div>
+                      <div class="kv-anillo">
+                        <svg viewBox="0 0 36 36">
+                          <circle class="kv-a-track" cx="18" cy="18" r="15.5" />
+                          <circle class="kv-a-fill" cx="18" cy="18" r="15.5" pathLength="100"
+                            style="stroke-dashoffset:18" />
+                        </svg>
+                        <b>82</b>
+                        <span>Imagen</span>
+                        <s>25%</s>
+                      </div>
+                      <div class="kv-anillo">
+                        <svg viewBox="0 0 36 36">
+                          <circle class="kv-a-track" cx="18" cy="18" r="15.5" />
+                          <circle class="kv-a-fill" cx="18" cy="18" r="15.5" pathLength="100"
+                            style="stroke-dashoffset:10" />
+                        </svg>
+                        <b>90</b>
+                        <span>Confianza</span>
+                        <s>15%</s>
+                      </div>
+                      <div class="kv-anillo">
+                        <svg viewBox="0 0 36 36">
+                          <circle class="kv-a-track" cx="18" cy="18" r="15.5" />
+                          <circle class="kv-a-fill" cx="18" cy="18" r="15.5" pathLength="100"
+                            style="stroke-dashoffset:42" />
+                        </svg>
+                        <b>58</b>
+                        <span>Operacion</span>
+                        <s>40%</s>
+                      </div>
+                    </div>
+                    <div class="kv-vista-pie">Operacion pesa 40%: es lo que el dueno no puede ver mirando su
+                      propia web.</div>
+                  </div>
+
+                  <!-- VISTA 3: Hallazgos -->
+                  <div class="kv-vista" data-vista="hallazgos">
+                    <div class="kv-vista-tit">Hallazgos</div>
+                    <div class="kv-hall kv-hall-abierto">
+                      <div class="kv-hall-cab">
+                        <span class="kv-hall-ic kv-hall-alto">!</span>
+                        <b>Cualquiera puede enviar correos haciendose pasar por tu empresa</b>
+                        <span class="kv-hall-sev">Alto</span>
+                      </div>
+                      <div class="kv-hall-cuerpo">
+                        <span class="kv-hall-lbl">Que te esta costando</span>
+                        <span class="kv-hall-txt">Sin DMARC, alguien puede escribirle a tus clientes desde
+                          una direccion que parece tuya.</span>
+                        <div class="kv-hall-accion">
+                          <span class="kv-hall-lbl">Que hacer</span>
+                          <span class="kv-hall-txt">Publicar un registro DMARC en el DNS del dominio.</span>
+                          <span class="kv-hall-meta">Esta semana &middot; lo hace quien te maneja el dominio</span>
+                        </div>
+                        <span class="kv-hall-ev">Evidencia &middot; _dmarc.tudominio.com &rarr; sin registro</span>
+                      </div>
+                    </div>
+                    <div class="kv-hall">
+                      <div class="kv-hall-cab">
+                        <span class="kv-hall-ic kv-hall-medio">!</span>
+                        <b>Ni Google ni la IA saben que es tu negocio</b>
+                        <span class="kv-hall-sev kv-sev-medio">Medio</span>
+                      </div>
+                    </div>
+                    <div class="kv-hall">
+                      <div class="kv-hall-cab">
+                        <span class="kv-hall-ic kv-hall-medio">!</span>
+                        <b>Tu web es lenta en celular</b>
+                        <span class="kv-hall-sev kv-sev-medio">Medio</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
               </div>
             </div>
-            <div class="kv-pv-msg">
-              <b>Te ves bien, pero por dentro estás expuesto.</b>
-              <p>Tu imagen y tu confianza están sólidas. La operación es la que arrastra el puntaje: sin DMARC,
-                cualquiera puede enviar correos haciéndose pasar por tu dominio.</p>
-            </div>
           </div>
 
-          <!-- Los pesos son los que usa de verdad el backend (operación 40,
-               imagen 25, visibilidad 20, confianza 15). Decían 35/15/50 sobre
-               tres pilares, de cuando visibilidad no existía: el ejemplo
-               prometía un reparto distinto al que devuelve el análisis. -->
-          <div class="kv-pv-pillars">
-            <div class="kv-pill">
-              <u>Visibilidad <em>20%</em></u>
-              <b>64<s>/100</s></b>
-              <div class="kv-pill-bar"><i style="width:64%"></i></div>
-            </div>
-            <div class="kv-pill">
-              <u>Imagen <em>25%</em></u>
-              <b>82<s>/100</s></b>
-              <div class="kv-pill-bar"><i style="width:82%"></i></div>
-            </div>
-            <div class="kv-pill">
-              <u>Confianza <em>15%</em></u>
-              <b>90<s>/100</s></b>
-              <div class="kv-pill-bar"><i style="width:90%"></i></div>
-            </div>
-            <div class="kv-pill">
-              <u>Operación <em>40%</em></u>
-              <b>58<s>/100</s></b>
-              <div class="kv-pill-bar"><i style="width:58%"></i></div>
-            </div>
-          </div>
-
-          <div class="kv-pv-find">
-            <b>Hallazgos principales</b>
-            <ul>
-              <li>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.6"
-                  stroke-linecap="round">
-                  <circle cx="12" cy="12" r="9" />
-                  <path d="M12 7v6M12 16.5v.01" />
-                </svg>
-                Sin registro DMARC: pueden suplantar tu correo
-              </li>
-              <li>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.6"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" />
-                  <path d="M12 9v4M12 17h.01" />
-                </svg>
-                SPF permisivo (~all): filtra poco
-              </li>
-              <li>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="9" />
-                  <path d="M8.5 12.2l2.4 2.4 4.6-4.8" />
-                </svg>
-                Certificado SSL válido y vigente
-              </li>
-            </ul>
-            <!-- Aquí había un candado que decía "9 hallazgos más en el reporte
-                 completo". Prometía un muro de pago que el backend no tiene:
-                 scan.php entrega TODOS los hallazgos y devuelve
-                 findings_locked = 0 siempre, por la decisión del 23 de julio de
-                 no recortar el diagnóstico. El candado hacía dos daños a la vez:
-                 le decía al visitante que le escondemos algo, y a quien llegaba
-                 al resultado le sobraba una promesa que ya se había cumplido. -->
-            <div class="kv-unlocked">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-              Y los demás hallazgos, con su evidencia al lado
-            </div>
-          </div>
         </div>
+      </section>
 
       </div>
 
@@ -2182,6 +2281,48 @@
     })();
   </script>
 
+
+  <!-- Recorrido guiado por scroll: sincroniza el paso que estás leyendo con
+       la vista que muestra el panel fijo de al lado.
+
+       IntersectionObserver y no un listener de scroll: el navegador avisa
+       cuando un elemento entra en una franja, sin que nosotros midamos
+       posiciones en cada fotograma. Un listener de scroll haciendo
+       getBoundingClientRect() sobre cada paso es justo la clase de código que
+       hace que una página vaya a tirones en un móvil de gama media, que es
+       con lo que entra la mayoría.
+
+       rootMargin recorta la franja de deteccion a la banda central de la
+       pantalla: asi el cambio ocurre cuando el paso esta de verdad en el
+       centro de la lectura, no cuando asoma por abajo. -->
+  <script>
+    (function () {
+      var pasos = [].slice.call(document.querySelectorAll('.kv-paso'));
+      if (!pasos.length || !('IntersectionObserver' in window)) return;
+
+      var vistas = [].slice.call(document.querySelectorAll('.kv-vista'));
+      var items = [].slice.call(document.querySelectorAll('.kv-app-item'));
+
+      function activar(nombre) {
+        pasos.forEach(function (p) { p.classList.toggle('on', p.dataset.vista === nombre); });
+        vistas.forEach(function (v) { v.classList.toggle('on', v.dataset.vista === nombre); });
+        items.forEach(function (i) { i.classList.toggle('on', i.dataset.item === nombre); });
+      }
+
+      /* La primera nace activa: si la seccion entra en pantalla ya empezada
+         (por ejemplo al volver con el boton atras), el panel no puede quedarse
+         en blanco esperando a que alguien haga scroll. */
+      activar('resumen');
+
+      var obs = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (e) {
+          if (e.isIntersecting) activar(e.target.dataset.vista);
+        });
+      }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+
+      pasos.forEach(function (p) { obs.observe(p); });
+    })();
+  </script>
 
   <!-- Si llegas desde el home con el dominio ya escrito (/monitor/?d=...),
        el campo aparece lleno para no tener que escribirlo dos veces. -->

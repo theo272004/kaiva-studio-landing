@@ -3369,3 +3369,509 @@
         padding-right: 0;
       }
     }
+
+    /* ============================================================
+       RECORRIDO POR LA HERRAMIENTA, GUIADO POR SCROLL
+       ============================================================
+       Tecnica investigada sobre attio.com el 2026-08-05: su demo del hero NO
+       es un video, ni un canvas, ni una imagen. Son ~840 nodos de DOM con el
+       texto real de la app dentro de un contenedor sticky, y el contenido va
+       cambiando conforme bajas. Comprobado midiendo: en scroll 0 mostraba una
+       vista y en scroll 600 el texto y el numero de nodos habian cambiado.
+
+       Se replica igual, y por las mismas ventajas: pesa una fraccion de lo
+       que pesaria un video, se puede leer y traducir, y actualizarlo cuando
+       cambie la herramienta es editar HTML en vez de volver a grabar. */
+
+    .kv-tour {
+      max-width: 1180px;
+      margin: clamp(3rem, 8vw, 6rem) auto 0;
+    }
+
+    .kv-tour-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: start;
+      text-align: left;
+    }
+
+    .kv-tour-intro {
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Cada paso ocupa casi una pantalla: es lo que le da recorrido al scroll
+       sin que el panel salte de vista en vista de golpe. */
+    .kv-paso {
+      min-height: 62vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: .35;
+      transition: opacity .45s var(--ease);
+    }
+
+    .kv-paso.on {
+      opacity: 1;
+    }
+
+    .kv-paso-num {
+      font-family: var(--display);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      color: var(--violet);
+      margin-bottom: .6rem;
+    }
+
+    .kv-paso h3 {
+      font-family: var(--display);
+      font-size: clamp(1.25rem, 2.6vw, 1.7rem);
+      font-weight: 800;
+      letter-spacing: -.025em;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: .7rem;
+    }
+
+    .kv-paso p {
+      font-size: .97rem;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 42ch;
+    }
+
+    .kv-tour-sticky {
+      position: sticky;
+      top: 96px;
+    }
+
+    /* ---- La ventana de la app ---- */
+    .kv-app-demo {
+      border: 1px solid var(--line-strong);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--surface);
+      box-shadow: var(--shadow-ui), 0 30px 70px -30px rgba(15, 23, 42, .35);
+    }
+
+    .kv-app-bar {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .6rem .85rem;
+      background: #fafafa;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .kv-app-bar i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, .13);
+    }
+
+    .kv-app-dom {
+      margin-left: .6rem;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--ink-soft);
+    }
+
+    .kv-app-tag {
+      margin-left: auto;
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--violet);
+      background: var(--violet-soft);
+      padding: .2rem .5rem;
+      border-radius: 99px;
+    }
+
+    .kv-app-cuerpo {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      min-height: 330px;
+    }
+
+    .kv-app-side {
+      border-right: 1px solid var(--line);
+      padding: .7rem .5rem;
+      display: flex;
+      flex-direction: column;
+      gap: .15rem;
+      background: #fcfcfd;
+    }
+
+    .kv-app-item {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .45rem .55rem;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-faint);
+      transition: background .3s var(--ease), color .3s var(--ease);
+    }
+
+    .kv-app-item.on {
+      background: var(--violet-soft);
+      color: var(--violet);
+    }
+
+    .kv-app-vista {
+      position: relative;
+      padding: 1rem 1.1rem;
+    }
+
+    /* Las vistas se apilan en la misma celda y solo una es visible: asi la
+       ventana no cambia de alto al pasar de una a otra, que es lo que haria
+       saltar la pagina entera estando el panel sticky. */
+    .kv-vista {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: opacity .4s var(--ease), transform .4s var(--ease), visibility .4s;
+    }
+
+    .kv-vista:not(:first-child) {
+      position: absolute;
+      inset: 1rem 1.1rem auto;
+    }
+
+    .kv-vista.on {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+
+    .kv-vista-tit {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: .7rem;
+    }
+
+    .kv-vista-sub {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin: 1.1rem 0 .55rem;
+    }
+
+    .kv-vista-pie {
+      font-size: 11px;
+      color: var(--ink-faint);
+      line-height: 1.5;
+      margin-top: .9rem;
+      padding-top: .7rem;
+      border-top: 1px solid var(--line);
+    }
+
+    /* Resumen */
+    .kv-score-fila {
+      display: flex;
+      align-items: baseline;
+      gap: .35rem;
+    }
+
+    .kv-score-num {
+      font-family: var(--display);
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1;
+      color: var(--ink);
+    }
+
+    .kv-score-de {
+      font-size: .9rem;
+      color: var(--ink-faint);
+    }
+
+    .kv-score-chip {
+      margin-left: .4rem;
+      font-size: 10px;
+      font-weight: 800;
+      color: #047857;
+      background: var(--green-soft);
+      padding: .2rem .5rem;
+      border-radius: 99px;
+    }
+
+    .kv-score-barra {
+      height: 6px;
+      border-radius: 99px;
+      background: #f1f5f9;
+      margin-top: .7rem;
+      overflow: hidden;
+    }
+
+    .kv-score-barra i {
+      display: block;
+      height: 100%;
+      width: 71%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--violet), var(--violet-2));
+    }
+
+    .kv-op {
+      display: flex;
+      align-items: flex-start;
+      gap: .5rem;
+      padding: .45rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .kv-op:last-child {
+      border-bottom: none;
+    }
+
+    .kv-op-pt {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      margin-top: .38em;
+      flex: none;
+    }
+
+    .kv-op-alto {
+      background: var(--red);
+    }
+
+    .kv-op-medio {
+      background: var(--amber);
+    }
+
+    .kv-op-bajo {
+      background: var(--green);
+    }
+
+    .kv-op b {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .kv-op s {
+      display: block;
+      text-decoration: none;
+      font-size: 11px;
+      color: var(--ink-soft);
+    }
+
+    /* Pilares */
+    .kv-anillos {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .5rem;
+    }
+
+    .kv-anillo {
+      text-align: center;
+      position: relative;
+    }
+
+    .kv-anillo svg {
+      width: 100%;
+      max-width: 62px;
+      display: block;
+      margin: 0 auto;
+      transform: rotate(-90deg);
+    }
+
+    .kv-a-track {
+      fill: none;
+      stroke: #f1f5f9;
+      stroke-width: 3.4;
+    }
+
+    .kv-a-fill {
+      fill: none;
+      stroke: var(--violet);
+      stroke-width: 3.4;
+      stroke-linecap: round;
+      stroke-dasharray: 100 100;
+      transition: stroke-dashoffset 1.1s var(--ease);
+    }
+
+    .kv-anillo b {
+      display: block;
+      margin-top: -2.4rem;
+      margin-bottom: 1.4rem;
+      font-family: var(--display);
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .kv-anillo span {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .kv-anillo s {
+      display: block;
+      text-decoration: none;
+      font-size: 10px;
+      color: var(--violet);
+      font-weight: 700;
+    }
+
+    /* Hallazgos */
+    .kv-hall {
+      border-bottom: 1px solid var(--line);
+      padding: .55rem 0;
+    }
+
+    .kv-hall:last-child {
+      border-bottom: none;
+    }
+
+    .kv-hall-cab {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .kv-hall-ic {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      font-size: 11px;
+      font-weight: 800;
+      flex: none;
+    }
+
+    .kv-hall-alto {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .kv-hall-medio {
+      background: rgba(245, 158, 11, .1);
+      color: var(--amber);
+    }
+
+    .kv-hall-cab b {
+      flex: 1;
+      min-width: 0;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+
+    .kv-hall-sev {
+      flex: none;
+      font-size: 9.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--red);
+      background: var(--red-soft);
+      padding: .15rem .4rem;
+      border-radius: 5px;
+    }
+
+    .kv-sev-medio {
+      color: #b45309;
+      background: rgba(245, 158, 11, .1);
+    }
+
+    .kv-hall-cuerpo {
+      padding: .6rem 0 .2rem 1.7rem;
+      display: grid;
+      gap: .5rem;
+    }
+
+    .kv-hall-lbl {
+      display: block;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: .15rem;
+    }
+
+    .kv-hall-txt {
+      display: block;
+      font-size: 11.5px;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+
+    .kv-hall-accion {
+      background: var(--violet-soft);
+      border-left: 2px solid var(--violet);
+      border-radius: 0 8px 8px 0;
+      padding: .5rem .65rem;
+    }
+
+    .kv-hall-accion .kv-hall-lbl {
+      color: var(--violet);
+    }
+
+    .kv-hall-accion .kv-hall-txt {
+      color: var(--ink);
+    }
+
+    .kv-hall-meta {
+      display: block;
+      font-size: 10px;
+      color: var(--ink-faint);
+      margin-top: .3rem;
+    }
+
+    .kv-hall-ev {
+      display: block;
+      font-size: 10px;
+      color: var(--ink-faint);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    /* En movil el panel deja de ser sticky: no hay sitio para tenerlo al lado,
+       y fijarlo taparia el propio texto que lo explica. Cada paso se lee
+       entero y el panel va debajo. */
+    @media (max-width: 900px) {
+      .kv-tour-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .kv-tour-sticky {
+        position: static;
+        margin-top: 1.5rem;
+      }
+
+      .kv-paso {
+        min-height: 0;
+        opacity: 1;
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .kv-vista,
+      .kv-paso,
+      .kv-a-fill {
+        transition: none;
+      }
+    }
