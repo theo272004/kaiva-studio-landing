@@ -1886,6 +1886,12 @@ html {
   border-top: none;
 }
 
+/* La píldora con puntito. Dentro de .section--violet quedaba fatal: el
+   --violet-soft del fondo se vuelve blanco translúcido y el texto violeta se
+   aclara, así que la etiqueta salía como una pastilla blanca flotando encima
+   del morado, gritando más que el propio título que iba debajo.
+   Un kicker es una entradilla, no un botón: se queda como texto, con la línea
+   corta encima que ya usa la casa. */
 .serv-kicker {
   display: inline-flex;
   align-items: center;
@@ -1895,18 +1901,22 @@ html {
   text-transform: uppercase;
   letter-spacing: .12em;
   color: var(--violet);
-  background: var(--violet-soft);
-  padding: .45rem .9rem;
-  border-radius: 99px;
+  padding: 0;
   margin-bottom: 1.2rem;
 }
 
 .serv-kicker::before {
   content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
+  width: 22px;
+  height: 2px;
+  border-radius: 99px;
   background: currentColor;
+}
+
+/* Sobre el bloque morado, el violeta de marca no contrasta consigo mismo.
+   Blanco a media opacidad: se lee como entradilla y deja que el título mande. */
+.section--violet .serv-kicker {
+  color: rgba(255, 255, 255, .72);
 }
 
 .serv-hi {
@@ -2294,6 +2304,183 @@ html {
     max-width: 30rem;
     height: auto;
   }
+
+  .sw-panel {
+    width: 100%;
+    max-width: 30rem;
+  }
+}
+
+/* ---- Panel de "a la medida", dibujado ---------------------------------
+   Sustituye una ilustración .webp de fondo casi blanco que rechinaba sobre
+   esta sección negra. Todo son superficies elevadas del propio fondo
+   (blanco a muy baja opacidad) más el morado de marca: nada de blanco
+   opaco, que es lo que hacía saltar la imagen anterior. */
+.sw-panel {
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, .09);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 30px 70px -24px rgba(0, 0, 0, .85),
+    0 0 60px -22px rgba(130, 66, 245, .45);
+}
+
+.sw-panel-bar {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .7rem .95rem;
+  background: rgba(255, 255, 255, .03);
+  border-bottom: 1px solid rgba(255, 255, 255, .07);
+}
+
+.sw-panel-bar i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .16);
+  flex: none;
+}
+
+.sw-panel-bar span {
+  margin-left: .5rem;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, .5);
+}
+
+.sw-panel-body {
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.sw-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .6rem;
+}
+
+.sw-kpi {
+  background: rgba(255, 255, 255, .035);
+  border: 1px solid rgba(255, 255, 255, .07);
+  border-radius: 10px;
+  padding: .6rem .7rem;
+}
+
+/* El KPI que importa lleva el morado: es el argumento de la sección
+   (horas que deja de perder el equipo), no un dato más. */
+.sw-kpi-alto {
+  background: rgba(130, 66, 245, .14);
+  border-color: rgba(130, 66, 245, .34);
+}
+
+.sw-kpi-lbl {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .45);
+}
+
+.sw-kpi b {
+  display: block;
+  margin-top: .15rem;
+  font-family: var(--display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  color: #fff;
+}
+
+.sw-kpi-alto b {
+  color: #c4a4ff;
+}
+
+.sw-grafica svg {
+  display: block;
+  width: 100%;
+  height: 96px;
+}
+
+/* La curva se dibuja sola al entrar. 520 es holgado para la longitud real
+   del trazo; pasarse solo alarga el arranque, quedarse corto lo cortaría. */
+.sw-linea {
+  stroke-dasharray: 520;
+  stroke-dashoffset: 520;
+  animation: swTrazo 1.8s var(--ease) .25s forwards;
+}
+
+.sw-area {
+  opacity: 0;
+  animation: swArea .9s var(--ease) 1.1s forwards;
+}
+
+@keyframes swTrazo {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes swArea {
+  to { opacity: 1; }
+}
+
+.sw-filas {
+  display: grid;
+  gap: .55rem;
+}
+
+.sw-fila {
+  display: grid;
+  grid-template-columns: 5.2rem 1fr;
+  align-items: center;
+  gap: .7rem;
+}
+
+.sw-fila span {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, .55);
+}
+
+.sw-fila i {
+  display: block;
+  height: 6px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, .07);
+  position: relative;
+  overflow: hidden;
+}
+
+.sw-fila i::after {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--w, 50%);
+  border-radius: inherit;
+  background: linear-gradient(90deg, #8242f5, #a679ff);
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: swBarra 1s var(--ease) .5s forwards;
+}
+
+@keyframes swBarra {
+  to { transform: scaleX(1); }
+}
+
+/* Sin movimiento si el sistema lo pide: el panel se ve igual, ya dibujado. */
+@media (prefers-reduced-motion: reduce) {
+
+  .sw-linea,
+  .sw-area,
+  .sw-fila i::after {
+    animation: none;
+  }
+
+  .sw-linea { stroke-dashoffset: 0; }
+  .sw-area { opacity: 1; }
+  .sw-fila i::after { transform: scaleX(1); }
 }
 
 /* ============================================================

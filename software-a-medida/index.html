@@ -50,7 +50,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260805c">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260805d">
 
   <script type="application/ld+json">
 {
@@ -670,9 +670,73 @@
             </ul>
           </div>
 
+          <!-- Panel dibujado con CSS y SVG, no una imagen.
+               Antes aquí iba software-a-medida-plataformas.webp: una
+               ilustración de fondo casi blanco sobre esta sección negra, que
+               rechinaba y encima pesaba 72 KB. Esto se dibuja con el mismo
+               morado y los mismos grises de la marca, así que pertenece al
+               fondo en vez de estar pegado encima — y no descarga nada.
+               No es el panel de ningún cliente: son números inventados a
+               propósito, como la ilustración que reemplaza. -->
           <div class="medida-arte" aria-hidden="true">
-            <img src="/assets/software-a-medida-plataformas.webp" alt="" width="586" height="712"
-              loading="lazy" decoding="async">
+            <div class="sw-panel">
+              <div class="sw-panel-bar">
+                <i></i><i></i><i></i>
+                <span>Tu operación, en un solo sitio</span>
+              </div>
+
+              <div class="sw-panel-body">
+                <div class="sw-kpis">
+                  <div class="sw-kpi">
+                    <span class="sw-kpi-lbl">Pedidos hoy</span>
+                    <b>128</b>
+                  </div>
+                  <div class="sw-kpi">
+                    <span class="sw-kpi-lbl">Sin facturar</span>
+                    <b>7</b>
+                  </div>
+                  <div class="sw-kpi sw-kpi-alto">
+                    <span class="sw-kpi-lbl">Horas ahorradas</span>
+                    <b>31</b>
+                  </div>
+                </div>
+
+                <div class="sw-grafica">
+                  <svg viewBox="0 0 300 96" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="swRelleno" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#8242f5" stop-opacity=".38" />
+                        <stop offset="100%" stop-color="#8242f5" stop-opacity="0" />
+                      </linearGradient>
+                    </defs>
+                    <!-- Rejilla: tres líneas, apenas visibles. -->
+                    <path d="M0 24H300M0 52H300M0 80H300" stroke="rgba(255,255,255,.07)" stroke-width="1" />
+                    <!-- El área bajo la curva y la curva. La curva se dibuja
+                         sola al cargar con stroke-dasharray. -->
+                    <path class="sw-area" d="M0 78 L45 66 L90 70 L135 48 L180 52 L225 28 L270 20 L300 12 L300 96 L0 96 Z"
+                      fill="url(#swRelleno)" />
+                    <path class="sw-linea" d="M0 78 L45 66 L90 70 L135 48 L180 52 L225 28 L270 20 L300 12"
+                      fill="none" stroke="#a679ff" stroke-width="2.5" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                </div>
+
+                <div class="sw-filas">
+                  <div class="sw-fila">
+                    <span>Facturación</span>
+                    <i style="--w:88%"></i>
+                  </div>
+                  <div class="sw-fila">
+                    <span>Inventario</span>
+                    <i style="--w:64%"></i>
+                  </div>
+                  <div class="sw-fila">
+                    <span>Pagos</span>
+                    <i style="--w:76%"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -883,7 +947,7 @@
           </a>
           <a class="serv-card" href="/branding/">
             <span class="serv-ico" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v7"/><path d="M12 10 8.5 20h7L12 10z"/><circle cx="12" cy="3" r="1.6"/><path d="M6 13.5 3.5 16"/><path d="M18 13.5 20.5 16"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="2" fill="currentColor" stroke="none"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="2" fill="currentColor" stroke="none" opacity=".45"/><rect x="13" y="13" width="7.5" height="7.5" rx="2"/></svg>
             </span>
             <b>Branding e identidad</b>
             <span class="serv-raya" aria-hidden="true"></span>
