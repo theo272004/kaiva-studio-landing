@@ -1886,40 +1886,9 @@ html {
   border-top: none;
 }
 
-/* La píldora con puntito. Dentro de .section--violet quedaba fatal: el
-   --violet-soft del fondo se vuelve blanco translúcido y el texto violeta se
-   aclara, así que la etiqueta salía como una pastilla blanca flotando encima
-   del morado, gritando más que el propio título que iba debajo.
-   Un kicker es una entradilla, no un botón: se queda como texto, con la línea
-   corta encima que ya usa la casa. */
-.serv-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: .5rem;
-  font-size: 11.5px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .12em;
-  color: var(--violet);
-  padding: 0;
-  margin-bottom: 1.2rem;
-}
-
-.serv-kicker::before {
-  content: '';
-  width: 22px;
-  height: 2px;
-  border-radius: 99px;
-  background: currentColor;
-}
-
 /* Sobre el bloque morado, el violeta de marca no contrasta consigo mismo.
    Blanco a media opacidad: se lee como entradilla y deja que el título mande. */
-.section--violet .serv-kicker {
-  color: rgba(255, 255, 255, .72);
-}
-
-.serv-hi {
+.section--violet .serv-hi {
   color: var(--violet);
 }
 

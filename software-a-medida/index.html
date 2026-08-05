@@ -155,7 +155,13 @@
       position: relative;
       aspect-ratio: 1 / 0.9;
       border-radius: 22px;
-      background: linear-gradient(160deg, #f7f6fb, #eef0f7);
+      /* Era linear-gradient(160deg, #f7f6fb, #eef0f7): arrancaba en un lila
+         palido y terminaba en #eef0f7, un gris AZULADO que no pertenece a la
+         paleta. Al lado del morado de marca se leia como un tono sucio y
+         hacia que el diagrama pareciera pegado de otro sitio.
+         Ahora las dos paradas son de la misma familia violeta, asi que el
+         degradado unifica en vez de cambiar de color a mitad de camino. */
+      background: linear-gradient(160deg, #faf8ff, #f1ebfd);
     }
 
     .sw-lines {
@@ -929,7 +935,6 @@
          cambian las tres tarjetas, que nunca incluyen la pagina donde estas. -->
     <section class="section serv-otros section--violet">
       <div class="wrap">
-        <span class="serv-kicker">Servicios adicionales</span>
         <h2>Otros <span class="serv-hi">servicios</span></h2>
         <p class="desc">Soluciones que se complementan entre sí. Cada una resuelve una parte
           distinta de tu presencia digital.</p>

@@ -627,8 +627,14 @@
       height: auto;
       position: relative;
       z-index: 1;
-      transform: scaleX(-1);
-      margin-right: -48px;
+      /* scaleX(-1) lo invierte para que mire a la tarjeta; el rotate va
+         DESPUES en la lista, y como las transformaciones se aplican de
+         derecha a izquierda, el giro ocurre en el espacio ya reflejado — por
+         eso el angulo es negativo para que se incline hacia la izquierda en
+         pantalla. Separado de la tarjeta: antes se solapaban y el robot
+         parecia estar detras de ella en vez de al lado. */
+      transform: scaleX(-1) rotate(-8deg);
+      margin-right: 26px;
       margin-bottom: 1rem;
       /* Halo violeta en vez de sombra negra: sobre un fondo casi negro una
          sombra negra no se ve, solo ensucia el borde del PNG. */
@@ -1222,7 +1228,6 @@
          cambian las tres tarjetas, que nunca incluyen la pagina donde estas. -->
     <section class="section serv-otros section--violet">
       <div class="wrap">
-        <span class="serv-kicker">Servicios adicionales</span>
         <h2>Otros <span class="serv-hi">servicios</span></h2>
         <p class="desc">Soluciones que se complementan entre sí. Cada una resuelve una parte
           distinta de tu presencia digital.</p>
