@@ -50,7 +50,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260805b">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260805c">
 
   <script type="application/ld+json">
 {
@@ -619,24 +619,40 @@
     }
 
     .dw-problema-robot {
-      width: clamp(130px, 26vw, 210px);
+      /* Invertido para que MIRE hacia la tarjeta: el robot es el que
+         diagnostica, y si mira hacia afuera la composicion empuja el ojo
+         fuera de la seccion en vez de hacia el contenido. Y mas grande: a
+         210px competia con la tarjeta en vez de sostenerla. */
+      width: clamp(180px, 34vw, 290px);
       height: auto;
       position: relative;
       z-index: 1;
-      margin-right: -34px;
-      margin-bottom: 1.2rem;
-      filter: drop-shadow(0 18px 30px rgba(0, 0, 0, .4));
+      transform: scaleX(-1);
+      margin-right: -48px;
+      margin-bottom: 1rem;
+      /* Halo violeta en vez de sombra negra: sobre un fondo casi negro una
+         sombra negra no se ve, solo ensucia el borde del PNG. */
+      filter: drop-shadow(0 12px 34px rgba(130, 66, 245, .35));
     }
 
+    /* La tarjeta era blanca sobre #0b0b0e y rechinaba — el mismo error que
+       este archivo corrige en otras partes. Ahora es una superficie ELEVADA
+       del propio fondo oscuro: blanco al 5% sobre el negro, borde apenas
+       visible y un halo violeta que la despega. Nada de blanco puro. */
     .dw-diag-card {
       position: relative;
       z-index: 2;
       width: min(300px, 88%);
       margin-left: auto;
-      background: #ffffff;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .10);
       border-radius: var(--r-ui-lg);
-      box-shadow: 0 30px 60px -16px rgba(0, 0, 0, .45), var(--shadow-ui);
+      box-shadow:
+        0 24px 60px -20px rgba(0, 0, 0, .8),
+        0 0 0 1px rgba(130, 66, 245, .12),
+        0 8px 40px -12px rgba(130, 66, 245, .22);
       padding: 1.15rem 1.3rem 1.35rem;
+      backdrop-filter: blur(8px);
     }
 
     .dw-diag-head {
@@ -647,13 +663,13 @@
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: .07em;
-      color: #64748b;
+      color: rgba(255, 255, 255, .55);
     }
 
     .dw-diag-head--despues {
       margin-top: .95rem;
       padding-top: .9rem;
-      border-top: 1px dashed #e2e8f0;
+      border-top: 1px dashed rgba(255, 255, 255, .14);
     }
 
     .dw-diag-dot {
@@ -695,28 +711,27 @@
       height: 7px;
     }
 
+    /* Sobre la tarjeta oscura, "apagado" es blanco a menos opacidad — no un
+       gris de tema claro, que ahi se lee peor que el fondo. La distincion
+       antes/despues sigue viviendo en el punto (rojo cuadrado vs verde
+       redondo), no en cuanto cuesta leer el texto. */
     .dw-diag-lista--antes li {
-      /* #94a3b8 medía 2,56:1 sobre blanco — muy por debajo de AA. El "antes"
-         tiene que verse apagado frente al "después", pero apagado no puede
-         significar invisible. #475569 es --ink-soft, el mismo gris que usa
-         el sitio entero para texto secundario y que ya se sabe que pasa. La
-         diferenciación visual sigue viviendo en el punto: rojo cuadrado vs
-         verde redondo, no en cuánto se lee el texto. */
-      color: #475569;
+      color: rgba(255, 255, 255, .62);
     }
 
     .dw-diag-lista--antes li::before {
       border-radius: 2px;
-      background: #fca5a5;
+      background: #f87171;
     }
 
     .dw-diag-lista--despues li {
-      color: #0f172a;
+      color: #ffffff;
+      font-weight: 600;
     }
 
     .dw-diag-lista--despues li::before {
       border-radius: 50%;
-      background: #10b981;
+      background: #34d399;
     }
 
     .dw-problema-texto .prosa {

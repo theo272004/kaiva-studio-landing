@@ -307,15 +307,18 @@ html {
 
 /* El CTA del nav, oscuro — igual que en el home. Se queda negro siempre: en
    hover solo levanta, nunca cambia de color ni se vuelve violeta. */
+/* Negro de verdad, no --ink. --ink es #0f172a, un azul pizarra: al lado del
+   negro de las secciones oscuras (--dark, #0b0b0e) se le notaba el tinte
+   azul y parecía un negro "sucio" en vez del de la marca. */
 .btn-dark {
-  background: var(--ink);
+  background: var(--dark);
   color: #fff;
   font-weight: 700;
 }
 
 .btn-dark:hover {
-  background: var(--ink);
-  box-shadow: 0 10px 22px -12px rgba(15, 23, 42, .45);
+  background: #000;
+  box-shadow: 0 10px 22px -12px rgba(0, 0, 0, .55);
 }
 
 /* Estas medidas son las del botón del nav en el home. No cambiarlas sin
