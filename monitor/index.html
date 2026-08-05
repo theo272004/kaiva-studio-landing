@@ -77,7 +77,7 @@
   <!-- El resto del CSS de esta pagina vive en assets/monitor.css. Antes eran
        51 KB incrustados en el propio HTML: no se cacheaban y viajaban en cada
        visita. Arriba solo se queda el @font-face, que va con los preload. -->
-  <link rel="stylesheet" href="/assets/monitor.css?v=20260805l">
+  <link rel="stylesheet" href="/assets/monitor.css?v=20260805m">
 </head>
 
 <body>
@@ -146,6 +146,14 @@
             sesión</button>
           <p class="kv-lead-err" id="kvSesionErr" role="alert"></p>
         </form>
+        <!-- Solo se enseña con el panel abierto, y no es una limitación
+             técnica disfrazada: el formulario de registro de verdad vive
+             dentro del panel y ata el análisis que estás viendo a la cuenta
+             nueva. Crear una cuenta sin análisis no guarda nada, así que en la
+             pantalla de bienvenida el enlace sobra. -->
+        <p class="kv-sesion-pie" id="kvIrARegistro" hidden>
+          ¿No tienes cuenta? <button type="button" class="kv-sesion-enlace">Crea una y guarda este análisis</button>
+        </p>
       </div>
 
       <!-- Sesión ya activa: solo queda la opción de salir. -->
@@ -610,6 +618,12 @@
          espera y lo guardamos junto al correo. Un lead con dominio vale
          mucho más que un correo suelto. */
       var dominio = '';
+      /* Se pone en true la primera vez que el panel llega a pantalla. Sirve
+         para dos cosas, las dos consecuencia de que ahora se pinte dos veces:
+         no devolver el scroll arriba en el repintado, y no mandar a nadie de
+         vuelta al formulario si algo falla DESPUES de que ya esta viendo su
+         informe. */
+      var panelPintado = false;
 
       /* ---- Panel de resultados reales -------------------------------------
          Solo se usa cuando API !== null. Traduce la respuesta de scan.php al
@@ -765,7 +779,7 @@
         return d;
       }
 
-      function renderChecklist(pillars, findings, imagenCompleta, imagenScore, speed) {
+      function renderChecklist(pillars, findings, imagenCompleta, imagenScore, speed, midiendo) {
         var cont = document.getElementById('kvChecklist');
         if (!cont) return;
         cont.innerHTML = '';
@@ -792,7 +806,9 @@
             '<div class="chk-list"></div>';
 
           card.querySelector('.chk-nombre').textContent = NOMBRE_PILAR[clave];
-          card.querySelector('.chk-score').textContent = completo ? (puntaje + '/100') : 'sin medir';
+          card.querySelector('.chk-score').textContent = completo
+            ? (puntaje + '/100')
+            : ((midiendo && clave === 'imagen') ? 'midiendo…' : 'sin medir');
           card.querySelector('.chk-sub').textContent =
             (pilar.label || '') + ' · pesa ' + Math.round((pilar.weight || 0) * 100) + '% del índice';
 
@@ -866,7 +882,13 @@
         return { A: 'Excelente', B: 'Bien encaminado', C: 'Necesita atención', D: 'Urgente', F: 'Crítico' }[g] || '';
       }
 
-      function renderDashboard(dom, scan, speed) {
+      /* `midiendo` solo lo pone en true el analisis en vivo, cuando acaba de
+         lanzar la peticion de velocidad y la esta esperando. No se deduce de
+         scan.pagespeed === 'pending' a proposito: un informe guardado cuyo
+         PageSpeed nunca llego a resolverse tambien viene 'pending', y ahi no
+         hay nada midiendose — anunciar que se actualiza sola seria una espera
+         que no termina nunca. */
+      function renderDashboard(dom, scan, speed, midiendo) {
         var pillars = scan.pillars || {};
         var score = (speed && speed.score != null) ? speed.score : scan.score;
         var grade = (speed && speed.grade) ? speed.grade : scan.grade;
@@ -900,6 +922,13 @@
           ? true
           : !!(pillars.imagen && pillars.imagen.complete !== false);
 
+        /* Hay DOS motivos distintos por los que Imagen puede salir sin
+           puntaje, y confundirlos seria mentir en la direccion facil: que no
+           se pudiera medir (el sitio bloqueo el analisis) o que se este
+           midiendo ahora mismo, que es lo normal durante los ~20s que tarda
+           PageSpeed. Lo segundo no es una falla y no debe leerse como tal. */
+        var midiendoVelocidad = !!midiendo && !speed;
+
         var pares = [
           ['scoreP0', 'ringP0', visScore, pillars.visibilidad && pillars.visibilidad.complete !== false],
           ['scoreP1', 'ringP1', imagenScore, imagenCompleta],
@@ -921,7 +950,7 @@
             : 'Sin hallazgos prioritarios';
         }
 
-        renderChecklist(pillars, findings, imagenCompleta, imagenScore, speed);
+        renderChecklist(pillars, findings, imagenCompleta, imagenScore, speed, midiendoVelocidad);
 
         var finds = document.querySelector('.finds');
         if (finds) {
@@ -949,12 +978,23 @@
              de las señales no es un 100, y presentarlo como tal sería el
              mismo tipo de engaño que las cifras que quitamos, solo que a
              favor del cliente en vez de en contra. */
-          var sinMedir = pares.filter(function (p) { return !p[3]; }).length;
+          /* Imagen no cuenta como "no se pudo medir" mientras se esta
+             midiendo: el texto diria "un pilar no se pudo medir en tu sitio",
+             que es falso y encima suena a problema del cliente. Se descuenta
+             de la cuenta y se explica aparte. */
+          var sinMedir = pares.filter(function (p, i) {
+            return !p[3] && !(midiendoVelocidad && i === 1);
+          }).length;
           var base = sinMedir > 0
             ? 'Análisis parcial: ' + (sinMedir === 1 ? 'un pilar no se pudo medir' : sinMedir + ' pilares no se pudieron medir')
               + ' en tu sitio, así que el puntaje sale solo de los demás.'
             : 'Tu puntaje pondera cuatro pilares: operación 40%, imagen 25%, '
               + 'visibilidad 20% y confianza 15%. Cada hallazgo trae la evidencia que lo prueba.';
+          if (midiendoVelocidad) {
+            base = 'Estamos midiendo la velocidad de carga; el puntaje de Imagen y el total '
+              + 'se ajustan solos en unos segundos. Lo demás del informe ya está completo. '
+              + base;
+          }
           /* PageSpeed se cae por su cuenta más seguido de lo que uno querría
              (límites de cuota, sitios que tardan demasiado). Decirlo es más
              honesto que dejar creer que la velocidad entró en el puntaje. */
@@ -1032,11 +1072,26 @@
         }
 
         function ease(t) { return 1 - Math.pow(1 - t, 3); }
+        /* Cuenta DESDE LO QUE YA HAY, no desde cero. En el primer pintado el
+           numero es 0 o una raya, asi que sube desde cero como siempre; en el
+           repintado que trae la velocidad, 84 baja a 81 con la misma animacion
+           corta. Volver a cero y subir otra vez pareceria que la pagina se
+           recargo sola. */
         function countUp(node, destino) {
+          var desde = parseInt(node.textContent, 10);
+          if (isNaN(desde)) desde = 0;
+          if (desde === destino) { node.textContent = destino; return; }
           var t0 = performance.now();
           (function paso(now) {
-            var p = Math.min(1, (now - t0) / 1200);
-            node.textContent = Math.round(ease(p) * destino);
+            /* Se recorta por ABAJO tambien, no solo por arriba. La marca que
+               entrega requestAnimationFrame es la del inicio del fotograma, y
+               puede ser anterior a la performance.now() que se guardo un
+               instante antes: entonces p sale negativo, la curva devuelve un
+               valor por debajo de cero y el puntaje parpadea en negativo
+               —medido: un "-3" antes de empezar a subir— en el primer
+               fotograma de cada animacion. */
+            var p = Math.max(0, Math.min(1, (now - t0) / 1200));
+            node.textContent = Math.round(desde + (destino - desde) * ease(p));
             if (p < 1) requestAnimationFrame(paso);
           })(performance.now());
         }
@@ -1047,25 +1102,39 @@
            sobre los controles de la ventana. */
         document.body.classList.add('kv-en-panel');
         [welcome, loading].forEach(function (s) { s.classList.remove('on'); });
-        window.scrollTo(0, 0);
+        // Solo al abrir el panel. En el repintado la persona ya lleva 20s
+        // leyendo y puede estar abajo, en los hallazgos: subirla de golpe
+        // seria arrancarle la pagina de las manos.
+        if (!panelPintado) window.scrollTo(0, 0);
+        panelPintado = true;
 
         var gen = el('scoreGeneral');
         if (gen) countUp(gen, score);
         pares.forEach(function (par) {
           var num = el(par[0]), ring = el(par[1]), val = par[2] || 0, medido = par[3];
 
+          var tarjeta = num && num.closest ? num.closest('.g-cell') : null;
+
           if (!medido) {
             /* No se pudo medir: raya y anillo vacío. Decir "no lo sabemos"
                es información; poner un cero es una acusación falsa. */
+            var enCurso = midiendoVelocidad && par[0] === 'scoreP1';
             if (num) {
               num.textContent = '—';
-              num.setAttribute('title', 'No pudimos medir este pilar en tu sitio');
+              num.setAttribute('title', enCurso
+                ? 'Midiendo la velocidad de carga…'
+                : 'No pudimos medir este pilar en tu sitio');
             }
             if (ring) ring.style.strokeDashoffset = 100;
-            var tarjeta = num && num.closest ? num.closest('.g-cell') : null;
-            if (tarjeta) tarjeta.style.opacity = '.55';
+            if (tarjeta) tarjeta.style.opacity = enCurso ? '.7' : '.55';
             return;
           }
+
+          /* Se limpia lo que dejo el pintado anterior. Sin esto, Imagen se
+             quedaba a media luz y con el titulo de "midiendo" pegado despues
+             de que su numero ya habia llegado. */
+          if (tarjeta) tarjeta.style.opacity = '';
+          if (num) num.removeAttribute('title');
 
           if (num) countUp(num, val);
           if (ring) ring.style.strokeDashoffset = 100 - val;
@@ -1171,13 +1240,32 @@
               e.codigo = scan.code || '';
               throw e;
             }
-            bar.style.width = '60%';
-            status.textContent = 'Midiendo velocidad de carga...';
+            bar.style.width = '100%';
 
             if (scan.pagespeed !== 'pending') {
-              bar.style.width = '100%';
               return renderDashboard(scan.domain, scan, null);
             }
+
+            /* NO SE ESPERA A PAGESPEED PARA ENSEÑAR EL INFORME.
+               -------------------------------------------------
+               speed.php tarda 20s medidos contra produccion, contra los 2s de
+               scan.php: el 90% de la espera era esa sola llamada. Y mientras
+               tanto la pantalla de carga tapaba un informe que ya estaba
+               completo —puntaje, grado, los cuatro pilares y todos los
+               hallazgos— por un dato que solo mueve el pilar de Imagen y
+               corre el total unos pocos puntos.
+
+               Era ademas lo que speed.php dice de si mismo desde el principio:
+               "el widget llama aqui en segundo plano mientras el usuario ya
+               esta viendo su score". El backend estaba partido en dos fases a
+               proposito; el front las volvia a pegar y se comia la espera.
+
+               Asi que el panel sale a los 2s con Imagen marcada como en
+               medicion, y cuando PageSpeed responde se repinta con el numero
+               real. renderDashboard es el mismo de siempre: sabe leer el scan
+               con o sin velocidad, que es justo para lo que se escribio. */
+            renderDashboard(scan.domain, scan, null, true);
+
             return fetch(API + '/speed.php', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -1186,13 +1274,23 @@
               .then(function (r) { return r.json(); })
               .catch(function () { return null; })
               .then(function (speed) {
-                bar.style.width = '100%';
-                status.textContent = 'Generando tu informe...';
-                renderDashboard(scan.domain, scan, (speed && speed.ok) ? speed : null);
+                /* Si PageSpeed falla no se repinta nada: el informe que ya
+                   esta en pantalla es correcto, y el pie sigue diciendo que
+                   la velocidad quedo fuera. Repintar con speed=null solo
+                   volveria a animar los mismos numeros sin motivo. */
+                if (speed && speed.ok) renderDashboard(scan.domain, scan, speed);
               });
           })
           .catch(function (err) {
             console.error('[kaiva] diagnóstico:', err);
+
+            /* Si el informe YA esta en pantalla, lo que fallo fue la segunda
+               fase —la velocidad— y no hay nada que anunciar: el panel es
+               correcto sin ella y su pie ya lo explica. Antes de partir la
+               espera en dos esto no podia pasar, porque no se pintaba nada
+               hasta el final; ahora un fallo tardio devolveria a la persona al
+               formulario vacio y le borraria el analisis que estaba leyendo. */
+            if (panelPintado) return;
 
             /* Se vuelve al formulario con el motivo real escrito arriba del
                campo, en vez de mandar a la pantalla de "próximamente". La
@@ -1227,6 +1325,7 @@
         }
         errEl.textContent = '';
         dominio = v;
+        panelPintado = false;   // arranca un analisis nuevo: no hay panel aun
         target.textContent = 'Revisando ' + v;
         show(loading);
 
@@ -1529,6 +1628,28 @@
             </span>
           </span>
           <span class="app-tag">Diagnóstico Digital</span>
+
+          <!-- SALIDAS DEL PANEL.
+               Hasta aquí el panel era una habitación sin puertas: entrabas con
+               tu análisis y no había forma de analizar otro dominio, de entrar
+               a una cuenta ni de cerrar la sesión abierta. El botón de sesión
+               de la cabecera, además, se oculta al abrir el panel
+               (body.kv-en-panel), así que dentro no quedaba ni ese. La única
+               salida era el logo o recargar a mano.
+
+               Van en la barra del panel y no flotando encima: es la barra de
+               esta ventana, y es donde alguien busca los controles de la
+               ventana en la que está. -->
+          <div class="app-acciones">
+            <button type="button" class="app-btn" id="kvOtroSitio">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M19 12H5m7-7-7 7 7 7" />
+              </svg>
+              Analizar otro sitio
+            </button>
+            <button type="button" class="app-btn app-btn--sesion" id="kvPanelSesion">Iniciar sesión</button>
+          </div>
         </div>
 
         <!-- Aviso de panel temporal.
@@ -2104,11 +2225,20 @@
         salir = document.getElementById('kvSesionSalir'),
         nombreSpan = document.getElementById('kvSesionNombre'),
         correoActivo = document.getElementById('kvSesionCorreoActivo'),
-        yaTengoCuenta = document.getElementById('kvYaTengoCuenta');
+        yaTengoCuenta = document.getElementById('kvYaTengoCuenta'),
+        panelSesion = document.getElementById('kvPanelSesion'),
+        otroSitio = document.getElementById('kvOtroSitio'),
+        irARegistro = document.getElementById('kvIrARegistro');
 
       if (!modal) return;
 
       var usuarioActivo = null; // se llena con /api/yo.php al cargar
+
+      // ¿Está el panel de resultados en pantalla? De eso depende si tiene
+      // sentido ofrecer "crear cuenta": el formulario de registro vive ahí.
+      function enPanel() {
+        return document.body.classList.contains('kv-en-panel');
+      }
 
       function abrirModal() {
         modal.classList.add('on');
@@ -2119,6 +2249,7 @@
         } else {
           panelForm.hidden = false;
           panelActiva.hidden = true;
+          if (irARegistro) irARegistro.hidden = !enPanel();
           if (correo) correo.focus();
         }
       }
@@ -2130,6 +2261,40 @@
 
       if (abrir) abrir.addEventListener('click', abrirModal);
       if (yaTengoCuenta) yaTengoCuenta.addEventListener('click', abrirModal);
+      if (panelSesion) panelSesion.addEventListener('click', abrirModal);
+
+      /* Volver a empezar. Se va a la URL limpia en vez de reconstruir la
+         pantalla a mano: el informe deja rastro en la direccion (?s=...), y
+         quedarse con ese parametro haria que el proximo recargue reabriera el
+         analisis viejo en lugar del formulario. Un cambio de direccion de
+         verdad, ademas, deja el "atras" del navegador coherente. */
+      if (otroSitio) {
+        otroSitio.addEventListener('click', function () {
+          window.location.href = location.pathname;
+        });
+      }
+
+      /* "Crea una cuenta" no abre un formulario nuevo: lleva al que ya existe
+         dentro del panel, que ademas reclama el analisis que se esta viendo.
+         Duplicar los tres campos aqui habria significado dos formularios de
+         registro que mantener y una de las dos copias olvidada tarde o
+         temprano. */
+      if (irARegistro) {
+        irARegistro.addEventListener('click', function (e) {
+          if (e.target.tagName !== 'BUTTON') return;
+          cerrarModal();
+          var caja = document.getElementById('kvGuardarForm');
+          var boton = document.getElementById('kvGuardar');
+          if (caja) {
+            caja.hidden = false;
+            caja.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            var n = document.getElementById('kvCuentaNombre');
+            if (n) setTimeout(function () { n.focus(); }, 350);
+          } else if (boton) {
+            boton.click();
+          }
+        });
+      }
       if (cerrar) cerrar.addEventListener('click', cerrarModal);
       modal.addEventListener('click', function (e) { if (e.target === modal) cerrarModal(); });
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrarModal(); });
@@ -2146,6 +2311,16 @@
 
       function pintarUsuario(u) {
         usuarioActivo = u;
+        /* El boton de la barra del panel dice lo mismo que el de la cabecera.
+           Con sesion abierta pasa a ser la salida: lleva al modal, que en ese
+           estado ya muestra "Cerrar sesion" —el boton existia desde siempre,
+           pero dentro del panel no habia forma de llegar a el. */
+        if (panelSesion) {
+          panelSesion.textContent = u ? ('Hola, ' + u.nombre.split(' ')[0]) : 'Iniciar sesión';
+          panelSesion.classList.toggle('app-btn--activa', !!u);
+          panelSesion.setAttribute('title', u ? 'Tu cuenta · cerrar sesión' : 'Entrar o crear una cuenta');
+        }
+
         if (u) {
           if (texto) texto.textContent = 'Hola, ' + u.nombre.split(' ')[0];
           if (nombreSpan) nombreSpan.textContent = ', ' + u.nombre.split(' ')[0];

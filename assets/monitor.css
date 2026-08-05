@@ -417,6 +417,138 @@
       background: #ffffff;
     }
 
+    /* ---- Salidas del panel ------------------------------------------------
+       Tres cosas que no existían dentro del panel: volver a analizar otro
+       dominio, entrar a una cuenta y cerrar la sesión abierta. Van en la barra
+       de la ventana, a la derecha del distintivo, que es donde se buscan los
+       controles de la ventana en la que uno está.
+
+       Discretos a propósito: quien acaba de recibir su diagnóstico viene a
+       leerlo, y estos botones son salidas, no la acción principal. Texto en
+       --ink-soft sobre blanco (7.1:1, holgado sobre el 4.5:1 que pide AA) y
+       borde de un punto; el color se reserva para el distintivo de al lado. */
+    .app-acciones {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-left: 0.55rem;
+    }
+
+    .app-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.32rem;
+      font: inherit;
+      font-size: 12.5px;
+      font-weight: 600;
+      line-height: 1;
+      color: var(--ink-soft);
+      background: #fff;
+      border: 1px solid rgba(15, 23, 42, 0.12);
+      border-radius: 7px;
+      padding: 0.42rem 0.66rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color .16s ease, border-color .16s ease, background .16s ease;
+    }
+
+    .app-btn:hover {
+      color: var(--ink);
+      border-color: rgba(15, 23, 42, 0.3);
+      background: #f8fafc;
+    }
+
+    .app-btn:focus-visible {
+      outline: 2px solid var(--violet);
+      outline-offset: 2px;
+    }
+
+    /* Con sesión abierta el botón lleva el nombre de la persona, y ahí sí se
+       tiñe: deja de ser una salida y pasa a ser "esta es tu cuenta". */
+    .app-btn--activa {
+      color: var(--violet);
+      border-color: rgba(130, 66, 245, 0.28);
+      background: var(--violet-soft);
+    }
+
+    .app-btn--activa:hover {
+      color: var(--violet);
+      border-color: rgba(130, 66, 245, 0.5);
+      background: var(--violet-soft);
+    }
+
+    /* En pantallas estrechas la barra no da para las dos etiquetas. Se queda
+       el icono de volver —una flecha se entiende sola— y el de sesión, que
+       lleva el nombre y no se puede resumir. */
+    @media (max-width: 640px) {
+      .app-bar {
+        /* Se recorta el aire de la barra para pagar los 44px de los botones
+           sin que la barra entera se hinche. */
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
+
+      .app-bar .addr {
+        max-width: 150px;
+      }
+
+      .app-tag {
+        display: none;
+      }
+
+      .app-acciones {
+        margin-left: auto;
+      }
+
+      /* 44px de lado, que es lo que pide un objetivo tactil. Con el tamano de
+         escritorio quedaban en 28-30px: se pulsan con el raton sin problema y
+         con el pulgar a medias. */
+      .app-btn {
+        min-height: 44px;
+        padding: 0.5rem 0.7rem;
+      }
+
+      #kvOtroSitio {
+        font-size: 0;
+        gap: 0;
+        min-width: 44px;
+        justify-content: center;
+        padding: 0.5rem;
+      }
+
+      #kvOtroSitio svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    /* ---- "¿No tienes cuenta?" en el modal de sesión ----------------------
+       Un enlace de texto, no un segundo botón: el registro de verdad está en
+       el panel y esto solo lleva hasta allí. Que parezca un botón competiría
+       con "Iniciar sesión", que es lo que la mayoría viene a hacer aquí. */
+    .kv-sesion-pie {
+      margin: 0.9rem 0 0;
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      text-align: center;
+    }
+
+    .kv-sesion-enlace {
+      font: inherit;
+      font-weight: 600;
+      color: var(--violet);
+      background: none;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .kv-sesion-enlace:hover {
+      text-decoration-thickness: 2px;
+    }
+
     .tl {
       width: 10px;
       height: 10px;
