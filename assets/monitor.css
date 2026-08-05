@@ -3402,7 +3402,10 @@
        sin libreria, que es el precio de no cargar una. */
 
     .kv-demo {
-      max-width: 940px;
+      /* 940px dejaba 300px de margen muerto a cada lado dentro del hero de
+         1240. Las referencias (attio, peec) llevan la ventana casi al ancho
+         del contenido: es el producto, tiene que dominar la pantalla. */
+      max-width: 1200px;
       margin: clamp(2.5rem, 6vw, 4.5rem) auto 0;
     }
 
@@ -3454,8 +3457,8 @@
 
     .kv-app-cuerpo {
       display: grid;
-      grid-template-columns: 148px minmax(0, 1fr);
-      min-height: 340px;
+      grid-template-columns: 172px minmax(0, 1fr);
+      min-height: 430px;
     }
 
     .kv-app-side {
@@ -3470,10 +3473,10 @@
     .kv-app-item {
       display: flex;
       align-items: center;
-      gap: .45rem;
-      padding: .5rem .55rem;
+      gap: .5rem;
+      padding: .6rem .7rem;
       border-radius: 8px;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 600;
       color: var(--ink-faint);
     }
@@ -3561,7 +3564,7 @@
        pasar de una a otra: si creciera, la pagina daria un salto. */
     .kv-app-vista {
       position: relative;
-      padding: 1rem 1.15rem;
+      padding: 1.4rem 1.6rem;
     }
 
     .kv-vista {
@@ -3570,7 +3573,7 @@
 
     .kv-vista:not(:first-child) {
       position: absolute;
-      inset: 1rem 1.15rem auto;
+      inset: 1.4rem 1.6rem auto;
     }
 
     .kv-vista[data-vista="resumen"] {
@@ -3716,7 +3719,7 @@
     /* ---- El cursor ----
        Viaja entre la pestana que toca y el hallazgo. Las coordenadas son de
        la esquina superior izquierda del marco, asi que si cambia el ancho de
-       la barra lateral (148px) hay que reajustar la X. */
+       la barra lateral (172px) hay que reajustar la X. Se sacan midiendo en el navegador, no a ojo. */
     .kv-cursor {
       position: absolute;
       top: 0;
@@ -3750,43 +3753,43 @@
 
       0%,
       10% {
-        transform: translate(300px, 210px);
+        transform: translate(430px, 250px);
       }
 
       /* a Pilares */
       16% {
-        transform: translate(58px, 92px);
+        transform: translate(63px, 116px);
       }
 
       19%,
       38% {
-        transform: translate(58px, 92px);
+        transform: translate(63px, 116px);
       }
 
       /* a Hallazgos */
       45% {
-        transform: translate(62px, 130px);
+        transform: translate(63px, 159px);
       }
 
       48%,
       57% {
-        transform: translate(62px, 130px);
+        transform: translate(63px, 159px);
       }
 
       /* al primer hallazgo */
       63% {
-        transform: translate(330px, 96px);
+        transform: translate(459px, 111px);
       }
 
       66%,
       86% {
-        transform: translate(330px, 96px);
+        transform: translate(459px, 111px);
       }
 
       /* de vuelta a Resumen */
       92%,
       100% {
-        transform: translate(58px, 56px);
+        transform: translate(63px, 74px);
       }
     }
 
@@ -3879,7 +3882,7 @@
 
     .kv-score-num {
       font-family: var(--display);
-      font-size: 2.6rem;
+      font-size: 3.2rem;
       font-weight: 800;
       letter-spacing: -.03em;
       line-height: 1;
@@ -3951,7 +3954,7 @@
 
     .kv-op b {
       display: block;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--ink);
     }
@@ -3959,7 +3962,7 @@
     .kv-op s {
       display: block;
       text-decoration: none;
-      font-size: 11px;
+      font-size: 12px;
       color: var(--ink-soft);
     }
 
@@ -3975,7 +3978,7 @@
 
     .kv-anillo svg {
       width: 100%;
-      max-width: 62px;
+      max-width: 82px;
       display: block;
       margin: 0 auto;
       transform: rotate(-90deg);
@@ -3989,17 +3992,17 @@
 
     .kv-anillo b {
       display: block;
-      margin-top: -2.4rem;
-      margin-bottom: 1.4rem;
+      margin-top: -3rem;
+      margin-bottom: 1.8rem;
       font-family: var(--display);
-      font-size: 1rem;
+      font-size: 1.25rem;
       font-weight: 800;
       color: var(--ink);
     }
 
     .kv-anillo span {
       display: block;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       color: var(--ink);
     }
@@ -4051,7 +4054,7 @@
     .kv-hall-cab b {
       flex: 1;
       min-width: 0;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--ink);
       line-height: 1.35;
@@ -4091,7 +4094,7 @@
 
     .kv-hall-txt {
       display: block;
-      font-size: 11.5px;
+      font-size: 12.5px;
       line-height: 1.5;
       color: var(--ink-soft);
     }
