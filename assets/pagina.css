@@ -2279,3 +2279,166 @@ html {
     height: auto;
   }
 }
+
+/* ============================================================
+   KIT DE RECURSOS VISUALES
+   ============================================================
+   No somos ilustradores, y no hace falta serlo: lo que hace atractivas a las
+   piezas de referencia (portfolios de diseñadores en Pinterest/Dribbble) casi
+   nunca es dibujo — es tipografía tratada como objeto gráfico. Cinco recursos,
+   reutilizables en las tres páginas de servicio y en el blog.
+
+   Los cinco heredan var(--violet) e var(--ink), así que dentro de
+   .section--dark y .section--violet se re-tematizan solos: no hay versión
+   oscura de cada uno que mantener aparte. */
+
+/* ---- 1. Marca: resalta la palabra que carga la frase -------------------
+   El recurso más repetido de todas las referencias: "From Junior to Senior",
+   "you have questions?". Un bloque de color detrás de una palabra. Se aplica
+   a un <mark> o <span class="marca"> dentro de un titular. */
+.marca {
+  background: var(--violet-soft);
+  color: var(--violet-ink);
+  padding: .05em .28em;
+  border-radius: .28em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.section--dark .marca,
+.section--violet .marca {
+  color: var(--ink);
+}
+
+/* Variante sólida, para cuando el titular necesita más peso que el tinte. */
+.marca-solida {
+  background: var(--violet);
+  color: #fff;
+  padding: .05em .3em;
+  border-radius: .28em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* ---- 2. Sello: etiqueta rotada, como pegada encima ----------------------
+   El "SALE", "#02", "01/09" de las referencias. Rotación fija y pequeña — no
+   tanto que parezca torcido por accidente. */
+.sello {
+  display: inline-flex;
+  align-items: center;
+  gap: .35em;
+  font-family: var(--display);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: #fff;
+  border: 1.5px solid var(--line-strong);
+  padding: .4em .75em;
+  border-radius: 8px;
+  transform: rotate(-3deg);
+  box-shadow: 0 6px 16px -6px rgba(15, 23, 42, .18);
+}
+
+.sello.sello-violeta {
+  background: var(--violet);
+  border-color: var(--violet);
+  color: #fff;
+  transform: rotate(3deg);
+}
+
+.section--dark .sello,
+.section--violet .sello {
+  background: var(--surface);
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+/* ---- 3. Cifra fantasma: número gigante de fondo -------------------------
+   Ordena la lectura de una sección sin añadir texto. Va como hermano del
+   contenido real, con position:absolute y el padre en position:relative. */
+.cifra-fantasma {
+  position: absolute;
+  top: -.15em;
+  right: clamp(.5rem, 3vw, 2rem);
+  font-family: var(--display);
+  font-size: clamp(5rem, 14vw, 11rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--ink);
+  opacity: .05;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.section--violet .cifra-fantasma {
+  color: #fff;
+  opacity: .12;
+}
+
+/* El contenido real necesita quedar por encima de la cifra. */
+.cifra-fantasma+* {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- 4. Malla de puntos: textura de fondo -------------------------------
+   Generaliza el patrón que ya usaba .serv-card::after (línea ~1922) para
+   que cualquier bloque lo pueda pedir con una sola clase, en vez de
+   reescribir el degradado radial cada vez. */
+.malla-puntos {
+  position: relative;
+}
+
+.malla-puntos::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, currentColor 1.2px, transparent 1.2px);
+  background-size: 16px 16px;
+  color: var(--violet);
+  opacity: .18;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section--dark .malla-puntos::before,
+.section--violet .malla-puntos::before {
+  opacity: .14;
+}
+
+/* Máscara en degradado: la trama se desvanece hacia el centro, para que no
+   compita con el texto que vaya encima. */
+.malla-puntos.malla-desvanece::before {
+  -webkit-mask-image: radial-gradient(ellipse at center, transparent 30%, #000 85%);
+  mask-image: radial-gradient(ellipse at center, transparent 30%, #000 85%);
+}
+
+/* ---- 5. Subrayado a mano: un trazo SVG bajo una palabra -----------------
+   La anotación de las referencias (flechas, círculos, subrayados torcidos)
+   sin dibujar nada: un único trazo curvo bajo el texto, dibujado con
+   background-image en línea. Va en un <span>. */
+.subrayado {
+  position: relative;
+  white-space: nowrap;
+}
+
+.subrayado::after {
+  content: '';
+  position: absolute;
+  left: -.05em;
+  right: -.05em;
+  bottom: -.12em;
+  height: .22em;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12' preserveAspectRatio='none'%3E%3Cpath d='M1 8.5 Q 25 2 50 6 T 99 4' fill='none' stroke='%238242f5' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+
+.section--dark .subrayado::after,
+.section--violet .subrayado::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12' preserveAspectRatio='none'%3E%3Cpath d='M1 8.5 Q 25 2 50 6 T 99 4' fill='none' stroke='%23ffffff' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+}
