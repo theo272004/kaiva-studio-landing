@@ -548,6 +548,30 @@
       flex-wrap: wrap;
     }
 
+    /* Los tres campos de crear cuenta (nombre, correo, contraseña). Grid y no
+       flex: con flex, un nombre largo escrito a mitad de camino reflow-ea
+       los tres campos de ancho de forma impredecible; con grid cada uno
+       tiene su carril fijo y solo cede en pantallas angostas. */
+    .kv-lead-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(160px, 1fr));
+      gap: .5rem;
+    }
+
+    .kv-lead-fila-btn {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      margin-top: .6rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 700px) {
+      .kv-lead-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .kv-lead-input {
       flex: 1 1 220px;
       min-width: 0;
