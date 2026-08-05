@@ -93,6 +93,20 @@
       padding: 0;
       box-sizing: border-box;
     }
+    /* Los controles de formulario no heredan la tipografia: el navegador les
+       pone la del sistema. Sin esta regla, en la portada salian en Arial el
+       boton "Enviar mensaje", los campos del formulario de contacto y los
+       botones del chat de la FAQ —once elementos— mientras el resto del sitio
+       iba en Inter. No se veia porque casi todos los botones del sitio son
+       enlaces <a>, y esos si heredan. Se deja el tamano fuera a proposito:
+       heredarlo tambien descuadraria campos que ya tienen el suyo. */
+    button,
+    input,
+    select,
+    textarea {
+      font-family: inherit;
+    }
+
 
     html {
       scroll-behavior: smooth;

@@ -87,6 +87,20 @@
       padding: 0;
       box-sizing: border-box;
     }
+      /* Los controles de formulario no heredan la tipografia: el navegador les
+         pone la del sistema. Sin esta regla salian en Arial el boton "Enviar
+         mensaje", los campos del formulario de contacto y los botones del chat
+         de la FAQ —once elementos— mientras el resto del sitio iba en Inter.
+         No se veia porque casi todos los botones son enlaces <a>, y esos si
+         heredan. El tamano se deja fuera a proposito: heredarlo tambien
+         descuadraria campos que ya tienen el suyo. */
+      button,
+      input,
+      select,
+      textarea {
+        font-family: inherit;
+      }
+
 
     html {
       scroll-behavior: smooth;
@@ -236,6 +250,12 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      /* Un <button> NO hereda la tipografia: sin esto toma la del sistema.
+         Se veia en "Enviar mensaje", el boton del formulario de contacto de la
+         portada, que salia en Arial mientras el resto del sitio va en Inter. No
+         se notaba porque todos los demas .btn son enlaces <a>, y esos si
+         heredan. */
+      font-family: inherit;
       font-size: 14.5px;
       font-weight: 600;
       letter-spacing: -0.01em;
