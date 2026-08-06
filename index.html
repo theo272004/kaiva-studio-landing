@@ -1258,6 +1258,10 @@
                       <div class="mnum"><span id="scoreGeneral" data-count="58">0</span><i>/100</i></div>
                     </div>
                     <div class="pn">Salud general</div>
+                    <!-- La letra que calcula scoring.php: 80 es A, 65 B, 50 C,
+                         30 D. 58 cae en C. Faltaba, y el texto de encima la
+                         promete. -->
+                    <div class="g-grado">Grado <b>C</b></div>
                     <div class="st">Necesita atención</div>
                   </div>
 
@@ -1341,6 +1345,7 @@
                     <div class="ft">
                       <div class="a">Tus correos corporativos se van a spam</div>
                       <div class="b">Tu dominio no tiene SPF: Gmail y Outlook desconfían.</div>
+                      <div class="ev">Evidencia &middot; tudominio.com &rarr; sin registro SPF</div>
                     </div>
                     <span class="sev sev-crit">Crítico</span>
                   </div>
@@ -1354,6 +1359,7 @@
                     <div class="ft">
                       <div class="a">Cualquiera puede enviar correos en tu nombre</div>
                       <div class="b">Sin DMARC, se envían correos en tu nombre.</div>
+                      <div class="ev">Evidencia &middot; _dmarc.tudominio.com &rarr; sin registro</div>
                     </div>
                     <span class="sev sev-high">Alto</span>
                   </div>
@@ -1368,6 +1374,7 @@
                     <div class="ft">
                       <div class="a">Tu link se ve vacío cuando lo comparten</div>
                       <div class="b">Falta la imagen para WhatsApp y redes (og:image).</div>
+                      <div class="ev">Evidencia &middot; &lt;meta og:image&gt; &rarr; ausente</div>
                     </div>
                     <span class="sev sev-high">Alto</span>
                   </div>

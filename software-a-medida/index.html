@@ -885,13 +885,38 @@
       margin-top: 2.6rem;
     }
 
+    /* Tarjeta, ya no una columna con una raya encima. La raya dejaba las
+       tres senales con el peso visual de una nota al pie, y son lo que hace
+       que alguien se reconozca en su propio problema: es la seccion que mas
+       trabaja de esta pagina. */
     .sint {
-      padding-top: 1.2rem;
-      border-top: 2px solid var(--line-strong);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: start;
+      column-gap: 1.1rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      padding: 1.5rem 1.6rem 1.7rem;
+      box-shadow: var(--shadow-md);
     }
+
+    .sint-ico {
+      grid-row: 1 / span 3;
+      width: 46px;
+      height: 46px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: var(--violet-soft);
+      color: var(--violet);   /* 5,2:1 sobre el violeta diluido: es un grafico, umbral 3:1 */
+    }
+
+    .sint-ico svg { width: 21px; height: 21px; }
 
     .sint-num {
       display: block;
+      align-self: center;
       font-family: var(--display);
       font-size: 13px;
       font-weight: 800;
@@ -1264,6 +1289,7 @@
 
         <div class="sint-grid">
           <article class="sint">
+            <span class="sint-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg></span>
             <span class="sint-num" aria-hidden="true">01</span>
             <h3>Hay un Excel del que depende media empresa</h3>
             <p>Lo abre una persona, lo edita otra, y nadie sabe cuál es la versión buena. Cuando esa
@@ -1271,6 +1297,7 @@
           </article>
 
           <article class="sint">
+            <span class="sint-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg></span>
             <span class="sint-num" aria-hidden="true">02</span>
             <h3>Los mismos datos se copian de un sitio a otro</h3>
             <p>Llega un pedido por WhatsApp, se pasa a una planilla, de ahí a la factura y de ahí al
@@ -1278,6 +1305,7 @@
           </article>
 
           <article class="sint">
+            <span class="sint-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 8v4l3 1.8"/></svg></span>
             <span class="sint-num" aria-hidden="true">03</span>
             <h3>Alguien dedica media jornada a algo que se repite</h3>
             <p>Armar el mismo informe cada lunes, revisar uno por uno qué pedidos entraron, mandar

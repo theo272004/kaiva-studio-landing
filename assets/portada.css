@@ -3152,15 +3152,45 @@
        arriba y uno solo abajo, que se lee como un error de maquetacion. La
        guia ocupa el ancho —que es lo que es, el resumen— y los cuatro pilares
        caen en 2x2, sin huerfanos. */
+    /* Los cuatro pilares en UNA fila, no en 2x2. Con 2x2 y anillos de 90px
+       esta tarjeta se hacia altisima y la de hallazgos —que es corta— se
+       estiraba vacia a su lado. En fila las dos columnas se parecen. */
     .gauges {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.8rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.7rem;
       align-items: stretch;
     }
 
     .gauges .lead-cell {
       grid-column: 1 / -1;
+    }
+
+    /* El anillo de los pilares se encoge; el general se queda grande, que es
+       el numero que la gente busca primero. */
+    .g-cell:not(.lead-cell) .marc { max-width: 64px; }
+
+    .g-grado {
+      font-family: var(--display);
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--ink-soft);
+      margin-top: .2rem;
+    }
+
+    .g-grado b {
+      font-weight: 800;
+      color: var(--violet-ink);   /* 6,2:1 sobre el violeta diluido de la tarjeta */
+    }
+
+    /* La evidencia. Es lo que separa este informe de una opinion, y el texto
+       de arriba la promete: sin ella la maqueta desmentia al copy. */
+    .find .ev {
+      display: block;
+      margin-top: .3rem;
+      font-size: 11.5px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--ink-faint);
     }
 
     .g-cell {
@@ -3280,9 +3310,9 @@
 
     .find {
       display: flex;
-      align-items: center;
+      align-items: flex-start;   /* con la evidencia son tres lineas: el icono va arriba */
       gap: 0.85rem;
-      padding: 0.7rem 0;
+      padding: 0.75rem 0;
       border-bottom: 1px solid rgba(15, 23, 42, 0.05);
     }
 
@@ -4484,8 +4514,11 @@
         grid-template-columns: 1fr
       }
 
+      /* De dos en dos: con una sola columna los cuatro pilares apilados
+         llevaban esta maqueta a 1.814px de alto, cuatro pantallas de scroll
+         para pasar de largo un adorno. */
       .gauges {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: .7rem
       }
 
