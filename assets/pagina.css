@@ -1397,6 +1397,142 @@ html {
 }
 
 /* ============================================================
+   CABECERA DE ARTÍCULO — titular a la izquierda, portada a la derecha
+   ============================================================
+
+   Antes el artículo abría en una sola columna (fecha, titular, bajada) y
+   la portada solo existía en el listado: quien entraba desde Google no
+   la veía nunca. Ahora abre a dos columnas sobre una banda de violeta
+   diluido, el mismo --violet-soft que ya usan .nota y las etiquetas.
+   Nada de crema ni de colores nuevos: la paleta no se toca.
+
+   El texto manda sobre la imagen, y por eso:
+   · la columna del texto es más ancha (1.15fr contra .85fr);
+   · la portada se recorta a 16/10, más panorámica que el alto natural
+     de algunos archivos, para que no crezca por encima del titular.
+   El recorte es con object-fit:cover — la imagen nunca se deforma, y
+   por eso da igual que los archivos vengan en 2:1, 3:2 o cuadrados.
+
+   Contraste sobre la banda (medido aplanando la transparencia, que da
+   #f8f4fe): --ink-faint se queda en 4,39:1 y no llega al 4,5:1 de AA.
+   Por eso la fecha y las migas, que en blanco van con --ink-faint, aquí
+   suben a --ink-soft (6,99:1). Los enlaces de la bajada usan
+   --violet-ink (6,25:1) en vez de --violet (4,78:1, justito). */
+
+.post-cabecera {
+  background: var(--violet-soft);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* Las migas entran dentro de la banda: si se quedaban fuera, aparecía una
+   franja blanca de un renglón entre el nav y el fondo violeta. */
+.post-cabecera .migas {
+  color: var(--ink-soft);
+  margin-bottom: clamp(1.8rem, 4vw, 3rem);
+}
+
+.post-cabecera .migas a {
+  color: var(--ink-soft);
+}
+
+.post-cabecera-in {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1.8rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+/* Por debajo de 900px se apila, y el texto va primero: la persona llegó
+   por el titular, no por la foto. */
+@media (min-width: 900px) {
+  .post-cabecera-in {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  }
+}
+
+/* Tope de medida: en un monitor ancho la bajada no debe estirarse hasta
+   renglones de treinta palabras. */
+.post-cabecera-texto {
+  max-width: 46rem;
+}
+
+.post-cabecera .fecha {
+  color: var(--ink-soft);
+  margin-bottom: 1rem;
+}
+
+/* Estos valores vivían en el atributo style de cada uno de los diez
+   titulares. Copiados tal cual: el titular se ve igual que antes. */
+.post-titulo {
+  font-family: var(--display);
+  font-size: clamp(1.9rem, 4.6vw, 3rem);
+  font-weight: 800;
+  line-height: 1.13;
+  letter-spacing: -.03em;
+  text-wrap: balance;
+  margin-bottom: 1.3rem;
+}
+
+/* La bajada ya no está dentro de .articulo, así que hereda sus medidas
+   pero no la línea de separación: aquí quien separa es la banda. */
+.post-cabecera .lead {
+  font-size: 1.15rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+  margin: 0;
+}
+
+.post-cabecera .lead a {
+  color: var(--violet-ink);
+  font-weight: 650;
+}
+
+.post-cabecera-foto {
+  margin: 0;
+}
+
+.post-cabecera-foto img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+}
+
+/* Apilada, la portada se achata. Medido en pantalla: a 834px de ancho, con
+   el 16/10 de escritorio, la foto salía de 767x479 y se comía media
+   pantalla —justo lo que había que evitar: la imagen mandando sobre el
+   titular—. El tope de alto la deja en banda panorámica sin deformarla
+   (sigue recortando con cover), y en móvil no llega a activarse porque el
+   16/9 de 375px ya da 188px. */
+@media (max-width: 899.98px) {
+  .post-cabecera-foto img {
+    aspect-ratio: 16 / 9;
+    max-height: 320px;
+    border-radius: var(--r-md);
+  }
+}
+
+.post-cuerpo {
+  padding-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+/* El índice lateral entraba 9rem más abajo «para no competir con el
+   titular». Con la cabecera nueva el titular ya no está en esa columna,
+   así que ese hueco no tiene nada que compensar. Se acota con :has() a
+   las páginas que llevan la cabecera nueva para no descolocar a las que
+   sigan abriendo en una sola columna. */
+@media (min-width: 1100px) {
+  body:has(.post-cabecera) .indice {
+    margin-top: 0;
+  }
+}
+
+/* ============================================================
    BLOG — índice
    Estructura de blog de verdad: portada centrada, buscador, filtros por
    categoría, un destacado grande y una rejilla de tarjetas con portada.

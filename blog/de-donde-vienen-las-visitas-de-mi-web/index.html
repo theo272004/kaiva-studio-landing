@@ -53,7 +53,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260805v">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260806c">
 
   <script type="application/ld+json">
 {
@@ -171,18 +171,20 @@
   </nav>
 
   <div class="wrap">
-    <nav class="migas" aria-label="Ruta de navegación">
-      <a href="/">Inicio</a><span>/</span><a href="/blog/">Blog</a><span>/</span>De dónde vienen tus visitas
-    </nav>
   </div>
 
   <main>
-    <article class="section" style="padding-top:2.5rem">
-      <div class="wrap">
-        <div class="articulo">
-          <p class="fecha"><time datetime="2026-08-06">6 de agosto de 2026</time> · Lectura de 8 minutos</p>
+    <article>
 
-          <h1 style="font-family:var(--display);font-size:clamp(1.9rem,4.6vw,3rem);font-weight:800;line-height:1.13;letter-spacing:-.03em;text-wrap:balance;margin-bottom:1.3rem">
+      <header class="post-cabecera">
+        <div class="wrap">
+    <nav class="migas" aria-label="Ruta de navegación">
+      <a href="/">Inicio</a><span>/</span><a href="/blog/">Blog</a><span>/</span>De dónde vienen tus visitas
+    </nav>
+          <div class="post-cabecera-in">
+            <div class="post-cabecera-texto">
+          <p class="fecha"><time datetime="2026-08-06">6 de agosto de 2026</time> · Lectura de 8 minutos</p>
+              <h1 class="post-titulo">
             Analytics no te dice de dónde vienen tus visitas<span style="color:var(--violet)">.</span>
             Esto es lo que encontramos al mirarlo de cerca
           </h1>
@@ -191,6 +193,21 @@
             igual que antes. No es que estés leyendo mal el informe: es que esas etiquetas esconden
             justo lo que querías saber. Lo comprobamos midiendo nuestro propio sitio, y esto es lo que
             salió.</p>
+            </div>
+
+            <figure class="post-cabecera-foto">
+              <img src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837"
+                fetchpriority="high" decoding="async">
+            </figure>
+          </div>
+        </div>
+      </header>
+
+      <div class="section post-cuerpo">
+      <div class="wrap">
+        <div class="articulo">
+
+
 
           <p>Todo lo que hay aquí abajo lo verificamos nosotros construyendo el panel con el que
             seguimos nuestros propios números. No son buenas prácticas leídas en otro lado: son cosas
@@ -326,6 +343,7 @@
           </div>
         </div>
       </div>
+    </div>
     </article>
 
 

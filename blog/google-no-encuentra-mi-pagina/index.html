@@ -53,7 +53,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260805v">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260806c">
 
   <script type="application/ld+json">
 {
@@ -144,226 +144,240 @@
     </div>
   </nav>
 
-  <div class="wrap">
-    <nav class="migas" aria-label="Ruta de navegación">
-      <a href="/">Inicio</a><span>/</span><a href="/blog/">Blog</a><span>/</span>Mi página no aparece en Google
-    </nav>
-  </div>
-
   <main>
-    <article class="section" style="padding-top:2.5rem">
-      <div class="wrap">
-        <div class="articulo">
-          <p class="fecha"><time datetime="2026-07-28">28 de julio de 2026</time> · Lectura de 8 minutos</p>
+    <article>
 
-          <h1
-            style="font-family:var(--display);font-size:clamp(1.9rem,4.6vw,3rem);font-weight:800;line-height:1.13;letter-spacing:-.03em;text-wrap:balance;margin-bottom:1.3rem">
-            Mi página no aparece en Google<span style="color:var(--violet)">.</span>
-          </h1>
+      <header class="post-cabecera">
+        <div class="wrap">
+          <nav class="migas" aria-label="Ruta de navegación">
+            <a href="/">Inicio</a><span>/</span><a href="/blog/">Blog</a><span>/</span>Mi página no aparece en Google
+          </nav>
 
-          <p class="lead"><a href="/blog/cuanto-cuesta-una-pagina-web-en-colombia/">Pagaste una página
-              web</a>. Está bonita, carga bien, tus amigos la vieron. Buscas
-            el nombre de tu empresa en Google y no sale nada. Antes de contratar a alguien que te
-            «posicione», vale la pena descartar siete cosas — y varias se arreglan en una tarde.</p>
+          <div class="post-cabecera-in">
+            <div class="post-cabecera-texto">
+              <p class="fecha"><time datetime="2026-07-28">28 de julio de 2026</time> · Lectura de 8 minutos</p>
 
-          <h2>Primero: comprueba si Google siquiera la tiene</h2>
+              <h1 class="post-titulo">
+                Mi página no aparece en Google<span style="color:var(--violet)">.</span>
+              </h1>
 
-          <p>Hay una diferencia enorme entre «no salgo de primero» y «Google no sabe que existo», y la
-            gente suele confundirlas. La segunda es mucho más grave y mucho más fácil de comprobar.</p>
+              <p class="lead"><a href="/blog/cuanto-cuesta-una-pagina-web-en-colombia/">Pagaste una página
+                web</a>. Está bonita, carga bien, tus amigos la vieron. Buscas
+                el nombre de tu empresa en Google y no sale nada. Antes de contratar a alguien que te
+                «posicione», vale la pena descartar siete cosas — y varias se arreglan en una tarde.</p>
+            </div>
 
-          <p>Busca esto en Google, con tu dominio y <strong>sin espacio después de los dos puntos</strong>:</p>
-
-          <p style="text-align:center;margin:1.4rem 0"><code>site:tuempresa.com</code></p>
-
-          <ul>
-            <li><strong>Salen resultados</strong> → Google sí te tiene. Tu problema es de posición, no
-              de existencia. Salta a las causas 5, 6 y 7.</li>
-            <li><strong>No sale nada</strong> → Google no tiene tu sitio. Ninguna estrategia de
-              contenidos va a servir hasta resolver esto. Sigue leyendo desde la causa 1.</li>
-          </ul>
-
-          <h2>1. Una etiqueta que le prohíbe a Google mostrarte</h2>
-
-          <p>Es la causa más común de las graves, y la más frustrante: se arregla borrando una línea.</p>
-
-          <p>Mientras un sitio está en construcción se le suele poner una instrucción llamada
-            <code>noindex</code>, que le pide a los buscadores que no lo muestren. Tiene sentido: nadie
-            quiere que Google indexe una web a medio hacer. El problema es que
-            <strong>hay que quitarla al publicar</strong>, y ese paso se olvida con una frecuencia que
-            sorprende.</p>
-
-          <p>El síntoma es exactamente el que estás viviendo: la web funciona perfecto para cualquier
-            visitante, se ve bien, carga rápido — y es invisible en Google. Puedes pasar meses pagando
-            publicidad y contenido sin que nada funcione, porque la puerta está cerrada por dentro.</p>
-
-          <div class="nota">
-            <p><strong>Cómo comprobarlo tú mismo:</strong> abre tu web, haz clic derecho y elige «Ver
-              código fuente de la página». Busca la palabra <code>noindex</code> con Ctrl+F. Si aparece,
-              ahí está tu problema. Quien te maneja la web lo quita en minutos.</p>
+            <figure class="post-cabecera-foto">
+              <img src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio oscuro mostrando una página de resultados de búsqueda de Google" width="1879" height="837"
+                fetchpriority="high" decoding="async">
+            </figure>
           </div>
+        </div>
+      </header>
 
-          <h2>2. El archivo robots.txt está bloqueando el sitio</h2>
+      <div class="section post-cuerpo">
+        <div class="wrap">
+          <div class="articulo">
 
-          <p>Todo sitio tiene (o debería tener) un archivo llamado <code>robots.txt</code> en la raíz.
-            Es un cartel en la puerta que le dice a los buscadores por dónde pueden pasar. Puedes ver el
-            tuyo escribiendo <code>tuempresa.com/robots.txt</code> en el navegador.</p>
+            <h2>Primero: comprueba si Google siquiera la tiene</h2>
 
-          <p>El caso peligroso es este:</p>
+            <p>Hay una diferencia enorme entre «no salgo de primero» y «Google no sabe que existo», y la
+              gente suele confundirlas. La segunda es mucho más grave y mucho más fácil de comprobar.</p>
 
-          <p style="text-align:center;margin:1.4rem 0"><code>User-agent: *</code><br><code>Disallow: /</code></p>
+            <p>Busca esto en Google, con tu dominio y <strong>sin espacio después de los dos puntos</strong>:</p>
 
-          <p>Esas dos líneas significan «ningún buscador puede recorrer nada de este sitio». Igual que
-            el <code>noindex</code>, suele ser un resto del desarrollo que nadie quitó.</p>
+            <p style="text-align:center;margin:1.4rem 0"><code>site:tuempresa.com</code></p>
 
-          <p>Ojo con no confundirse: <code>Disallow: /admin</code> o <code>Disallow: /carrito</code> son
-            normales y correctos —hay zonas que no tiene sentido indexar—. El problema es únicamente la
-            barra sola.</p>
+            <ul>
+              <li><strong>Salen resultados</strong> → Google sí te tiene. Tu problema es de posición, no
+                de existencia. Salta a las causas 5, 6 y 7.</li>
+              <li><strong>No sale nada</strong> → Google no tiene tu sitio. Ninguna estrategia de
+                contenidos va a servir hasta resolver esto. Sigue leyendo desde la causa 1.</li>
+            </ul>
 
-          <!-- Va después de las dos causas «de bloqueo» y antes de las de
-               espera: es la mitad del artículo y el punto donde cambia el tipo
-               de problema, no un adorno al principio. -->
-          <figure style="margin:2.4rem 0">
-            <img src="/assets/blog/visibilidad.webp"
-              alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas"
-              width="1879" height="837" loading="lazy" decoding="async"
-              style="display:block;width:100%;height:auto;border-radius:14px">
-          </figure>
+            <h2>1. Una etiqueta que le prohíbe a Google mostrarte</h2>
 
-          <h2>3. Tu sitio es nuevo y nadie le ha dicho a Google que existe</h2>
+            <p>Es la causa más común de las graves, y la más frustrante: se arregla borrando una línea.</p>
 
-          <p>Google no revisa internet entero cada mañana buscando páginas nuevas. Llega a los sitios
-            porque otros los enlazan, o porque el dueño se lo avisa.</p>
+            <p>Mientras un sitio está en construcción se le suele poner una instrucción llamada
+              <code>noindex</code>, que le pide a los buscadores que no lo muestren. Tiene sentido: nadie
+              quiere que Google indexe una web a medio hacer. El problema es que
+              <strong>hay que quitarla al publicar</strong>, y ese paso se olvida con una frecuencia que
+              sorprende.</p>
 
-          <p>Si tu web se publicó hace dos semanas, nadie la enlaza todavía y nunca la registraste en
-            Search Console, es normal que no aparezca. No está rota: está esperando turno.</p>
+            <p>El síntoma es exactamente el que estás viviendo: la web funciona perfecto para cualquier
+              visitante, se ve bien, carga rápido — y es invisible en Google. Puedes pasar meses pagando
+              publicidad y contenido sin que nada funcione, porque la puerta está cerrada por dentro.</p>
 
-          <p>La solución es gratis y toma quince minutos: registra el sitio en
-            <a href="https://search.google.com/search-console" target="_blank" rel="noopener">Google
-              Search Console</a>, verifica que es tuyo y envía tu sitemap. Search Console además es la
-            única fuente confiable para saber después en qué posición apareces de verdad.</p>
+            <div class="nota">
+              <p><strong>Cómo comprobarlo tú mismo:</strong> abre tu web, haz clic derecho y elige «Ver
+                código fuente de la página». Busca la palabra <code>noindex</code> con Ctrl+F. Si aparece,
+                ahí está tu problema. Quien te maneja la web lo quita en minutos.</p>
+            </div>
 
-          <h2>4. No hay sitemap, o el que hay está roto</h2>
+            <h2>2. El archivo robots.txt está bloqueando el sitio</h2>
 
-          <p>El sitemap es la lista de las páginas de tu sitio en un formato que los buscadores leen.
-            Sin él, Google tiene que descubrir tus páginas navegando enlace por enlace, y las que están
-            poco enlazadas pueden quedarse fuera durante mucho tiempo.</p>
+            <p>Todo sitio tiene (o debería tener) un archivo llamado <code>robots.txt</code> en la raíz.
+              Es un cartel en la puerta que le dice a los buscadores por dónde pueden pasar. Puedes ver el
+              tuyo escribiendo <code>tuempresa.com/robots.txt</code> en el navegador.</p>
 
-          <p>Míralo en <code>tuempresa.com/sitemap.xml</code>. La mayoría de gestores de contenido lo
-            generan solos o con un plugin gratuito. Una vez exista, se envía desde Search Console.</p>
+            <p>El caso peligroso es este:</p>
 
-          <h2>5. Compites contra tu propia página</h2>
+            <p style="text-align:center;margin:1.4rem 0"><code>User-agent: *</code><br><code>Disallow: /</code></p>
 
-          <p>Aquí ya pasamos a los casos de «sí aparezco, pero mal».</p>
+            <p>Esas dos líneas significan «ningún buscador puede recorrer nada de este sitio». Igual que
+              el <code>noindex</code>, suele ser un resto del desarrollo que nadie quitó.</p>
 
-          <p>Tu web puede ser accesible por varias direcciones distintas: con <code>www</code> y sin
-            <code>www</code>, con <code>http</code> y con <code>https</code>, con barra final y sin
-            ella. Si esas variantes no se unifican, Google puede tratarlas como sitios diferentes con el
-            mismo contenido, y repartir tu fuerza entre todas en vez de sumarla.</p>
+            <p>Ojo con no confundirse: <code>Disallow: /admin</code> o <code>Disallow: /carrito</code> son
+              normales y correctos —hay zonas que no tiene sentido indexar—. El problema es únicamente la
+              barra sola.</p>
 
-          <p>Se resuelve con dos cosas: que todas las variantes redirijan a una sola, y una etiqueta
-            <code>canonical</code> que declare cuál es la dirección oficial de cada página.</p>
+            <!-- Va después de las dos causas «de bloqueo» y antes de las de
+                 espera: es la mitad del artículo y el punto donde cambia el tipo
+                 de problema, no un adorno al principio. -->
+            <figure style="margin:2.4rem 0">
+              <img src="/assets/blog/visibilidad.webp"
+                alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas"
+                width="1879" height="837" loading="lazy" decoding="async"
+                style="display:block;width:100%;height:auto;border-radius:14px">
+            </figure>
 
-          <h2>6. Estás buscando algo que nadie más busca</h2>
+            <h2>3. Tu sitio es nuevo y nadie le ha dicho a Google que existe</h2>
 
-          <p>Esta no es un fallo técnico, sino de expectativa, y explica muchas frustraciones.</p>
+            <p>Google no revisa internet entero cada mañana buscando páginas nuevas. Llega a los sitios
+              porque otros los enlazan, o porque el dueño se lo avisa.</p>
 
-          <p>Si tu empresa se llama «Soluciones Integrales del Caribe» y buscas eso, deberías aparecer.
-            Pero si esperas salir por «página web barranquilla», estás compitiendo contra empresas que
-            llevan años trabajando ese término. Un sitio nuevo no gana ese pulso en dos meses, y quien
-            te prometa lo contrario está vendiendo humo.</p>
+            <p>Si tu web se publicó hace dos semanas, nadie la enlaza todavía y nunca la registraste en
+              Search Console, es normal que no aparezca. No está rota: está esperando turno.</p>
 
-          <p>El camino real es empezar por lo específico —tu nombre, tu servicio exacto, tu barrio— e ir
-            ampliando. Y si vendes local, tu prioridad ni siquiera es esta:
-            <a href="/blog/como-aparecer-en-google-maps/">es el mapa</a>, donde la competencia suele
-            estar mucho más floja.</p>
+            <p>La solución es gratis y toma quince minutos: registra el sitio en
+              <a href="https://search.google.com/search-console" target="_blank" rel="noopener">Google
+                Search Console</a>, verifica que es tuyo y envía tu sitemap. Search Console además es la
+              única fuente confiable para saber después en qué posición apareces de verdad.</p>
 
-          <h2>7. Tienes una penalización o el dominio venía con historia</h2>
+            <h2>4. No hay sitemap, o el que hay está roto</h2>
 
-          <p>Es el caso menos frecuente, pero existe. Si compraste un dominio de segunda mano, puede
-            arrastrar el pasado de quien lo tuvo antes. Y si en algún momento alguien «te ayudó» con
-            técnicas agresivas de posicionamiento, es posible que haya una acción manual encima.</p>
+            <p>El sitemap es la lista de las páginas de tu sitio en un formato que los buscadores leen.
+              Sin él, Google tiene que descubrir tus páginas navegando enlace por enlace, y las que están
+              poco enlazadas pueden quedarse fuera durante mucho tiempo.</p>
 
-          <p>Search Console te lo dice en su sección de <em>Acciones manuales</em>. Si está vacía, no es
-            tu caso — y en la enorme mayoría de las veces está vacía. Antes de asumir un castigo, revisa
-            las seis causas anteriores.</p>
+            <p>Míralo en <code>tuempresa.com/sitemap.xml</code>. La mayoría de gestores de contenido lo
+              generan solos o con un plugin gratuito. Una vez exista, se envía desde Search Console.</p>
 
-          <h2>El orden en que conviene revisarlo</h2>
+            <h2>5. Compites contra tu propia página</h2>
 
-          <div style="overflow-x:auto;margin-top:1.4rem">
-            <table>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Revisar</th>
-                  <th>Cuánto toma arreglarlo</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Etiqueta <code>noindex</code></td>
-                  <td>Minutos</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td><code>robots.txt</code> bloqueando</td>
-                  <td>Minutos</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Registro en Search Console</td>
-                  <td>15 minutos</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Sitemap</td>
-                  <td>Una tarde</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>Redirecciones y canonical</td>
-                  <td>Una tarde</td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>Expectativa de palabras</td>
-                  <td>Meses de trabajo</td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>Penalizaciones</td>
-                  <td>Depende</td>
-                </tr>
-              </tbody>
-            </table>
+            <p>Aquí ya pasamos a los casos de «sí aparezco, pero mal».</p>
+
+            <p>Tu web puede ser accesible por varias direcciones distintas: con <code>www</code> y sin
+              <code>www</code>, con <code>http</code> y con <code>https</code>, con barra final y sin
+              ella. Si esas variantes no se unifican, Google puede tratarlas como sitios diferentes con el
+              mismo contenido, y repartir tu fuerza entre todas en vez de sumarla.</p>
+
+            <p>Se resuelve con dos cosas: que todas las variantes redirijan a una sola, y una etiqueta
+              <code>canonical</code> que declare cuál es la dirección oficial de cada página.</p>
+
+            <h2>6. Estás buscando algo que nadie más busca</h2>
+
+            <p>Esta no es un fallo técnico, sino de expectativa, y explica muchas frustraciones.</p>
+
+            <p>Si tu empresa se llama «Soluciones Integrales del Caribe» y buscas eso, deberías aparecer.
+              Pero si esperas salir por «página web barranquilla», estás compitiendo contra empresas que
+              llevan años trabajando ese término. Un sitio nuevo no gana ese pulso en dos meses, y quien
+              te prometa lo contrario está vendiendo humo.</p>
+
+            <p>El camino real es empezar por lo específico —tu nombre, tu servicio exacto, tu barrio— e ir
+              ampliando. Y si vendes local, tu prioridad ni siquiera es esta:
+              <a href="/blog/como-aparecer-en-google-maps/">es el mapa</a>, donde la competencia suele
+              estar mucho más floja.</p>
+
+            <h2>7. Tienes una penalización o el dominio venía con historia</h2>
+
+            <p>Es el caso menos frecuente, pero existe. Si compraste un dominio de segunda mano, puede
+              arrastrar el pasado de quien lo tuvo antes. Y si en algún momento alguien «te ayudó» con
+              técnicas agresivas de posicionamiento, es posible que haya una acción manual encima.</p>
+
+            <p>Search Console te lo dice en su sección de <em>Acciones manuales</em>. Si está vacía, no es
+              tu caso — y en la enorme mayoría de las veces está vacía. Antes de asumir un castigo, revisa
+              las seis causas anteriores.</p>
+
+            <h2>El orden en que conviene revisarlo</h2>
+
+            <div style="overflow-x:auto;margin-top:1.4rem">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Revisar</th>
+                    <th>Cuánto toma arreglarlo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Etiqueta <code>noindex</code></td>
+                    <td>Minutos</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td><code>robots.txt</code> bloqueando</td>
+                    <td>Minutos</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Registro en Search Console</td>
+                    <td>15 minutos</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Sitemap</td>
+                    <td>Una tarde</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Redirecciones y canonical</td>
+                    <td>Una tarde</td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>Expectativa de palabras</td>
+                    <td>Meses de trabajo</td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td>Penalizaciones</td>
+                    <td>Depende</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p style="margin-top:1.2rem">Fíjate en que las cinco primeras son técnicas y baratas. Si
+              alguien te ofrece un contrato mensual de posicionamiento sin haber revisado esto,
+              <strong>está vendiéndote meses de trabajo sobre una puerta cerrada</strong>.</p>
+
+            <div class="nota">
+              <p><strong>La pregunta que conviene hacerle a
+                  <a href="/blog/mejores-agencias-diseno-web-barranquilla/">cualquier agencia</a> antes de
+                  firmar:</strong>
+                «¿mi sitio está indexado y qué encontraron al revisarlo?». Si la respuesta es vaga o pasan
+                directo a hablar de contenidos y redes, ya sabes cuánto miraron.</p>
+            </div>
+
+            <h2>En resumen</h2>
+
+            <ul>
+              <li>Primero comprueba con <code>site:tudominio.com</code> si Google te tiene o no. Cambia
+                todo el diagnóstico.</li>
+              <li>Las dos causas más comunes —<code>noindex</code> y <code>robots.txt</code>— se arreglan
+                en minutos y dejan un sitio completamente invisible.</li>
+              <li>Un sitio nuevo simplemente puede estar esperando. Search Console acelera eso, y es
+                gratis.</li>
+              <li>No aparecer por un término muy competido no es una falla técnica, es una expectativa
+                mal puesta.</li>
+              <li>Nadie debería venderte posicionamiento sin haber revisado antes los cinco primeros
+                puntos.</li>
+            </ul>
           </div>
-
-          <p style="margin-top:1.2rem">Fíjate en que las cinco primeras son técnicas y baratas. Si
-            alguien te ofrece un contrato mensual de posicionamiento sin haber revisado esto,
-            <strong>está vendiéndote meses de trabajo sobre una puerta cerrada</strong>.</p>
-
-          <div class="nota">
-            <p><strong>La pregunta que conviene hacerle a
-                <a href="/blog/mejores-agencias-diseno-web-barranquilla/">cualquier agencia</a> antes de
-                firmar:</strong>
-              «¿mi sitio está indexado y qué encontraron al revisarlo?». Si la respuesta es vaga o pasan
-              directo a hablar de contenidos y redes, ya sabes cuánto miraron.</p>
-          </div>
-
-          <h2>En resumen</h2>
-
-          <ul>
-            <li>Primero comprueba con <code>site:tudominio.com</code> si Google te tiene o no. Cambia
-              todo el diagnóstico.</li>
-            <li>Las dos causas más comunes —<code>noindex</code> y <code>robots.txt</code>— se arreglan
-              en minutos y dejan un sitio completamente invisible.</li>
-            <li>Un sitio nuevo simplemente puede estar esperando. Search Console acelera eso, y es
-              gratis.</li>
-            <li>No aparecer por un término muy competido no es una falla técnica, es una expectativa
-              mal puesta.</li>
-            <li>Nadie debería venderte posicionamiento sin haber revisado antes los cinco primeros
-              puntos.</li>
-          </ul>
         </div>
       </div>
     </article>

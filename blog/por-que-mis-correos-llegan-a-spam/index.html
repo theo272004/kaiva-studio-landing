@@ -53,7 +53,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260805v">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260806c">
 
   <script type="application/ld+json">
 {
@@ -159,347 +159,362 @@
     </div>
   </nav>
 
-  <div class="wrap">
-    <nav class="migas" aria-label="Ruta de navegación">
-      <a href="/">Inicio</a><span>/</span><a href="/blog/">Blog</a><span>/</span>Por qué mis correos llegan a spam
-    </nav>
-  </div>
-
   <main>
-    <article class="section" style="padding-top:2.5rem">
-      <div class="wrap">
-        <div class="articulo">
-          <p class="fecha"><time datetime="2026-07-25">25 de julio de 2026</time> · Lectura de 9 minutos</p>
+    <article>
 
-          <h1 style="font-family:var(--display);font-size:clamp(1.9rem,4.6vw,3rem);font-weight:800;line-height:1.13;letter-spacing:-.03em;text-wrap:balance;margin-bottom:1.3rem">
-            ¿Por qué mis correos llegan a spam<span style="color:var(--violet)">?</span>
-          </h1>
+      <header class="post-cabecera">
+        <div class="wrap">
+          <nav class="migas" aria-label="Ruta de navegación">
+            <a href="/">Inicio</a><span>/</span><a href="/blog/">Blog</a><span>/</span>Por qué mis correos llegan a spam
+          </nav>
 
-          <p class="lead">Le escribiste a un cliente una cotización y nunca respondió. No fue
-            desinterés: tu correo cayó en spam y ninguno de los dos se enteró. Este artículo explica
-            por qué pasa, y cómo revisarlo tú mismo en tres minutos sin instalar nada.</p>
+          <div class="post-cabecera-in">
+            <div class="post-cabecera-texto">
+              <p class="fecha"><time datetime="2026-07-25">25 de julio de 2026</time> · Lectura de 9 minutos</p>
 
-          <p>La mayoría de la gente cree que el spam se decide por lo que dice el mensaje —que si
-            escribiste «gratis», que si pusiste muchos signos de admiración. Eso era verdad hace
-            quince años. Hoy la decisión se toma <strong>antes de leer una sola palabra</strong>, y se
-            toma sobre tu dominio, no sobre tu texto.</p>
+              <h1 class="post-titulo">
+                ¿Por qué mis correos llegan a spam<span style="color:var(--violet)">?</span>
+              </h1>
 
-          <p>La pregunta que se hace el servidor de Gmail cuando llega tu correo es más simple: «¿este
-            mensaje viene de verdad de quien dice venir?». Si tu dominio no responde esa pregunta, el
-            mensaje entra marcado como sospechoso pase lo que pase.</p>
+              <p class="lead">Le escribiste a un cliente una cotización y nunca respondió. No fue
+                desinterés: tu correo cayó en spam y ninguno de los dos se enteró. Este artículo explica
+                por qué pasa, y cómo revisarlo tú mismo en tres minutos sin instalar nada.</p>
+            </div>
 
-          <!-- La imagen entra aquí, antes de la tanda de requisitos y tablas:
-               es el punto donde el artículo pasa de contar el problema a
-               enumerar normas, y donde la lectura se cae si no hay respiro. -->
-          <figure style="margin:2.4rem 0">
-            <img src="/assets/blog/correo.webp"
-              alt="Barra lateral de un gestor de correo con la carpeta Spam resaltada y 372 mensajes acumulados"
-              width="1774" height="887" loading="lazy" decoding="async"
-              style="display:block;width:100%;height:auto;border-radius:14px">
-          </figure>
-
-          <h2>Lo que cambió en 2024</h2>
-
-          <p>Durante años, autenticar el correo fue una buena práctica opcional. En febrero de 2024
-            dejó de serlo. Google y Yahoo empezaron a exigir requisitos mínimos a todo el que les
-            envíe correo, y a rechazar o mandar a spam lo que no los cumpla.</p>
-
-          <p>Estos son los requisitos vigentes, según la
-            <a href="https://support.google.com/a/answer/81126" target="_blank" rel="noopener">guía
-              oficial de Google para remitentes de correo</a>:</p>
-
-          <div style="overflow-x:auto;margin-top:1.4rem">
-            <table>
-              <thead>
-                <tr>
-                  <th>Requisito</th>
-                  <th>Todos los remitentes</th>
-                  <th>Más de 5.000 mensajes diarios a Gmail</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Autenticación del dominio</td>
-                  <td>SPF <em>o</em> DKIM</td>
-                  <td>SPF <strong>y</strong> DKIM <strong>y</strong> DMARC</td>
-                </tr>
-                <tr>
-                  <td>Alineación DMARC</td>
-                  <td>—</td>
-                  <td>El dominio del «De:» debe alinear con SPF o DKIM</td>
-                </tr>
-                <tr>
-                  <td>Registro PTR (DNS inverso)</td>
-                  <td>Obligatorio</td>
-                  <td>Obligatorio</td>
-                </tr>
-                <tr>
-                  <td>Conexión cifrada TLS</td>
-                  <td>Obligatoria</td>
-                  <td>Obligatoria</td>
-                </tr>
-                <tr>
-                  <td>Tasa de spam reportado</td>
-                  <td>Por debajo de 0,3%</td>
-                  <td>Por debajo de 0,3%</td>
-                </tr>
-                <tr>
-                  <td>Cancelar suscripción con un clic</td>
-                  <td>—</td>
-                  <td>Obligatorio en mensajes comerciales</td>
-                </tr>
-              </tbody>
-            </table>
+            <figure class="post-cabecera-foto">
+              <img src="/assets/blog/correo.webp" alt="Primer plano de la barra lateral de un gestor de correo con la carpeta de spam resaltada y 372 mensajes sin leer" width="1774" height="887"
+                fetchpriority="high" decoding="async">
+            </figure>
           </div>
+        </div>
+      </header>
 
-          <p style="margin-top:1.2rem;font-size:14.5px;color:var(--ink-faint)">Los requisitos de Google
-            entraron en vigor el 1 de febrero de 2024 y siguen vigentes. Yahoo publicó exigencias
-            equivalentes en la misma fecha.</p>
+      <div class="section post-cuerpo">
+        <div class="wrap">
+          <div class="articulo">
 
-          <p>Fíjate en el detalle que a casi nadie le cae en cuenta: <strong>el umbral de 0,3% no es de
-              spam enviado, es de spam reportado</strong>. Si de cada mil personas a las que escribes,
-            tres marcan tu correo como spam, ya estás en el límite. Y en una lista comprada o vieja,
-            tres de mil es poquísimo.</p>
+            <p>La mayoría de la gente cree que el spam se decide por lo que dice el mensaje —que si
+              escribiste «gratis», que si pusiste muchos signos de admiración. Eso era verdad hace
+              quince años. Hoy la decisión se toma <strong>antes de leer una sola palabra</strong>, y se
+              toma sobre tu dominio, no sobre tu texto.</p>
 
-          <h2>Los tres registros, sin jerga</h2>
+            <p>La pregunta que se hace el servidor de Gmail cuando llega tu correo es más simple: «¿este
+              mensaje viene de verdad de quien dice venir?». Si tu dominio no responde esa pregunta, el
+              mensaje entra marcado como sospechoso pase lo que pase.</p>
 
-          <p>SPF, DKIM y DMARC suenan a cosa de sistemas, pero son tres líneas de texto que viven en el
-            DNS de tu dominio —el mismo lugar donde está configurado que <em>tuempresa.com</em> apunte
-            a <a href="/blog/google-no-encuentra-mi-pagina/">tu página web</a>. No cuestan dinero. Se
-            escriben una vez.</p>
+            <!-- La imagen entra aquí, antes de la tanda de requisitos y tablas:
+                 es el punto donde el artículo pasa de contar el problema a
+                 enumerar normas, y donde la lectura se cae si no hay respiro. -->
+            <figure style="margin:2.4rem 0">
+              <img src="/assets/blog/correo.webp"
+                alt="Barra lateral de un gestor de correo con la carpeta Spam resaltada y 372 mensajes acumulados"
+                width="1774" height="887" loading="lazy" decoding="async"
+                style="display:block;width:100%;height:auto;border-radius:14px">
+            </figure>
 
-          <p>La forma más fácil de entenderlos es pensar en la portería de un edificio:</p>
+            <h2>Lo que cambió en 2024</h2>
 
-          <h3>SPF — la lista de la portería</h3>
-          <p>Es la lista de quiénes están autorizados a enviar correo diciendo que son tú. Si usas
-            Google Workspace, ahí va Google. Si además mandas campañas por Mailchimp o Brevo, también
-            van ellos. Si tu sistema de facturación manda correos, va también.</p>
-          <p>El portero mira de qué servidor llegó el mensaje, revisa la lista, y si ese servidor no
-            está, la puerta se cierra. <strong>El error más común del mundo es contratar una
-              herramienta nueva de correos y olvidar agregarla a esa lista.</strong></p>
+            <p>Durante años, autenticar el correo fue una buena práctica opcional. En febrero de 2024
+              dejó de serlo. Google y Yahoo empezaron a exigir requisitos mínimos a todo el que les
+              envíe correo, y a rechazar o mandar a spam lo que no los cumpla.</p>
 
-          <h3>DKIM — el sello en el sobre</h3>
-          <p>Es una firma criptográfica que tu servidor le pone a cada mensaje al salir. El servidor que
-            recibe la verifica contra una clave pública que está en tu DNS.</p>
-          <p>Si la firma cuadra, dos cosas quedan probadas: que el mensaje salió de tu infraestructura y
-            que <strong>nadie lo modificó en el camino</strong>. Si alguien intercepta el correo y
-            cambia un número de cuenta bancaria, la firma se rompe y se nota.</p>
+            <p>Estos son los requisitos vigentes, según la
+              <a href="https://support.google.com/a/answer/81126" target="_blank" rel="noopener">guía
+                oficial de Google para remitentes de correo</a>:</p>
 
-          <h3>DMARC — la instrucción y el reporte</h3>
-          <p>SPF y DKIM verifican. DMARC decide qué hacer cuando la verificación falla —y es la parte
-            que casi nadie configura.</p>
-          <p>Sin DMARC, cada servidor del mundo hace lo que le parezca con un correo que dice venir de
-            tu dominio pero no lo prueba. Algunos lo entregan igual. Con DMARC tú das la orden: no
-            hagas nada, mándalo a spam, o recházalo.</p>
-          <p>Y trae una segunda función que vale por sí sola: <strong>los reportes</strong>. DMARC hace
-            que los servidores del mundo te manden un resumen de quién está enviando correo a nombre de
-            tu dominio. Es la única forma de enterarte de que alguien te está suplantando.</p>
+            <div style="overflow-x:auto;margin-top:1.4rem">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Requisito</th>
+                    <th>Todos los remitentes</th>
+                    <th>Más de 5.000 mensajes diarios a Gmail</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Autenticación del dominio</td>
+                    <td>SPF <em>o</em> DKIM</td>
+                    <td>SPF <strong>y</strong> DKIM <strong>y</strong> DMARC</td>
+                  </tr>
+                  <tr>
+                    <td>Alineación DMARC</td>
+                    <td>—</td>
+                    <td>El dominio del «De:» debe alinear con SPF o DKIM</td>
+                  </tr>
+                  <tr>
+                    <td>Registro PTR (DNS inverso)</td>
+                    <td>Obligatorio</td>
+                    <td>Obligatorio</td>
+                  </tr>
+                  <tr>
+                    <td>Conexión cifrada TLS</td>
+                    <td>Obligatoria</td>
+                    <td>Obligatoria</td>
+                  </tr>
+                  <tr>
+                    <td>Tasa de spam reportado</td>
+                    <td>Por debajo de 0,3%</td>
+                    <td>Por debajo de 0,3%</td>
+                  </tr>
+                  <tr>
+                    <td>Cancelar suscripción con un clic</td>
+                    <td>—</td>
+                    <td>Obligatorio en mensajes comerciales</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-          <div class="nota">
-            <p><strong>Los tres se necesitan mutuamente.</strong> DMARC no funciona si no tienes SPF o
-              DKIM, porque no tiene qué verificar. Y SPF y DKIM sin DMARC verifican pero no deciden
-              nada. Es una cadena de tres eslabones, no tres opciones.</p>
+            <p style="margin-top:1.2rem;font-size:14.5px;color:var(--ink-faint)">Los requisitos de Google
+              entraron en vigor el 1 de febrero de 2024 y siguen vigentes. Yahoo publicó exigencias
+              equivalentes en la misma fecha.</p>
+
+            <p>Fíjate en el detalle que a casi nadie le cae en cuenta: <strong>el umbral de 0,3% no es de
+                spam enviado, es de spam reportado</strong>. Si de cada mil personas a las que escribes,
+              tres marcan tu correo como spam, ya estás en el límite. Y en una lista comprada o vieja,
+              tres de mil es poquísimo.</p>
+
+            <h2>Los tres registros, sin jerga</h2>
+
+            <p>SPF, DKIM y DMARC suenan a cosa de sistemas, pero son tres líneas de texto que viven en el
+              DNS de tu dominio —el mismo lugar donde está configurado que <em>tuempresa.com</em> apunte
+              a <a href="/blog/google-no-encuentra-mi-pagina/">tu página web</a>. No cuestan dinero. Se
+              escriben una vez.</p>
+
+            <p>La forma más fácil de entenderlos es pensar en la portería de un edificio:</p>
+
+            <h3>SPF — la lista de la portería</h3>
+            <p>Es la lista de quiénes están autorizados a enviar correo diciendo que son tú. Si usas
+              Google Workspace, ahí va Google. Si además mandas campañas por Mailchimp o Brevo, también
+              van ellos. Si tu sistema de facturación manda correos, va también.</p>
+            <p>El portero mira de qué servidor llegó el mensaje, revisa la lista, y si ese servidor no
+              está, la puerta se cierra. <strong>El error más común del mundo es contratar una
+                herramienta nueva de correos y olvidar agregarla a esa lista.</strong></p>
+
+            <h3>DKIM — el sello en el sobre</h3>
+            <p>Es una firma criptográfica que tu servidor le pone a cada mensaje al salir. El servidor que
+              recibe la verifica contra una clave pública que está en tu DNS.</p>
+            <p>Si la firma cuadra, dos cosas quedan probadas: que el mensaje salió de tu infraestructura y
+              que <strong>nadie lo modificó en el camino</strong>. Si alguien intercepta el correo y
+              cambia un número de cuenta bancaria, la firma se rompe y se nota.</p>
+
+            <h3>DMARC — la instrucción y el reporte</h3>
+            <p>SPF y DKIM verifican. DMARC decide qué hacer cuando la verificación falla —y es la parte
+              que casi nadie configura.</p>
+            <p>Sin DMARC, cada servidor del mundo hace lo que le parezca con un correo que dice venir de
+              tu dominio pero no lo prueba. Algunos lo entregan igual. Con DMARC tú das la orden: no
+              hagas nada, mándalo a spam, o recházalo.</p>
+            <p>Y trae una segunda función que vale por sí sola: <strong>los reportes</strong>. DMARC hace
+              que los servidores del mundo te manden un resumen de quién está enviando correo a nombre de
+              tu dominio. Es la única forma de enterarte de que alguien te está suplantando.</p>
+
+            <div class="nota">
+              <p><strong>Los tres se necesitan mutuamente.</strong> DMARC no funciona si no tienes SPF o
+                DKIM, porque no tiene qué verificar. Y SPF y DKIM sin DMARC verifican pero no deciden
+                nada. Es una cadena de tres eslabones, no tres opciones.</p>
+            </div>
+
+            <h2>Cómo revisar el tuyo en tres minutos</h2>
+
+            <p>No necesitas herramientas de pago ni saber de DNS. Hay un truco que funciona siempre y es
+              gratis:</p>
+
+            <ol>
+              <li>Manda un correo desde tu dominio (<em>tunombre@tuempresa.com</em>) a una cuenta
+                cualquiera de Gmail. Puede ser tuya.</li>
+              <li>Abre el correo en Gmail, <strong>desde el navegador en computador</strong> —en la app
+                del celular no aparece la opción.</li>
+              <li>Haz clic en los tres puntos arriba a la derecha del mensaje y elige
+                <strong>«Mostrar original»</strong>.</li>
+              <li>Se abre una pestaña con tres líneas arriba: <strong>SPF</strong>, <strong>DKIM</strong>
+                y <strong>DMARC</strong>. Cada una dice <em>PASS</em> o <em>FAIL</em>.</li>
+            </ol>
+
+            <p>Lo que estás buscando son tres PASS. Así se leen los resultados:</p>
+
+            <div style="overflow-x:auto;margin-top:1.4rem">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Lo que ves</th>
+                    <th>Qué significa</th>
+                    <th>Qué tan grave</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Los tres en PASS</td>
+                    <td>Tu dominio está autenticado correctamente</td>
+                    <td>Todo bien</td>
+                  </tr>
+                  <tr>
+                    <td>DMARC no aparece</td>
+                    <td>No tienes el registro. Nadie sabe qué hacer con quien te suplante</td>
+                    <td>Alto — es el más común</td>
+                  </tr>
+                  <tr>
+                    <td>SPF en FAIL</td>
+                    <td>Estás enviando desde un servidor que tu propio dominio no autoriza</td>
+                    <td>Alto — es la causa directa de caer en spam</td>
+                  </tr>
+                  <tr>
+                    <td>DKIM en FAIL</td>
+                    <td>La firma no cuadra: mal configurada, o el mensaje se alteró</td>
+                    <td>Medio-alto</td>
+                  </tr>
+                  <tr>
+                    <td>SPF en SOFTFAIL</td>
+                    <td>Tu SPF termina en <code>~all</code> en vez de <code>-all</code>: falla, pero pide
+                      que lo dejen pasar</td>
+                    <td>Medio — funciona hasta que deja de funcionar</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2>Los cinco errores que más nos encontramos</h2>
+
+            <p>Estos cinco explican la enorme mayoría de los casos que revisamos:</p>
+
+            <ul>
+              <li><strong>Dos registros SPF en el mismo dominio.</strong> Pasa cuando alguien agrega uno
+                nuevo en vez de editar el que ya existía. La norma permite <em>uno solo</em>: con dos,
+                ambos se invalidan y todo falla. Los proveedores se acumulan dentro de la misma línea, no
+                en líneas separadas.</li>
+              <li><strong>SPF con demasiadas consultas.</strong> El registro no puede generar más de diez
+                búsquedas de DNS. Cada servicio que agregas suma una o varias, así que un dominio con
+                cinco o seis herramientas conectadas se pasa del límite en silencio y empieza a fallar
+                sin que nada haya cambiado.</li>
+              <li><strong>Contratar una plataforma de correos y no autorizarla.</strong> Mailchimp,
+                Brevo, Klaviyo, el CRM, el sistema de facturación electrónica. Cada uno necesita quedar
+                en tu SPF y tener su DKIM configurado. Si no, sus envíos salen a nombre tuyo sin
+                respaldo.</li>
+              <li><strong>Dejar DMARC en modo <code>p=none</code> para siempre.</strong> Es el modo de
+                observación: recolecta reportes pero no bloquea nada. Sirve como punto de partida, no
+                como destino. Un DMARC en <code>none</code> protege igual que una alarma desconectada.</li>
+              <li><strong>Creer que esto es solo para quien manda correos masivos.</strong> Es el error
+                más caro y va aparte, en la siguiente sección.</li>
+            </ul>
+
+            <h2>Los tres modos de DMARC, y en qué orden se pasan</h2>
+
+            <p>DMARC tiene una sola instrucción que importa: la política. Son tres valores.</p>
+
+            <div style="overflow-x:auto;margin-top:1.4rem">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Política</th>
+                    <th>Qué hace el servidor que recibe</th>
+                    <th>Cuándo usarla</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>p=none</code></td>
+                    <td>Entrega el correo igual, pero te manda reportes</td>
+                    <td>Las primeras semanas, para ver quién envía en tu nombre</td>
+                  </tr>
+                  <tr>
+                    <td><code>p=quarantine</code></td>
+                    <td>Manda a spam lo que no autentique</td>
+                    <td>Cuando ya sabes que todos tus envíos legítimos pasan</td>
+                  </tr>
+                  <tr>
+                    <td><code>p=reject</code></td>
+                    <td>Rechaza el mensaje: ni siquiera llega a spam</td>
+                    <td>El destino final. Es el que de verdad frena la suplantación</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>El orden importa y no se puede saltar. Si pones <code>p=reject</code> el primer día sin
+              haber revisado los reportes, corres el riesgo de bloquear tu propia facturación
+              electrónica, tus notificaciones o el sistema que le manda las citas a tus clientes. El
+              camino sensato es <strong>none durante cuatro a seis semanas, luego quarantine, luego
+                reject</strong>, revisando los reportes en cada paso.</p>
+
+            <div class="nota">
+              <p><strong>El detalle técnico que importa:</strong> DMARC exige «alineación». No basta con
+                que SPF pase; el dominio que pasa SPF tiene que ser <em>el mismo</em> que aparece en el
+                «De:» que ve tu cliente. Por eso hay correos que muestran SPF en PASS y DMARC en FAIL al
+                mismo tiempo, y por eso revisar solo SPF no alcanza.</p>
+            </div>
+
+            <h2>Esto no es solo para quien hace email marketing</h2>
+
+            <p>Aquí está la parte que convierte esto de un tema de entregabilidad en un tema de riesgo
+              del negocio.</p>
+
+            <p>Un dominio sin DMARC en modo de rechazo es un dominio que cualquiera puede usar. No hace
+              falta acceso a tu correo, ni a tu servidor, ni a nada tuyo: se manda un mensaje poniendo tu
+              dirección en el remitente y listo. Sin DMARC, nada le dice al servidor que lo reciba que
+              eso debe rechazarse.</p>
+
+            <p>Es exactamente el mecanismo detrás de dos fraudes que le pasan a empresas pequeñas todo el
+              tiempo:</p>
+
+            <ul>
+              <li>Un correo «de contabilidad» que le avisa a un cliente que cambió el número de cuenta
+                para el pago de una factura.</li>
+              <li>Un correo «del gerente» que le pide a alguien del equipo una transferencia urgente.</li>
+            </ul>
+
+            <p>Los dos llegan con tu dominio real en el remitente, que es lo que los hace creíbles. Y
+              cuando ocurre, el daño no es que perdiste un correo: es que un cliente perdió plata
+              confiando en tu nombre.</p>
+
+            <p><strong>Por eso el argumento de «yo no mando correos masivos» no aplica.</strong> DMARC no
+              protege tus envíos. Protege tu nombre de los envíos que tú no hiciste.</p>
+
+            <h2>El orden en que se arregla</h2>
+
+            <p>Si al revisar te salió algo en FAIL, este es el orden que evita romper cosas:</p>
+
+            <ol>
+              <li><strong>Inventaría quién manda correo a nombre tuyo.</strong> Correo corporativo,
+                plataforma de campañas, CRM, facturación electrónica, formularios del sitio, la tienda
+                online. Casi siempre son más de los que uno recuerda.</li>
+              <li><strong>Arregla SPF primero.</strong> Un solo registro, con todos los proveedores
+                adentro, sin pasarse de las diez consultas.</li>
+              <li><strong>Activa DKIM en cada plataforma.</strong> Todas las serias lo ofrecen y dan las
+                instrucciones; es pegar un par de registros en el DNS.</li>
+              <li><strong>Publica DMARC en <code>p=none</code></strong> con una dirección donde recibir
+                los reportes.</li>
+              <li><strong>Espera y lee los reportes.</strong> Cuatro a seis semanas. Aquí es donde
+                descubres el servicio que llevaba dos años enviando mal.</li>
+              <li><strong>Sube a <code>quarantine</code>, luego a <code>reject</code>.</strong> Sin
+                afanes y verificando en cada escalón.</li>
+            </ol>
+
+            <p>El paso 5 es el que la gente se salta, y es el que hace que todo lo demás funcione. Los
+              reportes DMARC llegan en un formato XML incómodo de leer a mano; hay servicios gratuitos
+              que los traducen a un panel entendible, y vale la pena usar uno.</p>
+
+            <p>Si quieres profundizar en la especificación, DMARC está documentado públicamente en el
+              <a href="https://datatracker.ietf.org/doc/html/rfc7489" target="_blank" rel="noopener">RFC
+                7489</a>, que es la norma técnica que siguen todos los proveedores de correo.</p>
+
+            <h2>Cómo saber si esto te está costando clientes</h2>
+
+            <p>Lo incómodo de este problema es que es silencioso. No hay error, no hay rebote, no hay
+              aviso. Simplemente tus correos aparecen menos, y tú lo interpretas como que el mercado está
+              lento.</p>
+
+            <p>Tres señales de que vale la pena revisar hoy:</p>
+
+            <ul>
+              <li>Clientes que te dicen «no me llegó» y el correo sí salió.</li>
+              <li>Una caída en respuestas a cotizaciones sin cambio en el volumen enviado.</li>
+              <li>Cambiaste de proveedor de correo, de
+                <a href="/blog/cuanto-cuesta-una-pagina-web-en-colombia/">hosting</a> o de plataforma de
+                campañas en el último año y nadie tocó el DNS.</li>
+            </ul>
+
+            <p>Cualquiera de las tres justifica los tres minutos de la prueba de «Mostrar original».</p>
           </div>
-
-          <h2>Cómo revisar el tuyo en tres minutos</h2>
-
-          <p>No necesitas herramientas de pago ni saber de DNS. Hay un truco que funciona siempre y es
-            gratis:</p>
-
-          <ol>
-            <li>Manda un correo desde tu dominio (<em>tunombre@tuempresa.com</em>) a una cuenta
-              cualquiera de Gmail. Puede ser tuya.</li>
-            <li>Abre el correo en Gmail, <strong>desde el navegador en computador</strong> —en la app
-              del celular no aparece la opción.</li>
-            <li>Haz clic en los tres puntos arriba a la derecha del mensaje y elige
-              <strong>«Mostrar original»</strong>.</li>
-            <li>Se abre una pestaña con tres líneas arriba: <strong>SPF</strong>, <strong>DKIM</strong>
-              y <strong>DMARC</strong>. Cada una dice <em>PASS</em> o <em>FAIL</em>.</li>
-          </ol>
-
-          <p>Lo que estás buscando son tres PASS. Así se leen los resultados:</p>
-
-          <div style="overflow-x:auto;margin-top:1.4rem">
-            <table>
-              <thead>
-                <tr>
-                  <th>Lo que ves</th>
-                  <th>Qué significa</th>
-                  <th>Qué tan grave</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Los tres en PASS</td>
-                  <td>Tu dominio está autenticado correctamente</td>
-                  <td>Todo bien</td>
-                </tr>
-                <tr>
-                  <td>DMARC no aparece</td>
-                  <td>No tienes el registro. Nadie sabe qué hacer con quien te suplante</td>
-                  <td>Alto — es el más común</td>
-                </tr>
-                <tr>
-                  <td>SPF en FAIL</td>
-                  <td>Estás enviando desde un servidor que tu propio dominio no autoriza</td>
-                  <td>Alto — es la causa directa de caer en spam</td>
-                </tr>
-                <tr>
-                  <td>DKIM en FAIL</td>
-                  <td>La firma no cuadra: mal configurada, o el mensaje se alteró</td>
-                  <td>Medio-alto</td>
-                </tr>
-                <tr>
-                  <td>SPF en SOFTFAIL</td>
-                  <td>Tu SPF termina en <code>~all</code> en vez de <code>-all</code>: falla, pero pide
-                    que lo dejen pasar</td>
-                  <td>Medio — funciona hasta que deja de funcionar</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <h2>Los cinco errores que más nos encontramos</h2>
-
-          <p>Estos cinco explican la enorme mayoría de los casos que revisamos:</p>
-
-          <ul>
-            <li><strong>Dos registros SPF en el mismo dominio.</strong> Pasa cuando alguien agrega uno
-              nuevo en vez de editar el que ya existía. La norma permite <em>uno solo</em>: con dos,
-              ambos se invalidan y todo falla. Los proveedores se acumulan dentro de la misma línea, no
-              en líneas separadas.</li>
-            <li><strong>SPF con demasiadas consultas.</strong> El registro no puede generar más de diez
-              búsquedas de DNS. Cada servicio que agregas suma una o varias, así que un dominio con
-              cinco o seis herramientas conectadas se pasa del límite en silencio y empieza a fallar
-              sin que nada haya cambiado.</li>
-            <li><strong>Contratar una plataforma de correos y no autorizarla.</strong> Mailchimp,
-              Brevo, Klaviyo, el CRM, el sistema de facturación electrónica. Cada uno necesita quedar
-              en tu SPF y tener su DKIM configurado. Si no, sus envíos salen a nombre tuyo sin
-              respaldo.</li>
-            <li><strong>Dejar DMARC en modo <code>p=none</code> para siempre.</strong> Es el modo de
-              observación: recolecta reportes pero no bloquea nada. Sirve como punto de partida, no
-              como destino. Un DMARC en <code>none</code> protege igual que una alarma desconectada.</li>
-            <li><strong>Creer que esto es solo para quien manda correos masivos.</strong> Es el error
-              más caro y va aparte, en la siguiente sección.</li>
-          </ul>
-
-          <h2>Los tres modos de DMARC, y en qué orden se pasan</h2>
-
-          <p>DMARC tiene una sola instrucción que importa: la política. Son tres valores.</p>
-
-          <div style="overflow-x:auto;margin-top:1.4rem">
-            <table>
-              <thead>
-                <tr>
-                  <th>Política</th>
-                  <th>Qué hace el servidor que recibe</th>
-                  <th>Cuándo usarla</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code>p=none</code></td>
-                  <td>Entrega el correo igual, pero te manda reportes</td>
-                  <td>Las primeras semanas, para ver quién envía en tu nombre</td>
-                </tr>
-                <tr>
-                  <td><code>p=quarantine</code></td>
-                  <td>Manda a spam lo que no autentique</td>
-                  <td>Cuando ya sabes que todos tus envíos legítimos pasan</td>
-                </tr>
-                <tr>
-                  <td><code>p=reject</code></td>
-                  <td>Rechaza el mensaje: ni siquiera llega a spam</td>
-                  <td>El destino final. Es el que de verdad frena la suplantación</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <p>El orden importa y no se puede saltar. Si pones <code>p=reject</code> el primer día sin
-            haber revisado los reportes, corres el riesgo de bloquear tu propia facturación
-            electrónica, tus notificaciones o el sistema que le manda las citas a tus clientes. El
-            camino sensato es <strong>none durante cuatro a seis semanas, luego quarantine, luego
-              reject</strong>, revisando los reportes en cada paso.</p>
-
-          <div class="nota">
-            <p><strong>El detalle técnico que importa:</strong> DMARC exige «alineación». No basta con
-              que SPF pase; el dominio que pasa SPF tiene que ser <em>el mismo</em> que aparece en el
-              «De:» que ve tu cliente. Por eso hay correos que muestran SPF en PASS y DMARC en FAIL al
-              mismo tiempo, y por eso revisar solo SPF no alcanza.</p>
-          </div>
-
-          <h2>Esto no es solo para quien hace email marketing</h2>
-
-          <p>Aquí está la parte que convierte esto de un tema de entregabilidad en un tema de riesgo
-            del negocio.</p>
-
-          <p>Un dominio sin DMARC en modo de rechazo es un dominio que cualquiera puede usar. No hace
-            falta acceso a tu correo, ni a tu servidor, ni a nada tuyo: se manda un mensaje poniendo tu
-            dirección en el remitente y listo. Sin DMARC, nada le dice al servidor que lo reciba que
-            eso debe rechazarse.</p>
-
-          <p>Es exactamente el mecanismo detrás de dos fraudes que le pasan a empresas pequeñas todo el
-            tiempo:</p>
-
-          <ul>
-            <li>Un correo «de contabilidad» que le avisa a un cliente que cambió el número de cuenta
-              para el pago de una factura.</li>
-            <li>Un correo «del gerente» que le pide a alguien del equipo una transferencia urgente.</li>
-          </ul>
-
-          <p>Los dos llegan con tu dominio real en el remitente, que es lo que los hace creíbles. Y
-            cuando ocurre, el daño no es que perdiste un correo: es que un cliente perdió plata
-            confiando en tu nombre.</p>
-
-          <p><strong>Por eso el argumento de «yo no mando correos masivos» no aplica.</strong> DMARC no
-            protege tus envíos. Protege tu nombre de los envíos que tú no hiciste.</p>
-
-          <h2>El orden en que se arregla</h2>
-
-          <p>Si al revisar te salió algo en FAIL, este es el orden que evita romper cosas:</p>
-
-          <ol>
-            <li><strong>Inventaría quién manda correo a nombre tuyo.</strong> Correo corporativo,
-              plataforma de campañas, CRM, facturación electrónica, formularios del sitio, la tienda
-              online. Casi siempre son más de los que uno recuerda.</li>
-            <li><strong>Arregla SPF primero.</strong> Un solo registro, con todos los proveedores
-              adentro, sin pasarse de las diez consultas.</li>
-            <li><strong>Activa DKIM en cada plataforma.</strong> Todas las serias lo ofrecen y dan las
-              instrucciones; es pegar un par de registros en el DNS.</li>
-            <li><strong>Publica DMARC en <code>p=none</code></strong> con una dirección donde recibir
-              los reportes.</li>
-            <li><strong>Espera y lee los reportes.</strong> Cuatro a seis semanas. Aquí es donde
-              descubres el servicio que llevaba dos años enviando mal.</li>
-            <li><strong>Sube a <code>quarantine</code>, luego a <code>reject</code>.</strong> Sin
-              afanes y verificando en cada escalón.</li>
-          </ol>
-
-          <p>El paso 5 es el que la gente se salta, y es el que hace que todo lo demás funcione. Los
-            reportes DMARC llegan en un formato XML incómodo de leer a mano; hay servicios gratuitos
-            que los traducen a un panel entendible, y vale la pena usar uno.</p>
-
-          <p>Si quieres profundizar en la especificación, DMARC está documentado públicamente en el
-            <a href="https://datatracker.ietf.org/doc/html/rfc7489" target="_blank" rel="noopener">RFC
-              7489</a>, que es la norma técnica que siguen todos los proveedores de correo.</p>
-
-          <h2>Cómo saber si esto te está costando clientes</h2>
-
-          <p>Lo incómodo de este problema es que es silencioso. No hay error, no hay rebote, no hay
-            aviso. Simplemente tus correos aparecen menos, y tú lo interpretas como que el mercado está
-            lento.</p>
-
-          <p>Tres señales de que vale la pena revisar hoy:</p>
-
-          <ul>
-            <li>Clientes que te dicen «no me llegó» y el correo sí salió.</li>
-            <li>Una caída en respuestas a cotizaciones sin cambio en el volumen enviado.</li>
-            <li>Cambiaste de proveedor de correo, de
-              <a href="/blog/cuanto-cuesta-una-pagina-web-en-colombia/">hosting</a> o de plataforma de
-              campañas en el último año y nadie tocó el DNS.</li>
-          </ul>
-
-          <p>Cualquiera de las tres justifica los tres minutos de la prueba de «Mostrar original».</p>
         </div>
       </div>
     </article>
