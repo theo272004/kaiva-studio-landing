@@ -51,7 +51,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260805t">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260805u">
 
   <script type="application/ld+json">
 {
@@ -611,23 +611,28 @@
       gap: 1.1rem;
     }
 
+    /* Icono en su propia caja, como en la maqueta. Sustituye al punto: un
+       cuadrado con simbolo pesa mas en la composicion y hace que las cuatro
+       filas se lean como cuatro capacidades y no como una lista de viñetas. */
     .caso-lista li {
-      position: relative;
-      padding-left: 1.5rem;
+      display: grid;
+      grid-template-columns: 38px minmax(0, 1fr);
+      gap: 0 .9rem;
+      align-items: start;
       font-size: 13.5px;
       line-height: 1.6;
       color: var(--ink-soft);
     }
 
-    .caso-lista li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: .55rem;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--violet);
+    .caso-ico {
+      grid-row: span 2;
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: rgba(130, 66, 245, .08);
+      color: var(--violet);
     }
 
     .caso-lista b {
@@ -1001,18 +1006,22 @@
 
             <ul class="caso-lista">
               <li>
+                <span class="caso-ico" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></span>
                 <b>Casos con su estado y su ruta</b>
                 Código, paciente y en qué punto va: solicitud enviada, aprobada o pendiente de pago.
               </li>
               <li>
+                <span class="caso-ico" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5A2.5 2.5 0 0 0 12 8c-1.4 0-2.5.9-2.5 2s1.1 2 2.5 2 2.5.9 2.5 2-1.1 2-2.5 2a2.5 2.5 0 0 1-2.5-1.5M12 6.5v11"/></svg></span>
                 <b>Cobros y aprobaciones</b>
                 Lo que está pendiente de aprobar y lo que está pendiente de pagar, separado.
               </li>
               <li>
+                <span class="caso-ico" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></span>
                 <b>Ganancias por periodo</b>
                 Lo acumulado y lo que falta, con el desglose por paciente.
               </li>
               <li>
+                <span class="caso-ico" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></span>
                 <b>Enlace de afiliado con seguimiento</b>
                 Cada médico con su enlace, y los pacientes que llegaron por él.
               </li>
