@@ -78,7 +78,7 @@
   <!-- El resto del CSS de esta pagina vive en assets/monitor.css. Antes eran
        51 KB incrustados en el propio HTML: no se cacheaban y viajaban en cada
        visita. Arriba solo se queda el @font-face, que va con los preload. -->
-  <link rel="stylesheet" href="/assets/monitor.css?v=20260805q">
+  <link rel="stylesheet" href="/assets/monitor.css?v=20260805s">
 </head>
 
 <body>
@@ -1862,6 +1862,13 @@
                 <div class="ph">
                   <span class="lbl">Oportunidades de crecimiento</span>
                 </div>
+                <!-- Va AQUI y no en la portada de la herramienta. Quien acaba
+                     de escribir su dominio todavia no tiene datos, asi que
+                     arriba la frase le hablaria de un problema que aun no
+                     tiene. En cambio en este punto acaba de recibir un
+                     puntaje, cuatro pilares y una lista de hallazgos, y la
+                     pregunta que se hace es exactamente esa. -->
+                <p class="kv-decision">No necesitas más datos. Necesitas la siguiente decisión.</p>
                 <div class="growth-list" id="kvOportunidades"></div>
                 <div class="growth-footer" id="kvOportunidadesPie"></div>
                 <!-- El Resumen resume; los hallazgos con su evidencia están en

@@ -2192,7 +2192,14 @@
         display: none;
       }
 
-      .panel-top-row {
+      /* El #vResumen de mas arriba lleva un ID, y un ID le gana a esta
+         regla por especificidad aunque venga despues y dentro de una media
+         query. Resultado: en el telefono el Resumen seguia partido en dos
+         columnas y la tarjeta de oportunidades quedaba en 132px de ancho, con
+         el texto en columnas de seis palabras. Se repite el selector con el
+         ID para que la version movil pueda ganar. */
+      .panel-top-row,
+      #vResumen .panel-top-row {
         grid-template-columns: 1fr;
       }
 
@@ -4346,4 +4353,19 @@
       .kv-cursor {
         display: none;
       }
+    }
+
+    /* La frase que separa el diagnostico de la accion. No es un titulo ni una
+       nota al pie: es la bisagra del informe, y por eso pesa mas que el texto
+       de alrededor sin llegar a competir con el puntaje. */
+    .kv-decision {
+      margin: 0 0 1.1rem;
+      font-family: var(--display);
+      font-size: clamp(1rem, 2.2vw, 1.18rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.35;
+      color: var(--ink);
+      padding-bottom: .95rem;
+      border-bottom: 1px solid var(--line);
     }
