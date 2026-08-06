@@ -1651,7 +1651,7 @@ html {
 /* sobre la foto, la etiqueta y el pie cambian de color */
 .blog-destacado .blog-tag {
   color: #fff;
-  background: rgba(255, 255, 255, .16);
+  background: rgba(15, 23, 42, .18);
   backdrop-filter: none;
 }
 
@@ -2354,8 +2354,8 @@ html {
    (blanco a muy baja opacidad) más el morado de marca: nada de blanco
    opaco, que es lo que hacía saltar la imagen anterior. */
 .sw-panel {
-  background: rgba(255, 255, 255, .04);
-  border: 1px solid rgba(255, 255, 255, .09);
+  background: #fff;
+  border: 1px solid var(--line-strong);
   border-radius: 16px;
   overflow: hidden;
   box-shadow:
@@ -2368,8 +2368,8 @@ html {
   align-items: center;
   gap: .4rem;
   padding: .7rem .95rem;
-  background: rgba(255, 255, 255, .03);
-  border-bottom: 1px solid rgba(255, 255, 255, .07);
+  background: #fafafb;
+  border-bottom: 1px solid var(--line);
 }
 
 .sw-panel-bar i {
@@ -2384,7 +2384,7 @@ html {
   margin-left: .5rem;
   font-size: 11px;
   font-weight: 600;
-  color: rgba(255, 255, 255, .5);
+  color: var(--ink-soft);
 }
 
 .sw-panel-body {
@@ -2400,8 +2400,8 @@ html {
 }
 
 .sw-kpi {
-  background: rgba(255, 255, 255, .035);
-  border: 1px solid rgba(255, 255, 255, .07);
+  background: #fafafb;
+  border: 1px solid var(--line);
   border-radius: 10px;
   padding: .6rem .7rem;
 }
@@ -2409,8 +2409,8 @@ html {
 /* El KPI que importa lleva el morado: es el argumento de la sección
    (horas que deja de perder el equipo), no un dato más. */
 .sw-kpi-alto {
-  background: rgba(130, 66, 245, .14);
-  border-color: rgba(130, 66, 245, .34);
+  background: rgba(130, 66, 245, .08);
+  border-color: rgba(130, 66, 245, .3);
 }
 
 .sw-kpi-lbl {
@@ -2419,7 +2419,7 @@ html {
   font-weight: 700;
   letter-spacing: .05em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, .45);
+  color: var(--ink-soft);
 }
 
 .sw-kpi b {
@@ -2429,11 +2429,11 @@ html {
   font-size: 1.35rem;
   font-weight: 800;
   letter-spacing: -.02em;
-  color: #fff;
+  color: var(--ink);
 }
 
 .sw-kpi-alto b {
-  color: #c4a4ff;
+  color: var(--violet);
 }
 
 .sw-grafica svg {
@@ -2478,7 +2478,7 @@ html {
 .sw-fila span {
   font-size: 11px;
   font-weight: 600;
-  color: rgba(255, 255, 255, .55);
+  color: var(--ink-soft);
 }
 
 .sw-fila i {
