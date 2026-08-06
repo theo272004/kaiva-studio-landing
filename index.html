@@ -328,7 +328,7 @@
        @font-face, que va emparejado con los preload de las fuentes.
        El <link> es bloqueante y esta en el <head>, asi que no hay flash de
        contenido sin estilo: la pagina pinta ya con la hoja aplicada. -->
-  <link rel="stylesheet" href="/assets/portada.css?v=20260806d">
+  <link rel="stylesheet" href="/assets/portada.css?v=20260806e">
 </head>
 
 <body>
@@ -1233,47 +1233,53 @@
           <div class="panel">
             <div class="panel-row">
 
-              <!-- Index main card -->
+              <!-- INDICE. Copiado del panel real: numero grande, insignia con
+                   el grado, la frase que lo interpreta y la barra. El anillo
+                   que habia aqui no existe en la herramienta. -->
               <div class="pcard">
                 <div class="ph">
                   <span class="lbl">Índice de Salud Digital</span>
                   <span class="info">i</span>
                 </div>
-                <div class="gauges">
 
-                  <!-- General cell -->
-                  <div class="g-cell lead-cell">
-                    <div class="marc">
-                      <svg viewBox="0 0 100 100">
-                        <circle class="track" cx="50" cy="50" r="43" stroke-width="8"></circle>
-                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="url(#gdInk)"
-                          stroke-linecap="round" pathLength="100" id="ringP1" data-ring="58"></circle>
-                        <defs>
-                          <linearGradient id="gdInk" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stop-color="#0f172a"></stop>
-                            <stop offset="100%" stop-color="#475569"></stop>
-                          </linearGradient>
-                        </defs>
-                      </svg>
-                      <div class="mnum"><span id="scoreGeneral" data-count="58">0</span><i>/100</i></div>
+                <div class="index-content">
+                  <div class="index-left">
+                    <div class="score-row">
+                      <span class="score-num" id="scoreGeneral" data-count="58">0</span>
+                      <span class="score-max">/100</span>
                     </div>
-                    <div class="pn">Salud general</div>
-                    <!-- La letra que calcula scoring.php: 80 es A, 65 B, 50 C,
-                         30 D. 58 cae en C. Faltaba, y el texto de encima la
-                         promete. -->
-                    <div class="g-grado">Grado <b>C</b></div>
-                    <div class="st">Necesita atención</div>
+                    <!-- La letra sale de scoring.php: 80 es A, 65 B, 50 C, 30 D.
+                         58 cae en C, y su etiqueta es "Necesita atencion". -->
+                    <span class="score-badge">Necesita atención · Grado C</span>
+                    <div class="score-status">Tu sitio está bien encaminado pero tiene puntos flojos.</div>
+
+                    <div class="slider-track">
+                      <div class="slider-fill" style="width:58%"></div>
+                      <div class="slider-node" style="left:58%"></div>
+                    </div>
                   </div>
 
+                  <span class="index-k" aria-hidden="true">K<span class="dot">.</span></span>
+                </div>
 
-                  <!-- Visibilidad. FALTABA: la maqueta ensenaba tres pilares y
-                       la herramienta mide cuatro, asi que estabamos ocultando
-                       justo el que responde "¿me encuentran?". -->
+                <div class="index-footer">Último análisis técnico realizado en tu sitio.</div>
+              </div>
+
+              <!-- PILARES, en su propia tarjeta y con anillo violeta, como en
+                   el panel. Antes iban dentro de la tarjeta del indice y en
+                   azul oscuro. -->
+              <div class="pcard">
+                <div class="ph">
+                  <span class="lbl">Pilares de Evaluación</span>
+                  <span class="info">i</span>
+                </div>
+                <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="gdViolet" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#8242f5"></stop><stop offset="100%" stop-color="#a679ff"></stop></linearGradient></defs></svg>
+                <div class="pillars-grid">
                   <div class="g-cell">
                     <div class="marc">
                       <svg viewBox="0 0 100 100">
                         <circle class="track" cx="50" cy="50" r="43" stroke-width="8"></circle>
-                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="#0f172a"
+                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="url(#gdViolet)"
                           stroke-linecap="round" pathLength="100" id="ringP1" data-ring="72"></circle>
                       </svg>
                       <div class="mnum"><span id="scoreP0" data-count="72">0</span></div>
@@ -1281,13 +1287,11 @@
                     <div class="pn">Visibilidad</div>
                     <div class="pd">Google e IA te encuentran</div>
                   </div>
-
-                  <!-- Imagen cell -->
                   <div class="g-cell">
                     <div class="marc">
                       <svg viewBox="0 0 100 100">
                         <circle class="track" cx="50" cy="50" r="43" stroke-width="8"></circle>
-                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="#0f172a"
+                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="url(#gdViolet)"
                           stroke-linecap="round" pathLength="100" id="ringP2" data-ring="61"></circle>
                       </svg>
                       <div class="mnum"><span id="scoreP1" data-count="61">0</span></div>
@@ -1295,13 +1299,11 @@
                     <div class="pn">Imagen</div>
                     <div class="pd">Cómo te ve quien llega</div>
                   </div>
-
-                  <!-- Confianza cell -->
                   <div class="g-cell">
                     <div class="marc">
                       <svg viewBox="0 0 100 100">
                         <circle class="track" cx="50" cy="50" r="43" stroke-width="8"></circle>
-                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="#0f172a"
+                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="url(#gdViolet)"
                           stroke-linecap="round" pathLength="100" id="ringP3" data-ring="54"></circle>
                       </svg>
                       <div class="mnum"><span id="scoreP2" data-count="54">0</span></div>
@@ -1309,13 +1311,11 @@
                     <div class="pn">Confianza</div>
                     <div class="pd">Si se atreven a escribirte</div>
                   </div>
-
-                  <!-- Operación cell — el pilar de mayor peso (40%): el correo -->
                   <div class="g-cell">
                     <div class="marc">
                       <svg viewBox="0 0 100 100">
                         <circle class="track" cx="50" cy="50" r="43" stroke-width="8"></circle>
-                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="#0f172a"
+                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="url(#gdViolet)"
                           stroke-linecap="round" pathLength="100" id="ringP4" data-ring="42"></circle>
                       </svg>
                       <div class="mnum"><span id="scoreP3" data-count="42">0</span></div>
@@ -1323,67 +1323,67 @@
                     <div class="pn">Operación</div>
                     <div class="pd">Si te escriben y no se pierde</div>
                   </div>
-
-                </div>
-              </div>
-
-              <!-- Findings card -->
-              <div class="pcard">
-                <div class="ph">
-                  <span class="lbl">Hallazgos principales</span>
-                  <span class="info">i</span>
-                </div>
-                <div class="finds">
-                  <div class="find">
-                    <div class="fi fi-crit">
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path
-                          d="m10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01" />
-                      </svg>
-                    </div>
-                    <div class="ft">
-                      <div class="a">Tus correos corporativos se van a spam</div>
-                      <div class="b">Tu dominio no tiene SPF: Gmail y Outlook desconfían.</div>
-                      <div class="ev">Evidencia &middot; tudominio.com &rarr; sin registro SPF</div>
-                    </div>
-                    <span class="sev sev-crit">Crítico</span>
-                  </div>
-                  <div class="find">
-                    <div class="fi fi-high">
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
-                      </svg>
-                    </div>
-                    <div class="ft">
-                      <div class="a">Cualquiera puede enviar correos en tu nombre</div>
-                      <div class="b">Sin DMARC, se envían correos en tu nombre.</div>
-                      <div class="ev">Evidencia &middot; _dmarc.tudominio.com &rarr; sin registro</div>
-                    </div>
-                    <span class="sev sev-high">Alto</span>
-                  </div>
-                  <div class="find">
-                    <div class="fi fi-high">
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="7" y="2" width="10" height="20" rx="2" ry="2" />
-                        <path d="M12 18h.01" />
-                      </svg>
-                    </div>
-                    <div class="ft">
-                      <div class="a">Tu link se ve vacío cuando lo comparten</div>
-                      <div class="b">Falta la imagen para WhatsApp y redes (og:image).</div>
-                      <div class="ev">Evidencia &middot; &lt;meta og:image&gt; &rarr; ausente</div>
-                    </div>
-                    <span class="sev sev-high">Alto</span>
-                  </div>
                 </div>
               </div>
 
             </div>
+
+            <!-- HALLAZGOS a ancho completo. Antes compartia fila con el
+                 indice y se estiraba vacia a su lado. -->
+            <div class="pcard finds-card">
+              <div class="ph">
+                <span class="lbl">Hallazgos principales</span>
+                <span class="info">i</span>
+              </div>
+            <div class="finds">
+                <div class="find">
+                  <div class="fi fi-crit">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path
+                        d="m10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01" />
+                    </svg>
+                  </div>
+                  <div class="ft">
+                    <div class="a">Tus correos corporativos se van a spam</div>
+                    <div class="b">Tu dominio no tiene SPF: Gmail y Outlook desconfían.</div>
+                    <div class="ev">Evidencia &middot; tudominio.com &rarr; sin registro SPF</div>
+                  </div>
+                  <span class="sev sev-crit">Crítico</span>
+                </div>
+                <div class="find">
+                  <div class="fi fi-high">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
+                    </svg>
+                  </div>
+                  <div class="ft">
+                    <div class="a">Cualquiera puede enviar correos en tu nombre</div>
+                    <div class="b">Sin DMARC, se envían correos en tu nombre.</div>
+                    <div class="ev">Evidencia &middot; _dmarc.tudominio.com &rarr; sin registro</div>
+                  </div>
+                  <span class="sev sev-high">Alto</span>
+                </div>
+                <div class="find">
+                  <div class="fi fi-high">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="7" y="2" width="10" height="20" rx="2" ry="2" />
+                      <path d="M12 18h.01" />
+                    </svg>
+                  </div>
+                  <div class="ft">
+                    <div class="a">Tu link se ve vacío cuando lo comparten</div>
+                    <div class="b">Falta la imagen para WhatsApp y redes (og:image).</div>
+                    <div class="ev">Evidencia &middot; &lt;meta og:image&gt; &rarr; ausente</div>
+                  </div>
+                  <span class="sev sev-high">Alto</span>
+                </div>
+            </div>
           </div>
         </div>
+      </div>
       </div>
 
       <div class="tool-cta">
