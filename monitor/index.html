@@ -78,7 +78,7 @@
   <!-- El resto del CSS de esta pagina vive en assets/monitor.css. Antes eran
        51 KB incrustados en el propio HTML: no se cacheaban y viajaban en cada
        visita. Arriba solo se queda el @font-face, que va con los preload. -->
-  <link rel="stylesheet" href="/assets/monitor.css?v=20260805s">
+  <link rel="stylesheet" href="/assets/monitor.css?v=20260805t">
 </head>
 
 <body>
@@ -186,9 +186,17 @@
             </svg>
             Diagn&oacute;stico gratuito
           </span>
-          <h1>Analiza tu <em>salud digital.</em></h1>
-          <p class="kv-hero-lead">Descubre qu&eacute; est&aacute; frenando tu crecimiento y qu&eacute; oportunidades
-            est&aacute;s perdiendo.</p>
+          <!-- El titular dice POR QUE existe esto, no que hace. Lo que hace lo
+               dice la linea de abajo y el propio campo.
+
+               Deje constancia de mi reparo: quien llega por primera vez
+               todavia no tiene datos, asi que la frase le habla de un problema
+               que aun no tiene. Nicolas la pidio aqui dos veces y es su
+               decision; la bajada se reescribe para que aterrice enseguida en
+               lo concreto y nadie se quede sin saber que es esto. -->
+          <h1>No necesitas m&aacute;s datos.<br><em>Necesitas la siguiente decisi&oacute;n.</em></h1>
+          <p class="kv-hero-lead">Escribe tu dominio y en un minuto sabes qu&eacute; est&aacute; frenando tu
+            crecimiento, con la evidencia de cada hallazgo y por d&oacute;nde empezar.</p>
 
           <form class="kv-field" id="kvForm" novalidate>
             <span class="kv-field-ic">

@@ -51,7 +51,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260805p">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260805q">
 
   <script type="application/ld+json">
 {
@@ -532,85 +532,175 @@
       transition-delay: .24s;
     }
   
-    /* ---- Caso: el panel de CS Travel ------------------------------------
-       Texto a la izquierda y captura a la derecha, con la captura mas ancha:
-       es lo que hay que mirar, el texto solo dice que se esta mirando. */
-    .caso-grid {
+/* ---- Síntomas --------------------------------------------------------- */
+    .sint-grid {
       display: grid;
-      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-      gap: 2.6rem;
-      align-items: center;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.6rem;
+      margin-top: 2.6rem;
     }
 
-    .caso-cliente {
+    .sint {
+      padding-top: 1.2rem;
+      border-top: 2px solid var(--line-strong);
+    }
+
+    .sint-num {
+      display: block;
+      font-family: var(--display);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      color: var(--violet);
+      margin-bottom: .7rem;
+    }
+
+    .sint h3 {
+      font-family: var(--display);
+      font-size: clamp(1.05rem, 2.1vw, 1.25rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.3;
+      margin-bottom: .6rem;
+    }
+
+    .sint p { color: var(--ink-soft); line-height: 1.7; }
+
+    .sint-pie {
+      margin-top: 2.4rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid var(--line);
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--ink);
+      max-width: 68ch;
+    }
+
+    /* ---- Caso ------------------------------------------------------------- */
+    .caso-kicker {
       font-size: 12px;
       font-weight: 700;
       letter-spacing: .07em;
       text-transform: uppercase;
       color: var(--violet);
-      margin-bottom: 1rem;
+      margin-bottom: .8rem;
     }
 
-    .caso-txt p {
-      color: var(--ink-soft);
-      line-height: 1.65;
-      margin-bottom: 1rem;
+    .caso-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+      gap: 2.4rem;
+      align-items: center;
+      margin-top: 2.4rem;
     }
+
+    .caso-cliente {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: .8rem;
+    }
+
+    .caso-txt > p { color: var(--ink-soft); line-height: 1.7; }
 
     .caso-lista {
       list-style: none;
-      margin-top: 1.6rem;
+      margin: 1.8rem 0 0;
       padding: 0;
       display: grid;
-      gap: .55rem;
+      gap: 1.1rem;
     }
 
     .caso-lista li {
       position: relative;
-      padding-left: 1.4rem;
-      font-size: 14.5px;
-      color: var(--ink);
+      padding-left: 1.5rem;
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--ink-soft);
     }
 
     .caso-lista li::before {
       content: "";
       position: absolute;
       left: 0;
-      top: .5rem;
+      top: .55rem;
       width: 6px;
       height: 6px;
       border-radius: 50%;
       background: var(--violet);
     }
 
-    /* La captura es de un panel real y trae su propio blanco. El marco es una
-       linea fina y una sombra baja: cualquier cosa mas encima competiria con
-       la interfaz de dentro, que es lo que se quiere ensenar. */
-    .caso-shot {
-      margin: 0;
+    .caso-lista b {
+      display: block;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: .15rem;
     }
 
+    .caso-shot { margin: 0; }
+
+    /* La inclinación va solo aquí y es leve: seis grados bastan para que se
+       lea como una pantalla y no como una imagen pegada. Más giro se ve de
+       diseño y menos de producto. */
     .caso-shot img {
       width: 100%;
       height: auto;
       display: block;
       border-radius: 14px;
       border: 1px solid var(--line-strong);
-      box-shadow: 0 24px 50px -28px rgba(15, 23, 42, .45);
+      transform: perspective(1600px) rotateY(-6deg) rotateX(1.5deg);
+      box-shadow: 0 32px 64px -30px rgba(15, 23, 42, .5);
+      transition: transform .5s var(--ease, ease);
     }
 
-    .caso-shot figcaption {
-      margin-top: .8rem;
+    .caso-shot img:hover {
+      transform: perspective(1600px) rotateY(0) rotateX(0);
+    }
+
+    /* ---- Proceso ----------------------------------------------------------- */
+    .caso-pasos {
+      list-style: none;
+      margin: 3rem 0 0;
+      padding: 1.8rem 0 0;
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1.4rem;
+      counter-reset: paso;
+    }
+
+    .caso-pasos li {
+      counter-increment: paso;
       font-size: 12.5px;
+      line-height: 1.55;
       color: var(--ink-soft);
-      text-align: center;
+    }
+
+    .caso-pasos b {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: .25rem;
+    }
+
+    .caso-pasos b::before {
+      content: counter(paso, decimal-leading-zero) " · ";
+      color: var(--violet);
     }
 
     @media (max-width: 900px) {
-      .caso-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
+      .sint-grid { grid-template-columns: 1fr; gap: 1.4rem; }
+      .caso-grid { grid-template-columns: 1fr; gap: 2rem; }
+      /* Sin inclinación en el teléfono: una captura girada en pantalla
+         estrecha pierde altura útil y se lee peor. */
+      .caso-shot img { transform: none; }
+      .caso-pasos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 520px) {
+      .caso-pasos { grid-template-columns: 1fr; gap: 1rem; }
     }
   </style>
 </head>
@@ -706,6 +796,49 @@
          va destacada, porque es la más común y la que abre la conversación.
          La ilustración no es decorativa por casualidad — va a la derecha y
          con aria-hidden: no aporta información que no esté en el texto. -->
+    <!-- EMPEZAR POR EL SINTOMA, NO POR EL SERVICIO.
+         Nadie busca "software a medida": busca que se le acabe el Excel del
+         que depende media empresa. Esta seccion no vende nada, solo nombra
+         tres situaciones para que alguien se reconozca en una — y si no se
+         reconoce en ninguna, mejor que lo descubra aqui que en una llamada.
+
+         Es lo que hacen los estudios que venden esto bien: se parte de un
+         cuello de botella concreto, porque lo que se contrata es el criterio
+         para resolverlo, no las horas de programar. -->
+    <section class="section" id="sintomas">
+      <div class="wrap">
+        <h2 class="sec-head">¿Te suena alguna de estas<span class="dot">?</span></h2>
+        <p class="desc">No hace falta que sepas qué software necesitas. Con reconocer el problema
+          basta para empezar a hablar.</p>
+
+        <div class="sint-grid">
+          <article class="sint">
+            <span class="sint-num" aria-hidden="true">01</span>
+            <h3>Hay un Excel del que depende media empresa</h3>
+            <p>Lo abre una persona, lo edita otra, y nadie sabe cuál es la versión buena. Cuando esa
+              persona se va de vacaciones, el archivo se convierte en un problema de todos.</p>
+          </article>
+
+          <article class="sint">
+            <span class="sint-num" aria-hidden="true">02</span>
+            <h3>Los mismos datos se copian de un sitio a otro</h3>
+            <p>Llega un pedido por WhatsApp, se pasa a una planilla, de ahí a la factura y de ahí al
+              inventario. Cuatro veces el mismo dato, cuatro oportunidades de equivocarse.</p>
+          </article>
+
+          <article class="sint">
+            <span class="sint-num" aria-hidden="true">03</span>
+            <h3>Alguien dedica media jornada a algo que se repite</h3>
+            <p>Armar el mismo informe cada lunes, revisar uno por uno qué pedidos entraron, mandar
+              los mismos correos. Trabajo que hace una persona y podría no hacerlo nadie.</p>
+          </article>
+        </div>
+
+        <p class="sint-pie">Si no te reconoces en ninguna, puede que no necesites software a medida
+          —y preferimos decírtelo ahora—. Si te reconoces en una, ya sabemos por dónde empezar.</p>
+      </div>
+    </section>
+
     <section class="section alt section--marcada">
       <div class="wrap">
         <div class="medida">
@@ -838,6 +971,74 @@
       </div>
     </section>
 
+    <!-- UN CASO REAL.
+         Distribución tomada de la maqueta que pasó Nicolás: lista a la
+         izquierda, captura inclinada a la derecha, y el proceso en una fila
+         abajo.
+
+         LO QUE NO SE COPIÓ DE ESA MAQUETA, Y POR QUÉ: llevaba cuatro cifras
+         flotando sobre la pantalla —"+320 médicos activos", "$950M
+         gestionados", "98,7% de disponibilidad", "en producción desde enero
+         2024"—. No son datos de la captura: son afirmaciones sobre nuestro
+         trabajo en una página de venta, y no las tenemos. Es el mismo caso que
+         el "50+ factores" que se quitó de la herramienta. En su lugar van
+         cuatro hechos que la captura sí demuestra.
+
+         La inclinación es leve —seis grados— y solo en escritorio: una captura
+         muy girada se ve de diseño y no de producto, y el objetivo es que se
+         entienda qué hace el sistema. -->
+    <section class="section alt" id="caso">
+      <div class="wrap">
+        <p class="caso-kicker">Caso · CS Travel Group</p>
+        <h2 class="sec-head">Software que ya mueve una operación real<span class="dot">.</span></h2>
+
+        <div class="caso-grid">
+          <div class="caso-txt">
+            <p class="caso-cliente">Portal para médicos afiliados</p>
+            <p>CS Travel Group coordina viajes médicos. Construimos el portal por donde entran los
+              médicos que refieren pacientes: cada uno ve sus casos, en qué punto está cada uno y
+              cuánto lleva ganado, sin preguntarle a nadie.</p>
+
+            <ul class="caso-lista">
+              <li>
+                <b>Casos con su estado y su ruta</b>
+                Código, paciente y en qué punto va: solicitud enviada, aprobada o pendiente de pago.
+              </li>
+              <li>
+                <b>Cobros y aprobaciones</b>
+                Lo que está pendiente de aprobar y lo que está pendiente de pagar, separado.
+              </li>
+              <li>
+                <b>Ganancias por periodo</b>
+                Lo acumulado y lo que falta, con el desglose por paciente.
+              </li>
+              <li>
+                <b>Enlace de afiliado con seguimiento</b>
+                Cada médico con su enlace, y los pacientes que llegaron por él.
+              </li>
+            </ul>
+          </div>
+
+          <figure class="caso-shot">
+            <img src="/assets/trabajo-cstravel-software.webp"
+              alt="Panel de un médico en la plataforma de CS Travel Group: casos con su estado, cobros pendientes, ganancias por periodo y pacientes referidos"
+              width="1440" height="738" loading="lazy" decoding="async">
+          </figure>
+        </div>
+
+        <!-- El proceso va aquí abajo y no en su propia sección: contado junto
+             a algo que existe se lee como lo que pasó; suelto, se lee como el
+             folleto de proceso que tiene cualquiera. -->
+        <ol class="caso-pasos">
+          <li><b>Entender la operación</b>Qué se hace hoy a mano y dónde se pierde el tiempo.</li>
+          <li><b>Diseñar el flujo</b>Las pantallas que hacen falta, y las que no.</li>
+          <li><b>Construir</b>Con el alcance por escrito acordado antes de empezar.</li>
+          <li><b>Conectar</b>Con lo que la empresa ya usa, sin obligarla a cambiarlo.</li>
+          <li><b>Entregar</b>El sistema y su código quedan a nombre de la empresa.</li>
+        </ol>
+      </div>
+    </section>
+
     <section class="section" id="incluye">
       <div class="wrap">
         <h2>Qué construimos<span class="dot">.</span></h2>
@@ -934,42 +1135,6 @@
               </span>
             </div>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- UN CASO REAL, POR FIN.
-         Esta pagina hablaba de software a medida sin ensenar ni uno solo: la
-         unica imagen era el diagrama del hero, que es la idea del servicio y
-         no un trabajo hecho. Se describe unicamente lo que la captura
-         demuestra —los estados de cada caso, la ruta, las comisiones, el
-         enlace de afiliado—, sin inventar el "antes" del cliente ni cifras de
-         resultado que no podemos sostener. -->
-    <section class="section" id="caso">
-      <div class="wrap">
-        <h2 class="sec-head">Un sistema que ya está funcionando<span class="dot">.</span></h2>
-        <div class="caso-grid">
-          <div class="caso-txt">
-            <p class="caso-cliente">CS Travel Group · Viajes médicos corporativos</p>
-            <p>Construimos el portal por donde entran los médicos que refieren pacientes.
-              Cada uno ve sus casos con su código, la ruta del paciente y en qué punto
-              está: solicitud enviada, aprobada o pendiente de pago.</p>
-            <p>Debajo, lo que lleva ganado por periodo y los pacientes que llegaron a
-              través de su enlace de afiliado. Todo en una pantalla, sin preguntar por
-              el estado de cada caso uno por uno.</p>
-            <ul class="caso-lista">
-              <li>Casos con estado y ruta</li>
-              <li>Cobros pendientes y aprobaciones</li>
-              <li>Comisiones por periodo</li>
-              <li>Enlace de afiliado con su seguimiento</li>
-            </ul>
-          </div>
-          <figure class="caso-shot">
-            <img src="/assets/trabajo-cstravel-software.webp"
-              alt="Panel de un médico en la plataforma de CS Travel Group: casos con su estado, cobros pendientes, ganancias por periodo y pacientes referidos"
-              width="1440" height="738" loading="lazy" decoding="async">
-            <figcaption>Panel del médico. Los datos del paciente van difuminados.</figcaption>
-          </figure>
         </div>
       </div>
     </section>
