@@ -807,6 +807,66 @@
       }
     }
 
+  
+    /* ---- El retraso como ventaja -----------------------------------------
+       Tres hechos con fecha. La fecha va arriba y en violeta porque es lo que
+       sostiene el argumento: sin ella esto seria una opinion. */
+    .ventaja-lista {
+      display: grid;
+      gap: 1.6rem;
+      margin-top: 2.6rem;
+    }
+
+    .ventaja-item {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr);
+      gap: 0 2rem;
+      align-items: start;
+      padding-top: 1.6rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .ventaja-item:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .ventaja-fecha {
+      grid-row: span 2;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--violet);
+      padding-top: .2rem;
+    }
+
+    .ventaja-item h3 {
+      font-family: var(--display);
+      font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.3;
+      margin-bottom: .6rem;
+    }
+
+    .ventaja-item p {
+      color: var(--ink-soft);
+      line-height: 1.7;
+      max-width: 62ch;
+    }
+
+    @media (max-width: 720px) {
+      .ventaja-item {
+        grid-template-columns: 1fr;
+        gap: .5rem;
+      }
+
+      .ventaja-fecha {
+        grid-row: auto;
+        padding-top: 0;
+      }
+    }
   </style>
 </head>
 
@@ -981,7 +1041,7 @@
           <div class="pf-texto">
             <span class="inc-kicker">Nuestros proyectos</span>
             <h2>Proyectos que hablan por<br>nosotros<span class="dot">.</span></h2>
-            <p class="desc">Páginas que están en linea ahora mismo, con su dominio y su cliente
+            <p class="desc">Páginas que están en línea ahora mismo, con su dominio y su cliente
               detrás. Puedes entrar a cada una y verla funcionando.</p>
             <a class="pf-link" href="https://www.cstravelgroup.com/" target="_blank" rel="noopener">
               Ver el sitio de CS Travel
@@ -1134,6 +1194,57 @@
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           Certificado de seguridad, respaldos y buenas prácticas incluidos en cada proyecto.
         </p>
+      </div>
+    </section>
+
+    <!-- EL RETRASO COMO VENTAJA.
+         Idea de Nicolas, y es la unica seccion de la pagina que no habla de
+         nosotros: habla de lo que ya paso afuera. Funciona por dos razones.
+         La primera es que es verdad y se puede fechar —las tres cosas de aqui
+         tienen fecha y fuente—. La segunda es que convierte "vamos atrasados"
+         en algo accionable: si allá ya es obligatorio, aqui todavia te
+         diferencia.
+
+         Cada ejemplo se eligio porque la herramienta de Kaiva LO MIDE. No es
+         cultura general: es la lista de lo que el diagnostico revisa, contada
+         desde por que importa. -->
+    <section class="section alt" id="ventaja">
+      <div class="wrap">
+        <h2 class="sec-head">Lo que allá ya es obligatorio,<br>aquí todavía es ventaja<span class="dot">.</span></h2>
+        <p class="desc">Barranquilla va uno o dos años detrás de lo que ya se da por hecho en
+          Estados Unidos y Europa. Eso suena mal y es una oportunidad: sabemos qué viene, porque
+          allá ya pasó.</p>
+
+        <div class="ventaja-lista">
+          <article class="ventaja-item">
+            <span class="ventaja-fecha">Febrero de 2024</span>
+            <h3>Gmail y Yahoo empezaron a exigir que tu correo esté firmado</h3>
+            <p>Quien envía correo en volumen tiene que tener SPF, DKIM y DMARC configurados o sus
+              mensajes se van a spam. Aquí casi ninguna empresa los tiene, y lo descubren cuando un
+              cliente dice «no me llegó nada» y el correo llevaba semanas cayendo en la carpeta
+              equivocada.</p>
+          </article>
+
+          <article class="ventaja-item">
+            <span class="ventaja-fecha">28 de junio de 2025</span>
+            <h3>En Europa la accesibilidad web pasó a ser ley</h3>
+            <p>Las tiendas en línea y los servicios digitales tienen que cumplir un estándar de
+              accesibilidad, y también las empresas de fuera que venden allá. Si algún día quieres
+              exportar, ya es un requisito. Y mientras tanto es el mismo trabajo que hace que tu
+              sitio se pueda usar en un celular viejo y con mala señal, que es como te visita buena
+              parte de tu clientela.</p>
+          </article>
+
+          <article class="ventaja-item">
+            <span class="ventaja-fecha">Está pasando ahora</span>
+            <h3>Cada vez más gente pregunta a una IA en vez de buscar en Google</h3>
+            <p>Y la IA responde con lo que encuentra escrito de ti. Lo comprobamos con nosotros
+              mismos: le preguntamos a Perplexity qué era Kaiva Studio y nos describió repitiendo,
+              palabra por palabra, la descripción de nuestra propia página — sin mencionar nuestra
+              herramienta, porque no se la habíamos contado ahí. Lo que no está escrito donde la
+              máquina lee, para la máquina no existe.</p>
+          </article>
+        </div>
       </div>
     </section>
 
