@@ -599,16 +599,13 @@ html {
   border-block: 1px solid var(--line);
 }
 
-/* La regla de acento. Se degrada hacia la derecha para que sea una entrada y
-   no una raya de division: marca donde empieza la seccion sin cerrarla. */
-.section--marcada::before {
-  content: "";
-  position: absolute;
-  inset-inline: 0;
-  top: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--violet) 0%, rgba(130, 66, 245, .35) 32%, rgba(130, 66, 245, 0) 68%);
-}
+/* Aqui vivia una regla violeta de 3px cruzando la parte de arriba de la
+   seccion. La puse para dar ritmo tras quitar los bloques de color, y no
+   funcionaba: cortaba la pagina en trozos en vez de acompanarla, que es
+   justo lo que se le pedia a los fondos de color y por lo que se quitaron.
+
+   El ritmo lo llevan los dos tonos —blanco y #fafafa— y el aire entre
+   secciones. Sin trazos. */
 
 /* Cuando .alt y .marcada coinciden manda el gris: la regla de arriba sigue
    distinguiendola de una .alt cualquiera. */
