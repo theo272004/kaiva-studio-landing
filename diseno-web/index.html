@@ -51,7 +51,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260805o">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260805p">
 
   <script type="application/ld+json">
 {
@@ -808,64 +808,116 @@
     }
 
   
-    /* ---- El retraso como ventaja -----------------------------------------
-       Tres hechos con fecha. La fecha va arriba y en violeta porque es lo que
-       sostiene el argumento: sin ella esto seria una opinion. */
-    .ventaja-lista {
+/* ---- Línea de tiempo de la web ---------------------------------------
+       Un hilo vertical con seis hitos. El icono va sobre el hilo y la fecha
+       encima del título: la fecha es lo que sostiene el argumento, así que se
+       lee antes que nada.
+
+       Sin animación de entrada a propósito. Es una lista de hechos, y una
+       lista que aparece de a poco se lee peor que una que ya está. */
+    .evo-linea {
+      list-style: none;
+      margin: 2.8rem 0 0;
+      padding: 0;
+      position: relative;
+    }
+
+    /* El hilo. Se detiene antes del último icono para no sobresalir por
+       debajo del último hito. */
+    .evo-linea::before {
+      content: "";
+      position: absolute;
+      left: 19px;
+      top: 12px;
+      bottom: 12px;
+      width: 2px;
+      background: var(--line-strong);
+    }
+
+    .evo-hito {
+      position: relative;
+      padding: 0 0 2.2rem 3.6rem;
+    }
+
+    .evo-hito:last-child { padding-bottom: 0; }
+
+    .evo-icono {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 40px;
+      height: 40px;
       display: grid;
-      gap: 1.6rem;
-      margin-top: 2.6rem;
+      place-items: center;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid var(--line-strong);
+      color: var(--ink-soft);
     }
 
-    .ventaja-item {
-      display: grid;
-      grid-template-columns: 190px minmax(0, 1fr);
-      gap: 0 2rem;
-      align-items: start;
-      padding-top: 1.6rem;
-      border-top: 1px solid var(--line);
-    }
-
-    .ventaja-item:first-child {
-      padding-top: 0;
-      border-top: 0;
-    }
-
-    .ventaja-fecha {
-      grid-row: span 2;
-      font-size: 12.5px;
-      font-weight: 700;
-      letter-spacing: .04em;
-      text-transform: uppercase;
+    /* El hito de hoy es el único con color. Los cinco anteriores ya pasaron;
+       este es el que le toca al lector. */
+    .evo-ahora .evo-icono {
+      border-color: var(--violet);
       color: var(--violet);
-      padding-top: .2rem;
+      box-shadow: 0 0 0 5px rgba(130, 66, 245, .1);
     }
 
-    .ventaja-item h3 {
+    .evo-fecha {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: .35rem;
+      padding-top: .5rem;
+    }
+
+    .evo-ahora .evo-fecha { color: var(--violet); }
+
+    .evo-hito h3 {
       font-family: var(--display);
-      font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+      font-size: clamp(1.05rem, 2.1vw, 1.28rem);
       font-weight: 700;
       letter-spacing: -.02em;
       line-height: 1.3;
-      margin-bottom: .6rem;
+      margin-bottom: .5rem;
     }
 
-    .ventaja-item p {
+    .evo-hito p {
       color: var(--ink-soft);
       line-height: 1.7;
       max-width: 62ch;
     }
 
-    @media (max-width: 720px) {
-      .ventaja-item {
-        grid-template-columns: 1fr;
-        gap: .5rem;
-      }
+    .evo-cierre {
+      margin-top: 2.6rem;
+      padding-top: 1.6rem;
+      border-top: 1px solid var(--line);
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--ink);
+      max-width: 62ch;
+    }
 
-      .ventaja-fecha {
-        grid-row: auto;
-        padding-top: 0;
-      }
+    .evo-cierre a {
+      color: var(--violet);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    @media (max-width: 560px) {
+      .evo-linea::before { left: 15px; }
+
+      .evo-hito { padding-left: 2.9rem; padding-bottom: 1.8rem; }
+
+      .evo-icono { width: 32px; height: 32px; }
+
+      .evo-icono svg { width: 16px; height: 16px; }
+
+      .evo-fecha { padding-top: .3rem; }
     }
   </style>
 </head>
@@ -1197,54 +1249,92 @@
       </div>
     </section>
 
-    <!-- EL RETRASO COMO VENTAJA.
-         Idea de Nicolas, y es la unica seccion de la pagina que no habla de
-         nosotros: habla de lo que ya paso afuera. Funciona por dos razones.
-         La primera es que es verdad y se puede fechar —las tres cosas de aqui
-         tienen fecha y fuente—. La segunda es que convierte "vamos atrasados"
-         en algo accionable: si allá ya es obligatorio, aqui todavia te
-         diferencia.
+    <!-- LA EVOLUCIÓN DE UNA WEB.
+         Sustituye a "Lo que allá ya es obligatorio, aquí todavía es ventaja",
+         que contaba lo mismo peor: comparaba países en vez de contar el
+         cambio. Idea de Nicolás y es mejor, porque responde a la objeción
+         real —"si mi web funciona, ¿para qué la toco?"— sin discutir con
+         nadie: se limita a enseñar que las reglas cambiaron seis veces en
+         diez años.
 
-         Cada ejemplo se eligio porque la herramienta de Kaiva LO MIDE. No es
-         cultura general: es la lista de lo que el diagnostico revisa, contada
-         desde por que importa. -->
-    <section class="section alt" id="ventaja">
+         Las seis fechas están verificadas contra su fuente. Es lo que sostiene
+         la sección: sin fechas esto sería una opinión de vendedor. -->
+    <section class="section alt" id="evolucion">
       <div class="wrap">
-        <h2 class="sec-head">Lo que allá ya es obligatorio,<br>aquí todavía es ventaja<span class="dot">.</span></h2>
-        <p class="desc">Barranquilla va uno o dos años detrás de lo que ya se da por hecho en
-          Estados Unidos y Europa. Eso suena mal y es una oportunidad: sabemos qué viene, porque
-          allá ya pasó.</p>
+        <h2 class="sec-head">Una web no se hace una vez<span class="dot">.</span></h2>
+        <p class="desc">Cada pocos años cambia una regla y las páginas que no se movieron dejan de
+          funcionar sin que nadie avise. Esta es la lista de lo que cambió, con su fecha.</p>
 
-        <div class="ventaja-lista">
-          <article class="ventaja-item">
-            <span class="ventaja-fecha">Febrero de 2024</span>
-            <h3>Gmail y Yahoo empezaron a exigir que tu correo esté firmado</h3>
-            <p>Quien envía correo en volumen tiene que tener SPF, DKIM y DMARC configurados o sus
-              mensajes se van a spam. Aquí casi ninguna empresa los tiene, y lo descubren cuando un
-              cliente dice «no me llegó nada» y el correo llevaba semanas cayendo en la carpeta
-              equivocada.</p>
-          </article>
+        <ol class="evo-linea">
+          <li class="evo-hito">
+            <span class="evo-icono" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+            </span>
+            <span class="evo-fecha">Abril de 2015</span>
+            <h3>El celular pasó a mandar</h3>
+            <p>Google empezó a usar la adaptación a móvil para decidir quién sale primero. De un día
+              para otro, miles de páginas que se veían bien en computador cayeron en el buscador.</p>
+          </li>
 
-          <article class="ventaja-item">
-            <span class="ventaja-fecha">28 de junio de 2025</span>
-            <h3>En Europa la accesibilidad web pasó a ser ley</h3>
-            <p>Las tiendas en línea y los servicios digitales tienen que cumplir un estándar de
-              accesibilidad, y también las empresas de fuera que venden allá. Si algún día quieres
-              exportar, ya es un requisito. Y mientras tanto es el mismo trabajo que hace que tu
-              sitio se pueda usar en un celular viejo y con mala señal, que es como te visita buena
-              parte de tu clientela.</p>
-          </article>
+          <li class="evo-hito">
+            <span class="evo-icono" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            </span>
+            <span class="evo-fecha">Julio de 2018</span>
+            <h3>Sin candado, "No seguro"</h3>
+            <p>Chrome empezó a marcar como no seguras todas las páginas sin certificado. Ya no era
+              un detalle técnico: era un cartel de advertencia delante de tu cliente.</p>
+          </li>
 
-          <article class="ventaja-item">
-            <span class="ventaja-fecha">Está pasando ahora</span>
-            <h3>Cada vez más gente pregunta a una IA en vez de buscar en Google</h3>
-            <p>Y la IA responde con lo que encuentra escrito de ti. Lo comprobamos con nosotros
-              mismos: le preguntamos a Perplexity qué era Kaiva Studio y nos describió repitiendo,
-              palabra por palabra, la descripción de nuestra propia página — sin mencionar nuestra
-              herramienta, porque no se la habíamos contado ahí. Lo que no está escrito donde la
-              máquina lee, para la máquina no existe.</p>
-          </article>
-        </div>
+          <li class="evo-hito">
+            <span class="evo-icono" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </span>
+            <span class="evo-fecha">Junio de 2021</span>
+            <h3>La velocidad se volvió posición</h3>
+            <p>Cuánto tarda tu página en mostrarse, y si se mueve mientras carga, pasó a contar para
+              el puesto que ocupas en Google. Antes era una molestia; desde entonces cuesta visitas.</p>
+          </li>
+
+          <li class="evo-hito">
+            <span class="evo-icono" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+            </span>
+            <span class="evo-fecha">Febrero de 2024</span>
+            <h3>Tu correo tiene que ir firmado</h3>
+            <p>Gmail y Yahoo empezaron a exigir SPF, DKIM y DMARC a quien envía correo en volumen.
+              Sin eso, tus mensajes van a spam y tú te enteras cuando un cliente dice que no le llegó
+              nada.</p>
+          </li>
+
+          <li class="evo-hito">
+            <span class="evo-icono" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/></svg>
+            </span>
+            <span class="evo-fecha">Junio de 2025</span>
+            <h3>La accesibilidad pasó a ser ley</h3>
+            <p>En la Unión Europea, las tiendas y los servicios digitales tienen que ser accesibles
+              —también los de fuera que vendan allá—. Aquí todavía no obliga nadie, y es el mismo
+              trabajo que hace que tu web se pueda usar en un celular viejo.</p>
+          </li>
+
+          <li class="evo-hito evo-ahora">
+            <span class="evo-icono" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a4 4 0 0 1 4 4v1a4 4 0 0 1 0 8v1a4 4 0 0 1-8 0v-1a4 4 0 0 1 0-8V7a4 4 0 0 1 4-4z"/></svg>
+            </span>
+            <span class="evo-fecha">Está pasando ahora</span>
+            <h3>Ahora responde una IA por ti</h3>
+            <p>Cada vez más gente le pregunta a ChatGPT o a Perplexity en vez de buscar, y la
+              respuesta se arma con lo que encuentra escrito de ti. Lo probamos con nosotros mismos:
+              Perplexity nos describió repitiendo, palabra por palabra, la descripción de nuestra
+              propia página. Lo que no está escrito donde la máquina lee, para la máquina no existe.</p>
+          </li>
+        </ol>
+
+        <p class="evo-cierre">Seis cambios en diez años, y ninguno avisó. Por eso una web no es un
+          folleto que se imprime una vez: es algo que hay que revisar cada tanto. De ahí salió
+          nuestro <a href="/diagnostico/">diagnóstico gratuito</a>, que comprueba todo esto en tu
+          dominio en menos de un minuto.</p>
       </div>
     </section>
 
