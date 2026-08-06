@@ -210,9 +210,6 @@
          dentro. */
       font-size: 1cqw;
       font-family: var(--sans);
-      /* La perspectiva vive en la cámara y no en el mundo: si se pone en el
-         mundo, el scale del recorrido la deforma. */
-      perspective: 220em;
     }
 
     /* En el teléfono el cuadro mide unos 335px, así que 1cqw son 3,35px y
@@ -227,7 +224,6 @@
     .sw-tilt {
       position: absolute;
       inset: 0;
-      transform-style: preserve-3d;
       animation: swTilt 26s cubic-bezier(.22, .61, .36, 1) infinite;
     }
 
@@ -238,32 +234,39 @@
       width: 300%;
       height: 300%;
       transform-origin: 0 0;
+      /* Sin will-change a proposito: promocionar esto a capa fija hace
+         que el navegador lo dibuje una vez y luego lo estire, y ahi
+         nace el texto empanado. Mejor que lo redibuje. */
       animation: swCam 26s cubic-bezier(.65, 0, .35, 1) infinite;
-      will-change: transform;
     }
 
     /* La entrada: el plano llega ladeado y se endereza, como en el segundo
        vídeo que mandó. Solo al principio; el resto del recorrido es plano. */
+    /* La entrada, en 2D. Era rotateX/rotateY con perspectiva y quedaba mas
+       cinematográfica, pero un contexto 3D mete todo el subárbol en una capa
+       de GPU que se dibuja una vez y se estira: era una de las causas del
+       texto empañado. Un giro pequeño y una escala dan la sensación de que
+       la escena se posa, sin ese precio. */
     @keyframes swTilt {
-      0%   { transform: rotateX(13deg) rotateY(-11deg) translateZ(-14em); opacity: 0; }
+      0%   { transform: rotate(-1.6deg) scale(.965); opacity: 0; }
       3%   { opacity: 1; }
-      9%   { transform: rotateX(0deg) rotateY(0deg) translateZ(0); }
-      92%  { transform: rotateX(0deg) rotateY(0deg) translateZ(0); opacity: 1; }
-      100% { transform: rotateX(13deg) rotateY(-11deg) translateZ(-14em); opacity: 0; }
+      9%   { transform: rotate(0deg) scale(1); }
+      92%  { transform: rotate(0deg) scale(1); opacity: 1; }
+      100% { transform: rotate(-1.6deg) scale(.965); opacity: 0; }
     }
 
     /* Los catorce encuadres. Calculados, no tanteados — ver la nota de
        arriba. Los pares iguales seguidos son las PAUSAS: sin ellas la cámara
        no se detiene nunca y no da tiempo a leer nada. */
     @keyframes swCam {
-      0%,   7%  { transform: scale(0.550) translate(-20.197%, -20.197%); }
-      13%,  26% { transform: scale(1.450) translate(-18.506%, -14.506%); }
-      31%,  38% { transform: scale(2.450) translate(-24.697%, -23.197%); }
-      45%,  55% { transform: scale(1.400) translate(-59.095%, -12.095%); }
-      61%,  70% { transform: scale(1.500) translate(-62.889%, -44.889%); }
-      75%,  82% { transform: scale(2.200) translate(-37.424%, -54.424%); }
-      88%,  94% { transform: scale(1.500) translate(-16.889%, -66.889%); }
-      100%      { transform: scale(0.550) translate(-20.197%, -20.197%); }
+      0%,   7%  { transform: scale(0.345) translate(-1.641%, -4.541%); }
+      13%,  26% { transform: scale(1.000) translate(-13.333%, -8.333%); }
+      31%,  38% { transform: scale(1.586) translate(-19.491%, -20.991%); }
+      45%,  55% { transform: scale(0.979) translate(-52.976%, -9.976%); }
+      61%,  70% { transform: scale(1.034) translate(-55.881%, -47.881%); }
+      75%,  82% { transform: scale(1.414) translate(-28.213%, -45.213%); }
+      88%,  94% { transform: scale(1.034) translate(-15.881%, -68.881%); }
+      100%      { transform: scale(0.345) translate(-1.641%, -4.541%); }
     }
 
     /* ---- Las escenas -----------------------------------------------------
@@ -274,10 +277,10 @@
       position: absolute;
       transform: translate(-50%, -50%);
       background: #fff;
-      border: 0.16em solid rgba(15, 23, 42, .10);
-      border-radius: 1.6em;
-      box-shadow: 0 1.6em 4em rgba(15, 23, 42, .07);
-      padding: 1.5em;
+      border: 0.232em solid rgba(15, 23, 42, .10);
+      border-radius: 2.320em;
+      box-shadow: 0 2.320em 5.800em rgba(15, 23, 42, .07);
+      padding: 2.175em;
       color: var(--ink);
       line-height: 1.35;
     }
@@ -285,41 +288,41 @@
     .sw-esc-tit {
       display: flex;
       align-items: center;
-      gap: .7em;
-      font-size: 1.9em;
+      gap: 1.015em;
+      font-size: 2.755em;
       font-weight: 800;
-      letter-spacing: -.01em;
-      margin-bottom: 1em;
+      letter-spacing: -0.014em;
+      margin-bottom: 1.450em;
     }
 
-    .sw-esc-tit svg { width: 1.5em; height: 1.5em; color: var(--violet); }
+    .sw-esc-tit svg { width: 2.175em; height: 2.175em; color: var(--violet); }
 
     /* La etiqueta que dice qué es cada cosa. Va pegada arriba de su tarjeta y
        fuera de ella: dentro competía con el contenido de la escena. */
     .sw-eti {
       position: absolute;
       left: 0;
-      top: -3.4em;
-      font-size: 1.7em;
+      top: -4.930em;
+      font-size: 2.465em;
       font-weight: 800;
-      letter-spacing: .06em;
+      letter-spacing: 0.087em;
       text-transform: uppercase;
       color: var(--violet);
       white-space: nowrap;
     }
 
     /* -- 1. Dashboard -- */
-    .sw-e-tablero { left: 30.0%; top: 26.0%; width: 23%; }
+    .sw-e-tablero { left: 30.0%; top: 25.0%; width: 33.4%; }
 
-    .sw-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8em; margin-bottom: 1.2em; }
-    .sw-kpi { background: #f8fafc; border-radius: 1em; padding: .9em 1em; }
-    .sw-kpi i { display: block; font-style: normal; font-size: 1.35em; font-weight: 700; color: var(--ink-faint); margin-bottom: .35em; }
-    .sw-kpi b { display: block; font-size: 2.6em; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
-    .sw-kpi s { display: block; text-decoration: none; font-size: 1.3em; font-weight: 700; color: #16a34a; margin-top: .4em; }
+    .sw-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.160em; margin-bottom: 1.740em; }
+    .sw-kpi { background: #f8fafc; border-radius: 1.450em; padding: 1.305em 1.450em; }
+    .sw-kpi i { display: block; font-style: normal; font-size: 1.958em; font-weight: 700; color: var(--ink-faint); margin-bottom: 0.507em; }
+    .sw-kpi b { display: block; font-size: 3.770em; font-weight: 800; letter-spacing: -0.043em; line-height: 1; }
+    .sw-kpi s { display: block; text-decoration: none; font-size: 1.885em; font-weight: 700; color: #16a34a; margin-top: 0.580em; }
 
     /* La gráfica. El trazo se dibuja solo con stroke-dasharray, que es la
        forma barata de animar una línea sin mover un solo nodo. */
-    .sw-graf { position: relative; height: 11em; background: #f8fafc; border-radius: 1em; padding: 1em; }
+    .sw-graf { position: relative; height: 15.950em; background: #f8fafc; border-radius: 1.450em; padding: 1.450em; }
     .sw-graf svg { width: 100%; height: 100%; overflow: visible; }
     .sw-traza {
       fill: none;
@@ -343,14 +346,14 @@
     .sw-globo {
       position: absolute;
       left: 46%;
-      top: 1.4em;
+      top: 2.030em;
       transform: translate(-50%, -4px);
       background: var(--ink);
       color: #fff;
-      font-size: 1.35em;
+      font-size: 1.958em;
       font-weight: 700;
-      padding: .45em .7em;
-      border-radius: .6em;
+      padding: 0.652em 1.015em;
+      border-radius: 0.870em;
       white-space: nowrap;
       opacity: 0;
       animation: swGlobo 26s ease infinite;
@@ -363,30 +366,30 @@
     .sw-punto {
       position: absolute;
       left: 46%;
-      top: 5.1em;
-      width: 1.1em;
-      height: 1.1em;
-      margin: -.55em 0 0 -.55em;
+      top: 7.395em;
+      width: 1.595em;
+      height: 1.595em;
+      margin: -0.797em 0 0 -0.797em;
       border-radius: 50%;
       background: #fff;
-      border: .32em solid var(--violet);
+      border: 0.464em solid var(--violet);
       opacity: 0;
       animation: swGlobo 26s ease infinite;
     }
 
     /* -- 2. Reportes -- */
-    .sw-e-reportes { left: 71.0%; top: 24.0%; width: 21%; }
+    .sw-e-reportes { left: 70.0%; top: 27.0%; width: 30.4%; }
 
     .sw-fila {
       display: grid;
       grid-template-columns: 1fr auto;
       align-items: center;
-      gap: 1em;
-      padding: .85em 0;
-      border-top: 0.12em solid rgba(15, 23, 42, .07);
-      font-size: 1.5em;
+      gap: 1.450em;
+      padding: 1.232em 0;
+      border-top: 0.174em solid rgba(15, 23, 42, .07);
+      font-size: 2.175em;
       opacity: 0;
-      transform: translateY(.6em);
+      transform: translateY(0.870em);
       animation: swFila 26s ease infinite;
     }
     .sw-fila:first-of-type { border-top: 0; }
@@ -404,11 +407,11 @@
       62%, 100%{ opacity: 0; transform: translateY(.6em); }
     }
 
-    .sw-barritas { display: flex; align-items: flex-end; gap: .5em; height: 6.5em; margin-bottom: 1em; }
+    .sw-barritas { display: flex; align-items: flex-end; gap: 0.725em; height: 9.425em; margin-bottom: 1.450em; }
     .sw-barritas i {
       flex: 1;
       background: var(--violet);
-      border-radius: .3em .3em 0 0;
+      border-radius: 0.435em 0.435em 0 0;
       transform-origin: bottom;
       transform: scaleY(0);
       animation: swBarra 26s cubic-bezier(.2, .8, .2, 1) infinite;
@@ -426,23 +429,23 @@
     }
 
     /* -- 3. Automatizaciones -- */
-    .sw-e-automatiza { left: 74.0%; top: 56.0%; width: 20%; }
+    .sw-e-automatiza { left: 72.0%; top: 64.0%; width: 29.0%; }
 
     .sw-flujo { display: grid; gap: .9em; }
     .sw-nodo {
       display: flex;
       align-items: center;
-      gap: .8em;
-      font-size: 1.5em;
+      gap: 1.160em;
+      font-size: 2.175em;
       font-weight: 700;
       background: #f8fafc;
-      border: 0.12em solid rgba(15, 23, 42, .07);
-      border-radius: .8em;
-      padding: .7em .9em;
+      border: 0.174em solid rgba(15, 23, 42, .07);
+      border-radius: 1.160em;
+      padding: 1.015em 1.305em;
       animation: swNodo 26s ease infinite;
     }
     .sw-nodo em { font-style: normal; color: var(--ink-faint); font-weight: 700; }
-    .sw-nodo svg { width: 1.2em; height: 1.2em; flex: none; color: var(--ink-faint); }
+    .sw-nodo svg { width: 1.740em; height: 1.740em; flex: none; color: var(--ink-faint); }
     .sw-nodo:nth-of-type(1) { animation-delay: 15.6s; }
     .sw-nodo:nth-of-type(2) { animation-delay: 16.2s; }
     .sw-nodo:nth-of-type(3) { animation-delay: 16.8s; }
@@ -454,32 +457,32 @@
       9%       { background: rgba(130, 66, 245, .05); border-color: rgba(130, 66, 245, .35); }
       70%,100% { background: #f8fafc; border-color: rgba(15, 23, 42, .07); }
     }
-    .sw-hilo { height: 1.4em; margin-left: 1.5em; border-left: 0.12em dashed rgba(15, 23, 42, .18); }
+    .sw-hilo { height: 2.030em; margin-left: 2.175em; border-left: 0.174em dashed rgba(15, 23, 42, .18); }
 
     /* -- 4. Pasarelas de pago -- */
-    .sw-e-pagos { left: 45.0%; top: 62.0%; width: 15%; }
+    .sw-e-pagos { left: 40.0%; top: 57.0%; width: 21.8%; }
 
-    .sw-monto { font-size: 3.4em; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
-    .sw-monto-et { font-size: 1.4em; font-weight: 700; color: var(--ink-faint); margin-bottom: .5em; }
+    .sw-monto { font-size: 4.930em; font-weight: 800; letter-spacing: -0.043em; line-height: 1; }
+    .sw-monto-et { font-size: 2.030em; font-weight: 700; color: var(--ink-faint); margin-bottom: 0.725em; }
     .sw-tarjeta {
-      display: flex; align-items: center; gap: .7em;
-      font-size: 1.4em; font-weight: 700; color: var(--ink-faint);
-      margin-top: 1em;
+      display: flex; align-items: center; gap: 1.015em;
+      font-size: 2.030em; font-weight: 700; color: var(--ink-faint);
+      margin-top: 1.450em;
     }
-    .sw-tarjeta i { width: 2.4em; height: 1.6em; border-radius: .3em; background: #e2e8f0; font-style: normal; }
+    .sw-tarjeta i { width: 3.480em; height: 2.320em; border-radius: 0.435em; background: #e2e8f0; font-style: normal; }
     .sw-ok {
-      display: flex; align-items: center; gap: .6em;
-      margin-top: 1.2em;
-      font-size: 1.5em; font-weight: 800;
+      display: flex; align-items: center; gap: 0.870em;
+      margin-top: 1.740em;
+      font-size: 2.175em; font-weight: 800;
       color: #15803d;
       background: rgba(22, 163, 74, .10);
-      border-radius: .7em;
-      padding: .6em .8em;
+      border-radius: 1.015em;
+      padding: 0.870em 1.160em;
       opacity: 0;
       transform: scale(.9);
       animation: swOk 26s cubic-bezier(.2, 1.4, .4, 1) infinite;
     }
-    .sw-ok svg { width: 1.3em; height: 1.3em; }
+    .sw-ok svg { width: 1.885em; height: 1.885em; }
     @keyframes swOk {
       0%, 76%   { opacity: 0; transform: scale(.9); }
       79%, 86%  { opacity: 1; transform: scale(1); }
@@ -487,20 +490,20 @@
     }
 
     /* -- 5. CRM -- */
-    .sw-e-crm { left: 28.0%; top: 78.0%; width: 21%; }
+    .sw-e-crm { left: 32.0%; top: 85.0%; width: 30.4%; }
 
-    .sw-tablero-crm { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8em; }
-    .sw-col { background: #f8fafc; border-radius: .9em; padding: .7em; min-height: 9em; }
-    .sw-col-t { font-size: 1.3em; font-weight: 800; color: var(--ink-faint); margin-bottom: .6em; text-transform: uppercase; letter-spacing: .04em; }
+    .sw-tablero-crm { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.160em; }
+    .sw-col { background: #f8fafc; border-radius: 1.305em; padding: 1.015em; min-height: 13.050em; }
+    .sw-col-t { font-size: 1.885em; font-weight: 800; color: var(--ink-faint); margin-bottom: 0.870em; text-transform: uppercase; letter-spacing: 0.058em; }
     .sw-ficha {
       background: #fff;
-      border: 0.12em solid rgba(15, 23, 42, .08);
-      border-radius: .6em;
-      padding: .6em;
-      font-size: 1.3em;
+      border: 0.174em solid rgba(15, 23, 42, .08);
+      border-radius: 0.870em;
+      padding: 0.870em;
+      font-size: 1.885em;
       font-weight: 700;
-      margin-bottom: .5em;
-      box-shadow: 0 .3em .8em rgba(15, 23, 42, .04);
+      margin-bottom: 0.725em;
+      box-shadow: 0 0.435em 1.160em rgba(15, 23, 42, .04);
     }
     /* La ficha que se mueve de columna. Es el gesto de la escena: un CRM no
        se entiende viendo columnas quietas, se entiende viendo algo avanzar. */
@@ -590,7 +593,7 @@
       .sw-rotulo {
         animation: none !important;
       }
-      .sw-mundo { transform: scale(0.55) translate(-20.197%, -20.197%); }
+      .sw-mundo { transform: scale(0.345) translate(-1.641%, -4.541%); }
       .sw-tilt { opacity: 1; transform: none; }
       .sw-traza { stroke-dashoffset: 0; }
       .sw-area, .sw-fila { opacity: 1; transform: none; }
