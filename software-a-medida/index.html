@@ -201,11 +201,23 @@
       width: 100%;
       aspect-ratio: 100 / 86;
       overflow: hidden;
-      border-radius: 22px;
-      border: 1px solid var(--line-strong);
-      background:
-        radial-gradient(120% 100% at 20% 0%, rgba(130, 66, 245, .07) 0%, rgba(130, 66, 245, 0) 55%),
-        #fbfbfd;
+      /* SIN fondo propio ni borde. Llevaba un gris #fbfbfd con un tinte
+         violeta y un marco, y a la diseñadora no le convencía: leía como una
+         caja pegada encima de la sección. Ahora es del color de la sección
+         —o sea, transparente— y lo que se ve son las tarjetas flotando.
+
+         Al quitar el marco, las escenas se cortaban a hachazo contra el borde
+         invisible. La máscara las desvanece en los cuatro lados, que es lo
+         que hace que parezca que el plano sigue más allá del cuadro en vez de
+         que algo está mal recortado. */
+      -webkit-mask-image:
+        linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%),
+        linear-gradient(to bottom, transparent 0, #000 4%, #000 96%, transparent 100%);
+      mask-image:
+        linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%),
+        linear-gradient(to bottom, transparent 0, #000 4%, #000 96%, transparent 100%);
+      -webkit-mask-composite: source-in;
+      mask-composite: intersect;
       /* 1em = 1% del ancho del cuadro. De aquí cuelga TODA la escala de
          dentro. */
       font-size: 1cqw;
@@ -259,14 +271,14 @@
        arriba. Los pares iguales seguidos son las PAUSAS: sin ellas la cámara
        no se detiene nunca y no da tiempo a leer nada. */
     @keyframes swCam {
-      0%,   7%  { transform: scale(0.345) translate(-1.641%, -4.541%); }
+      0%,   7%  { transform: scale(0.600) translate(-22.172%, -25.072%); }
       13%,  26% { transform: scale(1.000) translate(-13.333%, -8.333%); }
       31%,  38% { transform: scale(1.586) translate(-19.491%, -20.991%); }
       45%,  55% { transform: scale(0.979) translate(-52.976%, -9.976%); }
       61%,  70% { transform: scale(1.034) translate(-55.881%, -47.881%); }
       75%,  82% { transform: scale(1.414) translate(-28.213%, -45.213%); }
       88%,  94% { transform: scale(1.034) translate(-15.881%, -68.881%); }
-      100%      { transform: scale(0.345) translate(-1.641%, -4.541%); }
+      100%      { transform: scale(0.600) translate(-22.172%, -25.072%); }
     }
 
     /* ---- Las escenas -----------------------------------------------------
@@ -322,8 +334,30 @@
 
     /* La gráfica. El trazo se dibuja solo con stroke-dasharray, que es la
        forma barata de animar una línea sin mover un solo nodo. */
-    .sw-graf { position: relative; height: 15.950em; background: #f8fafc; border-radius: 1.450em; padding: 1.450em; }
-    .sw-graf svg { width: 100%; height: 100%; overflow: visible; }
+    .sw-graf {
+      position: relative;
+      height: 17.400em;
+      background: #f8fafc;
+      border-radius: 1.450em;
+      padding: 1.450em 1.450em 0.600em;
+      display: grid;
+      grid-template-rows: 1fr auto;
+    }
+    /* min-height:0 y sin overflow visible: al pasar .sw-graf a rejilla, el
+       height:100% del svg dejo de resolverse contra la fila y la curva se
+       salia por debajo de su caja. Se vio en la captura. */
+    .sw-graf svg { width: 100%; height: 100%; min-height: 0; display: block; }
+    .sw-reja { fill: none; stroke: rgba(15, 23, 42, .07); stroke-width: 1; }
+    /* El eje de meses. Es lo que convierte una linea suelta en una grafica:
+       sin referencia temporal, un trazo que sube no dice nada. */
+    .sw-eje {
+      display: flex;
+      justify-content: space-between;
+      margin-top: .750em;
+      font-size: 1.600em;
+      font-weight: 700;
+      color: var(--ink-faint);
+    }
     .sw-traza {
       fill: none;
       stroke: var(--violet);
@@ -593,7 +627,7 @@
       .sw-rotulo {
         animation: none !important;
       }
-      .sw-mundo { transform: scale(0.345) translate(-1.641%, -4.541%); }
+      .sw-mundo { transform: scale(0.600) translate(-22.172%, -25.072%); }
       .sw-tilt { opacity: 1; transform: none; }
       .sw-traza { stroke-dashoffset: 0; }
       .sw-area, .sw-fila { opacity: 1; transform: none; }
@@ -1099,9 +1133,14 @@
                     <div class="sw-globo">$5.140.000</div>
                     <span class="sw-punto"></span>
                     <svg viewBox="0 0 100 40" preserveAspectRatio="none">
+                      <!-- Lineas de referencia. Sin ellas la curva flotaba en
+                           una caja gris y la tarjeta parecia a medio hacer. -->
+                      <path class="sw-reja" d="M0 8 H100 M0 19 H100 M0 30 H100" vector-effect="non-scaling-stroke"/>
                       <path class="sw-area" d="M0 30 C 10 28, 16 20, 24 22 C 34 24, 40 10, 50 12 C 60 14, 66 6, 76 8 C 86 10, 92 4, 100 3 L100 40 L0 40 Z"/>
-                      <path class="sw-traza" d="M0 30 C 10 28, 16 20, 24 22 C 34 24, 40 10, 50 12 C 60 14, 66 6, 76 8 C 86 10, 92 4, 100 3"/>
+                      <path class="sw-traza" d="M0 30 C 10 28, 16 20, 24 22 C 34 24, 40 10, 50 12 C 60 14, 66 6, 76 8 C 86 10, 92 4, 100 3"
+                            vector-effect="non-scaling-stroke"/>
                     </svg>
+                    <div class="sw-eje"><span>Ene</span><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span><span>Nov</span></div>
                   </div>
                 </div>
 
