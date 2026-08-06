@@ -170,7 +170,7 @@
        Con transform-origin 0 0 y scale(S) translate(tx%, ty%) —donde el % es
        del propio mundo—, un punto en la fracción px del mundo cae en
        x = S*3*(px + tx/100). Para centrarlo: tx = 100*(0.5/(3S) - px).
-       Los catorce fotogramas de .swCam salieron de esa fórmula, no de
+       Los catorce fotogramas de .kvcamCam salieron de esa fórmula, no de
        tantear: a ojo el punto interesante siempre se sale del encuadre.
 
        LAS MEDIDAS VAN EN em Y 1em = 1cqw, o sea el 1% del ancho del cuadro.
@@ -191,12 +191,12 @@
        que es el precio de no meter una librería de animación.
 
        Los datos son inventados y la etiqueta de abajo lo dice. */
-    .sw-cine {
+    .kvcam-cine {
       container-type: inline-size;
       width: 100%;
     }
 
-    .sw-cam {
+    .kvcam-cam {
       position: relative;
       width: 100%;
       aspect-ratio: 100 / 86;
@@ -230,16 +230,16 @@
        cuadros van en % y solo el texto va en em, así que subir la base agranda
        la letra sin tocar la composición. */
     @container (max-width: 520px) {
-      .sw-cam { font-size: 1.6cqw; }
+      .kvcam-cam { font-size: 1.6cqw; }
     }
 
-    .sw-tilt {
+    .kvcam-tilt {
       position: absolute;
       inset: 0;
-      animation: swTilt 26s cubic-bezier(.22, .61, .36, 1) infinite;
+      animation: kvcamTilt 26s cubic-bezier(.22, .61, .36, 1) infinite;
     }
 
-    .sw-mundo {
+    .kvcam-mundo {
       position: absolute;
       left: 0;
       top: 0;
@@ -249,7 +249,7 @@
       /* Sin will-change a proposito: promocionar esto a capa fija hace
          que el navegador lo dibuje una vez y luego lo estire, y ahi
          nace el texto empanado. Mejor que lo redibuje. */
-      animation: swCam 26s cubic-bezier(.65, 0, .35, 1) infinite;
+      animation: kvcamCam 26s cubic-bezier(.65, 0, .35, 1) infinite;
     }
 
     /* La entrada: el plano llega ladeado y se endereza, como en el segundo
@@ -259,7 +259,7 @@
        de GPU que se dibuja una vez y se estira: era una de las causas del
        texto empañado. Un giro pequeño y una escala dan la sensación de que
        la escena se posa, sin ese precio. */
-    @keyframes swTilt {
+    @keyframes kvcamTilt {
       0%   { transform: rotate(-1.6deg) scale(.965); opacity: 0; }
       3%   { opacity: 1; }
       9%   { transform: rotate(0deg) scale(1); }
@@ -270,7 +270,7 @@
     /* Los catorce encuadres. Calculados, no tanteados — ver la nota de
        arriba. Los pares iguales seguidos son las PAUSAS: sin ellas la cámara
        no se detiene nunca y no da tiempo a leer nada. */
-    @keyframes swCam {
+    @keyframes kvcamCam {
       0%,   7%  { transform: scale(0.600) translate(-22.172%, -25.072%); }
       13%,  26% { transform: scale(1.000) translate(-13.333%, -8.333%); }
       31%,  38% { transform: scale(1.586) translate(-19.491%, -20.991%); }
@@ -285,7 +285,7 @@
        Cada una se coloca por su CENTRO, que es el mismo punto que persigue la
        cámara. Así mover una escena es cambiar dos números en dos sitios y no
        recalcular esquinas. */
-    .sw-esc {
+    .kvcam-esc {
       position: absolute;
       transform: translate(-50%, -50%);
       background: #fff;
@@ -297,7 +297,7 @@
       line-height: 1.35;
     }
 
-    .sw-esc-tit {
+    .kvcam-esc-tit {
       display: flex;
       align-items: center;
       gap: 1.015em;
@@ -307,11 +307,11 @@
       margin-bottom: 1.450em;
     }
 
-    .sw-esc-tit svg { width: 2.175em; height: 2.175em; color: var(--violet); }
+    .kvcam-esc-tit svg { width: 2.175em; height: 2.175em; color: var(--violet); }
 
     /* La etiqueta que dice qué es cada cosa. Va pegada arriba de su tarjeta y
        fuera de ella: dentro competía con el contenido de la escena. */
-    .sw-eti {
+    .kvcam-eti {
       position: absolute;
       left: 0;
       top: -4.930em;
@@ -324,17 +324,17 @@
     }
 
     /* -- 1. Dashboard -- */
-    .sw-e-tablero { left: 30.0%; top: 25.0%; width: 33.4%; }
+    .kvcam-e-tablero { left: 30.0%; top: 25.0%; width: 33.4%; }
 
-    .sw-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.160em; margin-bottom: 1.740em; }
-    .sw-kpi { background: #f8fafc; border-radius: 1.450em; padding: 1.305em 1.450em; }
-    .sw-kpi i { display: block; font-style: normal; font-size: 1.958em; font-weight: 700; color: var(--ink-faint); margin-bottom: 0.507em; }
-    .sw-kpi b { display: block; font-size: 3.770em; font-weight: 800; letter-spacing: -0.043em; line-height: 1; }
-    .sw-kpi s { display: block; text-decoration: none; font-size: 1.885em; font-weight: 700; color: #16a34a; margin-top: 0.580em; }
+    .kvcam-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.160em; margin-bottom: 1.740em; }
+    .kvcam-kpi { background: #f8fafc; border-radius: 1.450em; padding: 1.305em 1.450em; }
+    .kvcam-kpi i { display: block; font-style: normal; font-size: 1.958em; font-weight: 700; color: var(--ink-faint); margin-bottom: 0.507em; }
+    .kvcam-kpi b { display: block; font-size: 3.770em; font-weight: 800; letter-spacing: -0.043em; line-height: 1; }
+    .kvcam-kpi s { display: block; text-decoration: none; font-size: 1.885em; font-weight: 700; color: #16a34a; margin-top: 0.580em; }
 
     /* La gráfica. El trazo se dibuja solo con stroke-dasharray, que es la
        forma barata de animar una línea sin mover un solo nodo. */
-    .sw-graf {
+    .kvcam-graf {
       position: relative;
       height: 17.400em;
       background: #f8fafc;
@@ -343,14 +343,14 @@
       display: grid;
       grid-template-rows: 1fr auto;
     }
-    /* min-height:0 y sin overflow visible: al pasar .sw-graf a rejilla, el
+    /* min-height:0 y sin overflow visible: al pasar .kvcam-graf a rejilla, el
        height:100% del svg dejo de resolverse contra la fila y la curva se
        salia por debajo de su caja. Se vio en la captura. */
-    .sw-graf svg { width: 100%; height: 100%; min-height: 0; display: block; }
-    .sw-reja { fill: none; stroke: rgba(15, 23, 42, .07); stroke-width: 1; }
+    .kvcam-graf svg { width: 100%; height: 100%; min-height: 0; display: block; }
+    .kvcam-reja { fill: none; stroke: rgba(15, 23, 42, .07); stroke-width: 1; }
     /* El eje de meses. Es lo que convierte una linea suelta en una grafica:
        sin referencia temporal, un trazo que sube no dice nada. */
-    .sw-eje {
+    .kvcam-eje {
       display: flex;
       justify-content: space-between;
       margin-top: .750em;
@@ -358,7 +358,7 @@
       font-weight: 700;
       color: var(--ink-faint);
     }
-    .sw-traza {
+    .kvcam-traza {
       fill: none;
       stroke: var(--violet);
       stroke-width: 2.2;
@@ -366,18 +366,18 @@
       stroke-linejoin: round;
       stroke-dasharray: 300;
       stroke-dashoffset: 300;
-      animation: swTrazo 26s linear infinite;
+      animation: kvcamTrazo 26s linear infinite;
     }
-    @keyframes swTrazo {
+    @keyframes kvcamTrazo {
       0%, 12%   { stroke-dashoffset: 300; }
       24%, 100% { stroke-dashoffset: 0; }
     }
-    .sw-area { fill: rgba(130, 66, 245, .12); opacity: 0; animation: swArea 26s linear infinite; }
-    @keyframes swArea { 0%, 20% { opacity: 0; } 27%, 100% { opacity: 1; } }
+    .kvcam-area { fill: rgba(130, 66, 245, .12); opacity: 0; animation: kvcamArea 26s linear infinite; }
+    @keyframes kvcamArea { 0%, 20% { opacity: 0; } 27%, 100% { opacity: 1; } }
 
     /* El globo de dato. Sale cuando la cámara ya está encima, no antes: si
        aparece de lejos no se lee y se pierde el gesto. */
-    .sw-globo {
+    .kvcam-globo {
       position: absolute;
       left: 46%;
       top: 2.030em;
@@ -390,14 +390,14 @@
       border-radius: 0.870em;
       white-space: nowrap;
       opacity: 0;
-      animation: swGlobo 26s ease infinite;
+      animation: kvcamGlobo 26s ease infinite;
     }
-    @keyframes swGlobo {
+    @keyframes kvcamGlobo {
       0%, 30%   { opacity: 0; transform: translate(-50%, 0); }
       33%, 39%  { opacity: 1; transform: translate(-50%, -.4em); }
       42%, 100% { opacity: 0; transform: translate(-50%, 0); }
     }
-    .sw-punto {
+    .kvcam-punto {
       position: absolute;
       left: 46%;
       top: 7.395em;
@@ -408,13 +408,13 @@
       background: #fff;
       border: 0.464em solid var(--violet);
       opacity: 0;
-      animation: swGlobo 26s ease infinite;
+      animation: kvcamGlobo 26s ease infinite;
     }
 
     /* -- 2. Reportes -- */
-    .sw-e-reportes { left: 70.0%; top: 27.0%; width: 30.4%; }
+    .kvcam-e-reportes { left: 70.0%; top: 27.0%; width: 30.4%; }
 
-    .sw-fila {
+    .kvcam-fila {
       display: grid;
       grid-template-columns: 1fr auto;
       align-items: center;
@@ -424,49 +424,49 @@
       font-size: 2.175em;
       opacity: 0;
       transform: translateY(0.870em);
-      animation: swFila 26s ease infinite;
+      animation: kvcamFila 26s ease infinite;
     }
-    .sw-fila:first-of-type { border-top: 0; }
-    .sw-fila b { font-weight: 700; }
-    .sw-fila span { color: var(--ink-faint); font-weight: 700; }
+    .kvcam-fila:first-of-type { border-top: 0; }
+    .kvcam-fila b { font-weight: 700; }
+    .kvcam-fila span { color: var(--ink-faint); font-weight: 700; }
     /* Entran de una en una, con medio punto de diferencia. Un retraso por
        fila y no una animación distinta por fila. */
-    .sw-fila:nth-of-type(1) { animation-delay: 11.4s; }
-    .sw-fila:nth-of-type(2) { animation-delay: 11.7s; }
-    .sw-fila:nth-of-type(3) { animation-delay: 12.0s; }
-    .sw-fila:nth-of-type(4) { animation-delay: 12.3s; }
-    @keyframes swFila {
+    .kvcam-fila:nth-of-type(1) { animation-delay: 11.4s; }
+    .kvcam-fila:nth-of-type(2) { animation-delay: 11.7s; }
+    .kvcam-fila:nth-of-type(3) { animation-delay: 12.0s; }
+    .kvcam-fila:nth-of-type(4) { animation-delay: 12.3s; }
+    @keyframes kvcamFila {
       0%       { opacity: 0; transform: translateY(.6em); }
       3%, 55%  { opacity: 1; transform: translateY(0); }
       62%, 100%{ opacity: 0; transform: translateY(.6em); }
     }
 
-    .sw-barritas { display: flex; align-items: flex-end; gap: 0.725em; height: 9.425em; margin-bottom: 1.450em; }
-    .sw-barritas i {
+    .kvcam-barritas { display: flex; align-items: flex-end; gap: 0.725em; height: 9.425em; margin-bottom: 1.450em; }
+    .kvcam-barritas i {
       flex: 1;
       background: var(--violet);
       border-radius: 0.435em 0.435em 0 0;
       transform-origin: bottom;
       transform: scaleY(0);
-      animation: swBarra 26s cubic-bezier(.2, .8, .2, 1) infinite;
+      animation: kvcamBarra 26s cubic-bezier(.2, .8, .2, 1) infinite;
     }
-    .sw-barritas i:nth-child(1) { height: 45%; animation-delay: 11.2s; }
-    .sw-barritas i:nth-child(2) { height: 70%; animation-delay: 11.35s; }
-    .sw-barritas i:nth-child(3) { height: 35%; animation-delay: 11.5s; }
-    .sw-barritas i:nth-child(4) { height: 90%; animation-delay: 11.65s; }
-    .sw-barritas i:nth-child(5) { height: 60%; animation-delay: 11.8s; }
-    .sw-barritas i:nth-child(6) { height: 100%; animation-delay: 11.95s; }
-    @keyframes swBarra {
+    .kvcam-barritas i:nth-child(1) { height: 45%; animation-delay: 11.2s; }
+    .kvcam-barritas i:nth-child(2) { height: 70%; animation-delay: 11.35s; }
+    .kvcam-barritas i:nth-child(3) { height: 35%; animation-delay: 11.5s; }
+    .kvcam-barritas i:nth-child(4) { height: 90%; animation-delay: 11.65s; }
+    .kvcam-barritas i:nth-child(5) { height: 60%; animation-delay: 11.8s; }
+    .kvcam-barritas i:nth-child(6) { height: 100%; animation-delay: 11.95s; }
+    @keyframes kvcamBarra {
       0%        { transform: scaleY(0); }
       4%, 55%   { transform: scaleY(1); }
       62%, 100% { transform: scaleY(0); }
     }
 
     /* -- 3. Automatizaciones -- */
-    .sw-e-automatiza { left: 72.0%; top: 64.0%; width: 29.0%; }
+    .kvcam-e-automatiza { left: 72.0%; top: 64.0%; width: 29.0%; }
 
-    .sw-flujo { display: grid; gap: .9em; }
-    .sw-nodo {
+    .kvcam-flujo { display: grid; gap: .9em; }
+    .kvcam-nodo {
       display: flex;
       align-items: center;
       gap: 1.160em;
@@ -476,35 +476,35 @@
       border: 0.174em solid rgba(15, 23, 42, .07);
       border-radius: 1.160em;
       padding: 1.015em 1.305em;
-      animation: swNodo 26s ease infinite;
+      animation: kvcamNodo 26s ease infinite;
     }
-    .sw-nodo em { font-style: normal; color: var(--ink-faint); font-weight: 700; }
-    .sw-nodo svg { width: 1.740em; height: 1.740em; flex: none; color: var(--ink-faint); }
-    .sw-nodo:nth-of-type(1) { animation-delay: 15.6s; }
-    .sw-nodo:nth-of-type(2) { animation-delay: 16.2s; }
-    .sw-nodo:nth-of-type(3) { animation-delay: 16.8s; }
+    .kvcam-nodo em { font-style: normal; color: var(--ink-faint); font-weight: 700; }
+    .kvcam-nodo svg { width: 1.740em; height: 1.740em; flex: none; color: var(--ink-faint); }
+    .kvcam-nodo:nth-of-type(1) { animation-delay: 15.6s; }
+    .kvcam-nodo:nth-of-type(2) { animation-delay: 16.2s; }
+    .kvcam-nodo:nth-of-type(3) { animation-delay: 16.8s; }
     /* El pulso: la tarjeta se enciende y se apaga cuando le toca. Es lo que
        da la sensación de que algo corre por el flujo. */
-    @keyframes swNodo {
+    @keyframes kvcamNodo {
       0%, 2%   { background: #f8fafc; border-color: rgba(15, 23, 42, .07); }
       4%       { background: rgba(130, 66, 245, .09); border-color: var(--violet); }
       9%       { background: rgba(130, 66, 245, .05); border-color: rgba(130, 66, 245, .35); }
       70%,100% { background: #f8fafc; border-color: rgba(15, 23, 42, .07); }
     }
-    .sw-hilo { height: 2.030em; margin-left: 2.175em; border-left: 0.174em dashed rgba(15, 23, 42, .18); }
+    .kvcam-hilo { height: 2.030em; margin-left: 2.175em; border-left: 0.174em dashed rgba(15, 23, 42, .18); }
 
     /* -- 4. Pasarelas de pago -- */
-    .sw-e-pagos { left: 40.0%; top: 57.0%; width: 21.8%; }
+    .kvcam-e-pagos { left: 40.0%; top: 57.0%; width: 21.8%; }
 
-    .sw-monto { font-size: 4.930em; font-weight: 800; letter-spacing: -0.043em; line-height: 1; }
-    .sw-monto-et { font-size: 2.030em; font-weight: 700; color: var(--ink-faint); margin-bottom: 0.725em; }
-    .sw-tarjeta {
+    .kvcam-monto { font-size: 4.930em; font-weight: 800; letter-spacing: -0.043em; line-height: 1; }
+    .kvcam-monto-et { font-size: 2.030em; font-weight: 700; color: var(--ink-faint); margin-bottom: 0.725em; }
+    .kvcam-tarjeta {
       display: flex; align-items: center; gap: 1.015em;
       font-size: 2.030em; font-weight: 700; color: var(--ink-faint);
       margin-top: 1.450em;
     }
-    .sw-tarjeta i { width: 3.480em; height: 2.320em; border-radius: 0.435em; background: #e2e8f0; font-style: normal; }
-    .sw-ok {
+    .kvcam-tarjeta i { width: 3.480em; height: 2.320em; border-radius: 0.435em; background: #e2e8f0; font-style: normal; }
+    .kvcam-ok {
       display: flex; align-items: center; gap: 0.870em;
       margin-top: 1.740em;
       font-size: 2.175em; font-weight: 800;
@@ -514,22 +514,22 @@
       padding: 0.870em 1.160em;
       opacity: 0;
       transform: scale(.9);
-      animation: swOk 26s cubic-bezier(.2, 1.4, .4, 1) infinite;
+      animation: kvcamOk 26s cubic-bezier(.2, 1.4, .4, 1) infinite;
     }
-    .sw-ok svg { width: 1.885em; height: 1.885em; }
-    @keyframes swOk {
+    .kvcam-ok svg { width: 1.885em; height: 1.885em; }
+    @keyframes kvcamOk {
       0%, 76%   { opacity: 0; transform: scale(.9); }
       79%, 86%  { opacity: 1; transform: scale(1); }
       90%, 100% { opacity: 0; transform: scale(.9); }
     }
 
     /* -- 5. CRM -- */
-    .sw-e-crm { left: 32.0%; top: 85.0%; width: 30.4%; }
+    .kvcam-e-crm { left: 32.0%; top: 85.0%; width: 30.4%; }
 
-    .sw-tablero-crm { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.160em; }
-    .sw-col { background: #f8fafc; border-radius: 1.305em; padding: 1.015em; min-height: 13.050em; }
-    .sw-col-t { font-size: 1.885em; font-weight: 800; color: var(--ink-faint); margin-bottom: 0.870em; text-transform: uppercase; letter-spacing: 0.058em; }
-    .sw-ficha {
+    .kvcam-tablero-crm { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.160em; }
+    .kvcam-col { background: #f8fafc; border-radius: 1.305em; padding: 1.015em; min-height: 13.050em; }
+    .kvcam-col-t { font-size: 1.885em; font-weight: 800; color: var(--ink-faint); margin-bottom: 0.870em; text-transform: uppercase; letter-spacing: 0.058em; }
+    .kvcam-ficha {
       background: #fff;
       border: 0.174em solid rgba(15, 23, 42, .08);
       border-radius: 0.870em;
@@ -541,11 +541,11 @@
     }
     /* La ficha que se mueve de columna. Es el gesto de la escena: un CRM no
        se entiende viendo columnas quietas, se entiende viendo algo avanzar. */
-    .sw-ficha-viaja {
+    .kvcam-ficha-viaja {
       border-color: var(--violet);
-      animation: swViaja 26s cubic-bezier(.65, 0, .35, 1) infinite;
+      animation: kvcamViaja 26s cubic-bezier(.65, 0, .35, 1) infinite;
     }
-    @keyframes swViaja {
+    @keyframes kvcamViaja {
       0%, 88%    { transform: translate(0, 0) rotate(0deg); }
       91%        { transform: translate(105%, -.4em) rotate(2.5deg); }
       94%, 100%  { transform: translate(210%, 0) rotate(0deg); }
@@ -556,7 +556,7 @@
        bonita y no se entiende: el visitante ve pantallas pasar y no sabe que
        está viendo CINCO tipos de software distintos, que es justo lo que se
        quiere contar. */
-    .sw-rotulos {
+    .kvcam-rotulos {
       position: absolute;
       left: 2.6em;
       bottom: 2.6em;
@@ -564,7 +564,7 @@
       height: 4.4em;
       pointer-events: none;
     }
-    .sw-rotulo {
+    .kvcam-rotulo {
       position: absolute;
       left: 0;
       bottom: 0;
@@ -584,25 +584,25 @@
       white-space: nowrap;
       opacity: 0;
       transform: translateY(.5em);
-      animation: swRotulo 26s ease infinite;
+      animation: kvcamRotulo 26s ease infinite;
     }
-    .sw-rotulo span { width: .7em; height: .7em; border-radius: 50%; background: var(--violet); }
+    .kvcam-rotulo span { width: .7em; height: .7em; border-radius: 50%; background: var(--violet); }
     /* Cada rótulo se enciende en su tramo. Los porcentajes son los mismos de
-       swCam, corridos un poco para que el nombre llegue con la escena y no
+       kvcamCam, corridos un poco para que el nombre llegue con la escena y no
        antes. */
-    .sw-rotulo:nth-of-type(1) { animation-name: swRot1; }
-    .sw-rotulo:nth-of-type(2) { animation-name: swRot2; }
-    .sw-rotulo:nth-of-type(3) { animation-name: swRot3; }
-    .sw-rotulo:nth-of-type(4) { animation-name: swRot4; }
-    .sw-rotulo:nth-of-type(5) { animation-name: swRot5; }
-    @keyframes swRotulo { 0%, 100% { opacity: 0; } }
-    @keyframes swRot1 { 0%,10% {opacity:0;transform:translateY(.5em)} 14%,40% {opacity:1;transform:translateY(0)} 43%,100% {opacity:0;transform:translateY(.5em)} }
-    @keyframes swRot2 { 0%,43% {opacity:0;transform:translateY(.5em)} 47%,57% {opacity:1;transform:translateY(0)} 60%,100% {opacity:0;transform:translateY(.5em)} }
-    @keyframes swRot3 { 0%,59% {opacity:0;transform:translateY(.5em)} 63%,71% {opacity:1;transform:translateY(0)} 74%,100% {opacity:0;transform:translateY(.5em)} }
-    @keyframes swRot4 { 0%,73% {opacity:0;transform:translateY(.5em)} 77%,84% {opacity:1;transform:translateY(0)} 86%,100% {opacity:0;transform:translateY(.5em)} }
-    @keyframes swRot5 { 0%,86% {opacity:0;transform:translateY(.5em)} 90%,95% {opacity:1;transform:translateY(0)} 97%,100% {opacity:0;transform:translateY(.5em)} }
+    .kvcam-rotulo:nth-of-type(1) { animation-name: kvcamRot1; }
+    .kvcam-rotulo:nth-of-type(2) { animation-name: kvcamRot2; }
+    .kvcam-rotulo:nth-of-type(3) { animation-name: kvcamRot3; }
+    .kvcam-rotulo:nth-of-type(4) { animation-name: kvcamRot4; }
+    .kvcam-rotulo:nth-of-type(5) { animation-name: kvcamRot5; }
+    @keyframes kvcamRotulo { 0%, 100% { opacity: 0; } }
+    @keyframes kvcamRot1 { 0%,10% {opacity:0;transform:translateY(.5em)} 14%,40% {opacity:1;transform:translateY(0)} 43%,100% {opacity:0;transform:translateY(.5em)} }
+    @keyframes kvcamRot2 { 0%,43% {opacity:0;transform:translateY(.5em)} 47%,57% {opacity:1;transform:translateY(0)} 60%,100% {opacity:0;transform:translateY(.5em)} }
+    @keyframes kvcamRot3 { 0%,59% {opacity:0;transform:translateY(.5em)} 63%,71% {opacity:1;transform:translateY(0)} 74%,100% {opacity:0;transform:translateY(.5em)} }
+    @keyframes kvcamRot4 { 0%,73% {opacity:0;transform:translateY(.5em)} 77%,84% {opacity:1;transform:translateY(0)} 86%,100% {opacity:0;transform:translateY(.5em)} }
+    @keyframes kvcamRot5 { 0%,86% {opacity:0;transform:translateY(.5em)} 90%,95% {opacity:1;transform:translateY(0)} 97%,100% {opacity:0;transform:translateY(.5em)} }
 
-    .sw-aviso {
+    .kvcam-aviso {
       position: absolute;
       right: 2.6em;
       top: 2.4em;
@@ -620,19 +620,19 @@
        general, quieto, con las cinco escenas a la vista. Sigue contando lo
        mismo, sin cámara. */
     @media (prefers-reduced-motion: reduce) {
-      .sw-tilt,
-      .sw-mundo,
-      .sw-traza, .sw-area, .sw-globo, .sw-punto,
-      .sw-fila, .sw-barritas i, .sw-nodo, .sw-ok, .sw-ficha-viaja,
-      .sw-rotulo {
+      .kvcam-tilt,
+      .kvcam-mundo,
+      .kvcam-traza, .kvcam-area, .kvcam-globo, .kvcam-punto,
+      .kvcam-fila, .kvcam-barritas i, .kvcam-nodo, .kvcam-ok, .kvcam-ficha-viaja,
+      .kvcam-rotulo {
         animation: none !important;
       }
-      .sw-mundo { transform: scale(0.600) translate(-22.172%, -25.072%); }
-      .sw-tilt { opacity: 1; transform: none; }
-      .sw-traza { stroke-dashoffset: 0; }
-      .sw-area, .sw-fila { opacity: 1; transform: none; }
-      .sw-barritas i { transform: scaleY(1); }
-      .sw-rotulo:nth-of-type(1) { opacity: 1; transform: none; }
+      .kvcam-mundo { transform: scale(0.600) translate(-22.172%, -25.072%); }
+      .kvcam-tilt { opacity: 1; transform: none; }
+      .kvcam-traza { stroke-dashoffset: 0; }
+      .kvcam-area, .kvcam-fila { opacity: 1; transform: none; }
+      .kvcam-barritas i { transform: scaleY(1); }
+      .kvcam-rotulo:nth-of-type(1) { opacity: 1; transform: none; }
     }
 
     /* ---- mini ilustraciones de "Qué construimos" ----
@@ -1112,71 +1112,71 @@
              dentro todo va en position:absolute y sin él la caja
              colapsa a cero. -->
         <div class="hero-visual">
-        <div class="sw-cine" aria-hidden="true">
-          <div class="sw-cam">
-            <div class="sw-tilt">
-              <div class="sw-mundo">
+        <div class="kvcam-cine" aria-hidden="true">
+          <div class="kvcam-cam">
+            <div class="kvcam-tilt">
+              <div class="kvcam-mundo">
 
                 <!-- 1 · DASHBOARD -->
-                <div class="sw-esc sw-e-tablero">
-                  <span class="sw-eti">Dashboards</span>
-                  <div class="sw-esc-tit">
+                <div class="kvcam-esc kvcam-e-tablero">
+                  <span class="kvcam-eti">Dashboards</span>
+                  <div class="kvcam-esc-tit">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
                     Tu operación en un vistazo
                   </div>
-                  <div class="sw-kpis">
-                    <div class="sw-kpi"><i>Pedidos</i><b>1.284</b><s>+18%</s></div>
-                    <div class="sw-kpi"><i>Ingresos</i><b>$47M</b><s>+9%</s></div>
-                    <div class="sw-kpi"><i>Entregas</i><b>96%</b><s>+3%</s></div>
+                  <div class="kvcam-kpis">
+                    <div class="kvcam-kpi"><i>Pedidos</i><b>1.284</b><s>+18%</s></div>
+                    <div class="kvcam-kpi"><i>Ingresos</i><b>$47M</b><s>+9%</s></div>
+                    <div class="kvcam-kpi"><i>Entregas</i><b>96%</b><s>+3%</s></div>
                   </div>
-                  <div class="sw-graf">
-                    <div class="sw-globo">$5.140.000</div>
-                    <span class="sw-punto"></span>
+                  <div class="kvcam-graf">
+                    <div class="kvcam-globo">$5.140.000</div>
+                    <span class="kvcam-punto"></span>
                     <svg viewBox="0 0 100 40" preserveAspectRatio="none">
                       <!-- Lineas de referencia. Sin ellas la curva flotaba en
                            una caja gris y la tarjeta parecia a medio hacer. -->
-                      <path class="sw-reja" d="M0 8 H100 M0 19 H100 M0 30 H100" vector-effect="non-scaling-stroke"/>
-                      <path class="sw-area" d="M0 30 C 10 28, 16 20, 24 22 C 34 24, 40 10, 50 12 C 60 14, 66 6, 76 8 C 86 10, 92 4, 100 3 L100 40 L0 40 Z"/>
-                      <path class="sw-traza" d="M0 30 C 10 28, 16 20, 24 22 C 34 24, 40 10, 50 12 C 60 14, 66 6, 76 8 C 86 10, 92 4, 100 3"
+                      <path class="kvcam-reja" d="M0 8 H100 M0 19 H100 M0 30 H100" vector-effect="non-scaling-stroke"/>
+                      <path class="kvcam-area" d="M0 30 C 10 28, 16 20, 24 22 C 34 24, 40 10, 50 12 C 60 14, 66 6, 76 8 C 86 10, 92 4, 100 3 L100 40 L0 40 Z"/>
+                      <path class="kvcam-traza" d="M0 30 C 10 28, 16 20, 24 22 C 34 24, 40 10, 50 12 C 60 14, 66 6, 76 8 C 86 10, 92 4, 100 3"
                             vector-effect="non-scaling-stroke"/>
                     </svg>
-                    <div class="sw-eje"><span>Ene</span><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span><span>Nov</span></div>
+                    <div class="kvcam-eje"><span>Ene</span><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span><span>Nov</span></div>
                   </div>
                 </div>
 
                 <!-- 2 · REPORTES -->
-                <div class="sw-esc sw-e-reportes">
-                  <span class="sw-eti">Reportes</span>
-                  <div class="sw-esc-tit">
+                <div class="kvcam-esc kvcam-e-reportes">
+                  <span class="kvcam-eti">Reportes</span>
+                  <div class="kvcam-esc-tit">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 17h8M8 13h8"/></svg>
                     El cierre del mes, solo
                   </div>
-                  <div class="sw-barritas"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-                  <div class="sw-fila"><b>Ventas por sede</b><span>$47,2M</span></div>
-                  <div class="sw-fila"><b>Margen por producto</b><span>31,4%</span></div>
-                  <div class="sw-fila"><b>Cartera vencida</b><span>$3,1M</span></div>
-                  <div class="sw-fila"><b>Rotación de inventario</b><span>4,8x</span></div>
+                  <div class="kvcam-barritas"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                  <div class="kvcam-fila"><b>Ventas por sede</b><span>$47,2M</span></div>
+                  <div class="kvcam-fila"><b>Margen por producto</b><span>31,4%</span></div>
+                  <div class="kvcam-fila"><b>Cartera vencida</b><span>$3,1M</span></div>
+                  <div class="kvcam-fila"><b>Rotación de inventario</b><span>4,8x</span></div>
                 </div>
 
                 <!-- 3 · AUTOMATIZACIONES -->
-                <div class="sw-esc sw-e-automatiza">
-                  <span class="sw-eti">Automatizaciones</span>
-                  <div class="sw-esc-tit">
+                <div class="kvcam-esc kvcam-e-automatiza">
+                  <span class="kvcam-eti">Automatizaciones</span>
+                  <div class="kvcam-esc-tit">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg>
                     Lo que nadie tiene que hacer a mano
                   </div>
-                  <div class="sw-flujo">
-                    <div class="sw-nodo">
+                  <div class="kvcam-flujo">
+                    <div class="kvcam-nodo">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 20l1-5.5A8.5 8.5 0 1 1 21 11.5Z"/></svg>
                       Entra un pedido <em>· por WhatsApp</em>
                     </div>
-                    <div class="sw-hilo"></div>
-                    <div class="sw-nodo">
+                    <div class="kvcam-hilo"></div>
+                    <div class="kvcam-nodo">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
                       Se emite la factura <em>· y se envía</em>
                     </div>
-                    <div class="sw-hilo"></div>
-                    <div class="sw-nodo">
+                    <div class="kvcam-hilo"></div>
+                    <div class="kvcam-nodo">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
                       Sale a despacho <em>· con su guía</em>
                     </div>
@@ -1184,37 +1184,37 @@
                 </div>
 
                 <!-- 4 · PASARELAS DE PAGO -->
-                <div class="sw-esc sw-e-pagos">
-                  <span class="sw-eti">Pasarelas de pago</span>
-                  <div class="sw-monto-et">Cobro en línea</div>
-                  <div class="sw-monto">$820.000</div>
-                  <div class="sw-tarjeta"><i></i>•••• 4417</div>
-                  <div class="sw-ok">
+                <div class="kvcam-esc kvcam-e-pagos">
+                  <span class="kvcam-eti">Pasarelas de pago</span>
+                  <div class="kvcam-monto-et">Cobro en línea</div>
+                  <div class="kvcam-monto">$820.000</div>
+                  <div class="kvcam-tarjeta"><i></i>•••• 4417</div>
+                  <div class="kvcam-ok">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
                     Pago aprobado
                   </div>
                 </div>
 
                 <!-- 5 · CRM -->
-                <div class="sw-esc sw-e-crm">
-                  <span class="sw-eti">CRM</span>
-                  <div class="sw-esc-tit">
+                <div class="kvcam-esc kvcam-e-crm">
+                  <span class="kvcam-eti">CRM</span>
+                  <div class="kvcam-esc-tit">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
                     Ningún cliente se queda sin respuesta
                   </div>
-                  <div class="sw-tablero-crm">
-                    <div class="sw-col">
-                      <div class="sw-col-t">Nuevo</div>
-                      <div class="sw-ficha sw-ficha-viaja">Distrimar S.A.S</div>
-                      <div class="sw-ficha">Casa Uribe</div>
+                  <div class="kvcam-tablero-crm">
+                    <div class="kvcam-col">
+                      <div class="kvcam-col-t">Nuevo</div>
+                      <div class="kvcam-ficha kvcam-ficha-viaja">Distrimar S.A.S</div>
+                      <div class="kvcam-ficha">Casa Uribe</div>
                     </div>
-                    <div class="sw-col">
-                      <div class="sw-col-t">Cotizado</div>
-                      <div class="sw-ficha">Andina Ltda.</div>
+                    <div class="kvcam-col">
+                      <div class="kvcam-col-t">Cotizado</div>
+                      <div class="kvcam-ficha">Andina Ltda.</div>
                     </div>
-                    <div class="sw-col">
-                      <div class="sw-col-t">Cerrado</div>
-                      <div class="sw-ficha">Grupo Caribe</div>
+                    <div class="kvcam-col">
+                      <div class="kvcam-col-t">Cerrado</div>
+                      <div class="kvcam-ficha">Grupo Caribe</div>
                     </div>
                   </div>
                 </div>
@@ -1224,15 +1224,15 @@
 
             <!-- Los rótulos van FUERA del mundo: si fueran dentro, la cámara
                  los escalaría y se irían de cuadro con la escena. -->
-            <div class="sw-rotulos">
-              <div class="sw-rotulo"><span></span>Dashboards a la medida</div>
-              <div class="sw-rotulo"><span></span>Reportes que se arman solos</div>
-              <div class="sw-rotulo"><span></span>Automatizaciones</div>
-              <div class="sw-rotulo"><span></span>Pasarelas de pago</div>
-              <div class="sw-rotulo"><span></span>CRM y seguimiento</div>
+            <div class="kvcam-rotulos">
+              <div class="kvcam-rotulo"><span></span>Dashboards a la medida</div>
+              <div class="kvcam-rotulo"><span></span>Reportes que se arman solos</div>
+              <div class="kvcam-rotulo"><span></span>Automatizaciones</div>
+              <div class="kvcam-rotulo"><span></span>Pasarelas de pago</div>
+              <div class="kvcam-rotulo"><span></span>CRM y seguimiento</div>
             </div>
 
-            <span class="sw-aviso">Datos de ejemplo</span>
+            <span class="kvcam-aviso">Datos de ejemplo</span>
           </div>
         </div>
         </div>
