@@ -603,212 +603,15 @@
       }
     }
 
-    /* ---- El problema: robot + tarjeta de diagnóstico ----------------------
-       Antes esta sección era solo texto sobre fondo oscuro. El robot es
-       Mora, el mismo que ya analiza en /monitor — no una mascota nueva.
+    /* ---- Las escenas de cada hito ---------------------------------------
+       Nicolás mandó una maqueta de referencia llena de renders 3D: "lo odio,
+       no se parece en nada al estilo que llevamos, pero me da ideas — hacer
+       dibujos a los lados mostrando el flujo de la historia".
 
-       Todo este bloque estaba construido para fondo negro: la tarjeta era una
-       superficie elevada de blanco al 5%, el texto blanco a distintas
-       opacidades y el robot llevaba un halo violeta porque una sombra negra
-       sobre negro no se ve. Al pasar la seccion a blanco, esos mismos valores
-       dejaban DOCE elementos en contraste 1,0 — invisibles. Ahora la tarjeta
-       tiene fondo propio y borde, el texto usa los tokens del tema claro y el
-       robot lleva sombra de verdad. */
-    .dw-problema {
-      display: grid;
-      grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
-      gap: clamp(2.5rem, 6vw, 5rem);
-      align-items: center;
-    }
-
-    .dw-problema-visual {
-      position: relative;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      min-height: 340px;
-    }
-
-    .dw-problema-robot {
-      /* Invertido para que MIRE hacia la tarjeta: el robot es el que
-         diagnostica, y si mira hacia afuera la composicion empuja el ojo
-         fuera de la seccion en vez de hacia el contenido. Y mas grande: a
-         210px competia con la tarjeta en vez de sostenerla. */
-      width: clamp(180px, 34vw, 290px);
-      height: auto;
-      position: relative;
-      z-index: 1;
-      /* scaleX(-1) lo invierte para que mire a la tarjeta; el rotate va
-         DESPUES en la lista, y como las transformaciones se aplican de
-         derecha a izquierda, el giro ocurre en el espacio ya reflejado — por
-         eso el angulo es negativo para que se incline hacia la izquierda en
-         pantalla. Separado de la tarjeta: antes se solapaban y el robot
-         parecia estar detras de ella en vez de al lado. */
-      transform: scaleX(-1) rotate(-8deg);
-      margin-right: 26px;
-      margin-bottom: 1rem;
-      /* Halo violeta en vez de sombra negra: sobre un fondo casi negro una
-         sombra negra no se ve, solo ensucia el borde del PNG. */
-      filter: drop-shadow(0 14px 30px rgba(15, 23, 42, .18));
-    }
-
-    /* La tarjeta era blanca sobre #0b0b0e y rechinaba — el mismo error que
-       este archivo corrige en otras partes. Ahora es una superficie ELEVADA
-       del propio fondo oscuro: blanco al 5% sobre el negro, borde apenas
-       visible y un halo violeta que la despega. Nada de blanco puro. */
-    .dw-diag-card {
-      position: relative;
-      z-index: 2;
-      width: min(300px, 88%);
-      margin-left: auto;
-      background: #fff;
-      border: 1px solid rgba(15, 23, 42, .10);
-      border-radius: var(--r-ui-lg);
-      box-shadow:
-        0 1px 2px rgba(15, 23, 42, .04),
-        0 22px 50px -26px rgba(15, 23, 42, .35);
-      padding: 1.15rem 1.3rem 1.35rem;
-    }
-
-    .dw-diag-head {
-      display: flex;
-      align-items: center;
-      gap: .4rem;
-      font-size: 10.5px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: .07em;
-      color: var(--ink-soft);
-    }
-
-    .dw-diag-head--despues {
-      margin-top: .95rem;
-      padding-top: .9rem;
-      border-top: 1px dashed rgba(15, 23, 42, .14);
-    }
-
-    .dw-diag-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      flex: none;
-    }
-
-    .dw-diag-dot--antes {
-      background: #ef4444;
-    }
-
-    .dw-diag-dot--despues {
-      background: #10b981;
-    }
-
-    .dw-diag-lista {
-      list-style: none;
-      display: grid;
-      gap: .4rem;
-      margin: .55rem 0 0;
-    }
-
-    .dw-diag-lista li {
-      position: relative;
-      padding-left: 1.2rem;
-      font-size: 12.5px;
-      font-weight: 500;
-      line-height: 1.4;
-    }
-
-    .dw-diag-lista li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: .48em;
-      width: 7px;
-      height: 7px;
-    }
-
-    /* Sobre la tarjeta oscura, "apagado" es blanco a menos opacidad — no un
-       gris de tema claro, que ahi se lee peor que el fondo. La distincion
-       antes/despues sigue viviendo en el punto (rojo cuadrado vs verde
-       redondo), no en cuanto cuesta leer el texto. */
-    .dw-diag-lista--antes li {
-      color: var(--ink-soft);
-    }
-
-    .dw-diag-lista--antes li::before {
-      border-radius: 2px;
-      background: #dc2626;
-    }
-
-    .dw-diag-lista--despues li {
-      color: var(--ink);
-      font-weight: 600;
-    }
-
-    .dw-diag-lista--despues li::before {
-      border-radius: 50%;
-      background: #059669;
-    }
-
-    .dw-problema-texto .prosa {
-      margin-top: 1rem;
-    }
-
-    .dw-feat-row {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1.5rem;
-      margin-top: 2.2rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--line);
-    }
-
-    .dw-feat svg {
-      color: var(--violet);
-      margin-bottom: .55rem;
-    }
-
-    .dw-feat b {
-      display: block;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--ink);
-      letter-spacing: -.01em;
-      margin-bottom: .2rem;
-    }
-
-    .dw-feat span {
-      display: block;
-      font-size: 12px;
-      color: var(--ink-soft);
-      line-height: 1.45;
-    }
-
-    @media (max-width: 900px) {
-      .dw-problema {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .dw-problema-visual {
-        max-width: 360px;
-        margin: 0 auto 1.2rem;
-        min-height: 300px;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .dw-feat-row {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 420px) {
-      .dw-feat-row {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-  
-/* ---- Línea de tiempo de la web ---------------------------------------
+       Se toma la idea y no el acabado. Línea de 2px, violeta como único
+       color, fondo claro. En cada escena el violeta marca lo que cambió —el
+       celular, el candado, los sellos del correo— y lo gris es el decorado. */
+    /* ---- Línea de tiempo de la web ---------------------------------------
        Un hilo vertical con seis hitos. El icono va sobre el hilo y la fecha
        encima del título: la fecha es lo que sostiene el argumento, así que se
        lee antes que nada.
@@ -908,6 +711,61 @@
       text-underline-offset: 2px;
     }
 
+    /* La escena va sobre un halo violeta muy tenue. Sin él, seis dibujos de
+       línea sueltos en el blanco se leen como cuatro rayas perdidas —se vio
+       en la primera prueba—: el halo les da un sitio sin meter una caja con
+       borde, que sería una tarjeta más en una página que ya tiene muchas. */
+    /* En el teléfono la escena va DEBAJO de su texto, no desaparece. Se
+       pensó en esconderla por debajo de 900px, y sería un error: la mayoría
+       de esta gente entra por el celular, así que esconderlas ahí es no
+       hacerlas. Solo van más pequeñas. */
+    .evo-arte {
+      padding: 1rem 0 .2rem;
+      border-radius: 20px;
+      background:
+        radial-gradient(ellipse at center, rgba(130, 66, 245, .07) 0%, rgba(130, 66, 245, 0) 72%);
+    }
+
+    .evo-arte svg {
+      width: 100%;
+      height: auto;
+      max-width: 220px;
+      display: block;
+      margin: 0;
+    }
+
+    /* En pantalla ancha el hilo se va al centro y los hitos se van turnando
+       de lado. Debajo de 900px eso deja columnas de 30 caracteres, así que
+       la línea vuelve a ser lo que era: hilo a la izquierda, todo seguido. */
+    @media (min-width: 900px) {
+      .evo-linea::before { left: 50%; margin-left: -1px; }
+
+      .evo-hito {
+        display: grid;
+        grid-template-columns: 1fr 40px 1fr;
+        column-gap: 2.4rem;
+        align-items: center;
+        padding: 0 0 2.6rem;
+      }
+
+      /* El círculo deja de estar posicionado a mano y pasa a ser la columna
+         del medio, que es justo por donde va el hilo. */
+      .evo-icono { position: static; grid-column: 2; grid-row: 1; }
+
+      .evo-txt  { grid-column: 1; grid-row: 1; }
+      .evo-arte { grid-column: 3; grid-row: 1; padding: 1.4rem 1.6rem; }
+      .evo-arte svg { max-width: 300px; margin: 0 auto; }
+
+      /* Los pares se cruzan. Con :nth-child no hay que marcar nada en el
+         HTML: el orden lo decide la propia lista. */
+      .evo-hito:nth-child(even) .evo-txt  { grid-column: 3; }
+      .evo-hito:nth-child(even) .evo-arte { grid-column: 1; justify-self: end; }
+
+      /* El texto NO se alinea a la derecha en los hitos de la izquierda.
+         Un párrafo en bandera derecha se lee peor, y aquí hay seis. */
+      .evo-hito p { max-width: none; }
+    }
+
     @media (max-width: 560px) {
       .evo-linea::before { left: 15px; }
 
@@ -994,85 +852,106 @@
          una versión corta de lo que ya se explica en detalle en "Todo lo que
          necesitas" (#incluye) más adelante en esta misma página. No hay ni un
          dato, cifra o marca que no esté respaldado en otra parte del sitio. -->
-    <section class="section section--marcada">
-      <div class="wrap dw-problema">
-        <div class="dw-problema-visual">
-          <img src="/assets/KaivaMora1.webp" alt="" class="dw-problema-robot" width="800" height="609"
-            loading="lazy" decoding="async">
-          <div class="dw-diag-card">
-            <div class="dw-diag-head">
-              <span class="dw-diag-dot dw-diag-dot--antes"></span>
-              Sin Kaiva
-            </div>
-            <ul class="dw-diag-lista dw-diag-lista--antes">
-              <li>Carga lenta en el celular</li>
-              <li>No dice a qué te dedicas</li>
-              <li>Sin ruta clara al contacto</li>
-              <li>Se ve distinto en cada pantalla</li>
-            </ul>
-            <div class="dw-diag-head dw-diag-head--despues">
-              <span class="dw-diag-dot dw-diag-dot--despues"></span>
-              Con Kaiva
-            </div>
-            <ul class="dw-diag-lista dw-diag-lista--despues">
-              <li>Carga en segundos</li>
-              <li>Dice qué haces y para quién</li>
-              <li>Un camino claro hasta escribirte</li>
-              <li>Se ve bien en cualquier pantalla</li>
-            </ul>
-          </div>
-        </div>
+    <section class="section section--marcada" id="evolucion">
+      <div class="wrap">
+        <h2 class="sec-head">Una web no se hace una vez<span class="dot">.</span></h2>
+        <p class="desc">Cada pocos años cambia una regla y las páginas que no se movieron dejan de
+          funcionar sin que nadie avise. Esta es la lista de lo que cambió, con su fecha.</p>
 
-        <div class="dw-problema-texto">
-          <span class="inc-kicker">El problema</span>
-          <h2>Una web bonita que no <span class="marca">vende</span> no sirve de
-            nada<span class="dot">.</span></h2>
-          <div class="prosa">
-            <p>La mayoría de las páginas de empresa en Colombia tienen el mismo problema: se ven bien
-              en la pantalla del diseñador y no hacen nada por el negocio. Cargan lento en datos
-              móviles, no explican con claridad a qué se dedica la empresa, y no le dicen al
-              visitante qué hacer después.</p>
-            <p>Nosotros empezamos al revés. Primero entendemos <strong>qué tiene que pasar para que
-                tu negocio gane un cliente</strong>, y a partir de ahí diseñamos la estructura. El
-              diseño viene después, al servicio de esa estructura — no al contrario.</p>
-          </div>
+        <ol class="evo-linea">
+          <li class="evo-hito">
+            <span class="evo-icono" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+            </span>
+            <div class="evo-txt">
+              <span class="evo-fecha">Abril de 2015</span>
+            <h3>El celular pasó a mandar</h3>
+            <p>Google empezó a usar la adaptación a móvil para decidir quién sale primero. De un día
+              para otro, miles de páginas que se veían bien en computador cayeron en el buscador.</p>
+            </div>
+            <div class="evo-arte" aria-hidden="true"><svg viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><g stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="30" width="74" height="52" rx="4" stroke="var(--line-strong)" stroke-width="2"/><path d="M40 82v10h30V82" stroke="var(--line-strong)" stroke-width="2"/><path d="M30 44h34M30 54h50M30 64h22" stroke="var(--line-strong)" stroke-width="2"/><path d="M26 100l14 14M40 100l-14 14" stroke="var(--ink-faint)" stroke-width="2"/><rect x="120" y="18" width="52" height="94" rx="9" stroke="var(--violet)" stroke-width="2.4"/><path d="M139 27h14" stroke="var(--violet)" stroke-width="2.4"/><path d="M131 46h30M131 58h30M131 70h18" stroke="var(--violet)" stroke-width="2" opacity=".55"/><path d="M146 128v-14M140 120l6-6 6 6" stroke="var(--violet)" stroke-width="2.4"/></g></svg></div>
+          
+          </li>
 
-          <div class="dw-feat-row">
-            <div class="dw-feat">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" />
-              </svg>
-              <b>Carga rápida</b>
-              <span>Optimizada para datos móviles, no en teoría.</span>
+          <li class="evo-hito">
+            <span class="evo-icono" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            </span>
+            <div class="evo-txt">
+              <span class="evo-fecha">Julio de 2018</span>
+            <h3>Sin candado, "No seguro"</h3>
+            <p>Chrome empezó a marcar como no seguras todas las páginas sin certificado. Ya no era
+              un detalle técnico: era un cartel de advertencia delante de tu cliente.</p>
             </div>
-            <div class="dw-feat">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-              </svg>
-              <b>Mensaje claro</b>
-              <span>Dice a qué te dedicas y para quién, sin rodeos.</span>
+            <div class="evo-arte" aria-hidden="true"><svg viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><g stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="30" width="168" height="80" rx="8" stroke="var(--line-strong)" stroke-width="2"/><path d="M16 52h168" stroke="var(--line-strong)" stroke-width="2"/><circle cx="30" cy="41" r="3" stroke="var(--line-strong)" stroke-width="2"/><circle cx="42" cy="41" r="3" stroke="var(--line-strong)" stroke-width="2"/><rect x="58" y="35" width="112" height="12" rx="6" stroke="var(--line-strong)" stroke-width="2"/><path d="M34 70h60M34 84h96M34 98h44" stroke="var(--line-strong)" stroke-width="2" opacity=".5"/><rect x="112" y="76" width="34" height="26" rx="4" stroke="var(--violet)" stroke-width="2.4"/><path d="M120 76v-7a9 9 0 0 1 15-6.6" stroke="var(--violet)" stroke-width="2.4"/><path d="M162 62l16 28h-32l16-28Z" stroke="var(--violet)" stroke-width="2.4"/><path d="M162 72v8M162 85v.5" stroke="var(--violet)" stroke-width="2.4"/></g></svg></div>
+          
+          </li>
+
+          <li class="evo-hito">
+            <span class="evo-icono" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </span>
+            <div class="evo-txt">
+              <span class="evo-fecha">Junio de 2021</span>
+            <h3>La velocidad se volvió posición</h3>
+            <p>Cuánto tarda tu página en mostrarse, y si se mueve mientras carga, pasó a contar para
+              el puesto que ocupas en Google. Antes era una molestia; desde entonces cuesta visitas.</p>
             </div>
-            <div class="dw-feat">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="11" cy="11" r="8" />
-                <path d="m21 21-4.3-4.3" />
-              </svg>
-              <b>SEO técnico</b>
-              <span>Google puede leerte desde el primer día.</span>
+            <div class="evo-arte" aria-hidden="true"><svg viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><g stroke-linecap="round" stroke-linejoin="round"><rect x="112" y="34" width="72" height="76" rx="6" stroke="var(--line-strong)" stroke-width="2"/><path d="M124 52h34M124 66h48M124 80h26" stroke="var(--line-strong)" stroke-width="2" opacity=".5"/><circle cx="62" cy="80" r="34" stroke="var(--violet)" stroke-width="2.4"/><path d="M62 38v-8M52 30h20" stroke="var(--violet)" stroke-width="2.4"/><path d="M62 80l18-14" stroke="var(--violet)" stroke-width="2.4"/><path d="M62 52v5M90 80h-5M62 108v-5M34 80h5" stroke="var(--violet)" stroke-width="2" opacity=".55"/><path d="M18 62h14M12 80h12M18 98h14" stroke="var(--ink-faint)" stroke-width="2" opacity=".6"/></g></svg></div>
+          
+          </li>
+
+          <li class="evo-hito">
+            <span class="evo-icono" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+            </span>
+            <div class="evo-txt">
+              <span class="evo-fecha">Febrero de 2024</span>
+            <h3>Tu correo tiene que ir firmado</h3>
+            <p>Gmail y Yahoo empezaron a exigir SPF, DKIM y DMARC a quien envía correo en volumen.
+              Sin eso, tus mensajes van a spam y tú te enteras cuando un cliente dice que no le llegó
+              nada.</p>
             </div>
-            <div class="dw-feat">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M18 20V10M12 20V4M6 20v-6" />
-              </svg>
-              <b>Diseñada para convertir</b>
-              <span>Cada sección lleva a una decisión.</span>
+            <div class="evo-arte" aria-hidden="true"><svg viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><g stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="34" width="104" height="72" rx="6" stroke="var(--line-strong)" stroke-width="2"/><path d="M14 42l52 34 52-34" stroke="var(--line-strong)" stroke-width="2"/><circle cx="144" cy="46" r="9" stroke="var(--violet)" stroke-width="2.4"/><path d="M140 46l3 3 5-6" stroke="var(--violet)" stroke-width="2.4"/><path d="M158 46h28" stroke="var(--violet)" stroke-width="2" opacity=".45"/><circle cx="144" cy="72" r="9" stroke="var(--violet)" stroke-width="2.4"/><path d="M140 72l3 3 5-6" stroke="var(--violet)" stroke-width="2.4"/><path d="M158 72h32" stroke="var(--violet)" stroke-width="2" opacity=".45"/><circle cx="144" cy="98" r="9" stroke="var(--violet)" stroke-width="2.4"/><path d="M140 98l3 3 5-6" stroke="var(--violet)" stroke-width="2.4"/><path d="M158 98h24" stroke="var(--violet)" stroke-width="2" opacity=".45"/></g></svg></div>
+          
+          </li>
+
+          <li class="evo-hito">
+            <span class="evo-icono" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/></svg>
+            </span>
+            <div class="evo-txt">
+              <span class="evo-fecha">Junio de 2025</span>
+            <h3>La accesibilidad pasó a ser ley</h3>
+            <p>En la Unión Europea, las tiendas y los servicios digitales tienen que ser accesibles
+              —también los de fuera que vendan allá—. Aquí todavía no obliga nadie, y es el mismo
+              trabajo que hace que tu web se pueda usar en un celular viejo.</p>
             </div>
-          </div>
-        </div>
+            <div class="evo-arte" aria-hidden="true"><svg viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><g stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="26" width="112" height="88" rx="8" stroke="var(--line-strong)" stroke-width="2"/><rect x="40" y="36" width="64" height="68" rx="6" stroke="var(--violet)" stroke-width="2" stroke-dasharray="5 5" opacity=".55"/><circle cx="72" cy="52" r="7" stroke="var(--violet)" stroke-width="2.4"/><path d="M56 68h32M72 68v16M72 84l-9 14M72 84l9 14" stroke="var(--violet)" stroke-width="2.4"/><rect x="146" y="50" width="40" height="28" rx="4" stroke="var(--line-strong)" stroke-width="2"/><path d="M154 59h2M164 59h2M174 59h2M154 69h24" stroke="var(--line-strong)" stroke-width="2"/><path d="M166 92v14M160 100l6 6 6-6" stroke="var(--ink-faint)" stroke-width="2"/></g></svg></div>
+          
+          </li>
+
+          <li class="evo-hito evo-ahora">
+            <span class="evo-icono" aria-hidden="true">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a4 4 0 0 1 4 4v1a4 4 0 0 1 0 8v1a4 4 0 0 1-8 0v-1a4 4 0 0 1 0-8V7a4 4 0 0 1 4-4z"/></svg>
+            </span>
+            <div class="evo-txt">
+              <span class="evo-fecha">Está pasando ahora</span>
+            <h3>Ahora responde una IA por ti</h3>
+            <p>Cada vez más gente le pregunta a ChatGPT o a Perplexity en vez de buscar, y la
+              respuesta se arma con lo que encuentra escrito de ti. Lo probamos con nosotros mismos:
+              Perplexity nos describió repitiendo, palabra por palabra, la descripción de nuestra
+              propia página. Lo que no está escrito donde la máquina lee, para la máquina no existe.</p>
+            </div>
+            <div class="evo-arte" aria-hidden="true"><svg viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><g stroke-linecap="round" stroke-linejoin="round"><path d="M16 30h80a6 6 0 0 1 6 6v26a6 6 0 0 1-6 6H38l-14 12V68h-8a6 6 0 0 1-6-6V36a6 6 0 0 1 6-6Z" stroke="var(--line-strong)" stroke-width="2"/><path d="M30 44h52M30 55h32" stroke="var(--line-strong)" stroke-width="2" opacity=".5"/><path d="M184 60h-70a6 6 0 0 0-6 6v28a6 6 0 0 0 6 6h48l14 12v-12h8a6 6 0 0 0 6-6V66a6 6 0 0 0-6-6Z" stroke="var(--violet)" stroke-width="2.4"/><path d="M122 78h48M122 90h30" stroke="var(--violet)" stroke-width="2" opacity=".55"/><path d="M150 22l3.6 9L163 34.6l-9.4 3.6L150 47l-3.6-8.8L137 34.6l9.4-3.6L150 22Z" stroke="var(--violet)" stroke-width="2.4"/></g></svg></div>
+          
+          </li>
+        </ol>
+
+        <p class="evo-cierre">Seis cambios en diez años, y ninguno avisó. Por eso una web no es un
+          folleto que se imprime una vez: es algo que hay que revisar cada tanto. De ahí salió
+          nuestro <a href="/diagnostico/">diagnóstico gratuito</a>, que comprueba todo esto en tu
+          dominio en menos de un minuto.</p>
       </div>
     </section>
 
@@ -1259,84 +1138,6 @@
 
          Las seis fechas están verificadas contra su fuente. Es lo que sostiene
          la sección: sin fechas esto sería una opinión de vendedor. -->
-    <section class="section alt" id="evolucion">
-      <div class="wrap">
-        <h2 class="sec-head">Una web no se hace una vez<span class="dot">.</span></h2>
-        <p class="desc">Cada pocos años cambia una regla y las páginas que no se movieron dejan de
-          funcionar sin que nadie avise. Esta es la lista de lo que cambió, con su fecha.</p>
-
-        <ol class="evo-linea">
-          <li class="evo-hito">
-            <span class="evo-icono" aria-hidden="true">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
-            </span>
-            <span class="evo-fecha">Abril de 2015</span>
-            <h3>El celular pasó a mandar</h3>
-            <p>Google empezó a usar la adaptación a móvil para decidir quién sale primero. De un día
-              para otro, miles de páginas que se veían bien en computador cayeron en el buscador.</p>
-          </li>
-
-          <li class="evo-hito">
-            <span class="evo-icono" aria-hidden="true">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-            </span>
-            <span class="evo-fecha">Julio de 2018</span>
-            <h3>Sin candado, "No seguro"</h3>
-            <p>Chrome empezó a marcar como no seguras todas las páginas sin certificado. Ya no era
-              un detalle técnico: era un cartel de advertencia delante de tu cliente.</p>
-          </li>
-
-          <li class="evo-hito">
-            <span class="evo-icono" aria-hidden="true">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-            </span>
-            <span class="evo-fecha">Junio de 2021</span>
-            <h3>La velocidad se volvió posición</h3>
-            <p>Cuánto tarda tu página en mostrarse, y si se mueve mientras carga, pasó a contar para
-              el puesto que ocupas en Google. Antes era una molestia; desde entonces cuesta visitas.</p>
-          </li>
-
-          <li class="evo-hito">
-            <span class="evo-icono" aria-hidden="true">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
-            </span>
-            <span class="evo-fecha">Febrero de 2024</span>
-            <h3>Tu correo tiene que ir firmado</h3>
-            <p>Gmail y Yahoo empezaron a exigir SPF, DKIM y DMARC a quien envía correo en volumen.
-              Sin eso, tus mensajes van a spam y tú te enteras cuando un cliente dice que no le llegó
-              nada.</p>
-          </li>
-
-          <li class="evo-hito">
-            <span class="evo-icono" aria-hidden="true">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/></svg>
-            </span>
-            <span class="evo-fecha">Junio de 2025</span>
-            <h3>La accesibilidad pasó a ser ley</h3>
-            <p>En la Unión Europea, las tiendas y los servicios digitales tienen que ser accesibles
-              —también los de fuera que vendan allá—. Aquí todavía no obliga nadie, y es el mismo
-              trabajo que hace que tu web se pueda usar en un celular viejo.</p>
-          </li>
-
-          <li class="evo-hito evo-ahora">
-            <span class="evo-icono" aria-hidden="true">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a4 4 0 0 1 4 4v1a4 4 0 0 1 0 8v1a4 4 0 0 1-8 0v-1a4 4 0 0 1 0-8V7a4 4 0 0 1 4-4z"/></svg>
-            </span>
-            <span class="evo-fecha">Está pasando ahora</span>
-            <h3>Ahora responde una IA por ti</h3>
-            <p>Cada vez más gente le pregunta a ChatGPT o a Perplexity en vez de buscar, y la
-              respuesta se arma con lo que encuentra escrito de ti. Lo probamos con nosotros mismos:
-              Perplexity nos describió repitiendo, palabra por palabra, la descripción de nuestra
-              propia página. Lo que no está escrito donde la máquina lee, para la máquina no existe.</p>
-          </li>
-        </ol>
-
-        <p class="evo-cierre">Seis cambios en diez años, y ninguno avisó. Por eso una web no es un
-          folleto que se imprime una vez: es algo que hay que revisar cada tanto. De ahí salió
-          nuestro <a href="/diagnostico/">diagnóstico gratuito</a>, que comprueba todo esto en tu
-          dominio en menos de un minuto.</p>
-      </div>
-    </section>
 
     <section class="section section--marcada" id="preguntas">
       <div class="wrap">
