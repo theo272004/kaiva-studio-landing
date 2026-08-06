@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Analytics con consentimiento previo. Aquí NO se carga el script de
+       Google: solo se fijan los valores por defecto (todo denegado) y se
+       deja que /assets/consentimiento.js lo inyecte si la persona acepta.
+       El razonamiento completo y las normas que lo obligan están comentados
+       arriba de ese archivo. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+  </script>
+  <script defer src="/assets/consentimiento.js?v=20260729"></script>
+  <script defer src="/assets/eventos.js?v=20260729"></script>
+  <script defer src="/assets/indice-blog.js?v=20260731"></script>
+  <script defer src="/assets/clarity.js?v=20260729"></script>
+
+  <title>De dónde vienen tus visitas: lo que Analytics no te está diciendo</title>
+  <meta name="description"
+    content="Por qué «Directo» casi nunca es directo, dónde esconde Analytics el tráfico de Instagram y de ChatGPT, y cómo etiquetar tus enlaces para verlo. Comprobado midiendo nuestro sitio.">
+  <link rel="canonical" href="https://kaivastudio.com/blog/de-donde-vienen-las-visitas-de-mi-web/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/favicon-96.png?v=20260805" type="image/png" sizes="96x96">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Kaiva Studio">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:url" content="https://kaivastudio.com/blog/de-donde-vienen-las-visitas-de-mi-web/">
+  <meta property="og:title" content="De dónde vienen tus visitas: lo que Analytics no te está diciendo">
+  <meta property="og:description"
+    content="Por qué «Directo» casi nunca es directo y dónde esconde Analytics el tráfico de Instagram y de ChatGPT. Lo que encontramos midiendo nuestro propio sitio.">
+  <meta property="og:image" content="https://kaivastudio.com/assets/blog/visibilidad.webp">
+  <meta property="article:published_time" content="2026-08-06">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="De dónde vienen tus visitas: lo que Analytics no te está diciendo">
+  <meta name="twitter:image" content="https://kaivastudio.com/assets/blog/visibilidad.webp">
+
+  <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260805v">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaivastudio.com/blog/de-donde-vienen-las-visitas-de-mi-web/#post",
+      "headline": "De dónde vienen tus visitas: lo que Analytics no te está diciendo",
+      "description": "Por qué «Directo» casi nunca es directo, dónde esconde Analytics el tráfico de Instagram y de ChatGPT, y cómo etiquetar tus enlaces para verlo. Comprobado midiendo nuestro sitio.",
+      "datePublished": "2026-08-06",
+      "dateModified": "2026-08-06",
+      "inLanguage": "es-CO",
+      "image": "https://kaivastudio.com/assets/blog/visibilidad.webp",
+      "mainEntityOfPage": "https://kaivastudio.com/blog/de-donde-vienen-las-visitas-de-mi-web/",
+      "author": {
+        "@type": "Organization",
+        "@id": "https://kaivastudio.com/#studio",
+        "name": "Kaiva Studio",
+        "url": "https://kaivastudio.com/"
+      },
+      "publisher": {
+        "@id": "https://kaivastudio.com/#studio"
+      },
+      "isPartOf": {
+        "@id": "https://kaivastudio.com/blog/#blog"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://kaivastudio.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaivastudio.com/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "De dónde vienen tus visitas",
+          "item": "https://kaivastudio.com/blog/de-donde-vienen-las-visitas-de-mi-web/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Por qué Google Analytics dice que mi tráfico es «Directo»?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Porque «Directo» no significa que la gente escribiera tu dirección de memoria: significa que Analytics no pudo identificar de dónde vino. La causa más común es que el navegador interno de Instagram, Facebook o TikTok borra el rastro del origen cuando alguien abre tu enlace sin salir de la aplicación. Tu sitio recibe la visita sin remitente y Analytics la archiva como directa. Por eso el tráfico social real aparece muchas veces mezclado ahí dentro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo sé si mis visitas vienen de Instagram o de otra red?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El canal «Organic Social» de Google Analytics junta Instagram, TikTok, YouTube, Facebook y LinkedIn en una sola cifra, así que ahí no se distingue. Para separarlos hay que mirar la dimensión sessionSource, que muestra el dominio concreto de cada visita, y sobre todo etiquetar tus propios enlaces con parámetros UTM antes de publicarlos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué son los parámetros UTM y cómo se usan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Son trozos de texto que se añaden al final de un enlace para decirle a tu web de dónde viene quien hace clic. Por ejemplo tusitio.com/?utm_source=instagram&utm_medium=bio. No hacen falta herramientas ni programas: se escriben a mano en el enlace que publicas. Desde el momento en que los usas, esas visitas dejan de caer en «Directo» y aparecen con su nombre."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo ver en Analytics las visitas que me llegan desde ChatGPT?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, pero no aparecen con ese nombre. Analytics clasifica las visitas que llegan desde ChatGPT o Perplexity como «Referral», la misma etiqueta que usa para el enlace de cualquier blog. Para verlas hay que buscar los dominios concretos entre las fuentes de referencia: chatgpt.com, perplexity.ai o gemini.google.com."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+  <nav class="nav" id="nav">
+    <div class="nav-in">
+      <a href="/" class="logo" aria-label="Kaiva Studio — ir al inicio">
+        <img src="/assets/logo-kaiva.png" alt="Kaiva Studio" width="105" height="44">
+      </a>
+      <div class="nav-right">
+        <div class="nav-links" id="navLinks">
+          <a href="/diseno-web/" class="lnk">Diseño web</a>
+          <a href="/software-a-medida/" class="lnk">Software</a>
+          <a href="/branding/" class="lnk">Branding</a>
+          <a href="/blog/" class="lnk" aria-current="page">Blog</a>
+          <a href="/monitor/" class="btn btn-dark">Diagnóstico Gratis</a>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menú" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <nav class="migas" aria-label="Ruta de navegación">
+      <a href="/">Inicio</a><span>/</span><a href="/blog/">Blog</a><span>/</span>De dónde vienen tus visitas
+    </nav>
+  </div>
+
+  <main>
+    <article class="section" style="padding-top:2.5rem">
+      <div class="wrap">
+        <div class="articulo">
+          <p class="fecha"><time datetime="2026-08-06">6 de agosto de 2026</time> · Lectura de 8 minutos</p>
+
+          <h1 style="font-family:var(--display);font-size:clamp(1.9rem,4.6vw,3rem);font-weight:800;line-height:1.13;letter-spacing:-.03em;text-wrap:balance;margin-bottom:1.3rem">
+            Analytics no te dice de dónde vienen tus visitas<span style="color:var(--violet)">.</span>
+            Esto es lo que encontramos al mirarlo de cerca
+          </h1>
+
+          <p class="lead">Abres Google Analytics, ves «Directo 45 %» y «Organic Social 12 %», y te quedas
+            igual que antes. No es que estés leyendo mal el informe: es que esas etiquetas esconden
+            justo lo que querías saber. Lo comprobamos midiendo nuestro propio sitio, y esto es lo que
+            salió.</p>
+
+          <p>Todo lo que hay aquí abajo lo verificamos nosotros construyendo el panel con el que
+            seguimos nuestros propios números. No son buenas prácticas leídas en otro lado: son cosas
+            que nos rompieron el informe hasta que entendimos por qué.</p>
+
+          <h2>1. «Organic Social» no es una fuente, es un cajón</h2>
+
+          <p>Google Analytics reparte las visitas por <strong>canal</strong>, no por origen. Y su canal
+            «Organic Social» mete en la misma bolsa Instagram, TikTok, YouTube, Facebook y LinkedIn.</p>
+
+          <p>Para un resumen sirve. Para decidir algo, no: no es lo mismo que tus visitas vengan de
+            LinkedIn —donde probablemente están las empresas que te contratan— a que vengan de TikTok.
+            La acción que se toma es distinta y el informe no te deja distinguirla.</p>
+
+          <p>La dimensión que sí lo distingue existe y se llama <em>sessionSource</em>: el dominio
+            concreto desde el que llegó cada visita. Está en el mismo Analytics, solo que no es lo que
+            te enseña la pantalla de inicio.</p>
+
+          <h2>2. ChatGPT y Perplexity caen en «Referral», junto a cualquier blog</h2>
+
+          <p>Cuando alguien le pregunta algo a ChatGPT, la IA le responde y esa persona hace clic en tu
+            enlace, Analytics clasifica esa visita como «Referral» — la misma etiqueta que usa para un
+            enlace desde el blog de un conocido.</p>
+
+          <p>Es decir: el canal más nuevo e interesante que existe ahora mismo está mezclado con el más
+            genérico. Si no vas a buscarlo por dominio (<code>chatgpt.com</code>,
+            <code>perplexity.ai</code>, <code>gemini.google.com</code>), no lo vas a ver.</p>
+
+          <p>Sobre por qué esto importa cada vez más, escribimos aparte en
+            <a href="/blog/seo-para-ia/">SEO para IA</a>.</p>
+
+          <h2>3. El hallazgo grande: «Directo» casi nunca es directo</h2>
+
+          <p>Esta fue la que nos costó entender. Sabíamos que teníamos gente llegando desde Instagram
+            —lo veíamos en los mensajes que recibíamos—, pero en el informe Instagram casi no aparecía.
+            Aparecía «Directo», y muy alto.</p>
+
+          <p>La causa: <strong>el navegador interno de Instagram, Facebook y TikTok borra el rastro del
+              origen</strong>. Cuando alguien abre tu enlace sin salir de la aplicación, el navegador no
+            le dice a tu web de dónde viene. Tu sitio recibe una visita sin remitente, y Analytics la
+            archiva donde archiva todo lo que no sabe identificar: «Directo».</p>
+
+          <p>Así que «Directo» no significa «gente que se sabe tu dirección de memoria». Significa
+            <em>«no sé de dónde vino esta persona»</em>, y ahí adentro está mezclado tráfico social real,
+            clics desde WhatsApp, y enlaces abiertos desde aplicaciones de escritorio.</p>
+
+          <h3>Cómo se arregla: etiquetar tú los enlaces</h3>
+
+          <p>Si el navegador no dice de dónde viene, se lo dices tú en la propia dirección. Se llaman
+            parámetros UTM y no hacen falta herramientas: es escribir el enlace así.</p>
+
+          <div style="overflow-x:auto;margin-top:1.4rem">
+            <table>
+              <thead>
+                <tr>
+                  <th>Dónde lo publicas</th>
+                  <th>Enlace que pones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>La biografía de Instagram</td>
+                  <td><code>tusitio.com/?utm_source=instagram&amp;utm_medium=bio</code></td>
+                </tr>
+                <tr>
+                  <td>Una historia</td>
+                  <td><code>tusitio.com/?utm_source=instagram&amp;utm_medium=historia</code></td>
+                </tr>
+                <tr>
+                  <td>Un mensaje de WhatsApp</td>
+                  <td><code>tusitio.com/?utm_source=whatsapp&amp;utm_medium=mensaje</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Desde el momento en que los uses, esas visitas dejan de caer en «Directo» y aparecen con su
+            nombre. No recupera lo de antes —eso ya se perdió—, pero a partir de ahí sabes de verdad qué
+            red te está trayendo gente.</p>
+
+          <h2>4. Lo que nos dijo Perplexity sobre nosotros mismos</h2>
+
+          <p>Le preguntamos a Perplexity por Kaiva Studio para ver cómo nos describía. La respuesta nos
+            dejó callados: <strong>nos describió repitiendo, palabra por palabra, la meta descripción de
+              nuestra propia página</strong>. No había interpretado nada ni buscado en ningún otro lado.
+            Recitó el texto que nosotros mismos habíamos escrito en la etiqueta que casi nadie mira.</p>
+
+          <p>De ahí salieron dos conclusiones que nos cambiaron el trabajo:</p>
+
+          <ul>
+            <li><strong>Lo que no está escrito donde la máquina lee, para la máquina no existe.</strong>
+              Si tu web no dice en texto claro a qué te dedicas, la IA se lo va a inventar o va a repetir
+              lo primero que encuentre.</li>
+            <li><strong>La meta descripción dejó de ser «eso que sale en Google».</strong> Ahora es,
+              literalmente, el guion con el que una máquina te presenta ante un cliente que nunca te ha
+              visto.</li>
+          </ul>
+
+          <p>Si tu página tiene problemas más básicos que ese —que Google directamente no la encuentre—
+            el orden correcto es al revés, y lo contamos en
+            <a href="/blog/google-no-encuentra-mi-pagina/">Google no encuentra mi página</a>.</p>
+
+          <h2>5. Y una que no tiene que ver con visitas, pero duele igual</h2>
+
+          <p>Mientras montábamos las mediciones nos topamos con otra cosa: de los cuatro pilares que
+            medimos en un sitio, <strong>el que más pesa es el correo</strong> — que tu dominio esté
+            configurado para que tus mensajes no caigan en spam. Y es el que casi nadie revisa, porque no
+            se ve. Una web preciosa y rápida no sirve de nada si el presupuesto que mandas por correo
+            nunca llega. Lo desarrollamos en
+            <a href="/blog/por-que-mis-correos-llegan-a-spam/">por qué mis correos llegan a spam</a>.</p>
+
+          <h2>Qué hacer con todo esto, en orden</h2>
+
+          <ol>
+            <li>Empieza a etiquetar con UTM cada enlace que publiques en redes y en WhatsApp. Es gratis y
+              se hace en un minuto.</li>
+            <li>En Analytics, deja de mirar «Canales» y mira <em>sessionSource</em>. Vas a ver dominios
+              concretos en vez de cajones.</li>
+            <li>Busca <code>chatgpt.com</code> y <code>perplexity.ai</code> entre tus fuentes de
+              referencia. Aunque sean pocas visitas, esa cifra es la que va a crecer.</li>
+            <li>Lee tu propia meta descripción en voz alta. Eso es lo que una IA va a contestar cuando
+              alguien pregunte por ti.</li>
+          </ol>
+
+          <p>Nada de esto necesita una herramienta de pago. Necesita saber que el informe que estás
+            mirando no está contando lo que tú creías que contaba.</p>
+
+          <div class="nota">
+            <p><strong>Si quieres ver cómo está tu dominio ahora mismo:</strong> nuestro
+              <a href="/diagnostico/">diagnóstico gratuito</a> revisa las cuatro cosas que sostienen tu
+              presencia digital —incluida la del correo, que es la que más pesa— y te devuelve los
+              hallazgos ordenados por gravedad, con la evidencia de cada uno. Escribes tu dominio y ya.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="cierre">
+          <h2>¿Te encuentran hoy<span class="dot">?</span></h2>
+          <p>El Diagnóstico Digital revisa si tu sitio se puede leer, si Google lo entiende y si tu
+            presencia está bien definida — que es la base sin la cual nada de lo anterior funciona.
+            Gratis, sin tarjeta y sin registro.</p>
+          <div class="hero-ctas" style="justify-content:center">
+            <a href="/diagnostico/" class="btn btn-violet">Ver el diagnóstico</a>
+            <a href="/#contacto" class="btn btn-ghost">Hablar con alguien</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="wrap">
+      <p>© Kaiva Studio 2026 · Barranquilla, Colombia</p>
+      <nav aria-label="Enlaces del pie">
+        <a href="/">Inicio</a>
+        <a href="/blog/">Blog</a>
+        <a href="/diagnostico/">Diagnóstico</a>
+        <a href="/#contacto">Contacto</a>
+        <a href="/privacidad/">Privacidad</a>
+        <a href="/terminos/">Términos</a>
+        <a href="/cookies/" data-kv-cookies>Preferencias</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.getElementById('nav');
+      var enlaces = document.getElementById('navLinks');
+      var boton = document.getElementById('navToggle');
+
+      var alScroll = function () {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+      };
+      alScroll();
+      window.addEventListener('scroll', alScroll, { passive: true });
+
+      boton.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var abierto = enlaces.classList.toggle('open');
+        boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!enlaces.contains(e.target) && !boton.contains(e.target)) {
+          enlaces.classList.remove('open');
+          boton.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Aparición al hacer scroll. La clase en <html> es la que activa el
+      // estado oculto en el CSS: sin JS no se esconde nada.
+      if (!('IntersectionObserver' in window)) return;
+      document.documentElement.classList.add('js-reveal');
+
+      var objetivos = document.querySelectorAll('.tarjeta, .paso, .post-item, .faq-item, .blog-post');
+      objetivos.forEach(function (el, i) {
+        el.classList.add('reveal');
+        el.style.setProperty('--d', (i % 6) * 0.06 + 's');
+      });
+
+      var observador = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (entrada) {
+          if (!entrada.isIntersecting) return;
+          entrada.target.classList.add('dentro');
+          observador.unobserve(entrada.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+      objetivos.forEach(function (el) { observador.observe(el); });
+    })();
+  </script>
+  <script src="/assets/fechas.js?v=1" defer></script>
+</body>
+
+</html>
