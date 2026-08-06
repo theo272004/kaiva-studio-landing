@@ -3534,6 +3534,15 @@
       font-size: 13.5px;
       color: var(--ink-soft);
       display: flex;
+      /* FALTABA, y es lo que hacia que los iconos se vieran raros. Sin esto
+         un <li> flexible estira sus hijos, asi que el visto quedaba centrado
+         respecto al bloque ENTERO de texto: en una linea da igual, pero en
+         dos o tres el icono flota a media altura en vez de acompanar a la
+         primera linea. Medido: hasta 18px de desvio.
+
+         Sus dos hermanas del mismo archivo, .svc-list li y .sit-panel li, ya
+         lo tenian. Esta se quedo sin la linea. */
+      align-items: flex-start;
       gap: 0.6rem;
       line-height: 1.45;
     }
