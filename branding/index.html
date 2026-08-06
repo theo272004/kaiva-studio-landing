@@ -51,7 +51,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260805q">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260805r">
 
   <script type="application/ld+json">
 {
@@ -463,6 +463,118 @@
     .tarjeta.dentro .tj-page-3 {
       transform: rotate(10deg) translateX(3px);
     }
+      /* ---- Las cuatro capas de una marca ------------------------------------
+       Van en fila y numeradas por su etiqueta —Primero, Después, Y entonces—
+       porque el orden ES el argumento: el logo va al final, no al principio.
+       Si se enseñaran como cuatro servicios sueltos, el cliente elegiría solo
+       el último, que es justo lo que hace hoy. */
+    .marca-capas {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.4rem;
+      margin-top: 2.6rem;
+      counter-reset: capa;
+    }
+
+    .capa {
+      position: relative;
+      padding-top: 1.2rem;
+      border-top: 2px solid var(--line-strong);
+    }
+
+    /* La cuarta es la que casi nadie entrega, así que es la única marcada. */
+    .capa:last-child { border-top-color: var(--violet); }
+
+    .capa-et {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: .5rem;
+    }
+
+    .capa:last-child .capa-et { color: var(--violet); }
+
+    .capa h3 {
+      font-family: var(--display);
+      font-size: clamp(1.05rem, 2vw, 1.22rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin-bottom: .5rem;
+    }
+
+    .capa p { color: var(--ink-soft); line-height: 1.65; font-size: 14px; }
+
+    /* ---- La lista de entregables ------------------------------------------
+       En dos columnas y con visto: la longitud de la lista es el argumento, y
+       en una sola columna se lee como una enumeración interminable en vez de
+       como un inventario. */
+    .marca-entrega {
+      margin-top: 3rem;
+      padding: 1.8rem;
+      background: #fafafa;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .marca-entrega-tit {
+      font-family: var(--display);
+      font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin-bottom: 1.2rem;
+    }
+
+    .marca-lista {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .7rem 2rem;
+    }
+
+    .marca-lista li {
+      position: relative;
+      padding-left: 1.6rem;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+
+    .marca-lista li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .42rem;
+      width: 9px;
+      height: 5px;
+      border-left: 2px solid var(--violet);
+      border-bottom: 2px solid var(--violet);
+      transform: rotate(-45deg);
+    }
+
+    .marca-entrega-pie {
+      margin-top: 1.6rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--line);
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      max-width: 68ch;
+    }
+
+    @media (max-width: 900px) {
+      .marca-capas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 560px) {
+      .marca-capas { grid-template-columns: 1fr; gap: 1.2rem; }
+      .marca-lista { grid-template-columns: 1fr; }
+      .marca-entrega { padding: 1.3rem; }
+    }
   </style>
 </head>
 
@@ -561,63 +673,79 @@
       </div>
     </section>
 
+    <!-- ESTRATEGIA CONTRA DISEÑO, Y LA LISTA COMPLETA.
+         De la investigación salieron dos cosas que explican por qué cuesta
+         vender esto:
+
+         1. El cliente cree que compra un logo, y lo cree porque NO SABE QUÉ
+            MÁS HAY. Un encargo de marca completo entrega entre 15 y 25 piezas
+            en cuatro capas —investigación, estrategia, identidad verbal e
+            identidad visual—, y la mayoría de estudios entrega solo la última.
+            Por eso tantos rediseños se caen a los 18 meses.
+
+         2. La estrategia es más difícil de vender que el diseño porque no se
+            ve. El diseño se enseña; la estrategia hay que explicarla.
+
+         La respuesta a las dos es la misma: hacer visible lo invisible. Por
+         eso esta sección es una LISTA, no un párrafo. -->
     <section class="section" id="incluye">
       <div class="wrap">
-        <h2>Qué te llevas<span class="dot">.</span></h2>
-        <p class="desc">Todo listo para usar, en los formatos que de verdad vas a necesitar.</p>
-        <div class="rejilla">
-          <article class="tarjeta">
-            <div class="ico" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" pathLength="1"/><path d="M12 3a9 9 0 0 0 0 18" pathLength="1"/></svg>
-            </div>
-            <h3>Logo y sus versiones</h3>
-            <p>Horizontal, compacta, en un solo color y para fondos oscuros. En vectorial, para que
-              sirva desde una factura hasta una valla.</p>
-            <div class="tj-visual tj-versions" aria-hidden="true">
-              <span class="tj-v tj-v-light"><span></span></span>
-              <span class="tj-v tj-v-dark"><span></span></span>
-              <span class="tj-v tj-v-mono"><span></span></span>
-            </div>
+        <h2 class="sec-head">Una marca no es un logo<span class="dot">.</span></h2>
+        <p class="desc">La estrategia decide qué significas. El diseño decide cómo te ves. Si
+          empiezas por el logo, estás eligiendo el traje antes de saber a qué evento vas.</p>
+
+        <div class="marca-capas">
+          <article class="capa">
+            <span class="capa-et">Primero</span>
+            <h3>Entender</h3>
+            <p>A quién le vendes, contra quién compites y qué quieres que sienta alguien que te ve
+              por primera vez. Sin esto, lo que sigue es decoración.</p>
           </article>
-          <article class="tarjeta">
-            <div class="ico" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5" pathLength="1"/><circle cx="17.5" cy="14" r="2.5" pathLength="1"/><circle cx="6.5" cy="9" r="2.5" pathLength="1"/><circle cx="8.5" cy="16.5" r="2.5" pathLength="1"/></svg>
-            </div>
-            <h3>Paleta de color</h3>
-            <p>Los colores definidos con sus códigos exactos para pantalla e impresión. Se acabó el
-              «más o menos ese azul».</p>
-            <div class="tj-visual tj-palette" aria-hidden="true">
-              <span class="tj-chip"></span>
-              <span class="tj-chip"></span>
-              <span class="tj-chip"></span>
-              <span class="tj-chip"></span>
-              <span class="tj-chip"></span>
-            </div>
+
+          <article class="capa">
+            <span class="capa-et">Después</span>
+            <h3>Decidir qué dices</h3>
+            <p>Qué te hace distinto y cómo se dice en una frase. El nombre de las cosas, el tono con
+              el que hablas, lo que no vas a decir nunca.</p>
           </article>
-          <article class="tarjeta">
-            <div class="ico" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3M9 20h6M12 4v16" pathLength="1"/></svg>
-            </div>
-            <h3>Tipografía</h3>
-            <p>Qué fuente usar para títulos y para texto, con sus pesos y tamaños. Y de dónde
-              descargarla para que todo tu equipo use la misma.</p>
-            <div class="tj-visual" aria-hidden="true">
-              <span class="tj-type">Aa</span>
-            </div>
+
+          <article class="capa">
+            <span class="capa-et">Y entonces</span>
+            <h3>Cómo se ve</h3>
+            <p>Ahora sí: logo, colores, tipografías. Se diseña sobre algo decidido, y por eso
+              aguanta cuando toca aplicarlo a algo que no estaba previsto.</p>
           </article>
-          <article class="tarjeta">
-            <div class="ico" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" pathLength="1"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" pathLength="1"/></svg>
-            </div>
-            <h3>Guía de marca</h3>
-            <p>El documento que explica cómo usar cada cosa. Se lo pasas a cualquier diseñador o
-              imprenta y el resultado sale bien sin que tengas que explicar nada.</p>
-            <div class="tj-visual tj-guide" aria-hidden="true">
-              <span class="tj-page tj-page-1"></span>
-              <span class="tj-page tj-page-2"></span>
-              <span class="tj-page tj-page-3"></span>
-            </div>
+
+          <article class="capa">
+            <span class="capa-et">Y para que dure</span>
+            <h3>Las reglas</h3>
+            <p>Cómo se usa todo lo anterior. Es la parte que casi nadie entrega y la que decide si
+              dentro de un año tu marca se sigue reconociendo.</p>
           </article>
+        </div>
+
+        <!-- La lista concreta. Es lo que hace que deje de compararte con quien
+             cobra por un logo: hasta que no se ve escrito, nadie sabe que
+             existe. -->
+        <div class="marca-entrega">
+          <h3 class="marca-entrega-tit">Lo que te llevas, pieza por pieza</h3>
+          <ul class="marca-lista">
+            <li>Logo principal, y sus versiones para cuando el principal no cabe</li>
+            <li>Versión horizontal, vertical y el símbolo solo</li>
+            <li>Cómo se ve sobre fondo claro, sobre oscuro y en un solo color</li>
+            <li>Paleta de colores, con sus códigos para pantalla y para imprenta</li>
+            <li>Tipografías, y qué usar en un título y qué en un párrafo</li>
+            <li>Tamaño mínimo y aire alrededor: dónde no puede ir pegado</li>
+            <li>Qué NO se puede hacer con el logo, con ejemplos</li>
+            <li>Foto de perfil y portada para redes</li>
+            <li>Firma de correo</li>
+            <li>Plantilla de factura o documento</li>
+            <li>Manual con todo lo anterior, en PDF, para dárselo a quien sea</li>
+            <li>Los archivos editables, para que no dependas de nosotros</li>
+          </ul>
+          <p class="marca-entrega-pie">Doce entregables. Cuando alguien te cotiza «un logo» por una
+            décima parte, esto es lo que no está cotizando — y es la parte que hace que la marca
+            siga en pie dentro de dos años.</p>
         </div>
       </div>
     </section>
