@@ -664,6 +664,16 @@ html {
   margin-right: auto;
 }
 
+/* La bajada que va DESPUES del titular, como hermana suya y no dentro.
+   Sin esto se estira desde el borde izquierdo mientras el titulo esta
+   centrado, y el bloque se lee partido. Pasaba en seis secciones de tres
+   paginas. */
+h2.sec-head + .desc {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
 .section .desc {
   font-size: 1.02rem;
   line-height: 1.7;
