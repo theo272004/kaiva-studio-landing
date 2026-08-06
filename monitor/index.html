@@ -143,13 +143,51 @@
             sesión</button>
           <p class="kv-lead-err" id="kvSesionErr" role="alert"></p>
         </form>
-        <!-- Solo se enseña con el panel abierto, y no es una limitación
-             técnica disfrazada: el formulario de registro de verdad vive
-             dentro del panel y ata el análisis que estás viendo a la cuenta
-             nueva. Crear una cuenta sin análisis no guarda nada, así que en la
-             pantalla de bienvenida el enlace sobra. -->
-        <p class="kv-sesion-pie" id="kvIrARegistro" hidden>
-          ¿No tienes cuenta? <button type="button" class="kv-sesion-enlace">Crea una y guarda este análisis</button>
+        <!-- Siempre visible. Antes se escondía salvo con el panel de
+             resultados en pantalla, porque el formulario de registro vivía
+             dentro del panel: desde la portada del monitor no había NINGUNA
+             forma de crear una cuenta. Registrarse sin análisis funciona
+             perfectamente en el backend (reclamo_token es opcional), así que
+             esconder la puerta de entrada no protegía de nada: solo dejaba
+             fuera a quien llegaba por primera vez. -->
+        <p class="kv-sesion-pie" id="kvIrARegistro">
+          ¿No tienes cuenta? <button type="button" class="kv-sesion-enlace">Crea una gratis</button>
+        </p>
+      </div>
+
+      <!-- EL formulario de registro. No una copia: el único que existe.
+           Vivía dentro del panel de resultados (#kvGuardarForm) y desde aquí
+           solo se le hacía scroll. Se movió entero al modal para que "crear
+           cuenta" sea posible en cualquier momento, con informe o sin él, y
+           "Guardar análisis" del panel abre este mismo modal en modo registro
+           pasándole el reclamo del análisis que se está viendo. Un formulario,
+           un camino de envío, un sitio donde arreglar las cosas. -->
+      <div id="kvSesionPanelRegistro" hidden>
+        <h2>Crea tu cuenta<span class="dot">.</span></h2>
+        <p class="kv-sesion-sub" id="kvSesionRegistroSub">Gratis para siempre. Sin tarjeta.</p>
+        <form id="kvCuentaForm" class="kv-lead">
+          <label class="kv-lead-lbl" for="kvCuentaNombre">Tu nombre</label>
+          <input type="text" id="kvCuentaNombre" class="kv-lead-input" placeholder="Nombre" required
+            autocomplete="name" style="width:100%; margin-bottom:.7rem;">
+          <!-- type="email" a proposito, al reves que el correo del login: por
+               esta puerta solo se crean cuentas de cliente, y ahi tiene que
+               ser un correo de verdad. -->
+          <label class="kv-lead-lbl" for="kvCuentaCorreo">Correo</label>
+          <input type="email" id="kvCuentaCorreo" class="kv-lead-input" placeholder="tucorreo@empresa.com" required
+            autocomplete="email" style="width:100%; margin-bottom:.7rem;">
+          <!-- Sin minlength: la longitud minima la dice la API y su mensaje se
+               enseña tal cual. Con minlength el navegador frenaba antes y
+               teniamos dos textos distintos para la misma regla; el dia que la
+               regla cambie en el backend, aqui no habria que tocar nada. -->
+          <label class="kv-lead-lbl" for="kvCuentaClave">Contraseña</label>
+          <input type="password" id="kvCuentaClave" class="kv-lead-input" placeholder="Mínimo 8 caracteres" required
+            autocomplete="new-password" style="width:100%;">
+          <button type="submit" class="kv-temp-btn" id="kvCuentaBtn" style="width:100%; margin-top:1rem;">Crear mi
+            cuenta</button>
+          <p class="kv-lead-err" id="kvCuentaErr" role="alert"></p>
+        </form>
+        <p class="kv-sesion-pie" id="kvYaTengoCuenta">
+          ¿Ya tienes cuenta? <button type="button" class="kv-sesion-enlace">Inicia sesión</button>
         </p>
       </div>
 
@@ -1218,10 +1256,31 @@
         aviso.hidden = false;
       }
 
+      /* Puente hacia el <script> del modal de sesión, que es quien tiene ahora
+         el único formulario de registro. Ese bloque no ve `scanIdActual` ni
+         `confirmarGuardado` —cada <script> tiene su ámbito—, así que se le dan
+         las dos cosas que necesita y nada más: qué análisis hay que reclamar,
+         y cómo avisar de que quedó guardado. Mismo patrón que
+         window.kaivaSesionActualizar, que existe por la razón inversa. */
+      window.kaivaReclamoPendiente = function () {
+        if (!scanIdActual) return null;
+        var token = null;
+        try { token = localStorage.getItem('kaiva_reclamo_' + scanIdActual); } catch (e) { }
+        return token ? { scan_id: scanIdActual, token: token } : null;
+      };
+
+      window.kaivaAnalisisReclamado = function () {
+        // El token de reclamo ya cumplió su función: no debe quedarse en el
+        // navegador más tiempo del necesario.
+        if (scanIdActual) {
+          try { localStorage.removeItem('kaiva_reclamo_' + scanIdActual); } catch (e) { }
+        }
+        confirmarGuardado('Cuenta creada.',
+          'Guardamos este análisis en tu cuenta. La próxima vez, inicia sesión y lo tendrás aquí.');
+      };
+
       function confirmarGuardado(titulo, detalle) {
         var aviso = document.getElementById('kvTemporal');
-        var formu = document.getElementById('kvGuardarForm');
-        if (formu) formu.hidden = true;
         if (!aviso) return;
         aviso.hidden = false;
         aviso.classList.add('kv-temp-ok');
@@ -1382,7 +1441,7 @@
          contar nada.
 
          TODO ESTE BLOQUE VA DENTRO DE DOMContentLoaded, y no es un adorno: el
-         marcado de #kvGuardar, #kvTemporal y #kvGuardarForm vive dentro de
+         marcado de #kvTemporal y #kvCopiar vive dentro de
          .tool-shell, que en el documento aparece DESPUÉS de este <script>
          (arranca en la línea ~1267, este script cierra en la ~1263). Sin este
          envoltorio, getElementById corre mientras el parser todavía no ha
@@ -1392,22 +1451,11 @@
          limpia, sin errores de consola, sin ningún efecto — el síntoma exacto
          de un listener que nunca se enganchó. */
       document.addEventListener('DOMContentLoaded', function () {
-      var btnGuardar = document.getElementById('kvGuardar'),
-        cajaGuardar = document.getElementById('kvGuardarForm'),
-        cuentaForm = document.getElementById('kvCuentaForm'),
-        cuentaNombre = document.getElementById('kvCuentaNombre'),
-        cuentaCorreo = document.getElementById('kvCuentaCorreo'),
-        cuentaClave = document.getElementById('kvCuentaClave'),
-        cuentaBtn = document.getElementById('kvCuentaBtn'),
-        cuentaErr = document.getElementById('kvCuentaErr'),
-        btnCopiar = document.getElementById('kvCopiar');
-
-      if (btnGuardar && cajaGuardar) {
-        btnGuardar.addEventListener('click', function () {
-          cajaGuardar.hidden = false;
-          if (cuentaNombre) cuentaNombre.focus();
-        });
-      }
+      /* "Guardar análisis" (#kvGuardar) ya no se engancha aquí: lo atiende el
+         <script> del modal de sesión, que es donde vive el formulario de
+         registro. Está más abajo en el documento que este marcado, así que lo
+         alcanza sin problema. */
+      var btnCopiar = document.getElementById('kvCopiar');
 
       if (btnCopiar) {
         btnCopiar.addEventListener('click', function (e) {
@@ -1430,77 +1478,10 @@
         });
       }
 
-      /* Paso 4 del mapa: crear cuenta gratuita. Llama a /api/registro.php
-         (src/auth.php + migración 008) con `credentials: 'include'` — sin eso
-         el navegador no guarda la cookie que la respuesta manda, porque es
-         una petición entre orígenes (kaivastudio.com → diagnostico.
-         kaivastudio.com) y fetch no adjunta ni recibe cookies de terceros por
-         defecto. El backend ya tiene el origen en su lista blanca y responde
-         Access-Control-Allow-Credentials, así que solo hace falta pedirlo
-         aquí. */
-      if (cuentaForm) {
-        cuentaForm.addEventListener('submit', function (e) {
-          e.preventDefault();
-          if (cuentaBtn.disabled) return;
-
-          var nombre = (cuentaNombre.value || '').trim();
-          var correo = (cuentaCorreo.value || '').trim();
-          var clave = cuentaClave.value || '';
-
-          if (!nombre) {
-            cuentaErr.textContent = 'Escribe tu nombre.';
-            cuentaNombre.focus();
-            return;
-          }
-          if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(correo)) {
-            cuentaErr.textContent = 'Escribe un correo válido.';
-            cuentaCorreo.focus();
-            return;
-          }
-          if (clave.length < 8) {
-            cuentaErr.textContent = 'La contraseña necesita al menos 8 caracteres.';
-            cuentaClave.focus();
-            return;
-          }
-
-          cuentaErr.textContent = '';
-          cuentaBtn.disabled = true;
-          cuentaBtn.textContent = 'Creando…';
-
-          var reclamo = null;
-          if (scanIdActual) {
-            try { reclamo = localStorage.getItem('kaiva_reclamo_' + scanIdActual); } catch (e) { }
-          }
-
-          fetch(API + '/registro.php', {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nombre: nombre, correo: correo, password: clave, reclamo_token: reclamo })
-          })
-            .then(function (r) { return r.json().then(function (d) { return { status: r.status, body: d }; }); })
-            .then(function (res) {
-              if (!res.body.ok) throw new Error(res.body.error || 'no se pudo crear la cuenta');
-              // El token de reclamo ya cumplió su función: no debe quedarse
-              // en el navegador más tiempo del necesario.
-              if (scanIdActual) {
-                try { localStorage.removeItem('kaiva_reclamo_' + scanIdActual); } catch (e) { }
-              }
-              // Avisa al OTRO <script> (el de la sesión, más abajo en el
-              // documento) para que la cabecera deje de decir "Iniciar
-              // sesión" ahora mismo, sin esperar a un recargue.
-              if (window.kaivaSesionActualizar) window.kaivaSesionActualizar(res.body.usuario);
-              confirmarGuardado('Cuenta creada.',
-                'Guardamos este análisis en tu cuenta. La próxima vez, inicia sesión y lo tendrás aquí.');
-            })
-            .catch(function (err) {
-              console.error('[kaiva] crear cuenta:', err);
-              cuentaErr.textContent = err.message || 'No pudimos crear tu cuenta. Inténtalo de nuevo.';
-              cuentaBtn.disabled = false;
-              cuentaBtn.textContent = 'Crear mi cuenta';
-            });
-        });
-      }
+      /* El envío de "Crear mi cuenta" (POST /api/registro.php) estaba aquí y
+         se movió al <script> del modal de sesión, junto al único formulario
+         que queda. Desde aquí se le pasa lo suyo por
+         window.kaivaReclamoPendiente / window.kaivaAnalisisReclamado. */
 
       /* ---- Volver a un informe guardado -----------------------------------
          Si la dirección trae ?s=, se pinta ese informe en vez de la pantalla
@@ -1691,39 +1672,12 @@
           </div>
         </div>
 
-        <!-- Cuenta gratuita. Aparece al pulsar "Guardar análisis".
-             Tres campos, no uno: hasta hoy esto solo pedía el correo y
-             mandaba el informe por email. Con cuentas reales (migración 008)
-             el resultado es mejor: el análisis queda atado a algo a lo que se
-             puede volver con clave, no solo a un enlace que hay que guardar
-             en algún lado. -->
-        <div class="kv-temp kv-temp-form" id="kvGuardarForm" hidden>
-          <form id="kvCuentaForm" class="kv-lead">
-            <div class="kv-lead-grid">
-              <div>
-                <label class="kv-lead-lbl" for="kvCuentaNombre">Tu nombre</label>
-                <input type="text" id="kvCuentaNombre" class="kv-lead-input" placeholder="Nombre"
-                  required autocomplete="name">
-              </div>
-              <div>
-                <label class="kv-lead-lbl" for="kvCuentaCorreo">Correo</label>
-                <input type="email" id="kvCuentaCorreo" class="kv-lead-input" placeholder="tucorreo@empresa.com"
-                  required autocomplete="email">
-              </div>
-              <div>
-                <label class="kv-lead-lbl" for="kvCuentaClave">Contraseña</label>
-                <input type="password" id="kvCuentaClave" class="kv-lead-input" placeholder="Mínimo 8 caracteres"
-                  required autocomplete="new-password" minlength="8">
-              </div>
-            </div>
-            <div class="kv-lead-fila-btn">
-              <button type="submit" class="kv-temp-btn" id="kvCuentaBtn">Crear mi cuenta</button>
-              <span class="kv-lead-nota">Gratis para siempre. Sin tarjeta.</span>
-            </div>
-            <p class="kv-lead-err" id="kvCuentaErr" role="alert"></p>
-            <button type="button" class="kv-lead-alt" id="kvYaTengoCuenta">¿Ya tienes cuenta? Inicia sesión</button>
-          </form>
-        </div>
+        <!-- Aqui vivia un SEGUNDO formulario de cuenta, gemelo del que hay en
+             el modal de sesion. "Guardar análisis" lo desplegaba aqui dentro.
+             Se eliminó: el boton abre ahora el modal en modo "crear cuenta" y
+             le pasa el reclamo de este análisis, asi que el análisis se sigue
+             atando a la cuenta nueva exactamente igual — pero hay un solo
+             formulario que mantener en vez de dos que se van separando. -->
 
         <!-- App Grid (Sidebar + Panel Content) -->
         <div class="app-grid" style="position: relative;">
@@ -2255,30 +2209,57 @@
         yaTengoCuenta = document.getElementById('kvYaTengoCuenta'),
         panelSesion = document.getElementById('kvPanelSesion'),
         otroSitio = document.getElementById('kvOtroSitio'),
-        irARegistro = document.getElementById('kvIrARegistro');
+        irARegistro = document.getElementById('kvIrARegistro'),
+        /* El modo "crear cuenta" y su formulario, que hasta hoy vivían dentro
+           del panel de resultados. */
+        panelRegistro = document.getElementById('kvSesionPanelRegistro'),
+        registroSub = document.getElementById('kvSesionRegistroSub'),
+        regForm = document.getElementById('kvCuentaForm'),
+        regNombre = document.getElementById('kvCuentaNombre'),
+        regCorreo = document.getElementById('kvCuentaCorreo'),
+        regClave = document.getElementById('kvCuentaClave'),
+        regBtn = document.getElementById('kvCuentaBtn'),
+        regErr = document.getElementById('kvCuentaErr'),
+        btnGuardar = document.getElementById('kvGuardar');
 
       if (!modal) return;
 
       var usuarioActivo = null; // se llena con /api/yo.php al cargar
 
-      // ¿Está el panel de resultados en pantalla? De eso depende si tiene
-      // sentido ofrecer "crear cuenta": el formulario de registro vive ahí.
-      function enPanel() {
-        return document.body.classList.contains('kv-en-panel');
+      /* El modal tiene tres caras y solo una a la vez: entrar, crear cuenta, y
+         la de sesión ya abierta. Antes eran dos y el "crear cuenta" no estaba
+         aquí, sino a un scroll de distancia dentro del panel. */
+      function mostrarModo(modo) {
+        panelForm.hidden = (modo !== 'entrar');
+        if (panelRegistro) panelRegistro.hidden = (modo !== 'registro');
+        panelActiva.hidden = (modo !== 'activa');
       }
 
-      function abrirModal() {
+      function abrirModal(modo) {
         modal.classList.add('on');
         document.body.style.overflow = 'hidden';
-        if (usuarioActivo) {
-          panelForm.hidden = true;
-          panelActiva.hidden = false;
-        } else {
-          panelForm.hidden = false;
-          panelActiva.hidden = true;
-          if (irARegistro) irARegistro.hidden = !enPanel();
-          if (correo) correo.focus();
+        if (usuarioActivo) { mostrarModo('activa'); return; }
+
+        if (modo === 'registro' && panelRegistro) {
+          mostrarModo('registro');
+          /* El subtítulo dice la verdad de cada caso. Con un análisis en
+             pantalla, la cuenta sirve para no perderlo; sin análisis, la
+             cuenta se crea igual (reclamo_token es opcional en la API) y lo
+             que se promete es solo lo que se cumple. */
+          var pendiente = window.kaivaReclamoPendiente ? window.kaivaReclamoPendiente() : null;
+          if (registroSub) {
+            registroSub.textContent = pendiente
+              ? 'Guardamos este análisis en tu cuenta para que no se pierda al cerrar la pestaña.'
+              : 'Gratis para siempre. Sin tarjeta. Tus análisis quedan guardados aquí.';
+          }
+          if (regErr) regErr.textContent = '';
+          if (regNombre) regNombre.focus();
+          return;
         }
+
+        mostrarModo('entrar');
+        if (err) err.textContent = '';
+        if (correo) correo.focus();
       }
 
       function cerrarModal() {
@@ -2286,9 +2267,29 @@
         document.body.style.overflow = '';
       }
 
-      if (abrir) abrir.addEventListener('click', abrirModal);
-      if (yaTengoCuenta) yaTengoCuenta.addEventListener('click', abrirModal);
-      if (panelSesion) panelSesion.addEventListener('click', abrirModal);
+      /* Los listeners envuelven la llamada: pasados directos, el objeto Event
+         llegaría como `modo` y el modal abriría en la cara equivocada. */
+      if (abrir) abrir.addEventListener('click', function () { abrirModal('entrar'); });
+      if (panelSesion) panelSesion.addEventListener('click', function () { abrirModal('entrar'); });
+
+      /* "Guardar análisis" del panel de resultados. Ya no despliega un
+         formulario propio: abre este modal en modo registro, y el reclamo del
+         análisis viaja solo (lo lee el envío, más abajo). */
+      if (btnGuardar) btnGuardar.addEventListener('click', function () { abrirModal('registro'); });
+
+      /* Ir y volver entre las dos caras, sin cerrar ni recargar nada. */
+      if (yaTengoCuenta) {
+        yaTengoCuenta.addEventListener('click', function (e) {
+          if (e.target.tagName !== 'BUTTON') return;
+          abrirModal('entrar');
+        });
+      }
+      if (irARegistro) {
+        irARegistro.addEventListener('click', function (e) {
+          if (e.target.tagName !== 'BUTTON') return;
+          abrirModal('registro');
+        });
+      }
 
       /* Volver a empezar. Se va a la URL limpia en vez de reconstruir la
          pantalla a mano: el informe deja rastro en la direccion (?s=...), y
@@ -2301,39 +2302,19 @@
         });
       }
 
-      /* "Crea una cuenta" no abre un formulario nuevo: lleva al que ya existe
-         dentro del panel, que ademas reclama el analisis que se esta viendo.
-         Duplicar los tres campos aqui habria significado dos formularios de
-         registro que mantener y una de las dos copias olvidada tarde o
-         temprano. */
-      if (irARegistro) {
-        irARegistro.addEventListener('click', function (e) {
-          if (e.target.tagName !== 'BUTTON') return;
-          cerrarModal();
-          var caja = document.getElementById('kvGuardarForm');
-          var boton = document.getElementById('kvGuardar');
-          if (caja) {
-            caja.hidden = false;
-            caja.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            var n = document.getElementById('kvCuentaNombre');
-            if (n) setTimeout(function () { n.focus(); }, 350);
-          } else if (boton) {
-            boton.click();
-          }
-        });
-      }
       if (cerrar) cerrar.addEventListener('click', cerrarModal);
       modal.addEventListener('click', function (e) { if (e.target === modal) cerrarModal(); });
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrarModal(); });
 
       /* Refleja la cuenta activa en la cabecera y en el modal. Se llama al
-         cargar (vía /api/yo.php), otra vez justo después de iniciar sesión, y
-         se expone en window para que OTRO <script> —el que atiende
-         "Crear mi cuenta"— también pueda avisar. Sin esto, crear una cuenta
-         dejaba la cabecera diciendo "Iniciar sesión" hasta el próximo
-         recargue: dos bloques de script con su propio ámbito, ninguno se
-         enteraba de lo que hacía el otro. Se detectó probando el flujo
-         completo de punta a punta, no leyendo el código. */
+         cargar (vía /api/yo.php) y otra vez justo después de entrar o de crear
+         una cuenta.
+
+         Nació expuesta en window porque "Crear mi cuenta" se atendía en OTRO
+         <script> y la cabecera se quedaba diciendo "Iniciar sesión" hasta el
+         próximo recargue. Ese formulario ya vive aquí, así que el puente
+         sobra dentro de esta página; se deja publicado por si algo fuera de
+         ella lo llama, pero la llamada de verdad es directa. */
       window.kaivaSesionActualizar = pintarUsuario;
 
       function pintarUsuario(u) {
@@ -2405,8 +2386,7 @@
               }
 
               pintarUsuario(res.usuario);
-              panelForm.hidden = true;
-              panelActiva.hidden = false;
+              mostrarModo('activa');
             })
             .catch(function (e) {
               err.textContent = e.message || 'No pudimos iniciar sesión.';
@@ -2414,6 +2394,71 @@
             .finally(function () {
               btn.disabled = false;
               btn.textContent = 'Iniciar sesión';
+            });
+        });
+      }
+
+      /* Paso 4 del mapa: crear cuenta gratuita. Llama a /api/registro.php
+         (src/auth.php + migración 008) con `credentials: 'include'` — sin eso
+         el navegador no guarda la cookie que la respuesta manda, porque es una
+         petición entre orígenes (kaivastudio.com → diagnostico.kaivastudio.com)
+         y fetch no adjunta ni recibe cookies de terceros por defecto. El
+         backend ya tiene el origen en su lista blanca y responde
+         Access-Control-Allow-Credentials, así que solo hace falta pedirlo.
+
+         `reclamo_token` es opcional en la API: si no hay análisis en pantalla
+         va en null y la cuenta se crea igual, solo que sin nada que atarle. Es
+         justo lo que hacía falta para poder registrarse desde la portada.
+
+         No se valida aquí lo que ya valida la API. Antes se comprobaban nombre,
+         correo y longitud de contraseña en el navegador con sus propios textos,
+         y eran dos verdades para la misma regla; ahora el mensaje que se ve es
+         literalmente el que devolvió el backend. */
+      if (regForm) {
+        regForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (regBtn.disabled) return;
+
+          regErr.textContent = '';
+          regBtn.disabled = true;
+          regBtn.textContent = 'Creando…';
+
+          var pendiente = window.kaivaReclamoPendiente ? window.kaivaReclamoPendiente() : null;
+
+          fetch(API + '/registro.php', {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              nombre: (regNombre.value || '').trim(),
+              correo: (regCorreo.value || '').trim(),
+              password: regClave.value || '',
+              reclamo_token: pendiente ? pendiente.token : null
+            })
+          })
+            .then(function (r) { return r.json(); })
+            .then(function (res) {
+              if (!res.ok) throw new Error(res.error || 'no se pudo crear la cuenta');
+              regClave.value = '';
+              pintarUsuario(res.usuario);
+
+              /* El análisis quedó atado a la cuenta: quien lo pidió está
+                 mirando el panel, así que se le devuelve ahí con el aviso ya
+                 cambiado, en vez de dejarle un modal encima tapándolo. */
+              if (res.reclamado && window.kaivaAnalisisReclamado) {
+                window.kaivaAnalisisReclamado();
+                cerrarModal();
+                return;
+              }
+              mostrarModo('activa');
+            })
+            .catch(function (e) {
+              console.error('[kaiva] crear cuenta:', e);
+              regErr.textContent = e.message || 'No pudimos crear tu cuenta. Inténtalo de nuevo.';
+            })
+            .finally(function () {
+              regBtn.disabled = false;
+              regBtn.textContent = 'Crear mi cuenta';
             });
         });
       }
