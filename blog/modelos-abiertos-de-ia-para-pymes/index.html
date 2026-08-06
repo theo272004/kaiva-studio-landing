@@ -65,7 +65,7 @@
       "headline": "Modelos abiertos de IA (DeepSeek, Qwen, Llama): qué cambia para una pyme",
       "description": "DeepSeek, Qwen y Llama ya igualan a GPT-4 en tareas normales a un costo hasta 90% menor. Qué significa eso en la práctica para un negocio pequeño con web propia.",
       "datePublished": "2026-08-02",
-      "dateModified": "2026-08-02",
+      "dateModified": "2026-08-05",
       "inLanguage": "es-CO",
       "image": "https://kaivastudio.com/assets/blog/ia.webp",
       "mainEntityOfPage": "https://kaivastudio.com/blog/modelos-abiertos-de-ia-para-pymes/",
@@ -102,7 +102,7 @@
           "name": "¿DeepSeek o Qwen son más baratos que ChatGPT?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Por token, sí, y por un margen amplio: comparaciones publicadas en 2026 ubican el costo de modelos como DeepSeek-V3.2 y Qwen3 entre 0,04 y 0,31 dólares por millón de tokens, con DeepSeek llegando a 0,07 dólares en aciertos de caché, frente a precios varias veces mayores en los modelos cerrados de punta. La diferencia se nota sobre todo en tareas de alto volumen: resúmenes automáticos, clasificación de correos, primeras respuestas de soporte."
+            "text": "Por token, sí, y por un margen amplio: comparaciones publicadas en 2026 ubican el costo de modelos de DeepSeek y Qwen entre 0,04 y 0,31 dólares por millón de tokens, con DeepSeek llegando a 0,07 dólares en aciertos de caché, frente a precios varias veces mayores en los modelos cerrados de punta. La diferencia se nota sobre todo en tareas de alto volumen: resúmenes automáticos, clasificación de correos, primeras respuestas de soporte."
           }
         },
         {
@@ -185,12 +185,34 @@
             modelos abiertos de 2026 rinden prácticamente igual que los modelos de pago más caros. La
             diferencia real hoy no está en qué tan bien piensan, está en cuánto cuesta cada consulta.</p>
 
-          <p>Y ahí la diferencia es enorme. Comparaciones publicadas este año ubican el precio de modelos
-            como DeepSeek-V3.2 o Qwen3 entre <strong>0,04 y 0,31 dólares por millón de tokens</strong>,
+          <p>Y ahí la diferencia es enorme. Comparaciones publicadas este año ubican el precio de los
+            modelos abiertos de DeepSeek y Qwen entre <strong>0,04 y 0,31 dólares por millón de tokens</strong>,
             con DeepSeek bajando hasta 0,07 dólares cuando se repiten consultas parecidas. Los modelos
             cerrados de punta cobran varias veces más por el mismo volumen.</p>
 
-          <p>Un millón de tokens no es una cifra abstracta: es, aproximadamente, unas 700.000 palabras.
+          <h3>Qué hay disponible hoy (agosto de 2026)</h3>
+
+            <p>Este terreno se mueve rápido, así que conviene fechar lo que se dice. A la fecha de
+              esta actualización, lo que está publicado y se puede descargar:</p>
+
+            <ul>
+              <li><strong>DeepSeek-V4</strong>, desde el 24 de abril de 2026, en dos versiones
+                —Pro y Flash— con licencia MIT y los pesos en Hugging Face. La Pro tiene 1,6 billones
+                de parámetros pero solo activa unos 49.000 millones por consulta, que es lo que la
+                hace barata de operar.</li>
+              <li><strong>Qwen 3.7</strong>, de Alibaba, con licencia Apache 2.0. Es la familia con
+                más versiones pequeñas, útiles cuando se quiere correr algo en un servidor modesto.</li>
+              <li><strong>Laguna S 2.1</strong>, de Poolside, publicado el 22 de julio de 2026 con
+                licencia OpenMDW-1.1. Está hecho específicamente para programar: 118.000 millones de
+                parámetros de los que activa 8.000 por token, y un contexto de un millón de tokens,
+                que es lo que permite pasarle un proyecto entero y no un archivo suelto.</li>
+            </ul>
+
+            <p>Si vas a probar solo uno para tareas de texto de tu negocio, empieza por el más
+              pequeño de la familia Qwen: es el que más fácil corre sin infraestructura. Si lo que
+              quieres es que te ayude a programar, Laguna S 2.1 es el que está pensado para eso.</p>
+
+            <p>Un millón de tokens no es una cifra abstracta: es, aproximadamente, unas 700.000 palabras.
             Suficiente para clasificar miles de correos de soporte o generar cientos de primeras
             respuestas a clientes. Que eso cueste centavos en vez de dólares cambia qué tareas se vuelven
             rentables automatizar.</p>
