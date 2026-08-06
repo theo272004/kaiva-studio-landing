@@ -3662,15 +3662,28 @@
        vez de alternar una clase por JS: sin script que mantener y el
        navegador lo resuelve en el hilo de composicion. */
     .kv-app-item[data-item="resumen"] {
-      animation: kvItemResumen 18s var(--ease) infinite;
+      animation: kvItemResumen 26s var(--ease) infinite;
     }
 
     .kv-app-item[data-item="pilares"] {
-      animation: kvItemPilares 18s var(--ease) infinite;
+      animation: kvItemPilares 26s var(--ease) infinite;
     }
 
     .kv-app-item[data-item="hallazgos"] {
-      animation: kvItemHallazgos 18s var(--ease) infinite;
+      animation: kvItemHallazgos 26s var(--ease) infinite;
+    }
+
+/* La pestana bloqueada de la demo. Apagada y con candado: no se anima,
+       porque no se pulsa. */
+    .kv-app-item-bloq {
+      opacity: .45;
+      animation: none !important;
+    }
+
+    .kv-app-lock {
+      margin-left: auto;
+      flex: none;
+      opacity: .8;
     }
 
     @keyframes kvItemResumen {
@@ -3754,15 +3767,15 @@
     }
 
     .kv-vista[data-vista="resumen"] {
-      animation: kvVistaResumen 18s var(--ease) infinite;
+      animation: kvVistaResumen 26s var(--ease) infinite;
     }
 
     .kv-vista[data-vista="pilares"] {
-      animation: kvVistaPilares 18s var(--ease) infinite;
+      animation: kvVistaPilares 26s var(--ease) infinite;
     }
 
     .kv-vista[data-vista="hallazgos"] {
-      animation: kvVistaHallazgos 18s var(--ease) infinite;
+      animation: kvVistaHallazgos 26s var(--ease) infinite;
     }
 
     @keyframes kvVistaResumen {
@@ -3838,7 +3851,7 @@
       stroke-linecap: round;
       stroke-dasharray: 100 100;
       stroke-dashoffset: 100;
-      animation: kvAnillo 18s var(--ease) infinite;
+      animation: kvAnillo 26s var(--ease) infinite;
     }
 
     @keyframes kvAnillo {
@@ -3866,7 +3879,7 @@
       opacity: 0;
       overflow: hidden;
       padding-top: 0;
-      animation: kvAbrirHallazgo 18s var(--ease) infinite;
+      animation: kvAbrirHallazgo 26s var(--ease) infinite;
     }
 
     @keyframes kvAbrirHallazgo {
@@ -3903,7 +3916,7 @@
       left: 0;
       z-index: 5;
       pointer-events: none;
-      animation: kvCursor 18s var(--ease) infinite;
+      animation: kvCursor 26s var(--ease) infinite;
     }
 
     .kv-cursor svg {
@@ -3923,7 +3936,7 @@
       background: var(--violet);
       opacity: 0;
       transform: scale(.3);
-      animation: kvClic 18s var(--ease) infinite;
+      animation: kvClic 26s var(--ease) infinite;
     }
 
     @keyframes kvCursor {

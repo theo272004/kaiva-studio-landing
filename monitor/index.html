@@ -78,7 +78,7 @@
   <!-- El resto del CSS de esta pagina vive en assets/monitor.css. Antes eran
        51 KB incrustados en el propio HTML: no se cacheaban y viajaban en cada
        visita. Arriba solo se queda el @font-face, que va con los preload. -->
-  <link rel="stylesheet" href="/assets/monitor.css?v=20260805u">
+  <link rel="stylesheet" href="/assets/monitor.css?v=20260805v">
 </head>
 
 <body>
@@ -310,6 +310,21 @@
                   <path d="m20 20-3.6-3.6" />
                 </svg>
                 Hallazgos
+              </span>
+              <!-- Bloqueada, como en la maqueta de la portada. No entra en la
+                   coreografia del cursor: esta para decir que existe y que no
+                   esta abierta, no para simular que se pulsa. -->
+              <span class="kv-app-item kv-app-item-bloq" data-item="competidores">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 3v18h18" /><path d="m7 14 4-4 3 3 5-6" />
+                </svg>
+                Competidores
+                <svg class="kv-app-lock" width="11" height="11" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+                  <rect x="5" y="11" width="14" height="10" rx="2" />
+                  <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                </svg>
               </span>
             </nav>
 
