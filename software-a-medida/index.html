@@ -51,7 +51,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260805u">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260805v">
 
   <script type="application/ld+json">
 {
@@ -576,14 +576,56 @@
       max-width: 68ch;
     }
 
-    /* ---- Caso ------------------------------------------------------------- */
+    
+
+    /* ---- Caso: la cabecera de la columna izquierda ------------------------
+       El nombre del cliente es el titular, no el subtitulo. En la maqueta va
+       grande y en negrita con "caso destacado" encima, y tiene sentido: la
+       seccion se llama "software que ya mueve una operacion real" y lo que
+       hay que leer despues es DE QUIEN. */
     .caso-kicker {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .07em;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: .09em;
       text-transform: uppercase;
       color: var(--violet);
-      margin-bottom: .8rem;
+      margin-bottom: .7rem;
+    }
+
+    /* La rayita que acompana al antetitulo en la maqueta. */
+    .caso-kicker span {
+      display: block;
+      width: 34px;
+      height: 2px;
+      background: currentColor;
+      opacity: .45;
+      order: 2;
+    }
+
+    .caso-nombre {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4.4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -.045em;
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: .35rem;
+    }
+
+    .caso-cliente {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink-soft);
+      margin-bottom: 1.4rem;
+    }
+
+    .caso-intro {
+      color: var(--ink-soft);
+      line-height: 1.7;
+      max-width: 46ch;
     }
 
     .caso-grid {
@@ -594,14 +636,7 @@
       margin-top: 2.4rem;
     }
 
-    .caso-cliente {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: .8rem;
-    }
-
-    .caso-txt > p { color: var(--ink-soft); line-height: 1.7; }
+    
 
     .caso-lista {
       list-style: none;
@@ -663,49 +698,15 @@
       transform: perspective(1600px) rotateY(0) rotateX(0);
     }
 
-    /* ---- Proceso ----------------------------------------------------------- */
-    .caso-pasos {
-      list-style: none;
-      margin: 3rem 0 0;
-      padding: 1.8rem 0 0;
-      border-top: 1px solid var(--line);
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 1.4rem;
-      counter-reset: paso;
-    }
-
-    .caso-pasos li {
-      counter-increment: paso;
-      font-size: 12.5px;
-      line-height: 1.55;
-      color: var(--ink-soft);
-    }
-
-    .caso-pasos b {
-      display: block;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: .25rem;
-    }
-
-    .caso-pasos b::before {
-      content: counter(paso, decimal-leading-zero) " · ";
-      color: var(--violet);
-    }
-
     @media (max-width: 900px) {
       .sint-grid { grid-template-columns: 1fr; gap: 1.4rem; }
       .caso-grid { grid-template-columns: 1fr; gap: 2rem; }
       /* Sin inclinación en el teléfono: una captura girada en pantalla
          estrecha pierde altura útil y se lee peor. */
       .caso-shot img { transform: none; }
-      .caso-pasos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-width: 520px) {
-      .caso-pasos { grid-template-columns: 1fr; gap: 1rem; }
     }
   </style>
 </head>
@@ -977,74 +978,73 @@
     </section>
 
     <!-- UN CASO REAL.
-         Distribución tomada de la maqueta que pasó Nicolás: lista a la
-         izquierda, captura inclinada a la derecha, y el proceso en una fila
-         abajo.
+         Distribución de la maqueta de Nicolás: el NOMBRE DEL CLIENTE es el
+         titular de la columna izquierda —grande y en negrita, con "caso
+         destacado" encima—, la lista de capacidades debajo con sus iconos, y
+         la captura a la derecha.
 
-         LO QUE NO SE COPIÓ DE ESA MAQUETA, Y POR QUÉ: llevaba cuatro cifras
-         flotando sobre la pantalla —"+320 médicos activos", "$950M
-         gestionados", "98,7% de disponibilidad", "en producción desde enero
-         2024"—. No son datos de la captura: son afirmaciones sobre nuestro
-         trabajo en una página de venta, y no las tenemos. Es el mismo caso que
-         el "50+ factores" que se quitó de la herramienta. En su lugar van
-         cuatro hechos que la captura sí demuestra.
+         QUÉ ES ESTO, corregido por Nicolás: no es un portal de médicos. CS
+         Travel da a sus afiliados un precio de mayorista; el afiliado arma el
+         caso de su paciente, decide cuánto cobra, y la diferencia es su
+         comisión. El portal es donde lleva todo eso. La descripción anterior
+         —"portal para médicos afiliados"— describía a los usuarios y no el
+         negocio, que es lo que hace entender para qué sirve.
 
-         La inclinación es leve —seis grados— y solo en escritorio: una captura
-         muy girada se ve de diseño y no de producto, y el objetivo es que se
-         entienda qué hace el sistema. -->
+         LO QUE NO SE PONE, Y POR QUÉ: la maqueta llevaba cuatro cifras
+         flotando —"+320 médicos activos", "$950M gestionados", "98,7% de
+         disponibilidad"—. Nicolás confirmó que son inventadas. Son
+         afirmaciones sobre nuestro trabajo en una página de venta; no van.
+
+         TAMPOCO van los cinco pasos de proceso que había aquí debajo: los
+         quitó él, y con razón — el proceso ya está contado en "Cuándo vale la
+         pena construir a la medida", y repetirlo aquí alargaba la sección sin
+         añadir nada. -->
     <section class="section alt" id="caso">
       <div class="wrap">
-        <p class="caso-kicker">Caso · CS Travel Group</p>
-        <h2 class="sec-head">Software que ya mueve una operación real<span class="dot">.</span></h2>
-
         <div class="caso-grid">
           <div class="caso-txt">
-            <p class="caso-cliente">Portal para médicos afiliados</p>
-            <p>CS Travel Group coordina viajes médicos. Construimos el portal por donde entran los
-              médicos que refieren pacientes: cada uno ve sus casos, en qué punto está cada uno y
-              cuánto lleva ganado, sin preguntarle a nadie.</p>
+            <p class="caso-kicker"><span aria-hidden="true"></span>Caso destacado</p>
+            <h2 class="caso-nombre">CS Travel Group<span class="dot">.</span></h2>
+            <p class="caso-cliente">Portal de gestión para afiliados de viaje</p>
+
+            <p class="caso-intro">Sus afiliados reciben un precio de mayorista. Cada uno arma el
+              caso de su paciente, decide cuánto cobra, y la diferencia es su comisión. El portal es
+              donde lo llevan todo.</p>
 
             <ul class="caso-lista">
               <li>
                 <span class="caso-ico" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></span>
-                <b>Casos con su estado y su ruta</b>
-                Código, paciente y en qué punto va: solicitud enviada, aprobada o pendiente de pago.
+                <b>Sus casos, con estado y ruta</b>
+                Cada caso con su código, su paciente y en qué punto va.
               </li>
               <li>
                 <span class="caso-ico" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5A2.5 2.5 0 0 0 12 8c-1.4 0-2.5.9-2.5 2s1.1 2 2.5 2 2.5.9 2.5 2-1.1 2-2.5 2a2.5 2.5 0 0 1-2.5-1.5M12 6.5v11"/></svg></span>
-                <b>Cobros y aprobaciones</b>
-                Lo que está pendiente de aprobar y lo que está pendiente de pagar, separado.
+                <b>La comisión, calculada sola</b>
+                La diferencia entre lo que cobra y el precio de mayorista, sin sacar cuentas.
               </li>
               <li>
-                <span class="caso-ico" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></span>
-                <b>Ganancias por periodo</b>
-                Lo acumulado y lo que falta, con el desglose por paciente.
+                <span class="caso-ico" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></span>
+                <b>Aprobaciones y cobros</b>
+                Lo que está esperando visto bueno y lo que está esperando pago, separado.
               </li>
               <li>
                 <span class="caso-ico" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></span>
-                <b>Enlace de afiliado con seguimiento</b>
-                Cada médico con su enlace, y los pacientes que llegaron por él.
+                <b>Su enlace de afiliado</b>
+                Quién llegó por él y cuánto ha generado.
               </li>
             </ul>
           </div>
 
+          <!-- ?v=2 en la imagen: se reemplazo el archivo conservando el
+               nombre, y sin esto el navegador sigue sirviendo la captura
+               anterior desde su cache. Comprobado: cargaba la vieja de
+               1440x738 teniendo la nueva de 1600x833 en disco. -->
           <figure class="caso-shot">
-            <img src="/assets/trabajo-cstravel-software.webp"
-              alt="Panel de un médico en la plataforma de CS Travel Group: casos con su estado, cobros pendientes, ganancias por periodo y pacientes referidos"
-              width="1440" height="738" loading="lazy" decoding="async">
+            <img src="/assets/trabajo-cstravel-software.webp?v=2"
+              alt="Panel de un afiliado en la plataforma de CS Travel Group: ganancias acumuladas, valor gestionado, ganancias por periodo, casos activos y referidos"
+              width="1600" height="833" loading="lazy" decoding="async">
           </figure>
         </div>
-
-        <!-- El proceso va aquí abajo y no en su propia sección: contado junto
-             a algo que existe se lee como lo que pasó; suelto, se lee como el
-             folleto de proceso que tiene cualquiera. -->
-        <ol class="caso-pasos">
-          <li><b>Entender la operación</b>Qué se hace hoy a mano y dónde se pierde el tiempo.</li>
-          <li><b>Diseñar el flujo</b>Las pantallas que hacen falta, y las que no.</li>
-          <li><b>Construir</b>Con el alcance por escrito acordado antes de empezar.</li>
-          <li><b>Conectar</b>Con lo que la empresa ya usa, sin obligarla a cambiarlo.</li>
-          <li><b>Entregar</b>El sistema y su código quedan a nombre de la empresa.</li>
-        </ol>
       </div>
     </section>
 
