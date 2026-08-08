@@ -51,7 +51,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260808a">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260808b">
 
   <script type="application/ld+json">
 {
@@ -466,9 +466,13 @@
       }
     }
 
-    /* El cierre claro y la "ruta" de tres pasos se movieron a pagina.css
-       (clase .cierre-light): ahora branding y software la usan también, así
-       que dejó de ser algo propio de esta página. */
+    /* El cierre claro y la "ruta" de tres pasos se movieron a pagina.css:
+       branding y software los usan también, así que dejaron de ser algo
+       propio de esta página. La clase se llama .cierre-serv desde que el
+       color de las páginas de servicio pasó a 60/30/10; el nombre anterior
+       (.cierre-light) siguió citado aquí durante meses mientras sus reglas
+       se quedaban sin marcado que las aplicara. Se borraron con el resto del
+       CSS muerto. */
 
       /* ============================================================
        HERO DE DISEÑO WEB

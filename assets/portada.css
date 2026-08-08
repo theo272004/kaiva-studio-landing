@@ -78,7 +78,7 @@
       animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
-    .logo, .kv-brand-fixed {
+    .logo {
       view-transition-name: kv-logo;
     }
 
@@ -3298,19 +3298,6 @@
        el numero que la gente busca primero. */
     .g-cell:not(.lead-cell) .marc { max-width: 64px; }
 
-    .g-grado {
-      font-family: var(--display);
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--ink-soft);
-      margin-top: .2rem;
-    }
-
-    .g-grado b {
-      font-weight: 800;
-      color: var(--violet-ink);   /* 6,2:1 sobre el violeta diluido de la tarjeta */
-    }
-
     /* La evidencia. Es lo que separa este informe de una opinion, y el texto
        de arriba la promete: sin ella la maqueta desmentia al copy. */
     .find .ev {
@@ -3798,197 +3785,9 @@
       }
     }
 
-    /* ===== Panel Pro (producto) ===== */
-    .plans-soft {
-      margin-top: 1.2rem;
-      max-width: 1100px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .plan-pro {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
-      gap: clamp(1.6rem, 4vw, 3rem);
-      align-items: center;
-      background: var(--surface);
-      border: 1px solid var(--line-strong);
-      border-radius: var(--r-lg);
-      padding: clamp(1.6rem, 3.5vw, 2.4rem);
-      box-shadow: var(--shadow-sm);
-      position: relative;
-    }
-
-    .plan-pro-soon {
-      display: inline-block;
-      font-size: 10.5px;
-      font-weight: 800;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--violet);
-      background: var(--violet-soft);
-      border: 1px solid rgba(130, 66, 245, .18);
-      padding: .28rem .65rem;
-      border-radius: 6px;
-      margin-bottom: .9rem;
-    }
-
-    .plan-pro h3 {
-      font-family: var(--display);
-      font-size: clamp(1.35rem, 2.6vw, 1.7rem);
-      font-weight: 800;
-      letter-spacing: -.02em;
-      color: var(--ink);
-      margin-bottom: .55rem;
-    }
-
-    .plan-pro-desc {
-      font-size: 13.5px;
-      line-height: 1.6;
-      color: var(--ink-soft);
-      margin-bottom: 1.3rem;
-    }
-
-    .plan-pro-price {
-      display: flex;
-      align-items: baseline;
-      gap: .4rem;
-      margin-bottom: 1.3rem;
-    }
-
-    .plan-pro-price b {
-      font-family: var(--display);
-      font-size: 34px;
-      font-weight: 800;
-      letter-spacing: -.03em;
-      line-height: 1;
-      color: var(--ink);
-    }
-
-    .plan-pro-price span {
-      font-size: 13px;
-      color: var(--ink-soft);
-      font-weight: 600;
-    }
-
-    .plan-pro-btn {
-      display: inline-block;
-      appearance: none;
-      -webkit-appearance: none;
-      font-family: inherit;
-      padding: .8rem 1.6rem;
-      border-radius: var(--r-btn);
-      background: var(--ink);
-      color: #fff;
-      font-size: 14px;
-      font-weight: 700;
-      text-align: center;
-      border: 0;
-      outline: 0;
-      cursor: pointer;
-      transition: background .2s var(--ease), transform .2s var(--ease);
-    }
-
-    .plan-pro-btn:hover {
-      background: var(--violet-hover);
-      transform: translateY(-1px);
-    }
-
-    .plan-pro-btn:active,
-    .plan-pro-btn:focus,
-    .plan-pro-btn:focus-visible {
-      background: var(--violet-hover);
-      color: #fff;
-      outline: 0;
-    }
-
-    .plan-pro-micro {
-      display: block;
-      font-size: 11.5px;
-      color: var(--ink-faint);
-      margin-top: .7rem;
-    }
-
-    /* Comparativa gratis vs pago */
-    .cmp {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: .9rem;
-    }
-
-    .cmp-col {
-      border: 1px solid var(--line-strong);
-      border-radius: var(--r-md);
-      padding: 1.1rem 1.2rem;
-      background: var(--paper);
-    }
-
-    .cmp-col.paid {
-      border-color: rgba(130, 66, 245, .3);
-      background: var(--violet-soft);
-    }
-
-    .cmp-col > b {
-      display: block;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: .2rem;
-    }
-
-    .cmp-col.paid > b {
-      color: var(--violet);
-    }
-
-    .cmp-col > i {
-      display: block;
-      font-style: normal;
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: .8rem;
-    }
-
-    .cmp-col ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: .5rem;
-      margin: 0;
-      padding: 0;
-    }
-
-    .cmp-col li {
-      display: flex;
-      gap: .5rem;
-      font-size: 12.5px;
-      line-height: 1.45;
-      color: var(--ink-soft);
-    }
-
-    .cmp-col li svg {
-      flex-shrink: 0;
-      margin-top: 2px;
-      color: var(--green);
-    }
-
-    .cmp-col.paid li svg {
-      color: var(--violet);
-    }
-
-    @media (max-width: 900px) {
-      .plan-pro {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .cmp {
-        grid-template-columns: 1fr;
-      }
-    }
+    /* Aqui vivian la tarjeta del Panel Pro (precio, boton, comparativa
+       gratis vs. pago) y sus dos @media. El marcado se quito del landing:
+       las reglas quedaron sin nada que pintar. */
 
     .plan.feat .pbtn:hover {
       background: var(--violet-ink);
@@ -4785,9 +4584,7 @@
       
       .float-robot,
       .float-robot-slow,
-      .tag-bubble,
-      .stmt-orbit,
-      .stmt-chip {
+      .tag-bubble {
         animation: none;
       }
     }

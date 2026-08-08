@@ -84,10 +84,6 @@
       animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
-    .kv-brand-fixed {
-      view-transition-name: kv-logo;
-    }
-
     * {
       margin: 0;
       padding: 0;
@@ -139,12 +135,6 @@
       text-decoration: none;
     }
 
-    .wrap {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding-inline: var(--pad);
-    }
-
     .dot {
       color: var(--violet);
     }
@@ -182,224 +172,9 @@
       animation: floaty-reverse 8s ease-in-out infinite;
     }
 
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      padding: 0.8rem 1.6rem;
-      border-radius: var(--r-btn);
-      cursor: pointer;
-      border: 1.5px solid transparent;
-      transition: all 0.3s var(--ease);
-      white-space: nowrap;
-      font-family: inherit;
-    }
-
-    .btn .arr {
-      transition: transform 0.3s var(--ease);
-    }
-
-    .btn:hover .arr {
-      transform: translateX(4px);
-    }
-
-    .btn-dark {
-      background: var(--ink);
-      color: #fff;
-    }
-
-    .btn-dark:hover {
-      background: #000;
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px -10px rgba(15, 23, 42, 0.4);
-    }
-
-    .btn-violet {
-      background: var(--ink);
-      color: #fff;
-      box-shadow: 0 10px 24px -8px rgba(130, 66, 245, 0.4);
-    }
-
-    .btn-violet:hover {
-      background: var(--ink);
-      transform: translateY(-2px);
-      box-shadow: 0 14px 28px -8px rgba(130, 66, 245, 0.5);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--ink);
-      border-color: var(--line-strong);
-    }
-
-    .btn-ghost:hover {
-      border-color: var(--ink);
-      background: rgba(15, 23, 42, 0.02);
-      transform: translateY(-1px);
-    }
-
-    /* Nav */
-    .nav {
-      position: fixed;
-      inset: 0 0 auto 0;
-      z-index: 200;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(20px) saturate(1.5);
-      -webkit-backdrop-filter: blur(20px) saturate(1.5);
-      border-bottom: 1px solid var(--line);
-      transition: all 0.3s ease;
-    }
-
-    .nav-in {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 0.85rem var(--pad);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-weight: 800;
-      font-size: 19px;
-      letter-spacing: -0.02em;
-      font-family: var(--display);
-    }
-
-    .logo img {
-      width: 32px;
-      height: 32px;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
-
-    .logo .wm {
-      display: inline-flex;
-      align-items: baseline;
-      white-space: nowrap;
-    }
-
-    .back {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--ink-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: color 0.2s;
-      padding: 0.5rem 1rem;
-      border-radius: 99px;
-      background: rgba(15, 23, 42, 0.03);
-    }
-
-    .back:hover {
-      color: var(--ink);
-      background: rgba(15, 23, 42, 0.07);
-    }
-
-    /* Hero */
-    .thero {
-      padding: clamp(7rem, 10vw, 8.5rem) 0 clamp(1.5rem, 3vw, 2.5rem);
-      text-align: center;
-      position: relative;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--violet);
-      background: var(--violet-soft);
-      border: 1px solid rgba(130, 66, 245, 0.12);
-      border-radius: 99px;
-      padding: 0.4rem 1rem;
-      margin-bottom: 1.5rem;
-      position: relative;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .thero h1 {
-      font-family: var(--display);
-      font-size: clamp(2.2rem, 4.2vw, 3.2rem);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1.1;
-      max-width: 20ch;
-      margin: 0 auto 1rem;
-      text-wrap: balance;
-      position: relative;
-    }
-
-    .thero p {
-      font-size: clamp(0.95rem, 1.15vw, 1.08rem);
-      color: var(--ink-soft);
-      line-height: 1.55;
-      max-width: 42ch;
-      margin: 0 auto 1.8rem;
-      position: relative;
-    }
-
-    /* Input Search Bar */
-    .runbar {
-      max-width: 580px;
-      margin: 0 auto;
-      display: flex;
-      gap: 0.5rem;
-      background: var(--surface);
-      border: 1px solid rgba(15, 23, 42, 0.1);
-      border-radius: 100px;
-      padding: 0.5rem;
-      box-shadow: 0 16px 36px -12px rgba(15, 23, 42, 0.08);
-      position: relative;
-      transition: all 0.3s var(--ease);
-    }
-
-    .runbar:focus-within {
-      border-color: var(--violet);
-      box-shadow: 0 16px 36px -8px rgba(130, 66, 245, 0.15);
-    }
-
-    .runbar .globe {
-      display: flex;
-      align-items: center;
-      padding-left: 0.8rem;
-      color: var(--ink-faint);
-    }
-
-    .runbar input {
-      flex: 1;
-      border: none;
-      outline: none;
-      font-family: inherit;
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--ink);
-      background: transparent;
-      padding: 0.6rem 0.4rem;
-    }
-
-    .runbar button {
-      border: none;
-    }
-
-    .run-note {
-      margin-top: 1rem;
-      font-size: 12.5px;
-      color: var(--ink-faint);
-      position: relative;
-    }
+    /* Aqui vivia la cabecera de marketing de la primera version de la pagina
+       —barra de navegacion, hero con titular y la barra de busqueda redonda—.
+       El documento ya no la pinta: entra directo al hero del diagnostico. */
 
     /* Dashboard Shell */
     /* min-height, no height: el panel crece con su contenido y scrollea la
@@ -729,47 +504,12 @@
       color: var(--ink);
     }
 
-    /* El formulario de guardado reusa la misma tarjeta. */
-    .kv-temp-form {
-      display: block;
-    }
-
     .kv-lead-lbl {
       display: block;
       font-size: 12px;
       font-weight: 600;
       color: var(--ink-soft);
       margin-bottom: .35rem;
-    }
-
-    .kv-lead-row {
-      display: flex;
-      gap: .5rem;
-      flex-wrap: wrap;
-    }
-
-    /* Los tres campos de crear cuenta (nombre, correo, contraseña). Grid y no
-       flex: con flex, un nombre largo escrito a mitad de camino reflow-ea
-       los tres campos de ancho de forma impredecible; con grid cada uno
-       tiene su carril fijo y solo cede en pantallas angostas. */
-    .kv-lead-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(160px, 1fr));
-      gap: .6rem;
-    }
-
-    .kv-lead-fila-btn {
-      display: flex;
-      align-items: center;
-      gap: .9rem;
-      margin-top: .8rem;
-      flex-wrap: wrap;
-    }
-
-    @media (max-width: 700px) {
-      .kv-lead-grid {
-        grid-template-columns: 1fr;
-      }
     }
 
     .kv-lead-input {
@@ -793,12 +533,6 @@
       outline: none;
       border-color: var(--violet);
       box-shadow: 0 0 0 3px var(--violet-soft);
-    }
-
-    .kv-lead-nota {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--ink-faint);
     }
 
     .kv-lead-err {
@@ -1011,25 +745,6 @@
     .kv-sesion-x:hover {
       background: rgba(15, 23, 42, .05);
       color: var(--ink);
-    }
-
-    /* El enlace "¿ya tienes cuenta?" dentro del formulario de crear cuenta. */
-    .kv-lead-alt {
-      display: block;
-      margin-top: .7rem;
-      font-size: 12.5px;
-      font-weight: 600;
-      color: var(--ink-faint);
-      background: none;
-      border: 0;
-      cursor: pointer;
-      text-decoration: underline;
-      text-underline-offset: 2px;
-      padding: 0;
-    }
-
-    .kv-lead-alt:hover {
-      color: var(--violet);
     }
 
     .app-grid {
@@ -1449,13 +1164,6 @@
     .panel-top-row {
       display: grid;
       grid-template-columns: 1fr 1.3fr;
-      gap: 1.2rem;
-      align-items: stretch;
-    }
-
-    .panel-bottom-row {
-      display: grid;
-      grid-template-columns: 1.15fr 0.95fr 0.9fr;
       gap: 1.2rem;
       align-items: stretch;
     }
@@ -2077,92 +1785,6 @@
       margin-bottom: 0.05rem;
     }
 
-    /* Scanning Overlay style */
-    .scanner-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.95);
-      z-index: 100;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1.2rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-    }
-
-    .scanner-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .scan-robot {
-      width: 90px;
-      height: 90px;
-      object-fit: contain;
-      filter: drop-shadow(0 12px 24px rgba(130, 66, 245, 0.15));
-    }
-
-    .scan-title {
-      font-family: var(--display);
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--ink);
-    }
-
-    .scan-progress-box {
-      width: 280px;
-      height: 6px;
-      background: #f1f5f9;
-      border-radius: 10px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .scan-progress-bar {
-      height: 100%;
-      width: 0;
-      background: linear-gradient(90deg, #0f172a 0%, #475569 100%);
-      border-radius: 10px;
-      transition: width 0.2s linear;
-    }
-
-    .scan-status {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--violet);
-      height: 20px;
-    }
-
-    /* Footer Section */
-    .footer {
-      border-top: 1px solid var(--line);
-      background: #ffffff;
-      padding-block: 2.8rem;
-      margin-top: 2rem;
-    }
-
-    .foot-in {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      font-size: 13.5px;
-      color: var(--ink-faint);
-    }
-
-    .foot-in a {
-      color: var(--ink-soft);
-      transition: color 0.2s;
-    }
-
-    .foot-in a:hover {
-      color: var(--ink);
-    }
-
     /* Responsive design adjustments */
     @media (max-width: 1080px) {
       .app-grid {
@@ -2203,10 +1825,6 @@
         grid-template-columns: 1fr;
       }
 
-      .panel-bottom-row {
-        grid-template-columns: 1fr;
-      }
-
       .footer-banner {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -2230,20 +1848,6 @@
         height: 112px;
       }
 
-      .runbar {
-        border-radius: 24px;
-        flex-direction: column;
-        padding: 0.8rem;
-      }
-
-      .runbar input {
-        padding: 0.4rem 0.8rem;
-      }
-
-      .runbar button {
-        width: 100%;
-      }
-
       .pillars-grid {
         grid-template-columns: 1fr;
         gap: 0.8rem;
@@ -2252,11 +1856,6 @@
       .footer-banner {
         grid-template-columns: 1fr;
         gap: 1.2rem;
-      }
-
-      .foot-in {
-        flex-direction: column;
-        text-align: center;
       }
     }
 
@@ -2317,61 +1916,11 @@
       }
     }
 
-    /* Solo acompañan a las pantallas previas (bienvenida y carga). Dentro del
-       panel se ocultan: allí la barra superior y el menú ya llevan la marca, y
-       el logo flotante quedaba encima de los controles de la ventana. La
-       puerta al panel tampoco pinta nada cuando ya estás viendo un informe. */
-    body.kv-en-panel .kv-brand-fixed,
-
-    /* Puerta al Panel Pro: discreta a propósito. Es para el equipo, y para el
-       visitante que viene a analizar su web no debe competir con el campo de
-       la URL, que es lo único que tiene que hacer aquí. */
-
-
-
-    @media (max-width: 560px) {
-      /* En móvil el texto compite con el logo; queda solo el candado. */
-
-    }
-
-    .kv-brand-fixed {
-      position: fixed;
-      top: clamp(1.1rem, 3vw, 1.9rem);
-      left: clamp(1.1rem, 4vw, 2.6rem);
-      z-index: 40;
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      font-family: var(--epilogue);
-      font-weight: 800;
-      font-size: .98rem;
-      color: var(--ink);
-      text-decoration: none;
-      opacity: .9;
-      transition: opacity .2s var(--ease);
-    }
-
-    .kv-brand-fixed:hover {
-      opacity: 1;
-    }
-
-    .kv-brand-fixed img {
-      height: 48px;
-      width: auto;
-      display: block;
-    }
-
-    @media (max-width:640px) {
-      /* En pantalla chica la marca deja de ir pegada: si se queda fija, se
-         come alto de una pantalla que ya va justa. La puerta al panel sigue
-         el mismo criterio — si una scrollea y la otra no, quedan bailando
-         una respecto de la otra. */
-      .kv-brand-fixed,
-
-      .kv-brand-fixed img {
-        height: 40px;
-      }
-    }
+    /* Aqui vivian el logotipo flotante de la esquina (.kv-brand-fixed) y la
+       puerta al Panel Pro. Al quitar la puerta quedo un selector con la coma
+       colgando, y esa coma se comia el @media que venia detras: ni la regla ni
+       el @media llegaban a aplicarse. Ninguna de las dos clases tiene marcado
+       en /monitor/, asi que se va la familia entera y con ella el destrozo. */
 
     .kv-box h2 {
       font-family: var(--epilogue);
@@ -2394,102 +1943,6 @@
       color: var(--ink-soft);
       max-width: 56ch;
       margin: 0 auto 2rem;
-    }
-
-    .kv-steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: .9rem;
-      margin-bottom: 2.2rem;
-      text-align: left;
-    }
-
-    @media (max-width:640px) {
-      .kv-steps {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .kv-step {
-      background: var(--surface);
-      border: 1px solid var(--line-strong);
-      border-radius: var(--r-md);
-      padding: 1rem 1.1rem;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .kv-step b {
-      display: block;
-      font-family: var(--epilogue);
-      font-size: .95rem;
-      color: var(--ink);
-      margin-bottom: .25rem;
-    }
-
-    .kv-step span {
-      font-size: .85rem;
-      line-height: 1.5;
-      color: var(--ink-soft);
-    }
-
-    .kv-step i {
-      font-style: normal;
-      font-weight: 800;
-      font-size: .7rem;
-      color: var(--violet);
-      letter-spacing: .1em;
-    }
-
-    .kv-form {
-      display: flex;
-      gap: .6rem;
-      background: var(--surface);
-      border: 1px solid var(--line-strong);
-      border-radius: var(--r-btn);
-      padding: .45rem .45rem .45rem 1.2rem;
-      box-shadow: var(--shadow-md);
-      max-width: 560px;
-      margin: 0 auto;
-      transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
-    }
-
-    .kv-form:focus-within {
-      border-color: var(--violet);
-      box-shadow: 0 0 0 4px var(--violet-soft), var(--shadow-md);
-    }
-
-    .kv-form input {
-      flex: 1;
-      min-width: 0;
-      border: 0;
-      outline: 0;
-      background: transparent;
-      font-family: var(--sans);
-      font-size: 1rem;
-      color: var(--ink);
-    }
-
-    .kv-form input::placeholder {
-      color: var(--ink-faint);
-    }
-
-    .kv-form button {
-      flex: none;
-      border: 0;
-      cursor: pointer;
-      background: var(--ink);
-      color: #fff;
-      font-family: var(--sans);
-      font-weight: 700;
-      font-size: .95rem;
-      padding: .8rem 1.6rem;
-      border-radius: var(--r-btn);
-      transition: background .2s var(--ease), transform .2s var(--ease);
-    }
-
-    .kv-form button:hover {
-      background: var(--ink);
-      transform: translateY(-1px);
     }
 
     .kv-note {
@@ -2548,30 +2001,6 @@
       font-size: .9rem;
       font-weight: 600;
       color: var(--ink-soft);
-    }
-
-    /* 404 */
-    .kv-404-img {
-      width: min(560px, 100%);
-      height: auto;
-      margin: 0 auto 1.8rem;
-      display: block;
-      border-radius: var(--r-lg);
-    }
-
-    .kv-404-fallback {
-      display: none;
-      font-family: var(--epilogue);
-      font-weight: 800;
-      font-size: clamp(4rem, 16vw, 9rem);
-      line-height: 1;
-      letter-spacing: -.04em;
-      color: var(--ink);
-      margin-bottom: 1.5rem;
-    }
-
-    .kv-404-fallback span {
-      color: var(--violet);
     }
 
     /* ---- Lista de espera de la herramienta ---- */
@@ -2812,28 +2241,6 @@
       }
     }
 
-    .kv-back {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      margin-top: 1.6rem;
-      padding: .85rem 1.7rem;
-      border-radius: var(--r-btn);
-      border: 1.5px solid var(--line-strong);
-      background: var(--surface);
-      color: var(--ink);
-      font-weight: 700;
-      font-size: .95rem;
-      text-decoration: none;
-      transition: border-color .2s var(--ease), transform .2s var(--ease);
-    }
-
-    .kv-back:hover {
-      border-color: var(--violet);
-      color: var(--violet);
-      transform: translateY(-1px);
-    }
-
     /* ===== Hero de bienvenida (2 columnas) ===== */
     #kvWelcome {
       align-items: flex-start;
@@ -2851,13 +2258,6 @@
        debajo, así que ya no hay dos columnas que repartir. */
     .kv-hero-top {
       display: block;
-    }
-
-    /* El panel de ejemplo, ahora bajo el hero y centrado. */
-    .kv-hero .kv-preview {
-      max-width: 940px;
-      margin: clamp(3rem, 7vw, 5rem) auto 0;
-      text-align: left;
     }
 
     /* ---- Hero centrado ---------------------------------------------------
@@ -2912,12 +2312,6 @@
 
     .kv-hero-centro .kv-err:not(:empty) {
       margin-top: .8rem;
-    }
-
-    .kv-hero-centro .kv-marks {
-      margin-top: 2.2rem;
-      margin-bottom: 1.4rem;
-      text-align: left;
     }
 
     .kv-hero-centro .kv-note {
@@ -3017,46 +2411,6 @@
       color: var(--ink-soft);
       max-width: 52ch;
       margin: 0 0 1.8rem;
-    }
-
-    /* Tres sellos */
-    .kv-marks {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-bottom: 1.9rem;
-    }
-
-    .kv-mark {
-      display: flex;
-      gap: .65rem;
-      align-items: flex-start;
-    }
-
-    .kv-mark .kv-mark-ic {
-      flex: none;
-      width: 36px;
-      height: 36px;
-      border-radius: 11px;
-      background: var(--violet-soft);
-      color: var(--violet);
-      display: grid;
-      place-items: center;
-    }
-
-    .kv-mark b {
-      display: block;
-      font-size: .87rem;
-      color: var(--ink);
-      font-weight: 700;
-      margin-bottom: .1rem;
-    }
-
-    .kv-mark span {
-      display: block;
-      font-size: .76rem;
-      line-height: 1.4;
-      color: var(--ink-soft);
     }
 
     /* Campo de dominio */
@@ -3177,216 +2531,9 @@
       outline-offset: 3px;
     }
 
-    /* Panel de ejemplo */
-    .kv-preview {
-      position: relative;
-      background: var(--surface);
-      border: 1px solid var(--line-strong);
-      border-radius: var(--r-lg);
-      box-shadow: 0 24px 60px rgba(15, 23, 42, .09), 0 3px 10px rgba(15, 23, 42, .03);
-      padding: 1.5rem;
-      display: grid;
-      gap: 1rem;
-      font-size: 12px;
-    }
-
-    .kv-pv-head {
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-    }
-
-    .kv-pv-head b {
-      font-family: var(--epilogue);
-      font-size: .95rem;
-      color: var(--ink);
-      font-weight: 800;
-    }
-
-    .kv-pv-tag {
-      margin-left: auto;
-      font-size: .62rem;
-      font-weight: 800;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      border: 1px solid var(--line-strong);
-      border-radius: 99px;
-      padding: .2rem .55rem;
-    }
-
-    .kv-pv-score {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 1.3rem;
-      align-items: center;
-    }
-
-    .kv-ring-wrap {
-      position: relative;
-      flex: none;
-      width: 122px;
-      height: 122px;
-      display: grid;
-      place-items: center;
-      text-align: center;
-    }
-
-    .kv-ring-wrap svg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      transform: rotate(-90deg);
-    }
-
-    .kv-ring-num {
-      font-family: var(--epilogue);
-      font-size: 2.1rem;
-      font-weight: 800;
-      color: var(--ink);
-      line-height: 1;
-    }
-
-    .kv-ring-sub {
-      font-size: .62rem;
-      color: var(--ink-faint);
-      margin-top: .15rem;
-    }
-
-    .kv-pv-msg b {
-      display: block;
-      font-family: var(--epilogue);
-      font-size: .92rem;
-      color: var(--ink);
-      margin-bottom: .35rem;
-    }
-
-    .kv-pv-msg p {
-      font-size: .76rem;
-      line-height: 1.5;
-      color: var(--ink-soft);
-      margin: 0;
-    }
-
-    /* Cuatro pilares: 2x2, que en el ancho del panel de ejemplo respira
-       mucho mejor que cuatro columnas apretadas. */
-    .kv-pv-pillars {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: .6rem;
-    }
-
-    .kv-pill {
-      border: 1px solid var(--line-strong);
-      border-radius: 12px;
-      padding: .6rem .7rem;
-    }
-
-    .kv-pill u {
-      display: flex;
-      align-items: center;
-      gap: .28rem;
-      text-decoration: none;
-      font-size: .63rem;
-      color: var(--ink-soft);
-      font-weight: 600;
-    }
-
-    .kv-pill em {
-      font-style: normal;
-      font-size: .55rem;
-      color: var(--ink-faint);
-      font-weight: 700;
-    }
-
-    .kv-pill b {
-      display: block;
-      font-family: var(--epilogue);
-      font-size: 1.15rem;
-      color: var(--ink);
-      font-weight: 800;
-      margin: .15rem 0 .35rem;
-    }
-
-    .kv-pill b s {
-      text-decoration: none;
-      font-size: .6rem;
-      color: var(--ink-faint);
-      font-weight: 600;
-    }
-
-    .kv-pill-bar {
-      height: 3px;
-      border-radius: 99px;
-      background: rgba(15, 23, 42, .07);
-      overflow: hidden;
-    }
-
-    .kv-pill-bar i {
-      display: block;
-      height: 100%;
-      border-radius: 99px;
-      background: var(--ink);
-    }
-
-    .kv-pv-find {
-      border: 1px solid var(--line-strong);
-      border-radius: 12px;
-      padding: .75rem .8rem;
-    }
-
-    .kv-pv-find > b {
-      display: block;
-      font-size: .74rem;
-      color: var(--ink);
-      margin-bottom: .5rem;
-    }
-
-    .kv-pv-find ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: .38rem;
-    }
-
-    .kv-pv-find li {
-      display: flex;
-      align-items: center;
-      gap: .45rem;
-      font-size: .72rem;
-      color: var(--ink);
-    }
-
-    .kv-pv-find li svg {
-      flex: none;
-    }
-
-    /* Antes .kv-locked, con un candado y "9 hallazgos más en el reporte
-       completo". El backend nunca tuvo ese muro: scan.php devuelve
-       findings_locked = 0 siempre. El renombre es a propósito, para que la
-       clase no invite a volver a poner un candado ahí. */
-    .kv-unlocked {
-      margin-top: .6rem;
-      padding-top: .55rem;
-      border-top: 1px dashed var(--line-strong);
-      font-size: .68rem;
-      color: var(--violet-ink);
-      display: flex;
-      align-items: center;
-      gap: .35rem;
-      font-weight: 600;
-    }
-
-    /* Pasos */
-    .kv-steps-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: clamp(1rem, 3vw, 2.4rem);
-      margin-top: clamp(3rem, 6vw, 4.5rem);
-      position: relative;
-    }
+    /* La maqueta estatica del panel —.kv-preview, su anillo, sus cuatro
+       pildoras y su lista de hallazgos— se reemplazo por la demo animada que
+       esta mas abajo (.kv-demo). */
 
     /* Enlace a la landing del diagnóstico. Reemplaza las dos tarjetas que
        comparaban «Gratis, ahora» con el Panel Pro. */
@@ -3408,170 +2555,20 @@
       border-bottom-color: var(--violet);
     }
 
-    .kv-stepc {
-      position: relative;
-      background: var(--surface);
-      border: 1px solid var(--line-strong);
-      border-radius: var(--r-md);
-      padding: 1.6rem 1.3rem 1.3rem;
-      display: flex;
-      gap: .9rem;
-      align-items: flex-start;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .kv-stepc::before {
-      content: attr(data-n);
-      position: absolute;
-      top: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--ink);
-      color: #fff;
-      font-size: .78rem;
-      font-weight: 800;
-      display: grid;
-      place-items: center;
-      box-shadow: 0 4px 12px rgba(130, 66, 245, .3);
-    }
-
-    .kv-stepc .kv-stepc-ic {
-      flex: none;
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: var(--violet-soft);
-      color: var(--violet);
-      display: grid;
-      place-items: center;
-    }
-
-    .kv-stepc b {
-      display: block;
-      font-family: var(--epilogue);
-      font-size: .93rem;
-      color: var(--ink);
-      margin-bottom: .25rem;
-    }
-
-    .kv-stepc span {
-      display: block;
-      font-size: .78rem;
-      line-height: 1.5;
-      color: var(--ink-soft);
-    }
-
-    /* Franja de beneficios */
-    .kv-strip {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-      margin-top: 1.4rem;
-      background: var(--surface);
-      border: 1px solid var(--line-strong);
-      border-radius: var(--r-md);
-      padding: 1.2rem 1.4rem;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .kv-strip > div {
-      display: flex;
-      gap: .7rem;
-      align-items: center;
-      padding-right: 1rem;
-      border-right: 1px solid var(--line-strong);
-    }
-
-    .kv-strip > div:last-child {
-      border-right: 0;
-      padding-right: 0;
-    }
-
-    .kv-strip .kv-strip-ic {
-      flex: none;
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      background: var(--violet-soft);
-      color: var(--violet);
-      display: grid;
-      place-items: center;
-    }
-
-    .kv-strip b {
-      display: block;
-      font-size: .82rem;
-      color: var(--ink);
-      font-weight: 700;
-    }
-
-    .kv-strip span {
-      display: block;
-      font-size: .72rem;
-      color: var(--ink-soft);
-      margin-top: .05rem;
-    }
-
     @media (max-width: 980px) {
       .kv-hero-top {
         grid-template-columns: 1fr;
         gap: 2.4rem;
       }
-
-      .kv-preview {
-        order: -1;
-      }
-
-      .kv-steps-row {
-        grid-template-columns: 1fr;
-        gap: 1.6rem;
-      }
-
-      .kv-strip {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.2rem;
-      }
-
-      .kv-strip > div:nth-child(2n) {
-        border-right: 0;
-        padding-right: 0;
-      }
     }
 
     @media (max-width: 620px) {
-      .kv-marks {
-        grid-template-columns: 1fr;
-        gap: .8rem;
-      }
-
-      .kv-pv-pillars {
-        grid-template-columns: 1fr;
-      }
-
-      .kv-pv-score {
-        grid-template-columns: 1fr;
-        justify-items: center;
-        text-align: center;
-      }
-
       .kv-field {
         flex-wrap: wrap;
       }
 
       .kv-field button {
         width: 100%;
-      }
-
-      .kv-strip {
-        grid-template-columns: 1fr;
-      }
-
-      .kv-strip > div {
-        border-right: 0;
-        padding-right: 0;
       }
     }
 

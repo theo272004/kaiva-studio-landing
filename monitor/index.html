@@ -78,7 +78,7 @@
   <!-- El resto del CSS de esta pagina vive en assets/monitor.css. Antes eran
        51 KB incrustados en el propio HTML: no se cacheaban y viajaban en cada
        visita. Arriba solo se queda el @font-face, que va con los preload. -->
-  <link rel="stylesheet" href="/assets/monitor.css?v=20260807b">
+  <link rel="stylesheet" href="/assets/monitor.css?v=20260808b">
 </head>
 
 <body>
@@ -271,21 +271,6 @@
       <!-- El panel de ejemplo baja del lateral a aqui: a ancho completo
            debajo del hero, en vez de competir con el campo del dominio.
            Sigue siendo un EJEMPLO y lo dice su etiqueta. -->
-        <!-- Columna derecha: panel de ejemplo -->
-      <!-- ===== Recorrido de la herramienta, guiado por scroll =====
-           Sustituye al panel de ejemplo estatico.
-
-           COMO FUNCIONA, y por que asi: el panel queda fijo (sticky) mientras
-           los pasos de texto pasan por al lado; un IntersectionObserver marca
-           cual esta a la vista y el panel cambia de vista. Todo es DOM real
-           -texto, SVG, CSS-, no un video ni una imagen: pesa nada, se lee en
-           un lector de pantalla, y actualizarlo cuando cambie la herramienta
-           es editar HTML, no volver a grabar y exportar.
-
-           LAS TRES VISTAS SON LAS QUE EXISTEN DE VERDAD: Resumen, Pilares y
-           Hallazgos. El panel real no tiene mas (Competencia e Historial estan
-           con candado), y ensenar pestanas que no existen seria prometer
-           producto que no hay. Cuando la herramienta crezca, se anaden aqui. -->
       <!-- ===== Demo de la herramienta, en marcha sola =====
            Una animacion por FOTOGRAMAS CLAVE de CSS (@keyframes), no un video.
            Simula a alguien usando el panel: el cursor se mueve, pulsa una
@@ -312,7 +297,12 @@
            Si se toca un tramo hay que mover los demas: van sincronizados a
            mano, que es el precio de no meter una libreria de animacion.
 
-           Los datos son inventados a proposito y la etiqueta lo dice. -->
+           Los datos son inventados a proposito y la etiqueta lo dice.
+
+           LAS TRES VISTAS SON LAS QUE EXISTEN DE VERDAD: Resumen, Pilares y
+           Hallazgos. El panel real no tiene mas (Competencia e Historial
+           estan con candado), y ensenar pestanas que no existen seria
+           prometer producto que no hay. -->
       <section class="kv-demo" aria-label="Demostracion de la herramienta">
         <div class="kv-demo-marco">
           <div class="kv-app-bar">
@@ -1408,28 +1398,11 @@
         target.textContent = 'Revisando ' + v;
         show(loading);
 
-        // Con backend disponible hacemos el análisis de verdad; sin él, la
-        // animación de siempre y la lista de espera.
-        if (API) {
-          analizarDeVerdad(v);
-          return;
-        }
-
-        var i = 0;
-        (function next() {
-          if (i >= steps.length) {
-            setTimeout(function () {
-              var eco = document.getElementById('kvDominioEco');
-              if (eco) eco.textContent = dominio;
-              show(err404);
-            }, 700);
-            return;
-          }
-          bar.style.width = steps[i][0] + '%';
-          status.textContent = steps[i][1];
-          i++;
-          setTimeout(next, 550 + Math.random() * 350);
-        })();
+        /* Aqui habia un `if (API)` con, debajo, la animacion falsa de la epoca
+           sin backend. Muerta por dos razones: API es un ternario que siempre
+           devuelve cadena (localhost o el VPS), y `steps`, `err404` y
+           #kvDominioEco no existen — de ejecutarse, habria reventado. */
+        analizarDeVerdad(v);
       });
 
       /* ---- Guardar el análisis y volver a él ------------------------------
@@ -1649,7 +1622,7 @@
               </svg>
               Analizar otro sitio
             </button>
-            <button type="button" class="app-btn app-btn--sesion" id="kvPanelSesion">Iniciar sesión</button>
+            <button type="button" class="app-btn" id="kvPanelSesion">Iniciar sesión</button>
           </div>
         </div>
 
@@ -1682,15 +1655,10 @@
         <!-- App Grid (Sidebar + Panel Content) -->
         <div class="app-grid" style="position: relative;">
 
-          <!-- Live Scanning Overlay (injected dynamically when running a diagnostic) -->
-          <div class="scanner-overlay" id="scannerOverlay">
-            <img src="../assets/KaivaMora1.webp" alt="Analizando" class="scan-robot float-robot">
-            <div class="scan-title">Ejecutando Diagnóstico</div>
-            <div class="scan-progress-box">
-              <div class="scan-progress-bar" id="scanProgressBar"></div>
-            </div>
-            <div class="scan-status" id="scanStatus">Conectando...</div>
-          </div>
+          <!-- Aqui vivia #scannerOverlay (robot, titulo y barra encima del
+               panel). Nacia con opacity:0 y solo se veia con .active, que
+               ningun guion de aqui le ponia: la espera la ensena #kvLoading.
+               El Panel Pro tiene el suyo, ese si encendido por JS. -->
 
           <!-- Sidebar -->
           <aside class="side">
@@ -1785,7 +1753,7 @@
                 <div class="index-card-content">
                   <div class="index-left">
                     <div class="score-row">
-                      <span class="score-num" id="scoreGeneral" data-count="58">0</span>
+                      <span class="score-num" id="scoreGeneral">0</span>
                       <span class="score-max">/100</span>
                     </div>
                     <span class="score-badge">Necesita atención</span>
@@ -1881,7 +1849,7 @@
                       <svg viewBox="0 0 100 100">
                         <circle class="track" cx="50" cy="50" r="43" stroke-width="8"></circle>
                         <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="url(#gdInk)"
-                          stroke-linecap="round" pathLength="100" id="ringP0" data-ring="0"></circle>
+                          stroke-linecap="round" pathLength="100" id="ringP0"></circle>
                         <defs>
                           <linearGradient id="gdInk" x1="0" y1="0" x2="1" y2="1">
                             <stop offset="0%" stop-color="#0f172a"></stop>
@@ -1889,7 +1857,7 @@
                           </linearGradient>
                         </defs>
                       </svg>
-                      <div class="mnum" id="scoreP0" data-count="0">0</div>
+                      <div class="mnum" id="scoreP0">0</div>
                     </div>
                     <div class="pn">Visibilidad</div>
                     <div class="pd">Google e IA te encuentran</div>
@@ -1902,9 +1870,9 @@
                       <svg viewBox="0 0 100 100">
                         <circle class="track" cx="50" cy="50" r="43" stroke-width="8"></circle>
                         <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="#0f172a"
-                          stroke-linecap="round" pathLength="100" id="ringP1" data-ring="61"></circle>
+                          stroke-linecap="round" pathLength="100" id="ringP1"></circle>
                       </svg>
-                      <div class="mnum" id="scoreP1" data-count="61">0</div>
+                      <div class="mnum" id="scoreP1">0</div>
                     </div>
                     <div class="pn">Imagen</div>
                     <div class="pd">Cómo te ve quien llega</div>
@@ -1917,9 +1885,9 @@
                       <svg viewBox="0 0 100 100">
                         <circle class="track" cx="50" cy="50" r="43" stroke-width="8"></circle>
                         <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="#0f172a"
-                          stroke-linecap="round" pathLength="100" id="ringP2" data-ring="54"></circle>
+                          stroke-linecap="round" pathLength="100" id="ringP2"></circle>
                       </svg>
-                      <div class="mnum" id="scoreP2" data-count="54">0</div>
+                      <div class="mnum" id="scoreP2">0</div>
                     </div>
                     <div class="pn">Confianza</div>
                     <div class="pd">Si se atreven a escribirte</div>
@@ -1932,9 +1900,9 @@
                       <svg viewBox="0 0 100 100">
                         <circle class="track" cx="50" cy="50" r="43" stroke-width="8"></circle>
                         <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="#0f172a"
-                          stroke-linecap="round" pathLength="100" id="ringP3" data-ring="59"></circle>
+                          stroke-linecap="round" pathLength="100" id="ringP3"></circle>
                       </svg>
-                      <div class="mnum" id="scoreP3" data-count="59">0</div>
+                      <div class="mnum" id="scoreP3">0</div>
                     </div>
                     <div class="pn">Operación</div>
                     <div class="pd">Si te escriben y no se pierde</div>
@@ -2479,47 +2447,10 @@
   </script>
 
 
-  <!-- Recorrido guiado por scroll: sincroniza el paso que estás leyendo con
-       la vista que muestra el panel fijo de al lado.
-
-       IntersectionObserver y no un listener de scroll: el navegador avisa
-       cuando un elemento entra en una franja, sin que nosotros midamos
-       posiciones en cada fotograma. Un listener de scroll haciendo
-       getBoundingClientRect() sobre cada paso es justo la clase de código que
-       hace que una página vaya a tirones en un móvil de gama media, que es
-       con lo que entra la mayoría.
-
-       rootMargin recorta la franja de deteccion a la banda central de la
-       pantalla: asi el cambio ocurre cuando el paso esta de verdad en el
-       centro de la lectura, no cuando asoma por abajo. -->
-  <script>
-    (function () {
-      var pasos = [].slice.call(document.querySelectorAll('.kv-paso'));
-      if (!pasos.length || !('IntersectionObserver' in window)) return;
-
-      var vistas = [].slice.call(document.querySelectorAll('.kv-vista'));
-      var items = [].slice.call(document.querySelectorAll('.kv-app-item'));
-
-      function activar(nombre) {
-        pasos.forEach(function (p) { p.classList.toggle('on', p.dataset.vista === nombre); });
-        vistas.forEach(function (v) { v.classList.toggle('on', v.dataset.vista === nombre); });
-        items.forEach(function (i) { i.classList.toggle('on', i.dataset.item === nombre); });
-      }
-
-      /* La primera nace activa: si la seccion entra en pantalla ya empezada
-         (por ejemplo al volver con el boton atras), el panel no puede quedarse
-         en blanco esperando a que alguien haga scroll. */
-      activar('resumen');
-
-      var obs = new IntersectionObserver(function (entradas) {
-        entradas.forEach(function (e) {
-          if (e.isIntersecting) activar(e.target.dataset.vista);
-        });
-      }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
-
-      pasos.forEach(function (p) { obs.observe(p); });
-    })();
-  </script>
+  <!-- Aqui vivia un IntersectionObserver que ataba unos pasos de texto
+       (.kv-paso) a la vista del panel. Esos pasos ya no existen: el recorrido
+       guiado por scroll se sustituyo por la demo de @keyframes de arriba, asi
+       que el guion salia en su primera linea (`if (!pasos.length) return`). -->
 
   <!-- Si llegas desde el home con el dominio ya escrito (/monitor/?d=...),
        el campo aparece lleno para no tener que escribirlo dos veces. -->

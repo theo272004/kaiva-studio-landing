@@ -140,10 +140,6 @@ html {
   padding-inline: var(--pad);
 }
 
-.narrow {
-  max-width: 980px;
-}
-
 /* ---------- Navegación ----------
    Copiada tal cual del home (index.html). Las dos deben verse idénticas: si
    cambia una, cambia la otra. Antes esta era sticky, encajonada al ancho del
@@ -1009,13 +1005,6 @@ h2.sec-head + .desc {
   color: var(--ink-soft);
 }
 
-.cierre-light .cierre-sub {
-  max-width: 52ch;
-  margin: 0 auto;
-  color: var(--ink-soft);
-  line-height: 1.7;
-}
-
 .cierre-light .btn-ghost {
   border-color: var(--line-strong);
   color: var(--ink);
@@ -1025,13 +1014,6 @@ h2.sec-head + .desc {
 .cierre-light .btn-ghost:hover {
   border-color: var(--ink);
   background: #fff;
-}
-
-.cierre-light .cierre-pie {
-  margin: 1.6rem auto 0;
-  max-width: 46ch;
-  font-size: 13.5px;
-  color: var(--ink-faint);
 }
 
 .ruta {
@@ -1235,12 +1217,10 @@ h2.sec-head + .desc {
 }
 
 /* ================= BLOG ================= */
-.post-lista {
-  display: grid;
-  gap: 0;
-  border-top: 1px solid var(--line-strong);
-  max-width: 900px;
-}
+/* De la lista antigua del blog solo queda .post-item: las paginas de
+   articulo lo nombran en un querySelectorAll de revelado. Sus companeras
+   (.post-lista, .post-meta, .post-tag, .post-flecha) no aparecian en
+   ningun marcado. */
 
 .post-item {
   display: grid;
@@ -1255,20 +1235,6 @@ h2.sec-head + .desc {
 
 .post-item:hover {
   padding-left: 1rem;
-}
-
-.post-meta {
-  font-size: 12.5px;
-  color: var(--ink-faint);
-  margin-bottom: .5rem;
-  display: flex;
-  gap: .6rem;
-  align-items: center;
-}
-
-.post-tag {
-  color: var(--violet);
-  font-weight: 650;
 }
 
 .post-item h2 {
@@ -1292,24 +1258,6 @@ h2.sec-head + .desc {
   line-height: 1.6;
   color: var(--ink-soft);
   max-width: 62ch;
-}
-
-.post-flecha {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1.5px solid var(--line-strong);
-  display: grid;
-  place-items: center;
-  color: var(--ink-faint);
-  flex-shrink: 0;
-  transition: all .3s var(--ease);
-}
-
-.post-item:hover .post-flecha {
-  border-color: var(--violet);
-  color: var(--violet);
-  transform: scale(1.08);
 }
 
 /* ---- artículo ---- */
@@ -1867,10 +1815,6 @@ h2.sec-head + .desc {
   padding-top: 1.1rem;
 }
 
-.blog-destacado .blog-avatar {
-  background: rgba(255, 255, 255, .18);
-}
-
 .blog-destacado .blog-autor {
   color: #fff;
 }
@@ -1962,22 +1906,6 @@ h2.sec-head + .desc {
   margin-top: 1.1rem;
   padding-top: .95rem;
   border-top: 1px solid var(--line);
-}
-
-.blog-avatar {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--ink);
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-}
-
-.blog-avatar img {
-  width: 17px;
-  height: auto;
-  filter: brightness(0) invert(1);
 }
 
 .blog-autor {
@@ -2129,37 +2057,6 @@ h2.sec-head + .desc {
 
 .dark-footer a:hover {
   color: #fff !important;
-}
-
-/* Alternancia del portafolio en desktop */
-@media (min-width: 769px) {
-  .portfolio-item:nth-child(even) {
-    grid-template-columns: 1fr 1.25fr;
-  }
-  .portfolio-item:nth-child(even) .portfolio-info {
-    grid-column: 1;
-    grid-row: 1;
-  }
-  .portfolio-item:nth-child(even) .portfolio-img-container {
-    grid-column: 2;
-    grid-row: 1;
-  }
-}
-
-@media (max-width: 768px) {
-  .portfolio-item {
-    grid-template-columns: 1fr;
-    gap: 1.8rem;
-    padding-bottom: 3rem;
-  }
-  .portfolio-item:nth-child(even) .portfolio-info {
-    grid-column: unset;
-    grid-row: unset;
-  }
-  .portfolio-item:nth-child(even) .portfolio-img-container {
-    grid-column: unset;
-    grid-row: unset;
-  }
 }
 
 
