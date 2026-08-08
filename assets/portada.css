@@ -2029,12 +2029,14 @@
     }
 
     /* ================= STATEMENT / INTERACTIVE TAGS ================= */
+    /* Sin filete arriba ni abajo: mismo criterio que en pagina.css. Aqui
+       ademas era blanco contra blanco, asi que la raya no marcaba un cambio
+       de nada — solo cortaba la pagina. Lo que separa es el aire. */
     .statement {
       position: relative;
       padding-block: clamp(5.5rem, 9vw, 10rem);
       overflow: hidden;
       background: #ffffff;
-      border-block: 1px solid var(--line);
     }
 
     /* Curvy SVG connector lines in background */
@@ -2925,7 +2927,6 @@
       background: var(--bg);
       padding-block: clamp(3.5rem, 6vw, 6rem);
       position: relative;
-      border-block: 1px solid var(--line);
     }
 
     .tool-perks {
@@ -3051,34 +3052,6 @@
       font-size: 15px;
       font-family: var(--display);
       color: var(--ink);
-    }
-
-    .side-brand img {
-      width: 22px;
-      height: 22px;
-    }
-
-    /* La K corta, la misma que firma los artículos del blog. Va en un
-       cuadrado de tinta para que funcione como isotipo y no se confunda con
-       la primera letra de la palabra que tiene al lado. */
-    .side-k {
-      flex-shrink: 0;
-      width: 24px;
-      height: 24px;
-      border-radius: 7px;
-      background: var(--ink);
-      color: #fff;
-      display: grid;
-      place-items: center;
-      font-family: var(--display);
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1;
-    }
-
-    .side-k .dot {
-      color: var(--violet-2);
     }
 
     .side-item {
@@ -4065,7 +4038,6 @@
       padding-block: clamp(5rem, 9vw, 8.5rem);
       position: relative;
       background: #ffffff;
-      border-top: 1px solid var(--line);
     }
 
     .contact-grid {
