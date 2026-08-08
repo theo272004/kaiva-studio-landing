@@ -51,7 +51,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260807f">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260808a">
 
   <script type="application/ld+json">
 {
@@ -190,6 +190,39 @@
        Si se toca un tramo hay que mover los demás: van sincronizados a mano,
        que es el precio de no meter una librería de animación.
 
+       LOS ENCUADRES SE MIDIERON, NO SE AJUSTARON A OJO. La primera tanda salió
+       de la fórmula pero contra el CUADRO, y el cuadro no es todo visible: la
+       máscara de abajo desvanece los bordes, así que la zona donde una tarjeta
+       se ve entera es más pequeña. Medidos uno a uno contra esa zona útil,
+       seis de los siete encuadres recortaban algo:
+
+         plano general   tablero -177px por la izquierda y -219 por arriba,
+                         reportes -153 y -226, automatiza -175, crm -120 y -183
+                         — cuatro de las cinco escenas cortadas, y es el plano
+                         que se ve al entrar, al cerrar y el único que queda
+                         fijo con prefers-reduced-motion
+         tablero         -20 y -19 por los lados: la etiqueta DASHBOARDS caía
+                         dentro del desvanecido y se leía "ASHBOARDS"
+         reportes        -5 por arriba          pagos  -0 por arriba
+         crm             -4 y -3 por los lados
+
+       Los de ahora salen de encuadrar el rectángulo real de cada escena
+       —medido en el navegador, etiqueta incluida— dentro del 93% x 94% del
+       cuadro, con un 4% de aire. Ninguno recorta: la holgura más ajustada es
+       de 7px. Si se cambia el contenido de una tarjeta hay que volver a
+       medirla, porque su alto es automático.
+
+       EL PLANO GENERAL NO PUEDE SER LEGIBLE, y conviene saber por qué antes de
+       intentar arreglarlo: cada tarjeta mide un cuadro de ancho, y cinco
+       tarjetas repartidas ocupan 2,2 x 2,4 cuadros. Verlas todas obliga a
+       alejarse hasta 0,358, y ahí el texto de dentro cae a 5px. Encogerlo todo
+       no sirve —encoger la tarjeta y su letra a la vez es la identidad, se
+       cancela—. Lo que sí sirve es que en ese plano crezca lo único que hace
+       falta leer: las etiquetas. Van a escala 2,5 mientras la cámara está
+       lejos y vuelven a 1 al acercarse, así que la apertura dice DASHBOARDS,
+       REPORTES, AUTOMATIZACIONES, PASARELAS DE PAGO y CRM —que es justo lo que
+       la pieza quiere contar— y cuesta 0,008 de escala.
+
        Los datos son inventados y la etiqueta de abajo lo dice. */
     .kvcam-cine {
       container-type: inline-size;
@@ -209,13 +242,19 @@
          Al quitar el marco, las escenas se cortaban a hachazo contra el borde
          invisible. La máscara las desvanece en los cuatro lados, que es lo
          que hace que parezca que el plano sigue más allá del cuadro en vez de
-         que algo está mal recortado. */
+         que algo está mal recortado.
+
+         3,5% y 3%, no 5% y 4%. El desvanecido come cuadro: con el 5% de antes
+         quedaba un 90% de ancho útil, y ahí es donde se perdía la D de
+         DASHBOARDS. Bajarlo devuelve seis puntos de zona útil —de los que
+         viven los encuadres— y el degradado sigue siendo suficiente para que
+         no se vea un canto duro. */
       -webkit-mask-image:
-        linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%),
-        linear-gradient(to bottom, transparent 0, #000 4%, #000 96%, transparent 100%);
+        linear-gradient(to right, transparent 0, #000 3.5%, #000 96.5%, transparent 100%),
+        linear-gradient(to bottom, transparent 0, #000 3%, #000 97%, transparent 100%);
       mask-image:
-        linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%),
-        linear-gradient(to bottom, transparent 0, #000 4%, #000 96%, transparent 100%);
+        linear-gradient(to right, transparent 0, #000 3.5%, #000 96.5%, transparent 100%),
+        linear-gradient(to bottom, transparent 0, #000 3%, #000 97%, transparent 100%);
       -webkit-mask-composite: source-in;
       mask-composite: intersect;
       /* 1em = 1% del ancho del cuadro. De aquí cuelga TODA la escala de
@@ -231,6 +270,51 @@
        la letra sin tocar la composición. */
     @container (max-width: 520px) {
       .kvcam-cam { font-size: 1.6cqw; }
+    }
+
+    /* Y por subir la base, el recorrido entero cambia aquí. Los anchos de las
+       escenas van en % del mundo y no se mueven, pero los altos son
+       automáticos: con la letra a 1,6 las tarjetas engordan y el conjunto pasa
+       de ocupar 2,20 x 2,45 cuadros a 2,20 x 2,90. Los encuadres de escritorio
+       aplicados a esa composición cortan por arriba y por abajo, así que van
+       recalculados con las medidas del cuadro pequeño. Se comprobó que subir
+       la base compensa: aleja la cámara (0,358 -> 0,294) pero el em crece más
+       de lo que la escala baja, así que el texto acaba más grande en los dos
+       planos, el general y el de detalle.
+
+       SON DOS JUEGOS DE @keyframes CON NOMBRES DISTINTOS, y no el mismo nombre
+       redefinido dentro del @container, que es lo primero que se probó: no
+       funciona. Un @keyframes es una regla de ámbito global —el nombre se
+       resuelve una vez para el documento— y una consulta de contenedor se
+       evalúa por elemento, así que la de dentro no llega a registrarse y el
+       navegador se queda con la de fuera. Medido: con el cuadro a 335px la
+       escala en el fotograma cero seguía dando 0,358, la de escritorio. Con
+       @media habría funcionado, pero el cuadro es una columna del hero y puede
+       ser estrecho con la ventana ancha, que es justo el caso que hay que
+       cubrir. Cambiar animation-name sí es una declaración normal.
+
+       Y el bloque que lo cambia va MÁS ABAJO, después de .kvcam-mundo y de
+       .kvcam-eti. Estaba aquí y tampoco funcionaba, por una razón distinta y
+       más tonta: esas dos reglas usan el atajo `animation:`, que incluye
+       animation-name, así que al venir después reponían el nombre de
+       escritorio. Misma especificidad, gana la última. */
+    @keyframes kvcamCamCorto {
+      0%,   7%  { transform: scale(0.294) translate(-3.425%,   9.658%); }
+      13%,  26% { transform: scale(0.812) translate(-9.528%,  -0.717%); }
+      31%,  38% { transform: scale(1.751) translate(-19.474%, -23.411%); }
+      45%,  55% { transform: scale(0.670) translate(-45.168%,  1.676%); }
+      61%,  70% { transform: scale(0.773) translate(-50.492%, -38.696%); }
+      75%,  82% { transform: scale(1.070) translate(-24.417%, -37.715%); }
+      88%,  94% { transform: scale(0.928) translate(-14.084%, -63.352%); }
+      100%      { transform: scale(0.294) translate(-3.425%,   9.658%); }
+    }
+
+    /* Más lejos el plano general, más grande tiene que ser la etiqueta para
+       medir los mismos 12px en pantalla. */
+    @keyframes kvcamEtiCorto {
+      0%,   7%  { transform: scale(3.1); }
+      13%, 94%  { transform: scale(1); }
+      100%      { transform: scale(3.1); }
     }
 
     .kvcam-tilt {
@@ -267,31 +351,60 @@
       100% { transform: rotate(-1.6deg) scale(.965); opacity: 0; }
     }
 
-    /* Los catorce encuadres. Calculados, no tanteados — ver la nota de
-       arriba. Los pares iguales seguidos son las PAUSAS: sin ellas la cámara
-       no se detiene nunca y no da tiempo a leer nada. */
+    /* Los catorce encuadres. Medidos, no tanteados — ver la nota de arriba.
+       Los pares iguales seguidos son las PAUSAS: sin ellas la cámara no se
+       detiene nunca y no da tiempo a leer nada. */
     @keyframes kvcamCam {
-      0%,   7%  { transform: scale(0.600) translate(-22.172%, -25.072%); }
-      13%,  26% { transform: scale(1.000) translate(-13.333%, -8.333%); }
-      31%,  38% { transform: scale(1.586) translate(-19.491%, -20.991%); }
-      45%,  55% { transform: scale(0.979) translate(-52.976%, -9.976%); }
-      61%,  70% { transform: scale(1.034) translate(-55.881%, -47.881%); }
-      75%,  82% { transform: scale(1.414) translate(-28.213%, -45.213%); }
-      88%,  94% { transform: scale(1.034) translate(-15.881%, -68.881%); }
-      100%      { transform: scale(0.600) translate(-22.172%, -25.072%); }
+      0%,   7%  { transform: scale(0.358) translate(-3.278%,  -3.741%); }
+      13%,  26% { transform: scale(0.891) translate(-11.261%, -3.950%); }
+      31%,  38% { transform: scale(1.693) translate(-18.961%, -20.445%); }
+      45%,  55% { transform: scale(0.979) translate(-52.955%, -7.629%); }
+      61%,  70% { transform: scale(1.027) translate(-55.766%, -45.411%); }
+      75%,  82% { transform: scale(1.364) translate(-27.796%, -42.443%); }
+      88%,  94% { transform: scale(0.979) translate(-14.965%, -65.647%); }
+      100%      { transform: scale(0.358) translate(-3.278%,  -3.741%); }
     }
+
+    /* El contra-zoom de las etiquetas. Va en la misma línea de tiempo y con la
+       misma curva que la cámara, así que crecen y se encogen con ella en vez
+       de ir por detrás. Escala 2,5 mientras el plano es general —donde son lo
+       único legible— y 1 en cuanto la cámara se acerca, que es cuando la
+       tarjeta ya se explica sola y una etiqueta gigante estorbaría.
+
+       scale y no font-size: el tamaño de letra reflowea la caja y arrastra a
+       la tarjeta de al lado; una escala no toca el flujo. El origen es la
+       esquina de abajo a la izquierda, que es por donde la etiqueta se ancla a
+       su tarjeta: así crece hacia arriba y hacia fuera, al hueco, y no se le
+       mete encima. */
+    @keyframes kvcamEti {
+      0%,   7%  { transform: scale(2.5); }
+      13%, 94%  { transform: scale(1); }
+      100%      { transform: scale(2.5); }
+    }
+
 
     /* ---- Las escenas -----------------------------------------------------
        Cada una se coloca por su CENTRO, que es el mismo punto que persigue la
        cámara. Así mover una escena es cambiar dos números en dos sitios y no
        recalcular esquinas. */
+    /* El borde y la sombra son más marcados de lo que parecería necesario, y
+       es por el plano general. Ahí la cámara está a 0,358, así que TODO lo que
+       va en em se divide por tres: el borde de 0,232em medía medio píxel y una
+       tarjeta blanca con medio píxel de borde sobre un fondo blanco no se ve.
+       Se midió en captura: las cinco escenas entraban enteras y aun así el
+       plano se leía como una mancha. Con 0,29em al 16% el contorno aguanta el
+       alejamiento, y en primer plano —donde el mismo borde crece a 1,6px—
+       sigue siendo un filete discreto. La sombra va en dos capas por lo mismo:
+       una corta que dibuja el canto y otra larga que da el aire. */
     .kvcam-esc {
       position: absolute;
       transform: translate(-50%, -50%);
       background: #fff;
-      border: 0.232em solid rgba(15, 23, 42, .10);
+      border: 0.290em solid rgba(15, 23, 42, .16);
       border-radius: 2.320em;
-      box-shadow: 0 2.320em 5.800em rgba(15, 23, 42, .07);
+      box-shadow:
+        0 0.580em 1.450em rgba(15, 23, 42, .07),
+        0 2.320em 5.800em rgba(15, 23, 42, .09);
       padding: 2.175em;
       color: var(--ink);
       line-height: 1.35;
@@ -321,6 +434,8 @@
       text-transform: uppercase;
       color: var(--violet);
       white-space: nowrap;
+      transform-origin: left bottom;
+      animation: kvcamEti 26s cubic-bezier(.65, 0, .35, 1) infinite;
     }
 
     /* -- 1. Dashboard -- */
@@ -616,6 +731,19 @@
       pointer-events: none;
     }
 
+    /* EL CAMBIO AL RECORRIDO DEL CUADRO ESTRECHO. Va aquí, al final, y no
+       arriba junto a los kvcam*Corto: tiene que venir DESPUÉS de .kvcam-mundo
+       y de .kvcam-eti, que declaran su animación con el atajo `animation:`.
+       El atajo incluye animation-name, así que con la misma especificidad
+       gana la última en aparecer y repone el nombre de escritorio. Pasó dos
+       veces: primero con el mundo y, al moverlo solo un poco, con la etiqueta
+       —que se declara cien líneas más abajo—. Se comprobó midiendo la escala
+       del mundo y el animationName de la etiqueta con el cuadro a 335px. */
+    @container (max-width: 520px) {
+      .kvcam-mundo { animation-name: kvcamCamCorto; }
+      .kvcam-eti   { animation-name: kvcamEtiCorto; }
+    }
+
     /* Quien pide menos movimiento no recibe ninguno: se queda el plano
        general, quieto, con las cinco escenas a la vista. Sigue contando lo
        mismo, sin cámara. */
@@ -624,15 +752,32 @@
       .kvcam-mundo,
       .kvcam-traza, .kvcam-area, .kvcam-globo, .kvcam-punto,
       .kvcam-fila, .kvcam-barritas i, .kvcam-nodo, .kvcam-ok, .kvcam-ficha-viaja,
-      .kvcam-rotulo {
+      .kvcam-eti, .kvcam-rotulo {
         animation: none !important;
       }
-      .kvcam-mundo { transform: scale(0.600) translate(-22.172%, -25.072%); }
+      /* El plano general congelado. Es el encuadre que más se notaba roto:
+         quien pide menos movimiento se quedaba mirando cuatro tarjetas
+         cortadas por los bordes, sin cámara que las descubriera después. */
+      .kvcam-mundo { transform: scale(0.358) translate(-3.278%, -3.741%); }
+      .kvcam-eti { transform: scale(2.5); }
       .kvcam-tilt { opacity: 1; transform: none; }
       .kvcam-traza { stroke-dashoffset: 0; }
       .kvcam-area, .kvcam-fila { opacity: 1; transform: none; }
       .kvcam-barritas i { transform: scaleY(1); }
-      .kvcam-rotulo:nth-of-type(1) { opacity: 1; transform: none; }
+
+      /* Sin rótulo. Aquí se dejaba encendido el primero —"Dashboards a la
+         medida"— porque el plano general no decía qué se estaba viendo. Ya lo
+         dice: las cinco etiquetas van a escala 2,5 y se leen. El rótulo, que
+         vive fuera del mundo y siempre cae en la misma esquina, se montaba
+         encima de la tarjeta del CRM. Se vio en captura. */
+      .kvcam-rotulos { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      @container (max-width: 520px) {
+        .kvcam-mundo { transform: scale(0.294) translate(-3.425%, 9.658%); }
+        .kvcam-eti { transform: scale(3.1); }
+      }
     }
 
     /* ---- mini ilustraciones de "Qué construimos" ----
@@ -1716,10 +1861,13 @@
       </div>
     </section>
 
-    <!-- Cierre. Va antes de "Otros servicios" a proposito: primero se
-         pregunta por aquello que la persona vino a mirar, y solo si no era eso
-         se le ofrece lo demas. Sin precios, que es la decision tomada para las
-         tres paginas de servicio. -->
+    <!-- Cierre, y ultima seccion de la pagina. Detras iba "Otros servicios",
+         un cruce a las otras dos: lo ultimo que veia alguien que acababa de
+         leerlo todo era una lista de mas cosas que vendemos. Se quito. Quien
+         llega hasta aqui ya decidio que le interesa ESTO, y lo unico que
+         necesita delante es el sitio donde decir "hablemos"; lo demas ya
+         esta en el menu de arriba y en el pie. Sin precios, que es la
+         decision tomada para las tres paginas de servicio. -->
     <section class="section cierre-serv">
       <div class="wrap cierre-serv-wrap">
         <h2>¿Qué parte de tu operación te está <span class="serv-hi">costando tiempo</span>?</h2>
@@ -1729,51 +1877,6 @@
           <a class="btn btn-wa" href="https://wa.me/573024137374" target="_blank" rel="noopener noreferrer"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>Escríbenos por WhatsApp</a>
         </div>
         <p class="cierre-serv-nota">Miramos primero si de verdad hace falta construir algo. A veces la respuesta es una herramienta que ya existe, y también te lo decimos.</p>
-      </div>
-    </section>
-
-    <!-- Otros servicios. Mismo componente en las tres paginas de servicio; solo
-         cambian las tres tarjetas, que nunca incluyen la pagina donde estas. -->
-    <section class="section alt serv-otros">
-      <div class="wrap">
-        <h2>Otros <span class="serv-hi">servicios</span></h2>
-        <p class="desc">Soluciones que se complementan entre sí. Cada una resuelve una parte
-          distinta de tu presencia digital.</p>
-        <div class="serv-grid">
-          <a class="serv-card" href="/diseno-web/">
-            <span class="serv-ico" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><circle cx="6.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/><circle cx="8.8" cy="6.5" r=".6" fill="currentColor" stroke="none"/><circle cx="11.1" cy="6.5" r=".6" fill="currentColor" stroke="none"/></svg>
-            </span>
-            <b>Diseño web</b>
-            <span class="serv-raya" aria-hidden="true"></span>
-            <span class="serv-desc">Páginas web a medida, rápidas y pensadas para convertir.</span>
-            <span class="serv-flecha" aria-hidden="true">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
-            </span>
-          </a>
-          <a class="serv-card" href="/branding/">
-            <span class="serv-ico" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="2" fill="currentColor" stroke="none"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="2" fill="currentColor" stroke="none" opacity=".45"/><rect x="13" y="13" width="7.5" height="7.5" rx="2"/></svg>
-            </span>
-            <b>Branding e identidad</b>
-            <span class="serv-raya" aria-hidden="true"></span>
-            <span class="serv-desc">Logo, identidad visual y guías de uso de marca.</span>
-            <span class="serv-flecha" aria-hidden="true">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
-            </span>
-          </a>
-          <a class="serv-card" href="/diagnostico/">
-            <span class="serv-ico" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/><path d="M9 12.5v2"/><path d="M11.5 9.5v5"/><path d="M14 11.5v3"/></svg>
-            </span>
-            <b>Diagnóstico Digital</b>
-            <span class="serv-raya" aria-hidden="true"></span>
-            <span class="serv-desc">Diagnóstico del estado de tu presencia digital.</span>
-            <span class="serv-flecha" aria-hidden="true">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
-            </span>
-          </a>
-        </div>
       </div>
     </section>
   </main>
