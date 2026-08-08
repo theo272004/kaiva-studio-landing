@@ -3124,8 +3124,18 @@
       outline: 0;
       background: transparent;
       font-family: var(--sans);
-      font-size: .95rem;
+      /* 1rem = 16px, y el 16 no es estetico: por debajo de esa medida Safari
+         en iPhone hace zoom al enfocar el campo y no lo deshace al salir.
+         Estaba en .95rem (15,2px), justo por debajo del umbral, en el unico
+         campo que tiene que rellenar quien viene a probar la herramienta. */
+      font-size: 1rem;
       color: var(--ink);
+      /* El input media 18px de alto: solo la linea de texto. Lo que se ve
+         grande es .kv-field, que es el contenedor — su relleno no forma parte
+         del campo, asi que tocar ahi no enfocaba nada. 44px iguala el area
+         sensible a lo que se ve y al alto del boton de al lado. .kv-field ya
+         es al menos asi de alto por el boton, de modo que no crece. */
+      min-height: 44px;
       padding: 0;
       margin-top: 1px;
     }

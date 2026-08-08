@@ -1219,6 +1219,24 @@ h2.sec-head + .desc {
   color: var(--violet);
 }
 
+/* Los ocho enlaces del pie medían 22px de alto. Con el dedo eso es una
+   loteria, y son justo los que alguien busca cuando de verdad los necesita
+   (privacidad, terminos, cookies, preferencias). Va en (pointer:coarse) y no
+   en un ancho: con raton no hace falta el area extra y en escritorio
+   descuadraria la fila. El gap vertical baja lo mismo que sube el alto, asi
+   que el pie ocupa lo que ocupaba. Mismo criterio que en portada.css. */
+@media (pointer: coarse) {
+  .pie nav {
+    gap: 0 1.4rem;
+  }
+
+  .pie nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+  }
+}
+
 /* ================= BLOG ================= */
 .post-lista {
   display: grid;
@@ -1672,6 +1690,16 @@ h2.sec-head + .desc {
   box-shadow: 0 0 0 4px rgba(130, 66, 245, .1);
 }
 
+/* Los 16px no son esteticos: por debajo de esa medida Safari en iPhone hace
+   zoom al enfocar el campo y no lo deshace al salir. 15px se quedaba a un
+   pixel del umbral. Va por (pointer:coarse) porque lo que dispara el zoom es
+   que el dispositivo sea tactil, no que la pantalla sea estrecha. */
+@media (pointer: coarse) {
+  .blog-buscar input {
+    font-size: 16px;
+  }
+}
+
 /* ---------- filtros ---------- */
 /* Sin rótulo encima: unas pastillas de temas debajo de un buscador ya se
    entienden solas. Con 30px seguían pegadas —los dos son píldoras y se
@@ -1738,9 +1766,30 @@ h2.sec-head + .desc {
   border-radius: 14px;
 }
 
+/* CUIDADO CON min-height JUNTO A aspect-ratio. Aqui habia
+   `aspect-ratio: 21/9; min-height: 340px`, y esas dos lineas se pelean: si el
+   ancho disponible no da 340px de alto por si solo, el navegador no recorta —
+   ENSANCHA la caja hasta que la proporcion cuadre. 340 x 21/9 = 793px. En un
+   telefono de 360px la foto del destacado medía 793px de ancho y el
+   contenedor se la comia: se veia el tercio izquierdo de la imagen y nada
+   mas. Medido en 360, 414 y 768: los tres.
+   Lo que faltaba era `width: 100%`. Sin el, el ancho de la caja era
+   indefinido —se lo pedia a su contenido— y ahi es donde la pareja
+   proporcion+alto minimo podia inventarselo. Con el ancho atado al
+   contenedor, min-height solo puede hacer lo que dice: subir el ALTO.
+   Y el alto minimo hace falta: encima de la foto va el titular del
+   destacado con su entradilla, y a 16/10 en un telefono la caja se quedaba
+   en 210px y el texto se salia por arriba y por abajo. */
 .blog-dest-foto {
-  aspect-ratio: 21 / 9;
+  width: 100%;
+  aspect-ratio: 16 / 10;
   min-height: 340px;
+}
+
+@media (min-width: 700px) {
+  .blog-dest-foto {
+    aspect-ratio: 21 / 9;
+  }
 }
 /* ---------- destacado ----------
    El texto va encima de la imagen, como en la referencia. El velo oscuro va
@@ -1965,13 +2014,17 @@ h2.sec-head + .desc {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .blog-destacado {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .blog-destacado-txt {
-    padding-right: 0;
-  }
+  /* Aqui habia dos reglas sobrantes de cuando el destacado era una rejilla de
+     dos columnas —foto a un lado, texto al otro—. Ya no lo es: hoy es un solo
+     bloque con el texto ENCIMA de la foto.
+       · grid-template-columns sobre .blog-destacado no hacia nada, porque el
+         elemento es display:block.
+       · padding-right: 0 si hacia. En la maqueta vieja el texto tenia su
+         propia columna y no necesitaba margen a la derecha; en esta va sobre
+         la imagen, asi que quitarselo dejaba el titular, la entradilla y la
+         linea de fecha pegados al canto de la tarjeta. Medido en 375px: el
+         texto llegaba a 355 y la tarjeta terminaba en 355. Sin un pixel.
+     Al borrarlas vuelve el padding parejo del clamp de .blog-destacado-txt. */
 }
 
 @media (max-width: 560px) {
@@ -2367,9 +2420,16 @@ h2.sec-head + .desc {
 
 @media (min-width: 960px) {
   .medida {
-    /* La columna del texto no crece más de 44rem aunque sobre ancho: pasada
-       esa medida los renglones se vuelven incómodos de leer. */
-    grid-template-columns: minmax(0, 44rem) minmax(0, 1fr);
+    /* La columna del texto ya no va a 44rem fijos. Lo era para que los
+       renglones no se hicieran incomodos de leer, pero 44rem son 704px y a
+       960-1100px de ventana no queda casi nada para la otra columna: medido a
+       1024, la del texto se llevaba 704 de los 927 y a la ilustracion le
+       quedaban 172, con lo que el panel (que mide 289 de minimo) se salia por
+       la derecha hasta 1026 y la pagina entera cogia scroll horizontal.
+       Con fracciones las dos columnas ceden a la vez. La medida de lectura
+       sigue protegida donde importa: los parrafos de .medida-txt ya llevan su
+       propio max-width de 46ch. */
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
   }
 }
 

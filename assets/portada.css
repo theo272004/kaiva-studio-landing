@@ -4736,6 +4736,24 @@
        ocupa lo que ocupaba. */
     @media (pointer: coarse) {
 
+      /* ---- EL ZOOM DE SAFARI EN iOS -------------------------------------
+         Safari en iPhone hace zoom sobre cualquier campo de formulario cuya
+         letra mida menos de 16px, y despues NO lo deshace: la persona se queda
+         con la pagina ampliada y tiene que apartarla con dos dedos para
+         seguir. Los campos del formulario de contacto iban a 14,5px, o sea que
+         pasaba en los cinco — y ese formulario es la unica conversion de la
+         portada.
+         16px exactos es el umbral del navegador, no un tamano elegido por
+         estetica. La condicion va por (pointer:coarse) y no por ancho: lo que
+         dispara el zoom es que el dispositivo sea tactil, no que la pantalla
+         sea estrecha. Con un ancho de corte, un telefono grande en horizontal
+         o una tablet se quedaban fuera. */
+      .form-input,
+      .form-select,
+      .form-textarea {
+        font-size: 16px;
+      }
+
       .foot-col ul {
         gap: 0.25rem;
       }
@@ -5039,6 +5057,17 @@
 
     .faq-chat-input:focus {
       border-color: var(--violet);
+    }
+
+    /* Mismo umbral de los 16px que en el formulario de contacto: por debajo,
+       Safari en iPhone hace zoom al enfocar y no lo deshace. Esta regla va
+       AQUI y no en el bloque de (pointer:coarse) de mas arriba a proposito:
+       las media queries no suman especificidad, asi que la declaracion de
+       13px de estas lineas ganaba por ir despues en el archivo. */
+    @media (pointer: coarse) {
+      .faq-chat-input {
+        font-size: 16px;
+      }
     }
 
     .faq-chat-send {
