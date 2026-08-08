@@ -365,18 +365,26 @@ html {
    nodo de texto, que si vio el blanco sobre blanco.
 
    ---- Cierre de las paginas de servicio --------------------------------
-   Las tres terminaban en "Otros servicios", que es un enlace cruzado: lo
-   ultimo que veia alguien despues de leerlo todo era una lista de otras
-   cosas que vendemos, sin un solo sitio donde decir "hablemos". Va antes del
-   cruce, no despues: primero se pregunta por lo que la persona vino a mirar,
-   y solo si no era eso se le ofrece lo demas.
+   Ahora es la ULTIMA seccion de las tres paginas. Detras iba "Otros
+   servicios", un cruce a las otras dos: lo ultimo que veia alguien despues
+   de leerlo todo era una lista de mas cosas que vendemos. Se quito. Quien
+   llega hasta aqui ya decidio que le interesa esto, y lo unico que necesita
+   delante es el sitio donde decir "hablemos".
 
-   Seccion clara, no oscura. La que la precede en las tres paginas ya es
-   oscura y la que sigue es violeta: meter un tercer bloque pesado entre las
-   dos habria dejado tres golpes seguidos sin aire. El peso lo lleva el boton
-   negro, que aqui es lo unico que tiene que destacar. */
+   Seccion clara, no oscura: la que la precede en las tres paginas ya es
+   oscura, y dos bloques pesados seguidos no dejan aire. El peso lo lleva el
+   boton negro, que aqui es lo unico que tiene que destacar. */
 .cierre-serv {
   text-align: center;
+}
+
+/* La palabra resaltada del titular. Su unica regla vivia dentro de
+   .section--violet, y se fue con las secciones moradas: desde entonces
+   .serv-hi era una clase sin efecto y el titular salia todo negro. Fuera del
+   morado el violeta de marca contrasta de sobra, asi que no necesita el
+   descendiente. */
+.serv-hi {
+  color: var(--violet);
 }
 
 .cierre-serv-wrap {
@@ -580,9 +588,13 @@ html {
   padding-block: clamp(3.5rem, 7vw, 6rem);
 }
 
+/* Sin filete arriba ni abajo. Lo llevaba —1px de var(--line)— y sobraba: el
+   cambio de tono ya dice donde empieza la seccion, y el trazo encima solo
+   servia para partir la pagina en cajas. Se veia peor donde dos .alt van
+   seguidas: mismo gris a los dos lados y una raya en medio sin nada que
+   separar. La separacion la hace el tono y el aire. */
 .section.alt {
   background: #fafafa;
-  border-block: 1px solid var(--line);
 }
 
 /* Botones dentro de los bloques de color -------------------------------- */
@@ -601,16 +613,21 @@ html {
      .section              blanco puro
      .section.alt          #fafafa, un gris de 250 que a efectos de area
                            sigue contando como blanco
-     .section--marcada     blanco con una regla de acento arriba
 
-   El peso de "esta seccion importa" lo llevan ahora la tipografia y un solo
-   trazo, no un cambio de fondo. Es mas trabajo de composicion y menos de
-   relleno, que es a donde apunta la correccion. */
+   El peso de "esta seccion importa" lo lleva la tipografia, no un cambio de
+   fondo. Es mas trabajo de composicion y menos de relleno, que es a donde
+   apunta la correccion.
+
+   .section--marcada quedo sin nada propio. Nacio como "blanco con una regla
+   de acento arriba"; primero se cayo la regla violeta (ver abajo) y luego el
+   filete gris que la sustituyo, asi que hoy es identica a .section. Se deja
+   declarada y vacia a proposito: la usan cuatro secciones de tres paginas y
+   borrarla obliga a tocar el HTML de todas para no ganar nada. Si vuelve a
+   hacer falta marcar una seccion, este es el sitio. */
 
 .section--marcada {
   background: #fff;
   position: relative;
-  border-block: 1px solid var(--line);
 }
 
 /* Aqui vivia una regla violeta de 3px cruzando la parte de arriba de la
@@ -625,26 +642,6 @@ html {
    distinguiendola de una .alt cualquiera. */
 .section.alt.section--marcada {
   background: #fafafa;
-}
-
-/* Las tarjetas del cruce de servicios vivian sobre morado y se apoyaban en el
-   contraste del fondo. Sobre blanco necesitan borde propio, y el acento pasa
-   al icono y al borde de hover: morado cuando se senala, negro nunca —el
-   negro se reserva para el boton, que es la accion. */
-.serv-otros .serv-card {
-  background: #fff;
-  border: 1px solid var(--line-strong);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
-}
-
-.serv-otros .serv-card:hover {
-  border-color: var(--violet);
-  box-shadow: 0 14px 30px -18px rgba(130, 66, 245, .45);
-}
-
-.serv-otros .serv-ico {
-  color: var(--violet);
-  background: rgba(130, 66, 245, .08);
 }
 
 .section h2 {
@@ -2165,122 +2162,6 @@ h2.sec-head + .desc {
   }
 }
 
-/* ================= OTROS SERVICIOS =================
-   Mismo bloque al pie de las tres paginas de servicio. Solo cambian las tres
-   tarjetas: nunca se incluye la pagina donde ya estas. */
-.serv-otros {
-  padding-top: 0;
-  border-top: none;
-}
-
-.serv-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1rem, 2vw, 1.5rem);
-  margin-top: clamp(2rem, 4vw, 3rem);
-}
-
-.serv-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-  border: 1px solid var(--line-strong);
-  border-radius: 22px;
-  padding: clamp(1.6rem, 3vw, 2.2rem);
-  text-decoration: none;
-  color: inherit;
-  overflow: hidden;
-  transition: transform .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease);
-}
-
-/* Trama de puntos de la esquina: un degradado radial repetido, sin imagen. */
-.serv-card::after {
-  content: '';
-  position: absolute;
-  right: 1.4rem;
-  bottom: 1.4rem;
-  width: 84px;
-  height: 62px;
-  background-image: radial-gradient(circle, rgba(130, 66, 245, .22) 1.2px, transparent 1.2px);
-  background-size: 11px 11px;
-  pointer-events: none;
-}
-
-.serv-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(130, 66, 245, .32);
-  box-shadow: var(--shadow-md);
-}
-
-.serv-ico {
-  display: grid;
-  place-items: center;
-  width: 58px;
-  height: 58px;
-  border-radius: 16px;
-  background: var(--violet-soft);
-  color: var(--violet);
-  margin-bottom: 1.6rem;
-}
-
-.serv-card b {
-  font-family: var(--display);
-  font-size: clamp(1.15rem, 2vw, 1.4rem);
-  font-weight: 800;
-  letter-spacing: -.02em;
-  margin-bottom: .8rem;
-}
-
-.serv-raya {
-  width: 30px;
-  height: 3px;
-  border-radius: 2px;
-  background: var(--violet);
-  margin-bottom: 1rem;
-}
-
-.serv-desc {
-  font-size: 15px;
-  line-height: 1.65;
-  color: var(--ink-soft);
-  max-width: 26ch;
-}
-
-/* auto empuja la flecha al pie, asi las tres quedan alineadas aunque los
-   textos midan distinto. */
-.serv-flecha {
-  margin-top: auto;
-  padding-top: 1.8rem;
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  box-sizing: content-box;
-  border-radius: 50%;
-  color: var(--violet);
-}
-
-.serv-flecha svg {
-  width: 44px;
-  height: 44px;
-  padding: 13px;
-  border-radius: 50%;
-  background: var(--violet-soft);
-  box-sizing: border-box;
-  transition: transform .35s var(--ease), background .35s var(--ease);
-}
-
-.serv-card:hover .serv-flecha svg {
-  transform: translateX(3px);
-  background: rgba(130, 66, 245, .18);
-}
-
-@media (max-width: 860px) {
-  .serv-grid {
-    grid-template-columns: 1fr;
-  }
-}
 
 /* ===================== ÍNDICE LATERAL DEL ARTÍCULO =====================
    Lo construye /assets/indice-blog.js leyendo los <h2>; aquí solo va el
@@ -2828,9 +2709,10 @@ h2.sec-head + .desc {
 }
 
 /* ---- 4. Malla de puntos: textura de fondo -------------------------------
-   Generaliza el patrón que ya usaba .serv-card::after (línea ~1922) para
-   que cualquier bloque lo pueda pedir con una sola clase, en vez de
-   reescribir el degradado radial cada vez. */
+   Cualquier bloque pide la trama con una sola clase, en vez de reescribir el
+   degradado radial cada vez. El patrón venía de .serv-card::after, la esquina
+   punteada de las tarjetas del cruce de servicios; esas tarjetas ya no
+   existen y este es lo que quedó de ellas. */
 .malla-puntos {
   position: relative;
 }
