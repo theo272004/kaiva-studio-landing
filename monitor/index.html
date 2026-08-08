@@ -78,7 +78,8 @@
   <!-- El resto del CSS de esta pagina vive en assets/monitor.css. Antes eran
        51 KB incrustados en el propio HTML: no se cacheaban y viajaban en cada
        visita. Arriba solo se queda el @font-face, que va con los preload. -->
-  <link rel="stylesheet" href="/assets/monitor.css?v=20260808b">
+  <link rel="stylesheet" href="/assets/tokens.css?v=20260808c">
+  <link rel="stylesheet" href="/assets/monitor.css?v=20260808c">
 </head>
 
 <body>
@@ -676,12 +677,21 @@
       /* ---- Panel de resultados reales -------------------------------------
          Solo se usa cuando API !== null. Traduce la respuesta de scan.php al
          panel que ya está maquetado (oculto) más abajo.                  */
+      /* Las CINCO severidades que calcula el backend, con cinco pesos.
+         Antes eran cinco entrando por tres: `medio` compartía clase con
+         `alto`, y `bajo` y `ok` se quedaban sin ninguna —salían con un gris
+         escrito a mano en un atributo `style`, que es como se pierde un
+         sistema—. El orden que el backend calcula y por el que ordena la
+         lista se borraba justo al pintarlo.
+
+         Las clases vienen de assets/tokens.css y son las MISMAS que usa el
+         Panel Pro y las mismas que la maqueta de la portada. */
       var SEV = {
-        critico: { sev: 'sev-crit', fi: 'fi-crit', label: 'Crítico' },
-        alto: { sev: 'sev-high', fi: 'fi-high', label: 'Alto' },
-        medio: { sev: 'sev-high', fi: 'fi-high', label: 'Medio' },
-        bajo: { sev: '', fi: '', label: 'Bajo' },
-        ok: { sev: '', fi: '', label: 'OK' }
+        critico: { sev: 'sev--critico', fi: 'fi-crit', label: 'Crítico' },
+        alto: { sev: 'sev--alto', fi: 'fi-high', label: 'Alto' },
+        medio: { sev: 'sev--medio', fi: 'fi-high', label: 'Medio' },
+        bajo: { sev: 'sev--bajo', fi: '', label: 'Bajo' },
+        ok: { sev: 'sev--ok', fi: '', label: 'OK' }
       };
 
       /* ---- Un hallazgo -----------------------------------------------------
@@ -696,7 +706,6 @@
          completo. El primero abre solo, para que se note que se abren. */
       function findingRow(f, abierto) {
         var s = SEV[f.severity] || SEV.bajo;
-        var neutro = s.sev ? '' : 'background:#f1f5f9;color:#64748b;';
         var det = document.createElement('details');
         det.className = 'find';
         if (abierto) det.open = true;
@@ -715,11 +724,15 @@
 
         det.innerHTML =
           '<summary class="find-head">' +
-          '<span class="fi ' + s.fi + '" style="' + (s.fi ? '' : 'background:#f1f5f9;color:#94a3b8;') + '">' +
+          /* Ni el icono ni la etiqueta llevan ya un `style` escrito a mano.
+             El de la etiqueta pintaba el gris de los niveles bajos, y el del
+             icono usaba #94a3b8, el gris que se rechazó por contraste. Los
+             dos casos ahora son una clase. */
+          '<span class="fi ' + (s.fi || 'fi-neutro') + '">' +
           '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/></svg>' +
           '</span>' +
           '<span class="ft"><span class="a"></span></span>' +
-          '<span class="sev ' + s.sev + '" style="' + neutro + '">' + s.label + '</span>' +
+          '<span class="sev ' + s.sev + '">' + s.label + '</span>' +
           '<span class="find-chevron" aria-hidden="true">' +
           '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>' +
           '</span>' +

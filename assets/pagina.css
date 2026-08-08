@@ -3,7 +3,12 @@
    La home mantiene su CSS embebido (está muy acoplado a su
    estructura); estas páginas comparten un archivo para que se vea
    todo igual y se descargue una sola vez.
-   Tokens copiados de index.html — si cambian allá, cambiar aquí.
+
+   Los tokens NO viven aquí. Están en assets/tokens.css, que cargan las
+   veinticuatro páginas del sitio y también el Panel Pro. Esta línea decía
+   "Tokens copiados de index.html — si cambian allá, cambiar aquí", que era
+   exactamente la instrucción que produjo cinco copias divergentes y tres
+   bugs de render invisibles.
    ============================================================ */
 
 @font-face {
@@ -22,48 +27,6 @@
   font-display: swap;
   src: url(/assets/fonts/inter-tight-latin-var.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-:root {
-  --bg: #ffffff;
-  --surface: #ffffff;
-  --ink: #0f172a;
-  --ink-soft: #475569;
-  /* Era #94a3b8: 2,56:1 sobre blanco, muy por debajo del 4,5:1 de AA. El
-     nombre invita a usarlo para adorno, pero en la practica lo llevaba texto
-     de verdad —42 nodos solo en la portada: los numeros de los pasos, los
-     titulares "Ya tengo una web", los antetitulos de seccion—. #64748b es el
-     tono mas claro que aun pasa (4,76:1). El escalon con --ink-soft se
-     conserva, solo que ahora los dos se leen. */
-  --ink-faint: #64748b;
-  --line: rgba(15, 23, 42, 0.05);
-  --line-strong: rgba(15, 23, 42, 0.12);
-  --violet: #8242f5;
-  --violet-ink: #6a2fe0;
-  --violet-soft: rgba(130, 66, 245, 0.06);
-  --dark: #0b0b0e;
-  --sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --display: 'Inter Tight', 'Inter', system-ui, sans-serif;
-  --maxw: 1380px;
-  --pad: clamp(1.25rem, 4vw, 3.75rem);
-  --r-lg: 24px;
-  --r-md: 16px;
-  --r-btn: 99px;
-  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --shadow-md: 0 12px 36px rgba(15, 23, 42, 0.05), 0 2px 8px rgba(15, 23, 42, 0.02);
-
-  /* Mismo vocabulario premium que assets/monitor.css — radios ajustados,
-     sombra en capas teñida de tinta, curva de salida seca. Medido contra
-     attio.com el 2026-08-05, no adivinado. Sirve para cualquier tarjeta de
-     "chrome" (paneles, diagnósticos) que aparezca en las páginas de
-     marketing, no solo en la herramienta. */
-  --r-ui: 10px;
-  --r-ui-lg: 12px;
-  --ease-ui: cubic-bezier(0.2, 0, 0, 1);
-  --shadow-ui:
-    0 0 0 1px rgba(0, 22, 62, .04),
-    0 4px 12px -1px rgba(0, 22, 62, .05),
-    0 1px 3px -1px rgba(0, 22, 62, .09);
 }
 
 * {

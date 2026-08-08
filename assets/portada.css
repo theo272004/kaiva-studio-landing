@@ -26,46 +26,8 @@
    ============================================================ */
 
 
-    /* ================= TOKENS ================= */
-    :root {
-      --bg: #ffffff;
-      --paper: #ffffff;
-      --surface: #ffffff;
-      --ink: #0f172a;
-      --ink-soft: #475569;
-      /* #94a3b8 daba 2,56:1 sobre blanco, por debajo del 4,5:1 de AA, y lo llevaba
-         texto de verdad. #64748b es el tono mas claro que aun pasa (4,76:1).
-         OJO: este token esta declarado por separado en portada.css, pagina.css,
-         monitor.css y legal.css. Son cuatro copias del mismo valor sin una fuente
-         unica; si se cambia aqui hay que cambiarlo en las otras tres. */
-      --ink-faint: #64748b;
-      --line: rgba(15, 23, 42, 0.05);
-      --line-strong: rgba(15, 23, 42, 0.12);
-      --violet: #8242f5;
-      --violet-ink: #6a2fe0;
-      --violet-soft: rgba(130, 66, 245, 0.06);
-      --violet-2: #a679ff;
-      --green: #10b981;
-      --green-soft: rgba(16, 185, 129, 0.08);
-      --amber: #f59e0b;
-      --red: #ef4444;
-      --red-soft: rgba(239, 68, 68, 0.08);
-      --dark: #0b0b0e;
-      --dark-2: #141419;
-      --dark-line: rgba(255, 255, 255, .09);
-      --sans: 'Inter', system-ui, -apple-system, sans-serif;
-      --display: 'Inter Tight', 'Inter', system-ui, sans-serif;
-      --maxw: 1380px;
-      --pad: clamp(1.25rem, 4vw, 3.75rem);
-      --r-lg: 24px;
-      --r-md: 16px;
-      --r-btn: 99px;
-      --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
-      --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
-      --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.03);
-      --shadow-md: 0 12px 36px rgba(15, 23, 42, 0.05), 0 2px 8px rgba(15, 23, 42, 0.02);
-      --shadow-lg: 0 28px 64px rgba(15, 23, 42, 0.08), 0 8px 24px rgba(15, 23, 42, 0.03);
-    }
+    /* Los tokens de esta hoja se fueron a assets/tokens.css, que index.html
+       carga JUSTO ANTES que este archivo. Aqui no se declara ninguno. */
 
     /* Transiciones nativas entre páginas (index <-> /monitor) del mismo origen */
     @view-transition {
@@ -1667,7 +1629,7 @@
       display: block;
       text-decoration: none;
       font-size: 5.5px;
-      color: var(--ink-faint, #94a3b8);
+      color: var(--ink-faint);
       margin-top: 2px;
       letter-spacing: .04em;
     }
@@ -1806,7 +1768,7 @@
       display: block;
       text-decoration: none;
       font-size: 5px;
-      color: var(--ink-faint, #94a3b8);
+      color: var(--ink-faint);
     }
 
     .mk-kpi b {
@@ -1911,7 +1873,7 @@
       display: block;
       text-decoration: none;
       font-size: 6px;
-      color: var(--ink-faint, #94a3b8);
+      color: var(--ink-faint);
       font-weight: 600;
     }
 
@@ -2005,7 +1967,7 @@
 
     .mk-ring-lbl {
       font-size: 5.5px;
-      color: var(--ink-faint, #94a3b8);
+      color: var(--ink-faint);
       margin-top: 2px;
     }
 
@@ -3464,25 +3426,20 @@
       line-height: 1.45;
     }
 
-    .find .sev {
-      font-size: 11px;
-      font-weight: 700;
-      padding: 0.18rem 0.5rem;
-      border-radius: 6px;
-      text-transform: uppercase;
-    }
+    /* Las etiquetas de severidad de la maqueta ahora son EL MISMO componente
+       que el del producto: `.sev` con sus modificadores, declarado en
+       assets/tokens.css.
 
-    .sev-crit {
-      background: var(--red-soft);
-      color: var(--red);
-      border: 1px solid rgba(239, 68, 68, 0.12);
-    }
+       Esto no es solo aseo. La maqueta de la portada es una foto de la
+       herramienta, y estaba derivando del original: aquí había un tercer
+       juego de estilos de severidad —después del monitor y del panel— y traía
+       el mismo defecto que los otros dos, `color: var(--amber)` sobre ámbar
+       al 8%, que da 2,02:1 a 11px y en negrita. La persona que mira la
+       portada leía esa palabra por costumbre, no porque se viera. Ahora sale
+       en 4,73:1, y el día que cambie en el producto cambia aquí sola.
 
-    .sev-high {
-      background: rgba(245, 158, 11, 0.08);
-      color: var(--amber);
-      border: 1px solid rgba(245, 158, 11, 0.12);
-    }
+       La maqueta sube tres píxeles menos por etiqueta (el line-height 1.2 del
+       componente frente al heredado): nueve píxeles en toda la página. */
 
     .fi-crit {
       background: var(--red-soft);
@@ -4854,7 +4811,7 @@
     }
 
     .faq-chat-send:hover {
-      background: var(--violet-hover);
+      background: var(--violet-ink);
     }
 
 /* ===== Bloque que estaba suelto dentro de <section class="statement"> ===== */

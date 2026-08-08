@@ -328,7 +328,8 @@
        @font-face, que va emparejado con los preload de las fuentes.
        El <link> es bloqueante y esta en el <head>, asi que no hay flash de
        contenido sin estilo: la pagina pinta ya con la hoja aplicada. -->
-  <link rel="stylesheet" href="/assets/portada.css?v=20260808b">
+  <link rel="stylesheet" href="/assets/tokens.css?v=20260808c">
+  <link rel="stylesheet" href="/assets/portada.css?v=20260808c">
 </head>
 
 <body>
@@ -1361,7 +1362,7 @@
                     <div class="b">Tu dominio no tiene SPF: Gmail y Outlook desconfían.</div>
                     <div class="ev">Evidencia &middot; tudominio.com &rarr; sin registro SPF</div>
                   </div>
-                  <span class="sev sev-crit">Crítico</span>
+                  <span class="sev sev--critico">Crítico</span>
                 </div>
                 <div class="find">
                   <div class="fi fi-high">
@@ -1375,7 +1376,7 @@
                     <div class="b">Sin DMARC, se envían correos en tu nombre.</div>
                     <div class="ev">Evidencia &middot; _dmarc.tudominio.com &rarr; sin registro</div>
                   </div>
-                  <span class="sev sev-high">Alto</span>
+                  <span class="sev sev--alto">Alto</span>
                 </div>
                 <div class="find">
                   <div class="fi fi-high">
@@ -1390,7 +1391,7 @@
                     <div class="b">Falta la imagen para WhatsApp y redes (og:image).</div>
                     <div class="ev">Evidencia &middot; &lt;meta og:image&gt; &rarr; ausente</div>
                   </div>
-                  <span class="sev sev-high">Alto</span>
+                  <span class="sev sev--alto">Alto</span>
                 </div>
             </div>
           </div>

@@ -16,63 +16,6 @@
    ============================================================ */
 
 
-    :root {
-      --bg: #ffffff;
-      --paper: #ffffff;
-      --surface: #ffffff;
-      --ink: #0f172a;
-      --ink-soft: #475569;
-      /* #94a3b8 daba 2,56:1 sobre blanco, por debajo del 4,5:1 de AA, y lo llevaba
-         texto de verdad. #64748b es el tono mas claro que aun pasa (4,76:1).
-         OJO: este token esta declarado por separado en portada.css, pagina.css,
-         monitor.css y legal.css. Son cuatro copias del mismo valor sin una fuente
-         unica; si se cambia aqui hay que cambiarlo en las otras tres. */
-      --ink-faint: #64748b;
-      --line: rgba(15, 23, 42, 0.05);
-      --line-strong: rgba(15, 23, 42, 0.12);
-      --violet: #8242f5;
-      --violet-hover: #6a2fe0;
-      --violet-soft: rgba(130, 66, 245, 0.06);
-      --violet-2: #a679ff;
-      --green: #10b981;
-      --green-soft: rgba(16, 185, 129, 0.08);
-      --amber: #f59e0b;
-      --red: #ef4444;
-      --red-soft: rgba(239, 68, 68, 0.08);
-      --sans: 'Inter', system-ui, -apple-system, sans-serif;
-      --display: 'Inter Tight', 'Inter', system-ui, sans-serif;
-      --maxw: 1380px;
-      --pad: clamp(1.25rem, 4vw, 3.75rem);
-      --r-lg: 24px;
-      --r-md: 16px;
-      --r-btn: 99px;
-      --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
-      --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.03);
-      --shadow-md: 0 12px 36px rgba(15, 23, 42, 0.05), 0 2px 8px rgba(15, 23, 42, 0.02);
-      --shadow-lg: 0 28px 64px rgba(15, 23, 42, 0.08), 0 8px 24px rgba(15, 23, 42, 0.03);
-
-      /* ---- Vocabulario "premium" para chrome de interfaz (no marketing) ----
-       Medido de verdad contra un SaaS de referencia (attio.com), no
-       adivinado: radios de 10-12px en vez de las píldoras de 24-99px que usa
-       el resto del sitio, sombra en TRES capas teñida de tinta (nunca negro
-       puro: rgba(0,22,62,x)) en vez de una sola sombra difusa, y una curva de
-       salida más seca que la del marketing (sin el rebote de --ease).
-       Se usan en chrome de aplicación: formularios, tarjetas de cuenta,
-       modales — no reemplazan --r-lg/--ease, que siguen siendo los del resto
-       del sitio y de las páginas de marketing. */
-      --r-ui: 10px;
-      --r-ui-lg: 12px;
-      --ease-ui: cubic-bezier(0.2, 0, 0, 1);
-      --shadow-ui:
-        0 0 0 1px rgba(0, 22, 62, .04),
-        0 4px 12px -1px rgba(0, 22, 62, .05),
-        0 1px 3px -1px rgba(0, 22, 62, .09);
-      --shadow-ui-hover:
-        0 0 0 1px rgba(0, 22, 62, .05),
-        0 8px 20px -2px rgba(0, 22, 62, .08),
-        0 2px 5px -1px rgba(0, 22, 62, .10);
-    }
-
     /* Transiciones nativas entre páginas (index <-> /monitor) del mismo origen */
     @view-transition {
       navigation: auto;
@@ -1541,25 +1484,23 @@
       color: var(--ink-soft);
     }
 
-    .find .sev {
-      font-size: 11px;
-      font-weight: 700;
-      padding: 0.2rem 0.55rem;
-      border-radius: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-    }
+    /* Las etiquetas de severidad son el componente compartido de
+       assets/tokens.css: las mismas cinco que el Panel Pro y las mismas que
+       la maqueta de la portada. Aquí había un cuarto juego con el defecto de
+       siempre —`color: var(--amber)` sobre ámbar al 8%, 2,02:1— y solo dos
+       variantes para cinco niveles.
 
-    .sev-crit {
-      background: var(--red-soft);
-      color: var(--red);
-      border: 1px solid rgba(239, 68, 68, 0.16);
-    }
+       `.find .sev` también se va: declaraba tamaño, peso, padding y radio, y
+       le ganaba por especificidad al componente, así que dejarlo era tener el
+       sistema y no aplicarlo. */
+    .find .sev { flex: none; }
 
-    .sev-high {
-      background: rgba(245, 158, 11, 0.08);
-      color: var(--amber);
-      border: 1px solid rgba(245, 158, 11, 0.16);
+    /* El nivel sin color propio: "bajo" y "ok" en el icono. Iba en un
+       atributo `style` dentro del JS, con #94a3b8 —el gris rechazado por
+       contraste— sobre gris claro. */
+    .fi-neutro {
+      background: var(--canvas);
+      color: var(--ink-faint);
     }
 
     .fi-crit {
@@ -1923,7 +1864,7 @@
        en /monitor/, asi que se va la familia entera y con ella el destrozo. */
 
     .kv-box h2 {
-      font-family: var(--epilogue);
+      font-family: var(--display);
       font-weight: 800;
       font-size: clamp(1.9rem, 5vw, 3rem);
       line-height: 1.08;
@@ -2391,7 +2332,7 @@
     }
 
     .kv-hero h1 {
-      font-family: var(--epilogue);
+      font-family: var(--display);
       font-weight: 800;
       font-size: clamp(2rem, 4.4vw, 3.35rem);
       line-height: 1.06;

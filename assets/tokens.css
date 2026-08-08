@@ -129,18 +129,40 @@
        -soft  → fondos teñidos
 
      Las razones de las variantes `-ink` están medidas sobre su propio fondo
-     `-soft`, que es donde se usan de verdad, no sobre blanco. */
+     `-soft`, que es donde se usan de verdad, y también sobre blanco, que es
+     donde se usan cuando el estado va suelto en una fila o en una cifra.
+     Las cinco están medidas EN EL NAVEGADOR sobre la etiqueta ya pintada, no
+     calculadas a mano: la primera versión de este archivo traía tres cifras
+     heredadas de la auditoría y dos estaban mal (el ámbar decía 5,02 y da
+     4,73; el rojo decía 7,10 y da 5,83). Las tres pasan AA igual, pero un
+     número escrito al lado de un color es una promesa. */
   --ok: #10b981;
-  --ok-ink: #047857;                /* 5,05:1 sobre --ok-soft */
+  --ok-ink: #047857;                /* 5,09:1 sobre --ok-soft · 5,48:1 sobre blanco */
   --ok-soft: rgba(16, 185, 129, 0.08);
 
   --warn: #f59e0b;
-  --warn-ink: #b45309;              /* 5,02:1 sobre --warn-soft */
+  --warn-ink: #b45309;              /* 4,73:1 sobre --warn-soft · 5,02:1 sobre blanco */
   --warn-soft: rgba(245, 158, 11, 0.08);
 
   --bad: #ef4444;
-  --bad-ink: #b91c1c;               /* 7,10:1 sobre --bad-soft */
+  --bad-ink: #b91c1c;               /* 5,83:1 sobre --bad-soft · 6,29:1 sobre blanco */
   --bad-soft: rgba(239, 68, 68, 0.08);
+
+  /* --- SERIES DE DATOS ----------------------------------------------------
+     Una gráfica con dos series necesita dos colores, y eso no es lo mismo que
+     un color de estado: aquí el color no dice "bien" ni "mal", dice "esta
+     línea es Clics y esta otra es Apariciones". Sin este papel declarado, el
+     cian del panel parecía un color suelto sin función y estuvo a punto de
+     borrarse; sí la tiene, y está documentada donde se usa.
+
+     La corrección: el cian base es #0ea5e9 y como LETRA daba 4,10:1, por
+     debajo del 4,5:1 de AA — y se usaba justo así, en la cifra de cada barra
+     de Apariciones. La variante `-ink` es la que lleva el número. Es la
+     regla 3 otra vez: el token base nunca es color de letra. */
+  --serie-1: var(--violet);         /* Clics */
+  --serie-1-ink: var(--violet-ink);
+  --serie-2: #0ea5e9;               /* Apariciones en Google */
+  --serie-2-ink: #0369a1;           /* 5,93:1 — era #0284c7, que daba 4,10:1 */
 
   /* --- TIPOGRAFÍA ---------------------------------------------------------
      Dos familias. `--epilogue` nunca existió: era una fuente de un rediseño
@@ -292,6 +314,8 @@
   --dark-2: var(--dark-raised);
   --r-btn: var(--r-pill);
   --epilogue: var(--display);
+  --teal: var(--serie-2);
+  --teal-ink: var(--serie-2-ink);
 }
 
 
