@@ -30,7 +30,7 @@
 
   <title>Modelos abiertos de IA (DeepSeek, Qwen, Llama): qué cambia para una pyme</title>
   <meta name="description"
-    content="DeepSeek, Qwen y Llama ya igualan a GPT-4 en tareas normales a un costo hasta 90% menor. Qué significa eso en la práctica para un negocio pequeño con web propia.">
+    content="DeepSeek V4-Flash, Qwen 3.8-Max y Llama hacen las tareas normales de un negocio por una fracción de lo que cuesta un modelo de punta. Actualizado a agosto de 2026.">
   <link rel="canonical" href="https://kaivastudio.com/blog/modelos-abiertos-de-ia-para-pymes/">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#ffffff">
@@ -44,7 +44,7 @@
   <meta property="og:url" content="https://kaivastudio.com/blog/modelos-abiertos-de-ia-para-pymes/">
   <meta property="og:title" content="Modelos abiertos de IA (DeepSeek, Qwen, Llama): qué cambia para una pyme">
   <meta property="og:description"
-    content="DeepSeek, Qwen y Llama ya igualan a GPT-4 en tareas normales a un costo hasta 90% menor. Qué significa eso para un negocio pequeño.">
+    content="DeepSeek V4-Flash, Qwen 3.8-Max y Llama hacen las tareas normales de un negocio por una fracción de lo que cuesta un modelo de punta.">
   <meta property="og:image" content="https://kaivastudio.com/assets/blog/ia.webp">
   <meta property="article:published_time" content="2026-08-02">
   <meta name="twitter:card" content="summary_large_image">
@@ -53,7 +53,7 @@
 
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260807f">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260808a">
 
   <script type="application/ld+json">
 {
@@ -63,9 +63,9 @@
       "@type": "BlogPosting",
       "@id": "https://kaivastudio.com/blog/modelos-abiertos-de-ia-para-pymes/#post",
       "headline": "Modelos abiertos de IA (DeepSeek, Qwen, Llama): qué cambia para una pyme",
-      "description": "DeepSeek, Qwen y Llama ya igualan a GPT-4 en tareas normales a un costo hasta 90% menor. Qué significa eso en la práctica para un negocio pequeño con web propia.",
+      "description": "DeepSeek V4-Flash, Qwen 3.8-Max y Llama hacen las tareas normales de un negocio por una fracción de lo que cuesta un modelo de punta. Actualizado a agosto de 2026.",
       "datePublished": "2026-08-02",
-      "dateModified": "2026-08-05",
+      "dateModified": "2026-08-08",
       "inLanguage": "es-CO",
       "image": "https://kaivastudio.com/assets/blog/ia.webp",
       "mainEntityOfPage": "https://kaivastudio.com/blog/modelos-abiertos-de-ia-para-pymes/",
@@ -102,7 +102,7 @@
           "name": "¿DeepSeek o Qwen son más baratos que ChatGPT?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Por token, sí, y por un margen amplio: comparaciones publicadas en 2026 ubican el costo de modelos de DeepSeek y Qwen entre 0,04 y 0,31 dólares por millón de tokens, con DeepSeek llegando a 0,07 dólares en aciertos de caché, frente a precios varias veces mayores en los modelos cerrados de punta. La diferencia se nota sobre todo en tareas de alto volumen: resúmenes automáticos, clasificación de correos, primeras respuestas de soporte."
+            "text": "Por token, sí, y por un margen amplio. DeepSeek V4-Flash cobra 0,14 dólares por millón de tokens de entrada y 0,28 de salida; Gemini 3.6 Flash, que es cerrado, cobra 1,50 y 7,50 por lo mismo. La diferencia se nota sobre todo en tareas de alto volumen: resúmenes automáticos, clasificación de correos, primeras respuestas de soporte. En una consulta suelta no se nota nada, porque las dos cuestan una fracción de centavo."
           }
         },
         {
@@ -200,12 +200,13 @@
               modelos abiertos de 2026 rinden prácticamente igual que los modelos de pago más caros. La
               diferencia real hoy no está en qué tan bien piensan, está en cuánto cuesta cada consulta.</p>
 
-            <p>Y ahí la diferencia es enorme. Comparaciones publicadas este año ubican el precio de los
-              modelos abiertos de DeepSeek y Qwen entre <strong>0,04 y 0,31 dólares por millón de tokens</strong>,
-              con DeepSeek bajando hasta 0,07 dólares cuando se repiten consultas parecidas. Los modelos
-              cerrados de punta cobran varias veces más por el mismo volumen.</p>
+            <p>Y ahí la diferencia es enorme. La versión Flash de DeepSeek cobra <strong>0,14 dólares
+              por millón de tokens</strong> de entrada y 0,28 de salida. El Gemini 3.6 Flash de Google,
+              que es un modelo cerrado y el caballo de batalla de la casa, cobra 1,50 y 7,50 por lo
+              mismo: diez veces más a la entrada y veintisiete a la salida. Los dos hacen bien las
+              tareas normales de un negocio.</p>
 
-            <h3>Qué hay disponible hoy (agosto de 2026)</h3>
+            <h3>Qué hay disponible hoy (8 de agosto de 2026)</h3>
 
               <p>Este terreno se mueve rápido, así que conviene fechar lo que se dice. A la fecha de
                 esta actualización, lo que está publicado y se puede descargar:</p>
@@ -214,18 +215,46 @@
                 <li><strong>DeepSeek-V4</strong>, desde el 24 de abril de 2026, en dos versiones
                   —Pro y Flash— con licencia MIT y los pesos en Hugging Face. La Pro tiene 1,6 billones
                   de parámetros pero solo activa unos 49.000 millones por consulta, que es lo que la
-                  hace barata de operar.</li>
-                <li><strong>Qwen 3.7</strong>, de Alibaba, con licencia Apache 2.0. Es la familia con
-                  más versiones pequeñas, útiles cuando se quiere correr algo en un servidor modesto.</li>
+                  hace barata de operar. La Flash es mucho más pequeña —284.000 millones de parámetros,
+                  13.000 activos— y cuesta 0,14 dólares por millón de tokens de entrada frente a los
+                  0,435 de la Pro.</li>
+                <li><strong>Qwen 3.8-Max</strong>, de Alibaba, anunciado el 3 de agosto de 2026: 2,4
+                  billones de parámetros y un contexto de un millón de tokens. Es la primera vez que
+                  Alibaba promete abrir los pesos de un modelo de su gama Max, junto con un
+                  Qwen3.8-27B mucho más pequeño que es el que de verdad se puede instalar en un
+                  servidor propio. Con una advertencia importante: cuando se escribe esto los pesos
+                  <em>todavía no están publicados</em> —Alibaba los anunció para la semana del 10 de
+                  agosto—, así que por ahora Qwen 3.8-Max solo se usa pagando su API, a 2 dólares el
+                  millón de tokens de entrada y 6 el de salida.</li>
                 <li><strong>Laguna S 2.1</strong>, de Poolside, publicado el 22 de julio de 2026 con
                   licencia OpenMDW-1.1. Está hecho específicamente para programar: 118.000 millones de
                   parámetros de los que activa 8.000 por token, y un contexto de un millón de tokens,
                   que es lo que permite pasarle un proyecto entero y no un archivo suelto.</li>
               </ul>
 
+              <h3>El modelo más interesante del verano es el pequeño, no el grande</h3>
+
+              <p>El 31 de julio DeepSeek publicó una versión reentrenada de la Flash, la
+                <strong>V4-Flash-0731</strong>. No cambió el diseño ni el tamaño: es el mismo modelo de
+                284.000 millones de parámetros, reentrenado para tareas de agente y de programación. Y
+                le ganó a la V4-Pro de la propia casa en los nueve bancos de prueba de agentes.</p>
+
+              <p>Los números concretos: 82,7 puntos en Terminal Bench 2.1 frente a los 72,1 de la Pro.
+                En DeepSWE pasó de 7,3 a 54,4. El precio no se movió, y para quien ya llamaba a la API
+                no hubo nada que migrar —mismo nombre, misma clave, mismo punto de entrada—. No es que
+                le gane a todo: contra Claude Opus 4.8 pierde en los nueve, por 5,7 puntos de media.</p>
+
+              <p>Eso es lo que hace interesante el caso, y por qué no se suele contar así. Durante dos
+                años el argumento fue «modelo más grande, mejor resultado». Aquí el modelo cinco veces
+                más pequeño y tres veces más barato de su propia empresa le pasó por encima al grande
+                sin añadir un solo parámetro, solo con mejor entrenamiento posterior. Si el tamaño ya
+                no predice el resultado, elegir «el más grande que me alcance» dejó de ser una
+                estrategia.</p>
+
               <p>Si vas a probar solo uno para tareas de texto de tu negocio, empieza por el más
                 pequeño de la familia Qwen: es el que más fácil corre sin infraestructura. Si lo que
-                quieres es que te ayude a programar, Laguna S 2.1 es el que está pensado para eso.</p>
+                quieres es que te ayude a programar, Laguna S 2.1 y la V4-Flash son los dos que están
+                pensados para eso.</p>
 
               <p>Un millón de tokens no es una cifra abstracta: es, aproximadamente, unas 700.000 palabras.
               Suficiente para clasificar miles de correos de soporte o generar cientos de primeras
@@ -250,8 +279,9 @@
               Latinoamérica que factura en pesos o soles y paga la IA en dólares.</p>
 
             <p>Qwen, del lado chino de Alibaba, se volvió una referencia para quien necesita atender a
-              clientes en varios idiomas sin pagar de más: su licencia Apache 2.0 permite uso comercial sin
-              regalías, algo que no todos los modelos ofrecen. Llama, de Meta, sigue siendo el modelo abierto
+              clientes en varios idiomas sin pagar de más: las versiones que ya tienen los pesos
+              publicados salen con licencia Apache 2.0, que permite uso comercial sin regalías, algo
+              que no todos los modelos ofrecen. Llama, de Meta, sigue siendo el modelo abierto
               más desplegado dentro de empresas grandes, justamente porque llegó primero y el ecosistema de
               herramientas alrededor ya está maduro.</p>
 
@@ -305,9 +335,15 @@
 
             <p>La conclusión incómoda es que la ventaja ya no está en usar IA —eso lo está haciendo todo el
               mundo— sino en usar la IA correcta para cada tarea, sin pagar precio de modelo de punta por un
-              trabajo que un modelo cinco veces más barato resuelve igual de bien. Esperar a que "se ponga
-              más barato todavía" casi nunca compensa: el costo ya bajó lo suficiente como para empezar hoy
+              trabajo que un modelo cinco veces más barato resuelve igual de bien. Esperar a que «se ponga
+              más barato todavía» casi nunca compensa: el costo ya bajó lo suficiente como para empezar hoy
               con algo pequeño y medible.</p>
+
+            <p>Y una advertencia sobre el precio, que es lo que más se compara y lo que menos decide:
+              el costo por token es la mitad de la cuenta. La otra mitad es cuántos tokens necesita cada
+              modelo para terminar el trabajo, y ahí las diferencias son mayores que en el precio. Está
+              con números en <a href="/blog/cuanto-cuesta-una-tarea-con-ia/">cuánto cuesta de verdad una
+              tarea con IA</a>.</p>
 
             <p>Si tu web o tu proceso de atención a clientes todavía dependen de revisar todo a mano, en
               nuestro <a href="/diagnostico/">Diagnóstico Digital</a> revisamos gratis en qué punto concreto

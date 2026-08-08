@@ -44,14 +44,28 @@
 
   <url>
     <loc>https://kaivastudio.com/blog/</loc>
-    <lastmod>2026-08-02</lastmod>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
+    <loc>https://kaivastudio.com/blog/chatgpt-gratis-ilimitado-que-cambia/</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://kaivastudio.com/blog/cuanto-cuesta-una-tarea-con-ia/</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://kaivastudio.com/blog/modelos-abiertos-de-ia-para-pymes/</loc>
-    <lastmod>2026-08-02</lastmod>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

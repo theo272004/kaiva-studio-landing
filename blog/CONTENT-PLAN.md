@@ -79,7 +79,9 @@ se comparten — la redacción, no.
 | 1 | 2026-07-30  | Localizado  | Cuánto cuesta una página web en **México**                        | Precios          | Publicado  |
 | 2 | 2026-07-31  | IA          | Qué es un "agente de IA" y si tu negocio realmente necesita uno   | IA y tecnología  | Publicado  |
 | 3 | 2026-08-01  | Localizado  | Cuánto cuesta una página web en **Perú**                          | Precios          | Publicado  |
-| 4 | 2026-08-02  | IA          | Modelos abiertos (Llama, DeepSeek, Qwen, Mistral): qué cambia para una pyme | IA y tecnología | Publicado |
+| 4 | 2026-08-02  | IA          | Modelos abiertos (Llama, DeepSeek, Qwen, Mistral): qué cambia para una pyme | IA y tecnología | Publicado (actualizado 2026-08-08) |
+| 4b| 2026-08-08  | IA          | El token bajó 99% y la factura subió: costo por tarea vs precio por token | IA y tecnología | Publicado |
+| 4c| 2026-08-08  | IA          | ChatGPT gratis e ilimitado (GPT-5.6 Luna): qué cambia para tu negocio | IA y tecnología | Publicado |
 | 5 | pendiente   | Localizado  | Cuánto cuesta una página web en **Chile**                         | Precios          | Pendiente  |
 | 6 | pendiente   | IA          | El "modo IA" y los AI Overviews de Google: qué significa para tu SEO | IA y tecnología | Pendiente |
 | 7 | pendiente   | Localizado  | Cuánto cuesta una página web en **Argentina**                     | Precios          | Pendiente  |

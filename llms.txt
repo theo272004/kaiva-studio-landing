@@ -70,10 +70,23 @@ eso DKIM se reporta como "no detectamos" y nunca como "no tienes".
 
 ## Recursos
 
+- [ChatGPT gratis e ilimitado: qué cambia](https://kaivastudio.com/blog/chatgpt-gratis-ilimitado-que-cambia/):
+  qué anunció OpenAI el 6 de agosto de 2026 —GPT-5.6 Luna por defecto en las
+  cuentas gratuitas, sin tope de mensajes de texto, botón Think, 62% menos
+  errores factuales—, qué límites siguen existiendo, y por qué el cambio
+  importa para la visibilidad de un negocio aunque no use ChatGPT.
+- [Cuánto cuesta de verdad una tarea con IA](https://kaivastudio.com/blog/cuanto-cuesta-una-tarea-con-ia/):
+  por qué el precio por token cayó más de un 99% desde 2023 y las facturas de
+  IA suben igual; la diferencia entre precio por token y costo por tarea
+  resuelta, con cifras de SWE-Bench Pro; por qué los agentes multiplican el
+  consumo; y qué métrica debería pedir una pyme antes de automatizar algo.
 - [Modelos abiertos de IA (DeepSeek, Qwen, Llama)](https://kaivastudio.com/blog/modelos-abiertos-de-ia-para-pymes/):
-  qué son los modelos abiertos, por qué ya igualan a GPT-4 en tareas normales
-  a un costo hasta 90% menor (cifras de comparativas de 2026), y qué significa
-  eso en la práctica para un negocio pequeño.
+  qué son los modelos abiertos y qué hay publicado a agosto de 2026 —DeepSeek
+  V4-Flash-0731, Qwen 3.8-Max, Laguna S 2.1— con sus licencias, precios y el
+  caso del modelo pequeño que superó al grande de su propia casa.
+- [De dónde vienen tus visitas](https://kaivastudio.com/blog/de-donde-vienen-las-visitas-de-mi-web/):
+  por qué «Directo» casi nunca es directo, dónde esconde Analytics el tráfico
+  de Instagram y de ChatGPT, y cómo etiquetar enlaces con UTM para verlo.
 - [Cuánto cuesta una página web en Perú](https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-peru/):
   rangos reales del mercado peruano en soles y qué explica la diferencia de precio.
 - [Qué es un agente de IA](https://kaivastudio.com/blog/que-es-un-agente-de-ia/): la diferencia

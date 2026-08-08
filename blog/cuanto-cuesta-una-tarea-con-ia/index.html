@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Analytics con consentimiento previo. Aquí NO se carga el script de
+       Google: solo se fijan los valores por defecto (todo denegado) y se
+       deja que /assets/consentimiento.js lo inyecte si la persona acepta.
+       El razonamiento completo y las normas que lo obligan están comentados
+       arriba de ese archivo. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+  </script>
+  <script defer src="/assets/consentimiento.js?v=20260729"></script>
+  <script defer src="/assets/eventos.js?v=20260729"></script>
+  <script defer src="/assets/indice-blog.js?v=20260731"></script>
+  <script defer src="/assets/clarity.js?v=20260729"></script>
+
+  <title>El token bajó 99% y la factura de IA subió: el costo por tarea</title>
+  <meta name="description"
+    content="Generar un millón de tokens costaba 60 dólares en 2023 y hoy cuesta menos de uno. Aun así las facturas de IA suben. La métrica que importa no es el precio del token: es cuánto cuesta terminar la tarea.">
+  <link rel="canonical" href="https://kaivastudio.com/blog/cuanto-cuesta-una-tarea-con-ia/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/favicon-96.png?v=20260805" type="image/png" sizes="96x96">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Kaiva Studio">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:url" content="https://kaivastudio.com/blog/cuanto-cuesta-una-tarea-con-ia/">
+  <meta property="og:title" content="El token bajó 99% y la factura de IA subió: el costo por tarea">
+  <meta property="og:description"
+    content="El precio del token se derrumbó y las facturas de IA suben igual. La métrica que importa es cuánto cuesta terminar la tarea, no cuánto cuesta el millón de tokens.">
+  <meta property="og:image" content="https://kaivastudio.com/assets/blog/precios.webp">
+  <meta property="article:published_time" content="2026-08-08">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="El token bajó 99% y la factura de IA subió: el costo por tarea">
+  <meta name="twitter:image" content="https://kaivastudio.com/assets/blog/precios.webp">
+
+  <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260808a">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaivastudio.com/blog/cuanto-cuesta-una-tarea-con-ia/#post",
+      "headline": "El token bajó 99% y la factura de IA subió: el costo por tarea",
+      "description": "Generar un millón de tokens costaba 60 dólares en 2023 y hoy cuesta menos de uno. Aun así las facturas de IA suben. La métrica que importa no es el precio del token: es cuánto cuesta terminar la tarea.",
+      "datePublished": "2026-08-08",
+      "dateModified": "2026-08-08",
+      "inLanguage": "es-CO",
+      "image": "https://kaivastudio.com/assets/blog/precios.webp",
+      "mainEntityOfPage": "https://kaivastudio.com/blog/cuanto-cuesta-una-tarea-con-ia/",
+      "author": {
+        "@type": "Organization",
+        "@id": "https://kaivastudio.com/#studio",
+        "name": "Kaiva Studio",
+        "url": "https://kaivastudio.com/"
+      },
+      "publisher": { "@id": "https://kaivastudio.com/#studio" },
+      "isPartOf": { "@id": "https://kaivastudio.com/blog/#blog" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://kaivastudio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://kaivastudio.com/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Cuánto cuesta una tarea con IA", "item": "https://kaivastudio.com/blog/cuanto-cuesta-una-tarea-con-ia/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta hoy una consulta a un modelo de IA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende del modelo, pero el orden de magnitud cambió por completo: generar un millón de tokens con un modelo de punta costaba unos 60 dólares a mediados de 2023 y a mediados de 2026 cuesta menos de un dólar, una caída de más del 99%. DeepSeek V4-Flash cobra 0,14 dólares por millón de tokens de entrada; Gemini 3.6 Flash, 1,50. Para un negocio pequeño, una consulta suelta cuesta una fracción de centavo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Si los tokens son tan baratos, ¿por qué suben las facturas de IA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Porque el precio por token y la cantidad de tokens que consume una tarea son dos palancas distintas que se multiplican. Un agente que trabaja en varios pasos reenvía todo el contexto acumulado en cada paso: una tarea de veinte pasos vuelve a leer los diecinueve anteriores, así que el gasto crece más rápido que el número de pasos. Análisis independientes estiman que una carga de trabajo con agentes consume desde varias veces hasta cien veces los tokens de un chat equivalente."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El modelo más barato por token es el más barato de usar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No necesariamente, y a veces es al revés. Sobre las tareas del banco de pruebas SWE-Bench Pro, Grok 4.5 cuesta alrededor de 0,096 dólares por tarea en tokens de salida y Claude Opus 4.8 alrededor de 1,68: una diferencia de diecisiete veces que viene por mitades del precio por token y de cuántos tokens necesita cada uno para terminar. Un modelo que resuelve a la primera puede salir más barato que uno cuyo token es más barato pero que necesita tres intentos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo se controla el gasto de IA en un negocio pequeño?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Midiendo el costo por caso resuelto y no el precio por millón de tokens, y poniendo un tope de tokens por respuesta. La investigación sobre presupuestos de tokens muestra que fijar un límite recorta entre un 20% y un 30% del gasto sin perder calidad, pero también que apretarlo demasiado trunca las respuestas y hace que el modelo acierte menos, con lo que hay que repetir la consulta y el ahorro desaparece."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+  <nav class="nav" id="nav">
+    <div class="nav-in">
+      <a href="/" class="logo" aria-label="Kaiva Studio — ir al inicio">
+        <img src="/assets/logo-kaiva.png" alt="Kaiva Studio" width="105" height="44">
+      </a>
+      <div class="nav-right">
+        <div class="nav-links" id="navLinks">
+          <a href="/diseno-web/" class="lnk">Diseño web</a>
+          <a href="/software-a-medida/" class="lnk">Software</a>
+          <a href="/branding/" class="lnk">Branding</a>
+          <a href="/blog/" class="lnk" aria-current="page">Blog</a>
+          <a href="/monitor/" class="btn btn-dark">Diagnóstico Gratis</a>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menú" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <article>
+
+      <header class="post-cabecera">
+        <div class="wrap">
+          <nav class="migas" aria-label="Ruta de navegación">
+            <a href="/">Inicio</a><span>/</span><a href="/blog/">Blog</a><span>/</span>Cuánto cuesta una tarea con IA
+          </nav>
+
+          <div class="post-cabecera-in">
+            <div class="post-cabecera-texto">
+              <p class="fecha"><time datetime="2026-08-08">8 de agosto de 2026</time> · Lectura de 8 minutos</p>
+
+              <h1 class="post-titulo">
+                El token bajó un 99<span style="color:var(--violet)">%</span> y la factura de IA subió
+              </h1>
+
+              <p class="lead">Generar un millón de palabras con el mejor modelo del mercado costaba unos 60
+                dólares a mediados de 2023. Hoy cuesta menos de uno. Y sin embargo, las empresas que más IA
+                usan están pagando más que el año pasado. Las dos cosas son ciertas al mismo tiempo, y
+                entender por qué es lo que separa a quien controla ese gasto de quien lo descubre en la
+                factura.</p>
+            </div>
+
+            <figure class="post-cabecera-foto">
+              <img src="/assets/blog/precios.webp" alt="Laptop abierta sobre una mesa de madera mostrando una propuesta de costos con su tabla de precios" width="1024" height="1024"
+                fetchpriority="high" decoding="async">
+            </figure>
+          </div>
+        </div>
+      </header>
+
+      <div class="section post-cuerpo">
+        <div class="wrap">
+          <div class="articulo">
+
+            <p>Durante tres años el titular fue siempre el mismo: la IA se abarata. Y es verdad. Entre
+              julio de 2025 y julio de 2026 la guerra de precios recortó entre un 90% y un 97% el costo de
+              una capacidad equivalente. OpenAI llegó a bajar el precio de su GPT-5.6 Luna un 80% tres
+              semanas después de lanzarlo. En julio de 2026, tres laboratorios distintos sacaron modelos
+              rivales en cuarenta y ocho horas y los tres anunciaron lo mismo: tokens más baratos.</p>
+
+            <p>Ninguno anunció «más capacidad». Eso ya dice bastante de dónde está la pelea.</p>
+
+            <h2>El precio del token es la mitad de la cuenta</h2>
+
+            <p>Un token es un pedazo de palabra. Se cobran de entrada —lo que le mandas al modelo— y de
+              salida —lo que te contesta—. Cuando alguien compara modelos, casi siempre compara ese precio
+              unitario. El problema es que la factura no se calcula así.</p>
+
+            <p>La factura es el precio por token <em>multiplicado</em> por cuántos tokens hicieron falta
+              para terminar el trabajo. Son dos palancas independientes, y la segunda se mueve mucho más
+              que la primera.</p>
+
+            <p>El ejemplo más limpio está en SWE-Bench Pro, un banco de pruebas donde a los modelos se les
+              dan tareas reales de programación. Resolver una de esas tareas cuesta unos 0,096 dólares con
+              Grok 4.5 y alrededor de 1,68 con Claude Opus 4.8, contando solo los tokens de salida.
+              Diecisiete veces más caro. Y la mitad de esa diferencia no es el precio: es que uno necesita
+              4,2 veces menos tokens que el otro para llegar al mismo sitio.</p>
+
+            <div class="nota">
+              <p><strong>Por qué esto se dispara con los «agentes»:</strong> un agente no contesta una vez,
+                trabaja en pasos. Y en cada paso vuelve a mandarle al modelo todo lo que lleva hecho. Una
+                tarea de veinte pasos relee los diecinueve anteriores, así que el gasto no crece con el
+                número de pasos: crece más rápido. Por eso en una factura de agentes manda la entrada y no
+                la salida, al revés de lo que casi todo el mundo supone. Los análisis independientes
+                estiman que una carga con agentes consume desde varias veces hasta cien veces los tokens
+                de un chat normal.</p>
+            </div>
+
+            <h2>Los fabricantes ya lo saben, y por eso cambiaron de discurso</h2>
+
+            <p>Google presentó el Gemini 3.6 Flash el 21 de julio de 2026 y el argumento de venta no fue
+              que piensa mejor. Fue que <strong>usa un 17% menos de tokens de salida</strong> que la
+              versión anterior para hacer lo mismo, con picos de hasta el 65% en algunas pruebas. Es decir:
+              vendieron la eficiencia, no la inteligencia.</p>
+
+            <p>El 31 de julio DeepSeek hizo algo todavía más elocuente. Reentrenó su modelo pequeño —el
+              V4-Flash, de 284.000 millones de parámetros— sin tocarle el diseño, y el resultado le ganó a
+              su propio modelo grande, el V4-Pro de 1,6 billones, en los nueve bancos de prueba de agentes.
+              En Terminal Bench 2.1 pasó de 61,8 a 82,7 puntos, por encima de los 72,1 de la Pro. El precio
+              no cambió: sigue en 0,14 dólares el millón de tokens de entrada.</p>
+
+            <p>Un modelo cinco veces más pequeño y tres veces más barato superando al grande de su propia
+              casa, sin añadir un solo parámetro. Si «el más grande que me alcance» era tu criterio de
+              selección, este mes se rompió.</p>
+
+            <h2>La comparación que sí sirve</h2>
+
+            <p>Poner los dos números juntos cambia el orden de la lista:</p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Modelo</th>
+                  <th>Precio por millón de tokens</th>
+                  <th>Costo por tarea resuelta</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Grok 4.5</td>
+                  <td>—</td>
+                  <td>≈ 0,096 USD</td>
+                </tr>
+                <tr>
+                  <td>Claude Opus 4.8</td>
+                  <td>—</td>
+                  <td>≈ 1,68 USD</td>
+                </tr>
+                <tr>
+                  <td>DeepSeek V4-Flash</td>
+                  <td>0,14 entrada / 0,28 salida</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>Gemini 3.6 Flash</td>
+                  <td>1,50 entrada / 7,50 salida</td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p>Los huecos de la tabla no son un descuido: son el punto. El costo por tarea solo existe
+              para los modelos que alguien se molestó en medir sobre un trabajo concreto, y el precio por
+              token está publicado para todos. Se compara lo que es fácil de comparar, no lo que decide la
+              factura.</p>
+
+            <h2>Qué significa esto si tu negocio no programa</h2>
+
+            <p>Casi ninguna pyme está corriendo agentes de veinte pasos. Si lo tuyo es un chat que responde
+              «¿tienen envío a domicilio?», la matemática de arriba no te aplica: ahí una consulta cuesta
+              una fracción de centavo y va a seguir costando eso. Decirlo es más honesto que asustar.</p>
+
+            <p>Lo que sí aplica es la métrica. En el momento en que alguien te proponga automatizar algo
+              con IA, la pregunta correcta no es «¿cuánto cuesta el millón de tokens?» sino
+              <strong>«¿cuánto cuesta resolver un caso, de principio a fin, incluyendo los que hay que
+              repetir?»</strong>. Un modelo barato que acierta a la tercera sale más caro que uno caro que
+              acierta a la primera, y esa cuenta no aparece en ninguna tabla de precios.</p>
+
+            <p>Hay una tentación obvia y conviene avisar: poner un tope de tokens por respuesta para gastar
+              menos. Funciona a medias. La investigación sobre presupuestos de tokens encuentra recortes de
+              entre el 20% y el 30% del gasto sin perder calidad, pero también que si se aprieta demasiado
+              las respuestas salen truncadas y el modelo acierta menos. Y una respuesta mala se repite, así
+              que el ahorro se devuelve solo.</p>
+
+            <div class="nota">
+              <p><strong>Lo que a una agencia le conviene no contarte:</strong> en un proyecto normal
+                —un chat de soporte, un buscador interno, generación de textos para
+                <a href="/blog/seo-para-ia/">que la IA encuentre tu negocio</a>— la parte que se le paga al
+                modelo cuesta centavos al mes. Lo caro es todo lo demás: el servidor donde vive, evitar que
+                alguien lo use de juguete y te dispare la cuenta, y sobre todo revisar que no invente
+                cosas. Si te venden «IA» y el presupuesto habla de tokens, te están enseñando la partida
+                más pequeña de la factura.</p>
+            </div>
+
+            <h2>Adónde lleva esto</h2>
+
+            <p>El final lógico de esta guerra es que una consulta de texto corriente cueste, en la
+              práctica, cero. Ya casi estamos: el 6 de agosto OpenAI quitó el límite diario de mensajes de
+              texto a las cuentas gratuitas de ChatGPT, algo que hace dos años habría sido ruinoso. Los
+              tokens se están volviendo una materia prima, como los minutos de llamada.</p>
+
+            <p>Cuando eso pasa, la ventaja deja de estar en tener acceso a la IA —lo va a tener todo el
+              mundo, gratis— y pasa a estar en saber a qué tarea concreta la pones y cómo compruebas que la
+              hizo bien. Eso no es un problema de precios y no lo va a resolver ninguna bajada más.</p>
+
+            <p>Si estás mirando dónde meter algo de esto en tu negocio, en nuestro
+              <a href="/diagnostico/">Diagnóstico Digital</a> revisamos gratis qué parte de tu operación
+              tiene volumen suficiente para que valga la pena y cuál es mejor dejar como está.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="cierre">
+          <h2>¿Por dónde empezar<span class="dot">?</span></h2>
+          <p>El Diagnóstico Digital revisa tu presencia actual y te dice, en concreto, qué vale la pena
+            automatizar primero y qué no. Gratis, sin tarjeta y sin registro.</p>
+          <div class="hero-ctas" style="justify-content:center">
+            <a href="/diagnostico/" class="btn btn-violet">Ver el diagnóstico</a>
+            <a href="/#contacto" class="btn btn-ghost">Hablar con alguien</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="wrap">
+      <p>© Kaiva Studio 2026 · Barranquilla, Colombia</p>
+      <nav aria-label="Enlaces del pie">
+        <a href="/">Inicio</a>
+        <a href="/blog/">Blog</a>
+        <a href="/diagnostico/">Diagnóstico</a>
+        <a href="/#contacto">Contacto</a>
+        <a href="/privacidad/">Privacidad</a>
+        <a href="/terminos/">Términos</a>
+        <a href="/cookies/" data-kv-cookies>Preferencias</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.getElementById('nav');
+      var enlaces = document.getElementById('navLinks');
+      var boton = document.getElementById('navToggle');
+
+      var alScroll = function () {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+      };
+      alScroll();
+      window.addEventListener('scroll', alScroll, { passive: true });
+
+      boton.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var abierto = enlaces.classList.toggle('open');
+        boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!enlaces.contains(e.target) && !boton.contains(e.target)) {
+          enlaces.classList.remove('open');
+          boton.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Aparición al hacer scroll. La clase en <html> es la que activa el
+      // estado oculto en el CSS: sin JS no se esconde nada.
+      if (!('IntersectionObserver' in window)) return;
+      document.documentElement.classList.add('js-reveal');
+
+      var objetivos = document.querySelectorAll('.tarjeta, .paso, .post-item, .faq-item, .blog-post');
+      objetivos.forEach(function (el, i) {
+        el.classList.add('reveal');
+        el.style.setProperty('--d', (i % 6) * 0.06 + 's');
+      });
+
+      var observador = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (entrada) {
+          if (!entrada.isIntersecting) return;
+          entrada.target.classList.add('dentro');
+          observador.unobserve(entrada.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+      objetivos.forEach(function (el) { observador.observe(el); });
+    })();
+  </script>
+  <script src="/assets/fechas.js?v=1" defer></script>
+</body>
+
+</html>
