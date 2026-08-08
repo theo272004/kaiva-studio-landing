@@ -100,6 +100,20 @@ html {
   *::after {
     animation-duration: .01ms !important;
     transition-duration: .01ms !important;
+    /* ESTA LINEA NO ES OPCIONAL. Sin ella, acortar la duracion a .01ms no
+       apaga una animacion `infinite`: la acelera. Un ciclo de .01ms repetido
+       para siempre son 100.000 vueltas por segundo, de las que la pantalla
+       pinta unas 60 a puntos al azar del recorrido. El resultado no es una
+       animacion desactivada, es un temblor.
+       Se veia en /branding/: las cuatro fichas del tablero del hero llevan
+       `bbFloat 7s infinite` (un vaiven de 6px) y a quien tiene el sistema con
+       las animaciones apagadas —Windows: Accesibilidad > Efectos visuales—
+       le vibraban en pantalla. Justo lo contrario de lo que pide quien activa
+       esa preferencia.
+       Con la cuenta a 1 la animacion corre una vez, termina, y el elemento se
+       queda en su estilo base. portada.css ya lo tenia; este archivo y
+       monitor.css no. */
+    animation-iteration-count: 1 !important;
   }
 }
 

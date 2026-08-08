@@ -2264,6 +2264,13 @@
       * {
         transition-duration: 0.001s !important;
         animation-duration: 0.001s !important;
+        /* Ver la nota larga en pagina.css: sin la cuenta a 1, acortar la
+           duracion no apaga una animacion `infinite`, la dispara a mil vueltas
+           por segundo. Aqui pegaba en la demo del panel del hero, que va toda
+           de animaciones `26s infinite`: las vistas y las pestanas del menu
+           parpadeaban mientras el cursor y los anillos —que si se apagaban—
+           estaban quietos. */
+        animation-iteration-count: 1 !important;
       }
 
       .app {
@@ -4339,19 +4346,42 @@
 
     /* Quien pide menos movimiento ve el panel quieto en la primera vista, no
        una animacion mas lenta: lo que molesta es el movimiento, no su ritmo. */
+    /* OJO CON LA ESPECIFICIDAD AQUI. Este bloque estaba escrito con selectores
+       de una sola clase (.kv-vista, .kv-app-item) pero las animaciones se
+       declaran arriba sobre .kv-vista[data-vista="..."] y
+       .kv-app-item[data-item="..."], que pesan mas. Resultado: a quien pide
+       menos movimiento la demo le quedaba a medias —el cursor desaparecia
+       (ese si se apagaba, va por clase) y los anillos se quedaban quietos,
+       mientras las vistas y las pestanas seguian pasando solas. O sea, un
+       panel que cambia de pantalla con un puntero invisible pulsando botones.
+       Los selectores de abajo repiten el atributo para empatar el peso. Si se
+       anade una vista nueva arriba, hay que anadirla aqui tambien. */
     @media (prefers-reduced-motion: reduce) {
 
       .kv-cursor,
       .kv-cursor-eco,
-      .kv-app-item,
-      .kv-vista,
+      .kv-app-item[data-item="resumen"],
+      .kv-app-item[data-item="pilares"],
+      .kv-app-item[data-item="hallazgos"],
+      .kv-vista[data-vista="resumen"],
+      .kv-vista[data-vista="pilares"],
+      .kv-vista[data-vista="hallazgos"],
       .kv-a-fill,
       .kv-hall-demo .kv-hall-cuerpo {
         animation: none;
       }
 
+      /* La demo se queda en el fotograma del resumen: es la primera pantalla
+         del recorrido y la unica que se explica sola sin las demas. */
       .kv-vista[data-vista="resumen"] {
         opacity: 1;
+      }
+
+      /* Las otras dos son absolutas y se apilan encima del resumen. Sin esto
+         se veian las tres a la vez, una sobre otra. */
+      .kv-vista[data-vista="pilares"],
+      .kv-vista[data-vista="hallazgos"] {
+        opacity: 0;
       }
 
       .kv-app-item[data-item="resumen"] {
