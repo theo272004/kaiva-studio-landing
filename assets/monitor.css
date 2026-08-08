@@ -132,8 +132,20 @@
       flex-direction: column;
     }
 
+    /* ---- UN SOLO NIVEL DE TARJETA ----------------------------------------
+       `.app` declaraba el gris #f8fafc y encima iban `.app-bar`, `.side`,
+       `.panel` y `.footer-banner` en #ffffff: el suelo gris no se veia NUNCA y
+       quedaban tres niveles de caja blanca apilados, separados solo por filetes
+       del 5-6% de alfa. Es el problema que `--canvas` existe para resolver, y
+       estaba escrito en el archivo de tokens antes de aplicarse aqui.
+
+       Ahora: el suelo de la aplicacion es `--canvas` —`.app`, `.app-bar`,
+       `.side` y `.panel`, todos el mismo gris— y encima solo hay UN nivel de
+       tarjeta blanca (`.pcard`, `.check-card`). El chrome se separa por filete,
+       no por color, y las tarjetas se leen solas sobre el gris sin sombra,
+       que es justo lo que dice tokens.css de `--canvas`. */
     .app {
-      background: #f8fafc;
+      background: var(--canvas);
       width: 100%;
       flex: 1;
       display: flex;
@@ -145,13 +157,17 @@
       transform: none;
     }
 
+    /* Sin fondo propio: es el mismo suelo, y del panel la separa el filete.
+       `--line-strong` y no `--line` porque ahora es la UNICA senal de que la
+       barra y el contenido son cosas distintas; al 5% de alfa sobre gris no se
+       veia. */
     .app-bar {
       display: flex;
       align-items: center;
       gap: 0.5rem;
       padding: 0.95rem 1.5rem;
-      border-bottom: 1px solid rgba(15, 23, 42, 0.06);
-      background: #ffffff;
+      border-bottom: 1px solid var(--line-strong);
+      background: transparent;
     }
 
     /* ---- Salidas del panel ------------------------------------------------
@@ -189,16 +205,17 @@
       transition: color .16s ease, border-color .16s ease, background .16s ease;
     }
 
+    /* El hover iba a #f8fafc, que ahora es EXACTAMENTE el color de la barra:
+       el boton se fundia con el fondo justo al apuntarlo. Pasa a la misma
+       tinta de hover que ya usa `.kv-sesion-x` en esta hoja. */
     .app-btn:hover {
       color: var(--ink);
-      border-color: rgba(15, 23, 42, 0.3);
-      background: #f8fafc;
+      border-color: var(--line-control);
+      background: rgba(15, 23, 42, 0.05);
     }
 
-    .app-btn:focus-visible {
-      outline: 2px solid var(--violet);
-      outline-offset: 2px;
-    }
+    /* El :focus-visible propio se va: la regla global de assets/tokens.css lo
+       cubre con el mismo token, y tener las dos era mantener dos. */
 
     /* Con sesión abierta el botón lleva el nombre de la persona, y ahí sí se
        tiñe: deja de ser una salida y pasa a ser "esta es tu cuenta". */
@@ -304,6 +321,9 @@
       background: #28c840;
     }
 
+    /* Con la barra ya en gris, un campo gris sobre gris desaparecia (#f1f5f9
+       sobre #f8fafc). Pasa a blanco con borde de control: se lee como lo que
+       es, la caja de la direccion. */
     .app-bar .addr {
       margin-left: 0.7rem;
       flex: 1;
@@ -312,8 +332,8 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      background: #f1f5f9;
-      border: 1px solid rgba(15, 23, 42, 0.04);
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
       border-radius: 8px;
       padding: 0.45rem 0.8rem;
       font-size: 12.5px;
@@ -357,18 +377,23 @@
        resto del sitio y no se sentía parte del mismo producto.
        Ahora es una tarjeta flotante con aire alrededor, como cualquier otro
        bloque de la interfaz: avisa sin sonar a advertencia. */
+    /* Vivia como hijo directo de `.app`, encima de `.app-grid`, y de ahi los
+       margenes laterales propios. Ahora es la penultima pieza de `.panel`, que
+       ya es una rejilla con su gap y su padding: el margen sobra y descuadraba.
+       Fuera tambien `--shadow-ui`: sobre el suelo gris ya no hace falta, y era
+       el segundo nivel de elevacion que este cambio viene a quitar. El punto
+       violeta sigue siendo lo que la distingue de una tarjeta corriente. */
     .kv-temp {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      margin: 1rem clamp(.9rem, 2.5vw, 1.4rem) 0;
+      margin: 0;
       padding: .9rem 1.1rem;
       background: var(--surface);
       border: 1px solid var(--line-strong);
       border-radius: var(--r-ui-lg);
-      box-shadow: var(--shadow-ui);
       font-size: 13px;
     }
 
@@ -434,11 +459,19 @@
       box-shadow: 0 6px 16px -4px rgba(130, 66, 245, .45);
     }
 
+    /* Sirve a un <a> ("Analizar otro sitio", que confirmarGuardado inyecta) y a
+       un <button> ("Crear cuenta gratis"): de ahi los reset de fondo y borde,
+       que un <a> no necesita y un <button> sin ellos sale como boton gris del
+       sistema. */
     .kv-temp-link {
+      font-family: inherit;
       font-size: 13px;
       font-weight: 600;
       color: var(--ink-soft);
       text-decoration: none;
+      background: none;
+      border: 0;
+      cursor: pointer;
       padding: .6rem .3rem;
       transition: color .2s var(--ease-ui);
     }
@@ -702,8 +735,8 @@
        menú se iba hacia arriba y había que volver hasta el principio para
        cambiar de vista. */
     .side {
-      background: #ffffff;
-      border-right: 1px solid rgba(15, 23, 42, 0.06);
+      background: transparent;
+      border-right: 1px solid var(--line-strong);
       padding: 1.5rem 1rem;
       display: flex;
       flex-direction: column;
@@ -733,16 +766,33 @@
       object-fit: contain;
     }
 
+    /* LAS CINCO ENTRADAS SON <button>.
+       Eran <div>: tres con role/tabindex y un keydown a mano, y las dos del
+       candado sin nada — con teclado no habia forma de abrir el modal del
+       Panel Pro, y son su unica puerta.
+
+       Un <button> no hereda cuatro cosas que un <div> si tenia, y sin ellas
+       sale en la fuente del sistema, encogido al ancho del texto, centrado y
+       con el fondo gris del navegador. Las cuatro se devuelven aqui:
+       `background`, `border`, `width` y `text-align`. (La familia tipografica
+       ya la devuelve la regla `button, input, select, textarea` de arriba.)
+
+       Y `transition: all` se cambia por la lista explicita: el sistema lo
+       prohibe, y aqui ademas animaba el `outline` del foco al aparecer. */
     .side-item {
       display: flex;
       align-items: center;
       gap: 0.7rem;
+      width: 100%;
+      text-align: left;
       padding: 0.65rem 0.8rem;
-      border-radius: 10px;
+      border: 0;
+      border-radius: var(--r-ui);
+      background: transparent;
       font-size: 13.5px;
       font-weight: 600;
       color: var(--ink-soft);
-      transition: all 0.2s ease;
+      transition: background-color var(--d-base) var(--ease-ui), color var(--d-base) var(--ease-ui);
       cursor: pointer;
     }
 
@@ -754,8 +804,10 @@
       transition: color 0.2s;
     }
 
+    /* Blanco sobre el gris del suelo: el hover iba a #f1f5f9, un gris
+       indistinguible de la barra ahora que la barra tambien es gris. */
     .side-item:hover {
-      background: #f1f5f9;
+      background: var(--surface);
       color: var(--ink);
     }
 
@@ -772,9 +824,13 @@
       color: var(--violet);
     }
 
+    /* Sin `opacity: .7`. Ese 0.7 sobre `--ink-faint` (4,76:1) dejaba el texto
+       en ~2,8:1 sobre el suelo: por debajo de AA. Se toleraba mientras esto
+       era un <div> decorativo; ahora es un <button> que se puede enfocar y
+       pulsar, y un control tiene que leerse. El candado y el color mas suave
+       ya dicen que esta bloqueado. */
     .side-item.locked {
       color: var(--ink-faint);
-      opacity: 0.7;
     }
 
     .side-item.locked svg {
@@ -786,72 +842,21 @@
       color: var(--ink-faint);
     }
 
-    /* Sidebar Helper Card */
-    .side-help {
-      margin-top: auto;
-      background: #fafafb;
-      border: 1px solid rgba(15, 23, 42, 0.05);
-      border-radius: 16px;
-      padding: 1.1rem;
-      position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .side-help .help-robot {
-      width: 68px;
-      height: 68px;
-      position: absolute;
-      right: -8px;
-      bottom: -6px;
-      opacity: 0.25;
-      pointer-events: none;
-      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-    }
-
-    .side-help h4 {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--ink);
-    }
-
-    .side-help p {
-      font-size: 11.5px;
-      color: var(--ink-soft);
-      line-height: 1.45;
-      max-width: 85%;
-    }
-
-    .side-help .help-link {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--violet);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-    }
-
-    .side-help .help-link:hover {
-      color: var(--violet-hover);
-    }
-
-    .side-help .help-link span {
-      transition: transform 0.2s;
-    }
-
-    .side-help .help-link:hover span {
-      transform: translateX(3px);
-    }
+    /* Aqui vivia `.side-help` (once reglas): la tarjeta "¿Necesitas ayuda? ·
+       Agendar sesion" del pie del menu. Apuntaba a /#contacto, el MISMO
+       destino que el boton de la tarjeta "Da el siguiente paso" del final del
+       panel: dos llamadas comerciales a la misma cita, a la vista al mismo
+       tiempo. Se quedo una, la del final, que es cuando la pregunta tiene
+       sentido. */
 
     /* Main Panel */
+    /* Gris, como el resto del suelo: era la tercera caja blanca sobre blanca.
+       Lo blanco de aqui adentro son las tarjetas, y solo ellas. */
     .panel {
       padding: 1.5rem;
       display: grid;
       gap: 1.2rem;
-      background: #ffffff;
+      background: var(--canvas);
       align-content: start;
       min-width: 0;
     }
@@ -894,10 +899,9 @@
 
     .check-card {
       background: var(--surface);
-      border: 1px solid rgba(15, 23, 42, 0.05);
+      border: 1px solid var(--line);
       border-radius: 18px;
       padding: 1.3rem;
-      box-shadow: var(--shadow-sm);
       min-width: 0;
     }
 
@@ -1048,12 +1052,16 @@
     }
 
     /* Cards general */
+    /* EL UNICO NIVEL DE TARJETA. Sin sombra: `--shadow-sm` es de la familia de
+       marketing, y sobre el suelo gris no hace falta ninguna — es literalmente
+       lo que dice tokens.css de `--canvas`: "encima de el la tarjeta blanca se
+       lee sola, sin necesidad de sombra ni de borde". El filete de 1px se
+       queda solo para rematar el canto. */
     .pcard {
       background: var(--surface);
-      border: 1px solid rgba(15, 23, 42, 0.05);
+      border: 1px solid var(--line);
       border-radius: 18px;
       padding: 1.3rem;
-      box-shadow: var(--shadow-sm);
       display: flex;
       flex-direction: column;
       min-width: 0;
@@ -1092,15 +1100,141 @@
       color: var(--ink-soft);
     }
 
+    /* `.link-detail` nacio para un <a>. La cabecera de "Tus cuatro pilares" lo
+       usa sobre un <button> —cambiar de vista es una accion, no una direccion—
+       y un button trae fondo, borde y padding propios que hay que quitar. */
     .pcard .link-detail {
       font-size: 12px;
       font-weight: 700;
       color: var(--violet);
-      transition: color 0.2s;
+      background: none;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      text-align: right;
+      transition: color var(--d-base) var(--ease-ui);
     }
 
     .pcard .link-detail:hover {
       color: var(--violet-hover);
+    }
+
+    /* ---- Los cuatro pilares en el Resumen ---------------------------------
+       Una fila compacta, SIEMPRE con los cuatro. El indice vivia en Resumen y
+       los pilares en otra vista, asi que nunca se veian juntos; y la lista de
+       Oportunidades solo nombra los pilares CON hallazgos, de modo que un pilar
+       sano no aparecia en el Resumen por ninguna parte.
+
+       Sin caja por celda: son columnas de la misma tarjeta, separadas por gap y
+       por un filete. Volver a meter cada pilar en su cajita seria repetir el
+       apilado de blancos que este cambio quita. */
+    .res-pilares {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--s-4);
+    }
+
+    .rp {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: baseline;
+      gap: 0 var(--s-2);
+      padding-left: var(--s-4);
+      border-left: 1px solid var(--line);
+      min-width: 0;
+    }
+
+    .res-pilares .rp:first-child {
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    .rp-nom {
+      font-size: var(--t-sm);
+      font-weight: var(--w-fuerte);
+      color: var(--ink);
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .rp-num {
+      font-family: var(--display);
+      font-size: var(--t-xl);
+      font-weight: var(--w-negro);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    /* El tubo va a ancho completo debajo de las dos columnas. */
+    .rp-tubo {
+      grid-column: 1 / -1;
+      margin-top: var(--s-2);
+      height: 5px;
+      border-radius: var(--r-pill);
+      background: var(--canvas);
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .rp-tubo i {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: var(--r-pill);
+      background: var(--ink);
+      transition: width var(--d-slow) var(--ease-ui);
+    }
+
+    .rp-sub {
+      grid-column: 1 / -1;
+      margin-top: var(--s-2);
+      font-size: var(--t-xs);
+      line-height: 1.4;
+      color: var(--ink-soft);
+    }
+
+    /* NO MEDIDO NO ES CERO. La raya, el tubo vacio y el motivo escrito al lado
+       dicen "no lo sabemos"; un cero diria "esta mal", que es una acusacion que
+       no comprobamos. Se baja el peso visual del numero, no el del texto que
+       explica por que. */
+    .rp--sin .rp-num {
+      color: var(--ink-faint);
+    }
+
+    @media (max-width: 1080px) {
+      .res-pilares {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: var(--s-5);
+      }
+
+      /* En dos columnas el filete de la izquierda solo separa la 2 de la 1 y
+         la 4 de la 3; las impares abren fila. */
+      .res-pilares .rp:nth-child(odd) {
+        padding-left: 0;
+        border-left: 0;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .res-pilares {
+        grid-template-columns: 1fr;
+        row-gap: var(--s-4);
+      }
+
+      .res-pilares .rp {
+        padding-left: 0;
+        border-left: 0;
+        padding-top: var(--s-4);
+        border-top: 1px solid var(--line);
+      }
+
+      .res-pilares .rp:first-child {
+        padding-top: 0;
+        border-top: 0;
+      }
     }
 
     /* Row Layouts */
@@ -1240,34 +1374,33 @@
       flex: 1;
     }
 
+    /* SIN CAJA. Eran cuatro tarjetas blancas dentro de una tarjeta blanca
+       dentro de un panel blanco. Ahora son cuatro columnas de la misma
+       tarjeta, separadas por el gap y por un filete — el mismo recurso que
+       `.chk-row` ya usaba unas lineas mas arriba.
+
+       Se fue tambien el `:hover` que levantaba una sombra: la celda no es
+       pulsable, y una caja que reacciona al puntero promete un clic que no
+       existe. Y con el se fue un `transition: all`, que el sistema prohibe.
+
+       `.lead-cell` (la celda de Visibilidad, tenida de violeta) desaparece por
+       falta de motivo: ningun dato la elegia — es, de hecho, el pilar de MENOR
+       peso, 20% — y realzar una de las cuatro estorba justo lo que esta rejilla
+       tiene que dejar hacer, que es compararlas. */
     .g-cell {
-      background: #ffffff;
-      border: 1px solid rgba(15, 23, 42, 0.06);
-      border-radius: 16px;
-      padding: 1.1rem 0.8rem;
+      padding: 1.1rem 0.8rem 1.1rem 1.4rem;
+      border-left: 1px solid var(--line);
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      transition: all 0.3s ease;
       position: relative;
     }
 
-    .g-cell:hover {
-      background: #ffffff;
-      border-color: rgba(15, 23, 42, 0.08);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .g-cell.lead-cell {
-      background: rgba(130, 66, 245, 0.02);
-      border-color: rgba(130, 66, 245, 0.08);
-    }
-
-    .g-cell.lead-cell:hover {
-      background: #ffffff;
-      border-color: rgba(130, 66, 245, 0.2);
+    .pillars-grid .g-cell:first-child {
+      padding-left: 0.8rem;
+      border-left: 0;
     }
 
     .marc {
@@ -1520,21 +1653,21 @@
       gap: 0.65rem;
     }
 
+    /* Sin caja, igual que `.g-cell`: eran tarjetas blancas dentro de la tarjeta
+       blanca de Oportunidades. Separacion por gap y filete, como `.chk-row`.
+       Fuera tambien el `:hover` con sombra —no son pulsables— y con el, otro
+       `transition: all`. */
     .growth-item {
-      background: #ffffff;
-      border: 1px solid rgba(15, 23, 42, 0.06);
-      border-radius: 12px;
-      padding: 0.75rem 0.9rem;
+      padding: 0.75rem 0 0;
+      border-top: 1px solid var(--line);
       display: flex;
       align-items: center;
       gap: 0.7rem;
-      transition: all 0.2s;
     }
 
-    .growth-item:hover {
-      background: #ffffff;
-      border-color: rgba(15, 23, 42, 0.08);
-      box-shadow: var(--shadow-sm);
+    .growth-list .growth-item:first-child {
+      padding-top: 0;
+      border-top: 0;
     }
 
     .growth-icon {
@@ -1686,45 +1819,10 @@
       pointer-events: none;
     }
 
-    /* Footer Info Bar */
-    .footer-banner {
-      background: #ffffff;
-      border-top: 1px solid rgba(15, 23, 42, 0.05);
-      padding: 1.5rem 1.8rem;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-    }
-
-    .fb-item {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .fb-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: var(--violet-soft);
-      color: var(--violet);
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-    }
-
-    .fb-info {
-      font-size: 11px;
-      color: var(--ink-soft);
-      line-height: 1.4;
-    }
-
-    .fb-info b {
-      font-size: 12px;
-      color: var(--ink);
-      display: block;
-      margin-bottom: 0.05rem;
-    }
+    /* Aqui vivia `.footer-banner` con `.fb-item`, `.fb-icon` y `.fb-info`: la
+       cuarta caja blanca del panel, y dentro cuatro argumentos de portada
+       ("Datos precisos", "Basado en +50 factores") dichos a quien ya esta
+       leyendo su informe. Se fue el marcado y se va su CSS. */
 
     /* Responsive design adjustments */
     @media (max-width: 1080px) {
@@ -1741,7 +1839,7 @@
         flex-direction: row;
         flex-wrap: wrap;
         border-right: none;
-        border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+        border-bottom: 1px solid var(--line-strong);
         align-items: center;
         gap: 0.5rem;
       }
@@ -1751,8 +1849,11 @@
         padding-bottom: 0.6rem;
       }
 
-      .side-help {
-        display: none;
+      /* En columna unica el menu es una tira horizontal, asi que el
+         `width: 100%` que un <button> necesita en el menu vertical lo
+         estiraria a toda la fila y dejaria una entrada por linea. */
+      .side-item {
+        width: auto;
       }
 
       /* El #vResumen de mas arriba lleva un ID, y un ID le gana a esta
@@ -1766,13 +1867,17 @@
         grid-template-columns: 1fr;
       }
 
-      .footer-banner {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
       /* Con 4 pilares una sola fila se aprieta antes que con 3: pasa a 2x2. */
       .pillars-grid {
         grid-template-columns: repeat(2, 1fr);
+        row-gap: 1.4rem;
+      }
+
+      /* En 2x2 el filete separa la 2 de la 1 y la 4 de la 3; las impares
+         abren fila y no llevan ninguno. */
+      .pillars-grid .g-cell:nth-child(odd) {
+        padding-left: 0.8rem;
+        border-left: 0;
       }
     }
 
@@ -1789,14 +1894,22 @@
         height: 112px;
       }
 
+      /* En una sola columna el filete pasa de vertical a horizontal. */
       .pillars-grid {
         grid-template-columns: 1fr;
         gap: 0.8rem;
       }
 
-      .footer-banner {
-        grid-template-columns: 1fr;
-        gap: 1.2rem;
+      .pillars-grid .g-cell,
+      .pillars-grid .g-cell:nth-child(odd) {
+        padding: 0.8rem 0.8rem 0;
+        border-left: 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .pillars-grid .g-cell:first-child {
+        padding-top: 0;
+        border-top: 0;
       }
     }
 
@@ -1924,7 +2037,7 @@
       height: 6px;
       width: min(420px, 80vw);
       margin: 1.6rem auto .9rem;
-      border-radius: 99px;
+      border-radius: var(--r-pill);
       background: var(--line-strong);
       overflow: hidden;
     }
@@ -1933,15 +2046,83 @@
       display: block;
       height: 100%;
       width: 0;
-      border-radius: 99px;
+      border-radius: var(--r-pill);
       background: linear-gradient(90deg, #0f172a, #475569);
       transition: width .35s var(--ease);
+    }
+
+    /* ---- La barra INDETERMINADA -------------------------------------------
+       Aqui solo hay una peticion en vuelo y no informa de su avance: cualquier
+       porcentaje seria inventado. La version anterior ponia 15% y se quedaba
+       ahi para siempre, que es lo peor de las dos cosas —parece una medida y
+       ademas no se mueve—.
+
+       Un bloque que recorre el carril dice lo unico cierto: seguimos
+       esperando. Es `infinite` a proposito y no contradice la regla del
+       sistema, que prohibe lo infinito DENTRO DE UNA VISTA DE DATOS: esto es
+       la pantalla de carga, donde no hay ningun dato que leer. */
+    .kv-bar--indet i {
+      width: 38%;
+      animation: kvBarrido 1.15s var(--ease-ui) infinite;
+    }
+
+    @keyframes kvBarrido {
+      from {
+        transform: translateX(-110%);
+      }
+
+      to {
+        transform: translateX(300%);
+      }
+    }
+
+    /* VA AQUI, DESPUES DE LA REGLA QUE ANULA, y no en el bloque de
+       reduced-motion de mas arriba: son la misma especificidad y gana la
+       ultima. Escrito arriba, el barrido seguia ganando y —con el
+       `animation-duration: .001s` y `animation-iteration-count: 1` globales—
+       la barra daba un salto instantaneo hasta translateX(300%) y desaparecia
+       por el borde derecho, dejando el carril vacio. Es el mismo mecanismo del
+       que avisa la nota de `animation-iteration-count`, una vuelta mas.
+
+       Con movimiento reducido el carril se llena y se queda quieto: sigue
+       diciendo "esto esta en marcha" sin moverse. */
+    @media (prefers-reduced-motion: reduce) {
+      .kv-bar--indet i {
+        animation: none;
+        width: 100%;
+        opacity: .45;
+      }
     }
 
     .kv-status {
       font-size: .9rem;
       font-weight: 600;
       color: var(--ink-soft);
+      min-height: 1.4em;
+    }
+
+    /* ---- Salida de la espera ---------------------------------------------
+       No existia. Si la red se colgaba, la unica salida era el boton de atras
+       del navegador o recargar. Es un boton de contorno y no un enlace de
+       texto: cancelar es una accion, y tiene que alcanzarse con el pulgar. */
+    .kv-cancelar {
+      margin-top: 1.4rem;
+      min-height: 44px;
+      padding: .6rem 1.2rem;
+      border: 1px solid var(--line-control);
+      border-radius: var(--r-pill);
+      background: transparent;
+      color: var(--ink-soft);
+      font-family: inherit;
+      font-size: var(--t-sm);
+      font-weight: var(--w-semi);
+      cursor: pointer;
+      transition: color var(--d-fast) var(--ease-ui), border-color var(--d-fast) var(--ease-ui);
+    }
+
+    .kv-cancelar:hover {
+      color: var(--ink);
+      border-color: var(--ink);
     }
 
     /* ---- Lista de espera de la herramienta ---- */

@@ -79,7 +79,7 @@
        51 KB incrustados en el propio HTML: no se cacheaban y viajaban en cada
        visita. Arriba solo se queda el @font-face, que va con los preload. -->
   <link rel="stylesheet" href="/assets/tokens.css?v=20260808c">
-  <link rel="stylesheet" href="/assets/monitor.css?v=20260808c">
+  <link rel="stylesheet" href="/assets/monitor.css?v=20260808d">
 </head>
 
 <body>
@@ -123,7 +123,12 @@
 
       <div id="kvSesionPanelForm">
         <h2 id="kvSesionTitulo">Inicia sesión</h2>
-        <p class="kv-sesion-sub">Entra a la cuenta donde guardaste tus análisis.</p>
+        <!-- Decía "Entra a la cuenta donde guardaste tus análisis". No existe
+             ese "donde": no hay endpoint que liste los análisis de un usuario
+             ni pantalla que los enseñe. La cuenta hoy sirve para entrar y para
+             que un análisis quede a tu nombre; el informe se recupera por su
+             enlace. El texto dice eso y nada más. -->
+        <p class="kv-sesion-sub">Con el correo y la contraseña que registraste.</p>
         <form id="kvSesionForm" class="kv-lead">
           <label class="kv-lead-lbl" for="kvSesionCorreo">Correo</label>
           <!-- type="text", no "email", a proposito. Por esta puerta entran dos
@@ -558,13 +563,36 @@
   </section>
 
   <!-- ===== 2. Cargando ===== -->
+  <!-- LA ESPERA TIENE SALIDA, LIMITE Y UNA BARRA QUE NO MIENTE.
+       Antes esta pantalla era un callejon: la barra se ponia en 15% y ahi se
+       quedaba, el texto decia "Conectando con el sitio..." y no volvia a
+       cambiar nunca —se ha visto un analisis terminado dejando esa frase en
+       pantalla—, no habia AbortController ni un solo setTimeout de red en todo
+       el archivo, y no habia ningun control. Si la red se colgaba, la persona
+       se quedaba mirando una pantalla quieta sin forma de volver.
+
+       Tres arreglos, y ninguno inventa nada:
+
+       1. LA BARRA ES INDETERMINADA, no un porcentaje. Aqui solo hay UNA
+          peticion en vuelo (scan.php) y no informa de su avance: cualquier
+          numero seria adivinado. La segunda fase real del backend —speed.php,
+          la velocidad— ocurre con el informe YA en pantalla y la narra el pie
+          del indice, no esta barra. Dos fases, cada una contada donde pasa.
+       2. EL TEXTO CAMBIA, y lo que dice es cierto: habla del estado de la
+          espera y de NUESTRO limite, nunca de un progreso que no medimos.
+       3. "Cancelar y volver" conserva el dominio ya escrito. Cancelar no puede
+          costar teclearlo otra vez. -->
   <section class="kv-stage" id="kvLoading">
     <div class="kv-box">
-      <img src="../assets/KaivaMora1.webp" alt="Analizando" class="kv-loader-robot">
+      <img src="../assets/KaivaMora1.webp" alt="" aria-hidden="true" class="kv-loader-robot">
       <h2>Analizando tu sitio</h2>
       <p class="kv-lead" id="kvTarget">Esto toma unos segundos.</p>
-      <div class="kv-bar"><i id="kvBar"></i></div>
-      <div class="kv-status" id="kvStatus">Conectando...</div>
+      <div class="kv-bar kv-bar--indet" id="kvBarCaja"><i id="kvBar"></i></div>
+      <!-- role="status" porque el texto cambia solo con el paso del tiempo:
+           sin el, lo que se escribio para que la espera no fuera muda es mudo
+           igualmente para quien usa lector de pantalla. -->
+      <div class="kv-status" id="kvStatus" role="status">Conectando con tu sitio…</div>
+      <button type="button" class="kv-cancelar" id="kvCancelar">Cancelar y volver</button>
     </div>
   </section>
 
@@ -654,8 +682,10 @@
         welcome = document.getElementById('kvWelcome'),
         loading = document.getElementById('kvLoading'),
         bar = document.getElementById('kvBar'),
+        barCaja = document.getElementById('kvBarCaja'),
         status = document.getElementById('kvStatus'),
-        target = document.getElementById('kvTarget');
+        target = document.getElementById('kvTarget'),
+        cancelar = document.getElementById('kvCancelar');
 
       function show(el) {
         [welcome, loading].forEach(function (s) { s.classList.remove('on'); });
@@ -673,6 +703,110 @@
          vuelta al formulario si algo falla DESPUES de que ya esta viendo su
          informe. */
       var panelPintado = false;
+
+      /* ==== LA ESPERA: limite, salida y estado que cambia ====================
+         Aqui no habia NADA. Cero AbortController y cero setTimeout de red en
+         todo el archivo: si scan.php no contestaba —red caida, sitio que no
+         cierra la conexion, servidor colgado— la promesa de fetch se quedaba
+         pendiente para siempre y la persona delante de una barra al 15% con un
+         texto fijo, sin boton para volver.
+
+         Tres piezas, y ninguna adivina progreso:
+
+           . LIMITE_MS  el corte duro. Pasado ese tiempo abortamos nosotros y
+                        lo decimos; es mejor un fallo explicado que una espera
+                        infinita.
+           . ESTADOS    lo que se lee mientras se espera. Cada linea habla del
+                        estado de la peticion o de NUESTRO limite, que son las
+                        dos unicas cosas que sabemos de verdad. Ninguna dice
+                        "revisando DNS" ni ensena un porcentaje.
+           . motivoCorte  distingue el corte por limite del "Cancelar y volver".
+                        No son el mismo suceso: uno merece explicacion, el otro
+                        no —la persona ya sabe por que volvio—.               */
+      var LIMITE_MS = 45000;
+      /* La velocidad tarda ~20s medidos, pero corre con el informe ya en
+         pantalla: puede permitirse mas aire sin que nadie espere mirando. */
+      var LIMITE_VELOCIDAD_MS = 75000;
+
+      var ESTADOS = [
+        [0, 'Conectando con tu sitio…'],
+        [10000, 'Seguimos esperando la respuesta de tu sitio.'],
+        [30000, 'Si no responde en 15 segundos, cancelamos y te lo decimos.']
+      ];
+
+      var peticionActual = null,   // AbortController de la peticion en vuelo
+        relojLimite = null,
+        relojEstado = null,
+        motivoCorte = '';
+
+      function limpiarRelojes() {
+        if (relojLimite) { clearTimeout(relojLimite); relojLimite = null; }
+        if (relojEstado) { clearTimeout(relojEstado); relojEstado = null; }
+      }
+
+      function terminarEspera() {
+        limpiarRelojes();
+        peticionActual = null;
+      }
+
+      function narrarEspera(i) {
+        if (!status || !ESTADOS[i]) return;
+        status.textContent = ESTADOS[i][1];
+        if (!ESTADOS[i + 1]) return;
+        relojEstado = setTimeout(function () {
+          narrarEspera(i + 1);
+        }, ESTADOS[i + 1][0] - ESTADOS[i][0]);
+      }
+
+      /* Indeterminada: hay una peticion en vuelo y no sabemos cuanto le falta.
+         Es la unica barra honesta para este momento. */
+      function arrancarEspera() {
+        limpiarRelojes();
+        motivoCorte = '';
+        peticionActual = new AbortController();
+        if (barCaja) barCaja.classList.add('kv-bar--indet');
+        if (bar) bar.style.width = '';
+        narrarEspera(0);
+        relojLimite = setTimeout(function () {
+          motivoCorte = 'limite';
+          if (peticionActual) peticionActual.abort();
+        }, LIMITE_MS);
+        return peticionActual.signal;
+      }
+
+      /* Determinada y llena: ya llego la respuesta. Es el unico numero que la
+         barra llega a mostrar, y es cierto. */
+      function cerrarEspera(texto) {
+        terminarEspera();
+        if (barCaja) barCaja.classList.remove('kv-bar--indet');
+        if (bar) bar.style.width = '100%';
+        if (status && texto) status.textContent = texto;
+      }
+
+      function volverAlFormulario(motivo) {
+        terminarEspera();
+        if (barCaja) barCaja.classList.remove('kv-bar--indet');
+        if (bar) bar.style.width = '';
+        errEl.textContent = motivo || '';
+        show(welcome);
+        /* El dominio que ya escribio NO se pierde: cancelar no puede costarle
+           teclearlo otra vez. Y si se abandona la apertura de un informe
+           guardado, se limpia el ?s= de la direccion — si no, recargar
+           reintentaria justo lo que se acaba de cancelar. */
+        if (dominio) urlIn.value = dominio;
+        if (/[?&]s=/.test(location.search) && window.history && history.replaceState) {
+          try { history.replaceState(null, '', location.pathname); } catch (e) { }
+        }
+        urlIn.focus();
+      }
+
+      if (cancelar) {
+        cancelar.addEventListener('click', function () {
+          motivoCorte = 'cancelado';
+          if (peticionActual) peticionActual.abort();
+          volverAlFormulario('');
+        });
+      }
 
       /* ---- Panel de resultados reales -------------------------------------
          Solo se usa cuando API !== null. Traduce la respuesta de scan.php al
@@ -770,6 +904,71 @@
         if (code) code.textContent = f.evidence;
 
         return det;
+      }
+
+      /* ---- La lista de hallazgos, que ya no se destruye sola ---------------
+         A los ~20s llega la velocidad y renderDashboard vuelve a correr. La
+         version anterior hacia `finds.innerHTML = ''` y repintaba con
+         `abierto = (i === 0)`: a quien tuviera abierto el cuarto hallazgo se le
+         cerraba en la cara, y si estaba con el teclado dentro perdia el foco.
+         Lo sabiamos: dos lineas mas abajo hay un comentario que evita subir el
+         scroll "porque puede estar abajo leyendo", y aun asi le arrancabamos el
+         DOM de debajo.
+
+         Ahora la lista se compara antes de tocarla:
+
+           . MISMOS HALLAZGOS, EN EL MISMO ORDEN -> no se toca nada. Es el caso
+             normal (la velocidad casi siempre corrige puntajes, no la lista),
+             y significa que el repintado deja la lista exactamente como estaba:
+             lo abierto abierto, el foco donde estaba, cero parpadeo.
+           . LA LISTA CAMBIO (PageSpeed puede sumar hallazgos de LCP o CLS) ->
+             se reconstruye, pero recordando que <details> estaban abiertos y
+             devolviendo el foco al mismo hallazgo si lo tenia.
+
+         El primero solo se abre solo en el PRIMER pintado. Despues manda lo que
+         la persona haya decidido, incluido cerrarlo todo.                    */
+      function pintarHallazgos(finds, findings) {
+        var idsNuevos = findings.map(function (f) { return String(f.id || f.title || ''); });
+        var actuales = [].slice.call(finds.querySelectorAll('.find'));
+        var abiertos = {}, enfocado = null;
+
+        actuales.forEach(function (d) {
+          var id = d.getAttribute('data-id') || '';
+          if (d.open) abiertos[id] = true;
+          if (d.contains(document.activeElement)) enfocado = id;
+        });
+
+        var mismos = actuales.length === idsNuevos.length &&
+          actuales.every(function (d, i) { return (d.getAttribute('data-id') || '') === idsNuevos[i]; });
+        if (mismos && actuales.length) return;
+
+        var primerPintado = actuales.length === 0;
+        finds.innerHTML = '';
+
+        /* Caso vacio antes que el caso feliz: sin hallazgos hay que decir que
+           no es un fallo del analisis, y a donde ir a ver el detalle. */
+        if (!findings.length) {
+          var vacio = document.createElement('div');
+          vacio.className = 'find-vacio';
+          vacio.textContent = 'Sin hallazgos — tu presencia digital está en buena forma. Mira el detalle de cada revisión en Pilares.';
+          finds.appendChild(vacio);
+          return;
+        }
+
+        findings.forEach(function (f, i) {
+          var det = findingRow(f, primerPintado ? (i === 0) : !!abiertos[idsNuevos[i]]);
+          det.setAttribute('data-id', idsNuevos[i]);
+          finds.appendChild(det);
+        });
+
+        if (enfocado) {
+          [].slice.call(finds.querySelectorAll('.find')).some(function (d) {
+            if ((d.getAttribute('data-id') || '') !== enfocado) return false;
+            var cab = d.querySelector('summary');
+            if (cab) cab.focus();
+            return true;
+          });
+        }
       }
 
       /* ---- Qué se revisa en cada pilar -------------------------------------
@@ -939,6 +1138,58 @@
         });
       }
 
+      /* ---- Los cuatro pilares en el Resumen --------------------------------
+         El indice y los pilares vivian en vistas distintas y no se veian nunca
+         juntos; y la lista de Oportunidades solo enumera los pilares CON
+         hallazgos, asi que un pilar sano desaparecia del Resumen por completo.
+         Esta fila contesta de un vistazo la pregunta que sigue al numero
+         grande: "¿y en que estoy bien y en que no?".
+
+         SIEMPRE LAS CUATRO FILAS. Las sanas y las que no se pudieron medir.
+         Un pilar sin medir sale con una raya y con el motivo escrito al lado
+         —"Sin medir", o "Midiendo la velocidad de carga" mientras PageSpeed
+         responde—, nunca con un cero: no medido y medido-y-dio-cero son
+         estados distintos, y pintar el primero como el segundo es acusar al
+         sitio de algo que no comprobamos.
+
+         El subtitulo y el peso salen de pillars[clave].label / .weight, o sea
+         del backend, que es el unico sitio donde estan escritos una sola vez.
+         Si un pilar no viene en la respuesta, la fila se pinta igual como no
+         medida y sin peso: mejor una fila honesta que una que falta.        */
+      function renderPilaresResumen(pillars, valores) {
+        var cont = document.getElementById('kvPilaresFila');
+        if (!cont) return;
+        cont.innerHTML = '';
+
+        valores.forEach(function (v) {
+          var pilar = pillars[v.clave] || null;
+          var fila = document.createElement('div');
+          fila.className = 'rp' + (v.medido ? '' : ' rp--sin');
+          fila.innerHTML =
+            '<span class="rp-nom"></span>' +
+            '<span class="rp-num"></span>' +
+            '<span class="rp-tubo"><i></i></span>' +
+            '<span class="rp-sub"></span>';
+
+          fila.querySelector('.rp-nom').textContent = NOMBRE_PILAR[v.clave];
+          fila.querySelector('.rp-num').textContent = v.medido ? v.valor : '—';
+          /* Ancho calculado a partir del dato, que es la excepcion admitida
+             para un `style` en linea (igual que el stroke-dashoffset de los
+             anillos). */
+          fila.querySelector('.rp-tubo i').style.width = (v.medido ? v.valor : 0) + '%';
+
+          var peso = (pilar && pilar.weight != null)
+            ? 'pesa ' + Math.round(pilar.weight * 100) + '% del índice'
+            : '';
+          var izq = v.medido
+            ? ((pilar && pilar.label) || '')
+            : (v.midiendo ? 'Midiendo la velocidad de carga' : 'Sin medir en esta pasada');
+          fila.querySelector('.rp-sub').textContent = [izq, peso].filter(Boolean).join(' · ');
+
+          cont.appendChild(fila);
+        });
+      }
+
       function gradeLabel(g) {
         return { A: 'Excelente', B: 'Bien encaminado', C: 'Necesita atención', D: 'Urgente', F: 'Crítico' }[g] || '';
       }
@@ -1013,18 +1264,17 @@
 
         renderChecklist(pillars, findings, imagenCompleta, imagenScore, speed, midiendoVelocidad);
 
+        /* Los mismos cuatro numeros del gauge, subidos al Resumen. Se arma con
+           `pares` para que no haya dos verdades sobre qué se pudo medir. */
+        renderPilaresResumen(pillars, [
+          { clave: 'visibilidad', valor: pares[0][2], medido: pares[0][3], midiendo: false },
+          { clave: 'imagen', valor: pares[1][2], medido: pares[1][3], midiendo: midiendoVelocidad },
+          { clave: 'confianza', valor: pares[2][2], medido: pares[2][3], midiendo: false },
+          { clave: 'operacion', valor: pares[3][2], medido: pares[3][3], midiendo: false }
+        ]);
+
         var finds = document.querySelector('.finds');
-        if (finds) {
-          finds.innerHTML = '';
-          if (findings.length) {
-            findings.forEach(function (f, i) { finds.appendChild(findingRow(f, i === 0)); });
-          } else {
-            var vacio = document.createElement('div');
-            vacio.className = 'find-vacio';
-            vacio.textContent = 'Sin hallazgos — tu presencia digital está en buena forma. Mira el detalle de cada revisión en Pilares.';
-            finds.appendChild(vacio);
-          }
-        }
+        if (finds) pintarHallazgos(finds, findings);
 
         /* ---- Pie del índice ----------------------------------------------
            Antes decía "Promedio de empresas similares: 74 · estás 16 puntos
@@ -1046,21 +1296,34 @@
           var sinMedir = pares.filter(function (p, i) {
             return !p[3] && !(midiendoVelocidad && i === 1);
           }).length;
-          var base = sinMedir > 0
-            ? 'Análisis parcial: ' + (sinMedir === 1 ? 'un pilar no se pudo medir' : sinMedir + ' pilares no se pudieron medir')
-              + ' en tu sitio, así que el puntaje sale solo de los demás.'
-            : 'Tu puntaje pondera cuatro pilares: operación 40%, imagen 25%, '
-              + 'visibilidad 20% y confianza 15%. Cada hallazgo trae la evidencia que lo prueba.';
-          if (midiendoVelocidad) {
-            base = 'Estamos midiendo la velocidad de carga; el puntaje de Imagen y el total '
-              + 'se ajustan solos en unos segundos. Lo demás del informe ya está completo. '
-              + base;
-          }
           /* PageSpeed se cae por su cuenta más seguido de lo que uno querría
              (límites de cuota, sitios que tardan demasiado). Decirlo es más
-             honesto que dejar creer que la velocidad entró en el puntaje. */
-          if (speed && speed.pagespeed === 'failed') {
-            base += ' No pudimos medir la velocidad de carga en esta pasada; el resto sí.';
+             honesto que dejar creer que la velocidad entró en el índice. */
+          var velocidadFallo = !!(speed && speed.pagespeed === 'failed');
+          var base;
+          /* Cuando el ÚNICO pilar sin medir es Imagen y el motivo es que
+             PageSpeed no respondió, decirlo dos veces —"un pilar no se pudo
+             medir en tu sitio" y además "no pudimos medir la velocidad"—
+             cargaba al sitio de la persona con una falla que es nuestra. Se
+             dice una sola vez y con el motivo real. Se quitó también el "en tu
+             sitio" del caso general por lo mismo: no sabemos de quién es la
+             culpa, solo que no se midió. */
+          if (velocidadFallo && sinMedir === 1 && !pares[1][3]) {
+            base = 'No pudimos medir la velocidad de carga en esta pasada, así que Imagen y el '
+              + 'índice salen del resto de señales. Lo demás del informe está completo.';
+          } else if (sinMedir > 0) {
+            base = 'Análisis parcial: ' + (sinMedir === 1 ? 'un pilar no se pudo medir' : sinMedir + ' pilares no se pudieron medir')
+              + ', así que el índice sale solo de los demás.';
+            if (velocidadFallo) base += ' No pudimos medir la velocidad de carga en esta pasada; el resto sí.';
+          } else {
+            base = 'Tu índice pondera cuatro pilares: operación 40%, imagen 25%, '
+              + 'visibilidad 20% y confianza 15%. Cada hallazgo trae la evidencia que lo prueba.';
+            if (velocidadFallo) base += ' No pudimos medir la velocidad de carga en esta pasada; el resto sí.';
+          }
+          if (midiendoVelocidad) {
+            base = 'Estamos midiendo la velocidad de carga; el índice de Imagen y el total '
+              + 'se ajustan solos en unos segundos. Lo demás del informe ya está completo. '
+              + base;
           }
           pie.textContent = base;
         }
@@ -1239,19 +1502,26 @@
         mostrarAvisoTemporal(scan.guardado === true);
       }
 
-      /* ---- Panel temporal: guardar y compartir ---------------------------
+      /* ---- Qué hacer con este informe: enlace y cuenta --------------------
          El diagnóstico ya está completo y sin candados, así que aquí no se
-         cambia información por un correo. Lo que se ofrece es que el análisis
-         no se pierda. Es una diferencia que se nota en el copy y que sostiene
-         la decisión del 23 de julio de no recortar el gratis. */
+         cambia información por un correo. Lo que se ofrece es el enlace —que
+         es lo que de verdad conserva el informe— y, aparte, una cuenta que lo
+         deja a nombre de quien lo corrió.
+
+         LAS DOS RAMAS DICEN LO MISMO. Antes no: la de abajo (se llegó por
+         enlace) escribía la verdad —"Este informe está guardado, puedes volver
+         a este enlace"— y el marcado de arriba decía "Este panel es temporal,
+         se borra al cerrar la pestaña" a 40 px del botón que copia justamente
+         ese enlace. El mismo componente contándose dos historias. */
       var scanIdActual = null;
 
       function mostrarAvisoTemporal(yaGuardado) {
         var aviso = document.getElementById('kvTemporal');
         if (!aviso || !scanIdActual) return;
         if (yaGuardado) {
-          /* Se llegó por enlace: el informe ya existe en la base, así que
-             "temporal" sería mentira. Se ofrece analizar otro sitio. */
+          /* Se llegó por enlace: no hay nada que reclamar ni que copiar que la
+             persona no tenga ya, así que la única acción útil es otro
+             análisis. */
           confirmarGuardado('Este informe está guardado.',
             'Puedes volver a este enlace cuando quieras.');
           return;
@@ -1278,8 +1548,13 @@
         if (scanIdActual) {
           try { localStorage.removeItem('kaiva_reclamo_' + scanIdActual); } catch (e) { }
         }
+        /* Decía "La próxima vez, inicia sesión y lo tendrás aquí". No hay
+           ningún "aquí": no existe endpoint que liste los análisis de una
+           cuenta ni pantalla que los enseñe. Lo que sí es cierto es que el
+           análisis quedó atado a la cuenta y que el enlace es la forma de
+           volver a él, con sesión o sin ella. */
         confirmarGuardado('Cuenta creada.',
-          'Guardamos este análisis en tu cuenta. La próxima vez, inicia sesión y lo tendrás aquí.');
+          'Este análisis quedó a tu nombre. Guarda el enlace: es la forma de volver a abrirlo.');
       };
 
       function confirmarGuardado(titulo, detalle) {
@@ -1307,13 +1582,13 @@
          sitio no responde tiene que revisar la dirección, y si se cayó algo
          nuestro no es culpa suya y no tiene sentido hacerle perder el tiempo. */
       function analizarDeVerdad(v) {
-        bar.style.width = '15%';
-        status.textContent = 'Conectando con el sitio...';
+        var senal = arrancarEspera();
 
         fetch(API + '/scan.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ url: v })
+          body: JSON.stringify({ url: v }),
+          signal: senal
         })
           .then(function (r) { return r.json(); })
           .then(function (scan) {
@@ -1322,7 +1597,10 @@
               e.codigo = scan.code || '';
               throw e;
             }
-            bar.style.width = '100%';
+            /* Fase 1 cerrada: es el unico 100% que la barra llega a enseñar, y
+               es cierto. La fase 2 —la velocidad— la cuenta el pie del indice
+               con el informe ya delante. */
+            cerrarEspera('Informe listo.');
 
             if (scan.pagespeed !== 'pending') {
               return renderDashboard(scan.domain, scan, null);
@@ -1348,23 +1626,54 @@
                con o sin velocidad, que es justo para lo que se escribio. */
             renderDashboard(scan.domain, scan, null, true);
 
+            /* La segunda fase tambien tiene limite. Sin el, si speed.php se
+               colgaba el pie del indice se quedaba para siempre diciendo
+               "estamos midiendo la velocidad... se ajusta solo en unos
+               segundos": una promesa que no se cumple nunca, en la pantalla
+               donde el producto pide que se le crea. Su AbortController es
+               propio y NO es el de la espera: aqui ya no hay pantalla de carga
+               que cancelar, hay un informe delante. */
+            var ctrlVelocidad = new AbortController();
+            var relojVelocidad = setTimeout(function () { ctrlVelocidad.abort(); }, LIMITE_VELOCIDAD_MS);
+
             return fetch(API + '/speed.php', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ scan_id: scan.scan_id })
+              body: JSON.stringify({ scan_id: scan.scan_id }),
+              signal: ctrlVelocidad.signal
             })
               .then(function (r) { return r.json(); })
               .catch(function () { return null; })
               .then(function (speed) {
-                /* Si PageSpeed falla no se repinta nada: el informe que ya
-                   esta en pantalla es correcto, y el pie sigue diciendo que
-                   la velocidad quedo fuera. Repintar con speed=null solo
-                   volveria a animar los mismos numeros sin motivo. */
-                if (speed && speed.ok) renderDashboard(scan.domain, scan, speed);
+                clearTimeout(relojVelocidad);
+                if (speed && speed.ok) { renderDashboard(scan.domain, scan, speed); return; }
+                /* Ni respondio ni respondio bien. Antes no se repintaba nada
+                   —"el informe que ya esta en pantalla es correcto"—, pero no
+                   lo era del todo: seguia anunciando una medicion en curso que
+                   ya no existe. Se repinta con el fallo declarado para que
+                   Imagen diga "sin medir" y el pie explique por que. La lista
+                   de hallazgos no se reconstruye: pintarHallazgos ve que es la
+                   misma y la deja intacta. */
+                renderDashboard(scan.domain, scan, { ok: false, pagespeed: 'failed' });
               });
           })
           .catch(function (err) {
+            /* Cancelar no es un error y no se registra como tal: la persona
+               pulso un boton y ya esta de vuelta en el formulario con su
+               dominio escrito. Salir por aqui antes de nada evita ademas que
+               el catch le pinte un motivo encima de lo que acaba de decidir. */
+            if (motivoCorte === 'cancelado') return;
+
             console.error('[kaiva] diagnóstico:', err);
+
+            /* Nuestro propio corte a los 45s. Se explica como lo que es —una
+               espera que pasamos de un limite que ponemos nosotros— y no como
+               un fallo del sitio de la persona, que no sabemos si lo es. */
+            if (motivoCorte === 'limite') {
+              volverAlFormulario('El análisis pasó de 45 segundos sin respuesta y lo detuvimos. '
+                + 'Vuelve a intentarlo; si se repite, puede que el sitio esté tardando demasiado en contestar.');
+              return;
+            }
 
             /* Si el informe YA esta en pantalla, lo que fallo fue la segunda
                fase —la velocidad— y no hay nada que anunciar: el panel es
@@ -1391,9 +1700,7 @@
               motivo = err.message || 'No pudimos completar el análisis. Inténtalo de nuevo en un momento.';
             }
 
-            errEl.textContent = motivo;
-            show(welcome);
-            urlIn.focus();
+            volverAlFormulario(motivo);
           });
       }
 
@@ -1481,27 +1788,29 @@
 
         target.textContent = 'Abriendo tu informe guardado';
         show(loading);
-        bar.style.width = '40%';
-        status.textContent = 'Recuperando el análisis...';
+        /* Misma espera con salida y con limite que la del analisis nuevo: un
+           enlace guardado puede colgarse igual que un escaneo, y antes esta
+           rama dejaba la barra clavada en 40% sin forma de volver. */
+        var senal = arrancarEspera();
 
-        fetch(API + '/informe.php?s=' + encodeURIComponent(sid))
+        fetch(API + '/informe.php?s=' + encodeURIComponent(sid), { signal: senal })
           .then(function (r) { return r.json(); })
           .then(function (inf) {
             if (!inf.ok) throw new Error(inf.error || 'no se pudo abrir');
-            bar.style.width = '100%';
+            cerrarEspera('Informe listo.');
             dominio = inf.domain;
             renderDashboard(inf.domain, inf, null);
           })
           .catch(function (err) {
+            if (motivoCorte === 'cancelado') return;
             console.error('[kaiva] informe guardado:', err);
             /* Un enlace roto no puede dejar a la persona mirando una barra de
                progreso: se la devuelve al formulario con el motivo, y la URL
-               se limpia para que refrescar no repita el fallo. */
-            errEl.textContent = 'Ese informe ya no está disponible. Puedes correr el análisis otra vez.';
-            if (window.history && history.replaceState) {
-              try { history.replaceState(null, '', location.pathname); } catch (e) { }
-            }
-            show(welcome);
+               se limpia (lo hace volverAlFormulario) para que refrescar no
+               repita el fallo. */
+            volverAlFormulario(motivoCorte === 'limite'
+              ? 'Tu informe tardó más de 45 segundos en abrir y detuvimos la espera. Vuelve a cargar el enlace.'
+              : 'Ese informe ya no está disponible. Puedes correr el análisis otra vez.');
           });
       })();
 
@@ -1639,24 +1948,11 @@
           </div>
         </div>
 
-        <!-- Aviso de panel temporal.
-             Nace oculto y lo enciende el guion al pintar el informe, porque
-             hasta entonces no hay nada que guardar. Dice la verdad literal: el
-             panel se pinta en memoria y desaparece al cerrar la pestaña. Lo
-             que se ofrece a cambio de la cuenta NO es información —el
-             diagnóstico ya está completo y sin candados— sino que el análisis
-             no se pierda y quede a mano la próxima vez. -->
-        <div class="kv-temp" id="kvTemporal" hidden>
-          <div class="kv-temp-txt">
-            <b>Este panel es temporal.</b>
-            <span>Se borra al cerrar la pestaña. Crea tu cuenta gratuita para guardarlo y
-              volver cuando quieras.</span>
-          </div>
-          <div class="kv-temp-acciones">
-            <button type="button" class="kv-temp-btn" id="kvGuardar">Guardar análisis</button>
-            <a class="kv-temp-link" id="kvCopiar" href="#" role="button">Copiar enlace</a>
-          </div>
-        </div>
+        <!-- Aqui vivia el aviso #kvTemporal, ENCIMA de .app-grid: lo primero
+             que se leia al terminar un analisis era una advertencia de perdida
+             y un boton de registro, no el indice que la persona vino a buscar.
+             Se movio al final del panel, debajo de los resultados, que es donde
+             tiene sentido preguntar "¿y esto como me lo llevo?". -->
 
         <!-- Aqui vivia un SEGUNDO formulario de cuenta, gemelo del que hay en
              el modal de sesion. "Guardar análisis" lo desplegaba aqui dentro.
@@ -1680,7 +1976,19 @@
             <div class="side-brand">
               Kaiva Studio.
             </div>
-            <div class="side-item active" data-ir="secResumen" role="button" tabindex="0">
+            <!-- LOS CINCO SON <button>, no <div>.
+                 Las tres primeras eran <div role="button" tabindex="0"> con un
+                 handler de teclado escrito a mano; las dos con candado ni eso:
+                 <div onclick=...> sin role, sin tabindex y sin teclado, y son
+                 la UNICA puerta al modal del Panel Pro — con teclado no habia
+                 forma de abrirlo.
+                 Un <button> trae gratis lo que alli se reescribia mal: foco,
+                 Enter, Espacio, papel de control para el lector de pantalla y
+                 el anillo de foco de tokens.css. Lo que NO hereda —fuente,
+                 ancho, alineacion y fondo— se lo devuelve `.side-item` en
+                 monitor.css; sin esas cuatro lineas un button sale en la fuente
+                 del sistema, encogido al texto y centrado. -->
+            <button type="button" class="side-item active" data-ir="secResumen">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                 stroke-linejoin="round">
                 <rect x="3" y="3" width="7" height="9" />
@@ -1689,24 +1997,24 @@
                 <rect x="3" y="16" width="7" height="5" />
               </svg>
               Resumen
-            </div>
-            <div class="side-item" data-ir="secPilares" role="button" tabindex="0">
+            </button>
+            <button type="button" class="side-item" data-ir="secPilares">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                 stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10" />
                 <path d="m4.9 19.1 14.2-14.2M12 2v20M2 12h20" />
               </svg>
               Pilares
-            </div>
-            <div class="side-item" data-ir="secHallazgos" role="button" tabindex="0">
+            </button>
+            <button type="button" class="side-item" data-ir="secHallazgos">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                 stroke-linejoin="round">
                 <circle cx="11" cy="11" r="8" />
                 <path d="m21 21-4.3-4.3" />
               </svg>
               Hallazgos
-            </div>
-            <div class="side-item locked" onclick="window.openLockedModal()" style="cursor:pointer">
+            </button>
+            <button type="button" class="side-item locked" onclick="window.openLockedModal()">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                 stroke-linejoin="round">
                 <path d="M12 20V10M18 20V4M6 20v-4" />
@@ -1717,8 +2025,8 @@
                 <rect x="5" y="11" width="14" height="10" rx="2" />
                 <path d="M8 11V7a4 4 0 0 1 8 0v4" />
               </svg>
-            </div>
-            <div class="side-item locked" onclick="window.openLockedModal()" style="cursor:pointer">
+            </button>
+            <button type="button" class="side-item locked" onclick="window.openLockedModal()">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                 stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10" />
@@ -1730,15 +2038,14 @@
                 <rect x="5" y="11" width="14" height="10" rx="2" />
                 <path d="M8 11V7a4 4 0 0 1 8 0v4" />
               </svg>
-            </div>
+            </button>
 
-            <!-- Sidebar Help box -->
-            <div class="side-help">
-              <img src="../assets/KaivaMora1.webp" alt="Mora" class="help-robot">
-              <h4>¿Necesitas ayuda?</h4>
-              <p>Te ayudamos a interpretar tus resultados.</p>
-              <a href="/#contacto" class="help-link">Agendar sesión</a>
-            </div>
+            <!-- Aqui vivia la tarjeta "¿Necesitas ayuda? · Agendar sesion", que
+                 apuntaba a /#contacto: el MISMO destino que el boton de la
+                 tarjeta "Da el siguiente paso" del pie del panel. Dos llamadas
+                 comerciales a la vez, a la misma cita, en la misma pantalla.
+                 Queda una sola, y va donde tiene sentido: al final, cuando ya
+                 se leyo el informe. El menu lateral vuelve a ser solo menu. -->
           </aside>
 
           <!-- Panel Main Content -->
@@ -1842,6 +2149,33 @@
               </div>
 
             </div><!-- /panel-top-row -->
+
+            <!-- ===== Los cuatro pilares, en el Resumen =====
+                 POR QUE ESTA AQUI. El indice vivia en Resumen y los pilares en
+                 otra vista: no se veian nunca juntos. Y "Oportunidades" solo
+                 nombra los pilares CON hallazgos, asi que un pilar sano no
+                 aparecia en ninguna parte del Resumen —quien abria su informe
+                 no podia contestar "¿como estoy en los cuatro?" sin cambiar de
+                 vista y contar a mano.
+
+                 SIEMPRE LOS CUATRO. Los sanos tambien, y los que no se
+                 pudieron medir salen con una raya y la palabra "sin medir",
+                 nunca con un cero: no medido y medido-y-dio-cero son estados
+                 distintos, y confundirlos es acusar al sitio de algo que no
+                 comprobamos.
+
+                 La fila la pinta renderPilaresResumen() con los mismos numeros
+                 del gauge; el subtitulo y el peso salen del backend
+                 (pillars[x].label / .weight), que es de donde tienen que salir
+                 para que no vuelva a haber dos versiones del mismo pilar. -->
+            <div class="pcard">
+              <div class="ph">
+                <span class="lbl">Tus cuatro pilares</span>
+                <button type="button" class="link-detail" onclick="window.kvIrA('secPilares')">Ver qué
+                  revisamos</button>
+              </div>
+              <div class="res-pilares" id="kvPilaresFila"></div>
+            </div>
             </div><!-- /vista Resumen -->
 
             <!-- ===== Vista: Pilares ===== -->
@@ -1857,18 +2191,19 @@
                 <div class="pillars-grid">
 
                   <!-- Pillar 0: Visibilidad — "no me encuentran" -->
-                  <div class="g-cell lead-cell">
+                  <!-- Iba con `lead-cell` (celda tenida de violeta) y su anillo
+                       en degradado, mientras los otros tres iban planos. Ningun
+                       dato justificaba el realce: Visibilidad es, de hecho, el
+                       pilar de MENOR peso (20%). Destacar uno de los cuatro por
+                       decoracion es justo lo contrario de lo que esta vista
+                       tiene que dejar hacer —compararlos de un vistazo—, asi
+                       que los cuatro se pintan igual. -->
+                  <div class="g-cell">
                     <div class="marc">
                       <svg viewBox="0 0 100 100">
                         <circle class="track" cx="50" cy="50" r="43" stroke-width="8"></circle>
-                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="url(#gdInk)"
+                        <circle class="fill" cx="50" cy="50" r="43" stroke-width="8" stroke="#0f172a"
                           stroke-linecap="round" pathLength="100" id="ringP0"></circle>
-                        <defs>
-                          <linearGradient id="gdInk" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stop-color="#0f172a"></stop>
-                            <stop offset="100%" stop-color="#475569"></stop>
-                          </linearGradient>
-                        </defs>
                       </svg>
                       <div class="mnum" id="scoreP0">0</div>
                     </div>
@@ -1953,8 +2288,43 @@
 
             </div><!-- /vista Hallazgos -->
 
+            <!-- ===== Qué hacer con este informe =====
+                 ESTABA ARRIBA DEL TODO, encima del índice. Ahora va aquí, bajo
+                 los resultados y en las tres vistas: la pregunta "¿cómo me
+                 llevo esto?" se hace después de leer, no antes.
+
+                 Y DECÍA LO CONTRARIO DE LO QUE PASA. El texto era "Este panel
+                 es temporal · Se borra al cerrar la pestaña", a 40 px de un
+                 botón "Copiar enlace" que demuestra justo lo contrario: el
+                 informe se guarda en la base y tiene dirección propia (?s=...),
+                 que es lo que la rama de al lado de este mismo componente
+                 —confirmarGuardado(), cuando se llega por enlace— ya escribía
+                 bien: "Este informe está guardado. Puedes volver a este enlace
+                 cuando quieras". Las dos ramas dicen ahora lo mismo.
+
+                 EL ORDEN DE LOS BOTONES CAMBIA con el texto. El sólido era
+                 "Guardar análisis" (crear cuenta); ahora es "Copiar enlace",
+                 que es lo que de verdad conserva el informe hoy. La cuenta pasa
+                 a acción secundaria y promete solo lo que cumple: dejar este
+                 análisis a tu nombre. No hay ningún "aquí" donde verlos —no
+                 existe endpoint que liste los análisis de un usuario— y el
+                 texto ya no lo insinúa. -->
+            <div class="kv-temp" id="kvTemporal" hidden>
+              <div class="kv-temp-txt">
+                <b>Este informe tiene su propio enlace.</b>
+                <span>Cópialo y vuelve cuando quieras, con cuenta o sin ella. Crear una deja este
+                  análisis a tu nombre.</span>
+              </div>
+              <div class="kv-temp-acciones">
+                <button type="button" class="kv-temp-btn" id="kvCopiar">Copiar enlace</button>
+                <button type="button" class="kv-temp-link" id="kvGuardar">Crear cuenta gratis</button>
+              </div>
+            </div>
+
             <!-- "Da el siguiente paso": queda fuera de las vistas, visible en
-                 las tres. Es la única salida comercial del panel. -->
+                 las tres. Es la única salida comercial del panel — la tarjeta
+                 gemela del menú lateral, que llevaba al mismo /#contacto, se
+                 retiró. -->
             <div class="pcard cta-card">
                 <div class="cta-card-content">
                   <div>
@@ -1976,68 +2346,14 @@
                 <img src="../assets/KaivaMora1.webp" alt="Mora Robot con pantalla" class="cta-robot float-robot">
             </div>
 
-            <!-- Bottom Banner (Features list) -->
-            <div class="footer-banner">
-
-              <div class="fb-item">
-                <span class="fb-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                    <path d="m22 4-10 10.01-3-3" />
-                  </svg>
-                </span>
-                <div class="fb-info">
-                  <b>Análisis 100% automatizado</b>
-                  Datos precisos analizados en tiempo real.
-                </div>
-              </div>
-
-              <div class="fb-item">
-                <span class="fb-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                  </svg>
-                </span>
-                <div class="fb-info">
-                  <b>Basado en +50 factores</b>
-                  Técnicos, de contenido, correo y SEO.
-                </div>
-              </div>
-
-              <div class="fb-item">
-                <span class="fb-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21.21 15.89A10 10 0 1 1 8 2.83M22 12A10 10 0 0 0 12 2v10z" />
-                  </svg>
-                </span>
-                <!-- Decía "Benchmark de tu industria · Comparación con promedio
-                     de competidores". La comparación con la competencia es del
-                     Panel Pro, que ni siquiera existe todavía: se anunciaba
-                     como incluido algo que nadie recibía. -->
-                <div class="fb-info">
-                  <b>Sin registro ni tarjeta</b>
-                  Escribes tu dominio y ya. Nada que crear.
-                </div>
-              </div>
-
-              <div class="fb-item">
-                <span class="fb-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="m4.93 4.93 14.14 14.14M12 2v20M2 12h20" />
-                  </svg>
-                </span>
-                <div class="fb-info">
-                  <b>Resultados accionables</b>
-                  Priorización clara de tareas de mejora.
-                </div>
-              </div>
-
-            </div>
+            <!-- Aqui vivia .footer-banner: cuatro fichas de venta ("Análisis
+                 100% automatizado · Datos precisos", "Basado en +50 factores",
+                 "Sin registro ni tarjeta", "Resultados accionables") cerrando
+                 el panel de RESULTADOS. Son argumentos de portada, dichos a
+                 quien ya compro el argumento y esta leyendo su informe; y dos
+                 de ellos son afirmaciones sin evidencia detras, que es justo lo
+                 que este producto dice no hacer. Ademas era la cuarta caja
+                 blanca apilada del panel. Fuera entero, con su CSS. -->
 
           </div>
 
@@ -2062,9 +2378,13 @@
        que ya estabas. Cero movimiento, cero señal de que el clic sirvió.
 
        Ahora cada entrada muestra su propia vista y oculta las demás, que es
-       lo que un menú lateral promete. Se marcan role="button" y tabindex
-       para que respondan también con teclado: son controles, y un <div> no
-       lo es para un lector de pantalla si no se le dice. */
+       lo que un menú lateral promete.
+
+       Y ya no hace falta simular el teclado: las cinco entradas son <button>
+       de verdad, así que Enter y Espacio los atiende el navegador. Aquí había
+       un handler de keydown escrito a mano (que dos de las cinco entradas no
+       tenían) y un `style.cursor = 'pointer'` puesto por JS; los dos se
+       borran, que es lo que pasa cuando se usa el elemento correcto. */
     (function () {
       var items = [].slice.call(document.querySelectorAll('.side-item[data-ir]'));
       var vistas = [].slice.call(document.querySelectorAll('.panel .view'));
@@ -2087,11 +2407,7 @@
       }
 
       items.forEach(function (item) {
-        item.style.cursor = 'pointer';
         item.addEventListener('click', function () { ir(item); });
-        item.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ir(item); }
-        });
       });
 
       /* Para que otras partes del panel puedan cambiar de vista sin duplicar
@@ -2224,14 +2540,20 @@
         if (modo === 'registro' && panelRegistro) {
           mostrarModo('registro');
           /* El subtítulo dice la verdad de cada caso. Con un análisis en
-             pantalla, la cuenta sirve para no perderlo; sin análisis, la
-             cuenta se crea igual (reclamo_token es opcional en la API) y lo
-             que se promete es solo lo que se cumple. */
+             pantalla, la cuenta lo deja a nombre de quien lo corrió; sin
+             análisis, la cuenta se crea igual (reclamo_token es opcional en la
+             API) y lo que se promete es solo lo que se cumple.
+
+             Decía "Tus análisis quedan guardados aquí" y "para que no se pierda
+             al cerrar la pestaña". Las dos frases prometen algo que no existe:
+             no hay endpoint que liste los análisis de una cuenta, ni pantalla
+             que los muestre, y el informe no se pierde al cerrar la pestaña
+             —tiene enlace propio y funciona sin cuenta—. */
           var pendiente = window.kaivaReclamoPendiente ? window.kaivaReclamoPendiente() : null;
           if (registroSub) {
             registroSub.textContent = pendiente
-              ? 'Guardamos este análisis en tu cuenta para que no se pierda al cerrar la pestaña.'
-              : 'Gratis para siempre. Sin tarjeta. Tus análisis quedan guardados aquí.';
+              ? 'Este análisis queda a tu nombre. Su enlace sigue funcionando igual, con cuenta o sin ella.'
+              : 'Gratis para siempre. Sin tarjeta.';
           }
           if (regErr) regErr.textContent = '';
           if (regNombre) regNombre.focus();
@@ -2253,9 +2575,12 @@
       if (abrir) abrir.addEventListener('click', function () { abrirModal('entrar'); });
       if (panelSesion) panelSesion.addEventListener('click', function () { abrirModal('entrar'); });
 
-      /* "Guardar análisis" del panel de resultados. Ya no despliega un
-         formulario propio: abre este modal en modo registro, y el reclamo del
-         análisis viaja solo (lo lee el envío, más abajo). */
+      /* "Crear cuenta gratis" del panel de resultados (#kvGuardar). Ya no
+         despliega un formulario propio: abre este modal en modo registro, y el
+         reclamo del análisis viaja solo (lo lee el envío, más abajo). Se
+         llamaba "Guardar análisis" y era el botón sólido de la tarjeta; ahora
+         el sólido es "Copiar enlace", que es lo que de verdad conserva el
+         informe hoy. */
       if (btnGuardar) btnGuardar.addEventListener('click', function () { abrirModal('registro'); });
 
       /* Ir y volver entre las dos caras, sin cerrar ni recargar nada. */
