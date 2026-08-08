@@ -28,7 +28,7 @@
     });
   </script>
   <script defer src="/assets/consentimiento.js?v=20260729"></script>
-  <script defer src="/assets/eventos.js?v=20260729"></script>
+  <script defer src="/assets/eventos.js?v=20260807"></script>
   <script defer src="/assets/clarity.js?v=20260729"></script>
 
   <title>Kaiva Studio | Agencia digital en Barranquilla: web y software</title>
@@ -328,7 +328,7 @@
        @font-face, que va emparejado con los preload de las fuentes.
        El <link> es bloqueante y esta en el <head>, asi que no hay flash de
        contenido sin estilo: la pagina pinta ya con la hoja aplicada. -->
-  <link rel="stylesheet" href="/assets/portada.css?v=20260806e">
+  <link rel="stylesheet" href="/assets/portada.css?v=20260807a">
 </head>
 
 <body>
@@ -358,14 +358,47 @@
 
   <!-- ============ HERO ============ -->
   <header class="hero" id="top">
-    <!-- El orden del hero es titular, trabajo, texto y botones: la vitrina
-         entra justo debajo del titular para que la prueba llegue antes que la
-         explicación. Por eso la copia va partida en dos bloques con la vitrina
-         en medio, y no en un solo bloque. -->
+    <!-- ORDEN DEL HERO — no volver a partirlo en dos.
+         Antes iba titular · vitrina · texto · botones, con la idea de que la
+         prueba llegara antes que la explicación. Medido en la página de verdad,
+         eso dejaba el botón en 898 px en escritorio (1280×800) y en 686 px en
+         móvil: FUERA de la primera pantalla en los dos casos. Quien entraba
+         veía un titular que no dice a qué nos dedicamos y tres capturas, y
+         ninguna forma de escribirnos sin bajar. 175 visitas, cero contactos.
+         Ahora la primera pantalla contesta las tres preguntas de quien acaba de
+         llegar —qué hacemos, para quién, y qué tiene que hacer si quiere
+         hablar— y la vitrina va debajo como prueba de lo que se acaba de
+         prometer. Si se toca esto, el botón se queda por encima del pliegue. -->
     <div class="wrap hero-grid">
       <div class="hero-copy hero-centered">
-        <p class="hero-eyebrow reveal">Estudio digital</p>
-        <h1 class="h1 hero-title split" data-split>Construimos la presencia digital que tu empresa <span style="color:var(--violet)">merece<span class="dot">.</span></span></h1>
+        <p class="hero-eyebrow reveal">Kaiva Studio · Estudio digital</p>
+        <h1 class="h1 hero-title split" data-split>Páginas web y <span style="color:var(--violet)">software a medida</span> para empresas de Colombia y Latinoamérica<span class="dot">.</span></h1>
+        <p class="hero-sub reveal" style="--d:.45s">Sitios que Google encuentra, tiendas que venden y plataformas
+          internas hechas a la medida de tu operación.</p>
+
+        <!-- UN SOLO BOTÓN. La alternativa (el diagnóstico) va justo debajo como
+             enlace de texto, no como segundo botón: dos botones del mismo peso
+             reparten el clic y ninguno se lleva la decisión. El destino es
+             #contacto, que es la conversión que de verdad se mide. -->
+        <div class="hero-ctas reveal" style="--d:.55s">
+          <a href="#contacto" class="btn btn-violet btn-lg" data-cta="hero">Cuéntanos tu proyecto
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+        </div>
+        <p class="hero-alt reveal" style="--d:.6s">¿Todavía no sabes qué necesitas?
+          <a href="/monitor/">Diagnostica tu web gratis en 60 segundos</a>
+        </p>
+
+        <div class="hero-note reveal" style="--d:.65s">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          Respondemos el mismo día · Presupuesto claro antes de empezar.
+        </div>
       </div>
     </div>
 
@@ -433,34 +466,13 @@
       </ul>
     </div>
 
-    <div class="wrap">
-      <div class="hero-copy hero-centered hero-tail">
-        <!-- El orden de los servicios aquí sí importa: el software va primero
-             porque es la línea que sostiene los tickets altos, y quien busca
-             software llega con menos resistencia al precio que quien busca
-             "una página". Barranquilla salió de esta línea a propósito: la
-             ciudad se trabaja en su propia página (/diseno-web/barranquilla/),
-             no encogiendo la portada a un mercado de dos millones. -->
-        <p class="hero-sub reveal" style="--d:.5s">Software a medida, páginas web, tiendas online y marca
-          para empresas de Colombia y América Latina.</p>
-        <div class="hero-ctas reveal" style="--d:.6s">
-          <a href="/monitor/" class="btn btn-violet">Diagnóstico gratis
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
-              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M7 17 17 7M9 7h8v8" />
-            </svg>
-          </a>
-          <a href="#trabajo" class="btn btn-ghost">Ver nuestro trabajo</a>
-        </div>
-        <div class="hero-note reveal" style="--d:.7s">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 6 9 17l-5-5" />
-          </svg>
-          Gratis · Sin registro · Resultado en 60 segundos.
-        </div>
-      </div>
-    </div>
+    <!-- El pie de la vitrina es la única copia que queda debajo: una línea que
+         nombra las tres líneas de trabajo, no un segundo bloque de titular con
+         sus propios botones. Barranquilla sigue fuera a propósito: la ciudad se
+         trabaja en su propia página (/diseno-web/barranquilla/), no encogiendo
+         la portada a un mercado de dos millones. -->
+    <p class="hero-proof reveal" style="--d:.85s">Trabajo real, en producción — software a medida, sitios web
+      y marca.</p>
   </header>
 
   <!-- ============ STATEMENT ============ -->

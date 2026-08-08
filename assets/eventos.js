@@ -23,6 +23,9 @@
 
    Eventos que manda
    -----------------
+   · clic_cta_principal  — clic en el botón principal del hero (el único
+                           botón de la primera pantalla). Separa "nadie
+                           pulsa" de "pulsan y no envían".
    · inicia_diagnostico  — clic hacia /monitor/ o /diagnostico/. Es el
                            evento que más importa: el lead magnet.
    · contacto_whatsapp   — clic en el enlace de WhatsApp.
@@ -90,6 +93,18 @@
 
     if (href.indexOf('mailto:') === 0) {
       mandar('contacto_correo', { zona: zona(a) });
+      return;
+    }
+
+    /* Botón principal del hero. Hace falta medirlo aparte del envío del
+       formulario: el panel decía "175 sesiones, 0 conversiones" y con solo
+       generate_lead no hay forma de saber si el problema es que nadie pulsa
+       el botón o que lo pulsan y luego abandonan el formulario. Son dos
+       arreglos distintos y sin este evento no se distinguen.
+       Se engancha a data-cta y no al href para que siga midiendo si mañana
+       el botón apunta a otro sitio. */
+    if (a.hasAttribute && a.hasAttribute('data-cta')) {
+      mandar('clic_cta_principal', { zona: a.getAttribute('data-cta'), etiqueta: texto });
       return;
     }
 

@@ -505,7 +505,11 @@
       /* Ya no fuerzo 100svh: con la vitrina debajo de la copia, el alto lo
          marca el contenido. Antes el hero era media pantalla de texto y el
          100svh evitaba que asomara la sección siguiente; ahora sobra alto. */
-      padding: clamp(7rem, 11vw, 9.5rem) 0 clamp(3rem, 5vw, 5rem);
+      /* El padding de arriba se recortó de 7rem a 5rem en móvil: son 32 px que
+         se le quitan al aire muerto entre el nav y el titular y se le suman al
+         presupuesto de la primera pantalla, que es donde tiene que caber el
+         botón. En escritorio sobra alto y se queda igual. */
+      padding: clamp(5rem, 9vw, 9.5rem) 0 clamp(3rem, 5vw, 5rem);
       position: relative;
       background: #ffffff;
       /* La rejilla se sale por los lados si no se recorta: el hero ocupa el
@@ -672,20 +676,17 @@
     }
 
     .hero-title {
-      /* El aire hasta la vitrina lo pone .showcase; aquí sobra. */
-      margin-bottom: 0;
-    }
-
-    .hero-tail {
-      margin-top: clamp(2rem, 4vw, 3rem);
+      margin-bottom: clamp(1rem, 1.8vw, 1.5rem);
     }
 
     .hero-sub {
-      font-size: clamp(1rem, 1.25vw, 1.15rem);
+      font-size: clamp(1.02rem, 1.25vw, 1.15rem);
       color: var(--ink-soft);
-      line-height: 1.6;
-      max-width: 56ch;
-      margin: 0 auto 2.2rem;
+      line-height: 1.55;
+      /* 52ch en vez de 56ch: la bajada tiene que caber en dos líneas de
+         escritorio y tres de móvil para que el botón no baje. */
+      max-width: 52ch;
+      margin: 0 auto clamp(1.4rem, 2.4vw, 1.9rem);
     }
 
     .hero-ctas {
@@ -696,8 +697,52 @@
       justify-content: center;
     }
 
+    /* El botón del hero es más grande que el resto: es el único de la primera
+       pantalla y tiene que leerse como LA acción, no como un enlace más. */
+    .btn-lg {
+      font-size: 15.5px;
+      padding: 1rem 1.9rem;
+    }
+
+    /* La salida alternativa (el diagnóstico) va de enlace, no de botón: en
+       cuanto se le pone caja compite con el principal y el clic se reparte. */
+    .hero-alt {
+      margin: 0.95rem 0 0;
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    .hero-alt a {
+      color: var(--violet);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1.5px;
+      text-decoration-color: rgba(130, 66, 245, .35);
+      transition: text-decoration-color .25s var(--ease);
+    }
+
+    .hero-alt a:hover {
+      text-decoration-color: var(--violet);
+    }
+
+    /* Pie de la vitrina. Va debajo de las tabletas y no encima: primero se ve
+       el trabajo, luego se le pone nombre. */
+    .hero-proof {
+      position: relative;
+      z-index: 1;
+      margin: clamp(1.2rem, 2.5vw, 1.8rem) auto 0;
+      max-width: 46ch;
+      padding-inline: var(--pad);
+      text-align: center;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--ink-soft);
+    }
+
     .hero-note {
-      margin-top: 1.5rem;
+      margin-top: 1.1rem;
       font-size: 13.5px;
       font-weight: 500;
       color: var(--ink-soft);
@@ -4612,6 +4657,40 @@
     }
 
     @media (max-width:560px) {
+
+      /* ---- HERO EN MÓVIL -------------------------------------------------
+         El presupuesto de la primera pantalla en un teléfono real es de unos
+         600 px útiles: 812 de alto menos la barra del navegador y la del
+         sistema. Ahí dentro tiene que caber titular, bajada y BOTÓN. Con el
+         .h1 de escritorio (clamp con mínimo de 2.4rem, que en 375 px no
+         escala porque el 4.8vw se queda muy por debajo) el titular ocupaba
+         cinco líneas él solo y empujaba el botón fuera.
+         Este clamp sí escala con el ancho: 8.6vw manda entre 320 y 447 px,
+         que es justo el rango de los teléfonos. */
+      .hero-title {
+        font-size: clamp(1.95rem, 8.6vw, 2.4rem);
+        letter-spacing: -0.035em;
+      }
+
+      .hero-sub {
+        font-size: 1rem;
+      }
+
+      /* El botón a todo el ancho: en el pulgar, un objetivo de 253 px centrado
+         es peor que uno que ocupa la columna entera, y además deja claro que
+         es LA acción. */
+      .hero-ctas .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .hero-note {
+        /* Tres cosas separadas por puntos no caben en una línea de 335 px y
+           el flex las apretaba hasta romper el texto. */
+        flex-wrap: wrap;
+        line-height: 1.45;
+      }
+
       .cards-4 {
         grid-template-columns: 1fr
       }
@@ -4643,6 +4722,43 @@
 
       .form-row {
         grid-template-columns: 1fr
+      }
+    }
+
+    /* ---- OBJETIVOS TÁCTILES --------------------------------------------
+       Medido en 375 px: los enlaces del pie miden 17 px de alto y la casilla
+       de privacidad del formulario 17×17. Con el dedo eso es una lotería, y
+       la casilla es obligatoria para enviar el formulario — o sea, está justo
+       en el camino de la única conversión de la página.
+       Va en (pointer:coarse) y no en un ancho: quien navega con ratón no
+       necesita el area extra y en escritorio descuadraría el pie. El gap de
+       la lista se recorta lo mismo que crece el padding, así que la columna
+       ocupa lo que ocupaba. */
+    @media (pointer: coarse) {
+
+      .foot-col ul {
+        gap: 0.25rem;
+      }
+
+      .foot-col a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 40px;
+      }
+
+      .foot-social a {
+        min-height: 40px;
+      }
+
+      /* El area sensible es la etiqueta entera, no el cuadradito: así basta
+         con tocar el texto del consentimiento. */
+      .form-consent {
+        padding-block: 0.35rem;
+      }
+
+      .form-consent input[type="checkbox"] {
+        width: 22px;
+        height: 22px;
       }
     }
 
