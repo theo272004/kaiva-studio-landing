@@ -79,10 +79,26 @@
        51 KB incrustados en el propio HTML: no se cacheaban y viajaban en cada
        visita. Arriba solo se queda el @font-face, que va con los preload. -->
   <link rel="stylesheet" href="/assets/tokens.css?v=20260808c">
-  <link rel="stylesheet" href="/assets/monitor.css?v=20260808d">
+  <link rel="stylesheet" href="/assets/monitor.css?v=20260808e">
 </head>
 
 <body>
+
+  <!-- ===== El anuncio para lectores de pantalla =====
+       EL ANALISIS ENTERO OCURRIA EN SILENCIO. Los avisos importantes de esta
+       pagina —"informe listo", "no pudimos medir la velocidad"— se escribian
+       en #kvStatus, que vive DENTRO de #kvLoading; y #kvLoading pasa de
+       `display: none` a `display: flex` y de vuelta a `none`. Una region viva
+       que aparece y desaparece del render no anuncia de forma fiable: el
+       navegador la trata como region nueva cada vez, y cuando el informe se
+       pinta el elemento entero deja de existir. Resultado medido: quien usa
+       lector de pantalla escribia su dominio y no volvia a enterarse de nada.
+
+       Esta region vive fuera de las tres pantallas, nunca se oculta y nunca se
+       vacia de golpe: es el unico sitio del documento donde un anuncio se
+       puede dar por entregado. `aria-atomic` para que se lea la frase entera y
+       no solo la palabra que cambio. -->
+  <p class="kv-solo-lectores" id="kvAnuncio" role="status" aria-live="polite" aria-atomic="true"></p>
 
   <!-- Cabecera: UNA sola puerta.
        Aquí hubo dos botones, "Iniciar sesión" y "Entrar al panel", uno al
@@ -107,6 +123,151 @@
          puerta: /api/sesion.php reconoce las dos llaves (la cuenta de cliente
          y la del administrador) y, si es la del admin, devuelve a donde ir. -->
   </div>
+
+  <!-- ===== El ayudante de modales, uno para los dos =====
+       LOS DOS MODALES DECLARABAN `aria-modal="true"` Y NINGUNO LO CUMPLIA.
+       Ese atributo es una promesa: "lo que hay detrás de esto no existe
+       mientras yo esté abierto". El DOM decía lo contrario — con Tab se salía
+       del modal a la primera, se recorría la página de abajo (el campo del
+       dominio, el botón de analizar, los enlaces del pie) sin ver nada de
+       ella, y al cerrar el foco se quedaba en el cuerpo del documento, así que
+       el siguiente Tab volvía a empezar desde arriba del todo.
+
+       Tres cosas, y las tres son las mismas que el Panel Pro ya hace bien en
+       su overlay (tool/public/pro/index.php, buscar `inert`):
+
+         1. GUARDAR Y DEVOLVER EL FOCO. Se apunta quién estaba enfocado al
+            abrir y se le devuelve al cerrar. Y se SUELTA antes de devolverlo:
+            al cerrar, el foco está en un botón que acaba de quedar dentro de
+            un contenedor sin pintar; si el elemento de origen ya no existe o
+            no es enfocable, `focus()` no hace nada y el foco se queda clavado
+            en algo invisible. Soltándolo primero, el peor caso es "vuelve al
+            principio del documento", que es recuperable.
+         2. `inert` EN LOS HERMANOS. Los dos modales cuelgan directamente de
+            <body>, así que basta con marcar a los demás hijos de <body>. Es lo
+            que convierte `aria-modal` en verdad y no en promesa: el contenido
+            de detrás deja de ser enfocable, clicable y legible por el lector.
+         3. CICLO DE TAB. Con `inert` puesto, Tab ya no tiene a dónde irse,
+            pero al llegar al último control saltaría al chrome del navegador y
+            volvería por fuera. Se cierra el círculo a mano.
+
+       Escape se atiende AQUÍ y no en `document`: había dos listeners globales,
+       uno por modal, así que una sola pulsación cerraba los dos y —peor— el
+       del Pro se disparaba también con el modal cerrado. Enganchado al
+       diálogo, solo responde el que está abierto.
+
+       Va en su propio <script> y antes de los dos que lo usan: los dos son
+       IIFE con ámbito propio y ninguno ve al otro. -->
+  <script>
+    window.kvModal = (function () {
+      /* Qué se puede enfocar de verdad: lo que el navegador enfocaría con Tab
+         y además está pintado. `offsetParent === null` descarta lo que está
+         dentro de un panel `hidden` — el modal de sesión tiene tres caras y
+         solo una a la vista, y sin este filtro el ciclo de Tab pasaba por los
+         campos de las otras dos. */
+      var SELECTOR = 'a[href], button:not([disabled]), input:not([disabled]), ' +
+        'select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+      function enfocables(raiz) {
+        return [].slice.call(raiz.querySelectorAll(SELECTOR)).filter(function (n) {
+          return n.offsetParent !== null;
+        });
+      }
+
+      /* El estado por diálogo. Un objeto y no un atributo en el DOM: quién
+         tenía el foco es una referencia, no un texto. */
+      var estados = [];
+
+      function estadoDe(dialogo) {
+        for (var i = 0; i < estados.length; i++) {
+          if (estados[i].dialogo === dialogo) return estados[i];
+        }
+        var nuevo = { dialogo: dialogo, foco: null, tecla: null, alCerrar: null };
+        estados.push(nuevo);
+        return nuevo;
+      }
+
+      /* #kvAnuncio queda FUERA a propósito. Es la región viva permanente, y
+         un anuncio dentro de una región inerte no se lee: si algo tuviera que
+         avisar con un modal abierto, el aviso se perdería sin dejar rastro.
+         Es la misma precaución que el overlay del Panel Pro documenta al lado
+         de su `inert`. */
+      function inertar(dialogo, puesto) {
+        [].slice.call(document.body.children).forEach(function (n) {
+          if (n === dialogo || n.tagName === 'SCRIPT' || n.id === 'kvAnuncio') return;
+          if (puesto) { n.setAttribute('inert', ''); }
+          else { n.removeAttribute('inert'); }
+        });
+      }
+
+      return {
+        /* opciones: { foco: elemento al que ir, alCerrar: función } */
+        abrir: function (dialogo, opciones) {
+          if (!dialogo) return;
+          opciones = opciones || {};
+          var st = estadoDe(dialogo);
+          /* Si YA estaba abierto no se vuelve a guardar el foco: el modal de
+             sesión llama aquí otra vez al cambiar de «entrar» a «crear cuenta»
+             y viceversa, y sin esta guarda el origen que hay que devolver
+             pasaría a ser el enlace de dentro del propio modal — que al
+             cerrarlo ya no está a la vista. */
+          var yaAbierto = dialogo.classList.contains('on');
+          if (!yaAbierto) {
+            st.foco = document.activeElement;
+            st.alCerrar = opciones.alCerrar || null;
+            dialogo.classList.add('on');
+            document.body.style.overflow = 'hidden';
+            inertar(dialogo, true);
+          }
+
+          var destino = opciones.foco;
+          if (!destino || destino.offsetParent === null) destino = enfocables(dialogo)[0];
+          if (destino) destino.focus();
+
+          if (!st.tecla) {
+            st.tecla = function (e) {
+              if (e.key === 'Escape') {
+                e.preventDefault();
+                window.kvModal.cerrar(dialogo);
+                return;
+              }
+              if (e.key !== 'Tab') return;
+              var lista = enfocables(dialogo);
+              if (!lista.length) return;
+              var primero = lista[0], ultimo = lista[lista.length - 1];
+              if (e.shiftKey && (document.activeElement === primero || document.activeElement === dialogo)) {
+                e.preventDefault();
+                ultimo.focus();
+              } else if (!e.shiftKey && document.activeElement === ultimo) {
+                e.preventDefault();
+                primero.focus();
+              }
+            };
+            dialogo.addEventListener('keydown', st.tecla);
+          }
+        },
+
+        cerrar: function (dialogo) {
+          if (!dialogo || !dialogo.classList.contains('on')) return;
+          var st = estadoDe(dialogo);
+
+          dialogo.classList.remove('on');
+          document.body.style.overflow = '';
+          inertar(dialogo, false);
+
+          if (document.activeElement && typeof document.activeElement.blur === 'function') {
+            document.activeElement.blur();
+          }
+          if (st.foco && st.foco !== document.body && document.contains(st.foco)
+            && typeof st.foco.focus === 'function') {
+            st.foco.focus();
+          }
+          st.foco = null;
+          if (st.alCerrar) st.alCerrar();
+        }
+      };
+    })();
+  </script>
 
   <!-- Modal de sesión: iniciar sesión o cerrarla. Estructura calcada del
        modal #kvPro (mismo patrón de apertura/cierre con ESC y click fuera),
@@ -169,7 +330,7 @@
            pasándole el reclamo del análisis que se está viendo. Un formulario,
            un camino de envío, un sitio donde arreglar las cosas. -->
       <div id="kvSesionPanelRegistro" hidden>
-        <h2>Crea tu cuenta<span class="dot">.</span></h2>
+        <h2 id="kvSesionTituloRegistro">Crea tu cuenta<span class="dot">.</span></h2>
         <p class="kv-sesion-sub" id="kvSesionRegistroSub">Gratis para siempre. Sin tarjeta.</p>
         <form id="kvCuentaForm" class="kv-lead">
           <label class="kv-lead-lbl" for="kvCuentaNombre">Tu nombre</label>
@@ -199,7 +360,7 @@
 
       <!-- Sesión ya activa: solo queda la opción de salir. -->
       <div id="kvSesionPanelActiva" hidden>
-        <h2>Hola<span id="kvSesionNombre"></span><span class="dot">.</span></h2>
+        <h2 id="kvSesionTituloActiva">Hola<span id="kvSesionNombre"></span><span class="dot">.</span></h2>
         <p class="kv-sesion-sub" id="kvSesionCorreoActivo"></p>
         <button type="button" class="kv-temp-btn" id="kvSesionSalir" style="width:100%; margin-top:1rem;">Cerrar
           sesión</button>
@@ -309,8 +470,8 @@
            Hallazgos. El panel real no tiene mas (Competencia e Historial
            estan con candado), y ensenar pestanas que no existen seria
            prometer producto que no hay. -->
-      <section class="kv-demo" aria-label="Demostracion de la herramienta">
-        <div class="kv-demo-marco">
+      <section class="kv-demo" aria-label="Demostración de la herramienta">
+        <div class="kv-demo-marco" id="kvDemoMarco">
           <div class="kv-app-bar">
             <i></i><i></i><i></i>
             <span class="kv-app-dom">tudominio.com</span>
@@ -472,6 +633,29 @@
             <i class="kv-cursor-eco"></i>
           </span>
         </div>
+
+        <!-- PAUSA (WCAG 2.2.2). Esto son seis animaciones de 26 segundos en
+             bucle infinito, colocadas entre el titular y los cuatro pilares, y
+             hasta hoy no habia forma de pararlas. El criterio lo pide con
+             estas palabras: todo movimiento automatico que dure mas de cinco
+             segundos y conviva con otro contenido tiene que poder pausarse.
+             Y aparte de la norma: quien lee despacio tenia un panel cambiando
+             de pantalla solo a media lectura.
+
+             El estado lo lleva `aria-pressed`, no el texto: asi el lector de
+             pantalla lo anuncia como conmutador y no como dos botones
+             distintos. El texto cambia igual, para quien lo ve. -->
+        <div class="kv-demo-control">
+          <button type="button" class="kv-demo-pausa" id="kvDemoPausa" aria-pressed="false"
+            aria-controls="kvDemoMarco">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+              id="kvDemoPausaIcono">
+              <rect x="6" y="5" width="4" height="14" rx="1" />
+              <rect x="14" y="5" width="4" height="14" rx="1" />
+            </svg>
+            <span id="kvDemoPausaTexto">Pausar la demostración</span>
+          </button>
+        </div>
       </section>
 
       <!-- La nota de privacidad baja aqui, debajo de la animacion.
@@ -585,13 +769,32 @@
   <section class="kv-stage" id="kvLoading">
     <div class="kv-box">
       <img src="../assets/KaivaMora1.webp" alt="" aria-hidden="true" class="kv-loader-robot">
-      <h2>Analizando tu sitio</h2>
+      <!-- `tabindex="-1"` para poder recibir el foco por programa (no con Tab).
+           Al enviar el formulario, #kvWelcome pasa a `display: none` con el
+           foco dentro del botón «Analizar mi sitio»: el foco se cae al <body> y
+           quien navega con teclado se queda sin punto de partida justo cuando
+           empieza la espera. Se manda aquí, al titulo de la pantalla que acaba
+           de entrar. -->
+      <h2 id="kvCargandoTitulo" tabindex="-1">Analizando tu sitio</h2>
       <p class="kv-lead" id="kvTarget">Esto toma unos segundos.</p>
-      <div class="kv-bar kv-bar--indet" id="kvBarCaja"><i id="kvBar"></i></div>
-      <!-- role="status" porque el texto cambia solo con el paso del tiempo:
-           sin el, lo que se escribio para que la espera no fuera muda es mudo
-           igualmente para quien usa lector de pantalla. -->
-      <div class="kv-status" id="kvStatus" role="status">Conectando con tu sitio…</div>
+      <!-- LA BARRA SE DECLARA COMO LO QUE ES. Era un <div> con dos hijos y
+           cero semantica: para un lector de pantalla no habia ninguna barra,
+           solo dos cajas vacias. `role="progressbar"` sin `aria-valuenow` es
+           exactamente como se declara una barra INDETERMINADA, que es lo que
+           esta es mientras scan.php no contesta —no sabemos cuanto falta y no
+           lo vamos a inventar—. Cuando llega la respuesta, cerrarEspera() le
+           pone valuenow=100 y con eso deja de ser indeterminada: el unico
+           numero que esta barra llega a decir, y es cierto. -->
+      <div class="kv-bar kv-bar--indet" id="kvBarCaja" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+        aria-label="Avance del análisis"><i id="kvBar"></i></div>
+      <!-- role="status" y ademas aria-live explicito. El rol ya implica
+           `polite`, pero este elemento entra y sale del render con su seccion
+           (#kvLoading pasa de display:none a flex), y una region viva que
+           aparece asi no siempre se registra a tiempo. Los avisos que de
+           verdad no se pueden perder van tambien a #kvAnuncio, que vive fuera
+           de las pantallas y nunca se oculta. -->
+      <div class="kv-status" id="kvStatus" role="status" aria-live="polite" aria-atomic="true">Conectando con tu sitio…
+      </div>
       <button type="button" class="kv-cancelar" id="kvCancelar">Cancelar y volver</button>
     </div>
   </section>
@@ -619,18 +822,44 @@
         </svg>
       </button>
 
-      <span class="kvpro-tag">Panel Pro · $70.000 COP/mes</span>
+      <!-- FUERA EL PRECIO. Aquí decía "Panel Pro · $70.000 COP/mes" y era la
+           única superficie del producto que publicaba una cifra. La decisión
+           contraria está escrita y fechada en tool/public/pro/en-cola.php
+           (2026-08-05): «NO SE PONE PRECIO. Decisión del dueño: los precios no
+           se publican por ahora. Y aunque se publicaran, prometer una cifra
+           por algo que todavía no se puede comprar es peor que no decir nada —
+           la cifra queda fijada en la cabeza de quien la leyó, y el producto
+           todavía puede cambiar.» El distintivo dice ahora lo mismo que el de
+           esa página: en construcción. -->
+      <span class="kvpro-tag">Panel Pro · En construcción</span>
       <h2 id="kvProTitulo">Esto es una sección del Panel Pro.</h2>
       <p class="kvpro-lead">El diagnóstico que acabas de correr es gratis y completo — no te
         escondemos hallazgos. Lo que el Panel Pro agrega es el <strong>tiempo</strong>: volver a
         medir solo, guardar el historial y avisarte cuando algo se rompa.</p>
 
+      <!-- LA MISMA LISTA QUE en-cola.php, palabra por palabra en lo que
+           promete. Eran dos listas distintas para el mismo producto no
+           lanzado: aquí cinco puntos, allí cuatro, y dos de los de aquí no
+           estaban en ninguna otra parte. Se cayeron los dos que sobraban:
+
+             · «Competencia: tu puntaje al lado del de otros de tu sector» —
+               no existe en la lista canónica y no hay dato detrás. No tenemos
+               promedios por sector; es exactamente la cifra inventada que se
+               quitó del pie del índice por el mismo motivo.
+             · «Informe mensual con qué atender primero» — se solapa con el
+               historial y con los avisos, y añadía una cadencia («mensual»)
+               que nadie ha decidido.
+
+           Y entra el cuarto de en-cola.php, que aquí faltaba: los datos de
+           Google interpretados. Vocabulario según la sección 7 de DESIGN.md:
+           «Re-escaneo» pasa a «volver a medir» (escanear está fuera del
+           glosario) y el «SSL» a «certificado», que es como lo dice la otra
+           página y como lo entiende quien no es técnico. -->
       <ul class="kvpro-list">
-        <li>Re-escaneo automático cada mes, sin que tengas que acordarte.</li>
-        <li>Historial: ves si mejoraste o si algo se dañó, y cuándo.</li>
-        <li>Alertas cuando el SSL vence, el sitio se cae o cambia tu correo.</li>
-        <li>Competencia: tu puntaje al lado del de otros de tu sector.</li>
-        <li>Informe mensual con qué atender primero.</li>
+        <li>Vuelve a medir tu sitio solo, sin que se lo pidas.</li>
+        <li>Historial: si mejoraste o si algo se dañó, y cuándo.</li>
+        <li>Avisos cuando el certificado vence o el sitio se cae.</li>
+        <li>Tus datos de Google interpretados, no otro tablero más.</li>
       </ul>
 
       <p class="kvpro-estado">Todavía no está disponible. Estamos construyéndolo; déjanos tu
@@ -691,6 +920,30 @@
         [welcome, loading].forEach(function (s) { s.classList.remove('on'); });
         el.classList.add('on');
         window.scrollTo(0, 0);
+        /* La pantalla que se acaba de ocultar se lleva el foco consigo. Con la
+           de carga el foco va a su titulo; con la de bienvenida no se toca
+           aqui, porque volverAlFormulario() lo pone en el campo del dominio,
+           que es mejor sitio (se puede corregir y reenviar sin un solo Tab). */
+        if (el === loading) {
+          var titulo = document.getElementById('kvCargandoTitulo');
+          if (titulo) titulo.focus();
+        }
+      }
+
+      /* ---- Decirlo en voz alta -------------------------------------------
+         #kvAnuncio vive fuera de las tres pantallas y nunca se oculta, que es
+         la unica forma de que una region viva funcione aqui: #kvStatus entra y
+         sale del render con #kvLoading, y al pintar el informe deja de existir
+         directamente.
+
+         El truco del espacio final no es capricho. Si el texto que se anuncia
+         es identico al que ya habia —pasa cuando el mismo aviso se repite— el
+         nodo no cambia y el lector no dice nada. Alternar un espacio al final
+         cambia el contenido sin cambiar lo que se oye. */
+      var anuncioEl = document.getElementById('kvAnuncio');
+      function anunciar(texto) {
+        if (!anuncioEl || !texto) return;
+        anuncioEl.textContent = (anuncioEl.textContent === texto) ? texto + ' ' : texto;
       }
 
       /* El dominio que escribió la persona: lo mostramos en el mensaje de
@@ -752,6 +1005,9 @@
       function narrarEspera(i) {
         if (!status || !ESTADOS[i]) return;
         status.textContent = ESTADOS[i][1];
+        /* El primer estado se dice al empezar; los siguientes tambien, porque
+           son justo lo que evita que la espera parezca colgada. */
+        anunciar(ESTADOS[i][1]);
         if (!ESTADOS[i + 1]) return;
         relojEstado = setTimeout(function () {
           narrarEspera(i + 1);
@@ -764,7 +1020,15 @@
         limpiarRelojes();
         motivoCorte = '';
         peticionActual = new AbortController();
-        if (barCaja) barCaja.classList.add('kv-bar--indet');
+        if (barCaja) {
+          barCaja.classList.add('kv-bar--indet');
+          /* Una barra de progreso SIN `aria-valuenow` es, por especificacion,
+             una barra indeterminada: el lector dice "en curso" en vez de
+             inventarse un porcentaje. Es exactamente lo que esta barra es
+             mientras scan.php no contesta. */
+          barCaja.removeAttribute('aria-valuenow');
+          barCaja.setAttribute('aria-busy', 'true');
+        }
         if (bar) bar.style.width = '';
         narrarEspera(0);
         relojLimite = setTimeout(function () {
@@ -778,16 +1042,31 @@
          barra llega a mostrar, y es cierto. */
       function cerrarEspera(texto) {
         terminarEspera();
-        if (barCaja) barCaja.classList.remove('kv-bar--indet');
+        if (barCaja) {
+          barCaja.classList.remove('kv-bar--indet');
+          /* El unico numero que esta barra llega a decir, y es cierto: la
+             peticion termino. */
+          barCaja.setAttribute('aria-valuenow', '100');
+          barCaja.removeAttribute('aria-busy');
+        }
         if (bar) bar.style.width = '100%';
         if (status && texto) status.textContent = texto;
+        anunciar(texto);
       }
 
       function volverAlFormulario(motivo) {
         terminarEspera();
-        if (barCaja) barCaja.classList.remove('kv-bar--indet');
+        if (barCaja) {
+          barCaja.classList.remove('kv-bar--indet');
+          barCaja.removeAttribute('aria-valuenow');
+          barCaja.removeAttribute('aria-busy');
+        }
         if (bar) bar.style.width = '';
         errEl.textContent = motivo || '';
+        /* El motivo ya esta en un `role="alert"`, pero ese elemento vive en la
+           pantalla a la que se ACABA de volver: se acaba de pintar y el aviso
+           se pierde. Se repite por el anuncio permanente. */
+        anunciar(motivo);
         show(welcome);
         /* El dominio que ya escribio NO se pierde: cancelar no puede costarle
            teclearlo otra vez. Y si se abandona la apertura de un informe
@@ -882,9 +1161,14 @@
             '<span class="fb-meta"></span>' +
             '</div>'
             : '') +
+          /* «La prueba» pasa a «La evidencia»: es la palabra del glosario
+             (DESIGN.md, seccion 7) y ademas la que ya usa el resto del
+             producto —la maqueta de la demo dice «Evidencia · _dmarc…» y el
+             hero promete «con la evidencia de cada hallazgo»—. Tres nombres
+             para la misma cosa en la misma pantalla. */
           (f.evidence
             ? '<div class="fb-row prueba">' +
-            '<span class="fb-lbl">La prueba</span>' +
+            '<span class="fb-lbl">La evidencia</span>' +
             '<code class="fb-code"></code>' +
             '</div>'
             : '') +
@@ -1208,10 +1492,16 @@
         var findings = (speed && speed.findings) ? speed.findings : (scan.findings || []);
         var visScore = pillars.visibilidad ? pillars.visibilidad.score : 0;
 
-        var addr = document.getElementById('appAddr');
-        if (addr) {
-          addr.innerHTML = '<span class="verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Verificado</span>';
-          addr.insertBefore(document.createTextNode(dom + ' '), addr.firstChild);
+        /* El dominio va en `.addr-dom` y nada mas. Aqui se reescribia el
+           `innerHTML` de la caja entera para inyectar el sello «Verificado»,
+           que no verificaba nada (ver el comentario del marcado). Ahora se
+           escribe solo el texto, con `textContent` —viene de lo que tecleo la
+           persona— y el `title` lleva el dominio completo por si la caja lo
+           corta con puntos suspensivos, que es lo normal en un telefono. */
+        var addrDom = document.querySelector('#appAddr .addr-dom');
+        if (addrDom) {
+          addrDom.textContent = dom;
+          addrDom.setAttribute('title', dom);
         }
 
         var el = function (id) { return document.getElementById(id); };
@@ -1241,11 +1531,14 @@
            PageSpeed. Lo segundo no es una falla y no debe leerse como tal. */
         var midiendoVelocidad = !!midiendo && !speed;
 
+        /* El quinto valor es el id de la linea de estado visible que sustituye
+           al `title` de hover. Va en la misma tabla que el numero y el anillo
+           para que no haya dos verdades sobre lo que se pudo medir. */
         var pares = [
-          ['scoreP0', 'ringP0', visScore, pillars.visibilidad && pillars.visibilidad.complete !== false],
-          ['scoreP1', 'ringP1', imagenScore, imagenCompleta],
-          ['scoreP2', 'ringP2', pillars.confianza.score, pillars.confianza.complete !== false],
-          ['scoreP3', 'ringP3', pillars.operacion.score, pillars.operacion.complete !== false]
+          ['scoreP0', 'ringP0', visScore, pillars.visibilidad && pillars.visibilidad.complete !== false, 'estadoP0'],
+          ['scoreP1', 'ringP1', imagenScore, imagenCompleta, 'estadoP1'],
+          ['scoreP2', 'ringP2', pillars.confianza.score, pillars.confianza.complete !== false, 'estadoP2'],
+          ['scoreP3', 'ringP3', pillars.operacion.score, pillars.operacion.complete !== false, 'estadoP3']
         ];
 
         var badge = document.querySelector('.score-badge');
@@ -1430,35 +1723,71 @@
         // leyendo y puede estar abajo, en los hallazgos: subirla de golpe
         // seria arrancarle la pagina de las manos.
         if (!panelPintado) window.scrollTo(0, 0);
+
+        /* ---- EL FOCO NO SE PUEDE QUEDAR EN EL AIRE ------------------------
+           Justo arriba se acaba de quitar la clase `on` de #kvLoading, y con
+           ella desaparece del render el boton «Cancelar y volver», que es
+           donde estaba el foco de quien llego hasta aqui con el teclado. El
+           navegador lo devuelve al <body>: el siguiente Tab empieza por el
+           principio del documento, o sea por encima del informe que se acaba
+           de pintar y que era justo lo que se estaba esperando.
+
+           El foco se manda al titulo del informe. Es el primer elemento del
+           panel, lleva el dominio, y desde ahi el Tab recorre el informe en
+           orden. Solo en el PRIMER pintado: el repintado que trae la velocidad
+           ocurre a los 20s con la persona leyendo, y robarle el foco entonces
+           es peor que no hacer nada. */
+        var tituloInforme = el('kvInformeTitulo');
+        if (tituloInforme) tituloInforme.textContent = 'Informe de ' + dom;
+        if (!panelPintado) {
+          anunciar('Informe de ' + dom + ' listo. Índice ' + score + ' de 100.');
+          if (tituloInforme) tituloInforme.focus();
+        }
         panelPintado = true;
 
         var gen = el('scoreGeneral');
         if (gen) countUp(gen, score);
         pares.forEach(function (par) {
           var num = el(par[0]), ring = el(par[1]), val = par[2] || 0, medido = par[3];
+          var estado = el(par[4]);
 
           var tarjeta = num && num.closest ? num.closest('.g-cell') : null;
 
           if (!medido) {
             /* No se pudo medir: raya y anillo vacío. Decir "no lo sabemos"
-               es información; poner un cero es una acusación falsa. */
+               es información; poner un cero es una acusación falsa.
+
+               EL MOTIVO ES TEXTO, NO UN `title`. Iba en un atributo de hover
+               sobre el número: no existe en el móvil, no se puede leer con el
+               dedo y tarda casi un segundo con el ratón. Justo el estado que
+               este producto promete declarar quedaba explicado en el único
+               sitio donde no se puede leer. Ahora es una línea bajo el nombre
+               del pilar, y el `aria-label` del número dice lo mismo para quien
+               no ve la celda entera de un golpe. */
             var enCurso = midiendoVelocidad && par[0] === 'scoreP1';
+            var motivo = enCurso
+              ? 'Midiendo la velocidad de carga…'
+              : 'No pudimos medirlo en esta pasada';
             if (num) {
               num.textContent = '—';
-              num.setAttribute('title', enCurso
-                ? 'Midiendo la velocidad de carga…'
-                : 'No pudimos medir este pilar en tu sitio');
+              num.removeAttribute('title');
+              num.setAttribute('aria-label', motivo);
             }
+            if (estado) estado.textContent = motivo;
             if (ring) ring.style.strokeDashoffset = 100;
             if (tarjeta) tarjeta.style.opacity = enCurso ? '.7' : '.55';
             return;
           }
 
           /* Se limpia lo que dejo el pintado anterior. Sin esto, Imagen se
-             quedaba a media luz y con el titulo de "midiendo" pegado despues
+             quedaba a media luz y con la linea de "midiendo" pegada despues
              de que su numero ya habia llegado. */
           if (tarjeta) tarjeta.style.opacity = '';
-          if (num) num.removeAttribute('title');
+          if (num) {
+            num.removeAttribute('title');
+            num.removeAttribute('aria-label');
+          }
+          if (estado) estado.textContent = '';
 
           if (num) countUp(num, val);
           if (ring) ring.style.strokeDashoffset = 100 - val;
@@ -1907,22 +2236,40 @@
 
   <!-- Panel de resultados. Empieza oculto y lo enciende renderDashboard()
        cuando el backend responde: antes de eso no hay nada que enseñar. -->
-  <section class="tool-shell" style="display:none;">
+  <section class="tool-shell" style="display:none;" aria-labelledby="kvInformeTitulo">
+      <!-- EL PANEL NO TENIA NI UN ENCABEZADO. Ni h1 ni h2: la pantalla mas
+           importante del producto era, para un lector de pantalla, una lista
+           plana de etiquetas sin ninguna estructura por la que saltar. Y hacia
+           falta ademas un sitio al que mandar el foco: al pintar el informe se
+           ocultan #kvWelcome y #kvLoading, asi que el elemento que tenia el
+           foco —el boton «Cancelar y volver»— desaparece del DOM y el foco se
+           cae al <body>. El siguiente Tab empezaba desde el principio de la
+           pagina, por encima del informe recien pintado.
+
+           Es un h1 y no un h2 porque, con el panel en pantalla, el h1 del hero
+           esta oculto: no hay dos titulos de primer nivel a la vez. El texto
+           lo completa renderDashboard() con el dominio. -->
+      <h1 class="kv-solo-lectores" id="kvInformeTitulo" tabindex="-1">Informe de tu sitio</h1>
       <div class="app in" id="app">
 
         <!-- Top App Bar -->
         <div class="app-bar">
           <span class="tl r"></span><span class="tl y"></span><span class="tl g"></span>
-          <span class="addr" id="appAddr">
-            miempresa.com
-            <span class="verified">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-              Verificado
-            </span>
-          </span>
+          <!-- AQUI VIVIA UN SELLO «✓ Verificado» Y NO VERIFICABAMOS NADA.
+               Se escribia para cualquier dominio que alguien escribiera en el
+               campo: no hay comprobacion de propiedad, ni DNS, ni archivo
+               subido, ni correo confirmado — no existe endpoint que haga nada
+               de eso. Era la unica afirmacion de toda la aplicacion sin una
+               evidencia detras, en un producto cuyo argumento entero es que
+               cada hallazgo carga la prueba que lo sostiene. Y encima era
+               invisible donde mas gente lo veria: medido a 375px, el sello
+               terminaba en x=450 dentro de una caja que acababa en 188.
+
+               No se sustituye por otro sello: lo unico cierto —que este es el
+               dominio que se analizo— ya lo dice la caja de la direccion.
+               El dominio va ahora en su propio `.addr-dom`, que es quien
+               trunca con puntos suspensivos. -->
+          <span class="addr" id="appAddr"><span class="addr-dom">miempresa.com</span></span>
           <span class="app-tag">Diagnóstico Digital</span>
 
           <!-- SALIDAS DEL PANEL.
@@ -2067,8 +2414,17 @@
                        resto del sitio y en la respuesta del backend es Salud
                        Digital. Dos nombres para el mismo número confunden. -->
                   <span class="lbl">Índice de Salud Digital</span>
-                  <span class="info"
-                    title="Índice ponderado de cuatro pilares: operación 40%, imagen 25%, visibilidad 20% y confianza 15%.">i</span>
+                  <!-- Era un <span class="info" title="..."> con cursor de
+                       ayuda. El atributo `title` no sale hasta pasado casi un
+                       segundo de hover, no se puede diseñar y EN EL MÓVIL NO
+                       EXISTE: en un teléfono esto era un circulito con una "i"
+                       que no hacía nada al tocarlo. El componente `.pista` del
+                       Panel Pro ya resolvió esto — se porta tal cual, con su
+                       botón de 15px y sus 45px de área táctil. -->
+                  <span class="pista"><button type="button" class="pista-b" aria-expanded="false"
+                      aria-label="Qué es el Índice de Salud Digital">i</button><span class="pista-nota" hidden>Un solo
+                      número sobre cuatro pilares, cada uno con su peso: operación 40&nbsp;%, imagen 25&nbsp;%,
+                      visibilidad 20&nbsp;% y confianza 15&nbsp;%.</span></span>
                 </div>
                 <div class="index-card-content">
                   <div class="index-left">
@@ -2087,8 +2443,10 @@
                   </div>
 
                   <!-- Robot Mora Sitting next to score -->
+                  <!-- alt vacio: es decoracion, y el que traia estaba ademas
+                       en ingles y con el vocabulario viejo («score»). -->
                   <div class="index-robot-box float-robot">
-                    <img src="../assets/KaivaMora1.webp" alt="Mora pointing at score">
+                    <img src="../assets/KaivaMora1.webp" alt="">
                   </div>
                 </div>
 
@@ -2209,6 +2567,11 @@
                     </div>
                     <div class="pn">Visibilidad</div>
                     <div class="pd">Google e IA te encuentran</div>
+                    <!-- El motivo de una raya, escrito donde se lee. Antes iba
+                         en un `title` sobre el número, invisible en el móvil.
+                         Lo llena renderDashboard() y nace vacío: mientras el
+                         pilar se pueda medir, esta línea no ocupa nada. -->
+                    <div class="pd-estado" id="estadoP0"></div>
                     <img src="../assets/KaivaTheo.webp" alt="" class="pillar-robot-img float-robot">
                   </div>
 
@@ -2224,6 +2587,7 @@
                     </div>
                     <div class="pn">Imagen</div>
                     <div class="pd">Cómo te ve quien llega</div>
+                    <div class="pd-estado" id="estadoP1"></div>
                     <img src="../assets/KaivaSara.webp" alt="" class="pillar-robot-img float-robot-slow">
                   </div>
 
@@ -2239,7 +2603,12 @@
                     </div>
                     <div class="pn">Confianza</div>
                     <div class="pd">Si se atreven a escribirte</div>
-                    <img src="../assets/KaivaSara.webp" alt="Sara Robot" class="pillar-robot-img float-robot-slow">
+                    <div class="pd-estado" id="estadoP2"></div>
+                    <!-- alt vacio: los robots son decoracion y sus dos hermanos
+                         ya lo tenian asi. «Sara Robot» y «Mora Robot» no
+                         aportaban nada a quien no ve la imagen; solo alargaban
+                         la lectura de la celda con el nombre de un personaje. -->
+                    <img src="../assets/KaivaSara.webp" alt="" class="pillar-robot-img float-robot-slow">
                   </div>
 
                   <!-- Pillar 3: Operación -->
@@ -2254,7 +2623,8 @@
                     </div>
                     <div class="pn">Operación</div>
                     <div class="pd">Si te escriben y no se pierde</div>
-                    <img src="../assets/KaivaMora1.webp" alt="Mora Robot" class="pillar-robot-img float-robot">
+                    <div class="pd-estado" id="estadoP3"></div>
+                    <img src="../assets/KaivaMora1.webp" alt="" class="pillar-robot-img float-robot">
                   </div>
 
                 </div>
@@ -2274,8 +2644,15 @@
               <div class="pcard" id="secHallazgos">
                 <div class="ph">
                   <span class="lbl">Hallazgos principales</span>
-                  <span class="info"
-                    title="Problemas técnicos y comerciales identificados en tu sitio que requieren atención prioritaria.">i</span>
+                  <!-- Mismo cambio de `title` a `.pista`. Y el texto decía
+                       «Problemas técnicos y comerciales identificados…»: en el
+                       glosario de DESIGN.md la palabra es hallazgo, no
+                       problema, y aquí encima daba nombre a la propia tarjeta
+                       de Hallazgos. -->
+                  <span class="pista"><button type="button" class="pista-b" aria-expanded="false"
+                      aria-label="Qué es un hallazgo">i</button><span class="pista-nota" hidden>Cada hallazgo es algo
+                      que encontramos en tu sitio, ordenado por gravedad y con la evidencia que lo prueba. Ábrelo para
+                      ver qué te está costando y qué hacer.</span></span>
                 </div>
                 <div class="finds">
                   <!-- Los hallazgos los pinta findingRow() con el análisis
@@ -2343,7 +2720,7 @@
                 </div>
 
                 <!-- Floating Robot inside Card -->
-                <img src="../assets/KaivaMora1.webp" alt="Mora Robot con pantalla" class="cta-robot float-robot">
+                <img src="../assets/KaivaMora1.webp" alt="" class="cta-robot float-robot">
             </div>
 
             <!-- Aqui vivia .footer-banner: cuatro fichas de venta ("Análisis
@@ -2442,29 +2819,30 @@
        temprana de allá dejaría este botón lanzando un error. */
     (function () {
       var modal = document.getElementById('kvPro'),
-        abrePro = document.getElementById('kvProCerrar');
+        botonCerrar = document.getElementById('kvProCerrar');
 
+      /* Abrir y cerrar los delega en window.kvModal (ver el comentario largo
+         de ese <script>, arriba del marcado de este modal). Aqui habia cuatro
+         lineas sueltas —add/remove de la clase y el overflow del body— que
+         declaraban `aria-modal="true"` sin cumplir nada de lo que ese atributo
+         promete: ni foco atrapado, ni foco devuelto, ni el resto de la pagina
+         apagado. El listener de Escape, ademas, colgaba de `document` y se
+         disparaba tambien con el modal cerrado. */
       function cerrarPro() {
-        if (!modal) return;
-        modal.classList.remove('on');
-        document.body.style.overflow = '';
+        window.kvModal.cerrar(modal);
       }
 
       window.openLockedModal = function () {
         if (!modal) { window.location.href = '/#contacto'; return; }
-        modal.classList.add('on');
-        document.body.style.overflow = 'hidden';
-        var campo = document.getElementById('kvWaitMail');
-        if (campo) campo.focus();
+        /* El foco entra en el campo del correo, que es lo unico que se puede
+           hacer aqui. El ciclo de Tab y Escape los pone el ayudante. */
+        window.kvModal.abrir(modal, { foco: document.getElementById('kvWaitMail') });
       };
 
       if (modal) {
-        if (abrePro) abrePro.addEventListener('click', cerrarPro);
+        if (botonCerrar) botonCerrar.addEventListener('click', cerrarPro);
         modal.addEventListener('click', function (e) {
           if (e.target === modal) cerrarPro();
-        });
-        document.addEventListener('keydown', function (e) {
-          if (e.key === 'Escape') cerrarPro();
         });
       }
     })();
@@ -2526,16 +2904,36 @@
       /* El modal tiene tres caras y solo una a la vez: entrar, crear cuenta, y
          la de sesión ya abierta. Antes eran dos y el "crear cuenta" no estaba
          aquí, sino a un scroll de distancia dentro del panel. */
+      /* EL NOMBRE DEL DIALOGO CAMBIA CON SU CARA. `aria-labelledby` apuntaba
+         siempre a #kvSesionTitulo («Inicia sesión»), que vive dentro del panel
+         de entrar: en modo registro o con sesión abierta, ese <h2> está dentro
+         de un contenedor `hidden`, y un dialogo etiquetado por un elemento
+         oculto se anuncia sin nombre. Cada cara apunta ahora al suyo. */
+      var TITULO_DE = {
+        entrar: 'kvSesionTitulo',
+        registro: 'kvSesionTituloRegistro',
+        activa: 'kvSesionTituloActiva'
+      };
+
       function mostrarModo(modo) {
         panelForm.hidden = (modo !== 'entrar');
         if (panelRegistro) panelRegistro.hidden = (modo !== 'registro');
         panelActiva.hidden = (modo !== 'activa');
+        if (TITULO_DE[modo]) modal.setAttribute('aria-labelledby', TITULO_DE[modo]);
       }
 
+      /* Abre por el ayudante compartido: guarda el foco de origen, apaga el
+         resto del documento con `inert`, cicla el Tab dentro de la tarjeta y
+         atiende Escape. Antes eran dos lineas (clase + overflow) bajo un
+         `aria-modal="true"` que no correspondia a nada. El foco se le pasa
+         DESPUES de elegir la cara, porque cada una enfoca un campo distinto y
+         el ayudante descarta lo que no este pintado. */
       function abrirModal(modo) {
-        modal.classList.add('on');
-        document.body.style.overflow = 'hidden';
-        if (usuarioActivo) { mostrarModo('activa'); return; }
+        if (usuarioActivo) {
+          mostrarModo('activa');
+          window.kvModal.abrir(modal, { foco: document.getElementById('kvSesionSalir') });
+          return;
+        }
 
         if (modo === 'registro' && panelRegistro) {
           mostrarModo('registro');
@@ -2556,18 +2954,17 @@
               : 'Gratis para siempre. Sin tarjeta.';
           }
           if (regErr) regErr.textContent = '';
-          if (regNombre) regNombre.focus();
+          window.kvModal.abrir(modal, { foco: regNombre });
           return;
         }
 
         mostrarModo('entrar');
         if (err) err.textContent = '';
-        if (correo) correo.focus();
+        window.kvModal.abrir(modal, { foco: correo });
       }
 
       function cerrarModal() {
-        modal.classList.remove('on');
-        document.body.style.overflow = '';
+        window.kvModal.cerrar(modal);
       }
 
       /* Los listeners envuelven la llamada: pasados directos, el objeto Event
@@ -2610,7 +3007,9 @@
 
       if (cerrar) cerrar.addEventListener('click', cerrarModal);
       modal.addEventListener('click', function (e) { if (e.target === modal) cerrarModal(); });
-      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrarModal(); });
+      /* El listener de Escape sobre `document` se va: lo pone el ayudante
+         sobre el propio diálogo. Había dos, uno por modal, así que una sola
+         pulsación intentaba cerrar los dos aunque solo uno estuviera abierto. */
 
       /* Refleja la cuenta activa en la cabecera y en el modal. Se llama al
          cargar (vía /api/yo.php) y otra vez justo después de entrar o de crear
@@ -2645,8 +3044,8 @@
              producto de que quien es dueño de Kaiva pueda revisar lo que se
              está construyendo sin que un candado se lo impida. Para
              cualquier otra cuenta, sigue sin haber nada real detrás del
-             candado — así que el mensaje deja de ser un argumento de venta
-             ("$70.000 COP/mes") y pasa a ser honesto: todavía no existe. */
+             candado, y el modal lo dice sin vender nada: ni precio ni fecha,
+             igual que en-cola.php. */
           if (u.ve_pro && window.openLockedModal) {
             window.openLockedModal = function () {
               window.alert('Esto todavía no está construido — es lo próximo en el mapa. '
@@ -2693,6 +3092,11 @@
 
               pintarUsuario(res.usuario);
               mostrarModo('activa');
+              /* La cara cambia con el modal ya abierto y el botón que tenía el
+                 foco («Iniciar sesión») acaba de quedar dentro de un panel
+                 `hidden`: el foco se caía al documento y el ciclo de Tab del
+                 modal se quedaba sin punto de partida. */
+              if (salir) salir.focus();
             })
             .catch(function (e) {
               err.textContent = e.message || 'No pudimos iniciar sesión.';
@@ -2757,6 +3161,7 @@
                 return;
               }
               mostrarModo('activa');
+              if (salir) salir.focus();   // mismo caso que al iniciar sesión
             })
             .catch(function (e) {
               console.error('[kaiva] crear cuenta:', e);
@@ -2789,6 +3194,91 @@
        (.kv-paso) a la vista del panel. Esos pasos ya no existen: el recorrido
        guiado por scroll se sustituyo por la demo de @keyframes de arriba, asi
        que el guion salia en su primera linea (`if (!pasos.length) return`). -->
+
+  <!-- ===== Las pistas y la pausa de la demo =====
+       Dos guiones cortos que no tienen nada que ver entre si, pero los dos
+       sustituyen algo que en un telefono no funcionaba. -->
+  <script>
+    /* ---- Pistas ---------------------------------------------------------
+       PORTADO DEL PANEL PRO, no reescrito. Un solo manejador para todas:
+       abren al pulsar, se cierra la anterior, se cierran al pulsar fuera y con
+       Escape. Con raton se abren tambien al pasar por encima, que es mas
+       rapido y no estorba a quien usa el dedo —el dedo no dispara hover—.
+       Funciona igual con raton y con dedo, que es exactamente lo que el
+       atributo `title` del navegador no hacia. */
+    (function () {
+      var pistas = [].slice.call(document.querySelectorAll('.pista'));
+      if (!pistas.length) return;
+
+      function cerrar(menos) {
+        pistas.forEach(function (p) {
+          if (p === menos) return;
+          var b = p.querySelector('.pista-b'), n = p.querySelector('.pista-nota');
+          if (!b || !n) return;
+          n.hidden = true;
+          b.setAttribute('aria-expanded', 'false');
+        });
+      }
+
+      pistas.forEach(function (p) {
+        var b = p.querySelector('.pista-b'), n = p.querySelector('.pista-nota');
+        if (!b || !n) return;
+        b.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var abierta = !n.hidden;
+          cerrar(p);
+          n.hidden = abierta;
+          b.setAttribute('aria-expanded', String(!abierta));
+        });
+        p.addEventListener('mouseenter', function () {
+          cerrar(p);
+          n.hidden = false;
+          b.setAttribute('aria-expanded', 'true');
+        });
+        p.addEventListener('mouseleave', function () {
+          n.hidden = true;
+          b.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      document.addEventListener('click', function () { cerrar(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') cerrar();
+      });
+    })();
+
+    /* ---- Pausar la demo (WCAG 2.2.2) ------------------------------------
+       Seis animaciones de 26s en bucle infinito, entre el titular y los cuatro
+       pilares, y hasta hoy sin ninguna forma de pararlas. El criterio 2.2.2 lo
+       pide para todo movimiento automatico de mas de cinco segundos que
+       conviva con otro contenido.
+
+       Es una PAUSA, no un apagado: `animation-play-state` congela el fotograma
+       en el que va y lo reanuda donde se quedo, asi que quien la para para
+       leer un hallazgo lo sigue teniendo delante. Quitar la animacion la
+       devolveria al primer fotograma, que es lo contrario de lo que se pide.
+
+       El estado va en `aria-pressed` —un conmutador, no dos botones— y el
+       texto y el icono cambian para quien lo ve. */
+    (function () {
+      var boton = document.getElementById('kvDemoPausa'),
+        marco = document.getElementById('kvDemoMarco'),
+        texto = document.getElementById('kvDemoPausaTexto'),
+        icono = document.getElementById('kvDemoPausaIcono');
+      if (!boton || !marco) return;
+
+      var BARRAS = '<rect x="6" y="5" width="4" height="14" rx="1"/>'
+        + '<rect x="14" y="5" width="4" height="14" rx="1"/>';
+      var TRIANGULO = '<path d="M8 5v14l11-7z"/>';
+
+      boton.addEventListener('click', function () {
+        var quieta = marco.classList.toggle('kv-demo--quieta');
+        boton.setAttribute('aria-pressed', String(quieta));
+        if (texto) texto.textContent = quieta ? 'Reanudar la demostración' : 'Pausar la demostración';
+        if (icono) icono.innerHTML = quieta ? TRIANGULO : BARRAS;
+      });
+    })();
+  </script>
 
   <!-- Si llegas desde el home con el dominio ya escrito (/monitor/?d=...),
        el campo aparece lleno para no tener que escribirlo dos veces. -->

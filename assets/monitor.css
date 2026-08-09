@@ -165,7 +165,11 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.95rem 1.5rem;
+      /* Los 1,5rem laterales pasan a `--panel-pad` para que la barra respire
+         igual que el panel de debajo. En un telefono son 16px en vez de 24, y
+         esos 16px se los queda la caja de la direccion, que es lo que aqui
+         iba mas apretado. */
+      padding: 0.95rem var(--panel-pad);
       border-bottom: 1px solid var(--line-strong);
       background: transparent;
     }
@@ -323,7 +327,21 @@
 
     /* Con la barra ya en gris, un campo gris sobre gris desaparecia (#f1f5f9
        sobre #f8fafc). Pasa a blanco con borde de control: se lee como lo que
-       es, la caja de la direccion. */
+       es, la caja de la direccion.
+
+       EL DOMINIO SE CORTABA SIN AVISAR. La caja llevaba `overflow: hidden` y
+       `nowrap` pero no `text-overflow: ellipsis`, asi que un dominio largo se
+       amputaba a media letra: medido en un telefono de 375px, 373px de texto
+       metidos en 97px de caja, sin un solo indicio de que faltaba algo.
+
+       Y el ellipsis no se puede poner aqui: `.addr` es un contenedor flex, y
+       `text-overflow` solo actua sobre el contenido en linea de un bloque. Por
+       eso el dominio se muda a su propio `.addr-dom`, que es quien trunca; lo
+       que vaya al lado queda FUERA del elemento truncable y no puede empujarlo
+       ni desaparecer con el. (Antes ahi vivia el sello "Verificado", que se
+       iba a 450px cuando la caja terminaba en 188: en movil no se veia nunca.
+       Se retiro por otra razon —no habia ninguna verificacion detras— pero la
+       estructura queda preparada para lo que sea que ocupe ese hueco.) */
     .app-bar .addr {
       margin-left: 0.7rem;
       flex: 1;
@@ -343,17 +361,12 @@
       white-space: nowrap;
     }
 
-    .app-bar .addr .verified {
-      margin-left: auto;
-      color: var(--green);
-      background: var(--green-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 0.15rem 0.45rem;
-      border-radius: 6px;
+    .app-bar .addr .addr-dom {
+      flex: 1 1 auto;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .app-tag {
@@ -440,6 +453,13 @@
       flex: none;
     }
 
+    /* 44px DE ALTO. Medido a 375px, este boton daba 35,2 y el enlace de al lado
+       otros 35,2: se pulsan bien con el raton y a medias con el pulgar. El
+       relleno no se toca —cambiarlo movia el ancho del texto—; se pone el
+       minimo y se centra el contenido, que sube el area sensible sin tocar la
+       tipografia. Es el mismo remedio que ya llevaban `.kv-sesion` (≤560px) y
+       `.app-btn` (≤640px) en esta misma hoja, generalizado a los dos botones
+       que se habian quedado fuera. */
     .kv-temp-btn {
       border: 0;
       cursor: pointer;
@@ -448,6 +468,10 @@
       font-family: inherit;
       font-size: 13px;
       font-weight: 600;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       padding: .6rem 1.15rem;
       border-radius: var(--r-ui);
       transition: transform .2s var(--ease-ui), background .2s var(--ease-ui), box-shadow .2s var(--ease-ui);
@@ -472,6 +496,10 @@
       background: none;
       border: 0;
       cursor: pointer;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       padding: .6rem .3rem;
       transition: color .2s var(--ease-ui);
     }
@@ -488,13 +516,20 @@
       margin-bottom: .35rem;
     }
 
+    /* EL BORDE DE UN CAMPO ES UN BORDE DE CONTROL, NO UNA COSTURA.
+       Iba con `--line-strong` (12% de alfa): medido sobre blanco da 1,28:1, y
+       WCAG 1.4.11 pide 3:1 para el limite de cualquier cosa con la que se
+       pueda interactuar. Con un placeholder gris y un borde que no se ve, la
+       caja del campo solo existia para quien ya sabia donde estaba.
+       `--line-control` (32% de alfa, ≈3,03:1) es el token que tokens.css
+       creo exactamente para esto y que aqui todavia no se usaba. */
     .kv-lead-input {
       flex: 1 1 220px;
       min-width: 0;
       font-family: inherit;
       font-size: 14px;
       padding: .6rem .8rem;
-      border: 1px solid var(--line-strong);
+      border: 1px solid var(--line-control);
       border-radius: var(--r-ui);
       background: var(--surface);
       color: var(--ink);
@@ -702,16 +737,22 @@
       color: var(--violet);
     }
 
+    /* La equis del modal: 44px de area tactil y borde de control.
+       Median 32x32 y el borde iba a 1,28:1. Como no lleva texto, ese circulo
+       ES el control —no hay otra pista de que se pueda pulsar—, asi que le
+       aplica 1.4.11 igual que a un campo. Se sube a 44 en vez de agrandar el
+       circulo: el aspa dibujada sigue midiendo 15px, que es lo que pide una
+       equis discreta en la esquina. */
     .kv-sesion-x {
       position: absolute;
       top: 1rem;
       right: 1rem;
-      width: 32px;
-      height: 32px;
+      width: 44px;
+      height: 44px;
       display: grid;
       place-items: center;
       border-radius: 50%;
-      border: 1px solid var(--line-strong);
+      border: 1px solid var(--line-control);
       background: transparent;
       color: var(--ink-soft);
       cursor: pointer;
@@ -737,7 +778,10 @@
     .side {
       background: transparent;
       border-right: 1px solid var(--line-strong);
-      padding: 1.5rem 1rem;
+      /* Vertical con `--panel-pad`, como el panel de al lado; horizontal fijo
+         en --s-4, que es lo que el menu necesita para que la fila activa no
+         toque el filete. */
+      padding: var(--panel-pad) var(--s-4);
       display: flex;
       flex-direction: column;
       gap: 0.2rem;
@@ -785,6 +829,14 @@
       gap: 0.7rem;
       width: 100%;
       text-align: left;
+      /* 44px de alto. Media 38,8 medidos a 375px, y en esa anchura el menu
+         deja de ser una columna lateral para convertirse en la tira horizontal
+         por la que se cambia de vista: es el control que mas se pulsa del
+         panel y el que peor se acertaba. El relleno se queda como estaba —el
+         minimo hace el trabajo— para no mover el ritmo del menu en
+         escritorio, donde las cinco filas pasan de 38,8 a 44 y el bloque crece
+         26px en total. */
+      min-height: 44px;
       padding: 0.65rem 0.8rem;
       border: 0;
       border-radius: var(--r-ui);
@@ -852,8 +904,14 @@
     /* Main Panel */
     /* Gris, como el resto del suelo: era la tercera caja blanca sobre blanca.
        Lo blanco de aqui adentro son las tarjetas, y solo ellas. */
+    /* EL RELLENO SE ADAPTA AL ANCHO. Era 1,5rem fijos: 48px de los 375 de un
+       telefono se iban en aire antes de empezar a leer, y en escritorio se
+       quedaba corto. `--panel-pad` es clamp(1rem, 4vw, 1,8rem) —16px en el
+       movil, 28,8 en pantalla ancha— y existe en tokens.css desde que se
+       escribio, sin que ninguna superficie lo usara; el linter lo listaba como
+       token declarado y sin usar. */
     .panel {
-      padding: 1.5rem;
+      padding: var(--panel-pad);
       display: grid;
       gap: 1.2rem;
       background: var(--canvas);
@@ -901,7 +959,11 @@
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: 18px;
-      padding: 1.3rem;
+      /* Mismo motivo que `.panel`: 1,3rem fijos pasan a `--card-pad`
+         —clamp(1rem, 3,5vw, 1,4rem)—, 16px en telefono y 22,4 en escritorio.
+         Aqui pesa mas que en ninguna otra tarjeta: las filas de revision
+         llevan titulo, nota y etiqueta de severidad en la misma linea. */
+      padding: var(--card-pad);
       min-width: 0;
     }
 
@@ -1061,7 +1123,7 @@
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: 18px;
-      padding: 1.3rem;
+      padding: var(--card-pad);
       display: flex;
       flex-direction: column;
       min-width: 0;
@@ -1082,22 +1144,95 @@
       letter-spacing: 0.06em;
     }
 
-    .pcard .ph .info {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 1px solid var(--line-strong);
-      color: var(--ink-faint);
-      font-size: 11px;
-      font-weight: 700;
-      display: grid;
-      place-items: center;
-      cursor: help;
+    /* ---- Pista: la ayuda que si se ve ------------------------------------
+       PORTADA DEL PANEL PRO, no reinventada (tool/public/pro/index.php).
+       Aqui vivia `.info`: un circulito con `title` y `cursor: help`. El
+       atributo `title` tarda cerca de un segundo en aparecer, no se puede
+       dar estilo y EN MOVIL NO EXISTE — o sea que en el telefono habia dos
+       circulos con una "i" que al tocarlos no hacian absolutamente nada.
+
+       El boton mide 15px porque junto a una micro-etiqueta de 12px cualquier
+       cosa mayor le roba el sitio. Pero 15px no se aciertan con el pulgar, asi
+       que el area que responde se amplia con un pseudoelemento invisible:
+       15 + 15 + 15 = 45px de lado, justo por encima del minimo tactil. Se ve
+       pequeno y se pulsa grande, que es la unica forma de tener las dos. */
+    .pista {
+      position: relative;
+      display: inline-block;
+      margin-left: .3rem;
     }
 
-    .pcard .ph .info:hover {
-      background: rgba(15, 23, 42, 0.03);
-      color: var(--ink-soft);
+    .pista-b {
+      position: relative;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 1px solid var(--line-control);
+      background: var(--surface);
+      color: var(--ink-faint);
+      font: inherit;
+      font-size: 9.5px;
+      font-weight: 800;
+      line-height: 1;
+      cursor: pointer;
+      display: inline-grid;
+      place-items: center;
+      padding: 0;
+      vertical-align: middle;
+      transition: color var(--d-fast) var(--ease-ui), border-color var(--d-fast) var(--ease-ui);
+    }
+
+    .pista-b:hover,
+    .pista-b[aria-expanded="true"] {
+      color: var(--violet);
+      border-color: var(--violet);
+    }
+
+    .pista-b::after {
+      content: "";
+      position: absolute;
+      inset: -15px;
+    }
+
+    /* ANCLADA A LA DERECHA, NO CENTRADA. Aqui difiere del Panel Pro a
+       proposito: alli la pista va a media linea dentro de un <h2>, y centrar
+       la nota bajo el boton es lo correcto. En el monitor las dos pistas viven
+       en una `.ph` con `justify-content: space-between`, o sea SIEMPRE pegadas
+       al borde derecho de la tarjeta; centrada, la mitad de la nota se salia.
+       Medido a 375px con la version centrada: nota de 220px cuyo borde derecho
+       caia fuera de la ventana. Anclada a la derecha cabe entera en las dos
+       pistas y en las dos anchuras. */
+    .pista-nota {
+      position: absolute;
+      z-index: 30;
+      top: calc(100% + 7px);
+      right: 0;
+      left: auto;
+      width: max-content;
+      max-width: 250px;
+      background: var(--ink);
+      color: #fff;
+      /* La familia y el resto, explicitos: la nota vive dentro de una `.ph`
+         que va en mayuscula y con letra espaciada, y sin esto heredaba las dos
+         cosas — una frase de prosa en versalitas. */
+      font-family: var(--sans);
+      font-size: 11.5px;
+      font-weight: 500;
+      line-height: 1.5;
+      letter-spacing: 0;
+      text-transform: none;
+      padding: .55rem .7rem;
+      border-radius: 9px;
+      box-shadow: var(--shadow-pop);
+      white-space: normal;
+    }
+
+    /* En un telefono la tarjeta entera mide poco mas de 300px: la nota se
+       estrecha para no tocar los dos bordes a la vez. */
+    @media (max-width: 560px) {
+      .pista-nota {
+        max-width: 220px;
+      }
     }
 
     /* `.link-detail` nacio para un <a>. La cabecera de "Tus cuatro pilares" lo
@@ -1457,6 +1592,29 @@
       line-height: 1.3;
     }
 
+    /* ---- "No pudimos medirlo", escrito donde se ve ------------------------
+       El estado que este producto promete declarar —lo no medido no es cero—
+       se explicaba en un atributo `title` sobre la raya del anillo. En el
+       telefono ese texto NO EXISTE: quedaba una raya sin explicacion en la
+       vista donde la persona busca su numero, y el motivo real estaba en otra
+       vista (la lista de revisiones de Pilares).
+
+       Ahora es una linea visible bajo el nombre del pilar. Nace vacia y sin
+       ocupar sitio; solo aparece cuando hay algo que decir, asi que las
+       cuatro celdas siguen alineadas cuando todo se midio. */
+    .g-cell .pd-estado {
+      display: none;
+      margin-top: 0.35rem;
+      font-size: 10.5px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--ink-soft);
+    }
+
+    .g-cell .pd-estado:not(:empty) {
+      display: block;
+    }
+
     /* Pillar robots in cells */
     .g-cell .pillar-robot-img {
       width: 42px;
@@ -1548,6 +1706,22 @@
       display: grid;
       gap: 0.8rem;
       padding: 0.1rem 0 1.1rem 3.2rem;
+    }
+
+    /* LA SANGRIA SE VA EN EL TELEFONO.
+       Los 3,2rem (51,2px) alinean el cuerpo del hallazgo bajo el titulo, con el
+       icono de 32px a su izquierda. En escritorio es lo correcto; en un movil
+       de 375px se comia 51 de los 283px de la tarjeta y dejaba la columna de
+       lectura en 232px —medido en el navegador— con la evidencia monoespaciada
+       partiendose cada tres palabras. En 360px quedaba en 217.
+
+       No es un arreglo nuevo: el Panel Pro ya resolvio esto mismo con esta
+       misma regla (tool/public/pro/index.php, @media max-width 620px). El
+       monitor, que es el que usa todo el mundo, se habia quedado sin ella. */
+    @media (max-width: 620px) {
+      .find-body {
+        padding-left: 0;
+      }
     }
 
     .fb-lbl {
@@ -1913,23 +2087,22 @@
       }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        transition-duration: 0.001s !important;
-        animation-duration: 0.001s !important;
-        /* Ver la nota larga en pagina.css: sin la cuenta a 1, acortar la
-           duracion no apaga una animacion `infinite`, la dispara a mil vueltas
-           por segundo. Aqui pegaba en la demo del panel del hero, que va toda
-           de animaciones `26s infinite`: las vistas y las pestanas del menu
-           parpadeaban mientras el cursor y los anillos —que si se apagaban—
-           estaban quietos. */
-        animation-iteration-count: 1 !important;
-      }
+    /* ---- Movimiento reducido: solo lo que tokens.css no cubre --------------
+       Aqui vivia una copia del bloque global —`*` con `transition-duration`,
+       `animation-duration` y `animation-iteration-count: 1`, los tres con
+       `!important`—. Desde que ese bloque esta en assets/tokens.css, que esta
+       hoja carga antes que ella, la copia no anadia nada: mismas propiedades,
+       mismos valores, misma bandera. Dos sitios donde arreglar lo mismo.
 
-      .app {
-        opacity: 1;
-        transform: none;
-      }
+       Se fue tambien `.app { opacity: 1; transform: none }`: `.app` no tiene
+       ni animacion ni transicion que reducir —la opacidad la pone `.app.in`, y
+       de una sola vez—, asi que esa regla no anulaba nada desde hace tiempo.
+
+       Lo que SI se queda es esto: apagar la flotacion de los robots por
+       nombre. Con la regla global sola, `floaty` no se detiene —se ejecuta una
+       vez a 0,001s—, y una vuelta instantanea de una curva que sube y baja
+       deja al robot exactamente donde estaba pero habiendo dado un tiron. */
+    @media (prefers-reduced-motion: reduce) {
 
       .float-robot,
       .float-robot-slow {
@@ -2077,12 +2250,13 @@
     }
 
     /* VA AQUI, DESPUES DE LA REGLA QUE ANULA, y no en el bloque de
-       reduced-motion de mas arriba: son la misma especificidad y gana la
-       ultima. Escrito arriba, el barrido seguia ganando y —con el
-       `animation-duration: .001s` y `animation-iteration-count: 1` globales—
-       la barra daba un salto instantaneo hasta translateX(300%) y desaparecia
-       por el borde derecho, dejando el carril vacio. Es el mismo mecanismo del
-       que avisa la nota de `animation-iteration-count`, una vuelta mas.
+       reduced-motion de mas arriba: `.kv-bar--indet i` contra
+       `.kv-bar--indet i` es la misma especificidad y gana la ultima. Escrito
+       arriba, el barrido seguia ganando y —con el `animation-duration: .001s`
+       y `animation-iteration-count: 1` que tokens.css impone a todo— la barra
+       daba un salto instantaneo hasta translateX(300%) y desaparecia por el
+       borde derecho, dejando el carril vacio. Es el mismo mecanismo del que
+       avisa la nota de `animation-iteration-count`, una vuelta mas.
 
        Con movimiento reducido el carril se llena y se queda quieto: sigue
        diciendo "esto esta en marcha" sin moverse. */
@@ -2145,12 +2319,13 @@
       gap: .6rem;
     }
 
+    /* Mismo caso que `.kv-lead-input`: 1,28:1 contra el 3:1 de WCAG 1.4.11. */
     .kv-wait-input {
       flex: 1;
       min-width: 0;
       padding: .85rem 1.1rem;
       border-radius: var(--r-btn);
-      border: 1.5px solid var(--line-strong);
+      border: 1.5px solid var(--line-control);
       background: var(--surface);
       color: var(--ink);
       font-family: inherit;
@@ -2255,16 +2430,18 @@
       box-shadow: 0 30px 70px rgba(15, 23, 42, .28);
     }
 
+    /* Mismo criterio que `.kv-sesion-x`: 34x34 y 1,28:1 pasan a 44x44 y
+       ≈3,03:1. Los dos modales tienen que cerrarse igual de facil. */
     .kvpro-x {
       position: absolute;
       top: 1rem;
       right: 1rem;
-      width: 34px;
-      height: 34px;
+      width: 44px;
+      height: 44px;
       display: grid;
       place-items: center;
       border-radius: 50%;
-      border: 1px solid var(--line-strong);
+      border: 1px solid var(--line-control);
       background: transparent;
       color: var(--ink-soft);
       cursor: pointer;
@@ -2536,12 +2713,16 @@
     }
 
     /* Campo de dominio */
+    /* El unico campo que rellena quien viene a probar la herramienta, y su
+       borde daba 1,28:1. Con `--line-control` pasa a ≈3,03:1 y cumple 1.4.11.
+       Es ademas el que mas lo necesita: el hero es todo blanco y sin borde
+       visible la caja se disolvia en el fondo. */
     .kv-field {
       display: flex;
       align-items: center;
       gap: .8rem;
       background: var(--surface);
-      border: 1px solid var(--line-strong);
+      border: 1px solid var(--line-control);
       border-radius: 18px;
       padding: .5rem .5rem .5rem 1.2rem;
       box-shadow: var(--shadow-md);
@@ -2730,6 +2911,69 @@
       background: var(--surface);
       box-shadow: var(--shadow-ui), 0 34px 80px -34px rgba(15, 23, 42, .4);
       text-align: left;
+    }
+
+    /* ---- El boton de pausa (WCAG 2.2.2) -----------------------------------
+       Esta demo son seis animaciones de 26s en bucle infinito y no habia
+       ninguna forma de pararlas. El criterio 2.2.2 lo pide literalmente: todo
+       movimiento automatico que dure mas de cinco segundos y corra en paralelo
+       con otro contenido tiene que poder pausarse. No es solo norma: la
+       animacion esta justo debajo del titular y encima de los cuatro pilares,
+       y para quien lee despacio —o le cuesta con el movimiento periferico— es
+       un panel cambiando de pantalla sola mientras intenta leer.
+
+       Va debajo del marco y no encima: flotando sobre la ventana taparia
+       precisamente lo que la demo esta ensenando, y en el tramo del cursor se
+       le cruzaria por delante. */
+    .kv-demo-control {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: .6rem;
+    }
+
+    .kv-demo-pausa {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      /* 44px: es un control como cualquier otro y se pulsa con el pulgar. */
+      min-height: 44px;
+      padding: .5rem .9rem;
+      border: 1px solid var(--line-control);
+      border-radius: var(--r-pill);
+      background: var(--surface);
+      color: var(--ink-soft);
+      font-family: inherit;
+      font-size: var(--t-xs);
+      font-weight: var(--w-semi);
+      cursor: pointer;
+      transition: color var(--d-fast) var(--ease-ui), border-color var(--d-fast) var(--ease-ui);
+    }
+
+    .kv-demo-pausa:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .kv-demo-pausa svg {
+      flex: none;
+    }
+
+    /* Pausa de verdad, no reinicio: `animation-play-state` congela el
+       fotograma en el que va y lo reanuda donde se quedo.
+
+       LA ESPECIFICIDAD IMPORTA. Las animaciones se declaran sobre selectores
+       con atributo (`.kv-vista[data-vista="..."]` = 0,2,0) y el `animation`
+       corto reinicia `animation-play-state` a `running`. El selector de abajo
+       suma dos clases en el ancestro mas la de `:is()` —que pesa lo que su
+       argumento mas fuerte, una clase— y da 0,3,0. Sin eso haria falta un
+       `!important`, que es como se pierde el control de una hoja. */
+    .kv-demo-marco.kv-demo--quieta :is(.kv-app-item,
+      .kv-vista,
+      .kv-a-fill,
+      .kv-hall-cuerpo,
+      .kv-cursor,
+      .kv-cursor-eco) {
+      animation-play-state: paused;
     }
 
     /* ---- Ventana ---- */
@@ -3523,6 +3767,12 @@
       }
 
       .kv-cursor {
+        display: none;
+      }
+
+      /* Sin nada que pausar, el boton seria un control que no hace nada. La
+         demo ya esta quieta en el fotograma del resumen. */
+      .kv-demo-control {
         display: none;
       }
     }
