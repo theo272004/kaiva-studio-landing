@@ -55,7 +55,7 @@
   <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/tokens.css?v=20260808c">
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260808c">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260809b">
 
   <script type="application/ld+json">
 {
@@ -216,6 +216,15 @@
                 código fuente de la página». Busca la palabra <code>noindex</code> con Ctrl+F. Si aparece,
                 ahí está tu problema. Quien te maneja la web lo quita en minutos.</p>
             </div>
+
+            <!-- Salida temprana. Ver .cta-lectura en pagina.css: por qué está
+                 aquí, por qué antes de un <h2> y por qué no se parece a .nota. -->
+            <aside class="cta-lectura" aria-labelledby="cta-lectura-tit">
+              <p class="lbl" id="cta-lectura-tit">Compruébalo en tu sitio</p>
+              <p>Si Google no te encuentra, la causa casi siempre se ve desde fuera. El <strong>Diagnóstico Digital</strong> revisa velocidad, visibilidad y correo, y te da tu Índice de Salud Digital en 60&nbsp;segundos. Gratis y sin registro.</p>
+              <a class="btn btn-violet" href="/monitor/?utm_source=blog&amp;utm_medium=cta-lectura&amp;utm_content=google-no-encuentra-mi-pagina">Ejecutar diagnóstico</a>
+            </aside>
+
 
             <h2>2. El archivo robots.txt está bloqueando el sitio</h2>
 

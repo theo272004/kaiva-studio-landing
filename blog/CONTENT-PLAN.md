@@ -25,6 +25,32 @@ publicar cada día. No es contenido del sitio: es el backlog interno.
   commitear en el repo), commit y push a `main`.
 - Marcar la fila como `Publicado` con la fecha real al terminar, y añadir una
   fila nueva al final de la cola para que nunca se quede vacía.
+- **Cada post lleva su `.cta-lectura`** en el primer tercio, justo antes de un
+  `<h2>`, con `utm_content=<slug>`. El bloque está descrito en `pagina.css`;
+  se copia de cualquier post ya publicado y se adapta su primera frase al
+  tema. La llamada del pie (`.cierre`) se queda donde está.
+- **Cada post necesita al menos un dato propio.** Ver la sección siguiente.
+
+## De dónde salen los temas, y qué hace distinto a un post
+
+Las trece primeras entradas de la cola se eligieron a mano. A partir de aquí
+la cola se alimenta de la demanda que Search Console ya registra, y ningún
+post se publica sin una cifra que hayamos producido nosotros. Las dos cosas
+las gobierna el motor de contenido, que vive fuera de este repositorio
+público porque incluye datos de clientes:
+
+    .claude/skills/motor-de-contenido/
+
+- `SKILL.md` — el ciclo entero, de elegir el tema a medir el resultado.
+- `oportunidades.mjs` — lee un export de Search Console y devuelve los temas
+  donde el sitio ya aparece y no captura nada. **Una búsqueda, una URL**: si
+  el tema ya tiene post, se mejora ese y no se escribe otro.
+- `CASOS.md` — la biblioteca de casos. Es la respuesta a la regla de «sin
+  anécdotas de clientes inventadas»: no se inventan, se documentan.
+- `avisar.mjs` — aviso por IndexNow a Bing y compañía después de publicar.
+  Google no lo usa; para Google sigue siendo el sitemap.
+- `MEDICIONES.md` — la línea de partida de cada post, para poder responder a
+  los treinta días si sirvió.
 
 ## Voz y estilo
 
