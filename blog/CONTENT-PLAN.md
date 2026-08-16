@@ -108,6 +108,7 @@ se comparten — la redacción, no.
 | 4 | 2026-08-02  | IA          | Modelos abiertos (Llama, DeepSeek, Qwen, Mistral): qué cambia para una pyme | IA y tecnología | Publicado (actualizado 2026-08-08) |
 | 4b| 2026-08-08  | IA          | El token bajó 99% y la factura subió: costo por tarea vs precio por token | IA y tecnología | Publicado |
 | 4c| 2026-08-08  | IA          | ChatGPT gratis e ilimitado (GPT-5.6 Luna): qué cambia para tu negocio | IA y tecnología | Publicado |
+| 4d| 2026-08-16  | IA          | Qwen3.8-27B: correr IA local en tu propio PC, y cuándo sale a cuenta | IA y tecnología | Publicado |
 | 5 | pendiente   | Localizado  | Cuánto cuesta una página web en **Chile**                         | Precios          | Pendiente  |
 | 6 | pendiente   | IA          | El "modo IA" y los AI Overviews de Google: qué significa para tu SEO | IA y tecnología | Pendiente |
 | 7 | pendiente   | Localizado  | Cuánto cuesta una página web en **Argentina**                     | Precios          | Pendiente  |
@@ -127,6 +128,7 @@ se comparten — la redacción, no.
 | 21| pendiente   | Localizado  | Mejores agencias de diseño web en **Panamá**                      | Cómo elegir      | Pendiente  |
 | 22| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
 | 23| pendiente   | Localizado  | Mejores agencias de diseño web en **Medellín**                    | Cómo elegir      | Pendiente  |
+| 24| pendiente   | IA          | Cuándo un negocio sí necesita su propio modelo: privacidad, datos regulados y volumen | IA y tecnología | Pendiente |
 
 Cuando la cola llegue al final, seguir el mismo patrón: más países (Panamá,
 Guatemala, República Dominicana, Uruguay...), más ciudades (Medellín,

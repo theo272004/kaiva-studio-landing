@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Analytics con consentimiento previo. Aquí NO se carga el script de
+       Google: solo se fijan los valores por defecto (todo denegado) y se
+       deja que /assets/consentimiento.js lo inyecte si la persona acepta.
+       El razonamiento completo y las normas que lo obligan están comentados
+       arriba de ese archivo. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+  </script>
+  <script defer src="/assets/consentimiento.js?v=20260729"></script>
+  <script defer src="/assets/eventos.js?v=20260729"></script>
+  <script defer src="/assets/indice-blog.js?v=20260731"></script>
+  <script defer src="/assets/clarity.js?v=20260729"></script>
+
+  <title>Qwen3.8-27B: correr IA local en tu PC, y cuándo sale a cuenta</title>
+  <meta name="description"
+    content="Alibaba liberó Qwen3.8-27B el 12 de agosto de 2026: 27B dense, multimodal, 262K de contexto y licencia Apache 2.0. Cuánta memoria pide de verdad, por qué cabe en una tarjeta de consumo y en qué punto tener tu propio modelo sale más barato que pagar por API.">
+  <link rel="canonical" href="https://kaivastudio.com/blog/qwen-3-8-27b-ia-local/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/favicon-96.png?v=20260809" type="image/png" sizes="96x96">
+  <link rel="icon" href="/assets/favicon-192.png?v=20260809" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=20260809">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Kaiva Studio">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:url" content="https://kaivastudio.com/blog/qwen-3-8-27b-ia-local/">
+  <meta property="og:title" content="Qwen3.8-27B: correr IA local en tu PC, y cuándo sale a cuenta">
+  <meta property="og:description"
+    content="27B parámetros, multimodal, Apache 2.0 y 262K de contexto en una máquina de escritorio. Cuánta memoria pide de verdad y a partir de qué volumen deja de ser un capricho.">
+  <meta property="og:image" content="https://kaivastudio.com/assets/blog/qwen-local.webp">
+  <meta property="article:published_time" content="2026-08-16">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Qwen3.8-27B: correr IA local en tu PC, y cuándo sale a cuenta">
+  <meta name="twitter:image" content="https://kaivastudio.com/assets/blog/qwen-local.webp">
+
+  <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/tokens.css?v=20260808c">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260809b">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaivastudio.com/blog/qwen-3-8-27b-ia-local/#post",
+      "headline": "Qwen3.8-27B: correr IA local en tu PC, y cuándo sale a cuenta",
+      "description": "Alibaba liberó Qwen3.8-27B el 12 de agosto de 2026: 27B dense, multimodal, 262K de contexto y licencia Apache 2.0. Cuánta memoria pide de verdad, por qué cabe en una tarjeta de consumo y en qué punto tener tu propio modelo sale más barato que pagar por API.",
+      "datePublished": "2026-08-16",
+      "dateModified": "2026-08-16",
+      "inLanguage": "es-CO",
+      "image": "https://kaivastudio.com/assets/blog/qwen-local.webp",
+      "mainEntityOfPage": "https://kaivastudio.com/blog/qwen-3-8-27b-ia-local/",
+      "author": {
+        "@type": "Organization",
+        "@id": "https://kaivastudio.com/#studio",
+        "name": "Kaiva Studio",
+        "url": "https://kaivastudio.com/"
+      },
+      "publisher": { "@id": "https://kaivastudio.com/#studio" },
+      "isPartOf": { "@id": "https://kaivastudio.com/blog/#blog" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://kaivastudio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://kaivastudio.com/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Qwen3.8-27B en tu propio PC", "item": "https://kaivastudio.com/blog/qwen-3-8-27b-ia-local/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es Qwen3.8-27B y cuándo salió?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es un modelo de inteligencia artificial de Alibaba con 27.000 millones de parámetros, dense (no de mezcla de expertos) y nativamente multimodal: entiende texto, imágenes y video. Los pesos se publicaron con licencia Apache 2.0 el 12 de agosto de 2026, lo que significa que cualquiera puede descargarlo y ejecutarlo en su propia máquina, incluso con fines comerciales. Su contexto nativo es de 262.144 tokens, extensible hasta un millón."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánta memoria hace falta para correr Qwen3.8-27B?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Según la tabla de hardware de Unsloth, la versión de 4 bits pide entre 17 y 19 GB, la de 3 bits entre 13 y 16 GB, la de 2 bits entre 11 y 13 GB, la de 8 bits unos 31 GB y la original sin cuantizar unos 56 GB. Esa cifra es memoria total: VRAM de la tarjeta más RAM del sistema. Un equipo con 16 GB de tarjeta puede correr la versión de 4 bits repartiendo carga con la RAM, pero pierde velocidad frente a tenerla entera en la tarjeta."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Sale más barato tener un modelo local que pagar una API?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende del volumen, y el punto de equilibrio está mucho más arriba de lo que la mayoría de negocios pequeños imagina. Nuestra medición del 29 de julio de 2026 sobre el chat de kaivastudio.com dio unos 6.000 pesos colombianos por cada mil mensajes usando una API con caché de prompt. Una tarjeta de 16 GB capaz de mover este modelo cuesta alrededor de 3.199.000 pesos, así que solo la tarjeta necesita unos 533.000 mensajes para pagarse. Por debajo de unos 15.000 mensajes al mes —unos 500 diarios— la cuenta no cierra."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué un modelo de 27.000 millones de parámetros cabe en una tarjeta de consumo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Por dos motivos. El primero es la cuantización: reducir la precisión de los números del modelo baja mucho su tamaño en disco y en memoria. El segundo, menos conocido, es su arquitectura: de sus 64 capas, solo 16 usan atención completa y las otras 48 son de tipo lineal. La memoria que consume una conversación larga —la caché de claves y valores— la generan sobre todo las capas de atención completa, así que al haber solo un cuarto de ellas el contexto largo pesa mucho menos que en un modelo clásico del mismo tamaño."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+  <nav class="nav" id="nav">
+    <div class="nav-in">
+      <a href="/" class="logo" aria-label="Kaiva Studio — ir al inicio">
+        <img src="/assets/logo-kaiva.png" alt="Kaiva Studio" width="105" height="44">
+      </a>
+      <div class="nav-right">
+        <div class="nav-links" id="navLinks">
+          <a href="/diseno-web/" class="lnk">Diseño web</a>
+          <a href="/software-a-medida/" class="lnk">Software</a>
+          <a href="/branding/" class="lnk">Branding</a>
+          <a href="/blog/" class="lnk" aria-current="page">Blog</a>
+          <a href="/monitor/" class="btn btn-dark">Diagnóstico Gratis</a>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menú" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <article>
+
+      <header class="post-cabecera">
+        <div class="wrap">
+          <nav class="migas" aria-label="Ruta de navegación">
+            <a href="/">Inicio</a><span>/</span><a href="/blog/">Blog</a><span>/</span>Qwen3.8-27B en tu propio PC
+          </nav>
+
+          <div class="post-cabecera-in">
+            <div class="post-cabecera-texto">
+              <p class="fecha"><time datetime="2026-08-16">16 de agosto de 2026</time> · Lectura de 9 minutos</p>
+
+              <h1 class="post-titulo">
+                Un modelo de IA serio ya cabe en un PC de escritorio<span style="color:var(--violet)">.</span>
+                Hicimos la cuenta de cuándo conviene
+              </h1>
+
+              <p class="lead">El 12 de agosto Alibaba publicó los pesos de Qwen3.8-27B y medio internet
+                escribió lo mismo: por fin un modelo de primera línea que corre en tu casa. Es verdad, y es
+                técnicamente notable. Lo que casi nadie puso en la misma página es la aritmética: con el
+                consumo de IA que tiene nuestro propio sitio, la tarjeta de video necesaria tardaría
+                <strong>444 años</strong> en pagarse sola.</p>
+            </div>
+
+            <figure class="post-cabecera-foto">
+              <img src="/assets/blog/qwen-local.webp"
+                alt="Gráfico de Qwen3.8-27B junto a un PC con tarjeta GeForce RTX iluminada y un chat de IA en pantalla, con los rótulos 27B parámetros dense, razonamiento avanzado, privacidad total y funciona en equipos de 12 GB de VRAM"
+                width="1824" height="1024" fetchpriority="high" decoding="async">
+            </figure>
+          </div>
+        </div>
+      </header>
+
+      <div class="section post-cuerpo">
+        <div class="wrap">
+          <div class="articulo">
+
+            <p>Los datos duros primero. Qwen3.8-27B tiene 27.000 millones de parámetros, es
+              <strong>dense</strong> —todos esos parámetros se activan en cada palabra que genera, a
+              diferencia de los modelos de mezcla de expertos, donde solo trabaja una fracción—, entiende
+              imágenes y video de forma nativa, y su ventana de contexto es de 262.144 tokens, extensible
+              hasta un millón. La licencia es <strong>Apache 2.0</strong>: se puede usar en un negocio sin
+              pedirle permiso a nadie.</p>
+
+            <p>En las pruebas que publica el propio equipo saca 61,7 en SWE-bench Pro, 90,3 en
+              LiveCodeBench v6, 89,2 en GPQA Diamond y 84,3 en OSWorld-Verified. Y su afirmación más
+              llamativa no es contra la competencia sino contra sí mismos: dicen que este modelo de 27B
+              <em>supera en conjunto a Qwen3.7-Plus</em>, que era su modelo grande de servidor. Un año atrás,
+              esa frase habría sido ridícula.</p>
+
+            <p>Hasta ahí la noticia. La parte que a un negocio le sirve empieza cuando uno pregunta cuánto
+              cuesta tenerlo puesto.</p>
+
+            <h2>Nuestra factura de IA son 6.000 pesos por cada mil mensajes. La tarjeta cuesta 3.199.000</h2>
+
+            <p>El 29 de julio medimos exactamente cuánto costaría atender con IA el chat de
+              kaivastudio.com. Cada mensaje son unos 2.500 tokens de entrada —la información del estudio, el
+              historial y la pregunta— y unos 150 de salida. Con Haiku 4.5 y caché de prompt, mil mensajes
+              salen por <strong>1,45 dólares</strong>: alrededor de 6.000 pesos colombianos.</p>
+
+            <p>Enfrente, el hardware. Para mover este modelo en su versión de 4 bits hace falta una tarjeta
+              de 16 GB. Una RTX 5060 Ti de 16 GB se consigue hoy en Colombia por
+              <strong>3.199.000 pesos</strong> —consultado el 16 de agosto de 2026 en
+              <a href="https://tauretcomputadores.com/product/tarjeta-de-video-msi-geforce-rtx-5060-ti-ventus-2x-oc-plus-gddr7-16gb"
+                target="_blank" rel="noopener">Tauret Computadores</a>, con IVA incluido—.</p>
+
+            <p>Dividir una cifra por la otra da el número que ningún tutorial de «instala tu IA local» pone:
+              <strong>533.000 mensajes</strong> antes de que la tarjeta se pague. Al tráfico que tiene
+              nuestro sitio, unos cien mensajes al mes, eso son 5.332 meses. Cuatrocientos cuarenta y cuatro
+              años.</p>
+
+            <p>Y esa cuenta es generosa con el hardware, porque deja fuera la luz, el resto del computador,
+              el disco, y las horas de alguien manteniendo aquello actualizado. El punto de equilibrio real
+              está más arriba todavía.</p>
+
+            <p>Le damos la vuelta, que es como se vuelve útil: para que la tarjeta se amortice en tres años
+              hay que estar procesando unos <strong>15.000 mensajes al mes</strong>, cerca de quinientos
+              diarios. Ese es el umbral. Si tu negocio está ahí, la máquina propia es una decisión sensata y
+              vale la pena sentarse a hacer números. Si estás en cien mensajes al mes, comprar una tarjeta de
+              video para ahorrarte seis mil pesos es una afición, no una inversión — y no pasa nada con
+              tener aficiones, siempre que se llamen por su nombre.</p>
+
+            <!-- Salida temprana. Ver .cta-lectura en pagina.css: por qué está
+                 aquí, por qué antes de un <h2> y por qué no se parece a .nota. -->
+            <aside class="cta-lectura" aria-labelledby="cta-lectura-tit">
+              <p class="lbl" id="cta-lectura-tit">Compruébalo en tu sitio</p>
+              <p>Antes de montar un modelo propio, mira qué tan sana está la base sobre la que iría. El
+                <strong>Diagnóstico Digital</strong> revisa velocidad, visibilidad y correo, y te da tu
+                Índice de Salud Digital en 60&nbsp;segundos. Gratis y sin registro.</p>
+              <a class="btn btn-violet"
+                href="/monitor/?utm_source=blog&amp;utm_medium=cta-lectura&amp;utm_content=qwen-3-8-27b-ia-local">Ejecutar
+                diagnóstico</a>
+            </aside>
+
+            <h2>Los «12 GB de VRAM» del cartel son ciertos, pero no con la versión que quieres usar</h2>
+
+            <p>Aquí es donde la mayoría de artículos se queda corto, porque copian una cifra suelta. Un
+              modelo se puede <strong>cuantizar</strong>: bajarle precisión a sus números para que ocupe
+              menos. Cuanto más se baja, menos memoria pide y más se degrada la calidad de lo que escribe.
+              Esta es la tabla de <a href="https://unsloth.ai/docs/models/qwen3.8" target="_blank"
+                rel="noopener">Unsloth</a> para este modelo:</p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Versión</th>
+                  <th scope="col">Memoria total necesaria</th>
+                  <th scope="col">Qué significa en la práctica</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2 bits</td>
+                  <td>11–13 GB</td>
+                  <td>Entra en una tarjeta de 12 GB, con pérdida de calidad visible</td>
+                </tr>
+                <tr>
+                  <td>3 bits</td>
+                  <td>13–16 GB</td>
+                  <td>El compromiso para quien tiene 16 GB justos</td>
+                </tr>
+                <tr>
+                  <td>4 bits</td>
+                  <td>17–19 GB</td>
+                  <td>La opción habitual y la más recomendada</td>
+                </tr>
+                <tr>
+                  <td>6 bits</td>
+                  <td>24 GB</td>
+                  <td>Diferencia pequeña frente a 4 bits, tarjeta bastante más cara</td>
+                </tr>
+                <tr>
+                  <td>8 bits</td>
+                  <td>31 GB</td>
+                  <td>Ya son dos tarjetas o una profesional</td>
+                </tr>
+                <tr>
+                  <td>Sin cuantizar</td>
+                  <td>56 GB</td>
+                  <td>Territorio de servidor</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p>Falta el detalle que cambia todo: esa columna es <strong>memoria total</strong>, VRAM de la
+              tarjeta más RAM del sistema. Los 17 GB de la versión de 4 bits no significan «necesitas 17 GB
+              de tarjeta»; significan que entre tarjeta y RAM tienes que reunir 17 GB. Se puede repartir, y
+              funciona. Lo que se paga es velocidad, porque lo que vive en la RAM va por un bus mucho más
+              lento.</p>
+
+            <p>Cuánto más lento no es teórico. Una prueba publicada sobre un MacBook con 16 GB de memoria
+              unificada corriendo la versión de 2 bits dio 7,11 tokens por segundo con un prompt corto y
+              <strong>2,91 con uno real de 7.072 tokens</strong>. Tres tokens por segundo es aproximadamente
+              la velocidad a la que uno lee en voz alta con desgana: usable para un experimento, insufrible
+              para atender clientes.</p>
+
+            <p>Traducido a la tarjeta que la mayoría de gente tiene en casa: con 12 GB corre, sí, en 2 o 3
+              bits, o repartiendo con la RAM. Es un modelo distinto del que aparece en los <em>benchmarks</em>
+              del anuncio.</p>
+
+            <h2>Lo que hace que quepa no es la cuantización: es que solo 16 de sus 64 capas usan atención completa</h2>
+
+            <p>Este es el dato que casi no se está contando y es el más interesante de todos.</p>
+
+            <p>Un modelo de lenguaje no solo ocupa memoria por su tamaño. Mientras conversa guarda una
+              especie de memoria de trabajo —la caché de claves y valores— que crece con cada token de la
+              conversación. En un modelo clásico, esa caché es la que arruina el contexto largo: puedes
+              tener el modelo cargado y quedarte sin memoria a mitad de un documento.</p>
+
+            <p>La arquitectura de Qwen3.8-27B alterna dos tipos de capa. De sus 64 capas, <strong>48 son de
+              atención lineal</strong> y solo <strong>16 son de atención completa</strong>, en un patrón de
+              tres a una. Y la caché la generan sobre todo esas 16. El resultado, según
+              <a href="https://ofox.ai/blog/qwen-3-8-27b-run-locally-vram-gguf-2026/" target="_blank"
+                rel="noopener">las mediciones de ofox.ai</a>: 0,5 GB de caché con 8.000 tokens de contexto,
+              2 GB con 32.000, y 16 GB con los 262.144 completos.</p>
+
+            <p>Compáralo con lo que pediría si las 64 capas guardaran memoria igual que esas 16: el mismo
+              contexto de 32.000 tokens estaría del orden de 8 GB, más de lo que ocupa el modelo entero en 2
+              bits. Ese es el truco. No es que hayan comprimido mejor un modelo grande; es que rediseñaron
+              qué partes del modelo tienen que acordarse de la conversación.</p>
+
+            <div class="nota">
+              <p><strong>Por qué esto importa fuera del laboratorio:</strong> la mayoría de tareas de negocio
+                que valen la pena automatizar con IA son de contexto largo. Resumir treinta correos, revisar
+                un contrato, contestar leyendo el catálogo completo. Un modelo que corre rápido con
+                preguntas cortas y se ahoga en cuanto le das un documento no sirve para eso. Lo que se acaba
+                de abaratar no es tanto «tener IA en casa» como <em>tener IA en casa que aguante un
+                  documento entero</em>.</p>
+            </div>
+
+            <h2>Hay un caso donde la cuenta se invierte, y no tiene que ver con el precio</h2>
+
+            <p>Todo lo anterior compara pesos con pesos. Hay situaciones donde esa no es la comparación
+              correcta.</p>
+
+            <p>En el panel a medida que construimos para CS Travel Group se manejan datos de pacientes.
+              Cuando publicamos la captura en nuestra portada tuvimos que difuminar un correo y un nombre —y
+              esa decisión, que parece cosmética, es la misma pregunta a otra escala: ¿esa información puede
+              salir del edificio? Con datos clínicos, jurídicos o financieros, mandar cada consulta a la API
+              de un tercero no es un detalle de implementación, es una decisión que alguien tiene que firmar.
+              Un modelo que corre en una máquina de la oficina no manda nada a ninguna parte.</p>
+
+            <p>El segundo caso es la dependencia. Un proveedor puede cambiar el modelo por debajo, subir el
+              precio, cerrar la versión que usabas o volverla gratis e ilimitada —
+              <a href="/blog/chatgpt-gratis-ilimitado-que-cambia/">las tres cosas han pasado este mismo
+                mes</a>—. Unos pesos descargados con licencia Apache 2.0 siguen funcionando igual dentro de
+              cinco años, en la misma máquina, sin conexión y sin factura.</p>
+
+            <p>Ninguna de esas dos razones es «sale más barato». Y ahí está lo que más incomoda de este
+              tema: la razón por la que a la mayoría de negocios pequeños le venden IA local es
+              precisamente la única que no se sostiene.</p>
+
+            <h2>Un modelo en tu oficina no cambia lo que un cliente ve de ti</h2>
+
+            <p>Lo que sí cambió esta semana, y es real, es el techo. Un negocio con motivos serios para no
+              sacar sus datos de casa ya no tiene que elegir entre privacidad y calidad: hoy puede tener las
+              dos por el precio de una tarjeta de video. Hace dieciocho meses eso costaba una máquina de
+              servidor y una persona dedicada a cuidarla. Es un cambio grande y va a seguir bajando.</p>
+
+            <p>Pero conviene no confundir dos conversaciones. La de este artículo es sobre <em>qué modelo
+              usas por dentro</em>. La que decide si te llegan clientes es otra:
+              <a href="/blog/seo-para-ia/">qué encuentra una máquina escrito sobre ti cuando alguien
+                pregunta por tu negocio</a>. Se puede tener el mejor modelo del mundo corriendo en el
+              cuarto de al lado y seguir siendo invisible, porque el modelo que le contesta a tu cliente no
+              es el tuyo — es el de ChatGPT, y lee lo que tú hayas dejado escrito en tu propio dominio.</p>
+
+            <p>Si lo que te interesa de todo esto era el ahorro, la ruta corta sigue siendo pagar por
+              consulta a un modelo abierto en la nube:
+              <a href="/blog/modelos-abiertos-de-ia-para-pymes/">cuestan una fracción de lo que cobran los
+                cerrados</a> y no hay nada que instalar. Y antes de gastar en cualquiera de los dos caminos,
+              vale más medir lo que ya tienes: el <a href="/diagnostico/">Diagnóstico Digital</a> lo hace
+              gratis sobre tu dominio y suele encontrar cosas que se arreglan en una tarde y rinden más que
+              un modelo de 27.000 millones de parámetros.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="cierre">
+          <h2>¿Vale la pena meterle IA a tu negocio<span class="dot">?</span></h2>
+          <p>Antes de comprar hardware o contratar herramientas, revisa la base. El Diagnóstico Digital
+            analiza tu dominio y te dice qué está frenando de verdad tus resultados. Gratis, sin tarjeta y
+            sin registro.</p>
+          <div class="hero-ctas" style="justify-content:center">
+            <a href="/diagnostico/" class="btn btn-violet">Ver el diagnóstico</a>
+            <a href="/#contacto" class="btn btn-ghost">Hablar con alguien</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="wrap">
+      <p>© Kaiva Studio 2026 · Barranquilla, Colombia</p>
+      <nav aria-label="Enlaces del pie">
+        <a href="/">Inicio</a>
+        <a href="/blog/">Blog</a>
+        <a href="/diagnostico/">Diagnóstico</a>
+        <a href="/#contacto">Contacto</a>
+        <a href="/privacidad/">Privacidad</a>
+        <a href="/terminos/">Términos</a>
+        <a href="/cookies/" data-kv-cookies>Preferencias</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.getElementById('nav');
+      var enlaces = document.getElementById('navLinks');
+      var boton = document.getElementById('navToggle');
+
+      var alScroll = function () {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+      };
+      alScroll();
+      window.addEventListener('scroll', alScroll, { passive: true });
+
+      boton.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var abierto = enlaces.classList.toggle('open');
+        boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!enlaces.contains(e.target) && !boton.contains(e.target)) {
+          enlaces.classList.remove('open');
+          boton.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Aparición al hacer scroll. La clase en <html> es la que activa el
+      // estado oculto en el CSS: sin JS no se esconde nada.
+      if (!('IntersectionObserver' in window)) return;
+      document.documentElement.classList.add('js-reveal');
+
+      var objetivos = document.querySelectorAll('.tarjeta, .paso, .post-item, .faq-item, .blog-post');
+      objetivos.forEach(function (el, i) {
+        el.classList.add('reveal');
+        el.style.setProperty('--d', (i % 6) * 0.06 + 's');
+      });
+
+      var observador = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (entrada) {
+          if (!entrada.isIntersecting) return;
+          entrada.target.classList.add('dentro');
+          observador.unobserve(entrada.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+      objetivos.forEach(function (el) { observador.observe(el); });
+    })();
+  </script>
+  <script src="/assets/fechas.js?v=1" defer></script>
+</body>
+
+</html>

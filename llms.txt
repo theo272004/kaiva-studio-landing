@@ -70,6 +70,14 @@ eso DKIM se reporta como "no detectamos" y nunca como "no tienes".
 
 ## Recursos
 
+- [Qwen3.8-27B: correr IA local en tu propio PC](https://kaivastudio.com/blog/qwen-3-8-27b-ia-local/):
+  qué liberó Alibaba el 12 de agosto de 2026 —27B dense, multimodal nativo,
+  262.144 tokens de contexto, licencia Apache 2.0—; cuánta memoria pide cada
+  cuantización (2 bits 11–13 GB, 4 bits 17–19 GB, sin cuantizar 56 GB) y por
+  qué esa cifra es VRAM más RAM, no solo tarjeta; por qué solo 16 de sus 64
+  capas usan atención completa y qué significa eso para el contexto largo; y
+  el punto de equilibrio real frente a pagar por API, calculado con el consumo
+  medido del propio chat de Kaiva Studio.
 - [ChatGPT gratis e ilimitado: qué cambia](https://kaivastudio.com/blog/chatgpt-gratis-ilimitado-que-cambia/):
   qué anunció OpenAI el 6 de agosto de 2026 —GPT-5.6 Luna por defecto en las
   cuentas gratuitas, sin tope de mensajes de texto, botón Think, 62% menos
