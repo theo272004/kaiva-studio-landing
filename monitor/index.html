@@ -1968,13 +1968,13 @@
                que cancelar, hay un informe delante.
 
                EL LIMITE SE ARMA ANTES DEL PRIMER PINTADO, Y NO DESPUES. Puesto
-               despues, dependia de que renderDashboard volviera: si el primer
-               pintado reventaba a mitad, la excepcion se llevaba por delante
-               tanto el temporizador como la llamada a speed.php, y el pie se
-               quedaba anunciando para siempre una medicion que nadie llego a
-               pedir. Visto en produccion: informe en pantalla con "estamos
-               midiendo la velocidad", Imagen en una raya, y speed.php sin
-               aparecer una sola vez en la pestana de red. Ahora el limite
+               despues, dependia de que renderDashboard volviera: cualquier
+               excepcion a mitad del primer pintado se llevaba por delante tanto
+               el temporizador como la llamada a speed.php, y entonces el pie
+               anunciaba para siempre una medicion que nadie llego a pedir. No
+               es una hipotesis comoda: es el unico camino por el que el pie
+               puede mentir sin limite, porque los otros dos —que speed.php
+               tarde o que falle— ya tienen quien los cierre. Ahora el limite
                existe desde el primer instante y ningun pintado lo desarma. */
             var ctrlVelocidad = new AbortController();
             var relojVelocidad = setTimeout(function () { ctrlVelocidad.abort(); }, LIMITE_VELOCIDAD_MS);
@@ -1998,7 +1998,12 @@
             /* LA GUARDIA. El corte de arriba solo puede disparar si la peticion
                llego a salir; esta dispara pase lo que pase, incluso si no se
                llego a pedir nada. Es el unico seguro contra un "midiendo..."
-               eterno. */
+               eterno.
+
+               Medido: speed.php tarda entre 9 y 32 s contra produccion, asi que
+               la espera larga es normal y no hay que confundirla con un fallo.
+               Lo que esta guardia cubre es el caso en que ya no va a llegar
+               nada. */
             var relojGuardia = setTimeout(function () {
               cerrarVelocidad({ ok: false, pagespeed: 'failed' });
             }, LIMITE_VELOCIDAD_MS + 10000);
