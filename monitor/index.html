@@ -1914,6 +1914,11 @@
       function analizarDeVerdad(v) {
         var senal = arrancarEspera();
 
+        /* La puerta de salida de la fase 2, declarada aqui para que tambien la
+           alcance el catch de mas abajo: hasta que la fase 2 arranca vale null
+           y no hay nada que cerrar. */
+        var cerrarVelocidad = null;
+
         fetch(API + '/scan.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1954,17 +1959,58 @@
                medicion, y cuando PageSpeed responde se repinta con el numero
                real. renderDashboard es el mismo de siempre: sabe leer el scan
                con o sin velocidad, que es justo para lo que se escribio. */
-            renderDashboard(scan.domain, scan, null, true);
-
             /* La segunda fase tambien tiene limite. Sin el, si speed.php se
                colgaba el pie del indice se quedaba para siempre diciendo
                "estamos midiendo la velocidad... se ajusta solo en unos
                segundos": una promesa que no se cumple nunca, en la pantalla
                donde el producto pide que se le crea. Su AbortController es
                propio y NO es el de la espera: aqui ya no hay pantalla de carga
-               que cancelar, hay un informe delante. */
+               que cancelar, hay un informe delante.
+
+               EL LIMITE SE ARMA ANTES DEL PRIMER PINTADO, Y NO DESPUES. Puesto
+               despues, dependia de que renderDashboard volviera: si el primer
+               pintado reventaba a mitad, la excepcion se llevaba por delante
+               tanto el temporizador como la llamada a speed.php, y el pie se
+               quedaba anunciando para siempre una medicion que nadie llego a
+               pedir. Visto en produccion: informe en pantalla con "estamos
+               midiendo la velocidad", Imagen en una raya, y speed.php sin
+               aparecer una sola vez en la pestana de red. Ahora el limite
+               existe desde el primer instante y ningun pintado lo desarma. */
             var ctrlVelocidad = new AbortController();
             var relojVelocidad = setTimeout(function () { ctrlVelocidad.abort(); }, LIMITE_VELOCIDAD_MS);
+
+            /* Una sola puerta de salida para la fase 2, la gane quien la gane:
+               la respuesta, el corte por tiempo o la guardia de abajo. Sin el
+               pestillo, dos de ellas repintarian el informe dos veces. */
+            var velocidadCerrada = false;
+            cerrarVelocidad = function (speed) {
+              if (velocidadCerrada) return;
+              velocidadCerrada = true;
+              clearTimeout(relojVelocidad);
+              clearTimeout(relojGuardia);
+              try {
+                renderDashboard(scan.domain, scan, speed);
+              } catch (e) {
+                console.error('[kaiva] repintado de velocidad:', e);
+              }
+            };
+
+            /* LA GUARDIA. El corte de arriba solo puede disparar si la peticion
+               llego a salir; esta dispara pase lo que pase, incluso si no se
+               llego a pedir nada. Es el unico seguro contra un "midiendo..."
+               eterno. */
+            var relojGuardia = setTimeout(function () {
+              cerrarVelocidad({ ok: false, pagespeed: 'failed' });
+            }, LIMITE_VELOCIDAD_MS + 10000);
+
+            /* El primer pintado va envuelto porque de el ya no depende nadie:
+               si revienta, la medicion sigue su curso y el repintado posterior
+               tiene otra oportunidad de dejar el informe entero. */
+            try {
+              renderDashboard(scan.domain, scan, null, true);
+            } catch (e) {
+              console.error('[kaiva] primer pintado:', e);
+            }
 
             return fetch(API + '/speed.php', {
               method: 'POST',
@@ -1975,8 +2021,7 @@
               .then(function (r) { return r.json(); })
               .catch(function () { return null; })
               .then(function (speed) {
-                clearTimeout(relojVelocidad);
-                if (speed && speed.ok) { renderDashboard(scan.domain, scan, speed); return; }
+                if (speed && speed.ok) { cerrarVelocidad(speed); return; }
                 /* Ni respondio ni respondio bien. Antes no se repintaba nada
                    —"el informe que ya esta en pantalla es correcto"—, pero no
                    lo era del todo: seguia anunciando una medicion en curso que
@@ -1984,7 +2029,7 @@
                    Imagen diga "sin medir" y el pie explique por que. La lista
                    de hallazgos no se reconstruye: pintarHallazgos ve que es la
                    misma y la deja intacta. */
-                renderDashboard(scan.domain, scan, { ok: false, pagespeed: 'failed' });
+                cerrarVelocidad({ ok: false, pagespeed: 'failed' });
               });
           })
           .catch(function (err) {
@@ -2011,7 +2056,17 @@
                espera en dos esto no podia pasar, porque no se pintaba nada
                hasta el final; ahora un fallo tardio devolveria a la persona al
                formulario vacio y le borraria el analisis que estaba leyendo. */
-            if (panelPintado) return;
+            if (panelPintado) {
+              /* PERO SIN DEJAR EL PIE MINTIENDO. Este `return` era el sumidero
+                 donde moria en silencio cualquier excepcion posterior al primer
+                 pintado —y con ella la fase 2 entera—: la persona se quedaba
+                 con "estamos midiendo la velocidad" fijo en pantalla, Imagen en
+                 una raya, y ni un aviso. El informe sigue en su sitio, como
+                 siempre; lo que se corrige es lo unico que habia quedado
+                 falso. */
+              if (cerrarVelocidad) cerrarVelocidad({ ok: false, pagespeed: 'failed' });
+              return;
+            }
 
             /* Se vuelve al formulario con el motivo real escrito arriba del
                campo, en vez de mandar a la pantalla de "próximamente". La
