@@ -80,7 +80,7 @@
        51 KB incrustados en el propio HTML: no se cacheaban y viajaban en cada
        visita. Arriba solo se queda el @font-face, que va con los preload. -->
   <link rel="stylesheet" href="/assets/tokens.css?v=20260808c">
-  <link rel="stylesheet" href="/assets/monitor.css?v=20260808e">
+  <link rel="stylesheet" href="/assets/monitor.css?v=20260825a">
 </head>
 
 <body>
@@ -2384,18 +2384,34 @@
             <div class="side-brand">
               Kaiva Studio.
             </div>
-            <!-- LOS CINCO SON <button>, no <div>.
+            <!-- EL MISMO MENU QUE EL PANEL PRO, ENTRADA POR ENTRADA.
+                 ------------------------------------------------------
+                 Antes eran cinco entradas sueltas, sin los rotulos de grupo, y
+                 faltaban tres de las que el Pro si tiene: Trafico, Busquedas y
+                 Conexion. El gratis se leia como otro producto —uno mas pobre
+                 y con otra forma— en vez de como la misma aplicacion con menos
+                 llaves. Ahora el menu es el del Pro: sus cuatro grupos, sus
+                 ocho entradas y en su orden. Lo que cambia es cuales se abren.
+
+                 QUE ESTE EL CANDADO ES EL PUNTO, no un descuido. Una entrada
+                 que no existe no se echa de menos; una con candado dice que hay
+                 algo ahi y que se llega pagando. Es la unica forma de que la
+                 limitacion se vea, que es justo lo que se pidio conservar.
+
+                 LOS OCHO SON <button>, no <div>.
                  Las tres primeras eran <div role="button" tabindex="0"> con un
-                 handler de teclado escrito a mano; las dos con candado ni eso:
-                 <div onclick=...> sin role, sin tabindex y sin teclado, y son
-                 la UNICA puerta al modal del Panel Pro — con teclado no habia
-                 forma de abrirlo.
+                 handler de teclado escrito a mano; las que llevan candado ni
+                 eso: <div onclick=...> sin role, sin tabindex y sin teclado, y
+                 son la UNICA puerta al modal del Panel Pro — con teclado no
+                 habia forma de abrirlo.
                  Un <button> trae gratis lo que alli se reescribia mal: foco,
                  Enter, Espacio, papel de control para el lector de pantalla y
                  el anillo de foco de tokens.css. Lo que NO hereda —fuente,
                  ancho, alineacion y fondo— se lo devuelve `.side-item` en
                  monitor.css; sin esas cuatro lineas un button sale en la fuente
                  del sistema, encogido al texto y centrado. -->
+
+            <div class="side-grupo">Cómo estás</div>
             <button type="button" class="side-item active" data-ir="secResumen">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                 stroke-linejoin="round">
@@ -2414,20 +2430,26 @@
               </svg>
               Pilares
             </button>
+            <!-- El icono era la lupa, que en el Pro es el de Busquedas. Dos
+                 superficies que se quieren la misma no pueden usar el mismo
+                 dibujo para dos cosas distintas: Hallazgos lleva las barras,
+                 como alli. -->
             <button type="button" class="side-item" data-ir="secHallazgos">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-                stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <path d="m21 21-4.3-4.3" />
-              </svg>
-              Hallazgos
-            </button>
-            <button type="button" class="side-item locked" onclick="window.openLockedModal()">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                 stroke-linejoin="round">
                 <path d="M12 20V10M18 20V4M6 20v-4" />
               </svg>
-              Competencia
+              Hallazgos
+            </button>
+
+            <div class="side-grupo">Quién te busca</div>
+            <button type="button" class="side-item locked" onclick="window.openLockedModal()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M3 3v18h18" />
+                <path d="m18.7 8-5.1 5.2-2.8-2.7L7 14.3" />
+              </svg>
+              Tráfico
               <svg class="lock" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="5" y="11" width="14" height="10" rx="2" />
@@ -2437,10 +2459,58 @@
             <button type="button" class="side-item locked" onclick="window.openLockedModal()">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                 stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+              Búsquedas
+              <svg class="lock" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="11" width="14" height="10" rx="2" />
+                <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+              </svg>
+            </button>
+            <!-- "Competencia" alli se llama "Competidores", y el icono son
+                 personas y no barras. Un mismo sitio no puede tener dos
+                 nombres segun quien lo mire. -->
+            <button type="button" class="side-item locked" onclick="window.openLockedModal()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+              Competidores
+              <svg class="lock" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="11" width="14" height="10" rx="2" />
+                <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+              </svg>
+            </button>
+
+            <div class="side-grupo">Cómo vas</div>
+            <button type="button" class="side-item locked" onclick="window.openLockedModal()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10" />
                 <path d="M12 6v6l4 2" />
               </svg>
               Historial
+              <svg class="lock" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="11" width="14" height="10" rx="2" />
+                <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+              </svg>
+            </button>
+
+            <div class="side-grupo">Tu cuenta</div>
+            <button type="button" class="side-item locked" onclick="window.openLockedModal()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7" />
+                <path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7" />
+              </svg>
+              Conexión
               <svg class="lock" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="5" y="11" width="14" height="10" rx="2" />
@@ -2466,6 +2536,7 @@
                  "ir" a Pilares no movía nada y parecía que el botón estaba
                  roto. Ahora cada entrada del menú muestra su propio panel. -->
             <div class="view on" id="vResumen">
+              <h1 class="kv-anuncio">Tu Índice de Salud Digital</h1>
             <div class="panel-top-row">
 
               <!-- Index Score Card -->
@@ -2599,6 +2670,7 @@
 
             <!-- ===== Vista: Pilares ===== -->
             <div class="view" id="vPilares">
+              <h1 class="kv-anuncio">Tus cuatro pilares</h1>
 
               <!-- Pillars Card -->
               <div class="pcard" id="secPilares">
@@ -2700,6 +2772,7 @@
 
             <!-- ===== Vista: Hallazgos ===== -->
             <div class="view" id="vHallazgos">
+              <h1 class="kv-anuncio">Lo que encontramos, con su evidencia</h1>
 
               <!-- Findings Card -->
               <div class="pcard" id="secHallazgos">

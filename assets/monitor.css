@@ -823,6 +823,37 @@
 
        Y `transition: all` se cambia por la lista explicita: el sistema lo
        prohibe, y aqui ademas animaba el `outline` del foco al aparecer. */
+
+    /* EL ROTULO DE GRUPO, COPIADO DEL PANEL PRO TAL CUAL.
+       No es decoracion: es lo que convierte ocho entradas en cuatro ideas
+       —como estas, quien te busca, como vas, tu cuenta— y es la mitad de por
+       que las dos superficies se leian como productos distintos. */
+    .side-grupo {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      padding: 0 .8rem .45rem;
+      margin-top: 1.3rem;
+    }
+
+    /* El primero no lleva aire arriba: ya lo da la marca del panel. */
+    .side-grupo:first-of-type { margin-top: .4rem; }
+
+    /* El titulo de cada vista. Existe para quien navega con lector de
+       pantalla, que sin el aterriza en una pantalla sin nombre; a la vista no
+       cambia nada. El Pro lo lleva en las ocho pestañas y aqui faltaba en las
+       tres. */
+    .kv-anuncio {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
     .side-item {
       display: flex;
       align-items: center;
@@ -2029,6 +2060,11 @@
       .side-item {
         width: auto;
       }
+
+      /* Los rotulos de grupo no caben en la tira y no hacen falta: el Pro los
+         esconde en este mismo punto. Sin esto, "CÓMO ESTÁS" y los otros tres
+         saldrian intercalados entre las entradas como si fueran una mas. */
+      .side-grupo { display: none; }
 
       /* El #vResumen de mas arriba lleva un ID, y un ID le gana a esta
          regla por especificidad aunque venga despues y dentro de una media
