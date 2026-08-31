@@ -109,12 +109,12 @@ se comparten — la redacción, no.
 | 4b| 2026-08-08  | IA          | El token bajó 99% y la factura subió: costo por tarea vs precio por token | IA y tecnología | Publicado |
 | 4c| 2026-08-08  | IA          | ChatGPT gratis e ilimitado (GPT-5.6 Luna): qué cambia para tu negocio | IA y tecnología | Publicado |
 | 4d| 2026-08-16  | IA          | Qwen3.8-27B: correr IA local en tu propio PC, y cuándo sale a cuenta | IA y tecnología | Publicado |
-| 5 | pendiente   | Localizado  | Cuánto cuesta una página web en **Chile**                         | Precios          | Pendiente  |
-| 6 | pendiente   | IA          | El "modo IA" y los AI Overviews de Google: qué significa para tu SEO | IA y tecnología | Pendiente |
-| 7 | pendiente   | Localizado  | Cuánto cuesta una página web en **Argentina**                     | Precios          | Pendiente  |
-| 8 | pendiente   | IA          | ChatGPT y la IA generativa como nuevo canal de descubrimiento de marca | IA y tecnología | Pendiente |
-| 9 | pendiente   | Localizado  | Mejores agencias de diseño web en **Bogotá**                      | Cómo elegir      | Pendiente  |
-| 10| pendiente   | IA          | Chatbots de IA para atención al cliente: costos reales y cuándo vale la pena | IA y tecnología | Pendiente |
+| 5 | 2026-08-22  | Localizado  | Cuánto cuesta una página web en **Chile**                         | Precios          | Publicado  |
+| 6 | 2026-08-23  | IA          | El "modo IA" y los AI Overviews de Google: qué significa para tu SEO | IA y tecnología | Publicado |
+| 7 | 2026-08-24  | Localizado  | Cuánto cuesta una página web en **Argentina**                     | Precios          | Publicado  |
+| 8 | 2026-08-25  | IA          | ChatGPT y la IA generativa como nuevo canal de descubrimiento de marca | IA y tecnología | Publicado |
+| 9 | 2026-08-26  | Localizado  | Mejores agencias de diseño web en **Bogotá**                      | Cómo elegir      | Publicado  |
+| 10| 2026-08-30  | IA          | Chatbots de IA para atención al cliente: costos reales y cuándo vale la pena | IA y tecnología | Publicado |
 | 11| pendiente   | Localizado  | Cuánto cuesta una página web en **Ecuador**                       | Precios          | Pendiente  |
 | 12| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
 | 13| pendiente   | Localizado  | Mejores agencias de diseño web en **Ciudad de México**            | Cómo elegir      | Pendiente  |
@@ -129,6 +129,11 @@ se comparten — la redacción, no.
 | 22| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
 | 23| pendiente   | Localizado  | Mejores agencias de diseño web en **Medellín**                    | Cómo elegir      | Pendiente  |
 | 24| pendiente   | IA          | Cuándo un negocio sí necesita su propio modelo: privacidad, datos regulados y volumen | IA y tecnología | Pendiente |
+| 25| pendiente   | Localizado  | Mejores agencias de diseño web en **Santiago**                    | Cómo elegir      | Pendiente  |
+| 26| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
+| 27| pendiente   | Localizado  | Mejores agencias de diseño web en **Cali**                        | Cómo elegir      | Pendiente  |
+| 28| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
+| 29| pendiente   | Localizado  | Cuánto cuesta una página web en **Panamá**                        | Precios          | Pendiente  |
 
 Cuando la cola llegue al final, seguir el mismo patrón: más países (Panamá,
 Guatemala, República Dominicana, Uruguay...), más ciudades (Medellín,

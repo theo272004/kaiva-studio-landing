@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Analytics con consentimiento previo. Aquí NO se carga el script de
+       Google: solo se fijan los valores por defecto (todo denegado) y se
+       deja que /assets/consentimiento.js lo inyecte si la persona acepta.
+       El razonamiento completo y las normas que lo obligan están comentados
+       arriba de ese archivo. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+  </script>
+  <script defer src="/assets/consentimiento.js?v=20260729"></script>
+  <script defer src="/assets/eventos.js?v=20260729"></script>
+  <script defer src="/assets/indice-blog.js?v=20260731"></script>
+  <script defer src="/assets/clarity.js?v=20260729"></script>
+
+  <title>Chatbots de IA para atención al cliente: lo que nadie pone en la cotización</title>
+  <meta name="description"
+    content="Gorgias cobra $1,50 por interacción, Freshdesk $0,49 por sesión, Intercom Fin $0,99 por resolución. Lo que de verdad cuesta un chatbot de IA y cuándo no vale la pena.">
+  <link rel="canonical" href="https://kaivastudio.com/blog/chatbots-ia-atencion-al-cliente-costos-reales/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/favicon-96.png?v=20260809" type="image/png" sizes="96x96">
+  <link rel="icon" href="/assets/favicon-192.png?v=20260809" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=20260809">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Kaiva Studio">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:url" content="https://kaivastudio.com/blog/chatbots-ia-atencion-al-cliente-costos-reales/">
+  <meta property="og:title" content="Chatbots de IA para atención al cliente: lo que nadie pone en la cotización">
+  <meta property="og:description"
+    content="Tres proveedores, tres formas distintas de cobrar la misma conversación. Los precios reales de 2026, el costo oculto de WhatsApp Business API, y cuándo un negocio pequeño no lo necesita.">
+  <meta property="og:image" content="https://kaivastudio.com/assets/blog/ia.webp">
+  <meta property="article:published_time" content="2026-08-30">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chatbots de IA para atención al cliente: lo que nadie pone en la cotización">
+  <meta name="twitter:image" content="https://kaivastudio.com/assets/blog/ia.webp">
+
+  <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/tokens.css?v=20260808c">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260809b">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaivastudio.com/blog/chatbots-ia-atencion-al-cliente-costos-reales/#post",
+      "headline": "Chatbots de IA para atención al cliente: lo que nadie pone en la cotización",
+      "description": "Los precios reales de 2026 por proveedor, el costo que Meta cobra aparte por WhatsApp Business API, y el volumen de conversaciones al mes en el que un chatbot de IA deja de tener sentido.",
+      "datePublished": "2026-08-30",
+      "dateModified": "2026-08-30",
+      "inLanguage": "es-CO",
+      "image": "https://kaivastudio.com/assets/blog/ia.webp",
+      "mainEntityOfPage": "https://kaivastudio.com/blog/chatbots-ia-atencion-al-cliente-costos-reales/",
+      "author": {
+        "@type": "Organization",
+        "@id": "https://kaivastudio.com/#studio",
+        "name": "Kaiva Studio",
+        "url": "https://kaivastudio.com/"
+      },
+      "publisher": { "@id": "https://kaivastudio.com/#studio" },
+      "isPartOf": { "@id": "https://kaivastudio.com/blog/#blog" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://kaivastudio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://kaivastudio.com/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Chatbots de IA para atención al cliente", "item": "https://kaivastudio.com/blog/chatbots-ia-atencion-al-cliente-costos-reales/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta un chatbot de IA para atención al cliente?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende de qué cuenta el proveedor como una unidad facturable. Gorgias cobra $1,50 por interacción automatizada por encima de su paquete, Freshdesk $0,49 por sesión tras 500 incluidas al mes, eesel $0,40 por ticket resuelto, e Intercom Fin $0,99 por resolución con un plan base de $49/mes que incluye 50. La misma conversación puede costar cuatro veces más en un proveedor que en otro, según cómo cuenten."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es \"contención\" y por qué no es lo mismo que resolver el problema?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La contención mide cuántas conversaciones no llegaron a un humano. Un cliente que se rinde y cierra la ventana también cuenta como \"contenido\" en la mayoría de paneles, aunque el bot no haya resuelto nada. Medir solo contención sin cruzarla con si el cliente regresa o se va a la competencia es la forma más común de creer que un chatbot funciona cuando en realidad está espantando gente."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta un chatbot de WhatsApp para una pyme en Latinoamérica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En México, el nivel básico para hasta 500 conversaciones al mes cuesta entre 8.000 y 15.000 MXN de configuración inicial y 6.000-12.000 MXN/mes de operación, según Uniamos. A eso se suma lo que Meta cobra directamente por WhatsApp Business API: las conversaciones que inicia el cliente son gratis las primeras 24 horas, pero las que inicia la empresa (una promoción, un recordatorio) cuestan entre 0,01 y 0,10 USD cada una, y esa factura no aparece en la cotización del proveedor del bot."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuándo no conviene un chatbot de IA para atención al cliente?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cuando el volumen de conversaciones es bajo. Con unos 80 tickets al mes, un buen centro de ayuda con preguntas frecuentes bien escritas resuelve más por menos dinero que cualquier chatbot, porque casi todos los proveedores cobran un mínimo mensual fijo que a ese volumen nunca se amortiza. También conviene evitarlo en cualquier conversación con consecuencias legales, médicas o financieras, donde una respuesta incorrecta pero segura de sí misma sale más caro que no responder."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+  <nav class="nav" id="nav">
+    <div class="nav-in">
+      <a href="/" class="logo" aria-label="Kaiva Studio — ir al inicio">
+        <img src="/assets/logo-kaiva.png" alt="Kaiva Studio" width="105" height="44">
+      </a>
+      <div class="nav-right">
+        <div class="nav-links" id="navLinks">
+          <a href="/diseno-web/" class="lnk">Diseño web</a>
+          <a href="/software-a-medida/" class="lnk">Software</a>
+          <a href="/branding/" class="lnk">Branding</a>
+          <a href="/blog/" class="lnk" aria-current="page">Blog</a>
+          <a href="/monitor/" class="btn btn-dark">Diagnóstico Gratis</a>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menú" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <article>
+
+      <header class="post-cabecera">
+        <div class="wrap">
+          <nav class="migas" aria-label="Ruta de navegación">
+            <a href="/">Inicio</a><span>/</span><a href="/blog/">Blog</a><span>/</span>Chatbots de IA para atención al cliente
+          </nav>
+
+          <div class="post-cabecera-in">
+            <div class="post-cabecera-texto">
+              <p class="fecha"><time datetime="2026-08-30">30 de agosto de 2026</time> · Lectura de 8 minutos</p>
+
+              <h1 class="post-titulo">
+                Chatbots de IA para atención al cliente<span style="color:var(--violet)">:</span> lo que nadie pone en la cotización
+              </h1>
+
+              <p class="lead">Gorgias cobra $1,50 por cada intercambio que su IA resuelve. Freshdesk, $0,49. Intercom Fin, $0,99. Tres proveedores, tres formas distintas de contar la misma conversación, y ninguna cotización te explica la diferencia hasta que ya firmaste.</p>
+            </div>
+
+            <figure class="post-cabecera-foto">
+              <img src="/assets/blog/ia.webp" alt="Profesional revisando en una laptop el panel de un chatbot de inteligencia artificial en una oficina moderna" width="1774" height="887"
+                fetchpriority="high" decoding="async">
+            </figure>
+          </div>
+        </div>
+      </header>
+
+      <div class="section post-cuerpo">
+        <div class="wrap">
+          <div class="articulo">
+
+            <p>Un dueño de comercio electrónico contó en Reddit que su factura de soporte con IA saltó de 4.000 a 9.000 dólares al mes sin que él cambiara nada. Otro, en la misma discusión, hizo la cuenta de cabeza durante una llamada de ventas y llegó a 30.000 dólares mensuales antes de que terminara la demo. Ninguno de los dos había leído mal el precio. Habían leído el precio de venta, que es distinto del precio real.</p>
+
+            <p>La razón es que cada proveedor eligió una unidad distinta para cobrar, y esas unidades no son intercambiables aunque las páginas de precios las muestren una al lado de la otra como si lo fueran.</p>
+
+            <h2>Nadie te está cobrando por «el chatbot»</h2>
+
+            <p>Gorgias cuenta interacciones: cada mensaje de ida y vuelta dentro de una conversación es una unidad, a $1,50 por encima de lo incluido en el plan. Un cliente que escribe cuatro veces antes de darse por resuelto son cuatro cargos, no uno.</p>
+
+            <p>Freshdesk cuenta sesiones: toda la conversación, sin importar cuántos mensajes tenga, es una sola unidad, a $0,49 después de las 500 sesiones que ya vienen incluidas en cualquiera de sus planes. eesel cuenta tickets resueltos, a $0,40, sin cobro por puesto de agente. Intercom Fin —que en junio de 2026 se convirtió en el objetivo de una compra de Salesforce por unos 3.600 millones de dólares— cuenta resoluciones, a $0,99 cada una, con un plan base de $49 al mes que trae 50 incluidas.</p>
+
+            <table>
+              <thead>
+                <tr><th>Proveedor</th><th>Qué cobra</th><th>Tarifa</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>eesel AI</td><td>Ticket resuelto</td><td>$0,40</td></tr>
+                <tr><td>Freshdesk (Freddy)</td><td>Sesión, tras 500/mes incluidas</td><td>$0,49</td></tr>
+                <tr><td>HubSpot Breeze</td><td>Conversación resuelta (50 créditos)</td><td>≈ $0,50</td></tr>
+                <tr><td>Tidio (Lyro)</td><td>Conversación, desde 200/mes</td><td>$0,70</td></tr>
+                <tr><td>Intercom Fin</td><td>Resolución, con base de $49/mes por 50</td><td>$0,99</td></tr>
+                <tr><td>Gorgias</td><td>Interacción automatizada</td><td>$1,50</td></tr>
+              </tbody>
+            </table>
+
+            <p>La misma conversación de soporte, según quién la factura, puede costar cuatro veces más. Y ninguno de esos números incluye lo que cuesta el puesto del agente humano que sigue ahí detrás para lo que el bot no resuelve.</p>
+
+            <!-- Salida temprana. Ver .cta-lectura en pagina.css: por qué está
+                 aquí, por qué antes de un <h2> y por qué no se parece a .nota. -->
+            <aside class="cta-lectura" aria-labelledby="cta-lectura-tit">
+              <p class="lbl" id="cta-lectura-tit">¿Sabes cuánto tráfico y cuántos contactos mueve hoy tu sitio?</p>
+              <p>Antes de sumarle un chatbot a tu web, vale la pena saber si el problema es de atención o de que nadie te encuentra. El Diagnóstico Digital revisa visibilidad, velocidad y confianza en 60 segundos, gratis.</p>
+              <a class="btn btn-violet" href="/monitor/?utm_source=blog&amp;utm_medium=cta-lectura&amp;utm_content=chatbots-ia-atencion-al-cliente-costos-reales">Ejecutar diagnóstico</a>
+            </aside>
+
+            <h2>En el sitio de Kaiva no hay un chatbot</h2>
+
+            <p>Es una elección, no un descuido. En kaivastudio.com no atendemos preguntas con un modelo conversacional: usamos una herramienta que analiza el dominio de quien llega y le devuelve un informe con hallazgos concretos, sin abrir una conversación de ida y vuelta con nadie. La persona escribe su dominio una sola vez y recibe algo que puede leer, no algo con lo que tiene que negociar.</p>
+
+            <p>La diferencia no es cosmética. Un chatbot conversacional cobra por cada intercambio o por cada resolución, así que entre más gente lo usa, más sube la factura variable. Una herramienta que responde con un informe fijo cuesta lo mismo la use una persona o mil: el gasto está en construirla una vez, no en cada conversación que sostiene después. Para un negocio con tráfico bajo o irregular —que es la mayoría de las pymes en Barranquilla o en cualquier ciudad intermedia de la región— esa diferencia de estructura de costos importa más que cualquier funcionalidad del bot.</p>
+
+            <h2>WhatsApp cobra aparte, y esa factura no la ves en la cotización</h2>
+
+            <p>En Latinoamérica el canal de atención no es el chat de una web: es WhatsApp. Y ahí hay una segunda factura que casi ninguna propuesta comercial menciona con claridad.</p>
+
+            <p>Un chatbot básico de WhatsApp para una pyme mexicana, con hasta 500 conversaciones al mes y sin integraciones a un CRM, cuesta entre 8.000 y 15.000 pesos mexicanos de configuración inicial y entre 6.000 y 12.000 pesos al mes de operación, según una guía de precios de la agencia Uniamos publicada en junio de 2026. Ese es el cargo del proveedor del bot.</p>
+
+            <p>Aparte, Meta cobra directamente por el uso de WhatsApp Business API. Si el cliente escribe primero, la empresa tiene 24 horas gratis para responder. Si la empresa es la que escribe primero —para avisar que el pedido está listo, para recordar una cita, para ofrecer algo— cada conversación de ese tipo cuesta entre 0,01 y 0,10 dólares, según sea de servicio, utilidad o marketing. Con 3.000 conversaciones mensuales mixtas, esa factura de Meta sola puede llegar a 2.500-4.500 pesos mexicanos, y llega separada, no incluida en lo que cotizó la agencia.</p>
+
+            <div class="nota">
+              <p><strong>El dato que cambia la cuenta:</strong> a esos dos cargos casi siempre se suma un tercero, el de la plataforma intermediaria (360dialog, Twilio, Gupshup) que conecta el bot con la API de WhatsApp, entre 0 y 1.000 dólares mensuales según volumen. Tres facturas de tres empresas distintas por un solo chatbot.</p>
+            </div>
+
+            <h2>El volumen decide, no la tecnología</h2>
+
+            <p>La adopción de IA en la región ya no es un experimento. En Brasil el 76% de los usuarios digitales usa alguna herramienta de inteligencia artificial, y en México el 70%, según cifras citadas en agosto de 2026 durante un coloquio de El Colegio de México recogido por la agencia EFE. La pregunta ya no es si tu competencia está usando IA en algún punto de su operación. Es si tu volumen de conversaciones justifica pagar por ella en atención al cliente específicamente.</p>
+
+            <p>La respuesta tiene un umbral bastante claro. Con unas 80 conversaciones al mes, un buen centro de ayuda con las preguntas reales de tus clientes bien escritas —no las que a ti te parece que preguntan, sino las que de verdad llegan— resuelve más por menos dinero que cualquier chatbot con medidor de uso. La razón es aritmética: la mayoría de proveedores tiene un mínimo mensual fijo, y a ese volumen ese mínimo nunca se amortiza contra lo que ahorrarías en tiempo de un agente humano.</p>
+
+            <p>Donde el cálculo cambia es en volumen alto y repetitivo: estado de un pedido, restablecer una contraseña, confirmar un horario. Esas preguntas no necesitan criterio, solo velocidad, y son las que de verdad justifican automatizar primero.</p>
+
+            <h2>Lo que ningún panel de métricas te dice solo</h2>
+
+            <p>Hay una trampa de medición que vale la pena conocer antes de comprar cualquiera de estas herramientas: la contención no es lo mismo que resolver el problema.</p>
+
+            <p>Un ticket cuenta como «contenido» en la mayoría de paneles cuando el cliente simplemente deja de responder durante 24 horas después de la última respuesta del bot. Eso incluye a la persona que de verdad quedó satisfecha, pero también incluye a la que se hartó, cerró la pestaña y buscó a otro proveedor. La práctica recomendada en la industria corrige justo eso: una sesión que termina sin escalar se cuenta como contenida solo <em>provisionalmente</em>, y si el cliente vuelve a escribir por el mismo asunto dentro de las 24 horas siguientes, se reclasifica como no resuelta. Casi ningún panel viene configurado así de fábrica, y la diferencia entre las dos formas de contar no es cosmética: es la que decide si el chatbot te está ahorrando trabajo o solo moviéndolo de sitio.</p>
+
+            <p>Eso es lo que separa un chatbot que ahorra plata de uno que solo la esconde en otro renglón: no cuánto desvía, sino qué le pasa después al cliente que desvió.</p>
+
+            <p>El riesgo más caro tampoco es que el bot diga «no sé». Eso lo perdona cualquier cliente. El riesgo caro es que responda mal con total seguridad —que le confirme un descuento que no existe, o le diga que un producto tiene garantía que no tiene— porque tu documentación tenía una ambigüedad que un agente humano habría interpretado bien y el bot leyó de forma literal. Esa clase de error no sale en ninguna métrica de desvío. Sale semanas después, cuando alguien tiene que disculparse por lo que dijo la máquina.</p>
+
+            <p>Antes de firmar cualquier contrato de estos, la pregunta que de verdad importa no es qué modelo de lenguaje usa el proveedor. Es qué unidad factura, cuánto cuesta esa unidad a tu volumen real, y qué hace el bot cuando no está seguro. Si la respuesta a esa última pregunta es «adivina», ya sabes cuánto va a costar de verdad — solo que todavía no en dinero.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="cierre">
+          <h2>¿Prefieres saber primero si tu web tiene el problema<span class="dot">?</span></h2>
+          <p>Antes de sumar un chatbot, conviene saber si el tráfico y la visibilidad de tu sitio son el cuello de botella real. El Diagnóstico Digital lo revisa gratis en 60 segundos.</p>
+          <div class="hero-ctas" style="justify-content:center">
+            <a href="/diagnostico/" class="btn btn-violet">Ver el diagnóstico</a>
+            <a href="/#contacto" class="btn btn-ghost">Hablar con alguien</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="wrap">
+      <p>© Kaiva Studio 2026 · Barranquilla, Colombia</p>
+      <nav aria-label="Enlaces del pie">
+        <a href="/">Inicio</a>
+        <a href="/blog/">Blog</a>
+        <a href="/diagnostico/">Diagnóstico</a>
+        <a href="/#contacto">Contacto</a>
+        <a href="/privacidad/">Privacidad</a>
+        <a href="/terminos/">Términos</a>
+        <a href="/cookies/" data-kv-cookies>Preferencias</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.getElementById('nav');
+      var enlaces = document.getElementById('navLinks');
+      var boton = document.getElementById('navToggle');
+
+      var alScroll = function () {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+      };
+      alScroll();
+      window.addEventListener('scroll', alScroll, { passive: true });
+
+      boton.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var abierto = enlaces.classList.toggle('open');
+        boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!enlaces.contains(e.target) && !boton.contains(e.target)) {
+          enlaces.classList.remove('open');
+          boton.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Aparición al hacer scroll. La clase en <html> es la que activa el
+      // estado oculto en el CSS: sin JS no se esconde nada.
+      if (!('IntersectionObserver' in window)) return;
+      document.documentElement.classList.add('js-reveal');
+
+      var objetivos = document.querySelectorAll('.tarjeta, .paso, .post-item, .faq-item, .blog-post');
+      objetivos.forEach(function (el, i) {
+        el.classList.add('reveal');
+        el.style.setProperty('--d', (i % 6) * 0.06 + 's');
+      });
+
+      var observador = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (entrada) {
+          if (!entrada.isIntersecting) return;
+          entrada.target.classList.add('dentro');
+          observador.unobserve(entrada.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+      objetivos.forEach(function (el) { observador.observe(el); });
+    })();
+  </script>
+  <script src="/assets/fechas.js?v=1" defer></script>
+</body>
+
+</html>

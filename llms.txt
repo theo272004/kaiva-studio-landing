@@ -70,6 +70,50 @@ eso DKIM se reporta como "no detectamos" y nunca como "no tienes".
 
 ## Recursos
 
+- [Chatbots de IA para atención al cliente](https://kaivastudio.com/blog/chatbots-ia-atencion-al-cliente-costos-reales/):
+  cómo factura cada proveedor la misma conversación (Gorgias $1,50 por interacción, Freshdesk $0,49 por
+  sesión, eesel $0,40 por ticket, Intercom Fin $0,99 por resolución); el costo aparte que cobra Meta por
+  WhatsApp Business API en México (0,01–0,10 USD por conversación iniciada por la empresa); por qué la
+  «contención» que muestran los paneles no es lo mismo que resolver el problema del cliente; y el umbral
+  de volumen (unas 80 conversaciones al mes) por debajo del cual un chatbot de IA no se amortiza.
+- [Agencias de diseño web en Bogotá](https://kaivastudio.com/blog/mejores-agencias-diseno-web-bogota/):
+  guía para elegir agencia, con seis estudios de la ciudad con presencia verificable (321 Agencia
+  Digital, Colectivo Web, DesignPlus, El Creativo Web, Mouse Interactivo, Xtrategik); cómo verificar
+  con el RUES si una empresa está registrada en la Cámara de Comercio de Bogotá; y por qué el tamaño
+  del mercado bogotano atrae rankings pagados y sitios duplicados por ciudad. Kaiva se excluye a
+  propósito de su propia lista.
+- [ChatGPT como canal de descubrimiento de marca](https://kaivastudio.com/blog/chatgpt-ia-descubrimiento-marca/):
+  por qué el 80% de usuarios usa IA para buscar empresas; qué cambió el 7 de mayo de 2026
+  cuando OpenAI hizo clickeables los nombres de marca (tráfico referente saltó 157% en una
+  semana); por qué el tráfico de ChatGPT convierte mejor que la búsqueda orgánica normal
+  (1,81% vs 1,39%, 31% más alto); y qué debería hacer un negocio pequeño al respecto.
+- [¿Cuánto cuesta una página web en Argentina?](https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-argentina/):
+  rangos reales del mercado argentino en 2026, con datos en pesos argentinos
+  y equivalente en dólares (USD 200–2.000 según el tipo de proyecto); la
+  particularidad de Argentina donde los costos se cotizan en USD pero se
+  facturan en ARS con una inflación que bajó a 33% interanual pero sigue corriendo; la diferencia entre
+  presupuestos fijos en pesos (que pierden valor cada mes) y cotizan en
+  dólares (que se mantienen); costos de dominio .com.ar, hosting (muchas
+  agencias usan servidores en EE.UU.), y mantenimiento mensual; y por qué
+  preguntarse si el presupuesto es en dólares o pesos fijos es la pregunta
+  que más dinero ahorra.
+- [El Modo IA de Google y los AI Overviews: qué significa para tu SEO](https://kaivastudio.com/blog/modo-ia-google-ai-overviews-que-significa-para-tu-seo/):
+  diferencia entre AI Overviews y el Modo IA, que pasó de experimento a
+  pestaña fija con mil millones de usuarios mensuales en Google I/O de mayo
+  de 2026; el clic dentro del AI Overview cayendo a 1,3% en diciembre de
+  2025 y subiendo a 2,4% en febrero de 2026 (Seer Interactive); el estudio
+  de Pew Research sobre 69.000 búsquedas reales (8% de clic con IA presente
+  contra 15% sin ella); la caída del 58% medida por Ahrefs en la página
+  mejor posicionada; el 22% de clic extra para los sitios citados dentro
+  del AI Overview (Sistrix); y el índice de 94/100 del propio Diagnóstico
+  Digital de Kaiva Studio como referencia de lo técnico básico.
+- [Cuánto cuesta una página web en Chile](https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-chile/):
+  rangos publicados por agencias y freelancers chilenos en 2025-2026 (desde
+  $170.000 CLP hasta varios millones); qué es la Ley 21.719 de protección de
+  datos personales, que entra en vigencia el 1 de diciembre de 2026 y obliga
+  a cualquier sitio con formulario de contacto; la obligación del SII de
+  emitir Documento Tributario Electrónico en toda venta online; y los costos
+  recurrentes de dominio .cl y hosting.
 - [Qwen3.8-27B: correr IA local en tu propio PC](https://kaivastudio.com/blog/qwen-3-8-27b-ia-local/):
   qué liberó Alibaba el 12 de agosto de 2026 —27B dense, multimodal nativo,
   262.144 tokens de contexto, licencia Apache 2.0—; cuánta memoria pide cada
