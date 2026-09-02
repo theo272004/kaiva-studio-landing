@@ -286,10 +286,10 @@
         },
         {
           "@type": "Question",
-          "name": "¿En qué se diferencia el Mantenimiento Digital del Panel Pro?",
+          "name": "¿Qué incluye el Mantenimiento Digital?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "El Mantenimiento Digital lo ejecutamos nosotros por ti: actualizamos, corregimos, optimizamos y te mandamos un informe cada mes. El Panel Pro es una herramienta de autoservicio: tú ves los datos de tu presencia digital y decides qué hacer. Costará 70.000 COP al mes y todavía no está disponible; puedes entrar a la lista de espera. El Diagnóstico Digital, en cambio, ya está en línea y es gratis. Son productos distintos y no se reemplazan."
+            "text": "Lo ejecutamos nosotros por ti: actualizamos, corregimos y optimizamos tu sitio, y vigilamos lo que no se ve — velocidad, seguridad, si tu correo llega, cómo te encuentran en Google y cómo te describen las IA. Cada cliente con mantenimiento tiene además su panel: el mismo índice del diagnóstico pero mes a mes, con el histórico, lo que cambió y qué sigue. No es una herramienta que se compre aparte, es la ventana del trabajo que estamos haciendo. El Diagnóstico Digital es la foto, gratis y sin registro; el mantenimiento es la película."
           }
         }
       ]
@@ -1233,13 +1233,16 @@
               </svg>
             </div>
 
-            <!-- Este botón decía "Ver Panel Pro" y llevaba a /monitor/, que es
-                 el diagnóstico gratis: prometía un producto y entregaba otro.
-                 El Pro todavía no existe, así que lo honesto es la espera. -->
+            <!-- Aquí se ofrecía el "Panel Pro" con lista de espera, como si
+                 fuera un producto de autoservicio aparte. No lo es: el panel
+                 es la ventana del trabajo que hacemos cada mes, y solo existe
+                 mientras estemos gestionando algo detrás. Vender el acceso
+                 suelto lo convertiría en un tablero copiable; lo que se cobra
+                 es la gestión, no el dato. -->
             <div class="side-pro">
-              <div class="t">Panel Pro</div>
-              <div class="d">Seguimiento mensual, histórico y competencia.</div>
-              <a href="#contacto" class="b" data-espera-pro>Entrar a la lista de espera</a>
+              <div class="t">Mantenimiento Digital</div>
+              <div class="d">Gestionamos tu web cada mes, y ves el avance en tu propio panel.</div>
+              <a href="#contacto" class="b" data-interes="mantenimiento">Hablemos de tu sitio</a>
             </div>
           </aside>
 
@@ -1628,20 +1631,21 @@
 
         <details class="faq-item">
           <summary>
-            <h3>¿En qué se diferencia el Mantenimiento Digital del Panel Pro?</h3>
+            <h3>¿Qué incluye el Mantenimiento Digital?</h3>
             <span class="faq-icon" aria-hidden="true">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
             </span>
           </summary>
           <div class="faq-answer">
-            <p>El <strong>Mantenimiento Digital</strong> lo ejecutamos nosotros por ti: actualizamos, corregimos,
-              optimizamos y te mandamos un informe cada mes. Tú no tocas nada.</p>
-            <p>El <strong>Panel Pro</strong> es una herramienta de autoservicio: tú ves los datos de tu presencia
-              digital y decides qué hacer. Costará <strong>$70.000 COP al mes</strong> y todavía no está
-              disponible — puedes <a href="#contacto" data-espera-pro>entrar a la lista de espera</a>. El
-              <a href="/monitor/">Diagnóstico Digital</a>, en cambio, ya está en línea y es gratis.</p>
-            <p>Son productos distintos y no se reemplazan: uno es que lo hagamos nosotros, el otro es que lo
-              veas tú.</p>
+            <p>Lo ejecutamos nosotros por ti: actualizamos, corregimos y optimizamos tu sitio,
+              y vigilamos lo que no se ve —velocidad, seguridad, si tu correo llega, cómo te
+              encuentran en Google y cómo te describen las IA—. Tú no tocas nada.</p>
+            <p>Y lo ves. Cada cliente con mantenimiento tiene su <strong>panel</strong>: el mismo
+              índice del diagnóstico pero mes a mes, con el histórico, lo que cambió y qué sigue.
+              No es una herramienta que se compre aparte — es la ventana del trabajo que estamos
+              haciendo.</p>
+            <p>El <a href="/monitor/">Diagnóstico Digital</a> es la foto, gratis y sin registro.
+              El mantenimiento es la película.</p>
           </div>
         </details>
 
@@ -1701,7 +1705,6 @@
                   <option value="web-branding">Web &amp; Branding</option>
                   <option value="mantenimiento">Mantenimiento Digital</option>
                   <option value="software">Software a medida</option>
-                  <option value="panel-pro">Panel Pro (lista de espera)</option>
                   <option value="otro">Otro / No sé aún</option>
                 </select>
               </div>
@@ -2071,14 +2074,13 @@
           cta: 'Ver mi diagnóstico gratis', href: '/monitor', micro: 'Sin compromiso. En 60 segundos.'
         },
         {
-          lbl: 'Tu panel de control', h: 'Medimos y mejoramos <em>cada mes</em>.',
-          p: 'El Panel Pro mide tu salud digital mes a mes — velocidad, seguridad, correo y cómo te describe la IA — y te dice exactamente qué hacer.',
+          lbl: 'Tu paso de cada mes', h: 'Medimos y mejoramos <em>cada mes</em>.',
+          p: 'Nos hacemos cargo de tu sitio mes a mes — velocidad, seguridad, correo, cómo te encuentran en Google y cómo te describen las IA — y lo ves todo en tu panel.',
           li: ['Re-escaneo automático e historial', 'Alertas cuando algo cambia', 'Visibilidad en Google e IA', 'Analytics y Search Console interpretados', 'Informe mensual y qué priorizar'],
-          /* El Panel Pro sigue sin lanzarse, pero el diagnóstico gratis ya no:
-             mandar a "/monitor/" con el rótulo "Próximamente" contradecía a la
-             propia herramienta, que responde en 60 segundos. La espera es del
-             Pro, y se apunta al formulario, que es donde se registra. */
-          cta: 'Entrar a la lista de espera', href: '#contacto', pro: true, micro: 'El Panel Pro aún no está disponible. El diagnóstico gratis sí.'
+          /* Ya no hay lista de espera que ofrecer: el panel no se vende
+             suelto, va incluido en el mantenimiento. El botón lleva a la
+             conversación, que es donde empieza ese servicio. */
+          cta: 'Hablemos de tu sitio', href: '#contacto', pro: true, micro: 'Empieza con el diagnóstico gratis, que ya está en línea.'
         }
       ];
       var opts = [].slice.call(document.querySelectorAll('.sit-row'));
@@ -2090,7 +2092,7 @@
 
       function renderSit(i) {
         var d = sitData[i];
-        panel.innerHTML = '<span class="lbl">' + d.lbl + '</span><h3>' + d.h + '</h3><p>' + d.p + '</p><ul>' + d.li.map(function (x) { return '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>' + x + '</li>'; }).join('') + '</ul><a href="' + d.href + '" class="btn btn-violet"' + (d.pro ? ' data-espera-pro' : '') + '>' + d.cta + '</a><span class="micro">' + d.micro + '</span>';
+        panel.innerHTML = '<span class="lbl">' + d.lbl + '</span><h3>' + d.h + '</h3><p>' + d.p + '</p><ul>' + d.li.map(function (x) { return '<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>' + x + '</li>'; }).join('') + '</ul><a href="' + d.href + '" class="btn btn-violet"' + (d.pro ? ' data-interes="mantenimiento"' : '') + '>' + d.cta + '</a><span class="micro">' + d.micro + '</span>';
         panel.classList.remove('fade-swap');
         void panel.offsetWidth;
         panel.classList.add('fade-swap');
@@ -2276,7 +2278,7 @@
         "precio": "Depende del alcance — cada proyecto es diferente. Lo que sí podemos decirte es que trabajamos sin plantillas genéricas. La mejor forma de saberlo es agendar una llamada de 20 minutos donde te damos un estimado real. Sin compromiso.",
         "tiempo": "Una web estándar tarda entre 3 y 5 semanas. Proyectos de branding completo o software a medida pueden tomar más. Te damos un cronograma claro desde el primer día.",
         "empezar": "Nada especial. Con una llamada de 20 minutos entendemos tu negocio y te decimos exactamente qué necesitas y en qué orden. Puedes empezar también con el diagnóstico gratis.",
-        "diferencia": "El Mantenimiento lo hacemos nosotros por ti — actualizamos, corregimos y optimizamos. El Panel Pro es una herramienta de auto-servicio: tú ves los datos y decides. Son productos distintos, no se reemplazan.\n\nEl Panel Pro costará $70.000 COP/mes y aún no está disponible — puedes entrar a la lista de espera escribiéndonos desde el formulario. El Diagnóstico Digital sí está en línea y es gratis.",
+        "diferencia": "El Mantenimiento lo hacemos nosotros por ti — actualizamos, corregimos y optimizamos tu sitio, y vigilamos velocidad, seguridad, correo y cómo te encuentran en Google y en las IA. Cada cliente con mantenimiento ve todo eso en su panel, mes a mes. El Diagnóstico Digital es la foto y es gratis; el mantenimiento es la película.",
         /* Decía "Solo dejas tu correo para ver el reporte completo". Nunca fue
            verdad y hoy menos: el diagnóstico se entrega entero sin pedir nada. */
         "gratis": "Sí, completamente. Puntaje, hallazgos reales con su evidencia y qué priorizar — sin costo, sin registro y sin dejar tu correo. Está en línea en kaivastudio.com/monitor/ y responde en unos 60 segundos.",
@@ -2408,25 +2410,23 @@
   </script>
 
   <script>
-    /* Lista de espera del Panel Pro: lleva al formulario con el interés ya
-       elegido.
+    /* Un enlace puede bajar al formulario con el interés ya elegido.
 
-       Esto colgaba de un id="proWaitlist" que no existe en la página desde
-       que el Panel Pro salió de la sección de planes: el script se moría en
-       la primera línea y ningún enlace de "lista de espera" preparaba nada.
-       Ahora es delegación sobre [data-espera-pro], que se puede poner en
-       cualquier enlace —incluidos los que se pintan por JavaScript, como el
-       panel de situaciones— sin volver a tocar esto. */
+       Antes esto era [data-espera-pro] y solo servía para una cosa: apuntar a
+       la lista de espera del Panel Pro, que ya no existe —el panel va incluido
+       en el mantenimiento, no se vende suelto—. Ahora el atributo lleva el
+       valor de la opción, así que cualquier enlace puede preseleccionar
+       cualquier servicio sin volver a tocar este script.
+
+       Y ya no se rellena el mensaje: escribirle al visitante lo que
+       supuestamente quiere decir es peor que dejarle el campo libre. */
     (function () {
       document.addEventListener('click', function (e) {
-        var btn = e.target.closest ? e.target.closest('[data-espera-pro]') : null;
+        var btn = e.target.closest ? e.target.closest('[data-interes]') : null;
         if (!btn) return;
         var sel = document.getElementById('cService');
-        if (sel) sel.value = 'panel-pro';
-        var msg = document.getElementById('cMessage');
-        if (msg && !msg.value.trim()) {
-          msg.value = 'Quiero entrar a la lista de espera del Panel Pro.';
-        }
+        var val = btn.getAttribute('data-interes');
+        if (sel && val) sel.value = val;
         var dest = document.getElementById('contacto');
         if (dest) {
           e.preventDefault();
@@ -2474,7 +2474,6 @@
         'web-branding': 'Web & Branding',
         'mantenimiento': 'Mantenimiento Digital',
         'software': 'Software a medida',
-        'panel-pro': 'Panel Pro (lista de espera)',
         'otro': 'Otro / No sé aún'
       };
 

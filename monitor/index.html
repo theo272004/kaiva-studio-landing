@@ -807,10 +807,12 @@
        a alguien que acababa de usar la herramienta. Los errores ahora se
        explican sobre el propio formulario (ver el catch de analizarDeVerdad).
 
-       La lista de espera no desapareció: se movió al Panel Pro (#kvPro), que
-       es lo único que de verdad falta por lanzar. -->
+       Y la lista de espera se retiró del todo: el panel no es un producto por
+       lanzar, va incluido en el Mantenimiento Digital. El modal #kvPro sigue
+       ahí, pero ahora recoge interés en el servicio en vez de anotar gente
+       para un lanzamiento que no va a ocurrir. -->
 
-  <!-- ===== Panel Pro: lista de espera ===== -->
+  <!-- ===== Seguimiento mensual: interés ===== -->
   <!-- Va aquí arriba, antes del guion que engancha el formulario. Si
        estuviera más abajo, getElementById devolvería null y el formulario
        quedaría mudo sin dar ni un error. -->
@@ -832,10 +834,10 @@
            la cifra queda fijada en la cabeza de quien la leyó, y el producto
            todavía puede cambiar.» El distintivo dice ahora lo mismo que el de
            esa página: en construcción. -->
-      <span class="kvpro-tag">Panel Pro · En construcción</span>
-      <h2 id="kvProTitulo">Esto es una sección del Panel Pro.</h2>
+      <span class="kvpro-tag">Va incluido en el Mantenimiento Digital</span>
+      <h2 id="kvProTitulo">Esto es parte del seguimiento mensual.</h2>
       <p class="kvpro-lead">El diagnóstico que acabas de correr es gratis y completo — no te
-        escondemos hallazgos. Lo que el Panel Pro agrega es el <strong>tiempo</strong>: volver a
+        escondemos hallazgos. Lo que el seguimiento agrega es el <strong>tiempo</strong>: volver a
         medir solo, guardar el historial y avisarte cuando algo se rompa.</p>
 
       <!-- LA MISMA LISTA QUE en-cola.php, palabra por palabra en lo que
@@ -863,8 +865,15 @@
         <li>Tus datos de Google interpretados, no otro tablero más.</li>
       </ul>
 
-      <p class="kvpro-estado">Todavía no está disponible. Estamos construyéndolo; déjanos tu
-        correo y serás de los primeros en entrar.</p>
+      <!-- ESTO NO ES UNA LISTA DE ESPERA. Decía "todavía no está disponible,
+           déjanos tu correo y serás de los primeros en entrar", como si el panel
+           fuera un producto por lanzar. No lo es: el panel existe, y va incluido
+           cuando gestionamos el sitio. Vender el acceso suelto lo convertiría en
+           un tablero copiable, y lo que se cobra es la gestión, no el dato.
+           Además, una lista de espera para algo que no se piensa lanzar es una
+           promesa incumplible hecha justo a quien acaba de confiar en nosotros. -->
+      <p class="kvpro-estado">No se vende suelto: lo tienen los sitios que cuidamos nosotros.
+        Déjanos tu correo y te contamos qué incluye, sin compromiso.</p>
 
       <form class="kv-wait" id="kvWaitForm">
         <label class="kv-wait-label" for="kvWaitMail">Tu correo</label>
@@ -873,7 +882,7 @@
             autocomplete="email">
           <button type="submit" class="kv-wait-btn" id="kvWaitBtn">Avísenme</button>
         </div>
-        <p class="kv-wait-note">Te escribimos una sola vez, para avisarte del lanzamiento. Nada más.</p>
+        <p class="kv-wait-note">Te escribimos una sola vez, con lo que incluye el seguimiento. Nada más.</p>
         <p class="kv-wait-err" id="kvWaitErr" role="alert"></p>
       </form>
 
@@ -882,7 +891,7 @@
           stroke-linecap="round" stroke-linejoin="round">
           <path d="M20 6 9 17l-5-5" />
         </svg>
-        Listo. Te avisamos apenas el Panel Pro esté disponible.
+        Listo. Te escribimos con lo que incluye el seguimiento.
       </div>
     </div>
   </div>
@@ -2206,11 +2215,13 @@
 
       }); // fin de DOMContentLoaded (guardar análisis + reabrir informe)
 
-      /* ---- Lista de espera del Panel Pro ----
-         El mismo formulario de antes, pero apuntando a lo único que sigue
-         sin lanzarse. El diagnóstico ya está en línea: pedir el correo "para
-         avisarte cuando esté lista" a quien acaba de usarla no tenía sentido
-         y ensuciaba la hoja de leads con interés falso. */
+      /* ---- Interés en el seguimiento mensual ----
+         Antes esto era una lista de espera del Panel Pro. Dejó de serlo: el panel
+         no se lanza como producto, va incluido en el Mantenimiento Digital. El
+         formulario se queda donde está —dispara justo cuando alguien acaba de
+         correr su diagnóstico y quiso abrir una sección de seguimiento, que es el
+         mejor momento posible—, pero ahora registra lo que de verdad es: alguien
+         interesado en que le cuidemos el sitio. */
       var EJS = {
         service: 'service_94uqq2e',
         template: 'template_brvipe9',
@@ -2249,10 +2260,10 @@
               method: 'POST',
               headers: { 'Content-Type': 'text/plain;charset=utf-8' },
               body: JSON.stringify({
-                nombre: '(lista de espera Panel Pro)',
+                nombre: '(interés desde el diagnóstico)',
                 correo: correo,
                 telefono: '',
-                interes: 'Panel Pro — lista de espera',
+                interes: 'Mantenimiento Digital',
                 mensaje: 'Analizó: ' + sitio,
                 origen: window.location.href,
                 referente: document.referrer || 'directo'
@@ -2268,12 +2279,12 @@
               template_id: EJS.template,
               user_id: EJS.key,
               template_params: {
-                name: '(lista de espera — Panel Pro)',
+                name: '(interés desde el diagnóstico)',
                 email: correo,
-                message: 'Alguien corrió el diagnóstico de ' + sitio + ', intentó abrir una sección Pro y dejó su correo para que le avisen cuando el Panel Pro esté disponible.',
+                message: 'Alguien corrió el diagnóstico de ' + sitio + ', quiso abrir una sección de seguimiento y dejó su correo para que le contemos qué incluye el Mantenimiento Digital.',
                 phone: 'No indicado',
-                interest: 'Panel Pro — lista de espera',
-                subject: 'Lista de espera Panel Pro — ' + sitio,
+                interest: 'Mantenimiento Digital',
+                subject: 'Interés en seguimiento — ' + sitio,
                 time: new Date().toLocaleString('es-CO', { dateStyle: 'medium', timeStyle: 'short' }),
                 page_url: window.location.href,
                 privacy: 'Aceptada'

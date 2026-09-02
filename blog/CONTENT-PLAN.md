@@ -32,8 +32,17 @@ publicar cada día. No es contenido del sitio: es el backlog interno.
   (sección Recursos), luego `git add` **solo** de los archivos tocados para
   este post (nunca `git add -A` ni tocar otros cambios que ya estuvieran sin
   commitear en el repo), commit y push a `main`.
-- Marcar la fila como `Publicado` con la fecha real al terminar, y añadir una
-  fila nueva al final de la cola para que nunca se quede vacía.
+- **Comprobar que se publicó de verdad antes de marcar la fila.** El
+  2026-08-30 aparecieron seis artículos marcados `Publicado` que respondían
+  404: el push llevaba días fallando contra candados huérfanos en `.git` y la
+  tarea marcaba la fila igual. Dos comprobaciones, en este orden:
+  `git rev-list --left-right --count origin/main...HEAD` tiene que dar `0  0`,
+  y `curl -s -o /dev/null -w '%{http_code}' https://kaivastudio.com/blog/<slug>/`
+  tiene que dar `200` (GitHub Pages tarda cerca de un minuto).
+- Marcar la fila como `Publicado` con la fecha real **solo si la URL respondió
+  200**; si no, se queda en `Pendiente`. Una cola que miente es peor que una
+  cola atrasada, porque nadie vuelve a mirar lo que ya dice «hecho». Y añadir
+  una fila nueva al final de la cola para que nunca se quede vacía.
 - **Cada post lleva su `.cta-lectura`** en el primer tercio, justo antes de un
   `<h2>`, con `utm_content=<slug>`. El bloque está descrito en `pagina.css`;
   se copia de cualquier post ya publicado y se adapta su primera frase al
