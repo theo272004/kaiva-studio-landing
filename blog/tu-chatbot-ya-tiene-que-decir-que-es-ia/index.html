@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Analytics con consentimiento previo. Aquí NO se carga el script de
+       Google: solo se fijan los valores por defecto (todo denegado) y se
+       deja que /assets/consentimiento.js lo inyecte si la persona acepta.
+       El razonamiento completo y las normas que lo obligan están comentados
+       arriba de ese archivo. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+  </script>
+  <script defer src="/assets/consentimiento.js?v=20260729"></script>
+  <script defer src="/assets/eventos.js?v=20260729"></script>
+  <script defer src="/assets/indice-blog.js?v=20260731"></script>
+  <script defer src="/assets/clarity.js?v=20260729"></script>
+
+  <title>Tu chatbot ya tiene que decir que es una IA: qué cambió el 2 de agosto</title>
+  <meta name="description"
+    content="Desde el 2 de agosto de 2026 rige en la Unión Europea la obligación de que un chatbot avise que es una IA, con multas de hasta 15 millones de euros. Qué dice la norma, a quién le aplica de verdad y qué hacer con el tuyo aunque no vendas en Europa.">
+  <link rel="canonical" href="https://kaivastudio.com/blog/tu-chatbot-ya-tiene-que-decir-que-es-ia/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/favicon-96.png?v=20260809" type="image/png" sizes="96x96">
+  <link rel="icon" href="/assets/favicon-192.png?v=20260809" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=20260809">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Kaiva Studio">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:url" content="https://kaivastudio.com/blog/tu-chatbot-ya-tiene-que-decir-que-es-ia/">
+  <meta property="og:title" content="Tu chatbot ya tiene que decir que es una IA: qué cambió el 2 de agosto">
+  <meta property="og:description"
+    content="La Unión Europea ya exige que un chatbot avise que es una IA, con multas de hasta 15 millones de euros. Qué dice la norma y qué hacer con el tuyo aunque no vendas en Europa.">
+  <meta property="og:image" content="https://kaivastudio.com/assets/blog/ia.webp">
+  <meta property="article:published_time" content="2026-09-01">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tu chatbot ya tiene que decir que es una IA: qué cambió el 2 de agosto">
+  <meta name="twitter:image" content="https://kaivastudio.com/assets/blog/ia.webp">
+
+  <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/tokens.css?v=20260808c">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260809b">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaivastudio.com/blog/tu-chatbot-ya-tiene-que-decir-que-es-ia/#post",
+      "headline": "Tu chatbot ya tiene que decir que es una IA: qué cambió el 2 de agosto",
+      "description": "Desde el 2 de agosto de 2026 rige en la Unión Europea la obligación de que un chatbot avise que es una IA, con multas de hasta 15 millones de euros. Qué dice la norma, a quién le aplica de verdad y qué hacer con el tuyo aunque no vendas en Europa.",
+      "datePublished": "2026-09-01",
+      "dateModified": "2026-09-01",
+      "inLanguage": "es-CO",
+      "image": "https://kaivastudio.com/assets/blog/ia.webp",
+      "mainEntityOfPage": "https://kaivastudio.com/blog/tu-chatbot-ya-tiene-que-decir-que-es-ia/",
+      "author": {
+        "@type": "Organization",
+        "@id": "https://kaivastudio.com/#studio",
+        "name": "Kaiva Studio",
+        "url": "https://kaivastudio.com/"
+      },
+      "publisher": { "@id": "https://kaivastudio.com/#studio" },
+      "isPartOf": { "@id": "https://kaivastudio.com/blog/#blog" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://kaivastudio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://kaivastudio.com/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Tu chatbot ya tiene que decir que es IA", "item": "https://kaivastudio.com/blog/tu-chatbot-ya-tiene-que-decir-que-es-ia/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es el artículo 50 del Reglamento de IA de la Unión Europea?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es la parte del AI Act europeo que obliga a avisar cuando algo fue hecho o es operado por inteligencia artificial: chatbots y asistentes de voz que tienen que decir que no son una persona, contenido sintético (imagen, audio, video, texto) que tiene que marcarse como generado por IA, y sistemas de reconocimiento de emociones o categorización biométrica que tienen que informarse antes de usarse sobre alguien. Empezó a aplicarse el 2 de agosto de 2026, con una excepción hasta el 2 de diciembre de 2026 solo para el marcado técnico de contenido generado por sistemas ya en el mercado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Me aplica esta norma si mi negocio no está en la Unión Europea?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Directamente, solo si tu chatbot atiende a personas que están en la Unión Europea al momento de usarlo — un cliente en Madrid escribiéndole a tu WhatsApp cuenta, aunque tu empresa esté en Barranquilla. Si toda tu clientela está en América Latina, la norma no te obliga hoy. Pero suele pasar que lo que empieza como ley europea termina siendo el estándar que los propios proveedores de chatbots activan por defecto en todos sus clientes, como ocurrió con el aviso de cookies después del RGPD."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si no le aviso a mis clientes que hablan con un chatbot?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Si operas en la Unión Europea, la multa puede llegar a 15 millones de euros o el 3% de la facturación anual mundial, lo que sea mayor. Si no operas ahí, no hay sanción legal todavía, pero el riesgo real es otro: el 60% de las personas que tuvieron una mala experiencia con un chatbot prefiere después que la atienda una persona, y descubrir a mitad de conversación que quien respondía no era humano suele convertir una mala experiencia en una queja pública."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo aviso que mi chatbot es IA sin que se sienta robótico?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Con una frase al comienzo de la conversación, no con un banner legal. Algo como «Hola, soy el asistente virtual de [tu empresa], no una persona — si prefieres hablar con alguien del equipo, escribe asesor» cumple el aviso, deja claro que hay salida a un humano, y no rompe el tono de la marca."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+  <nav class="nav" id="nav">
+    <div class="nav-in">
+      <a href="/" class="logo" aria-label="Kaiva Studio — ir al inicio">
+        <img src="/assets/logo-kaiva.png" alt="Kaiva Studio" width="105" height="44">
+      </a>
+      <div class="nav-right">
+        <div class="nav-links" id="navLinks">
+          <a href="/diseno-web/" class="lnk">Diseño web</a>
+          <a href="/software-a-medida/" class="lnk">Software</a>
+          <a href="/branding/" class="lnk">Branding</a>
+          <a href="/blog/" class="lnk" aria-current="page">Blog</a>
+          <a href="/monitor/" class="btn btn-dark">Diagnóstico Gratis</a>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menú" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <article>
+
+      <header class="post-cabecera">
+        <div class="wrap">
+          <nav class="migas" aria-label="Ruta de navegación">
+            <a href="/">Inicio</a><span>/</span><a href="/blog/">Blog</a><span>/</span>Tu chatbot ya tiene que decir que es IA
+          </nav>
+
+          <div class="post-cabecera-in">
+            <div class="post-cabecera-texto">
+              <p class="fecha"><time datetime="2026-09-01">1 de septiembre de 2026</time> · Lectura de 9 minutos</p>
+
+              <h1 class="post-titulo">
+                Tu chatbot ya tiene que decir que es una IA<span style="color:var(--violet)">.</span> No es opcional
+              </h1>
+
+              <p class="lead">El 2 de agosto de 2026 entró en vigor en la Unión Europea la obligación de que un
+                chatbot avise que es una máquina antes de que sigas confiando en lo que te dice. La multa por
+                no hacerlo llega a 15 millones de euros. Pero la parte que de verdad debería importarte, tengas
+                o no clientes en Europa, no es la multa.</p>
+            </div>
+
+            <figure class="post-cabecera-foto">
+              <img src="/assets/blog/ia.webp" alt="Profesional revisando en una laptop una conversación de chatbot de inteligencia artificial en una oficina moderna" width="1774" height="887"
+                fetchpriority="high" decoding="async">
+            </figure>
+          </div>
+        </div>
+      </header>
+
+      <div class="section post-cuerpo">
+        <div class="wrap">
+          <div class="articulo">
+
+            <p>Miles de negocios pusieron un chatbot en su web o en su WhatsApp y le dieron un nombre de
+              persona: Ana, Sofía, Camila. Responde rápido, usa emojis, y si no le preguntas directamente
+              «¿eres un bot?», nunca lo aclara. Desde el 2 de agosto de 2026, en la Unión Europea eso ya no
+              se puede hacer. Y aunque tu negocio esté en Barranquilla, Bogotá o Quito, vale la pena que
+              entiendas por qué.</p>
+
+            <h2>El artículo 50 ya no es una propuesta, es ley aplicada</h2>
+
+            <p>El <em>AI Act</em> europeo es el reglamento más amplio del mundo sobre inteligencia artificial,
+              y se viene aplicando por partes desde 2024. La parte que tocó ahora es el artículo 50, sobre
+              transparencia, y empezó a regir el 2 de agosto de 2026 para todo sistema que ya esté en uso,
+              sin importar cuándo se puso en marcha.</p>
+
+            <p>Cubre cuatro situaciones distintas, y solo una es la que te toca si tienes un negocio pequeño:</p>
+
+            <div style="overflow-x:auto;margin-top:1.4rem">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Qué usa IA</th>
+                    <th>Qué exige la norma</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Chatbots, asistentes de voz, agentes de IA</strong></td>
+                    <td>Avisar que quien responde es una IA, salvo que sea evidente por sí solo</td>
+                  </tr>
+                  <tr>
+                    <td>Imágenes, audio, video o texto generado</td>
+                    <td>Marca legible por máquina que identifique el origen artificial</td>
+                  </tr>
+                  <tr>
+                    <td>Reconocimiento de emociones o biometría</td>
+                    <td>Informar antes a la persona expuesta al sistema</td>
+                  </tr>
+                  <tr>
+                    <td>Deepfakes y contenido sintético de interés público</td>
+                    <td>Revelar de forma clara y visible que es artificial o fue manipulado</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p style="margin-top:1.2rem;font-size:14.5px;color:var(--ink-faint)">Fuente:
+              <a href="https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act" target="_blank" rel="noopener">Comisión Europea, obligaciones de transparencia del artículo 50</a>
+              y <a href="https://www.cooley.com/news/insight/2026/2026-08-03-eu-ai-act-transparency-obligations-take-effect-2-august-2026" target="_blank" rel="noopener">análisis de Cooley sobre su entrada en vigor</a>, agosto de 2026. El marcado técnico de contenido generado por sistemas ya existentes tiene plazo hasta el 2 de diciembre de 2026; el resto ya rige.</p>
+
+            <p>La primera fila de esa tabla es la que le toca a cualquiera que tenga un chatbot vendiendo,
+              agendando citas o resolviendo dudas. Y el incumplimiento no es simbólico: la multa puede
+              llegar a <strong>15 millones de euros o el 3% de la facturación anual mundial</strong>, lo que
+              sea mayor — la misma escala de sanción que el RGPD.</p>
+
+            <!-- Salida temprana. Ver .cta-lectura en pagina.css: por qué está
+                 aquí, por qué antes de un <h2> y por qué no se parece a .nota. -->
+            <aside class="cta-lectura" aria-labelledby="cta-lectura-tit">
+              <p class="lbl" id="cta-lectura-tit">¿Tu web ya declara quién eres?</p>
+              <p>Antes de pensar en el chatbot, vale la pena saber si tu sitio ya comunica con claridad quién
+                es tu negocio. El <strong>Diagnóstico Digital</strong> revisa eso, además de velocidad,
+                visibilidad y correo, y te da tu Índice de Salud Digital en 60&nbsp;segundos. Gratis y sin
+                registro.</p>
+              <a class="btn btn-violet" href="/monitor/?utm_source=blog&amp;utm_medium=cta-lectura&amp;utm_content=tu-chatbot-ya-tiene-que-decir-que-es-ia">Ejecutar diagnóstico</a>
+            </aside>
+
+            <h2>Si tu clientela está en América Latina, la ley no te alcanza — hoy</h2>
+
+            <p>Seamos honestos con el alcance: el AI Act aplica cuando el sistema interactúa con personas que
+              están físicamente en la Unión Europea al momento de usarlo. Si tu chatbot solo atiende consultas
+              de Colombia, Ecuador, Perú o México, esta ley en particular no te obliga a nada todavía. Nadie
+              en Bruselas va a multar a una pyme de Barranquilla por su asistente de WhatsApp.</p>
+
+            <p>Pero hay dos razones por las que igual conviene prestarle atención, y ninguna de las dos es
+              legal.</p>
+
+            <p>La primera es que <strong>Europa suele ser la que escribe el estándar que después todos
+                copian</strong>. Pasó con el aviso de cookies después del RGPD en 2018: nadie en América
+              Latina estaba obligado, y siete años después casi cualquier web seria lo tiene, porque los
+              proveedores de las herramientas lo activaron por defecto para todo el mundo. Es razonable
+              esperar que las plataformas de chatbots — Meta, las que venden WhatsApp Business API, los
+              proveedores de agentes de IA — terminen agregando el aviso como opción estándar para todos sus
+              clientes, apliquen o no la ley donde operan.</p>
+
+            <p>La segunda razón es la que de verdad debería moverte, y no tiene nada que ver con Europa.</p>
+
+            <h2>La confianza se rompe antes que la ley te alcance</h2>
+
+            <p>El 50% de las personas todavía prefiere que un humano resuelva su consulta de atención al
+              cliente, según el II Observatorio de Tendencias en CX de Foundever. Y entre quienes tuvieron
+              una mala experiencia con un chatbot, el <strong>60% pasa a preferir que lo atienda una
+                persona</strong> de ahí en adelante. La desconfianza hacia los bots no es una anécdota: es
+              la reacción mayoritaria cuando la cosa sale mal.</p>
+
+            <p>Ahora súmale esto: si tu chatbot se llama «Sofía» y responde como si fuera una persona del
+              equipo, y el cliente descubre a mitad de conversación — por una respuesta rara, por algo que
+              no entendió — que en realidad hablaba con una máquina, la mala experiencia deja de ser solo
+              con el chatbot. Pasa a ser con tu marca, porque sintió que le mintieron sobre algo simple.</p>
+
+            <p>Decir «soy un asistente virtual, no una persona» al principio de la conversación no evita que
+              el chatbot cometa errores. Pero sí cambia lo que el cliente espera, y eso reduce la sensación
+              de engaño cuando el error ocurre. Es la misma lógica de por qué un restaurante avisa que un
+              plato lleva nueces: no elimina el riesgo, pero deja que la persona decida con la información
+              completa.</p>
+
+            <figure style="margin:2.4rem 0">
+              <img src="/assets/blog/ia.webp"
+                alt="Persona escribiendo en el teléfono en una conversación de WhatsApp con un asistente de inteligencia artificial"
+                width="1774" height="887" loading="lazy" decoding="async"
+                style="display:block;width:100%;height:auto;border-radius:14px">
+            </figure>
+
+            <h2>Lo que nadie te dice cuando te vende un chatbot «con nombre propio»</h2>
+
+            <p>Hay una práctica extendida entre agencias y proveedores de automatización: venden el chatbot
+              con un nombre de persona precisamente para que se sienta más humano, y presentan esa
+              ambigüedad como una ventaja de producto. Es exactamente la práctica que el artículo 50 salió
+              a corregir en Europa. Nadie te está pidiendo que el bot suene aburrido — se puede llamar Sofía
+              y tener personalidad — pero si tu proveedor nunca mencionó que hay que avisar que es IA, no es
+              un detalle que se les olvidó: es que vender la ilusión de humanidad es parte de lo que están
+              cobrando.</p>
+
+            <p>Si ya tienes un chatbot para atención al cliente — y si le pusiste números reales, sabes que
+              <a href="/blog/chatbots-ia-atencion-al-cliente-costos-reales/">cuesta por interacción, no
+                por licencia</a> — este es un buen momento para revisar cómo se presenta, sin esperar a que
+              te lo exija una ley que quizás nunca te toque directamente.</p>
+
+            <h2>Qué hacer con el tuyo, en la práctica</h2>
+
+            <p>No hace falta un abogado ni una auditoría. Tres cambios cubren la parte que le corresponde a
+              un negocio pequeño:</p>
+
+            <p><strong>Una frase al inicio, no un aviso legal.</strong> Algo como «Hola, soy el asistente
+              virtual de [tu empresa], no una persona del equipo» en el primer mensaje automático cumple el
+              aviso y no rompe el tono de marca. No necesita mayúsculas ni asteriscos de disclaimer.</p>
+
+            <p><strong>Una salida clara hacia un humano.</strong> «Si prefieres hablar con alguien del
+              equipo, escribe <em>asesor</em>» o un botón equivalente. Es lo que evita que el 60% que ya
+              desconfía de los bots se quede atrapado sin opción.</p>
+
+            <p><strong>Revisa qué generó tu proveedor, no solo qué configuraste tú.</strong> Si usas
+              plantillas o respuestas armadas por un tercero, confirma que el aviso está en el flujo por
+              defecto y no solo disponible como opción que hay que activar a mano.</p>
+
+            <p>Nada de esto exige presupuesto ni semanas de desarrollo. Es una línea de texto en el mensaje
+              de bienvenida del bot que ya tienes, y una decisión — no ocultar algo que de todas formas se
+              va a notar tarde o temprano.</p>
+
+            <p>Lo incómodo de esta norma no es la multa, que a la mayoría de negocios en América Latina no
+              le va a tocar. Lo incómodo es que confirma algo que ya se sabía: la razón por la que a muchos
+              proveedores no les interesaba avisar es la misma razón por la que ahora una ley los obliga a
+              hacerlo.</p>
+
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="cierre">
+          <h2>¿Sabes qué tan claro comunica tu web<span class="dot">?</span></h2>
+          <p>El Diagnóstico Digital revisa si tu sitio dice con claridad quién eres, si Google lo entiende y
+            si tu presencia está bien definida — la misma claridad que ahora exige la ley para un chatbot.
+            Gratis, sin tarjeta y sin registro.</p>
+          <div class="hero-ctas" style="justify-content:center">
+            <a href="/diagnostico/" class="btn btn-violet">Ver el diagnóstico</a>
+            <a href="/#contacto" class="btn btn-ghost">Hablar con alguien</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="wrap">
+      <p>© Kaiva Studio 2026 · Barranquilla, Colombia</p>
+      <nav aria-label="Enlaces del pie">
+        <a href="/">Inicio</a>
+        <a href="/blog/">Blog</a>
+        <a href="/diagnostico/">Diagnóstico</a>
+        <a href="/#contacto">Contacto</a>
+        <a href="/privacidad/">Privacidad</a>
+        <a href="/terminos/">Términos</a>
+        <a href="/cookies/" data-kv-cookies>Preferencias</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.getElementById('nav');
+      var enlaces = document.getElementById('navLinks');
+      var boton = document.getElementById('navToggle');
+
+      var alScroll = function () {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+      };
+      alScroll();
+      window.addEventListener('scroll', alScroll, { passive: true });
+
+      boton.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var abierto = enlaces.classList.toggle('open');
+        boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!enlaces.contains(e.target) && !boton.contains(e.target)) {
+          enlaces.classList.remove('open');
+          boton.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Aparición al hacer scroll. La clase en <html> es la que activa el
+      // estado oculto en el CSS: sin JS no se esconde nada.
+      if (!('IntersectionObserver' in window)) return;
+      document.documentElement.classList.add('js-reveal');
+
+      var objetivos = document.querySelectorAll('.tarjeta, .paso, .post-item, .faq-item, .blog-post');
+      objetivos.forEach(function (el, i) {
+        el.classList.add('reveal');
+        el.style.setProperty('--d', (i % 6) * 0.06 + 's');
+      });
+
+      var observador = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (entrada) {
+          if (!entrada.isIntersecting) return;
+          entrada.target.classList.add('dentro');
+          observador.unobserve(entrada.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+      objetivos.forEach(function (el) { observador.observe(el); });
+    })();
+  </script>
+  <script src="/assets/fechas.js?v=1" defer></script>
+</body>
+
+</html>

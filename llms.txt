@@ -70,6 +70,11 @@ eso DKIM se reporta como "no detectamos" y nunca como "no tienes".
 
 ## Recursos
 
+- [Tu chatbot ya tiene que decir que es una IA](https://kaivastudio.com/blog/tu-chatbot-ya-tiene-que-decir-que-es-ia/):
+  desde el 2 de agosto de 2026 rige el artículo 50 del AI Act europeo, que obliga a los chatbots a
+  avisar que son IA, con multas de hasta 15 millones de euros o el 3% de la facturación mundial; a
+  quién le aplica de verdad si el negocio opera solo en América Latina; y por qué el 60% de las
+  personas que tuvo una mala experiencia con un chatbot pasa a preferir que la atienda un humano.
 - [¿Cuánto cuesta una página web en Ecuador?](https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-ecuador/):
   rangos reales del mercado ecuatoriano en 2026, ya en dólares (de $200 a más de $10,000) porque
   Ecuador usa el dólar estadounidense como moneda oficial desde el año 2000; por qué el IVA general

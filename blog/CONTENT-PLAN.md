@@ -134,7 +134,7 @@ se comparten — la redacción, no.
 | 9 | 2026-08-26  | Localizado  | Mejores agencias de diseño web en **Bogotá**                      | Cómo elegir      | Publicado  |
 | 10| 2026-08-30  | IA          | Chatbots de IA para atención al cliente: costos reales y cuándo vale la pena | IA y tecnología | Publicado |
 | 11| 2026-08-31  | Localizado  | Cuánto cuesta una página web en **Ecuador**                       | Precios          | Publicado  |
-| 12| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
+| 12| 2026-09-01  | IA          | Artículo 50 del AI Act europeo: chatbots deben avisar que son IA desde el 2 de agosto de 2026 | IA y tecnología | Publicado |
 | 13| pendiente   | Marketing   | Qué es la autoridad de dominio y por qué un "Domain Rating alto" no es lo mismo que vender más | Marketing y SEO | Pendiente |
 | 14| pendiente   | Localizado  | Mejores agencias de diseño web en **Ciudad de México**            | Cómo elegir      | Pendiente  |
 | 15| pendiente   | IA          | Búsqueda con IA en el propio sitio (RAG): qué es y si aplica a una pyme | IA y tecnología | Pendiente |
@@ -163,6 +163,7 @@ se comparten — la redacción, no.
 | 38| pendiente   | Localizado  | Cuánto cuesta una página web en **Panamá**                        | Precios          | Pendiente  |
 | 39| pendiente   | Marketing   | Contenido genérico y "Helpful Content": por qué Google penaliza el blog que "suena a blog de nadie" | Marketing y SEO | Pendiente |
 | 40| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
+| 41| pendiente   | Localizado  | Mejores agencias de diseño web en **Buenos Aires**                | Cómo elegir      | Pendiente  |
 
 Cuando la cola llegue al final, seguir el mismo patrón de tercios: más países
 (Guatemala, República Dominicana, Uruguay...), más ciudades (Buenos Aires,
