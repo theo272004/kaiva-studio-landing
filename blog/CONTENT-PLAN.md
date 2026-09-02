@@ -5,20 +5,29 @@ publicar cada día. No es contenido del sitio: es el backlog interno.
 
 ## Reglas fijas
 
-- Un post nuevo cada día. Se alterna: **día impar del ciclo = guía
-  localizada** (variante de país o de ciudad de una guía ya existente), **día
-  par del ciclo = IA e innovación** (noticia, reporte o cambio relevante,
-  investigado ese mismo día — nunca inventado).
+- Un post nuevo cada día. Se rota entre **tres tipos**, en este orden fijo:
+  **guía localizada** (variante de país o de ciudad de una guía ya existente)
+  → **IA e innovación** (noticia, reporte o cambio relevante, investigado ese
+  mismo día — nunca inventado) → **marketing, SEO y autoridad de marca**
+  (concepto, cambio de algoritmo o práctica que le sirve a una pyme, también
+  investigado el día de publicación) → y vuelve a empezar por localizada.
+  Antes de agosto de 2026 la rotación era de dos tipos; la cola ya está
+  reordenada en tercios a partir de la fila 11.
 - Toda cifra (precio, dato, estadística) se investiga con WebSearch antes de
-  publicarse. Nunca se inventan números, ni para países ni para noticias de IA.
+  publicarse. Nunca se inventan números, ni para países, ni para noticias de
+  IA, ni para los posts de marketing/SEO.
 - Los posts de IA usan la etiqueta **"IA y tecnología"** (ya existe como chip
   de filtro en `/blog/index.html`). Los de precios usan **"Precios"**. Los de
-  agencias por ciudad usan **"Cómo elegir"**.
+  agencias por ciudad usan **"Cómo elegir"**. Los de marketing, SEO y
+  autoridad de marca usan **"Marketing y SEO"** (chip nuevo, agregado el 30
+  de agosto de 2026 junto con esta categoría).
 - Cada post nuevo se vuelve el destacado de `/blog/index.html`; el destacado
   anterior baja a ser la primera tarjeta de la grilla.
 - Reutilizar las imágenes existentes en `/assets/blog/` según el tema
   (`precios.webp`, `ia.webp`, `elegir.webp`, etc.) salvo que el usuario pida
-  imágenes nuevas.
+  imágenes nuevas. Los posts de **Marketing y SEO** reutilizan
+  `visibilidad.webp` (o `local.webp` si el tema es de posicionamiento local),
+  porque no hay foto propia para la categoría todavía.
 - Al publicar: actualizar `blog/index.html`, `sitemap.xml` y `llms.txt`
   (sección Recursos), luego `git add` **solo** de los archivos tocados para
   este post (nunca `git add -A` ni tocar otros cambios que ya estuvieran sin
@@ -115,27 +124,41 @@ se comparten — la redacción, no.
 | 8 | 2026-08-25  | IA          | ChatGPT y la IA generativa como nuevo canal de descubrimiento de marca | IA y tecnología | Publicado |
 | 9 | 2026-08-26  | Localizado  | Mejores agencias de diseño web en **Bogotá**                      | Cómo elegir      | Publicado  |
 | 10| 2026-08-30  | IA          | Chatbots de IA para atención al cliente: costos reales y cuándo vale la pena | IA y tecnología | Publicado |
-| 11| pendiente   | Localizado  | Cuánto cuesta una página web en **Ecuador**                       | Precios          | Pendiente  |
+| 11| 2026-08-31  | Localizado  | Cuánto cuesta una página web en **Ecuador**                       | Precios          | Publicado  |
 | 12| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
-| 13| pendiente   | Localizado  | Mejores agencias de diseño web en **Ciudad de México**            | Cómo elegir      | Pendiente  |
-| 14| pendiente   | IA          | Búsqueda con IA en el propio sitio (RAG): qué es y si aplica a una pyme | IA y tecnología | Pendiente |
-| 15| pendiente   | Localizado  | Cuánto cuesta una página web en **España**                        | Precios          | Pendiente  |
-| 16| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
-| 17| pendiente   | Localizado  | Mejores agencias de diseño web en **Lima**                        | Cómo elegir      | Pendiente  |
+| 13| pendiente   | Marketing   | Qué es la autoridad de dominio y por qué un "Domain Rating alto" no es lo mismo que vender más | Marketing y SEO | Pendiente |
+| 14| pendiente   | Localizado  | Mejores agencias de diseño web en **Ciudad de México**            | Cómo elegir      | Pendiente  |
+| 15| pendiente   | IA          | Búsqueda con IA en el propio sitio (RAG): qué es y si aplica a una pyme | IA y tecnología | Pendiente |
+| 16| pendiente   | Marketing   | Por qué comprar backlinks ya casi no funciona, y qué hace Google en 2026 para detectarlos | Marketing y SEO | Pendiente |
+| 17| pendiente   | Localizado  | Cuánto cuesta una página web en **España**                        | Precios          | Pendiente  |
 | 18| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
-| 19| pendiente   | Localizado  | Cuánto cuesta una página web en **Costa Rica**                    | Precios          | Pendiente  |
-| 20| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
-| 21| pendiente   | Localizado  | Mejores agencias de diseño web en **Panamá**                      | Cómo elegir      | Pendiente  |
-| 22| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
-| 23| pendiente   | Localizado  | Mejores agencias de diseño web en **Medellín**                    | Cómo elegir      | Pendiente  |
-| 24| pendiente   | IA          | Cuándo un negocio sí necesita su propio modelo: privacidad, datos regulados y volumen | IA y tecnología | Pendiente |
-| 25| pendiente   | Localizado  | Mejores agencias de diseño web en **Santiago**                    | Cómo elegir      | Pendiente  |
-| 26| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
-| 27| pendiente   | Localizado  | Mejores agencias de diseño web en **Cali**                        | Cómo elegir      | Pendiente  |
-| 28| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
-| 29| pendiente   | Localizado  | Cuánto cuesta una página web en **Panamá**                        | Precios          | Pendiente  |
+| 19| pendiente   | Marketing   | E-E-A-T: cómo demuestra una pyme sin años de trayectoria que tiene experiencia y confianza | Marketing y SEO | Pendiente |
+| 20| pendiente   | Localizado  | Mejores agencias de diseño web en **Lima**                        | Cómo elegir      | Pendiente  |
+| 21| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
+| 22| pendiente   | Marketing   | Reseñas de Google: cuántas necesitas, qué tan rápido responder, y el efecto real en el ranking local | Marketing y SEO | Pendiente |
+| 23| pendiente   | Localizado  | Cuánto cuesta una página web en **Costa Rica**                    | Precios          | Pendiente  |
+| 24| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
+| 25| pendiente   | Marketing   | Marca vs. rendimiento: por qué construir marca importa más cuando todos compiten con anuncios de IA | Marketing y SEO | Pendiente |
+| 26| pendiente   | Localizado  | Mejores agencias de diseño web en **Panamá**                      | Cómo elegir      | Pendiente  |
+| 27| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
+| 28| pendiente   | Marketing   | Cómo medir la autoridad de marca sin pagar una herramienta enterprise (menciones, búsquedas de marca, share of voice) | Marketing y SEO | Pendiente |
+| 29| pendiente   | Localizado  | Mejores agencias de diseño web en **Medellín**                    | Cómo elegir      | Pendiente  |
+| 30| pendiente   | IA          | Cuándo un negocio sí necesita su propio modelo: privacidad, datos regulados y volumen | IA y tecnología | Pendiente |
+| 31| pendiente   | Marketing   | Cambiar de nombre o de dominio sin perder el SEO: la guía de redirecciones que casi nadie hace bien | Marketing y SEO | Pendiente |
+| 32| pendiente   | Localizado  | Mejores agencias de diseño web en **Santiago**                    | Cómo elegir      | Pendiente  |
+| 33| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
+| 34| pendiente   | Marketing   | Redes sociales y SEO: ¿las señales sociales posicionan, o es un mito que no muere?  | Marketing y SEO | Pendiente |
+| 35| pendiente   | Localizado  | Mejores agencias de diseño web en **Cali**                        | Cómo elegir      | Pendiente  |
+| 36| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
+| 37| pendiente   | Marketing   | Core Web Vitals en 2026: qué mide Google hoy y cuánto pesa de verdad en el ranking | Marketing y SEO | Pendiente |
+| 38| pendiente   | Localizado  | Cuánto cuesta una página web en **Panamá**                        | Precios          | Pendiente  |
+| 39| pendiente   | Marketing   | Contenido genérico y "Helpful Content": por qué Google penaliza el blog que "suena a blog de nadie" | Marketing y SEO | Pendiente |
+| 40| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
 
-Cuando la cola llegue al final, seguir el mismo patrón: más países (Panamá,
-Guatemala, República Dominicana, Uruguay...), más ciudades (Medellín,
-Santiago, Buenos Aires, Guadalajara...), y noticias de IA investigadas al
-momento — nunca dejar de alternar los dos tipos.
+Cuando la cola llegue al final, seguir el mismo patrón de tercios: más países
+(Guatemala, República Dominicana, Uruguay...), más ciudades (Buenos Aires,
+Guadalajara, Quito...), noticias de IA investigadas al momento, y más temas
+de marketing/SEO/autoridad de marca (por ejemplo: schema markup y datos
+estructurados, el efecto real de las estrellas de reseña en el CTR, cómo
+funciona hoy PageRank internamente, o el email marketing como canal que
+Google e IA no pueden tocar) — nunca dejar de rotar los tres tipos.
