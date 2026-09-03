@@ -408,3 +408,19 @@ td {
   outline: 2px solid var(--violet);
   outline-offset: 3px;
 }
+
+/* Los nombres técnicos de los permisos de Google, en la sección 3 de la
+   política. Van en <code> porque son identificadores literales que un revisor
+   de Google va a buscar tal cual, no prosa. Sin esta regla salían en el
+   monospace por defecto del navegador, que junto a Inter se ve como un
+   descuido. Se ajusta el tamaño porque el monospace se ve más grande que la
+   fuente de texto al mismo px, y `overflow-wrap` evita que el más largo
+   (sodium_crypto_secretbox, 23 caracteres) empuje la línea en un móvil. */
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .88em;
+  background: rgba(110, 56, 255, .07);
+  border-radius: 4px;
+  padding: .1em .35em;
+  overflow-wrap: anywhere;
+}

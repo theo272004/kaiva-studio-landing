@@ -97,14 +97,15 @@
      datos de identificación tuyos.
      ============================================================================ -->
     <div class="pendiente">
-      <p><strong>Pendiente por completar.</strong> Faltan los datos de identificación del responsable
-        —nombre o razón social, NIT y dirección de notificaciones—, marcados abajo entre corchetes.
+      <p><strong>Pendiente por completar.</strong> Faltan dos datos de identificación del
+        responsable —el nombre completo tal como aparece en el RUT y la dirección de
+        notificaciones—, marcados abajo entre corchetes. El NIT ya está.
         La Superintendencia de Industria y Comercio exige que el responsable del tratamiento esté
         plenamente identificado. Conviene además que un abogado revise el texto completo.</p>
     </div>
 
     <h2>1. Quién responde por tus datos</h2>
-    <p><strong>[RAZÓN SOCIAL]</strong>, identificado con NIT <strong>[NIT]</strong> y en adelante
+    <p><strong>[RAZÓN SOCIAL]</strong>, identificado con NIT <strong>1193411957</strong> y en adelante
       «Kaiva Studio», con domicilio en <strong>[DIRECCIÓN]</strong>, Barranquilla, Atlántico,
       Colombia, es el responsable del tratamiento de los datos personales que se recogen a través de
       <a href="https://kaivastudio.com/">kaivastudio.com</a>.</p>
@@ -175,7 +176,70 @@
       mejorar el análisis y ver qué señales fallan más. Si analizaste un dominio tuyo y quieres que
       borremos ese registro, escríbenos y lo hacemos.</p>
 
-    <h2>3. Con qué autorización los tratamos</h2>
+    <!-- SECCIÓN EXIGIDA POR GOOGLE PARA VERIFICAR LA APLICACIÓN.
+         Los permisos que pide el Panel Pro (Search Console y Analytics) son
+         scopes "sensibles". Para usarlos con cuentas que no son la nuestra,
+         Google revisa la aplicación, y una de las cosas que revisa es que esta
+         política declare EXPLÍCITAMENTE qué dato de Google se toca, para qué,
+         cuánto se guarda, con quién se comparte y cómo se revoca. La política
+         hablaba solo de quien visita el sitio; del dato de Google, ni una
+         palabra. Sin esta sección la verificación se rechaza.
+
+         La frase sobre la Política de Datos de Usuario y el "Uso Limitado" no
+         es relleno: es la declaración que Google exige literalmente. -->
+    <h2>3. Los datos de Google que nos autorizas (Panel&nbsp;Pro)</h2>
+    <p>Esta sección aplica <strong>solo</strong> si eres cliente del Panel Pro y conectaste tu
+      cuenta de Google. Si únicamente visitas el sitio o usas el Diagnóstico gratuito, nada de
+      esto te afecta: el diagnóstico no pide permisos ni cuenta de Google.</p>
+
+    <p><strong>Qué permisos pedimos, y por qué son de solo lectura.</strong> Cuando conectas tu
+      cuenta te pedimos tres autorizaciones, todas de consulta. Ninguna nos deja escribir,
+      modificar ni borrar nada en tus cuentas:</p>
+    <ul>
+      <li><strong>Google Search Console</strong> (<code>webmasters.readonly</code>) — para leer
+        por qué búsquedas apareces, en qué posición y cuántos clics recibes.</li>
+      <li><strong>Google Analytics</strong> (<code>analytics.readonly</code>) — para leer cuánta
+        gente entra a tu sitio y de dónde llega.</li>
+      <li><strong>Tu dirección de correo</strong> (<code>userinfo.email</code>) — únicamente para
+        mostrarte en pantalla qué cuenta tienes conectada, y que no te quede duda de cuál
+        autorizaste.</li>
+    </ul>
+
+    <p><strong>Para qué usamos ese dato.</strong> Para una sola cosa: construir tu panel y tu
+      informe. Con esas cifras calculamos tu histórico, detectamos qué cambió de un mes a otro y
+      te decimos qué conviene hacer. No se usa para nada más.</p>
+
+    <p><strong>Lo que no hacemos con él, dicho de frente.</strong> No lo vendemos, no lo cedemos,
+      no lo cruzamos con el de otros clientes, no lo usamos para publicidad ni para segmentar
+      audiencias, y <strong>no lo usamos para entrenar modelos de inteligencia artificial</strong>
+      —ni nuestros ni de terceros—. Ninguna persona ajena al equipo de Kaiva Studio lo consulta,
+      y dentro del equipo solo quien opera tu cuenta.</p>
+
+    <p>El uso que Kaiva Studio hace de la información recibida de las APIs de Google se ajusta a la
+      <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank"
+        rel="noopener noreferrer">Política de Datos de Usuario de los Servicios de API de Google</a>,
+      incluidos sus requisitos de <strong>Uso Limitado</strong>.</p>
+
+    <p><strong>Qué guardamos y dónde.</strong> Guardamos dos cosas en el servidor del Diagnóstico
+      (Hostinger, en Estados Unidos): las cifras diarias que componen tu histórico —clics,
+      apariciones, posición, sesiones— y las credenciales que nos permiten volver a consultarlas
+      cada noche sin molestarte. <strong>Esas credenciales se guardan cifradas</strong>
+      (<code>sodium_crypto_secretbox</code>), no en texto plano. No copiamos tus informes ni tus
+      audiencias: solo los números que ves en tu panel.</p>
+
+    <p><strong>Cuánto tiempo.</strong> Mientras seas cliente. Si cancelas o revocas el acceso,
+      borramos las credenciales de inmediato y el histórico a más tardar en 90 días, salvo que nos
+      pidas conservarlo por si vuelves.</p>
+
+    <p><strong>Cómo cortarlo, sin pedirnos permiso.</strong> Puedes retirarnos el acceso cuando
+      quieras desde
+      <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer">
+        la página de permisos de tu cuenta de Google</a>, sin avisarnos y sin pasar por nosotros.
+      A partir de ese momento dejamos de poder consultar nada. Si además quieres que borremos lo ya
+      guardado, escríbenos a <a href="mailto:info@kaivastudio.com">info@kaivastudio.com</a> y lo
+      hacemos.</p>
+
+    <h2>4. Con qué autorización los tratamos</h2>
     <p>Cuando envías el formulario nos das tu autorización expresa marcando la casilla
       correspondiente, para tratar tus datos con las finalidades descritas arriba, conforme al
       artículo 9 de la Ley 1581 de 2012. Guardamos la fecha y hora en que la diste, que es lo que
@@ -188,7 +252,7 @@
       conserva la versión irreversible que explicamos arriba. Si decides dejarnos tu correo para
       recibir el informe, ahí sí nos autorizas expresamente a contactarte.</p>
 
-    <h2>4. Cuánto tiempo los guardamos</h2>
+    <h2>5. Cuánto tiempo los guardamos</h2>
     <p>Conservamos los datos de contacto mientras exista una relación comercial o interés vigente, y
       hasta <strong>dos (2) años</strong> después del último contacto. Cumplido ese plazo los
       eliminamos, salvo que una obligación legal o contable nos exija conservarlos más tiempo.</p>
@@ -198,7 +262,7 @@
       anónimo para nosotros. Tu preferencia de cookies se guarda <strong>doce meses</strong> en tu
       propio navegador; pasado ese plazo te volvemos a preguntar.</p>
 
-    <h2>5. Quién más puede verlos</h2>
+    <h2>6. Quién más puede verlos</h2>
     <p>No vendemos ni cedemos tus datos. Para operar el sitio usamos proveedores que actúan como
       encargados del tratamiento y que pueden almacenar información fuera de Colombia:</p>
     <ul>
@@ -219,7 +283,7 @@
       proveedores que ofrecen niveles adecuados de protección, según lo previsto en el Título VIII
       de la Ley 1581 de 2012.</p>
 
-    <h2>6. Tus derechos</h2>
+    <h2>7. Tus derechos</h2>
     <p>Como titular de tus datos personales puedes, en cualquier momento:</p>
     <ul>
       <li><strong>Conocer</strong> qué datos tuyos tenemos y cómo los usamos.</li>
@@ -234,16 +298,16 @@
       Atendemos consultas en un plazo máximo de <strong>diez (10) días hábiles</strong> y reclamos en
       <strong>quince (15) días hábiles</strong>, conforme a los artículos 14 y 15 de la Ley 1581.</p>
 
-    <h2>7. Cómo los protegemos</h2>
+    <h2>8. Cómo los protegemos</h2>
     <p>El sitio funciona sobre HTTPS y el acceso a los registros de contacto está limitado al equipo
       de Kaiva Studio. Aun así, ningún sistema es infalible: si llegara a ocurrir un incidente que
       comprometa tus datos, te informaremos y lo reportaremos a la autoridad competente.</p>
 
-    <h2>8. Cookies</h2>
+    <h2>9. Cookies</h2>
     <p>Usamos cookies para medir el uso del sitio. El detalle está en nuestra
       <a href="/cookies/">Política de Cookies</a>.</p>
 
-    <h2>9. Cambios en esta política</h2>
+    <h2>10. Cambios en esta política</h2>
     <p>Si modificamos esta política publicaremos la nueva versión en esta misma dirección y
       actualizaremos la fecha del encabezado. Los cambios rigen desde su publicación.</p>
 
