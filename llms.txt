@@ -70,6 +70,11 @@ eso DKIM se reporta como "no detectamos" y nunca como "no tienes".
 
 ## Recursos
 
+- [¿Cuánto cuesta una página web en España?](https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-espana/):
+  rangos reales del mercado español en 2026 (de 300 € a más de 10.000 €, con el 21% de IVA general
+  aparte); qué es Verifactu y por qué el Real Decreto-ley 15/2025, publicado en el BOE el 3 de
+  diciembre de 2025, aplazó su entrada en vigor un año —sociedades al 1 de enero de 2027, autónomos
+  al 1 de julio de 2027—; y el costo de un dominio .es (unos 33 €/año en Nominalia) y del hosting.
 - [Por qué comprar backlinks ya casi no funciona](https://kaivastudio.com/blog/por-que-comprar-backlinks-ya-no-funciona/):
   qué dice textualmente la política de spam de enlaces de Google Search Central —comprar y vender enlaces es
   parte normal de la economía publicitaria de la web y no viola las políticas siempre que el enlace lleve

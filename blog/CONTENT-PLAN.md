@@ -170,6 +170,7 @@ se comparten — la redacción, no.
 | 45| pendiente   | IA          | Cuánto cuesta de verdad tener un asistente de IA propio: la factura por pregunta, no por licencia | IA y tecnología | Pendiente |
 | 46| pendiente   | Marketing   | Qué es una consulta sin clic y qué le queda a una pyme cuando Google responde por ella | Marketing y SEO | Pendiente |
 | 47| pendiente   | Localizado  | Mejores agencias de diseño web en **Quito**                       | Cómo elegir      | Pendiente  |
+| 48| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
 
 Cuando la cola llegue al final, seguir el mismo patrón de tercios: más países
 (Guatemala, República Dominicana, Uruguay...), más ciudades (Buenos Aires,
