@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Analytics con consentimiento previo. Aquí NO se carga el script de
+       Google: solo se fijan los valores por defecto (todo denegado) y se
+       deja que /assets/consentimiento.js lo inyecte si la persona acepta.
+       El razonamiento completo y las normas que lo obligan están comentados
+       arriba de ese archivo. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+  </script>
+  <script defer src="/assets/consentimiento.js?v=20260729"></script>
+  <script defer src="/assets/eventos.js?v=20260729"></script>
+  <script defer src="/assets/indice-blog.js?v=20260731"></script>
+  <script defer src="/assets/clarity.js?v=20260729"></script>
+
+  <title>Por qué comprar backlinks ya casi no funciona (y cómo lo detecta Google en 2026)</title>
+  <meta name="description"
+    content="Google no prohíbe pagar por un enlace: prohíbe esconder que lo pagaste. Qué dice la política oficial de spam de enlaces, cómo trabaja SpamBrain y qué pasó en la actualización de marzo de 2026.">
+  <link rel="canonical" href="https://kaivastudio.com/blog/por-que-comprar-backlinks-ya-no-funciona/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/favicon-96.png?v=20260809" type="image/png" sizes="96x96">
+  <link rel="icon" href="/assets/favicon-192.png?v=20260809" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=20260809">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Kaiva Studio">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:url" content="https://kaivastudio.com/blog/por-que-comprar-backlinks-ya-no-funciona/">
+  <meta property="og:title" content="Por qué comprar backlinks ya casi no funciona (y cómo lo detecta Google en 2026)">
+  <meta property="og:description"
+    content="Google no prohíbe pagar por un enlace: prohíbe esconder que lo pagaste. Qué dice la política oficial de spam de enlaces, cómo trabaja SpamBrain y qué pasó en marzo de 2026.">
+  <meta property="og:image" content="https://kaivastudio.com/assets/blog/visibilidad.webp">
+  <meta property="article:published_time" content="2026-09-08">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Por qué comprar backlinks ya casi no funciona (y cómo lo detecta Google en 2026)">
+  <meta name="twitter:image" content="https://kaivastudio.com/assets/blog/visibilidad.webp">
+
+  <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/tokens.css?v=20260808c">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260809b">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaivastudio.com/blog/por-que-comprar-backlinks-ya-no-funciona/#post",
+      "headline": "Por qué comprar backlinks ya casi no funciona (y cómo lo detecta Google en 2026)",
+      "description": "Google no prohíbe pagar por un enlace: prohíbe esconder que lo pagaste. Qué dice la política oficial de spam de enlaces de Google, cómo funciona SpamBrain, qué pasó en la actualización de marzo de 2026 y qué hacer en su lugar.",
+      "datePublished": "2026-09-08",
+      "dateModified": "2026-09-08",
+      "inLanguage": "es-CO",
+      "image": "https://kaivastudio.com/assets/blog/visibilidad.webp",
+      "mainEntityOfPage": "https://kaivastudio.com/blog/por-que-comprar-backlinks-ya-no-funciona/",
+      "author": {
+        "@type": "Organization",
+        "@id": "https://kaivastudio.com/#studio",
+        "name": "Kaiva Studio",
+        "url": "https://kaivastudio.com/"
+      },
+      "publisher": { "@id": "https://kaivastudio.com/#studio" },
+      "isPartOf": { "@id": "https://kaivastudio.com/blog/#blog" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://kaivastudio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://kaivastudio.com/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Por qué comprar backlinks ya casi no funciona", "item": "https://kaivastudio.com/blog/por-que-comprar-backlinks-ya-no-funciona/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Google prohíbe comprar backlinks?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No exactamente. La política de spam de enlaces de Google dice textualmente que entiende que comprar y vender enlaces es una parte normal de la economía de la publicidad y el patrocinio en la web, y que no viola sus políticas siempre que el enlace lleve el atributo rel=\"nofollow\" o rel=\"sponsored\". Lo que sí prohíbe es intercambiar dinero, productos o servicios por un enlace que transfiera autoridad de ranking sin declarar que fue pagado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es SpamBrain?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es el sistema de inteligencia artificial que usa Google para detectar spam a gran escala, incluyendo perfiles de enlaces manipulados. No busca palabras clave sospechosas: analiza patrones en el perfil de enlaces de un dominio, el texto de anclaje, redes de blogs privados (PBN) y el comportamiento general del sitio para calcular si esos enlaces existen para ayudar al usuario o solo para subir el ranking."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si Google detecta que compré enlaces?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En la mayoría de los casos no llega ninguna notificación ni penalización manual: SpamBrain simplemente deja de contar esos enlaces como señal de ranking, de forma algorítmica y continua. El sitio pierde el impulso que esos enlaces le daban sin ningún aviso en Search Console, lo que hace más difícil notar el problema a tiempo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Sirve usar rel=\"sponsored\" en vez de esconder que un enlace es pagado?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, y es justamente lo que pide Google. Un enlace patrocinado con rel=\"sponsored\" (o rel=\"nofollow\") declarado correctamente es una práctica publicitaria normal y no arriesga nada. El riesgo aparece cuando ese mismo enlace se deja como si fuera una mención editorial genuina, sin declarar el pago, para que pase autoridad de ranking."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+  <nav class="nav" id="nav">
+    <div class="nav-in">
+      <a href="/" class="logo" aria-label="Kaiva Studio — ir al inicio">
+        <img src="/assets/logo-kaiva.png" alt="Kaiva Studio" width="105" height="44">
+      </a>
+      <div class="nav-right">
+        <div class="nav-links" id="navLinks">
+          <a href="/diseno-web/" class="lnk">Diseño web</a>
+          <a href="/software-a-medida/" class="lnk">Software</a>
+          <a href="/branding/" class="lnk">Branding</a>
+          <a href="/blog/" class="lnk" aria-current="page">Blog</a>
+          <a href="/monitor/" class="btn btn-dark">Diagnóstico Gratis</a>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menú" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <article>
+
+      <header class="post-cabecera">
+        <div class="wrap">
+          <nav class="migas" aria-label="Ruta de navegación">
+            <a href="/">Inicio</a><span>/</span><a href="/blog/">Blog</a><span>/</span>Por qué comprar backlinks ya casi no funciona
+          </nav>
+
+          <div class="post-cabecera-in">
+            <div class="post-cabecera-texto">
+              <p class="fecha"><time datetime="2026-09-08">8 de septiembre de 2026</time> · Lectura de 8 minutos</p>
+
+              <h1 class="post-titulo">
+                Comprar backlinks<span style="color:var(--violet)">:</span> lo que Google sí prohíbe
+                no es lo que crees
+              </h1>
+
+              <p class="lead">Buscas «comprar backlinks» y las primeras respuestas te dicen que está
+                prohibido, que Google te va a penalizar, que es jugar con fuego. Es una versión aplanada
+                de la verdad. Google no prohíbe pagar por un enlace. Prohíbe esconder que lo pagaste.</p>
+            </div>
+
+            <figure class="post-cabecera-foto">
+              <img src="/assets/blog/visibilidad.webp"
+                alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas"
+                width="1879" height="837" fetchpriority="high" decoding="async">
+            </figure>
+          </div>
+        </div>
+      </header>
+
+      <div class="section post-cuerpo">
+        <div class="wrap">
+          <div class="articulo">
+
+            <p>La política oficial de spam de enlaces de Google Search Central lo dice sin rodeos: comprar
+              y vender enlaces es una parte normal de la economía publicitaria de la web, y no es una
+              violación de las políticas de Google. La condición está en la misma frase: ese enlace tiene
+              que llevar el atributo <code>rel="nofollow"</code> o <code>rel="sponsored"</code>, para que
+              quede claro que no transfiere autoridad de ranking. Lo que sí está en la lista de prácticas
+              prohibidas es exactamente lo que vende la mayoría de los servicios de «venta de backlinks»:
+              un enlace pagado que se hace pasar por una mención editorial genuina.</p>
+
+            <h2>Lo que un vendedor de enlaces no te va a explicar</h2>
+
+            <p>Un servicio de compra de enlaces vive de que ese enlace pase autoridad de ranking sin que
+              nadie lo declare como pagado. Es exactamente el ejemplo que la propia documentación de Google
+              usa para ilustrar el «advertorial» prohibido: un artículo sembrado de enlaces con texto de
+              anclaje optimizado —«los mejores anillos de compromiso», «la mejor pizza en tu ciudad»— dentro
+              de un texto que finge ser contenido normal. No importa si el artículo lo escribió una persona,
+              una agencia o una IA: si el propósito central es sembrar enlaces que pasen ranking sin
+              declararlo, cae en la misma categoría que Google llama spam de enlaces.</p>
+
+            <p>Esa es la trampa del argumento de venta «es indetectable, son enlaces de sitios reales con
+              tráfico real». Puede ser cierto que el sitio que vende el espacio tenga tráfico real. Lo que
+              no cambia es que el enlace se compró para pasar ranking sin decirlo, y esa es justamente la
+              definición que usa Google para decidir qué neutraliza.</p>
+
+            <h2>SpamBrain no lee palabras clave, lee patrones</h2>
+
+            <p>SpamBrain es el sistema de aprendizaje automático que Google usa desde 2018 para detectar
+              spam a una escala que ningún equipo humano de revisión podría cubrir. No funciona buscando
+              una lista de palabras prohibidas: analiza el perfil completo de enlaces entrantes de un
+              dominio —cuántos, desde qué tipo de sitios, con qué texto de anclaje, con qué velocidad de
+              crecimiento— y compara ese patrón contra el de un perfil de enlaces que creció de forma
+              orgánica, uno a la vez, porque alguien mencionó el sitio por su cuenta.</p>
+
+            <p>Una red de blogs privados (PBN, por sus siglas en inglés) creada solo para enlazar entre sí
+              deja huellas que un algoritmo entrenado para esto detecta con más facilidad que un enlace
+              suelto: hospedaje compartido entre los mismos dominios, plantillas de diseño repetidas,
+              contenido genérico que no aporta nada por sí solo, y un patrón de enlaces que apunta siempre
+              a las mismas páginas de destino con el mismo puñado de frases de anclaje. Cada una de esas
+              señales por separado podría ser casualidad. Juntas, son exactamente el tipo de patrón que
+              SpamBrain está entrenado para encontrar.</p>
+
+            <!-- Salida temprana. Ver .cta-lectura en pagina.css: por qué está
+                 aquí, por qué antes de un <h2> y por qué no se parece a .nota. -->
+            <aside class="cta-lectura" aria-labelledby="cta-lectura-tit">
+              <p class="lbl" id="cta-lectura-tit">Revisa qué está pasando con tu propio sitio</p>
+              <p>Antes de gastar en enlaces que pueden quedar neutralizados sin aviso, vale la pena saber
+                qué tan sano está lo que ya tienes. El <strong>Diagnóstico Digital</strong> revisa
+                indexabilidad, velocidad y autenticación de correo en 60&nbsp;segundos. Gratis y sin
+                registro.</p>
+              <a class="btn btn-violet" href="/monitor/?utm_source=blog&amp;utm_medium=cta-lectura&amp;utm_content=por-que-comprar-backlinks-ya-no-funciona">Ejecutar diagnóstico</a>
+            </aside>
+
+            <h2>Marzo de 2026: la actualización que tardó 31 horas en rodar</h2>
+
+            <p>El 25 de marzo de 2026, Google lanzó una actualización de spam que terminó de desplegarse en
+              todos los idiomas y regiones en apenas 31 horas, según el propio panel de estado de Google
+              Search. No trajo reglas nuevas: las políticas de spam de enlaces son las mismas desde hace
+              años. Lo que cambió fue la capacidad de SpamBrain para reconocer y marcar los patrones que
+              esas reglas ya prohibían, incluyendo la manipulación de enlaces, el contenido producido en
+              masa para sembrar enlaces —con o sin IA de por medio— y el abuso de dominios expirados
+              reutilizados para «tomar prestada» autoridad que el dominio nunca ganó con contenido propio.</p>
+
+            <p>La actualización de octubre de 2025 había ido específicamente detrás de un patrón puntual:
+              granjas de artículos de invitado generados con IA a gran escala, publicados con el único fin
+              de insertar enlaces pagados en contenido delgado y sin valor real. Ese patrón y el de las
+              redes de blogs privados comparten el mismo defecto de origen que ya delató al Domain Rating
+              comprado con enlaces masivos: el número puede subir, pero no porque el sitio se haya vuelto
+              más útil para nadie.</p>
+
+            <h2>Nadie te avisa cuando el enlace deja de contar</h2>
+
+            <p>Aquí está la parte que de verdad debería preocupar a quien está pensando en pagar por
+              enlaces: cuando SpamBrain decide que un enlace no cuenta, no llega una notificación a Search
+              Console ni una acción manual que puedas apelar. El sistema simplemente deja de sumar esa señal
+              al cálculo de ranking, de forma continua y silenciosa. El sitio pierde el impulso que ese
+              enlace le daba sin que nada en el panel diga «esto dejó de funcionar el día tal». Lo único que
+              se ve, semanas después, es que el tráfico que subió no volvió a subir, y nadie sabe bien por
+              qué.</p>
+
+            <p>Existe además un mecanismo poco conocido incluso entre quien sí revisa su perfil de enlaces:
+              la herramienta de rechazo de enlaces (disavow) de Google es acumulativa solo en apariencia.
+              Cada archivo nuevo que se sube reemplaza por completo al anterior. Si un negocio subió una
+              lista de dominios tóxicos hace un año y ahora sube una lista nueva sin incluir los de la
+              primera, esos dominios viejos vuelven a contar como si nunca se hubieran rechazado —se
+              «readmiten» sin que nadie lo pida.</p>
+
+            <figure style="margin:2.4rem 0">
+              <img src="/assets/blog/visibilidad.webp"
+                alt="Persona revisando en una laptop un panel con el perfil de enlaces de un sitio web"
+                width="1879" height="837" loading="lazy" decoding="async"
+                style="display:block;width:100%;height:auto;border-radius:14px">
+            </figure>
+
+            <h2>Qué construye autoridad de verdad, sin pasar por un vendedor de enlaces</h2>
+
+            <p>Si un negocio necesita publicidad pagada que incluya un enlace —una nota patrocinada en un
+              medio, un banner en un directorio del gremio, un canje con un proveedor—, la ruta correcta
+              no es esconder el pago: es declararlo con <code>rel="sponsored"</code> y seguir adelante sin
+              ningún riesgo, porque es exactamente lo que Google pide que se haga. El problema nunca fue
+              pagar por visibilidad. Fue fingir que esa visibilidad se ganó sola.</p>
+
+            <p>La autoridad que sí mueve el negocio se construye más lento y se parece menos a una compra:
+              una mención real en un medio que cubre el sector, un caso de estudio que un cliente comparte
+              por su cuenta en su propio sitio, un directorio gremial que verifica que la empresa existe de
+              verdad antes de listarla. Ninguno de esos enlaces se puede comprar en bloque, y por eso mismo
+              son los que SpamBrain no tiene ningún patrón que marcar: no hay patrón, porque cada uno nació
+              de una razón distinta.</p>
+
+            <p>La pregunta que vale la pena hacerle a cualquier propuesta de «paquete de 50 backlinks» no es
+              cuánto cuesta cada enlace. Es cuánto va a durar el impulso antes de que un sistema entrenado
+              para esto exactamente decida que ese impulso nunca debió existir.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="cierre">
+          <h2>¿Sabes qué tan sano está el perfil de tu sitio<span class="dot">?</span></h2>
+          <p>El Diagnóstico Digital revisa lo que Google sí puede rastrear y verificar hoy — indexabilidad,
+            velocidad, datos estructurados, autenticación de correo — no un atajo que un algoritmo puede
+            neutralizar sin avisar. Gratis, sin tarjeta y sin registro.</p>
+          <div class="hero-ctas" style="justify-content:center">
+            <a href="/diagnostico/" class="btn btn-violet">Ver el diagnóstico</a>
+            <a href="/#contacto" class="btn btn-ghost">Hablar con alguien</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="wrap">
+      <p>© Kaiva Studio 2026 · Barranquilla, Colombia</p>
+      <nav aria-label="Enlaces del pie">
+        <a href="/">Inicio</a>
+        <a href="/blog/">Blog</a>
+        <a href="/diagnostico/">Diagnóstico</a>
+        <a href="/#contacto">Contacto</a>
+        <a href="/privacidad/">Privacidad</a>
+        <a href="/terminos/">Términos</a>
+        <a href="/cookies/" data-kv-cookies>Preferencias</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.getElementById('nav');
+      var enlaces = document.getElementById('navLinks');
+      var boton = document.getElementById('navToggle');
+
+      var alScroll = function () {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+      };
+      alScroll();
+      window.addEventListener('scroll', alScroll, { passive: true });
+
+      boton.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var abierto = enlaces.classList.toggle('open');
+        boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!enlaces.contains(e.target) && !boton.contains(e.target)) {
+          enlaces.classList.remove('open');
+          boton.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Aparición al hacer scroll. La clase en <html> es la que activa el
+      // estado oculto en el CSS: sin JS no se esconde nada.
+      if (!('IntersectionObserver' in window)) return;
+      document.documentElement.classList.add('js-reveal');
+
+      var objetivos = document.querySelectorAll('.tarjeta, .paso, .post-item, .faq-item, .blog-post');
+      objetivos.forEach(function (el, i) {
+        el.classList.add('reveal');
+        el.style.setProperty('--d', (i % 6) * 0.06 + 's');
+      });
+
+      var observador = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (entrada) {
+          if (!entrada.isIntersecting) return;
+          entrada.target.classList.add('dentro');
+          observador.unobserve(entrada.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+      objetivos.forEach(function (el) { observador.observe(el); });
+    })();
+  </script>
+  <script src="/assets/fechas.js?v=1" defer></script>
+</body>
+
+</html>

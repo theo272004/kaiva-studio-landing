@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Analytics con consentimiento previo. Aquí NO se carga el script de
+       Google: solo se fijan los valores por defecto (todo denegado) y se
+       deja que /assets/consentimiento.js lo inyecte si la persona acepta.
+       El razonamiento completo y las normas que lo obligan están comentados
+       arriba de ese archivo. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+  </script>
+  <script defer src="/assets/consentimiento.js?v=20260729"></script>
+  <script defer src="/assets/eventos.js?v=20260729"></script>
+  <script defer src="/assets/indice-blog.js?v=20260731"></script>
+  <script defer src="/assets/clarity.js?v=20260729"></script>
+
+  <title>Búsqueda con IA en tu propio sitio (RAG): qué es y qué cuesta de verdad</title>
+  <meta name="description"
+    content="Indexar un sitio de mil páginas en el buscador con IA de Google cuesta 2,38 dólares al mes según su propia lista de precios. Qué es RAG en palabras simples, qué se paga en realidad, y en qué casos una pyme no lo necesita.">
+  <link rel="canonical" href="https://kaivastudio.com/blog/busqueda-con-ia-en-tu-sitio-rag/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/favicon-96.png?v=20260809" type="image/png" sizes="96x96">
+  <link rel="icon" href="/assets/favicon-192.png?v=20260809" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=20260809">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Kaiva Studio">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:url" content="https://kaivastudio.com/blog/busqueda-con-ia-en-tu-sitio-rag/">
+  <meta property="og:title" content="Búsqueda con IA en tu propio sitio (RAG): qué es y qué cuesta de verdad">
+  <meta property="og:description"
+    content="Indexar un sitio de mil páginas en el buscador con IA de Google cuesta 2,38 dólares al mes según su propia lista de precios. Qué es RAG, qué se paga en realidad y cuándo una pyme no lo necesita.">
+  <meta property="og:image" content="https://kaivastudio.com/assets/blog/ia.webp">
+  <meta property="article:published_time" content="2026-09-06">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Búsqueda con IA en tu propio sitio (RAG): qué es y qué cuesta de verdad">
+  <meta name="twitter:image" content="https://kaivastudio.com/assets/blog/ia.webp">
+
+  <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/tokens.css?v=20260808c">
+  <link rel="stylesheet" href="/assets/pagina.css?v=20260809b">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://kaivastudio.com/blog/busqueda-con-ia-en-tu-sitio-rag/#post",
+      "headline": "Búsqueda con IA en tu propio sitio (RAG): qué es y qué cuesta de verdad",
+      "description": "Indexar un sitio de mil páginas en el buscador con IA de Google cuesta 2,38 dólares al mes según su propia lista de precios. Qué es RAG en palabras simples, qué se paga en realidad, y en qué casos una pyme no lo necesita.",
+      "datePublished": "2026-09-06",
+      "dateModified": "2026-09-06",
+      "inLanguage": "es-CO",
+      "image": "https://kaivastudio.com/assets/blog/ia.webp",
+      "mainEntityOfPage": "https://kaivastudio.com/blog/busqueda-con-ia-en-tu-sitio-rag/",
+      "author": {
+        "@type": "Organization",
+        "@id": "https://kaivastudio.com/#studio",
+        "name": "Kaiva Studio",
+        "url": "https://kaivastudio.com/"
+      },
+      "publisher": { "@id": "https://kaivastudio.com/#studio" },
+      "isPartOf": { "@id": "https://kaivastudio.com/blog/#blog" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://kaivastudio.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://kaivastudio.com/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Búsqueda con IA en tu propio sitio (RAG)", "item": "https://kaivastudio.com/blog/busqueda-con-ia-en-tu-sitio-rag/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es RAG en palabras simples?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RAG significa generación aumentada por recuperación. En la práctica son dos pasos: primero un buscador encuentra los fragmentos de tu propio contenido que tienen que ver con la pregunta, y después un modelo de lenguaje redacta la respuesta usando solo esos fragmentos, con enlaces a la página de donde salió cada cosa. No se entrena ningún modelo con tu información: el modelo lee tu contenido en el momento de responder, igual que una persona que consulta un manual antes de contestar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta poner un buscador con IA en mi sitio web?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La parte de infraestructura es barata y está publicada. En la lista de precios de Agent Search de Google Cloud, consultada el 6 de septiembre de 2026, indexar un sitio web se calcula a 500 KiB por página: un sitio de mil páginas cuesta 2,38 dólares al mes, y los primeros 10 GiB de índice son gratis. Las respuestas generadas cuestan 4,00 dólares por cada mil consultas en la edición Enterprise, con 10.000 consultas mensuales gratuitas de prueba por cuenta. Lo caro no es el servicio: es el trabajo de montarlo, limpiar el contenido y mantenerlo al día."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Necesita mi negocio pequeño un buscador con IA en su web?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Si tu sitio tiene diez o quince páginas, casi seguro no. Un buscador con IA sirve cuando hay demasiado contenido para que una persona lo recorra a mano: catálogos grandes, manuales, historiales de fichas técnicas, bases de preguntas frecuentes que llevan años creciendo. Con pocas páginas, el problema no es que la gente no encuentre la respuesta, es que la respuesta no está escrita en ninguna parte, y eso no lo arregla ninguna tecnología de recuperación."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es seguro subir documentos internos a un buscador con IA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende por completo de qué documentos. Todo lo que entra al índice puede salir citado en una respuesta, así que la pregunta correcta antes de subir un archivo es qué pasa si su contenido aparece textualmente en pantalla ante la persona equivocada. Datos de salud, datos financieros de clientes, contratos y bases de datos personales no deberían entrar a un índice consultable sin una revisión de permisos y una decisión explícita sobre dónde se almacenan. Contenido público —catálogo, tarifas publicadas, preguntas frecuentes, documentación— es el caso fácil, y es donde casi todas las pymes deberían empezar."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+  <nav class="nav" id="nav">
+    <div class="nav-in">
+      <a href="/" class="logo" aria-label="Kaiva Studio — ir al inicio">
+        <img src="/assets/logo-kaiva.png" alt="Kaiva Studio" width="105" height="44">
+      </a>
+      <div class="nav-right">
+        <div class="nav-links" id="navLinks">
+          <a href="/diseno-web/" class="lnk">Diseño web</a>
+          <a href="/software-a-medida/" class="lnk">Software</a>
+          <a href="/branding/" class="lnk">Branding</a>
+          <a href="/blog/" class="lnk" aria-current="page">Blog</a>
+          <a href="/monitor/" class="btn btn-dark">Diagnóstico Gratis</a>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menú" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <article>
+
+      <header class="post-cabecera">
+        <div class="wrap">
+          <nav class="migas" aria-label="Ruta de navegación">
+            <a href="/">Inicio</a><span>/</span><a href="/blog/">Blog</a><span>/</span>Búsqueda con IA en tu propio sitio
+          </nav>
+
+          <div class="post-cabecera-in">
+            <div class="post-cabecera-texto">
+              <p class="fecha"><time datetime="2026-09-06">6 de septiembre de 2026</time> · Lectura de 9 minutos</p>
+
+              <h1 class="post-titulo">
+                Meter tu web entera en un buscador con IA cuesta dos dólares al mes<span
+                  style="color:var(--violet)">.</span> El resto es margen
+              </h1>
+
+              <p class="lead">Google publica el precio de indexar un sitio web en su buscador con IA: 500 KiB por
+                página, y su propio ejemplo dice que un sitio de mil páginas sale en 2,38 dólares mensuales.
+                Nuestro sitio, con 33 direcciones, ni siquiera llega a la franja de pago. Lo que se cobra
+                encima de eso puede estar bien justificado — pero conviene que sepas qué parte es máquina y
+                qué parte es trabajo.</p>
+            </div>
+
+            <figure class="post-cabecera-foto">
+              <img src="/assets/blog/ia.webp"
+                alt="Persona consultando en una laptop un buscador con inteligencia artificial dentro del sitio web de su propia empresa"
+                width="1774" height="887" fetchpriority="high" decoding="async">
+            </figure>
+          </div>
+        </div>
+      </header>
+
+      <div class="section post-cuerpo">
+        <div class="wrap">
+          <div class="articulo">
+
+            <p>La lista de precios de <em>Agent Search</em>, el producto de búsqueda de Google Cloud, está
+              publicada y cualquiera puede leerla. Dice tres cosas que cambian bastante la conversación
+              cuando alguien te ofrece «un buscador inteligente entrenado con tu contenido»: guardar el índice
+              de tu sitio es casi gratis, responder preguntas se cobra por pregunta, y las primeras diez mil
+              consultas del mes no cuestan nada.</p>
+
+            <p>Con esos tres datos ya se puede hacer la cuenta de tu caso. Pero antes hay que aclarar qué es
+              exactamente lo que se está comprando, porque el nombre con el que se vende casi siempre está
+              mal.</p>
+
+            <h2>Nadie está entrenando un modelo con tu contenido</h2>
+
+            <p>La frase «entrenamos una IA con la información de tu empresa» describe algo que casi nunca
+              ocurre. Entrenar un modelo es carísimo, lento, y cada vez que cambias una tarifa habría que
+              volver a hacerlo. Lo que se hace de verdad tiene otro nombre: <strong>RAG</strong>, siglas en
+              inglés de generación aumentada por recuperación.</p>
+
+            <p>Son dos piezas separadas. La primera es un buscador que guarda tu contenido partido en
+              fragmentos y sabe encontrar los que se parecen a una pregunta, aunque la pregunta no use las
+              mismas palabras que el texto. La segunda es un modelo de lenguaje al que se le entregan esos
+              fragmentos y se le pide que redacte la respuesta usando solo eso, citando de dónde salió cada
+              parte.</p>
+
+            <p>La diferencia no es académica. Si el modelo se hubiera «entrenado» con tu contenido, cambiar el
+              precio de un servicio exigiría rehacer el modelo. Como en realidad lo lee al momento de
+              responder, cambiar el precio en tu web y esperar la siguiente indexación es todo lo que hace
+              falta. Y cuando alguien pregunta algo que no está en ningún lado de tu sitio, el sistema puede
+              decir que no lo sabe, en vez de inventarlo — que es la razón principal por la que este montaje
+              existe.</p>
+
+            <h2>Lo que cobra Google, con la lista en la mano</h2>
+
+            <p>Estos son los precios publicados el 6 de septiembre de 2026 para el modelo de pago por uso.
+              Están en dólares y sin descuentos por compromiso anual.</p>
+
+            <div style="overflow-x:auto;margin-top:1.4rem">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Concepto</th>
+                    <th>Precio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Búsqueda estándar (recuperación semántica, sin respuesta redactada)</td>
+                    <td>USD 1,50 / 1.000 consultas</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Búsqueda Enterprise, con respuesta generada y citas</strong></td>
+                    <td><strong>USD 4,00 / 1.000 consultas</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Respuestas avanzadas (conversación de varios turnos, multimodal)</td>
+                    <td>+ USD 4,00 / 1.000 consultas</td>
+                  </tr>
+                  <tr>
+                    <td>Almacenamiento del índice</td>
+                    <td>USD 5,00 / GB al mes · primeros 10 GiB gratis</td>
+                  </tr>
+                  <tr>
+                    <td>Prueba gratuita</td>
+                    <td>10.000 consultas al mes por cuenta</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p style="margin-top:1.2rem;font-size:14.5px;color:var(--ink-faint)">Fuente:
+              <a href="https://cloud.google.com/generative-ai-app-builder/pricing" target="_blank"
+                rel="noopener">lista de precios de Agent Search, Google Cloud</a>, consultada el 6 de
+              septiembre de 2026. Para un sitio web, Google calcula el almacenamiento como 500 KiB
+              multiplicado por el número de páginas, y pone su propio ejemplo: un sitio de 1.000 páginas
+              cuesta 2,38 dólares al mes de indexación.</p>
+
+            <p>Hicimos la cuenta con nuestro propio sitio, que es un caso que cualquiera puede reproducir:
+              <a href="https://kaivastudio.com/sitemap.xml" target="_blank" rel="noopener">kaivastudio.com/sitemap.xml</a>
+              declara 33 direcciones a día de hoy. A 500 KiB por página son 0,016 GiB — un uno y medio por
+              ciento de lo que Google regala cada mes. Indexar el sitio completo de este estudio, blog
+              incluido, cuesta exactamente cero.</p>
+
+            <!-- Salida temprana. Ver .cta-lectura en pagina.css: por qué está
+                 aquí, por qué antes de un <h2> y por qué no se parece a .nota. -->
+            <aside class="cta-lectura" aria-labelledby="cta-lectura-tit">
+              <p class="lbl" id="cta-lectura-tit">¿Tu sitio tiene algo que un buscador pueda responder?</p>
+              <p>Antes de pensar en IA sobre tu contenido, conviene saber si tu contenido existe y si Google
+                lo está viendo. El <strong>Diagnóstico Digital</strong> revisa visibilidad, velocidad,
+                claridad y correo, y te da tu Índice de Salud Digital en 60&nbsp;segundos. Gratis y sin
+                registro.</p>
+              <a class="btn btn-violet"
+                href="/monitor/?utm_source=blog&amp;utm_medium=cta-lectura&amp;utm_content=busqueda-con-ia-en-tu-sitio-rag">Ejecutar
+                diagnóstico</a>
+            </aside>
+
+            <h2>Tu contenido no genera la factura; las preguntas sí</h2>
+
+            <p>Este es el punto que se le escapa a casi todo el mundo, y es el mismo que ya apareció cuando
+              revisamos <a href="/blog/cuanto-cuesta-una-tarea-con-ia/">el costo real de una tarea con
+                IA</a>: el precio no depende del tamaño de tu empresa ni de cuánto contenido tengas, depende
+              de cuánta gente pregunte.</p>
+
+            <p>Un negocio con un sitio de 200 páginas y 400 preguntas al mes está dentro de la prueba
+              gratuita. Ese mismo negocio, si el buscador se vuelve popular y llega a 30.000 preguntas
+              mensuales, paga 120 dólares al mes en respuestas generadas — menos lo que cubra la franja
+              gratuita, que Google describe como una prueba y no como una capa permanente. Sigue sin ser una
+              cifra dramática, pero ya no es cero, y crece justo cuando el sistema empieza a funcionar bien.
+              Cualquier presupuesto que te presenten con una cuota plana mensual está asumiendo un volumen
+              que quizás nadie te dijo cuál es. Pregúntalo.</p>
+
+            <p>Hay un segundo cargo que casi nadie menciona en las cotizaciones: la indexación no es
+              instantánea ni gratuita en esfuerzo. Si tu contenido está en PDF escaneados, hay que pasarlos
+              por reconocimiento de texto, y eso se cobra aparte. Si está en fichas de producto con
+              descripciones de dos líneas, el buscador va a recuperar dos líneas. La calidad de la respuesta
+              no la pone el modelo: la pone lo que escribiste.</p>
+
+            <h2>Google cobra catorce veces más por consultarse a sí mismo que por consultarte a ti</h2>
+
+            <p>En la misma página de precios hay un detalle que dice mucho sobre dónde está el valor. Generar
+              una respuesta apoyada en <em>tus propios datos</em> cuesta 2,50 dólares por cada mil peticiones.
+              Generar esa misma respuesta apoyada en la Búsqueda de Google cuesta 35,00 dólares por cada mil.</p>
+
+            <p>Catorce veces la diferencia, por el mismo modelo y la misma redacción. Lo único que cambia es
+              de dónde salen los hechos. Es un recordatorio incómodo y útil a la vez: el índice de Google es
+              lo caro del asunto, y el tuyo es barato porque es pequeño. Pero también es lo único del sistema
+              que solo tú tienes. Nadie más puede responder qué incluye tu plan de mantenimiento, cuánto
+              tarda tu instalación, o qué pasa si el cliente cancela a los tres meses.</p>
+
+            <figure style="margin:2.4rem 0">
+              <img src="/assets/blog/ia.webp"
+                alt="Pantalla de computador mostrando resultados de una búsqueda interna con respuestas generadas por inteligencia artificial y sus fuentes citadas"
+                width="1774" height="887" loading="lazy" decoding="async"
+                style="display:block;width:100%;height:auto;border-radius:14px">
+            </figure>
+
+            <h2>Un buscador no arregla un sitio que no tiene qué responder</h2>
+
+            <p>Aquí va la parte que a un estudio como el nuestro no le conviene decir, porque es un servicio
+              menos que vender: la mayoría de las pymes que preguntan por esto no lo necesitan.</p>
+
+            <p>La recuperación resuelve un problema concreto: hay demasiado contenido para que una persona lo
+              recorra a mano. Un catálogo de ocho mil referencias con fichas técnicas. Un archivo de
+              normativa. Diez años de preguntas frecuentes acumuladas en un centro de ayuda. Un manual de
+              instalación de cuatrocientas páginas que el técnico consulta desde el celular en la obra. En
+              esos casos el buscador con IA hace algo que un menú no puede hacer, y se nota desde la primera
+              semana.</p>
+
+            <p>Un sitio de doce páginas no tiene ese problema. Si en tu web nadie encuentra la respuesta, casi
+              siempre es porque <em>la respuesta no está escrita</em>. Montar RAG encima de doce páginas
+              produce un asistente que contesta «no encuentro esa información en el sitio» con mucha
+              elegancia. Escribir la página de precios que no existe cuesta menos y funciona mejor.</p>
+
+            <p>La señal para saber en cuál de los dos casos estás no requiere ninguna herramienta: mira qué
+              escribe la gente en el buscador de tu propio sitio, o qué preguntan por WhatsApp. Si las
+              preguntas se repiten y son cinco, la solución es una página. Si son cientos y todas distintas,
+              ahí sí hay algo que recuperar.</p>
+
+            <h2>Hay contenido que no debería entrar nunca al índice</h2>
+
+            <p>Todo lo que se indexa puede salir citado. Suena obvio escrito así, y aun así es el error más
+              común: alguien vuelca la carpeta compartida entera al buscador porque «así responde mejor», y
+              dentro de esa carpeta hay una lista de clientes, una plantilla de contrato con nombres reales o
+              un reporte con cifras que nadie autorizó a publicar.</p>
+
+            <p>La regla práctica antes de subir un archivo es una sola pregunta: qué pasa si este texto
+              aparece en pantalla, palabra por palabra, delante de la persona equivocada. Si la respuesta
+              incomoda, ese archivo no entra sin una decisión explícita sobre permisos y sobre dónde se
+              guarda.</p>
+
+            <p>Nos tocó de cerca. Una de las plataformas que construimos maneja datos médicos de pacientes, y
+              hasta la captura que mostramos en nuestra portada lleva difuminados un correo y un nombre. Un
+              sistema así no se conecta a un índice consultable «a ver qué tal responde»: primero se decide
+              quién puede preguntar qué, y esa decisión es de producto, no de tecnología. Para el contenido
+              público —catálogo, tarifas, documentación, preguntas frecuentes— el riesgo es cero y ahí es
+              donde tiene sentido empezar.</p>
+
+            <h2>El producto cambió de nombre cinco veces en dos años y medio</h2>
+
+            <p>Si vas a apoyar parte de tu operación en uno de estos servicios, vale la pena mirar su
+              historial. El mismo producto de Google, con las mismas funciones y los mismos endpoints, se
+              llamó <em>Generative AI App Builder</em>, luego <em>Vertex AI Search and Conversation</em> en
+              octubre de 2023, <em>Vertex AI Agent Builder</em> en abril de 2024, <em>AI Applications</em> en
+              abril de 2025, otra vez <em>Vertex AI Search</em> en octubre de 2025, y desde el 22 de abril de
+              2026 se llama <em>Agent Search</em>. Todo eso está en las notas de versión oficiales, que a día
+              de hoy siguen advirtiendo que la consola de Google todavía muestra el nombre viejo.</p>
+
+            <p>No es una crítica gratuita: es información de compra. Un proveedor que renombra su producto
+              cinco veces en dos años y medio también reorganiza precios, cambia condiciones de las capas
+              gratuitas y
+              deprecia APIs — de hecho, una de las formas de generar respuestas con datos propios ya fue
+              retirada y reemplazada por otra. Nada de eso es motivo para no usarlo. Sí es motivo para que la
+              búsqueda con IA sea una capa encima de tu sitio, y no la única forma que tienen tus clientes de
+              llegar a la información. Tu contenido tiene que seguir estando en páginas normales, con URLs
+              normales, que Google y cualquier otro puedan leer.</p>
+
+            <p>La conclusión práctica es menos emocionante que el discurso: esto es infraestructura barata
+              montada sobre contenido caro. La parte que cuesta dinero de verdad —escribir bien lo que hace tu
+              negocio, mantenerlo actualizado, decidir qué es público y qué no— es exactamente la misma que
+              costaba antes de que existiera la IA, y es la única que nadie puede hacer por ti con una tarjeta
+              de crédito.</p>
+
+            <p>Si alguien te cotiza un buscador con IA sin preguntarte cuántas páginas tienes ni cuántas
+              consultas esperas al mes, no está cotizando tu problema. Está cotizando el suyo.</p>
+
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <section class="section" style="padding-top:0">
+      <div class="wrap">
+        <div class="cierre">
+          <h2>¿Tu contenido está listo para que algo lo lea<span class="dot">?</span></h2>
+          <p>El Diagnóstico Digital revisa si tu sitio explica con claridad lo que haces, si Google lo
+            encuentra y si carga rápido — las tres cosas de las que depende cualquier capa de IA que le
+            pongas encima. Gratis, sin tarjeta y sin registro.</p>
+          <div class="hero-ctas" style="justify-content:center">
+            <a href="/diagnostico/" class="btn btn-violet">Ver el diagnóstico</a>
+            <a href="/#contacto" class="btn btn-ghost">Hablar con alguien</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="wrap">
+      <p>© Kaiva Studio 2026 · Barranquilla, Colombia</p>
+      <nav aria-label="Enlaces del pie">
+        <a href="/">Inicio</a>
+        <a href="/blog/">Blog</a>
+        <a href="/diagnostico/">Diagnóstico</a>
+        <a href="/#contacto">Contacto</a>
+        <a href="/privacidad/">Privacidad</a>
+        <a href="/terminos/">Términos</a>
+        <a href="/cookies/" data-kv-cookies>Preferencias</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.getElementById('nav');
+      var enlaces = document.getElementById('navLinks');
+      var boton = document.getElementById('navToggle');
+
+      var alScroll = function () {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+      };
+      alScroll();
+      window.addEventListener('scroll', alScroll, { passive: true });
+
+      boton.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var abierto = enlaces.classList.toggle('open');
+        boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!enlaces.contains(e.target) && !boton.contains(e.target)) {
+          enlaces.classList.remove('open');
+          boton.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Aparición al hacer scroll. La clase en <html> es la que activa el
+      // estado oculto en el CSS: sin JS no se esconde nada.
+      if (!('IntersectionObserver' in window)) return;
+      document.documentElement.classList.add('js-reveal');
+
+      var objetivos = document.querySelectorAll('.tarjeta, .paso, .post-item, .faq-item, .blog-post');
+      objetivos.forEach(function (el, i) {
+        el.classList.add('reveal');
+        el.style.setProperty('--d', (i % 6) * 0.06 + 's');
+      });
+
+      var observador = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (entrada) {
+          if (!entrada.isIntersecting) return;
+          entrada.target.classList.add('dentro');
+          observador.unobserve(entrada.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+      objetivos.forEach(function (el) { observador.observe(el); });
+    })();
+  </script>
+  <script src="/assets/fechas.js?v=1" defer></script>
+</body>
+
+</html>

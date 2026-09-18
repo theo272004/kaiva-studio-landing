@@ -70,6 +70,43 @@ eso DKIM se reporta como "no detectamos" y nunca como "no tienes".
 
 ## Recursos
 
+- [Por qué comprar backlinks ya casi no funciona](https://kaivastudio.com/blog/por-que-comprar-backlinks-ya-no-funciona/):
+  qué dice textualmente la política de spam de enlaces de Google Search Central —comprar y vender enlaces es
+  parte normal de la economía publicitaria de la web y no viola las políticas siempre que el enlace lleve
+  rel="nofollow" o rel="sponsored"—; cómo SpamBrain, el sistema de IA que Google usa desde 2018, detecta
+  patrones de perfiles de enlaces manipulados y redes de blogs privados (PBN) en vez de buscar palabras clave;
+  qué pasó en la actualización de spam del 25 de marzo de 2026, que se desplegó en todos los idiomas y
+  regiones en 31 horas y fue tras la manipulación de enlaces, el contenido masivo (con o sin IA) y el abuso
+  de dominios expirados; por qué la mayoría de los enlaces neutralizados no generan ninguna notificación en
+  Search Console; el dato poco conocido de que la herramienta de rechazo de enlaces (disavow) de Google
+  reemplaza el archivo completo en cada subida, no lo acumula; y qué construye autoridad real en su lugar.
+- [Búsqueda con IA en tu propio sitio (RAG)](https://kaivastudio.com/blog/busqueda-con-ia-en-tu-sitio-rag/):
+  qué es la generación aumentada por recuperación en palabras simples —nadie entrena un modelo con tu
+  contenido: un buscador recupera fragmentos y el modelo los redacta citando la fuente—; los precios
+  publicados de Agent Search de Google Cloud al 6 de septiembre de 2026 (USD 1,50 por mil consultas
+  estándar, USD 4,00 por mil con respuesta generada, USD 5,00 por GB de índice al mes con los primeros
+  10 GiB gratis, y el cálculo oficial de 500 KiB por página que deja un sitio de mil páginas en USD 2,38
+  al mes); la diferencia de catorce veces entre fundamentar una respuesta en datos propios (USD 2,50 por
+  mil) y en la Búsqueda de Google (USD 35,00 por mil); por qué la factura la generan las preguntas y no
+  el contenido; cuándo una pyme con doce páginas no lo necesita; qué contenido no debería entrar nunca a
+  un índice consultable; y las cinco veces que Google renombró el mismo producto entre octubre de 2023 y
+  abril de 2026. Incluye un dato propio reproducible: el sitemap público de Kaiva declara 33 URLs, que a
+  500 KiB por página caben de sobra en la franja gratuita.
+- [Agencias de diseño web en CDMX](https://kaivastudio.com/blog/mejores-agencias-diseno-web-ciudad-de-mexico/):
+  guía para elegir agencia en Ciudad de México, con seis estudios de dirección verificable (ABC Digital
+  en la Roma, CloudStudio, Codefy, Creative Studio® en Polanco, Serna Digital en Roma Sur y Undertk
+  Studio en la Hipódromo); la condición mexicana que decide si el sitio web es deducible —CFDI válido
+  cuyos datos coincidan letra por letra con la Constancia de Situación Fiscal desde el CFDI 4.0—; las
+  dos consultas gratuitas en sat.gob.mx antes de pagar el anticipo (validador de RFC y listado
+  definitivo del artículo 69-B del CFF, cuyos CFDI no producen efectos fiscales); el detalle del IVA
+  del 16% que cambia qué cotización era la más barata; y por qué muchos negocios no necesitan una
+  agencia de Polanco. Kaiva se excluye a propósito de su propia lista.
+- [Domain Rating y autoridad de dominio](https://kaivastudio.com/blog/domain-rating-autoridad-de-dominio-no-es-vender-mas/):
+  qué mide en realidad el Domain Rating de Ahrefs y la Domain Authority de Moz —ninguna de las dos es
+  de Google, y se calculan solo sobre enlaces entrantes en una escala logarítmica—; las declaraciones
+  de John Mueller diciendo que Google no las usa para rastrear, indexar ni posicionar; por qué el
+  número puede subir con enlaces comprados de baja calidad; y qué debería mirar un negocio en su lugar
+  (tráfico real y menciones de marca, no un número de un software de pago).
 - [Tu chatbot ya tiene que decir que es una IA](https://kaivastudio.com/blog/tu-chatbot-ya-tiene-que-decir-que-es-ia/):
   desde el 2 de agosto de 2026 rige el artículo 50 del AI Act europeo, que obliga a los chatbots a
   avisar que son IA, con multas de hasta 15 millones de euros o el 3% de la facturación mundial; a

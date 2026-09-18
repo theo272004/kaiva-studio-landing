@@ -135,10 +135,10 @@ se comparten — la redacción, no.
 | 10| 2026-08-30  | IA          | Chatbots de IA para atención al cliente: costos reales y cuándo vale la pena | IA y tecnología | Publicado |
 | 11| 2026-08-31  | Localizado  | Cuánto cuesta una página web en **Ecuador**                       | Precios          | Publicado  |
 | 12| 2026-09-01  | IA          | Artículo 50 del AI Act europeo: chatbots deben avisar que son IA desde el 2 de agosto de 2026 | IA y tecnología | Publicado |
-| 13| pendiente   | Marketing   | Qué es la autoridad de dominio y por qué un "Domain Rating alto" no es lo mismo que vender más | Marketing y SEO | Pendiente |
-| 14| pendiente   | Localizado  | Mejores agencias de diseño web en **Ciudad de México**            | Cómo elegir      | Pendiente  |
-| 15| pendiente   | IA          | Búsqueda con IA en el propio sitio (RAG): qué es y si aplica a una pyme | IA y tecnología | Pendiente |
-| 16| pendiente   | Marketing   | Por qué comprar backlinks ya casi no funciona, y qué hace Google en 2026 para detectarlos | Marketing y SEO | Pendiente |
+| 13| 2026-09-04  | Marketing   | Qué es la autoridad de dominio y por qué un "Domain Rating alto" no es lo mismo que vender más | Marketing y SEO | Publicado |
+| 14| 2026-09-05  | Localizado  | Mejores agencias de diseño web en **Ciudad de México**            | Cómo elegir      | Publicado  |
+| 15| 2026-09-06  | IA          | Búsqueda con IA en el propio sitio (RAG): qué es y si aplica a una pyme | IA y tecnología | Publicado |
+| 16| 2026-09-08  | Marketing   | Por qué comprar backlinks ya casi no funciona, y qué hace Google en 2026 para detectarlos | Marketing y SEO | Publicado |
 | 17| pendiente   | Localizado  | Cuánto cuesta una página web en **España**                        | Precios          | Pendiente  |
 | 18| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
 | 19| pendiente   | Marketing   | E-E-A-T: cómo demuestra una pyme sin años de trayectoria que tiene experiencia y confianza | Marketing y SEO | Pendiente |
@@ -164,6 +164,12 @@ se comparten — la redacción, no.
 | 39| pendiente   | Marketing   | Contenido genérico y "Helpful Content": por qué Google penaliza el blog que "suena a blog de nadie" | Marketing y SEO | Pendiente |
 | 40| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
 | 41| pendiente   | Localizado  | Mejores agencias de diseño web en **Buenos Aires**                | Cómo elegir      | Pendiente  |
+| 42| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
+| 43| pendiente   | Marketing   | Schema markup y datos estructurados: qué le cambia de verdad a una pyme en los resultados | Marketing y SEO | Pendiente |
+| 44| pendiente   | Localizado  | Cuánto cuesta una página web en **Guatemala**                     | Precios          | Pendiente  |
+| 45| pendiente   | IA          | Cuánto cuesta de verdad tener un asistente de IA propio: la factura por pregunta, no por licencia | IA y tecnología | Pendiente |
+| 46| pendiente   | Marketing   | Qué es una consulta sin clic y qué le queda a una pyme cuando Google responde por ella | Marketing y SEO | Pendiente |
+| 47| pendiente   | Localizado  | Mejores agencias de diseño web en **Quito**                       | Cómo elegir      | Pendiente  |
 
 Cuando la cola llegue al final, seguir el mismo patrón de tercios: más países
 (Guatemala, República Dominicana, Uruguay...), más ciudades (Buenos Aires,
