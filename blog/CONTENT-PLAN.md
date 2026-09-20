@@ -139,8 +139,8 @@ se comparten — la redacción, no.
 | 14| 2026-09-05  | Localizado  | Mejores agencias de diseño web en **Ciudad de México**            | Cómo elegir      | Publicado  |
 | 15| 2026-09-06  | IA          | Búsqueda con IA en el propio sitio (RAG): qué es y si aplica a una pyme | IA y tecnología | Publicado |
 | 16| 2026-09-08  | Marketing   | Por qué comprar backlinks ya casi no funciona, y qué hace Google en 2026 para detectarlos | Marketing y SEO | Publicado |
-| 17| pendiente   | Localizado  | Cuánto cuesta una página web en **España**                        | Precios          | Pendiente  |
-| 18| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
+| 17| 2026-09-18  | Localizado  | Cuánto cuesta una página web en **España**                        | Precios          | Publicado  |
+| 18| 2026-09-20  | IA          | Comercio agéntico: qué pasó con Instant Checkout de OpenAI (apagado el 6 de marzo de 2026) y qué le toca hacer a una pyme | IA y tecnología | Publicado |
 | 19| pendiente   | Marketing   | E-E-A-T: cómo demuestra una pyme sin años de trayectoria que tiene experiencia y confianza | Marketing y SEO | Pendiente |
 | 20| pendiente   | Localizado  | Mejores agencias de diseño web en **Lima**                        | Cómo elegir      | Pendiente  |
 | 21| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
@@ -171,6 +171,8 @@ se comparten — la redacción, no.
 | 46| pendiente   | Marketing   | Qué es una consulta sin clic y qué le queda a una pyme cuando Google responde por ella | Marketing y SEO | Pendiente |
 | 47| pendiente   | Localizado  | Mejores agencias de diseño web en **Quito**                       | Cómo elegir      | Pendiente  |
 | 48| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
+| 49| pendiente   | Marketing   | Reseñas falsas y compradas: qué está haciendo Google en 2026 para detectarlas y qué arriesga el negocio que las usa | Marketing y SEO | Pendiente |
+| 50| pendiente   | Localizado  | Cuánto cuesta una página web en **República Dominicana**          | Precios          | Pendiente  |
 
 Cuando la cola llegue al final, seguir el mismo patrón de tercios: más países
 (Guatemala, República Dominicana, Uruguay...), más ciudades (Buenos Aires,
