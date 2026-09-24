@@ -70,6 +70,25 @@ eso DKIM se reporta como "no detectamos" y nunca como "no tienes".
 
 ## Recursos
 
+- [Agencias de diseño web en Lima](https://kaivastudio.com/blog/mejores-agencias-diseno-web-lima/):
+  guía para elegir agencia en Lima, con seis estudios de presencia verificable (Creativa en Miraflores,
+  KOM Agencia Digital en Jesús María, Lima Diseño Web, Staff Digital en Surco/Chacarilla, TalentuPerú en
+  Los Olivos y Yankenpo Digital en Santa Beatriz); la obligación del Libro de Reclamaciones virtual que
+  exige INDECOPI a todo negocio que vende en línea, con sanciones de hasta 450 UIT (S/ 2.475.000 con la
+  UIT 2026 en S/ 5.500) y que casi ninguna cotización de agencia menciona; cómo verificar con SUNAT
+  (e-consultaruc.sunat.gob.pe) si una empresa está activa y hábida antes de firmar; y por qué la
+  responsabilidad legal de ese libro recae en el negocio que vende, no en la agencia que construyó el
+  sitio. Kaiva se excluye a propósito de su propia lista.
+- [E-E-A-T: cómo lo demuestra una pyme sin años de trayectoria](https://kaivastudio.com/blog/eeat-experiencia-y-confianza-sin-anos-de-trayectoria/):
+  qué es E-E-A-T (Experiencia, Pericia, Autoridad, Confianza) y por qué Danny Sullivan, de Google, afirma
+  que en sí mismo no es un factor de ranking específico, sino el marco que usan más de 10.000 evaluadores
+  humanos de las Search Quality Rater Guidelines para entrenar los sistemas de ranking; la actualización del
+  documento del 11 de septiembre de 2025 (de 181 a 182 páginas), que agregó ejemplos para calificar los AI
+  Overviews y amplió la definición de contenido YMYL a información electoral y de votación; el origen de la
+  E de Experiencia, añadida el 15 de diciembre de 2022; y qué puede hacer sin presupuesto un negocio sin
+  historial —autoría verificable, contacto real, reseñas negativas respondidas con soluciones—, con el
+  ejemplo del propio historial de git de Kaiva Studio (commits `be63feb` y `c224a68`) y el índice de 94/100
+  del Diagnóstico Digital corrido sobre kaivastudio.com.
 - [Comercio agéntico: la IA que compra por ti](https://kaivastudio.com/blog/comercio-agentico-ia-compra-por-ti/):
   qué pasó con Instant Checkout de OpenAI, lanzado a finales de septiembre de 2025 con vendedores de
   Etsy y apagado el 6 de marzo de 2026 —entre otras razones, porque nunca construyó un sistema para

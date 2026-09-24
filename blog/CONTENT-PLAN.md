@@ -141,7 +141,7 @@ se comparten — la redacción, no.
 | 16| 2026-09-08  | Marketing   | Por qué comprar backlinks ya casi no funciona, y qué hace Google en 2026 para detectarlos | Marketing y SEO | Publicado |
 | 17| 2026-09-18  | Localizado  | Cuánto cuesta una página web en **España**                        | Precios          | Publicado  |
 | 18| 2026-09-20  | IA          | Comercio agéntico: qué pasó con Instant Checkout de OpenAI (apagado el 6 de marzo de 2026) y qué le toca hacer a una pyme | IA y tecnología | Publicado |
-| 19| pendiente   | Marketing   | E-E-A-T: cómo demuestra una pyme sin años de trayectoria que tiene experiencia y confianza | Marketing y SEO | Pendiente |
+| 19| 2026-09-22  | Marketing   | E-E-A-T: cómo demuestra una pyme sin años de trayectoria que tiene experiencia y confianza | Marketing y SEO | Publicado |
 | 20| pendiente   | Localizado  | Mejores agencias de diseño web en **Lima**                        | Cómo elegir      | Pendiente  |
 | 21| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
 | 22| pendiente   | Marketing   | Reseñas de Google: cuántas necesitas, qué tan rápido responder, y el efecto real en el ranking local | Marketing y SEO | Pendiente |
@@ -173,6 +173,8 @@ se comparten — la redacción, no.
 | 48| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
 | 49| pendiente   | Marketing   | Reseñas falsas y compradas: qué está haciendo Google en 2026 para detectarlas y qué arriesga el negocio que las usa | Marketing y SEO | Pendiente |
 | 50| pendiente   | Localizado  | Cuánto cuesta una página web en **República Dominicana**          | Precios          | Pendiente  |
+| 51| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
+| 52| pendiente   | Marketing   | El efecto real de las estrellas de reseña en el CTR: cuánto sube el clic un punto extra de calificación, con datos reales | Marketing y SEO | Pendiente |
 
 Cuando la cola llegue al final, seguir el mismo patrón de tercios: más países
 (Guatemala, República Dominicana, Uruguay...), más ciudades (Buenos Aires,
