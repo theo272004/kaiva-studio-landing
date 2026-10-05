@@ -92,10 +92,10 @@ section{scroll-margin-top:90px}
 
 /* ---------- HERO ---------- */
 .page{--aw:600px;--bz:12px}
-.hero{position:relative;background:var(--ink);color:var(--paper);border-radius:var(--r-panel);padding:22px 0 30px;isolation:isolate;overflow:hidden}
+.hero{position:relative;background:var(--ink);color:var(--paper);border-radius:var(--r-panel);padding:36px 0 30px;isolation:isolate;overflow:hidden}
 .hero::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(70% 55% at 50% 0%,rgba(255,255,255,.06),transparent 70%),radial-gradient(60% 50% at 50% 100%,rgba(78,30,134,.45),transparent 70%);z-index:-1;pointer-events:none}
 .hero::after{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--violet);opacity:var(--hp,0);z-index:-2;pointer-events:none}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 28px;max-width:var(--wrap);margin-inline:auto}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 clamp(20px,3.4vw,44px)}
 .logo{display:inline-block;transition:transform .4s var(--ease)}
 .logo:hover{transform:translateY(-2px)}
 .logo img{height:46px;width:auto}
@@ -589,7 +589,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   .page{--aw:280px;--bz:7px}
   .ci{border-radius:20px}
   .ci img{border-radius:13px}
-  .nav{padding:0 18px}
+  .nav{padding:0 20px}
+  .hero{padding-top:26px}
   .nav-cta{display:none}
   .logo img{height:40px}
   .hero-copy{padding-top:44px}
