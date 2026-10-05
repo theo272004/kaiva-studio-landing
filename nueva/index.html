@@ -1,0 +1,962 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kaiva Studio</title>
+<meta name="description" content="Estudio digital en Barranquilla. Diseño web, software a medida y marca para empresas de Colombia y Latinoamérica.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="img/icono-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap">
+<style>
+/* Layout: paneles redondeados que flotan sobre blanco. El morado abre y cierra la página,
+   el negro marca lo que se elige y la laptop es el objeto protagonista de cada sección. */
+:root{
+  --violet:#8B7BF5;
+  --violet-deep:#6B59E8;
+  --violet-soft:#EEEBFE;
+  --ink:#0E0E11;
+  --ink-2:#5D5D67;
+  --ink-3:#A4A4AE;
+  --paper:#FFFFFF;
+  --mist:#F3F3F6;
+  --line:#E6E6EC;
+  --note:#F1EEFF;
+
+  --f-display:"Urbanist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-body:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --f-hand:"Caveat","Segoe Print","Bradley Hand",cursive;
+
+  --r-panel:34px;
+  --r-card:22px;
+  --wrap:1180px;
+  --gutter:16px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--violet-deep);outline-offset:3px;border-radius:8px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.page{padding-inline:var(--gutter);padding-block:12px 16px;overflow-x:clip}
+.wrap{max-width:var(--wrap);margin-inline:auto}
+
+h1,h2,h3{font-family:var(--f-display);font-weight:400;letter-spacing:-.025em;line-height:1.05;margin:0;text-wrap:balance}
+h2{font-size:clamp(2.1rem,4.4vw,3.3rem)}
+p{margin:0}
+.sub{color:var(--ink-2);max-width:52ch;margin-inline:auto;text-align:center;font-size:15px}
+.head{display:grid;gap:14px;justify-items:center;text-align:center}
+.label{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+section{scroll-margin-top:90px}
+
+/* ---------- botones ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 22px;border-radius:999px;font-size:14.5px;font-weight:500;transition:transform .35s var(--ease),background .25s,color .25s,box-shadow .35s var(--ease);white-space:nowrap}
+.btn svg{width:16px;height:16px;transition:transform .35s var(--ease)}
+.btn:hover{transform:translateY(-2px)}
+.btn:hover svg{transform:translateX(3px)}
+.btn-white{background:var(--paper);color:var(--ink);box-shadow:0 10px 30px -12px rgba(30,15,90,.45)}
+.btn-ghost{color:var(--paper);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.75)}
+.btn-ghost:hover{background:rgba(255,255,255,.12)}
+.btn-ink{background:var(--ink);color:var(--paper)}
+.btn-ink:hover{background:#26262c}
+
+/* ---------- laptop ---------- */
+.laptop{container-type:inline-size;position:relative;margin-inline:auto;perspective:2400px}
+.laptop .lid{position:relative;background:#0A0A0C;border-radius:3cqw 3cqw .7cqw .7cqw;padding:1.7cqw 1.7cqw 2.3cqw;box-shadow:inset 0 0 0 .22cqw #2B2B31,inset 0 0 0 .5cqw #121215;transform-origin:50% 100%;transform-style:preserve-3d}
+.laptop .cam{position:absolute;top:.6cqw;left:50%;width:.75cqw;height:.75cqw;margin-left:-.375cqw;border-radius:50%;background:#1E1E25;box-shadow:inset 0 0 0 .15cqw #2E2E3A}
+.laptop .screen{position:relative;aspect-ratio:16/10;border-radius:.9cqw;overflow:hidden;background:var(--paper)}
+.laptop .base{position:relative;width:117%;margin-left:-8.5%;height:2.3cqw;border-radius:.4cqw .4cqw 3.4cqw 3.4cqw / .4cqw .4cqw 1.7cqw 1.7cqw;background:linear-gradient(180deg,#F4F4F7 0%,#D9D9DF 45%,#AEAEB7 100%);box-shadow:0 2.6cqw 4cqw -1.4cqw rgba(16,10,50,.35)}
+.laptop .base::before{content:"";position:absolute;top:0;left:50%;width:15%;height:.85cqw;margin-left:-7.5%;border-radius:0 0 1.1cqw 1.1cqw;background:linear-gradient(#C3C3CB,#D6D6DC)}
+.laptop .base::after{content:"";position:absolute;left:3%;right:3%;bottom:-.1cqw;height:.5cqw;border-radius:50%;background:rgba(0,0,0,.18);filter:blur(.3cqw);z-index:-1}
+
+.chrome{display:flex;align-items:center;gap:1.1cqw;height:3.6cqw;padding:0 1.6cqw;background:#F6F6F8;border-bottom:1px solid var(--line)}
+.chrome i{width:.9cqw;height:.9cqw;border-radius:50%;background:#DADAE0;flex:none}
+.chrome i:first-child{background:#FF5F57}.chrome i:nth-child(2){background:#FEBC2E}.chrome i:nth-child(3){background:#28C840}
+.chrome .url{margin-inline:auto;display:flex;align-items:center;gap:.6cqw;height:2.2cqw;padding:0 2.4cqw;border-radius:99px;background:var(--paper);box-shadow:0 0 0 1px var(--line);font-size:1.25cqw;color:var(--ink-2);white-space:nowrap}
+.chrome .url::before{content:"";width:.8cqw;height:.8cqw;border-radius:50%;background:var(--violet)}
+.slides{position:absolute;inset:3.6cqw 0 0 0}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .9s ease}
+.slide.on{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover;object-position:top center;transform:scale(1.04);transition:transform 4.5s ease-out}
+.slide.on img{transform:scale(1)}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;background:var(--violet);color:var(--paper);border-radius:var(--r-panel);padding:22px 0 0;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(70% 60% at 50% 0%,rgba(255,255,255,.22),transparent 70%),radial-gradient(60% 50% at 50% 110%,rgba(40,20,140,.35),transparent 70%);z-index:-1;pointer-events:none}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 28px;max-width:var(--wrap);margin-inline:auto}
+.logo img{height:46px;width:auto}
+.hero .logo img,.final .logo img{filter:brightness(0) invert(1)}
+.nav-links{display:flex;gap:30px;list-style:none;margin:0;padding:0;font-size:13.5px}
+.nav-links a{opacity:.9;position:relative;padding:4px 0}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-end{display:flex;align-items:center;gap:8px}
+.nav-cta{font-size:13px;font-weight:500;margin-right:6px}
+.circle{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--ink);color:var(--paper);transition:transform .3s var(--ease)}
+.circle.light{background:var(--paper);color:var(--ink)}
+.circle:hover{transform:scale(1.08)}
+.circle svg{width:17px;height:17px}
+
+.hero-copy{display:grid;justify-items:center;text-align:center;gap:22px;padding:64px 24px 0}
+.pill{white-space:nowrap;display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 14px 0 6px;border-radius:999px;background:rgba(255,255,255,.16);box-shadow:inset 0 0 0 1px rgba(255,255,255,.28);font-size:12.5px;backdrop-filter:blur(6px)}
+.pill b{display:inline-grid;place-items:center;height:20px;padding:0 8px;border-radius:99px;background:var(--paper);color:var(--ink);font-weight:500;font-size:11.5px}
+.hero h1{font-size:clamp(2.7rem,7vw,5.6rem);font-weight:300;line-height:.98;letter-spacing:-.035em}
+.hero h1 .line{display:block;overflow:hidden;padding-bottom:.08em}
+.hero h1 .line>span{display:inline-block}
+.hero h1 em{font-style:normal;font-weight:500}
+.hero .lede{max-width:46ch;font-size:16px;opacity:.92}
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:4px}
+
+.hero-stage{position:relative;margin-top:64px}
+.marquee{position:absolute;left:0;right:0;top:9%;height:52%;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;gap:18px;height:100%;width:max-content;animation:slide 48s linear infinite}
+.shot{position:relative;flex:none;height:100%;aspect-ratio:16/10.5;border-radius:16px;overflow:hidden;background:var(--paper);box-shadow:0 18px 40px -18px rgba(25,10,90,.55)}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top}
+.shot figcaption{position:absolute;left:10px;bottom:10px;display:flex;gap:6px;align-items:center;padding:5px 10px;border-radius:99px;background:rgba(14,14,17,.82);color:var(--paper);font-size:11px;backdrop-filter:blur(6px)}
+@keyframes slide{to{transform:translateX(calc(-50% - 9px))}}
+.laptop--hero{width:min(820px,78%);z-index:2;margin-bottom:-1.4%}
+.laptop--hero .lid{box-shadow:inset 0 0 0 .22cqw #2B2B31,inset 0 0 0 .5cqw #121215,0 5cqw 9cqw -3cqw rgba(20,8,80,.55)}
+.stage-caption{position:absolute;z-index:3;right:clamp(10px,6%,80px);bottom:24%;display:flex;align-items:center;gap:10px;padding:10px 14px 10px 10px;border-radius:16px;background:rgba(255,255,255,.94);color:var(--ink);box-shadow:0 20px 40px -18px rgba(20,8,80,.5);font-size:12.5px;line-height:1.3;transition:opacity .4s}
+.stage-caption .k{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--ink);color:var(--paper);font-family:var(--f-display);font-weight:500}
+.stage-caption small{display:block;color:var(--ink-2)}
+
+/* animación de entrada */
+.js .hero h1 .line>span{animation:rise 1.1s var(--ease) both}
+.js .hero h1 .line:nth-child(2)>span{animation-delay:.12s}
+.js .hero .pill,.js .hero .lede,.js .hero .actions{animation:fade 1s var(--ease) both}
+.js .hero .lede{animation-delay:.25s}.js .hero .actions{animation-delay:.35s}
+.js .laptop--hero .lid{animation:open 1.6s var(--ease) .45s both}
+.js .marquee{animation:fade 1.4s ease 1.1s both}
+@keyframes rise{from{transform:translateY(105%)}to{transform:none}}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes open{from{transform:rotateX(-82deg)}to{transform:rotateX(0)}}
+
+/* ---------- barra flotante ---------- */
+.float-nav{position:fixed;z-index:50;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;display:flex;align-items:center;gap:22px;padding:7px 7px 7px 18px;border-radius:999px;background:rgba(255,255,255,.78);backdrop-filter:saturate(1.6) blur(18px);-webkit-backdrop-filter:saturate(1.6) blur(18px);box-shadow:0 0 0 1px rgba(14,14,17,.06),0 14px 40px -18px rgba(14,14,17,.35);transform:translate(-50%,-140%);transition:transform .6s var(--ease);max-width:calc(100% - 32px)}
+.float-nav.show{transform:translate(-50%,0)}
+.float-nav .logo img{height:32px}
+.float-nav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0;font-size:13px;color:var(--ink-2)}
+.float-nav ul a:hover{color:var(--ink)}
+.float-nav .btn{height:38px;padding:0 16px;font-size:13px}
+
+/* ---------- manifiesto ---------- */
+.manifesto{padding:clamp(110px,14vw,170px) 0 clamp(70px,9vw,110px)}
+.manifesto p{max-width:31ch;margin-inline:auto;text-align:center;font-family:var(--f-display);font-size:clamp(1.55rem,3.1vw,2.35rem);line-height:1.28;letter-spacing:-.02em;color:var(--ink-3)}
+.manifesto p .w{transition:color .35s ease}
+.manifesto p .w.lit{color:var(--ink)}
+
+/* ---------- estudio (cifras) ---------- */
+.studio{background:var(--mist);border-radius:var(--r-panel);padding:clamp(56px,8vw,100px) clamp(18px,4vw,56px)}
+.studio-grid{display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:14px;max-width:960px;margin-inline:auto}
+.me{grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between;gap:28px;background:var(--ink);color:var(--paper);border-radius:var(--r-card);padding:26px;box-shadow:0 30px 60px -30px rgba(14,14,17,.55);position:relative;overflow:hidden}
+.me h3{font-size:22px;font-weight:500;letter-spacing:-.01em}
+.me p{color:#C9C9D2;font-size:14.5px;margin-top:12px;max-width:34ch}
+.me .chip{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--violet);font-family:var(--f-display);font-weight:500;font-size:20px}
+.me .btn{justify-content:center;background:var(--paper);color:var(--ink);height:44px}
+.stat{background:var(--paper);border-radius:var(--r-card);padding:24px;display:grid;align-content:space-between;gap:26px;min-height:190px}
+.stat .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.stat .num{font-family:var(--f-display);font-size:clamp(2.4rem,4vw,3.1rem);letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.stat .unit{font-size:12.5px;color:var(--ink-2)}
+.stat p{font-size:13.5px;color:var(--ink-2);line-height:1.45}
+
+/* ---------- servicios ---------- */
+.block{padding-top:clamp(90px,11vw,140px)}
+.block>.head{margin-bottom:clamp(36px,5vw,56px)}
+.block-left{display:flex;align-items:end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+.block-left h2{text-align:left}
+.block-left p{color:var(--ink-2);max-width:40ch;font-size:15px}
+.features{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(24px,4vw,56px);align-items:center;background:var(--mist);border-radius:var(--r-panel);padding:clamp(28px,4vw,56px)}
+.features .laptop{width:100%}
+.screen .pane{position:absolute;inset:0;opacity:0;transform:scale(1.02);transition:opacity .6s ease,transform .8s var(--ease)}
+.screen .pane.on{opacity:1;transform:none}
+.screen .pane>img{width:100%;height:100%;object-fit:cover;object-position:top}
+
+/* mock: marca */
+.mock{position:absolute;inset:0;padding:5cqw;display:grid;gap:3cqw;background:var(--paper);font-family:var(--f-body);color:var(--ink)}
+.mock .mlabel{font-family:var(--f-mono);font-size:1.5cqw;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.mock-brand{grid-template-columns:1.1fr 1fr;align-items:stretch}
+.mock-brand .aa{border-radius:2cqw;background:var(--mist);padding:3.4cqw;display:flex;flex-direction:column;justify-content:space-between}
+.mock-brand .aa b{font-family:var(--f-display);font-weight:400;font-size:17cqw;line-height:.85;letter-spacing:-.04em}
+.mock-brand .aa span{font-size:1.7cqw;color:var(--ink-2)}
+.mock-brand .right{display:grid;grid-template-rows:1fr auto;gap:2.6cqw}
+.mock-brand .mark{border-radius:2cqw;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:var(--f-display);font-size:6.6cqw;font-weight:500;letter-spacing:-.03em}
+.mock-brand .mark i{font-style:normal;color:var(--violet)}
+.swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4cqw}
+.swatches div{aspect-ratio:1;border-radius:1.4cqw;display:flex;align-items:flex-end;padding:1cqw;font-family:var(--f-mono);font-size:1.15cqw;box-shadow:inset 0 0 0 1px var(--line)}
+/* mock: diagnóstico */
+.mock-diag{grid-template-columns:1fr 1.25fr;align-items:center}
+.gauge{position:relative;aspect-ratio:1;display:grid;place-items:center}
+.gauge svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.gauge .g-num{font-family:var(--f-display);font-size:9cqw;letter-spacing:-.04em;line-height:1;text-align:center}
+.gauge .g-num small{display:block;font-family:var(--f-body);font-size:1.6cqw;color:var(--ink-2);letter-spacing:0;margin-top:.8cqw}
+.pillars{display:grid;gap:1.6cqw}
+.pillars .row{display:grid;grid-template-columns:1fr auto;gap:.8cqw 2cqw;align-items:center;font-size:1.75cqw}
+.pillars .row span:last-child{font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.pillars .bar{grid-column:1/-1;height:1cqw;border-radius:99px;background:var(--mist);overflow:hidden}
+.pillars .bar i{display:block;height:100%;border-radius:inherit;background:var(--ink)}
+.pillars .row:nth-child(2) .bar i{background:var(--violet)}
+.mock .tag{justify-self:start;padding:.6cqw 1.6cqw;border-radius:99px;background:var(--violet-soft);color:var(--violet-deep);font-size:1.45cqw}
+
+.acc{display:grid;gap:12px}
+.acc-item{background:var(--paper);border-radius:18px;box-shadow:0 0 0 1px var(--line);transition:box-shadow .3s}
+.acc-item.open{box-shadow:0 0 0 1px var(--line),0 20px 40px -26px rgba(14,14,17,.3)}
+.acc-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;background:none;border:0;padding:20px 20px 20px 22px;text-align:left;font-size:15.5px;font-weight:500}
+.acc-btn .ic{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:var(--mist);transition:transform .45s var(--ease),background .3s}
+.acc-btn .ic svg{width:14px;height:14px}
+.acc-item.open .ic{transform:rotate(180deg);background:var(--ink);color:var(--paper)}
+.acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s var(--ease)}
+.acc-item.open .acc-panel{grid-template-rows:1fr}
+.acc-panel>div{overflow:hidden}
+.acc-inner{padding:0 22px 20px;display:grid;gap:14px}
+.acc-inner p{color:var(--ink-2);font-size:14px;max-width:46ch}
+.ticks{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:0;padding:0}
+.ticks li{font-size:12.5px;padding:5px 11px;border-radius:99px;background:var(--mist)}
+.more{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:500;color:var(--violet-deep)}
+.more svg{width:14px;height:14px;transition:transform .3s var(--ease)}
+.more:hover svg{transform:translateX(3px)}
+.progress{height:2px;margin:0 22px 16px;border-radius:2px;background:var(--mist);overflow:hidden}
+.progress i{display:block;height:100%;width:100%;background:var(--violet);transform-origin:left;transform:scaleX(0)}
+.acc-item.open.auto .progress i{animation:prog 7s linear forwards}
+.acc-item:not(.open) .progress,.acc-item.open:not(.auto) .progress{display:none}
+@keyframes prog{to{transform:scaleX(1)}}
+
+/* ---------- formas de empezar (tarjetas) ---------- */
+.paths{position:relative;display:grid;grid-template-columns:1fr minmax(0,1.5fr) 1fr;align-items:center;gap:24px;min-height:440px}
+.cards{position:relative;height:420px}
+.pcard{position:absolute;left:50%;top:50%;width:min(420px,92%);aspect-ratio:1.58;border-radius:26px;overflow:hidden;padding:24px 26px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .9s var(--ease);will-change:transform}
+.pcard .row{display:flex;justify-content:space-between;align-items:center;gap:10px;position:relative;z-index:1}
+.pcard .chip{width:46px;height:34px;border-radius:8px;background:linear-gradient(135deg,#F3E7A8,#D6B85C);box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.pcard .brand{font-family:var(--f-display);font-weight:500;font-size:19px;letter-spacing:-.02em}
+.pcard .brand i{font-style:normal;color:var(--violet)}
+.pcard .digits{font-family:var(--f-mono);font-size:clamp(15px,2vw,19px);letter-spacing:.12em;position:relative;z-index:1}
+.pcard .meta{display:flex;gap:28px;font-size:11px;position:relative;z-index:1}
+.pcard .meta small{display:block;opacity:.65;font-size:9.5px;letter-spacing:.04em;text-transform:uppercase}
+.pcard--black{background:var(--ink);color:var(--paper);transform:translate(-40%,-64%) rotate(12deg);z-index:1;box-shadow:0 40px 70px -40px rgba(14,14,17,.7)}
+.pcard--black::before{content:"";position:absolute;inset:-30% -10% auto 38%;height:120%;border-radius:50%;background:var(--violet);transform:rotate(-24deg)}
+.pcard--violet{background:var(--violet);color:var(--paper);transform:translate(-60%,-36%) rotate(-12deg);z-index:2;box-shadow:0 40px 70px -36px rgba(60,30,160,.65)}
+.pcard--violet::before{content:"";position:absolute;inset:44% -30% -40% 40%;border-radius:50%;background:var(--ink);transform:rotate(-18deg)}
+.pcard--violet .brand i{color:var(--ink)}
+.note{display:grid;gap:10px;max-width:240px}
+.note .pin{display:flex;align-items:center;gap:0}
+.note .pin::before{content:"";flex:1;height:1px;background:var(--ink-3)}
+.note .pin i{width:14px;height:14px;border-radius:50%;border:3px solid var(--ink);background:var(--paper);flex:none}
+.note.right .pin{flex-direction:row-reverse}
+.note h3{font-family:var(--f-body);font-size:15px;font-weight:600;letter-spacing:0}
+.note p{font-size:13.5px;color:var(--ink-2);line-height:1.5}
+.note.left{justify-self:end;text-align:right;align-self:start;margin-top:40px}
+.note.right{align-self:end;margin-bottom:40px}
+
+/* ---------- pantallas ---------- */
+.devices{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.dev{position:relative;background:var(--mist);border-radius:var(--r-panel);padding:32px 28px 0;overflow:hidden;display:grid;justify-items:center;gap:10px;min-height:440px}
+.dev .badge{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 14px;border-radius:99px;background:var(--paper);font-size:13px;font-weight:500;box-shadow:0 6px 18px -10px rgba(14,14,17,.25)}
+.dev .badge svg{width:15px;height:15px}
+.dev h3{font-family:var(--f-body);font-size:15px;font-weight:500;letter-spacing:0}
+.dev p{font-size:13px;color:var(--ink-2);text-align:center;max-width:34ch}
+.dev .laptop{width:min(560px,118%);margin-top:22px;margin-bottom:-10%;transition:transform .9s var(--ease)}
+.dev:hover .laptop,.dev:hover .phone{transform:translateY(-10px)}
+.phone{width:min(220px,62%);margin-top:22px;margin-bottom:-36%;aspect-ratio:9/19;border-radius:38px;background:#0A0A0C;padding:9px;box-shadow:inset 0 0 0 2px #2B2B31,0 30px 60px -30px rgba(14,14,17,.5);transition:transform .9s var(--ease);position:relative}
+.phone .scr{position:relative;width:100%;height:100%;border-radius:30px;overflow:hidden;background:var(--paper)}
+.phone .island{position:absolute;z-index:2;top:9px;left:50%;width:34%;height:20px;margin-left:-17%;border-radius:99px;background:#0A0A0C}
+.mobile-site{position:absolute;inset:0;display:flex;flex-direction:column}
+.mobile-site .ms-bar{display:flex;justify-content:space-between;align-items:center;padding:40px 16px 10px;font-size:10px;color:var(--ink-2)}
+.mobile-site .ms-bar b{color:#0F2C59;font-size:11px}
+.mobile-site .ms-img{height:42%;overflow:hidden}
+.mobile-site .ms-img img{width:100%;height:100%;object-fit:cover;object-position:70% center}
+.mobile-site .ms-body{padding:14px 16px;display:grid;gap:8px}
+.mobile-site .ms-k{font-size:7.5px;letter-spacing:.08em;text-transform:uppercase;color:#5B7FB0}
+.mobile-site .ms-h{font-family:var(--f-body);font-weight:600;font-size:15px;line-height:1.15;color:#0F2C59}
+.mobile-site .ms-h mark{background:#FFD43B;color:inherit;padding:0 2px}
+.mobile-site .ms-p{font-size:9px;color:var(--ink-2);line-height:1.45}
+.mobile-site .ms-btn{justify-self:start;margin-top:4px;padding:7px 12px;border-radius:99px;background:#0F2C59;color:#fff;font-size:9px;font-weight:600}
+
+/* ---------- diagnóstico (gráfica) ---------- */
+.chart-wrap{max-width:760px;margin-inline:auto;padding-left:30px}
+.chart{position:relative;display:grid;grid-template-columns:repeat(5,1fr);align-items:end;gap:clamp(14px,4vw,44px);height:300px;padding:0 clamp(8px,4vw,40px);border-bottom:1px solid var(--line)}
+.chart .gridline{position:absolute;left:0;right:0;border-top:1px dashed var(--line);pointer-events:none}
+.chart .gridline span{position:absolute;right:100%;margin-right:0;top:-8px;padding-right:8px;font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3)}
+.bar-col{position:relative;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}
+.bar{position:relative;width:min(56px,100%);height:var(--h);display:flex;flex-direction:column;border-radius:8px 8px 3px 3px;overflow:hidden;transition:height 1.2s var(--ease);transition-delay:var(--d,0s)}
+.bar .gain{height:var(--g);background:var(--violet);flex:none}
+.bar .base-part{flex:1;background:var(--ink)}
+.chart.pre .bar{height:0}
+.bar-col .val{position:absolute;bottom:calc(var(--h) + 10px);font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);font-variant-numeric:tabular-nums;transition:bottom 1.2s var(--ease),opacity .6s;transition-delay:var(--d,0s)}
+.chart.pre .val{bottom:10px;opacity:0}
+.bar-col .flag{position:absolute;bottom:calc(var(--h) + 34px);display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:99px;background:var(--violet);color:var(--paper);font-size:12px;font-weight:500;white-space:nowrap;box-shadow:0 10px 24px -10px rgba(80,50,200,.7);transition:opacity .6s 1.3s,transform .6s 1.3s var(--ease)}
+.bar-col .flag::after{content:"";position:absolute;left:50%;bottom:-4px;width:8px;height:8px;margin-left:-4px;background:inherit;transform:rotate(45deg)}
+.chart.pre .flag{opacity:0;transform:translateY(8px)}
+.months{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(14px,4vw,44px);padding:12px clamp(8px,4vw,40px) 0;text-align:center;font-size:12.5px;color:var(--ink-2)}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin-top:28px;font-size:12.5px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.legend i{width:10px;height:10px;border-radius:3px;background:var(--ink)}
+.legend span:nth-child(2) i{background:var(--violet)}
+.pillar-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:34px}
+.pillar-chips div{display:grid;gap:2px;padding:12px 16px;border-radius:16px;background:var(--mist);min-width:150px;text-align:left}
+.pillar-chips b{font-weight:500;font-size:14px}
+.pillar-chips small{font-size:12px;color:var(--ink-2)}
+.chart-cta{display:flex;justify-content:center;margin-top:30px}
+
+/* ---------- planes ---------- */
+.toggle{display:inline-flex;align-items:center;gap:12px;font-size:13px;font-weight:500;margin-top:6px}
+.toggle span{color:var(--ink-3);transition:color .3s}
+.toggle span.act{color:var(--ink)}
+.switch{position:relative;width:46px;height:26px;border-radius:99px;border:0;background:var(--ink);padding:0}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--paper);transition:transform .45s var(--ease)}
+.switch[aria-checked="true"]::after{transform:translateX(20px)}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1020px;margin-inline:auto}
+.plan{position:relative;display:flex;flex-direction:column;gap:22px;background:var(--mist);border-radius:var(--r-card);padding:28px 26px 26px;transition:background .6s var(--ease),color .6s var(--ease),transform .6s var(--ease),box-shadow .6s var(--ease)}
+.plan .pname{font-size:13.5px;font-weight:500;text-align:center}
+.plan .price{text-align:center;font-family:var(--f-display);font-size:clamp(1.9rem,3vw,2.4rem);letter-spacing:-.03em;line-height:1}
+.plan .price small{display:block;font-family:var(--f-body);font-size:12.5px;letter-spacing:0;color:var(--ink-2);margin-top:8px;transition:color .6s}
+.plan p.desc{font-size:13.5px;color:var(--ink-2);text-align:center;transition:color .6s}
+.plan ul{list-style:none;margin:0;padding:18px 0 0;border-top:1px solid var(--line);display:grid;gap:10px;font-size:13.5px;flex:1;transition:border-color .6s}
+.plan li{display:flex;gap:10px;align-items:flex-start}
+.plan li::before{content:"";flex:none;width:6px;height:6px;margin-top:8px;border-radius:50%;background:var(--violet)}
+.plan .btn{justify-content:center;background:var(--ink);color:var(--paper)}
+.plan .tagline{position:absolute;top:14px;right:14px;font-size:10.5px;font-weight:500;padding:4px 9px;border-radius:99px;background:var(--violet);color:var(--paper);opacity:0;transform:translateY(-4px);transition:opacity .4s,transform .4s var(--ease)}
+.plan.featured{background:var(--ink);color:var(--paper);transform:translateY(-10px);box-shadow:0 40px 70px -40px rgba(14,14,17,.7)}
+.plan.featured .price small,.plan.featured p.desc{color:#B9B9C4}
+.plan.featured ul{border-color:#2A2A31}
+.plan.featured .btn{background:var(--paper);color:var(--ink)}
+.plan.featured .tagline{opacity:1;transform:none}
+
+/* ---------- cierre ---------- */
+.final{position:relative;margin-top:clamp(100px,12vw,150px);background:var(--violet);color:var(--paper);border-radius:var(--r-panel);padding:clamp(70px,9vw,110px) 24px 26px;overflow:hidden;isolation:isolate}
+.final::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 55% at 50% 30%,rgba(255,255,255,.2),transparent 70%);z-index:-1}
+.final-core{display:grid;justify-items:center;text-align:center;gap:26px}
+.sticky{position:relative;width:170px;aspect-ratio:1;padding:26px 18px;background:var(--note);color:var(--ink);font-family:var(--f-hand);font-size:25px;line-height:1.05;font-weight:500;text-align:center;display:grid;place-items:center;transform:rotate(-7deg);box-shadow:0 2px 0 rgba(0,0,0,.04),0 18px 30px -14px rgba(20,8,80,.55);margin-bottom:14px}
+.sticky::before{content:"";position:absolute;top:-12px;left:50%;width:70px;height:24px;margin-left:-35px;background:rgba(255,255,255,.55);transform:rotate(3deg);box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.sticky::after{content:"";position:absolute;left:30%;top:60%;width:160%;height:70%;background:linear-gradient(115deg,rgba(40,15,120,.28),transparent 70%);transform:skewX(38deg);z-index:-1;filter:blur(6px)}
+.js .sticky.pre{transform:translateY(-40px) rotate(-18deg);opacity:0}
+.sticky{transition:transform 1.1s var(--ease),opacity .8s}
+.final h2{font-size:clamp(2.3rem,5.4vw,4.2rem);font-weight:300;letter-spacing:-.035em;max-width:16ch}
+.final h2 b{font-weight:500}
+.mail-form{display:flex;align-items:center;gap:8px;width:min(460px,100%);padding:6px 6px 6px 20px;border-radius:999px;background:var(--paper);box-shadow:0 24px 50px -24px rgba(20,8,80,.6)}
+.mail-form input{flex:1;min-width:0;border:0;background:none;font:inherit;font-size:15px;color:var(--ink);outline:none;height:44px}
+.mail-form input::placeholder{color:var(--ink-3)}
+.mail-form button{flex:none;height:44px;padding:0 20px;border:0;border-radius:99px;background:var(--ink);color:var(--paper);font-size:14px;font-weight:500;transition:background .25s}
+.mail-form button:hover{background:#2A2A31}
+.form-note{font-size:12.5px;opacity:.85;min-height:1.2em}
+.contacts{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;font-size:13.5px}
+.contacts a{border-bottom:1px solid rgba(255,255,255,.45)}
+.contacts a:hover{border-color:var(--paper)}
+.foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;max-width:var(--wrap);margin:clamp(70px,9vw,110px) auto 0;padding-top:22px;border-top:1px solid rgba(255,255,255,.25);font-size:13px}
+.foot ul{display:flex;flex-wrap:wrap;gap:8px 24px;list-style:none;margin:0;padding:0}
+.foot ul a{opacity:.9}
+.foot ul a:hover{opacity:1}
+.foot .soc{display:flex;gap:8px}
+.foot .soc a{width:34px;height:34px}
+.foot .soc svg{width:15px;height:15px}
+.legal{max-width:var(--wrap);margin:14px auto 0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 18px;font-size:12px;opacity:.75}
+
+/* ---------- aparición ---------- */
+.js [data-reveal]{transition:opacity .9s var(--ease),transform 1s var(--ease)}
+.js [data-reveal].pre{opacity:0;transform:translateY(32px)}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .nav-links,.float-nav ul{display:none}
+  .features{grid-template-columns:1fr}
+  .studio-grid{grid-template-columns:1fr 1fr}
+  .me{grid-column:1/-1;grid-row:auto}
+  .paths{grid-template-columns:1fr;min-height:0;gap:0}
+  .note.left,.note.right{justify-self:center;text-align:center;margin:0;align-self:auto;max-width:44ch}
+  .note .pin{display:none}
+  .cards{height:360px;order:-1}
+  .plans{grid-template-columns:1fr;max-width:460px}
+  .plan.featured{transform:none}
+}
+@media (max-width:700px){
+  :root{--r-panel:26px}
+  .nav{padding:0 18px}
+  .nav-cta{display:none}
+  .hero-copy{padding-top:44px}
+  .hero-stage{margin-top:44px}
+  .laptop--hero{width:84%}
+  .pill{font-size:11.5px}
+  .pillar-chips{display:grid;grid-template-columns:1fr 1fr}
+  .pillar-chips div{min-width:0}
+  .logo img{height:40px}
+  .marquee{top:4%;height:46%}
+  .shot{border-radius:10px}
+  .stage-caption{display:none}
+  .devices{grid-template-columns:1fr}
+  .dev{min-height:380px}
+  .studio-grid{grid-template-columns:1fr}
+  .stat{min-height:0}
+  .chart{height:240px}
+  .bar-col .flag{font-size:11px;padding:0 8px}
+  .cards{height:320px}
+  .pcard{width:min(320px,82%);padding:18px 20px;border-radius:20px}
+  .float-nav{gap:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .js [data-reveal].pre,.js .sticky.pre{opacity:1;transform:none}
+  .chart.pre .bar{height:var(--h)}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.3-.3-.3-.6-.5z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></g><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-in" viewBox="0 0 24 24"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM10 9.5h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.7 2.6 4.7 6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></g></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="1.6"/><path d="M2 19h20"/></g></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="7" y="2.5" width="10" height="19" rx="2.6"/><path d="M11 18.5h2"/></g></symbol>
+</svg>
+
+<nav class="float-nav" id="floatNav" aria-label="Navegación rápida">
+  <a class="logo" href="#inicio"><img src="img/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a>
+  <ul>
+    <li><a href="#trabajo">Trabajo</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#diagnostico">Diagnóstico</a></li>
+    <li><a href="#planes">Planes</a></li>
+  </ul>
+  <a class="btn btn-ink" href="#contacto">Agendar llamada</a>
+</nav>
+
+<div class="page">
+
+  <!-- ============ HERO ============ -->
+  <header class="hero" id="inicio">
+    <nav class="nav" aria-label="Principal">
+      <a class="logo" href="#inicio"><img src="img/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a>
+      <ul class="nav-links">
+        <li><a href="#trabajo">Trabajo</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#diagnostico">Diagnóstico</a></li>
+        <li><a href="#planes">Planes</a></li>
+      </ul>
+      <div class="nav-end">
+        <a class="nav-cta" href="#contacto">Agendar llamada</a>
+        <a class="circle" href="https://wa.me/573024137374" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg><use href="#i-wa"/></svg></a>
+        <a class="circle light" href="https://www.instagram.com/kaivastudio/" target="_blank" rel="noopener" aria-label="Instagram de Kaiva Studio"><svg><use href="#i-ig"/></svg></a>
+      </div>
+    </nav>
+
+    <div class="hero-copy">
+      <p class="pill"><b>Gratis</b> Diagnostica tu web en 60 segundos</p>
+      <h1>
+        <span class="line"><span>Tu empresa, en su</span></span>
+        <span class="line"><span>mejor versión <em>digital</em></span></span>
+      </h1>
+      <p class="lede">Diseño web, software a medida y marca para empresas de Colombia y Latinoamérica. Desde Barranquilla, sin plantillas.</p>
+      <div class="actions">
+        <a class="btn btn-white" href="#contacto">Cuéntanos tu proyecto</a>
+        <a class="btn btn-ghost" href="#servicios">Ver qué hacemos <svg><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+
+    <div class="hero-stage" id="trabajo">
+      <div class="marquee" aria-hidden="true">
+        <div class="track">
+          <figure class="shot"><img src="img/trabajo-cstravel-empresas.webp" alt="" loading="lazy"><figcaption>CS Travel · Empresas</figcaption></figure>
+          <figure class="shot"><img src="img/trabajo-thallo.webp" alt="" loading="lazy"><figcaption>Thallo Digital</figcaption></figure>
+          <figure class="shot"><img src="img/trabajo-cstravel-software.webp" alt="" loading="lazy"><figcaption>CS Travel · Plataforma</figcaption></figure>
+          <figure class="shot"><img src="img/trabajo-cstravel-medicos.webp" alt="" loading="lazy"><figcaption>CS Travel · Médicos</figcaption></figure>
+          <figure class="shot"><img src="img/trabajo-cstravel-home.webp" alt="" loading="lazy"><figcaption>CS Travel Group</figcaption></figure>
+          <figure class="shot"><img src="img/trabajo-cstravel-empresas.webp" alt="" loading="lazy"><figcaption>CS Travel · Empresas</figcaption></figure>
+          <figure class="shot"><img src="img/trabajo-thallo.webp" alt="" loading="lazy"><figcaption>Thallo Digital</figcaption></figure>
+          <figure class="shot"><img src="img/trabajo-cstravel-software.webp" alt="" loading="lazy"><figcaption>CS Travel · Plataforma</figcaption></figure>
+          <figure class="shot"><img src="img/trabajo-cstravel-medicos.webp" alt="" loading="lazy"><figcaption>CS Travel · Médicos</figcaption></figure>
+          <figure class="shot"><img src="img/trabajo-cstravel-home.webp" alt="" loading="lazy"><figcaption>CS Travel Group</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="laptop laptop--hero" role="img" aria-label="Laptop mostrando proyectos reales de Kaiva Studio: Thallo Digital y CS Travel Group">
+        <div class="lid">
+          <span class="cam"></span>
+          <div class="screen">
+            <div class="chrome"><i></i><i></i><i></i><span class="url" id="heroUrl">Thallo Digital · sitio web y marca</span></div>
+            <div class="slides" id="heroSlides">
+              <div class="slide on" data-label="Thallo Digital · sitio web y marca"><img src="img/trabajo-thallo.webp" alt="" width="1440" height="738"></div>
+              <div class="slide" data-label="CS Travel Group · sitio web"><img src="img/trabajo-cstravel-home.webp" alt="" width="1440" height="738"></div>
+              <div class="slide" data-label="CS Travel Group · software a medida"><img src="img/trabajo-cstravel-software.webp" alt="" width="1600" height="833"></div>
+            </div>
+          </div>
+        </div>
+        <div class="base"></div>
+      </div>
+
+      <div class="stage-caption" aria-hidden="true"><span class="k">K.</span><span>Trabajo real, en producción<small>Software, sitios web y marca</small></span></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- ============ MANIFIESTO ============ -->
+    <section class="manifesto" aria-label="Quiénes somos">
+      <p id="manifesto">Somos un estudio digital que diseña y construye lo que tu empresa necesita para vender en internet. Y medimos lo que casi nadie mira: si tu correo llega, si te pueden suplantar y si Google y las IA entienden qué haces.</p>
+    </section>
+
+    <!-- ============ ESTUDIO ============ -->
+    <section class="studio" aria-labelledby="studio-t" data-reveal>
+      <h2 id="studio-t" class="sr-only">Kaiva Studio en cifras</h2>
+      <div class="studio-grid">
+        <article class="me">
+          <span class="chip">K.</span>
+          <div>
+            <h3>Somos Kaiva Studio</h3>
+            <p>Un estudio de Barranquilla que trabaja 100 % remoto con empresas de toda Colombia y Latinoamérica. No vendemos páginas bonitas: diseñamos, medimos y arreglamos lo que hace que tu negocio se vea grande en internet.</p>
+          </div>
+          <a class="btn" href="#contacto">Hablemos de tu empresa</a>
+        </article>
+        <div class="stat">
+          <div class="top"><span class="num">3–5</span><span class="unit">semanas</span></div>
+          <p>Lo que toma una web estándar desde que aprobamos el alcance, con cronograma desde el primer día.</p>
+        </div>
+        <div class="stat">
+          <div class="top"><span class="num" data-count="60">60</span><span class="unit">segundos</span></div>
+          <p>Lo que tarda el Diagnóstico Digital en revisar tu dominio y devolverte un índice de 0 a 100.</p>
+        </div>
+        <div class="stat">
+          <div class="top"><span class="num" data-count="0">0</span><span class="unit">plantillas</span></div>
+          <p>Cada proyecto se diseña desde cero, según lo que tu negocio necesita vender.</p>
+        </div>
+        <div class="stat">
+          <div class="top"><span class="num" data-count="100" data-suffix=" %">100 %</span><span class="unit">remoto</span></div>
+          <p>Videollamada, correo y WhatsApp. La ubicación nunca ha sido un límite para entregar bien.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICIOS ============ -->
+    <section class="block" id="servicios" aria-labelledby="serv-t">
+      <div class="block-left" data-reveal>
+        <h2 id="serv-t">Lo que construimos</h2>
+        <p>Cada empresa necesita algo distinto. Estos son los cuatro frentes con los que más ayudamos, desde el primer sitio hasta plataformas completas.</p>
+      </div>
+      <div class="features" data-reveal>
+        <div class="laptop" aria-hidden="true">
+          <div class="lid">
+            <span class="cam"></span>
+            <div class="screen" id="featScreen">
+              <div class="pane on" data-pane="0"><img src="img/trabajo-thallo.webp" alt="" loading="lazy"></div>
+              <div class="pane" data-pane="1"><img src="img/trabajo-cstravel-software.webp" alt="" loading="lazy"></div>
+              <div class="pane" data-pane="2">
+                <div class="mock mock-brand">
+                  <div class="aa"><span class="mlabel">Tipografía</span><b>Aa</b><span>Regular · Medium · Bold</span></div>
+                  <div class="right">
+                    <div class="mark">tu marca<i>.</i></div>
+                    <div class="swatches">
+                      <div style="background:var(--violet);color:var(--paper)">#8B7B</div>
+                      <div style="background:var(--ink);color:var(--paper)">#0E0E</div>
+                      <div style="background:var(--mist)">#F3F3</div>
+                      <div style="background:var(--paper)">#FFFF</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pane" data-pane="3">
+                <div class="mock mock-diag">
+                  <div class="gauge">
+                    <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="var(--mist)" stroke-width="7"/><circle cx="50" cy="50" r="42" fill="none" stroke="var(--violet)" stroke-width="7" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="47.5"/></svg>
+                    <div class="g-num">82<small>Índice de Salud Digital</small></div>
+                  </div>
+                  <div class="pillars">
+                    <span class="mlabel">tuempresa.com · ejemplo</span>
+                    <div class="row"><span>Visibilidad</span><span>88</span><div class="bar"><i style="width:88%"></i></div></div>
+                    <div class="row"><span>Imagen</span><span>91</span><div class="bar"><i style="width:91%"></i></div></div>
+                    <div class="row"><span>Confianza</span><span>84</span><div class="bar"><i style="width:84%"></i></div></div>
+                    <div class="row"><span>Operación</span><span>64</span><div class="bar"><i style="width:64%"></i></div></div>
+                    <span class="tag">Correo sin DMARC: cualquiera puede escribir en tu nombre</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="base"></div>
+        </div>
+
+        <div class="acc" id="acc">
+          <div class="acc-item open auto">
+            <button class="acc-btn" aria-expanded="true" aria-controls="p0" id="b0">Diseño y desarrollo web<span class="ic"><svg><use href="#i-chev"/></svg></span></button>
+            <div class="acc-panel" id="p0" role="region" aria-labelledby="b0"><div><div class="acc-inner">
+              <p>Tu sitio principal: rápido, bonito y construido para convertir visitas en clientes.</p>
+              <ul class="ticks"><li>Diseño a medida</li><li>Responsivo</li><li>UI/UX que convierte</li></ul>
+              <a class="more" href="https://kaivastudio.com/diseno-web/">Ver diseño web <svg><use href="#i-arrow"/></svg></a>
+            </div></div></div>
+            <div class="progress"><i></i></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="p1" id="b1">Software y plataformas<span class="ic"><svg><use href="#i-chev"/></svg></span></button>
+            <div class="acc-panel" id="p1" role="region" aria-labelledby="b1"><div><div class="acc-inner">
+              <p>Para cuando tu negocio necesita más que una web: plataformas internas hechas a la medida de tu operación.</p>
+              <ul class="ticks"><li>E-commerce a medida</li><li>Dashboards</li><li>Integraciones</li><li>Automatizaciones</li></ul>
+              <a class="more" href="https://kaivastudio.com/software-a-medida/">Ver software a medida <svg><use href="#i-arrow"/></svg></a>
+            </div></div></div>
+            <div class="progress"><i></i></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="p2" id="b2">Branding e identidad<span class="ic"><svg><use href="#i-chev"/></svg></span></button>
+            <div class="acc-panel" id="p2" role="region" aria-labelledby="b2"><div><div class="acc-inner">
+              <p>Para que tu marca se vea tan buena como el negocio que representa.</p>
+              <ul class="ticks"><li>Logo e identidad</li><li>Color y tipografía</li><li>Guía de marca</li></ul>
+              <a class="more" href="https://kaivastudio.com/branding/">Ver branding <svg><use href="#i-arrow"/></svg></a>
+            </div></div></div>
+            <div class="progress"><i></i></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="p3" id="b3">Visibilidad en IA y SEO<span class="ic"><svg><use href="#i-chev"/></svg></span></button>
+            <div class="acc-panel" id="p3" role="region" aria-labelledby="b3"><div><div class="acc-inner">
+              <p>Medimos cómo te encuentra Google y cómo te describen ChatGPT, Claude y Gemini. Luego lo mejoramos.</p>
+              <ul class="ticks"><li>SEO técnico</li><li>AEO en asistentes de IA</li><li>Reportes y seguimiento</li></ul>
+              <a class="more" href="https://kaivastudio.com/diagnostico/">Ver el Diagnóstico <svg><use href="#i-arrow"/></svg></a>
+            </div></div></div>
+            <div class="progress"><i></i></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DOS FORMAS DE EMPEZAR ============ -->
+    <section class="block" aria-labelledby="paths-t">
+      <div class="head" data-reveal>
+        <h2 id="paths-t">Dos formas de empezar</h2>
+      </div>
+      <div class="paths">
+        <div class="note left" data-reveal>
+          <div class="pin"><i></i></div>
+          <h3>Web &amp; Branding</h3>
+          <p>Para lanzarte o relanzarte con una presencia que genere confianza desde el primer clic. Alcance por escrito antes de empezar.</p>
+        </div>
+        <div class="cards" id="cards" aria-hidden="true">
+          <div class="pcard pcard--black">
+            <div class="row"><span class="chip"></span><span class="brand">kaiva<i>.</i></span></div>
+            <div class="digits">SOFTWARE · A MEDIDA</div>
+            <div class="meta"><span><small>Para</small>Tu operación</span><span><small>Incluye</small>UX/UI + desarrollo</span></div>
+          </div>
+          <div class="pcard pcard--violet">
+            <div class="row"><span class="chip"></span><span class="brand">kaiva<i>.</i></span></div>
+            <div class="digits">WEB · BRANDING</div>
+            <div class="meta"><span><small>Para</small>Tu empresa</span><span><small>Entrega</small>3–5 semanas</span></div>
+          </div>
+        </div>
+        <div class="note right" data-reveal>
+          <div class="pin"><i></i></div>
+          <h3>Software a medida</h3>
+          <p>E-commerce, plataformas, dashboards e integraciones con los sistemas que ya usas, para cuando tu negocio necesita más que una web.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PANTALLAS ============ -->
+    <section class="block" aria-labelledby="dev-t">
+      <div class="head" data-reveal>
+        <h2 id="dev-t">Impecable en<br>cada pantalla</h2>
+        <p class="sub">Diseñamos primero para la laptop donde se decide la compra, y lo llevamos igual de bien al celular donde te descubren.</p>
+      </div>
+      <div class="devices">
+        <article class="dev" data-reveal>
+          <span class="badge"><svg><use href="#i-laptop"/></svg>Escritorio</span>
+          <h3>Donde se decide</h3>
+          <p>Comparar, leer con calma y escribirte. Aquí se cierra el negocio.</p>
+          <div class="laptop" aria-hidden="true">
+            <div class="lid"><span class="cam"></span>
+              <div class="screen"><div class="chrome"><i></i><i></i><i></i><span class="url">CS Travel · Empresas</span></div>
+                <div class="slides"><div class="slide on"><img src="img/trabajo-cstravel-empresas.webp" alt="" loading="lazy"></div></div>
+              </div>
+            </div>
+            <div class="base"></div>
+          </div>
+        </article>
+        <article class="dev" data-reveal>
+          <span class="badge"><svg><use href="#i-phone"/></svg>Móvil</span>
+          <h3>Donde te descubren</h3>
+          <p>Un enlace por WhatsApp, una búsqueda rápida. Tiene que cargar y convencer en segundos.</p>
+          <div class="phone" aria-hidden="true">
+            <span class="island"></span>
+            <div class="scr">
+              <div class="mobile-site">
+                <div class="ms-bar"><b>CS Travel</b><span>☰</span></div>
+                <div class="ms-img"><img src="img/trabajo-cstravel-medicos.webp" alt="" loading="lazy"></div>
+                <div class="ms-body">
+                  <span class="ms-k">Para médicos y clínicas</span>
+                  <span class="ms-h">El viaje de tu paciente ahora <mark>es un ingreso</mark> para ti</span>
+                  <span class="ms-p">Cada paciente que viaja para tratarse contigo es también una oportunidad de ingreso.</span>
+                  <span class="ms-btn">Quiero saber más</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ DIAGNÓSTICO ============ -->
+    <section class="block" id="diagnostico" aria-labelledby="diag-t">
+      <div class="head" data-reveal>
+        <h2 id="diag-t">Lo medimos todo,<br>mes a mes</h2>
+        <p class="sub">El Diagnóstico Digital le pone un número de 0 a 100 a tu presencia en internet. Con Mantenimiento Digital lo ves subir en tu propio panel.</p>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart pre" id="chart" role="img" aria-label="Ejemplo ilustrativo: el Índice de Salud Digital sube de 42 en junio a 91 en octubre, 49 puntos en cinco meses.">
+          <div class="gridline" style="bottom:50%"><span>50</span></div>
+          <div class="gridline" style="bottom:100%"><span>100</span></div>
+          <div class="bar-col" style="--h:42%;--d:0s"><span class="val">42</span><div class="bar" style="--g:0%"><span class="gain"></span><span class="base-part"></span></div></div>
+          <div class="bar-col" style="--h:58%;--d:.1s"><span class="val">58</span><div class="bar" style="--g:27.6%"><span class="gain"></span><span class="base-part"></span></div></div>
+          <div class="bar-col" style="--h:67%;--d:.2s"><span class="val">67</span><div class="bar" style="--g:13.4%"><span class="gain"></span><span class="base-part"></span></div></div>
+          <div class="bar-col" style="--h:79%;--d:.3s"><span class="val">79</span><div class="bar" style="--g:15.2%"><span class="gain"></span><span class="base-part"></span></div></div>
+          <div class="bar-col" style="--h:91%;--d:.4s"><span class="flag">+49 puntos</span><span class="val">91</span><div class="bar" style="--g:13.2%"><span class="gain"></span><span class="base-part"></span></div></div>
+        </div>
+        <div class="months" aria-hidden="true"><span>Jun</span><span>Jul</span><span>Ago</span><span>Sep</span><span>Oct</span></div>
+        <div class="legend"><span><i></i>Índice del mes anterior</span><span><i></i>Lo que sumó ese mes</span><span>Ejemplo ilustrativo</span></div>
+        <div class="pillar-chips" data-reveal>
+          <div><b>Visibilidad</b><small>¿Te encuentran Google y las IA?</small></div>
+          <div><b>Imagen</b><small>¿Te ves grande al compartirte?</small></div>
+          <div><b>Confianza</b><small>¿Inspiras seriedad?</small></div>
+          <div><b>Operación</b><small>¿Tu correo llega o cae en spam?</small></div>
+        </div>
+        <div class="chart-cta"><a class="btn btn-ink" href="https://kaivastudio.com/diagnostico/">Diagnostica tu web gratis <svg><use href="#i-arrow"/></svg></a></div>
+      </div>
+    </section>
+
+    <!-- ============ PLANES ============ -->
+    <section class="block" id="planes" aria-labelledby="plans-t">
+      <div class="head" data-reveal>
+        <h2 id="plans-t">Elige cómo trabajar<br>con nosotros</h2>
+        <p class="sub">No publicamos precios porque dependen del alcance. Cada proyecto parte de una llamada de 20 minutos y sale con un estimado real por escrito.</p>
+        <div class="toggle" role="group" aria-label="Tu situación">
+          <span id="tgA" class="act">Estoy empezando</span>
+          <button class="switch" id="switch" role="switch" aria-checked="false" aria-labelledby="tgB"></button>
+          <span id="tgB">Quiero crecer</span>
+        </div>
+      </div>
+      <div class="plans" id="plans">
+        <article class="plan" data-plan="mant" data-reveal>
+          <span class="tagline">Recomendado</span>
+          <div class="pname">Mantenimiento Digital</div>
+          <div class="price">Mensual<small>sin permanencia</small></div>
+          <p class="desc">Tu presencia digital cuidada mes a mes. Nosotros ejecutamos, tú te dedicas a tu negocio.</p>
+          <ul><li>Monitoreo continuo de salud digital</li><li>Seguridad y SSL al día</li><li>Ajustes mensuales de contenido</li><li>Panel con tu índice mes a mes</li></ul>
+          <a class="btn" href="#contacto">Agendar llamada</a>
+        </article>
+        <article class="plan featured" data-plan="web" data-reveal>
+          <span class="tagline">Recomendado</span>
+          <div class="pname">Web &amp; Branding</div>
+          <div class="price">Por proyecto<small>alcance por escrito antes de empezar</small></div>
+          <p class="desc">Para lanzarte o relanzarte con una presencia que genere confianza desde el primer clic.</p>
+          <ul><li>Identidad visual</li><li>Web rápida y responsiva</li><li>Estructura comercial real</li><li>SEO técnico inicial</li><li>Revisiones hasta aprobación</li></ul>
+          <a class="btn" href="#contacto">Agendar llamada</a>
+        </article>
+        <article class="plan" data-plan="soft" data-reveal>
+          <span class="tagline">Recomendado</span>
+          <div class="pname">Software a medida</div>
+          <div class="price">A medida<small>cotización tras el análisis</small></div>
+          <p class="desc">E-commerce, plataformas, dashboards e integraciones para cuando necesitas más que una web.</p>
+          <ul><li>Análisis de requerimientos</li><li>Diseño UX/UI</li><li>Desarrollo completo</li><li>Integración con tus sistemas</li></ul>
+          <a class="btn" href="#contacto">Agendar llamada</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ CIERRE ============ -->
+  <footer class="final" id="contacto">
+    <div class="final-core">
+      <div class="sticky pre" id="sticky">Te escribimos hoy o mañana.<br>— Kaiva</div>
+      <h2>Hablemos de <b>tu empresa</b></h2>
+      <form class="mail-form" id="mailForm" novalidate>
+        <label class="sr-only" for="email">Tu correo de trabajo</label>
+        <input id="email" name="email" type="email" placeholder="Tu correo de trabajo" autocomplete="email" required>
+        <button type="submit">Agendar llamada</button>
+      </form>
+      <p class="form-note" id="formNote" aria-live="polite">Te contestamos el mismo día o el siguiente, de lunes a viernes.</p>
+      <div class="contacts">
+        <a href="mailto:info@kaivastudio.com">info@kaivastudio.com</a>
+        <a href="https://wa.me/573024137374" target="_blank" rel="noopener">WhatsApp +57 302 413 7374</a>
+      </div>
+    </div>
+
+    <div class="foot">
+      <a class="logo" href="#inicio"><img src="img/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125" loading="lazy"></a>
+      <ul>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#diagnostico">Diagnóstico</a></li>
+        <li><a href="#planes">Planes</a></li>
+        <li><a href="https://kaivastudio.com/blog/">Blog</a></li>
+      </ul>
+      <div class="soc">
+        <a class="circle light" href="https://www.instagram.com/kaivastudio/" target="_blank" rel="noopener" aria-label="Instagram"><svg><use href="#i-ig"/></svg></a>
+        <a class="circle light" href="https://www.linkedin.com/in/kaiva-studio-a6a15340b/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg><use href="#i-in"/></svg></a>
+        <a class="circle light" href="https://wa.me/573024137374" target="_blank" rel="noopener" aria-label="WhatsApp"><svg><use href="#i-wa"/></svg></a>
+        <a class="circle light" href="mailto:info@kaivastudio.com" aria-label="Correo"><svg><use href="#i-mail"/></svg></a>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Kaiva Studio · Barranquilla, Colombia</span>
+      <span><a href="https://kaivastudio.com/privacidad/">Privacidad</a> · <a href="https://kaivastudio.com/terminos/">Términos</a></span>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  root.classList.add('js');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Proyectos en la laptop del hero */
+  var slides=[].slice.call(document.querySelectorAll('#heroSlides .slide'));
+  var url=document.getElementById('heroUrl');
+  var si=0;
+  if(!reduce&&slides.length>1){
+    setInterval(function(){
+      slides[si].classList.remove('on');
+      si=(si+1)%slides.length;
+      slides[si].classList.add('on');
+      url.textContent=slides[si].dataset.label;
+    },4200);
+  }
+
+  /* Barra flotante */
+  var fn=document.getElementById('floatNav');
+  var hero=document.getElementById('inicio');
+  function onScrollNav(){
+    var b=hero.getBoundingClientRect().bottom;
+    fn.classList.toggle('show',b<120);
+  }
+
+  /* Manifiesto: se enciende palabra por palabra */
+  var man=document.getElementById('manifesto');
+  var words=man.textContent.trim().split(/\s+/);
+  man.innerHTML=words.map(function(w){return '<span class="w">'+w+'</span>'}).join(' ');
+  var ws=man.querySelectorAll('.w');
+  function onScrollMan(){
+    var r=man.getBoundingClientRect(),vh=window.innerHeight;
+    var p=(vh*0.85-r.top)/(r.height+vh*0.35);
+    p=Math.max(0,Math.min(1,p));
+    var n=Math.round(p*ws.length);
+    for(var i=0;i<ws.length;i++) ws[i].classList.toggle('lit',i<n);
+  }
+
+  /* Tarjetas: giran un poco con el scroll */
+  var cards=document.getElementById('cards');
+  var black=cards.querySelector('.pcard--black'),violet=cards.querySelector('.pcard--violet');
+  function onScrollCards(){
+    if(reduce)return;
+    var r=cards.getBoundingClientRect(),vh=window.innerHeight;
+    var t=Math.max(-1,Math.min(1,(r.top+r.height/2-vh/2)/(vh/2)));
+    black.style.transform='translate(-40%,'+(-64+t*6)+'%) rotate('+(12+t*6)+'deg)';
+    violet.style.transform='translate(-60%,'+(-36-t*6)+'%) rotate('+(-12-t*6)+'deg)';
+  }
+
+  var ticking=false;
+  function onScroll(){
+    if(ticking)return;ticking=true;
+    requestAnimationFrame(function(){onScrollNav();onScrollMan();onScrollCards();ticking=false;});
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+  onScroll();
+
+  /* Apariciones: solo lo que todavía no está en pantalla espera al scroll */
+  var vh=window.innerHeight;
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting)return;
+      e.target.classList.remove('pre');
+      if(e.target.id==='chart'||e.target.classList.contains('studio'))countUp(e.target);
+      io.unobserve(e.target);
+    });
+  },{threshold:.18}):null;
+  function watch(el){
+    if(reduce||!io){el.classList.remove('pre');return;}
+    if(el.getBoundingClientRect().top>vh*0.92){el.classList.add('pre');io.observe(el);}
+    else el.classList.remove('pre');
+  }
+  document.querySelectorAll('[data-reveal]').forEach(watch);
+  watch(document.getElementById('chart'));
+  watch(document.getElementById('sticky'));
+
+  /* Conteo de cifras */
+  function countUp(scope){
+    if(reduce)return;
+    scope.querySelectorAll('[data-count]').forEach(function(el){
+      var to=+el.dataset.count,suf=el.dataset.suffix||'',t0=null;
+      if(!to)return;
+      function step(ts){
+        if(!t0)t0=ts;
+        var k=Math.min(1,(ts-t0)/1400),e=1-Math.pow(1-k,3);
+        el.textContent=Math.round(to*e)+suf;
+        if(k<1)requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  /* Acordeón de servicios + pantalla de la laptop */
+  var items=[].slice.call(document.querySelectorAll('#acc .acc-item'));
+  var panes=[].slice.call(document.querySelectorAll('#featScreen .pane'));
+  var cur=0,auto=!reduce,timer=null;
+  function openItem(i,byUser){
+    items.forEach(function(it,j){
+      var on=j===i;
+      it.classList.toggle('open',on);
+      it.classList.remove('auto');
+      it.querySelector('.acc-btn').setAttribute('aria-expanded',on);
+      panes[j].classList.toggle('on',on);
+    });
+    cur=i;
+    if(byUser){auto=false;clearTimeout(timer);}
+    if(auto){
+      void items[i].offsetWidth;
+      items[i].classList.add('auto');
+      clearTimeout(timer);
+      timer=setTimeout(function(){openItem((cur+1)%items.length)},7000);
+    }
+  }
+  items.forEach(function(it,i){
+    it.querySelector('.acc-btn').addEventListener('click',function(){openItem(i,true)});
+  });
+  var acc=document.getElementById('acc');
+  if(auto&&io){
+    var accIo=new IntersectionObserver(function(es){
+      if(es[0].isIntersecting){openItem(cur);accIo.disconnect();}
+    },{threshold:.4});
+    accIo.observe(acc);
+    items[0].classList.remove('auto');
+  } else items[0].classList.remove('auto');
+
+  /* Planes: el recomendado depende de tu situación */
+  var sw=document.getElementById('switch'),A=document.getElementById('tgA'),B=document.getElementById('tgB');
+  var plans=document.querySelectorAll('#plans .plan');
+  function setGrow(g){
+    sw.setAttribute('aria-checked',g);
+    A.classList.toggle('act',!g);B.classList.toggle('act',g);
+    plans.forEach(function(p){p.classList.toggle('featured',p.dataset.plan===(g?'soft':'web'))});
+  }
+  sw.addEventListener('click',function(){setGrow(sw.getAttribute('aria-checked')!=='true')});
+  A.addEventListener('click',function(){setGrow(false)});
+  B.addEventListener('click',function(){setGrow(true)});
+
+  /* Correo: abre WhatsApp con el mensaje listo */
+  var form=document.getElementById('mailForm'),email=document.getElementById('email'),note=document.getElementById('formNote');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=email.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){
+      note.textContent='Escribe un correo válido, por ejemplo nombre@tuempresa.com.';
+      email.focus();return;
+    }
+    var msg='Hola Kaiva, quiero agendar una llamada. Mi correo es '+v;
+    note.innerHTML='Abrimos WhatsApp con tu mensaje listo. Si no se abre, escríbenos a info@kaivastudio.com.';
+    window.open('https://wa.me/573024137374?text='+encodeURIComponent(msg),'_blank','noopener');
+  });
+})();
+</script>
+</body>
+</html>
