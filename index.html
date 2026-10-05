@@ -701,8 +701,9 @@ h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s
 .app.bounce{animation:bounce .6s var(--ease)}
 @keyframes bounce{30%{transform:translateY(-1.3cqw)}60%{transform:translateY(0)}80%{transform:translateY(-.4cqw)}}
 .dock .sep{width:1px;align-self:stretch;margin:.3cqw .3cqw;background:rgba(0,0,0,.18)}
-.cursor{position:absolute;left:62%;top:58%;width:1.9cqw;z-index:10;transition:left .8s var(--ease),top .8s var(--ease);pointer-events:none;filter:drop-shadow(0 .2cqw .3cqw rgba(0,0,0,.4))}
-.cursor svg{width:100%;display:block;transition:transform .15s}
+.cursor{position:absolute;left:62%;top:58%;width:1.9cqw;margin:-.16cqw 0 0 -.32cqw;z-index:10;transition:left .8s var(--ease),top .8s var(--ease);pointer-events:none;filter:drop-shadow(0 .2cqw .3cqw rgba(0,0,0,.4))}
+/* la punta de la flecha (4,2 de 24) queda justo en el punto al que apunta el cursor */
+.cursor svg{width:100%;display:block;transform-origin:17% 8%;transition:transform .15s}
 .cursor.click svg{transform:scale(.8)}
 
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;list-style:none;margin:32px auto 0;padding:0;max-width:780px}
@@ -1805,14 +1806,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   }
   function moveCursor(el){
     var s=scr.getBoundingClientRect(),r=el.getBoundingClientRect();
-    cursor.style.left=((r.left+r.width*.55-s.left)/s.width*100)+'%';
+    cursor.style.left=((r.left+r.width*.5-s.left)/s.width*100)+'%';
     cursor.style.top=((r.top+r.height*.5-s.top)/s.height*100)+'%';
-  }
-  // el cursor apunta al centro de varios elementos a la vez (un grupo del lienzo)
-  function moveCursorTo(els){
-    var l=1e9,t=1e9,r=-1e9,b=-1e9;
-    els.forEach(function(e){var q=e.getBoundingClientRect();l=Math.min(l,q.left);t=Math.min(t,q.top);r=Math.max(r,q.right);b=Math.max(b,q.bottom)});
-    moveCursor({getBoundingClientRect:function(){return {left:l,top:t,width:r-l,height:b-t}}});
   }
   // el recuadro de selección enmarca los elementos elegidos (medidas sin la escala de la animación)
   function selectEls(w,els){
@@ -1843,7 +1838,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       layers.forEach(function(x){x.classList.remove('on')});
       for(var g=0;g<layers.length;g++){
         var els=[].slice.call(w.querySelectorAll('.el[data-g="'+g+'"]'));
-        moveCursorTo(els);await sleep(560);if(id!==run)return false;
+        // va al centro del primer elemento del grupo y espera a llegar (el cursor tarda .8 s)
+        moveCursor(els[0]);await sleep(900);if(id!==run)return false;
         await clickCursor();
         els.forEach(function(e){e.classList.add('in')});
         layers.forEach(function(x,j){x.classList.toggle('on',j===g)});
@@ -1852,11 +1848,11 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       }
       // elige el botón y lo pinta de morado desde «Relleno»
       var b1=w.querySelector('.el.b1');
-      moveCursor(b1);await sleep(650);if(id!==run)return false;
+      moveCursor(b1);await sleep(900);if(id!==run)return false;
       await clickCursor();
       layers.forEach(function(x,j){x.classList.toggle('on',j===3)});selectEls(w,[b1]);w.classList.add('pick');
       await sleep(500);
-      moveCursor(w.querySelector('.ds-props .ds-sw'));await sleep(800);if(id!==run)return false;
+      moveCursor(w.querySelector('.ds-props .ds-sw'));await sleep(900);if(id!==run)return false;
       await clickCursor();
       w.classList.add('paint');await sleep(1400);
     }else if(i===1){
