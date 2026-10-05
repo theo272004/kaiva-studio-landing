@@ -705,8 +705,9 @@ h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s
 @keyframes bounce{30%{transform:translateY(-1.3cqw)}60%{transform:translateY(0)}80%{transform:translateY(-.4cqw)}}
 .dock .sep{width:1px;align-self:stretch;margin:.3cqw .3cqw;background:rgba(0,0,0,.18)}
 .cursor{position:absolute;left:62%;top:58%;width:1.9cqw;margin:-.16cqw 0 0 -.32cqw;z-index:10;transition:left .8s var(--ease),top .8s var(--ease);pointer-events:none;filter:drop-shadow(0 .2cqw .3cqw rgba(0,0,0,.4))}
-/* la punta de la flecha (4,2 de 24) queda justo en el punto al que apunta el cursor */
-.cursor svg{width:100%;display:block;transform-origin:17% 8%;transition:transform .15s}
+/* la punta de la flecha (4,2 de 24) queda justo en el punto al que apunta el cursor.
+   El SVG necesita alto propio: sin él, el navegador le da 150 px y dibuja la flecha centrada, muy por debajo */
+.cursor svg{width:100%;height:auto;aspect-ratio:1/1;display:block;transform-origin:17% 8%;transition:transform .15s}
 .cursor.click svg{transform:scale(.8)}
 
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;list-style:none;margin:32px auto 0;padding:0;max-width:780px}
