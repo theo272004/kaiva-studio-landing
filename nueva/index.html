@@ -552,6 +552,20 @@ section{scroll-margin-top:90px}
 .legal a{transition:opacity .25s}
 .legal a:hover{opacity:.7}
 
+/* ---------- cursor propio: avión de papel dibujado a mano (solo con mouse) ---------- */
+html.has-cursor,html.has-cursor *{cursor:none!important}
+html.has-cursor input,html.has-cursor textarea{cursor:text!important}
+.cur-plane{position:fixed;left:0;top:0;z-index:1000;pointer-events:none;opacity:0;transition:opacity .25s}
+.cur-on .cur-plane{opacity:1}
+.cur-on .cur-plane.gone{opacity:0;transition:opacity .08s}
+.cur-plane svg{display:block;width:38px;height:29px;margin:-2px 0 0 -2px;overflow:visible;transform-origin:2px 2px;transition:transform .35s var(--ease);filter:drop-shadow(0 3px 3px rgba(8,8,8,.28))}
+.cur-plane.hover svg{transform:rotate(-10deg) scale(1.1)}
+.cur-plane.down svg{transform:scale(.86)}
+.cur-plane.hover.down svg{transform:rotate(-10deg) scale(.96)}
+.cur-burst{position:fixed;left:0;top:0;z-index:999;pointer-events:none;width:64px;height:64px;margin:-46px 0 0 -32px}
+.cur-burst svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 2px 2px rgba(8,8,8,.25));transform-origin:32px 46px;animation:ray .5s var(--ease) forwards}
+@keyframes ray{0%{opacity:0;transform:scale(.4)}25%{opacity:1}65%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.12)}}
+
 /* ---------- aparición ---------- */
 .js [data-reveal]{transition:opacity .9s var(--ease),transform 1s var(--ease)}
 .js [data-reveal].pre{opacity:0;transform:translateY(32px)}
@@ -1261,6 +1275,37 @@ section{scroll-margin-top:90px}
     accBox.querySelectorAll('.acc-item').forEach(function(x){x.classList.toggle('open',x===open)});
     accBox.classList.remove('measure');
     accBox.style.minHeight=max+'px';
+  }
+
+  /* ---------- Cursor propio: avión de papel dibujado a mano + destello al hacer clic ---------- */
+  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    var plane=document.createElement('div');plane.className='cur-plane';
+    plane.innerHTML='<svg viewBox="0 0 40 30"><defs>'+
+      '<linearGradient id="curWing" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E2E2E8"/></linearGradient>'+
+      '<linearGradient id="curFold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D6D6DD"/><stop offset="1" stop-color="#A4A4AF"/></linearGradient>'+
+      '<linearGradient id="curRay" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#BABAC4"/></linearGradient></defs>'+
+      '<path fill="url(#curWing)" stroke="rgba(8,8,8,.5)" stroke-width="1.1" stroke-linejoin="round" d="M2 2L38 3L35 8.5L34.6 21L18.6 28.4Z"/>'+
+      '<path fill="url(#curFold)" d="M27.6 13.4L31.6 9.6L33.9 17.6L34.6 21Z"/>'+
+      '<path fill="none" stroke="rgba(8,8,8,.32)" stroke-width=".9" stroke-linejoin="round" d="M8.6 5.1L31.6 9.6L33.9 17.6M13.2 8.7L27.6 13.4L34.6 21"/>'+
+      '<path fill="none" stroke="#fff" stroke-width=".8" stroke-linecap="round" opacity=".9" d="M4.5 3.4L34.5 4.2"/></svg>';
+    document.body.appendChild(plane);
+    root.classList.add('has-cursor');
+    var hoverSel='a,button,.ci,.acc-btn,.mail-form,.app,[role="switch"],.toggle span,.mw-art,.mw-row div,.sw-kpi,.sw-row,.br-card,.br-icon,.br-post,.br-logo';
+    var ray='M0 -7L-4.6 -23Q0 -24.8 4.6 -23Z';
+    function burst(x,y){
+      var d=document.createElement('div');d.className='cur-burst';
+      d.style.transform='translate3d('+x+'px,'+y+'px,0)';
+      d.innerHTML='<svg viewBox="0 0 64 64">'+[-68,-24,14,52].map(function(a){return '<path fill="url(#curRay)" stroke="rgba(8,8,8,.42)" stroke-width="1" stroke-linejoin="round" transform="translate(32 46) rotate('+a+')" d="'+ray+'"/>'}).join('')+'</svg>';
+      document.body.appendChild(d);setTimeout(function(){d.remove()},700);
+    }
+    document.addEventListener('mousemove',function(e){
+      plane.style.transform='translate3d('+e.clientX+'px,'+e.clientY+'px,0)';
+      root.classList.add('cur-on');
+      plane.classList.toggle('hover',!!(e.target.closest&&e.target.closest(hoverSel)));
+    });
+    document.addEventListener('mouseout',function(e){if(!e.relatedTarget)root.classList.remove('cur-on')});
+    var goneT=null;
+    document.addEventListener('mousedown',function(e){plane.classList.add('gone');if(!reduce)burst(e.clientX,e.clientY);clearTimeout(goneT);goneT=setTimeout(function(){plane.classList.remove('gone')},450)});
   }
 
   /* ---------- Acordeón de servicios + pantalla de la laptop ---------- */
