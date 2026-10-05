@@ -552,15 +552,18 @@ section{scroll-margin-top:90px}
 .legal a{transition:opacity .25s}
 .legal a:hover{opacity:.7}
 
-/* ---------- cursor propio: avión de papel en pixel art (solo con mouse) ---------- */
+/* ---------- cursor propio: avión de papel dibujado a mano (solo con mouse) ---------- */
 html.has-cursor,html.has-cursor *{cursor:none!important}
 html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .cur-plane{position:fixed;left:0;top:0;z-index:1000;pointer-events:none;opacity:0;transition:opacity .25s}
 .cur-on .cur-plane{opacity:1}
-.cur-plane canvas{display:block;width:40px;height:30px;image-rendering:pixelated;transform-origin:0 0;transition:transform .3s var(--ease);filter:drop-shadow(1px 2px 0 rgba(8,8,8,.18))}
-.cur-plane.hover canvas{transform:rotate(-8deg) scale(1.12)}
-.cur-plane.down canvas{transform:scale(.88)}
-.cur-plane.hover.down canvas{transform:rotate(-8deg) scale(.98)}
+.cur-plane svg{display:block;width:38px;height:29px;margin:-2px 0 0 -2px;overflow:visible;transform-origin:2px 2px;transition:transform .35s var(--ease);filter:drop-shadow(1px 2px 1px rgba(8,8,8,.18))}
+.cur-plane.hover svg{transform:rotate(-10deg) scale(1.1)}
+.cur-plane.down svg{transform:scale(.86)}
+.cur-plane.hover.down svg{transform:rotate(-10deg) scale(.96)}
+.cur-burst{position:fixed;left:0;top:0;z-index:999;pointer-events:none;width:64px;height:64px;margin:-46px 0 0 -32px}
+.cur-burst svg{width:100%;height:100%;overflow:visible;transform-origin:32px 46px;animation:ray .5s var(--ease) forwards}
+@keyframes ray{0%{opacity:0;transform:scale(.4)}25%{opacity:1}65%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.12)}}
 
 /* ---------- aparición ---------- */
 .js [data-reveal]{transition:opacity .9s var(--ease),transform 1s var(--ease)}
@@ -1270,26 +1273,28 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     accBox.style.minHeight=max+'px';
   }
 
-  /* ---------- Cursor propio: avión de papel en pixel art ---------- */
+  /* ---------- Cursor propio: avión de papel dibujado a mano + destello al hacer clic ---------- */
   if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
-    var cv=document.createElement('canvas');cv.width=20;cv.height=15;
-    var cx=cv.getContext('2d');
-    cx.fillStyle='#fff';cx.beginPath();cx.moveTo(0,0);cx.lineTo(20,0);cx.lineTo(18,3);cx.lineTo(18,12);cx.lineTo(10,15);cx.closePath();cx.fill();
-    function px(x,y,c){cx.fillStyle=c||'#080808';cx.fillRect(x,y,1,1)}
-    function line(x0,y0,x1,y1,c){var dx=Math.abs(x1-x0),sx=x0<x1?1:-1,dy=-Math.abs(y1-y0),sy=y0<y1?1:-1,e=dx+dy;for(;;){px(x0,y0,c);if(x0===x1&&y0===y1)break;var e2=2*e;if(e2>=dy){e+=dy;x0+=sx}if(e2<=dx){e+=dx;y0+=sy}}}
-    line(0,0,19,0);line(0,1,5,1);line(0,1,9,14);line(19,0,17,3);line(17,3,17,10);line(13,11,9,14);
-    cx.fillStyle='#080808';cx.fillRect(13,9,5,3);px(15,10,'#8C8C93');px(16,10,'#8C8C93');
-    line(5,2,16,4);line(7,3,14,5);line(14,5,16,8);
-    var plane=document.createElement('div');plane.className='cur-plane';plane.appendChild(cv);document.body.appendChild(plane);
+    var ink='fill="#FFFFFF" stroke="#080808" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round"';
+    var plane=document.createElement('div');plane.className='cur-plane';
+    plane.innerHTML='<svg viewBox="0 0 40 30"><path '+ink+' d="M2.4 2.2Q20.2 1.2 37.6 2.9Q36 5.6 34.9 8.4Q34.1 14.6 34.6 20.8Q26.5 24.1 18.6 28.2Q10.9 15.4 2.4 2.2Z"/><path '+ink+' fill="none" d="M8.6 5.1Q20.6 7.2 31.6 9.6L33.9 17.6M13.2 8.7Q21.1 10.5 27.6 13.4L34.3 20.4"/></svg>';
+    document.body.appendChild(plane);
     root.classList.add('has-cursor');
     var hoverSel='a,button,.ci,.acc-btn,.mail-form,.app,[role="switch"],.toggle span,.mw-art,.mw-row div,.sw-kpi,.sw-row,.br-card,.br-icon,.br-post,.br-logo';
+    var ray='M0 -7Q-1.8 -15 -5 -23Q0 -25 5 -23Q1.8 -15 0 -7Z';
+    function burst(x,y){
+      var d=document.createElement('div');d.className='cur-burst';
+      d.style.transform='translate3d('+x+'px,'+y+'px,0)';
+      d.innerHTML='<svg viewBox="0 0 64 64">'+[-68,-24,14,52].map(function(a){return '<path '+ink+' transform="translate(32 46) rotate('+a+')" d="'+ray+'"/>'}).join('')+'</svg>';
+      document.body.appendChild(d);setTimeout(function(){d.remove()},700);
+    }
     document.addEventListener('mousemove',function(e){
       plane.style.transform='translate3d('+e.clientX+'px,'+e.clientY+'px,0)';
       root.classList.add('cur-on');
       plane.classList.toggle('hover',!!(e.target.closest&&e.target.closest(hoverSel)));
     });
     document.addEventListener('mouseout',function(e){if(!e.relatedTarget)root.classList.remove('cur-on')});
-    document.addEventListener('mousedown',function(){plane.classList.add('down')});
+    document.addEventListener('mousedown',function(e){plane.classList.add('down');if(!reduce)burst(e.clientX,e.clientY)});
     document.addEventListener('mouseup',function(){plane.classList.remove('down')});
   }
   lockAcc();
