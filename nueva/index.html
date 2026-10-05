@@ -552,20 +552,6 @@ section{scroll-margin-top:90px}
 .legal a{transition:opacity .25s}
 .legal a:hover{opacity:.7}
 
-/* ---------- cursor propio: avión de papel dibujado a mano (solo con mouse) ---------- */
-html.has-cursor,html.has-cursor *{cursor:none!important}
-html.has-cursor input,html.has-cursor textarea{cursor:text!important}
-.cur-plane{position:fixed;left:0;top:0;z-index:1000;pointer-events:none;opacity:0;transition:opacity .25s}
-.cur-on .cur-plane{opacity:1}
-.cur-on .cur-plane.gone{opacity:0;transition:opacity .08s}
-.cur-plane svg{display:block;width:38px;height:29px;margin:-2px 0 0 -2px;overflow:visible;transform-origin:2px 2px;transition:transform .35s var(--ease);filter:drop-shadow(0 3px 3px rgba(8,8,8,.28))}
-.cur-plane.hover svg{transform:rotate(-10deg) scale(1.1)}
-.cur-plane.down svg{transform:scale(.86)}
-.cur-plane.hover.down svg{transform:rotate(-10deg) scale(.96)}
-.cur-burst{position:fixed;left:0;top:0;z-index:999;pointer-events:none;width:64px;height:64px;margin:-46px 0 0 -32px}
-.cur-burst svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 2px 2px rgba(8,8,8,.25));transform-origin:32px 46px;animation:ray .5s var(--ease) forwards}
-@keyframes ray{0%{opacity:0;transform:scale(.4)}25%{opacity:1}65%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.12)}}
-
 /* ---------- aparición ---------- */
 .js [data-reveal]{transition:opacity .9s var(--ease),transform 1s var(--ease)}
 .js [data-reveal].pre{opacity:0;transform:translateY(32px)}
@@ -660,7 +646,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 
     <div class="hero-copy">
       <p class="pill"><b>Barranquilla</b> <span class="long">Trabajamos con toda Colombia y Latinoamérica</span><span class="short">Colombia y LATAM</span></p>
-      <h1><span class="dim">Tu empresa,</span> en su mejor versión digital</h1>
+      <h1><span class="dim">Páginas web</span> y software a medida</h1>
       <p class="lede">Diseño web, software a medida y diseño de marca para empresas que quieren verse tan bien como trabajan. Sin plantillas.</p>
       <div class="actions">
         <a class="btn btn-white" href="#contacto">Cuéntanos tu proyecto</a>
@@ -1277,36 +1263,111 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     accBox.style.minHeight=max+'px';
   }
 
-  /* ---------- Cursor propio: avión de papel dibujado a mano + destello al hacer clic ---------- */
-  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
-    var plane=document.createElement('div');plane.className='cur-plane';
-    plane.innerHTML='<svg viewBox="0 0 40 30"><defs>'+
-      '<linearGradient id="curWing" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E2E2E8"/></linearGradient>'+
-      '<linearGradient id="curFold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D6D6DD"/><stop offset="1" stop-color="#A4A4AF"/></linearGradient>'+
-      '<linearGradient id="curRay" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#BABAC4"/></linearGradient></defs>'+
-      '<path fill="url(#curWing)" stroke="rgba(8,8,8,.5)" stroke-width="1.1" stroke-linejoin="round" d="M2 2L38 3L35 8.5L34.6 21L18.6 28.4Z"/>'+
-      '<path fill="url(#curFold)" d="M27.6 13.4L31.6 9.6L33.9 17.6L34.6 21Z"/>'+
-      '<path fill="none" stroke="rgba(8,8,8,.32)" stroke-width=".9" stroke-linejoin="round" d="M8.6 5.1L31.6 9.6L33.9 17.6M13.2 8.7L27.6 13.4L34.6 21"/>'+
-      '<path fill="none" stroke="#fff" stroke-width=".8" stroke-linecap="round" opacity=".9" d="M4.5 3.4L34.5 4.2"/></svg>';
-    document.body.appendChild(plane);
-    root.classList.add('has-cursor');
-    var hoverSel='a,button,.ci,.acc-btn,.mail-form,.app,[role="switch"],.toggle span,.mw-art,.mw-row div,.sw-kpi,.sw-row,.br-card,.br-icon,.br-post,.br-logo';
-    var ray='M0 -7L-4.6 -23Q0 -24.8 4.6 -23Z';
-    function burst(x,y){
-      var d=document.createElement('div');d.className='cur-burst';
-      d.style.transform='translate3d('+x+'px,'+y+'px,0)';
-      d.innerHTML='<svg viewBox="0 0 64 64">'+[-68,-24,14,52].map(function(a){return '<path fill="url(#curRay)" stroke="rgba(8,8,8,.42)" stroke-width="1" stroke-linejoin="round" transform="translate(32 46) rotate('+a+')" d="'+ray+'"/>'}).join('')+'</svg>';
-      document.body.appendChild(d);setTimeout(function(){d.remove()},700);
-    }
-    document.addEventListener('mousemove',function(e){
-      plane.style.transform='translate3d('+e.clientX+'px,'+e.clientY+'px,0)';
-      root.classList.add('cur-on');
-      plane.classList.toggle('hover',!!(e.target.closest&&e.target.closest(hoverSel)));
+  /* ---------- Acordeón de servicios + pantalla de la laptop ---------- */
+  var accItems=[].slice.call(document.querySelectorAll('#acc .acc-item'));
+  var panes=[].slice.call(document.querySelectorAll('#featScreen .pane'));
+  var cur=0,auto=!reduce,accTimer=null;
+  function openItem(i,byUser){
+    accItems.forEach(function(it,j){
+      var on=j===i;
+      it.classList.toggle('open',on);it.classList.remove('auto');
+      it.querySelector('.acc-btn').setAttribute('aria-expanded',on);
+      panes[j].classList.toggle('on',on);
     });
-    document.addEventListener('mouseout',function(e){if(!e.relatedTarget)root.classList.remove('cur-on')});
-    var goneT=null;
-    document.addEventListener('mousedown',function(e){plane.classList.add('gone');if(!reduce)burst(e.clientX,e.clientY);clearTimeout(goneT);goneT=setTimeout(function(){plane.classList.remove('gone')},450)});
+    cur=i;
+    if(byUser){auto=false;clearTimeout(accTimer)}
+    if(auto){void accItems[i].offsetWidth;accItems[i].classList.add('auto');clearTimeout(accTimer);accTimer=setTimeout(function(){openItem((cur+1)%accItems.length)},7000)}
   }
+  accItems.forEach(function(it,i){it.querySelector('.acc-btn').addEventListener('click',function(){openItem(i,true)})});
+  if(auto&&io){
+    var accIo=new IntersectionObserver(function(es){if(es[0].isIntersecting){openItem(cur);accIo.disconnect()}},{threshold:.4});
+    accIo.observe(document.getElementById('acc'));
+  }
+
+  /* ---------- Proceso: el Mac abre diseño, código y navegador ---------- */
+  var disp=document.getElementById('display'),scr=disp.querySelector('.sd-screen');
+  var wins=[].slice.call(disp.querySelectorAll('.win'));
+  var apps=[0,1,2].map(function(i){return disp.querySelector('.app[data-step="'+i+'"]')});
+  var stepBtns=[].slice.call(document.querySelectorAll('#steps button'));
+  var cursor=document.getElementById('cursor'),mbApp=document.getElementById('mbApp');
+  var names=['Diseño','Código','Navegador'];
+  var lines=[].slice.call(document.getElementById('codeBody').children);
+  var layers=[].slice.call(disp.querySelectorAll('.ds-layer'));
+  var run=0;
+  var now=new Date(),mon=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'],dia=['dom','lun','mar','mié','jue','vie','sáb'];
+  document.getElementById('calMon').textContent=mon[now.getMonth()];
+  document.getElementById('calDay').textContent=now.getDate();
+  document.getElementById('mbClock').textContent=dia[now.getDay()]+' '+now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');
+
+  function resetWin(w){w.classList.remove('run','build','pick','paint','done','built','published');lines.forEach(function(l){l.style.animation=''})}
+  function moveCursor(el){
+    var s=scr.getBoundingClientRect(),r=el.getBoundingClientRect();
+    cursor.style.left=((r.left+r.width*.55-s.left)/s.width*100)+'%';
+    cursor.style.top=((r.top+r.height*.5-s.top)/s.height*100)+'%';
+  }
+  function markStep(i){stepBtns.forEach(function(b,j){b.classList.toggle('on',j===i)});mbApp.textContent=names[i]}
+  function openWin(i){
+    wins.forEach(function(w,j){w.classList.toggle('front',j===i);w.classList.toggle('back',j<i&&w.classList.contains('open'))});
+    apps[i].classList.add('live');
+    apps[i].classList.remove('bounce');void apps[i].offsetWidth;apps[i].classList.add('bounce');
+    resetWin(wins[i]);
+    wins[i].classList.add('open');
+    markStep(i);
+  }
+  async function playStep(i,id){
+    moveCursor(apps[i]);await sleep(850);if(id!==run)return false;
+    cursor.classList.add('click');await sleep(160);cursor.classList.remove('click');
+    openWin(i);await sleep(700);if(id!==run)return false;
+    var w=wins[i];
+    if(i===0){
+      w.classList.add('run');void w.offsetWidth;
+      moveCursor(w.querySelector('.frame'));
+      w.classList.add('build');
+      for(var l=0;l<layers.length;l++){layers.forEach(function(x,j){x.classList.toggle('on',j===l)});await sleep(260);if(id!==run)return false}
+      await sleep(500);
+      moveCursor(w.querySelector('.el.b1'));await sleep(800);
+      w.classList.add('pick');layers.forEach(function(x,j){x.classList.toggle('on',j===3)});await sleep(600);
+      moveCursor(w.querySelector('.ds-props .sw'));await sleep(800);
+      cursor.classList.add('click');await sleep(160);cursor.classList.remove('click');
+      w.classList.add('paint');await sleep(1400);
+    }else if(i===1){
+      moveCursor(w.querySelector('.term'));
+      var t=0;
+      lines.forEach(function(l){var n=l.textContent.length+1;l.style.setProperty('--n',n);var d=n*26;l.style.animation='typeln '+d+'ms steps('+n+') '+t+'ms forwards';t+=d+110});
+      await sleep(t+300);if(id!==run)return false;
+      w.classList.add('built');await sleep(1500);
+    }else{
+      moveCursor(w.querySelector('.web-chrome .u'));
+      w.classList.add('run');await sleep(1900);if(id!==run)return false;
+      w.classList.add('published');moveCursor(w.querySelector('.toast'));await sleep(3200);
+    }
+    return id===run;
+  }
+  async function sequence(from){
+    var id=++run;
+    wins.forEach(function(w,j){if(j>=from){w.classList.remove('open','front','back');resetWin(w)}});
+    apps.forEach(function(a,j){if(j>=from)a.classList.remove('live')});
+    await sleep(from===0?500:200);
+    for(var i=from;i<3;i++){if(!(await playStep(i,id)))return}
+    await sleep(1200);if(id!==run)return;
+    wins.forEach(function(w){w.classList.remove('open','front','back')});
+    apps.forEach(function(a){a.classList.remove('live')});
+    await sleep(900);if(id!==run)return;
+    wins.forEach(resetWin);
+    sequence(0);
+  }
+  function jumpTo(i){
+    if(reduce){wins.forEach(function(w,j){w.classList.toggle('open',j<=i);w.classList.toggle('front',j===i);w.classList.toggle('back',j<i);w.classList.add('done','built','published')});markStep(i);return}
+    sequence(i);
+  }
+  stepBtns.forEach(function(b){b.addEventListener('click',function(){jumpTo(+b.dataset.step)})});
+  apps.forEach(function(a,i){a.addEventListener('click',function(){jumpTo(i)})});
+  if(!reduce&&io){
+    var started=false;
+    var dIo=new IntersectionObserver(function(es){if(es[0].isIntersecting&&!started){started=true;sequence(0)}},{threshold:.35});
+    dIo.observe(disp);
+  }
+
   lockAcc();
   window.addEventListener('resize',lockAcc);
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(lockAcc);
