@@ -656,8 +656,8 @@ h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s
 .win-design.pick .selbox,.win-design.done .selbox{opacity:1}
 .ds-props{display:grid;align-content:start;gap:1.2cqw;padding:1.2cqw;border-left:1px solid #E3E3E8}
 .ds-props .row{display:flex;align-items:center;justify-content:space-between;gap:.6cqw}
-.ds-props .sw{width:1.8cqw;height:1.8cqw;border-radius:.4cqw;background:#BDBDC6;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);transition:background .5s}
-.win-design.paint .ds-props .sw,.win-design.done .ds-props .sw{background:var(--violet)}
+.ds-props .ds-sw{width:1.8cqw;height:1.8cqw;border-radius:50%;background:#BDBDC6;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);transition:background .5s}
+.win-design.paint .ds-props .ds-sw,.win-design.done .ds-props .ds-sw{background:var(--violet)}
 .ds-props .hex{font-family:var(--f-mono);font-size:1cqw}
 
 /* editor de código */
@@ -1190,7 +1190,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
             <div class="menubar"><b>Kaiva</b><span id="mbApp">Diseño</span><span>Archivo</span><span>Editar</span><span>Ver</span><span class="mb-r" id="mbClock">lun 9:41</span></div>
 
             <div class="win win-design" data-step="0">
-              <div class="win-bar"><i></i><i></i><i></i><span>Landing nueva · Diseño</span></div>
+              <div class="win-bar"><i></i><i></i><i></i><span>CS Travel · Inicio</span></div>
               <div class="ds">
                 <div class="ds-layers">
                   <b>Capas</b>
@@ -1217,7 +1217,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
                 </div>
                 <div class="ds-props">
                   <div><b>Botón</b></div>
-                  <div class="row"><span>Relleno</span><span class="sw"></span></div>
+                  <div class="row"><span>Relleno</span><span class="ds-sw"></span></div>
                   <div class="row"><span>Radio</span><span class="hex">999</span></div>
                   <div class="row"><span>Fuente</span><span class="hex">Geist 600</span></div>
                   <div class="row"><span>Alto</span><span class="hex">48 px</span></div>
@@ -1226,16 +1226,16 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
             </div>
 
             <div class="win win-code" data-step="1">
-              <div class="win-bar"><i></i><i></i><i></i><span>plataforma · Código</span></div>
+              <div class="win-bar"><i></i><i></i><i></i><span>cs-travel · inicio.html</span></div>
               <div class="code">
-                <div class="code-tabs"><span class="on">casos.js</span><span>tarifas.js</span></div>
+                <div class="code-tabs"><span class="on">inicio.html</span><span>estilos.css</span></div>
                 <div class="code-body" id="codeBody">
-                  <span class="ln"><span class="c">// Ejemplo: cotizar un caso</span></span>
-                  <span class="ln"><span class="k">export async function</span> <span class="f">cotizar</span>(caso) {</span>
-                  <span class="ln">  <span class="k">const</span> tarifa = <span class="k">await</span> <span class="f">buscarTarifa</span>(caso.destino)</span>
-                  <span class="ln">  <span class="k">const</span> margen = <span class="f">calcularMargen</span>(tarifa, caso.aliado)</span>
-                  <span class="ln">  <span class="k">return</span> { ...caso, tarifa, margen, estado: <span class="s">"listo"</span> }</span>
-                  <span class="ln">}</span>
+                  <span class="ln"><span class="c">&lt;!-- Inicio de CS Travel Group --&gt;</span></span>
+                  <span class="ln"><span class="k">&lt;section</span> <span class="f">class</span>=<span class="s">"hero"</span><span class="k">&gt;</span></span>
+                  <span class="ln">  <span class="k">&lt;h1&gt;</span>Tus viajes convertidos en ingresos pasivos<span class="k">&lt;/h1&gt;</span></span>
+                  <span class="ln">  <span class="k">&lt;a</span> <span class="f">class</span>=<span class="s">"boton"</span><span class="k">&gt;</span>Quiero saber más<span class="k">&lt;/a&gt;</span></span>
+                  <span class="ln">  <span class="k">&lt;img</span> <span class="f">src</span>=<span class="s">"viajes.webp"</span><span class="k">&gt;</span></span>
+                  <span class="ln"><span class="k">&lt;/section&gt;</span></span>
                 </div>
                 <div class="term"><span>$ npm run build</span><span class="ok">✓ Listo para publicar</span></div>
               </div>
@@ -1788,7 +1788,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   var apps=[0,1,2].map(function(i){return disp.querySelector('.app[data-step="'+i+'"]')});
   var stepBtns=[].slice.call(document.querySelectorAll('#steps button'));
   var cursor=document.getElementById('cursor'),mbApp=document.getElementById('mbApp');
-  var names=['Diseño','Código','Navegador'];
+  var names=['Diseño','Editor','Navegador'];
   var lines=[].slice.call(document.getElementById('codeBody').children);
   var layers=[].slice.call(disp.querySelectorAll('.ds-layer'));
   var run=0;
@@ -1825,7 +1825,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       await sleep(500);
       moveCursor(w.querySelector('.el.b1'));await sleep(800);
       w.classList.add('pick');layers.forEach(function(x,j){x.classList.toggle('on',j===3)});await sleep(600);
-      moveCursor(w.querySelector('.ds-props .sw'));await sleep(800);
+      moveCursor(w.querySelector('.ds-props .ds-sw'));await sleep(800);
       cursor.classList.add('click');await sleep(160);cursor.classList.remove('click');
       w.classList.add('paint');await sleep(1400);
     }else if(i===1){
