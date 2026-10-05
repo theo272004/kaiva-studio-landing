@@ -219,7 +219,7 @@
       '4 4 0 0 1-5-5 4 4 0 0 1-5-5Z"/><path d="M8.5 9.5h.01M12 14h.01M16 12h.01M9 16h.01"/></svg>' +
       'Cookies</h2>' +
       '<p>Usamos cookies necesarias para que el sitio funcione. Las de análisis ' +
-      'nos dicen qué páginas sirven y cuáles no — y solo se activan si tú lo autorizas. ' +
+      'nos dicen qué páginas sirven y cuáles no, y solo se activan si las autorizas. ' +
       'Puedes ver el detalle en la <a href="/cookies/">política de cookies</a>.</p>' +
 
       '<div class="kvck-panel">' +
