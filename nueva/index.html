@@ -520,7 +520,7 @@ section{scroll-margin-top:90px}
 /* ---------- cierre ---------- */
 .final{position:relative;margin-top:clamp(110px,13vw,160px);background:var(--violet);color:var(--paper);border-radius:var(--r-panel);padding:clamp(80px,10vw,120px) clamp(20px,3.4vw,44px) 24px;overflow:hidden;isolation:isolate}
 .final::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 55% at 50% 25%,rgba(255,255,255,.07),transparent 70%);z-index:-1}
-.final-core{display:grid;justify-items:center;text-align:center;gap:26px}
+.final-core{display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center;gap:26px}
 .note-wrap{position:relative;width:180px;height:180px;margin-bottom:22px;transform:rotate(-6deg);transition:transform 1.1s var(--ease),opacity .8s}
 .js .note-wrap.pre{transform:translateY(-50px) rotate(-16deg);opacity:0}
 .note-shadow{position:absolute;left:0;top:0;width:330px;height:430px;filter:blur(7px);opacity:.95;pointer-events:none}
@@ -598,7 +598,10 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   .pill .short{display:inline}
   .car{margin-top:40px}
   .car-cap .txt{min-width:0}
-  .manifesto{height:130vh}
+  .manifesto{height:auto;padding-block:110px 90px}
+  .manifesto .pin{position:static;height:auto}
+  .mail-form{padding-left:16px}
+  .mail-form button{padding:0 16px}
   .studio-grid{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr}
   .dev{min-height:440px}
@@ -1163,7 +1166,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   var ws=man.querySelectorAll('.w');
   function onScrollMan(){
     var r=manSec.getBoundingClientRect(),vh=window.innerHeight,total=r.height-vh;
-    var p=total>0?(-r.top+vh*.3)/(total*.9):1;
+    var p=total>0?(-r.top+vh*.3)/(total*.9):(vh*.85-r.top)/(r.height*.8);
     if(reduce)p=1;
     p=Math.max(0,Math.min(1,p));
     var n=Math.round(p*ws.length);
@@ -1274,6 +1277,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       max=Math.max(max,accBox.offsetHeight);
     });
     accBox.querySelectorAll('.acc-item').forEach(function(x){x.classList.toggle('open',x===open)});
+    void accBox.offsetHeight;
     accBox.classList.remove('measure');
     accBox.style.minHeight=max+'px';
   }
@@ -1415,7 +1419,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   }
 
   lockAcc();
-  window.addEventListener('resize',lockAcc);
+  var accW=window.innerWidth;window.addEventListener('resize',function(){if(window.innerWidth!==accW){accW=window.innerWidth;lockAcc()}});
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(lockAcc);
 
   /* ---------- Planes: el recomendado pasa al centro y los otros quedan detrás ---------- */
