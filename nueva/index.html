@@ -16,7 +16,7 @@
    tablet (portafolio), laptop (servicios), Mac (proceso), laptop + celular (pantallas). */
 :root{
   /* Paleta de marca: morado, negro y blanco */
-  --violet:#4E1E86;
+  --violet:#36115F;
   --violet-soft:#EAE2F4;
   --violet-light:#A580D6;
   --ink:#080808;
@@ -93,7 +93,7 @@ section{scroll-margin-top:90px}
 /* ---------- HERO ---------- */
 .page{--aw:600px;--bz:12px}
 .hero{position:relative;background:var(--violet);color:var(--paper);border-radius:var(--r-panel);padding:22px 0 30px;isolation:isolate;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(70% 55% at 50% 0%,rgba(255,255,255,.14),transparent 70%),radial-gradient(60% 45% at 50% 100%,rgba(20,4,40,.4),transparent 70%);z-index:-1;pointer-events:none}
+.hero::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(70% 55% at 50% 0%,rgba(255,255,255,.07),transparent 70%),radial-gradient(60% 45% at 50% 100%,rgba(20,4,40,.4),transparent 70%);z-index:-1;pointer-events:none}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 28px;max-width:var(--wrap);margin-inline:auto}
 .logo{display:inline-block;transition:transform .4s var(--ease)}
 .logo:hover{transform:translateY(-2px)}
@@ -518,7 +518,7 @@ section{scroll-margin-top:90px}
 
 /* ---------- cierre ---------- */
 .final{position:relative;margin-top:clamp(110px,13vw,160px);background:var(--violet);color:var(--paper);border-radius:var(--r-panel);padding:clamp(80px,10vw,120px) clamp(20px,3.4vw,44px) 24px;overflow:hidden;isolation:isolate}
-.final::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 55% at 50% 25%,rgba(255,255,255,.13),transparent 70%);z-index:-1}
+.final::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 55% at 50% 25%,rgba(255,255,255,.07),transparent 70%);z-index:-1}
 .final-core{display:grid;justify-items:center;text-align:center;gap:26px}
 .note-wrap{position:relative;width:180px;height:180px;margin-bottom:22px;transform:rotate(-6deg);transition:transform 1.1s var(--ease),opacity .8s}
 .js .note-wrap.pre{transform:translateY(-50px) rotate(-16deg);opacity:0}
