@@ -647,13 +647,13 @@ h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s
 .el.b2{left:23%;top:70%;width:13%;height:8%;border-radius:99px;background:transparent;box-shadow:inset 0 0 0 .2cqw var(--ink)}
 .el.img{left:57%;top:24%;width:37%;height:62%;border-radius:1cqw;background:linear-gradient(140deg,var(--violet-soft),var(--violet-light) 55%,var(--violet));overflow:hidden}
 .el.img::after{content:"";position:absolute;left:14%;bottom:12%;width:44%;height:30%;border-radius:.8cqw;background:rgba(255,255,255,.85);box-shadow:0 .6cqw 1.2cqw -.4cqw rgba(40,10,80,.35)}
-.selbox{position:absolute;left:5.4%;top:69%;width:16.2%;height:10%;border:.14cqw solid var(--violet);opacity:0;transition:opacity .3s}
+.selbox{position:absolute;left:5.4%;top:69%;width:16.2%;height:10%;border:.14cqw solid var(--violet);opacity:0;transition:opacity .3s,left .45s var(--ease),top .45s var(--ease),width .45s var(--ease),height .45s var(--ease)}
 .selbox::before,.selbox::after{content:"";position:absolute;width:.7cqw;height:.7cqw;background:#fff;border:.14cqw solid var(--violet)}
 .selbox::before{left:-.45cqw;top:-.45cqw}.selbox::after{right:-.45cqw;bottom:-.45cqw}
 .win-design.run .el{opacity:0;transform:scale(.7)}
-.win-design.run.build .el{opacity:1;transform:none;transition-delay:calc(var(--i) * .16s)}
+.win-design.run .el.in{opacity:1;transform:none}
 .win-design.paint .el.b1,.win-design.done .el.b1{background:var(--violet)}
-.win-design.pick .selbox,.win-design.done .selbox{opacity:1}
+.selbox.on,.win-design.done .selbox{opacity:1}
 .ds-props{display:grid;align-content:start;gap:1.2cqw;padding:1.2cqw;border-left:1px solid #E3E3E8}
 .ds-props .row{display:flex;align-items:center;justify-content:space-between;gap:.6cqw}
 .ds-props .ds-sw{width:1.8cqw;height:1.8cqw;border-radius:50%;background:#BDBDC6;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);transition:background .5s}
@@ -1202,16 +1202,16 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
                 </div>
                 <div class="ds-canvas">
                   <div class="frame">
-                    <span class="el nav-logo" style="--i:0"></span>
-                    <span class="el g nav-l1" style="--i:1"></span><span class="el g nav-l2" style="--i:1"></span><span class="el g nav-l3" style="--i:1"></span>
-                    <span class="el nav-b" style="--i:2"></span>
-                    <span class="el h1" style="--i:3"></span>
-                    <span class="el h2" style="--i:4"></span>
-                    <span class="el g t1" style="--i:5"></span>
-                    <span class="el g t2" style="--i:5"></span>
-                    <span class="el b1" style="--i:6"></span>
-                    <span class="el b2" style="--i:6"></span>
-                    <span class="el img" style="--i:7"></span>
+                    <span class="el nav-logo" data-g="0"></span>
+                    <span class="el g nav-l1" data-g="0"></span><span class="el g nav-l2" data-g="0"></span><span class="el g nav-l3" data-g="0"></span>
+                    <span class="el nav-b" data-g="0"></span>
+                    <span class="el h1" data-g="1"></span>
+                    <span class="el h2" data-g="1"></span>
+                    <span class="el g t1" data-g="2"></span>
+                    <span class="el g t2" data-g="2"></span>
+                    <span class="el b1" data-g="3"></span>
+                    <span class="el b2" data-g="3"></span>
+                    <span class="el img" data-g="4"></span>
                     <span class="selbox"></span>
                   </div>
                 </div>
@@ -1797,12 +1797,31 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   document.getElementById('calDay').textContent=now.getDate();
   document.getElementById('mbClock').textContent=dia[now.getDay()]+' '+now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');
 
-  function resetWin(w){w.classList.remove('run','build','pick','paint','done','built','published');lines.forEach(function(l){l.style.animation=''})}
+  function resetWin(w){
+    w.classList.remove('run','build','pick','paint','done','built','published');lines.forEach(function(l){l.style.animation=''});
+    w.querySelectorAll('.el.in').forEach(function(e){e.classList.remove('in')});
+    var sb=w.querySelector('.selbox');if(sb){sb.classList.remove('on');sb.removeAttribute('style')}
+  }
   function moveCursor(el){
     var s=scr.getBoundingClientRect(),r=el.getBoundingClientRect();
     cursor.style.left=((r.left+r.width*.55-s.left)/s.width*100)+'%';
     cursor.style.top=((r.top+r.height*.5-s.top)/s.height*100)+'%';
   }
+  // el cursor apunta al centro de varios elementos a la vez (un grupo del lienzo)
+  function moveCursorTo(els){
+    var l=1e9,t=1e9,r=-1e9,b=-1e9;
+    els.forEach(function(e){var q=e.getBoundingClientRect();l=Math.min(l,q.left);t=Math.min(t,q.top);r=Math.max(r,q.right);b=Math.max(b,q.bottom)});
+    moveCursor({getBoundingClientRect:function(){return {left:l,top:t,width:r-l,height:b-t}}});
+  }
+  // el recuadro de selección enmarca los elementos elegidos (medidas sin la escala de la animación)
+  function selectEls(w,els){
+    var f=w.querySelector('.frame'),sb=w.querySelector('.selbox'),fw=f.clientWidth,fh=f.clientHeight,l=1e9,t=1e9,r=-1e9,b=-1e9;
+    els.forEach(function(e){l=Math.min(l,e.offsetLeft);t=Math.min(t,e.offsetTop);r=Math.max(r,e.offsetLeft+e.offsetWidth);b=Math.max(b,e.offsetTop+e.offsetHeight)});
+    var p=fw*.008;
+    sb.style.left=((l-p)/fw*100)+'%';sb.style.top=((t-p)/fh*100)+'%';sb.style.width=((r-l+2*p)/fw*100)+'%';sb.style.height=((b-t+2*p)/fh*100)+'%';
+    sb.classList.add('on');
+  }
+  async function clickCursor(){cursor.classList.add('click');await sleep(160);cursor.classList.remove('click')}
   function markStep(i){stepBtns.forEach(function(b,j){b.classList.toggle('on',j===i)});mbApp.textContent=names[i]}
   function openWin(i){
     wins.forEach(function(w,j){w.classList.toggle('front',j===i);w.classList.toggle('back',j<i&&w.classList.contains('open'))});
@@ -1818,15 +1837,26 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     openWin(i);await sleep(700);if(id!==run)return false;
     var w=wins[i];
     if(i===0){
+      // el cursor coloca cada parte de la página: va al elemento, hace clic, aparece y queda seleccionado
       w.classList.add('run');void w.offsetWidth;
-      moveCursor(w.querySelector('.frame'));
-      w.classList.add('build');
-      for(var l=0;l<layers.length;l++){layers.forEach(function(x,j){x.classList.toggle('on',j===l)});await sleep(260);if(id!==run)return false}
+      layers.forEach(function(x){x.classList.remove('on')});
+      for(var g=0;g<layers.length;g++){
+        var els=[].slice.call(w.querySelectorAll('.el[data-g="'+g+'"]'));
+        moveCursorTo(els);await sleep(560);if(id!==run)return false;
+        await clickCursor();
+        els.forEach(function(e){e.classList.add('in')});
+        layers.forEach(function(x,j){x.classList.toggle('on',j===g)});
+        selectEls(w,els);
+        await sleep(520);if(id!==run)return false;
+      }
+      // elige el botón y lo pinta de morado desde «Relleno»
+      var b1=w.querySelector('.el.b1');
+      moveCursor(b1);await sleep(650);if(id!==run)return false;
+      await clickCursor();
+      layers.forEach(function(x,j){x.classList.toggle('on',j===3)});selectEls(w,[b1]);w.classList.add('pick');
       await sleep(500);
-      moveCursor(w.querySelector('.el.b1'));await sleep(800);
-      w.classList.add('pick');layers.forEach(function(x,j){x.classList.toggle('on',j===3)});await sleep(600);
-      moveCursor(w.querySelector('.ds-props .ds-sw'));await sleep(800);
-      cursor.classList.add('click');await sleep(160);cursor.classList.remove('click');
+      moveCursor(w.querySelector('.ds-props .ds-sw'));await sleep(800);if(id!==run)return false;
+      await clickCursor();
       w.classList.add('paint');await sleep(1400);
     }else if(i===1){
       moveCursor(w.querySelector('.term'));
