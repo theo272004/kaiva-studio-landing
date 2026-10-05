@@ -635,7 +635,7 @@ h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s
 .ds-canvas{position:relative;display:grid;place-items:center;background-color:#E6E6EB;background-image:radial-gradient(#D0D0D8 .12cqw,transparent .14cqw);background-size:1.6cqw 1.6cqw}
 .frame{position:relative;width:88%;aspect-ratio:16/10;background:#fff;box-shadow:0 .6cqw 1.6cqw -.6cqw rgba(0,0,0,.25)}
 .frame::before{content:"Inicio · Escritorio";position:absolute;left:0;top:-1.7cqw;font-size:1cqw;color:var(--ink-2)}
-.el{position:absolute;border-radius:.4cqw;background:var(--ink);transition:opacity .4s ease,transform .5s var(--ease),background .5s ease}
+.el{position:absolute;border-radius:.4cqw;background:var(--ink);transition:opacity .4s ease,transform .5s var(--ease),background .5s ease,box-shadow .5s ease}
 .el.g{background:#D5D5DC}
 .el.nav-logo{left:6%;top:7%;width:11%;height:4.5%;border-radius:99px}
 .el.nav-l1{left:52%;top:8.5%;width:7%;height:2%}.el.nav-l2{left:62%;top:8.5%;width:7%;height:2%}.el.nav-l3{left:72%;top:8.5%;width:7%;height:2%}
@@ -647,12 +647,15 @@ h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s
 .el.b1{left:6%;top:70%;width:15%;height:8%;border-radius:99px;background:#BDBDC6}
 .el.b2{left:23%;top:70%;width:13%;height:8%;border-radius:99px;background:transparent;box-shadow:inset 0 0 0 .2cqw var(--ink)}
 .el.img{left:57%;top:24%;width:37%;height:62%;border-radius:1cqw;background:linear-gradient(140deg,var(--violet-soft),var(--violet-light) 55%,var(--violet));overflow:hidden}
-.el.img::after{content:"";position:absolute;left:14%;bottom:12%;width:44%;height:30%;border-radius:.8cqw;background:rgba(255,255,255,.85);box-shadow:0 .6cqw 1.2cqw -.4cqw rgba(40,10,80,.35)}
+.el.img::after{transition:opacity .5s ease;content:"";position:absolute;left:14%;bottom:12%;width:44%;height:30%;border-radius:.8cqw;background:rgba(255,255,255,.85);box-shadow:0 .6cqw 1.2cqw -.4cqw rgba(40,10,80,.35)}
 .selbox{position:absolute;left:5.4%;top:69%;width:16.2%;height:10%;border:.14cqw solid var(--violet);opacity:0;transition:opacity .3s,left .45s var(--ease),top .45s var(--ease),width .45s var(--ease),height .45s var(--ease)}
 .selbox::before,.selbox::after{content:"";position:absolute;width:.7cqw;height:.7cqw;background:#fff;border:.14cqw solid var(--violet)}
 .selbox::before{left:-.45cqw;top:-.45cqw}.selbox::after{right:-.45cqw;bottom:-.45cqw}
-.win-design.run .el{opacity:0;transform:scale(.7)}
-.win-design.run .el.in{opacity:1;transform:none}
+/* Diseño: la página arranca como boceto gris y cada bloque toma su diseño cuando el cursor lo elige */
+.win-design.run .el:not(.in){background:#ECECF0;box-shadow:inset 0 0 0 .1cqw #D6D6DD}
+.win-design.run .el.img:not(.in)::after{opacity:0}
+.win-design.run .el.in{animation:elIn .45s var(--ease)}
+@keyframes elIn{40%{transform:scale(1.05)}}
 .win-design.paint .el.b1,.win-design.done .el.b1{background:var(--violet)}
 .selbox.on,.win-design.done .selbox{opacity:1}
 .ds-props{display:grid;align-content:start;gap:1.2cqw;padding:1.2cqw;border-left:1px solid #E3E3E8}
@@ -1833,7 +1836,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     openWin(i);await sleep(700);if(id!==run)return false;
     var w=wins[i];
     if(i===0){
-      // el cursor coloca cada parte de la página: va al elemento, hace clic, aparece y queda seleccionado
+      // el cursor recorre el boceto: va a cada bloque, hace clic, el bloque toma su diseño y queda seleccionado
       w.classList.add('run');void w.offsetWidth;
       layers.forEach(function(x){x.classList.remove('on')});
       for(var g=0;g<layers.length;g++){
