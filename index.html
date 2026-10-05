@@ -388,9 +388,11 @@ section{scroll-margin-top:90px}
 /* ---------- manifiesto ---------- */
 .manifesto{padding-block:clamp(110px,14vw,170px)}
 .manifesto .pin{display:grid;place-content:center;justify-items:center;gap:24px;padding-inline:8px}
-.manifesto p{max-width:32ch;text-align:center;font-size:clamp(1.6rem,3.1vw,2.55rem);font-weight:600;line-height:1.16;letter-spacing:-.04em;color:#C6C6CB;text-wrap:balance}
+.manifesto p{width:min(32ch,calc(100vw - 48px));text-align:center;font-size:clamp(1.6rem,3.1vw,2.55rem);font-weight:600;line-height:1.16;letter-spacing:-.04em;color:#C6C6CB;text-wrap:balance}
 /* el manifiesto ya no se enciende con el scroll: «Somos un estudio digital» en negro,
    «tu web, tu software y tu marca.» en morado, el resto en gris, y cada palabra se enciende al pasar el mouse */
+.manifesto p .mline{display:block;text-wrap:balance}
+.manifesto p .mline.gap{margin-top:.18em}
 .manifesto p .w{transition:color 1.1s ease}
 .manifesto p .w.ink{color:var(--ink)}
 .manifesto p .w.key{color:var(--violet-text)}
@@ -416,10 +418,6 @@ h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s
 .stat{background:var(--card);border-radius:var(--r-card);padding:24px;display:grid;gap:14px;align-content:start}
 .stat .num{display:flex;align-items:baseline;gap:8px;font-size:clamp(2.5rem,4.2vw,3.2rem);font-weight:600;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
 .stat .num small{font-size:15px;font-weight:600;letter-spacing:-.02em;color:var(--ink-2)}
-/* al terminar de contar, el número da un salto con un destello morado */
-.stat .val{display:inline-block;transform-origin:left bottom}
-.stat .val.pop{animation:statPop .6s var(--ease)}
-@keyframes statPop{35%{transform:scale(1.12);color:var(--violet-text)}100%{transform:none}}
 .stat p{font-size:13.5px;color:var(--ink-2);line-height:1.45}
 .meter{height:6px;border-radius:99px;background:var(--mist);overflow:hidden;margin-top:4px}
 .meter i{display:block;height:100%;width:100%;border-radius:inherit;background:var(--ink);transform-origin:left;transform:scaleX(var(--p,1));transition:transform 1.6s var(--ease)}
@@ -571,16 +569,17 @@ h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s
 /* preguntas frecuentes: <details> nativo con la misma tarjeta del acordeón de servicios */
 .faq{max-width:760px;margin-inline:auto;display:grid;gap:12px}
 .faq-item{background:var(--card);border-radius:18px;box-shadow:0 0 0 1px var(--line);transition:box-shadow .35s}
-.faq-item[open]{box-shadow:0 0 0 1px var(--line),0 20px 40px -26px rgba(8,8,8,.3)}
+.faq-item.is-open{box-shadow:0 0 0 1px var(--line),0 20px 40px -26px rgba(8,8,8,.3)}
 .faq-item summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 20px 20px 22px;cursor:pointer}
 .faq-item summary::-webkit-details-marker{display:none}
 .faq-item h3{margin:0;font-size:16px;font-weight:600;letter-spacing:-.02em;line-height:1.3}
-.faq-item .ic{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:var(--mist);transition:transform .45s var(--ease),background .3s}
+.faq-item .ic{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--mist);transition:transform .45s var(--ease),background .3s}
 .faq-item .ic svg{width:14px;height:14px}
-.faq-item[open] .ic{transform:rotate(180deg);background:var(--violet);color:var(--paper)}
+.faq-item.is-open .ic{transform:rotate(180deg);background:var(--violet);color:var(--paper)}
+.faq-a{overflow:hidden}
 .faq-item p{margin:0;padding:0 22px 20px;color:var(--ink-2);font-size:14.5px;line-height:1.55;max-width:62ch}
 .acc-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;background:none;border:0;padding:20px 20px 20px 22px;text-align:left;font-size:16px;font-weight:600;letter-spacing:-.02em}
-.acc-btn .ic{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:var(--mist);transition:transform .45s var(--ease),background .3s}
+.acc-btn .ic{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--mist);transition:transform .45s var(--ease),background .3s}
 .acc-btn .ic svg{width:14px;height:14px}
 .acc-item.open .ic{transform:rotate(180deg);background:var(--ink);color:var(--paper)}
 .acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s var(--ease)}
@@ -799,7 +798,12 @@ h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s
 .mail-form button:hover{background:#26262A;transform:translateX(-2px)}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .consent{display:flex;align-items:flex-start;gap:9px;max-width:440px;text-align:left;font-size:12.5px;line-height:1.45;opacity:.85}
-.consent input{flex:none;width:16px;height:16px;margin:1px 0 0;accent-color:#fff}
+/* casilla con la marca: círculo con borde blanco que se llena de morado con un check animado */
+.consent input{flex:none;-webkit-appearance:none;appearance:none;width:18px;height:18px;margin:0;border-radius:50%;border:1.5px solid rgba(255,255,255,.6);background:transparent;display:grid;place-items:center;cursor:pointer;transition:background .25s,border-color .25s}
+.consent input::after{content:"";width:8px;height:4px;border:2px solid #fff;border-top:0;border-right:0;transform:translateY(-1px) rotate(-45deg) scale(0);transition:transform .25s var(--ease)}
+.consent input:checked{background:var(--violet-text);border-color:var(--violet-text)}
+.consent input:checked::after{transform:translateY(-1px) rotate(-45deg) scale(1)}
+.consent input:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .consent a{text-decoration:underline;text-underline-offset:2px}
 .form-note{font-size:12.5px;opacity:.85;min-height:1.2em}
 .contacts{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;font-size:13.5px;font-weight:500}
@@ -1000,7 +1004,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     <section class="manifesto" aria-label="Quiénes somos">
       <div class="pin">
         <span class="label">Kaiva Studio</span>
-        <p id="manifesto">Somos un estudio digital que convierte ideas en presencia real. Diseñamos, construimos y renovamos lo que tu empresa necesita: tu web, tu software y tu marca.</p>
+        <p id="manifesto">Somos un estudio digital que convierte tus ideas en presencia real. Diseñamos, construimos y renovamos lo que tu empresa necesita: tu web, tu software y tu marca.</p>
       </div>
     </section>
 
@@ -1373,29 +1377,29 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
         <p class="sub">Lo que más nos preguntan antes de empezar.</p>
       </div>
       <div class="faq" data-reveal>
-        <details class="faq-item" name="faq">
+        <details class="faq-item">
           <summary><h3>¿Cuánto cuesta una página web?</h3><span class="ic" aria-hidden="true"><svg><use href="#i-chev"/></svg></span></summary>
-          <p>No publicamos precios porque cada proyecto se diseña desde cero y depende de lo que necesitas. Nos cuentas tu proyecto, lo hablamos en una llamada y después te enviamos la cotización.</p>
+          <div class="faq-a"><p>No publicamos precios porque cada proyecto se diseña desde cero y depende de lo que necesitas. Nos cuentas tu proyecto, lo hablamos en una llamada y después te enviamos la cotización.</p></div>
         </details>
-        <details class="faq-item" name="faq">
+        <details class="faq-item">
           <summary><h3>¿Cuánto tarda una página web?</h3><span class="ic" aria-hidden="true"><svg><use href="#i-chev"/></svg></span></summary>
-          <p>Una web estándar toma de 2 a 3 semanas desde que apruebas la propuesta, y sabes las fechas desde el primer día. Una marca completa o un software a medida toman más.</p>
+          <div class="faq-a"><p>Una web estándar toma de 2 a 3 semanas desde que apruebas la propuesta, y sabes las fechas desde el primer día. Una marca completa o un software a medida toman más.</p></div>
         </details>
-        <details class="faq-item" name="faq">
+        <details class="faq-item">
           <summary><h3>¿Pueden rediseñar mi web o renovar mi marca?</h3><span class="ic" aria-hidden="true"><svg><use href="#i-chev"/></svg></span></summary>
-          <p>Sí. Además de crear proyectos desde cero, rediseñamos sitios web y hacemos rebranding de marcas que ya existen.</p>
+          <div class="faq-a"><p>Sí. Además de crear proyectos desde cero, rediseñamos sitios web y hacemos rebranding de marcas que ya existen.</p></div>
         </details>
-        <details class="faq-item" name="faq">
+        <details class="faq-item">
           <summary><h3>¿Hacen tiendas online y e-commerce?</h3><span class="ic" aria-hidden="true"><svg><use href="#i-chev"/></svg></span></summary>
-          <p>Sí. Desarrollamos e-commerce a medida, además de plataformas, paneles con tus datos, conexión con los sistemas que ya usas y tareas automáticas.</p>
+          <div class="faq-a"><p>Sí. Desarrollamos e-commerce a medida, además de plataformas, paneles con tus datos, conexión con los sistemas que ya usas y tareas automáticas.</p></div>
         </details>
-        <details class="faq-item" name="faq">
+        <details class="faq-item">
           <summary><h3>¿Trabajan con empresas fuera de Barranquilla?</h3><span class="ic" aria-hidden="true"><svg><use href="#i-chev"/></svg></span></summary>
-          <p>Sí. Estamos en Barranquilla y trabajamos 100 % en remoto con empresas de toda Colombia y Latinoamérica, por videollamada, correo y WhatsApp.</p>
+          <div class="faq-a"><p>Sí. Estamos en Barranquilla y trabajamos 100 % en remoto con empresas de toda Colombia y Latinoamérica, por videollamada, correo y WhatsApp.</p></div>
         </details>
-        <details class="faq-item" name="faq">
+        <details class="faq-item">
           <summary><h3>¿Qué pasa después del lanzamiento?</h3><span class="ic" aria-hidden="true"><svg><use href="#i-chev"/></svg></span></summary>
-          <p>Si quieres que sigamos a cargo de tu sitio, puedes contratar aparte el mantenimiento web mensual, sin permanencia.</p>
+          <div class="faq-a"><p>Si quieres que sigamos a cargo de tu sitio, puedes contratar aparte el mantenimiento web mensual, sin permanencia.</p></div>
         </details>
       </div>
     </section>
@@ -1453,6 +1457,37 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var sleep=function(ms){return new Promise(function(r){setTimeout(r,ms)})};
 
+  /* ---------- Scroll suave con la rueda del mouse ----------
+     La rueda no salta: fija un destino y la página se desliza hacia él con inercia.
+     Solo con mouse (no en celular) y nunca si el sistema pide reducir el movimiento. */
+  var smoothTo=null;
+  (function(){
+    if(reduce||!window.matchMedia('(pointer:fine)').matches)return;
+    var root=document.documentElement,target=window.pageYOffset,cur=target,raf=0,ease=.1;
+    function max(){return root.scrollHeight-window.innerHeight}
+    function tick(){
+      cur+=(target-cur)*ease;
+      if(Math.abs(target-cur)<.5)cur=target;
+      window.scrollTo(0,cur);
+      raf=cur===target?0:requestAnimationFrame(tick);
+    }
+    function go(y,k){target=Math.max(0,Math.min(max(),y));ease=k;if(!raf){cur=window.pageYOffset;raf=requestAnimationFrame(tick)}}
+    window.addEventListener('wheel',function(e){
+      if(e.ctrlKey||e.defaultPrevented||Math.abs(e.deltaX)>Math.abs(e.deltaY))return;
+      // lo que tenga su propio scroll (configuración de cookies, menús) se desplaza normal
+      for(var n=e.target;n&&n.nodeType===1&&n!==root&&n!==document.body;n=n.parentElement){
+        var o=getComputedStyle(n).overflowY;
+        if((o==='auto'||o==='scroll')&&n.scrollHeight>n.clientHeight)return;
+      }
+      e.preventDefault();
+      if(!raf)target=window.pageYOffset;
+      go(target+e.deltaY*(e.deltaMode===1?40:e.deltaMode===2?window.innerHeight:1),.1);
+    },{passive:false});
+    window.addEventListener('scroll',function(){if(!raf)target=cur=window.pageYOffset},{passive:true});
+    window.addEventListener('keydown',function(){if(raf){cancelAnimationFrame(raf);raf=0}});
+    smoothTo=function(y){go(y,.075)};
+  })();
+
   /* ---------- Enlaces internos: desplazamiento suave hecho a mano ---------- */
   document.addEventListener('click',function(e){
     var a=e.target.closest('a[href^="#"]');
@@ -1464,7 +1499,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     if(id==='inicio')y=0;
     else if(id==='trabajo'){var c=document.getElementById('car').getBoundingClientRect(),cap=t.getBoundingClientRect();y=c.top+window.pageYOffset-Math.max(90,(vh-(cap.bottom-c.top))/2)}
     else{var h=t.querySelector(':scope > .head, :scope > .block-left')||t;y=h.getBoundingClientRect().top+window.pageYOffset-(id==='contacto'?20:110)}
-    window.scrollTo({top:y,behavior:reduce?'auto':'smooth'});
+    if(smoothTo)smoothTo(y);else window.scrollTo({top:y,behavior:reduce?'auto':'smooth'});
   });
 
 
@@ -1528,12 +1563,18 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   /* ---------- Manifiesto: se enciende palabra por palabra ---------- */
   var man=document.getElementById('manifesto'),manSec=man.closest('.manifesto');
   // «Somos un estudio digital» va en negro y «tu web, tu software y tu marca.» siempre en morado;
-  // el resto está en gris y cada palabra se enciende al pasar el mouse
+  // el resto está en gris y cada palabra se enciende al pasar el mouse.
+  // Cada idea arranca en su propia línea: la frase principal, lo que hacemos y el remate morado.
   var words=man.textContent.trim().split(/\s+/),start=words.indexOf('web,')-1,last=words.length-1;
-  man.innerHTML=words.map(function(w,i){
+  var brk=0;while(brk<last&&!/\.$/.test(words[brk]))brk++;
+  function manWord(w,i){
     var cls='w'+(i<4?' ink':'')+(i>=start?' v key':'');
     if(i===last&&/\.$/.test(w))return '<span class="'+cls+'">'+w.slice(0,-1)+'</span><span class="dot">.</span>';
     return '<span class="'+cls+'">'+w+'</span>';
+  }
+  // «Somos un estudio digital» sola arriba; «gap» separa las dos oraciones y el remate
+  man.innerHTML=[[0,3,''],[4,brk,''],[brk+1,start-1,' gap'],[start,last,' gap']].map(function(s){
+    return '<span class="mline'+s[2]+'">'+words.slice(s[0],s[1]+1).map(function(w,j){return manWord(w,s[0]+j)}).join(' ')+'</span>';
   }).join(' ');
   // la parte gris de los títulos, palabra por palabra
   document.querySelectorAll('h1 .dim,h2 .dim').forEach(function(d){
@@ -1559,7 +1600,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   document.querySelectorAll('[data-reveal]').forEach(watch);
 
   /* ---------- Cifras: cuentan desde cero cada vez que la sección entra en pantalla ----------
-     Las tarjetas arrancan una tras otra y cada número da un pequeño salto al terminar.
+     Las tarjetas arrancan una tras otra.
      Al salir del todo de la pantalla vuelven a cero, listas para la próxima vez. */
   var studio=document.getElementById('estudio');
   var stats=[].slice.call(studio.querySelectorAll('.stat'));
@@ -1584,18 +1625,18 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       setTimeout(function(){
         if(id!==statsRun)return;
         fillMeter(st,true);
-        var t0=null,val=st.querySelector('.val');
+        var t0=null;
         function step(ts){
           if(id!==statsRun)return;
           if(!t0)t0=ts;
           var q=Math.min(1,(ts-t0)/1400),e=1-Math.pow(1-q,3);setStat(st,e);
-          if(q<1)requestAnimationFrame(step);else{val.classList.remove('pop');void val.offsetWidth;val.classList.add('pop')}
+          if(q<1)requestAnimationFrame(step);
         }
         requestAnimationFrame(step);
       },k*180);
     });
   }
-  function resetStats(){statsRun++;statsPlayed=false;setStats(0);fillMeters(false);stats.forEach(function(st){st.querySelector('.val').classList.remove('pop')})}
+  function resetStats(){statsRun++;statsPlayed=false;setStats(0);fillMeters(false)}
   if(!reduce&&io){
     resetStats();
     new IntersectionObserver(function(es){es.forEach(function(e){
@@ -1647,10 +1688,31 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   }
   accPick.forEach(function(b){b.addEventListener('click',function(){setAcc(b.dataset.c);stopAuto()})});
 
-  /* ---------- Preguntas frecuentes: solo una abierta a la vez ----------
-     <details name="faq"> ya lo hace en los navegadores nuevos; esto cubre los demás. */
+  /* ---------- Preguntas frecuentes: se abren y cierran deslizándose, una a la vez ----------
+     Sin JavaScript siguen funcionando como <details> normales. */
   var faqs=[].slice.call(document.querySelectorAll('.faq-item'));
-  faqs.forEach(function(d){d.addEventListener('toggle',function(){if(d.open)faqs.forEach(function(o){if(o!==d)o.open=false})})});
+  function faqOpen(d){
+    var a=d.querySelector('.faq-a');if(d._an)d._an.cancel();
+    d._closing=false;d.open=true;d.classList.add('is-open');
+    if(reduce)return;
+    d._an=a.animate([{height:'0px',opacity:0},{height:a.scrollHeight+'px',opacity:1}],{duration:520,easing:'cubic-bezier(.2,.8,.2,1)'});
+    d._an.onfinish=function(){d._an=null};
+  }
+  function faqClose(d){
+    var a=d.querySelector('.faq-a');if(d._an)d._an.cancel();
+    d.classList.remove('is-open');
+    if(reduce){d.open=false;return}
+    d._closing=true;
+    d._an=a.animate([{height:a.offsetHeight+'px',opacity:1},{height:'0px',opacity:0}],{duration:400,easing:'cubic-bezier(.4,0,.2,1)'});
+    d._an.onfinish=function(){d.open=false;d._closing=false;d._an=null};
+  }
+  faqs.forEach(function(d){
+    d.querySelector('summary').addEventListener('click',function(e){
+      e.preventDefault();
+      if(d.open&&!d._closing)faqClose(d);
+      else{faqs.forEach(function(o){if(o!==d&&o.open&&!o._closing)faqClose(o)});faqOpen(d)}
+    });
+  });
 
   /* ---------- Panel gris de servicios: siempre del mismo alto ---------- */
   var accBox=document.getElementById('acc');
