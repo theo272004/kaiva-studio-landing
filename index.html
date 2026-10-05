@@ -386,7 +386,8 @@ section{scroll-margin-top:90px}
 .float-nav .btn{height:38px;padding:0 16px;font-size:13px}
 
 /* ---------- manifiesto ---------- */
-.manifesto{padding-block:clamp(110px,14vw,170px)}
+/* el manifiesto ocupa una pantalla completa, centrado, con aire blanco arriba y abajo */
+.manifesto{min-height:100vh;min-height:100svh;display:grid;place-items:center;padding-block:clamp(80px,10vw,120px)}
 .manifesto .pin{display:grid;place-content:center;justify-items:center;gap:24px;padding-inline:8px}
 .manifesto p{width:min(32ch,calc(100vw - 48px));text-align:center;font-size:clamp(1.6rem,3.1vw,2.55rem);font-weight:600;line-height:1.16;letter-spacing:-.04em;color:#C6C6CB;text-wrap:balance}
 /* el manifiesto ya no se enciende con el scroll: «Somos un estudio digital» en negro,
