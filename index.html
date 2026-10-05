@@ -1807,10 +1807,12 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     w.querySelectorAll('.el.in').forEach(function(e){e.classList.remove('in')});
     var sb=w.querySelector('.selbox');if(sb){sb.classList.remove('on');sb.removeAttribute('style')}
   }
+  // ubica la punta del cursor en el centro del elemento, en píxeles desde el borde interior
+  // de la pantalla del Mac (sin el marco), para que caiga exacto en cualquier tamaño y zoom
   function moveCursor(el){
-    var s=scr.getBoundingClientRect(),r=el.getBoundingClientRect();
-    cursor.style.left=((r.left+r.width*.5-s.left)/s.width*100)+'%';
-    cursor.style.top=((r.top+r.height*.5-s.top)/s.height*100)+'%';
+    var cb=cursor.offsetParent||scr,s=cb.getBoundingClientRect(),r=el.getBoundingClientRect();
+    cursor.style.left=(r.left+r.width*.5-s.left-cb.clientLeft)+'px';
+    cursor.style.top=(r.top+r.height*.5-s.top-cb.clientTop)+'px';
   }
   // el recuadro de selección enmarca los elementos elegidos (medidas sin la escala de la animación)
   function selectEls(w,els){
