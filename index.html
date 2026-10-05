@@ -386,14 +386,20 @@ section{scroll-margin-top:90px}
 .float-nav .btn{height:38px;padding:0 16px;font-size:13px}
 
 /* ---------- manifiesto ---------- */
-.manifesto{height:150vh}
-.manifesto .pin{position:sticky;top:0;height:100vh;display:grid;place-content:center;justify-items:center;gap:24px;padding-inline:8px}
+.manifesto{padding-block:clamp(110px,14vw,170px)}
+.manifesto .pin{display:grid;place-content:center;justify-items:center;gap:24px;padding-inline:8px}
 .manifesto p{max-width:32ch;text-align:center;font-size:clamp(1.6rem,3.1vw,2.55rem);font-weight:600;line-height:1.16;letter-spacing:-.04em;color:#C6C6CB;text-wrap:balance}
+/* el manifiesto ya no se enciende con el scroll: «Somos un estudio digital» en negro,
+   el resto en gris con el punto final morado, y cada palabra se enciende al pasar el mouse */
 .manifesto p .w{transition:color 1.1s ease}
-.manifesto p .w.lit{color:var(--ink);transition:color .3s ease}
-.manifesto p .w.lit.v{color:var(--violet-text)}
+.manifesto p .w.ink{color:var(--ink)}
+.manifesto p .dot{color:var(--violet-text)}
 .manifesto p .w:hover{color:var(--ink);transition:color .08s}
 .manifesto p .w.v:hover{color:var(--violet-text)}
+/* la parte gris de los títulos se enciende en morado al pasar el mouse, como el manifiesto */
+h1 .dim .w,h2 .dim .w{transition:color 1.1s ease}
+h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s}
+.hero h1 .dim .w:hover,.final h2 .dim .w:hover{color:var(--violet-light)}
 
 /* ---------- estudio (cifras) ---------- */
 .studio{background:var(--mist);border-radius:var(--r-panel);padding:clamp(48px,7vw,90px) clamp(18px,4vw,56px)}
@@ -566,7 +572,7 @@ section{scroll-margin-top:90px}
 .faq-item h3{margin:0;font-size:16px;font-weight:600;letter-spacing:-.02em;line-height:1.3}
 .faq-item .ic{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:var(--mist);transition:transform .45s var(--ease),background .3s}
 .faq-item .ic svg{width:14px;height:14px}
-.faq-item[open] .ic{transform:rotate(180deg);background:var(--ink);color:var(--paper)}
+.faq-item[open] .ic{transform:rotate(180deg);background:var(--violet);color:var(--paper)}
 .faq-item p{margin:0;padding:0 22px 20px;color:var(--ink-2);font-size:14.5px;line-height:1.55;max-width:62ch}
 .acc-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;background:none;border:0;padding:20px 20px 20px 22px;text-align:left;font-size:16px;font-weight:600;letter-spacing:-.02em}
 .acc-btn .ic{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:var(--mist);transition:transform .45s var(--ease),background .3s}
@@ -805,14 +811,20 @@ section{scroll-margin-top:90px}
 /* ---------- cursor propio: avión de papel dibujado a mano (solo con mouse) ---------- */
 html.has-cursor,html.has-cursor *{cursor:none!important}
 html.has-cursor input,html.has-cursor textarea{cursor:text!important}
-.cur-plane{position:fixed;left:0;top:0;z-index:1000;pointer-events:none;opacity:0;transition:opacity .25s}
+.cur-plane{position:fixed;left:0;top:0;z-index:10000;pointer-events:none;opacity:0;transition:opacity .25s}
 .cur-on .cur-plane{opacity:1}
 .cur-on .cur-plane.gone{opacity:0;transition:opacity .08s}
 .cur-plane svg{display:block;width:32px;height:24px;margin:-2px 0 0 -2px;overflow:visible;transform-origin:2px 2px;transform:rotate(24deg);transition:transform .35s var(--ease);filter:drop-shadow(0 3px 3px rgba(8,8,8,.28))}
 .cur-plane.hover svg{transform:rotate(14deg) scale(1.1)}
 .cur-plane.down svg{transform:rotate(24deg) scale(.86)}
 .cur-plane.hover.down svg{transform:rotate(14deg) scale(.96)}
-.cur-burst{position:fixed;left:0;top:0;z-index:999;pointer-events:none;width:64px;height:64px;margin:-46px 0 0 -32px}
+/* aviso de cookies (assets/consentimiento.js, compartido con el resto del sitio) con los morados de la portada */
+html .kvck h2 svg,html .kvck a{color:var(--violet-text)}
+html .kvck-si{background:var(--violet)}
+html .kvck-si:hover{background:#4E1E86}
+html .kvck-b:focus-visible,html .kvck-sw input:focus-visible+i{outline-color:var(--violet-text)}
+html .kvck-sw input:checked+i,html .kvck-sw input:disabled+i{background:var(--violet)}
+.cur-burst{position:fixed;left:0;top:0;z-index:9999;pointer-events:none;width:64px;height:64px;margin:-46px 0 0 -32px}
 .cur-burst svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 2px 2px rgba(8,8,8,.25));transform-origin:32px 46px;animation:ray .3s var(--ease) forwards}
 @keyframes ray{0%{opacity:0;transform:scale(.4)}25%{opacity:1}65%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.12)}}
 
@@ -1506,20 +1518,21 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 
   /* ---------- Manifiesto: se enciende palabra por palabra ---------- */
   var man=document.getElementById('manifesto'),manSec=man.closest('.manifesto');
-  var words=man.textContent.trim().split(/\s+/),colon=words.indexOf('renovar');
-  man.innerHTML=words.map(function(w,i){return '<span class="w'+(i>colon?' v':'')+'">'+w+'</span>'}).join(' ');
-  var ws=man.querySelectorAll('.w');
-  function onScrollMan(){
-    var r=manSec.getBoundingClientRect(),vh=window.innerHeight,total=r.height-vh;
-    var p=total>0?(-r.top+vh*.3)/(total*.9):(vh*.85-r.top)/(r.height*.8);
-    if(reduce)p=1;
-    p=Math.max(0,Math.min(1,p));
-    var n=Math.round(p*ws.length);
-    for(var i=0;i<ws.length;i++)ws[i].classList.toggle('lit',i<n);
-  }
+  // «Somos un estudio digital» va en negro; «tu web, tu software y tu marca» se enciende en morado
+  // al pasar el mouse; el punto final siempre es morado
+  var words=man.textContent.trim().split(/\s+/),colon=words.indexOf('renovar'),last=words.length-1;
+  man.innerHTML=words.map(function(w,i){
+    var cls='w'+(i<4?' ink':'')+(i>colon?' v':'');
+    if(i===last&&/\.$/.test(w))return '<span class="'+cls+'">'+w.slice(0,-1)+'</span><span class="dot">.</span>';
+    return '<span class="'+cls+'">'+w+'</span>';
+  }).join(' ');
+  // la parte gris de los títulos, palabra por palabra
+  document.querySelectorAll('h1 .dim,h2 .dim').forEach(function(d){
+    d.innerHTML=d.textContent.trim().split(/\s+/).map(function(w){return '<span class="w">'+w+'</span>'}).join(' ');
+  });
 
   var ticking=false;
-  function onScroll(){if(ticking)return;ticking=true;requestAnimationFrame(function(){onScrollNav();onScrollMan();ticking=false})}
+  function onScroll(){if(ticking)return;ticking=true;requestAnimationFrame(function(){onScrollNav();ticking=false})}
   window.addEventListener('scroll',onScroll,{passive:true});
   window.addEventListener('resize',onScroll);
   onScroll();
