@@ -24,7 +24,7 @@
   --ink-3:#8C8C93;
   --paper:#FBFBFB;
   --card:#FFFFFF;
-  --mist:#EAEAEC;
+  --mist:#F0F0F2;
   --line:#DADADE;
 
   --f-sans:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
@@ -557,6 +557,7 @@ html.has-cursor,html.has-cursor *{cursor:none!important}
 html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .cur-plane{position:fixed;left:0;top:0;z-index:1000;pointer-events:none;opacity:0;transition:opacity .25s}
 .cur-on .cur-plane{opacity:1}
+.cur-on .cur-plane.gone{opacity:0;transition:opacity .08s}
 .cur-plane svg{display:block;width:38px;height:29px;margin:-2px 0 0 -2px;overflow:visible;transform-origin:2px 2px;transition:transform .35s var(--ease);filter:drop-shadow(0 3px 3px rgba(8,8,8,.28))}
 .cur-plane.hover svg{transform:rotate(-10deg) scale(1.1)}
 .cur-plane.down svg{transform:scale(.86)}
@@ -1303,8 +1304,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       plane.classList.toggle('hover',!!(e.target.closest&&e.target.closest(hoverSel)));
     });
     document.addEventListener('mouseout',function(e){if(!e.relatedTarget)root.classList.remove('cur-on')});
-    document.addEventListener('mousedown',function(e){plane.classList.add('down');if(!reduce)burst(e.clientX,e.clientY)});
-    document.addEventListener('mouseup',function(){plane.classList.remove('down')});
+    var goneT=null;
+    document.addEventListener('mousedown',function(e){plane.classList.add('gone');if(!reduce)burst(e.clientX,e.clientY);clearTimeout(goneT);goneT=setTimeout(function(){plane.classList.remove('gone')},450)});
   }
   lockAcc();
   window.addEventListener('resize',lockAcc);
