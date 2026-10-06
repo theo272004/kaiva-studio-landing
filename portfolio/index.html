@@ -990,8 +990,20 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .pw-note a{color:var(--violet-text);font-weight:600}
 .pw-live{position:relative;flex:1;min-height:0;margin:0 14px 14px;border-radius:9px;overflow:hidden;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.14)}
 .pw-main:has(.pw-live) .pw-url{max-width:none}
-.pw-live.back::after{content:"Esta vista muestra solo el inicio · Abrir ↗ para ver todo";position:absolute;z-index:3;left:50%;top:14px;transform:translateX(-50%);padding:6px 12px;border-radius:99px;background:rgba(18,14,24,.86);color:#fff;font-size:12px;font-weight:600;white-space:nowrap;pointer-events:none;animation:backTip 3.2s ease forwards}
-@keyframes backTip{0%,80%{opacity:1}100%{opacity:0}}
+/* otra página dentro de la web en vivo: aviso suave, sin sacarte de golpe */
+.pw-live iframe{transition:opacity .35s ease,filter .5s ease}
+.pw-live.away iframe{filter:blur(3px) saturate(.85)}
+.pw-live.fade iframe{opacity:0}
+.pw-away{position:absolute;inset:0;z-index:4;display:grid;place-items:center;padding:16px;background:rgba(20,16,26,.18);opacity:0;visibility:hidden;transition:opacity .45s ease,visibility 0s linear .45s}
+.pw-live.away .pw-away{opacity:1;visibility:visible;transition:opacity .45s ease .15s}
+.pw-away-card{display:grid;gap:6px;max-width:340px;padding:18px 20px;border-radius:16px;background:#fff;text-align:center;box-shadow:0 30px 60px -24px rgba(0,0,0,.45);transform:translateY(10px) scale(.97);transition:transform .5s var(--ease) .15s}
+.pw-live.away .pw-away-card{transform:none}
+.pw-away-card b{font-size:15px;letter-spacing:-.02em;color:var(--ink)}
+.pw-away-card span{font-size:13px;line-height:1.45;color:var(--ink-2)}
+.pw-away-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:8px}
+.pw-away-btns button,.pw-away-btns a{padding:8px 14px;border-radius:99px;font:inherit;font-size:12.5px;font-weight:600;text-decoration:none;cursor:pointer}
+.pw-away-btns button{border:0;background:var(--ink);color:#fff}
+.pw-away-btns a{background:var(--violet-soft);color:var(--violet-text)}
 .pw-live iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0;background:#fff}
 .pw-live-tag{position:absolute;z-index:2;left:10px;bottom:10px;display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;background:rgba(18,14,24,.78);color:#fff;font-size:11px;font-weight:600;pointer-events:none}
 .pw-live-tag::before{content:"";width:6px;height:6px;border-radius:50%;background:#2ED47A;box-shadow:0 0 0 3px rgba(46,212,122,.25)}
@@ -1461,7 +1473,9 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
           :'<img src="'+BB+d.i+'.webp" alt="'+d.alt+'" width="1600" height="900" decoding="async"'+(i>2?' loading="lazy"':'')+'>')+'</figure>'}).join('')+'</div>';
     // en vivo: el sitio real dentro de la ventana, a tamaño de escritorio y reducido para que quepa
     if(pg.frame)return '<div class="pw-url">'+lock+'<span>'+pg.url+'</span><a href="'+pg.live+'" target="_blank" rel="noopener">Abrir ↗</a></div>'+
-      '<div class="pw-live"><span class="pw-live-tag">En vivo</span><iframe src="'+pg.frame+'" title="'+pg.alt+' (en vivo)"></iframe></div>';
+      '<div class="pw-live"><span class="pw-live-tag">En vivo</span><iframe src="'+pg.frame+'" title="'+pg.alt+' (en vivo)"></iframe>'+
+      '<div class="pw-away" aria-live="polite"><div class="pw-away-card"><b>Aquí mostramos solo el inicio</b><span>Para recorrer el resto de la web, ábrela completa.</span>'+
+      '<div class="pw-away-btns"><button type="button" class="pw-home">Volver al inicio</button><a href="'+pg.live+'" target="_blank" rel="noopener">Ver el sitio completo ↗</a></div></div></div></div>';
     return '<div class="pw-url">'+lock+'<span>'+pg.url+'</span>'+(pg.live?'<a href="'+pg.live+'" target="_blank" rel="noopener">Ver en vivo ↗</a>':'')+'</div>'+
       '<div class="pw-scroll'+(pg.full?' full':'')+'" tabindex="0">'+pg.shots.map(function(s,i){var d=dim(s),alt=pg.alts?pg.alts[i]:pg.alt+(pg.shots.length>1?', página '+(i+1):'');return (pg.caps?'<p class="pw-cap">'+pg.caps[i]+'</p>':'')+'<img src="'+s+'" alt="'+alt+'" width="'+d[0]+'" height="'+d[1]+'" style="--i:'+i+'" decoding="async">'}).join('')+(pg.note?'<p class="pw-note">'+pg.note+'</p>':'')+'</div>';
   }
@@ -1519,9 +1533,17 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
     box.querySelectorAll('video[data-loop]').forEach(function(v){v.addEventListener('ended',function(){if(!v.dataset.on)return;v.currentTime=+v.dataset.loop;v.play()})});
   }
   function watchLive(root){root.querySelectorAll('.pw-live').forEach(function(b){scaleLive(b);if(liveRO)liveRO.observe(b);
-    // solo se muestra la página de inicio: si adentro se abre otra, vuelve al inicio (el sitio completo está en «Abrir ↗»)
-    var f=b.querySelector('iframe'),home=f.getAttribute('src'),loads=0;
-    f.addEventListener('load',function(){loads++;if(loads>1){loads=0;f.setAttribute('src',home);b.classList.remove('back');void b.offsetWidth;b.classList.add('back')}});
+    // solo se muestra la página de inicio: si adentro se abre otra, aparece un aviso suave y tú eliges volver o abrir el sitio
+    var f=b.querySelector('iframe'),home=f.getAttribute('src'),loads=0,going=false;
+    f.addEventListener('load',function(){
+      loads++;
+      if(going){going=false;loads=1;b.classList.remove('fade');return}
+      if(loads>1)b.classList.add('away');
+    });
+    b.querySelector('.pw-home').addEventListener('click',function(){
+      b.classList.remove('away');b.classList.add('fade');going=true;
+      setTimeout(function(){f.setAttribute('src',home)},350);
+    });
   })}
   function front(key){
     var i=stack.indexOf(key);if(i<0)return;
