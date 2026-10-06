@@ -1007,16 +1007,18 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .mcopy{display:grid;justify-items:center;gap:14px;max-width:620px;margin:0 auto 34px;text-align:center}
 .mcopy .who{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
 .mcopy .btn{background:var(--ink);color:var(--paper)}
-.mcar{--h:clamp(140px,14vw,200px);--zz:30px;overflow:hidden;margin:0 calc(var(--gutter) * -1);padding:calc(var(--zz) + 26px) 0 calc(var(--zz) + 30px);-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.mcar{--h:clamp(140px,14vw,200px);--zz:12px;overflow:hidden;margin:0 calc(var(--gutter) * -1);padding:calc(var(--zz) + 26px) 0 calc(var(--zz) + 30px);-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
 .mcar-track{display:flex;align-items:center;gap:14px;width:max-content;animation:mroll 70s linear infinite}
 @keyframes mroll{to{transform:translateX(calc(-50% - 7px))}}
-.mcard{flex:none;height:var(--h);padding:0;border:0;border-radius:16px;overflow:hidden;background:#fff;cursor:pointer;box-shadow:0 0 0 1px rgba(8,8,8,.06),0 18px 34px -22px rgba(8,8,8,.45);transform:translateY(var(--y,0));transition:transform .5s var(--ease),box-shadow .45s}
+.mcard{flex:none;height:var(--h);padding:0;border:0;border-radius:16px;overflow:hidden;background:#fff;cursor:pointer;box-shadow:0 0 0 1px rgba(8,8,8,.06),0 18px 34px -22px rgba(8,8,8,.45);translate:0 var(--y,0);animation:levita 4.2s ease-in-out infinite;transition:transform .5s var(--ease),box-shadow .45s}
+/* levitan: suben y bajan despacio, una al revés de la otra */
+@keyframes levita{0%,100%{translate:0 calc(var(--y,0) - 7px)}50%{translate:0 calc(var(--y,0) + 7px)}}
 /* una arriba, una abajo, bien marcado */
 .mcard:nth-child(odd){--y:calc(var(--zz) * -1)}
-.mcard:nth-child(even){--y:var(--zz)}
-.mcard:hover,.mcard:focus-visible{transform:translateY(calc(var(--y,0) - 22px)) scale(1.04);box-shadow:0 0 0 1px rgba(8,8,8,.06),0 26px 44px -22px rgba(8,8,8,.55)}
+.mcard:nth-child(even){--y:var(--zz);animation-delay:-2.1s}
+.mcard:hover,.mcard:focus-visible{transform:translateY(-18px) scale(1.04);box-shadow:0 0 0 1px rgba(8,8,8,.06),0 26px 44px -22px rgba(8,8,8,.55)}
 .mcard img{display:block;height:100%;width:auto}
-@media (prefers-reduced-motion:reduce){.mcar-track{animation:none}.mcar{overflow-x:auto}}
+@media (prefers-reduced-motion:reduce){.mcar-track,.mcard{animation:none}.mcar{overflow-x:auto}}
 /* (abanico anterior, ya no se usa) */
 .brands{overflow-x:clip}
 .arc{--cw:clamp(150px,16vw,220px);--ch:calc(var(--cw) * .5625);--R:clamp(300px,32vw,470px);position:relative;height:calc(var(--R) + var(--ch) + 80px);max-width:1240px;margin:0 auto}
