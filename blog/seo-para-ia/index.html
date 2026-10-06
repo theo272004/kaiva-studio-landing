@@ -1,11 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- Google Analytics 4 (G-BD6VDCSQDC). Es la misma propiedad del sitio
+       anterior, recuperada del commit f259fa1: se perdió al pasar de React a
+       HTML estático y el sitio estuvo meses sin medir nada.
 
-  <!-- Analytics con consentimiento previo. Aquí NO se carga el script de
+       Analytics con consentimiento previo. Aquí NO se carga el script de
        Google: solo se fijan los valores por defecto (todo denegado) y se
        deja que /assets/consentimiento.js lo inyecte si la persona acepta.
        El razonamiento completo y las normas que lo obligan están comentados
@@ -24,8 +27,7 @@
     });
   </script>
   <script defer src="/assets/consentimiento.js?v=20261005"></script>
-  <script defer src="/assets/eventos.js?v=20260729"></script>
-  <script defer src="/assets/indice-blog.js?v=20260731"></script>
+  <script defer src="/assets/eventos.js?v=20260807"></script>
   <script defer src="/assets/clarity.js?v=20260729"></script>
 
   <title>SEO para IA: cómo lograr que ChatGPT recomiende tu empresa</title>
@@ -33,11 +35,7 @@
     content="Qué son GEO y AEO, qué dice Google textualmente, por qué llms.txt casi no sirve todavía, y qué factores sí correlacionan con aparecer en la IA.">
   <link rel="canonical" href="https://kaivastudio.com/blog/seo-para-ia/">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="theme-color" content="#ffffff">
-  <link rel="icon" href="/favicon.ico?v=20261006k" sizes="48x48">
-  <link rel="icon" href="/assets/favicon-96.png?v=20261006k" type="image/png" sizes="96x96">
-  <link rel="icon" href="/assets/favicon-192.png?v=20261006k" type="image/png" sizes="192x192">
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=20261006k">
+  <meta name="theme-color" content="#FBFBFB">
 
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Kaiva Studio">
@@ -51,11 +49,6 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SEO para IA: cómo lograr que ChatGPT recomiende tu empresa">
   <meta name="twitter:image" content="https://kaivastudio.com/assets/blog/ia.webp">
-
-  <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/tokens.css?v=20260808c">
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260809b">
 
   <script type="application/ld+json">
 {
@@ -136,411 +129,1140 @@
   ]
 }
 </script>
+  <link rel="icon" href="/favicon.ico?v=20261006k" sizes="48x48">
+  <link rel="icon" href="/assets/favicon-96.png?v=20261006k" type="image/png" sizes="96x96">
+  <link rel="icon" href="/assets/favicon-192.png?v=20261006k" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=20261006k">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: paneles redondeados que flotan sobre blanco. El morado abre y cierra la página,
+   el negro marca lo que se elige, y cada sección tiene una pantalla protagonista:
+   tablet (portafolio), laptop (servicios), Mac (proceso), laptop + celular (pantallas). */
+:root{
+  /* Paleta de marca: morado, negro y blanco */
+  --violet:#36115F;
+  --violet-soft:#EAE2F4;
+  --violet-light:#A580D6;
+  /* morado más vivo solo para letra y etiquetas sobre fondo claro */
+  --violet-text:#7A3FC9;
+  --ink:#080808;
+  --ink-2:#4E4E55;
+  --ink-3:#8C8C93;
+  --paper:#FBFBFB;
+  --card:#FFFFFF;
+  --mist:#F0F0F2;
+  --line:#DADADE;
+
+  --f-sans:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+
+  --r-panel:20px;
+  --r-card:22px;
+  --wrap:1180px;
+  --gutter:16px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--violet);outline-offset:3px;border-radius:8px}
+::selection{background:var(--violet-text);color:#fff}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.page{padding-inline:var(--gutter);padding-block:12px 16px;overflow-x:clip}
+.wrap{max-width:var(--wrap);margin-inline:auto}
+
+h1,h2,h3{font-family:var(--f-sans);font-weight:600;letter-spacing:-.04em;line-height:1.04;margin:0;text-wrap:balance}
+h2{font-size:clamp(2.1rem,4.4vw,3.3rem)}
+h2 .dim{color:var(--ink-3)}
+p{margin:0}
+.sub{color:var(--ink-2);max-width:52ch;margin-inline:auto;text-align:center;font-size:15.5px}
+.head{display:grid;gap:16px;justify-items:center;text-align:center}
+.label{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+section{scroll-margin-top:90px}
+
+/* todo lo que se toca se levanta */
+.lift{transition:transform .45s var(--ease),box-shadow .45s var(--ease),background .3s}
+.lift:hover{transform:translateY(-5px);box-shadow:0 22px 40px -24px rgba(8,8,8,.35)}
+
+/* ---------- botones ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 22px;border-radius:999px;font-size:14.5px;font-weight:600;letter-spacing:-.01em;transition:transform .4s var(--ease),background .25s,color .25s,box-shadow .4s var(--ease);white-space:nowrap;border:0}
+.btn svg{width:16px;height:16px;transition:transform .4s var(--ease)}
+.btn:hover{transform:translateY(-3px)}
+.btn:hover svg{transform:translateX(4px)}
+.btn:active{transform:translateY(-1px) scale(.98)}
+.btn-white{background:var(--paper);color:var(--ink);box-shadow:0 0 0 0 rgba(255,255,255,.35),0 10px 30px -12px rgba(30,6,60,.6)}
+.btn-white:hover{box-shadow:0 0 0 5px rgba(255,255,255,.28),0 16px 34px -14px rgba(30,6,60,.7)}
+.btn-ghost{color:var(--paper);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.6),0 0 0 0 rgba(255,255,255,.2)}
+.btn-ghost:hover{background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1.5px var(--paper),0 0 0 5px rgba(255,255,255,.16)}
+.btn-ink{background:var(--ink);color:var(--paper);box-shadow:0 0 0 0 rgba(8,8,8,.12)}
+.btn-ink:hover{box-shadow:0 0 0 5px rgba(8,8,8,.1)}
+
+/* ---------- laptop (servicios y pantallas) ---------- */
+.laptop{container-type:inline-size;position:relative;margin-inline:auto}
+.laptop .lid{position:relative;background:#0A0A0C;border-radius:3cqw 3cqw .7cqw .7cqw;padding:1.7cqw 1.7cqw 2.3cqw;box-shadow:inset 0 0 0 .22cqw #2B2B31,inset 0 0 0 .5cqw #121215}
+.laptop .cam{position:absolute;top:.6cqw;left:50%;width:.75cqw;height:.75cqw;margin-left:-.375cqw;border-radius:50%;background:#1E1E25}
+.laptop .screen{position:relative;aspect-ratio:16/10;border-radius:.9cqw;overflow:hidden;background:#fff}
+.laptop .base{position:relative;width:117%;margin-left:-8.5%;height:2.3cqw;border-radius:.4cqw .4cqw 3.4cqw 3.4cqw / .4cqw .4cqw 1.7cqw 1.7cqw;background:linear-gradient(180deg,#F4F4F7 0%,#D9D9DF 45%,#AEAEB7 100%);box-shadow:0 2.6cqw 4cqw -1.4cqw rgba(16,10,30,.35)}
+.laptop .base::before{content:"";position:absolute;top:0;left:50%;width:15%;height:.85cqw;margin-left:-7.5%;border-radius:0 0 1.1cqw 1.1cqw;background:linear-gradient(#C3C3CB,#D6D6DC)}
+.chrome{display:flex;align-items:center;gap:1.1cqw;height:3.6cqw;padding:0 1.6cqw;background:#F6F6F8;border-bottom:1px solid var(--line)}
+.chrome i{width:.9cqw;height:.9cqw;border-radius:50%;background:#DADAE0;flex:none}
+.chrome i:first-child{background:#FF5F57}.chrome i:nth-child(2){background:#FEBC2E}.chrome i:nth-child(3){background:#28C840}
+.chrome .url{margin-inline:auto;display:flex;align-items:center;gap:.6cqw;height:2.2cqw;padding:0 2.4cqw;border-radius:99px;background:#fff;box-shadow:0 0 0 1px var(--line);font-size:1.25cqw;color:var(--ink-2);white-space:nowrap}
+.chrome .url::before{content:"";width:.8cqw;height:.8cqw;border-radius:50%;background:var(--violet)}
+.page-shot{position:absolute;inset:3.6cqw 0 0 0}
+.page-shot img{width:100%;height:100%;object-fit:cover;object-position:top center}
+
+/* ---------- HERO ---------- */
+.page{--aw:clamp(600px,48vw,900px);--bz:12px}
+.hero{position:relative;background:var(--ink);color:var(--paper);border-radius:var(--r-panel);padding:36px 0 30px;isolation:isolate;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(70% 55% at 50% 0%,rgba(255,255,255,.06),transparent 70%),radial-gradient(60% 50% at 50% 100%,rgba(78,30,134,.45),transparent 70%);z-index:-1;pointer-events:none}
+.hero::after{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--violet);opacity:var(--hp,0);z-index:-2;pointer-events:none}
+.nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:0 clamp(20px,3.4vw,44px)}
+.logo{display:inline-block;transition:transform .4s var(--ease)}
+.logo:hover{transform:translateY(-2px)}
+.logo img{height:46px;width:auto}
+.hero .logo img,.final .logo img{filter:brightness(0) invert(1)}
+.nav-links{display:flex;gap:30px;list-style:none;margin:0;padding:0;font-size:13.5px;font-weight:500}
+.nav-links a{display:inline-block;opacity:.88;position:relative;padding:4px 0;transition:transform .35s var(--ease),opacity .25s}
+.nav-links a:hover{opacity:1;transform:translateY(-2px)}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.nav-links a:hover::after{transform:scaleX(1)}
+/* la página en la que estás se marca en morado */
+.nav-links a[aria-current="page"],.float-nav ul a[aria-current="page"],.mm-links a[aria-current="page"]{color:var(--violet-text);opacity:1;font-weight:600}
+.hero .nav-links a[aria-current="page"],.mm-links a[aria-current="page"]{color:var(--violet-light)}
+.nav-end{grid-column:3;justify-self:end;display:flex;align-items:center;gap:8px}
+/* Inicio, Portfolio y Blog siempre en la mitad, aunque el logo y los botones midan distinto */
+.nav>.logo{justify-self:start}
+.float-nav>.logo{grid-column:1;justify-self:start}
+.float-nav>ul{grid-column:2}
+.float-nav>.btn,.float-nav>.burger{grid-column:3;grid-row:1;justify-self:end}
+.nav-cta{font-size:13px;font-weight:600;margin-right:6px;display:inline-block;transition:transform .35s var(--ease)}
+.nav-cta:hover{transform:translateY(-2px)}
+.circle{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--ink);color:var(--paper);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.circle.light{background:var(--paper);color:var(--ink)}
+.circle:hover{transform:translateY(-3px) scale(1.06);box-shadow:0 0 0 4px rgba(255,255,255,.22)}
+.circle svg{width:17px;height:17px}
+
+.hero-copy{display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center;gap:22px;padding:60px 24px 0}
+.pill{white-space:nowrap;display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 14px 0 6px;border-radius:999px;background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25);font-size:12.5px;font-weight:500}
+.pill .short{display:none}
+.pill b{display:inline-grid;place-items:center;height:20px;padding:0 8px;border-radius:99px;background:var(--paper);color:var(--ink);font-weight:600;font-size:11.5px}
+.hero h1{font-size:clamp(2.6rem,6.4vw,5.1rem);line-height:.98;letter-spacing:-.05em;max-width:14ch}
+.hero h1 .dim{color:rgba(255,255,255,.55)}
+.hero .lede{max-width:46ch;font-size:16px;opacity:.88}
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:4px}
+
+/* carrusel: las capturas se esconden unas detrás de otras y la del centro es una tablet */
+.car{position:relative;margin-top:58px;height:calc((var(--aw) - 2 * var(--bz)) / 1.95 + 2 * var(--bz) + 40px);-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.ci{position:absolute;left:50%;top:50%;width:var(--aw);height:calc((var(--aw) - 2 * var(--bz)) / 1.95 + 2 * var(--bz));margin:0;padding:var(--bz);border-radius:30px;background:#0A0A0C;box-shadow:inset 0 0 0 2px #2B2B31,0 30px 50px -28px rgba(20,4,40,.8);transform:translate(-50%,-50%);transition:transform 1s var(--ease),opacity .7s ease,filter .7s ease;cursor:pointer;will-change:transform}
+.ci img{width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:18px;background:#fff}
+/* sin el marco de tablet: las fotos de las webs con bordes redondeados */
+.ci{padding:0;background:none;border-radius:18px;overflow:hidden;box-shadow:0 30px 60px -28px rgba(0,0,0,.7)}
+.ci img{border-radius:18px}
+.ci::before{display:none}
+.ci:not(.on){filter:brightness(.8) saturate(.9)}
+.ci:not(.on):hover{filter:brightness(1)}
+.ci.on{cursor:default}
+.car-cap{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:6px;position:relative;z-index:2}
+.car-cap .txt{display:grid;text-align:center;min-width:230px}
+.car-cap b{font-size:15px;font-weight:600;letter-spacing:-.01em;transition:opacity .3s}
+.car-cap small{font-size:13px;opacity:.75;transition:opacity .3s}
+.car-cap.swap b,.car-cap.swap small{opacity:0}
+.arrow{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:var(--paper);box-shadow:inset 0 0 0 1px rgba(255,255,255,.3);transition:background .25s,color .25s,transform .35s var(--ease),box-shadow .35s var(--ease)}
+.arrow:hover{background:var(--paper);color:var(--ink);transform:translateY(-3px);box-shadow:0 0 0 5px rgba(255,255,255,.18)}
+.arrow:active{transform:scale(.94)}
+.arrow svg{width:16px;height:16px;pointer-events:none}
+.arrow.prev svg{transform:rotate(180deg)}
+
+.js .hero-copy>*{animation:fade 1s var(--ease) both}
+.js .hero-copy>:nth-child(2){animation-delay:.08s}
+.js .hero-copy>:nth-child(3){animation-delay:.18s}
+.js .hero-copy>:nth-child(4){animation-delay:.26s}
+.js .car,.js .car-cap{animation:fade 1.2s var(--ease) .35s both}
+@keyframes fade{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* ---------- barra flotante ---------- */
+.float-nav{position:fixed;z-index:50;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:22px;padding:7px 7px 7px 18px;border-radius:999px;background:rgba(251,251,251,.82);backdrop-filter:saturate(1.6) blur(18px);-webkit-backdrop-filter:saturate(1.6) blur(18px);box-shadow:0 0 0 1px rgba(8,8,8,.06),0 14px 40px -18px rgba(8,8,8,.35);transform:translate(-50%,-140%);transition:transform .6s var(--ease);max-width:calc(100% - 32px)}
+.float-nav.show{transform:translate(-50%,0)}
+.float-nav .logo img{height:32px}
+.float-nav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0;font-size:13px;font-weight:500;color:var(--ink-2)}
+.float-nav ul a{display:inline-block;transition:transform .3s var(--ease),color .2s}
+.float-nav ul a:hover{color:var(--ink);transform:translateY(-2px)}
+.float-nav .btn{height:38px;padding:0 16px;font-size:13px}
+
+/* ---------- manifiesto ---------- */
+/* el manifiesto ocupa una pantalla completa, centrado, con aire blanco arriba y abajo */
+.manifesto{min-height:100vh;min-height:100svh;display:grid;place-items:center;padding-block:clamp(80px,10vw,120px)}
+.manifesto .pin{display:grid;place-content:center;justify-items:center;gap:24px;padding-inline:8px}
+.manifesto p{width:min(44ch,calc(100vw - 48px));text-align:center;font-size:clamp(1.6rem,3.1vw,2.55rem);font-weight:600;line-height:1.16;letter-spacing:-.04em;color:#C6C6CB;text-wrap:balance}
+/* el manifiesto ya no se enciende con el scroll: «Somos un estudio digital» en negro,
+   «tu web, tu software y tu marca.» en morado, el resto en gris, y cada palabra se enciende al pasar el mouse */
+.manifesto p .mline{display:inline}
+.manifesto p .w{transition:color 1.1s ease}
+.manifesto p .w.ink{color:var(--ink)}
+.manifesto p .w.key{color:var(--violet-text)}
+.manifesto p .dot{color:var(--violet-text)}
+.manifesto p .w:hover{color:var(--ink);transition:color .08s}
+.manifesto p .w.v:hover{color:var(--violet-text)}
+/* la parte gris de los títulos se enciende en morado al pasar el mouse, como el manifiesto */
+h1 .dim .w,h2 .dim .w{transition:color 1.1s ease}
+h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s}
+.final h2 .dim .w:hover{color:var(--violet-light)}
+
+/* ---------- estudio (cifras) ---------- */
+.studio{background:var(--mist);border-radius:var(--r-panel);padding:clamp(48px,7vw,90px) clamp(18px,4vw,56px)}
+.studio-grid{display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:14px;max-width:980px;margin-inline:auto}
+.me{grid-row:span 2;display:flex;flex-direction:column;gap:20px;background:var(--ink);color:var(--paper);border-radius:var(--r-card);padding:26px;box-shadow:0 30px 60px -30px rgba(8,8,8,.55)}
+.me-top{display:flex;align-items:center;gap:12px}
+.me .chip{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--violet);color:#fff;font-weight:700;font-size:19px;letter-spacing:-.04em}
+.me-top span{font-size:12.5px;color:#A8A8B0;line-height:1.35}
+.me h3{font-size:24px;letter-spacing:-.035em;margin-top:8px}
+.me p{color:#C9C9CF;font-size:14.5px;max-width:36ch}
+.me .btn{margin-top:auto;justify-content:center;background:var(--paper);color:var(--ink);height:46px}
+.me .btn:hover{box-shadow:0 0 0 5px rgba(255,255,255,.14)}
+.stat{background:var(--card);border-radius:var(--r-card);padding:24px;display:grid;gap:14px;align-content:start}
+.stat .num{display:flex;align-items:baseline;gap:8px;font-size:clamp(2.5rem,4.2vw,3.2rem);font-weight:600;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+.stat .num small{font-size:15px;font-weight:600;letter-spacing:-.02em;color:var(--ink-2)}
+.stat p{font-size:13.5px;color:var(--ink-2);line-height:1.45}
+.meter{height:6px;border-radius:99px;background:var(--mist);overflow:hidden;margin-top:4px}
+.meter i{display:block;height:100%;width:100%;border-radius:inherit;background:var(--ink);transform-origin:left;transform:scaleX(var(--p,1));transition:transform 1.6s var(--ease)}
+.meter.v i{background:var(--violet-text)}
+.weeks{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:4px}
+.weeks i{height:6px;border-radius:99px;background:var(--mist);transition:background .35s ease calc(var(--k,0) * .22s)}
+.weeks i.on{background:var(--ink)}
+.weeks i.on.soft{background:var(--violet-text)}
+
+/* ---------- servicios ---------- */
+.block{padding-top:clamp(100px,12vw,150px)}
+.block>.head{margin-bottom:clamp(36px,5vw,56px)}
+.block-left{display:flex;align-items:end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+.block-left p{color:var(--ink-2);max-width:40ch;font-size:15px}
+.features{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(24px,4vw,56px);align-items:center;background:var(--mist);border-radius:var(--r-panel);padding:clamp(28px,4vw,56px)}
+.features .laptop{width:100%}
+.screen .pane{position:absolute;inset:0;opacity:0;transform:scale(1.02);transition:opacity .6s ease,transform .8s var(--ease)}
+.screen .pane{pointer-events:none}
+.screen .pane.on{opacity:1;transform:none;pointer-events:auto;z-index:1}
+.pane button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+.pane{font-family:var(--f-sans);word-spacing:.14em}
+
+/* maqueta 1: una web cuyo color se puede probar */
+.mw{position:absolute;inset:0;display:flex;flex-direction:column;background:#fff;--acc:#4E1E86;font-size:1.3cqw;color:#111}
+.mw-bar{flex:none;display:flex;align-items:center;gap:.8cqw;height:3.4cqw;padding:0 1.6cqw;background:#F4F4F6;border-bottom:1px solid #E4E4E8}
+.mw-bar i{width:.85cqw;height:.85cqw;border-radius:50%;background:#FF5F57;flex:none}
+.mw-bar i:nth-child(2){background:#FEBC2E}.mw-bar i:nth-child(3){background:#28C840}
+.mw-url{margin-inline:auto;transform:translateX(-2cqw);height:2cqw;padding:0 3cqw;border-radius:99px;background:#fff;box-shadow:0 0 0 1px #E4E4E8;display:flex;align-items:center;font-size:1.15cqw;color:#666}
+.mw-site{flex:1;padding:2.4cqw 4cqw 3cqw;display:grid;grid-template-rows:auto 1fr auto;gap:2.2cqw;min-height:0}
+.mw-nav{display:flex;align-items:center;gap:2.4cqw;font-size:1.2cqw;color:#555}
+.mw-nav b{margin-right:auto;font-size:1.8cqw;letter-spacing:-.04em;color:#111}
+.mw-nav b i{font-style:normal;color:var(--acc);transition:color .5s}
+.mw-cta{font-style:normal;padding:.7cqw 1.6cqw;border-radius:99px;background:#111;color:#fff;font-weight:600}
+.mw-hero{display:grid;grid-template-columns:1.1fr 1fr;gap:3cqw;align-items:center;min-height:0}
+.mw-copy small{display:inline-block;padding:.4cqw 1.2cqw;border-radius:99px;background:color-mix(in srgb,var(--acc) 14%,#fff);color:var(--acc);font-weight:600;font-size:1.1cqw;transition:background .5s,color .5s}
+.mw-copy .mw-h{margin:1.4cqw 0 1cqw;font-size:3.9cqw;line-height:1;letter-spacing:-.05em;font-weight:600}
+.mw-copy .mw-h em{font-style:normal;color:var(--acc);transition:color .5s}
+.mw-copy p{font-size:1.35cqw;color:#666;max-width:30ch;line-height:1.45}
+.mw-btns{display:flex;gap:1cqw;margin-top:2cqw}
+.mw-btns button{padding:1cqw 2.2cqw;border-radius:99px;font-weight:600;font-size:1.3cqw;transition:transform .3s var(--ease),background .5s,box-shadow .3s}
+.pane .mw-b1{background:var(--acc);color:#fff}
+.pane .mw-b2{box-shadow:inset 0 0 0 .15cqw #111}
+.mw-btns button:hover{transform:translateY(-.4cqw)}
+.mw-art{position:relative;height:100%;min-height:18cqw}
+.mw-card{position:absolute;border-radius:1.4cqw;transition:transform .6s var(--ease),background .5s}
+.mw-card.c1{inset:0 12% 16% 0;background:linear-gradient(140deg,color-mix(in srgb,var(--acc) 22%,#fff),var(--acc))}
+.mw-card.c2{right:0;bottom:0;width:50%;height:42%;background:#fff;box-shadow:0 1.4cqw 2.6cqw -1cqw rgba(0,0,0,.28);padding:1.4cqw;display:grid;gap:.7cqw;align-content:start}
+.mw-card.c2 i{display:block;height:.9cqw;border-radius:99px;background:#E6E6EA}
+.mw-card.c2 i:first-child{width:50%;background:var(--acc);transition:background .5s}
+.mw-art:hover .c1{transform:rotate(-2deg) scale(1.02)}
+.mw-art:hover .c2{transform:translate(-1cqw,-1cqw)}
+.mw-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6cqw}
+.mw-row div{height:4cqw;border-radius:1cqw;background:#F3F3F5;transition:transform .3s var(--ease),background .3s}
+.mw-row div:hover{transform:translateY(-.4cqw);background:color-mix(in srgb,var(--acc) 12%,#fff)}
+.mw-tool{position:absolute;right:2cqw;bottom:2cqw;display:flex;align-items:center;gap:.9cqw;padding:.9cqw 1.2cqw .9cqw 1.8cqw;border-radius:99px;background:#111;color:#fff;font-size:1.15cqw;box-shadow:0 1.4cqw 2.6cqw -1cqw rgba(0,0,0,.45)}
+.mw-tool button{width:2.2cqw;height:2.2cqw;border-radius:50%;background:var(--c);box-shadow:0 0 0 .2cqw #111;transition:transform .3s var(--ease),box-shadow .3s}
+.mw-tool button.on{box-shadow:0 0 0 .2cqw #111,0 0 0 .4cqw #fff}
+.mw-tool button:hover{transform:scale(1.18)}
+
+/* maqueta 2: panel de software con pestañas y barras */
+.sw{position:absolute;inset:0;display:grid;grid-template-columns:6.4cqw 1fr;background:#F4F4F6;--acc:#4E1E86;font-size:1.25cqw;color:#111}
+.sw-side{background:#0E0E11;display:flex;flex-direction:column;align-items:center;gap:1.4cqw;padding:2cqw 0}
+.sw-side .lg{width:3.2cqw;height:3.2cqw;border-radius:.9cqw;background:var(--acc);display:grid;place-items:center;color:#fff;font-weight:700;font-size:1.4cqw;margin-bottom:1cqw;transition:background .5s}
+.pane .sw-side button{width:3.6cqw;height:3.6cqw;border-radius:1cqw;display:grid;place-items:center;color:#77777F;transition:background .3s,color .3s}
+.sw-side button svg{width:1.7cqw;height:1.7cqw}
+.pane .sw-side button.on,.pane .sw-side button:hover{background:#22222A;color:#fff}
+.sw-colors{margin-top:auto;display:grid;justify-items:center;gap:1cqw}
+.pane .sw-side .sw-colors button{width:1.8cqw;height:1.8cqw;border-radius:50%;background:var(--c);box-shadow:0 0 0 .2cqw #0E0E11;transition:transform .3s var(--ease),box-shadow .3s}
+.pane .sw-side .sw-colors button.on{background:var(--c);box-shadow:0 0 0 .2cqw #0E0E11,0 0 0 .4cqw #fff}
+.pane .sw-side .sw-colors button:hover{background:var(--c);transform:scale(1.18)}
+.sw-main{padding:2.2cqw 2.6cqw;display:grid;grid-template-rows:auto auto 1fr;gap:1.6cqw;min-height:0}
+.sw-head{display:flex;align-items:center;justify-content:space-between;gap:1cqw}
+.sw-head b{font-size:2.3cqw;letter-spacing:-.04em;line-height:1.1}
+.sw-head small{display:block;font-size:1.1cqw;color:#8A8A92;font-weight:400;letter-spacing:0}
+.sw-tabs{display:flex;padding:.4cqw;border-radius:99px;background:#E6E6EA}
+.pane .sw-tabs button{padding:.6cqw 1.6cqw;border-radius:99px;font-size:1.15cqw;font-weight:600;color:#6A6A72;transition:background .3s,color .3s,box-shadow .3s}
+.pane .sw-tabs button.on{background:#fff;color:#111;box-shadow:0 .2cqw .6cqw rgba(0,0,0,.12)}
+.sw-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4cqw}
+.sw-kpi{background:#fff;border-radius:1.4cqw;padding:1.4cqw 1.6cqw;display:grid;gap:.3cqw;transition:transform .3s var(--ease),box-shadow .3s,background .5s}
+.sw-kpi:hover{transform:translateY(-.4cqw);box-shadow:0 1.2cqw 2.2cqw -1.2cqw rgba(0,0,0,.28)}
+.sw-kpi span{font-size:1.1cqw;color:#8A8A92}
+.sw-kpi b{font-size:2.7cqw;letter-spacing:-.05em;font-variant-numeric:tabular-nums;line-height:1.1}
+.sw-kpi em{font-style:normal;font-size:1.05cqw;color:#18A058;font-weight:600}
+.sw-kpi.dark{background:var(--acc);color:#fff}
+.sw-kpi.dark span{color:rgba(255,255,255,.7)}.sw-kpi.dark em{color:#B9F5CF}
+.sw-bottom{display:grid;grid-template-columns:1.5fr 1fr;gap:1.4cqw;min-height:0}
+.sw-chart{background:#fff;border-radius:1.4cqw;padding:1.4cqw 1.6cqw 1.2cqw;display:grid;grid-template-rows:auto 1fr auto;gap:.8cqw;min-height:0}
+.sw-chart>span,.sw-list>span{font-size:1.15cqw;font-weight:600}
+.sw-bars{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:.8cqw;align-items:end;min-height:0;padding-top:2.4cqw}
+.pane .sw-bars button{position:relative;height:100%;display:flex;align-items:flex-end}
+.sw-bars i{display:block;width:100%;height:var(--h);border-radius:.6cqw .6cqw .2cqw .2cqw;background:color-mix(in srgb,var(--acc) 18%,#fff);transition:height .7s var(--ease),background .3s}
+.sw-bars button:hover i,.sw-bars button.on i{background:var(--acc)}
+.sw-bars button::after{content:attr(data-v);position:absolute;left:50%;bottom:calc(var(--h) + .6cqw);transform:translate(-50%,.4cqw);padding:.3cqw .7cqw;border-radius:.5cqw;background:#111;color:#fff;font-size:1cqw;white-space:nowrap;opacity:0;transition:opacity .2s,transform .2s,bottom .7s var(--ease);pointer-events:none}
+.sw-bars button:hover::after,.sw-bars button.on::after{opacity:1;transform:translate(-50%,0)}
+.sw-bars:hover button.on:not(:hover)::after{opacity:0}
+.sw-bars:hover button.on:not(:hover) i{background:color-mix(in srgb,var(--acc) 18%,#fff)}
+.sw-days{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:.8cqw;text-align:center;font-size:1cqw;color:#9A9AA2}
+.sw-list{background:#fff;border-radius:1.4cqw;padding:1.4cqw 1.6cqw;display:grid;align-content:start;gap:.7cqw;font-size:1.1cqw}
+.sw-row{display:flex;align-items:center;justify-content:space-between;gap:.8cqw;padding:.6cqw 0;border-bottom:1px solid #F0F0F3;transition:transform .3s var(--ease)}
+.sw-row:hover{transform:translateX(.5cqw)}
+.sw-row b{font-weight:600}
+.sw-row small{display:block;color:#9A9AA2;font-size:.95cqw}
+.sw-pill{padding:.25cqw .8cqw;border-radius:99px;font-size:.95cqw;font-weight:600;white-space:nowrap}
+.sw-pill.ok{background:#E3F6EA;color:#18A058}.sw-pill.wait{background:#FFF3D6;color:#A86B00}.sw-pill.new{background:color-mix(in srgb,var(--acc) 14%,#fff);color:var(--acc)}
+
+/* maqueta 3: kit de marca que cambia de color y tipografía */
+.br{position:absolute;inset:0;display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:1fr auto;gap:1.8cqw;padding:2.4cqw;background:#F1F0EE;--b:#4E1E86;font-size:1.2cqw;color:#111}
+.br-lbl{font-family:var(--f-mono);font-size:1cqw;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+.br-logo{position:relative;border-radius:1.8cqw;background:var(--b);color:#fff;padding:2cqw;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;transition:background .6s var(--ease)}
+.br-logo::after{content:"";position:absolute;right:-12%;bottom:-30%;width:60%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.08);transition:transform .8s var(--ease)}
+.br-logo:hover::after{transform:scale(1.15) translate(-4%,-4%)}
+.br-word{position:relative;z-index:1;font-size:6.6cqw;line-height:1;letter-spacing:-.05em;font-weight:700;transition:opacity .25s,transform .35s var(--ease)}
+.br-word i{font-style:normal;opacity:.55}
+.br-word.swap{opacity:0;transform:translateY(1cqw)}
+.br-word.f1{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-style:italic;letter-spacing:-.03em}
+.br-word.f2{font-family:var(--f-mono);font-weight:500;letter-spacing:-.06em}
+.br-word.f3{font-weight:300;letter-spacing:-.02em}
+.br-foot{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:1cqw}
+.pane .br-font{display:inline-flex;align-items:center;gap:.6cqw;padding:.7cqw 1.4cqw;border-radius:99px;background:rgba(255,255,255,.16);color:#fff;font-size:1.1cqw;font-weight:600;transition:background .3s,transform .3s var(--ease)}
+.pane .br-font:hover{background:rgba(255,255,255,.28);transform:translateY(-.3cqw)}
+.br-font b{font-size:1.5cqw}
+.br-side{display:grid;grid-template-rows:1fr 1fr;gap:1.8cqw;min-height:0}
+.br-card{position:relative;border-radius:1.2cqw;background:#fff;padding:1.6cqw;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1cqw 2cqw -1.4cqw rgba(0,0,0,.35);transform:rotate(-3deg);transition:transform .5s var(--ease)}
+.br-card:hover{transform:rotate(0) translateY(-.5cqw)}
+.br-card .w{font-weight:700;font-size:1.9cqw;letter-spacing:-.05em}
+.br-card .w i{font-style:normal;color:var(--b);transition:color .6s}
+.br-card .ln2{display:grid;gap:.4cqw;font-size:.95cqw;color:#777}
+.br-card::after{content:"";position:absolute;right:1.6cqw;bottom:1.6cqw;width:3cqw;height:.6cqw;border-radius:99px;background:var(--b);transition:background .6s}
+.br-apps{display:grid;grid-template-columns:1fr 1.4fr;gap:1.8cqw;min-height:0}
+.br-icon{border-radius:2cqw;background:var(--b);display:grid;place-items:center;color:#fff;font-weight:700;font-size:4cqw;letter-spacing:-.06em;box-shadow:0 1cqw 2cqw -1.2cqw rgba(0,0,0,.4);transition:background .6s,transform .5s var(--ease)}
+.br-icon:hover{transform:translateY(-.5cqw) rotate(4deg)}
+.br-post{border-radius:1.2cqw;background:#111;color:#fff;padding:1.4cqw;display:flex;flex-direction:column;justify-content:space-between;transition:transform .5s var(--ease)}
+.br-post:hover{transform:translateY(-.5cqw)}
+.br-post b{font-size:1.7cqw;line-height:1.05;letter-spacing:-.04em}
+.br-post b em{font-style:normal;color:color-mix(in srgb,var(--b) 55%,#fff);transition:color .6s}
+.br-post span{display:block;height:.6cqw;width:40%;border-radius:99px;background:var(--b);transition:background .6s}
+.br-pal{grid-column:1/-1;display:flex;align-items:center;gap:1.2cqw}
+.br-pal .br-lbl{margin-right:auto}
+.pane .br-pal button{display:flex;align-items:center;gap:.6cqw;padding:.5cqw 1.1cqw .5cqw .5cqw;border-radius:99px;background:#fff;font-size:1.05cqw;font-weight:600;box-shadow:0 0 0 1px #E2E2E6;transition:transform .3s var(--ease),box-shadow .3s}
+.pane .br-pal button:hover{transform:translateY(-.3cqw)}
+.pane .br-pal button.on{box-shadow:0 0 0 .2cqw #111}
+.br-pal button i{width:1.8cqw;height:1.8cqw;border-radius:50%;background:var(--c)}
+
+.acc{display:grid;gap:12px}
+.acc-item{background:var(--card);border-radius:18px;box-shadow:0 0 0 1px var(--line);transition:box-shadow .35s,transform .45s var(--ease)}
+.acc-item:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--line),0 18px 34px -24px rgba(8,8,8,.35)}
+.acc-item.open{box-shadow:0 0 0 1px var(--line),0 20px 40px -26px rgba(8,8,8,.3)}
+.acc-h{margin:0;font:inherit}
+/* preguntas frecuentes: <details> nativo con la misma tarjeta del acordeón de servicios */
+.faq{max-width:760px;margin-inline:auto;display:grid;gap:12px}
+.faq-item{background:var(--card);border-radius:18px;box-shadow:0 0 0 1px var(--line);transition:box-shadow .35s}
+.faq-item.is-open{box-shadow:0 0 0 1px var(--line),0 20px 40px -26px rgba(8,8,8,.3)}
+.faq-item summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 20px 20px 22px;cursor:pointer}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item h3{margin:0;font-size:16px;font-weight:600;letter-spacing:-.02em;line-height:1.3}
+.faq-item .ic{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--mist);transition:transform .45s var(--ease),background .3s}
+.faq-item .ic svg{width:14px;height:14px}
+.faq-item.is-open .ic{transform:rotate(180deg);background:var(--violet);color:var(--paper)}
+.faq-a{overflow:hidden}
+.faq-item p{margin:0;padding:0 22px 20px;color:var(--ink-2);font-size:14.5px;line-height:1.55;max-width:62ch}
+.acc-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;background:none;border:0;padding:20px 20px 20px 22px;text-align:left;font-size:16px;font-weight:600;letter-spacing:-.02em}
+.acc-btn .ic{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--mist);transition:transform .45s var(--ease),background .3s}
+.acc-btn .ic svg{width:14px;height:14px}
+.acc-item.open .ic{transform:rotate(180deg);background:var(--ink);color:var(--paper)}
+.acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s var(--ease)}
+.acc-item.open .acc-panel{grid-template-rows:1fr}
+.acc-panel>div{overflow:hidden}
+.acc.measure .acc-panel{transition:none!important}
+.acc-inner{padding:0 22px 20px;display:grid;gap:14px}
+.acc-inner p{color:var(--ink-2);font-size:14px;max-width:46ch}
+.ticks{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:0;padding:0}
+.ticks li{font-size:12.5px;padding:5px 11px;border-radius:99px;background:var(--mist)}
+.more{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:var(--violet-text);justify-self:start;transition:transform .35s var(--ease)}
+.more svg{width:14px;height:14px;transition:transform .3s var(--ease)}
+.more:hover{transform:translateY(-2px)}
+.more:hover svg{transform:translateX(4px)}
+.progress{height:2px;margin:0 22px 16px;border-radius:2px;background:var(--mist);overflow:hidden}
+.progress i{display:block;height:100%;width:100%;background:var(--violet-text);transform-origin:left;transform:scaleX(0)}
+.acc-item.open.auto .progress i{animation:prog 7s linear forwards}
+.acc-item:not(.open) .progress,.acc-item.open:not(.auto) .progress{display:none}
+@keyframes prog{to{transform:scaleX(1)}}
+
+/* ---------- proceso: Mac con ventanas ---------- */
+.display{container-type:inline-size;width:min(780px,100%,calc((100vh - 170px) * 1.32));margin-inline:auto}
+.sd-frame{padding:1cqw;border-radius:2.4cqw;background:linear-gradient(160deg,#F1F1F4,#CDCDD4);box-shadow:inset 0 0 0 1px rgba(255,255,255,.7),0 1.2cqw 1.6cqw -1.2cqw rgba(8,8,8,.3)}
+.sd-screen{position:relative;aspect-ratio:16/10;border-radius:1.5cqw;overflow:hidden;border:.9cqw solid #0A0A0C;background:#E8DCC4 center/cover no-repeat}
+.sd-screen.bg-on{background-image:url(/assets/inicio/fondo-collage.webp)}
+.sd-neck{width:15%;height:7cqw;margin-inline:auto;background:linear-gradient(90deg,#BEBEC6,#EDEDF1 45%,#C4C4CC);clip-path:polygon(8% 0,92% 0,100% 100%,0 100%)}
+.sd-foot{position:relative;z-index:1;width:32%;height:1.4cqw;margin-inline:auto;border-radius:.5cqw .5cqw 1cqw 1cqw;background:linear-gradient(#E8E8EC,#B4B4BC)}
+.sd-ground{width:56%;height:4cqw;margin:-2.2cqw auto 0;border-radius:50%;background:radial-gradient(closest-side,rgba(8,8,8,.32),rgba(8,8,8,.12) 55%,transparent);filter:blur(.6cqw)}
+.menubar{position:absolute;inset:0 0 auto 0;height:2.6cqw;display:flex;align-items:center;gap:2cqw;padding:0 2cqw;background:rgba(246,242,234,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:#1C1C1F;font-size:1.2cqw;z-index:9}
+.menubar b{font-weight:700;letter-spacing:-.03em}
+.menubar #mbApp{font-weight:600}
+.menubar .mb-r{margin-left:auto}
+.win{position:absolute;display:flex;flex-direction:column;border-radius:1.1cqw;overflow:hidden;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.16),0 3cqw 6cqw -1.5cqw rgba(30,20,0,.55);opacity:0;transform:translateY(18cqw) scale(.1);transform-origin:50% 100%;transition:transform .7s var(--ease),opacity .45s ease,filter .5s;z-index:2;pointer-events:none}
+.win.open{opacity:1;transform:none}
+.win.back{filter:brightness(.85) saturate(.85)}
+.win.front{z-index:5}
+.win-bar{flex:none;display:flex;align-items:center;gap:.8cqw;height:3cqw;padding:0 1.3cqw;background:#ECECF0;border-bottom:1px solid #DADAE0;font-size:1.15cqw;color:var(--ink-2)}
+.win-bar i{width:.85cqw;height:.85cqw;border-radius:50%;flex:none;background:#FF5F57}
+.win-bar i:nth-child(2){background:#FEBC2E}.win-bar i:nth-child(3){background:#28C840}
+.win-bar span{margin-inline:auto;transform:translateX(-2cqw);font-weight:500}
+.win-design{left:6%;top:8%;width:70%;height:70%}
+.win-code{left:24%;top:12%;width:62%;height:62%;background:#101016}
+.win-code .win-bar{background:#1B1B23;border-color:#26262F;color:#9A9AAA}
+.win-web{left:13%;top:7%;width:74%}
+
+/* app de diseño (un sitio en construcción, sin cliente) */
+.ds{flex:1;display:grid;grid-template-columns:13cqw 1fr 13cqw;min-height:0;font-size:1.05cqw;color:var(--ink-2)}
+.ds-layers{display:grid;align-content:start;gap:.3cqw;padding:1.2cqw .8cqw;background:#F7F7F9;border-right:1px solid #E3E3E8}
+.ds-layers b,.ds-props b{display:block;color:var(--ink);font-weight:600;font-size:1.1cqw;margin:0 0 .6cqw .4cqw}
+.ds-layer{display:flex;align-items:center;gap:.6cqw;padding:.45cqw .6cqw;border-radius:.5cqw;transition:background .3s,color .3s}
+.ds-layer::before{content:"";width:.9cqw;height:.9cqw;border-radius:.2cqw;border:1px solid currentColor;flex:none}
+.ds-layer.on{background:var(--violet-soft);color:var(--violet)}
+.ds-canvas{position:relative;display:grid;place-items:center;background-color:#E6E6EB;background-image:radial-gradient(#D0D0D8 .12cqw,transparent .14cqw);background-size:1.6cqw 1.6cqw}
+.frame{position:relative;width:88%;aspect-ratio:16/10;background:#fff;box-shadow:0 .6cqw 1.6cqw -.6cqw rgba(0,0,0,.25)}
+.frame::before{content:"Inicio · Escritorio";position:absolute;left:0;top:-1.7cqw;font-size:1cqw;color:var(--ink-2)}
+.el{position:absolute;border-radius:.4cqw;background:var(--ink);transition:opacity .4s ease,transform .5s var(--ease),background .5s ease,box-shadow .5s ease}
+.el.g{background:#D5D5DC}
+.el.nav-logo{left:6%;top:7%;width:11%;height:4.5%;border-radius:99px}
+.el.nav-l1{left:52%;top:8.5%;width:7%;height:2%}.el.nav-l2{left:62%;top:8.5%;width:7%;height:2%}.el.nav-l3{left:72%;top:8.5%;width:7%;height:2%}
+.el.nav-b{left:83%;top:6.5%;width:11%;height:5.5%;border-radius:99px}
+.el.h1{left:6%;top:30%;width:46%;height:7.5%}
+.el.h2{left:6%;top:41%;width:34%;height:7.5%}
+.el.t1{left:6%;top:55%;width:40%;height:2.4%}
+.el.t2{left:6%;top:60%;width:31%;height:2.4%}
+.el.b1{left:6%;top:70%;width:15%;height:8%;border-radius:99px;background:#BDBDC6}
+.el.b2{left:23%;top:70%;width:13%;height:8%;border-radius:99px;background:transparent;box-shadow:inset 0 0 0 .2cqw var(--ink)}
+.el.img{left:57%;top:24%;width:37%;height:62%;border-radius:1cqw;background:linear-gradient(140deg,var(--violet-soft),var(--violet-light) 55%,var(--violet));overflow:hidden}
+.el.img::after{transition:opacity .5s ease;content:"";position:absolute;left:14%;bottom:12%;width:44%;height:30%;border-radius:.8cqw;background:rgba(255,255,255,.85);box-shadow:0 .6cqw 1.2cqw -.4cqw rgba(40,10,80,.35)}
+.selbox{position:absolute;left:5.4%;top:69%;width:16.2%;height:10%;border:.14cqw solid var(--violet);opacity:0;transition:opacity .3s,left .45s var(--ease),top .45s var(--ease),width .45s var(--ease),height .45s var(--ease)}
+.selbox::before,.selbox::after{content:"";position:absolute;width:.7cqw;height:.7cqw;background:#fff;border:.14cqw solid var(--violet)}
+.selbox::before{left:-.45cqw;top:-.45cqw}.selbox::after{right:-.45cqw;bottom:-.45cqw}
+/* Diseño: la página arranca como boceto gris y cada bloque toma su diseño cuando el cursor lo elige */
+.win-design.run .el:not(.in){background:#ECECF0;box-shadow:inset 0 0 0 .1cqw #D6D6DD}
+.win-design.run .el.img:not(.in)::after{opacity:0}
+.win-design.run .el.in{animation:elIn .45s var(--ease)}
+@keyframes elIn{40%{transform:scale(1.05)}}
+.win-design.paint .el.b1,.win-design.done .el.b1{background:var(--violet)}
+.selbox.on,.win-design.done .selbox{opacity:1}
+.ds-props{display:grid;align-content:start;gap:1.2cqw;padding:1.2cqw;border-left:1px solid #E3E3E8}
+.ds-props .row{display:flex;align-items:center;justify-content:space-between;gap:.6cqw}
+.ds-props .ds-sw{width:1.8cqw;height:1.8cqw;border-radius:50%;background:#BDBDC6;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);transition:background .5s}
+.win-design.paint .ds-props .ds-sw,.win-design.done .ds-props .ds-sw{background:var(--violet)}
+.ds-props .hex{font-family:var(--f-mono);font-size:1cqw}
+
+/* editor de código */
+.code{flex:1;display:grid;grid-template-rows:auto 1fr auto;min-height:0;font-family:var(--f-mono);font-size:1.3cqw;color:#E6E6F0}
+.code-tabs{display:flex;background:#15151C;font-size:1.05cqw;color:#7C7C8C}
+.code-tabs span{padding:.8cqw 1.6cqw;border-right:1px solid #22222B}
+.code-tabs span.on{background:#101016;color:#E6E6F0;box-shadow:inset 0 .18cqw 0 var(--violet-light)}
+.code-body{padding:1.6cqw;display:grid;align-content:start;gap:.55cqw;counter-reset:ln}
+.ln{display:block;white-space:pre;overflow:hidden;width:0;line-height:1.5}
+.ln::before{counter-increment:ln;content:counter(ln);display:inline-block;width:2.6cqw;color:#4A4A58}
+.code .k{color:#C6A8F0}.code .f{color:#7FD1FF}.code .s{color:#A6E3A1}.code .c{color:#6B6B7B}
+.term{border-top:1px solid #22222B;padding:1cqw 1.6cqw;font-size:1.1cqw;color:#9A9AAA;display:grid;gap:.4cqw;background:#0C0C11}
+.term .ok{color:#A6E3A1;opacity:0;transition:opacity .4s}
+.win-code.built .term .ok{opacity:1}
+
+/* navegador: la captura entra completa, sin recortes */
+.web-chrome{flex:none;display:flex;align-items:center;gap:1cqw;height:3cqw;padding:0 1.3cqw;background:#ECECF0;border-bottom:1px solid #DADAE0}
+.web-chrome i{width:.85cqw;height:.85cqw;border-radius:50%;flex:none;background:#FF5F57}
+.web-chrome i:nth-child(2){background:#FEBC2E}.web-chrome i:nth-child(3){background:#28C840}
+.web-chrome .u{margin-inline:auto;transform:translateX(-2cqw);display:flex;align-items:center;gap:.6cqw;height:1.9cqw;padding:0 2.4cqw;border-radius:99px;background:#fff;font-size:1.1cqw;color:var(--ink-2)}
+.web-chrome .u::before{content:"";width:.8cqw;height:.8cqw;border-radius:50%;background:#28C840}
+.web-body{position:relative;aspect-ratio:1440/738;overflow:hidden;background:#F6F6F8}
+.web-body img{width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transform:scale(1.03);transition:opacity .8s ease .9s,transform 1.4s var(--ease) .9s}
+.loadbar{position:absolute;left:0;top:0;height:.35cqw;width:0;background:var(--violet);z-index:2}
+.win-web.run .loadbar{animation:load 1.1s var(--ease) forwards}
+.win-web.run .web-body img,.win-web.done .web-body img{opacity:1;transform:none}
+@keyframes load{0%{width:0;opacity:1}85%{width:100%;opacity:1}100%{width:100%;opacity:0}}
+.toast{position:absolute;right:2cqw;bottom:2cqw;display:flex;align-items:center;gap:1cqw;padding:1.2cqw 1.6cqw;border-radius:1.2cqw;background:var(--ink);color:#fff;font-size:1.25cqw;box-shadow:0 2cqw 4cqw -1.5cqw rgba(0,0,0,.6);opacity:0;transform:translateY(1.5cqw);transition:opacity .5s ease,transform .6s var(--ease)}
+.toast i{display:grid;place-items:center;width:2.2cqw;height:2.2cqw;border-radius:50%;background:#28C840;font-style:normal;font-size:1.2cqw}
+.toast small{display:block;color:#A9A9B6;font-size:1.05cqw}
+.win-web.published .toast{opacity:1;transform:none}
+
+/* dock */
+.dock{position:absolute;left:50%;bottom:1cqw;transform:translateX(-50%);display:flex;align-items:flex-end;gap:.55cqw;padding:.6cqw .7cqw;border-radius:1.6cqw;background:rgba(246,242,234,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.55),0 1cqw 2cqw -1cqw rgba(0,0,0,.35);z-index:8}
+.app{position:relative;width:3.7cqw;height:3.7cqw;border-radius:.9cqw;border:0;padding:0;background:none;display:block;transition:transform .35s var(--ease)}
+.app svg{width:100%;height:100%;display:block}
+.app:hover{transform:translateY(-.6cqw) scale(1.12)}
+.app::after{content:"";position:absolute;bottom:-.5cqw;left:50%;width:.4cqw;height:.4cqw;margin-left:-.2cqw;border-radius:50%;background:#2A2A2E;opacity:0;transition:opacity .3s}
+.app.live::after{opacity:.85}
+.app.bounce{animation:bounce .6s var(--ease)}
+@keyframes bounce{30%{transform:translateY(-1.3cqw)}60%{transform:translateY(0)}80%{transform:translateY(-.4cqw)}}
+.dock .sep{width:1px;align-self:stretch;margin:.3cqw .3cqw;background:rgba(0,0,0,.18)}
+.cursor{position:absolute;left:62%;top:58%;width:1.9cqw;margin:-.16cqw 0 0 -.32cqw;z-index:10;transition:left .8s var(--ease),top .8s var(--ease);pointer-events:none;filter:drop-shadow(0 .2cqw .3cqw rgba(0,0,0,.4))}
+/* la punta de la flecha (4,2 de 24) queda justo en el punto al que apunta el cursor.
+   El SVG necesita alto propio: sin él, el navegador le da 150 px y dibuja la flecha centrada, muy por debajo */
+.cursor svg{width:100%;height:auto;aspect-ratio:1/1;display:block;transform-origin:17% 8%;transition:transform .15s}
+.cursor.click svg{transform:scale(.8)}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;list-style:none;margin:32px auto 0;padding:0;max-width:780px}
+.steps button{width:100%;height:100%;text-align:left;border:0;background:var(--mist);border-radius:18px;padding:16px 18px;display:grid;gap:5px;transition:background .4s,color .4s,transform .45s var(--ease),box-shadow .45s var(--ease)}
+.steps button:hover{transform:translateY(-4px);box-shadow:0 18px 34px -24px rgba(8,8,8,.4)}
+.steps .n{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);transition:color .4s}
+.steps b{font-size:16px;font-weight:600;letter-spacing:-.02em}
+.steps small{font-size:13px;color:var(--ink-2);line-height:1.45;transition:color .4s}
+.steps button.on{background:var(--ink);color:var(--paper)}
+.steps button.on .n,.steps button.on small{color:#B4B4BC}
+
+/* ---------- pantallas ---------- */
+.devices{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.dev{position:relative;background:var(--mist);border-radius:var(--r-panel);padding:32px 28px 0;overflow:hidden;display:flex;flex-direction:column;align-items:center;gap:10px;min-height:470px;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.dev:hover{transform:translateY(-5px);box-shadow:0 26px 50px -30px rgba(8,8,8,.4)}
+.dev .badge{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 14px;border-radius:99px;background:var(--card);font-size:13px;font-weight:600;box-shadow:0 6px 18px -10px rgba(8,8,8,.25)}
+.dev .badge svg{width:15px;height:15px}
+.dev h3{font-size:17px;letter-spacing:-.02em}
+.dev p{font-size:13.5px;color:var(--ink-2);text-align:center;max-width:34ch}
+.dev .stagebox{margin-top:auto;width:100%;display:flex;justify-content:center;height:260px;align-items:flex-start;padding-top:20px}
+.dev .laptop{width:min(470px,86%);transition:transform .9s var(--ease)}
+.dev:hover .laptop,.dev:hover .phone{transform:translateY(-10px)}
+.phone{flex:none;width:210px;height:430px;border-radius:40px;background:#0A0A0C;padding:9px;box-shadow:inset 0 0 0 2px #2B2B31,0 30px 60px -30px rgba(8,8,8,.5);transition:transform .9s var(--ease);position:relative}
+.phone .scr{position:relative;width:100%;height:100%;border-radius:32px;overflow:hidden;background:#fff}
+.phone .island{position:absolute;z-index:3;top:17px;left:50%;width:70px;height:20px;margin-left:-35px;border-radius:99px;background:#0A0A0C}
+.ms{position:absolute;inset:0;display:flex;flex-direction:column}
+.ms-status{display:flex;justify-content:space-between;align-items:center;height:42px;padding:0 22px 0 26px;font-size:11px;font-weight:600;color:var(--ink)}
+.ms-status i{display:block;width:16px;height:8px;border-radius:2px;border:1.5px solid var(--ink)}
+.ms-nav{display:flex;justify-content:space-between;align-items:center;padding:6px 14px 10px;border-bottom:1px solid var(--line)}
+.ms-nav b{font-size:11px;font-weight:700;color:#0F2C59;letter-spacing:-.01em}
+.ms-nav span{font-size:8px;font-weight:600;color:#fff;background:#0F2C59;padding:5px 9px;border-radius:99px}
+.ms-body{padding:14px 14px 10px;display:grid;gap:7px}
+.ms-k{font-size:6.5px;letter-spacing:.08em;text-transform:uppercase;color:#5B7FB0;font-weight:600}
+.ms-h{font-weight:700;font-size:15.5px;line-height:1.12;letter-spacing:-.02em;color:#0F2C59}
+.ms-h mark{background:#FFD43B;color:inherit;padding:0 2px}
+.ms-p{font-size:8.5px;color:var(--ink-2);line-height:1.45}
+.ms-btn{justify-self:start;margin-top:2px;padding:7px 12px;border-radius:99px;background:#0F2C59;color:#fff;font-size:8px;font-weight:600}
+.ms-img{position:relative;flex:1;margin:4px 10px 0;border-radius:12px 12px 0 0;overflow:hidden;min-height:150px}
+.ms-img img{position:absolute;top:0;right:0;height:100%;width:auto;max-width:none}
+
+/* ---------- planes: las de los lados quedan detrás de la negra ---------- */
+.toggle{display:inline-flex;align-items:center;gap:12px;font-size:13px;font-weight:600;margin-top:6px}
+.toggle span{color:var(--ink-3);transition:color .3s;cursor:pointer}
+.toggle span.act{color:var(--ink)}
+.switch{position:relative;width:46px;height:26px;border-radius:99px;border:0;background:var(--ink);padding:0;transition:transform .3s var(--ease)}
+.switch:hover{transform:scale(1.06)}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--paper);transition:transform .45s var(--ease)}
+.switch[aria-checked="true"]::after{transform:translateX(20px)}
+.plans{display:flex;justify-content:center;align-items:stretch;max-width:1040px;margin-inline:auto}
+.plan{position:relative;flex:0 1 340px;display:flex;flex-direction:column;gap:22px;background:var(--mist);border-radius:var(--r-card);padding:28px 26px 26px;z-index:1;transform:scale(.94);transition:background .6s var(--ease),color .6s var(--ease),transform .6s var(--ease),box-shadow .6s var(--ease),padding .6s var(--ease)}
+.plan.pos-l{padding-right:52px}
+.plan.pos-r{padding-left:52px}
+.plan.pos-l:hover,.plan.pos-r:hover{transform:scale(.94) translateY(-8px)}
+.plan.featured{z-index:3;margin-inline:-30px;background:var(--ink);color:var(--paper);transform:none;box-shadow:0 40px 70px -36px rgba(8,8,8,.75),0 0 0 6px var(--paper)}
+.plan.featured:hover{transform:translateY(-6px)}
+.plan .pname{font-size:14px;font-weight:600;text-align:center}
+.plan .price{text-align:center;font-size:clamp(1.9rem,3vw,2.4rem);font-weight:600;letter-spacing:-.05em;line-height:1}
+.plan .price small{display:block;font-size:12.5px;font-weight:400;letter-spacing:0;color:var(--ink-2);margin-top:8px;transition:color .6s}
+.plan p.desc{font-size:13.5px;color:var(--ink-2);text-align:center;transition:color .6s}
+.plan ul{list-style:none;margin:0;padding:18px 0 0;border-top:1px solid var(--line);display:grid;align-content:start;gap:10px;font-size:13.5px;flex:1;transition:border-color .6s}
+.plan li{display:flex;gap:10px;align-items:flex-start}
+.plan li::before{content:"";flex:none;width:6px;height:6px;margin-top:8px;border-radius:50%;background:var(--violet)}
+.plan .btn{justify-content:center;background:var(--ink);color:var(--paper)}
+.plan .tagline{position:absolute;top:14px;right:14px;font-size:10.5px;font-weight:600;padding:4px 9px;border-radius:99px;background:var(--violet-text);color:#fff;opacity:0;transform:translateY(-4px);transition:opacity .4s,transform .4s var(--ease)}
+.plan.featured .price small,.plan.featured p.desc{color:#B4B4BC}
+.plan.featured ul{border-color:#26262A}
+.plan.featured li::before{background:var(--violet-light)}
+.plan.featured .btn{background:var(--paper);color:var(--ink)}
+.plan.featured .btn:hover{box-shadow:0 0 0 5px rgba(255,255,255,.16)}
+.plan.featured .tagline{opacity:1;transform:none}
+
+/* ---------- cierre ---------- */
+.final{position:relative;margin-top:clamp(110px,13vw,160px);background:var(--violet);color:var(--paper);border-radius:var(--r-panel);padding:clamp(80px,10vw,120px) clamp(20px,3.4vw,44px) 24px;overflow:hidden;isolation:isolate}
+/* el cierre hace lo contrario del hero: empieza morado y se oscurece al bajar (--fp);
+   un degradado morado baja de arriba hacia abajo por todo el bloque y no se apaga */
+.final::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(122,63,201,.5) 0%,rgba(122,63,201,.28) 40%,rgba(122,63,201,.08) 80%,transparent 100%);z-index:-1}
+.final::after{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--ink);opacity:var(--fp,0);z-index:-2;pointer-events:none}
+.final-core{display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center;gap:26px}
+.note-wrap{position:relative;width:180px;height:180px;margin-bottom:-2px;transform:rotate(-4deg)}
+.note-shadow{position:absolute;left:0;top:0;width:330px;height:430px;filter:blur(7px);opacity:.95;pointer-events:none}
+.note-shadow i{position:absolute;inset:0;background:linear-gradient(165deg,rgba(20,2,40,.55) 0%,rgba(20,2,40,.25) 40%,rgba(20,2,40,0) 80%);clip-path:polygon(180px 2px,300px 240px,300px 420px,128px 420px,2px 180px,180px 180px)}
+.sticky{position:absolute;inset:0;padding:22px 20px;background:var(--paper);color:var(--ink);display:grid;align-content:center;justify-items:start;gap:10px;text-align:left;box-shadow:0 1px 1px rgba(0,0,0,.06)}
+.sticky::before{content:"";position:absolute;top:-12px;left:50%;width:74px;height:24px;margin-left:-37px;background:rgba(255,255,255,.5);transform:rotate(3deg)}
+.sticky b{font-size:23px;font-weight:600;letter-spacing:-.045em;line-height:1}
+.sticky span{font-size:12.5px;color:var(--ink-2);line-height:1.35}
+.sticky i{font-style:normal;color:var(--violet);font-weight:600}
+.final h2{font-size:clamp(2.4rem,5.6vw,4.4rem);letter-spacing:-.05em;max-width:15ch;line-height:1}
+.final h2 .dim{color:rgba(255,255,255,.55)}
+.mail-form{display:flex;align-items:center;gap:8px;width:min(460px,100%);padding:6px 6px 6px 20px;border-radius:999px;background:var(--paper);box-shadow:0 24px 50px -24px rgba(20,2,40,.7);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.mail-form:hover,.mail-form:focus-within{transform:translateY(-3px);box-shadow:0 0 0 5px rgba(255,255,255,.18),0 28px 54px -24px rgba(20,2,40,.75)}
+.mail-form input{flex:1;min-width:0;border:0;background:none;font:inherit;font-size:15px;color:var(--ink);outline:none;height:44px}
+.mail-form input::placeholder{color:var(--ink-3)}
+.mail-form button{flex:none;height:44px;padding:0 20px;border:0;border-radius:99px;background:var(--ink);color:var(--paper);font-size:14px;font-weight:600;transition:background .25s,transform .35s var(--ease)}
+.mail-form button:hover{background:#26262A;transform:translateX(-2px)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.consent{display:flex;align-items:flex-start;gap:9px;max-width:440px;text-align:left;font-size:12.5px;line-height:1.45;opacity:.85}
+/* casilla con la marca: círculo con borde blanco que se llena de morado con un check animado */
+.consent input{flex:none;-webkit-appearance:none;appearance:none;width:18px;height:18px;margin:0;border-radius:50%;border:1.5px solid rgba(255,255,255,.6);background:transparent;display:grid;place-items:center;cursor:pointer;transition:background .25s,border-color .25s}
+.consent input::after{content:"";width:8px;height:4px;border:2px solid #fff;border-top:0;border-right:0;transform:translateY(-1px) rotate(-45deg) scale(0);transition:transform .25s var(--ease)}
+.consent input:checked{background:var(--violet-text);border-color:var(--violet-text)}
+.consent input:checked::after{transform:translateY(-1px) rotate(-45deg) scale(1)}
+.consent input:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.consent a{text-decoration:underline;text-underline-offset:2px}
+.form-note{font-size:12.5px;opacity:.85;min-height:1.2em}
+.contacts{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;font-size:13.5px;font-weight:500}
+.contacts a{display:inline-block;border-bottom:1px solid rgba(255,255,255,.45);transition:transform .35s var(--ease),border-color .25s}
+.contacts a:hover{border-color:var(--paper);transform:translateY(-2px)}
+.foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;margin-top:clamp(80px,10vw,120px);padding-top:22px;border-top:1px solid rgba(255,255,255,.22);font-size:13.5px;font-weight:500}
+.foot ul{display:flex;flex-wrap:wrap;gap:8px 26px;list-style:none;margin:0;padding:0}
+.foot ul a{display:inline-block;opacity:.88;transition:transform .35s var(--ease),opacity .25s}
+.foot ul a:hover{opacity:1;transform:translateY(-2px)}
+/* Inicio, Portfolio y Blog justo en la mitad, como en el menú de arriba */
+@media (min-width:700px){.foot{display:grid;grid-template-columns:1fr auto 1fr}.foot>:first-child{justify-self:start}.foot ul{justify-self:center}.foot .soc{justify-self:end}}
+.foot .soc{display:flex;gap:8px}
+.foot .soc a{width:36px;height:36px}
+.foot .soc svg{width:15px;height:15px}
+.legal{margin-top:16px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 18px;font-size:12.5px;opacity:.72}
+.legal a{transition:opacity .25s}
+.legal a:hover{opacity:.7}
+
+/* ---------- cursor propio: avión de papel dibujado a mano (solo con mouse) ---------- */
+html.has-cursor,html.has-cursor *{cursor:none!important}
+html.has-cursor input,html.has-cursor textarea{cursor:text!important}
+.cur-plane{position:fixed;left:0;top:0;z-index:10000;pointer-events:none;opacity:0;transition:opacity .25s}
+.cur-on .cur-plane{opacity:1}
+.cur-on .cur-plane.gone{opacity:0;transition:opacity .08s}
+.cur-plane svg{display:block;width:32px;height:24px;margin:-2px 0 0 -2px;overflow:visible;transform-origin:2px 2px;transform:rotate(24deg);transition:transform .35s var(--ease);filter:drop-shadow(0 3px 3px rgba(8,8,8,.28))}
+.cur-plane.hover svg{transform:rotate(14deg) scale(1.1)}
+.cur-plane.down svg{transform:rotate(24deg) scale(.86)}
+.cur-plane.hover.down svg{transform:rotate(14deg) scale(.96)}
+.cur-burst{position:fixed;left:0;top:0;z-index:9999;pointer-events:none;width:64px;height:64px;margin:-46px 0 0 -32px}
+.cur-burst svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 2px 2px rgba(8,8,8,.25));transform-origin:32px 46px;animation:ray .3s var(--ease) forwards}
+@keyframes ray{0%{opacity:0;transform:scale(.4)}25%{opacity:1}65%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.12)}}
+
+
+/* ---------- menú hamburguesa (celular) ---------- */
+.burger,.mm-close{display:none;position:relative;width:44px;height:44px;border-radius:50%;border:0;padding:0;background:var(--ink);color:var(--paper);transition:transform .35s var(--ease)}
+.hero .burger{background:var(--paper);color:var(--ink)}
+.burger span,.mm-close span{position:absolute;left:13px;right:13px;height:2px;border-radius:2px;background:currentColor}
+.burger span:first-child{top:17px}.burger span:last-child{top:25px}
+.burger:active{transform:scale(.92)}
+.mmenu{position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 22px) 22px calc(env(safe-area-inset-bottom,0px) + 28px);background:var(--ink);color:var(--paper);opacity:0;visibility:hidden;transform:translateY(-12px);transition:opacity .35s ease,transform .45s var(--ease),visibility 0s .45s}
+.mmenu.open{opacity:1;visibility:visible;transform:none;transition:opacity .35s ease,transform .45s var(--ease)}
+.mm-top{display:flex;align-items:center;justify-content:space-between}
+.mm-top .logo img{height:42px;filter:brightness(0) invert(1)}
+.mm-close{display:block;background:var(--paper);color:var(--ink)}
+.mm-close span{top:21px}.mm-close span:first-child{transform:rotate(45deg)}.mm-close span:last-child{transform:rotate(-45deg)}
+.mm-links{display:grid;gap:6px;margin-top:auto;margin-bottom:auto}
+.mm-links a{font-size:38px;font-weight:600;letter-spacing:-.045em;line-height:1.15;opacity:0;transform:translateY(14px);transition:opacity .4s ease,transform .5s var(--ease)}
+.mmenu.open .mm-links a{opacity:1;transform:none}
+.mmenu.open .mm-links a:nth-child(2){transition-delay:.04s}.mmenu.open .mm-links a:nth-child(3){transition-delay:.08s}.mmenu.open .mm-links a:nth-child(4){transition-delay:.12s}.mmenu.open .mm-links a:nth-child(5){transition-delay:.16s}
+.mm-foot{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.mm-soc{display:flex;gap:8px}
+
+/* ---------- aparición ---------- */
+.js [data-reveal]{transition:opacity .9s var(--ease),transform 1s var(--ease)}
+.js [data-reveal].pre{opacity:0;transform:translateY(32px)}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .page{--aw:470px;--bz:10px}
+  .nav-links,.float-nav ul{display:none}
+  .features{grid-template-columns:1fr}
+  .studio-grid{grid-template-columns:1fr 1fr}
+  .me{grid-column:1/-1;grid-row:auto}
+  .devices{grid-template-columns:1fr}
+  .plans{flex-direction:column;max-width:460px;gap:14px}
+  .plan.featured{order:-1!important}
+  .plan,.plan.featured{flex:none;width:100%;transform:none;margin-inline:0}
+  .plan.pos-l,.plan.pos-r{padding:28px 26px 26px}
+  .plan.pos-l:hover,.plan.pos-r:hover{transform:translateY(-4px)}
+}
+@media (max-width:700px){
+  :root{--r-panel:18px}
+  .page{--aw:280px;--bz:7px}
+  .ci{border-radius:14px}
+  .ci img{border-radius:14px}
+  .nav{padding:0 20px}
+  .hero{padding-top:26px}
+  .nav-cta{display:none}
+  .burger{display:block}
+  .nav-end .circle,.float-nav .btn{display:none}
+  .float-nav{left:12px;right:12px;max-width:none;justify-content:space-between;padding:7px 7px 7px 18px;transform:translateY(-150%)}
+  .float-nav.show{transform:none}
+  .float-nav .logo img{height:40px}
+  .hero{margin:-12px calc(var(--gutter) * -1) 0;border-radius:0}
+  .final{margin-inline:calc(var(--gutter) * -1);margin-bottom:-16px;border-radius:0}
+  .logo img{height:44px}
+  .logo img{height:40px}
+  .hero-copy{padding-top:44px}
+  .pill{font-size:11.5px}
+  .pill .long{display:none}
+  .pill .short{display:inline}
+  .car{margin-top:40px}
+  .car-cap .txt{min-width:0}
+  .manifesto{height:auto;padding-block:110px 90px}
+  .manifesto .pin{position:static;height:auto}
+  .mail-form{padding-left:16px}
+  .mail-form button{padding:0 16px}
+  .studio-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .dev{min-height:440px}
+  .float-nav{gap:12px}
+  .foot{justify-content:center;text-align:center}
+  .foot ul{justify-content:center}
+  .legal{justify-content:center;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js [data-reveal].pre{opacity:1;transform:none}
+  .js .note-wrap.pre{opacity:1;transform:rotate(-6deg)}
+  .manifesto{height:auto;padding-block:140px}
+  .manifesto .pin{position:static;height:auto}
+}
+
+/* ---------- artículos del blog ---------- */
+/* =====================================================================
+   ARTÍCULOS DEL BLOG: lectura tranquila, al estilo de la portada.
+   Una columna centrada, letra grande, índice al lado en pantallas anchas.
+   ===================================================================== */
+.art{padding-top:clamp(120px,13vw,160px)}
+.art-head{display:grid;justify-items:center;gap:20px;max-width:820px;margin:0 auto;padding:0 20px;text-align:center}
+.art-crumbs{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.art-crumbs a{color:var(--ink-3);text-decoration:none;transition:color .25s}
+.art-crumbs a:hover{color:var(--ink)}
+.art-crumbs b{font-weight:500;color:var(--violet-text)}
+.art-head h1{margin:0;font-size:clamp(2.2rem,5vw,3.9rem);line-height:1.02;letter-spacing:-.05em;text-wrap:balance}
+.art-lead{margin:0;max-width:62ch;font-size:clamp(17px,1.6vw,19.5px);line-height:1.6;color:var(--ink-2);text-wrap:pretty}
+.art-meta{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink-3)}
+.art-meta .k{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--ink);color:var(--paper);font-size:12px;font-weight:700;letter-spacing:-.04em}
+.art-meta b{font-weight:600;color:var(--ink)}
+.art-hero{max-width:1120px;margin:clamp(36px,5vw,56px) auto 0;padding:0 20px}
+.art-hero img{display:block;width:100%;height:auto;aspect-ratio:16/8;object-fit:cover;border-radius:var(--r-card);background:var(--mist)}
+
+/* cuerpo: columna de lectura de 680 px; el índice se suma a la izquierda */
+.art-body{max-width:1120px;margin:clamp(48px,6vw,72px) auto 0;padding:0 20px}
+.art-body>.articulo{max-width:680px;margin:0 auto}
+.art-body.con-indice{display:grid;grid-template-columns:220px minmax(0,680px);justify-content:center;gap:clamp(40px,6vw,80px);align-items:start}
+.art-body.con-indice>.articulo{margin:0;grid-column:2;grid-row:1}
+.indice{grid-column:1;grid-row:1;position:sticky;top:110px;display:grid;gap:10px;padding-top:6px}
+.indice-tit{margin:0;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.indice ul{display:grid;gap:2px;margin:0;padding:0;list-style:none;border-left:1px solid var(--line)}
+.indice a{display:block;padding:6px 0 6px 14px;margin-left:-1px;border-left:2px solid transparent;font-size:13.5px;line-height:1.4;color:var(--ink-3);text-decoration:none;transition:color .25s,border-color .25s}
+.indice a:hover{color:var(--ink)}
+.indice a.activo{color:var(--ink);border-left-color:var(--violet-text)}
+@media (max-width:1060px){.art-body.con-indice{display:block}.art-body.con-indice>.articulo{margin:0 auto}.indice{display:none}}
+
+/* tipografía de lectura */
+.articulo{font-size:18px;line-height:1.75;color:#2B2B31}
+.articulo>*:first-child{margin-top:0}
+.articulo p{margin:0 0 1.25em}
+.articulo h2{margin:2.4em 0 .7em;font-size:clamp(1.55rem,2.4vw,1.95rem);line-height:1.15;letter-spacing:-.035em;color:var(--ink);scroll-margin-top:110px}
+.articulo h3{margin:1.9em 0 .5em;font-size:1.2rem;line-height:1.3;letter-spacing:-.02em;color:var(--ink)}
+.articulo strong{color:var(--ink);font-weight:600}
+.articulo a{color:var(--violet-text);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:rgba(122,63,201,.35);transition:text-decoration-color .25s}
+.articulo a:hover{text-decoration-color:currentColor}
+.articulo ul,.articulo ol{margin:0 0 1.4em;padding-left:1.3em}
+.articulo li{margin:.4em 0;padding-left:.2em}
+.articulo li::marker{color:var(--ink-3)}
+.articulo code{padding:.12em .4em;border-radius:6px;background:var(--mist);font-family:var(--f-mono);font-size:.84em;color:var(--ink)}
+.articulo figure{margin:2.2em auto!important;max-width:100%!important}
+.articulo figure img{display:block;width:100%;height:auto;border-radius:18px!important;background:var(--mist)}
+.articulo figcaption{margin-top:10px;font-size:13.5px;color:var(--ink-3);text-align:center}
+.articulo blockquote{margin:1.8em 0;padding:0 0 0 20px;border-left:2px solid var(--violet-text);font-size:1.08em;color:var(--ink)}
+/* notas: tarjeta suave */
+.articulo .nota{margin:2em 0;padding:22px 24px;border-radius:18px;background:var(--mist)}
+.articulo .nota p{margin:0 0 .6em;font-size:16.5px;line-height:1.65}
+.articulo .nota p:last-child{margin:0}
+/* tablas: tarjeta con bordes finos */
+.articulo div:has(>table){margin:1.8em 0!important;border-radius:16px;box-shadow:0 0 0 1px var(--line);overflow-x:auto}
+.articulo table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.5}
+.articulo th{padding:13px 16px;background:var(--mist);text-align:left;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap}
+.articulo td{padding:13px 16px;border-top:1px solid var(--line);vertical-align:top}
+.articulo td:first-child{font-weight:600;color:var(--ink)}
+.articulo p[style*="font-size:14.5px"]{font-size:14px!important;color:var(--ink-3)!important}
+
+/* sigue leyendo */
+.art-more{max-width:1120px;margin:clamp(90px,10vw,130px) auto 0;padding:0 20px}
+.art-more-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:28px}
+.art-more-head h2{margin:0;text-align:left;font-size:clamp(1.9rem,3.4vw,2.6rem)}
+.art-more-head a{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--violet-text);text-decoration:none;white-space:nowrap}
+.art-more-head a svg{width:14px;height:14px;transition:transform .3s var(--ease)}
+.art-more-head a:hover svg{transform:translateX(3px)}
+.art-more-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.amc{display:flex;flex-direction:column;gap:14px;color:inherit;text-decoration:none}
+.amc-img{display:block;aspect-ratio:4/3;border-radius:18px;overflow:hidden;background:var(--mist)}
+.amc-img img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.amc:hover .amc-img img{transform:scale(1.05)}
+.amc .bm{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.amc .bm b{font-weight:500;color:var(--violet-text)}
+.amc h3{margin:0;font-size:19px;line-height:1.25;letter-spacing:-.03em;transition:color .25s}
+.amc:hover h3{color:var(--violet-text)}
+
+/* barra de progreso de lectura */
+.art-prog{position:fixed;left:0;top:0;z-index:60;height:2px;width:100%;background:var(--violet-text);transform-origin:left;transform:scaleX(var(--rp,0));pointer-events:none}
+
+@media (max-width:860px){.art-more-grid{grid-template-columns:1fr 1fr}.art-more-grid .amc:nth-child(3){display:none}}
+@media (max-width:600px){
+  .art{padding-top:104px}
+  .articulo{font-size:17px}
+  .art-hero img{aspect-ratio:4/3}
+  .art-more-grid{grid-template-columns:1fr}.art-more-grid .amc:nth-child(3){display:flex}
+  .art-more-head{flex-direction:column;align-items:flex-start}
+}
+
+
+/* cierre del blog: empieza morado oscuro y se vuelve casi negro al bajar */
+.final{background:#36115F}
+.final::before{background:linear-gradient(180deg,rgba(78,30,134,.55) 0%,rgba(54,17,95,.2) 45%,transparent 90%)}
+.final::after{background:#07050B;opacity:calc(.35 + var(--fp,0))}
+</style>
+  <script defer src="/assets/indice-blog.js?v=20261006"></script>
 </head>
-
 <body>
-  <nav class="nav" id="nav">
-    <div class="nav-in">
-      <a href="/" class="logo" aria-label="Kaiva Studio — ir al inicio">
-        <img src="/assets/logo-kaiva.png" alt="Kaiva Studio" width="105" height="44">
-      </a>
-      <div class="nav-right">
-        <div class="nav-links" id="navLinks">
-          <a href="/diseno-web/" class="lnk">Diseño web</a>
-          <a href="/software-a-medida/" class="lnk">Software</a>
-          <a href="/branding/" class="lnk">Branding</a>
-          <a href="/blog/" class="lnk" aria-current="page">Blog</a>
-          <a href="/monitor/" class="btn btn-dark">Diagnóstico Gratis</a>
-        </div>
-        <button class="nav-toggle" id="navToggle" aria-label="Menú" aria-expanded="false">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M4 7h16M4 12h16M4 17h16" />
-          </svg>
-        </button>
-      </div>
-    </div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.3-.3-.3-.6-.5z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></g><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-in" viewBox="0 0 24 24"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM10 9.5h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.7 2.6 4.7 6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></g></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="1.6"/><path d="M2 19h20"/></g></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="7" y="2.5" width="10" height="19" rx="2.6"/><path d="M11 18.5h2"/></g></symbol>
+  <symbol id="i-cursor" viewBox="0 0 24 24"><path d="M4 2l16 10-7 1.5L9.5 21z" fill="currentColor" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+</svg>
+<span class="art-prog" aria-hidden="true"></span>
+<nav class="float-nav show" id="floatNav" aria-label="Navegación rápida">
+  <a class="logo" href="/#top"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a>
+  <ul>
+        <li><a href="/#top">Inicio</a></li>
+        <li><a href="/portfolio/">Portfolio</a></li>
+        <li><a href="/blog/" aria-current="page">Blog</a></li>
+      </ul>
+  <a class="btn btn-ink" href="#contacto">Agendar llamada</a>
+  <button class="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mmenu"><span></span><span></span></button>
+</nav>
+
+<div class="mmenu" id="mmenu" aria-label="Menú">
+  <div class="mm-top"><a class="logo" href="/#top"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a><button class="mm-close" type="button" aria-label="Cerrar menú"><span></span><span></span></button></div>
+  <nav class="mm-links">
+    <a href="/#top">Inicio</a><a href="/portfolio/">Portfolio</a><a href="/blog/" aria-current="page">Blog</a><a href="#contacto">Contacto</a>
   </nav>
+  <div class="mm-foot">
+    <a class="btn btn-white" href="#contacto">Agendar llamada</a>
+    <div class="mm-soc"><a class="circle light" href="https://wa.me/573024137374" target="_blank" rel="noopener" aria-label="WhatsApp"><svg><use href="#i-wa"/></svg></a><a class="circle light" href="https://www.instagram.com/kaivastudio/" target="_blank" rel="noopener" aria-label="Instagram"><svg><use href="#i-ig"/></svg></a></div>
+  </div>
+</div>
 
-  <main>
+<div class="page">
+  <main class="art" id="top">
     <article>
-
-      <header class="post-cabecera">
-        <div class="wrap">
-          <nav class="migas" aria-label="Ruta de navegación">
-            <a href="/">Inicio</a><span>/</span><a href="/blog/">Blog</a><span>/</span>SEO para IA
-          </nav>
-
-          <div class="post-cabecera-in">
-            <div class="post-cabecera-texto">
-              <p class="fecha"><time datetime="2026-07-26">26 de julio de 2026</time> · Lectura de 10 minutos</p>
-
-              <h1 class="post-titulo">
-                SEO para IA<span style="color:var(--violet)">:</span> cómo lograr que ChatGPT recomiende tu
-                empresa
-              </h1>
-
-              <p class="lead">Cada vez más gente le pregunta a ChatGPT lo que antes buscaba en Google. Este
-                artículo separa lo que de verdad influye en salir en esas respuestas —con las cifras de los
-                estudios— de lo que las agencias están vendiendo como novedad.</p>
-            </div>
-
-            <figure class="post-cabecera-foto">
-              <img src="/assets/blog/ia.webp" alt="Laptop sobre un escritorio de madera con una conversación de ChatGPT abierta en pantalla y una mano escribiendo en el teclado" width="1774" height="887"
-                fetchpriority="high" decoding="async">
-            </figure>
-          </div>
-        </div>
+      <header class="art-head">
+        <nav class="art-crumbs" aria-label="Ruta de navegación"><a href="/blog/">Blog</a><span aria-hidden="true">/</span><b>SEO para IA</b></nav>
+        <h1>SEO para IA<span class="dot">:</span> cómo lograr que ChatGPT recomiende tu
+                empresa</h1>
+        <p class="art-lead">Cada vez más gente le pregunta a ChatGPT lo que antes buscaba en Google. Este artículo separa lo que de verdad influye en salir en esas respuestas —con las cifras de los estudios— de lo que las agencias están vendiendo como novedad.</p>
+        <p class="art-meta"><span class="k" aria-hidden="true">K.</span><span><b>Kaiva Studio</b> · <time datetime="2026-07-26">26 jul 2026</time> · 10 min de lectura</span></p>
       </header>
-
-      <div class="section post-cuerpo">
-        <div class="wrap">
-          <div class="articulo">
-
-            <p>Empecemos por lo que va a molestar a más de uno: <strong>no existe una disciplina nueva</strong>.
-              Existen siglas nuevas para el mismo trabajo, con un factor que cambió de peso. Y ese factor
-              —lo adelantamos— no está en tu página web.</p>
-
-            <h2>SEO, GEO, AEO: qué significa cada sigla</h2>
-
-            <p>Las tres describen dónde quieres aparecer, no técnicas distintas:</p>
-
-            <div style="overflow-x:auto;margin-top:1.4rem">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Sigla</th>
-                    <th>Qué persigue</th>
-                    <th>Dónde se ve</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><strong>SEO</strong><br><span style="font-size:13px">Search engine optimization</span></td>
-                    <td>Que tu página salga en la lista de resultados</td>
-                    <td>Los enlaces azules de siempre</td>
-                  </tr>
-                  <tr>
-                    <td><strong>AEO</strong><br><span style="font-size:13px">Answer engine optimization</span></td>
-                    <td>Que tu contenido <em>sea</em> la respuesta, sin que haya que hacer clic</td>
-                    <td>El recuadro destacado, la respuesta directa, los asistentes de voz</td>
-                  </tr>
-                  <tr>
-                    <td><strong>GEO</strong><br><span style="font-size:13px">Generative engine optimization</span></td>
-                    <td>Que un modelo te cite dentro de la respuesta que redacta</td>
-                    <td>ChatGPT, Gemini, Perplexity, los resúmenes de IA de Google</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <p style="margin-top:1.2rem">Fíjate en que las tres necesitan lo mismo por debajo: que tu sitio
-              se pueda rastrear, que el contenido responda algo concreto y que quede claro quién eres. Si
-              alguien te vende «GEO» como un servicio separado que cuesta aparte del SEO, vale la pena
-              preguntar qué hace exactamente que sea distinto.</p>
-
-            <h2>Lo que dice Google, textualmente</h2>
-
-            <p>Google publicó una guía sobre cómo aparecer en sus funciones de IA, y es sorprendentemente
-              corta. La frase que más discusión ahorra es esta:</p>
-
-            <div class="nota">
-              <p>«No necesitas crear archivos legibles por máquina, archivos de texto para IA ni marcado
-                nuevo para aparecer en estas funciones.»<br>
-                <span style="font-size:13.5px;color:var(--ink-faint)">— <a
-                    href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank"
-                    rel="noopener">Google Search Central, guía de funciones de IA</a> (traducido del
-                  inglés)</span>
-              </p>
-            </div>
-
-            <p>El resto de la guía se resume en aplicar «las mismas buenas prácticas fundamentales de SEO
-              que para la Búsqueda en general»: contenido útil, que la página se pueda indexar, y que los
-              datos estructurados coincidan con lo que se ve en pantalla.</p>
-
-            <p>Eso no significa que dé igual lo que hagas. Significa que <strong>la puerta de entrada
-                sigue siendo la misma</strong>, y que quien no tiene resuelto
-              <a href="/blog/google-no-encuentra-mi-pagina/">el SEO técnico básico</a> no tiene por dónde
-              empezar con lo de la IA.</p>
-
-            <!-- Salida temprana. Ver .cta-lectura en pagina.css: por qué está
-                 aquí, por qué antes de un <h2> y por qué no se parece a .nota. -->
-            <aside class="cta-lectura" aria-labelledby="cta-lectura-tit">
-              <p class="lbl" id="cta-lectura-tit">Compruébalo en tu sitio</p>
-              <p>Si Google no te encuentra, la causa casi siempre se ve desde fuera. El <strong>Diagnóstico Digital</strong> revisa velocidad, visibilidad y correo, y te da tu Índice de Salud Digital en 60&nbsp;segundos. Gratis y sin registro.</p>
-              <a class="btn btn-violet" href="/monitor/?utm_source=blog&amp;utm_medium=cta-lectura&amp;utm_content=seo-para-ia">Ejecutar diagnóstico</a>
-            </aside>
-
-
-            <h2>El archivo llms.txt: por qué casi no sirve todavía</h2>
-
-            <p>Es la propuesta de moda: un archivo de texto en la raíz de tu sitio que le explica a los
-              modelos de lenguaje qué hay en tu página y cómo leerla. La idea es razonable y el formato
-              está bien pensado. El problema es que <strong>hoy casi nadie lo lee</strong>.</p>
-
-            <ul>
-              <li><strong>Google dice que no lo usa.</strong> John Mueller, de Google, fue explícito en
-                que la Búsqueda no lo utiliza y que el equipo no lo respalda —
-                <a href="https://www.seroundtable.com/google-does-not-endorse-llms-txt-40789.html"
-                  target="_blank" rel="noopener">llegó a aparecer en documentación de Google por error de
-                  otro equipo y lo quitaron</a>.</li>
-              <li><strong>Los datos de tráfico lo confirman.</strong> En un análisis de 137.000 dominios,
-                el 97% de los archivos <code>llms.txt</code> publicados no recibió <em>ni una sola
-                  petición</em> durante mayo de 2026.</li>
-              <li><strong>Casi nadie lo publica.</strong> Alrededor del 28% de los dominios analizados lo
-                tenía, y de esos la enorme mayoría nunca fue consultada.</li>
-            </ul>
-
-            <div class="nota">
-              <p><strong>Aclaración honesta:</strong> este sitio tiene un
-                <a href="/llms.txt" target="_blank" rel="noopener">llms.txt</a>. Lo publicamos porque
-                cuesta diez minutos, no hace daño y puede que algún día importe. Pero sería deshonesto
-                vendértelo como una palanca de posicionamiento: <strong>no lo es</strong>, y si una
-                agencia te lo cobra como el centro de su servicio de «visibilidad en IA», ya sabes qué
-                preguntar.</p>
-            </div>
-
-            <!-- Corte entre la parte que desmiente (llms.txt) y la parte con
-                 datos: es el punto medio del artículo y el más largo sin
-                 descanso visual. -->
-            <figure style="margin:2.4rem 0">
-              <img src="/assets/blog/visibilidad.webp"
-                alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas"
-                width="1879" height="837" loading="lazy" decoding="async"
-                style="display:block;width:100%;height:auto;border-radius:14px">
-            </figure>
-
-            <h2>Lo que sí correlaciona, con números</h2>
-
-            <p>Aquí está la parte útil. Ahrefs analizó <strong>75.000 marcas</strong> en diciembre de 2025
-              para medir qué factores acompañan a la visibilidad en respuestas de IA. Estas son las
-              correlaciones que encontraron:</p>
-
-            <div style="overflow-x:auto;margin-top:1.4rem">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Factor</th>
-                    <th>ChatGPT</th>
-                    <th>AI Mode</th>
-                    <th>Resúmenes de IA</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Menciones en YouTube</td>
-                    <td colspan="3">~0,737 — la más alta de todo el estudio</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Menciones de marca en la web</strong></td>
-                    <td>0,664</td>
-                    <td>0,709</td>
-                    <td>0,656</td>
-                  </tr>
-                  <tr>
-                    <td>Enlaces con tu nombre de marca</td>
-                    <td>0,511</td>
-                    <td>0,628</td>
-                    <td>0,527</td>
-                  </tr>
-                  <tr>
-                    <td>Búsquedas de tu marca</td>
-                    <td>0,352</td>
-                    <td>0,466</td>
-                    <td>0,392</td>
-                  </tr>
-                  <tr>
-                    <td>Autoridad del dominio</td>
-                    <td>0,266</td>
-                    <td>0,285</td>
-                    <td>0,326</td>
-                  </tr>
-                  <tr>
-                    <td>Número de enlaces entrantes</td>
-                    <td colspan="3">Correlación débil en las tres</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <p style="margin-top:1.2rem;font-size:14.5px;color:var(--ink-faint)">Fuente:
-              <a href="https://ahrefs.com/blog/ai-brand-visibility-correlations/" target="_blank"
-                rel="noopener">Ahrefs, estudio de correlaciones de visibilidad de marca en IA</a>,
-              diciembre de 2025. Correlación no es causalidad: son señales que acompañan a la visibilidad,
-              no recetas garantizadas.</p>
-
-            <p>Léelo otra vez y fíjate en el patrón: <strong>los cuatro factores de arriba están fuera de
-                tu sitio web</strong>. No son cosas que puedas escribir en tu propia página. Son cosas
-              que otras personas dicen sobre ti en lugares que no controlas.</p>
-
-            <p>Y hay un detalle que le duele al gremio: que te <em>mencionen</em> pesa bastante más que
-              que te <em>enlacen</em>. Un artículo que nombra tu empresa sin poner un enlace, que durante
-              veinte años se consideró una oportunidad perdida, hoy es de las señales más fuertes que
-              existen.</p>
-
-            <h2>Qué hacer, en orden</h2>
-
-            <p>De más a menos efecto, según lo anterior:</p>
-
-            <ol>
-              <li><strong>Consigue que hablen de ti donde no controlas nada.</strong> Directorios serios,
-                artículos de terceros, listados del sector, la cámara de comercio, entrevistas, podcasts.
-                Si en tu ciudad hay artículos tipo «mejores agencias de X», pedir que te incluyan es de
-                las acciones con mejor relación esfuerzo-resultado que existe hoy.</li>
-              <li><strong>Saca
-                  <a href="/blog/como-aparecer-en-google-maps/">tu ficha de Google Business Profile</a> y
-                  mantenla.</strong> Es de las fuentes
-                más consultadas para preguntas locales, es gratis, y en la mayoría de ciudades
-                colombianas la competencia la tiene abandonada.</li>
-              <li><strong>Responde la pregunta en las primeras tres líneas.</strong> Los modelos toman
-                fragmentos. Si tu respuesta llega en el párrafo seis, después de la introducción de
-                relleno, no la van a tomar. Título claro, respuesta inmediata, desarrollo después.</li>
-              <li><strong>Escribe lo que solo tú puedes escribir.</strong> Precios reales, plazos reales,
-                datos de tus propios proyectos, errores que te encontraste. Lo genérico ya está en el
-                modelo; lo que no está es tu experiencia concreta, y eso es lo citable.</li>
-              <li><strong>Deja claro quién eres y sé consistente.</strong> Mismo nombre, misma dirección,
-                mismo teléfono en todas partes. Los sistemas de IA tienen que poder resolver que las
-                menciones sueltas son la misma empresa.</li>
-              <li><strong>Datos estructurados que coincidan con lo visible.</strong> No para agradar a la
-                IA —Google fue claro en que no hay esquema especial— sino porque le quita ambigüedad a
-                quién eres y qué haces.</li>
-            </ol>
-
-            <h2>Lo que no vale la pena pagar</h2>
-
-            <ul>
-              <li><strong>«Posicionamiento garantizado en ChatGPT».</strong> No existe. No hay panel de
-                administración, no hay puja, y las respuestas cambian entre sesiones para la misma
-                pregunta.</li>
-              <li><strong>Llenar la web de preguntas frecuentes artificiales.</strong> Un bloque de FAQ
-                real ayuda; treinta preguntas inventadas para «alimentar a la IA» solo diluyen la página.</li>
-              <li><strong>El llms.txt como servicio.</strong> Ver arriba. Diez minutos, no una línea de
-                factura.</li>
-              <li><strong>Contenido generado en masa.</strong> Es la vía más rápida a que ni Google ni los
-                modelos tengan razón para citarte, porque no aportas nada que no esté ya.</li>
-            </ul>
-
-            <h2>Cómo medir si estás apareciendo</h2>
-
-            <p>Tres formas, ninguna perfecta:</p>
-
-            <ul>
-              <li><strong>Pregúntale directamente.</strong> Abre ChatGPT o Gemini y pregunta por tu
-                categoría y tu ciudad <em>sin</em> nombrar tu empresa. Repítelo en sesiones nuevas, porque
-                la respuesta varía. Mira también qué fuentes cita: ahí está el mapa de dónde te conviene
-                aparecer.</li>
-              <li><strong>Mira el tráfico de referencia.</strong> En Google Analytics, filtra las visitas
-                que llegan desde <code>chatgpt.com</code> o <code>perplexity.ai</code>. Es poco volumen,
-                pero suele venir con mucha intención.</li>
-              <li><strong>Search Console, con una advertencia.</strong> Las impresiones de los resúmenes
-                de IA se cuentan dentro de la búsqueda web normal, sin separar. Sirve para ver si te
-                indexan, no para medir la IA aparte.</li>
-            </ul>
-
-            <h2>Lo que de verdad se aprende de todo esto</h2>
-
-            <p>La conclusión incómoda del estudio es que <strong>la visibilidad en IA se parece más a la
-                reputación que al SEO</strong>. Se construye con menciones, con presencia en sitios
-              ajenos, con que la gente busque tu nombre. Nada de eso se resuelve escribiendo en tu propia
-              página.</p>
-
-            <p>Lo cual, si lo piensas, es una buena noticia para una empresa pequeña que hace bien su
-              trabajo, y una mala para quien esperaba comprar un atajo técnico.</p>
-
-            <p>Un último aviso: <strong>esto cambia rápido</strong>. Las cifras de este artículo son de
-              diciembre de 2025 y julio de 2026, y las plataformas mueven sus preferencias de fuentes en
-              cuestión de semanas. Cualquiera que te hable de «la fórmula» de la visibilidad en IA está
-              describiendo una foto, no una regla.</p>
-
-            <p>Si quieres empezar por lo básico —que tu sitio se pueda leer, que Google lo entienda y que
-              tu marca esté bien definida— eso se revisa en minutos con nuestro
-              <a href="/diagnostico/">Diagnóstico Digital</a>. Y si estás en Barranquilla y andas
-              comparando quién te puede ayudar, escribimos una
-              <a href="/blog/mejores-agencias-diseno-web-barranquilla/">guía para elegir agencia</a> en la
-              que, a propósito, no nos incluimos.</p>
-          </div>
+      <figure class="art-hero"><img src="/assets/blog/ia.webp" alt="Laptop sobre un escritorio de madera con una conversación de ChatGPT abierta en pantalla y una mano escribiendo en el teclado" width="1600" height="800" fetchpriority="high" decoding="async"></figure>
+      <div class="art-body">
+        <div class="articulo">
+<p>Empecemos por lo que va a molestar a más de uno: <strong>no existe una disciplina nueva</strong>. Existen siglas nuevas para el mismo trabajo, con un factor que cambió de peso. Y ese factor —lo adelantamos— no está en tu página web.</p>
+<h2>SEO, GEO, AEO: qué significa cada sigla</h2>
+<p>Las tres describen dónde quieres aparecer, no técnicas distintas:</p>
+<div style="overflow-x:auto;margin-top:1.4rem">
+<table>
+<thead>
+<tr> <th>Sigla</th> <th>Qué persigue</th> <th>Dónde se ve</th> </tr> </thead>
+<tbody>
+<tr> <td><strong>SEO</strong><br><span style="font-size:13px">Search engine optimization</span></td> <td>Que tu página salga en la lista de resultados</td> <td>Los enlaces azules de siempre</td> </tr>
+<tr> <td><strong>AEO</strong><br><span style="font-size:13px">Answer engine optimization</span></td> <td>Que tu contenido <em>sea</em> la respuesta, sin que haya que hacer clic</td> <td>El recuadro destacado, la respuesta directa, los asistentes de voz</td> </tr>
+<tr> <td><strong>GEO</strong><br><span style="font-size:13px">Generative engine optimization</span></td> <td>Que un modelo te cite dentro de la respuesta que redacta</td> <td>ChatGPT, Gemini, Perplexity, los resúmenes de IA de Google</td> </tr> </tbody> </table> </div>
+<p style="margin-top:1.2rem">Fíjate en que las tres necesitan lo mismo por debajo: que tu sitio se pueda rastrear, que el contenido responda algo concreto y que quede claro quién eres. Si alguien te vende «GEO» como un servicio separado que cuesta aparte del SEO, vale la pena preguntar qué hace exactamente que sea distinto.</p>
+<h2>Lo que dice Google, textualmente</h2>
+<p>Google publicó una guía sobre cómo aparecer en sus funciones de IA, y es sorprendentemente corta. La frase que más discusión ahorra es esta:</p>
+<div class="nota">
+<p>«No necesitas crear archivos legibles por máquina, archivos de texto para IA ni marcado nuevo para aparecer en estas funciones.»<br> <span style="font-size:13.5px;color:var(--ink-faint)">— <a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">Google Search Central, guía de funciones de IA</a> (traducido del inglés)</span> </p> </div>
+<p>El resto de la guía se resume en aplicar «las mismas buenas prácticas fundamentales de SEO que para la Búsqueda en general»: contenido útil, que la página se pueda indexar, y que los datos estructurados coincidan con lo que se ve en pantalla.</p>
+<p>Eso no significa que dé igual lo que hagas. Significa que <strong>la puerta de entrada sigue siendo la misma</strong>, y que quien no tiene resuelto <a href="/blog/google-no-encuentra-mi-pagina/">el SEO técnico básico</a> no tiene por dónde empezar con lo de la IA.</p>
+<h2>El archivo llms.txt: por qué casi no sirve todavía</h2>
+<p>Es la propuesta de moda: un archivo de texto en la raíz de tu sitio que le explica a los modelos de lenguaje qué hay en tu página y cómo leerla. La idea es razonable y el formato está bien pensado. El problema es que <strong>hoy casi nadie lo lee</strong>.</p>
+<ul>
+<li><strong>Google dice que no lo usa.</strong> John Mueller, de Google, fue explícito en que la Búsqueda no lo utiliza y que el equipo no lo respalda — <a href="https://www.seroundtable.com/google-does-not-endorse-llms-txt-40789.html" target="_blank" rel="noopener">llegó a aparecer en documentación de Google por error de otro equipo y lo quitaron</a>.</li>
+<li><strong>Los datos de tráfico lo confirman.</strong> En un análisis de 137.000 dominios, el 97% de los archivos <code>llms.txt</code> publicados no recibió <em>ni una sola petición</em> durante mayo de 2026.</li>
+<li><strong>Casi nadie lo publica.</strong> Alrededor del 28% de los dominios analizados lo tenía, y de esos la enorme mayoría nunca fue consultada.</li> </ul>
+<div class="nota">
+<p><strong>Aclaración honesta:</strong> este sitio tiene un <a href="/llms.txt" target="_blank" rel="noopener">llms.txt</a>. Lo publicamos porque cuesta diez minutos, no hace daño y puede que algún día importe. Pero sería deshonesto vendértelo como una palanca de posicionamiento: <strong>no lo es</strong>, y si una agencia te lo cobra como el centro de su servicio de «visibilidad en IA», ya sabes qué preguntar.</p> </div>
+<figure style="margin:2.4rem 0"> <img src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" loading="lazy" decoding="async" style="display:block;width:100%;height:auto;border-radius:14px"> </figure>
+<h2>Lo que sí correlaciona, con números</h2>
+<p>Aquí está la parte útil. Ahrefs analizó <strong>75.000 marcas</strong> en diciembre de 2025 para medir qué factores acompañan a la visibilidad en respuestas de IA. Estas son las correlaciones que encontraron:</p>
+<div style="overflow-x:auto;margin-top:1.4rem">
+<table>
+<thead>
+<tr> <th>Factor</th> <th>ChatGPT</th> <th>AI Mode</th> <th>Resúmenes de IA</th> </tr> </thead>
+<tbody>
+<tr> <td>Menciones en YouTube</td> <td colspan="3">~0,737 — la más alta de todo el estudio</td> </tr>
+<tr> <td><strong>Menciones de marca en la web</strong></td> <td>0,664</td> <td>0,709</td> <td>0,656</td> </tr>
+<tr> <td>Enlaces con tu nombre de marca</td> <td>0,511</td> <td>0,628</td> <td>0,527</td> </tr>
+<tr> <td>Búsquedas de tu marca</td> <td>0,352</td> <td>0,466</td> <td>0,392</td> </tr>
+<tr> <td>Autoridad del dominio</td> <td>0,266</td> <td>0,285</td> <td>0,326</td> </tr>
+<tr> <td>Número de enlaces entrantes</td> <td colspan="3">Correlación débil en las tres</td> </tr> </tbody> </table> </div>
+<p style="margin-top:1.2rem;font-size:14.5px;color:var(--ink-faint)">Fuente: <a href="https://ahrefs.com/blog/ai-brand-visibility-correlations/" target="_blank" rel="noopener">Ahrefs, estudio de correlaciones de visibilidad de marca en IA</a>, diciembre de 2025. Correlación no es causalidad: son señales que acompañan a la visibilidad, no recetas garantizadas.</p>
+<p>Léelo otra vez y fíjate en el patrón: <strong>los cuatro factores de arriba están fuera de tu sitio web</strong>. No son cosas que puedas escribir en tu propia página. Son cosas que otras personas dicen sobre ti en lugares que no controlas.</p>
+<p>Y hay un detalle que le duele al gremio: que te <em>mencionen</em> pesa bastante más que que te <em>enlacen</em>. Un artículo que nombra tu empresa sin poner un enlace, que durante veinte años se consideró una oportunidad perdida, hoy es de las señales más fuertes que existen.</p>
+<h2>Qué hacer, en orden</h2>
+<p>De más a menos efecto, según lo anterior:</p>
+<ol>
+<li><strong>Consigue que hablen de ti donde no controlas nada.</strong> Directorios serios, artículos de terceros, listados del sector, la cámara de comercio, entrevistas, podcasts. Si en tu ciudad hay artículos tipo «mejores agencias de X», pedir que te incluyan es de las acciones con mejor relación esfuerzo-resultado que existe hoy.</li>
+<li><strong>Saca <a href="/blog/como-aparecer-en-google-maps/">tu ficha de Google Business Profile</a> y mantenla.</strong> Es de las fuentes más consultadas para preguntas locales, es gratis, y en la mayoría de ciudades colombianas la competencia la tiene abandonada.</li>
+<li><strong>Responde la pregunta en las primeras tres líneas.</strong> Los modelos toman fragmentos. Si tu respuesta llega en el párrafo seis, después de la introducción de relleno, no la van a tomar. Título claro, respuesta inmediata, desarrollo después.</li>
+<li><strong>Escribe lo que solo tú puedes escribir.</strong> Precios reales, plazos reales, datos de tus propios proyectos, errores que te encontraste. Lo genérico ya está en el modelo; lo que no está es tu experiencia concreta, y eso es lo citable.</li>
+<li><strong>Deja claro quién eres y sé consistente.</strong> Mismo nombre, misma dirección, mismo teléfono en todas partes. Los sistemas de IA tienen que poder resolver que las menciones sueltas son la misma empresa.</li>
+<li><strong>Datos estructurados que coincidan con lo visible.</strong> No para agradar a la IA —Google fue claro en que no hay esquema especial— sino porque le quita ambigüedad a quién eres y qué haces.</li> </ol>
+<h2>Lo que no vale la pena pagar</h2>
+<ul>
+<li><strong>«Posicionamiento garantizado en ChatGPT».</strong> No existe. No hay panel de administración, no hay puja, y las respuestas cambian entre sesiones para la misma pregunta.</li>
+<li><strong>Llenar la web de preguntas frecuentes artificiales.</strong> Un bloque de FAQ real ayuda; treinta preguntas inventadas para «alimentar a la IA» solo diluyen la página.</li>
+<li><strong>El llms.txt como servicio.</strong> Ver arriba. Diez minutos, no una línea de factura.</li>
+<li><strong>Contenido generado en masa.</strong> Es la vía más rápida a que ni Google ni los modelos tengan razón para citarte, porque no aportas nada que no esté ya.</li> </ul>
+<h2>Cómo medir si estás apareciendo</h2>
+<p>Tres formas, ninguna perfecta:</p>
+<ul>
+<li><strong>Pregúntale directamente.</strong> Abre ChatGPT o Gemini y pregunta por tu categoría y tu ciudad <em>sin</em> nombrar tu empresa. Repítelo en sesiones nuevas, porque la respuesta varía. Mira también qué fuentes cita: ahí está el mapa de dónde te conviene aparecer.</li>
+<li><strong>Mira el tráfico de referencia.</strong> En Google Analytics, filtra las visitas que llegan desde <code>chatgpt.com</code> o <code>perplexity.ai</code>. Es poco volumen, pero suele venir con mucha intención.</li>
+<li><strong>Search Console, con una advertencia.</strong> Las impresiones de los resúmenes de IA se cuentan dentro de la búsqueda web normal, sin separar. Sirve para ver si te indexan, no para medir la IA aparte.</li> </ul>
+<h2>Lo que de verdad se aprende de todo esto</h2>
+<p>La conclusión incómoda del estudio es que <strong>la visibilidad en IA se parece más a la reputación que al SEO</strong>. Se construye con menciones, con presencia en sitios ajenos, con que la gente busque tu nombre. Nada de eso se resuelve escribiendo en tu propia página.</p>
+<p>Lo cual, si lo piensas, es una buena noticia para una empresa pequeña que hace bien su trabajo, y una mala para quien esperaba comprar un atajo técnico.</p>
+<p>Un último aviso: <strong>esto cambia rápido</strong>. Las cifras de este artículo son de diciembre de 2025 y julio de 2026, y las plataformas mueven sus preferencias de fuentes en cuestión de semanas. Cualquiera que te hable de «la fórmula» de la visibilidad en IA está describiendo una foto, no una regla.</p>
+<p>Si quieres empezar por lo básico —que tu sitio se pueda leer, que Google lo entienda y que tu marca esté bien definida— por ahí empieza todo lo demás. Y si estás en Barranquilla y andas comparando quién te puede ayudar, escribimos una <a href="/blog/mejores-agencias-diseno-web-barranquilla/">guía para elegir agencia</a> en la que, a propósito, no nos incluimos.</p>
         </div>
       </div>
     </article>
 
-    <section class="section" style="padding-top:0">
-      <div class="wrap">
-        <div class="cierre">
-          <h2>¿Te encuentran hoy<span class="dot">?</span></h2>
-          <p>El Diagnóstico Digital revisa si tu sitio se puede leer, si Google lo entiende y si tu
-            presencia está bien definida — que es la base sin la cual nada de lo anterior funciona.
-            Gratis, sin tarjeta y sin registro.</p>
-          <div class="hero-ctas" style="justify-content:center">
-            <a href="/diagnostico/" class="btn btn-violet">Ver el diagnóstico</a>
-            <a href="/#contacto" class="btn btn-ghost">Hablar con alguien</a>
-          </div>
-        </div>
+    <section class="art-more" aria-labelledby="mas-t">
+      <div class="art-more-head">
+        <h2 id="mas-t"><span class="dim">Sigue</span> leyendo</h2>
+        <a href="/blog/">Ver todo el blog <svg><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="art-more-grid">
+      <a class="amc" href="/blog/mejores-agencias-diseno-web-lima/">
+        <span class="amc-img"><img src="/assets/blog/elegir.webp" alt="Laptop sobre un escritorio mostrando un directorio de portafolios de estudios de diseño web" width="1200" height="800" loading="lazy" decoding="async"></span>
+        <span class="bm">23 sep 2026 · <b>Cómo elegir</b></span>
+        <h3>Agencias de diseño web en Lima: guía para elegir</h3>
+      </a>
+      <a class="amc" href="/blog/cuanto-cuesta-una-pagina-web-en-espana/">
+        <span class="amc-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web con su tabla de precios" width="1024" height="1024" loading="lazy" decoding="async"></span>
+        <span class="bm">18 sep 2026 · <b>Precios</b></span>
+        <h3>¿Cuánto cuesta una página web en España?</h3>
+      </a>
+      <a class="amc" href="/blog/por-que-comprar-backlinks-ya-no-funciona/">
+        <span class="amc-img"><img src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" loading="lazy" decoding="async"></span>
+        <span class="bm">8 sep 2026 · <b>Marketing y SEO</b></span>
+        <h3>Por qué comprar backlinks ya casi no funciona</h3>
+      </a>
       </div>
     </section>
   </main>
 
-  <footer class="pie">
-    <div class="wrap">
-      <p>© Kaiva Studio 2026 · Barranquilla, Colombia</p>
-      <nav aria-label="Enlaces del pie">
-        <a href="/">Inicio</a>
-        <a href="/blog/">Blog</a>
-        <a href="/diagnostico/">Diagnóstico</a>
-        <a href="/#contacto">Contacto</a>
-        <a href="/privacidad/">Privacidad</a>
-        <a href="/terminos/">Términos</a>
-        <a href="/cookies/" data-kv-cookies>Preferencias</a>
-      </nav>
+    <!-- ============ CIERRE ============ -->
+  <footer class="final" id="contacto">
+    <div class="final-core">
+      <div class="note-wrap" id="note" aria-hidden="true">
+        <div class="note-shadow"><i></i></div>
+        <div class="sticky"><b>¿Tienes un proyecto?</b><span>Cuéntanos qué necesitas.<br><i>— Kaiva Studio</i></span></div>
+      </div>
+      <h2><span class="dim">Hablemos de</span> tu empresa</h2>
+      <form class="mail-form" id="mailForm" novalidate>
+        <label class="sr-only" for="email">Tu correo de trabajo</label>
+        <input id="email" name="email" type="email" placeholder="Tu correo de trabajo" autocomplete="email" required>
+        <input class="hp" type="text" id="cWebsite" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit">Agendar llamada</button>
+      </form>
+      <label class="consent" for="cPrivacy"><input type="checkbox" id="cPrivacy" required> <span>Autorizo a Kaiva Studio a tratar mis datos para responder mi solicitud, según la <a href="/privacidad/">política de privacidad</a>.</span></label>
+      <p class="form-note" id="formNote" aria-live="polite">Te contestamos el mismo día o el siguiente, de lunes a viernes, de 8:00 a. m. a 6:00 p. m.</p>
+      <div class="contacts">
+        <a href="mailto:info@kaivastudio.com">info@kaivastudio.com</a>
+        <a href="https://wa.me/573024137374" target="_blank" rel="noopener">WhatsApp +57 302 413 7374</a>
+      </div>
+    </div>
+
+    <div class="foot">
+      <a class="logo" href="/#top"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125" loading="lazy"></a>
+      <ul>
+        <li><a href="/#top">Inicio</a></li>
+        <li><a href="/portfolio/">Portfolio</a></li>
+        <li><a href="/blog/">Blog</a></li>
+      </ul>
+      <div class="soc">
+        <a class="circle light" href="https://www.instagram.com/kaivastudio/" target="_blank" rel="noopener" aria-label="Instagram"><svg><use href="#i-ig"/></svg></a>
+        <a class="circle light" href="https://www.linkedin.com/in/kaiva-studio-a6a15340b/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg><use href="#i-in"/></svg></a>
+        <a class="circle light" href="https://wa.me/573024137374" target="_blank" rel="noopener" aria-label="WhatsApp"><svg><use href="#i-wa"/></svg></a>
+        <a class="circle light" href="mailto:info@kaivastudio.com" aria-label="Correo"><svg><use href="#i-mail"/></svg></a>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Kaiva Studio · Barranquilla, Colombia</span>
+      <span><a href="/privacidad/">Privacidad</a> · <a href="/terminos/">Términos</a></span>
     </div>
   </footer>
+</div>
+<script>
+(function(){
+  var root=document.documentElement;
+  root.classList.add('js');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  <script>
-    (function () {
-      var nav = document.getElementById('nav');
-      var enlaces = document.getElementById('navLinks');
-      var boton = document.getElementById('navToggle');
+  /* ---------- Scroll suave con la rueda del mouse ----------
+     La rueda no salta: fija un destino y la página se desliza hacia él con inercia.
+     Solo con mouse (no en celular) y nunca si el sistema pide reducir el movimiento. */
+  var smoothTo=null;
+  (function(){
+    if(reduce||!window.matchMedia('(pointer:fine)').matches)return;
+    var root=document.documentElement,target=window.pageYOffset,cur=target,raf=0,ease=.1;
+    function max(){return root.scrollHeight-window.innerHeight}
+    function tick(){
+      cur+=(target-cur)*ease;
+      if(Math.abs(target-cur)<.5)cur=target;
+      window.scrollTo(0,cur);
+      raf=cur===target?0:requestAnimationFrame(tick);
+    }
+    function go(y,k){target=Math.max(0,Math.min(max(),y));ease=k;if(!raf){cur=window.pageYOffset;raf=requestAnimationFrame(tick)}}
+    window.addEventListener('wheel',function(e){
+      if(e.ctrlKey||e.defaultPrevented||Math.abs(e.deltaX)>Math.abs(e.deltaY))return;
+      // lo que tenga su propio scroll (configuración de cookies, menús) se desplaza normal
+      for(var n=e.target;n&&n.nodeType===1&&n!==root&&n!==document.body;n=n.parentElement){
+        var o=getComputedStyle(n).overflowY;
+        if((o==='auto'||o==='scroll')&&n.scrollHeight>n.clientHeight)return;
+      }
+      e.preventDefault();
+      if(!raf)target=window.pageYOffset;
+      go(target+e.deltaY*(e.deltaMode===1?40:e.deltaMode===2?window.innerHeight:1),.1);
+    },{passive:false});
+    window.addEventListener('scroll',function(){if(!raf)target=cur=window.pageYOffset},{passive:true});
+    window.addEventListener('keydown',function(){if(raf){cancelAnimationFrame(raf);raf=0}});
+    smoothTo=function(y){go(y,.075)};
+  })();
 
-      var alScroll = function () {
-        nav.classList.toggle('scrolled', window.scrollY > 10);
-      };
-      alScroll();
-      window.addEventListener('scroll', alScroll, { passive: true });
+  /* ---------- Enlaces internos: desplazamiento suave hecho a mano ---------- */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="#"]');
+    if(!a)return;
+    var id=a.getAttribute('href').slice(1),t=id&&document.getElementById(id);
+    if(!t)return;
+    e.preventDefault();
+    var vh=window.innerHeight,y;
+    if(id==='inicio'||id==='top')y=0;
+    else if(id==='trabajo'){var c=document.getElementById('car').getBoundingClientRect(),cap=t.getBoundingClientRect();y=c.top+window.pageYOffset-Math.max(90,(vh-(cap.bottom-c.top))/2)}
+    else{var h=t.querySelector(':scope > .head, :scope > .block-left')||t;y=h.getBoundingClientRect().top+window.pageYOffset-(id==='contacto'?20:110)}
+    if(smoothTo)smoothTo(y);else window.scrollTo({top:y,behavior:reduce?'auto':'smooth'});
+    if(id==='top'&&history.replaceState)history.replaceState(null,'','#top');
+  });
 
-      boton.addEventListener('click', function (e) {
-        e.stopPropagation();
-        var abierto = enlaces.classList.toggle('open');
-        boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
-      });
 
-      document.addEventListener('click', function (e) {
-        if (!enlaces.contains(e.target) && !boton.contains(e.target)) {
-          enlaces.classList.remove('open');
-          boton.setAttribute('aria-expanded', 'false');
-        }
-      });
+  /* ---------- Menú hamburguesa ---------- */
+  var mm=document.getElementById('mmenu');
+  function setMenu(o){mm.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';document.querySelectorAll('.burger').forEach(function(b){b.setAttribute('aria-expanded',o)})}
+  document.querySelectorAll('.burger').forEach(function(b){b.addEventListener('click',function(){setMenu(true)})});
+  mm.querySelector('.mm-close').addEventListener('click',function(){setMenu(false)});
+  mm.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false)});
 
-      // Aparición al hacer scroll. La clase en <html> es la que activa el
-      // estado oculto en el CSS: sin JS no se esconde nada.
-      if (!('IntersectionObserver' in window)) return;
-      document.documentElement.classList.add('js-reveal');
 
-      var objetivos = document.querySelectorAll('.tarjeta, .paso, .post-item, .faq-item, .blog-post');
-      objetivos.forEach(function (el, i) {
-        el.classList.add('reveal');
-        el.style.setProperty('--d', (i % 6) * 0.06 + 's');
-      });
+  /* ---------- Progreso de lectura y cierre que se oscurece al bajar ---------- */
+  var fin=document.getElementById('contacto'),art=document.querySelector('.articulo');
+  function onScroll(){
+    var a=art.getBoundingClientRect(),vh=window.innerHeight;
+    root.style.setProperty('--rp',Math.max(0,Math.min(1,(vh*.35-a.top)/Math.max(1,a.height-vh*.5))).toFixed(4));
+    var fr=fin.getBoundingClientRect(),fp=(vh-fr.top)/Math.min(fr.height,vh);
+    fin.style.setProperty('--fp',(Math.max(0,Math.min(1,fp))*.82).toFixed(3));
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);onScroll();
 
-      var observador = new IntersectionObserver(function (entradas) {
-        entradas.forEach(function (entrada) {
-          if (!entrada.isIntersecting) return;
-          entrada.target.classList.add('dentro');
-          observador.unobserve(entrada.target);
-        });
-      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  /* ---------- Enlaces internos (índice y #contacto) ---------- */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="#"]');if(!a)return;
+    var t=document.getElementById(a.getAttribute('href').slice(1));if(!t)return;
+    e.preventDefault();var y=t.getBoundingClientRect().top+window.pageYOffset-(t.id==='contacto'?20:100);
+    if(smoothTo)smoothTo(y);else window.scrollTo({top:y,behavior:reduce?'auto':'smooth'});
+    if(t.id!=='contacto'&&history.replaceState)history.replaceState(null,'','#'+t.id);
+  });
 
-      objetivos.forEach(function (el) { observador.observe(el); });
-    })();
-  </script>
-  <script src="/assets/fechas.js?v=1" defer></script>
+  /* ---------- La parte gris de los títulos se enciende al pasar el mouse ---------- */
+  document.querySelectorAll('h2 .dim').forEach(function(d){
+    d.innerHTML=d.textContent.trim().split(/\s+/).map(function(w){return '<span class="w">'+w+'</span>'}).join(' ');
+  });
+
+  /* ---------- Cursor propio: avión de papel dibujado a mano + destello al hacer clic ---------- */
+  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    var plane=document.createElement('div');plane.className='cur-plane';
+    plane.innerHTML='<svg viewBox="0 0 40 30"><defs>'+
+      '<linearGradient id="curWing" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E2E2E8"/></linearGradient>'+
+      '<linearGradient id="curFold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D6D6DD"/><stop offset="1" stop-color="#A4A4AF"/></linearGradient>'+
+      '<linearGradient id="curRay" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#BABAC4"/></linearGradient></defs>'+
+      '<path fill="url(#curWing)" stroke="rgba(8,8,8,.55)" stroke-width=".6" stroke-linejoin="round" d="M2 2L38 3L35 8.5L34.6 21L18.6 28.4Z"/>'+
+      '<path fill="url(#curFold)" d="M27.6 13.4L31.6 9.6L33.9 17.6L34.6 21Z"/>'+
+      '<path fill="none" stroke="rgba(8,8,8,.3)" stroke-width=".5" stroke-linejoin="round" d="M8.6 5.1L31.6 9.6L33.9 17.6M13.2 8.7L27.6 13.4L34.6 21"/>'+
+      '<path fill="none" stroke="#fff" stroke-width=".5" stroke-linecap="round" opacity=".9" d="M4.5 3.4L34.5 4.2"/></svg>';
+    document.body.appendChild(plane);
+    root.classList.add('has-cursor');
+    var hoverSel='a,button,.ci,.acc-btn,.mail-form,.app,[role="switch"],.toggle span,.mw-art,.mw-row div,.sw-kpi,.sw-row,.br-card,.br-icon,.br-post,.br-logo,.faq-item summary';
+    var ray='M0 -7L-4.6 -23Q0 -24.8 4.6 -23Z';
+    function burst(x,y){
+      var d=document.createElement('div');d.className='cur-burst';
+      d.style.transform='translate3d('+x+'px,'+y+'px,0)';
+      d.innerHTML='<svg viewBox="0 0 64 64">'+[-68,-24,14,52].map(function(a){return '<path fill="url(#curRay)" stroke="rgba(8,8,8,.42)" stroke-width=".6" stroke-linejoin="round" transform="translate(32 46) rotate('+a+')" d="'+ray+'"/>'}).join('')+'</svg>';
+      document.body.appendChild(d);setTimeout(function(){d.remove()},400);
+    }
+    document.addEventListener('mousemove',function(e){
+      plane.style.transform='translate3d('+e.clientX+'px,'+e.clientY+'px,0)';
+      root.classList.add('cur-on');
+      plane.classList.toggle('hover',!!(e.target.closest&&e.target.closest(hoverSel)));
+    });
+    document.addEventListener('mouseout',function(e){if(!e.relatedTarget)root.classList.remove('cur-on')});
+    var goneT=null;
+    document.addEventListener('mousedown',function(e){plane.classList.add('gone');if(!reduce)burst(e.clientX,e.clientY);clearTimeout(goneT);goneT=setTimeout(function(){plane.classList.remove('gone')},200)});
+  }
+
+  /* ---------- Formulario: copia en la hoja de leads y aviso por correo (EmailJS) ---------- */
+  var form=document.getElementById('mailForm'),email=document.getElementById('email'),note=document.getElementById('formNote'),casilla=document.getElementById('cPrivacy');
+  var fBtn=form.querySelector('button[type="submit"]'),fLabel=fBtn.textContent;
+  var HOJA_LEADS='https://script.google.com/macros/s/AKfycbwqEv37I6bl8g7xdZxrTHgMWswDPAGO6bDbHH70JgLFeqhfLwE0NrJEc_iGTnU-zwEZTA/exec';
+  var EJS={service:'service_94uqq2e',template:'template_brvipe9',key:'7bRjr4NU9L0Y5gDsy',endpoint:'https://api.emailjs.com/api/v1.0/email/send'};
+  var fallo='No pudimos enviarlo. Escríbenos a info@kaivastudio.com o por WhatsApp al +57 302 413 7374.';
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(fBtn.disabled)return;
+    if(document.getElementById('cWebsite').value){note.textContent='Listo, recibimos tu correo.';form.reset();return}
+    var v=email.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){note.textContent='Escribe un correo válido, por ejemplo nombre@tuempresa.com.';email.focus();return}
+    if(!casilla.checked){note.textContent='Marca la casilla de autorización para poder escribirte.';casilla.focus();return}
+    var autorizada=new Date().toISOString(),mensaje='Quiere agendar una llamada desde un artículo del blog.';
+    fBtn.disabled=true;fBtn.textContent='Enviando…';
+    fetch(HOJA_LEADS,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({nombre:'',correo:v,telefono:'',interes:'Agendar llamada',mensaje:mensaje,origen:location.href,referente:document.referrer||'directo',autorizacion:autorizada})}).catch(function(){});
+    fetch(EJS.endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:EJS.service,template_id:EJS.template,user_id:EJS.key,template_params:{
+      name:v.split('@')[0],email:v,message:mensaje,phone:'No indicado',interest:'Agendar llamada',
+      subject:'Nuevo contacto desde kaivastudio.com — Agendar llamada',
+      time:new Date().toLocaleString('es-CO',{dateStyle:'medium',timeStyle:'short'}),page_url:location.href,privacy:'Autorizada el '+autorizada}})})
+    .then(function(r){if(!r.ok)throw new Error(r.status);note.textContent='Listo, recibimos tu correo. Te escribimos el mismo día o el siguiente, de lunes a viernes.';form.reset();casilla.checked=false})
+    .catch(function(){note.textContent=fallo})
+    .then(function(){fBtn.disabled=false;fBtn.textContent=fLabel});
+  });
+})();
+</script>
 </body>
-
 </html>
