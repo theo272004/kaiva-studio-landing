@@ -950,9 +950,9 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 </svg>
 
 <nav class="float-nav" id="floatNav" aria-label="Navegación rápida">
-  <a class="logo" href="#inicio"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a>
+  <a class="logo" href="#top"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a>
   <ul>
-    <li><a href="/" aria-current="page">Inicio</a></li>
+    <li><a href="#top" aria-current="page">Inicio</a></li>
     <li><a href="/portfolio/">Portfolio</a></li>
     <li><a href="/blog/">Blog</a></li>
   </ul>
@@ -961,9 +961,9 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 </nav>
 
 <div class="mmenu" id="mmenu" aria-label="Menú">
-  <div class="mm-top"><a class="logo" href="#inicio"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a><button class="mm-close" type="button" aria-label="Cerrar menú"><span></span><span></span></button></div>
+  <div class="mm-top"><a class="logo" href="#top"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a><button class="mm-close" type="button" aria-label="Cerrar menú"><span></span><span></span></button></div>
   <nav class="mm-links">
-    <a href="/" aria-current="page">Inicio</a><a href="/portfolio/">Portfolio</a><a href="/blog/">Blog</a><a href="#contacto">Contacto</a>
+    <a href="#top" aria-current="page">Inicio</a><a href="/portfolio/">Portfolio</a><a href="/blog/">Blog</a><a href="#contacto">Contacto</a>
   </nav>
   <div class="mm-foot">
     <a class="btn btn-white" href="#contacto">Agendar llamada</a>
@@ -971,14 +971,15 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   </div>
 </div>
 
+<div id="top"></div>
 <div class="page">
 
   <!-- ============ HERO ============ -->
   <header class="hero" id="inicio">
     <nav class="nav" aria-label="Principal">
-      <a class="logo" href="#inicio"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a>
+      <a class="logo" href="#top"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a>
       <ul class="nav-links">
-        <li><a href="/" aria-current="page">Inicio</a></li>
+        <li><a href="#top" aria-current="page">Inicio</a></li>
         <li><a href="/portfolio/">Portfolio</a></li>
         <li><a href="/blog/">Blog</a></li>
       </ul>
@@ -1444,9 +1445,9 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     </div>
 
     <div class="foot">
-      <a class="logo" href="#inicio"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125" loading="lazy"></a>
+      <a class="logo" href="#top"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125" loading="lazy"></a>
       <ul>
-        <li><a href="/">Inicio</a></li>
+        <li><a href="#top">Inicio</a></li>
         <li><a href="/portfolio/">Portfolio</a></li>
         <li><a href="/blog/">Blog</a></li>
       </ul>
@@ -1510,10 +1511,11 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     if(!t)return;
     e.preventDefault();
     var vh=window.innerHeight,y;
-    if(id==='inicio')y=0;
+    if(id==='inicio'||id==='top')y=0;
     else if(id==='trabajo'){var c=document.getElementById('car').getBoundingClientRect(),cap=t.getBoundingClientRect();y=c.top+window.pageYOffset-Math.max(90,(vh-(cap.bottom-c.top))/2)}
     else{var h=t.querySelector(':scope > .head, :scope > .block-left')||t;y=h.getBoundingClientRect().top+window.pageYOffset-(id==='contacto'?20:110)}
     if(smoothTo)smoothTo(y);else window.scrollTo({top:y,behavior:reduce?'auto':'smooth'});
+    if(id==='top'&&history.replaceState)history.replaceState(null,'','#top');
   });
 
 
