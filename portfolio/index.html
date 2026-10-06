@@ -985,6 +985,44 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .idsl.play .ids-logo{opacity:1;transform:none}
 .idsl.play .ids-sw div{transform:none}
 .idsl.play .ids-nt{opacity:1}
+/* plantilla de presupuesto (en código, medidas en cqw para escalar con la página) */
+.deck .slide.tpl{container-type:inline-size;background:#0B0B10}
+.tp{position:relative;height:100%;overflow:hidden;color:#fff;font-family:Inter,var(--f-sans),sans-serif}
+.tp-glow{position:absolute;inset:0;background:radial-gradient(60% 70% at 85% 10%,rgba(214,40,57,.45),transparent 70%),radial-gradient(55% 60% at 10% 100%,rgba(47,91,234,.35),transparent 70%)}
+.tp-card{position:relative;padding:1.6cqw 1.8cqw;border-radius:1.4cqw;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09)}
+.tp-card small{display:block;font-size:1.35cqw;color:rgba(255,255,255,.65)}
+.tp-card b{display:block;margin-top:.4cqw;font-size:2.9cqw;letter-spacing:-.02em}
+.tp-card i{display:block;margin-top:.3cqw;font-style:normal;font-size:1.15cqw;color:rgba(255,255,255,.5)}
+.tp-eye{font-family:var(--f-mono);font-size:1.15cqw;letter-spacing:.16em;text-transform:uppercase;color:#FF5A6A}
+.tp-blue{background:#2F5BEA;box-shadow:0 2cqw 4cqw -2cqw rgba(47,91,234,.7)}
+.tp-blue small,.tp-blue i{color:rgba(255,255,255,.8)}
+.tp-red{background:#D62839;box-shadow:0 2cqw 4cqw -2cqw rgba(214,40,57,.7)}
+.tp-red .tp-eye{color:#fff}
+.tp-cover{display:grid;grid-template-columns:30% 1fr 28%;align-items:center;gap:3cqw;padding:5cqw}
+.tp-intro{display:grid;gap:1cqw}
+.tp-h{font-size:4.2cqw;line-height:1.02;letter-spacing:-.03em}
+.tp-intro p{margin:0;font-size:1.45cqw;line-height:1.45;color:rgba(255,255,255,.7)}
+.tp-intro small{font-size:1.2cqw;color:#8FA8FF}
+.tp-ring{position:relative;justify-self:center;width:24cqw;aspect-ratio:1}
+.tp-donut{position:absolute;inset:0;border-radius:50%;background:conic-gradient(#2F5BEA 0 var(--a),#D62839 var(--a) 100%);-webkit-mask:radial-gradient(circle,transparent 58%,#000 59%);mask:radial-gradient(circle,transparent 58%,#000 59%);--a:0%;transition:--a 1.4s var(--ease);filter:drop-shadow(0 1.5cqw 3cqw rgba(0,0,0,.5))}
+.tp-ring-in{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.tp-ring-in b{font-size:4cqw;letter-spacing:-.03em}
+.tp-ring-in small{font-size:1.2cqw;color:rgba(255,255,255,.6)}
+.tp-side{display:grid;gap:1.4cqw}
+.tp-goals{display:flex;flex-direction:column;justify-content:center;padding:5cqw 6cqw}
+.tp-title{position:relative;font-size:3.4cqw;letter-spacing:-.03em}
+.tp-sub{position:relative;margin:.6cqw 0 3cqw;font-size:1.55cqw;color:rgba(255,255,255,.6)}
+.tp-gl{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:1.4cqw}
+.tp-gl .tp-card b{font-size:2.3cqw}
+.tp-bar{position:relative;height:.5cqw;margin-top:3cqw;border-radius:1cqw;background:rgba(255,255,255,.1);overflow:hidden}
+.tp-bar i{display:block;height:100%;background:linear-gradient(90deg,#2F5BEA,#D62839);transform-origin:left;transform:scaleX(0);transition:transform 1.6s var(--ease) .5s}
+/* al llegar a la página: la dona se llena, las tarjetas entran y la barra avanza */
+@property --a{syntax:'<percentage>';inherits:false;initial-value:0%}
+.tpl .tp-card{opacity:0;transform:translateY(1.4cqw);transition:opacity .6s ease,transform .8s var(--ease);transition-delay:calc(.15s + var(--d,0) * .12s)}
+.tpl .tp-side .tp-card:nth-child(2){--d:1}
+.tpl.play .tp-card{opacity:1;transform:none}
+.tpl.play .tp-donut{--a:43%}
+.tpl.play .tp-bar i{transform:none}
 .pw-cap{width:100%;max-width:640px;margin:8px 0 -6px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
 .pw-cap:first-child{margin-top:2px}
 @keyframes shotIn{to{opacity:1;transform:none}}
@@ -1091,6 +1129,7 @@ html.lock{overflow:hidden}
   .folder{width:92px;height:72px}
   .desk-area .ico:nth-child(1){--x:calc(50% - 148px)!important;--y:52%!important}
   .desk-area .ico:nth-child(2){--x:calc(50% + 8px)!important;--y:52%!important}
+  .desk-area .ico:nth-child(3){--x:calc(50% - 70px)!important;--y:80%!important}
   .pdock{gap:6px;padding:7px 8px;border-radius:18px;bottom:10px}
   .pdock .d{width:40px;height:40px;border-radius:10px}
   .pdock .m-hide{display:none}
@@ -1182,6 +1221,10 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       <button class="ico" type="button" data-open="thallo" style="--x:19.5%;--y:61%">
         <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/thallo-brandbook/01-portada.webp" alt="" width="1600" height="900"><span class="ff"></span></span>
         <span class="ico-name">Thallo Digital<small>Web y marca</small></span>
+      </button>
+      <button class="ico" type="button" data-open="tpl" style="--x:74%;--y:56%">
+        <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/plantilla-portada.webp" alt="" width="1600" height="900"><span class="ff"></span></span>
+        <span class="ico-name">Plantillas<small>Presentaciones</small></span>
       </button>
     </div>
 
@@ -1437,6 +1480,24 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
         '<div class="ids-nt">'+nt.map(function(c){return '<span><i style="--c:'+c[1]+'"></i>'+c[0]+'</span>'}).join('')+'</div>'+
       '</div></div>';
   }
+  // plantilla de presentación: presupuesto personal con datos de ejemplo (no es una propuesta)
+  function tplCover(){
+    return '<div class="tp tp-cover"><div class="tp-glow"></div>'+
+      '<div class="tp-card tp-intro"><span class="tp-eye">Presupuesto personal</span><b class="tp-h">Mi plan<br>de ahorro</b><p>Gastos del mes y cuánto tendré ahorrado mes a mes.</p><small>Plantilla editable · datos de ejemplo</small></div>'+
+      '<div class="tp-ring"><div class="tp-donut"></div><div class="tp-ring-in"><b>43 %</b><small>se ahorra</small></div></div>'+
+      '<div class="tp-side"><div class="tp-card"><small>Ingreso mensual</small><b>$3.500.000</b><i>Ejemplo</i></div><div class="tp-card tp-blue"><small>Ahorro en 12 meses</small><b>$18.000.000</b><i>$1.500.000 al mes</i></div></div>'+
+    '</div>';
+  }
+  function tplGoals(){
+    var g=[['Diciembre','$4.500.000','3 meses'],['Marzo','$9.000.000','6 meses'],['Junio','$13.500.000','9 meses'],['Septiembre','$18.000.000','12 meses']];
+    return '<div class="tp tp-goals"><div class="tp-glow"></div><b class="tp-title">Metas clave</b><p class="tp-sub">Cuánto tendrás ahorrado en cada etapa</p>'+
+      '<div class="tp-gl">'+g.map(function(x,i){return '<div class="tp-card'+(i===3?' tp-red':'')+'" style="--d:'+i+'"><span class="tp-eye">'+x[0]+'</span><b>'+x[1]+'</b><small>'+x[2]+'</small></div>'}).join('')+'</div>'+
+      '<div class="tp-bar"><i></i></div></div>';
+  }
+  var TPL=[
+    {fn:tplCover,cls:'tpl',alt:'Plantilla de presupuesto personal: portada con ingreso mensual y ahorro en 12 meses, datos de ejemplo'},
+    {fn:tplGoals,cls:'tpl',alt:'Plantilla de presupuesto personal: metas de ahorro por trimestre, datos de ejemplo'}
+  ];
   var P={
     cst:{name:'CS Travel Group',kind:'Diseño web · Software a medida',hash:'cstravel',live:'https://www.cstravelgroup.com/',
       desc:'Agencia de viajes corporativos y para médicos. Hicimos su sitio web, las páginas para empresas y para médicos, y una plataforma a medida para sus aliados.',
@@ -1447,6 +1508,10 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
         {id:'plataforma',label:'Plataforma para aliados',url:'cstravelgroup.com/portal',live:'https://www.cstravelgroup.com/portal',full:true,shots:['/assets/portfolio/cstravel-portal-login.webp','/assets/inicio/trabajo-cstravel-software.webp'],caps:['Inicio de sesión del portal','Parte interna del portal'],alts:['Inicio de sesión del portal de aliados de CS Travel Group','Parte interna de la plataforma de CS Travel Group: ganancias, referidos y casos del aliado'],alt:'Plataforma a medida de CS Travel Group para sus aliados',
           note:'Es una plataforma privada: los aliados de CS Travel Group entran con su usuario para ver sus casos, sus referidos y sus ganancias.'}
       ]},
+    tpl:{name:'Plantillas',kind:'Plantillas de presentación',hash:'plantillas',
+      desc:'También diseñamos plantillas de presentación para que tu equipo solo cambie los datos. Esta es de presupuesto personal; los números son de ejemplo.',
+      done:['Portada','Tablas y gráficos','Metas y cierre','Editable en Canva'],
+      pages:[{id:'presupuesto',label:'Plan de ahorro',url:'Plantilla · Plan de ahorro',deck:TPL}]},
     thallo:{name:'Thallo Digital',kind:'Diseño web · Diseño de marca',hash:'thallo',live:'https://thallodigital.com/',
       desc:'Hicimos su sitio web y su marca: símbolo, logo, paleta, tipografía y cómo se aplica la identidad.',
       done:['Sitio web','Símbolo y logo','Paleta y tipografía','Brandbook'],
@@ -1471,6 +1536,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
     if(pg.deck)return '<div class="pw-url">'+lock+'<span>'+pg.url+'</span></div>'+
       '<div class="pw-scroll deck" tabindex="0">'+pg.deck.map(function(d,i){
         if(d.id)return '<figure class="slide idsl">'+idSlide(d.alt)+'</figure>';
+        if(d.fn)return '<figure class="slide '+d.cls+'" role="img" aria-label="'+d.alt+'">'+d.fn()+'</figure>';
         return '<figure class="slide">'+(d.v?'<video muted playsinline preload="'+(i<3?'auto':'metadata')+'" width="1600" height="900" poster="'+BB+d.v+(reduce?'':'-inicio')+'.webp" data-end="'+BB+d.v+'.webp"'+(d.loop?' data-loop="'+d.loop+'"':'')+' aria-label="'+d.alt+'"><source src="'+BB+d.v+'.mp4" type="video/mp4"></video>'
           :'<img src="'+BB+d.i+'.webp" alt="'+d.alt+'" width="1600" height="900" decoding="async"'+(i>2?' loading="lazy"':'')+'>')+'</figure>'}).join('')+'</div>';
     // en vivo: el sitio real dentro de la ventana, a tamaño de escritorio y reducido para que quepa
@@ -1615,7 +1681,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       o.body.innerHTML='<aside class="pw-side"><div><span class="eyebrow">'+p.kind+'</span><h2>'+p.name+'</h2></div><p>'+p.desc+'</p>'+
         '<div class="pw-pages"><b>Ver</b>'+p.pages.map(function(pg){return '<button type="button" data-id="'+pg.id+'">'+pgIco+pg.label+'</button>'}).join('')+'</div>'+
         '<ul class="pw-done">'+p.done.map(function(d){return '<li>'+d+'</li>'}).join('')+'</ul>'+
-        '<a class="btn" href="'+p.live+'" target="_blank" rel="noopener">Ver sitio en vivo <svg><use href="#i-arrow"/></svg></a></aside><div class="pw-main"></div>';
+        (p.live?'<a class="btn" href="'+p.live+'" target="_blank" rel="noopener">Ver sitio en vivo <svg><use href="#i-arrow"/></svg></a>':'')+'</aside><div class="pw-main"></div>';
       o.body.querySelectorAll('.pw-pages button').forEach(function(b){b.addEventListener('click',function(){page(b.dataset.id)})});
     }
     page(pageId);
