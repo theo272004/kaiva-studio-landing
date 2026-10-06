@@ -107,7 +107,7 @@
         "@id": "https://kaivastudio.com/#studio"
       },
       "url": "https://thallodigital.com/",
-      "image": "https://kaivastudio.com/assets/portfolio/thallo-1.webp",
+      "image": "https://kaivastudio.com/assets/portfolio/thallo-brandbook/01-portada.webp",
       "genre": [
         "Diseño web",
         "Diseño de marca"
@@ -941,6 +941,11 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .pw-note{max-width:640px}
 /* pantallazos al ancho completo de la ventana, cada uno con su nombre encima */
 .pw-scroll.full img,.pw-scroll.full .pw-note,.pw-scroll.full .pw-cap{max-width:none}
+/* brandbook: páginas 16:9 que aparecen al llegar a ellas */
+.pw-scroll.deck{display:flex;flex-direction:column;align-items:center;gap:16px}
+.deck .slide{flex:none;width:100%;max-width:640px;aspect-ratio:16/9;margin:0;border-radius:9px;overflow:hidden;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.14);opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .7s var(--ease)}
+.deck .slide.in{opacity:1;transform:none}
+.deck .slide img,.deck .slide video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;max-width:none;border-radius:0;box-shadow:none;opacity:1;transform:none;animation:none}
 .pw-main:has(.pw-scroll.full) .pw-url{max-width:none}
 .pw-cap{width:100%;max-width:640px;margin:8px 0 -6px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
 .pw-cap:first-child{margin-top:2px}
@@ -1078,7 +1083,7 @@ html.lock{overflow:hidden}
   <header class="screen" id="inicio">
     <div class="sc-bg" aria-hidden="true">
       <img src="/assets/portfolio/cstravel-inicio-1.webp" alt="" width="1440" height="900">
-      <img src="/assets/portfolio/thallo-brandbook-01.webp" alt="" width="1440" height="810">
+      <img src="/assets/portfolio/thallo-brandbook/01-portada.webp" alt="" width="1600" height="900">
     </div>
     <div class="mbar" aria-hidden="true"><b>Kaiva</b><span id="mbApp">Finder</span><span class="opt">Archivo</span><span class="opt">Editar</span><span class="opt">Ver</span><span class="opt">Ventana</span><span class="mb-r" id="mbClock"></span></div>
 
@@ -1095,7 +1100,7 @@ html.lock{overflow:hidden}
         <span class="ico-name">CS Travel Group<small>Web y plataforma</small></span>
       </button>
       <button class="ico" type="button" data-open="thallo" style="--x:calc(100% - 160px);--y:22px">
-        <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/thallo-brandbook-01.webp" alt="" width="1440" height="810"><span class="ff"></span></span>
+        <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/thallo-brandbook/01-portada.webp" alt="" width="1600" height="900"><span class="ff"></span></span>
         <span class="ico-name">Thallo Digital<small>Web y marca</small></span>
       </button>
     </div>
@@ -1138,7 +1143,7 @@ html.lock{overflow:hidden}
           </span>
         </a>
         <a class="pcard" href="#thallo" data-open="thallo">
-          <img src="/assets/portfolio/thallo-brandbook-01.webp" alt="Portada del mini brandbook de Thallo Digital" width="1440" height="810" loading="lazy">
+          <img src="/assets/portfolio/thallo-brandbook/01-portada.webp" alt="Portada del brandbook de Thallo Digital" width="1600" height="900" loading="lazy">
           <span>
             <h3>Thallo Digital</h3>
             <p>Sitio web y marca: símbolo, logo, paleta, tipografía y cómo se aplica la identidad.</p>
@@ -1153,18 +1158,18 @@ html.lock{overflow:hidden}
     <section class="block brands" id="marcas" aria-labelledby="br-t">
       <div class="arc" id="arc" data-reveal>
         <div class="arc-row">
-          <button class="bcard" type="button" style="--a:-66deg;--i:0" data-cap="Thallo Digital · Mini Brandbook"><img src="/assets/portfolio/thallo-brandbook-01.webp" alt="Portada del mini brandbook de Thallo Digital" width="1440" height="810" loading="lazy"></button>
-          <button class="bcard" type="button" style="--a:-44deg;--i:1" data-cap="Thallo Digital · Símbolo"><img src="/assets/portfolio/thallo-brandbook-10.webp" alt="Símbolo de Thallo Digital, una forma orgánica verde oliva" width="1440" height="810" loading="lazy"></button>
-          <button class="bcard" type="button" style="--a:-22deg;--i:2" data-cap="Thallo Digital · Versiones del logo"><img src="/assets/portfolio/thallo-brandbook-11.webp" alt="Versiones aprobadas del logo de Thallo Digital" width="1440" height="810" loading="lazy"></button>
-          <button class="bcard" type="button" style="--a:0deg;--i:3" data-cap="Thallo Digital · Identidad visual"><img src="/assets/portfolio/thallo-brandbook-09.webp" alt="Portadilla de identidad visual del brandbook de Thallo Digital" width="1440" height="810" loading="lazy"></button>
-          <button class="bcard" type="button" style="--a:22deg;--i:4" data-cap="Thallo Digital · Paleta"><img src="/assets/portfolio/thallo-brandbook-13.webp" alt="Paleta de color de Thallo Digital: verdes oliva sobre neutros cálidos" width="1440" height="810" loading="lazy"></button>
-          <button class="bcard" type="button" style="--a:44deg;--i:5" data-cap="Thallo Digital · Aplicaciones"><img src="/assets/portfolio/thallo-brandbook-16.webp" alt="La identidad de Thallo Digital aplicada en piezas y pantallas" width="1440" height="810" loading="lazy"></button>
-          <button class="bcard" type="button" style="--a:66deg;--i:6" data-cap="Thallo Digital · Cierre"><img src="/assets/portfolio/thallo-brandbook-17.webp" alt="Cierre del brandbook de Thallo Digital" width="1440" height="810" loading="lazy"></button>
+          <button class="bcard" type="button" style="--a:-66deg;--i:0" data-cap="Thallo Digital · Portada"><img src="/assets/portfolio/thallo-brandbook/01-portada.webp" alt="Portada del brandbook de Thallo Digital" width="1600" height="900" loading="lazy"></button>
+          <button class="bcard" type="button" style="--a:-44deg;--i:1" data-cap="Thallo Digital · El nombre"><img src="/assets/portfolio/thallo-brandbook/02-nombre.webp" alt="El nombre de Thallo: θάλλειν, brotar, florecer" width="1600" height="900" loading="lazy"></button>
+          <button class="bcard" type="button" style="--a:-22deg;--i:2" data-cap="Thallo Digital · Símbolo"><img src="/assets/portfolio/thallo-brandbook/04-simbolo.webp" alt="Símbolo de Thallo Digital, una forma orgánica verde oliva" width="1600" height="900" loading="lazy"></button>
+          <button class="bcard" type="button" style="--a:0deg;--i:3" data-cap="Thallo Digital · Logo"><img src="/assets/portfolio/thallo-brandbook/05-logo.webp" alt="Versiones aprobadas del logo de Thallo Digital" width="1600" height="900" loading="lazy"></button>
+          <button class="bcard" type="button" style="--a:22deg;--i:4" data-cap="Thallo Digital · Paleta"><img src="/assets/portfolio/thallo-brandbook/06-color.webp" alt="Paleta de color de Thallo Digital: verdes oliva sobre neutros cálidos" width="1600" height="900" loading="lazy"></button>
+          <button class="bcard" type="button" style="--a:44deg;--i:5" data-cap="Thallo Digital · Identidad aplicada"><img src="/assets/portfolio/thallo-brandbook/07-identidad-aplicada.webp" alt="La identidad de Thallo Digital aplicada en piezas y pantallas" width="1600" height="900" loading="lazy"></button>
+          <button class="bcard" type="button" style="--a:66deg;--i:6" data-cap="Thallo Digital · Cierre"><img src="/assets/portfolio/thallo-brandbook/10-cierre.webp" alt="Cierre del brandbook de Thallo Digital" width="1600" height="900" loading="lazy"></button>
         </div>
         <div class="arc-copy">
           <span class="who">Diseño de marca · Thallo Digital</span>
           <h2 id="br-t"><span class="dim">Marcas que</span><br>se reconocen</h2>
-          <p class="sub">Páginas del brandbook que diseñamos para Thallo. Toca una para verla de cerca o ábrelo completo.</p>
+          <p class="sub">Páginas del brandbook que diseñamos para Thallo. Toca una para verla de cerca o ábrelo completo, con sus animaciones.</p>
           <button class="btn" type="button" data-brand>Ver el brandbook completo <svg><use href="#i-arrow"/></svg></button>
         </div>
       </div>
@@ -1334,11 +1339,25 @@ html.lock{overflow:hidden}
       done:['Sitio web','Símbolo y logo','Paleta y tipografía','Brandbook'],
       pages:[
         {id:'inicio',label:'Sitio web',url:'thallodigital.com',live:'https://thallodigital.com/',frame:'https://thallodigital.com/',alt:'Sitio web de Thallo Digital'},
-        {id:'marca',label:'Mini Brandbook',url:'Brandbook de Thallo Digital',book:true,shots:shots('thallo-brandbook',17,true),alt:'Mini brandbook de Thallo Digital'}
+        {id:'marca',label:'Brandbook',url:'Brandbook · Thallo Digital',deck:SMB}
       ]}
   };
+  // súper mini brandbook de Thallo: sale de sus Canva; las páginas con animación van en video
+  var BB='/assets/portfolio/thallo-brandbook/';
+  var SMB=[
+    {i:'01-portada',alt:'Portada del brandbook de Thallo Digital: el símbolo iluminado sobre una pared'},
+    {v:'02-nombre',alt:'El nombre: θάλλειν, brotar, florecer; en la mitología griega Thallo es la diosa de los brotes jóvenes'},
+    {v:'03-marca',alt:'La marca: nueva identidad, mismo criterio; fotos, colores y tipografías de Thallo'},
+    {i:'04-simbolo',alt:'El símbolo de Thallo: una forma orgánica que crece con intención'},
+    {i:'05-logo',alt:'Versiones aprobadas del logo de Thallo Digital'},
+    {i:'06-color',alt:'Paleta de color de Thallo: verdes oliva sobre neutros cálidos'},
+    {i:'07-identidad-aplicada',alt:'La identidad aplicada en fotos: papelería, pantallas y espacios'},
+    {i:'08-aplicaciones',alt:'Aplicaciones: tarjetas, papelería y credencial con la marca de Thallo'},
+    {v:'09-web',alt:'La web: un sitio que predica con el ejemplo, en computador, celular y portátil'},
+    {i:'10-cierre',alt:'Cierre: Be the name they already trust'}
+  ];
   // marcas: cada manual de marca es una pestaña del navegador
-  var BOOKS=[{id:'thallo',label:'Thallo Digital',url:'Mini Brandbook · Thallo Digital',shots:shots('thallo-brandbook',17,true),alt:'Mini brandbook de Thallo Digital'}];
+  var BOOKS=[{id:'thallo',label:'Thallo Digital',url:'Brandbook · Thallo Digital',deck:SMB}];
   // navegador: una pestaña por sitio, en vivo; dentro se navega con el menú de cada web
   var WEBS=[{p:P.cst,pg:P.cst.pages[0]},{p:P.thallo,pg:P.thallo.pages[0]}].map(function(x,i){return {id:'w'+i,label:x.p.name,url:x.pg.url,live:x.pg.live,frame:x.pg.frame,alt:x.pg.alt}});
 
@@ -1349,6 +1368,11 @@ html.lock{overflow:hidden}
   var lock='<svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 10V8a5 5 0 0 1 10 0v2h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h1zm2 0h6V8a3 3 0 0 0-6 0v2z"/></svg>';
   var pgIco='<svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></g></svg>';
   function screensHTML(pg){
+    // brandbook: una página tras otra; las animadas se reproducen al llegar a ellas
+    if(pg.deck)return '<div class="pw-url">'+lock+'<span>'+pg.url+'</span></div>'+
+      '<div class="pw-scroll deck" tabindex="0">'+pg.deck.map(function(d,i){
+        return '<figure class="slide">'+(d.v?'<video muted playsinline preload="'+(i<3?'auto':'metadata')+'" width="1600" height="900" poster="'+BB+d.v+(reduce?'':'-inicio')+'.webp" data-end="'+BB+d.v+'.webp" aria-label="'+d.alt+'"><source src="'+BB+d.v+'.mp4" type="video/mp4"></video>'
+          :'<img src="'+BB+d.i+'.webp" alt="'+d.alt+'" width="1600" height="900" decoding="async"'+(i>2?' loading="lazy"':'')+'>')+'</figure>'}).join('')+'</div>';
     // en vivo: el sitio real dentro de la ventana, a tamaño de escritorio y reducido para que quepa
     if(pg.frame)return '<div class="pw-url">'+lock+'<span>'+pg.url+'</span><a href="'+pg.live+'" target="_blank" rel="noopener">Abrir ↗</a></div>'+
       '<div class="pw-live"><span class="pw-live-tag">En vivo</span><iframe src="'+pg.frame+'" title="'+pg.alt+' (en vivo)"></iframe></div>';
@@ -1391,6 +1415,21 @@ html.lock{overflow:hidden}
     f.style.width=(w/k)+'px';f.style.height=(h/k)+'px';f.style.transform=k===1?'none':'scale('+k+')';
   }
   var liveRO=('ResizeObserver' in window)?new ResizeObserver(function(es){es.forEach(function(e){scaleLive(e.target)})}):null;
+  function watchDeck(root){
+    var box=root.querySelector('.pw-scroll.deck');if(!box)return;
+    var slides=[].slice.call(box.querySelectorAll('.slide'));
+    function still(v){var im=document.createElement('img');im.src=v.getAttribute('data-end');im.alt=v.getAttribute('aria-label');im.width=1600;im.height=900;v.replaceWith(im)}
+    if(reduce||!('IntersectionObserver' in window)){slides.forEach(function(s){s.classList.add('in');var v=s.querySelector('video');if(v)still(v)});return}
+    // aparece apenas asoma; el video arranca desde el principio cuando la página se ve casi completa
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      var v=e.target.querySelector('video'),k=e.intersectionRatio;
+      if(k>=.12)e.target.classList.add('in');
+      if(!v)return;
+      if(k>=.6&&!v.dataset.on){v.dataset.on='1';try{v.currentTime=0}catch(x){}var pr=v.play();if(pr&&pr.catch)pr.catch(function(){still(v)})}
+      else if(k<.12&&v.dataset.on){delete v.dataset.on;v.pause()}
+    })},{root:box,threshold:[0,.12,.6]});
+    slides.forEach(function(s){io.observe(s)});
+  }
   function watchLive(root){root.querySelectorAll('.pw-live').forEach(function(b){scaleLive(b);if(liveRO)liveRO.observe(b)})}
   function front(key){
     var i=stack.indexOf(key);if(i<0)return;
@@ -1453,7 +1492,7 @@ html.lock{overflow:hidden}
     function page(id){
       var pg=p.pages.filter(function(x){return x.id===id})[0]||p.pages[0];
       o.body.querySelectorAll('.pw-pages button').forEach(function(b){b.classList.toggle('on',b.dataset.id===pg.id)});
-      o.body.querySelector('.pw-main').innerHTML=screensHTML(pg);o.live=pg.live||p.live;watchLive(o.body);
+      o.body.querySelector('.pw-main').innerHTML=screensHTML(pg);o.live=pg.live||p.live;watchLive(o.body);watchDeck(o.body);
     }
     if(fresh){
       o.title.textContent=p.name;
@@ -1473,7 +1512,7 @@ html.lock{overflow:hidden}
     function tab(id){
       var t=list.filter(function(x){return x.id===id})[0]||list[0];
       o.tabs.querySelectorAll('button').forEach(function(b){var on=b.dataset.id===t.id;b.classList.toggle('on',on);b.setAttribute('aria-selected',on)});
-      o.body.innerHTML='<div class="pw-main">'+screensHTML(t)+'</div>';o.live=t.live||null;watchLive(o.body);
+      o.body.innerHTML='<div class="pw-main">'+screensHTML(t)+'</div>';o.live=t.live||null;watchLive(o.body);watchDeck(o.body);
     }
     o.tabs.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){tab(b.dataset.id)})});
     tab();
