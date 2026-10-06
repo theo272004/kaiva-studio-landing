@@ -1120,58 +1120,140 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 }
 
 /* ---------- solo en el blog ---------- */
-
 /* =====================================================================
-   BLOG: mismas reglas de la portada. El panel oscuro trae el buscador,
-   los temas y el artículo más reciente; abajo, todas las guías.
+   BLOG en formato revista, con las reglas de la portada: el panel oscuro
+   trae los temas y un carrusel de destacados; abajo, lo más reciente con
+   tarjetas recortadas y una selección para empezar.
    ===================================================================== */
-.bhero{padding-bottom:clamp(28px,4vw,48px)}
+.bhero{padding-bottom:clamp(30px,4vw,52px)}
 .bhero .hero-copy{padding-bottom:0}
-/* buscador: la misma píldora blanca del formulario de la portada */
-.bsearch{display:flex;align-items:center;gap:10px;width:min(560px,calc(100% - 32px));margin:6px auto 0;padding:0 8px 0 20px;height:56px;border-radius:999px;background:var(--paper);color:var(--ink);box-shadow:0 20px 40px -24px rgba(0,0,0,.7)}
-.bsearch svg{width:18px;height:18px;flex:none;color:var(--ink-3)}
-.bsearch input{flex:1;min-width:0;height:100%;border:0;background:none;font:inherit;font-size:15.5px;color:var(--ink);outline:none}
-.bsearch input::placeholder{color:var(--ink-3)}
-.bsearch kbd{flex:none;padding:4px 9px;border-radius:8px;background:var(--mist);font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2)}
-/* temas: píldoras de vidrio sobre el panel oscuro */
-.btemas{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:860px;margin:18px auto 0;padding:0 16px}
-.btema{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 14px;border:0;border-radius:999px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.86);font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);transition:background .25s,color .25s,transform .25s var(--ease)}
-.btema:hover{background:rgba(255,255,255,.18);transform:translateY(-2px)}
-.btema i{font-style:normal;font-size:11.5px;font-weight:600;opacity:.6}
-.btema[aria-pressed="true"]{background:var(--paper);color:var(--ink);box-shadow:none}
-.btema[aria-pressed="true"] i{opacity:.5}
-/* destacado: tarjeta grande dentro del panel */
-.bdest{display:grid;grid-template-columns:1.15fr 1fr;align-items:stretch;width:min(1080px,calc(100% - 32px));margin:clamp(34px,5vw,56px) auto 0;border-radius:var(--r-card);overflow:hidden;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);color:var(--paper);text-decoration:none;transition:transform .45s var(--ease),background .3s}
-.bdest:hover{transform:translateY(-6px);background:rgba(255,255,255,.1)}
-.bdest-img{position:relative;overflow:hidden;min-height:300px}
-.bdest-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
-.bdest:hover .bdest-img img{transform:scale(1.04)}
-.bdest-txt{display:flex;flex-direction:column;gap:14px;padding:clamp(24px,3.4vw,42px)}
-.bdest-txt .new{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--violet-light)}
-.bdest-txt h2{font-size:clamp(1.6rem,2.6vw,2.2rem);letter-spacing:-.045em;line-height:1.05}
-.bdest-txt p{margin:0;color:rgba(255,255,255,.72);font-size:15px;line-height:1.55}
-.bdest-txt .bmeta{margin-top:auto;color:rgba(255,255,255,.6)}
-.bdest-txt .btag{background:rgba(255,255,255,.14);color:#fff}
-/* rejilla de guías */
-.bhead{display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:28px}
-.bhead p{margin:0;color:var(--ink-2);font-size:15px}
-.bgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.bcard{display:flex;flex-direction:column;border-radius:var(--r-card);overflow:hidden;background:var(--card);box-shadow:0 0 0 1px var(--line);color:inherit;text-decoration:none;transition:transform .4s var(--ease),box-shadow .4s}
-.bcard:hover{transform:translateY(-6px);box-shadow:0 0 0 1px var(--line),0 26px 46px -28px rgba(8,8,8,.45)}
-.bcard-img{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--mist)}
-.bcard-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s var(--ease)}
-.bcard:hover .bcard-img img{transform:scale(1.05)}
-.bcard-txt{flex:1;display:flex;flex-direction:column;gap:10px;padding:18px 20px 20px}
-.bcard-txt h3{font-size:18px;line-height:1.22;letter-spacing:-.03em;margin:0}
-.bcard-txt p{margin:0;color:var(--ink-2);font-size:14px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.btag{align-self:flex-start;padding:4px 10px;border-radius:99px;background:var(--violet-soft);color:var(--violet);font-size:11.5px;font-weight:600}
-.bmeta{display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:4px;font-size:12.5px;color:var(--ink-3)}
-.bmeta b{display:grid;place-items:center;width:24px;height:24px;border-radius:7px;background:var(--violet);color:#fff;font-size:11px;letter-spacing:-.04em}
+.bhero h1{max-width:16ch}
+
+/* ---------- menú de temas: texto, como el índice de una revista ---------- */
+.bbar{display:flex;align-items:center;justify-content:center;gap:18px;width:min(1180px,calc(100% - 32px));margin:34px auto 0;padding:12px 0;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12)}
+.btemas{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 2px;min-width:0}
+.btema{position:relative;display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;border:0;background:none;color:rgba(255,255,255,.7);font:inherit;font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:color .25s}
+.btema i{font-style:normal;font-size:10.5px;opacity:.55}
+.btema::after{content:"";position:absolute;left:12px;right:12px;bottom:3px;height:2px;border-radius:2px;background:var(--violet-light);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.btema:hover{color:#fff}
+.btema:hover::after{transform:scaleX(.5)}
+.btema[aria-pressed="true"]{color:#fff}
+.btema[aria-pressed="true"]::after{transform:scaleX(1)}
+.bsearch{flex:none;display:flex;align-items:center;gap:8px;width:220px;height:38px;padding:0 6px 0 14px;border-radius:999px;background:rgba(255,255,255,.1);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);transition:width .45s var(--ease),background .3s}
+.bsearch:focus-within{width:300px;background:rgba(255,255,255,.16)}
+.bsearch svg{width:15px;height:15px;flex:none;opacity:.7}
+.bsearch input{flex:1;min-width:0;height:100%;border:0;background:none;font:inherit;font-size:13.5px;color:#fff;outline:none}
+.bsearch input::placeholder{color:rgba(255,255,255,.55)}
+.bsearch kbd{flex:none;padding:2px 7px;border-radius:6px;background:rgba(255,255,255,.14);font-family:var(--f-mono);font-size:10.5px;color:rgba(255,255,255,.8)}
+
+/* ---------- destacados: panel oscuro, foto a la derecha y tarjeta blanca encima ---------- */
+.bfeat{position:relative;width:min(1180px,calc(100% - 32px));margin:clamp(28px,4vw,44px) auto 0;aspect-ratio:2.25/1;min-height:380px;border-radius:var(--r-card);overflow:hidden;background:#17171B}
+.bslide{position:absolute;inset:0;display:grid;grid-template-columns:38% 1fr;opacity:0;visibility:hidden;transition:opacity .8s ease,visibility 0s linear .8s;color:inherit;text-decoration:none}
+.bslide.on{opacity:1;visibility:visible;transition:opacity .8s ease;z-index:1}
+.bslide-img{grid-column:2;position:relative;overflow:hidden}
+.bslide-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 7s linear}
+.bslide.on .bslide-img img{transform:scale(1)}
+.bslide-card{position:absolute;z-index:2;left:7%;top:50%;width:min(470px,46%);display:flex;flex-direction:column;gap:12px;padding:clamp(24px,3vw,40px);border-radius:16px;background:var(--paper);color:var(--ink);box-shadow:0 40px 70px -40px rgba(0,0,0,.8);transform:translateY(-44%);opacity:0;transition:transform .9s var(--ease) .15s,opacity .6s ease .15s}
+.bslide.on .bslide-card{transform:translateY(-50%);opacity:1}
+.bslide-card h2{font-size:clamp(1.45rem,2.3vw,2.05rem);line-height:1.06;letter-spacing:-.045em;margin:0}
+.bslide-card p{margin:0;color:var(--ink-2);font-size:14.5px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.bslide:hover .bslide-card h2{color:var(--violet-text)}
+.bdots{position:absolute;z-index:3;right:22px;top:50%;transform:translateY(-50%);display:grid;gap:10px}
+.bdots button{position:relative;width:10px;height:10px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.45);cursor:pointer;transition:background .3s,transform .3s}
+.bdots button:hover{transform:scale(1.3)}
+.bdots button[aria-current="true"]{background:#fff}
+.bdots button[aria-current="true"]::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1.5px solid rgba(255,255,255,.7)}
+.bnum{position:absolute;z-index:3;left:24px;bottom:20px;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;color:rgba(255,255,255,.55)}
+.bnum b{color:#fff;font-weight:500}
+.bprog{position:absolute;z-index:3;left:0;bottom:0;height:3px;width:100%;background:rgba(255,255,255,.08)}
+.bprog i{display:block;height:100%;background:var(--violet-light);transform-origin:left;transform:scaleX(0)}
+.bprog i.run{animation:bprog 6.5s linear forwards}
+@keyframes bprog{to{transform:scaleX(1)}}
+
+/* ---------- datos de cada artículo: fecha y tema en versalitas, raya morada ---------- */
+.bm{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.bm b{font-weight:500;color:var(--violet-text)}
+.brule{display:block;width:34px;height:2px;border-radius:2px;background:var(--violet-text)}
+.bread{display:inline-flex;align-items:center;gap:7px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--violet-text)}
+.bread svg{width:12px;height:12px;transition:transform .35s var(--ease)}
+a:hover .bread svg{transform:translateX(4px)}
+
+/* ---------- cabecera de sección: rótulo pequeño y título grande, a la izquierda ---------- */
+.bsec{display:grid;gap:8px;margin-bottom:34px}
+.bsec .eye{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.bsec h2{text-align:left}
+.bsec-row{display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.bsec-row p{margin:0;color:var(--ink-2);font-size:14.5px}
+
+/* ---------- lo más reciente: foto con la esquina de texto recortada encima ---------- */
+.bgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:52px 34px}
+.bcard{position:relative;display:flex;flex-direction:column;color:inherit;text-decoration:none}
+.bcard-img{position:relative;display:block;aspect-ratio:4/3;margin-left:14%;border-radius:18px;overflow:hidden;background:var(--mist)}
+.bcard-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.1s var(--ease)}
+.bcard:hover .bcard-img img{transform:scale(1.06)}
+.bcard-txt{position:relative;z-index:1;display:flex;flex-direction:column;gap:12px;width:86%;margin-top:-58px;padding:20px 22px 0 0;background:var(--paper);border-top-right-radius:18px;transition:transform .5s var(--ease)}
+.bcard:hover .bcard-txt{transform:translateY(-6px)}
+.bcard-txt h3{font-size:19px;line-height:1.2;letter-spacing:-.03em;margin:0;transition:color .25s}
+.bcard:hover h3{color:var(--violet-text)}
+.bcard-txt p{margin:0;color:var(--ink-2);font-size:14px;line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.bcard.extra{display:none}
+.bgrid.all .bcard.extra,.bgrid.filtering .bcard{display:flex}
+.bcard.hide,.bgrid.filtering .bcard.hide{display:none}
+.bmore{display:flex;justify-content:center;margin-top:56px}
+.bmore button{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 24px;border:0;border-radius:999px;background:var(--violet-text);color:#fff;font:inherit;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 14px 30px -16px rgba(122,63,201,.8);transition:transform .35s var(--ease),box-shadow .35s}
+.bmore button:hover{transform:translateY(-3px);box-shadow:0 20px 36px -16px rgba(122,63,201,.9)}
+.bmore button i{font-style:normal;opacity:.75;font-weight:500}
+.bmore.done,.bmore.off{display:none}
 .bvacio{display:none;margin:30px auto 0;max-width:46ch;text-align:center;color:var(--ink-2)}
 .bvacio.show{display:block}
-.bcard.hide,.bdest.hide{display:none}
-@media (max-width:980px){.bgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.bdest{grid-template-columns:1fr}.bdest-img{min-height:220px}}
-@media (max-width:640px){.bgrid{grid-template-columns:1fr}.bsearch kbd{display:none}.btemas{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}.btema{flex:none}}
+
+/* ---------- para empezar: una grande y tres en lista ---------- */
+.bpicks{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(28px,4vw,56px);align-items:start}
+.bpick-big{position:relative;display:block;color:inherit;text-decoration:none}
+.bpick-big .bpb-img{display:block;aspect-ratio:4/3.3;border-radius:var(--r-card);overflow:hidden;background:var(--ink)}
+.bpick-big .bpb-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.1s var(--ease)}
+.bpick-big:hover .bpb-img img{transform:scale(1.05)}
+.bpick-big .bpb-txt{position:relative;display:flex;flex-direction:column;gap:12px;width:84%;margin:-110px 0 0 auto;padding:26px 28px;border-radius:18px;background:var(--ink);color:var(--paper);box-shadow:0 30px 60px -34px rgba(8,8,8,.6)}
+.bpick-big .bpb-txt h3{font-size:clamp(1.35rem,2vw,1.75rem);line-height:1.1;letter-spacing:-.04em;margin:0}
+.bpick-big .bpb-txt p{margin:0;color:rgba(255,255,255,.7);font-size:14.5px;line-height:1.55}
+.bpick-big .bm{color:rgba(255,255,255,.55)}
+.bpick-big .bm b,.bpick-big .bread{color:var(--violet-light)}
+.bpick-big .brule{background:var(--violet-light)}
+.bpick-list{display:grid;gap:8px;counter-reset:pk}
+.bpick{display:grid;grid-template-columns:auto 1fr 112px;gap:18px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line);color:inherit;text-decoration:none;counter-increment:pk}
+.bpick:first-child{padding-top:0}
+.bpick::before{content:counter(pk,decimal-leading-zero);font-size:34px;font-weight:700;letter-spacing:-.05em;line-height:1;color:transparent;-webkit-text-stroke:1.2px var(--ink-3);transition:color .3s,-webkit-text-stroke-color .3s}
+.bpick:hover::before{color:var(--violet-text);-webkit-text-stroke-color:var(--violet-text)}
+.bpick h3{font-size:17px;line-height:1.22;letter-spacing:-.03em;margin:6px 0 0;transition:color .25s}
+.bpick:hover h3{color:var(--violet-text)}
+.bpick-img{aspect-ratio:1;border-radius:14px;overflow:hidden;background:var(--mist)}
+.bpick-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s var(--ease)}
+.bpick:hover .bpick-img img{transform:scale(1.08)}
+
+@media (max-width:980px){
+  .bgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bpicks{grid-template-columns:1fr}
+  .bfeat{aspect-ratio:auto;height:560px}
+  .bslide{grid-template-columns:1fr;grid-template-rows:1fr 1fr}
+  .bslide-img{grid-column:1;grid-row:1}
+  .bslide-card{left:16px;right:16px;width:auto;top:auto;bottom:22px;transform:translateY(12px)}
+  .bslide.on .bslide-card{transform:none}
+  .bdots{top:20px;transform:none;display:flex}
+  .bnum{display:none}
+}
+@media (max-width:700px){
+  .bbar{flex-direction:column;align-items:stretch;gap:10px;border-bottom:0;padding-bottom:0}
+  .btemas{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 10px}
+  .btema{flex:none}
+  .bsearch,.bsearch:focus-within{width:100%;height:44px}
+  .bsearch kbd{display:none}
+  .bgrid{grid-template-columns:1fr;gap:44px}
+  .bfeat{height:520px}
+  .bslide-card h2{font-size:1.35rem}
+  .bpick{grid-template-columns:auto 1fr 84px;gap:14px}
+  .bpick::before{font-size:28px}
+}
+@media (prefers-reduced-motion:reduce){.bslide-img img{transition:none}.bprog{display:none}}
 </style>
 </head>
 <body>
@@ -1211,7 +1293,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 
 <div class="page">
 
-  <!-- ============ PANEL DEL BLOG: buscador, temas y lo más reciente ============ -->
+  <!-- ============ PORTADA DE LA REVISTA: temas, buscador y destacados ============ -->
   <header class="hero bhero" id="inicio">
     <nav class="nav" aria-label="Principal">
       <a class="logo" href="/"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a>
@@ -1234,306 +1316,409 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       <p class="lede">Escribimos sobre lo que de verdad nos preguntan los clientes: cuánto cuesta una web, por qué no apareces en Google, qué vale la pena y qué no. Sin jerga y sin vender humo.</p>
     </div>
 
-    <form class="bsearch" role="search" onsubmit="return false">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7.5"/><path d="m20.5 20.5-4.2-4.2"/></g></svg>
-      <label class="sr-only" for="bq">Buscar en el blog</label>
-      <input type="search" id="bq" placeholder="Buscar en el blog…" autocomplete="off">
-      <kbd aria-hidden="true">/</kbd>
-    </form>
-    <div class="btemas" role="group" aria-label="Filtrar por tema">
-      <button type="button" class="btema" data-tema="" aria-pressed="true">Todos <i>30</i></button>
-      <button type="button" class="btema" data-tema="IA y tecnología" aria-pressed="false">IA y tecnología <i>11</i></button>
-      <button type="button" class="btema" data-tema="Precios" aria-pressed="false">Precios <i>7</i></button>
-      <button type="button" class="btema" data-tema="Cómo elegir" aria-pressed="false">Cómo elegir <i>4</i></button>
-      <button type="button" class="btema" data-tema="Marketing y SEO" aria-pressed="false">Marketing y SEO <i>3</i></button>
-      <button type="button" class="btema" data-tema="Visibilidad" aria-pressed="false">Visibilidad <i>2</i></button>
-      <button type="button" class="btema" data-tema="Negocio local" aria-pressed="false">Negocio local <i>1</i></button>
-      <button type="button" class="btema" data-tema="SEO para IA" aria-pressed="false">SEO para IA <i>1</i></button>
-      <button type="button" class="btema" data-tema="Correo" aria-pressed="false">Correo <i>1</i></button>
+    <div class="bbar">
+      <div class="btemas" role="group" aria-label="Filtrar por tema">
+        <button type="button" class="btema" data-tema="" aria-pressed="true">Todos <i>30</i></button>
+        <button type="button" class="btema" data-tema="IA y tecnología" aria-pressed="false">IA y tecnología <i>11</i></button>
+        <button type="button" class="btema" data-tema="Precios" aria-pressed="false">Precios <i>7</i></button>
+        <button type="button" class="btema" data-tema="Cómo elegir" aria-pressed="false">Cómo elegir <i>4</i></button>
+        <button type="button" class="btema" data-tema="Marketing y SEO" aria-pressed="false">Marketing y SEO <i>3</i></button>
+        <button type="button" class="btema" data-tema="Visibilidad" aria-pressed="false">Visibilidad <i>2</i></button>
+        <button type="button" class="btema" data-tema="Negocio local" aria-pressed="false">Negocio local <i>1</i></button>
+        <button type="button" class="btema" data-tema="SEO para IA" aria-pressed="false">SEO para IA <i>1</i></button>
+        <button type="button" class="btema" data-tema="Correo" aria-pressed="false">Correo <i>1</i></button>
+      </div>
+      <form class="bsearch" role="search" onsubmit="return false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7.5"/><path d="m20.5 20.5-4.2-4.2"/></g></svg>
+        <label class="sr-only" for="bq">Buscar en el blog</label>
+        <input type="search" id="bq" placeholder="Buscar…" autocomplete="off">
+        <kbd aria-hidden="true">/</kbd>
+      </form>
     </div>
 
-    <a class="bdest" href="/blog/mejores-agencias-diseno-web-lima/" data-tema="Cómo elegir" data-txt="mejores agencias de diseno web en lima peru guia para elegir libro de reclamaciones virtual indecopi ruc sunat activo habido creativa kom staff digital talentuperu yankenpo lima diseno web agencias de diseno web en lima: guia para elegir seis estudios con presencia verificable en la ciudad, y la pregunta que casi ninguna cotizacion responde: si el sitio va a traer el libro de reclamaciones virtual que exige indecopi, con multas de hasta s/ 2.475.000. como elegir">
-      <span class="bdest-img"><img src="/assets/blog/elegir.webp" alt="Laptop sobre un escritorio mostrando un directorio de portafolios de estudios de diseño web" width="1200" height="800" fetchpriority="high"></span>
-      <span class="bdest-txt">
-        <span class="new">Lo más reciente</span>
-        <span class="btag">Cómo elegir</span>
-        <h2>Agencias de diseño web en Lima: guía para elegir</h2>
-        <p>Seis estudios con presencia verificable en la ciudad, y la pregunta que casi ninguna cotización responde: si el sitio va a traer el Libro de Reclamaciones virtual que exige INDECOPI, con multas de hasta S/ 2.475.000.</p>
-        <span class="bmeta"><b>K.</b><time datetime="2026-09-23">23 sep 2026</time> · 8 min de lectura</span>
-      </span>
-    </a>
+    <section class="bfeat" id="bfeat" aria-roledescription="carrusel" aria-label="Artículos destacados">
+      <a class="bslide on" href="/blog/mejores-agencias-diseno-web-lima/">
+        <span class="bslide-img"><img src="/assets/blog/elegir.webp" alt="Laptop sobre un escritorio mostrando un directorio de portafolios de estudios de diseño web" width="1200" height="800" style="object-position:50% 50%" decoding="async"></span>
+        <span class="bslide-card">
+          <span class="bm"><time datetime="2026-09-23">23 sep 2026</time> · <b>Cómo elegir</b> · 8 min</span>
+          <span class="brule"></span>
+          <h2>Agencias de diseño web en Lima: guía para elegir</h2>
+          <p>Seis estudios con presencia verificable en la ciudad, y la pregunta que casi ninguna cotización responde: si el sitio va a traer el Libro de Reclamaciones virtual que exige INDECOPI, con multas de hasta S/ 2.475.000.</p>
+          <span class="bread">Leer el artículo <svg><use href="#i-arrow"/></svg></span>
+        </span>
+      </a>
+      <a class="bslide" href="/blog/eeat-experiencia-y-confianza-sin-anos-de-trayectoria/" tabindex="-1">
+        <span class="bslide-img"><img src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" style="object-position:80% 50%" loading="lazy" decoding="async"></span>
+        <span class="bslide-card">
+          <span class="bm"><time datetime="2026-09-22">22 sep 2026</time> · <b>Marketing y SEO</b> · 8 min</span>
+          <span class="brule"></span>
+          <h2>E-E-A-T: la trayectoria que no tienes, y cómo se demuestra igual</h2>
+          <p>Google entrena a más de 10.000 evaluadores con un documento de 182 páginas para juzgar el E-E-A-T de una página, y dice que no es un factor de ranking. Qué es de verdad y cómo lo demuestra un negocio sin historial.</p>
+          <span class="bread">Leer el artículo <svg><use href="#i-arrow"/></svg></span>
+        </span>
+      </a>
+      <a class="bslide" href="/blog/comercio-agentico-ia-compra-por-ti/" tabindex="-1">
+        <span class="bslide-img"><img src="/assets/blog/ia.webp" alt="Persona usando un teléfono para hacer una compra en línea con ayuda de un asistente de inteligencia artificial" width="1774" height="887" style="object-position:35% 20%" loading="lazy" decoding="async"></span>
+        <span class="bslide-card">
+          <span class="bm"><time datetime="2026-09-20">20 sep 2026</time> · <b>IA y tecnología</b> · 9 min</span>
+          <span class="brule"></span>
+          <h2>El comercio con IA prometía saltarse tu sitio web. Terminó necesitándolo más</h2>
+          <p>OpenAI apagó la compra dentro de ChatGPT cinco meses después de lanzarla, en parte porque nunca resolvió cobrar el impuesto de ventas. Qué pasó de verdad con el comercio agéntico y qué le toca hacer a tu negocio.</p>
+          <span class="bread">Leer el artículo <svg><use href="#i-arrow"/></svg></span>
+        </span>
+      </a>
+      <div class="bdots" role="group" aria-label="Elegir destacado"><button type="button" aria-label="Destacado 1" aria-current="true"></button><button type="button" aria-label="Destacado 2"></button><button type="button" aria-label="Destacado 3"></button></div>
+      <span class="bnum"><b id="bnow">01</b> / 03</span>
+      <span class="bprog"><i id="bprog"></i></span>
+    </section>
   </header>
 
   <main class="wrap">
     <section class="block" id="guias" aria-labelledby="guias-t">
-      <div class="bhead" data-reveal>
-        <h2 id="guias-t"><span class="dim">Todas las</span><br>guías</h2>
-        <p id="bcount">30 artículos · los más recientes primero</p>
+      <div class="bsec" data-reveal>
+        <span class="eye">Lee lo último que escribimos</span>
+        <div class="bsec-row">
+          <h2 id="guias-t"><span class="dim">Lo más</span> reciente</h2>
+          <p id="bcount">30 artículos · los más recientes primero</p>
+        </div>
       </div>
       <div class="bgrid" id="bgrid">
-        <a class="bcard" href="/blog/eeat-experiencia-y-confianza-sin-anos-de-trayectoria/" data-tema="Marketing y SEO" data-txt="eeat que es como demuestra una pyme sin anos de trayectoria que tiene experiencia y confianza search quality rater guidelines danny sullivan ymyl septiembre 2025 e-e-a-t: la trayectoria que no tienes, y como se demuestra igual google entrena a mas de 10.000 evaluadores con un documento de 182 paginas para juzgar el e-e-a-t de una pagina, y dice que no es un factor de ranking. que es de verdad y como lo demuestra un negocio sin historial. marketing y seo">
-          <span class="bcard-img"><img src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" loading="lazy" decoding="async"></span>
+        <a class="bcard" href="/blog/mejores-agencias-diseno-web-lima/" data-tema="Cómo elegir" data-txt="mejores agencias de diseno web en lima peru guia para elegir libro de reclamaciones virtual indecopi ruc sunat activo habido creativa kom staff digital talentuperu yankenpo lima diseno web agencias de diseno web en lima: guia para elegir seis estudios con presencia verificable en la ciudad, y la pregunta que casi ninguna cotizacion responde: si el sitio va a traer el libro de reclamaciones virtual que exige indecopi, con multas de hasta s/ 2.475.000. como elegir">
+          <span class="bcard-img"><img src="/assets/blog/elegir.webp" alt="Laptop sobre un escritorio mostrando un directorio de portafolios de estudios de diseño web" width="1200" height="800" style="object-position:50% 50%" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">Marketing y SEO</span>
+            <h3>Agencias de diseño web en Lima: guía para elegir</h3>
+            <span class="bm"><time datetime="2026-09-23">23 sep 2026</time> · <b>Cómo elegir</b> · 8 min</span>
+            <span class="brule"></span>
+            <p>Seis estudios con presencia verificable en la ciudad, y la pregunta que casi ninguna cotización responde: si el sitio va a traer el Libro de Reclamaciones virtual que exige INDECOPI, con multas de hasta S/ 2.475.000.</p>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/eeat-experiencia-y-confianza-sin-anos-de-trayectoria/" data-tema="Marketing y SEO" data-txt="eeat que es como demuestra una pyme sin anos de trayectoria que tiene experiencia y confianza search quality rater guidelines danny sullivan ymyl septiembre 2025 e-e-a-t: la trayectoria que no tienes, y como se demuestra igual google entrena a mas de 10.000 evaluadores con un documento de 182 paginas para juzgar el e-e-a-t de una pagina, y dice que no es un factor de ranking. que es de verdad y como lo demuestra un negocio sin historial. marketing y seo">
+          <span class="bcard-img"><img src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" style="object-position:20% 40%" decoding="async"></span>
+          <span class="bcard-txt">
             <h3>E-E-A-T: la trayectoria que no tienes, y cómo se demuestra igual</h3>
+            <span class="bm"><time datetime="2026-09-22">22 sep 2026</time> · <b>Marketing y SEO</b> · 8 min</span>
+            <span class="brule"></span>
             <p>Google entrena a más de 10.000 evaluadores con un documento de 182 páginas para juzgar el E-E-A-T de una página, y dice que no es un factor de ranking. Qué es de verdad y cómo lo demuestra un negocio sin historial.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-09-22">22 sep 2026</time> · 8 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
         <a class="bcard" href="/blog/comercio-agentico-ia-compra-por-ti/" data-tema="IA y tecnología" data-txt="comercio agentico ia que compra por ti instant checkout openai chatgpt agentic commerce protocol acp agent payments protocol ap2 google stripe paypal shopify impuesto de ventas el comercio con ia prometia saltarse tu sitio web. termino necesitandolo mas openai apago la compra dentro de chatgpt cinco meses despues de lanzarla, en parte porque nunca resolvio cobrar el impuesto de ventas. que paso de verdad con el comercio agentico y que le toca hacer a tu negocio. ia y tecnologia">
-          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Persona usando un teléfono para hacer una compra en línea con ayuda de un asistente de inteligencia artificial" width="1774" height="887" loading="lazy" decoding="async"></span>
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Persona usando un teléfono para hacer una compra en línea con ayuda de un asistente de inteligencia artificial" width="1774" height="887" style="object-position:80% 50%" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">IA y tecnología</span>
             <h3>El comercio con IA prometía saltarse tu sitio web. Terminó necesitándolo más</h3>
+            <span class="bm"><time datetime="2026-09-20">20 sep 2026</time> · <b>IA y tecnología</b> · 9 min</span>
+            <span class="brule"></span>
             <p>OpenAI apagó la compra dentro de ChatGPT cinco meses después de lanzarla, en parte porque nunca resolvió cobrar el impuesto de ventas. Qué pasó de verdad con el comercio agéntico y qué le toca hacer a tu negocio.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-09-20">20 sep 2026</time> · 9 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
         <a class="bcard" href="/blog/cuanto-cuesta-una-pagina-web-en-espana/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en espana precios presupuesto cotizacion rangos euros iva verifactu real decreto ley 15/2025 facturacion electronica autonomos ¿cuanto cuesta una pagina web en espana? los precios van de 300 € a mas de 10.000 €. el gobierno aplazo verifactu a 2027, pero si tu sitio va a vender o facturar, esa fecha ya deberia estar en la conversacion con quien te lo construya. precios">
-          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web con su tabla de precios" width="1024" height="1024" loading="lazy" decoding="async"></span>
+          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web con su tabla de precios" width="1024" height="1024" style="object-position:50% 80%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">Precios</span>
             <h3>¿Cuánto cuesta una página web en España?</h3>
+            <span class="bm"><time datetime="2026-09-18">18 sep 2026</time> · <b>Precios</b> · 8 min</span>
+            <span class="brule"></span>
             <p>Los precios van de 300 € a más de 10.000 €. El Gobierno aplazó Verifactu a 2027, pero si tu sitio va a vender o facturar, esa fecha ya debería estar en la conversación con quien te lo construya.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-09-18">18 sep 2026</time> · 8 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
         <a class="bcard" href="/blog/por-que-comprar-backlinks-ya-no-funciona/" data-tema="Marketing y SEO" data-txt="por que comprar backlinks ya casi no funciona google spam brain deteccion 2026 rel nofollow sponsored actualizacion de spam marzo 2026 disavow enlaces pagados por que comprar backlinks ya casi no funciona google no prohibe pagar por un enlace: prohibe esconder que lo pagaste. como detecta spambrain los patrones de enlaces comprados y que paso en la actualizacion de spam de marzo de 2026, que tardo 31 horas en rodar por todo el mundo. marketing y seo">
-          <span class="bcard-img"><img src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" loading="lazy" decoding="async"></span>
+          <span class="bcard-img"><img src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" style="object-position:35% 20%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">Marketing y SEO</span>
             <h3>Por qué comprar backlinks ya casi no funciona</h3>
+            <span class="bm"><time datetime="2026-09-08">8 sep 2026</time> · <b>Marketing y SEO</b> · 8 min</span>
+            <span class="brule"></span>
             <p>Google no prohíbe pagar por un enlace: prohíbe esconder que lo pagaste. Cómo detecta SpamBrain los patrones de enlaces comprados y qué pasó en la actualización de spam de marzo de 2026, que tardó 31 horas en rodar por todo el mundo.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-09-08">8 sep 2026</time> · 8 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
         <a class="bcard" href="/blog/busqueda-con-ia-en-tu-sitio-rag/" data-tema="IA y tecnología" data-txt="busqueda con ia en tu propio sitio rag generacion aumentada por recuperacion agent search vertex ai search google cloud precios indexar buscador interno chatbot sobre tu contenido busqueda con ia en tu propio sitio: que es rag y que cuesta google publica el precio: indexar un sitio de mil paginas cuesta 2,38 dolares al mes. nadie esta entrenando un modelo con tu contenido, y la mayoria de las pymes que preguntan por esto todavia no lo necesita. ia y tecnologia">
-          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Persona consultando en una laptop un buscador con inteligencia artificial dentro del sitio web de su empresa" width="1774" height="887" loading="lazy" decoding="async"></span>
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Persona consultando en una laptop un buscador con inteligencia artificial dentro del sitio web de su empresa" width="1774" height="887" style="object-position:70% 70%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">IA y tecnología</span>
             <h3>Búsqueda con IA en tu propio sitio: qué es RAG y qué cuesta</h3>
+            <span class="bm"><time datetime="2026-09-06">6 sep 2026</time> · <b>IA y tecnología</b> · 9 min</span>
+            <span class="brule"></span>
             <p>Google publica el precio: indexar un sitio de mil páginas cuesta 2,38 dólares al mes. Nadie está entrenando un modelo con tu contenido, y la mayoría de las pymes que preguntan por esto todavía no lo necesita.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-09-06">6 sep 2026</time> · 9 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
         <a class="bcard" href="/blog/mejores-agencias-diseno-web-ciudad-de-mexico/" data-tema="Cómo elegir" data-txt="mejores agencias de diseno web en cdmx ciudad de mexico guia para elegir estudios sat rfc cfdi 4.0 articulo 69-b efos constancia de situacion fiscal iva polanco roma agencias de diseno web en cdmx: guia para elegir seis estudios con direccion verificable en la ciudad, y la pregunta que casi nadie hace en la primera reunion: si te van a poder facturar. incluye las dos consultas del sat que deciden si el gasto es deducible. como elegir">
-          <span class="bcard-img"><img src="/assets/blog/elegir.webp?v=2" alt="Laptop sobre un escritorio mostrando un directorio de portafolios de estudios de diseño web" width="1200" height="800" loading="lazy" decoding="async"></span>
+          <span class="bcard-img"><img src="/assets/blog/elegir.webp?v=2" alt="Laptop sobre un escritorio mostrando un directorio de portafolios de estudios de diseño web" width="1200" height="800" style="object-position:50% 50%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">Cómo elegir</span>
             <h3>Agencias de diseño web en CDMX: guía para elegir</h3>
+            <span class="bm"><time datetime="2026-09-05">5 sep 2026</time> · <b>Cómo elegir</b> · 8 min</span>
+            <span class="brule"></span>
             <p>Seis estudios con dirección verificable en la ciudad, y la pregunta que casi nadie hace en la primera reunión: si te van a poder facturar. Incluye las dos consultas del SAT que deciden si el gasto es deducible.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-09-05">5 sep 2026</time> · 8 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
         <a class="bcard" href="/blog/domain-rating-autoridad-de-dominio-no-es-vender-mas/" data-tema="Marketing y SEO" data-txt="domain rating autoridad de dominio moz ahrefs domain authority john mueller google no lo usa backlinks enlaces escala logaritmica vender mas domain rating: el numero que sube en el reporte y no en la caja ahrefs y moz inventaron el domain rating y la domain authority, no google. john mueller lo ha dicho varias veces: no se usan para posicionar. que miden en realidad y que deberias pedir en su lugar. marketing y seo">
-          <span class="bcard-img"><img src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" loading="lazy" decoding="async"></span>
+          <span class="bcard-img"><img src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" style="object-position:20% 40%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">Marketing y SEO</span>
             <h3>Domain Rating: el número que sube en el reporte y no en la caja</h3>
+            <span class="bm"><time datetime="2026-09-04">4 sep 2026</time> · <b>Marketing y SEO</b> · 8 min</span>
+            <span class="brule"></span>
             <p>Ahrefs y Moz inventaron el Domain Rating y la Domain Authority, no Google. John Mueller lo ha dicho varias veces: no se usan para posicionar. Qué miden en realidad y qué deberías pedir en su lugar.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-09-04">4 sep 2026</time> · 8 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
         <a class="bcard" href="/blog/tu-chatbot-ya-tiene-que-decir-que-es-ia/" data-tema="IA y tecnología" data-txt="tu chatbot ya tiene que decir que es ia reglamento europeo articulo 50 ai act transparencia multas whatsapp asistente virtual tu chatbot ya tiene que decir que es una ia: que cambio el 2 de agosto la union europea ya exige que un chatbot avise que es una ia, con multas de hasta 15 millones de euros. que dice la norma y que hacer con el tuyo aunque no vendas en europa. ia y tecnologia">
-          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional revisando en una laptop una conversación de chatbot de inteligencia artificial en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional revisando en una laptop una conversación de chatbot de inteligencia artificial en una oficina moderna" width="1774" height="887" style="object-position:80% 50%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">IA y tecnología</span>
             <h3>Tu chatbot ya tiene que decir que es una IA: qué cambió el 2 de agosto</h3>
+            <span class="bm"><time datetime="2026-09-01">1 sep 2026</time> · <b>IA y tecnología</b> · 9 min</span>
+            <span class="brule"></span>
             <p>La Unión Europea ya exige que un chatbot avise que es una IA, con multas de hasta 15 millones de euros. Qué dice la norma y qué hacer con el tuyo aunque no vendas en Europa.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-09-01">1 sep 2026</time> · 9 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/cuanto-cuesta-una-pagina-web-en-ecuador/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en ecuador precios presupuesto cotizacion rangos dolares dolarizacion iva sri factura electronica ¿cuanto cuesta una pagina web en ecuador? el dolar no es la duda; el iva si los precios van de $200 a mas de $10,000, ya en dolares. por que el iva subio a 15% y que cambio con el sri desde enero de 2026. precios">
-          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1200" height="800" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/cuanto-cuesta-una-pagina-web-en-ecuador/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en ecuador precios presupuesto cotizacion rangos dolares dolarizacion iva sri factura electronica ¿cuanto cuesta una pagina web en ecuador? el dolar no es la duda; el iva si los precios van de $200 a mas de $10,000, ya en dolares. por que el iva subio a 15% y que cambio con el sri desde enero de 2026. precios">
+          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1200" height="800" style="object-position:50% 80%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">Precios</span>
             <h3>¿Cuánto cuesta una página web en Ecuador? El dólar no es la duda; el IVA sí</h3>
+            <span class="bm"><time datetime="2026-08-31">31 ago 2026</time> · <b>Precios</b> · 9 min</span>
+            <span class="brule"></span>
             <p>Los precios van de $200 a más de $10,000, ya en dólares. Por qué el IVA subió a 15% y qué cambió con el SRI desde enero de 2026.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-08-31">31 ago 2026</time> · 9 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/chatbots-ia-atencion-al-cliente-costos-reales/" data-tema="IA y tecnología" data-txt="chatbots de ia para atencion al cliente costos reales gorgias freshdesk intercom fin whatsapp business api meta contencion resolucion chatbots de ia para atencion al cliente: lo que nadie pone en la cotizacion gorgias cobra $1,50 por interaccion, freshdesk $0,49 por sesion, intercom fin $0,99 por resolucion. los precios reales de 2026 y el costo oculto de whatsapp business api. ia y tecnologia">
-          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional revisando en una laptop el panel de un chatbot de inteligencia artificial en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/chatbots-ia-atencion-al-cliente-costos-reales/" data-tema="IA y tecnología" data-txt="chatbots de ia para atencion al cliente costos reales gorgias freshdesk intercom fin whatsapp business api meta contencion resolucion chatbots de ia para atencion al cliente: lo que nadie pone en la cotizacion gorgias cobra $1,50 por interaccion, freshdesk $0,49 por sesion, intercom fin $0,99 por resolucion. los precios reales de 2026 y el costo oculto de whatsapp business api. ia y tecnologia">
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional revisando en una laptop el panel de un chatbot de inteligencia artificial en una oficina moderna" width="1774" height="887" style="object-position:35% 20%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">IA y tecnología</span>
             <h3>Chatbots de IA para atención al cliente: lo que nadie pone en la cotización</h3>
+            <span class="bm"><time datetime="2026-08-30">30 ago 2026</time> · <b>IA y tecnología</b> · 8 min</span>
+            <span class="brule"></span>
             <p>Gorgias cobra $1,50 por interacción, Freshdesk $0,49 por sesión, Intercom Fin $0,99 por resolución. Los precios reales de 2026 y el costo oculto de WhatsApp Business API.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-08-30">30 ago 2026</time> · 8 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/mejores-agencias-diseno-web-bogota/" data-tema="Cómo elegir" data-txt="mejores agencias de diseno web en bogota guia para elegir comparar estudios rues camara de comercio agencias de diseno web en bogota: guia para elegir seis estudios con presencia verificable en la ciudad y los criterios que separan un buen proyecto de uno que toca rehacer al ano. incluye como verificar si una agencia es una empresa real. como elegir">
-          <span class="bcard-img"><img src="/assets/blog/elegir.webp?v=2" alt="Laptop sobre un escritorio de madera mostrando un directorio de estudios de diseño web" width="1200" height="800" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/mejores-agencias-diseno-web-bogota/" data-tema="Cómo elegir" data-txt="mejores agencias de diseno web en bogota guia para elegir comparar estudios rues camara de comercio agencias de diseno web en bogota: guia para elegir seis estudios con presencia verificable en la ciudad y los criterios que separan un buen proyecto de uno que toca rehacer al ano. incluye como verificar si una agencia es una empresa real. como elegir">
+          <span class="bcard-img"><img src="/assets/blog/elegir.webp?v=2" alt="Laptop sobre un escritorio de madera mostrando un directorio de estudios de diseño web" width="1200" height="800" style="object-position:70% 70%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">Cómo elegir</span>
             <h3>Agencias de diseño web en Bogotá: guía para elegir</h3>
+            <span class="bm"><time datetime="2026-08-26">26 ago 2026</time> · <b>Cómo elegir</b> · 8 min</span>
+            <span class="brule"></span>
             <p>Seis estudios con presencia verificable en la ciudad y los criterios que separan un buen proyecto de uno que toca rehacer al año. Incluye cómo verificar si una agencia es una empresa real.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-08-26">26 ago 2026</time> · 8 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/chatgpt-ia-descubrimiento-marca/" data-tema="IA y tecnología" data-txt="chatgpt canal descubrimiento marca traffico referente clickeable enlaces 157% usuarios buscan chatgpt como canal de descubrimiento de marca: por que importa hoy el trafico que viene de chatgpt se multiplico 157% en una semana. que cambio, por que el 80% de tus clientes potenciales ya buscan asi, y que significa eso para tu negocio. ia y tecnologia">
-          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Laptop sobre un escritorio de madera con una conversación de ChatGPT abierta en pantalla y una mano escribiendo en el teclado" width="1774" height="887" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/chatgpt-ia-descubrimiento-marca/" data-tema="IA y tecnología" data-txt="chatgpt canal descubrimiento marca traffico referente clickeable enlaces 157% usuarios buscan chatgpt como canal de descubrimiento de marca: por que importa hoy el trafico que viene de chatgpt se multiplico 157% en una semana. que cambio, por que el 80% de tus clientes potenciales ya buscan asi, y que significa eso para tu negocio. ia y tecnologia">
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Laptop sobre un escritorio de madera con una conversación de ChatGPT abierta en pantalla y una mano escribiendo en el teclado" width="1774" height="887" style="object-position:50% 50%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">IA y tecnología</span>
             <h3>ChatGPT como canal de descubrimiento de marca: por qué importa hoy</h3>
+            <span class="bm"><time datetime="2026-08-25">25 ago 2026</time> · <b>IA y tecnología</b> · 7 min</span>
+            <span class="brule"></span>
             <p>El tráfico que viene de ChatGPT se multiplicó 157% en una semana. Qué cambió, por qué el 80% de tus clientes potenciales ya buscan así, y qué significa eso para tu negocio.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-08-25">25 ago 2026</time> · 7 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/cuanto-cuesta-una-pagina-web-en-argentina/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en argentina precios presupuesto cotizacion rangos pesos argentinos dolar inflacion ¿cuanto cuesta una pagina web en argentina? y por que todo se cotiza en dolares los precios van desde $250.000 a mas de $1.500.000 ars. como el dolar cambia la ecuacion y por que casi todas las agencias cotizan en divisa aunque facturen en pesos. precios">
-          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de diseño web con tabla de precios" width="1024" height="1024" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/cuanto-cuesta-una-pagina-web-en-argentina/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en argentina precios presupuesto cotizacion rangos pesos argentinos dolar inflacion ¿cuanto cuesta una pagina web en argentina? y por que todo se cotiza en dolares los precios van desde $250.000 a mas de $1.500.000 ars. como el dolar cambia la ecuacion y por que casi todas las agencias cotizan en divisa aunque facturen en pesos. precios">
+          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de diseño web con tabla de precios" width="1024" height="1024" style="object-position:20% 40%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">Precios</span>
             <h3>¿Cuánto cuesta una página web en Argentina? Y por qué todo se cotiza en dólares</h3>
+            <span class="bm"><time datetime="2026-08-24">24 ago 2026</time> · <b>Precios</b> · 7 min</span>
+            <span class="brule"></span>
             <p>Los precios van desde $250.000 a más de $1.500.000 ARS. Cómo el dólar cambia la ecuación y por qué casi todas las agencias cotizan en divisa aunque facturen en pesos.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-08-24">24 ago 2026</time> · 7 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/modo-ia-google-ai-overviews-que-significa-para-tu-seo/" data-tema="IA y tecnología" data-txt="modo ia google ai overviews que significa para tu seo mil millones de usuarios clics pew research ahrefs sistrix el modo ia de google llego a mil millones de usuarios: que significa para tu seo el clic en los ai overviews toco fondo en 1,3% y el modo ia ya es pestana fija del buscador. que cambia de verdad para un negocio pequeno, con los datos de los ultimos estudios. ia y tecnologia">
-          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/modo-ia-google-ai-overviews-que-significa-para-tu-seo/" data-tema="IA y tecnología" data-txt="modo ia google ai overviews que significa para tu seo mil millones de usuarios clics pew research ahrefs sistrix el modo ia de google llego a mil millones de usuarios: que significa para tu seo el clic en los ai overviews toco fondo en 1,3% y el modo ia ya es pestana fija del buscador. que cambia de verdad para un negocio pequeno, con los datos de los ultimos estudios. ia y tecnologia">
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" style="object-position:80% 50%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">IA y tecnología</span>
             <h3>El Modo IA de Google llegó a mil millones de usuarios: qué significa para tu SEO</h3>
+            <span class="bm"><time datetime="2026-08-23">23 ago 2026</time> · <b>IA y tecnología</b> · 8 min</span>
+            <span class="brule"></span>
             <p>El clic en los AI Overviews tocó fondo en 1,3% y el Modo IA ya es pestaña fija del buscador. Qué cambia de verdad para un negocio pequeño, con los datos de los últimos estudios.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-08-23">23 ago 2026</time> · 8 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/cuanto-cuesta-una-pagina-web-en-chile/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en chile precios presupuesto cotizacion rangos pesos chilenos ley 21719 proteccion de datos ¿cuanto cuesta una pagina web en chile? y que cambia con la ley 21.719 los precios van de $170.000 a varios millones de pesos. en diciembre entra en vigencia la nueva ley de proteccion de datos, y casi ninguna cotizacion la esta mencionando. precios">
-          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/cuanto-cuesta-una-pagina-web-en-chile/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en chile precios presupuesto cotizacion rangos pesos chilenos ley 21719 proteccion de datos ¿cuanto cuesta una pagina web en chile? y que cambia con la ley 21.719 los precios van de $170.000 a varios millones de pesos. en diciembre entra en vigencia la nueva ley de proteccion de datos, y casi ninguna cotizacion la esta mencionando. precios">
+          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" style="object-position:50% 80%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">Precios</span>
             <h3>¿Cuánto cuesta una página web en Chile? Y qué cambia con la Ley 21.719</h3>
+            <span class="bm"><time datetime="2026-08-22">22 ago 2026</time> · <b>Precios</b> · 8 min</span>
+            <span class="brule"></span>
             <p>Los precios van de $170.000 a varios millones de pesos. En diciembre entra en vigencia la nueva ley de protección de datos, y casi ninguna cotización la está mencionando.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-08-22">22 ago 2026</time> · 8 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/qwen-3-8-27b-ia-local/" data-tema="IA y tecnología" data-txt="qwen3.8-27b qwen 3.8 27b ia local modelo local vram cuantizacion gguf ollama llama.cpp apache 2.0 contexto 262k tarjeta de video un modelo de ia serio ya cabe en un pc de escritorio. hicimos la cuenta de cuando conviene alibaba libero qwen3.8-27b y corre en una maquina de casa. con el consumo de ia de nuestro propio sitio, la tarjeta de video tardaria 444 anos en pagarse sola. ia y tecnologia">
-          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/qwen-3-8-27b-ia-local/" data-tema="IA y tecnología" data-txt="qwen3.8-27b qwen 3.8 27b ia local modelo local vram cuantizacion gguf ollama llama.cpp apache 2.0 contexto 262k tarjeta de video un modelo de ia serio ya cabe en un pc de escritorio. hicimos la cuenta de cuando conviene alibaba libero qwen3.8-27b y corre en una maquina de casa. con el consumo de ia de nuestro propio sitio, la tarjeta de video tardaria 444 anos en pagarse sola. ia y tecnologia">
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" style="object-position:35% 20%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">IA y tecnología</span>
             <h3>Un modelo de IA serio ya cabe en un PC de escritorio. Hicimos la cuenta de cuándo conviene</h3>
+            <span class="bm"><time datetime="2026-08-16">16 ago 2026</time> · <b>IA y tecnología</b> · 9 min</span>
+            <span class="brule"></span>
             <p>Alibaba liberó Qwen3.8-27B y corre en una máquina de casa. Con el consumo de IA de nuestro propio sitio, la tarjeta de video tardaría 444 años en pagarse sola.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-08-16">16 ago 2026</time> · 9 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/chatgpt-gratis-ilimitado-que-cambia/" data-tema="IA y tecnología" data-txt="chatgpt gratis ilimitado gpt-5.6 luna openai limite mensajes think modelo por defecto visibilidad se acabo el «te quedan 3 mensajes». y eso te afecta aunque no uses chatgpt openai quito el tope de mensajes de texto en las cuentas gratuitas y puso ahi su modelo bueno. el numero de gente que va a preguntar por ti a una maquina acaba de perder el techo. ia y tecnologia">
-          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/chatgpt-gratis-ilimitado-que-cambia/" data-tema="IA y tecnología" data-txt="chatgpt gratis ilimitado gpt-5.6 luna openai limite mensajes think modelo por defecto visibilidad se acabo el «te quedan 3 mensajes». y eso te afecta aunque no uses chatgpt openai quito el tope de mensajes de texto en las cuentas gratuitas y puso ahi su modelo bueno. el numero de gente que va a preguntar por ti a una maquina acaba de perder el techo. ia y tecnologia">
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" style="object-position:70% 70%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">IA y tecnología</span>
             <h3>Se acabó el «te quedan 3 mensajes». Y eso te afecta aunque no uses ChatGPT</h3>
+            <span class="bm"><time datetime="2026-08-08">8 ago 2026</time> · <b>IA y tecnología</b> · 7 min</span>
+            <span class="brule"></span>
             <p>OpenAI quitó el tope de mensajes de texto en las cuentas gratuitas y puso ahí su modelo bueno. El número de gente que va a preguntar por ti a una máquina acaba de perder el techo.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-08-08">8 ago 2026</time> · 7 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/cuanto-cuesta-una-tarea-con-ia/" data-tema="IA y tecnología" data-txt="cuanto cuesta una tarea con ia costo por token precio por tarea agentes guerra de precios deepseek gemini flash presupuesto de tokens el token bajo un 99% y la factura de ia subio el precio por token se derrumbo y las cuentas siguen creciendo. la metrica que decide la factura no es esa: es cuanto cuesta terminar la tarea. ia y tecnologia">
-          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/cuanto-cuesta-una-tarea-con-ia/" data-tema="IA y tecnología" data-txt="cuanto cuesta una tarea con ia costo por token precio por tarea agentes guerra de precios deepseek gemini flash presupuesto de tokens el token bajo un 99% y la factura de ia subio el precio por token se derrumbo y las cuentas siguen creciendo. la metrica que decide la factura no es esa: es cuanto cuesta terminar la tarea. ia y tecnologia">
+          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" style="object-position:50% 50%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">IA y tecnología</span>
             <h3>El token bajó un 99% y la factura de IA subió</h3>
+            <span class="bm"><time datetime="2026-08-08">8 ago 2026</time> · <b>IA y tecnología</b> · 8 min</span>
+            <span class="brule"></span>
             <p>El precio por token se derrumbó y las cuentas siguen creciendo. La métrica que decide la factura no es esa: es cuánto cuesta terminar la tarea.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-08-08">8 ago 2026</time> · 8 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/de-donde-vienen-las-visitas-de-mi-web/" data-tema="Visibilidad" data-txt="de donde vienen las visitas trafico directo organic social utm instagram chatgpt analytics referral de donde vienen tus visitas: lo que analytics no te esta diciendo por que «directo» casi nunca es directo, donde esconde analytics el trafico de instagram y de chatgpt, y como etiquetar tus enlaces para verlo. visibilidad">
-          <span class="bcard-img"><img src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/de-donde-vienen-las-visitas-de-mi-web/" data-tema="Visibilidad" data-txt="de donde vienen las visitas trafico directo organic social utm instagram chatgpt analytics referral de donde vienen tus visitas: lo que analytics no te esta diciendo por que «directo» casi nunca es directo, donde esconde analytics el trafico de instagram y de chatgpt, y como etiquetar tus enlaces para verlo. visibilidad">
+          <span class="bcard-img"><img src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" style="object-position:20% 40%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">Visibilidad</span>
             <h3>De dónde vienen tus visitas: lo que Analytics no te está diciendo</h3>
+            <span class="bm"><time datetime="2026-08-06">6 ago 2026</time> · <b>Visibilidad</b> · 8 min</span>
+            <span class="brule"></span>
             <p>Por qué «Directo» casi nunca es directo, dónde esconde Analytics el tráfico de Instagram y de ChatGPT, y cómo etiquetar tus enlaces para verlo.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-08-06">6 ago 2026</time> · 8 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/modelos-abiertos-de-ia-para-pymes/" data-tema="IA y tecnología" data-txt="modelos abiertos de ia deepseek v4 flash qwen 3.8 max llama pymes costo por token licencia mit apache los modelos de ia que casi nadie te menciona, y por que te deberian importar deepseek, qwen y llama hacen las tareas normales de un negocio por una fraccion de lo que cuesta un modelo de punta. actualizado a agosto de 2026. ia y tecnologia">
-          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/modelos-abiertos-de-ia-para-pymes/" data-tema="IA y tecnología" data-txt="modelos abiertos de ia deepseek v4 flash qwen 3.8 max llama pymes costo por token licencia mit apache los modelos de ia que casi nadie te menciona, y por que te deberian importar deepseek, qwen y llama hacen las tareas normales de un negocio por una fraccion de lo que cuesta un modelo de punta. actualizado a agosto de 2026. ia y tecnologia">
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" style="object-position:80% 50%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">IA y tecnología</span>
             <h3>Los modelos de IA que casi nadie te menciona, y por qué te deberían importar</h3>
+            <span class="bm"><time datetime="2026-08-02">2 ago 2026</time> · <b>IA y tecnología</b> · 9 min</span>
+            <span class="brule"></span>
             <p>DeepSeek, Qwen y Llama hacen las tareas normales de un negocio por una fracción de lo que cuesta un modelo de punta. Actualizado a agosto de 2026.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-08-02">2 ago 2026</time> · 9 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/cuanto-cuesta-una-pagina-web-en-peru/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en peru precios presupuesto cotizacion rangos soles ¿cuanto cuesta una pagina web en peru? por que el 60% de las compras en linea en peru pasan por yape o plin, y que cambia eso en lo que deberias pagar por tu sitio. precios">
-          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/cuanto-cuesta-una-pagina-web-en-peru/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en peru precios presupuesto cotizacion rangos soles ¿cuanto cuesta una pagina web en peru? por que el 60% de las compras en linea en peru pasan por yape o plin, y que cambia eso en lo que deberias pagar por tu sitio. precios">
+          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" style="object-position:50% 80%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">Precios</span>
             <h3>¿Cuánto cuesta una página web en Perú?</h3>
+            <span class="bm"><time datetime="2026-08-01">1 ago 2026</time> · <b>Precios</b> · 8 min</span>
+            <span class="brule"></span>
             <p>Por qué el 60% de las compras en línea en Perú pasan por Yape o Plin, y qué cambia eso en lo que deberías pagar por tu sitio.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-08-01">1 ago 2026</time> · 8 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/que-es-un-agente-de-ia/" data-tema="IA y tecnología" data-txt="que es un agente de ia chatbot vs agente pymes adopcion riesgos gartner cisa que es un agente de ia (y si tu negocio realmente necesita uno) la diferencia real entre un chatbot y un agente, que tan rapido lo estan adoptando las pymes, que riesgos trae y como empezar sin quemar plata. ia y tecnologia">
-          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/que-es-un-agente-de-ia/" data-tema="IA y tecnología" data-txt="que es un agente de ia chatbot vs agente pymes adopcion riesgos gartner cisa que es un agente de ia (y si tu negocio realmente necesita uno) la diferencia real entre un chatbot y un agente, que tan rapido lo estan adoptando las pymes, que riesgos trae y como empezar sin quemar plata. ia y tecnologia">
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" style="object-position:35% 20%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">IA y tecnología</span>
             <h3>Qué es un agente de IA (y si tu negocio realmente necesita uno)</h3>
+            <span class="bm"><time datetime="2026-07-31">31 jul 2026</time> · <b>IA y tecnología</b> · 9 min</span>
+            <span class="brule"></span>
             <p>La diferencia real entre un chatbot y un agente, qué tan rápido lo están adoptando las pymes, qué riesgos trae y cómo empezar sin quemar plata.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-07-31">31 jul 2026</time> · 9 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/cuanto-cuesta-una-pagina-web-en-mexico/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en mexico precios presupuesto cotizacion rangos pesos mexicanos ¿cuanto cuesta una pagina web en mexico? los precios publicados van desde $6,000 hasta mas de $250,000 pesos mexicanos. que hay detras de esa diferencia y como saber cuanto deberia costar la tuya. precios">
-          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/cuanto-cuesta-una-pagina-web-en-mexico/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en mexico precios presupuesto cotizacion rangos pesos mexicanos ¿cuanto cuesta una pagina web en mexico? los precios publicados van desde $6,000 hasta mas de $250,000 pesos mexicanos. que hay detras de esa diferencia y como saber cuanto deberia costar la tuya. precios">
+          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" style="object-position:70% 70%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">Precios</span>
             <h3>¿Cuánto cuesta una página web en México?</h3>
+            <span class="bm"><time datetime="2026-07-30">30 jul 2026</time> · <b>Precios</b> · 7 min</span>
+            <span class="brule"></span>
             <p>Los precios publicados van desde $6,000 hasta más de $250,000 pesos mexicanos. Qué hay detrás de esa diferencia y cómo saber cuánto debería costar la tuya.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-07-30">30 jul 2026</time> · 7 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/google-no-encuentra-mi-pagina/" data-tema="Visibilidad" data-txt="mi pagina no aparece en google visibilidad indexacion noindex robots search console mi pagina no aparece en google antes de contratar seo, descarta lo que se arregla en una tarde. las siete causas, de la mas comun a la mas rara — empezando por una linea de codigo que deja tu web invisible. visibilidad">
-          <span class="bcard-img"><img src="/assets/blog/visibilidad.webp" alt="Persona revisando la visibilidad de su web en Google en una laptop en un espacio de trabajo limpio" width="1879" height="837" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/google-no-encuentra-mi-pagina/" data-tema="Visibilidad" data-txt="mi pagina no aparece en google visibilidad indexacion noindex robots search console mi pagina no aparece en google antes de contratar seo, descarta lo que se arregla en una tarde. las siete causas, de la mas comun a la mas rara — empezando por una linea de codigo que deja tu web invisible. visibilidad">
+          <span class="bcard-img"><img src="/assets/blog/visibilidad.webp" alt="Persona revisando la visibilidad de su web en Google en una laptop en un espacio de trabajo limpio" width="1879" height="837" style="object-position:50% 50%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">Visibilidad</span>
             <h3>Mi página no aparece en Google</h3>
+            <span class="bm"><time datetime="2026-07-28">28 jul 2026</time> · <b>Visibilidad</b> · 8 min</span>
+            <span class="brule"></span>
             <p>Antes de contratar SEO, descarta lo que se arregla en una tarde. Las siete causas, de la más común a la más rara — empezando por una línea de código que deja tu web invisible.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-07-28">28 jul 2026</time> · 8 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/como-aparecer-en-google-maps/" data-tema="Negocio local" data-txt="como aparecer en google maps negocio local ficha resenas mapa paquete local como aparecer en google maps el mapa se lleva buena parte de los clics y no depende de tu pagina web. los tres factores que deciden el orden y como aparecer aunque no tengas local. negocio local">
-          <span class="bcard-img"><img src="/assets/blog/local.webp" alt="Manos sosteniendo un smartphone con la aplicación de Google Maps abierta sobre una mesa de madera" width="1774" height="887" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/como-aparecer-en-google-maps/" data-tema="Negocio local" data-txt="como aparecer en google maps negocio local ficha resenas mapa paquete local como aparecer en google maps el mapa se lleva buena parte de los clics y no depende de tu pagina web. los tres factores que deciden el orden y como aparecer aunque no tengas local. negocio local">
+          <span class="bcard-img"><img src="/assets/blog/local.webp" alt="Manos sosteniendo un smartphone con la aplicación de Google Maps abierta sobre una mesa de madera" width="1774" height="887" style="object-position:20% 40%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">Negocio local</span>
             <h3>Cómo aparecer en Google Maps</h3>
+            <span class="bm"><time datetime="2026-07-27">27 jul 2026</time> · <b>Negocio local</b> · 7 min</span>
+            <span class="brule"></span>
             <p>El mapa se lleva buena parte de los clics y no depende de tu página web. Los tres factores que deciden el orden y cómo aparecer aunque no tengas local.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-07-27">27 jul 2026</time> · 7 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/seo-para-ia/" data-tema="SEO para IA" data-txt="seo para ia geo aeo chatgpt gemini claude llms txt menciones de marca como lograr que chatgpt recomiende tu empresa que son geo y aeo, que dice google textualmente, por que el archivo llms.txt casi no sirve todavia, y que factores si correlacionan. seo para ia">
-          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de ChatGPT en una laptop en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/seo-para-ia/" data-tema="SEO para IA" data-txt="seo para ia geo aeo chatgpt gemini claude llms txt menciones de marca como lograr que chatgpt recomiende tu empresa que son geo y aeo, que dice google textualmente, por que el archivo llms.txt casi no sirve todavia, y que factores si correlacionan. seo para ia">
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de ChatGPT en una laptop en una oficina moderna" width="1774" height="887" style="object-position:80% 50%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">SEO para IA</span>
             <h3>Cómo lograr que ChatGPT recomiende tu empresa</h3>
+            <span class="bm"><time datetime="2026-07-26">26 jul 2026</time> · <b>SEO para IA</b> · 10 min</span>
+            <span class="brule"></span>
             <p>Qué son GEO y AEO, qué dice Google textualmente, por qué el archivo llms.txt casi no sirve todavía, y qué factores sí correlacionan.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-07-26">26 jul 2026</time> · 10 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/por-que-mis-correos-llegan-a-spam/" data-tema="Correo" data-txt="por que mis correos llegan a spam spf dkim dmarc gmail autenticacion suplantacion ¿por que mis correos llegan a spam? desde 2024 google exige autenticar el dominio o el correo va directo a spam. que son spf, dkim y dmarc y como revisar los tuyos en tres minutos. correo">
-          <span class="bcard-img"><img src="/assets/blog/correo.webp" alt="Vista cercana de la bandeja de entrada de correos electrónicos en una laptop con la sección de spam resaltada" width="1774" height="887" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/por-que-mis-correos-llegan-a-spam/" data-tema="Correo" data-txt="por que mis correos llegan a spam spf dkim dmarc gmail autenticacion suplantacion ¿por que mis correos llegan a spam? desde 2024 google exige autenticar el dominio o el correo va directo a spam. que son spf, dkim y dmarc y como revisar los tuyos en tres minutos. correo">
+          <span class="bcard-img"><img src="/assets/blog/correo.webp" alt="Vista cercana de la bandeja de entrada de correos electrónicos en una laptop con la sección de spam resaltada" width="1774" height="887" style="object-position:50% 80%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">Correo</span>
             <h3>¿Por qué mis correos llegan a spam?</h3>
+            <span class="bm"><time datetime="2026-07-25">25 jul 2026</time> · <b>Correo</b> · 9 min</span>
+            <span class="brule"></span>
             <p>Desde 2024 Google exige autenticar el dominio o el correo va directo a spam. Qué son SPF, DKIM y DMARC y cómo revisar los tuyos en tres minutos.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-07-25">25 jul 2026</time> · 9 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/mejores-agencias-diseno-web-barranquilla/" data-tema="Cómo elegir" data-txt="mejores agencias de diseno web en barranquilla guia para elegir comparar estudios agencias de diseno web en barranquilla: guia para elegir seis estudios con presencia verificable en la ciudad y los criterios que separan un buen proyecto de uno que toca rehacer al ano. como elegir">
-          <span class="bcard-img"><img src="/assets/blog/elegir.webp?v=2" alt="Laptop sobre un escritorio de madera mostrando un directorio de estudios de diseño web" width="1200" height="800" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/mejores-agencias-diseno-web-barranquilla/" data-tema="Cómo elegir" data-txt="mejores agencias de diseno web en barranquilla guia para elegir comparar estudios agencias de diseno web en barranquilla: guia para elegir seis estudios con presencia verificable en la ciudad y los criterios que separan un buen proyecto de uno que toca rehacer al ano. como elegir">
+          <span class="bcard-img"><img src="/assets/blog/elegir.webp?v=2" alt="Laptop sobre un escritorio de madera mostrando un directorio de estudios de diseño web" width="1200" height="800" style="object-position:35% 20%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">Cómo elegir</span>
             <h3>Agencias de diseño web en Barranquilla: guía para elegir</h3>
+            <span class="bm"><time datetime="2026-07-24">24 jul 2026</time> · <b>Cómo elegir</b> · 8 min</span>
+            <span class="brule"></span>
             <p>Seis estudios con presencia verificable en la ciudad y los criterios que separan un buen proyecto de uno que toca rehacer al año.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-07-24">24 jul 2026</time> · 8 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
-        <a class="bcard" href="/blog/cuanto-cuesta-una-pagina-web-en-colombia/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en colombia precios presupuesto cotizacion rangos ¿cuanto cuesta una pagina web en colombia? los precios publicados van desde $400.000 hasta mas de $50 millones. que hay detras de esa diferencia y como saber cuanto deberia costar la tuya. precios">
-          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" loading="lazy" decoding="async"></span>
+        <a class="bcard extra" href="/blog/cuanto-cuesta-una-pagina-web-en-colombia/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en colombia precios presupuesto cotizacion rangos ¿cuanto cuesta una pagina web en colombia? los precios publicados van desde $400.000 hasta mas de $50 millones. que hay detras de esa diferencia y como saber cuanto deberia costar la tuya. precios">
+          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" style="object-position:70% 70%" loading="lazy" decoding="async"></span>
           <span class="bcard-txt">
-            <span class="btag">Precios</span>
             <h3>¿Cuánto cuesta una página web en Colombia?</h3>
+            <span class="bm"><time datetime="2026-07-23">23 jul 2026</time> · <b>Precios</b> · 7 min</span>
+            <span class="brule"></span>
             <p>Los precios publicados van desde $400.000 hasta más de $50 millones. Qué hay detrás de esa diferencia y cómo saber cuánto debería costar la tuya.</p>
-            <span class="bmeta"><b>K.</b><time datetime="2026-07-23">23 jul 2026</time> · 7 min de lectura</span>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
           </span>
         </a>
       </div>
       <p class="bvacio" id="bvacio">No encontramos nada con eso. Prueba con otra palabra o quita el filtro.</p>
+      <div class="bmore" id="bmore"><button type="button">Más artículos <i>+21</i></button></div>
+    </section>
+
+    <section class="block" id="empezar" aria-labelledby="emp-t">
+      <div class="bsec" data-reveal>
+        <span class="eye">Si solo vas a leer cuatro</span>
+        <h2 id="emp-t"><span class="dim">Para</span> empezar</h2>
+      </div>
+      <div class="bpicks" data-reveal>
+        <a class="bpick-big" href="/blog/cuanto-cuesta-una-pagina-web-en-colombia/">
+          <span class="bpb-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" style="object-position:50% 80%" loading="lazy" decoding="async"></span>
+          <span class="bpb-txt">
+            <span class="bm"><time datetime="2026-07-23">23 jul 2026</time> · <b>Precios</b> · 7 min</span>
+            <span class="brule"></span>
+            <h3>¿Cuánto cuesta una página web en Colombia?</h3>
+            <p>Los precios publicados van desde $400.000 hasta más de $50 millones. Qué hay detrás de esa diferencia y cómo saber cuánto debería costar la tuya.</p>
+            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
+          </span>
+        </a>
+        <div class="bpick-list">
+          <a class="bpick" href="/blog/seo-para-ia/">
+            <span><span class="bm"><time datetime="2026-07-26">26 jul 2026</time> · <b>SEO para IA</b> · 10 min</span><h3>Cómo lograr que ChatGPT recomiende tu empresa</h3></span>
+            <span class="bpick-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de ChatGPT en una laptop en una oficina moderna" width="1774" height="887" style="object-position:20% 40%" loading="lazy" decoding="async"></span>
+          </a>
+          <a class="bpick" href="/blog/google-no-encuentra-mi-pagina/">
+            <span><span class="bm"><time datetime="2026-07-28">28 jul 2026</time> · <b>Visibilidad</b> · 8 min</span><h3>Mi página no aparece en Google</h3></span>
+            <span class="bpick-img"><img src="/assets/blog/visibilidad.webp" alt="Persona revisando la visibilidad de su web en Google en una laptop en un espacio de trabajo limpio" width="1879" height="837" style="object-position:80% 50%" loading="lazy" decoding="async"></span>
+          </a>
+          <a class="bpick" href="/blog/como-aparecer-en-google-maps/">
+            <span><span class="bm"><time datetime="2026-07-27">27 jul 2026</time> · <b>Negocio local</b> · 7 min</span><h3>Cómo aparecer en Google Maps</h3></span>
+            <span class="bpick-img"><img src="/assets/blog/local.webp" alt="Manos sosteniendo un smartphone con la aplicación de Google Maps abierta sobre una mesa de madera" width="1774" height="887" style="object-position:50% 80%" loading="lazy" decoding="async"></span>
+          </a>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -1672,24 +1857,43 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     d.innerHTML=d.textContent.trim().split(/\s+/).map(function(w){return '<span class="w">'+w+'</span>'}).join(' ');
   });
 
-  /* ---------- Buscador y temas ---------- */
+  /* ---------- Destacados: cambian solos cada 6,5 s; se pausan con el mouse encima ---------- */
+  var feat=document.getElementById('bfeat'),sl=[].slice.call(feat.querySelectorAll('.bslide')),dots=[].slice.call(feat.querySelectorAll('.bdots button'));
+  var now=document.getElementById('bnow'),prog=document.getElementById('bprog'),si=0,st=null,hold=false;
+  function go(i){
+    si=(i+sl.length)%sl.length;
+    sl.forEach(function(s,k){var on=k===si;s.classList.toggle('on',on);s.tabIndex=on?0:-1});
+    dots.forEach(function(d,k){if(k===si)d.setAttribute('aria-current','true');else d.removeAttribute('aria-current')});
+    now.textContent='0'+(si+1);
+    prog.classList.remove('run');void prog.offsetWidth;if(!reduce&&!hold)prog.classList.add('run');
+  }
+  function play(){clearInterval(st);if(reduce)return;st=setInterval(function(){if(!hold&&!document.hidden)go(si+1)},6500)}
+  dots.forEach(function(d,k){d.addEventListener('click',function(e){e.preventDefault();go(k);play()})});
+  feat.addEventListener('mouseenter',function(){hold=true;prog.classList.remove('run')});
+  feat.addEventListener('mouseleave',function(){hold=false;go(si);play()});
+  go(0);play();
+
+  /* ---------- Buscador, temas y "Más artículos" ---------- */
   var q=document.getElementById('bq'),chips=[].slice.call(document.querySelectorAll('.btema'));
-  var items=[].slice.call(document.querySelectorAll('.bcard,.bdest')),vacio=document.getElementById('bvacio'),count=document.getElementById('bcount');
+  var grid=document.getElementById('bgrid'),items=[].slice.call(grid.querySelectorAll('.bcard')),vacio=document.getElementById('bvacio'),count=document.getElementById('bcount'),more=document.getElementById('bmore');
   var tema='',total=items.length;
-  function norm(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim()}
+  more.querySelector('button').addEventListener('click',function(){grid.classList.add('all');more.classList.add('done')});
+  function norm(s){return s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().trim()}
   function filtrar(){
-    var t=norm(q.value),words=t?t.split(/\s+/):[],n=0;
+    var t=norm(q.value),words=t?t.split(/\s+/):[],n=0,on=!!(tema||t);
     items.forEach(function(it){
       var ok=(!tema||it.dataset.tema===tema)&&words.every(function(w){return it.dataset.txt.indexOf(w)>=0});
       it.classList.toggle('hide',!ok);if(ok)n++;
     });
+    grid.classList.toggle('filtering',on);more.classList.toggle('off',on);
     vacio.classList.toggle('show',n===0);
-    count.textContent=(tema||t)?(n===1?'1 artículo':n+' artículos')+(tema?' en '+tema:'')+(t?' con «'+q.value.trim()+'»':''):total+' artículos · los más recientes primero';
+    count.textContent=on?(n===1?'1 artículo':n+' artículos')+(tema?' en '+tema:'')+(t?' con «'+q.value.trim()+'»':''):total+' artículos · los más recientes primero';
   }
+  function toGrid(){var g=document.getElementById('guias');var y=g.getBoundingClientRect().top+window.pageYOffset-90;if(Math.abs(window.pageYOffset-y)>200){if(smoothTo)smoothTo(y);else window.scrollTo({top:y,behavior:reduce?'auto':'smooth'})}}
   q.addEventListener('input',filtrar);
+  q.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();toGrid()}});
   chips.forEach(function(c){c.addEventListener('click',function(){
-    tema=c.dataset.tema;chips.forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false')});filtrar();
-    if(tema){var g=document.getElementById('guias');var y=g.getBoundingClientRect().top+window.pageYOffset-90;if(window.pageYOffset<y-200){if(smoothTo)smoothTo(y);else window.scrollTo({top:y,behavior:reduce?'auto':'smooth'})}}
+    tema=c.dataset.tema;chips.forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false')});filtrar();toGrid();
   })});
   document.addEventListener('keydown',function(e){if(e.key==='/'&&document.activeElement!==q&&!/input|textarea/i.test(document.activeElement.tagName)){e.preventDefault();q.focus()}});
 
