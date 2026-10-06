@@ -834,14 +834,14 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .float-nav a[aria-current="page"],.mm-links a[aria-current="page"]{opacity:1;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1.5px}
 
 /* ---------- la pantalla ---------- */
-.screen{--mb:30px;--dk:86px;position:relative;isolation:isolate;overflow:hidden;width:100%;max-width:1180px;height:calc(100svh - 124px);min-height:540px;max-height:800px;margin:84px auto 0;border-radius:var(--r-panel);color:#fff;
+.screen{--mb:30px;--dk:86px;position:relative;isolation:isolate;overflow:hidden;width:100%;max-width:1320px;height:calc(100svh - 100px);min-height:540px;max-height:900px;margin:80px auto 0;border-radius:var(--r-panel);color:#fff;
   background:radial-gradient(110% 80% at 10% 0%,rgba(94,43,158,.55) 0%,transparent 60%),radial-gradient(90% 70% at 95% 100%,rgba(122,63,201,.32) 0%,transparent 58%),radial-gradient(60% 50% at 65% 35%,rgba(255,255,255,.06) 0%,transparent 70%),#1C1724}
 .sc-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
 .sc-bg img{position:absolute;width:58%;opacity:.16;filter:blur(46px) saturate(1.2);mix-blend-mode:screen}
 .sc-bg img:nth-child(1){left:-6%;bottom:-10%;transform:rotate(-8deg)}
 .sc-bg img:nth-child(2){right:-8%;top:8%;transform:rotate(9deg)}
 /* barra de menú de macOS */
-.mbar{position:absolute;inset:0 0 auto 0;z-index:30;height:var(--mb);display:flex;align-items:center;gap:20px;padding:0 18px;background:rgba(12,10,16,.36);-webkit-backdrop-filter:blur(20px) saturate(1.2);backdrop-filter:blur(20px) saturate(1.2);font-size:13px;font-weight:500;color:rgba(255,255,255,.92)}
+.mbar{position:absolute;inset:0 0 auto 0;z-index:50;height:var(--mb);display:flex;align-items:center;gap:20px;padding:0 18px;background:rgba(12,10,16,.36);-webkit-backdrop-filter:blur(20px) saturate(1.2);backdrop-filter:blur(20px) saturate(1.2);font-size:13px;font-weight:500;color:rgba(255,255,255,.92)}
 .mbar b{font-weight:700}
 .mbar #mbApp{font-weight:600}
 .mbar .mb-r{margin-left:auto;font-variant-numeric:tabular-nums}
@@ -854,7 +854,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .widget p{margin:0;font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.8)}
 .widget p b{color:#fff}
 /* íconos del escritorio */
-.desk-area{position:absolute;z-index:3;inset:var(--mb) 0 var(--dk) 0}
+.desk-area{position:absolute;z-index:22;inset:var(--mb) 0 var(--dk) 0}
 .ico{position:absolute;left:var(--x);top:var(--y);display:grid;justify-items:center;gap:7px;width:128px;padding:6px 4px;border:0;border-radius:12px;background:none;color:#fff;font:inherit;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none}
 .ico.drag{z-index:6}
 .ico-art{transition:transform .35s var(--ease),filter .35s;filter:drop-shadow(0 14px 20px rgba(10,0,30,.55))}
@@ -892,13 +892,19 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .pdock .d-brand svg,.pdock .d-ig svg{width:58%;height:58%}
 
 /* ---------- ventana dentro de la pantalla ---------- */
-.sc-ov{position:absolute;z-index:20;inset:var(--mb) 0 0 0;background:rgba(14,12,18,.3);-webkit-backdrop-filter:blur(16px) saturate(1.1);backdrop-filter:blur(16px) saturate(1.1);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s linear .35s}
+.sc-ov{position:absolute;z-index:20;pointer-events:none;inset:var(--mb) 0 0 0;background:rgba(14,12,18,.3);-webkit-backdrop-filter:blur(16px) saturate(1.1);backdrop-filter:blur(16px) saturate(1.1);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s linear .35s}
 .screen.win-open .sc-ov{opacity:1;visibility:visible;transition:opacity .35s ease}
-.pwin{position:absolute;z-index:25;top:calc(var(--mb) + 14px);bottom:calc(var(--dk) + 6px);left:max(16px,4%);right:max(16px,4%);display:flex;flex-direction:column;border-radius:13px;overflow:hidden;background:#fff;color:var(--ink);box-shadow:0 0 0 1px rgba(0,0,0,.18),0 50px 100px -30px rgba(0,0,0,.7);opacity:0;visibility:hidden;transform:scale(.5);transform-origin:var(--ox,50%) var(--oy,100%);transition:transform .55s var(--ease),opacity .3s ease,visibility 0s linear .55s}
-.pwin.tall{left:max(16px,calc(50% - 215px));right:max(16px,calc(50% - 215px))}
-.pwin.tall .pw-url span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.screen.win-open .pwin{opacity:1;visibility:visible;transform:none;transition:transform .55s var(--ease),opacity .3s ease}
-.pw-bar{flex:none;display:flex;align-items:center;gap:14px;height:42px;padding:0 14px;background:#F3F2F6;border-bottom:1px solid #E2E1E7}
+.pwin{position:absolute;z-index:25;display:flex;flex-direction:column;border-radius:13px;overflow:hidden;background:#fff;color:var(--ink);box-shadow:0 0 0 1px rgba(0,0,0,.18),0 50px 100px -30px rgba(0,0,0,.7);opacity:0;visibility:hidden;transform:scale(.5);transform-origin:var(--ox,50%) var(--oy,100%);transition:transform .55s var(--ease),opacity .3s ease,visibility 0s linear .55s}
+.pw-url span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pwin.moving{transition:none;-webkit-user-select:none;user-select:none}
+.pwin.open{opacity:1;visibility:visible;transform:none;transition:transform .55s var(--ease),opacity .3s ease}
+.pw-bar{flex:none;display:flex;align-items:center;gap:14px;height:42px;padding:0 14px;background:#F3F2F6;border-bottom:1px solid #E2E1E7;cursor:grab;touch-action:none}
+.pwin.moving .pw-bar{cursor:grabbing}
+/* las ventanas de atrás se ven apagadas, como en la Mac */
+.pwin:not(.front) .pw-bar{background:#F8F8FA}
+.pwin:not(.front) .lights button{background:#D9D8DE}
+.pwin:not(.front) .pw-title,.pwin:not(.front) .pw-tabs button{opacity:.6}
+.pwin:not(.front){box-shadow:0 0 0 1px rgba(0,0,0,.14),0 30px 60px -30px rgba(0,0,0,.55)}
 .lights{display:flex;gap:8px;flex:none}
 .lights button{width:12px;height:12px;border:0;border-radius:50%;padding:0;cursor:pointer;display:grid;place-items:center;font-size:9px;line-height:1;color:transparent}
 .lights:hover button{color:rgba(0,0,0,.55)}
@@ -907,7 +913,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 /* pestañas tipo Safari */
 .pw-tabs[hidden],.pw-title[hidden]{display:none}
 .pw-tabs{flex:1;display:flex;gap:6px;min-width:0;overflow-x:auto;scrollbar-width:none}
-.pw-tabs button{flex:none;display:flex;align-items:center;gap:7px;height:28px;padding:0 12px;border:0;border-radius:8px;background:none;font:inherit;font-size:12.5px;font-weight:600;color:var(--ink-2);cursor:pointer;white-space:nowrap}
+.pw-tabs button{flex:0 1 auto;min-width:0;max-width:220px;overflow:hidden;text-overflow:ellipsis;display:block;line-height:28px;height:28px;padding:0 12px;border:0;border-radius:8px;background:none;font:inherit;font-size:12.5px;font-weight:600;color:var(--ink-2);cursor:pointer;white-space:nowrap}
 .pw-tabs button:hover{background:#E8E7ED}
 .pw-tabs button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
 .pw-body{flex:1;display:grid;grid-template-columns:270px minmax(0,1fr);min-height:0}
@@ -998,7 +1004,6 @@ html.lock{overflow:hidden}
   .pdock .m-hide{display:none}
   .pdock .sep{height:30px}
   .pdock .live::after{display:none}
-  .pwin{left:8px;right:8px;top:calc(var(--mb) + 8px)}
   .pw-tabs button{padding:0 9px}
   .pcard{grid-template-columns:96px 1fr;gap:14px}
   .pcard img{width:96px;height:62px}
@@ -1087,15 +1092,6 @@ html.lock{overflow:hidden}
     </div>
 
     <div class="sc-ov" id="scOv"></div>
-    <div class="pwin" id="pwin" role="dialog" aria-modal="false" aria-labelledby="pwTitle">
-      <div class="pw-bar">
-        <div class="lights"><button class="lc" type="button" aria-label="Cerrar ventana">×</button><button class="lm" type="button" aria-label="Cerrar ventana" tabindex="-1">–</button><button class="lz" type="button" aria-label="Abrir en una pestaña nueva" tabindex="-1">↗</button></div>
-        <div class="pw-tabs" id="pwTabs" role="tablist" hidden></div>
-        <b class="pw-title" id="pwTitle"></b>
-      </div>
-      <div class="pw-body" id="pwBody"></div>
-    </div>
-
     <nav class="pdock" aria-label="Dock">
       <span class="d deco" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#B9E0FF"/><path d="M9 0h12c-3 8-4 15-3 22h-3c0 6 1 12 3 18H9a9 9 0 0 1-9-9V9a9 9 0 0 1 9-9z" fill="#1E8EF0"/><path d="M13 12v5M27 12v5" stroke="#111" stroke-width="2" stroke-linecap="round"/><path d="M11 27c5 4 13 4 18 0" stroke="#111" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span>
       <span class="d deco" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#fff"/><text x="20" y="13" text-anchor="middle" font-family="Geist,Arial" font-size="8" font-weight="700" fill="#FF3B30" id="calMon">OCT</text><text x="20" y="32" text-anchor="middle" font-family="Geist,Arial" font-size="18" font-weight="500" fill="#1C1C1E" id="calDay">5</text></svg></span>
@@ -1242,7 +1238,9 @@ html.lock{overflow:hidden}
         var box=e.target.closest('.pw-scroll,.pw-side');
         if(box&&box.scrollHeight>box.clientHeight)return;
         e.preventDefault();
-        var page=sc.querySelector('.pw-scroll');
+        var under=e.target.closest('.pwin'),top=null;
+        sc.querySelectorAll('.pwin.open').forEach(function(w){if(!top||+w.style.zIndex>+top.style.zIndex)top=w});
+        var page=(under||top||sc).querySelector('.pw-scroll');
         if(page)page.scrollBy({top:dy,behavior:Math.abs(dy)>=60?'smooth':'auto'});
         return;
       }
@@ -1338,80 +1336,139 @@ html.lock{overflow:hidden}
 
   var DIM={'/assets/portfolio/cstravel-inicio.webp':[1280,3945],'/assets/portfolio/cstravel-empresas.webp':[1280,5952],'/assets/portfolio/cstravel-medicos.webp':[1280,8311],'/assets/portfolio/thallo-web.webp':[1280,8616],'/assets/inicio/trabajo-cstravel-software.webp':[1600,833]};
   function dim(s){return DIM[s]||(/brandbook/.test(s)?[1440,810]:[1440,900])}
-  var scr=document.getElementById('inicio'),win=document.getElementById('pwin'),body=document.getElementById('pwBody');
-  var tabs=document.getElementById('pwTabs'),title=document.getElementById('pwTitle'),mbApp=document.getElementById('mbApp');
-  var live=null,mode=null,lastFocus=null;
+  var scr=document.getElementById('inicio'),dockEl=scr.querySelector('.pdock'),mbApp=document.getElementById('mbApp');
+  var lastFocus=null;
   var lock='<svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 10V8a5 5 0 0 1 10 0v2h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h1zm2 0h6V8a3 3 0 0 0-6 0v2z"/></svg>';
   var pgIco='<svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></g></svg>';
   function screensHTML(pg){
     return '<div class="pw-url">'+lock+'<span>'+pg.url+'</span>'+(pg.live?'<a href="'+pg.live+'" target="_blank" rel="noopener">Ver en vivo ↗</a>':'')+'</div>'+
       '<div class="pw-scroll'+(pg.site?' site':'')+'" tabindex="0">'+pg.shots.map(function(s,i){var d=dim(s);return '<img src="'+s+'" alt="'+pg.alt+(pg.shots.length>1?', página '+(i+1):'')+'" width="'+d[0]+'" height="'+d[1]+'" style="--i:'+i+'" decoding="async">'}).join('')+(pg.note?'<p class="pw-note">'+pg.note+'</p>':'')+'</div>';
   }
-  function origin(from){
-    if(!from)return;var r=from.getBoundingClientRect(),s=scr.getBoundingClientRect();
-    win.style.setProperty('--ox',(r.left+r.width/2-s.left-win.offsetLeft)+'px');win.style.setProperty('--oy',(r.top+r.height/2-s.top-win.offsetTop)+'px');
+
+  /* ---------- Ventanas: varias abiertas a la vez, cada una del tamaño de lo que muestra ----------
+     Se apilan como en una Mac: la que tocas pasa al frente y se arrastran desde la barra. */
+  var WINS={},stack=[];
+  var SIZE={folder:954,web:684,brand:684,ig:430};
+  function small(){return scr.clientWidth<=700}
+  function bounds(){
+    var cs=getComputedStyle(scr),mb=parseFloat(cs.getPropertyValue('--mb'))||30,dk=parseFloat(cs.getPropertyValue('--dk'))||86;
+    return {w:scr.clientWidth,top:mb+(small()?8:12),bottom:scr.clientHeight-dk-6};
   }
-  function show(from,name){
-    win.classList.toggle('tall',mode==='ig');origin(from);lastFocus=document.activeElement;
-    scr.classList.add('win-open');mbApp.textContent=name;
-    document.querySelectorAll('.pdock .live').forEach(function(d){d.classList.toggle('on',d.dataset.app===mode)});
-    setTimeout(function(){win.querySelector('.lc').focus({preventScroll:true})},60);
+  // tamaño según el contenido y posición en cascada para que se vean las de atrás
+  function fit(o,n){
+    var b=bounds(),el=o.el,m=small(),avail=b.bottom-b.top;
+    var w=m?b.w-16:Math.min(SIZE[o.kind],b.w-32);
+    var off=m?0:(n%3)*22,h=avail-off;
+    if(o.kind==='ig'&&!m)h=Math.min(h,760);
+    var left=m?8:Math.round((b.w-w)/2)+(n%3)*34;
+    el.style.width=w+'px';el.style.height=h+'px';
+    el.style.left=Math.max(8,Math.min(b.w-w-8,left))+'px';el.style.top=(b.top+off)+'px';
   }
-  function hide(){
-    scr.classList.remove('win-open');mbApp.textContent='Finder';mode=null;root.classList.remove('in-win');
-    document.querySelectorAll('.pdock .live').forEach(function(d){d.classList.remove('on')});
-    setTimeout(function(){if(!scr.classList.contains('win-open'))body.innerHTML=''},400);
+  // al cambiar el tamaño del navegador, que ninguna ventana se salga de la pantalla
+  function keep(o){
+    var b=bounds(),el=o.el,m=small(),w=m?b.w-16:Math.min(SIZE[o.kind],b.w-32);
+    el.style.width=w+'px';el.style.height=Math.min(o.kind==='ig'&&!m?760:9999,b.bottom-b.top-(el.offsetTop-b.top>0?el.offsetTop-b.top:0))+'px';
+    el.style.left=(m?8:Math.max(-w+140,Math.min(b.w-140,el.offsetLeft)))+'px';
+    el.style.top=Math.max(b.top,Math.min(b.bottom-42,el.offsetTop))+'px';
+  }
+  window.addEventListener('resize',function(){stack.forEach(function(k){keep(WINS[k])})});
+  function front(key){
+    var i=stack.indexOf(key);if(i<0)return;
+    stack.splice(i,1);stack.push(key);
+    stack.forEach(function(k,j){var o=WINS[k];o.el.style.zIndex=25+j;o.el.classList.toggle('front',k===key)});
+    var o=WINS[key];mbApp.textContent=o.name;
+    if(history.replaceState)history.replaceState(null,'',o.hash?'#'+o.hash:location.pathname);
+  }
+  function dockState(){document.querySelectorAll('.pdock .live').forEach(function(d){d.classList.toggle('on',!!WINS[d.dataset.app])})}
+  function makeWin(key,kind,name,from){
+    var el=document.createElement('div');el.className='pwin';el.setAttribute('role','dialog');el.setAttribute('aria-label',name);
+    el.innerHTML='<div class="pw-bar"><div class="lights"><button class="lc" type="button" aria-label="Cerrar ventana">×</button><button class="lm" type="button" aria-label="Cerrar ventana" tabindex="-1">–</button><button class="lz" type="button" aria-label="Abrir en una pestaña nueva" tabindex="-1">↗</button></div><div class="pw-tabs" role="tablist" hidden></div><b class="pw-title"></b></div><div class="pw-body"></div>';
+    scr.insertBefore(el,dockEl);
+    var o={key:key,kind:kind,name:name,el:el,tabs:el.querySelector('.pw-tabs'),title:el.querySelector('.pw-title'),body:el.querySelector('.pw-body'),live:null,hash:null};
+    WINS[key]=o;fit(o,stack.length);
+    if(from){var r=from.getBoundingClientRect(),s=scr.getBoundingClientRect();el.style.setProperty('--ox',(r.left+r.width/2-s.left-el.offsetLeft)+'px');el.style.setProperty('--oy',(r.top+r.height/2-s.top-el.offsetTop)+'px')}
+    el.addEventListener('pointerdown',function(){if(stack[stack.length-1]!==key)front(key)},true);
+    el.addEventListener('click',function(e){
+      if(e.target.closest('.lc,.lm')){closeWin(key);return}
+      if(e.target.closest('.lz')&&o.live)window.open(o.live,'_blank','noopener');
+    });
+    // se arrastra desde la barra
+    var bar=el.querySelector('.pw-bar'),sx,sy,ox,oy,pid=null;
+    bar.addEventListener('pointerdown',function(e){if(e.button!==0||e.target.closest('button,a')||small())return;pid=e.pointerId;sx=e.clientX;sy=e.clientY;ox=el.offsetLeft;oy=el.offsetTop;bar.setPointerCapture(pid);el.classList.add('moving')});
+    bar.addEventListener('pointermove',function(e){
+      if(pid!==e.pointerId)return;var b=bounds();
+      el.style.left=Math.max(-el.offsetWidth+140,Math.min(b.w-140,ox+e.clientX-sx))+'px';
+      el.style.top=Math.max(b.top,Math.min(b.bottom-42,oy+e.clientY-sy))+'px';
+    });
+    bar.addEventListener('pointerup',function(e){if(pid!==e.pointerId)return;pid=null;el.classList.remove('moving')});
+    return o;
+  }
+  // abre la ventana o, si ya está abierta, la trae al frente
+  function ensure(key,kind,name,from){
+    if(WINS[key]){front(key);return {o:WINS[key],fresh:false}}
+    if(!stack.length)lastFocus=document.activeElement;
+    var o=makeWin(key,kind,name,from);
+    stack.push(key);front(key);scr.classList.add('win-open');dockState();
+    requestAnimationFrame(function(){requestAnimationFrame(function(){o.el.classList.add('open')})});
+    setTimeout(function(){o.el.querySelector('.lc').focus({preventScroll:true})},60);
+    return {o:o,fresh:true};
+  }
+  function closeWin(key){
+    var o=WINS[key];if(!o)return;
+    delete WINS[key];stack.splice(stack.indexOf(key),1);
+    o.el.classList.remove('open');setTimeout(function(){o.el.remove()},450);
+    dockState();
+    if(stack.length){var t=stack[stack.length-1];front(t);WINS[t].el.querySelector('.lc').focus({preventScroll:true});return}
+    scr.classList.remove('win-open');mbApp.textContent='Finder';root.classList.remove('in-win');
     if(history.replaceState)history.replaceState(null,'',location.pathname);
     if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});
   }
   // carpeta de un cliente: Finder a la izquierda, navegador a la derecha
   function openProject(key,pageId,from){
-    var p=P[key];if(!p)return;mode='folder';live=p.live;
-    tabs.hidden=true;title.hidden=false;title.textContent=p.name;
-    body.className='pw-body';
-    body.innerHTML='<aside class="pw-side"><div><span class="eyebrow">'+p.kind+'</span><h2>'+p.name+'</h2></div><p>'+p.desc+'</p>'+
-      '<div class="pw-pages"><b>Ver</b>'+p.pages.map(function(pg){return '<button type="button" data-id="'+pg.id+'">'+pgIco+pg.label+'</button>'}).join('')+'</div>'+
-      '<ul class="pw-done">'+p.done.map(function(d){return '<li>'+d+'</li>'}).join('')+'</ul>'+
-      '<a class="btn" href="'+p.live+'" target="_blank" rel="noopener">Ver sitio en vivo <svg><use href="#i-arrow"/></svg></a></aside><div class="pw-main" id="pwMain"></div>';
+    var p=P[key];if(!p)return;
+    var k='p-'+key,fresh=!WINS[k];
+    if(fresh){var r=ensure(k,'folder',p.name,from);r.o.hash=p.hash;front(k)}else front(k);
+    var o=WINS[k];
+    if(!fresh&&!pageId)return;
     function page(id){
       var pg=p.pages.filter(function(x){return x.id===id})[0]||p.pages[0];
-      body.querySelectorAll('.pw-pages button').forEach(function(b){b.classList.toggle('on',b.dataset.id===pg.id)});
-      document.getElementById('pwMain').innerHTML=screensHTML(pg);live=pg.live||p.live;
+      o.body.querySelectorAll('.pw-pages button').forEach(function(b){b.classList.toggle('on',b.dataset.id===pg.id)});
+      o.body.querySelector('.pw-main').innerHTML=screensHTML(pg);o.live=pg.live||p.live;
     }
-    body.querySelectorAll('.pw-pages button').forEach(function(b){b.addEventListener('click',function(){page(b.dataset.id)})});
-    page(pageId);show(from,p.name);
-    if(history.replaceState)history.replaceState(null,'','#'+p.hash);
+    if(fresh){
+      o.title.textContent=p.name;
+      o.body.innerHTML='<aside class="pw-side"><div><span class="eyebrow">'+p.kind+'</span><h2>'+p.name+'</h2></div><p>'+p.desc+'</p>'+
+        '<div class="pw-pages"><b>Ver</b>'+p.pages.map(function(pg){return '<button type="button" data-id="'+pg.id+'">'+pgIco+pg.label+'</button>'}).join('')+'</div>'+
+        '<ul class="pw-done">'+p.done.map(function(d){return '<li>'+d+'</li>'}).join('')+'</ul>'+
+        '<a class="btn" href="'+p.live+'" target="_blank" rel="noopener">Ver sitio en vivo <svg><use href="#i-arrow"/></svg></a></aside><div class="pw-main"></div>';
+      o.body.querySelectorAll('.pw-pages button').forEach(function(b){b.addEventListener('click',function(){page(b.dataset.id)})});
+    }
+    page(pageId);
   }
   // navegador (Safari): una pestaña por sitio o por manual
   function openBrowser(list,app,name,from){
-    mode=app;tabs.hidden=false;title.hidden=true;
-    body.className='pw-body full';
-    tabs.innerHTML=list.map(function(t){return '<button type="button" role="tab" data-id="'+t.id+'">'+t.label+'</button>'}).join('');
+    var r=ensure(app,app,name,from),o=r.o;if(!r.fresh)return;
+    o.tabs.hidden=false;o.title.hidden=true;o.body.className='pw-body full';
+    o.tabs.innerHTML=list.map(function(t){return '<button type="button" role="tab" data-id="'+t.id+'" title="'+t.label+'">'+t.label+'</button>'}).join('');
     function tab(id){
       var t=list.filter(function(x){return x.id===id})[0]||list[0];
-      tabs.querySelectorAll('button').forEach(function(b){var on=b.dataset.id===t.id;b.classList.toggle('on',on);b.setAttribute('aria-selected',on)});
-      body.innerHTML='<div class="pw-main">'+screensHTML(t)+'</div>';live=t.live||null;
+      o.tabs.querySelectorAll('button').forEach(function(b){var on=b.dataset.id===t.id;b.classList.toggle('on',on);b.setAttribute('aria-selected',on)});
+      o.body.innerHTML='<div class="pw-main">'+screensHTML(t)+'</div>';o.live=t.live||null;
     }
-    tabs.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){tab(b.dataset.id)})});
-    tab();show(from,name);
+    o.tabs.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){tab(b.dataset.id)})});
+    tab();
   }
-  // Instagram dentro de la pantalla (se carga solo cuando alguien lo abre)
+  // Instagram dentro de la pantalla, en vertical (se carga solo cuando alguien lo abre)
   function openInstagram(from){
-    mode='ig';live='https://www.instagram.com/kaivastudio/';tabs.hidden=true;title.hidden=false;title.textContent='Instagram — @kaivastudio';
-    body.className='pw-body full';
-    body.innerHTML='<div class="pw-main"><div class="pw-url">'+lock+'<span>instagram.com/kaivastudio</span><a href="https://www.instagram.com/kaivastudio/" target="_blank" rel="noopener">Abrir en Instagram ↗</a></div><div class="pw-ig"><iframe src="https://www.instagram.com/kaivastudio/embed/" title="Perfil de Instagram de Kaiva Studio" loading="lazy" allowtransparency="true"></iframe></div></div>';
-    show(from,'Instagram');
+    var r=ensure('ig','ig','Instagram',from),o=r.o;if(!r.fresh)return;
+    o.live='https://www.instagram.com/kaivastudio/';o.title.textContent='Instagram — @kaivastudio';o.body.className='pw-body full';
+    o.body.innerHTML='<div class="pw-main"><div class="pw-url">'+lock+'<span>instagram.com/kaivastudio</span><a href="https://www.instagram.com/kaivastudio/" target="_blank" rel="noopener">Abrir en Instagram ↗</a></div><div class="pw-ig"><iframe src="https://www.instagram.com/kaivastudio/embed/" title="Perfil de Instagram de Kaiva Studio" loading="lazy" allowtransparency="true"></iframe></div></div>';
   }
 
-  document.getElementById('scOv').addEventListener('click',hide);
-  win.addEventListener('click',function(e){
-    if(e.target.closest('.lc,.lm')){hide();return}
-    if(e.target.closest('.lz')&&live)window.open(live,'_blank','noopener');
-  });
   document.addEventListener('keydown',function(e){
     if(e.key!=='Escape')return;
     if(bov.classList.contains('open'))closeBig();
-    else if(scr.classList.contains('win-open'))hide();
+    else if(stack.length)closeWin(stack[stack.length-1]);
     else setMenu(false);
   });
   function fromBelow(fn){
@@ -1429,7 +1486,6 @@ html.lock{overflow:hidden}
   document.querySelectorAll('.pdock .live').forEach(function(d){
     d.addEventListener('click',function(){
       var a=d.dataset.app;
-      if(scr.classList.contains('win-open')&&mode===a){hide();return}
       if(a==='web')openBrowser(WEBS,'web','Navegador',d);
       else if(a==='brand')openBrowser(BOOKS,'brand','Marca',d);
       else if(a==='ig')openInstagram(d);
