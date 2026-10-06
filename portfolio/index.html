@@ -939,8 +939,11 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .pw-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;display:grid;align-content:start;justify-items:center;gap:14px;padding:6px 14px 20px}
 .pw-scroll img{display:block;width:100%;max-width:640px;height:auto;border-radius:9px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.14);opacity:0;transform:translateY(14px);animation:shotIn .6s var(--ease) forwards;animation-delay:calc(var(--i) * 60ms)}
 .pw-note{max-width:640px}
-.pw-scroll.site{scroll-behavior:auto}
-.pw-scroll.site img{animation-duration:.45s}
+/* pantallazos al ancho completo de la ventana, cada uno con su nombre encima */
+.pw-scroll.full img,.pw-scroll.full .pw-note,.pw-scroll.full .pw-cap{max-width:none}
+.pw-main:has(.pw-scroll.full) .pw-url{max-width:none}
+.pw-cap{width:100%;max-width:640px;margin:8px 0 -6px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.pw-cap:first-child{margin-top:2px}
 @keyframes shotIn{to{opacity:1;transform:none}}
 .pw-note{margin:0;padding:12px 14px;border-radius:10px;background:#fff;font-size:13px;color:var(--ink-2);box-shadow:0 0 0 1px #DEDDE4}
 .pw-note a{color:var(--violet-text);font-weight:600}
@@ -1323,7 +1326,7 @@ html.lock{overflow:hidden}
       pages:[
         // en vivo: la copia del sitio publicada en GitHub (el dominio real no deja mostrarse dentro de otra página); se navega con su propio menú
         {id:'inicio',label:'Sitio web',url:'cstravelgroup.com',live:'https://www.cstravelgroup.com/',frame:'https://theo272004.github.io/cs-travel-group/',alt:'Sitio web de CS Travel Group'},
-        {id:'plataforma',label:'Plataforma para aliados',url:'Plataforma privada de CS Travel Group',shots:['/assets/inicio/trabajo-cstravel-software.webp'],alt:'Plataforma a medida de CS Travel Group para sus aliados',
+        {id:'plataforma',label:'Plataforma para aliados',url:'cstravelgroup.com/portal',live:'https://www.cstravelgroup.com/portal',full:true,shots:['/assets/portfolio/cstravel-portal-login.webp','/assets/inicio/trabajo-cstravel-software.webp'],caps:['Inicio de sesión del portal','Parte interna del portal'],alts:['Inicio de sesión del portal de aliados de CS Travel Group','Parte interna de la plataforma de CS Travel Group: ganancias, referidos y casos del aliado'],alt:'Plataforma a medida de CS Travel Group para sus aliados',
           note:'Es una plataforma privada: los aliados de CS Travel Group entran con su usuario para ver sus casos, sus referidos y sus ganancias.'}
       ]},
     thallo:{name:'Thallo Digital',kind:'Diseño web · Diseño de marca',hash:'thallo',live:'https://thallodigital.com/',
@@ -1339,7 +1342,7 @@ html.lock{overflow:hidden}
   // navegador: una pestaña por sitio, en vivo; dentro se navega con el menú de cada web
   var WEBS=[{p:P.cst,pg:P.cst.pages[0]},{p:P.thallo,pg:P.thallo.pages[0]}].map(function(x,i){return {id:'w'+i,label:x.p.name,url:x.pg.url,live:x.pg.live,frame:x.pg.frame,alt:x.pg.alt}});
 
-  var DIM={'/assets/inicio/trabajo-cstravel-software.webp':[1600,833]};
+  var DIM={'/assets/inicio/trabajo-cstravel-software.webp':[1600,833],'/assets/portfolio/cstravel-portal-login.webp':[2000,1250]};
   function dim(s){return DIM[s]||(/brandbook/.test(s)?[1440,810]:[1440,900])}
   var scr=document.getElementById('inicio'),dockEl=scr.querySelector('.pdock'),mbApp=document.getElementById('mbApp');
   var lastFocus=null;
@@ -1350,7 +1353,7 @@ html.lock{overflow:hidden}
     if(pg.frame)return '<div class="pw-url">'+lock+'<span>'+pg.url+'</span><a href="'+pg.live+'" target="_blank" rel="noopener">Abrir ↗</a></div>'+
       '<div class="pw-live"><span class="pw-live-tag">En vivo</span><iframe src="'+pg.frame+'" title="'+pg.alt+' (en vivo)"></iframe></div>';
     return '<div class="pw-url">'+lock+'<span>'+pg.url+'</span>'+(pg.live?'<a href="'+pg.live+'" target="_blank" rel="noopener">Ver en vivo ↗</a>':'')+'</div>'+
-      '<div class="pw-scroll'+(pg.site?' site':'')+'" tabindex="0">'+pg.shots.map(function(s,i){var d=dim(s);return '<img src="'+s+'" alt="'+pg.alt+(pg.shots.length>1?', página '+(i+1):'')+'" width="'+d[0]+'" height="'+d[1]+'" style="--i:'+i+'" decoding="async">'}).join('')+(pg.note?'<p class="pw-note">'+pg.note+'</p>':'')+'</div>';
+      '<div class="pw-scroll'+(pg.full?' full':'')+'" tabindex="0">'+pg.shots.map(function(s,i){var d=dim(s),alt=pg.alts?pg.alts[i]:pg.alt+(pg.shots.length>1?', página '+(i+1):'');return (pg.caps?'<p class="pw-cap">'+pg.caps[i]+'</p>':'')+'<img src="'+s+'" alt="'+alt+'" width="'+d[0]+'" height="'+d[1]+'" style="--i:'+i+'" decoding="async">'}).join('')+(pg.note?'<p class="pw-note">'+pg.note+'</p>':'')+'</div>';
   }
 
   /* ---------- Ventanas: varias abiertas a la vez, cada una del tamaño de lo que muestra ----------
