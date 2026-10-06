@@ -1,11 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- Google Analytics 4 (G-BD6VDCSQDC). Es la misma propiedad del sitio
+       anterior, recuperada del commit f259fa1: se perdió al pasar de React a
+       HTML estático y el sitio estuvo meses sin medir nada.
 
-  <!-- Analytics con consentimiento previo. Aquí NO se carga el script de
+       Analytics con consentimiento previo. Aquí NO se carga el script de
        Google: solo se fijan los valores por defecto (todo denegado) y se
        deja que /assets/consentimiento.js lo inyecte si la persona acepta.
        El razonamiento completo y las normas que lo obligan están comentados
@@ -24,37 +26,32 @@
     });
   </script>
   <script defer src="/assets/consentimiento.js?v=20261005"></script>
-  <script defer src="/assets/eventos.js?v=20260729"></script>
+  <script defer src="/assets/eventos.js?v=20260807"></script>
   <script defer src="/assets/clarity.js?v=20260729"></script>
 
-  <title>Blog — Guías claras sobre web, marca y presencia digital | Kaiva Studio</title>
-  <meta name="description"
-    content="Explicamos sin jerga cómo funciona la presencia digital de una empresa: cuánto cuesta una web, por qué no apareces en Google y qué priorizar primero.">
+  <title>Blog de Kaiva Studio: guías claras de web y marca</title>
+  <meta name="description" content="Explicamos sin jerga cómo funciona la presencia digital de una empresa: cuánto cuesta una web, por qué no apareces en Google y qué priorizar primero.">
   <link rel="canonical" href="https://kaivastudio.com/blog/">
-  <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="author" content="Kaiva Studio">
+  <meta name="theme-color" content="#080808">
   <link rel="icon" href="/favicon.ico?v=20261005c" sizes="48x48">
   <link rel="icon" href="/assets/favicon-96.png?v=20261005c" type="image/png" sizes="96x96">
   <link rel="icon" href="/assets/favicon-192.png?v=20261005c" type="image/png" sizes="192x192">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=20261005c">
-
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Kaiva Studio">
   <meta property="og:locale" content="es_CO">
   <meta property="og:url" content="https://kaivastudio.com/blog/">
-  <meta property="og:title" content="Blog — Kaiva Studio">
-  <meta property="og:description"
-    content="Guías claras sobre web, marca y presencia digital para empresas colombianas.">
+  <meta property="og:title" content="Blog de Kaiva Studio: guías claras de web y marca">
+  <meta property="og:description" content="Explicamos sin jerga cómo funciona la presencia digital de una empresa: cuánto cuesta una web, por qué no apareces en Google y qué priorizar primero.">
   <meta property="og:image" content="https://kaivastudio.com/assets/kaiva-og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Blog — Kaiva Studio">
+  <meta name="twitter:title" content="Blog de Kaiva Studio: guías claras de web y marca">
+  <meta name="twitter:description" content="Explicamos sin jerga cómo funciona la presencia digital de una empresa: cuánto cuesta una web, por qué no apareces en Google y qué priorizar primero.">
   <meta name="twitter:image" content="https://kaivastudio.com/assets/kaiva-og.jpg">
-
-  <link rel="preload" href="/assets/fonts/inter-tight-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/tokens.css?v=20260808c">
-  <link rel="stylesheet" href="/assets/pagina.css?v=20260809b">
-
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -62,688 +59,1689 @@
     {
       "@type": "Blog",
       "@id": "https://kaivastudio.com/blog/#blog",
-      "name": "Blog de Kaiva Studio",
-      "description": "Guías claras sobre web, marca y presencia digital para empresas colombianas.",
       "url": "https://kaivastudio.com/blog/",
+      "name": "Blog de Kaiva Studio",
+      "description": "Explicamos sin jerga cómo funciona la presencia digital de una empresa: cuánto cuesta una web, por qué no apareces en Google y qué priorizar primero.",
       "inLanguage": "es-CO",
       "publisher": {
-        "@type": "ProfessionalService",
-        "@id": "https://kaivastudio.com/#studio",
-        "name": "Kaiva Studio",
-        "url": "https://kaivastudio.com/"
-      }
+        "@id": "https://kaivastudio.com/#studio"
+      },
+      "isPartOf": {
+        "@id": "https://kaivastudio.com/#website"
+      },
+      "blogPost": [
+        {
+          "@type": "BlogPosting",
+          "headline": "Agencias de diseño web en Lima: guía para elegir",
+          "url": "https://kaivastudio.com/blog/mejores-agencias-diseno-web-lima/",
+          "datePublished": "2026-09-23",
+          "image": "https://kaivastudio.com/assets/blog/elegir.webp",
+          "articleSection": "Cómo elegir",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "E-E-A-T: la trayectoria que no tienes, y cómo se demuestra igual",
+          "url": "https://kaivastudio.com/blog/eeat-experiencia-y-confianza-sin-anos-de-trayectoria/",
+          "datePublished": "2026-09-22",
+          "image": "https://kaivastudio.com/assets/blog/visibilidad.webp",
+          "articleSection": "Marketing y SEO",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "El comercio con IA prometía saltarse tu sitio web. Terminó necesitándolo más",
+          "url": "https://kaivastudio.com/blog/comercio-agentico-ia-compra-por-ti/",
+          "datePublished": "2026-09-20",
+          "image": "https://kaivastudio.com/assets/blog/ia.webp",
+          "articleSection": "IA y tecnología",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "¿Cuánto cuesta una página web en España?",
+          "url": "https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-espana/",
+          "datePublished": "2026-09-18",
+          "image": "https://kaivastudio.com/assets/blog/precios.webp",
+          "articleSection": "Precios",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Por qué comprar backlinks ya casi no funciona",
+          "url": "https://kaivastudio.com/blog/por-que-comprar-backlinks-ya-no-funciona/",
+          "datePublished": "2026-09-08",
+          "image": "https://kaivastudio.com/assets/blog/visibilidad.webp",
+          "articleSection": "Marketing y SEO",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Búsqueda con IA en tu propio sitio: qué es RAG y qué cuesta",
+          "url": "https://kaivastudio.com/blog/busqueda-con-ia-en-tu-sitio-rag/",
+          "datePublished": "2026-09-06",
+          "image": "https://kaivastudio.com/assets/blog/ia.webp",
+          "articleSection": "IA y tecnología",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Agencias de diseño web en CDMX: guía para elegir",
+          "url": "https://kaivastudio.com/blog/mejores-agencias-diseno-web-ciudad-de-mexico/",
+          "datePublished": "2026-09-05",
+          "image": "https://kaivastudio.com/assets/blog/elegir.webp?v=2",
+          "articleSection": "Cómo elegir",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Domain Rating: el número que sube en el reporte y no en la caja",
+          "url": "https://kaivastudio.com/blog/domain-rating-autoridad-de-dominio-no-es-vender-mas/",
+          "datePublished": "2026-09-04",
+          "image": "https://kaivastudio.com/assets/blog/visibilidad.webp",
+          "articleSection": "Marketing y SEO",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Tu chatbot ya tiene que decir que es una IA: qué cambió el 2 de agosto",
+          "url": "https://kaivastudio.com/blog/tu-chatbot-ya-tiene-que-decir-que-es-ia/",
+          "datePublished": "2026-09-01",
+          "image": "https://kaivastudio.com/assets/blog/ia.webp",
+          "articleSection": "IA y tecnología",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "¿Cuánto cuesta una página web en Ecuador? El dólar no es la duda; el IVA sí",
+          "url": "https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-ecuador/",
+          "datePublished": "2026-08-31",
+          "image": "https://kaivastudio.com/assets/blog/precios.webp",
+          "articleSection": "Precios",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Chatbots de IA para atención al cliente: lo que nadie pone en la cotización",
+          "url": "https://kaivastudio.com/blog/chatbots-ia-atencion-al-cliente-costos-reales/",
+          "datePublished": "2026-08-30",
+          "image": "https://kaivastudio.com/assets/blog/ia.webp",
+          "articleSection": "IA y tecnología",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Agencias de diseño web en Bogotá: guía para elegir",
+          "url": "https://kaivastudio.com/blog/mejores-agencias-diseno-web-bogota/",
+          "datePublished": "2026-08-26",
+          "image": "https://kaivastudio.com/assets/blog/elegir.webp?v=2",
+          "articleSection": "Cómo elegir",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "ChatGPT como canal de descubrimiento de marca: por qué importa hoy",
+          "url": "https://kaivastudio.com/blog/chatgpt-ia-descubrimiento-marca/",
+          "datePublished": "2026-08-25",
+          "image": "https://kaivastudio.com/assets/blog/ia.webp",
+          "articleSection": "IA y tecnología",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "¿Cuánto cuesta una página web en Argentina? Y por qué todo se cotiza en dólares",
+          "url": "https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-argentina/",
+          "datePublished": "2026-08-24",
+          "image": "https://kaivastudio.com/assets/blog/precios.webp",
+          "articleSection": "Precios",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "El Modo IA de Google llegó a mil millones de usuarios: qué significa para tu SEO",
+          "url": "https://kaivastudio.com/blog/modo-ia-google-ai-overviews-que-significa-para-tu-seo/",
+          "datePublished": "2026-08-23",
+          "image": "https://kaivastudio.com/assets/blog/ia.webp",
+          "articleSection": "IA y tecnología",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "¿Cuánto cuesta una página web en Chile? Y qué cambia con la Ley 21.719",
+          "url": "https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-chile/",
+          "datePublished": "2026-08-22",
+          "image": "https://kaivastudio.com/assets/blog/precios.webp",
+          "articleSection": "Precios",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Un modelo de IA serio ya cabe en un PC de escritorio. Hicimos la cuenta de cuándo conviene",
+          "url": "https://kaivastudio.com/blog/qwen-3-8-27b-ia-local/",
+          "datePublished": "2026-08-16",
+          "image": "https://kaivastudio.com/assets/blog/ia.webp",
+          "articleSection": "IA y tecnología",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Se acabó el «te quedan 3 mensajes». Y eso te afecta aunque no uses ChatGPT",
+          "url": "https://kaivastudio.com/blog/chatgpt-gratis-ilimitado-que-cambia/",
+          "datePublished": "2026-08-08",
+          "image": "https://kaivastudio.com/assets/blog/ia.webp",
+          "articleSection": "IA y tecnología",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "El token bajó un 99% y la factura de IA subió",
+          "url": "https://kaivastudio.com/blog/cuanto-cuesta-una-tarea-con-ia/",
+          "datePublished": "2026-08-08",
+          "image": "https://kaivastudio.com/assets/blog/precios.webp",
+          "articleSection": "IA y tecnología",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "De dónde vienen tus visitas: lo que Analytics no te está diciendo",
+          "url": "https://kaivastudio.com/blog/de-donde-vienen-las-visitas-de-mi-web/",
+          "datePublished": "2026-08-06",
+          "image": "https://kaivastudio.com/assets/blog/visibilidad.webp",
+          "articleSection": "Visibilidad",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Los modelos de IA que casi nadie te menciona, y por qué te deberían importar",
+          "url": "https://kaivastudio.com/blog/modelos-abiertos-de-ia-para-pymes/",
+          "datePublished": "2026-08-02",
+          "image": "https://kaivastudio.com/assets/blog/ia.webp",
+          "articleSection": "IA y tecnología",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "¿Cuánto cuesta una página web en Perú?",
+          "url": "https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-peru/",
+          "datePublished": "2026-08-01",
+          "image": "https://kaivastudio.com/assets/blog/precios.webp",
+          "articleSection": "Precios",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Qué es un agente de IA (y si tu negocio realmente necesita uno)",
+          "url": "https://kaivastudio.com/blog/que-es-un-agente-de-ia/",
+          "datePublished": "2026-07-31",
+          "image": "https://kaivastudio.com/assets/blog/ia.webp",
+          "articleSection": "IA y tecnología",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "¿Cuánto cuesta una página web en México?",
+          "url": "https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-mexico/",
+          "datePublished": "2026-07-30",
+          "image": "https://kaivastudio.com/assets/blog/precios.webp",
+          "articleSection": "Precios",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Mi página no aparece en Google",
+          "url": "https://kaivastudio.com/blog/google-no-encuentra-mi-pagina/",
+          "datePublished": "2026-07-28",
+          "image": "https://kaivastudio.com/assets/blog/visibilidad.webp",
+          "articleSection": "Visibilidad",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Cómo aparecer en Google Maps",
+          "url": "https://kaivastudio.com/blog/como-aparecer-en-google-maps/",
+          "datePublished": "2026-07-27",
+          "image": "https://kaivastudio.com/assets/blog/local.webp",
+          "articleSection": "Negocio local",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Cómo lograr que ChatGPT recomiende tu empresa",
+          "url": "https://kaivastudio.com/blog/seo-para-ia/",
+          "datePublished": "2026-07-26",
+          "image": "https://kaivastudio.com/assets/blog/ia.webp",
+          "articleSection": "SEO para IA",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "¿Por qué mis correos llegan a spam?",
+          "url": "https://kaivastudio.com/blog/por-que-mis-correos-llegan-a-spam/",
+          "datePublished": "2026-07-25",
+          "image": "https://kaivastudio.com/assets/blog/correo.webp",
+          "articleSection": "Correo",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Agencias de diseño web en Barranquilla: guía para elegir",
+          "url": "https://kaivastudio.com/blog/mejores-agencias-diseno-web-barranquilla/",
+          "datePublished": "2026-07-24",
+          "image": "https://kaivastudio.com/assets/blog/elegir.webp?v=2",
+          "articleSection": "Cómo elegir",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "¿Cuánto cuesta una página web en Colombia?",
+          "url": "https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-colombia/",
+          "datePublished": "2026-07-23",
+          "image": "https://kaivastudio.com/assets/blog/precios.webp",
+          "articleSection": "Precios",
+          "author": {
+            "@id": "https://kaivastudio.com/#studio"
+          }
+        }
+      ]
     },
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://kaivastudio.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://kaivastudio.com/blog/" }
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://kaivastudio.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://kaivastudio.com/blog/"
+        }
       ]
     }
   ]
 }
-</script>
+  </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: paneles redondeados que flotan sobre blanco. El morado abre y cierra la página,
+   el negro marca lo que se elige, y cada sección tiene una pantalla protagonista:
+   tablet (portafolio), laptop (servicios), Mac (proceso), laptop + celular (pantallas). */
+:root{
+  /* Paleta de marca: morado, negro y blanco */
+  --violet:#36115F;
+  --violet-soft:#EAE2F4;
+  --violet-light:#A580D6;
+  /* morado más vivo solo para letra y etiquetas sobre fondo claro */
+  --violet-text:#7A3FC9;
+  --ink:#080808;
+  --ink-2:#4E4E55;
+  --ink-3:#8C8C93;
+  --paper:#FBFBFB;
+  --card:#FFFFFF;
+  --mist:#F0F0F2;
+  --line:#DADADE;
+
+  --f-sans:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+
+  --r-panel:20px;
+  --r-card:22px;
+  --wrap:1180px;
+  --gutter:16px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--violet);outline-offset:3px;border-radius:8px}
+::selection{background:var(--violet-text);color:#fff}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.page{padding-inline:var(--gutter);padding-block:12px 16px;overflow-x:clip}
+.wrap{max-width:var(--wrap);margin-inline:auto}
+
+h1,h2,h3{font-family:var(--f-sans);font-weight:600;letter-spacing:-.04em;line-height:1.04;margin:0;text-wrap:balance}
+h2{font-size:clamp(2.1rem,4.4vw,3.3rem)}
+h2 .dim{color:var(--ink-3)}
+p{margin:0}
+.sub{color:var(--ink-2);max-width:52ch;margin-inline:auto;text-align:center;font-size:15.5px}
+.head{display:grid;gap:16px;justify-items:center;text-align:center}
+.label{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+section{scroll-margin-top:90px}
+
+/* todo lo que se toca se levanta */
+.lift{transition:transform .45s var(--ease),box-shadow .45s var(--ease),background .3s}
+.lift:hover{transform:translateY(-5px);box-shadow:0 22px 40px -24px rgba(8,8,8,.35)}
+
+/* ---------- botones ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 22px;border-radius:999px;font-size:14.5px;font-weight:600;letter-spacing:-.01em;transition:transform .4s var(--ease),background .25s,color .25s,box-shadow .4s var(--ease);white-space:nowrap;border:0}
+.btn svg{width:16px;height:16px;transition:transform .4s var(--ease)}
+.btn:hover{transform:translateY(-3px)}
+.btn:hover svg{transform:translateX(4px)}
+.btn:active{transform:translateY(-1px) scale(.98)}
+.btn-white{background:var(--paper);color:var(--ink);box-shadow:0 0 0 0 rgba(255,255,255,.35),0 10px 30px -12px rgba(30,6,60,.6)}
+.btn-white:hover{box-shadow:0 0 0 5px rgba(255,255,255,.28),0 16px 34px -14px rgba(30,6,60,.7)}
+.btn-ghost{color:var(--paper);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.6),0 0 0 0 rgba(255,255,255,.2)}
+.btn-ghost:hover{background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1.5px var(--paper),0 0 0 5px rgba(255,255,255,.16)}
+.btn-ink{background:var(--ink);color:var(--paper);box-shadow:0 0 0 0 rgba(8,8,8,.12)}
+.btn-ink:hover{box-shadow:0 0 0 5px rgba(8,8,8,.1)}
+
+/* ---------- laptop (servicios y pantallas) ---------- */
+.laptop{container-type:inline-size;position:relative;margin-inline:auto}
+.laptop .lid{position:relative;background:#0A0A0C;border-radius:3cqw 3cqw .7cqw .7cqw;padding:1.7cqw 1.7cqw 2.3cqw;box-shadow:inset 0 0 0 .22cqw #2B2B31,inset 0 0 0 .5cqw #121215}
+.laptop .cam{position:absolute;top:.6cqw;left:50%;width:.75cqw;height:.75cqw;margin-left:-.375cqw;border-radius:50%;background:#1E1E25}
+.laptop .screen{position:relative;aspect-ratio:16/10;border-radius:.9cqw;overflow:hidden;background:#fff}
+.laptop .base{position:relative;width:117%;margin-left:-8.5%;height:2.3cqw;border-radius:.4cqw .4cqw 3.4cqw 3.4cqw / .4cqw .4cqw 1.7cqw 1.7cqw;background:linear-gradient(180deg,#F4F4F7 0%,#D9D9DF 45%,#AEAEB7 100%);box-shadow:0 2.6cqw 4cqw -1.4cqw rgba(16,10,30,.35)}
+.laptop .base::before{content:"";position:absolute;top:0;left:50%;width:15%;height:.85cqw;margin-left:-7.5%;border-radius:0 0 1.1cqw 1.1cqw;background:linear-gradient(#C3C3CB,#D6D6DC)}
+.chrome{display:flex;align-items:center;gap:1.1cqw;height:3.6cqw;padding:0 1.6cqw;background:#F6F6F8;border-bottom:1px solid var(--line)}
+.chrome i{width:.9cqw;height:.9cqw;border-radius:50%;background:#DADAE0;flex:none}
+.chrome i:first-child{background:#FF5F57}.chrome i:nth-child(2){background:#FEBC2E}.chrome i:nth-child(3){background:#28C840}
+.chrome .url{margin-inline:auto;display:flex;align-items:center;gap:.6cqw;height:2.2cqw;padding:0 2.4cqw;border-radius:99px;background:#fff;box-shadow:0 0 0 1px var(--line);font-size:1.25cqw;color:var(--ink-2);white-space:nowrap}
+.chrome .url::before{content:"";width:.8cqw;height:.8cqw;border-radius:50%;background:var(--violet)}
+.page-shot{position:absolute;inset:3.6cqw 0 0 0}
+.page-shot img{width:100%;height:100%;object-fit:cover;object-position:top center}
+
+/* ---------- HERO ---------- */
+.page{--aw:clamp(600px,48vw,900px);--bz:12px}
+.hero{position:relative;background:var(--ink);color:var(--paper);border-radius:var(--r-panel);padding:36px 0 30px;isolation:isolate;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(70% 55% at 50% 0%,rgba(255,255,255,.06),transparent 70%),radial-gradient(60% 50% at 50% 100%,rgba(78,30,134,.45),transparent 70%);z-index:-1;pointer-events:none}
+.hero::after{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--violet);opacity:var(--hp,0);z-index:-2;pointer-events:none}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 clamp(20px,3.4vw,44px)}
+.logo{display:inline-block;transition:transform .4s var(--ease)}
+.logo:hover{transform:translateY(-2px)}
+.logo img{height:46px;width:auto}
+.hero .logo img,.final .logo img{filter:brightness(0) invert(1)}
+.nav-links{display:flex;gap:30px;list-style:none;margin:0;padding:0;font-size:13.5px;font-weight:500}
+.nav-links a{display:inline-block;opacity:.88;position:relative;padding:4px 0;transition:transform .35s var(--ease),opacity .25s}
+.nav-links a:hover{opacity:1;transform:translateY(-2px)}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-end{display:flex;align-items:center;gap:8px}
+.nav-cta{font-size:13px;font-weight:600;margin-right:6px;display:inline-block;transition:transform .35s var(--ease)}
+.nav-cta:hover{transform:translateY(-2px)}
+.circle{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--ink);color:var(--paper);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.circle.light{background:var(--paper);color:var(--ink)}
+.circle:hover{transform:translateY(-3px) scale(1.06);box-shadow:0 0 0 4px rgba(255,255,255,.22)}
+.circle svg{width:17px;height:17px}
+
+.hero-copy{display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center;gap:22px;padding:60px 24px 0}
+.pill{white-space:nowrap;display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 14px 0 6px;border-radius:999px;background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25);font-size:12.5px;font-weight:500}
+.pill .short{display:none}
+.pill b{display:inline-grid;place-items:center;height:20px;padding:0 8px;border-radius:99px;background:var(--paper);color:var(--ink);font-weight:600;font-size:11.5px}
+.hero h1{font-size:clamp(2.6rem,6.4vw,5.1rem);line-height:.98;letter-spacing:-.05em;max-width:14ch}
+.hero h1 .dim{color:rgba(255,255,255,.55)}
+.hero .lede{max-width:46ch;font-size:16px;opacity:.88}
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:4px}
+
+/* carrusel: las capturas se esconden unas detrás de otras y la del centro es una tablet */
+.car{position:relative;margin-top:58px;height:calc((var(--aw) - 2 * var(--bz)) / 1.95 + 2 * var(--bz) + 40px);-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.ci{position:absolute;left:50%;top:50%;width:var(--aw);height:calc((var(--aw) - 2 * var(--bz)) / 1.95 + 2 * var(--bz));margin:0;padding:var(--bz);border-radius:30px;background:#0A0A0C;box-shadow:inset 0 0 0 2px #2B2B31,0 30px 50px -28px rgba(20,4,40,.8);transform:translate(-50%,-50%);transition:transform 1s var(--ease),opacity .7s ease,filter .7s ease;cursor:pointer;will-change:transform}
+.ci img{width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:18px;background:#fff}
+.ci::before{content:"";position:absolute;top:calc(var(--bz) / 2 - 2.5px);left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:#2A2A33}
+.ci:not(.on){filter:brightness(.8) saturate(.9)}
+.ci:not(.on):hover{filter:brightness(1)}
+.ci.on{cursor:default}
+.car-cap{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:6px;position:relative;z-index:2}
+.car-cap .txt{display:grid;text-align:center;min-width:230px}
+.car-cap b{font-size:15px;font-weight:600;letter-spacing:-.01em;transition:opacity .3s}
+.car-cap small{font-size:13px;opacity:.75;transition:opacity .3s}
+.car-cap.swap b,.car-cap.swap small{opacity:0}
+.arrow{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:var(--paper);box-shadow:inset 0 0 0 1px rgba(255,255,255,.3);transition:background .25s,color .25s,transform .35s var(--ease),box-shadow .35s var(--ease)}
+.arrow:hover{background:var(--paper);color:var(--ink);transform:translateY(-3px);box-shadow:0 0 0 5px rgba(255,255,255,.18)}
+.arrow:active{transform:scale(.94)}
+.arrow svg{width:16px;height:16px;pointer-events:none}
+.arrow.prev svg{transform:rotate(180deg)}
+
+.js .hero-copy>*{animation:fade 1s var(--ease) both}
+.js .hero-copy>:nth-child(2){animation-delay:.08s}
+.js .hero-copy>:nth-child(3){animation-delay:.18s}
+.js .hero-copy>:nth-child(4){animation-delay:.26s}
+.js .car,.js .car-cap{animation:fade 1.2s var(--ease) .35s both}
+@keyframes fade{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* ---------- barra flotante ---------- */
+.float-nav{position:fixed;z-index:50;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;display:flex;align-items:center;gap:22px;padding:7px 7px 7px 18px;border-radius:999px;background:rgba(251,251,251,.82);backdrop-filter:saturate(1.6) blur(18px);-webkit-backdrop-filter:saturate(1.6) blur(18px);box-shadow:0 0 0 1px rgba(8,8,8,.06),0 14px 40px -18px rgba(8,8,8,.35);transform:translate(-50%,-140%);transition:transform .6s var(--ease);max-width:calc(100% - 32px)}
+.float-nav.show{transform:translate(-50%,0)}
+.float-nav .logo img{height:32px}
+.float-nav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0;font-size:13px;font-weight:500;color:var(--ink-2)}
+.float-nav ul a{display:inline-block;transition:transform .3s var(--ease),color .2s}
+.float-nav ul a:hover{color:var(--ink);transform:translateY(-2px)}
+.float-nav .btn{height:38px;padding:0 16px;font-size:13px}
+
+/* ---------- manifiesto ---------- */
+/* el manifiesto ocupa una pantalla completa, centrado, con aire blanco arriba y abajo */
+.manifesto{min-height:100vh;min-height:100svh;display:grid;place-items:center;padding-block:clamp(80px,10vw,120px)}
+.manifesto .pin{display:grid;place-content:center;justify-items:center;gap:24px;padding-inline:8px}
+.manifesto p{width:min(32ch,calc(100vw - 48px));text-align:center;font-size:clamp(1.6rem,3.1vw,2.55rem);font-weight:600;line-height:1.16;letter-spacing:-.04em;color:#C6C6CB;text-wrap:balance}
+/* el manifiesto ya no se enciende con el scroll: «Somos un estudio digital» en negro,
+   «tu web, tu software y tu marca.» en morado, el resto en gris, y cada palabra se enciende al pasar el mouse */
+.manifesto p .mline{display:block;text-wrap:balance}
+.manifesto p .mline.gap{margin-top:.18em}
+.manifesto p .w{transition:color 1.1s ease}
+.manifesto p .w.ink{color:var(--ink)}
+.manifesto p .w.key{color:var(--violet-text)}
+.manifesto p .dot{color:var(--violet-text)}
+.manifesto p .w:hover{color:var(--ink);transition:color .08s}
+.manifesto p .w.v:hover{color:var(--violet-text)}
+/* la parte gris de los títulos se enciende en morado al pasar el mouse, como el manifiesto */
+h1 .dim .w,h2 .dim .w{transition:color 1.1s ease}
+h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s}
+.final h2 .dim .w:hover{color:var(--violet-light)}
+
+/* ---------- estudio (cifras) ---------- */
+.studio{background:var(--mist);border-radius:var(--r-panel);padding:clamp(48px,7vw,90px) clamp(18px,4vw,56px)}
+.studio-grid{display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:14px;max-width:980px;margin-inline:auto}
+.me{grid-row:span 2;display:flex;flex-direction:column;gap:20px;background:var(--ink);color:var(--paper);border-radius:var(--r-card);padding:26px;box-shadow:0 30px 60px -30px rgba(8,8,8,.55)}
+.me-top{display:flex;align-items:center;gap:12px}
+.me .chip{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--violet);color:#fff;font-weight:700;font-size:19px;letter-spacing:-.04em}
+.me-top span{font-size:12.5px;color:#A8A8B0;line-height:1.35}
+.me h3{font-size:24px;letter-spacing:-.035em;margin-top:8px}
+.me p{color:#C9C9CF;font-size:14.5px;max-width:36ch}
+.me .btn{margin-top:auto;justify-content:center;background:var(--paper);color:var(--ink);height:46px}
+.me .btn:hover{box-shadow:0 0 0 5px rgba(255,255,255,.14)}
+.stat{background:var(--card);border-radius:var(--r-card);padding:24px;display:grid;gap:14px;align-content:start}
+.stat .num{display:flex;align-items:baseline;gap:8px;font-size:clamp(2.5rem,4.2vw,3.2rem);font-weight:600;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+.stat .num small{font-size:15px;font-weight:600;letter-spacing:-.02em;color:var(--ink-2)}
+.stat p{font-size:13.5px;color:var(--ink-2);line-height:1.45}
+.meter{height:6px;border-radius:99px;background:var(--mist);overflow:hidden;margin-top:4px}
+.meter i{display:block;height:100%;width:100%;border-radius:inherit;background:var(--ink);transform-origin:left;transform:scaleX(var(--p,1));transition:transform 1.6s var(--ease)}
+.meter.v i{background:var(--violet)}
+.weeks{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:4px}
+.weeks i{height:6px;border-radius:99px;background:var(--mist);transition:background .35s ease calc(var(--k,0) * .22s)}
+.weeks i.on{background:var(--ink)}
+.weeks i.on.soft{background:var(--violet)}
+
+/* ---------- servicios ---------- */
+.block{padding-top:clamp(100px,12vw,150px)}
+.block>.head{margin-bottom:clamp(36px,5vw,56px)}
+.block-left{display:flex;align-items:end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+.block-left p{color:var(--ink-2);max-width:40ch;font-size:15px}
+.features{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(24px,4vw,56px);align-items:center;background:var(--mist);border-radius:var(--r-panel);padding:clamp(28px,4vw,56px)}
+.features .laptop{width:100%}
+.screen .pane{position:absolute;inset:0;opacity:0;transform:scale(1.02);transition:opacity .6s ease,transform .8s var(--ease)}
+.screen .pane{pointer-events:none}
+.screen .pane.on{opacity:1;transform:none;pointer-events:auto;z-index:1}
+.pane button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+.pane{font-family:var(--f-sans);word-spacing:.14em}
+
+/* maqueta 1: una web cuyo color se puede probar */
+.mw{position:absolute;inset:0;display:flex;flex-direction:column;background:#fff;--acc:#4E1E86;font-size:1.3cqw;color:#111}
+.mw-bar{flex:none;display:flex;align-items:center;gap:.8cqw;height:3.4cqw;padding:0 1.6cqw;background:#F4F4F6;border-bottom:1px solid #E4E4E8}
+.mw-bar i{width:.85cqw;height:.85cqw;border-radius:50%;background:#FF5F57;flex:none}
+.mw-bar i:nth-child(2){background:#FEBC2E}.mw-bar i:nth-child(3){background:#28C840}
+.mw-url{margin-inline:auto;transform:translateX(-2cqw);height:2cqw;padding:0 3cqw;border-radius:99px;background:#fff;box-shadow:0 0 0 1px #E4E4E8;display:flex;align-items:center;font-size:1.15cqw;color:#666}
+.mw-site{flex:1;padding:2.4cqw 4cqw 3cqw;display:grid;grid-template-rows:auto 1fr auto;gap:2.2cqw;min-height:0}
+.mw-nav{display:flex;align-items:center;gap:2.4cqw;font-size:1.2cqw;color:#555}
+.mw-nav b{margin-right:auto;font-size:1.8cqw;letter-spacing:-.04em;color:#111}
+.mw-nav b i{font-style:normal;color:var(--acc);transition:color .5s}
+.mw-cta{font-style:normal;padding:.7cqw 1.6cqw;border-radius:99px;background:#111;color:#fff;font-weight:600}
+.mw-hero{display:grid;grid-template-columns:1.1fr 1fr;gap:3cqw;align-items:center;min-height:0}
+.mw-copy small{display:inline-block;padding:.4cqw 1.2cqw;border-radius:99px;background:color-mix(in srgb,var(--acc) 14%,#fff);color:var(--acc);font-weight:600;font-size:1.1cqw;transition:background .5s,color .5s}
+.mw-copy .mw-h{margin:1.4cqw 0 1cqw;font-size:3.9cqw;line-height:1;letter-spacing:-.05em;font-weight:600}
+.mw-copy .mw-h em{font-style:normal;color:var(--acc);transition:color .5s}
+.mw-copy p{font-size:1.35cqw;color:#666;max-width:30ch;line-height:1.45}
+.mw-btns{display:flex;gap:1cqw;margin-top:2cqw}
+.mw-btns button{padding:1cqw 2.2cqw;border-radius:99px;font-weight:600;font-size:1.3cqw;transition:transform .3s var(--ease),background .5s,box-shadow .3s}
+.pane .mw-b1{background:var(--acc);color:#fff}
+.pane .mw-b2{box-shadow:inset 0 0 0 .15cqw #111}
+.mw-btns button:hover{transform:translateY(-.4cqw)}
+.mw-art{position:relative;height:100%;min-height:18cqw}
+.mw-card{position:absolute;border-radius:1.4cqw;transition:transform .6s var(--ease),background .5s}
+.mw-card.c1{inset:0 12% 16% 0;background:linear-gradient(140deg,color-mix(in srgb,var(--acc) 22%,#fff),var(--acc))}
+.mw-card.c2{right:0;bottom:0;width:50%;height:42%;background:#fff;box-shadow:0 1.4cqw 2.6cqw -1cqw rgba(0,0,0,.28);padding:1.4cqw;display:grid;gap:.7cqw;align-content:start}
+.mw-card.c2 i{display:block;height:.9cqw;border-radius:99px;background:#E6E6EA}
+.mw-card.c2 i:first-child{width:50%;background:var(--acc);transition:background .5s}
+.mw-art:hover .c1{transform:rotate(-2deg) scale(1.02)}
+.mw-art:hover .c2{transform:translate(-1cqw,-1cqw)}
+.mw-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6cqw}
+.mw-row div{height:4cqw;border-radius:1cqw;background:#F3F3F5;transition:transform .3s var(--ease),background .3s}
+.mw-row div:hover{transform:translateY(-.4cqw);background:color-mix(in srgb,var(--acc) 12%,#fff)}
+.mw-tool{position:absolute;right:2cqw;bottom:2cqw;display:flex;align-items:center;gap:.9cqw;padding:.9cqw 1.2cqw .9cqw 1.8cqw;border-radius:99px;background:#111;color:#fff;font-size:1.15cqw;box-shadow:0 1.4cqw 2.6cqw -1cqw rgba(0,0,0,.45)}
+.mw-tool button{width:2.2cqw;height:2.2cqw;border-radius:50%;background:var(--c);box-shadow:0 0 0 .2cqw #111;transition:transform .3s var(--ease),box-shadow .3s}
+.mw-tool button.on{box-shadow:0 0 0 .2cqw #111,0 0 0 .4cqw #fff}
+.mw-tool button:hover{transform:scale(1.18)}
+
+/* maqueta 2: panel de software con pestañas y barras */
+.sw{position:absolute;inset:0;display:grid;grid-template-columns:6.4cqw 1fr;background:#F4F4F6;--acc:#4E1E86;font-size:1.25cqw;color:#111}
+.sw-side{background:#0E0E11;display:flex;flex-direction:column;align-items:center;gap:1.4cqw;padding:2cqw 0}
+.sw-side .lg{width:3.2cqw;height:3.2cqw;border-radius:.9cqw;background:var(--acc);display:grid;place-items:center;color:#fff;font-weight:700;font-size:1.4cqw;margin-bottom:1cqw;transition:background .5s}
+.pane .sw-side button{width:3.6cqw;height:3.6cqw;border-radius:1cqw;display:grid;place-items:center;color:#77777F;transition:background .3s,color .3s}
+.sw-side button svg{width:1.7cqw;height:1.7cqw}
+.pane .sw-side button.on,.pane .sw-side button:hover{background:#22222A;color:#fff}
+.sw-colors{margin-top:auto;display:grid;justify-items:center;gap:1cqw}
+.pane .sw-side .sw-colors button{width:1.8cqw;height:1.8cqw;border-radius:50%;background:var(--c);box-shadow:0 0 0 .2cqw #0E0E11;transition:transform .3s var(--ease),box-shadow .3s}
+.pane .sw-side .sw-colors button.on{background:var(--c);box-shadow:0 0 0 .2cqw #0E0E11,0 0 0 .4cqw #fff}
+.pane .sw-side .sw-colors button:hover{background:var(--c);transform:scale(1.18)}
+.sw-main{padding:2.2cqw 2.6cqw;display:grid;grid-template-rows:auto auto 1fr;gap:1.6cqw;min-height:0}
+.sw-head{display:flex;align-items:center;justify-content:space-between;gap:1cqw}
+.sw-head b{font-size:2.3cqw;letter-spacing:-.04em;line-height:1.1}
+.sw-head small{display:block;font-size:1.1cqw;color:#8A8A92;font-weight:400;letter-spacing:0}
+.sw-tabs{display:flex;padding:.4cqw;border-radius:99px;background:#E6E6EA}
+.pane .sw-tabs button{padding:.6cqw 1.6cqw;border-radius:99px;font-size:1.15cqw;font-weight:600;color:#6A6A72;transition:background .3s,color .3s,box-shadow .3s}
+.pane .sw-tabs button.on{background:#fff;color:#111;box-shadow:0 .2cqw .6cqw rgba(0,0,0,.12)}
+.sw-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4cqw}
+.sw-kpi{background:#fff;border-radius:1.4cqw;padding:1.4cqw 1.6cqw;display:grid;gap:.3cqw;transition:transform .3s var(--ease),box-shadow .3s,background .5s}
+.sw-kpi:hover{transform:translateY(-.4cqw);box-shadow:0 1.2cqw 2.2cqw -1.2cqw rgba(0,0,0,.28)}
+.sw-kpi span{font-size:1.1cqw;color:#8A8A92}
+.sw-kpi b{font-size:2.7cqw;letter-spacing:-.05em;font-variant-numeric:tabular-nums;line-height:1.1}
+.sw-kpi em{font-style:normal;font-size:1.05cqw;color:#18A058;font-weight:600}
+.sw-kpi.dark{background:var(--acc);color:#fff}
+.sw-kpi.dark span{color:rgba(255,255,255,.7)}.sw-kpi.dark em{color:#B9F5CF}
+.sw-bottom{display:grid;grid-template-columns:1.5fr 1fr;gap:1.4cqw;min-height:0}
+.sw-chart{background:#fff;border-radius:1.4cqw;padding:1.4cqw 1.6cqw 1.2cqw;display:grid;grid-template-rows:auto 1fr auto;gap:.8cqw;min-height:0}
+.sw-chart>span,.sw-list>span{font-size:1.15cqw;font-weight:600}
+.sw-bars{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:.8cqw;align-items:end;min-height:0;padding-top:2.4cqw}
+.pane .sw-bars button{position:relative;height:100%;display:flex;align-items:flex-end}
+.sw-bars i{display:block;width:100%;height:var(--h);border-radius:.6cqw .6cqw .2cqw .2cqw;background:color-mix(in srgb,var(--acc) 18%,#fff);transition:height .7s var(--ease),background .3s}
+.sw-bars button:hover i,.sw-bars button.on i{background:var(--acc)}
+.sw-bars button::after{content:attr(data-v);position:absolute;left:50%;bottom:calc(var(--h) + .6cqw);transform:translate(-50%,.4cqw);padding:.3cqw .7cqw;border-radius:.5cqw;background:#111;color:#fff;font-size:1cqw;white-space:nowrap;opacity:0;transition:opacity .2s,transform .2s,bottom .7s var(--ease);pointer-events:none}
+.sw-bars button:hover::after,.sw-bars button.on::after{opacity:1;transform:translate(-50%,0)}
+.sw-bars:hover button.on:not(:hover)::after{opacity:0}
+.sw-bars:hover button.on:not(:hover) i{background:color-mix(in srgb,var(--acc) 18%,#fff)}
+.sw-days{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:.8cqw;text-align:center;font-size:1cqw;color:#9A9AA2}
+.sw-list{background:#fff;border-radius:1.4cqw;padding:1.4cqw 1.6cqw;display:grid;align-content:start;gap:.7cqw;font-size:1.1cqw}
+.sw-row{display:flex;align-items:center;justify-content:space-between;gap:.8cqw;padding:.6cqw 0;border-bottom:1px solid #F0F0F3;transition:transform .3s var(--ease)}
+.sw-row:hover{transform:translateX(.5cqw)}
+.sw-row b{font-weight:600}
+.sw-row small{display:block;color:#9A9AA2;font-size:.95cqw}
+.sw-pill{padding:.25cqw .8cqw;border-radius:99px;font-size:.95cqw;font-weight:600;white-space:nowrap}
+.sw-pill.ok{background:#E3F6EA;color:#18A058}.sw-pill.wait{background:#FFF3D6;color:#A86B00}.sw-pill.new{background:color-mix(in srgb,var(--acc) 14%,#fff);color:var(--acc)}
+
+/* maqueta 3: kit de marca que cambia de color y tipografía */
+.br{position:absolute;inset:0;display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:1fr auto;gap:1.8cqw;padding:2.4cqw;background:#F1F0EE;--b:#4E1E86;font-size:1.2cqw;color:#111}
+.br-lbl{font-family:var(--f-mono);font-size:1cqw;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+.br-logo{position:relative;border-radius:1.8cqw;background:var(--b);color:#fff;padding:2cqw;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;transition:background .6s var(--ease)}
+.br-logo::after{content:"";position:absolute;right:-12%;bottom:-30%;width:60%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.08);transition:transform .8s var(--ease)}
+.br-logo:hover::after{transform:scale(1.15) translate(-4%,-4%)}
+.br-word{position:relative;z-index:1;font-size:6.6cqw;line-height:1;letter-spacing:-.05em;font-weight:700;transition:opacity .25s,transform .35s var(--ease)}
+.br-word i{font-style:normal;opacity:.55}
+.br-word.swap{opacity:0;transform:translateY(1cqw)}
+.br-word.f1{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-style:italic;letter-spacing:-.03em}
+.br-word.f2{font-family:var(--f-mono);font-weight:500;letter-spacing:-.06em}
+.br-word.f3{font-weight:300;letter-spacing:-.02em}
+.br-foot{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:1cqw}
+.pane .br-font{display:inline-flex;align-items:center;gap:.6cqw;padding:.7cqw 1.4cqw;border-radius:99px;background:rgba(255,255,255,.16);color:#fff;font-size:1.1cqw;font-weight:600;transition:background .3s,transform .3s var(--ease)}
+.pane .br-font:hover{background:rgba(255,255,255,.28);transform:translateY(-.3cqw)}
+.br-font b{font-size:1.5cqw}
+.br-side{display:grid;grid-template-rows:1fr 1fr;gap:1.8cqw;min-height:0}
+.br-card{position:relative;border-radius:1.2cqw;background:#fff;padding:1.6cqw;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1cqw 2cqw -1.4cqw rgba(0,0,0,.35);transform:rotate(-3deg);transition:transform .5s var(--ease)}
+.br-card:hover{transform:rotate(0) translateY(-.5cqw)}
+.br-card .w{font-weight:700;font-size:1.9cqw;letter-spacing:-.05em}
+.br-card .w i{font-style:normal;color:var(--b);transition:color .6s}
+.br-card .ln2{display:grid;gap:.4cqw;font-size:.95cqw;color:#777}
+.br-card::after{content:"";position:absolute;right:1.6cqw;bottom:1.6cqw;width:3cqw;height:.6cqw;border-radius:99px;background:var(--b);transition:background .6s}
+.br-apps{display:grid;grid-template-columns:1fr 1.4fr;gap:1.8cqw;min-height:0}
+.br-icon{border-radius:2cqw;background:var(--b);display:grid;place-items:center;color:#fff;font-weight:700;font-size:4cqw;letter-spacing:-.06em;box-shadow:0 1cqw 2cqw -1.2cqw rgba(0,0,0,.4);transition:background .6s,transform .5s var(--ease)}
+.br-icon:hover{transform:translateY(-.5cqw) rotate(4deg)}
+.br-post{border-radius:1.2cqw;background:#111;color:#fff;padding:1.4cqw;display:flex;flex-direction:column;justify-content:space-between;transition:transform .5s var(--ease)}
+.br-post:hover{transform:translateY(-.5cqw)}
+.br-post b{font-size:1.7cqw;line-height:1.05;letter-spacing:-.04em}
+.br-post b em{font-style:normal;color:color-mix(in srgb,var(--b) 55%,#fff);transition:color .6s}
+.br-post span{display:block;height:.6cqw;width:40%;border-radius:99px;background:var(--b);transition:background .6s}
+.br-pal{grid-column:1/-1;display:flex;align-items:center;gap:1.2cqw}
+.br-pal .br-lbl{margin-right:auto}
+.pane .br-pal button{display:flex;align-items:center;gap:.6cqw;padding:.5cqw 1.1cqw .5cqw .5cqw;border-radius:99px;background:#fff;font-size:1.05cqw;font-weight:600;box-shadow:0 0 0 1px #E2E2E6;transition:transform .3s var(--ease),box-shadow .3s}
+.pane .br-pal button:hover{transform:translateY(-.3cqw)}
+.pane .br-pal button.on{box-shadow:0 0 0 .2cqw #111}
+.br-pal button i{width:1.8cqw;height:1.8cqw;border-radius:50%;background:var(--c)}
+
+.acc{display:grid;gap:12px}
+.acc-item{background:var(--card);border-radius:18px;box-shadow:0 0 0 1px var(--line);transition:box-shadow .35s,transform .45s var(--ease)}
+.acc-item:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--line),0 18px 34px -24px rgba(8,8,8,.35)}
+.acc-item.open{box-shadow:0 0 0 1px var(--line),0 20px 40px -26px rgba(8,8,8,.3)}
+.acc-h{margin:0;font:inherit}
+/* preguntas frecuentes: <details> nativo con la misma tarjeta del acordeón de servicios */
+.faq{max-width:760px;margin-inline:auto;display:grid;gap:12px}
+.faq-item{background:var(--card);border-radius:18px;box-shadow:0 0 0 1px var(--line);transition:box-shadow .35s}
+.faq-item.is-open{box-shadow:0 0 0 1px var(--line),0 20px 40px -26px rgba(8,8,8,.3)}
+.faq-item summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 20px 20px 22px;cursor:pointer}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item h3{margin:0;font-size:16px;font-weight:600;letter-spacing:-.02em;line-height:1.3}
+.faq-item .ic{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--mist);transition:transform .45s var(--ease),background .3s}
+.faq-item .ic svg{width:14px;height:14px}
+.faq-item.is-open .ic{transform:rotate(180deg);background:var(--violet);color:var(--paper)}
+.faq-a{overflow:hidden}
+.faq-item p{margin:0;padding:0 22px 20px;color:var(--ink-2);font-size:14.5px;line-height:1.55;max-width:62ch}
+.acc-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;background:none;border:0;padding:20px 20px 20px 22px;text-align:left;font-size:16px;font-weight:600;letter-spacing:-.02em}
+.acc-btn .ic{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--mist);transition:transform .45s var(--ease),background .3s}
+.acc-btn .ic svg{width:14px;height:14px}
+.acc-item.open .ic{transform:rotate(180deg);background:var(--ink);color:var(--paper)}
+.acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s var(--ease)}
+.acc-item.open .acc-panel{grid-template-rows:1fr}
+.acc-panel>div{overflow:hidden}
+.acc.measure .acc-panel{transition:none!important}
+.acc-inner{padding:0 22px 20px;display:grid;gap:14px}
+.acc-inner p{color:var(--ink-2);font-size:14px;max-width:46ch}
+.ticks{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:0;padding:0}
+.ticks li{font-size:12.5px;padding:5px 11px;border-radius:99px;background:var(--mist)}
+.more{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:var(--violet);justify-self:start;transition:transform .35s var(--ease)}
+.more svg{width:14px;height:14px;transition:transform .3s var(--ease)}
+.more:hover{transform:translateY(-2px)}
+.more:hover svg{transform:translateX(4px)}
+.progress{height:2px;margin:0 22px 16px;border-radius:2px;background:var(--mist);overflow:hidden}
+.progress i{display:block;height:100%;width:100%;background:var(--violet);transform-origin:left;transform:scaleX(0)}
+.acc-item.open.auto .progress i{animation:prog 7s linear forwards}
+.acc-item:not(.open) .progress,.acc-item.open:not(.auto) .progress{display:none}
+@keyframes prog{to{transform:scaleX(1)}}
+
+/* ---------- proceso: Mac con ventanas ---------- */
+.display{container-type:inline-size;width:min(780px,100%,calc((100vh - 170px) * 1.32));margin-inline:auto}
+.sd-frame{padding:1cqw;border-radius:2.4cqw;background:linear-gradient(160deg,#F1F1F4,#CDCDD4);box-shadow:inset 0 0 0 1px rgba(255,255,255,.7),0 1.2cqw 1.6cqw -1.2cqw rgba(8,8,8,.3)}
+.sd-screen{position:relative;aspect-ratio:16/10;border-radius:1.5cqw;overflow:hidden;border:.9cqw solid #0A0A0C;background:#E8DCC4 url(/assets/inicio/fondo-collage.webp) center/cover no-repeat}
+.sd-neck{width:15%;height:7cqw;margin-inline:auto;background:linear-gradient(90deg,#BEBEC6,#EDEDF1 45%,#C4C4CC);clip-path:polygon(8% 0,92% 0,100% 100%,0 100%)}
+.sd-foot{position:relative;z-index:1;width:32%;height:1.4cqw;margin-inline:auto;border-radius:.5cqw .5cqw 1cqw 1cqw;background:linear-gradient(#E8E8EC,#B4B4BC)}
+.sd-ground{width:56%;height:4cqw;margin:-2.2cqw auto 0;border-radius:50%;background:radial-gradient(closest-side,rgba(8,8,8,.32),rgba(8,8,8,.12) 55%,transparent);filter:blur(.6cqw)}
+.menubar{position:absolute;inset:0 0 auto 0;height:2.6cqw;display:flex;align-items:center;gap:2cqw;padding:0 2cqw;background:rgba(246,242,234,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:#1C1C1F;font-size:1.2cqw;z-index:9}
+.menubar b{font-weight:700;letter-spacing:-.03em}
+.menubar #mbApp{font-weight:600}
+.menubar .mb-r{margin-left:auto}
+.win{position:absolute;display:flex;flex-direction:column;border-radius:1.1cqw;overflow:hidden;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.16),0 3cqw 6cqw -1.5cqw rgba(30,20,0,.55);opacity:0;transform:translateY(18cqw) scale(.1);transform-origin:50% 100%;transition:transform .7s var(--ease),opacity .45s ease,filter .5s;z-index:2;pointer-events:none}
+.win.open{opacity:1;transform:none}
+.win.back{filter:brightness(.85) saturate(.85)}
+.win.front{z-index:5}
+.win-bar{flex:none;display:flex;align-items:center;gap:.8cqw;height:3cqw;padding:0 1.3cqw;background:#ECECF0;border-bottom:1px solid #DADAE0;font-size:1.15cqw;color:var(--ink-2)}
+.win-bar i{width:.85cqw;height:.85cqw;border-radius:50%;flex:none;background:#FF5F57}
+.win-bar i:nth-child(2){background:#FEBC2E}.win-bar i:nth-child(3){background:#28C840}
+.win-bar span{margin-inline:auto;transform:translateX(-2cqw);font-weight:500}
+.win-design{left:6%;top:8%;width:70%;height:70%}
+.win-code{left:24%;top:12%;width:62%;height:62%;background:#101016}
+.win-code .win-bar{background:#1B1B23;border-color:#26262F;color:#9A9AAA}
+.win-web{left:13%;top:7%;width:74%}
+
+/* app de diseño (un sitio en construcción, sin cliente) */
+.ds{flex:1;display:grid;grid-template-columns:13cqw 1fr 13cqw;min-height:0;font-size:1.05cqw;color:var(--ink-2)}
+.ds-layers{display:grid;align-content:start;gap:.3cqw;padding:1.2cqw .8cqw;background:#F7F7F9;border-right:1px solid #E3E3E8}
+.ds-layers b,.ds-props b{display:block;color:var(--ink);font-weight:600;font-size:1.1cqw;margin:0 0 .6cqw .4cqw}
+.ds-layer{display:flex;align-items:center;gap:.6cqw;padding:.45cqw .6cqw;border-radius:.5cqw;transition:background .3s,color .3s}
+.ds-layer::before{content:"";width:.9cqw;height:.9cqw;border-radius:.2cqw;border:1px solid currentColor;flex:none}
+.ds-layer.on{background:var(--violet-soft);color:var(--violet)}
+.ds-canvas{position:relative;display:grid;place-items:center;background-color:#E6E6EB;background-image:radial-gradient(#D0D0D8 .12cqw,transparent .14cqw);background-size:1.6cqw 1.6cqw}
+.frame{position:relative;width:88%;aspect-ratio:16/10;background:#fff;box-shadow:0 .6cqw 1.6cqw -.6cqw rgba(0,0,0,.25)}
+.frame::before{content:"Inicio · Escritorio";position:absolute;left:0;top:-1.7cqw;font-size:1cqw;color:var(--ink-2)}
+.el{position:absolute;border-radius:.4cqw;background:var(--ink);transition:opacity .4s ease,transform .5s var(--ease),background .5s ease,box-shadow .5s ease}
+.el.g{background:#D5D5DC}
+.el.nav-logo{left:6%;top:7%;width:11%;height:4.5%;border-radius:99px}
+.el.nav-l1{left:52%;top:8.5%;width:7%;height:2%}.el.nav-l2{left:62%;top:8.5%;width:7%;height:2%}.el.nav-l3{left:72%;top:8.5%;width:7%;height:2%}
+.el.nav-b{left:83%;top:6.5%;width:11%;height:5.5%;border-radius:99px}
+.el.h1{left:6%;top:30%;width:46%;height:7.5%}
+.el.h2{left:6%;top:41%;width:34%;height:7.5%}
+.el.t1{left:6%;top:55%;width:40%;height:2.4%}
+.el.t2{left:6%;top:60%;width:31%;height:2.4%}
+.el.b1{left:6%;top:70%;width:15%;height:8%;border-radius:99px;background:#BDBDC6}
+.el.b2{left:23%;top:70%;width:13%;height:8%;border-radius:99px;background:transparent;box-shadow:inset 0 0 0 .2cqw var(--ink)}
+.el.img{left:57%;top:24%;width:37%;height:62%;border-radius:1cqw;background:linear-gradient(140deg,var(--violet-soft),var(--violet-light) 55%,var(--violet));overflow:hidden}
+.el.img::after{transition:opacity .5s ease;content:"";position:absolute;left:14%;bottom:12%;width:44%;height:30%;border-radius:.8cqw;background:rgba(255,255,255,.85);box-shadow:0 .6cqw 1.2cqw -.4cqw rgba(40,10,80,.35)}
+.selbox{position:absolute;left:5.4%;top:69%;width:16.2%;height:10%;border:.14cqw solid var(--violet);opacity:0;transition:opacity .3s,left .45s var(--ease),top .45s var(--ease),width .45s var(--ease),height .45s var(--ease)}
+.selbox::before,.selbox::after{content:"";position:absolute;width:.7cqw;height:.7cqw;background:#fff;border:.14cqw solid var(--violet)}
+.selbox::before{left:-.45cqw;top:-.45cqw}.selbox::after{right:-.45cqw;bottom:-.45cqw}
+/* Diseño: la página arranca como boceto gris y cada bloque toma su diseño cuando el cursor lo elige */
+.win-design.run .el:not(.in){background:#ECECF0;box-shadow:inset 0 0 0 .1cqw #D6D6DD}
+.win-design.run .el.img:not(.in)::after{opacity:0}
+.win-design.run .el.in{animation:elIn .45s var(--ease)}
+@keyframes elIn{40%{transform:scale(1.05)}}
+.win-design.paint .el.b1,.win-design.done .el.b1{background:var(--violet)}
+.selbox.on,.win-design.done .selbox{opacity:1}
+.ds-props{display:grid;align-content:start;gap:1.2cqw;padding:1.2cqw;border-left:1px solid #E3E3E8}
+.ds-props .row{display:flex;align-items:center;justify-content:space-between;gap:.6cqw}
+.ds-props .ds-sw{width:1.8cqw;height:1.8cqw;border-radius:50%;background:#BDBDC6;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);transition:background .5s}
+.win-design.paint .ds-props .ds-sw,.win-design.done .ds-props .ds-sw{background:var(--violet)}
+.ds-props .hex{font-family:var(--f-mono);font-size:1cqw}
+
+/* editor de código */
+.code{flex:1;display:grid;grid-template-rows:auto 1fr auto;min-height:0;font-family:var(--f-mono);font-size:1.3cqw;color:#E6E6F0}
+.code-tabs{display:flex;background:#15151C;font-size:1.05cqw;color:#7C7C8C}
+.code-tabs span{padding:.8cqw 1.6cqw;border-right:1px solid #22222B}
+.code-tabs span.on{background:#101016;color:#E6E6F0;box-shadow:inset 0 .18cqw 0 var(--violet-light)}
+.code-body{padding:1.6cqw;display:grid;align-content:start;gap:.55cqw;counter-reset:ln}
+.ln{display:block;white-space:pre;overflow:hidden;width:0;line-height:1.5}
+.ln::before{counter-increment:ln;content:counter(ln);display:inline-block;width:2.6cqw;color:#4A4A58}
+.code .k{color:#C6A8F0}.code .f{color:#7FD1FF}.code .s{color:#A6E3A1}.code .c{color:#6B6B7B}
+.term{border-top:1px solid #22222B;padding:1cqw 1.6cqw;font-size:1.1cqw;color:#9A9AAA;display:grid;gap:.4cqw;background:#0C0C11}
+.term .ok{color:#A6E3A1;opacity:0;transition:opacity .4s}
+.win-code.built .term .ok{opacity:1}
+
+/* navegador: la captura entra completa, sin recortes */
+.web-chrome{flex:none;display:flex;align-items:center;gap:1cqw;height:3cqw;padding:0 1.3cqw;background:#ECECF0;border-bottom:1px solid #DADAE0}
+.web-chrome i{width:.85cqw;height:.85cqw;border-radius:50%;flex:none;background:#FF5F57}
+.web-chrome i:nth-child(2){background:#FEBC2E}.web-chrome i:nth-child(3){background:#28C840}
+.web-chrome .u{margin-inline:auto;transform:translateX(-2cqw);display:flex;align-items:center;gap:.6cqw;height:1.9cqw;padding:0 2.4cqw;border-radius:99px;background:#fff;font-size:1.1cqw;color:var(--ink-2)}
+.web-chrome .u::before{content:"";width:.8cqw;height:.8cqw;border-radius:50%;background:#28C840}
+.web-body{position:relative;aspect-ratio:1440/738;overflow:hidden;background:#F6F6F8}
+.web-body img{width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transform:scale(1.03);transition:opacity .8s ease .9s,transform 1.4s var(--ease) .9s}
+.loadbar{position:absolute;left:0;top:0;height:.35cqw;width:0;background:var(--violet);z-index:2}
+.win-web.run .loadbar{animation:load 1.1s var(--ease) forwards}
+.win-web.run .web-body img,.win-web.done .web-body img{opacity:1;transform:none}
+@keyframes load{0%{width:0;opacity:1}85%{width:100%;opacity:1}100%{width:100%;opacity:0}}
+.toast{position:absolute;right:2cqw;bottom:2cqw;display:flex;align-items:center;gap:1cqw;padding:1.2cqw 1.6cqw;border-radius:1.2cqw;background:var(--ink);color:#fff;font-size:1.25cqw;box-shadow:0 2cqw 4cqw -1.5cqw rgba(0,0,0,.6);opacity:0;transform:translateY(1.5cqw);transition:opacity .5s ease,transform .6s var(--ease)}
+.toast i{display:grid;place-items:center;width:2.2cqw;height:2.2cqw;border-radius:50%;background:#28C840;font-style:normal;font-size:1.2cqw}
+.toast small{display:block;color:#A9A9B6;font-size:1.05cqw}
+.win-web.published .toast{opacity:1;transform:none}
+
+/* dock */
+.dock{position:absolute;left:50%;bottom:1cqw;transform:translateX(-50%);display:flex;align-items:flex-end;gap:.55cqw;padding:.6cqw .7cqw;border-radius:1.6cqw;background:rgba(246,242,234,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.55),0 1cqw 2cqw -1cqw rgba(0,0,0,.35);z-index:8}
+.app{position:relative;width:3.7cqw;height:3.7cqw;border-radius:.9cqw;border:0;padding:0;background:none;display:block;transition:transform .35s var(--ease)}
+.app svg{width:100%;height:100%;display:block}
+.app:hover{transform:translateY(-.6cqw) scale(1.12)}
+.app::after{content:"";position:absolute;bottom:-.5cqw;left:50%;width:.4cqw;height:.4cqw;margin-left:-.2cqw;border-radius:50%;background:#2A2A2E;opacity:0;transition:opacity .3s}
+.app.live::after{opacity:.85}
+.app.bounce{animation:bounce .6s var(--ease)}
+@keyframes bounce{30%{transform:translateY(-1.3cqw)}60%{transform:translateY(0)}80%{transform:translateY(-.4cqw)}}
+.dock .sep{width:1px;align-self:stretch;margin:.3cqw .3cqw;background:rgba(0,0,0,.18)}
+.cursor{position:absolute;left:62%;top:58%;width:1.9cqw;margin:-.16cqw 0 0 -.32cqw;z-index:10;transition:left .8s var(--ease),top .8s var(--ease);pointer-events:none;filter:drop-shadow(0 .2cqw .3cqw rgba(0,0,0,.4))}
+/* la punta de la flecha (4,2 de 24) queda justo en el punto al que apunta el cursor.
+   El SVG necesita alto propio: sin él, el navegador le da 150 px y dibuja la flecha centrada, muy por debajo */
+.cursor svg{width:100%;height:auto;aspect-ratio:1/1;display:block;transform-origin:17% 8%;transition:transform .15s}
+.cursor.click svg{transform:scale(.8)}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;list-style:none;margin:32px auto 0;padding:0;max-width:780px}
+.steps button{width:100%;height:100%;text-align:left;border:0;background:var(--mist);border-radius:18px;padding:16px 18px;display:grid;gap:5px;transition:background .4s,color .4s,transform .45s var(--ease),box-shadow .45s var(--ease)}
+.steps button:hover{transform:translateY(-4px);box-shadow:0 18px 34px -24px rgba(8,8,8,.4)}
+.steps .n{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);transition:color .4s}
+.steps b{font-size:16px;font-weight:600;letter-spacing:-.02em}
+.steps small{font-size:13px;color:var(--ink-2);line-height:1.45;transition:color .4s}
+.steps button.on{background:var(--ink);color:var(--paper)}
+.steps button.on .n,.steps button.on small{color:#B4B4BC}
+
+/* ---------- pantallas ---------- */
+.devices{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.dev{position:relative;background:var(--mist);border-radius:var(--r-panel);padding:32px 28px 0;overflow:hidden;display:flex;flex-direction:column;align-items:center;gap:10px;min-height:470px;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.dev:hover{transform:translateY(-5px);box-shadow:0 26px 50px -30px rgba(8,8,8,.4)}
+.dev .badge{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 14px;border-radius:99px;background:var(--card);font-size:13px;font-weight:600;box-shadow:0 6px 18px -10px rgba(8,8,8,.25)}
+.dev .badge svg{width:15px;height:15px}
+.dev h3{font-size:17px;letter-spacing:-.02em}
+.dev p{font-size:13.5px;color:var(--ink-2);text-align:center;max-width:34ch}
+.dev .stagebox{margin-top:auto;width:100%;display:flex;justify-content:center;height:260px;align-items:flex-start;padding-top:20px}
+.dev .laptop{width:min(470px,86%);transition:transform .9s var(--ease)}
+.dev:hover .laptop,.dev:hover .phone{transform:translateY(-10px)}
+.phone{flex:none;width:210px;height:430px;border-radius:40px;background:#0A0A0C;padding:9px;box-shadow:inset 0 0 0 2px #2B2B31,0 30px 60px -30px rgba(8,8,8,.5);transition:transform .9s var(--ease);position:relative}
+.phone .scr{position:relative;width:100%;height:100%;border-radius:32px;overflow:hidden;background:#fff}
+.phone .island{position:absolute;z-index:3;top:17px;left:50%;width:70px;height:20px;margin-left:-35px;border-radius:99px;background:#0A0A0C}
+.ms{position:absolute;inset:0;display:flex;flex-direction:column}
+.ms-status{display:flex;justify-content:space-between;align-items:center;height:42px;padding:0 22px 0 26px;font-size:11px;font-weight:600;color:var(--ink)}
+.ms-status i{display:block;width:16px;height:8px;border-radius:2px;border:1.5px solid var(--ink)}
+.ms-nav{display:flex;justify-content:space-between;align-items:center;padding:6px 14px 10px;border-bottom:1px solid var(--line)}
+.ms-nav b{font-size:11px;font-weight:700;color:#0F2C59;letter-spacing:-.01em}
+.ms-nav span{font-size:8px;font-weight:600;color:#fff;background:#0F2C59;padding:5px 9px;border-radius:99px}
+.ms-body{padding:14px 14px 10px;display:grid;gap:7px}
+.ms-k{font-size:6.5px;letter-spacing:.08em;text-transform:uppercase;color:#5B7FB0;font-weight:600}
+.ms-h{font-weight:700;font-size:15.5px;line-height:1.12;letter-spacing:-.02em;color:#0F2C59}
+.ms-h mark{background:#FFD43B;color:inherit;padding:0 2px}
+.ms-p{font-size:8.5px;color:var(--ink-2);line-height:1.45}
+.ms-btn{justify-self:start;margin-top:2px;padding:7px 12px;border-radius:99px;background:#0F2C59;color:#fff;font-size:8px;font-weight:600}
+.ms-img{position:relative;flex:1;margin:4px 10px 0;border-radius:12px 12px 0 0;overflow:hidden;min-height:150px}
+.ms-img img{position:absolute;top:0;right:0;height:100%;width:auto;max-width:none}
+
+/* ---------- planes: las de los lados quedan detrás de la negra ---------- */
+.toggle{display:inline-flex;align-items:center;gap:12px;font-size:13px;font-weight:600;margin-top:6px}
+.toggle span{color:var(--ink-3);transition:color .3s;cursor:pointer}
+.toggle span.act{color:var(--ink)}
+.switch{position:relative;width:46px;height:26px;border-radius:99px;border:0;background:var(--ink);padding:0;transition:transform .3s var(--ease)}
+.switch:hover{transform:scale(1.06)}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--paper);transition:transform .45s var(--ease)}
+.switch[aria-checked="true"]::after{transform:translateX(20px)}
+.plans{display:flex;justify-content:center;align-items:stretch;max-width:1040px;margin-inline:auto}
+.plan{position:relative;flex:0 1 340px;display:flex;flex-direction:column;gap:22px;background:var(--mist);border-radius:var(--r-card);padding:28px 26px 26px;z-index:1;transform:scale(.94);transition:background .6s var(--ease),color .6s var(--ease),transform .6s var(--ease),box-shadow .6s var(--ease),padding .6s var(--ease)}
+.plan.pos-l{padding-right:52px}
+.plan.pos-r{padding-left:52px}
+.plan.pos-l:hover,.plan.pos-r:hover{transform:scale(.94) translateY(-8px)}
+.plan.featured{z-index:3;margin-inline:-30px;background:var(--ink);color:var(--paper);transform:none;box-shadow:0 40px 70px -36px rgba(8,8,8,.75),0 0 0 6px var(--paper)}
+.plan.featured:hover{transform:translateY(-6px)}
+.plan .pname{font-size:14px;font-weight:600;text-align:center}
+.plan .price{text-align:center;font-size:clamp(1.9rem,3vw,2.4rem);font-weight:600;letter-spacing:-.05em;line-height:1}
+.plan .price small{display:block;font-size:12.5px;font-weight:400;letter-spacing:0;color:var(--ink-2);margin-top:8px;transition:color .6s}
+.plan p.desc{font-size:13.5px;color:var(--ink-2);text-align:center;transition:color .6s}
+.plan ul{list-style:none;margin:0;padding:18px 0 0;border-top:1px solid var(--line);display:grid;align-content:start;gap:10px;font-size:13.5px;flex:1;transition:border-color .6s}
+.plan li{display:flex;gap:10px;align-items:flex-start}
+.plan li::before{content:"";flex:none;width:6px;height:6px;margin-top:8px;border-radius:50%;background:var(--violet)}
+.plan .btn{justify-content:center;background:var(--ink);color:var(--paper)}
+.plan .tagline{position:absolute;top:14px;right:14px;font-size:10.5px;font-weight:600;padding:4px 9px;border-radius:99px;background:var(--violet-text);color:#fff;opacity:0;transform:translateY(-4px);transition:opacity .4s,transform .4s var(--ease)}
+.plan.featured .price small,.plan.featured p.desc{color:#B4B4BC}
+.plan.featured ul{border-color:#26262A}
+.plan.featured li::before{background:var(--violet-light)}
+.plan.featured .btn{background:var(--paper);color:var(--ink)}
+.plan.featured .btn:hover{box-shadow:0 0 0 5px rgba(255,255,255,.16)}
+.plan.featured .tagline{opacity:1;transform:none}
+
+/* ---------- cierre ---------- */
+.final{position:relative;margin-top:clamp(110px,13vw,160px);background:var(--violet);color:var(--paper);border-radius:var(--r-panel);padding:clamp(80px,10vw,120px) clamp(20px,3.4vw,44px) 24px;overflow:hidden;isolation:isolate}
+/* el cierre hace lo contrario del hero: empieza morado y se oscurece al bajar (--fp);
+   un degradado morado baja de arriba hacia abajo por todo el bloque y no se apaga */
+.final::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(122,63,201,.5) 0%,rgba(122,63,201,.28) 40%,rgba(122,63,201,.08) 80%,transparent 100%);z-index:-1}
+.final::after{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--ink);opacity:var(--fp,0);z-index:-2;pointer-events:none}
+.final-core{display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center;gap:26px}
+.note-wrap{position:relative;width:180px;height:180px;margin-bottom:-2px;transform:rotate(-4deg)}
+.note-shadow{position:absolute;left:0;top:0;width:330px;height:430px;filter:blur(7px);opacity:.95;pointer-events:none}
+.note-shadow i{position:absolute;inset:0;background:linear-gradient(165deg,rgba(20,2,40,.55) 0%,rgba(20,2,40,.25) 40%,rgba(20,2,40,0) 80%);clip-path:polygon(180px 2px,300px 240px,300px 420px,128px 420px,2px 180px,180px 180px)}
+.sticky{position:absolute;inset:0;padding:22px 20px;background:var(--paper);color:var(--ink);display:grid;align-content:center;justify-items:start;gap:10px;text-align:left;box-shadow:0 1px 1px rgba(0,0,0,.06)}
+.sticky::before{content:"";position:absolute;top:-12px;left:50%;width:74px;height:24px;margin-left:-37px;background:rgba(255,255,255,.5);transform:rotate(3deg)}
+.sticky b{font-size:23px;font-weight:600;letter-spacing:-.045em;line-height:1}
+.sticky span{font-size:12.5px;color:var(--ink-2);line-height:1.35}
+.sticky i{font-style:normal;color:var(--violet);font-weight:600}
+.final h2{font-size:clamp(2.4rem,5.6vw,4.4rem);letter-spacing:-.05em;max-width:15ch;line-height:1}
+.final h2 .dim{color:rgba(255,255,255,.55)}
+.mail-form{display:flex;align-items:center;gap:8px;width:min(460px,100%);padding:6px 6px 6px 20px;border-radius:999px;background:var(--paper);box-shadow:0 24px 50px -24px rgba(20,2,40,.7);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.mail-form:hover,.mail-form:focus-within{transform:translateY(-3px);box-shadow:0 0 0 5px rgba(255,255,255,.18),0 28px 54px -24px rgba(20,2,40,.75)}
+.mail-form input{flex:1;min-width:0;border:0;background:none;font:inherit;font-size:15px;color:var(--ink);outline:none;height:44px}
+.mail-form input::placeholder{color:var(--ink-3)}
+.mail-form button{flex:none;height:44px;padding:0 20px;border:0;border-radius:99px;background:var(--ink);color:var(--paper);font-size:14px;font-weight:600;transition:background .25s,transform .35s var(--ease)}
+.mail-form button:hover{background:#26262A;transform:translateX(-2px)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.consent{display:flex;align-items:flex-start;gap:9px;max-width:440px;text-align:left;font-size:12.5px;line-height:1.45;opacity:.85}
+/* casilla con la marca: círculo con borde blanco que se llena de morado con un check animado */
+.consent input{flex:none;-webkit-appearance:none;appearance:none;width:18px;height:18px;margin:0;border-radius:50%;border:1.5px solid rgba(255,255,255,.6);background:transparent;display:grid;place-items:center;cursor:pointer;transition:background .25s,border-color .25s}
+.consent input::after{content:"";width:8px;height:4px;border:2px solid #fff;border-top:0;border-right:0;transform:translateY(-1px) rotate(-45deg) scale(0);transition:transform .25s var(--ease)}
+.consent input:checked{background:var(--violet-text);border-color:var(--violet-text)}
+.consent input:checked::after{transform:translateY(-1px) rotate(-45deg) scale(1)}
+.consent input:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.consent a{text-decoration:underline;text-underline-offset:2px}
+.form-note{font-size:12.5px;opacity:.85;min-height:1.2em}
+.contacts{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;font-size:13.5px;font-weight:500}
+.contacts a{display:inline-block;border-bottom:1px solid rgba(255,255,255,.45);transition:transform .35s var(--ease),border-color .25s}
+.contacts a:hover{border-color:var(--paper);transform:translateY(-2px)}
+.foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;margin-top:clamp(80px,10vw,120px);padding-top:22px;border-top:1px solid rgba(255,255,255,.22);font-size:13.5px;font-weight:500}
+.foot ul{display:flex;flex-wrap:wrap;gap:8px 26px;list-style:none;margin:0;padding:0}
+.foot ul a{display:inline-block;opacity:.88;transition:transform .35s var(--ease),opacity .25s}
+.foot ul a:hover{opacity:1;transform:translateY(-2px)}
+.foot .soc{display:flex;gap:8px}
+.foot .soc a{width:36px;height:36px}
+.foot .soc svg{width:15px;height:15px}
+.legal{margin-top:16px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 18px;font-size:12.5px;opacity:.72}
+.legal a{transition:opacity .25s}
+.legal a:hover{opacity:.7}
+
+/* ---------- cursor propio: avión de papel dibujado a mano (solo con mouse) ---------- */
+html.has-cursor,html.has-cursor *{cursor:none!important}
+html.has-cursor input,html.has-cursor textarea{cursor:text!important}
+.cur-plane{position:fixed;left:0;top:0;z-index:10000;pointer-events:none;opacity:0;transition:opacity .25s}
+.cur-on .cur-plane{opacity:1}
+.cur-on .cur-plane.gone{opacity:0;transition:opacity .08s}
+.cur-plane svg{display:block;width:32px;height:24px;margin:-2px 0 0 -2px;overflow:visible;transform-origin:2px 2px;transform:rotate(24deg);transition:transform .35s var(--ease);filter:drop-shadow(0 3px 3px rgba(8,8,8,.28))}
+.cur-plane.hover svg{transform:rotate(14deg) scale(1.1)}
+.cur-plane.down svg{transform:rotate(24deg) scale(.86)}
+.cur-plane.hover.down svg{transform:rotate(14deg) scale(.96)}
+.cur-burst{position:fixed;left:0;top:0;z-index:9999;pointer-events:none;width:64px;height:64px;margin:-46px 0 0 -32px}
+.cur-burst svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 2px 2px rgba(8,8,8,.25));transform-origin:32px 46px;animation:ray .3s var(--ease) forwards}
+@keyframes ray{0%{opacity:0;transform:scale(.4)}25%{opacity:1}65%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.12)}}
+
+
+/* ---------- menú hamburguesa (celular) ---------- */
+.burger,.mm-close{display:none;position:relative;width:44px;height:44px;border-radius:50%;border:0;padding:0;background:var(--ink);color:var(--paper);transition:transform .35s var(--ease)}
+.hero .burger{background:var(--paper);color:var(--ink)}
+.burger span,.mm-close span{position:absolute;left:13px;right:13px;height:2px;border-radius:2px;background:currentColor}
+.burger span:first-child{top:17px}.burger span:last-child{top:25px}
+.burger:active{transform:scale(.92)}
+.mmenu{position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 22px) 22px calc(env(safe-area-inset-bottom,0px) + 28px);background:var(--ink);color:var(--paper);opacity:0;visibility:hidden;transform:translateY(-12px);transition:opacity .35s ease,transform .45s var(--ease),visibility 0s .45s}
+.mmenu.open{opacity:1;visibility:visible;transform:none;transition:opacity .35s ease,transform .45s var(--ease)}
+.mm-top{display:flex;align-items:center;justify-content:space-between}
+.mm-top .logo img{height:42px;filter:brightness(0) invert(1)}
+.mm-close{display:block;background:var(--paper);color:var(--ink)}
+.mm-close span{top:21px}.mm-close span:first-child{transform:rotate(45deg)}.mm-close span:last-child{transform:rotate(-45deg)}
+.mm-links{display:grid;gap:6px;margin-top:auto;margin-bottom:auto}
+.mm-links a{font-size:38px;font-weight:600;letter-spacing:-.045em;line-height:1.15;opacity:0;transform:translateY(14px);transition:opacity .4s ease,transform .5s var(--ease)}
+.mmenu.open .mm-links a{opacity:1;transform:none}
+.mmenu.open .mm-links a:nth-child(2){transition-delay:.04s}.mmenu.open .mm-links a:nth-child(3){transition-delay:.08s}.mmenu.open .mm-links a:nth-child(4){transition-delay:.12s}.mmenu.open .mm-links a:nth-child(5){transition-delay:.16s}
+.mm-foot{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.mm-soc{display:flex;gap:8px}
+
+/* ---------- aparición ---------- */
+.js [data-reveal]{transition:opacity .9s var(--ease),transform 1s var(--ease)}
+.js [data-reveal].pre{opacity:0;transform:translateY(32px)}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .page{--aw:470px;--bz:10px}
+  .nav-links,.float-nav ul{display:none}
+  .features{grid-template-columns:1fr}
+  .studio-grid{grid-template-columns:1fr 1fr}
+  .me{grid-column:1/-1;grid-row:auto}
+  .devices{grid-template-columns:1fr}
+  .plans{flex-direction:column;max-width:460px;gap:14px}
+  .plan.featured{order:-1!important}
+  .plan,.plan.featured{flex:none;width:100%;transform:none;margin-inline:0}
+  .plan.pos-l,.plan.pos-r{padding:28px 26px 26px}
+  .plan.pos-l:hover,.plan.pos-r:hover{transform:translateY(-4px)}
+}
+@media (max-width:700px){
+  :root{--r-panel:18px}
+  .page{--aw:280px;--bz:7px}
+  .ci{border-radius:20px}
+  .ci img{border-radius:13px}
+  .nav{padding:0 20px}
+  .hero{padding-top:26px}
+  .nav-cta{display:none}
+  .burger{display:block}
+  .nav-end .circle,.float-nav .btn{display:none}
+  .float-nav{left:12px;right:12px;max-width:none;justify-content:space-between;padding:7px 7px 7px 18px;transform:translateY(-150%)}
+  .float-nav.show{transform:none}
+  .float-nav .logo img{height:40px}
+  .hero{margin:-12px calc(var(--gutter) * -1) 0;border-radius:0}
+  .final{margin-inline:calc(var(--gutter) * -1);margin-bottom:-16px;border-radius:0}
+  .logo img{height:44px}
+  .logo img{height:40px}
+  .hero-copy{padding-top:44px}
+  .pill{font-size:11.5px}
+  .pill .long{display:none}
+  .pill .short{display:inline}
+  .car{margin-top:40px}
+  .car-cap .txt{min-width:0}
+  .manifesto{height:auto;padding-block:110px 90px}
+  .manifesto .pin{position:static;height:auto}
+  .mail-form{padding-left:16px}
+  .mail-form button{padding:0 16px}
+  .studio-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .dev{min-height:440px}
+  .float-nav{gap:12px}
+  .foot{justify-content:center;text-align:center}
+  .foot ul{justify-content:center}
+  .legal{justify-content:center;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js [data-reveal].pre{opacity:1;transform:none}
+  .js .note-wrap.pre{opacity:1;transform:rotate(-6deg)}
+  .manifesto{height:auto;padding-block:140px}
+  .manifesto .pin{position:static;height:auto}
+}
+
+/* ---------- solo en el blog ---------- */
+
+/* =====================================================================
+   BLOG: mismas reglas de la portada. El panel oscuro trae el buscador,
+   los temas y el artículo más reciente; abajo, todas las guías.
+   ===================================================================== */
+.nav-links a[aria-current="page"],.float-nav a[aria-current="page"]{opacity:1;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1.5px}
+.bhero{padding-bottom:clamp(28px,4vw,48px)}
+.bhero .hero-copy{padding-bottom:0}
+/* buscador: la misma píldora blanca del formulario de la portada */
+.bsearch{display:flex;align-items:center;gap:10px;width:min(560px,calc(100% - 32px));margin:6px auto 0;padding:0 8px 0 20px;height:56px;border-radius:999px;background:var(--paper);color:var(--ink);box-shadow:0 20px 40px -24px rgba(0,0,0,.7)}
+.bsearch svg{width:18px;height:18px;flex:none;color:var(--ink-3)}
+.bsearch input{flex:1;min-width:0;height:100%;border:0;background:none;font:inherit;font-size:15.5px;color:var(--ink);outline:none}
+.bsearch input::placeholder{color:var(--ink-3)}
+.bsearch kbd{flex:none;padding:4px 9px;border-radius:8px;background:var(--mist);font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2)}
+/* temas: píldoras de vidrio sobre el panel oscuro */
+.btemas{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:860px;margin:18px auto 0;padding:0 16px}
+.btema{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 14px;border:0;border-radius:999px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.86);font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);transition:background .25s,color .25s,transform .25s var(--ease)}
+.btema:hover{background:rgba(255,255,255,.18);transform:translateY(-2px)}
+.btema i{font-style:normal;font-size:11.5px;font-weight:600;opacity:.6}
+.btema[aria-pressed="true"]{background:var(--paper);color:var(--ink);box-shadow:none}
+.btema[aria-pressed="true"] i{opacity:.5}
+/* destacado: tarjeta grande dentro del panel */
+.bdest{display:grid;grid-template-columns:1.15fr 1fr;align-items:stretch;width:min(1080px,calc(100% - 32px));margin:clamp(34px,5vw,56px) auto 0;border-radius:var(--r-card);overflow:hidden;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);color:var(--paper);text-decoration:none;transition:transform .45s var(--ease),background .3s}
+.bdest:hover{transform:translateY(-6px);background:rgba(255,255,255,.1)}
+.bdest-img{position:relative;overflow:hidden;min-height:300px}
+.bdest-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.bdest:hover .bdest-img img{transform:scale(1.04)}
+.bdest-txt{display:flex;flex-direction:column;gap:14px;padding:clamp(24px,3.4vw,42px)}
+.bdest-txt .new{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--violet-light)}
+.bdest-txt h2{font-size:clamp(1.6rem,2.6vw,2.2rem);letter-spacing:-.045em;line-height:1.05}
+.bdest-txt p{margin:0;color:rgba(255,255,255,.72);font-size:15px;line-height:1.55}
+.bdest-txt .bmeta{margin-top:auto;color:rgba(255,255,255,.6)}
+.bdest-txt .btag{background:rgba(255,255,255,.14);color:#fff}
+/* rejilla de guías */
+.bhead{display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.bhead p{margin:0;color:var(--ink-2);font-size:15px}
+.bgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.bcard{display:flex;flex-direction:column;border-radius:var(--r-card);overflow:hidden;background:var(--card);box-shadow:0 0 0 1px var(--line);color:inherit;text-decoration:none;transition:transform .4s var(--ease),box-shadow .4s}
+.bcard:hover{transform:translateY(-6px);box-shadow:0 0 0 1px var(--line),0 26px 46px -28px rgba(8,8,8,.45)}
+.bcard-img{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--mist)}
+.bcard-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s var(--ease)}
+.bcard:hover .bcard-img img{transform:scale(1.05)}
+.bcard-txt{flex:1;display:flex;flex-direction:column;gap:10px;padding:18px 20px 20px}
+.bcard-txt h3{font-size:18px;line-height:1.22;letter-spacing:-.03em;margin:0}
+.bcard-txt p{margin:0;color:var(--ink-2);font-size:14px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.btag{align-self:flex-start;padding:4px 10px;border-radius:99px;background:var(--violet-soft);color:var(--violet);font-size:11.5px;font-weight:600}
+.bmeta{display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:4px;font-size:12.5px;color:var(--ink-3)}
+.bmeta b{display:grid;place-items:center;width:24px;height:24px;border-radius:7px;background:var(--violet);color:#fff;font-size:11px;letter-spacing:-.04em}
+.bvacio{display:none;margin:30px auto 0;max-width:46ch;text-align:center;color:var(--ink-2)}
+.bvacio.show{display:block}
+.bcard.hide,.bdest.hide{display:none}
+@media (max-width:980px){.bgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.bdest{grid-template-columns:1fr}.bdest-img{min-height:220px}}
+@media (max-width:640px){.bgrid{grid-template-columns:1fr}.bsearch kbd{display:none}.btemas{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}.btema{flex:none}}
+</style>
 </head>
-
 <body>
-  <nav class="nav" id="nav">
-    <div class="nav-in">
-      <a href="/" class="logo" aria-label="Kaiva Studio — ir al inicio">
-        <img src="/assets/logo-kaiva.png" alt="Kaiva Studio" width="105" height="44">
-      </a>
-      <div class="nav-right">
-        <div class="nav-links" id="navLinks">
-          <a href="/diseno-web/" class="lnk">Diseño web</a>
-          <a href="/software-a-medida/" class="lnk">Software</a>
-          <a href="/branding/" class="lnk">Branding</a>
-          <a href="/blog/" class="lnk" aria-current="page">Blog</a>
-          <a href="/monitor/" class="btn btn-dark">Diagnóstico Gratis</a>
-        </div>
-        <button class="nav-toggle" id="navToggle" aria-label="Menú" aria-expanded="false">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M4 7h16M4 12h16M4 17h16" />
-          </svg>
-        </button>
-      </div>
-    </div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.3-.3-.3-.6-.5z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></g><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-in" viewBox="0 0 24 24"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM10 9.5h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.7 2.6 4.7 6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></g></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="1.6"/><path d="M2 19h20"/></g></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="7" y="2.5" width="10" height="19" rx="2.6"/><path d="M11 18.5h2"/></g></symbol>
+  <symbol id="i-cursor" viewBox="0 0 24 24"><path d="M4 2l16 10-7 1.5L9.5 21z" fill="currentColor" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+</svg>
+
+<nav class="float-nav" id="floatNav" aria-label="Navegación rápida">
+  <a class="logo" href="/"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a>
+  <ul>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/portfolio/">Portfolio</a></li>
+        <li><a href="/blog/" aria-current="page">Blog</a></li>
+      </ul>
+  <a class="btn btn-ink" href="#contacto">Agendar llamada</a>
+  <button class="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mmenu"><span></span><span></span></button>
+</nav>
+
+<div class="mmenu" id="mmenu" aria-label="Menú">
+  <div class="mm-top"><a class="logo" href="/"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a><button class="mm-close" type="button" aria-label="Cerrar menú"><span></span><span></span></button></div>
+  <nav class="mm-links">
+    <a href="/">Inicio</a><a href="/portfolio/">Portfolio</a><a href="/blog/" aria-current="page">Blog</a><a href="#contacto">Contacto</a>
   </nav>
+  <div class="mm-foot">
+    <a class="btn btn-white" href="#contacto">Agendar llamada</a>
+    <div class="mm-soc"><a class="circle light" href="https://wa.me/573024137374" target="_blank" rel="noopener" aria-label="WhatsApp"><svg><use href="#i-wa"/></svg></a><a class="circle light" href="https://www.instagram.com/kaivastudio/" target="_blank" rel="noopener" aria-label="Instagram"><svg><use href="#i-ig"/></svg></a></div>
+  </div>
+</div>
 
-  <main>
-    <section class="blog-hero">
-      <div class="wrap">
-        <span class="blog-kicker"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>El blog</span>
-        <h1>Lo que nadie te explica sin cobrarte<span class="dot">.</span></h1>
-        <p>Escribimos sobre lo que de verdad nos preguntan los clientes: cuánto cuesta una web, por qué
-          no apareces en Google, qué vale la pena y qué no. Sin jerga y sin vender humo.</p>
+<div class="page">
 
-        <form class="blog-buscar" role="search" onsubmit="return false">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" id="blogBuscar" placeholder="Buscar en el blog…" autocomplete="off"
-            aria-label="Buscar artículos">
-        </form>
-
-        <div class="blog-filtros" id="blogFiltros" role="group" aria-label="Filtrar por tema">
-          <button type="button" class="blog-chip" data-tema="" aria-pressed="true">Todos</button>
-          <button type="button" class="blog-chip" data-tema="Visibilidad" aria-pressed="false">Visibilidad</button>
-          <button type="button" class="blog-chip" data-tema="Negocio local" aria-pressed="false">Negocio local</button>
-          <button type="button" class="blog-chip" data-tema="SEO para IA" aria-pressed="false">SEO para IA</button>
-          <button type="button" class="blog-chip" data-tema="Correo" aria-pressed="false">Correo</button>
-          <button type="button" class="blog-chip" data-tema="Cómo elegir" aria-pressed="false">Cómo elegir</button>
-          <button type="button" class="blog-chip" data-tema="Precios" aria-pressed="false">Precios</button>
-          <button type="button" class="blog-chip" data-tema="IA y tecnología" aria-pressed="false">IA y tecnología</button>
-          <button type="button" class="blog-chip" data-tema="Marketing y SEO" aria-pressed="false">Marketing y SEO</button>
-        </div>
+  <!-- ============ PANEL DEL BLOG: buscador, temas y lo más reciente ============ -->
+  <header class="hero bhero" id="inicio">
+    <nav class="nav" aria-label="Principal">
+      <a class="logo" href="/"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a>
+      <ul class="nav-links">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/portfolio/">Portfolio</a></li>
+        <li><a href="/blog/" aria-current="page">Blog</a></li>
+      </ul>
+      <div class="nav-end">
+        <a class="nav-cta" href="#contacto">Agendar llamada</a>
+        <a class="circle" href="https://wa.me/573024137374" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg><use href="#i-wa"/></svg></a>
+        <a class="circle light" href="https://www.instagram.com/kaivastudio/" target="_blank" rel="noopener" aria-label="Instagram de Kaiva Studio"><svg><use href="#i-ig"/></svg></a>
+        <button class="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mmenu"><span></span><span></span></button>
       </div>
-    </section>
+    </nav>
 
-    <section class="section" style="padding-top:0">
-      <div class="wrap">
+    <div class="hero-copy">
+      <p class="pill"><b>Blog</b> <span class="long">Guías claras de web, marca y Google</span><span class="short">Guías sin jerga</span></p>
+      <h1><span class="dim">Lo que nadie te explica</span> sin cobrarte</h1>
+      <p class="lede">Escribimos sobre lo que de verdad nos preguntan los clientes: cuánto cuesta una web, por qué no apareces en Google, qué vale la pena y qué no. Sin jerga y sin vender humo.</p>
+    </div>
 
-        <!-- Destacado: el más reciente -->
-        <a class="blog-destacado blog-post reveal" href="/blog/mejores-agencias-diseno-web-lima/"
-          data-tema="Cómo elegir"
-          data-txt="mejores agencias de diseno web en lima peru guia para elegir libro de reclamaciones virtual indecopi ruc sunat activo habido creativa kom staff digital talentuperu yankenpo lima diseno web">
-          <!-- El destacado superpone el titular sobre la foto, así que aquí NO
-               va la portada del artículo: es un gráfico con texto propio y se
-               leerían dos textos encima del otro. La portada vive en el post. -->
-          <span class="blog-dest-foto"><img class="blog-foto" src="/assets/blog/elegir.webp" alt="Laptop sobre un escritorio mostrando un directorio de portafolios de estudios de diseño web" width="1200" height="800" fetchpriority="high"></span>
-          <div class="blog-destacado-txt">
-            <span class="blog-tag">Cómo elegir</span>
-            <h2>Agencias de diseño web en Lima: guía para elegir</h2>
-            <p>Seis estudios con presencia verificable en la ciudad, y la pregunta que casi ninguna cotización responde: si el sitio va a traer el Libro de Reclamaciones virtual que exige INDECOPI, con multas de hasta S/ 2.475.000.</p>
-            <div class="blog-pie">
-              <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-              <span class="blog-lectura"><time datetime="2026-09-23">23 sep 2026</time> · 8 min de lectura</span>
-            </div>
-          </div>
+    <form class="bsearch" role="search" onsubmit="return false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7.5"/><path d="m20.5 20.5-4.2-4.2"/></g></svg>
+      <label class="sr-only" for="bq">Buscar en el blog</label>
+      <input type="search" id="bq" placeholder="Buscar en el blog…" autocomplete="off">
+      <kbd aria-hidden="true">/</kbd>
+    </form>
+    <div class="btemas" role="group" aria-label="Filtrar por tema">
+      <button type="button" class="btema" data-tema="" aria-pressed="true">Todos <i>30</i></button>
+      <button type="button" class="btema" data-tema="IA y tecnología" aria-pressed="false">IA y tecnología <i>11</i></button>
+      <button type="button" class="btema" data-tema="Precios" aria-pressed="false">Precios <i>7</i></button>
+      <button type="button" class="btema" data-tema="Cómo elegir" aria-pressed="false">Cómo elegir <i>4</i></button>
+      <button type="button" class="btema" data-tema="Marketing y SEO" aria-pressed="false">Marketing y SEO <i>3</i></button>
+      <button type="button" class="btema" data-tema="Visibilidad" aria-pressed="false">Visibilidad <i>2</i></button>
+      <button type="button" class="btema" data-tema="Negocio local" aria-pressed="false">Negocio local <i>1</i></button>
+      <button type="button" class="btema" data-tema="SEO para IA" aria-pressed="false">SEO para IA <i>1</i></button>
+      <button type="button" class="btema" data-tema="Correo" aria-pressed="false">Correo <i>1</i></button>
+    </div>
+
+    <a class="bdest" href="/blog/mejores-agencias-diseno-web-lima/" data-tema="Cómo elegir" data-txt="mejores agencias de diseno web en lima peru guia para elegir libro de reclamaciones virtual indecopi ruc sunat activo habido creativa kom staff digital talentuperu yankenpo lima diseno web agencias de diseno web en lima: guia para elegir seis estudios con presencia verificable en la ciudad, y la pregunta que casi ninguna cotizacion responde: si el sitio va a traer el libro de reclamaciones virtual que exige indecopi, con multas de hasta s/ 2.475.000. como elegir">
+      <span class="bdest-img"><img src="/assets/blog/elegir.webp" alt="Laptop sobre un escritorio mostrando un directorio de portafolios de estudios de diseño web" width="1200" height="800" fetchpriority="high"></span>
+      <span class="bdest-txt">
+        <span class="new">Lo más reciente</span>
+        <span class="btag">Cómo elegir</span>
+        <h2>Agencias de diseño web en Lima: guía para elegir</h2>
+        <p>Seis estudios con presencia verificable en la ciudad, y la pregunta que casi ninguna cotización responde: si el sitio va a traer el Libro de Reclamaciones virtual que exige INDECOPI, con multas de hasta S/ 2.475.000.</p>
+        <span class="bmeta"><b>K.</b><time datetime="2026-09-23">23 sep 2026</time> · 8 min de lectura</span>
+      </span>
+    </a>
+  </header>
+
+  <main class="wrap">
+    <section class="block" id="guias" aria-labelledby="guias-t">
+      <div class="bhead" data-reveal>
+        <h2 id="guias-t"><span class="dim">Todas las</span><br>guías</h2>
+        <p id="bcount">30 artículos · los más recientes primero</p>
+      </div>
+      <div class="bgrid" id="bgrid">
+        <a class="bcard" href="/blog/eeat-experiencia-y-confianza-sin-anos-de-trayectoria/" data-tema="Marketing y SEO" data-txt="eeat que es como demuestra una pyme sin anos de trayectoria que tiene experiencia y confianza search quality rater guidelines danny sullivan ymyl septiembre 2025 e-e-a-t: la trayectoria que no tienes, y como se demuestra igual google entrena a mas de 10.000 evaluadores con un documento de 182 paginas para juzgar el e-e-a-t de una pagina, y dice que no es un factor de ranking. que es de verdad y como lo demuestra un negocio sin historial. marketing y seo">
+          <span class="bcard-img"><img src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">Marketing y SEO</span>
+            <h3>E-E-A-T: la trayectoria que no tienes, y cómo se demuestra igual</h3>
+            <p>Google entrena a más de 10.000 evaluadores con un documento de 182 páginas para juzgar el E-E-A-T de una página, y dice que no es un factor de ranking. Qué es de verdad y cómo lo demuestra un negocio sin historial.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-09-22">22 sep 2026</time> · 8 min de lectura</span>
+          </span>
         </a>
-
-        <div class="blog-grid" id="blogGrid">
-
-          <a class="blog-card blog-post reveal" href="/blog/eeat-experiencia-y-confianza-sin-anos-de-trayectoria/" style="--d:.05s"
-            data-tema="Marketing y SEO"
-            data-txt="eeat que es como demuestra una pyme sin anos de trayectoria que tiene experiencia y confianza search quality rater guidelines danny sullivan ymyl septiembre 2025">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">Marketing y SEO</span>
-              <h3>E-E-A-T: la trayectoria que no tienes, y cómo se demuestra igual</h3>
-              <p>Google entrena a más de 10.000 evaluadores con un documento de 182 páginas para juzgar el E-E-A-T de una página, y dice que no es un factor de ranking. Qué es de verdad y cómo lo demuestra un negocio sin historial.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-09-22">22 sep 2026</time> · 8 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/comercio-agentico-ia-compra-por-ti/" style="--d:.1s"
-            data-tema="IA y tecnología"
-            data-txt="comercio agentico ia que compra por ti instant checkout openai chatgpt agentic commerce protocol acp agent payments protocol ap2 google stripe paypal shopify impuesto de ventas">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/ia.webp" alt="Persona usando un teléfono para hacer una compra en línea con ayuda de un asistente de inteligencia artificial" width="1774" height="887" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">IA y tecnología</span>
-              <h3>El comercio con IA prometía saltarse tu sitio web. Terminó necesitándolo más</h3>
-              <p>OpenAI apagó la compra dentro de ChatGPT cinco meses después de lanzarla, en parte porque nunca resolvió cobrar el impuesto de ventas. Qué pasó de verdad con el comercio agéntico y qué le toca hacer a tu negocio.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-09-20">20 sep 2026</time> · 9 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/cuanto-cuesta-una-pagina-web-en-espana/" style="--d:.1s"
-            data-tema="Precios"
-            data-txt="cuanto cuesta una pagina web en espana precios presupuesto cotizacion rangos euros iva verifactu real decreto ley 15/2025 facturacion electronica autonomos">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web con su tabla de precios" width="1024" height="1024" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">Precios</span>
-              <h3>¿Cuánto cuesta una página web en España?</h3>
-              <p>Los precios van de 300 € a más de 10.000 €. El Gobierno aplazó Verifactu a 2027, pero si tu sitio va a vender o facturar, esa fecha ya debería estar en la conversación con quien te lo construya.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-09-18">18 sep 2026</time> · 8 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/por-que-comprar-backlinks-ya-no-funciona/" style="--d:.1s"
-            data-tema="Marketing y SEO"
-            data-txt="por que comprar backlinks ya casi no funciona google spam brain deteccion 2026 rel nofollow sponsored actualizacion de spam marzo 2026 disavow enlaces pagados">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">Marketing y SEO</span>
-              <h3>Por qué comprar backlinks ya casi no funciona</h3>
-              <p>Google no prohíbe pagar por un enlace: prohíbe esconder que lo pagaste. Cómo detecta SpamBrain los patrones de enlaces comprados y qué pasó en la actualización de spam de marzo de 2026, que tardó 31 horas en rodar por todo el mundo.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-09-08">8 sep 2026</time> · 8 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/busqueda-con-ia-en-tu-sitio-rag/" style="--d:.1s"
-            data-tema="IA y tecnología"
-            data-txt="busqueda con ia en tu propio sitio rag generacion aumentada por recuperacion agent search vertex ai search google cloud precios indexar buscador interno chatbot sobre tu contenido">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/ia.webp" alt="Persona consultando en una laptop un buscador con inteligencia artificial dentro del sitio web de su empresa" width="1774" height="887" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">IA y tecnología</span>
-              <h3>Búsqueda con IA en tu propio sitio: qué es RAG y qué cuesta</h3>
-              <p>Google publica el precio: indexar un sitio de mil páginas cuesta 2,38 dólares al mes. Nadie está entrenando un modelo con tu contenido, y la mayoría de las pymes que preguntan por esto todavía no lo necesita.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-09-06">6 sep 2026</time> · 9 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/mejores-agencias-diseno-web-ciudad-de-mexico/" style="--d:.1s"
-            data-tema="Cómo elegir"
-            data-txt="mejores agencias de diseno web en cdmx ciudad de mexico guia para elegir estudios sat rfc cfdi 4.0 articulo 69-b efos constancia de situacion fiscal iva polanco roma">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/elegir.webp?v=2" alt="Laptop sobre un escritorio mostrando un directorio de portafolios de estudios de diseño web" width="1200" height="800" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">Cómo elegir</span>
-              <h3>Agencias de diseño web en CDMX: guía para elegir</h3>
-              <p>Seis estudios con dirección verificable en la ciudad, y la pregunta que casi nadie hace en la primera reunión: si te van a poder facturar. Incluye las dos consultas del SAT que deciden si el gasto es deducible.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-09-05">5 sep 2026</time> · 8 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/domain-rating-autoridad-de-dominio-no-es-vender-mas/" style="--d:.1s"
-            data-tema="Marketing y SEO"
-            data-txt="domain rating autoridad de dominio moz ahrefs domain authority john mueller google no lo usa backlinks enlaces escala logaritmica vender mas">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">Marketing y SEO</span>
-              <h3>Domain Rating: el número que sube en el reporte y no en la caja</h3>
-              <p>Ahrefs y Moz inventaron el Domain Rating y la Domain Authority, no Google. John Mueller lo ha dicho varias veces: no se usan para posicionar. Qué miden en realidad y qué deberías pedir en su lugar.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-09-04">4 sep 2026</time> · 8 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/tu-chatbot-ya-tiene-que-decir-que-es-ia/" style="--d:.1s"
-            data-tema="IA y tecnología"
-            data-txt="tu chatbot ya tiene que decir que es ia reglamento europeo articulo 50 ai act transparencia multas whatsapp asistente virtual">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/ia.webp" alt="Profesional revisando en una laptop una conversación de chatbot de inteligencia artificial en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">IA y tecnología</span>
-              <h3>Tu chatbot ya tiene que decir que es una IA: qué cambió el 2 de agosto</h3>
-              <p>La Unión Europea ya exige que un chatbot avise que es una IA, con multas de hasta 15 millones de euros. Qué dice la norma y qué hacer con el tuyo aunque no vendas en Europa.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-09-01">1 sep 2026</time> · 9 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/cuanto-cuesta-una-pagina-web-en-ecuador/" style="--d:.1s"
-            data-tema="Precios"
-            data-txt="cuanto cuesta una pagina web en ecuador precios presupuesto cotizacion rangos dolares dolarizacion iva sri factura electronica">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1200" height="800" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">Precios</span>
-              <h3>¿Cuánto cuesta una página web en Ecuador? El dólar no es la duda; el IVA sí</h3>
-              <p>Los precios van de $200 a más de $10,000, ya en dólares. Por qué el IVA subió a 15% y qué cambió con el SRI desde enero de 2026.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-08-31">31 ago 2026</time> · 9 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/chatbots-ia-atencion-al-cliente-costos-reales/" style="--d:.1s"
-            data-tema="IA y tecnología"
-            data-txt="chatbots de ia para atencion al cliente costos reales gorgias freshdesk intercom fin whatsapp business api meta contencion resolucion">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/ia.webp" alt="Profesional revisando en una laptop el panel de un chatbot de inteligencia artificial en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">IA y tecnología</span>
-              <h3>Chatbots de IA para atención al cliente: lo que nadie pone en la cotización</h3>
-              <p>Gorgias cobra $1,50 por interacción, Freshdesk $0,49 por sesión, Intercom Fin $0,99 por resolución. Los precios reales de 2026 y el costo oculto de WhatsApp Business API.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-08-30">30 ago 2026</time> · 8 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/mejores-agencias-diseno-web-bogota/" style="--d:.1s"
-            data-tema="Cómo elegir"
-            data-txt="mejores agencias de diseno web en bogota guia para elegir comparar estudios rues camara de comercio">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/elegir.webp?v=2" alt="Laptop sobre un escritorio de madera mostrando un directorio de estudios de diseño web" width="1200" height="800" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">Cómo elegir</span>
-              <h3>Agencias de diseño web en Bogotá: guía para elegir</h3>
-              <p>Seis estudios con presencia verificable en la ciudad y los criterios que separan un buen proyecto de uno que toca rehacer al año. Incluye cómo verificar si una agencia es una empresa real.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-08-26">26 ago 2026</time> · 8 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/chatgpt-ia-descubrimiento-marca/" style="--d:.15s"
-            data-tema="IA y tecnología"
-            data-txt="chatgpt canal descubrimiento marca traffico referente clickeable enlaces 157% usuarios buscan">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/ia.webp" alt="Laptop sobre un escritorio de madera con una conversación de ChatGPT abierta en pantalla y una mano escribiendo en el teclado" width="1774" height="887" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">IA y tecnología</span>
-              <h3>ChatGPT como canal de descubrimiento de marca: por qué importa hoy</h3>
-              <p>El tráfico que viene de ChatGPT se multiplicó 157% en una semana. Qué cambió, por qué el 80% de tus clientes potenciales ya buscan así, y qué significa eso para tu negocio.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-08-25">25 ago 2026</time> · 7 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/cuanto-cuesta-una-pagina-web-en-argentina/" style="--d:.2s"
-            data-tema="Precios"
-            data-txt="cuanto cuesta una pagina web en argentina precios presupuesto cotizacion rangos pesos argentinos dolar inflacion">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de diseño web con tabla de precios" width="1024" height="1024" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">Precios</span>
-              <h3>¿Cuánto cuesta una página web en Argentina? Y por qué todo se cotiza en dólares</h3>
-              <p>Los precios van desde $250.000 a más de $1.500.000 ARS. Cómo el dólar cambia la ecuación y por qué casi todas las agencias cotizan en divisa aunque facturen en pesos.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-08-24">24 ago 2026</time> · 7 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/modo-ia-google-ai-overviews-que-significa-para-tu-seo/" style="--d:.25s"
-            data-tema="IA y tecnología"
-            data-txt="modo ia google ai overviews que significa para tu seo mil millones de usuarios clics pew research ahrefs sistrix">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">IA y tecnología</span>
-              <h3>El Modo IA de Google llegó a mil millones de usuarios: qué significa para tu SEO</h3>
-              <p>El clic en los AI Overviews tocó fondo en 1,3% y el Modo IA ya es pestaña fija del buscador.
-                Qué cambia de verdad para un negocio pequeño, con los datos de los últimos estudios.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-08-23">23 ago 2026</time> · 8 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/cuanto-cuesta-una-pagina-web-en-chile/" style="--d:.3s"
-            data-tema="Precios"
-            data-txt="cuanto cuesta una pagina web en chile precios presupuesto cotizacion rangos pesos chilenos ley 21719 proteccion de datos">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">Precios</span>
-              <h3>¿Cuánto cuesta una página web en Chile? Y qué cambia con la Ley 21.719</h3>
-              <p>Los precios van de $170.000 a varios millones de pesos. En diciembre entra en vigencia la
-                nueva ley de protección de datos, y casi ninguna cotización la está mencionando.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-08-22">22 ago 2026</time> · 8 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/qwen-3-8-27b-ia-local/" style="--d:.35s"
-            data-tema="IA y tecnología"
-            data-txt="qwen3.8-27b qwen 3.8 27b ia local modelo local vram cuantizacion gguf ollama llama.cpp apache 2.0 contexto 262k tarjeta de video">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">IA y tecnología</span>
-              <h3>Un modelo de IA serio ya cabe en un PC de escritorio. Hicimos la cuenta de cuándo conviene</h3>
-              <p>Alibaba liberó Qwen3.8-27B y corre en una máquina de casa. Con el consumo de IA de nuestro
-                propio sitio, la tarjeta de video tardaría 444 años en pagarse sola.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-08-16">16 ago 2026</time> · 9 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/chatgpt-gratis-ilimitado-que-cambia/" style="--d:.4s"
-            data-tema="IA y tecnología"
-            data-txt="chatgpt gratis ilimitado gpt-5.6 luna openai limite mensajes think modelo por defecto visibilidad">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">IA y tecnología</span>
-              <h3>Se acabó el «te quedan 3 mensajes». Y eso te afecta aunque no uses ChatGPT</h3>
-              <p>OpenAI quitó el tope de mensajes de texto en las cuentas gratuitas y puso ahí su modelo
-                bueno. El número de gente que va a preguntar por ti a una máquina acaba de perder el techo.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-08-08">8 ago 2026</time> · 7 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/cuanto-cuesta-una-tarea-con-ia/" style="--d:.45s"
-            data-tema="IA y tecnología"
-            data-txt="cuanto cuesta una tarea con ia costo por token precio por tarea agentes guerra de precios deepseek gemini flash presupuesto de tokens">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">IA y tecnología</span>
-              <h3>El token bajó un 99% y la factura de IA subió</h3>
-              <p>El precio por token se derrumbó y las cuentas siguen creciendo. La métrica que decide la
-                factura no es esa: es cuánto cuesta terminar la tarea.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-08-08">8 ago 2026</time> · 8 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/de-donde-vienen-las-visitas-de-mi-web/" style="--d:.5s"
-            data-tema="Visibilidad"
-            data-txt="de donde vienen las visitas trafico directo organic social utm instagram chatgpt analytics referral">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">Visibilidad</span>
-              <h3>De dónde vienen tus visitas: lo que Analytics no te está diciendo</h3>
-              <p>Por qué «Directo» casi nunca es directo, dónde esconde Analytics el tráfico de Instagram
-                y de ChatGPT, y cómo etiquetar tus enlaces para verlo.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-08-06">6 ago 2026</time> · 8 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/modelos-abiertos-de-ia-para-pymes/" style="--d:.55s"
-            data-tema="IA y tecnología"
-            data-txt="modelos abiertos de ia deepseek v4 flash qwen 3.8 max llama pymes costo por token licencia mit apache">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">IA y tecnología</span>
-              <h3>Los modelos de IA que casi nadie te menciona, y por qué te deberían importar</h3>
-              <p>DeepSeek, Qwen y Llama hacen las tareas normales de un negocio por una fracción de lo que
-                cuesta un modelo de punta. Actualizado a agosto de 2026.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-08-02">2 ago 2026</time> · 9 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/cuanto-cuesta-una-pagina-web-en-peru/" style="--d:.6s"
-            data-tema="Precios"
-            data-txt="cuanto cuesta una pagina web en peru precios presupuesto cotizacion rangos soles">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">Precios</span>
-              <h3>¿Cuánto cuesta una página web en Perú?</h3>
-              <p>Por qué el 60% de las compras en línea en Perú pasan por Yape o Plin, y qué cambia eso
-                en lo que deberías pagar por tu sitio.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-08-01">1 ago 2026</time> · 8 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/que-es-un-agente-de-ia/" style="--d:.65s"
-            data-tema="IA y tecnología"
-            data-txt="que es un agente de ia chatbot vs agente pymes adopcion riesgos gartner cisa">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">IA y tecnología</span>
-              <h3>Qué es un agente de IA (y si tu negocio realmente necesita uno)</h3>
-              <p>La diferencia real entre un chatbot y un agente, qué tan rápido lo están adoptando las
-                pymes, qué riesgos trae y cómo empezar sin quemar plata.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-07-31">31 jul 2026</time> · 9 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/cuanto-cuesta-una-pagina-web-en-mexico/" style="--d:.7s"
-            data-tema="Precios"
-            data-txt="cuanto cuesta una pagina web en mexico precios presupuesto cotizacion rangos pesos mexicanos">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">Precios</span>
-              <h3>¿Cuánto cuesta una página web en México?</h3>
-              <p>Los precios publicados van desde $6,000 hasta más de $250,000 pesos mexicanos. Qué hay
-                detrás de esa diferencia y cómo saber cuánto debería costar la tuya.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-07-30">30 jul 2026</time> · 7 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/google-no-encuentra-mi-pagina/" style="--d:.75s"
-            data-tema="Visibilidad"
-            data-txt="mi pagina no aparece en google visibilidad indexacion noindex robots search console">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/visibilidad.webp" alt="Persona revisando la visibilidad de su web en Google en una laptop en un espacio de trabajo limpio" width="1879" height="837" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">Visibilidad</span>
-              <h3>Mi página no aparece en Google</h3>
-              <p>Antes de contratar SEO, descarta lo que se arregla en una tarde. Las siete causas, de
-                la más común a la más rara — empezando por una línea de código que deja tu web invisible.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-07-28">28 jul 2026</time> · 8 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/como-aparecer-en-google-maps/" style="--d:.8s"
-            data-tema="Negocio local"
-            data-txt="como aparecer en google maps negocio local ficha resenas mapa paquete local">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/local.webp" alt="Manos sosteniendo un smartphone con la aplicación de Google Maps abierta sobre una mesa de madera" width="1774" height="887" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">Negocio local</span>
-              <h3>Cómo aparecer en Google Maps</h3>
-              <p>El mapa se lleva buena parte de los clics y no depende de tu página web. Los tres
-                factores que deciden el orden y cómo aparecer aunque no tengas local.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-07-27">27 jul 2026</time> · 7 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/seo-para-ia/" style="--d:.85s"
-            data-tema="SEO para IA"
-            data-txt="seo para ia geo aeo chatgpt gemini claude llms txt menciones de marca">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de ChatGPT en una laptop en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">SEO para IA</span>
-              <h3>Cómo lograr que ChatGPT recomiende tu empresa</h3>
-              <p>Qué son GEO y AEO, qué dice Google textualmente, por qué el archivo llms.txt casi no
-                sirve todavía, y qué factores sí correlacionan.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-07-26">26 jul 2026</time> · 10 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/por-que-mis-correos-llegan-a-spam/" style="--d:.9s"
-            data-tema="Correo"
-            data-txt="por que mis correos llegan a spam spf dkim dmarc gmail autenticacion suplantacion">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/correo.webp" alt="Vista cercana de la bandeja de entrada de correos electrónicos en una laptop con la sección de spam resaltada" width="1774" height="887" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">Correo</span>
-              <h3>¿Por qué mis correos llegan a spam?</h3>
-              <p>Desde 2024 Google exige autenticar el dominio o el correo va directo a spam. Qué son
-                SPF, DKIM y DMARC y cómo revisar los tuyos en tres minutos.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-07-25">25 jul 2026</time> · 9 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/mejores-agencias-diseno-web-barranquilla/" style="--d:.95s"
-            data-tema="Cómo elegir"
-            data-txt="mejores agencias de diseno web en barranquilla guia para elegir comparar estudios">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/elegir.webp?v=2" alt="Laptop sobre un escritorio de madera mostrando un directorio de estudios de diseño web" width="1200" height="800" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">Cómo elegir</span>
-              <h3>Agencias de diseño web en Barranquilla: guía para elegir</h3>
-              <p>Seis estudios con presencia verificable en la ciudad y los criterios que separan un
-                buen proyecto de uno que toca rehacer al año.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-07-24">24 jul 2026</time> · 8 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="blog-card blog-post reveal" href="/blog/cuanto-cuesta-una-pagina-web-en-colombia/" style="--d:1s"
-            data-tema="Precios"
-            data-txt="cuanto cuesta una pagina web en colombia precios presupuesto cotizacion rangos">
-            <span class="blog-card-foto"><img class="blog-foto" src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" loading="lazy" decoding="async"></span>
-            <div class="blog-card-txt">
-              <span class="blog-tag">Precios</span>
-              <h3>¿Cuánto cuesta una página web en Colombia?</h3>
-              <p>Los precios publicados van desde $400.000 hasta más de $50 millones. Qué hay detrás de
-                esa diferencia y cómo saber cuánto debería costar la tuya.</p>
-              <div class="blog-pie">
-                <span class="blog-autor">K<span style="color:var(--violet)">.</span></span>
-                <span class="blog-lectura"><time datetime="2026-07-23">23 jul 2026</time> · 7 min de lectura</span>
-              </div>
-            </div>
-          </a>
-
-        </div>
-
-        <p class="blog-vacio" id="blogVacio">No encontramos nada con eso. Prueba con otra palabra o
-          quita el filtro.</p>
+        <a class="bcard" href="/blog/comercio-agentico-ia-compra-por-ti/" data-tema="IA y tecnología" data-txt="comercio agentico ia que compra por ti instant checkout openai chatgpt agentic commerce protocol acp agent payments protocol ap2 google stripe paypal shopify impuesto de ventas el comercio con ia prometia saltarse tu sitio web. termino necesitandolo mas openai apago la compra dentro de chatgpt cinco meses despues de lanzarla, en parte porque nunca resolvio cobrar el impuesto de ventas. que paso de verdad con el comercio agentico y que le toca hacer a tu negocio. ia y tecnologia">
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Persona usando un teléfono para hacer una compra en línea con ayuda de un asistente de inteligencia artificial" width="1774" height="887" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">IA y tecnología</span>
+            <h3>El comercio con IA prometía saltarse tu sitio web. Terminó necesitándolo más</h3>
+            <p>OpenAI apagó la compra dentro de ChatGPT cinco meses después de lanzarla, en parte porque nunca resolvió cobrar el impuesto de ventas. Qué pasó de verdad con el comercio agéntico y qué le toca hacer a tu negocio.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-09-20">20 sep 2026</time> · 9 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/cuanto-cuesta-una-pagina-web-en-espana/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en espana precios presupuesto cotizacion rangos euros iva verifactu real decreto ley 15/2025 facturacion electronica autonomos ¿cuanto cuesta una pagina web en espana? los precios van de 300 € a mas de 10.000 €. el gobierno aplazo verifactu a 2027, pero si tu sitio va a vender o facturar, esa fecha ya deberia estar en la conversacion con quien te lo construya. precios">
+          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web con su tabla de precios" width="1024" height="1024" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">Precios</span>
+            <h3>¿Cuánto cuesta una página web en España?</h3>
+            <p>Los precios van de 300 € a más de 10.000 €. El Gobierno aplazó Verifactu a 2027, pero si tu sitio va a vender o facturar, esa fecha ya debería estar en la conversación con quien te lo construya.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-09-18">18 sep 2026</time> · 8 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/por-que-comprar-backlinks-ya-no-funciona/" data-tema="Marketing y SEO" data-txt="por que comprar backlinks ya casi no funciona google spam brain deteccion 2026 rel nofollow sponsored actualizacion de spam marzo 2026 disavow enlaces pagados por que comprar backlinks ya casi no funciona google no prohibe pagar por un enlace: prohibe esconder que lo pagaste. como detecta spambrain los patrones de enlaces comprados y que paso en la actualizacion de spam de marzo de 2026, que tardo 31 horas en rodar por todo el mundo. marketing y seo">
+          <span class="bcard-img"><img src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">Marketing y SEO</span>
+            <h3>Por qué comprar backlinks ya casi no funciona</h3>
+            <p>Google no prohíbe pagar por un enlace: prohíbe esconder que lo pagaste. Cómo detecta SpamBrain los patrones de enlaces comprados y qué pasó en la actualización de spam de marzo de 2026, que tardó 31 horas en rodar por todo el mundo.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-09-08">8 sep 2026</time> · 8 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/busqueda-con-ia-en-tu-sitio-rag/" data-tema="IA y tecnología" data-txt="busqueda con ia en tu propio sitio rag generacion aumentada por recuperacion agent search vertex ai search google cloud precios indexar buscador interno chatbot sobre tu contenido busqueda con ia en tu propio sitio: que es rag y que cuesta google publica el precio: indexar un sitio de mil paginas cuesta 2,38 dolares al mes. nadie esta entrenando un modelo con tu contenido, y la mayoria de las pymes que preguntan por esto todavia no lo necesita. ia y tecnologia">
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Persona consultando en una laptop un buscador con inteligencia artificial dentro del sitio web de su empresa" width="1774" height="887" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">IA y tecnología</span>
+            <h3>Búsqueda con IA en tu propio sitio: qué es RAG y qué cuesta</h3>
+            <p>Google publica el precio: indexar un sitio de mil páginas cuesta 2,38 dólares al mes. Nadie está entrenando un modelo con tu contenido, y la mayoría de las pymes que preguntan por esto todavía no lo necesita.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-09-06">6 sep 2026</time> · 9 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/mejores-agencias-diseno-web-ciudad-de-mexico/" data-tema="Cómo elegir" data-txt="mejores agencias de diseno web en cdmx ciudad de mexico guia para elegir estudios sat rfc cfdi 4.0 articulo 69-b efos constancia de situacion fiscal iva polanco roma agencias de diseno web en cdmx: guia para elegir seis estudios con direccion verificable en la ciudad, y la pregunta que casi nadie hace en la primera reunion: si te van a poder facturar. incluye las dos consultas del sat que deciden si el gasto es deducible. como elegir">
+          <span class="bcard-img"><img src="/assets/blog/elegir.webp?v=2" alt="Laptop sobre un escritorio mostrando un directorio de portafolios de estudios de diseño web" width="1200" height="800" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">Cómo elegir</span>
+            <h3>Agencias de diseño web en CDMX: guía para elegir</h3>
+            <p>Seis estudios con dirección verificable en la ciudad, y la pregunta que casi nadie hace en la primera reunión: si te van a poder facturar. Incluye las dos consultas del SAT que deciden si el gasto es deducible.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-09-05">5 sep 2026</time> · 8 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/domain-rating-autoridad-de-dominio-no-es-vender-mas/" data-tema="Marketing y SEO" data-txt="domain rating autoridad de dominio moz ahrefs domain authority john mueller google no lo usa backlinks enlaces escala logaritmica vender mas domain rating: el numero que sube en el reporte y no en la caja ahrefs y moz inventaron el domain rating y la domain authority, no google. john mueller lo ha dicho varias veces: no se usan para posicionar. que miden en realidad y que deberias pedir en su lugar. marketing y seo">
+          <span class="bcard-img"><img src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">Marketing y SEO</span>
+            <h3>Domain Rating: el número que sube en el reporte y no en la caja</h3>
+            <p>Ahrefs y Moz inventaron el Domain Rating y la Domain Authority, no Google. John Mueller lo ha dicho varias veces: no se usan para posicionar. Qué miden en realidad y qué deberías pedir en su lugar.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-09-04">4 sep 2026</time> · 8 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/tu-chatbot-ya-tiene-que-decir-que-es-ia/" data-tema="IA y tecnología" data-txt="tu chatbot ya tiene que decir que es ia reglamento europeo articulo 50 ai act transparencia multas whatsapp asistente virtual tu chatbot ya tiene que decir que es una ia: que cambio el 2 de agosto la union europea ya exige que un chatbot avise que es una ia, con multas de hasta 15 millones de euros. que dice la norma y que hacer con el tuyo aunque no vendas en europa. ia y tecnologia">
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional revisando en una laptop una conversación de chatbot de inteligencia artificial en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">IA y tecnología</span>
+            <h3>Tu chatbot ya tiene que decir que es una IA: qué cambió el 2 de agosto</h3>
+            <p>La Unión Europea ya exige que un chatbot avise que es una IA, con multas de hasta 15 millones de euros. Qué dice la norma y qué hacer con el tuyo aunque no vendas en Europa.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-09-01">1 sep 2026</time> · 9 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/cuanto-cuesta-una-pagina-web-en-ecuador/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en ecuador precios presupuesto cotizacion rangos dolares dolarizacion iva sri factura electronica ¿cuanto cuesta una pagina web en ecuador? el dolar no es la duda; el iva si los precios van de $200 a mas de $10,000, ya en dolares. por que el iva subio a 15% y que cambio con el sri desde enero de 2026. precios">
+          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1200" height="800" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">Precios</span>
+            <h3>¿Cuánto cuesta una página web en Ecuador? El dólar no es la duda; el IVA sí</h3>
+            <p>Los precios van de $200 a más de $10,000, ya en dólares. Por qué el IVA subió a 15% y qué cambió con el SRI desde enero de 2026.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-08-31">31 ago 2026</time> · 9 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/chatbots-ia-atencion-al-cliente-costos-reales/" data-tema="IA y tecnología" data-txt="chatbots de ia para atencion al cliente costos reales gorgias freshdesk intercom fin whatsapp business api meta contencion resolucion chatbots de ia para atencion al cliente: lo que nadie pone en la cotizacion gorgias cobra $1,50 por interaccion, freshdesk $0,49 por sesion, intercom fin $0,99 por resolucion. los precios reales de 2026 y el costo oculto de whatsapp business api. ia y tecnologia">
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional revisando en una laptop el panel de un chatbot de inteligencia artificial en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">IA y tecnología</span>
+            <h3>Chatbots de IA para atención al cliente: lo que nadie pone en la cotización</h3>
+            <p>Gorgias cobra $1,50 por interacción, Freshdesk $0,49 por sesión, Intercom Fin $0,99 por resolución. Los precios reales de 2026 y el costo oculto de WhatsApp Business API.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-08-30">30 ago 2026</time> · 8 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/mejores-agencias-diseno-web-bogota/" data-tema="Cómo elegir" data-txt="mejores agencias de diseno web en bogota guia para elegir comparar estudios rues camara de comercio agencias de diseno web en bogota: guia para elegir seis estudios con presencia verificable en la ciudad y los criterios que separan un buen proyecto de uno que toca rehacer al ano. incluye como verificar si una agencia es una empresa real. como elegir">
+          <span class="bcard-img"><img src="/assets/blog/elegir.webp?v=2" alt="Laptop sobre un escritorio de madera mostrando un directorio de estudios de diseño web" width="1200" height="800" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">Cómo elegir</span>
+            <h3>Agencias de diseño web en Bogotá: guía para elegir</h3>
+            <p>Seis estudios con presencia verificable en la ciudad y los criterios que separan un buen proyecto de uno que toca rehacer al año. Incluye cómo verificar si una agencia es una empresa real.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-08-26">26 ago 2026</time> · 8 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/chatgpt-ia-descubrimiento-marca/" data-tema="IA y tecnología" data-txt="chatgpt canal descubrimiento marca traffico referente clickeable enlaces 157% usuarios buscan chatgpt como canal de descubrimiento de marca: por que importa hoy el trafico que viene de chatgpt se multiplico 157% en una semana. que cambio, por que el 80% de tus clientes potenciales ya buscan asi, y que significa eso para tu negocio. ia y tecnologia">
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Laptop sobre un escritorio de madera con una conversación de ChatGPT abierta en pantalla y una mano escribiendo en el teclado" width="1774" height="887" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">IA y tecnología</span>
+            <h3>ChatGPT como canal de descubrimiento de marca: por qué importa hoy</h3>
+            <p>El tráfico que viene de ChatGPT se multiplicó 157% en una semana. Qué cambió, por qué el 80% de tus clientes potenciales ya buscan así, y qué significa eso para tu negocio.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-08-25">25 ago 2026</time> · 7 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/cuanto-cuesta-una-pagina-web-en-argentina/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en argentina precios presupuesto cotizacion rangos pesos argentinos dolar inflacion ¿cuanto cuesta una pagina web en argentina? y por que todo se cotiza en dolares los precios van desde $250.000 a mas de $1.500.000 ars. como el dolar cambia la ecuacion y por que casi todas las agencias cotizan en divisa aunque facturen en pesos. precios">
+          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de diseño web con tabla de precios" width="1024" height="1024" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">Precios</span>
+            <h3>¿Cuánto cuesta una página web en Argentina? Y por qué todo se cotiza en dólares</h3>
+            <p>Los precios van desde $250.000 a más de $1.500.000 ARS. Cómo el dólar cambia la ecuación y por qué casi todas las agencias cotizan en divisa aunque facturen en pesos.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-08-24">24 ago 2026</time> · 7 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/modo-ia-google-ai-overviews-que-significa-para-tu-seo/" data-tema="IA y tecnología" data-txt="modo ia google ai overviews que significa para tu seo mil millones de usuarios clics pew research ahrefs sistrix el modo ia de google llego a mil millones de usuarios: que significa para tu seo el clic en los ai overviews toco fondo en 1,3% y el modo ia ya es pestana fija del buscador. que cambia de verdad para un negocio pequeno, con los datos de los ultimos estudios. ia y tecnologia">
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">IA y tecnología</span>
+            <h3>El Modo IA de Google llegó a mil millones de usuarios: qué significa para tu SEO</h3>
+            <p>El clic en los AI Overviews tocó fondo en 1,3% y el Modo IA ya es pestaña fija del buscador. Qué cambia de verdad para un negocio pequeño, con los datos de los últimos estudios.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-08-23">23 ago 2026</time> · 8 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/cuanto-cuesta-una-pagina-web-en-chile/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en chile precios presupuesto cotizacion rangos pesos chilenos ley 21719 proteccion de datos ¿cuanto cuesta una pagina web en chile? y que cambia con la ley 21.719 los precios van de $170.000 a varios millones de pesos. en diciembre entra en vigencia la nueva ley de proteccion de datos, y casi ninguna cotizacion la esta mencionando. precios">
+          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">Precios</span>
+            <h3>¿Cuánto cuesta una página web en Chile? Y qué cambia con la Ley 21.719</h3>
+            <p>Los precios van de $170.000 a varios millones de pesos. En diciembre entra en vigencia la nueva ley de protección de datos, y casi ninguna cotización la está mencionando.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-08-22">22 ago 2026</time> · 8 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/qwen-3-8-27b-ia-local/" data-tema="IA y tecnología" data-txt="qwen3.8-27b qwen 3.8 27b ia local modelo local vram cuantizacion gguf ollama llama.cpp apache 2.0 contexto 262k tarjeta de video un modelo de ia serio ya cabe en un pc de escritorio. hicimos la cuenta de cuando conviene alibaba libero qwen3.8-27b y corre en una maquina de casa. con el consumo de ia de nuestro propio sitio, la tarjeta de video tardaria 444 anos en pagarse sola. ia y tecnologia">
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">IA y tecnología</span>
+            <h3>Un modelo de IA serio ya cabe en un PC de escritorio. Hicimos la cuenta de cuándo conviene</h3>
+            <p>Alibaba liberó Qwen3.8-27B y corre en una máquina de casa. Con el consumo de IA de nuestro propio sitio, la tarjeta de video tardaría 444 años en pagarse sola.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-08-16">16 ago 2026</time> · 9 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/chatgpt-gratis-ilimitado-que-cambia/" data-tema="IA y tecnología" data-txt="chatgpt gratis ilimitado gpt-5.6 luna openai limite mensajes think modelo por defecto visibilidad se acabo el «te quedan 3 mensajes». y eso te afecta aunque no uses chatgpt openai quito el tope de mensajes de texto en las cuentas gratuitas y puso ahi su modelo bueno. el numero de gente que va a preguntar por ti a una maquina acaba de perder el techo. ia y tecnologia">
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">IA y tecnología</span>
+            <h3>Se acabó el «te quedan 3 mensajes». Y eso te afecta aunque no uses ChatGPT</h3>
+            <p>OpenAI quitó el tope de mensajes de texto en las cuentas gratuitas y puso ahí su modelo bueno. El número de gente que va a preguntar por ti a una máquina acaba de perder el techo.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-08-08">8 ago 2026</time> · 7 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/cuanto-cuesta-una-tarea-con-ia/" data-tema="IA y tecnología" data-txt="cuanto cuesta una tarea con ia costo por token precio por tarea agentes guerra de precios deepseek gemini flash presupuesto de tokens el token bajo un 99% y la factura de ia subio el precio por token se derrumbo y las cuentas siguen creciendo. la metrica que decide la factura no es esa: es cuanto cuesta terminar la tarea. ia y tecnologia">
+          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">IA y tecnología</span>
+            <h3>El token bajó un 99% y la factura de IA subió</h3>
+            <p>El precio por token se derrumbó y las cuentas siguen creciendo. La métrica que decide la factura no es esa: es cuánto cuesta terminar la tarea.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-08-08">8 ago 2026</time> · 8 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/de-donde-vienen-las-visitas-de-mi-web/" data-tema="Visibilidad" data-txt="de donde vienen las visitas trafico directo organic social utm instagram chatgpt analytics referral de donde vienen tus visitas: lo que analytics no te esta diciendo por que «directo» casi nunca es directo, donde esconde analytics el trafico de instagram y de chatgpt, y como etiquetar tus enlaces para verlo. visibilidad">
+          <span class="bcard-img"><img src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">Visibilidad</span>
+            <h3>De dónde vienen tus visitas: lo que Analytics no te está diciendo</h3>
+            <p>Por qué «Directo» casi nunca es directo, dónde esconde Analytics el tráfico de Instagram y de ChatGPT, y cómo etiquetar tus enlaces para verlo.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-08-06">6 ago 2026</time> · 8 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/modelos-abiertos-de-ia-para-pymes/" data-tema="IA y tecnología" data-txt="modelos abiertos de ia deepseek v4 flash qwen 3.8 max llama pymes costo por token licencia mit apache los modelos de ia que casi nadie te menciona, y por que te deberian importar deepseek, qwen y llama hacen las tareas normales de un negocio por una fraccion de lo que cuesta un modelo de punta. actualizado a agosto de 2026. ia y tecnologia">
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">IA y tecnología</span>
+            <h3>Los modelos de IA que casi nadie te menciona, y por qué te deberían importar</h3>
+            <p>DeepSeek, Qwen y Llama hacen las tareas normales de un negocio por una fracción de lo que cuesta un modelo de punta. Actualizado a agosto de 2026.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-08-02">2 ago 2026</time> · 9 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/cuanto-cuesta-una-pagina-web-en-peru/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en peru precios presupuesto cotizacion rangos soles ¿cuanto cuesta una pagina web en peru? por que el 60% de las compras en linea en peru pasan por yape o plin, y que cambia eso en lo que deberias pagar por tu sitio. precios">
+          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">Precios</span>
+            <h3>¿Cuánto cuesta una página web en Perú?</h3>
+            <p>Por qué el 60% de las compras en línea en Perú pasan por Yape o Plin, y qué cambia eso en lo que deberías pagar por tu sitio.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-08-01">1 ago 2026</time> · 8 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/que-es-un-agente-de-ia/" data-tema="IA y tecnología" data-txt="que es un agente de ia chatbot vs agente pymes adopcion riesgos gartner cisa que es un agente de ia (y si tu negocio realmente necesita uno) la diferencia real entre un chatbot y un agente, que tan rapido lo estan adoptando las pymes, que riesgos trae y como empezar sin quemar plata. ia y tecnologia">
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de un asistente de IA en una laptop en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">IA y tecnología</span>
+            <h3>Qué es un agente de IA (y si tu negocio realmente necesita uno)</h3>
+            <p>La diferencia real entre un chatbot y un agente, qué tan rápido lo están adoptando las pymes, qué riesgos trae y cómo empezar sin quemar plata.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-07-31">31 jul 2026</time> · 9 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/cuanto-cuesta-una-pagina-web-en-mexico/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en mexico precios presupuesto cotizacion rangos pesos mexicanos ¿cuanto cuesta una pagina web en mexico? los precios publicados van desde $6,000 hasta mas de $250,000 pesos mexicanos. que hay detras de esa diferencia y como saber cuanto deberia costar la tuya. precios">
+          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">Precios</span>
+            <h3>¿Cuánto cuesta una página web en México?</h3>
+            <p>Los precios publicados van desde $6,000 hasta más de $250,000 pesos mexicanos. Qué hay detrás de esa diferencia y cómo saber cuánto debería costar la tuya.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-07-30">30 jul 2026</time> · 7 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/google-no-encuentra-mi-pagina/" data-tema="Visibilidad" data-txt="mi pagina no aparece en google visibilidad indexacion noindex robots search console mi pagina no aparece en google antes de contratar seo, descarta lo que se arregla en una tarde. las siete causas, de la mas comun a la mas rara — empezando por una linea de codigo que deja tu web invisible. visibilidad">
+          <span class="bcard-img"><img src="/assets/blog/visibilidad.webp" alt="Persona revisando la visibilidad de su web en Google en una laptop en un espacio de trabajo limpio" width="1879" height="837" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">Visibilidad</span>
+            <h3>Mi página no aparece en Google</h3>
+            <p>Antes de contratar SEO, descarta lo que se arregla en una tarde. Las siete causas, de la más común a la más rara — empezando por una línea de código que deja tu web invisible.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-07-28">28 jul 2026</time> · 8 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/como-aparecer-en-google-maps/" data-tema="Negocio local" data-txt="como aparecer en google maps negocio local ficha resenas mapa paquete local como aparecer en google maps el mapa se lleva buena parte de los clics y no depende de tu pagina web. los tres factores que deciden el orden y como aparecer aunque no tengas local. negocio local">
+          <span class="bcard-img"><img src="/assets/blog/local.webp" alt="Manos sosteniendo un smartphone con la aplicación de Google Maps abierta sobre una mesa de madera" width="1774" height="887" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">Negocio local</span>
+            <h3>Cómo aparecer en Google Maps</h3>
+            <p>El mapa se lleva buena parte de los clics y no depende de tu página web. Los tres factores que deciden el orden y cómo aparecer aunque no tengas local.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-07-27">27 jul 2026</time> · 7 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/seo-para-ia/" data-tema="SEO para IA" data-txt="seo para ia geo aeo chatgpt gemini claude llms txt menciones de marca como lograr que chatgpt recomiende tu empresa que son geo y aeo, que dice google textualmente, por que el archivo llms.txt casi no sirve todavia, y que factores si correlacionan. seo para ia">
+          <span class="bcard-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de ChatGPT en una laptop en una oficina moderna" width="1774" height="887" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">SEO para IA</span>
+            <h3>Cómo lograr que ChatGPT recomiende tu empresa</h3>
+            <p>Qué son GEO y AEO, qué dice Google textualmente, por qué el archivo llms.txt casi no sirve todavía, y qué factores sí correlacionan.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-07-26">26 jul 2026</time> · 10 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/por-que-mis-correos-llegan-a-spam/" data-tema="Correo" data-txt="por que mis correos llegan a spam spf dkim dmarc gmail autenticacion suplantacion ¿por que mis correos llegan a spam? desde 2024 google exige autenticar el dominio o el correo va directo a spam. que son spf, dkim y dmarc y como revisar los tuyos en tres minutos. correo">
+          <span class="bcard-img"><img src="/assets/blog/correo.webp" alt="Vista cercana de la bandeja de entrada de correos electrónicos en una laptop con la sección de spam resaltada" width="1774" height="887" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">Correo</span>
+            <h3>¿Por qué mis correos llegan a spam?</h3>
+            <p>Desde 2024 Google exige autenticar el dominio o el correo va directo a spam. Qué son SPF, DKIM y DMARC y cómo revisar los tuyos en tres minutos.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-07-25">25 jul 2026</time> · 9 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/mejores-agencias-diseno-web-barranquilla/" data-tema="Cómo elegir" data-txt="mejores agencias de diseno web en barranquilla guia para elegir comparar estudios agencias de diseno web en barranquilla: guia para elegir seis estudios con presencia verificable en la ciudad y los criterios que separan un buen proyecto de uno que toca rehacer al ano. como elegir">
+          <span class="bcard-img"><img src="/assets/blog/elegir.webp?v=2" alt="Laptop sobre un escritorio de madera mostrando un directorio de estudios de diseño web" width="1200" height="800" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">Cómo elegir</span>
+            <h3>Agencias de diseño web en Barranquilla: guía para elegir</h3>
+            <p>Seis estudios con presencia verificable en la ciudad y los criterios que separan un buen proyecto de uno que toca rehacer al año.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-07-24">24 jul 2026</time> · 8 min de lectura</span>
+          </span>
+        </a>
+        <a class="bcard" href="/blog/cuanto-cuesta-una-pagina-web-en-colombia/" data-tema="Precios" data-txt="cuanto cuesta una pagina web en colombia precios presupuesto cotizacion rangos ¿cuanto cuesta una pagina web en colombia? los precios publicados van desde $400.000 hasta mas de $50 millones. que hay detras de esa diferencia y como saber cuanto deberia costar la tuya. precios">
+          <span class="bcard-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" loading="lazy" decoding="async"></span>
+          <span class="bcard-txt">
+            <span class="btag">Precios</span>
+            <h3>¿Cuánto cuesta una página web en Colombia?</h3>
+            <p>Los precios publicados van desde $400.000 hasta más de $50 millones. Qué hay detrás de esa diferencia y cómo saber cuánto debería costar la tuya.</p>
+            <span class="bmeta"><b>K.</b><time datetime="2026-07-23">23 jul 2026</time> · 7 min de lectura</span>
+          </span>
+        </a>
       </div>
-    </section>
-
-    <section class="section" style="padding-top:0">
-      <div class="wrap">
-        <div class="cierre">
-          <h2>¿Prefieres que lo veamos con tu caso<span class="dot">?</span></h2>
-          <p>Cuéntanos qué necesitas y te contestamos el mismo día o el siguiente, de lunes a viernes, con un camino claro.</p>
-          <div class="hero-ctas" style="justify-content:center">
-            <a href="/#contacto" class="btn btn-violet">Escríbenos</a>
-            <a href="/diagnostico/" class="btn btn-ghost">Ver el diagnóstico</a>
-          </div>
-        </div>
-      </div>
+      <p class="bvacio" id="bvacio">No encontramos nada con eso. Prueba con otra palabra o quita el filtro.</p>
     </section>
   </main>
 
-  <footer class="pie">
-    <div class="wrap">
-      <p>© Kaiva Studio 2026 · Barranquilla, Colombia</p>
-      <nav aria-label="Enlaces del pie">
-        <a href="/">Inicio</a>
-        <a href="/diagnostico/">Diagnóstico</a>
-        <a href="/#contacto">Contacto</a>
-        <a href="/privacidad/">Privacidad</a>
-        <a href="/terminos/">Términos</a>
-        <a href="/cookies/">Cookies</a>
-        <a href="/cookies/" data-kv-cookies>Preferencias</a>
-      </nav>
+    <!-- ============ CIERRE ============ -->
+  <footer class="final" id="contacto">
+    <div class="final-core">
+      <div class="note-wrap" id="note" aria-hidden="true">
+        <div class="note-shadow"><i></i></div>
+        <div class="sticky"><b>¿Tienes un proyecto?</b><span>Cuéntanos qué necesitas.<br><i>— Kaiva Studio</i></span></div>
+      </div>
+      <h2><span class="dim">Hablemos de</span> tu empresa</h2>
+      <form class="mail-form" id="mailForm" novalidate>
+        <label class="sr-only" for="email">Tu correo de trabajo</label>
+        <input id="email" name="email" type="email" placeholder="Tu correo de trabajo" autocomplete="email" required>
+        <input class="hp" type="text" id="cWebsite" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit">Agendar llamada</button>
+      </form>
+      <label class="consent" for="cPrivacy"><input type="checkbox" id="cPrivacy" required> <span>Autorizo a Kaiva Studio a tratar mis datos para responder mi solicitud, según la <a href="/privacidad/">política de privacidad</a>.</span></label>
+      <p class="form-note" id="formNote" aria-live="polite">Te contestamos el mismo día o el siguiente, de lunes a viernes, de 8:00 a. m. a 6:00 p. m.</p>
+      <div class="contacts">
+        <a href="mailto:info@kaivastudio.com">info@kaivastudio.com</a>
+        <a href="https://wa.me/573024137374" target="_blank" rel="noopener">WhatsApp +57 302 413 7374</a>
+      </div>
+    </div>
+
+    <div class="foot">
+      <a class="logo" href="/"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125" loading="lazy"></a>
+      <ul>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/portfolio/">Portfolio</a></li>
+        <li><a href="/blog/">Blog</a></li>
+      </ul>
+      <div class="soc">
+        <a class="circle light" href="https://www.instagram.com/kaivastudio/" target="_blank" rel="noopener" aria-label="Instagram"><svg><use href="#i-ig"/></svg></a>
+        <a class="circle light" href="https://www.linkedin.com/in/kaiva-studio-a6a15340b/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg><use href="#i-in"/></svg></a>
+        <a class="circle light" href="https://wa.me/573024137374" target="_blank" rel="noopener" aria-label="WhatsApp"><svg><use href="#i-wa"/></svg></a>
+        <a class="circle light" href="mailto:info@kaivastudio.com" aria-label="Correo"><svg><use href="#i-mail"/></svg></a>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Kaiva Studio · Barranquilla, Colombia</span>
+      <span><a href="/privacidad/">Privacidad</a> · <a href="/terminos/">Términos</a></span>
     </div>
   </footer>
-  <script>
-    (function () {
-      var nav = document.getElementById('nav');
-      var enlaces = document.getElementById('navLinks');
-      var boton = document.getElementById('navToggle');
+</div>
+<script>
+(function(){
+  var root=document.documentElement;
+  root.classList.add('js');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      var alScroll = function () {
-        nav.classList.toggle('scrolled', window.scrollY > 10);
-      };
-      alScroll();
-      window.addEventListener('scroll', alScroll, { passive: true });
+  /* ---------- Scroll suave con la rueda del mouse ----------
+     La rueda no salta: fija un destino y la página se desliza hacia él con inercia.
+     Solo con mouse (no en celular) y nunca si el sistema pide reducir el movimiento. */
+  var smoothTo=null;
+  (function(){
+    if(reduce||!window.matchMedia('(pointer:fine)').matches)return;
+    var root=document.documentElement,target=window.pageYOffset,cur=target,raf=0,ease=.1;
+    function max(){return root.scrollHeight-window.innerHeight}
+    function tick(){
+      cur+=(target-cur)*ease;
+      if(Math.abs(target-cur)<.5)cur=target;
+      window.scrollTo(0,cur);
+      raf=cur===target?0:requestAnimationFrame(tick);
+    }
+    function go(y,k){target=Math.max(0,Math.min(max(),y));ease=k;if(!raf){cur=window.pageYOffset;raf=requestAnimationFrame(tick)}}
+    window.addEventListener('wheel',function(e){
+      if(e.ctrlKey||e.defaultPrevented||Math.abs(e.deltaX)>Math.abs(e.deltaY))return;
+      // lo que tenga su propio scroll (configuración de cookies, menús) se desplaza normal
+      for(var n=e.target;n&&n.nodeType===1&&n!==root&&n!==document.body;n=n.parentElement){
+        var o=getComputedStyle(n).overflowY;
+        if((o==='auto'||o==='scroll')&&n.scrollHeight>n.clientHeight)return;
+      }
+      e.preventDefault();
+      if(!raf)target=window.pageYOffset;
+      go(target+e.deltaY*(e.deltaMode===1?40:e.deltaMode===2?window.innerHeight:1),.1);
+    },{passive:false});
+    window.addEventListener('scroll',function(){if(!raf)target=cur=window.pageYOffset},{passive:true});
+    window.addEventListener('keydown',function(){if(raf){cancelAnimationFrame(raf);raf=0}});
+    smoothTo=function(y){go(y,.075)};
+  })();
 
-      boton.addEventListener('click', function (e) {
-        e.stopPropagation();
-        var abierto = enlaces.classList.toggle('open');
-        boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
-      });
+  /* ---------- Enlaces internos: desplazamiento suave hecho a mano ---------- */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="#"]');
+    if(!a)return;
+    var id=a.getAttribute('href').slice(1),t=id&&document.getElementById(id);
+    if(!t)return;
+    e.preventDefault();
+    var vh=window.innerHeight,y;
+    if(id==='inicio')y=0;
+    else if(id==='trabajo'){var c=document.getElementById('car').getBoundingClientRect(),cap=t.getBoundingClientRect();y=c.top+window.pageYOffset-Math.max(90,(vh-(cap.bottom-c.top))/2)}
+    else{var h=t.querySelector(':scope > .head, :scope > .block-left')||t;y=h.getBoundingClientRect().top+window.pageYOffset-(id==='contacto'?20:110)}
+    if(smoothTo)smoothTo(y);else window.scrollTo({top:y,behavior:reduce?'auto':'smooth'});
+  });
 
-      document.addEventListener('click', function (e) {
-        if (!enlaces.contains(e.target) && !boton.contains(e.target)) {
-          enlaces.classList.remove('open');
-          boton.setAttribute('aria-expanded', 'false');
-        }
-      });
 
-      // Aparición al hacer scroll. La clase en <html> es la que activa el
-      // estado oculto en el CSS: sin JS no se esconde nada.
-      if (!('IntersectionObserver' in window)) return;
-      document.documentElement.classList.add('js-reveal');
+  /* ---------- Menú hamburguesa ---------- */
+  var mm=document.getElementById('mmenu');
+  function setMenu(o){mm.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';document.querySelectorAll('.burger').forEach(function(b){b.setAttribute('aria-expanded',o)})}
+  document.querySelectorAll('.burger').forEach(function(b){b.addEventListener('click',function(){setMenu(true)})});
+  mm.querySelector('.mm-close').addEventListener('click',function(){setMenu(false)});
+  mm.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false)});
 
-      var objetivos = document.querySelectorAll('.tarjeta, .paso, .post-item, .faq-item, .blog-post');
-      objetivos.forEach(function (el, i) {
-        el.classList.add('reveal');
-        // Escalona solo dentro de cada grupo para que no se acumule el retraso.
-        el.style.setProperty('--d', (i % 6) * 0.06 + 's');
-      });
 
-      var observador = new IntersectionObserver(function (entradas) {
-        entradas.forEach(function (entrada) {
-          if (!entrada.isIntersecting) return;
-          entrada.target.classList.add('dentro');
-          observador.unobserve(entrada.target);
-        });
-      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  /* ---------- Barra flotante, panel que se vuelve morado y cierre que se oscurece ---------- */
+  var fn=document.getElementById('floatNav'),hero=document.getElementById('inicio'),fin=document.getElementById('contacto');
+  function onScroll(){
+    var hr=hero.getBoundingClientRect();fn.classList.toggle('show',hr.bottom<120);hero.style.setProperty('--hp',Math.max(0,Math.min(1,-hr.top/(hr.height*.6))).toFixed(3));
+    var fr=fin.getBoundingClientRect(),vh=window.innerHeight,fp=(vh-fr.top)/Math.min(fr.height,vh);
+    fin.style.setProperty('--fp',(Math.max(0,Math.min(1,fp))*.82).toFixed(3));
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);onScroll();
 
-      objetivos.forEach(function (el) { observador.observe(el); });
-    })();
-  </script>
-  <!-- ================= BUSCADOR Y FILTROS DEL BLOG =================
-       Todo del lado del cliente: son seis artículos, no hace falta backend.
-       Cada tarjeta lleva su tema y un `data-txt` sin tildes para buscar sin
-       que importen los acentos. -->
-  <script>
-    (function () {
-      var posts = [].slice.call(document.querySelectorAll('.blog-post'));
-      var chips = [].slice.call(document.querySelectorAll('.blog-chip'));
-      var campo = document.getElementById('blogBuscar');
-      var vacio = document.getElementById('blogVacio');
-      if (!posts.length) return;
+  /* ---------- Enlaces internos de esta página ---------- */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="#"]');if(!a)return;
+    var t=document.getElementById(a.getAttribute('href').slice(1));if(!t)return;
+    e.preventDefault();var y=t.getBoundingClientRect().top+window.pageYOffset-(t.id==='contacto'?20:90);
+    if(smoothTo)smoothTo(y);else window.scrollTo({top:y,behavior:reduce?'auto':'smooth'});
+  });
 
-      var tema = '';
+  /* ---------- Apariciones ---------- */
+  var vh0=window.innerHeight;
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('pre');io.unobserve(e.target)}});
+  },{threshold:.15}):null;
+  document.querySelectorAll('[data-reveal]').forEach(function(el){
+    if(reduce||!io){el.classList.remove('pre');return}
+    if(el.getBoundingClientRect().top>vh0*.92){el.classList.add('pre');io.observe(el)}else el.classList.remove('pre');
+  });
 
-      var limpiar = function (s) {
-        return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-      };
+  /* ---------- La parte gris de los títulos se enciende al pasar el mouse ---------- */
+  document.querySelectorAll('h1 .dim,h2 .dim').forEach(function(d){
+    d.innerHTML=d.textContent.trim().split(/\s+/).map(function(w){return '<span class="w">'+w+'</span>'}).join(' ');
+  });
 
-      var filtrar = function () {
-        var texto = limpiar(campo ? campo.value.trim() : '');
-        var visibles = 0;
+  /* ---------- Buscador y temas ---------- */
+  var q=document.getElementById('bq'),chips=[].slice.call(document.querySelectorAll('.btema'));
+  var items=[].slice.call(document.querySelectorAll('.bcard,.bdest')),vacio=document.getElementById('bvacio'),count=document.getElementById('bcount');
+  var tema='',total=items.length;
+  function norm(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim()}
+  function filtrar(){
+    var t=norm(q.value),words=t?t.split(/\s+/):[],n=0;
+    items.forEach(function(it){
+      var ok=(!tema||it.dataset.tema===tema)&&words.every(function(w){return it.dataset.txt.indexOf(w)>=0});
+      it.classList.toggle('hide',!ok);if(ok)n++;
+    });
+    vacio.classList.toggle('show',n===0);
+    count.textContent=(tema||t)?(n===1?'1 artículo':n+' artículos')+(tema?' en '+tema:'')+(t?' con «'+q.value.trim()+'»':''):total+' artículos · los más recientes primero';
+  }
+  q.addEventListener('input',filtrar);
+  chips.forEach(function(c){c.addEventListener('click',function(){
+    tema=c.dataset.tema;chips.forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false')});filtrar();
+    if(tema){var g=document.getElementById('guias');var y=g.getBoundingClientRect().top+window.pageYOffset-90;if(window.pageYOffset<y-200){if(smoothTo)smoothTo(y);else window.scrollTo({top:y,behavior:reduce?'auto':'smooth'})}}
+  })});
+  document.addEventListener('keydown',function(e){if(e.key==='/'&&document.activeElement!==q&&!/input|textarea/i.test(document.activeElement.tagName)){e.preventDefault();q.focus()}});
 
-        posts.forEach(function (p) {
-          var coincideTema = !tema || p.dataset.tema === tema;
-          var coincideTexto = !texto ||
-            limpiar(p.dataset.txt).indexOf(texto) > -1 ||
-            limpiar(p.textContent).indexOf(texto) > -1;
-          var mostrar = coincideTema && coincideTexto;
-          p.style.display = mostrar ? '' : 'none';
-          if (mostrar) visibles++;
-        });
+  /* ---------- Cursor propio: avión de papel dibujado a mano + destello al hacer clic ---------- */
+  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    var plane=document.createElement('div');plane.className='cur-plane';
+    plane.innerHTML='<svg viewBox="0 0 40 30"><defs>'+
+      '<linearGradient id="curWing" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E2E2E8"/></linearGradient>'+
+      '<linearGradient id="curFold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D6D6DD"/><stop offset="1" stop-color="#A4A4AF"/></linearGradient>'+
+      '<linearGradient id="curRay" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#BABAC4"/></linearGradient></defs>'+
+      '<path fill="url(#curWing)" stroke="rgba(8,8,8,.55)" stroke-width=".6" stroke-linejoin="round" d="M2 2L38 3L35 8.5L34.6 21L18.6 28.4Z"/>'+
+      '<path fill="url(#curFold)" d="M27.6 13.4L31.6 9.6L33.9 17.6L34.6 21Z"/>'+
+      '<path fill="none" stroke="rgba(8,8,8,.3)" stroke-width=".5" stroke-linejoin="round" d="M8.6 5.1L31.6 9.6L33.9 17.6M13.2 8.7L27.6 13.4L34.6 21"/>'+
+      '<path fill="none" stroke="#fff" stroke-width=".5" stroke-linecap="round" opacity=".9" d="M4.5 3.4L34.5 4.2"/></svg>';
+    document.body.appendChild(plane);
+    root.classList.add('has-cursor');
+    var hoverSel='a,button,.ci,.acc-btn,.mail-form,.app,[role="switch"],.toggle span,.mw-art,.mw-row div,.sw-kpi,.sw-row,.br-card,.br-icon,.br-post,.br-logo,.faq-item summary';
+    var ray='M0 -7L-4.6 -23Q0 -24.8 4.6 -23Z';
+    function burst(x,y){
+      var d=document.createElement('div');d.className='cur-burst';
+      d.style.transform='translate3d('+x+'px,'+y+'px,0)';
+      d.innerHTML='<svg viewBox="0 0 64 64">'+[-68,-24,14,52].map(function(a){return '<path fill="url(#curRay)" stroke="rgba(8,8,8,.42)" stroke-width=".6" stroke-linejoin="round" transform="translate(32 46) rotate('+a+')" d="'+ray+'"/>'}).join('')+'</svg>';
+      document.body.appendChild(d);setTimeout(function(){d.remove()},400);
+    }
+    document.addEventListener('mousemove',function(e){
+      plane.style.transform='translate3d('+e.clientX+'px,'+e.clientY+'px,0)';
+      root.classList.add('cur-on');
+      plane.classList.toggle('hover',!!(e.target.closest&&e.target.closest(hoverSel)));
+    });
+    document.addEventListener('mouseout',function(e){if(!e.relatedTarget)root.classList.remove('cur-on')});
+    var goneT=null;
+    document.addEventListener('mousedown',function(e){plane.classList.add('gone');if(!reduce)burst(e.clientX,e.clientY);clearTimeout(goneT);goneT=setTimeout(function(){plane.classList.remove('gone')},200)});
+  }
 
-        if (vacio) vacio.classList.toggle('on', visibles === 0);
-      };
-
-      chips.forEach(function (chip) {
-        chip.addEventListener('click', function () {
-          tema = chip.dataset.tema;
-          chips.forEach(function (c) {
-            c.setAttribute('aria-pressed', c === chip ? 'true' : 'false');
-          });
-          filtrar();
-        });
-      });
-
-      if (campo) campo.addEventListener('input', filtrar);
-    })();
-  </script>
-
-  <script src="/assets/fechas.js?v=1" defer></script>
+  /* ---------- Formulario: copia en la hoja de leads y aviso por correo (EmailJS) ---------- */
+  var form=document.getElementById('mailForm'),email=document.getElementById('email'),note=document.getElementById('formNote'),casilla=document.getElementById('cPrivacy');
+  var fBtn=form.querySelector('button[type="submit"]'),fLabel=fBtn.textContent;
+  var HOJA_LEADS='https://script.google.com/macros/s/AKfycbwqEv37I6bl8g7xdZxrTHgMWswDPAGO6bDbHH70JgLFeqhfLwE0NrJEc_iGTnU-zwEZTA/exec';
+  var EJS={service:'service_94uqq2e',template:'template_brvipe9',key:'7bRjr4NU9L0Y5gDsy',endpoint:'https://api.emailjs.com/api/v1.0/email/send'};
+  var fallo='No pudimos enviarlo. Escríbenos a info@kaivastudio.com o por WhatsApp al +57 302 413 7374.';
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(fBtn.disabled)return;
+    if(document.getElementById('cWebsite').value){note.textContent='Listo, recibimos tu correo.';form.reset();return}
+    var v=email.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){note.textContent='Escribe un correo válido, por ejemplo nombre@tuempresa.com.';email.focus();return}
+    if(!casilla.checked){note.textContent='Marca la casilla de autorización para poder escribirte.';casilla.focus();return}
+    var autorizada=new Date().toISOString(),mensaje='Quiere agendar una llamada desde el blog.';
+    fBtn.disabled=true;fBtn.textContent='Enviando…';
+    fetch(HOJA_LEADS,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({nombre:'',correo:v,telefono:'',interes:'Agendar llamada',mensaje:mensaje,origen:location.href,referente:document.referrer||'directo',autorizacion:autorizada})}).catch(function(){});
+    fetch(EJS.endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:EJS.service,template_id:EJS.template,user_id:EJS.key,template_params:{
+      name:v.split('@')[0],email:v,message:mensaje,phone:'No indicado',interest:'Agendar llamada',
+      subject:'Nuevo contacto desde kaivastudio.com — Agendar llamada',
+      time:new Date().toLocaleString('es-CO',{dateStyle:'medium',timeStyle:'short'}),page_url:location.href,privacy:'Autorizada el '+autorizada}})})
+    .then(function(r){if(!r.ok)throw new Error(r.status);note.textContent='Listo, recibimos tu correo. Te escribimos el mismo día o el siguiente, de lunes a viernes.';form.reset();casilla.checked=false})
+    .catch(function(){note.textContent=fallo})
+    .then(function(){fBtn.disabled=false;fBtn.textContent=fLabel});
+  });
+})();
+</script>
 </body>
-
 </html>
