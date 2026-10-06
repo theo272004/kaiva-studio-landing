@@ -853,6 +853,9 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 @media (max-width:980px){
   .page{--aw:470px;--bz:10px}
   .nav-links,.float-nav ul{display:none}
+  .burger{display:block}
+  .float-nav>.btn{display:none}
+  .laptop .base{width:106%;margin-left:-3%}
   .features{grid-template-columns:1fr}
   .studio-grid{grid-template-columns:1fr 1fr}
   .me{grid-column:1/-1;grid-row:auto}
@@ -1330,6 +1333,9 @@ html.lock{overflow:hidden}
   .desk-area .ico:nth-child(6){--x:calc(50% + 8px)!important;--y:71%!important}
   .pdock{gap:6px;padding:7px 8px;border-radius:18px;bottom:10px}
   .pdock .d{width:40px;height:40px;border-radius:10px}
+  /* en pantallas angostas el dock deja solo Finder y lo que se abre */
+  .pdock .deco:not(:first-child){display:none}
+  .pdock .sep:last-of-type{display:none}
   .pdock .m-hide{display:none}
   .pdock .sep{height:30px}
   .pdock .live::after{display:none}

@@ -774,6 +774,9 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 @media (max-width:980px){
   .page{--aw:470px;--bz:10px}
   .nav-links,.float-nav ul{display:none}
+  .burger{display:block}
+  .float-nav>.btn{display:none}
+  .laptop .base{width:106%;margin-left:-3%}
   .features{grid-template-columns:1fr}
   .studio-grid{grid-template-columns:1fr 1fr}
   .me{grid-column:1/-1;grid-row:auto}
@@ -840,7 +843,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .art-crumbs b{font-weight:500;color:var(--violet-text)}
 .art-head h1{margin:0;font-size:clamp(2.2rem,5vw,3.9rem);line-height:1.02;letter-spacing:-.05em;text-wrap:balance}
 .art-lead{margin:0;max-width:62ch;font-size:clamp(17px,1.6vw,19.5px);line-height:1.6;color:var(--ink-2);text-wrap:pretty}
-.art-meta{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink-3)}
+.art-meta{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 10px;text-align:center;font-size:13.5px;color:var(--ink-3)}
 .art-meta .k{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--ink);color:var(--paper);font-size:12px;font-weight:700;letter-spacing:-.04em}
 .art-meta b{font-weight:600;color:var(--ink)}
 .art-hero{max-width:1120px;margin:clamp(36px,5vw,56px) auto 0;padding:0 20px}
@@ -912,6 +915,16 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 @media (max-width:600px){
   .art{padding-top:104px}
   .articulo{font-size:17px}
+  .art-meta .k{display:none}
+  /* tablas como tarjetas apiladas */
+  .articulo div:has(>table.tcards){box-shadow:none;border-radius:0;overflow:visible}
+  .articulo table.tcards,.tcards tbody,.tcards tr,.tcards td{display:block;width:100%}
+  .tcards thead{display:none}
+  .tcards tr{margin:0 0 12px;padding:14px 16px;border-radius:16px;background:var(--mist)}
+  .articulo .tcards td{padding:4px 0;border:0;font-size:15px}
+  .articulo .tcards td::before{content:attr(data-label);display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .articulo .tcards td:first-child{font-size:16.5px;padding-bottom:6px}
+  .articulo .tcards td:first-child::before{display:none}
   .art-hero img{aspect-ratio:4/3}
   .art-more-grid{grid-template-columns:1fr}.art-more-grid .amc:nth-child(3){display:flex}
   .art-more-head{flex-direction:column;align-items:flex-start}
@@ -984,15 +997,15 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 <h2>Los rangos que se publican en Argentina</h2>
 <p>Estos son los órdenes de magnitud que ves en las páginas de agencias y freelancers argentinos. Los números en pesos reflejan el tipo de cambio de fines de agosto de 2026 (dólar oficial en torno a $1.485). Los números en dólares son los que importan si planeas un presupuesto que no se devalue.</p>
 <div style="overflow-x:auto;margin-top:1.4rem">
-<table>
+<table class="tcards">
 <thead>
 <tr> <th>Tipo de sitio</th> <th>Rango publicado</th> <th>Para quién tiene sentido</th> </tr> </thead>
 <tbody>
-<tr> <td>Plantilla adaptada</td> <td>$200–600 USD<br/>($300k–900k ARS)</td> <td>Validar una idea rápido, presupuesto muy ajustado</td> </tr>
-<tr> <td>Landing page a medida</td> <td>$250–400 USD<br/>($370k–600k ARS)</td> <td>Un solo servicio o producto, o una campaña puntual</td> </tr>
-<tr> <td>Sitio corporativo a medida</td> <td>$400–800 USD<br/>($600k–1,2M ARS)</td> <td>La mayoría de pymes y empresas de servicios</td> </tr>
-<tr> <td>Tienda en línea</td> <td>$600–2.000 USD<br/>($900k–3M ARS)</td> <td>Vender en línea con pagos e inventario</td> </tr>
-<tr> <td>Plataforma o desarrollo grande</td> <td>USD 5.000+<br/>($7,4M+ ARS)</td> <td>Software a medida, sistemas conectados</td> </tr> </tbody> </table> </div>
+<tr> <td data-label="Tipo de sitio">Plantilla adaptada</td> <td data-label="Rango publicado">$200–600 USD<br/>($300k–900k ARS)</td> <td data-label="Para quién tiene sentido">Validar una idea rápido, presupuesto muy ajustado</td> </tr>
+<tr> <td data-label="Tipo de sitio">Landing page a medida</td> <td data-label="Rango publicado">$250–400 USD<br/>($370k–600k ARS)</td> <td data-label="Para quién tiene sentido">Un solo servicio o producto, o una campaña puntual</td> </tr>
+<tr> <td data-label="Tipo de sitio">Sitio corporativo a medida</td> <td data-label="Rango publicado">$400–800 USD<br/>($600k–1,2M ARS)</td> <td data-label="Para quién tiene sentido">La mayoría de pymes y empresas de servicios</td> </tr>
+<tr> <td data-label="Tipo de sitio">Tienda en línea</td> <td data-label="Rango publicado">$600–2.000 USD<br/>($900k–3M ARS)</td> <td data-label="Para quién tiene sentido">Vender en línea con pagos e inventario</td> </tr>
+<tr> <td data-label="Tipo de sitio">Plataforma o desarrollo grande</td> <td data-label="Rango publicado">USD 5.000+<br/>($7,4M+ ARS)</td> <td data-label="Para quién tiene sentido">Software a medida, sistemas conectados</td> </tr> </tbody> </table> </div>
 <p style="margin-top:1.2rem;font-size:14.5px;color:var(--ink-faint)">Rangos recogidos de precios publicados por agencias y freelancers argentinos durante 2025 y 2026. Los precios en pesos varían constantemente con el tipo de cambio.</p>
 <h2>Lo que la mayoría no menciona: mantenimiento y hosting</h2>
 <p>El desarrollo es un pago único. Mantener vivo el sitio no lo es, y en Argentina esto tiene un costo especial:</p>

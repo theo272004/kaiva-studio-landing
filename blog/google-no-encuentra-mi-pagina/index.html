@@ -765,6 +765,9 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 @media (max-width:980px){
   .page{--aw:470px;--bz:10px}
   .nav-links,.float-nav ul{display:none}
+  .burger{display:block}
+  .float-nav>.btn{display:none}
+  .laptop .base{width:106%;margin-left:-3%}
   .features{grid-template-columns:1fr}
   .studio-grid{grid-template-columns:1fr 1fr}
   .me{grid-column:1/-1;grid-row:auto}
@@ -831,7 +834,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .art-crumbs b{font-weight:500;color:var(--violet-text)}
 .art-head h1{margin:0;font-size:clamp(2.2rem,5vw,3.9rem);line-height:1.02;letter-spacing:-.05em;text-wrap:balance}
 .art-lead{margin:0;max-width:62ch;font-size:clamp(17px,1.6vw,19.5px);line-height:1.6;color:var(--ink-2);text-wrap:pretty}
-.art-meta{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink-3)}
+.art-meta{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 10px;text-align:center;font-size:13.5px;color:var(--ink-3)}
 .art-meta .k{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--ink);color:var(--paper);font-size:12px;font-weight:700;letter-spacing:-.04em}
 .art-meta b{font-weight:600;color:var(--ink)}
 .art-hero{max-width:1120px;margin:clamp(36px,5vw,56px) auto 0;padding:0 20px}
@@ -903,6 +906,16 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 @media (max-width:600px){
   .art{padding-top:104px}
   .articulo{font-size:17px}
+  .art-meta .k{display:none}
+  /* tablas como tarjetas apiladas */
+  .articulo div:has(>table.tcards){box-shadow:none;border-radius:0;overflow:visible}
+  .articulo table.tcards,.tcards tbody,.tcards tr,.tcards td{display:block;width:100%}
+  .tcards thead{display:none}
+  .tcards tr{margin:0 0 12px;padding:14px 16px;border-radius:16px;background:var(--mist)}
+  .articulo .tcards td{padding:4px 0;border:0;font-size:15px}
+  .articulo .tcards td::before{content:attr(data-label);display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .articulo .tcards td:first-child{font-size:16.5px;padding-bottom:6px}
+  .articulo .tcards td:first-child::before{display:none}
   .art-hero img{aspect-ratio:4/3}
   .art-more-grid{grid-template-columns:1fr}.art-more-grid .amc:nth-child(3){display:flex}
   .art-more-head{flex-direction:column;align-items:flex-start}
@@ -1003,17 +1016,17 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 <p>Search Console te lo dice en su sección de <em>Acciones manuales</em>. Si está vacía, no es tu caso — y en la enorme mayoría de las veces está vacía. Antes de asumir un castigo, revisa las seis causas anteriores.</p>
 <h2>El orden en que conviene revisarlo</h2>
 <div style="overflow-x:auto;margin-top:1.4rem">
-<table>
+<table class="tcards">
 <thead>
 <tr> <th>#</th> <th>Revisar</th> <th>Cuánto toma arreglarlo</th> </tr> </thead>
 <tbody>
-<tr> <td>1</td> <td>Etiqueta <code>noindex</code></td> <td>Minutos</td> </tr>
-<tr> <td>2</td> <td><code>robots.txt</code> bloqueando</td> <td>Minutos</td> </tr>
-<tr> <td>3</td> <td>Registro en Search Console</td> <td>15 minutos</td> </tr>
-<tr> <td>4</td> <td>Sitemap</td> <td>Una tarde</td> </tr>
-<tr> <td>5</td> <td>Redirecciones y canonical</td> <td>Una tarde</td> </tr>
-<tr> <td>6</td> <td>Expectativa de palabras</td> <td>Meses de trabajo</td> </tr>
-<tr> <td>7</td> <td>Penalizaciones</td> <td>Depende</td> </tr> </tbody> </table> </div>
+<tr> <td data-label="#">1</td> <td data-label="Revisar">Etiqueta <code>noindex</code></td> <td data-label="Cuánto toma arreglarlo">Minutos</td> </tr>
+<tr> <td data-label="#">2</td> <td data-label="Revisar"><code>robots.txt</code> bloqueando</td> <td data-label="Cuánto toma arreglarlo">Minutos</td> </tr>
+<tr> <td data-label="#">3</td> <td data-label="Revisar">Registro en Search Console</td> <td data-label="Cuánto toma arreglarlo">15 minutos</td> </tr>
+<tr> <td data-label="#">4</td> <td data-label="Revisar">Sitemap</td> <td data-label="Cuánto toma arreglarlo">Una tarde</td> </tr>
+<tr> <td data-label="#">5</td> <td data-label="Revisar">Redirecciones y canonical</td> <td data-label="Cuánto toma arreglarlo">Una tarde</td> </tr>
+<tr> <td data-label="#">6</td> <td data-label="Revisar">Expectativa de palabras</td> <td data-label="Cuánto toma arreglarlo">Meses de trabajo</td> </tr>
+<tr> <td data-label="#">7</td> <td data-label="Revisar">Penalizaciones</td> <td data-label="Cuánto toma arreglarlo">Depende</td> </tr> </tbody> </table> </div>
 <p style="margin-top:1.2rem">Fíjate en que las cinco primeras son técnicas y baratas. Si alguien te ofrece un contrato mensual de posicionamiento sin haber revisado esto, <strong>está vendiéndote meses de trabajo sobre una puerta cerrada</strong>.</p>
 <div class="nota">
 <p><strong>La pregunta que conviene hacerle a <a href="/blog/mejores-agencias-diseno-web-barranquilla/">cualquier agencia</a> antes de firmar:</strong> «¿mi sitio está indexado y qué encontraron al revisarlo?». Si la respuesta es vaga o pasan directo a hablar de contenidos y redes, ya sabes cuánto miraron.</p> </div>
