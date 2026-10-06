@@ -1050,36 +1050,34 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .pw-ig{flex:1;min-height:0;display:grid;place-items:center;background:#FAFAFA}
 .pw-ig iframe{width:100%;height:100%;border:0;background:#fff}
 
-/* ---------- logofolio ---------- */
-.logof{overflow:visible}
-.lf-band{width:100vw;margin:0 0 0 calc(50% - 50vw);overflow:hidden;background:var(--violet-text);color:#fff}
-.logof .lf-band:first-child{margin-bottom:56px}
-.logof .lf-band:last-child{margin-top:56px}
-.lf-track{display:flex;align-items:center;gap:22px;width:max-content;padding:12px 0;animation:lfroll 38s linear infinite;font-weight:700;font-size:clamp(15px,1.5vw,20px);letter-spacing:.02em}
+/* ---------- logofolio (ventana) ---------- */
+.pw-scroll.lfw{display:block;padding:0 0 22px;container-type:inline-size}
+.lfw .lf-band{position:sticky;top:0;z-index:2;overflow:hidden;background:#E03E85;color:#fff;margin-bottom:18px}
+.lf-track{display:flex;align-items:center;gap:18px;width:max-content;padding:9px 0;animation:lfroll 32s linear infinite;font-family:Montserrat,var(--f-sans),sans-serif;font-weight:700;font-size:15px;letter-spacing:.02em}
 .lf-track i{font-style:normal;opacity:.7}
 @keyframes lfroll{to{transform:translateX(-50%)}}
-.lf-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;max-width:1180px;margin:0 auto}
-.lf-tile{position:relative;display:grid;place-items:center;aspect-ratio:4/3;margin:0;border-radius:var(--r-card);background:#F3F3F3;overflow:hidden;cursor:default;outline:none;box-shadow:0 0 0 1px rgba(8,8,8,.04);transition:transform .45s var(--ease),box-shadow .45s}
-.lf-tile:hover,.lf-tile:focus-visible{transform:translateY(-4px);box-shadow:0 0 0 1px rgba(8,8,8,.06),0 24px 40px -26px rgba(8,8,8,.45)}
-.lf-tile img{grid-area:1/1;display:block;height:auto;transition:opacity .45s ease,transform .6s var(--ease)}
-.lf-tile.white img{mix-blend-mode:multiply}
-.lf-iso{width:auto;max-width:56%;max-height:52%}
-.lf-logo{width:auto;max-width:80%;max-height:40%;opacity:0;transform:scale(.92)}
-.lf-tile:not(.solo):hover .lf-iso,.lf-tile:not(.solo):focus-visible .lf-iso{opacity:0;transform:scale(1.08)}
-.lf-tile:hover .lf-logo,.lf-tile:focus-visible .lf-logo{opacity:1;transform:none}
-.lf-tile.solo:hover .lf-iso{transform:scale(1.06)}
-.lf-tile figcaption{position:absolute;left:14px;bottom:12px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);opacity:0;transform:translateY(6px);transition:opacity .35s ease,transform .45s var(--ease)}
-.lf-tile:hover figcaption,.lf-tile:focus-visible figcaption{opacity:1;transform:none}
+.lfw .lf-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:0 18px}
+.lfw .lf-tile{position:relative;display:grid;place-items:center;aspect-ratio:4/3;margin:0;border-radius:14px;background:#F3F3F3;overflow:hidden;cursor:default;outline:none;box-shadow:0 0 0 1px rgba(8,8,8,.04);transition:transform .45s var(--ease),box-shadow .45s}
+.lfw .lf-tile:hover,.lfw .lf-tile:focus-visible{transform:translateY(-4px);box-shadow:0 0 0 1px rgba(8,8,8,.06),0 24px 40px -26px rgba(8,8,8,.45)}
+.pw-scroll.lfw .lf-tile img{grid-area:1/1;display:block;width:auto;height:auto;border-radius:0;background:none;box-shadow:none;animation:none;opacity:1;transform:none;transition:opacity .45s ease,transform .6s var(--ease)}
+.pw-scroll.lfw .lf-tile .lf-iso{max-width:56%;max-height:52%}
+.pw-scroll.lfw .lf-tile .lf-logo{max-width:80%;max-height:40%;opacity:0;transform:scale(.92)}
+.pw-scroll.lfw .lf-tile.white img{mix-blend-mode:multiply;filter:grayscale(1) contrast(1.25)}
+.pw-scroll.lfw .lf-tile:not(.solo):hover .lf-iso,.pw-scroll.lfw .lf-tile:not(.solo):focus-visible .lf-iso{opacity:0;transform:scale(1.08)}
+.pw-scroll.lfw .lf-tile:hover .lf-logo,.pw-scroll.lfw .lf-tile:focus-visible .lf-logo{opacity:1;transform:none}
+.pw-scroll.lfw .lf-tile.solo:hover .lf-iso{transform:scale(1.06)}
+.lfw .lf-tile figcaption{position:absolute;left:14px;bottom:12px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);opacity:0;transform:translateY(6px);transition:opacity .35s ease,transform .45s var(--ease)}
+.lfw .lf-tile:hover figcaption,.lfw .lf-tile:focus-visible figcaption{opacity:1;transform:none}
 /* sin mouse (celular): cada tarjeta alterna sola entre símbolo y logo */
 @media (hover:none){
-  .lf-tile:not(.solo) .lf-iso{animation:lfiso 7s ease-in-out infinite;animation-delay:calc(var(--i) * .7s)}
-  .lf-tile:not(.solo) .lf-logo{animation:lflogo 7s ease-in-out infinite;animation-delay:calc(var(--i) * .7s)}
-  .lf-tile figcaption{opacity:1;transform:none}
+  .pw-scroll.lfw .lf-tile:not(.solo) .lf-iso{animation:lfiso 7s ease-in-out infinite;animation-delay:calc(var(--i) * .7s)}
+  .pw-scroll.lfw .lf-tile:not(.solo) .lf-logo{animation:lflogo 7s ease-in-out infinite;animation-delay:calc(var(--i) * .7s)}
+  .lfw .lf-tile figcaption{opacity:1;transform:none}
 }
+@container (max-width:620px){.lfw .lf-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:0 12px}}
 @keyframes lfiso{0%,42%{opacity:1;transform:none}50%,92%{opacity:0;transform:scale(1.08)}100%{opacity:1;transform:none}}
 @keyframes lflogo{0%,42%{opacity:0;transform:scale(.92)}50%,92%{opacity:1;transform:none}100%{opacity:0;transform:scale(.92)}}
-@media (max-width:980px){.lf-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (prefers-reduced-motion:reduce){.lf-track,.lf-tile img{animation:none!important}}
+@media (prefers-reduced-motion:reduce){.lf-track,.pw-scroll.lfw .lf-tile img{animation:none!important}}
 
 /* ---------- índice de proyectos (texto real para Google y para celular) ---------- */
 .plist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:1180px;margin:0 auto}
@@ -1160,7 +1158,8 @@ html.lock{overflow:hidden}
   .folder{width:92px;height:72px}
   .desk-area .ico:nth-child(1){--x:calc(50% - 148px)!important;--y:52%!important}
   .desk-area .ico:nth-child(2){--x:calc(50% + 8px)!important;--y:52%!important}
-  .desk-area .ico:nth-child(3){--x:calc(50% - 70px)!important;--y:80%!important}
+  .desk-area .ico:nth-child(3){--x:calc(50% - 148px)!important;--y:80%!important}
+  .desk-area .ico:nth-child(4){--x:calc(50% + 8px)!important;--y:80%!important}
   .pdock{gap:6px;padding:7px 8px;border-radius:18px;bottom:10px}
   .pdock .d{width:40px;height:40px;border-radius:10px}
   .pdock .m-hide{display:none}
@@ -1257,6 +1256,10 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
         <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/plantilla-portada.webp" alt="" width="1600" height="900"><span class="ff"></span></span>
         <span class="ico-name">Plantillas<small>Presentaciones</small></span>
       </button>
+      <button class="ico" type="button" data-open="logos" style="--x:36%;--y:7%">
+        <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/logos/folder.webp" alt="" width="800" height="500"><span class="ff"></span></span>
+        <span class="ico-name">Logofolio<small>Logos</small></span>
+      </button>
     </div>
 
     <div class="sc-ov" id="scOv"></div>
@@ -1340,56 +1343,6 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       </div>
     </section>
 
-    <!-- ============ LOGOFOLIO ============
-         Los logos que diseñamos. Cada tarjeta muestra el símbolo y, al pasar el mouse, el logo completo. -->
-    <section class="block logof" id="logos" aria-labelledby="lf-t">
-      <div class="lf-band" aria-hidden="true"><div class="lf-track"><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i></div></div>
-      <div class="head" data-reveal>
-        <h2 id="lf-t"><span class="dim">Logos que</span><br>diseñamos</h2>
-        <p class="sub">Símbolos y logotipos para marcas de distintos sectores. Cada tarjeta muestra el símbolo y, al pasar por encima, el logo completo.</p>
-      </div>
-      <div class="lf-grid" data-reveal>
-          <figure class="lf-tile white" style="--i:0" tabindex="0">
-            <img class="lf-iso" src="/assets/portfolio/thallo-brandbook/id-simbolo.webp" alt="Símbolo de Thallo Digital" width="800" height="800" loading="lazy">
-            <img class="lf-logo" src="/assets/portfolio/thallo-brandbook/id-logo.webp" alt="Logo de Thallo Digital" width="920" height="240" loading="lazy">
-            <figcaption>Thallo Digital</figcaption>
-          </figure>
-          <figure class="lf-tile" style="--i:1" tabindex="0">
-            <img class="lf-iso" src="/assets/portfolio/logos/seo4-iso.webp" alt="Símbolo de SEO4Startups" width="200" height="200" loading="lazy">
-            <img class="lf-logo" src="/assets/portfolio/logos/seo4-logo.webp" alt="Logo de SEO4Startups" width="980" height="200" loading="lazy">
-            <figcaption>SEO4Startups</figcaption>
-          </figure>
-          <figure class="lf-tile" style="--i:2" tabindex="0">
-            <img class="lf-iso" src="/assets/portfolio/logos/datafacta-iso.webp" alt="Símbolo de DataFacta" width="170" height="170" loading="lazy">
-            <img class="lf-logo" src="/assets/portfolio/logos/datafacta-logo.webp" alt="Logo de DataFacta" width="965" height="145" loading="lazy">
-            <figcaption>DataFacta</figcaption>
-          </figure>
-          <figure class="lf-tile" style="--i:3" tabindex="0">
-            <img class="lf-iso" src="/assets/portfolio/logos/gr-iso.webp" alt="Símbolo de GR Solutions SAS" width="225" height="180" loading="lazy">
-            <img class="lf-logo" src="/assets/portfolio/logos/gr-logo.webp" alt="Logo de GR Solutions SAS" width="835" height="175" loading="lazy">
-            <figcaption>GR Solutions SAS</figcaption>
-          </figure>
-          <figure class="lf-tile" style="--i:4" tabindex="0">
-            <img class="lf-iso" src="/assets/portfolio/logos/growher-iso.webp" alt="Símbolo de Growher" width="240" height="255" loading="lazy">
-            <img class="lf-logo" src="/assets/portfolio/logos/growher-logo.webp" alt="Logo de Growher" width="335" height="310" loading="lazy">
-            <figcaption>Growher</figcaption>
-          </figure>
-          <figure class="lf-tile" style="--i:5" tabindex="0">
-            <img class="lf-iso" src="/assets/portfolio/logos/conknots-emblema.webp" alt="Símbolo de Con Knots" width="430" height="290" loading="lazy">
-            <img class="lf-logo" src="/assets/portfolio/logos/conknots-logo.webp" alt="Logo de Con Knots" width="715" height="195" loading="lazy">
-            <figcaption>Con Knots</figcaption>
-          </figure>
-          <figure class="lf-tile solo" style="--i:6" tabindex="0">
-            <img class="lf-iso" src="/assets/portfolio/logos/gvm.webp" alt="Logo de GVM" width="280" height="210" loading="lazy">
-            <figcaption>GVM</figcaption>
-          </figure>
-          <figure class="lf-tile solo" style="--i:7" tabindex="0">
-            <img class="lf-iso" src="/assets/portfolio/logos/reka.webp" alt="Logo de Reka" width="365" height="210" loading="lazy">
-            <figcaption>Reka</figcaption>
-          </figure>
-      </div>
-      <div class="lf-band" aria-hidden="true"><div class="lf-track"><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i><span>LOGOFOLIO</span><i>—</i></div></div>
-    </section>
   </main>
 
     <!-- ============ CIERRE ============ -->
@@ -1580,6 +1533,27 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
     {fn:tplCover,cls:'tpl',alt:'Plantilla de presupuesto personal: portada con ingreso mensual y ahorro en 12 meses, datos de ejemplo'},
     {fn:tplGoals,cls:'tpl',alt:'Plantilla de presupuesto personal: metas de ahorro por trimestre, datos de ejemplo'}
   ];
+  // logofolio: logos en gris para que combinen entre sí; símbolo y, al pasar el mouse, el logo completo
+  var LG='/assets/portfolio/logos/';
+  var LOGOS=[
+    ['Thallo Digital',BB+'id-simbolo.webp',800,800,BB+'id-logo.webp',920,240,1],
+    ['SEO4Startups',LG+'seo4-iso.webp',200,200,LG+'seo4-logo.webp',980,200],
+    ['DataFacta',LG+'datafacta-iso.webp',170,170,LG+'datafacta-logo.webp',965,145],
+    ['GR Solutions SAS',LG+'gr-iso.webp',225,180,LG+'gr-logo.webp',835,175],
+    ['Growher',LG+'growher-iso.webp',240,255,LG+'growher-logo.webp',335,310],
+    ['Con Knots',LG+'conknots-emblema.webp',430,290,LG+'conknots-logo.webp',715,195],
+    ['GVM',LG+'gvm.webp',280,210],
+    ['Reka',LG+'reka.webp',365,210]
+  ];
+  function logofolioHTML(){
+    var w='';for(var k=0;k<14;k++)w+='<span>LOGOFOLIO</span><i>—</i>';
+    return '<div class="lf-band" aria-hidden="true"><div class="lf-track">'+w+w+'</div></div>'+
+      '<div class="lf-grid">'+LOGOS.map(function(x,i){
+        return '<figure class="lf-tile'+(x[4]?'':' solo')+(x[7]?' white':'')+'" style="--i:'+i+'" tabindex="0">'+
+          '<img class="lf-iso" src="'+x[1]+'" alt="'+(x[4]?'Símbolo de ':'Logo de ')+x[0]+'" width="'+x[2]+'" height="'+x[3]+'" loading="lazy">'+
+          (x[4]?'<img class="lf-logo" src="'+x[4]+'" alt="Logo de '+x[0]+'" width="'+x[5]+'" height="'+x[6]+'" loading="lazy">':'')+
+          '<figcaption>'+x[0]+'</figcaption></figure>'}).join('')+'</div>';
+  }
   var P={
     cst:{name:'CS Travel Group',kind:'Diseño web · Software a medida',hash:'cstravel',live:'https://www.cstravelgroup.com/',
       desc:'Agencia de viajes corporativos y para médicos. Hicimos su sitio web, las páginas para empresas y para médicos, y una plataforma a medida para sus aliados.',
@@ -1590,6 +1564,10 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
         {id:'plataforma',label:'Plataforma para aliados',url:'cstravelgroup.com/portal',live:'https://www.cstravelgroup.com/portal',full:true,shots:['/assets/portfolio/cstravel-portal-login.webp','/assets/inicio/trabajo-cstravel-software.webp'],caps:['Inicio de sesión del portal','Parte interna del portal'],alts:['Inicio de sesión del portal de aliados de CS Travel Group','Parte interna de la plataforma de CS Travel Group: ganancias, referidos y casos del aliado'],alt:'Plataforma a medida de CS Travel Group para sus aliados',
           note:'Es una plataforma privada: los aliados de CS Travel Group entran con su usuario para ver sus casos, sus referidos y sus ganancias.'}
       ]},
+    logos:{name:'Logofolio',kind:'Diseño de logos',hash:'logofolio',
+      desc:'Símbolos y logotipos para marcas de distintos sectores. Los mostramos en gris para que se vean como una sola colección.',
+      done:['Símbolo','Logotipo','Versiones','Sistema en blanco y negro'],
+      pages:[{id:'logos',label:'Logos',url:'Logofolio · Kaiva Studio',html:logofolioHTML}]},
     tpl:{name:'Plantillas',kind:'Plantillas de presentación',hash:'plantillas',
       desc:'También diseñamos plantillas de presentación para que tu equipo solo cambie los datos. Esta es de presupuesto personal; los números son de ejemplo.',
       done:['Portada','Tablas y gráficos','Metas y cierre','Editable en Canva'],
@@ -1603,7 +1581,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       ]}
   };
   // marcas: cada manual de marca es una pestaña del navegador
-  var BOOKS=[{id:'thallo',label:'Thallo Digital',url:'Brandbook · Thallo Digital',deck:SMB}];
+  var BOOKS=[{id:'thallo',label:'Thallo Digital',url:'Brandbook · Thallo Digital',deck:SMB},{id:'logos',label:'Logofolio',url:'Logofolio · Kaiva Studio',html:logofolioHTML}];
   // navegador: una pestaña por sitio, en vivo; dentro se navega con el menú de cada web
   var WEBS=[{p:P.cst,pg:P.cst.pages[0]},{p:P.thallo,pg:P.thallo.pages[0]}].map(function(x,i){return {id:'w'+i,label:x.p.name,url:x.pg.url,live:x.pg.live,frame:x.pg.frame,alt:x.pg.alt}});
 
@@ -1614,6 +1592,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
   var lock='<svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 10V8a5 5 0 0 1 10 0v2h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h1zm2 0h6V8a3 3 0 0 0-6 0v2z"/></svg>';
   var pgIco='<svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></g></svg>';
   function screensHTML(pg){
+    if(pg.html)return '<div class="pw-url">'+lock+'<span>'+pg.url+'</span></div><div class="pw-scroll lfw" tabindex="0">'+pg.html()+'</div>';
     // brandbook: una página tras otra; las animadas se reproducen al llegar a ellas
     if(pg.deck)return '<div class="pw-url">'+lock+'<span>'+pg.url+'</span></div>'+
       '<div class="pw-scroll deck" tabindex="0">'+pg.deck.map(function(d,i){
