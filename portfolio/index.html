@@ -1212,11 +1212,12 @@ html.lock{overflow:hidden}
   .ico-name{max-width:132px;font-size:13px}
   .ico-name small{font-size:11px}
   .folder{width:92px;height:72px}
-  .desk-area .ico:nth-child(1){--x:calc(50% - 148px)!important;--y:33%!important}
-  .desk-area .ico:nth-child(2){--x:calc(50% + 8px)!important;--y:33%!important}
-  .desk-area .ico:nth-child(3){--x:calc(50% - 148px)!important;--y:52%!important}
-  .desk-area .ico:nth-child(4){--x:calc(50% + 8px)!important;--y:52%!important}
-  .desk-area .ico:nth-child(5){--x:calc(50% - 70px)!important;--y:71%!important}
+  .desk-area .ico:nth-child(1){--x:calc(50% - 148px)!important;--y:29%!important}
+  .desk-area .ico:nth-child(2){--x:calc(50% + 8px)!important;--y:29%!important}
+  .desk-area .ico:nth-child(3){--x:calc(50% - 148px)!important;--y:50%!important}
+  .desk-area .ico:nth-child(4){--x:calc(50% + 8px)!important;--y:50%!important}
+  .desk-area .ico:nth-child(5){--x:calc(50% - 148px)!important;--y:71%!important}
+  .desk-area .ico:nth-child(6){--x:calc(50% + 8px)!important;--y:71%!important}
   .pdock{gap:6px;padding:7px 8px;border-radius:18px;bottom:10px}
   .pdock .d{width:40px;height:40px;border-radius:10px}
   .pdock .m-hide{display:none}
@@ -1320,6 +1321,10 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       <button class="ico" type="button" data-open="editorial" style="--x:74%;--y:56%">
         <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/felinorte/01.webp" alt="" width="900" height="1350" style="object-position:center 20%"><span class="ff"></span></span>
         <span class="ico-name">Editorial<small>Libro ilustrado</small></span>
+      </button>
+      <button class="ico" type="button" data-open="proenergy" style="--x:3%;--y:44%">
+        <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/proenergy/01.webp" alt="" width="1600" height="900"><span class="ff"></span></span>
+        <span class="ico-name">Proenergy<small>Presentación</small></span>
       </button>
     </div>
 
@@ -1624,14 +1629,14 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       '<div class="atg-view" hidden><button type="button" class="atg-x" aria-label="Volver a todas">×</button><button type="button" class="atg-nav prev" aria-label="Anterior">‹</button><img alt=""><button type="button" class="atg-nav next" aria-label="Siguiente">›</button><span class="atg-count"></span></div>';
   }
   // libro: 28 páginas; se ve de a dos como un libro abierto (portada sola a la derecha, contraportada sola a la izquierda)
-  var BOOK={base:'/assets/portfolio/felinorte/',pages:28,title:'Descubriendo Felinorte'};
+  var BOOK={base:'/assets/portfolio/felinorte/',pages:30,title:'Descubriendo Felinorte'};
   function bookHTML(){
     return '<div class="bk"><div class="bk-book" data-v="0">'+
       '<div class="bk-p bk-l"><img alt=""></div><div class="bk-p bk-r"><img alt=""></div>'+
       '<div class="bk-leaf"><div class="bk-f"><img alt=""></div><div class="bk-b"><img alt=""></div></div>'+
       '<button type="button" class="bk-hit prev" aria-label="Página anterior"></button><button type="button" class="bk-hit next" aria-label="Página siguiente"></button></div>'+
       '<div class="bk-nav"><button type="button" class="bk-btn prev" aria-label="Página anterior">‹</button><span class="bk-count" aria-live="polite"></span><button type="button" class="bk-btn next" aria-label="Página siguiente">›</button></div>'+
-      '<p class="bk-note"><b>Proyecto educativo.</b> Ilustrado y diagramado por Sarah Vargas, diseñadora de Kaiva Studio, para un trabajo universitario en la Universidad del Norte. Textos de Valentina Angarita, María Ángel García y Marlyn Bueno. Sin fines comerciales.</p></div>';
+      '<p class="bk-note"><b>Proyecto educativo · 2023.</b> Ilustrado y diagramado por una de nuestras diseñadoras para un trabajo universitario. Sin fines comerciales.</p></div>';
   }
   function watchBook(root){
     var bk=root.querySelector('.bk');if(!bk)return;
@@ -1678,8 +1683,16 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       desc:'Símbolos y logotipos para marcas de distintos sectores. Los mostramos en gris para que se vean como una sola colección.',
       done:['Símbolo','Logotipo','Versiones','Sistema en blanco y negro'],
       pages:[{id:'logos',label:'Logos',url:'Logofolio · Kaiva Studio',html:logofolioHTML}]},
+    proenergy:{name:'Proenergy',kind:'Presentación comercial',hash:'proenergy',
+      desc:'Presentación de casos de éxito para Proenergy, empresa de ingeniería eléctrica en Barranquilla. Las fotos son de sus obras reales; los datos de contacto y las cifras van difuminados.',
+      done:['Diseño de presentación','Casos de éxito con reto, solución y resultado','Sistema visual de la marca','Cierre con llamado a la acción'],
+      pages:[{id:'presentacion',label:'Presentación',url:'Presentación · Proenergy',deck:[
+        {src:'/assets/portfolio/proenergy/01.webp',alt:'Portada: Energía que conecta realidades'},
+        {src:'/assets/portfolio/proenergy/02.webp',alt:'Caso de éxito 01: modernización de una red de media tensión'},
+        {src:'/assets/portfolio/proenergy/03.webp',alt:'Caso de éxito 02: generación solar para un autogenerador industrial'},
+        {src:'/assets/portfolio/proenergy/04.webp',alt:'Cierre: Hablemos de su próximo proyecto'}]}]},
     editorial:{name:'Editorial',kind:'Diseño editorial · Ilustración',hash:'editorial',
-      desc:'Descubriendo Felinorte: libro sobre el grupo estudiantil que cuida la colonia de gatos de la Universidad del Norte. Proyecto educativo, ilustrado y diagramado por Sarah Vargas, una de nuestras diseñadoras.',
+      desc:'Descubriendo Felinorte (2023): libro sobre el grupo estudiantil que cuida la colonia de gatos de la Universidad del Norte. Proyecto totalmente educativo, ilustrado y diagramado por una de nuestras diseñadoras.',
       done:['Ilustración de portada e interiores','Diagramación del libro','Tipografía y paleta','Proyecto académico, sin fines comerciales'],
       pages:[{id:'felinorte',label:'Descubriendo Felinorte',url:'Descubriendo Felinorte',book:true}]},
     atec:{name:'ATEC',kind:'Estrategia de marca · Propuesta gráfica',hash:'atec',
@@ -1713,6 +1726,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
     if(pg.deck)return '<div class="pw-url">'+lock+'<span>'+pg.url+'</span></div>'+
       '<div class="pw-scroll deck" tabindex="0">'+pg.deck.map(function(d,i){
         if(d.id)return '<figure class="slide idsl">'+idSlide(d.alt)+'</figure>';
+        if(d.src)return '<figure class="slide"><img src="'+d.src+'" alt="'+d.alt+'" width="1600" height="900" decoding="async"'+(i>1?' loading="lazy"':'')+'></figure>';
         if(d.fn)return '<figure class="slide '+d.cls+'" role="img" aria-label="'+d.alt+'">'+d.fn()+'</figure>';
         return '<figure class="slide">'+(d.v?'<video muted playsinline preload="'+(i<3?'auto':'metadata')+'" width="1600" height="900" poster="'+BB+d.v+(reduce?'':'-inicio')+'.webp" data-end="'+BB+d.v+'.webp"'+(d.loop?' data-loop="'+d.loop+'"':'')+' aria-label="'+d.alt+'"><source src="'+BB+d.v+'.mp4" type="video/mp4"></video>'
           :'<img src="'+BB+d.i+'.webp" alt="'+d.alt+'" width="1600" height="900" decoding="async"'+(i>2?' loading="lazy"':'')+'>')+'</figure>'}).join('')+'</div>';
