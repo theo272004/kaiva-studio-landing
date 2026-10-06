@@ -839,21 +839,21 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .float-nav a[aria-current="page"],.mm-links a[aria-current="page"]{opacity:1;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1.5px}
 
 /* ---------- la pantalla ---------- */
-.screen{--mb:30px;--dk:86px;position:relative;isolation:isolate;overflow:hidden;width:100%;max-width:1440px;height:calc(100svh - 100px);min-height:540px;max-height:900px;margin:80px auto 0;border-radius:var(--r-panel);color:#fff;
+.screen{--glass:rgba(20,16,26,.5);--glass-fx:blur(22px) saturate(1.3);--mb:30px;--dk:86px;position:relative;isolation:isolate;overflow:hidden;width:100%;max-width:1440px;height:calc(100svh - 100px);min-height:540px;max-height:900px;margin:80px auto 0;border-radius:var(--r-panel);color:#fff;
   background:#CFC3AE}
 /* el collage de la Mac, difuminado para que no compita con las ventanas */
-.screen::before{content:"";position:absolute;inset:-40px;z-index:-1;background:#E8DCC4 url(/assets/inicio/fondo-collage.webp) center/cover no-repeat;filter:blur(14px) saturate(.9);opacity:.92;pointer-events:none}
+.screen::before{content:"";position:absolute;inset:-40px;z-index:-1;background:#E8DCC4 url(/assets/inicio/fondo-collage.webp) center/cover no-repeat;filter:blur(7px) saturate(.95);opacity:.95;pointer-events:none}
 .sc-bg{display:none}
 .sc-bg img{position:absolute;width:58%;opacity:.16;filter:blur(46px) saturate(1.2);mix-blend-mode:screen}
 .sc-bg img:nth-child(1){left:-6%;bottom:-10%;transform:rotate(-8deg)}
 .sc-bg img:nth-child(2){right:-8%;top:8%;transform:rotate(9deg)}
 /* barra de menú de macOS */
-.mbar{position:absolute;inset:0 0 auto 0;z-index:50;height:var(--mb);display:flex;align-items:center;gap:20px;padding:0 18px;background:rgba(12,10,16,.36);-webkit-backdrop-filter:blur(20px) saturate(1.2);backdrop-filter:blur(20px) saturate(1.2);font-size:13px;font-weight:500;color:rgba(255,255,255,.92)}
+.mbar{position:absolute;inset:0 0 auto 0;z-index:50;height:var(--mb);display:flex;align-items:center;gap:20px;padding:0 18px;background:var(--glass);-webkit-backdrop-filter:var(--glass-fx);backdrop-filter:var(--glass-fx);font-size:13px;font-weight:500;color:rgba(255,255,255,.92)}
 .mbar b{font-weight:700}
 .mbar #mbApp{font-weight:600}
 .mbar .mb-r{margin-left:auto;font-variant-numeric:tabular-nums}
 /* widget con el título */
-.widget{position:absolute;z-index:2;left:clamp(16px,3vw,40px);top:calc(var(--mb) + clamp(16px,3vh,34px));width:min(380px,calc(100% - 32px));padding:20px 22px 22px;border-radius:22px;background:rgba(18,14,24,.62);-webkit-backdrop-filter:blur(24px) saturate(1.3);backdrop-filter:blur(24px) saturate(1.3);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 24px 50px -30px rgba(0,0,0,.6)}
+.widget{position:absolute;z-index:2;left:clamp(16px,3vw,40px);top:calc(var(--mb) + clamp(16px,3vh,34px));width:min(380px,calc(100% - 32px));padding:20px 22px 22px;border-radius:22px;background:var(--glass);-webkit-backdrop-filter:var(--glass-fx);backdrop-filter:var(--glass-fx);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 24px 50px -30px rgba(0,0,0,.6)}
 .widget .eyebrow{display:block;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.62)}
 .widget h1{margin:8px 0 10px;font-size:clamp(2rem,3.4vw,3rem);letter-spacing:-.05em;line-height:1}
 .widget h1 .dim{color:rgba(255,255,255,.55)}
@@ -862,16 +862,17 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .widget p b{color:#fff}
 /* íconos del escritorio */
 .desk-area{position:absolute;z-index:22;inset:var(--mb) 0 var(--dk) 0}
-.ico{position:absolute;left:var(--x);top:var(--y);display:grid;justify-items:center;gap:7px;width:128px;padding:6px 4px;border:0;border-radius:12px;background:none;color:#fff;font:inherit;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none}
+.ico{position:absolute;left:var(--x);top:var(--y);display:grid;justify-items:center;gap:9px;width:150px;padding:12px 8px 10px;border:0;border-radius:12px;background:none;color:#fff;font:inherit;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none}
 .ico.drag{z-index:6}
 .ico-art{transition:transform .35s var(--ease),filter .35s;filter:drop-shadow(0 14px 20px rgba(10,0,30,.55))}
 .ico:hover .ico-art{transform:translateY(-5px) scale(1.05)}
 .ico.drag .ico-art{transform:scale(1.07);filter:drop-shadow(0 24px 30px rgba(10,0,30,.6))}
-.ico-name{max-width:124px;padding:3px 9px;border-radius:7px;background:rgba(18,14,24,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font-size:12.5px;font-weight:600;line-height:1.3;text-align:center;letter-spacing:-.01em;text-shadow:0 1px 3px rgba(0,0,0,.6);transition:background .2s}
-.ico-name small{display:block;font-weight:500;opacity:.75;font-size:11px}
+.ico{border-radius:18px;background:var(--glass);-webkit-backdrop-filter:var(--glass-fx);backdrop-filter:var(--glass-fx);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 18px 40px -26px rgba(0,0,0,.6)}
+.ico-name{max-width:140px;padding:2px 6px;border-radius:7px;font-size:14px;font-weight:600;line-height:1.3;text-align:center;letter-spacing:-.01em;text-shadow:0 1px 3px rgba(0,0,0,.6);transition:background .2s}
+.ico-name small{display:block;font-weight:500;opacity:.75;font-size:12px}
 .ico:focus-visible{outline:none}
 .ico:focus-visible .ico-name,.ico.sel .ico-name{background:#4E1E86;text-shadow:none}
-.folder{position:relative;width:100px;height:78px}
+.folder{position:relative;width:124px;height:96px}
 .folder::before{content:"";position:absolute;left:0;top:0;width:40%;height:24%;border-radius:7px 7px 0 0;background:#C9B7EC}
 .folder .fb{position:absolute;inset:11% 0 0;border-radius:4px 9px 9px 9px;background:#C9B7EC}
 .folder img{position:absolute;left:9%;top:4%;width:82%;height:62%;object-fit:cover;object-position:top;border-radius:3px;box-shadow:0 1px 5px rgba(0,0,0,.35);transition:transform .35s var(--ease)}
@@ -1006,13 +1007,14 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .mcopy{display:grid;justify-items:center;gap:14px;max-width:620px;margin:0 auto 34px;text-align:center}
 .mcopy .who{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
 .mcopy .btn{background:var(--ink);color:var(--paper)}
-.mcar{--h:clamp(190px,22vw,290px);overflow:hidden;margin:0 calc(var(--gutter) * -1);padding:10px 0 26px;-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.mcar-track{display:flex;gap:16px;width:max-content;animation:mroll 70s linear infinite}
-.mcar:hover .mcar-track,.mcar:focus-within .mcar-track{animation-play-state:paused}
-@keyframes mroll{to{transform:translateX(calc(-50% - 8px))}}
-.mcard{flex:none;height:var(--h);padding:0;border:0;border-radius:16px;overflow:hidden;background:#fff;cursor:pointer;box-shadow:0 0 0 1px rgba(8,8,8,.06),0 18px 34px -22px rgba(8,8,8,.45);transition:transform .45s var(--ease),box-shadow .45s}
-.mcard:nth-child(odd){transform:translateY(8px)}
-.mcard:hover,.mcard:focus-visible{transform:translateY(-6px) rotate(-1deg);box-shadow:0 0 0 1px rgba(8,8,8,.06),0 26px 44px -22px rgba(8,8,8,.55)}
+.mcar{--h:clamp(140px,14vw,200px);--zz:30px;overflow:hidden;margin:0 calc(var(--gutter) * -1);padding:calc(var(--zz) + 26px) 0 calc(var(--zz) + 30px);-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.mcar-track{display:flex;align-items:center;gap:14px;width:max-content;animation:mroll 70s linear infinite}
+@keyframes mroll{to{transform:translateX(calc(-50% - 7px))}}
+.mcard{flex:none;height:var(--h);padding:0;border:0;border-radius:16px;overflow:hidden;background:#fff;cursor:pointer;box-shadow:0 0 0 1px rgba(8,8,8,.06),0 18px 34px -22px rgba(8,8,8,.45);transform:translateY(var(--y,0));transition:transform .5s var(--ease),box-shadow .45s}
+/* una arriba, una abajo, bien marcado */
+.mcard:nth-child(odd){--y:calc(var(--zz) * -1)}
+.mcard:nth-child(even){--y:var(--zz)}
+.mcard:hover,.mcard:focus-visible{transform:translateY(calc(var(--y,0) - 22px)) scale(1.04);box-shadow:0 0 0 1px rgba(8,8,8,.06),0 26px 44px -22px rgba(8,8,8,.55)}
 .mcard img{display:block;height:100%;width:auto}
 @media (prefers-reduced-motion:reduce){.mcar-track{animation:none}.mcar{overflow-x:auto}}
 /* (abanico anterior, ya no se usa) */
@@ -1054,10 +1056,12 @@ html.lock{overflow:hidden}
   .widget{padding:16px 18px}
   .widget h1{font-size:2rem}
   .widget p{font-size:13.5px}
-  .ico{width:100px}
-  .folder{width:84px;height:66px}
-  .desk-area .ico:nth-child(1){--x:10%!important;--y:52%!important}
-  .desk-area .ico:nth-child(2){--x:54%!important;--y:52%!important}
+  .ico{width:140px;padding:9px 6px 8px}
+  .ico-name{max-width:132px;font-size:13px}
+  .ico-name small{font-size:11px}
+  .folder{width:92px;height:72px}
+  .desk-area .ico:nth-child(1){--x:calc(50% - 148px)!important;--y:52%!important}
+  .desk-area .ico:nth-child(2){--x:calc(50% + 8px)!important;--y:52%!important}
   .pdock{gap:6px;padding:7px 8px;border-radius:18px;bottom:10px}
   .pdock .d{width:40px;height:40px;border-radius:10px}
   .pdock .m-hide{display:none}
@@ -1142,11 +1146,11 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
 
     <h2 class="sr-only">Proyectos web, software y marca</h2>
     <div class="desk-area" id="desk" aria-label="Escritorio con los proyectos">
-      <button class="ico" type="button" data-open="cst" style="--x:calc(100% - 300px);--y:22px">
+      <button class="ico" type="button" data-open="cst" style="--x:calc(100% - 352px);--y:22px">
         <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/cstravel-inicio-1.webp" alt="" width="1440" height="900"><span class="ff"></span></span>
         <span class="ico-name">CS Travel Group<small>Web y plataforma</small></span>
       </button>
-      <button class="ico" type="button" data-open="thallo" style="--x:calc(100% - 160px);--y:22px">
+      <button class="ico" type="button" data-open="thallo" style="--x:calc(100% - 186px);--y:22px">
         <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/thallo-brandbook/01-portada.webp" alt="" width="1600" height="900"><span class="ff"></span></span>
         <span class="ico-name">Thallo Digital<small>Web y marca</small></span>
       </button>
@@ -1157,9 +1161,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       <span class="d deco" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#B9E0FF"/><path d="M9 0h12c-3 8-4 15-3 22h-3c0 6 1 12 3 18H9a9 9 0 0 1-9-9V9a9 9 0 0 1 9-9z" fill="#1E8EF0"/><path d="M13 12v5M27 12v5" stroke="#111" stroke-width="2" stroke-linecap="round"/><path d="M11 27c5 4 13 4 18 0" stroke="#111" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span>
       <span class="d deco" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#fff"/><text x="20" y="13" text-anchor="middle" font-family="Geist,Arial" font-size="8" font-weight="700" fill="#FF3B30" id="calMon">OCT</text><text x="20" y="32" text-anchor="middle" font-family="Geist,Arial" font-size="18" font-weight="500" fill="#1C1C1E" id="calDay">5</text></svg></span>
       <span class="d deco m-hide" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#fff"/><path d="M0 9a9 9 0 0 1 9-9h22a9 9 0 0 1 9 9v4H0z" fill="#FFD233"/><path d="M7 20h26M7 26h26M7 32h18" stroke="#D8D8DE" stroke-width="1.6"/></svg></span>
-      <span class="d deco m-hide" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#1ED760"/><path d="M10 15c7-2 14-1 20 2M11 21c6-1.6 11-.8 16 1.6M12 26.5c4.6-1 8.6-.5 12 1.2" stroke="#111" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg></span>
       <span class="d deco" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#25D366"/><g transform="translate(8 8)" fill="#fff"><use href="#i-wa" width="24" height="24"/></g></svg></span>
-      <span class="d deco m-hide" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#fff" stroke="#E2E2E6"/><path d="M13 11h5l9 13V11h3v18h-5l-9-13v13h-3z" fill="#111"/></svg></span>
       <span class="d deco m-hide" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#1E1E1E"/><circle cx="16.5" cy="11" r="4" fill="#F24E1E"/><circle cx="23.5" cy="11" r="4" fill="#FF7262"/><circle cx="16.5" cy="19" r="4" fill="#A259FF"/><circle cx="23.5" cy="19" r="4" fill="#1ABCFE"/><circle cx="16.5" cy="27" r="4" fill="#0ACF83"/></svg></span>
       <span class="sep" aria-hidden="true"></span>
       <button class="d live" type="button" data-app="web" data-tip="Navegador" aria-label="Abrir el navegador con los sitios web"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#fff"/><path d="M20 2a18 18 0 0 1 15.6 9H20a9 9 0 0 0-7.8 4.5L4.4 11A18 18 0 0 1 20 2z" fill="#EA4335"/><path d="M35.6 11A18 18 0 0 1 20 38l7.8-13.5A9 9 0 0 0 27.8 15.5 9 9 0 0 0 20 11z" fill="#FBBC05"/><path d="M20 38A18 18 0 0 1 4.4 11l7.8 13.5A9 9 0 0 0 27.8 24.5z" fill="#34A853"/><circle cx="20" cy="20" r="7.2" fill="#fff"/><circle cx="20" cy="20" r="5.6" fill="#4285F4"/></svg></button>
