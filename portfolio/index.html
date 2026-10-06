@@ -1252,6 +1252,10 @@ html.lock{overflow:hidden}
 .in-win .cur-burst{display:none}
 .in-frame .cur-mac,.in-frame .cur-plane{opacity:0!important;transition:none}
 html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
+
+/* cierre del portfolio: casi negro, con el morado bajando desde arriba */
+.final{background:#110B18}
+.final::before{background:linear-gradient(180deg,rgba(78,30,134,.62) 0%,rgba(54,17,95,.3) 40%,rgba(30,12,52,.1) 80%,transparent 100%)}
 </style>
 </head>
 <body>
@@ -1557,7 +1561,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
 
   /* ---------- Reloj de la barra de menú y fecha del calendario del dock ---------- */
   var dias=['dom','lun','mar','mié','jue','vie','sáb'],meses=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
-  function clock(){var d=new Date();document.getElementById('mbClock').textContent=dias[d.getDay()]+' '+d.getDate()+' '+meses[d.getMonth()].toLowerCase()}
+  function clock(){var d=new Date();document.getElementById('mbClock').textContent=dias[d.getDay()]+' '+d.getDate()+' '+meses[d.getMonth()].toLowerCase()+'  '+d.getHours()+':'+String(d.getMinutes()).padStart(2,'0')}
   clock();setInterval(clock,30000);
   var cm=document.getElementById('calMon'),cd=document.getElementById('calDay');
   if(cm){var now=new Date();cm.textContent=meses[now.getMonth()];cd.textContent=now.getDate()}
