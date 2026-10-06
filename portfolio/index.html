@@ -1053,7 +1053,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 /* ---------- libro que se hojea ---------- */
 .pw-scroll.bookw{display:block;overflow:hidden;padding:0;container-type:size;background:radial-gradient(80% 70% at 50% 40%,#F4EFE6,#E6E0D6)}
 .bk{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;height:100%;padding:18px 20px 14px;outline:none}
-.bk-book{position:relative;height:min(calc(100cqh - 132px),calc((100cqw - 40px) * .75));aspect-ratio:4/3;perspective:2600px;transition:transform .8s var(--ease)}
+.bk-book{position:relative;height:min(calc(100cqh - 132px),calc((100cqw - 40px) * .75));aspect-ratio:4/3;perspective:2600px;transition:transform .45s var(--ease)}
 .bk-book[data-v="first"]{transform:translateX(-25%)}
 .bk-book[data-v="last"]{transform:translateX(25%)}
 .bk-p,.bk-leaf{position:absolute;top:0;width:50%;height:100%}
@@ -1065,7 +1065,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .bk-l::after,.bk-b::after{background:linear-gradient(270deg,rgba(0,0,0,.2),rgba(0,0,0,0) 9%)}
 .bk-r::after,.bk-f::after{background:linear-gradient(90deg,rgba(0,0,0,.22),rgba(0,0,0,0) 9%)}
 .bk-book[data-v="first"] .bk-r::after{background:linear-gradient(90deg,rgba(0,0,0,.12),rgba(0,0,0,0) 3%)}
-.bk-leaf{right:0;z-index:3;transform-origin:left center;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.45,.05,.3,1);visibility:hidden}
+.bk-leaf{right:0;z-index:3;transform-origin:left center;transform-style:preserve-3d;transition:transform .42s cubic-bezier(.4,.05,.25,1);visibility:hidden}
 .bk-leaf.on{visibility:visible}
 .bk-f,.bk-b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .bk-b{transform:rotateY(180deg)}
@@ -1074,7 +1074,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .bk-hit.prev{left:0}.bk-hit.next{right:0}
 .bk-hit:disabled{cursor:default}
 .bk-nav{display:flex;align-items:center;gap:14px}
-.bk-btn{width:36px;height:36px;border:0;border-radius:50%;background:var(--ink);color:#fff;font-size:20px;line-height:1;cursor:pointer;transition:transform .3s var(--ease),opacity .3s}
+.bk-btn{display:grid;place-items:center;width:38px;height:38px;padding:0;border:0;border-radius:50%;background:var(--ink);color:#fff;cursor:pointer;transition:transform .3s var(--ease),opacity .3s}
+.bk-btn svg,.atg-nav svg,.atg-x svg{display:block;width:18px;height:18px}
 .bk-btn:hover{transform:scale(1.08)}
 .bk-btn:disabled{opacity:.25;cursor:default;transform:none}
 .bk-count{min-width:120px;text-align:center;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
@@ -1101,7 +1102,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .atg-view{position:sticky;top:0;margin-top:-100%;z-index:5;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;height:100%;min-height:100%;padding:16px;background:rgba(20,16,26,.88);opacity:0;transition:opacity .25s ease}
 .atg-view.on{opacity:1}
 .pw-scroll.atg .atg-view img{grid-column:2;width:100%;max-width:none;max-height:calc(100% - 30px);height:auto;object-fit:contain;justify-self:center;border-radius:8px;box-shadow:0 30px 60px -25px rgba(0,0,0,.7);opacity:1;transform:none;animation:none}
-.atg-nav,.atg-x{width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:22px;line-height:1;cursor:pointer;transition:background .2s}
+.atg-nav,.atg-x{display:grid;place-items:center;width:38px;height:38px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;cursor:pointer;transition:background .2s}
 .atg-nav:hover,.atg-x:hover{background:rgba(255,255,255,.28)}
 .atg-x{position:absolute;top:12px;right:12px}
 .atg-count{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);font-size:12px;font-weight:600;color:rgba(255,255,255,.75)}
@@ -1319,12 +1320,12 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
         <span class="ico-name">ATEC<small>Estrategia de marca</small></span>
       </button>
       <button class="ico" type="button" data-open="editorial" style="--x:74%;--y:56%">
-        <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/felinorte/01.webp" alt="" width="900" height="1350" style="object-position:center 20%"><span class="ff"></span></span>
+        <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/felinorte/01.webp?v=pdf2" alt="" width="900" height="1350" style="object-position:center 20%"><span class="ff"></span></span>
         <span class="ico-name">Editorial<small>Libro ilustrado</small></span>
       </button>
       <button class="ico" type="button" data-open="proenergy" style="--x:3%;--y:44%">
-        <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/proenergy/01.webp" alt="" width="1600" height="900"><span class="ff"></span></span>
-        <span class="ico-name">Proenergy<small>Presentación</small></span>
+        <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/proenergy/01.webp?v=2" alt="" width="1600" height="900"><span class="ff"></span></span>
+        <span class="ico-name">Propuesta<small>Presentación</small></span>
       </button>
     </div>
 
@@ -1626,7 +1627,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
     return '<div class="atg-head"><b>ATEC · Estrategia de marca</b><span>'+g.titles.length+' páginas</span></div>'+
       '<div class="atg-grid">'+g.titles.map(function(t,i){var n=String(i+1).padStart(2,'0');
         return '<button type="button" class="atg-it" data-i="'+i+'" style="--i:'+i+'"><img src="'+g.base+n+'-t.webp" alt="'+t+'" width="560" height="347" loading="lazy" decoding="async"><span>'+(i+1)+'</span></button>'}).join('')+'</div>'+
-      '<div class="atg-view" hidden><button type="button" class="atg-x" aria-label="Volver a todas">×</button><button type="button" class="atg-nav prev" aria-label="Anterior">‹</button><img alt=""><button type="button" class="atg-nav next" aria-label="Siguiente">›</button><span class="atg-count"></span></div>';
+      '<div class="atg-view" hidden><button type="button" class="atg-x" aria-label="Volver a todas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="atg-nav prev" aria-label="Anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><img alt=""><button type="button" class="atg-nav next" aria-label="Siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="atg-count"></span></div>';
   }
   // libro: 28 páginas; se ve de a dos como un libro abierto (portada sola a la derecha, contraportada sola a la izquierda)
   var BOOK={base:'/assets/portfolio/felinorte/',pages:30,title:'Descubriendo Felinorte'};
@@ -1635,14 +1636,15 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       '<div class="bk-p bk-l"><img alt=""></div><div class="bk-p bk-r"><img alt=""></div>'+
       '<div class="bk-leaf"><div class="bk-f"><img alt=""></div><div class="bk-b"><img alt=""></div></div>'+
       '<button type="button" class="bk-hit prev" aria-label="Página anterior"></button><button type="button" class="bk-hit next" aria-label="Página siguiente"></button></div>'+
-      '<div class="bk-nav"><button type="button" class="bk-btn prev" aria-label="Página anterior">‹</button><span class="bk-count" aria-live="polite"></span><button type="button" class="bk-btn next" aria-label="Página siguiente">›</button></div>'+
+      '<div class="bk-nav"><button type="button" class="bk-btn prev" aria-label="Página anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="bk-count" aria-live="polite"></span><button type="button" class="bk-btn next" aria-label="Página siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>'+
       '<p class="bk-note"><b>Proyecto educativo · 2023.</b> Ilustrado y diagramado por una de nuestras diseñadoras para un trabajo universitario. Sin fines comerciales.</p></div>';
   }
   function watchBook(root){
     var bk=root.querySelector('.bk');if(!bk)return;
     var book=bk.querySelector('.bk-book'),L=bk.querySelector('.bk-l img'),R=bk.querySelector('.bk-r img'),leaf=bk.querySelector('.bk-leaf'),F=leaf.querySelector('.bk-f img'),B=leaf.querySelector('.bk-b img'),cnt=bk.querySelector('.bk-count');
-    var N=BOOK.pages,V=Math.floor(N/2),v=0,busy=false;
-    function src(n){return n>=1&&n<=N?BOOK.base+String(n).padStart(2,'0')+'.webp':''}
+    var N=BOOK.pages,V=Math.floor(N/2),v=0,busy=false,tm=null,DUR=420;
+    function done(){clearTimeout(tm);leaf.classList.remove('on');show();busy=false}
+    function src(n){return n>=1&&n<=N?BOOK.base+String(n).padStart(2,'0')+'.webp?v=pdf2':''}
     function set(im,n){var u=src(n);im.parentNode.classList.toggle('empty',!u);if(u){if(im.getAttribute('src')!==u)im.src=u;im.alt=BOOK.title+', página '+n}else{im.removeAttribute('src');im.alt=''}}
     function pages(x){return x===0?[0,1]:x===V?[N,0]:[2*x,2*x+1]}
     function show(){var p=pages(v);set(L,p[0]);set(R,p[1]);book.setAttribute('data-v',v===0?'first':v===V?'last':'mid');
@@ -1651,7 +1653,8 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       // precarga las dos páginas siguientes
       [2*v+2,2*v+3].forEach(function(n){var u=src(n);if(u)(new Image()).src=u});}
     function flip(d){
-      if(busy||(d>0&&v===V)||(d<0&&v===0))return;
+      if(busy)done();
+      if((d>0&&v===V)||(d<0&&v===0))return;
       var cur=pages(v),nxt=pages(v+d);
       if(reduce){v+=d;show();return}
       busy=true;
@@ -1660,7 +1663,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       v+=d;book.setAttribute('data-v',v===0?'first':v===V?'last':'mid');
       leaf.classList.add('on');void leaf.offsetWidth;
       leaf.style.transition='';leaf.style.transform=d>0?'rotateY(-180deg)':'rotateY(0deg)';
-      setTimeout(function(){leaf.classList.remove('on');show();busy=false},820);
+      tm=setTimeout(done,DUR+20);
     }
     bk.querySelectorAll('.next').forEach(function(b){b.addEventListener('click',function(){flip(1)})});
     bk.querySelectorAll('.prev').forEach(function(b){b.addEventListener('click',function(){flip(-1)})});
@@ -1683,14 +1686,14 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       desc:'Símbolos y logotipos para marcas de distintos sectores. Los mostramos en gris para que se vean como una sola colección.',
       done:['Símbolo','Logotipo','Versiones','Sistema en blanco y negro'],
       pages:[{id:'logos',label:'Logos',url:'Logofolio · Kaiva Studio',html:logofolioHTML}]},
-    proenergy:{name:'Proenergy',kind:'Presentación comercial',hash:'proenergy',
-      desc:'Presentación de casos de éxito para Proenergy, empresa de ingeniería eléctrica en Barranquilla. Las fotos son de sus obras reales; los datos de contacto y las cifras van difuminados.',
-      done:['Diseño de presentación','Casos de éxito con reto, solución y resultado','Sistema visual de la marca','Cierre con llamado a la acción'],
-      pages:[{id:'presentacion',label:'Presentación',url:'Presentación · Proenergy',deck:[
-        {src:'/assets/portfolio/proenergy/01.webp',alt:'Portada: Energía que conecta realidades'},
-        {src:'/assets/portfolio/proenergy/02.webp',alt:'Caso de éxito 01: modernización de una red de media tensión'},
-        {src:'/assets/portfolio/proenergy/03.webp',alt:'Caso de éxito 02: generación solar para un autogenerador industrial'},
-        {src:'/assets/portfolio/proenergy/04.webp',alt:'Cierre: Hablemos de su próximo proyecto'}]}]},
+    proenergy:{name:'Propuesta comercial',kind:'Presentación · Propuesta',hash:'propuesta',
+      desc:'Propuesta de presentación de casos de éxito para una empresa de ingeniería eléctrica. Las fotos son de obras reales; el nombre de la marca, los datos de contacto y las cifras van difuminados.',
+      done:['Diseño de presentación','Casos de éxito con reto, solución y resultado','Sistema visual','Cierre con llamado a la acción'],
+      pages:[{id:'presentacion',label:'Presentación',url:'Propuesta comercial',deck:[
+        {src:'/assets/portfolio/proenergy/01.webp?v=2',alt:'Portada: Energía que conecta realidades'},
+        {src:'/assets/portfolio/proenergy/02.webp?v=2',alt:'Caso de éxito 01: modernización de una red de media tensión'},
+        {src:'/assets/portfolio/proenergy/03.webp?v=2',alt:'Caso de éxito 02: generación solar para un autogenerador industrial'},
+        {src:'/assets/portfolio/proenergy/04.webp?v=2',alt:'Cierre: Hablemos de su próximo proyecto'}]}]},
     editorial:{name:'Editorial',kind:'Diseño editorial · Ilustración',hash:'editorial',
       desc:'Descubriendo Felinorte (2023): libro sobre el grupo estudiantil que cuida la colonia de gatos de la Universidad del Norte. Proyecto totalmente educativo, ilustrado y diagramado por una de nuestras diseñadoras.',
       done:['Ilustración de portada e interiores','Diagramación del libro','Tipografía y paleta','Proyecto académico, sin fines comerciales'],
