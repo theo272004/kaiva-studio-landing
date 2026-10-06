@@ -1129,6 +1129,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 /* portada clara: el menú flota arriba como en el portfolio */
 /* portada: la tarjeta oscura de la home, debajo del menú flotante, y todo en una sola pantalla */
 .hero.bintro{display:flex;flex-direction:column;gap:clamp(18px,2.6vh,30px);max-width:none;height:calc(100svh - 100px);min-height:600px;max-height:900px;margin:80px auto 0;padding:clamp(28px,4.5vh,48px) clamp(20px,3vw,40px) clamp(20px,3vh,32px)}
+/* al abrir: sigue negra, con un brillo morado abajo (más que en la portada, porque la foto tapa el centro) */
+.hero.bintro::before{background:radial-gradient(70% 55% at 50% 0%,rgba(255,255,255,.06),transparent 70%),radial-gradient(90% 45% at 50% 100%,rgba(110,45,190,.85),transparent 75%),linear-gradient(180deg,transparent 55%,rgba(78,30,134,.35) 100%)}
 .bintro-copy{flex:none;display:grid;justify-items:center;gap:clamp(10px,1.6vh,16px);text-align:center;padding:0 16px}
 .hero.bintro h1{font-size:clamp(2.2rem,min(4.6vw,7.2vh),4.2rem);max-width:18ch;margin:0}
 .hero.bintro .lede{max-width:60ch;margin:0;font-size:15px;line-height:1.55}
