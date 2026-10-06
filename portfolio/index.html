@@ -825,66 +825,121 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 }
 
 /* ---------- solo en el portfolio ---------- */
-.arc-row{display:contents}
 
 /* =====================================================================
-   PORTFOLIO: un escritorio (sin el aparato) con carpetas por cliente.
-   Web y software se abren en una ventana con el fondo difuminado;
-   las marcas se muestran como cartas en abanico.
+   PORTFOLIO: una pantalla de Mac (sin el aparato), morada, que entra
+   completa en la ventana. El menú del sitio queda fuera, arriba.
+   Las ventanas se abren dentro de la pantalla y el dock sigue a la vista.
    ===================================================================== */
-.nav-links a[aria-current="page"],.float-nav a[aria-current="page"]{opacity:1;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1.5px}
+.float-nav a[aria-current="page"],.mm-links a[aria-current="page"]{opacity:1;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1.5px}
 
-/* ---------- escritorio ---------- */
-.desk{padding-bottom:20px}
-.desk-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;border-radius:inherit;pointer-events:none}
-.desk-bg img{position:absolute;width:64%;opacity:.38;filter:blur(42px) saturate(1.25)}
-.desk-bg img:nth-child(1){left:-8%;top:26%;transform:rotate(-7deg)}
-.desk-bg img:nth-child(2){right:-10%;top:44%;transform:rotate(8deg)}
-.desk .hero-copy{padding-bottom:0}
-.desk-area{position:relative;height:clamp(460px,60vh,620px);max-width:1240px;margin:22px auto 0}
-.ico{position:absolute;left:var(--x);top:var(--y);z-index:1;display:grid;justify-items:center;gap:7px;width:124px;padding:6px 4px;border:0;border-radius:12px;background:none;color:#fff;font:inherit;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none}
+/* ---------- la pantalla ---------- */
+.screen{--mb:30px;--dk:86px;position:relative;isolation:isolate;overflow:hidden;height:calc(100svh - 92px);min-height:560px;max-height:980px;margin-top:76px;border-radius:var(--r-panel);color:#fff;
+  background:radial-gradient(110% 80% at 12% 0%,#5E2B9E 0%,transparent 58%),radial-gradient(90% 70% at 92% 100%,#7A3FC9 0%,transparent 55%),radial-gradient(60% 50% at 70% 30%,rgba(165,128,214,.35) 0%,transparent 70%),var(--violet)}
+.sc-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.sc-bg img{position:absolute;width:58%;opacity:.2;filter:blur(46px) saturate(1.2);mix-blend-mode:screen}
+.sc-bg img:nth-child(1){left:-6%;bottom:-10%;transform:rotate(-8deg)}
+.sc-bg img:nth-child(2){right:-8%;top:8%;transform:rotate(9deg)}
+/* barra de menú de macOS */
+.mbar{position:absolute;inset:0 0 auto 0;z-index:30;height:var(--mb);display:flex;align-items:center;gap:20px;padding:0 18px;background:rgba(20,6,40,.32);-webkit-backdrop-filter:blur(20px) saturate(1.4);backdrop-filter:blur(20px) saturate(1.4);font-size:13px;font-weight:500;color:rgba(255,255,255,.92)}
+.mbar b{font-weight:700}
+.mbar #mbApp{font-weight:600}
+.mbar .mb-r{margin-left:auto;font-variant-numeric:tabular-nums}
+/* widget con el título */
+.widget{position:absolute;z-index:2;left:clamp(16px,3vw,40px);top:calc(var(--mb) + clamp(16px,3vh,34px));width:min(380px,calc(100% - 32px));padding:20px 22px 22px;border-radius:22px;background:rgba(255,255,255,.1);-webkit-backdrop-filter:blur(24px) saturate(1.3);backdrop-filter:blur(24px) saturate(1.3);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 24px 50px -30px rgba(0,0,0,.6)}
+.widget .eyebrow{display:block;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.62)}
+.widget h1{margin:8px 0 10px;font-size:clamp(2rem,3.4vw,3rem);letter-spacing:-.05em;line-height:1}
+.widget h1 .dim{color:rgba(255,255,255,.55)}
+.widget h1 .dim .w:hover{color:var(--violet-light)}
+.widget p{margin:0;font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.8)}
+.widget p b{color:#fff}
+/* íconos del escritorio */
+.desk-area{position:absolute;z-index:3;inset:var(--mb) 0 var(--dk) 0}
+.ico{position:absolute;left:var(--x);top:var(--y);display:grid;justify-items:center;gap:7px;width:128px;padding:6px 4px;border:0;border-radius:12px;background:none;color:#fff;font:inherit;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none}
 .ico.drag{z-index:6}
-.ico-art{transition:transform .35s var(--ease),filter .35s;filter:drop-shadow(0 12px 18px rgba(0,0,0,.5))}
-.ico:hover .ico-art{transform:translateY(-5px) scale(1.04)}
-.ico.drag .ico-art{transform:scale(1.06);filter:drop-shadow(0 22px 28px rgba(0,0,0,.55))}
-.ico-name{max-width:120px;padding:2px 7px;border-radius:6px;font-size:12px;font-weight:600;line-height:1.3;text-align:center;letter-spacing:-.01em;text-shadow:0 1px 3px rgba(0,0,0,.7);transition:background .2s}
-.ico-name small{display:block;font-weight:500;opacity:.72;font-size:11px}
+.ico-art{transition:transform .35s var(--ease),filter .35s;filter:drop-shadow(0 14px 20px rgba(10,0,30,.55))}
+.ico:hover .ico-art{transform:translateY(-5px) scale(1.05)}
+.ico.drag .ico-art{transform:scale(1.07);filter:drop-shadow(0 24px 30px rgba(10,0,30,.6))}
+.ico-name{max-width:124px;padding:2px 8px;border-radius:6px;font-size:12.5px;font-weight:600;line-height:1.3;text-align:center;letter-spacing:-.01em;text-shadow:0 1px 3px rgba(0,0,0,.6);transition:background .2s}
+.ico-name small{display:block;font-weight:500;opacity:.75;font-size:11px}
 .ico:focus-visible{outline:none}
-.ico:focus-visible .ico-name,.ico.sel .ico-name{background:var(--violet-text);text-shadow:none}
-/* carpeta morada con la captura asomando */
-.folder{position:relative;width:92px;height:72px}
-.folder::before{content:"";position:absolute;left:0;top:0;width:40%;height:24%;border-radius:7px 7px 0 0;background:#4A1F86}
-.folder .fb{position:absolute;inset:11% 0 0;border-radius:4px 9px 9px 9px;background:#4A1F86}
-.folder img{position:absolute;left:9%;top:4%;width:82%;height:62%;object-fit:cover;object-position:top;border-radius:3px;box-shadow:0 1px 5px rgba(0,0,0,.4);transition:transform .35s var(--ease)}
-.ico:hover .folder img{transform:translateY(-6px) rotate(-3deg)}
-.folder .ff{position:absolute;left:0;right:0;bottom:0;height:70%;border-radius:6px 6px 9px 9px;background:linear-gradient(180deg,#8B5BD8,#6A35C2);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
-/* archivo: la captura como miniatura */
-.file{width:108px;height:68px;border-radius:7px;overflow:hidden;border:2px solid #fff;background:#fff}
-.file img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.ico:focus-visible .ico-name,.ico.sel .ico-name{background:rgba(255,255,255,.22);text-shadow:none}
+.folder{position:relative;width:100px;height:78px}
+.folder::before{content:"";position:absolute;left:0;top:0;width:40%;height:24%;border-radius:7px 7px 0 0;background:#C9B7EC}
+.folder .fb{position:absolute;inset:11% 0 0;border-radius:4px 9px 9px 9px;background:#C9B7EC}
+.folder img{position:absolute;left:9%;top:4%;width:82%;height:62%;object-fit:cover;object-position:top;border-radius:3px;box-shadow:0 1px 5px rgba(0,0,0,.35);transition:transform .35s var(--ease)}
+.ico:hover .folder img{transform:translateY(-7px) rotate(-3deg)}
+.folder .ff{position:absolute;left:0;right:0;bottom:0;height:70%;border-radius:6px 6px 9px 9px;background:linear-gradient(180deg,#F1EAFB,#D9CBF2);box-shadow:inset 0 1px 0 #fff}
 
-/* ---------- dock ---------- */
-.pdock{position:relative;z-index:2;display:flex;align-items:flex-end;gap:10px;width:max-content;max-width:calc(100% - 24px);margin:10px auto 0;padding:9px 12px;border-radius:22px;background:rgba(255,255,255,.12);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 24px 44px -22px rgba(0,0,0,.7)}
-.pdock .d{position:relative;display:grid;place-items:center;width:50px;height:50px;border:0;border-radius:13px;padding:0;color:#fff;font:inherit;cursor:pointer;transition:transform .3s var(--ease)}
-.pdock .d:hover,.pdock .d:focus-visible{transform:translateY(-8px) scale(1.12)}
-.pdock .d svg{width:26px;height:26px}
-.pdock .d::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(4px);padding:4px 9px;border-radius:7px;background:rgba(20,20,24,.92);color:#fff;font-size:11.5px;font-weight:600;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
-.pdock .d:hover::after,.pdock .d:focus-visible::after{opacity:1;transform:translateX(-50%)}
-.pdock .sep{width:1px;height:38px;margin:0 2px 6px;background:rgba(255,255,255,.25)}
-.d-k{background:var(--violet);font-weight:700;font-size:24px;letter-spacing:-.04em}
-.d-web{background:linear-gradient(160deg,#5AC8FA,#1F6FEB)}
-.d-brand{background:linear-gradient(160deg,#FFB86B,#F0568E 55%,#8B5BD8)}
-.d-blog{background:#fff;color:#111!important}
-.d-blog svg{color:#E8A400}
-.d-wa{background:#25D366}
-.d-ig{background:radial-gradient(circle at 30% 107%,#FDF497 0,#FD5949 45%,#D6249F 60%,#285AEB 90%)}
-.d-mail{background:linear-gradient(160deg,#5AC8FA,#1A7CF5)}
-.d-cal{background:#fff;color:#111!important;flex-direction:column;gap:0;line-height:1}
-.d-cal b{font-size:9px;color:#FF3B30;font-weight:700;margin-top:3px}
-.d-cal i{font-style:normal;font-size:22px;font-weight:600;letter-spacing:-.04em}
+/* ---------- dock: los íconos de la Mac de la portada ---------- */
+.pdock{position:absolute;z-index:40;left:50%;bottom:12px;transform:translateX(-50%);display:flex;align-items:flex-end;gap:8px;max-width:calc(100% - 20px);padding:8px 10px;border-radius:22px;background:rgba(255,255,255,.16);-webkit-backdrop-filter:blur(20px) saturate(1.5);backdrop-filter:blur(20px) saturate(1.5);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22),0 24px 44px -22px rgba(0,0,0,.6)}
+.pdock .d{position:relative;display:block;flex:none;width:48px;height:48px;padding:0;border:0;border-radius:12px;background:none;font:inherit;color:inherit}
+.pdock .d svg{display:block;width:100%;height:100%}
+.pdock .deco{cursor:default}
+/* los que se pueden abrir: suben al pasar el mouse, tienen nombre y un punto debajo */
+.pdock .live{cursor:pointer;transition:transform .3s var(--ease)}
+.pdock .live:hover,.pdock .live:focus-visible{transform:translateY(-10px) scale(1.14)}
+.pdock .live::before{content:"";position:absolute;left:50%;bottom:-6px;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:#fff;box-shadow:0 0 8px rgba(255,255,255,.9)}
+.pdock .live.on::before{background:#C9B7EC;width:14px;margin-left:-7px;border-radius:3px}
+.pdock .live::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 14px);left:50%;transform:translateX(-50%) translateY(4px);padding:4px 10px;border-radius:7px;background:rgba(20,20,24,.92);color:#fff;font-size:11.5px;font-weight:600;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+.pdock .live:hover::after,.pdock .live:focus-visible::after{opacity:1;transform:translateX(-50%)}
+.pdock .live.hello{animation:hello .9s var(--ease) 2}
+@keyframes hello{0%,100%{transform:none}40%{transform:translateY(-14px)}}
+.pdock .sep{flex:none;width:1px;height:38px;margin:0 2px 5px;background:rgba(255,255,255,.3)}
+.pdock .d-brand,.pdock .d-ig{display:grid;place-items:center;color:#fff}
+.pdock .d-brand{background:linear-gradient(160deg,#FFB86B,#F0568E 55%,#8B5BD8)}
+.pdock .d-ig{background:radial-gradient(circle at 30% 107%,#FDF497 0,#FD5949 45%,#D6249F 60%,#285AEB 90%)}
+.pdock .d-brand svg,.pdock .d-ig svg{width:58%;height:58%}
+
+/* ---------- ventana dentro de la pantalla ---------- */
+.sc-ov{position:absolute;z-index:20;inset:var(--mb) 0 0 0;background:rgba(20,6,40,.22);-webkit-backdrop-filter:blur(16px) saturate(1.1);backdrop-filter:blur(16px) saturate(1.1);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s linear .35s}
+.screen.win-open .sc-ov{opacity:1;visibility:visible;transition:opacity .35s ease}
+.pwin{position:absolute;z-index:25;top:calc(var(--mb) + 14px);bottom:calc(var(--dk) + 6px);left:max(16px,4%);right:max(16px,4%);display:flex;flex-direction:column;border-radius:13px;overflow:hidden;background:#fff;color:var(--ink);box-shadow:0 0 0 1px rgba(0,0,0,.18),0 50px 100px -30px rgba(0,0,0,.7);opacity:0;visibility:hidden;transform:scale(.5);transform-origin:var(--ox,50%) var(--oy,100%);transition:transform .55s var(--ease),opacity .3s ease,visibility 0s linear .55s}
+.screen.win-open .pwin{opacity:1;visibility:visible;transform:none;transition:transform .55s var(--ease),opacity .3s ease}
+.pw-bar{flex:none;display:flex;align-items:center;gap:14px;height:42px;padding:0 14px;background:#F3F2F6;border-bottom:1px solid #E2E1E7}
+.lights{display:flex;gap:8px;flex:none}
+.lights button{width:12px;height:12px;border:0;border-radius:50%;padding:0;cursor:pointer;display:grid;place-items:center;font-size:9px;line-height:1;color:transparent}
+.lights:hover button{color:rgba(0,0,0,.55)}
+.lights .lc{background:#FF5F57}.lights .lm{background:#FEBC2E}.lights .lz{background:#28C840}
+.pw-title{flex:1;margin-right:62px;text-align:center;font-size:13px;font-weight:600;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* pestañas tipo Safari */
+.pw-tabs[hidden],.pw-title[hidden]{display:none}
+.pw-tabs{flex:1;display:flex;gap:6px;min-width:0;overflow-x:auto;scrollbar-width:none}
+.pw-tabs button{flex:none;display:flex;align-items:center;gap:7px;height:28px;padding:0 12px;border:0;border-radius:8px;background:none;font:inherit;font-size:12.5px;font-weight:600;color:var(--ink-2);cursor:pointer;white-space:nowrap}
+.pw-tabs button:hover{background:#E8E7ED}
+.pw-tabs button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.pw-body{flex:1;display:grid;grid-template-columns:270px minmax(0,1fr);min-height:0}
+.pw-body.full{grid-template-columns:minmax(0,1fr)}
+.pw-side{display:flex;flex-direction:column;gap:16px;min-height:0;overflow:auto;padding:20px 18px;background:#F8F7FA;border-right:1px solid #E6E5EB}
+.pw-side .eyebrow{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.pw-side h2{font-size:22px;letter-spacing:-.04em;line-height:1.05;margin:4px 0 0}
+.pw-side p{margin:0;font-size:13.5px;line-height:1.55;color:var(--ink-2)}
+.pw-pages{display:grid;gap:2px}
+.pw-pages b{font-size:11px;font-weight:600;color:var(--ink-3);margin:0 0 4px 8px}
+.pw-pages button{display:flex;align-items:center;gap:9px;width:100%;padding:8px 10px;border:0;border-radius:8px;background:none;font:inherit;font-size:13.5px;color:var(--ink);text-align:left;cursor:pointer;transition:background .2s}
+.pw-pages button:hover{background:#ECEBF1}
+.pw-pages button.on{background:var(--violet-soft);color:var(--violet);font-weight:600}
+.pw-pages button svg{width:15px;height:15px;flex:none;opacity:.8}
+.pw-done{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:13px;color:var(--ink-2)}
+.pw-done li{display:flex;gap:9px}
+.pw-done li::before{content:"";flex:none;width:6px;height:6px;margin-top:7px;border-radius:50%;background:var(--violet)}
+.pw-side .btn{margin-top:auto;justify-content:center;background:var(--ink);color:var(--paper)}
+.pw-main{display:flex;flex-direction:column;min-height:0;background:#E8E7ED}
+.pw-url{flex:none;display:flex;align-items:center;gap:8px;margin:10px 14px;padding:7px 12px;border-radius:9px;background:#fff;box-shadow:0 0 0 1px #DEDDE4;font-size:12.5px;color:var(--ink-2)}
+.pw-url svg{width:13px;height:13px;flex:none;color:#28A745}
+.pw-url a{margin-left:auto;font-weight:600;color:var(--violet-text);text-decoration:none;white-space:nowrap}
+.pw-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;display:grid;align-content:start;gap:12px;padding:0 14px 16px}
+.pw-scroll img{display:block;width:100%;height:auto;aspect-ratio:1440/900;border-radius:9px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.14);opacity:0;transform:translateY(14px);animation:shotIn .6s var(--ease) forwards;animation-delay:calc(var(--i) * 60ms)}
+.pw-scroll.book img{aspect-ratio:1440/810}
+@keyframes shotIn{to{opacity:1;transform:none}}
+.pw-note{margin:0;padding:12px 14px;border-radius:10px;background:#fff;font-size:13px;color:var(--ink-2);box-shadow:0 0 0 1px #DEDDE4}
+.pw-note a{color:var(--violet-text);font-weight:600}
+.pw-ig{flex:1;min-height:0;display:grid;place-items:center;background:#FAFAFA}
+.pw-ig iframe{width:min(540px,100%);height:100%;border:0;background:#fff}
 
 /* ---------- índice de proyectos (texto real para Google y para celular) ---------- */
 .plist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:1180px;margin:0 auto}
-.pcard{display:grid;grid-template-columns:132px 1fr;gap:18px;align-items:center;padding:16px;border-radius:var(--r-card);background:var(--card);box-shadow:0 0 0 1px var(--line);text-align:left;font:inherit;color:inherit;border:0;cursor:pointer;transition:transform .35s var(--ease),box-shadow .35s}
+.pcard{display:grid;grid-template-columns:132px 1fr;gap:18px;align-items:center;padding:16px;border-radius:var(--r-card);background:var(--card);box-shadow:0 0 0 1px var(--line);text-align:left;color:inherit;text-decoration:none;transition:transform .35s var(--ease),box-shadow .35s}
 .pcard:hover{transform:translateY(-4px);box-shadow:0 0 0 1px var(--line),0 22px 40px -26px rgba(8,8,8,.4)}
 .pcard img{width:132px;height:84px;object-fit:cover;object-position:top;border-radius:10px;box-shadow:0 0 0 1px var(--line)}
 .pcard h3{font-size:18px;letter-spacing:-.03em;margin:0 0 4px}
@@ -892,102 +947,65 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .pcard .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .pcard .tags span{padding:3px 9px;border-radius:99px;background:var(--mist);font-size:11.5px;font-weight:600;color:var(--ink-2)}
 
-/* ---------- ventana con el fondo difuminado ---------- */
-html.lock{overflow:hidden}
-.pw-ov{position:fixed;inset:0;z-index:9000;display:grid;place-items:center;padding:20px;background:rgba(10,6,18,.36);-webkit-backdrop-filter:blur(18px) saturate(1.1);backdrop-filter:blur(18px) saturate(1.1);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s linear .35s}
-.pw-ov.open{opacity:1;visibility:visible;transition:opacity .35s ease}
-.pwin{width:min(1180px,100%);height:min(800px,calc(100vh - 40px));display:flex;flex-direction:column;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.18),0 50px 100px -30px rgba(0,0,0,.75);opacity:0;transform:scale(.55);transform-origin:var(--ox,50%) var(--oy,50%);transition:transform .55s var(--ease),opacity .3s ease}
-.pw-ov.open .pwin{opacity:1;transform:none}
-.pw-bar{flex:none;display:flex;align-items:center;gap:14px;height:44px;padding:0 14px;background:#F3F2F6;border-bottom:1px solid #E2E1E7}
-.lights{display:flex;gap:8px}
-.lights button{width:12px;height:12px;border:0;border-radius:50%;padding:0;cursor:pointer;display:grid;place-items:center;font-size:9px;line-height:1;color:transparent}
-.lights:hover button{color:rgba(0,0,0,.55)}
-.lights .lc{background:#FF5F57}.lights .lm{background:#FEBC2E}.lights .lz{background:#28C840}
-.pw-bar b{flex:1;margin-right:62px;text-align:center;font-size:13px;font-weight:600;color:var(--ink-2)}
-.pw-body{flex:1;display:grid;grid-template-columns:280px minmax(0,1fr);min-height:0}
-.pw-side{display:flex;flex-direction:column;gap:18px;min-height:0;overflow:auto;padding:22px 20px;background:#F8F7FA;border-right:1px solid #E6E5EB}
-.pw-side .eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
-.pw-side h2{font-size:24px;letter-spacing:-.04em;line-height:1.05;margin:4px 0 0}
-.pw-side p{margin:0;font-size:14px;line-height:1.55;color:var(--ink-2)}
-.pw-pages{display:grid;gap:2px}
-.pw-pages b{font-size:11px;font-weight:600;color:var(--ink-3);margin:0 0 4px 8px}
-.pw-pages button{display:flex;align-items:center;gap:9px;width:100%;padding:8px 10px;border:0;border-radius:8px;background:none;font:inherit;font-size:14px;color:var(--ink);text-align:left;cursor:pointer;transition:background .2s}
-.pw-pages button:hover{background:#ECEBF1}
-.pw-pages button.on{background:var(--violet-soft);color:var(--violet);font-weight:600}
-.pw-pages button svg{width:15px;height:15px;flex:none;opacity:.8}
-.pw-done{margin:0;padding:0;list-style:none;display:grid;gap:7px;font-size:13.5px;color:var(--ink-2)}
-.pw-done li{display:flex;gap:9px}
-.pw-done li::before{content:"";flex:none;width:6px;height:6px;margin-top:7px;border-radius:50%;background:var(--violet)}
-.pw-side .btn{margin-top:auto;justify-content:center;background:var(--ink);color:var(--paper)}
-.pw-main{display:flex;flex-direction:column;min-height:0;background:#E8E7ED}
-.pw-url{flex:none;display:flex;align-items:center;gap:8px;margin:10px 14px;padding:7px 12px;border-radius:9px;background:#fff;box-shadow:0 0 0 1px #DEDDE4;font-size:12.5px;color:var(--ink-2)}
-.pw-url svg{width:13px;height:13px;flex:none;color:#28A745}
-.pw-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;display:grid;align-content:start;gap:12px;padding:0 14px 16px}
-.pw-scroll img{display:block;width:100%;height:auto;aspect-ratio:1440/900;border-radius:9px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.14);opacity:0;transform:translateY(14px);animation:shotIn .6s var(--ease) forwards;animation-delay:calc(var(--i) * 70ms)}
-@keyframes shotIn{to{opacity:1;transform:none}}
-.pw-note{margin:0;padding:12px 14px;border-radius:10px;background:#fff;font-size:13.5px;color:var(--ink-2);box-shadow:0 0 0 1px #DEDDE4}
-
-/* ---------- marcas: cartas en abanico ---------- */
-.brands .head{margin-bottom:0}
-.arc{--cw:clamp(120px,13vw,176px);--R:clamp(300px,32vw,460px);position:relative;height:calc(var(--R) + var(--cw) * .7 + 60px);max-width:1240px;margin:0 auto}
+/* ---------- marcas: páginas del brandbook en abanico ---------- */
 .brands{overflow-x:clip}
-.bcard{--i:0;position:absolute;left:50%;top:calc(var(--R) + var(--cw) * .7 + 40px);width:var(--cw);aspect-ratio:4/5;margin:calc(var(--cw) * -.625) 0 0 calc(var(--cw) * -.5);padding:0;border:0;border-radius:20px;overflow:hidden;background:#fff;cursor:pointer;box-shadow:0 0 0 1px rgba(8,8,8,.06),0 22px 40px -22px rgba(8,8,8,.5);transform:rotate(var(--a)) translateY(calc(var(--R) * -1)) rotate(calc(var(--a) * -.4));transition:transform .7s var(--ease),box-shadow .4s;transition-delay:calc(var(--i) * 55ms)}
-.bcard:hover,.bcard:focus-visible{z-index:3;transform:rotate(var(--a)) translateY(calc(var(--R) * -1 - 18px)) rotate(calc(var(--a) * -1)) scale(1.07);box-shadow:0 0 0 1px rgba(8,8,8,.06),0 30px 54px -22px rgba(8,8,8,.55);transition-delay:0s}
+.arc{--cw:clamp(150px,16vw,220px);--ch:calc(var(--cw) * .5625);--R:clamp(300px,32vw,470px);position:relative;height:calc(var(--R) + var(--ch) + 80px);max-width:1240px;margin:0 auto}
+.arc-row{display:contents}
+.bcard{--i:0;position:absolute;left:50%;top:calc(var(--R) + var(--ch) * .5 + 50px);width:var(--cw);aspect-ratio:16/9;margin:calc(var(--ch) * -.5) 0 0 calc(var(--cw) * -.5);padding:0;border:0;border-radius:14px;overflow:hidden;background:#fff;cursor:pointer;box-shadow:0 0 0 1px rgba(8,8,8,.06),0 22px 40px -22px rgba(8,8,8,.5);transform:rotate(var(--a)) translateY(calc(var(--R) * -1)) rotate(calc(var(--a) * -.35));transition:transform .7s var(--ease),box-shadow .4s;transition-delay:calc(var(--i) * 55ms)}
+.bcard img{display:block;width:100%;height:100%;object-fit:cover}
+.bcard:hover,.bcard:focus-visible{z-index:3;transform:rotate(var(--a)) translateY(calc(var(--R) * -1 - 18px)) rotate(calc(var(--a) * -1)) scale(1.1);box-shadow:0 0 0 1px rgba(8,8,8,.06),0 30px 54px -22px rgba(8,8,8,.55);transition-delay:0s}
 .js .arc.pre .bcard{transform:translateY(calc(var(--R) * -1 + 40px)) scale(.9)}
-.arc-copy{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);width:min(560px,92%);display:grid;justify-items:center;gap:14px;text-align:center}
-.arc-copy h2 em{font-style:normal;color:var(--violet-text)}
+.arc-copy{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);width:min(560px,92%);display:grid;justify-items:center;gap:14px;text-align:center}
 .arc-copy .who{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
 .arc-copy .btn{background:var(--ink);color:var(--paper)}
-/* contenido de cada carta: piezas reales de la marca de Thallo */
-.bc{position:absolute;inset:0;display:grid;place-items:center}
-.bc-logo{background:#fff}.bc-logo.sage{background:#CBD0AC}.bc-logo.ink{background:#101828}
-.bc-logo img{width:78%;height:auto}
-.bc-logo.ink img{filter:brightness(0) invert(1)}
-.bc-pal{grid-template-rows:repeat(4,1fr);place-items:stretch}
-.bc-pal i{display:flex;align-items:flex-end;padding:0 10px 7px;font-style:normal;font-family:var(--f-mono);font-size:10px;letter-spacing:.04em;color:#fff}
-.bc-pal i:nth-child(4){color:#39471D}
-.bc-type{align-content:center;gap:4px;padding:14px;background:#101828;color:#fff;font-family:"Inter",var(--f-sans);text-align:center}
-.bc-type b{font-size:calc(var(--cw) * .44);font-weight:800;letter-spacing:-.05em;line-height:1}
-.bc-type span{font-size:calc(var(--cw) * .085);font-weight:800;font-style:italic;color:#CBD0AC;letter-spacing:-.02em}
-.bc-type small{font-size:calc(var(--cw) * .06);opacity:.6;letter-spacing:.06em;text-transform:uppercase;font-family:var(--f-mono)}
-.bc-shot img{width:100%;height:100%;object-fit:cover;object-position:var(--op,left top)}
-/* carta ampliada */
-.bbig{position:relative;width:min(460px,86vw);aspect-ratio:4/5;border-radius:26px;overflow:hidden;background:#fff;box-shadow:0 50px 100px -30px rgba(0,0,0,.75);--cw:min(460px,86vw);opacity:0;transform:scale(.7);transition:transform .55s var(--ease),opacity .3s}
+/* página ampliada */
+.pw-ov{position:fixed;inset:0;z-index:9000;display:grid;place-items:center;padding:20px;background:rgba(10,6,18,.36);-webkit-backdrop-filter:blur(18px) saturate(1.1);backdrop-filter:blur(18px) saturate(1.1);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s linear .35s}
+.pw-ov.open{opacity:1;visibility:visible;transition:opacity .35s ease}
+.bbig{position:relative;width:min(1000px,92vw);aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 50px 100px -30px rgba(0,0,0,.75);opacity:0;transform:scale(.7);transition:transform .55s var(--ease),opacity .3s}
+.bbig img{width:100%;height:100%;object-fit:cover;display:block}
 .pw-ov.open .bbig{opacity:1;transform:none}
-.bcap{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);padding:8px 14px;border-radius:99px;background:rgba(255,255,255,.92);color:var(--ink);font-size:13px;font-weight:600;white-space:nowrap;box-shadow:0 10px 24px -12px rgba(0,0,0,.5)}
+.bcap{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);padding:7px 14px;border-radius:99px;background:rgba(255,255,255,.92);color:var(--ink);font-size:13px;font-weight:600;white-space:nowrap;box-shadow:0 10px 24px -12px rgba(0,0,0,.5)}
 .pw-x{position:fixed;top:18px;right:18px;width:42px;height:42px;border:0;border-radius:50%;background:rgba(255,255,255,.9);color:var(--ink);font-size:22px;line-height:1;cursor:pointer}
+html.lock{overflow:hidden}
 
 @media (max-width:980px){
   .plist{grid-template-columns:1fr}
-}
-@media (max-width:860px){
-  .pw-ov{padding:0}
-  .pwin{height:100%;border-radius:0}
-  .pw-body{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}
-  .pw-side{max-height:38vh;border-right:0;border-bottom:1px solid #E6E5EB;gap:12px;padding:16px}
-  .pw-side .btn{margin-top:4px}
+  .pw-body{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}
+  .pw-side,.pw-main{min-width:0}
+  .pw-side{max-height:none;overflow:visible;border-right:0;border-bottom:1px solid #E6E5EB;gap:10px;padding:12px 14px}
+  .pw-side .pw-done,.pw-side .btn,.pw-side p,.pw-side .eyebrow,.pw-pages b{display:none}
+  .pw-side h2{font-size:18px;margin:0}
+  .pw-pages{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+  .pw-pages button{flex:none;width:auto;white-space:nowrap;padding:6px 10px;background:#ECEBF1}
 }
 @media (max-width:700px){
-  /* en celular el escritorio pasa a una cuadrícula y el abanico a una fila deslizable */
-  .desk-area{height:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px 6px;padding:8px 10px 6px}
-  .ico{position:static;width:auto}
-  .folder{width:74px;height:58px}
-  .file{width:86px;height:54px}
-  .ico-name{font-size:11px}
-  .pdock{gap:6px;padding:7px 9px;border-radius:18px}
-  .pdock .d{width:40px;height:40px;border-radius:11px}
-  .pdock .d svg{width:21px;height:21px}
+  .screen{--dk:72px;height:calc(100svh - 84px);min-height:520px;margin-top:70px}
+  .mbar{gap:12px;padding:0 12px;font-size:12px}
+  .mbar .opt{display:none}
+  .widget{padding:16px 18px}
+  .widget h1{font-size:2rem}
+  .widget p{font-size:13.5px}
+  .ico{width:100px}
+  .folder{width:84px;height:66px}
+  .desk-area .ico:nth-child(1){--x:10%!important;--y:52%!important}
+  .desk-area .ico:nth-child(2){--x:54%!important;--y:52%!important}
+  .pdock{gap:6px;padding:7px 8px;border-radius:18px;bottom:10px}
+  .pdock .d{width:40px;height:40px;border-radius:10px}
+  .pdock .m-hide{display:none}
   .pdock .sep{height:30px}
-  .pdock .d::after{display:none}
+  .pdock .live::after{display:none}
+  .pwin{left:8px;right:8px;top:calc(var(--mb) + 8px)}
+  .pw-tabs button{padding:0 9px}
   .pcard{grid-template-columns:96px 1fr;gap:14px}
   .pcard img{width:96px;height:62px}
-  .arc{--cw:62vw;height:auto;display:flex;flex-direction:column;gap:24px;overflow:visible}
+  .arc{--cw:78vw;height:auto;display:flex;flex-direction:column;gap:24px}
   .arc-copy{position:static;transform:none;width:100%;order:-1}
   .arc-row{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 16px 20px;margin:0 -16px}
   .bcard{position:relative;left:auto;top:auto;flex:none;margin:0;transform:none!important;scroll-snap-align:center}
 }
 @media (prefers-reduced-motion:reduce){
-  .js .arc.pre .bcard{transform:rotate(var(--a)) translateY(calc(var(--R) * -1)) rotate(calc(var(--a) * -.4))}
+  .js .arc.pre .bcard{transform:rotate(var(--a)) translateY(calc(var(--R) * -1)) rotate(calc(var(--a) * -.35))}
+  .pdock .live.hello{animation:none}
 }
 </style>
 </head>
@@ -1004,7 +1022,7 @@ html.lock{overflow:hidden}
   <symbol id="i-cursor" viewBox="0 0 24 24"><path d="M4 2l16 10-7 1.5L9.5 21z" fill="currentColor" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></symbol>
 </svg>
 
-<nav class="float-nav" id="floatNav" aria-label="Navegación rápida">
+<nav class="float-nav show" id="floatNav" aria-label="Principal">
   <a class="logo" href="/"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a>
   <ul>
     <li><a href="/">Inicio</a></li>
@@ -1028,78 +1046,61 @@ html.lock{overflow:hidden}
 
 <div class="page">
 
-  <!-- ============ ESCRITORIO ============
-       Una pantalla de Mac sin el aparato: carpetas por cliente y archivos con cada página.
-       Al abrirlos aparece una ventana con el fondo difuminado. -->
-  <header class="hero desk" id="inicio">
-    <div class="desk-bg" aria-hidden="true">
+  <!-- ============ LA PANTALLA ============
+       Una Mac sin el aparato: morada, completa en la ventana, con el menú del sitio afuera.
+       Una carpeta por marca; las ventanas se abren dentro y el dock sigue a la vista. -->
+  <header class="screen" id="inicio">
+    <div class="sc-bg" aria-hidden="true">
       <img src="/assets/portfolio/cstravel-inicio-1.webp" alt="" width="1440" height="900">
-      <img src="/assets/portfolio/thallo-1.webp" alt="" width="1440" height="900">
+      <img src="/assets/portfolio/thallo-brandbook-01.webp" alt="" width="1440" height="810">
     </div>
-    <nav class="nav" aria-label="Principal">
-      <a class="logo" href="/"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a>
-      <ul class="nav-links">
-        <li><a href="/">Inicio</a></li>
-        <li><a href="/portfolio/" aria-current="page">Portfolio</a></li>
-        <li><a href="/blog/">Blog</a></li>
-      </ul>
-      <div class="nav-end">
-        <a class="nav-cta" href="#contacto">Agendar llamada</a>
-        <a class="circle" href="https://wa.me/573024137374" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg><use href="#i-wa"/></svg></a>
-        <a class="circle light" href="https://www.instagram.com/kaivastudio/" target="_blank" rel="noopener" aria-label="Instagram de Kaiva Studio"><svg><use href="#i-ig"/></svg></a>
-        <button class="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mmenu"><span></span><span></span></button>
-      </div>
-    </nav>
+    <div class="mbar" aria-hidden="true"><b>Kaiva</b><span id="mbApp">Finder</span><span class="opt">Archivo</span><span class="opt">Editar</span><span class="opt">Ver</span><span class="opt">Ventana</span><span class="mb-r" id="mbClock"></span></div>
 
-    <div class="hero-copy">
-      <p class="pill"><b>Portfolio</b> <span class="long">Web, software y marca</span><span class="short">Web y marca</span></p>
+    <div class="widget">
+      <span class="eyebrow">Portfolio · Kaiva Studio</span>
       <h1><span class="dim">Nuestro</span> portfolio</h1>
-      <p class="lede">Proyectos reales que diseñamos y construimos para nuestros clientes. Abre una carpeta y recórrelos como si estuvieras en su página.</p>
+      <p>Proyectos reales de web, software y marca. <b>Abre una carpeta</b> o usa los íconos del dock que tienen un punto.</p>
     </div>
 
-    <h2 class="sr-only">Proyectos web y software</h2>
+    <h2 class="sr-only">Proyectos web, software y marca</h2>
     <div class="desk-area" id="desk" aria-label="Escritorio con los proyectos">
-      <button class="ico" type="button" data-open="cst" style="--x:7%;--y:8%">
+      <button class="ico" type="button" data-open="cst" style="--x:calc(100% - 300px);--y:22px">
         <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/cstravel-inicio-1.webp" alt="" width="1440" height="900"><span class="ff"></span></span>
         <span class="ico-name">CS Travel Group<small>Web y plataforma</small></span>
       </button>
-      <button class="ico" type="button" data-open="cst" data-page="empresas" style="--x:22%;--y:34%">
-        <span class="ico-art file"><img src="/assets/portfolio/cstravel-empresas-1.webp" alt="" width="1440" height="900"></span>
-        <span class="ico-name">Empresas<small>CS Travel</small></span>
-      </button>
-      <button class="ico" type="button" data-open="cst" data-page="medicos" style="--x:9%;--y:58%">
-        <span class="ico-art file"><img src="/assets/portfolio/cstravel-medicos-1.webp" alt="" width="1440" height="900"></span>
-        <span class="ico-name">Médicos<small>CS Travel</small></span>
-      </button>
-      <button class="ico" type="button" data-open="cst" data-page="plataforma" style="--x:31%;--y:66%">
-        <span class="ico-art file"><img src="/assets/inicio/trabajo-cstravel-software.webp" alt="" width="1600" height="833"></span>
-        <span class="ico-name">Plataforma para aliados<small>CS Travel</small></span>
-      </button>
-      <button class="ico" type="button" data-open="thallo" style="--x:76%;--y:10%">
-        <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/thallo-1.webp" alt="" width="1440" height="900"><span class="ff"></span></span>
+      <button class="ico" type="button" data-open="thallo" style="--x:calc(100% - 160px);--y:22px">
+        <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/thallo-brandbook-01.webp" alt="" width="1440" height="810"><span class="ff"></span></span>
         <span class="ico-name">Thallo Digital<small>Web y marca</small></span>
-      </button>
-      <button class="ico" type="button" data-open="thallo" style="--x:63%;--y:40%">
-        <span class="ico-art file"><img src="/assets/portfolio/thallo-2.webp" alt="" width="1440" height="900"></span>
-        <span class="ico-name">Inicio<small>Thallo Digital</small></span>
-      </button>
-      <button class="ico" type="button" data-go="#marcas" style="--x:82%;--y:56%">
-        <span class="ico-art file"><img src="/assets/portfolio/thallo-3.webp" alt="" width="1440" height="900"></span>
-        <span class="ico-name">Marca<small>Thallo Digital</small></span>
       </button>
     </div>
 
+    <div class="sc-ov" id="scOv"></div>
+    <div class="pwin" id="pwin" role="dialog" aria-modal="false" aria-labelledby="pwTitle">
+      <div class="pw-bar">
+        <div class="lights"><button class="lc" type="button" aria-label="Cerrar ventana">×</button><button class="lm" type="button" aria-label="Cerrar ventana" tabindex="-1">–</button><button class="lz" type="button" aria-label="Abrir en una pestaña nueva" tabindex="-1">↗</button></div>
+        <div class="pw-tabs" id="pwTabs" role="tablist" hidden></div>
+        <b class="pw-title" id="pwTitle"></b>
+      </div>
+      <div class="pw-body" id="pwBody"></div>
+    </div>
+
     <nav class="pdock" aria-label="Dock">
-      <a class="d d-k" href="/" data-tip="Inicio" aria-label="Inicio">K</a>
-      <button class="d d-web" type="button" data-open="cst" data-tip="Proyectos web" aria-label="Abrir proyecto web de CS Travel Group"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.8 3.8 5.8 3.8 9s-1.2 6.2-3.8 9c-2.6-2.8-3.8-5.8-3.8-9s1.2-6.2 3.8-9z"/></g></svg></button>
-      <a class="d d-brand" href="#marcas" data-tip="Marcas" aria-label="Ver marcas"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.8-.8 1.8-1.7 0-1.2-1-1.6-1-2.6 0-.9.7-1.6 1.7-1.6H17a4 4 0 0 0 4-4C21 6.5 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.2" fill="currentColor"/><circle cx="10" cy="7" r="1.2" fill="currentColor"/><circle cx="15" cy="7.5" r="1.2" fill="currentColor"/></g></svg></a>
-      <a class="d d-blog" href="/blog/" data-tip="Blog" aria-label="Blog"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 4h14v16H5z"/><path d="M8 9h8M8 13h8M8 17h5"/></g></svg></a>
+      <span class="d deco" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#B9E0FF"/><path d="M9 0h12c-3 8-4 15-3 22h-3c0 6 1 12 3 18H9a9 9 0 0 1-9-9V9a9 9 0 0 1 9-9z" fill="#1E8EF0"/><path d="M13 12v5M27 12v5" stroke="#111" stroke-width="2" stroke-linecap="round"/><path d="M11 27c5 4 13 4 18 0" stroke="#111" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span>
+      <span class="d deco" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#fff"/><text x="20" y="13" text-anchor="middle" font-family="Geist,Arial" font-size="8" font-weight="700" fill="#FF3B30" id="calMon">OCT</text><text x="20" y="32" text-anchor="middle" font-family="Geist,Arial" font-size="18" font-weight="500" fill="#1C1C1E" id="calDay">5</text></svg></span>
+      <span class="d deco m-hide" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#fff"/><path d="M0 9a9 9 0 0 1 9-9h22a9 9 0 0 1 9 9v4H0z" fill="#FFD233"/><path d="M7 20h26M7 26h26M7 32h18" stroke="#D8D8DE" stroke-width="1.6"/></svg></span>
+      <span class="d deco m-hide" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#1ED760"/><path d="M10 15c7-2 14-1 20 2M11 21c6-1.6 11-.8 16 1.6M12 26.5c4.6-1 8.6-.5 12 1.2" stroke="#111" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg></span>
+      <span class="d deco" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#25D366"/><g transform="translate(8 8)" fill="#fff"><use href="#i-wa" width="24" height="24"/></g></svg></span>
+      <span class="d deco m-hide" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#fff" stroke="#E2E2E6"/><path d="M13 11h5l9 13V11h3v18h-5l-9-13v13h-3z" fill="#111"/></svg></span>
+      <span class="d deco m-hide" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#1E1E1E"/><circle cx="16.5" cy="11" r="4" fill="#F24E1E"/><circle cx="23.5" cy="11" r="4" fill="#FF7262"/><circle cx="16.5" cy="19" r="4" fill="#A259FF"/><circle cx="23.5" cy="19" r="4" fill="#1ABCFE"/><circle cx="16.5" cy="27" r="4" fill="#0ACF83"/></svg></span>
       <span class="sep" aria-hidden="true"></span>
-      <a class="d d-wa" href="https://wa.me/573024137374" target="_blank" rel="noopener" data-tip="WhatsApp" aria-label="WhatsApp"><svg><use href="#i-wa"/></svg></a>
-      <a class="d d-ig" href="https://www.instagram.com/kaivastudio/" target="_blank" rel="noopener" data-tip="Instagram" aria-label="Instagram"><svg><use href="#i-ig"/></svg></a>
-      <a class="d d-mail" href="mailto:info@kaivastudio.com" data-tip="Correo" aria-label="Correo"><svg><use href="#i-mail"/></svg></a>
-      <a class="d d-cal" href="#contacto" data-tip="Agendar llamada" aria-label="Agendar llamada"><b id="calMon">OCT</b><i id="calDay">5</i></a>
-    </nav>
+      <button class="d live" type="button" data-app="web" data-tip="Navegador" aria-label="Abrir el navegador con los sitios web"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#fff"/><path d="M20 2a18 18 0 0 1 15.6 9H20a9 9 0 0 0-7.8 4.5L4.4 11A18 18 0 0 1 20 2z" fill="#EA4335"/><path d="M35.6 11A18 18 0 0 1 20 38l7.8-13.5A9 9 0 0 0 27.8 15.5 9 9 0 0 0 20 11z" fill="#FBBC05"/><path d="M20 38A18 18 0 0 1 4.4 11l7.8 13.5A9 9 0 0 0 27.8 24.5z" fill="#34A853"/><circle cx="20" cy="20" r="7.2" fill="#fff"/><circle cx="20" cy="20" r="5.6" fill="#4285F4"/></svg></button>
+      <button class="d live d-brand" type="button" data-app="brand" data-tip="Marca" aria-label="Abrir los manuales de marca"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.8-.8 1.8-1.7 0-1.2-1-1.6-1-2.6 0-.9.7-1.6 1.7-1.6H17a4 4 0 0 0 4-4C21 6.5 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.2" fill="currentColor"/><circle cx="10" cy="7" r="1.2" fill="currentColor"/><circle cx="15" cy="7.5" r="1.2" fill="currentColor"/></g></svg></button>
+      <button class="d live d-ig" type="button" data-app="ig" data-tip="Instagram" aria-label="Abrir el Instagram de Kaiva Studio"><svg><use href="#i-ig"/></svg></button>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="d deco m-hide" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#fff"/><g transform="translate(20 20)" opacity=".85"><ellipse rx="4" ry="8" cy="-7" fill="#FF9500"/><ellipse rx="4" ry="8" cy="-7" fill="#FFCC00" transform="rotate(45)"/><ellipse rx="4" ry="8" cy="-7" fill="#34C759" transform="rotate(90)"/><ellipse rx="4" ry="8" cy="-7" fill="#00C7BE" transform="rotate(135)"/><ellipse rx="4" ry="8" cy="-7" fill="#007AFF" transform="rotate(180)"/><ellipse rx="4" ry="8" cy="-7" fill="#5856D6" transform="rotate(225)"/><ellipse rx="4" ry="8" cy="-7" fill="#AF52DE" transform="rotate(270)"/><ellipse rx="4" ry="8" cy="-7" fill="#FF2D55" transform="rotate(315)"/></g></svg></span>
+      <span class="d deco m-hide" aria-hidden="true"><svg viewBox="0 0 40 40"><defs><linearGradient id="st" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B8B8BE"/><stop offset="1" stop-color="#7C7C84"/></linearGradient></defs><rect width="40" height="40" rx="9" fill="url(#st)"/><circle cx="20" cy="20" r="10" fill="none" stroke="#3A3A40" stroke-width="4" stroke-dasharray="3.2 2.4"/><circle cx="20" cy="20" r="6" fill="#E6E6EA" stroke="#3A3A40" stroke-width="2"/></svg></span>
+      <span class="d deco" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M10 9h20l-2 27H12z" fill="rgba(255,255,255,.65)" stroke="#9A9AA2" stroke-width="1.2"/><path d="M8 8h24" stroke="#9A9AA2" stroke-width="2" stroke-linecap="round"/><path d="M15 13v19M20 13v19M25 13v19" stroke="#B4B4BC" stroke-width="1"/></svg></span>
+      </nav>
   </header>
 
   <main class="wrap">
@@ -1108,7 +1109,7 @@ html.lock{overflow:hidden}
     <section class="block" id="proyectos" aria-labelledby="proj-t">
       <div class="head" data-reveal>
         <h2 id="proj-t"><span class="dim">Lo que hicimos</span><br>en cada proyecto</h2>
-        <p class="sub">Cada carpeta del escritorio es un cliente. Aquí está el resumen de cada uno.</p>
+        <p class="sub">Cada carpeta de la pantalla es un cliente. Aquí está el resumen de cada uno.</p>
       </div>
       <div class="plist" data-reveal>
         <a class="pcard" href="#cstravel" data-open="cst">
@@ -1120,10 +1121,10 @@ html.lock{overflow:hidden}
           </span>
         </a>
         <a class="pcard" href="#thallo" data-open="thallo">
-          <img src="/assets/portfolio/thallo-1.webp" alt="Página de inicio del sitio web de Thallo Digital" width="1440" height="900" loading="lazy">
+          <img src="/assets/portfolio/thallo-brandbook-01.webp" alt="Portada del mini brandbook de Thallo Digital" width="1440" height="810" loading="lazy">
           <span>
             <h3>Thallo Digital</h3>
-            <p>Sitio web y marca: logo, color, tipografía y cómo se aplica en cada pantalla.</p>
+            <p>Sitio web y marca: símbolo, logo, paleta, tipografía y cómo se aplica la identidad.</p>
             <span class="tags"><span>Diseño web</span><span>Diseño de marca</span></span>
           </span>
         </a>
@@ -1131,23 +1132,23 @@ html.lock{overflow:hidden}
     </section>
 
     <!-- ============ MARCAS ============
-         Distinto a la web: las piezas de una marca se muestran como cartas en abanico. -->
+         Distinto a la web: las páginas del brandbook se muestran como cartas en abanico. -->
     <section class="block brands" id="marcas" aria-labelledby="br-t">
       <div class="arc" id="arc" data-reveal>
         <div class="arc-row">
-          <button class="bcard" type="button" style="--a:-66deg;--i:0" data-cap="Thallo Digital · Logo"><span class="bc bc-logo"><img src="/assets/portfolio/thallo-logo.png" alt="Logo de Thallo Digital" width="1826" height="520" loading="lazy"></span></button>
-          <button class="bcard" type="button" style="--a:-44deg;--i:1" data-cap="Thallo Digital · Sitio web"><span class="bc bc-shot" style="--op:6% 40%"><img src="/assets/portfolio/thallo-1.webp" alt="Titular del sitio web de Thallo Digital con su tipografía y su verde" width="1440" height="900" loading="lazy"></span></button>
-          <button class="bcard" type="button" style="--a:-22deg;--i:2" data-cap="Thallo Digital · Paleta"><span class="bc bc-pal" role="img" aria-label="Paleta de Thallo Digital: #101828, #39471D, #55672E y #CBD0AC"><i style="background:#101828">#101828</i><i style="background:#39471D">#39471D</i><i style="background:#55672E">#55672E</i><i style="background:#CBD0AC">#CBD0AC</i></span></button>
-          <button class="bcard" type="button" style="--a:0deg;--i:3" data-cap="Thallo Digital · Ilustración"><span class="bc bc-shot" style="--op:18% 50%"><img src="/assets/portfolio/thallo-3.webp" alt="Ilustración de una rama en el sitio web de Thallo Digital" width="1440" height="900" loading="lazy"></span></button>
-          <button class="bcard" type="button" style="--a:22deg;--i:4" data-cap="Thallo Digital · Tipografía"><span class="bc bc-type" role="img" aria-label="Tipografía de Thallo Digital: Inter ExtraBold y cursiva"><b>Aa</b><span>can’t stop citing.</span><small>Inter ExtraBold</small></span></button>
-          <button class="bcard" type="button" style="--a:44deg;--i:5" data-cap="Thallo Digital · Logo sobre verde"><span class="bc bc-logo sage"><img src="/assets/portfolio/thallo-logo.png" alt="Logo de Thallo Digital sobre su verde claro" width="1826" height="520" loading="lazy"></span></button>
-          <button class="bcard" type="button" style="--a:66deg;--i:6" data-cap="Thallo Digital · Cierre del sitio"><span class="bc bc-shot" style="--op:30% 50%"><img src="/assets/portfolio/thallo-6.webp" alt="Sección de contacto del sitio web de Thallo Digital en su verde oscuro" width="1440" height="900" loading="lazy"></span></button>
+          <button class="bcard" type="button" style="--a:-66deg;--i:0" data-cap="Thallo Digital · Mini Brandbook"><img src="/assets/portfolio/thallo-brandbook-01.webp" alt="Portada del mini brandbook de Thallo Digital" width="1440" height="810" loading="lazy"></button>
+          <button class="bcard" type="button" style="--a:-44deg;--i:1" data-cap="Thallo Digital · Símbolo"><img src="/assets/portfolio/thallo-brandbook-10.webp" alt="Símbolo de Thallo Digital, una forma orgánica verde oliva" width="1440" height="810" loading="lazy"></button>
+          <button class="bcard" type="button" style="--a:-22deg;--i:2" data-cap="Thallo Digital · Versiones del logo"><img src="/assets/portfolio/thallo-brandbook-11.webp" alt="Versiones aprobadas del logo de Thallo Digital" width="1440" height="810" loading="lazy"></button>
+          <button class="bcard" type="button" style="--a:0deg;--i:3" data-cap="Thallo Digital · Identidad visual"><img src="/assets/portfolio/thallo-brandbook-09.webp" alt="Portadilla de identidad visual del brandbook de Thallo Digital" width="1440" height="810" loading="lazy"></button>
+          <button class="bcard" type="button" style="--a:22deg;--i:4" data-cap="Thallo Digital · Paleta"><img src="/assets/portfolio/thallo-brandbook-13.webp" alt="Paleta de color de Thallo Digital: verdes oliva sobre neutros cálidos" width="1440" height="810" loading="lazy"></button>
+          <button class="bcard" type="button" style="--a:44deg;--i:5" data-cap="Thallo Digital · Aplicaciones"><img src="/assets/portfolio/thallo-brandbook-16.webp" alt="La identidad de Thallo Digital aplicada en piezas y pantallas" width="1440" height="810" loading="lazy"></button>
+          <button class="bcard" type="button" style="--a:66deg;--i:6" data-cap="Thallo Digital · Cierre"><img src="/assets/portfolio/thallo-brandbook-17.webp" alt="Cierre del brandbook de Thallo Digital" width="1440" height="810" loading="lazy"></button>
         </div>
         <div class="arc-copy">
           <span class="who">Diseño de marca · Thallo Digital</span>
           <h2 id="br-t"><span class="dim">Marcas que</span><br>se reconocen</h2>
-          <p class="sub">Logo, color y tipografía pensados juntos y aplicados igual en cada pantalla. Toca una carta para verla de cerca.</p>
-          <a class="btn" href="https://thallodigital.com/" target="_blank" rel="noopener">Ver el sitio de Thallo <svg><use href="#i-arrow"/></svg></a>
+          <p class="sub">Páginas del brandbook que diseñamos para Thallo. Toca una para verla de cerca o ábrelo completo.</p>
+          <button class="btn" type="button" data-brand>Ver el brandbook completo <svg><use href="#i-arrow"/></svg></button>
         </div>
       </div>
     </section>
@@ -1196,31 +1197,9 @@ html.lock{overflow:hidden}
   </footer>
 </div>
 
-<!-- ventana del proyecto y carta ampliada: el resto de la página se difumina detrás -->
-<div class="pw-ov" id="pwOv" aria-hidden="true">
-  <div class="pwin" id="pwin" role="dialog" aria-modal="true" aria-labelledby="pwTitle">
-    <div class="pw-bar">
-      <div class="lights"><button class="lc" type="button" aria-label="Cerrar ventana">×</button><button class="lm" type="button" aria-label="Cerrar ventana" tabindex="-1">–</button><button class="lz" type="button" aria-label="Ver sitio en vivo" tabindex="-1">↗</button></div>
-      <b id="pwBar"></b>
-    </div>
-    <div class="pw-body">
-      <aside class="pw-side">
-        <div><span class="eyebrow" id="pwKind"></span><h2 id="pwTitle"></h2></div>
-        <p id="pwDesc"></p>
-        <div class="pw-pages" id="pwPages"><b>Páginas</b></div>
-        <ul class="pw-done" id="pwDone"></ul>
-        <a class="btn" id="pwLive" href="#" target="_blank" rel="noopener">Ver sitio en vivo <svg><use href="#i-arrow"/></svg></a>
-      </aside>
-      <div class="pw-main">
-        <div class="pw-url"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 10V8a5 5 0 0 1 10 0v2h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h1zm2 0h6V8a3 3 0 0 0-6 0v2z"/></svg><span id="pwUrl"></span></div>
-        <div class="pw-scroll" id="pwScroll" tabindex="0"></div>
-      </div>
-    </div>
-  </div>
-</div>
 <div class="pw-ov" id="bcOv" aria-hidden="true">
   <button class="pw-x" type="button" aria-label="Cerrar">×</button>
-  <div class="bbig" id="bbig" role="dialog" aria-modal="true" aria-label="Pieza de marca ampliada"></div>
+  <div class="bbig" id="bbig" role="dialog" aria-modal="true" aria-label="Página del brandbook ampliada"></div>
 </div>
 
 <script>
@@ -1247,6 +1226,7 @@ html.lock{overflow:hidden}
       for(var n=e.target;n&&n.nodeType===1&&n!==root&&n!==document.body;n=n.parentElement){
         var o=getComputedStyle(n).overflowY;
         if((o==='auto'||o==='scroll')&&n.scrollHeight>n.clientHeight)return;
+        if(n.tagName==='IFRAME')return;
       }
       e.preventDefault();
       if(!raf)target=window.pageYOffset;
@@ -1256,7 +1236,8 @@ html.lock{overflow:hidden}
     window.addEventListener('keydown',function(){if(raf){cancelAnimationFrame(raf);raf=0}});
     smoothTo=function(y){go(y,.075)};
   })();
-  function scrollToEl(t){var y=t.getBoundingClientRect().top+window.pageYOffset-(t.id==='contacto'?20:90);if(smoothTo)smoothTo(y);else window.scrollTo({top:y,behavior:reduce?'auto':'smooth'})}
+  function scrollToY(y){if(smoothTo)smoothTo(y);else window.scrollTo({top:y,behavior:reduce?'auto':'smooth'})}
+  function scrollToEl(t){scrollToY(t.getBoundingClientRect().top+window.pageYOffset-(t.id==='contacto'?20:t.id==='inicio'?76:90))}
 
   /* ---------- Enlaces internos de esta página ---------- */
   document.addEventListener('click',function(e){
@@ -1274,10 +1255,9 @@ html.lock{overflow:hidden}
   mm.querySelector('.mm-close').addEventListener('click',function(){setMenu(false)});
   mm.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
 
-  /* ---------- Barra flotante, escritorio que se vuelve morado y cierre que se oscurece ---------- */
-  var fn=document.getElementById('floatNav'),hero=document.getElementById('inicio'),fin=document.getElementById('contacto');
+  /* ---------- El cierre se oscurece al bajar (la pantalla ya es morada desde el inicio) ---------- */
+  var fin=document.getElementById('contacto');
   function onScroll(){
-    var hr=hero.getBoundingClientRect();fn.classList.toggle('show',hr.bottom<120);hero.style.setProperty('--hp',Math.max(0,Math.min(1,-hr.top/(hr.height*.6))).toFixed(3));
     var fr=fin.getBoundingClientRect(),vh=window.innerHeight,fp=(vh-fr.top)/Math.min(fr.height,vh);
     fin.style.setProperty('--fp',(Math.max(0,Math.min(1,fp))*.82).toFixed(3));
   }
@@ -1298,14 +1278,17 @@ html.lock{overflow:hidden}
     d.innerHTML=d.textContent.trim().split(/\s+/).map(function(w){return '<span class="w">'+w+'</span>'}).join(' ');
   });
 
-  /* ---------- Fecha real en el ícono del calendario del dock ---------- */
-  var now=new Date();
-  document.getElementById('calMon').textContent=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'][now.getMonth()];
-  document.getElementById('calDay').textContent=now.getDate();
+  /* ---------- Reloj de la barra de menú y fecha del calendario del dock ---------- */
+  var dias=['dom','lun','mar','mié','jue','vie','sáb'],meses=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+  function clock(){var d=new Date();document.getElementById('mbClock').textContent=dias[d.getDay()]+' '+d.getDate()+' '+meses[d.getMonth()].toLowerCase()+'  '+d.getHours()+':'+String(d.getMinutes()).padStart(2,'0')}
+  clock();setInterval(clock,30000);
+  var cm=document.getElementById('calMon'),cd=document.getElementById('calDay');
+  if(cm){var now=new Date();cm.textContent=meses[now.getMonth()];cd.textContent=now.getDate()}
 
-  /* ---------- Proyectos: lo que se muestra en cada ventana ----------
-     Solo datos confirmados. Las capturas son de los sitios reales, sección por sección. */
-  var shots=function(p,n){var a=[];for(var i=1;i<=n;i++)a.push('/assets/portfolio/'+p+'-'+i+'.webp');return a};
+  /* ---------- Contenido de las ventanas ----------
+     Solo datos confirmados. Las pantallas son de los sitios reales, sección por sección,
+     y las páginas de marca salen del brandbook que entregamos. */
+  var shots=function(p,n,ext){var a=[];for(var i=1;i<=n;i++)a.push('/assets/portfolio/'+p+'-'+(ext?String(i).padStart(2,'0'):i)+'.webp');return a};
   var P={
     cst:{name:'CS Travel Group',kind:'Diseño web · Software a medida',hash:'cstravel',live:'https://www.cstravelgroup.com/',
       desc:'Agencia de viajes corporativos y para médicos. Hicimos su sitio web, las páginas para empresas y para médicos, y una plataforma a medida para sus aliados.',
@@ -1318,108 +1301,154 @@ html.lock{overflow:hidden}
           note:'Es una plataforma privada: los aliados de CS Travel entran con su usuario para ver sus casos, sus referidos y sus ganancias.'}
       ]},
     thallo:{name:'Thallo Digital',kind:'Diseño web · Diseño de marca',hash:'thallo',live:'https://thallodigital.com/',
-      desc:'Hicimos su sitio web y su marca: logo, color y tipografía aplicados igual en cada pantalla.',
-      done:['Sitio web','Logo e identidad','Color y tipografía'],
-      pages:[{id:'inicio',label:'Inicio',url:'thallodigital.com',live:'https://thallodigital.com/',shots:shots('thallo',6),alt:'Sitio web de Thallo Digital'}],
-      brand:true}
+      desc:'Hicimos su sitio web y su marca: símbolo, logo, paleta, tipografía y cómo se aplica la identidad.',
+      done:['Sitio web','Símbolo y logo','Paleta y tipografía','Brandbook'],
+      pages:[
+        {id:'inicio',label:'Sitio web',url:'thallodigital.com',live:'https://thallodigital.com/',shots:shots('thallo',6),alt:'Sitio web de Thallo Digital'},
+        {id:'marca',label:'Mini Brandbook',url:'Brandbook de Thallo Digital',book:true,shots:shots('thallo-brandbook',17,true),alt:'Mini brandbook de Thallo Digital'}
+      ]}
   };
+  // marcas: cada manual de marca es una pestaña del navegador
+  var BOOKS=[{id:'thallo',label:'Thallo Digital',url:'Mini Brandbook · Thallo Digital',shots:shots('thallo-brandbook',17,true),alt:'Mini brandbook de Thallo Digital'}];
+  // navegador: los sitios web en vivo de cada proyecto, en pestañas
+  var WEBS=[P.cst.pages[0],P.cst.pages[1],P.cst.pages[2],P.thallo.pages[0]].map(function(pg,i){return {id:'w'+i,label:(i<3?'CS Travel · ':'Thallo · ')+pg.label,url:pg.url,live:pg.live,shots:pg.shots,alt:pg.alt}});
 
-  var ov=document.getElementById('pwOv'),win=document.getElementById('pwin'),scroller=document.getElementById('pwScroll');
-  var pages=document.getElementById('pwPages'),live=document.getElementById('pwLive'),lastFocus=null,curP=null;
-  var ico='<svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></g></svg>';
-  function showPage(p,pg){
-    pages.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.dataset.id===pg.id);b.setAttribute('aria-current',b.dataset.id===pg.id?'page':'false')});
-    document.getElementById('pwUrl').textContent=pg.url;
-    live.href=pg.live||p.live;
-    scroller.innerHTML=pg.shots.map(function(s,i){return '<img src="'+s+'" alt="'+pg.alt+(pg.shots.length>1?', pantalla '+(i+1):'')+'" width="1440" height="900" style="--i:'+i+(pg.ratio?';aspect-ratio:'+pg.ratio:'')+'" decoding="async">'}).join('')+(pg.note?'<p class="pw-note">'+pg.note+'</p>':'')+(p.brand?'<p class="pw-note">También hicimos su marca. <a href="#marcas" data-close>Ver las piezas de marca</a>.</p>':'');
-    scroller.scrollTop=0;
+  var scr=document.getElementById('inicio'),win=document.getElementById('pwin'),body=document.getElementById('pwBody');
+  var tabs=document.getElementById('pwTabs'),title=document.getElementById('pwTitle'),mbApp=document.getElementById('mbApp');
+  var live=null,mode=null,lastFocus=null;
+  var lock='<svg viewBox="0 0 24 24"><path fill="currentColor" d="M7 10V8a5 5 0 0 1 10 0v2h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h1zm2 0h6V8a3 3 0 0 0-6 0v2z"/></svg>';
+  var pgIco='<svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></g></svg>';
+  function screensHTML(pg){
+    return '<div class="pw-url">'+lock+'<span>'+pg.url+'</span>'+(pg.live?'<a href="'+pg.live+'" target="_blank" rel="noopener">Ver en vivo ↗</a>':'')+'</div>'+
+      '<div class="pw-scroll'+(pg.book?' book':'')+'" tabindex="0">'+pg.shots.map(function(s,i){return '<img src="'+s+'" alt="'+pg.alt+(pg.shots.length>1?', página '+(i+1):'')+'" width="1440" height="'+(pg.book?810:900)+'" style="--i:'+i+(pg.ratio?';aspect-ratio:'+pg.ratio:'')+'" decoding="async">'}).join('')+(pg.note?'<p class="pw-note">'+pg.note+'</p>':'')+'</div>';
   }
-  function openP(key,pageId,from){
-    var p=P[key];if(!p)return;curP=p;lastFocus=document.activeElement;
-    document.getElementById('pwBar').textContent=p.name;
-    document.getElementById('pwTitle').textContent=p.name;
-    document.getElementById('pwKind').textContent=p.kind;
-    document.getElementById('pwDesc').textContent=p.desc;
-    document.getElementById('pwDone').innerHTML=p.done.map(function(d){return '<li>'+d+'</li>'}).join('');
-    pages.innerHTML='<b>Páginas</b>'+p.pages.map(function(pg){return '<button type="button" data-id="'+pg.id+'">'+ico+pg.label+'</button>'}).join('');
-    pages.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){showPage(p,p.pages.filter(function(x){return x.id===b.dataset.id})[0])})});
-    showPage(p,p.pages.filter(function(x){return x.id===pageId})[0]||p.pages[0]);
-    // la ventana crece desde el ícono que se tocó, como en macOS
-    if(from){var r=from.getBoundingClientRect(),w=win.getBoundingClientRect();win.style.setProperty('--ox',(r.left+r.width/2-w.left)+'px');win.style.setProperty('--oy',(r.top+r.height/2-w.top)+'px')}
-    openOv(ov);
-    if(history.replaceState)history.replaceState(null,'','#'+p.hash);
-    setTimeout(function(){ov.querySelector('.lc').focus({preventScroll:true})},60);
+  function origin(from){
+    if(!from)return;var r=from.getBoundingClientRect(),s=scr.getBoundingClientRect();
+    win.style.setProperty('--ox',(r.left+r.width/2-s.left-win.offsetLeft)+'px');win.style.setProperty('--oy',(r.top+r.height/2-s.top-win.offsetTop)+'px');
   }
-  function openOv(o){root.classList.add('lock');o.classList.add('open');o.setAttribute('aria-hidden','false')}
-  function closeOv(o){
-    o.classList.remove('open');o.setAttribute('aria-hidden','true');root.classList.remove('lock');
-    if(o===ov&&history.replaceState)history.replaceState(null,'',location.pathname);
+  function show(from,name){
+    origin(from);lastFocus=document.activeElement;
+    scr.classList.add('win-open');mbApp.textContent=name;
+    document.querySelectorAll('.pdock .live').forEach(function(d){d.classList.toggle('on',d.dataset.app===mode)});
+    setTimeout(function(){win.querySelector('.lc').focus({preventScroll:true})},60);
+  }
+  function hide(){
+    scr.classList.remove('win-open');mbApp.textContent='Finder';mode=null;
+    document.querySelectorAll('.pdock .live').forEach(function(d){d.classList.remove('on')});
+    setTimeout(function(){if(!scr.classList.contains('win-open'))body.innerHTML=''},400);
+    if(history.replaceState)history.replaceState(null,'',location.pathname);
     if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});
   }
-  ov.addEventListener('click',function(e){
-    if(e.target===ov||e.target.closest('.lc,.lm')){closeOv(ov);return}
-    if(e.target.closest('.lz')){window.open(live.href,'_blank','noopener');return}
-    var a=e.target.closest('[data-close]');
-    if(a){e.preventDefault();closeOv(ov);var t=document.getElementById('marcas');setTimeout(function(){scrollToEl(t)},200)}
+  // carpeta de un cliente: Finder a la izquierda, navegador a la derecha
+  function openProject(key,pageId,from){
+    var p=P[key];if(!p)return;mode='folder';live=p.live;
+    tabs.hidden=true;title.hidden=false;title.textContent=p.name;
+    body.className='pw-body';
+    body.innerHTML='<aside class="pw-side"><div><span class="eyebrow">'+p.kind+'</span><h2>'+p.name+'</h2></div><p>'+p.desc+'</p>'+
+      '<div class="pw-pages"><b>Ver</b>'+p.pages.map(function(pg){return '<button type="button" data-id="'+pg.id+'">'+pgIco+pg.label+'</button>'}).join('')+'</div>'+
+      '<ul class="pw-done">'+p.done.map(function(d){return '<li>'+d+'</li>'}).join('')+'</ul>'+
+      '<a class="btn" href="'+p.live+'" target="_blank" rel="noopener">Ver sitio en vivo <svg><use href="#i-arrow"/></svg></a></aside><div class="pw-main" id="pwMain"></div>';
+    function page(id){
+      var pg=p.pages.filter(function(x){return x.id===id})[0]||p.pages[0];
+      body.querySelectorAll('.pw-pages button').forEach(function(b){b.classList.toggle('on',b.dataset.id===pg.id)});
+      document.getElementById('pwMain').innerHTML=screensHTML(pg);live=pg.live||p.live;
+    }
+    body.querySelectorAll('.pw-pages button').forEach(function(b){b.addEventListener('click',function(){page(b.dataset.id)})});
+    page(pageId);show(from,p.name);
+    if(history.replaceState)history.replaceState(null,'','#'+p.hash);
+  }
+  // navegador (Safari): una pestaña por sitio o por manual
+  function openBrowser(list,app,name,from){
+    mode=app;tabs.hidden=false;title.hidden=true;
+    body.className='pw-body full';
+    tabs.innerHTML=list.map(function(t){return '<button type="button" role="tab" data-id="'+t.id+'">'+t.label+'</button>'}).join('');
+    function tab(id){
+      var t=list.filter(function(x){return x.id===id})[0]||list[0];
+      tabs.querySelectorAll('button').forEach(function(b){var on=b.dataset.id===t.id;b.classList.toggle('on',on);b.setAttribute('aria-selected',on)});
+      body.innerHTML='<div class="pw-main">'+screensHTML(t)+'</div>';live=t.live||null;
+    }
+    tabs.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){tab(b.dataset.id)})});
+    tab();show(from,name);
+  }
+  // Instagram dentro de la pantalla (se carga solo cuando alguien lo abre)
+  function openInstagram(from){
+    mode='ig';live='https://www.instagram.com/kaivastudio/';tabs.hidden=true;title.hidden=false;title.textContent='Instagram — @kaivastudio';
+    body.className='pw-body full';
+    body.innerHTML='<div class="pw-main"><div class="pw-url">'+lock+'<span>instagram.com/kaivastudio</span><a href="https://www.instagram.com/kaivastudio/" target="_blank" rel="noopener">Abrir en Instagram ↗</a></div><div class="pw-ig"><iframe src="https://www.instagram.com/kaivastudio/embed/" title="Perfil de Instagram de Kaiva Studio" loading="lazy" allowtransparency="true"></iframe></div></div>';
+    show(from,'Instagram');
+  }
+
+  document.getElementById('scOv').addEventListener('click',hide);
+  win.addEventListener('click',function(e){
+    if(e.target.closest('.lc,.lm')){hide();return}
+    if(e.target.closest('.lz')&&live)window.open(live,'_blank','noopener');
   });
   document.addEventListener('keydown',function(e){
     if(e.key!=='Escape')return;
-    if(ov.classList.contains('open'))closeOv(ov);
-    else if(bov.classList.contains('open'))closeOv(bov);
+    if(bov.classList.contains('open'))closeBig();
+    else if(scr.classList.contains('win-open'))hide();
     else setMenu(false);
   });
-
-  /* ---------- Íconos del escritorio: se abren con clic y se pueden arrastrar ---------- */
-  var desk=document.getElementById('desk');
+  function fromBelow(fn){
+    // si se abre desde abajo de la página, primero sube a la pantalla
+    if(scr.getBoundingClientRect().top<-40||scr.getBoundingClientRect().bottom>window.innerHeight+40){scrollToEl(scr);setTimeout(fn,650)}else fn();
+  }
   document.querySelectorAll('[data-open]').forEach(function(el){
     el.addEventListener('click',function(e){
-      if(el.dataset.dragged){delete el.dataset.dragged;e.preventDefault();return}
-      e.preventDefault();openP(el.dataset.open,el.dataset.page,el.closest('.ico,.pcard,.d')||el);
+      e.preventDefault();
+      if(el.dataset.dragged){delete el.dataset.dragged;return}
+      var from=el.classList.contains('ico')?el:null;
+      fromBelow(function(){openProject(el.dataset.open,el.dataset.page,from||document.querySelector('.ico[data-open="'+el.dataset.open+'"]'))});
     });
   });
-  document.querySelectorAll('[data-go]').forEach(function(el){
-    el.addEventListener('click',function(){if(el.dataset.dragged){delete el.dataset.dragged;return}scrollToEl(document.querySelector(el.dataset.go))});
+  document.querySelectorAll('.pdock .live').forEach(function(d){
+    d.addEventListener('click',function(){
+      var a=d.dataset.app;
+      if(scr.classList.contains('win-open')&&mode===a){hide();return}
+      if(a==='web')openBrowser(WEBS,'web','Navegador',d);
+      else if(a==='brand')openBrowser(BOOKS,'brand','Marca',d);
+      else if(a==='ig')openInstagram(d);
+    });
   });
+  document.querySelectorAll('[data-brand]').forEach(function(b){b.addEventListener('click',function(){fromBelow(function(){openBrowser(BOOKS,'brand','Marca',document.querySelector('.pdock [data-app="brand"]'))})})});
+  // los interactivos del dock saludan una vez para que se note que se pueden abrir
+  if(!reduce)setTimeout(function(){document.querySelectorAll('.pdock .live').forEach(function(d,i){setTimeout(function(){d.classList.add('hello')},i*180)})},1400);
+
+  /* ---------- Carpetas: se abren con clic y se pueden arrastrar ---------- */
+  var desk=document.getElementById('desk');
   if(window.matchMedia('(pointer:fine) and (min-width:701px)').matches){
     desk.querySelectorAll('.ico').forEach(function(ic){
       var sx,sy,ox,oy,moved=false,id=null;
-      ic.addEventListener('pointerdown',function(e){
-        if(e.button!==0)return;
-        id=e.pointerId;sx=e.clientX;sy=e.clientY;ox=ic.offsetLeft;oy=ic.offsetTop;moved=false;
-        ic.setPointerCapture(id);
-      });
+      ic.addEventListener('pointerdown',function(e){if(e.button!==0)return;id=e.pointerId;sx=e.clientX;sy=e.clientY;ox=ic.offsetLeft;oy=ic.offsetTop;moved=false;ic.setPointerCapture(id)});
       ic.addEventListener('pointermove',function(e){
         if(id!==e.pointerId)return;
         var dx=e.clientX-sx,dy=e.clientY-sy;
         if(!moved&&Math.hypot(dx,dy)<6)return;
         moved=true;ic.classList.add('drag');
-        var W=desk.clientWidth-ic.offsetWidth,H=desk.clientHeight-ic.offsetHeight;
-        ic.style.left=Math.max(0,Math.min(W,ox+dx))/desk.clientWidth*100+'%';
-        ic.style.top=Math.max(0,Math.min(H,oy+dy))/desk.clientHeight*100+'%';
+        ic.style.left=Math.max(0,Math.min(desk.clientWidth-ic.offsetWidth,ox+dx))+'px';
+        ic.style.top=Math.max(0,Math.min(desk.clientHeight-ic.offsetHeight,oy+dy))+'px';
       });
-      ic.addEventListener('pointerup',function(e){
-        if(id!==e.pointerId)return;id=null;ic.classList.remove('drag');
-        if(moved)ic.dataset.dragged='1';
-      });
+      ic.addEventListener('pointerup',function(e){if(id!==e.pointerId)return;id=null;ic.classList.remove('drag');if(moved)ic.dataset.dragged='1'});
       ic.addEventListener('focus',function(){desk.querySelectorAll('.ico').forEach(function(x){x.classList.toggle('sel',x===ic)})});
     });
   }
 
-  /* ---------- Marcas: cada carta se abre en grande con el fondo difuminado ---------- */
-  var bov=document.getElementById('bcOv'),big=document.getElementById('bbig');
+  /* ---------- Marcas: cada página del brandbook se abre en grande ---------- */
+  var bov=document.getElementById('bcOv'),big=document.getElementById('bbig'),bigFrom=null;
+  function closeBig(){bov.classList.remove('open');bov.setAttribute('aria-hidden','true');root.classList.remove('lock');if(bigFrom)bigFrom.focus({preventScroll:true})}
   document.querySelectorAll('.bcard').forEach(function(c){
     c.addEventListener('click',function(){
-      lastFocus=c;
-      big.innerHTML=c.innerHTML+'<span class="bcap">'+c.dataset.cap+'</span>';
+      bigFrom=c;big.innerHTML=c.innerHTML+'<span class="bcap">'+c.dataset.cap+'</span>';
       big.querySelectorAll('img').forEach(function(i){i.removeAttribute('loading')});
-      openOv(bov);setTimeout(function(){bov.querySelector('.pw-x').focus({preventScroll:true})},60);
+      root.classList.add('lock');bov.classList.add('open');bov.setAttribute('aria-hidden','false');
+      setTimeout(function(){bov.querySelector('.pw-x').focus({preventScroll:true})},60);
     });
   });
-  bov.addEventListener('click',function(e){if(e.target===bov||e.target.closest('.pw-x'))closeOv(bov)});
+  bov.addEventListener('click',function(e){if(e.target===bov||e.target.closest('.pw-x'))closeBig()});
 
   // enlace directo a un proyecto: /portfolio/#cstravel o /portfolio/#thallo
   var h=location.hash.slice(1);
-  Object.keys(P).forEach(function(k){if(P[k].hash===h)setTimeout(function(){openP(k)},350)});
+  Object.keys(P).forEach(function(k){if(P[k].hash===h)setTimeout(function(){openProject(k,null,document.querySelector('.ico[data-open="'+k+'"]'))},400)});
 
   /* ---------- Cursor propio: avión de papel dibujado a mano + destello al hacer clic ---------- */
   if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
