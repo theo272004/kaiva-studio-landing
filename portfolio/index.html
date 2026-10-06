@@ -834,14 +834,14 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .float-nav a[aria-current="page"],.mm-links a[aria-current="page"]{opacity:1;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1.5px}
 
 /* ---------- la pantalla ---------- */
-.screen{--mb:30px;--dk:86px;position:relative;isolation:isolate;overflow:hidden;height:calc(100svh - 92px);min-height:560px;max-height:980px;margin-top:76px;border-radius:var(--r-panel);color:#fff;
-  background:radial-gradient(110% 80% at 12% 0%,#5E2B9E 0%,transparent 58%),radial-gradient(90% 70% at 92% 100%,#7A3FC9 0%,transparent 55%),radial-gradient(60% 50% at 70% 30%,rgba(165,128,214,.35) 0%,transparent 70%),var(--violet)}
+.screen{--mb:30px;--dk:86px;position:relative;isolation:isolate;overflow:hidden;width:100%;max-width:1180px;height:calc(100svh - 124px);min-height:540px;max-height:800px;margin:84px auto 0;border-radius:var(--r-panel);color:#fff;
+  background:radial-gradient(110% 80% at 10% 0%,rgba(94,43,158,.55) 0%,transparent 60%),radial-gradient(90% 70% at 95% 100%,rgba(122,63,201,.32) 0%,transparent 58%),radial-gradient(60% 50% at 65% 35%,rgba(255,255,255,.06) 0%,transparent 70%),#1C1724}
 .sc-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-.sc-bg img{position:absolute;width:58%;opacity:.2;filter:blur(46px) saturate(1.2);mix-blend-mode:screen}
+.sc-bg img{position:absolute;width:58%;opacity:.16;filter:blur(46px) saturate(1.2);mix-blend-mode:screen}
 .sc-bg img:nth-child(1){left:-6%;bottom:-10%;transform:rotate(-8deg)}
 .sc-bg img:nth-child(2){right:-8%;top:8%;transform:rotate(9deg)}
 /* barra de menú de macOS */
-.mbar{position:absolute;inset:0 0 auto 0;z-index:30;height:var(--mb);display:flex;align-items:center;gap:20px;padding:0 18px;background:rgba(20,6,40,.32);-webkit-backdrop-filter:blur(20px) saturate(1.4);backdrop-filter:blur(20px) saturate(1.4);font-size:13px;font-weight:500;color:rgba(255,255,255,.92)}
+.mbar{position:absolute;inset:0 0 auto 0;z-index:30;height:var(--mb);display:flex;align-items:center;gap:20px;padding:0 18px;background:rgba(12,10,16,.36);-webkit-backdrop-filter:blur(20px) saturate(1.2);backdrop-filter:blur(20px) saturate(1.2);font-size:13px;font-weight:500;color:rgba(255,255,255,.92)}
 .mbar b{font-weight:700}
 .mbar #mbApp{font-weight:600}
 .mbar .mb-r{margin-left:auto;font-variant-numeric:tabular-nums}
@@ -892,9 +892,11 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .pdock .d-brand svg,.pdock .d-ig svg{width:58%;height:58%}
 
 /* ---------- ventana dentro de la pantalla ---------- */
-.sc-ov{position:absolute;z-index:20;inset:var(--mb) 0 0 0;background:rgba(20,6,40,.22);-webkit-backdrop-filter:blur(16px) saturate(1.1);backdrop-filter:blur(16px) saturate(1.1);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s linear .35s}
+.sc-ov{position:absolute;z-index:20;inset:var(--mb) 0 0 0;background:rgba(14,12,18,.3);-webkit-backdrop-filter:blur(16px) saturate(1.1);backdrop-filter:blur(16px) saturate(1.1);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s linear .35s}
 .screen.win-open .sc-ov{opacity:1;visibility:visible;transition:opacity .35s ease}
 .pwin{position:absolute;z-index:25;top:calc(var(--mb) + 14px);bottom:calc(var(--dk) + 6px);left:max(16px,4%);right:max(16px,4%);display:flex;flex-direction:column;border-radius:13px;overflow:hidden;background:#fff;color:var(--ink);box-shadow:0 0 0 1px rgba(0,0,0,.18),0 50px 100px -30px rgba(0,0,0,.7);opacity:0;visibility:hidden;transform:scale(.5);transform-origin:var(--ox,50%) var(--oy,100%);transition:transform .55s var(--ease),opacity .3s ease,visibility 0s linear .55s}
+.pwin.tall{left:max(16px,calc(50% - 215px));right:max(16px,calc(50% - 215px))}
+.pwin.tall .pw-url span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .screen.win-open .pwin{opacity:1;visibility:visible;transform:none;transition:transform .55s var(--ease),opacity .3s ease}
 .pw-bar{flex:none;display:flex;align-items:center;gap:14px;height:42px;padding:0 14px;background:#F3F2F6;border-bottom:1px solid #E2E1E7}
 .lights{display:flex;gap:8px;flex:none}
@@ -931,11 +933,13 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .pw-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;display:grid;align-content:start;justify-items:center;gap:14px;padding:6px 14px 20px}
 .pw-scroll img{display:block;width:100%;max-width:640px;height:auto;border-radius:9px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.14);opacity:0;transform:translateY(14px);animation:shotIn .6s var(--ease) forwards;animation-delay:calc(var(--i) * 60ms)}
 .pw-note{max-width:640px}
+.pw-scroll.site{scroll-behavior:auto}
+.pw-scroll.site img{animation-duration:.45s}
 @keyframes shotIn{to{opacity:1;transform:none}}
 .pw-note{margin:0;padding:12px 14px;border-radius:10px;background:#fff;font-size:13px;color:var(--ink-2);box-shadow:0 0 0 1px #DEDDE4}
 .pw-note a{color:var(--violet-text);font-weight:600}
 .pw-ig{flex:1;min-height:0;display:grid;place-items:center;background:#FAFAFA}
-.pw-ig iframe{width:min(540px,100%);height:100%;border:0;background:#fff}
+.pw-ig iframe{width:100%;height:100%;border:0;background:#fff}
 
 /* ---------- índice de proyectos (texto real para Google y para celular) ---------- */
 .plist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:1180px;margin:0 auto}
@@ -1007,6 +1011,14 @@ html.lock{overflow:hidden}
   .js .arc.pre .bcard{transform:rotate(var(--a)) translateY(calc(var(--R) * -1)) rotate(calc(var(--a) * -.35))}
   .pdock .live.hello{animation:none}
 }
+
+/* ---------- dentro de las ventanas, el cursor es la flecha negra de la Mac ---------- */
+.cur-mac{position:fixed;left:0;top:0;z-index:10001;pointer-events:none;opacity:0;transition:opacity .12s}
+.cur-mac svg{display:block;width:22px;height:22px;margin:-1.85px 0 0 -3.65px;transform-origin:17% 8%;transition:transform .12s;filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.35))}
+.cur-mac.down svg{transform:scale(.85)}
+.cur-on.in-win .cur-mac{opacity:1}
+.in-win .cur-plane{opacity:0!important;transition:none}
+.in-win .cur-burst{display:none}
 </style>
 </head>
 <body>
@@ -1223,6 +1235,17 @@ html.lock{overflow:hidden}
     function go(y,k){target=Math.max(0,Math.min(max(),y));ease=k;if(!raf){cur=window.pageYOffset;raf=requestAnimationFrame(tick)}}
     window.addEventListener('wheel',function(e){
       if(e.ctrlKey||e.defaultPrevented||Math.abs(e.deltaX)>Math.abs(e.deltaY)||root.classList.contains('lock'))return;
+      var dy=e.deltaY*(e.deltaMode===1?40:e.deltaMode===2?window.innerHeight:1);
+      // con una ventana abierta, la rueda mueve la página que se ve adentro, esté donde esté el mouse en la pantalla
+      var sc=document.getElementById('inicio');
+      if(sc&&sc.classList.contains('win-open')&&sc.contains(e.target)){
+        var box=e.target.closest('.pw-scroll,.pw-side');
+        if(box&&box.scrollHeight>box.clientHeight)return;
+        e.preventDefault();
+        var page=sc.querySelector('.pw-scroll');
+        if(page)page.scrollBy({top:dy,behavior:Math.abs(dy)>=60?'smooth':'auto'});
+        return;
+      }
       for(var n=e.target;n&&n.nodeType===1&&n!==root&&n!==document.body;n=n.parentElement){
         var o=getComputedStyle(n).overflowY;
         if((o==='auto'||o==='scroll')&&n.scrollHeight>n.clientHeight)return;
@@ -1230,7 +1253,7 @@ html.lock{overflow:hidden}
       }
       e.preventDefault();
       if(!raf)target=window.pageYOffset;
-      go(target+e.deltaY*(e.deltaMode===1?40:e.deltaMode===2?window.innerHeight:1),.1);
+      go(target+dy,.1);
     },{passive:false});
     window.addEventListener('scroll',function(){if(!raf)target=cur=window.pageYOffset},{passive:true});
     window.addEventListener('keydown',function(){if(raf){cancelAnimationFrame(raf);raf=0}});
@@ -1294,25 +1317,27 @@ html.lock{overflow:hidden}
       desc:'Agencia de viajes corporativos y para médicos. Hicimos su sitio web, las páginas para empresas y para médicos, y una plataforma a medida para sus aliados.',
       done:['Sitio web','Página para empresas','Página para médicos','Plataforma a medida para aliados'],
       pages:[
-        {id:'inicio',label:'Inicio',url:'cstravelgroup.com',live:'https://www.cstravelgroup.com/',shots:shots('cstravel-inicio',5),alt:'Sitio web de CS Travel Group, página de inicio'},
-        {id:'empresas',label:'Empresas',url:'cstravelgroup.com/empresas',live:'https://www.cstravelgroup.com/empresas/',shots:shots('cstravel-empresas',5),alt:'Sitio web de CS Travel Group, página para empresas'},
-        {id:'medicos',label:'Médicos',url:'cstravelgroup.com/medicos',live:'https://www.cstravelgroup.com/medicos/',shots:shots('cstravel-medicos',5),alt:'Sitio web de CS Travel Group, página para médicos'},
-        {id:'plataforma',label:'Plataforma para aliados',url:'Plataforma privada de CS Travel Group',shots:['/assets/inicio/trabajo-cstravel-software.webp'],ratio:'1600/833',alt:'Plataforma a medida de CS Travel Group para sus aliados',
-          note:'Es una plataforma privada: los aliados de CS Travel entran con su usuario para ver sus casos, sus referidos y sus ganancias.'}
+        {id:'inicio',label:'Inicio',url:'cstravelgroup.com',live:'https://www.cstravelgroup.com/',shots:['/assets/portfolio/cstravel-inicio.webp'],site:true,alt:'Sitio web de CS Travel Group, página de inicio'},
+        {id:'empresas',label:'Empresas',url:'cstravelgroup.com/empresas',live:'https://www.cstravelgroup.com/empresas/',shots:['/assets/portfolio/cstravel-empresas.webp'],site:true,alt:'Sitio web de CS Travel Group, página para empresas'},
+        {id:'medicos',label:'Médicos',url:'cstravelgroup.com/medicos',live:'https://www.cstravelgroup.com/medicos/',shots:['/assets/portfolio/cstravel-medicos.webp'],site:true,alt:'Sitio web de CS Travel Group, página para médicos'},
+        {id:'plataforma',label:'Plataforma para aliados',url:'Plataforma privada de CS Travel Group',shots:['/assets/inicio/trabajo-cstravel-software.webp'],alt:'Plataforma a medida de CS Travel Group para sus aliados',
+          note:'Es una plataforma privada: los aliados de CS Travel Group entran con su usuario para ver sus casos, sus referidos y sus ganancias.'}
       ]},
     thallo:{name:'Thallo Digital',kind:'Diseño web · Diseño de marca',hash:'thallo',live:'https://thallodigital.com/',
       desc:'Hicimos su sitio web y su marca: símbolo, logo, paleta, tipografía y cómo se aplica la identidad.',
       done:['Sitio web','Símbolo y logo','Paleta y tipografía','Brandbook'],
       pages:[
-        {id:'inicio',label:'Sitio web',url:'thallodigital.com',live:'https://thallodigital.com/',shots:shots('thallo',6),alt:'Sitio web de Thallo Digital'},
+        {id:'inicio',label:'Sitio web',url:'thallodigital.com',live:'https://thallodigital.com/',shots:['/assets/portfolio/thallo-web.webp'],site:true,alt:'Sitio web de Thallo Digital'},
         {id:'marca',label:'Mini Brandbook',url:'Brandbook de Thallo Digital',book:true,shots:shots('thallo-brandbook',17,true),alt:'Mini brandbook de Thallo Digital'}
       ]}
   };
   // marcas: cada manual de marca es una pestaña del navegador
   var BOOKS=[{id:'thallo',label:'Thallo Digital',url:'Mini Brandbook · Thallo Digital',shots:shots('thallo-brandbook',17,true),alt:'Mini brandbook de Thallo Digital'}];
   // navegador: los sitios web en vivo de cada proyecto, en pestañas
-  var WEBS=[P.cst.pages[0],P.cst.pages[1],P.cst.pages[2],P.thallo.pages[0]].map(function(pg,i){return {id:'w'+i,label:(i<3?'CS Travel · ':'Thallo · ')+pg.label,url:pg.url,live:pg.live,shots:pg.shots,alt:pg.alt}});
+  var WEBS=[P.cst.pages[0],P.cst.pages[1],P.cst.pages[2],P.thallo.pages[0]].map(function(pg,i){return {id:'w'+i,label:(i<3?'CS Travel Group · ':'Thallo Digital · ')+pg.label,url:pg.url,live:pg.live,shots:pg.shots,site:pg.site,alt:pg.alt}});
 
+  var DIM={'/assets/portfolio/cstravel-inicio.webp':[1280,3945],'/assets/portfolio/cstravel-empresas.webp':[1280,5952],'/assets/portfolio/cstravel-medicos.webp':[1280,8311],'/assets/portfolio/thallo-web.webp':[1280,8616],'/assets/inicio/trabajo-cstravel-software.webp':[1600,833]};
+  function dim(s){return DIM[s]||(/brandbook/.test(s)?[1440,810]:[1440,900])}
   var scr=document.getElementById('inicio'),win=document.getElementById('pwin'),body=document.getElementById('pwBody');
   var tabs=document.getElementById('pwTabs'),title=document.getElementById('pwTitle'),mbApp=document.getElementById('mbApp');
   var live=null,mode=null,lastFocus=null;
@@ -1320,20 +1345,20 @@ html.lock{overflow:hidden}
   var pgIco='<svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></g></svg>';
   function screensHTML(pg){
     return '<div class="pw-url">'+lock+'<span>'+pg.url+'</span>'+(pg.live?'<a href="'+pg.live+'" target="_blank" rel="noopener">Ver en vivo ↗</a>':'')+'</div>'+
-      '<div class="pw-scroll'+(pg.book?' book':'')+'" tabindex="0">'+pg.shots.map(function(s,i){var book=/brandbook/.test(s),wide=/software/.test(s);return '<img src="'+s+'" alt="'+pg.alt+(pg.shots.length>1?', página '+(i+1):'')+'" width="'+(wide?1600:1440)+'" height="'+(book?810:wide?833:900)+'" style="--i:'+i+'" decoding="async">'}).join('')+(pg.note?'<p class="pw-note">'+pg.note+'</p>':'')+'</div>';
+      '<div class="pw-scroll'+(pg.site?' site':'')+'" tabindex="0">'+pg.shots.map(function(s,i){var d=dim(s);return '<img src="'+s+'" alt="'+pg.alt+(pg.shots.length>1?', página '+(i+1):'')+'" width="'+d[0]+'" height="'+d[1]+'" style="--i:'+i+'" decoding="async">'}).join('')+(pg.note?'<p class="pw-note">'+pg.note+'</p>':'')+'</div>';
   }
   function origin(from){
     if(!from)return;var r=from.getBoundingClientRect(),s=scr.getBoundingClientRect();
     win.style.setProperty('--ox',(r.left+r.width/2-s.left-win.offsetLeft)+'px');win.style.setProperty('--oy',(r.top+r.height/2-s.top-win.offsetTop)+'px');
   }
   function show(from,name){
-    origin(from);lastFocus=document.activeElement;
+    win.classList.toggle('tall',mode==='ig');origin(from);lastFocus=document.activeElement;
     scr.classList.add('win-open');mbApp.textContent=name;
     document.querySelectorAll('.pdock .live').forEach(function(d){d.classList.toggle('on',d.dataset.app===mode)});
     setTimeout(function(){win.querySelector('.lc').focus({preventScroll:true})},60);
   }
   function hide(){
-    scr.classList.remove('win-open');mbApp.textContent='Finder';mode=null;
+    scr.classList.remove('win-open');mbApp.textContent='Finder';mode=null;root.classList.remove('in-win');
     document.querySelectorAll('.pdock .live').forEach(function(d){d.classList.remove('on')});
     setTimeout(function(){if(!scr.classList.contains('win-open'))body.innerHTML=''},400);
     if(history.replaceState)history.replaceState(null,'',location.pathname);
@@ -1506,6 +1531,19 @@ html.lock{overflow:hidden}
     .then(function(){fBtn.disabled=false;fBtn.textContent=fLabel});
   });
 
+
+  /* ---------- Dentro de las ventanas, el cursor es la flecha negra de la Mac de la portada ---------- */
+  if(root.classList.contains('has-cursor')){
+    var mac=document.createElement('div');mac.className='cur-mac';
+    mac.innerHTML='<svg style="color:#0E0E11"><use href="#i-cursor"/></svg>';
+    document.body.appendChild(mac);
+    document.addEventListener('mousemove',function(e){
+      mac.style.transform='translate3d('+e.clientX+'px,'+e.clientY+'px,0)';
+      root.classList.toggle('in-win',!!(e.target.closest&&e.target.closest('.pwin')));
+    });
+    document.addEventListener('mousedown',function(){mac.classList.add('down')});
+    document.addEventListener('mouseup',function(){mac.classList.remove('down')});
+  }
 })();
 </script>
 
