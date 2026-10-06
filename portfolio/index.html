@@ -945,8 +945,9 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .pw-note{margin:0;padding:12px 14px;border-radius:10px;background:#fff;font-size:13px;color:var(--ink-2);box-shadow:0 0 0 1px #DEDDE4}
 .pw-note a{color:var(--violet-text);font-weight:600}
 .pw-live{position:relative;flex:1;min-height:0;margin:0 14px 14px;border-radius:9px;overflow:hidden;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.14)}
+.pw-main:has(.pw-live) .pw-url{max-width:none}
 .pw-live iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0;background:#fff}
-.pw-live-tag{position:absolute;z-index:2;right:10px;bottom:10px;display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;background:rgba(18,14,24,.78);color:#fff;font-size:11px;font-weight:600;pointer-events:none}
+.pw-live-tag{position:absolute;z-index:2;left:10px;bottom:10px;display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;background:rgba(18,14,24,.78);color:#fff;font-size:11px;font-weight:600;pointer-events:none}
 .pw-live-tag::before{content:"";width:6px;height:6px;border-radius:50%;background:#2ED47A;box-shadow:0 0 0 3px rgba(46,212,122,.25)}
 .pw-ig{flex:1;min-height:0;display:grid;place-items:center;background:#FAFAFA}
 .pw-ig iframe{width:100%;height:100%;border:0;background:#fff}
@@ -1320,9 +1321,8 @@ html.lock{overflow:hidden}
       desc:'Agencia de viajes corporativos y para médicos. Hicimos su sitio web, las páginas para empresas y para médicos, y una plataforma a medida para sus aliados.',
       done:['Sitio web','Página para empresas','Página para médicos','Plataforma a medida para aliados'],
       pages:[
-        {id:'inicio',label:'Inicio',url:'cstravelgroup.com',live:'https://www.cstravelgroup.com/',shots:['/assets/portfolio/cstravel-inicio.webp'],site:true,alt:'Sitio web de CS Travel Group, página de inicio'},
-        {id:'empresas',label:'Empresas',url:'cstravelgroup.com/empresas',live:'https://www.cstravelgroup.com/empresas/',shots:['/assets/portfolio/cstravel-empresas.webp'],site:true,alt:'Sitio web de CS Travel Group, página para empresas'},
-        {id:'medicos',label:'Médicos',url:'cstravelgroup.com/medicos',live:'https://www.cstravelgroup.com/medicos/',shots:['/assets/portfolio/cstravel-medicos.webp'],site:true,alt:'Sitio web de CS Travel Group, página para médicos'},
+        // en vivo: la copia del sitio publicada en GitHub (el dominio real no deja mostrarse dentro de otra página); se navega con su propio menú
+        {id:'inicio',label:'Sitio web',url:'cstravelgroup.com',live:'https://www.cstravelgroup.com/',frame:'https://theo272004.github.io/cs-travel-group/',alt:'Sitio web de CS Travel Group'},
         {id:'plataforma',label:'Plataforma para aliados',url:'Plataforma privada de CS Travel Group',shots:['/assets/inicio/trabajo-cstravel-software.webp'],alt:'Plataforma a medida de CS Travel Group para sus aliados',
           note:'Es una plataforma privada: los aliados de CS Travel Group entran con su usuario para ver sus casos, sus referidos y sus ganancias.'}
       ]},
@@ -1330,16 +1330,16 @@ html.lock{overflow:hidden}
       desc:'Hicimos su sitio web y su marca: símbolo, logo, paleta, tipografía y cómo se aplica la identidad.',
       done:['Sitio web','Símbolo y logo','Paleta y tipografía','Brandbook'],
       pages:[
-        {id:'inicio',label:'Sitio web',url:'thallodigital.com',live:'https://thallodigital.com/',shots:['/assets/portfolio/thallo-web.webp'],site:true,frame:'https://thallodigital.com/',alt:'Sitio web de Thallo Digital'},
+        {id:'inicio',label:'Sitio web',url:'thallodigital.com',live:'https://thallodigital.com/',frame:'https://thallodigital.com/',alt:'Sitio web de Thallo Digital'},
         {id:'marca',label:'Mini Brandbook',url:'Brandbook de Thallo Digital',book:true,shots:shots('thallo-brandbook',17,true),alt:'Mini brandbook de Thallo Digital'}
       ]}
   };
   // marcas: cada manual de marca es una pestaña del navegador
   var BOOKS=[{id:'thallo',label:'Thallo Digital',url:'Mini Brandbook · Thallo Digital',shots:shots('thallo-brandbook',17,true),alt:'Mini brandbook de Thallo Digital'}];
-  // navegador: los sitios web en vivo de cada proyecto, en pestañas
-  var WEBS=[P.cst.pages[0],P.cst.pages[1],P.cst.pages[2],P.thallo.pages[0]].map(function(pg,i){return {id:'w'+i,label:pg.label+(i<3?' — CS Travel Group':' — Thallo Digital'),url:pg.url,live:pg.live,shots:pg.shots,site:pg.site,frame:pg.frame,alt:pg.alt}});
+  // navegador: una pestaña por sitio, en vivo; dentro se navega con el menú de cada web
+  var WEBS=[{p:P.cst,pg:P.cst.pages[0]},{p:P.thallo,pg:P.thallo.pages[0]}].map(function(x,i){return {id:'w'+i,label:x.p.name,url:x.pg.url,live:x.pg.live,frame:x.pg.frame,alt:x.pg.alt}});
 
-  var DIM={'/assets/portfolio/cstravel-inicio.webp':[1280,3945],'/assets/portfolio/cstravel-empresas.webp':[1280,5952],'/assets/portfolio/cstravel-medicos.webp':[1280,8311],'/assets/portfolio/thallo-web.webp':[1280,8616],'/assets/inicio/trabajo-cstravel-software.webp':[1600,833]};
+  var DIM={'/assets/inicio/trabajo-cstravel-software.webp':[1600,833]};
   function dim(s){return DIM[s]||(/brandbook/.test(s)?[1440,810]:[1440,900])}
   var scr=document.getElementById('inicio'),dockEl=scr.querySelector('.pdock'),mbApp=document.getElementById('mbApp');
   var lastFocus=null;
@@ -1356,7 +1356,7 @@ html.lock{overflow:hidden}
   /* ---------- Ventanas: varias abiertas a la vez, cada una del tamaño de lo que muestra ----------
      Se apilan como en una Mac: la que tocas pasa al frente y se arrastran desde la barra. */
   var WINS={},stack=[];
-  var SIZE={folder:954,web:684,brand:684,ig:430};
+  var SIZE={folder:1270,web:1180,brand:684,ig:430};
   function small(){return scr.clientWidth<=700}
   function bounds(){
     var cs=getComputedStyle(scr),mb=parseFloat(cs.getPropertyValue('--mb'))||30,dk=parseFloat(cs.getPropertyValue('--dk'))||86;
