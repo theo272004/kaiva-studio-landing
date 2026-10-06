@@ -866,7 +866,9 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .widget p{margin:0;font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.8)}
 .widget p b{color:#fff}
 /* íconos del escritorio */
-.desk-area{position:absolute;z-index:22;inset:var(--mb) 0 var(--dk) 0}
+/* con una ventana abierta, las carpetas se esconden */
+.screen.win-open .desk-area{opacity:0;visibility:hidden;transition:opacity .3s ease,visibility 0s linear .3s}
+.desk-area{transition:opacity .4s ease .1s;position:absolute;z-index:22;inset:var(--mb) 0 var(--dk) 0}
 .ico{position:absolute;left:var(--x);top:var(--y);display:grid;justify-items:center;gap:9px;width:150px;padding:12px 8px 10px;border:0;border-radius:12px;background:none;color:#fff;font:inherit;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none}
 .ico.drag{z-index:6}
 .ico-art{transition:transform .35s var(--ease),filter .35s;filter:drop-shadow(0 14px 20px rgba(10,0,30,.55))}
@@ -1173,11 +1175,11 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
 
     <h2 class="sr-only">Proyectos web, software y marca</h2>
     <div class="desk-area" id="desk" aria-label="Escritorio con los proyectos">
-      <button class="ico" type="button" data-open="cst" style="--x:calc(100% - 352px);--y:22px">
+      <button class="ico" type="button" data-open="cst" style="--x:55%;--y:11%">
         <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/cstravel-inicio-1.webp" alt="" width="1440" height="900"><span class="ff"></span></span>
         <span class="ico-name">CS Travel Group<small>Web y plataforma</small></span>
       </button>
-      <button class="ico" type="button" data-open="thallo" style="--x:calc(100% - 186px);--y:22px">
+      <button class="ico" type="button" data-open="thallo" style="--x:19.5%;--y:61%">
         <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/thallo-brandbook/01-portada.webp" alt="" width="1600" height="900"><span class="ff"></span></span>
         <span class="ico-name">Thallo Digital<small>Web y marca</small></span>
       </button>
