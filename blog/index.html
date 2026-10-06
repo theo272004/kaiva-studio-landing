@@ -523,6 +523,9 @@ section{scroll-margin-top:90px}
 .nav-links a:hover{opacity:1;transform:translateY(-2px)}
 .nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
 .nav-links a:hover::after{transform:scaleX(1)}
+/* la página en la que estás se marca en morado */
+.nav-links a[aria-current="page"],.float-nav ul a[aria-current="page"],.mm-links a[aria-current="page"]{color:var(--violet-text);opacity:1;font-weight:600}
+.hero .nav-links a[aria-current="page"],.mm-links a[aria-current="page"]{color:var(--violet-light)}
 .nav-end{grid-column:3;justify-self:end;display:flex;align-items:center;gap:8px}
 /* Inicio, Portfolio y Blog siempre en la mitad, aunque el logo y los botones midan distinto */
 .nav>.logo{justify-self:start}
@@ -1122,7 +1125,6 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
    BLOG: mismas reglas de la portada. El panel oscuro trae el buscador,
    los temas y el artículo más reciente; abajo, todas las guías.
    ===================================================================== */
-.nav-links a[aria-current="page"],.float-nav a[aria-current="page"]{opacity:1;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1.5px}
 .bhero{padding-bottom:clamp(28px,4vw,48px)}
 .bhero .hero-copy{padding-bottom:0}
 /* buscador: la misma píldora blanca del formulario de la portada */
