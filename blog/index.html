@@ -1128,15 +1128,15 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
    ===================================================================== */
 /* portada clara: el menú flota arriba como en el portfolio */
 /* portada: la tarjeta oscura de la home, debajo del menú flotante, y todo en una sola pantalla */
-.hero.bintro{display:flex;flex-direction:column;gap:clamp(18px,2.6vh,30px);max-width:1440px;height:calc(100svh - 100px);min-height:600px;max-height:900px;margin:80px auto 0;padding:clamp(28px,4.5vh,48px) clamp(20px,3vw,40px) clamp(20px,3vh,32px)}
+.hero.bintro{display:flex;flex-direction:column;gap:clamp(18px,2.6vh,30px);max-width:none;height:calc(100svh - 100px);min-height:600px;max-height:900px;margin:80px auto 0;padding:clamp(28px,4.5vh,48px) clamp(20px,3vw,40px) clamp(20px,3vh,32px)}
 .bintro-copy{flex:none;display:grid;justify-items:center;gap:clamp(10px,1.6vh,16px);text-align:center;padding:0 16px}
 .hero.bintro h1{font-size:clamp(2.2rem,min(4.6vw,7.2vh),4.2rem);max-width:18ch;margin:0}
 .hero.bintro .lede{max-width:60ch;margin:0;font-size:15px;line-height:1.55}
 
 /* ---------- menú de temas: texto, como el índice de una revista ---------- */
-.bbar{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px 24px;margin:-6px 0 38px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.bbar::before{content:"Temas";grid-column:1;grid-row:1;font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
-.btemas{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:repeat(5,auto);justify-content:space-between;gap:4px 8px;min-width:0;margin:0 -10px}
+.bbar{display:flex;align-items:center;justify-content:space-between;gap:24px;margin:-6px 0 38px;padding:10px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.btemas{display:flex;flex-wrap:wrap;align-items:center;gap:2px;min-width:0;margin-left:-10px}
+.bbreak{flex-basis:100%;height:0}
 .btema{position:relative;display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 10px;border:0;background:none;color:var(--ink-3);font:inherit;font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:color .25s}
 .btema i{font-style:normal;font-size:10.5px;opacity:.55}
 .btema::after{content:"";position:absolute;left:10px;right:10px;bottom:3px;height:2px;border-radius:2px;background:var(--violet-text);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
@@ -1144,7 +1144,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .btema:hover::after{transform:scaleX(.5)}
 .btema[aria-pressed="true"]{color:var(--violet-text)}
 .btema[aria-pressed="true"]::after{transform:scaleX(1)}
-.bsearch{grid-column:2;grid-row:1;flex:none;align-self:center;display:flex;align-items:center;gap:8px;width:210px;height:40px;padding:0 6px 0 14px;border-radius:999px;background:var(--mist);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line);transition:width .45s var(--ease),background .3s}
+.bsearch{flex:none;align-self:center;display:flex;align-items:center;gap:8px;width:210px;height:40px;padding:0 6px 0 14px;border-radius:999px;background:var(--mist);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line);transition:width .45s var(--ease),background .3s}
 .bsearch:focus-within{width:300px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--violet-text)}
 .bsearch svg{width:15px;height:15px;flex:none;opacity:.7}
 .bsearch input{flex:1;min-width:0;height:100%;border:0;background:none;font:inherit;font-size:13.5px;color:var(--ink);outline:none}
@@ -1252,7 +1252,7 @@ a:hover .bread svg{transform:translateX(4px)}
   .hero.bintro{height:auto;min-height:0;max-height:none;margin-top:72px}
   .hero.bintro .bfeat{flex:none;height:520px}
   .btemas{display:flex;flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 10px}
-  .bbar{grid-template-columns:1fr}.bbar::before{display:none}.bsearch{grid-column:1}
+  .bbreak{display:none}
   .btema{flex:none}
   .bsearch,.bsearch:focus-within{width:100%;height:44px}
   .bsearch kbd{display:none}
@@ -1325,29 +1325,6 @@ a:hover .bread svg{transform:translateX(4px)}
           <span class="bread">Leer el artículo <svg><use href="#i-arrow"/></svg></span>
         </span>
       </a>
-      <a class="bslide" href="/blog/eeat-experiencia-y-confianza-sin-anos-de-trayectoria/" tabindex="-1">
-        <span class="bslide-img"><img src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" style="object-position:80% 50%" loading="lazy" decoding="async"></span>
-        <span class="bslide-card">
-          <span class="bm"><time datetime="2026-09-22">22 sep 2026</time> · <b>Marketing y SEO</b> · 8 min</span>
-          <span class="brule"></span>
-          <h2>E-E-A-T: la trayectoria que no tienes, y cómo se demuestra igual</h2>
-          <p>Google entrena a más de 10.000 evaluadores con un documento de 182 páginas para juzgar el E-E-A-T de una página, y dice que no es un factor de ranking. Qué es de verdad y cómo lo demuestra un negocio sin historial.</p>
-          <span class="bread">Leer el artículo <svg><use href="#i-arrow"/></svg></span>
-        </span>
-      </a>
-      <a class="bslide" href="/blog/comercio-agentico-ia-compra-por-ti/" tabindex="-1">
-        <span class="bslide-img"><img src="/assets/blog/ia.webp" alt="Persona usando un teléfono para hacer una compra en línea con ayuda de un asistente de inteligencia artificial" width="1774" height="887" style="object-position:35% 20%" loading="lazy" decoding="async"></span>
-        <span class="bslide-card">
-          <span class="bm"><time datetime="2026-09-20">20 sep 2026</time> · <b>IA y tecnología</b> · 9 min</span>
-          <span class="brule"></span>
-          <h2>El comercio con IA prometía saltarse tu sitio web. Terminó necesitándolo más</h2>
-          <p>OpenAI apagó la compra dentro de ChatGPT cinco meses después de lanzarla, en parte porque nunca resolvió cobrar el impuesto de ventas. Qué pasó de verdad con el comercio agéntico y qué le toca hacer a tu negocio.</p>
-          <span class="bread">Leer el artículo <svg><use href="#i-arrow"/></svg></span>
-        </span>
-      </a>
-      <div class="bdots" role="group" aria-label="Elegir destacado"><button type="button" aria-label="Destacado 1" aria-current="true"></button><button type="button" aria-label="Destacado 2"></button><button type="button" aria-label="Destacado 3"></button></div>
-      <span class="bnum"><b id="bnow">01</b> / 03</span>
-      <span class="bprog"><i id="bprog"></i></span>
     </section>
   </header>
 
@@ -1369,6 +1346,7 @@ a:hover .bread svg{transform:translateX(4px)}
         <button type="button" class="btema" data-tema="Marketing y SEO" aria-pressed="false">Marketing y SEO <i>3</i></button>
         <button type="button" class="btema" data-tema="Visibilidad" aria-pressed="false">Visibilidad <i>2</i></button>
         <button type="button" class="btema" data-tema="Negocio local" aria-pressed="false">Negocio local <i>1</i></button>
+        <span class="bbreak" aria-hidden="true"></span>
         <button type="button" class="btema" data-tema="SEO para IA" aria-pressed="false">SEO para IA <i>1</i></button>
         <button type="button" class="btema" data-tema="Correo" aria-pressed="false">Correo <i>1</i></button>
         </div>
@@ -1793,7 +1771,7 @@ a:hover .bread svg{transform:translateX(4px)}
   /* ---------- Barra flotante, panel que se vuelve morado y cierre que se oscurece ---------- */
   var fn=document.getElementById('floatNav'),hero=document.getElementById('inicio'),fin=document.getElementById('contacto');
   function onScroll(){
-    
+    var hr=hero.getBoundingClientRect();hero.style.setProperty('--hp',Math.max(0,Math.min(1,-hr.top/(hr.height*.6))).toFixed(3));
     var fr=fin.getBoundingClientRect(),vh=window.innerHeight,fp=(vh-fr.top)/Math.min(fr.height,vh);
     fin.style.setProperty('--fp',(Math.max(0,Math.min(1,fp))*.82).toFixed(3));
   }
@@ -1821,22 +1799,6 @@ a:hover .bread svg{transform:translateX(4px)}
   document.querySelectorAll('h1 .dim,h2 .dim').forEach(function(d){
     d.innerHTML=d.textContent.trim().split(/\s+/).map(function(w){return '<span class="w">'+w+'</span>'}).join(' ');
   });
-
-  /* ---------- Destacados: cambian solos cada 6,5 s; se pausan con el mouse encima ---------- */
-  var feat=document.getElementById('bfeat'),sl=[].slice.call(feat.querySelectorAll('.bslide')),dots=[].slice.call(feat.querySelectorAll('.bdots button'));
-  var now=document.getElementById('bnow'),prog=document.getElementById('bprog'),si=0,st=null,hold=false;
-  function go(i){
-    si=(i+sl.length)%sl.length;
-    sl.forEach(function(s,k){var on=k===si;s.classList.toggle('on',on);s.tabIndex=on?0:-1});
-    dots.forEach(function(d,k){if(k===si)d.setAttribute('aria-current','true');else d.removeAttribute('aria-current')});
-    now.textContent='0'+(si+1);
-    prog.classList.remove('run');void prog.offsetWidth;if(!reduce&&!hold)prog.classList.add('run');
-  }
-  function play(){clearInterval(st);if(reduce)return;st=setInterval(function(){if(!hold&&!document.hidden)go(si+1)},6500)}
-  dots.forEach(function(d,k){d.addEventListener('click',function(e){e.preventDefault();go(k);play()})});
-  feat.addEventListener('mouseenter',function(){hold=true;prog.classList.remove('run')});
-  feat.addEventListener('mouseleave',function(){hold=false;go(si);play()});
-  go(0);play();
 
   /* ---------- Buscador, temas y "Más artículos" ---------- */
   var q=document.getElementById('bq'),chips=[].slice.call(document.querySelectorAll('.btema'));
