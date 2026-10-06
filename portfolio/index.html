@@ -962,6 +962,12 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .deck .slide.in{opacity:1;transform:none}
 .deck .slide>img,.deck .slide>video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;max-width:none;border-radius:0;box-shadow:none;opacity:1;transform:none;animation:none}
 .pw-main:has(.pw-scroll.full) .pw-url{max-width:none}
+/* presentación: las cuatro diapositivas a la vista */
+.pw-scroll.deck.quad{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:max-content;align-items:start;align-content:start;gap:16px;padding:16px 18px 22px}
+.deck.quad .slide{height:auto;align-self:start}
+.deck.quad .slide{max-width:none;cursor:zoom-in;transition:opacity .6s var(--ease),transform .5s var(--ease),box-shadow .4s}
+.deck.quad .slide:hover{transform:translateY(-4px);box-shadow:0 0 0 2px var(--violet-text),0 22px 40px -24px rgba(8,8,8,.5)}
+@media (max-width:700px){.pw-scroll.deck.quad{grid-template-columns:1fr;gap:12px;padding:12px}}
 /* identidad en código: medidas en cqw para que escale con la página */
 .deck .slide.idsl{container-type:inline-size;background:#fff}
 .ids{display:grid;grid-template-columns:38% 1fr;height:100%;font-family:Inter,var(--f-sans,system-ui),sans-serif;color:#111827}
@@ -1323,8 +1329,8 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
         <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/felinorte/01.webp?v=pdf2" alt="" width="900" height="1350" style="object-position:center 20%"><span class="ff"></span></span>
         <span class="ico-name">Editorial<small>Libro ilustrado</small></span>
       </button>
-      <button class="ico" type="button" data-open="proenergy" style="--x:3%;--y:44%">
-        <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/proenergy/01.webp?v=2" alt="" width="1600" height="900"><span class="ff"></span></span>
+      <button class="ico" type="button" data-open="propuesta" style="--x:3%;--y:44%">
+        <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/propuesta/01.webp?v=2" alt="" width="1600" height="900"><span class="ff"></span></span>
         <span class="ico-name">Propuesta<small>Presentación</small></span>
       </button>
     </div>
@@ -1686,14 +1692,14 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       desc:'Símbolos y logotipos para marcas de distintos sectores. Los mostramos en gris para que se vean como una sola colección.',
       done:['Símbolo','Logotipo','Versiones','Sistema en blanco y negro'],
       pages:[{id:'logos',label:'Logos',url:'Logofolio · Kaiva Studio',html:logofolioHTML}]},
-    proenergy:{name:'Propuesta comercial',kind:'Presentación · Propuesta',hash:'propuesta',
+    propuesta:{name:'Propuesta comercial',kind:'Presentación · Propuesta',hash:'propuesta',
       desc:'Propuesta de presentación de casos de éxito para una empresa de ingeniería eléctrica. Las fotos son de obras reales; el nombre de la marca, los datos de contacto y las cifras van difuminados.',
       done:['Diseño de presentación','Casos de éxito con reto, solución y resultado','Sistema visual','Cierre con llamado a la acción'],
-      pages:[{id:'presentacion',label:'Presentación',url:'Propuesta comercial',deck:[
-        {src:'/assets/portfolio/proenergy/01.webp?v=2',alt:'Portada: Energía que conecta realidades'},
-        {src:'/assets/portfolio/proenergy/02.webp?v=2',alt:'Caso de éxito 01: modernización de una red de media tensión'},
-        {src:'/assets/portfolio/proenergy/03.webp?v=2',alt:'Caso de éxito 02: generación solar para un autogenerador industrial'},
-        {src:'/assets/portfolio/proenergy/04.webp?v=2',alt:'Cierre: Hablemos de su próximo proyecto'}]}]},
+      pages:[{id:'presentacion',label:'Presentación',url:'Propuesta comercial',quad:true,deck:[
+        {src:'/assets/portfolio/propuesta/01.webp?v=2',alt:'Portada: Energía que conecta realidades'},
+        {src:'/assets/portfolio/propuesta/02.webp?v=2',alt:'Caso de éxito 01: modernización de una red de media tensión'},
+        {src:'/assets/portfolio/propuesta/03.webp?v=2',alt:'Caso de éxito 02: generación solar para un autogenerador industrial'},
+        {src:'/assets/portfolio/propuesta/04.webp?v=2',alt:'Cierre: Hablemos de su próximo proyecto'}]}]},
     editorial:{name:'Editorial',kind:'Diseño editorial · Ilustración',hash:'editorial',
       desc:'Descubriendo Felinorte (2023): libro sobre el grupo estudiantil que cuida la colonia de gatos de la Universidad del Norte. Proyecto totalmente educativo, ilustrado y diagramado por una de nuestras diseñadoras.',
       done:['Ilustración de portada e interiores','Diagramación del libro','Tipografía y paleta','Proyecto académico, sin fines comerciales'],
@@ -1727,7 +1733,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
     if(pg.html)return '<div class="pw-scroll lfw" tabindex="0">'+pg.html()+'</div>';
     // brandbook: una página tras otra; las animadas se reproducen al llegar a ellas
     if(pg.deck)return '<div class="pw-url">'+lock+'<span>'+pg.url+'</span></div>'+
-      '<div class="pw-scroll deck" tabindex="0">'+pg.deck.map(function(d,i){
+      '<div class="pw-scroll deck'+(pg.quad?' quad':'')+'" tabindex="0">'+pg.deck.map(function(d,i){
         if(d.id)return '<figure class="slide idsl">'+idSlide(d.alt)+'</figure>';
         if(d.src)return '<figure class="slide"><img src="'+d.src+'" alt="'+d.alt+'" width="1600" height="900" decoding="async"'+(i>1?' loading="lazy"':'')+'></figure>';
         if(d.fn)return '<figure class="slide '+d.cls+'" role="img" aria-label="'+d.alt+'">'+d.fn()+'</figure>';
@@ -1779,6 +1785,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
   var liveRO=('ResizeObserver' in window)?new ResizeObserver(function(es){es.forEach(function(e){scaleLive(e.target)})}):null;
   function watchDeck(root){
     var box=root.querySelector('.pw-scroll.deck');if(!box)return;
+    if(box.classList.contains('quad'))box.querySelectorAll('.slide img').forEach(function(im){im.parentNode.addEventListener('click',function(){big.innerHTML='<img src="'+im.src+'" alt="'+im.alt+'">';root.ownerDocument.documentElement.classList.add('lock');bov.classList.add('open');bov.setAttribute('aria-hidden','false')})});
     var slides=[].slice.call(box.querySelectorAll('.slide'));
     function still(v){var im=document.createElement('img');im.src=v.getAttribute('data-end');im.alt=v.getAttribute('aria-label');im.width=1600;im.height=900;v.replaceWith(im)}
     if(reduce||!('IntersectionObserver' in window)){slides.forEach(function(s){s.classList.add('in','play');var v=s.querySelector('video');if(v)still(v)});return}
