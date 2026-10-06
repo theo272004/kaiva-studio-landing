@@ -902,7 +902,9 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .pdock .live.hello{animation:hello .9s var(--ease) 2}
 @keyframes hello{0%,100%{transform:none}40%{transform:translateY(-14px)}}
 .pdock .sep{flex:none;width:1px;height:38px;margin:0 2px 5px;background:rgba(0,0,0,.18)}
-.pdock .d-brand,.pdock .d-ig{display:grid;place-items:center;color:#fff}
+.pdock .d-brand,.pdock .d-ig,.pdock .d-in{display:grid;place-items:center;color:#fff}
+.pdock .d-in{background:#0A66C2}
+.pdock .d-in svg{width:60%;height:60%}
 .pdock .d-brand{background:linear-gradient(160deg,#FFB86B,#F0568E 55%,#8B5BD8)}
 .pdock .d-ig{background:radial-gradient(circle at 30% 107%,#FDF497 0,#FD5949 45%,#D6249F 60%,#285AEB 90%)}
 .pdock .d-brand svg,.pdock .d-ig svg{width:58%;height:58%}
@@ -1357,11 +1359,11 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       <span class="d deco" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#fff"/><text x="20" y="13" text-anchor="middle" font-family="Geist,Arial" font-size="8" font-weight="700" fill="#FF3B30" id="calMon">OCT</text><text x="20" y="32" text-anchor="middle" font-family="Geist,Arial" font-size="18" font-weight="500" fill="#1C1C1E" id="calDay">5</text></svg></span>
       <span class="d deco m-hide" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#fff"/><path d="M0 9a9 9 0 0 1 9-9h22a9 9 0 0 1 9 9v4H0z" fill="#FFD233"/><path d="M7 20h26M7 26h26M7 32h18" stroke="#D8D8DE" stroke-width="1.6"/></svg></span>
       <span class="d deco" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#25D366"/><g transform="translate(8 8)" fill="#fff"><use href="#i-wa" width="24" height="24"/></g></svg></span>
-      <span class="d deco m-hide" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#1E1E1E"/><circle cx="16.5" cy="11" r="4" fill="#F24E1E"/><circle cx="23.5" cy="11" r="4" fill="#FF7262"/><circle cx="16.5" cy="19" r="4" fill="#A259FF"/><circle cx="23.5" cy="19" r="4" fill="#1ABCFE"/><circle cx="16.5" cy="27" r="4" fill="#0ACF83"/></svg></span>
       <span class="sep" aria-hidden="true"></span>
       <button class="d live" type="button" data-app="web" data-tip="Navegador" aria-label="Abrir el navegador con los sitios web"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#fff"/><path d="M20 2a18 18 0 0 1 15.6 9H20a9 9 0 0 0-7.8 4.5L4.4 11A18 18 0 0 1 20 2z" fill="#EA4335"/><path d="M35.6 11A18 18 0 0 1 20 38l7.8-13.5A9 9 0 0 0 27.8 15.5 9 9 0 0 0 20 11z" fill="#FBBC05"/><path d="M20 38A18 18 0 0 1 4.4 11l7.8 13.5A9 9 0 0 0 27.8 24.5z" fill="#34A853"/><circle cx="20" cy="20" r="7.2" fill="#fff"/><circle cx="20" cy="20" r="5.6" fill="#4285F4"/></svg></button>
       <button class="d live d-brand" type="button" data-app="brand" data-tip="Marca" aria-label="Abrir los manuales de marca"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.8-.8 1.8-1.7 0-1.2-1-1.6-1-2.6 0-.9.7-1.6 1.7-1.6H17a4 4 0 0 0 4-4C21 6.5 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.2" fill="currentColor"/><circle cx="10" cy="7" r="1.2" fill="currentColor"/><circle cx="15" cy="7.5" r="1.2" fill="currentColor"/></g></svg></button>
       <button class="d live d-ig" type="button" data-app="ig" data-tip="Instagram" aria-label="Abrir el Instagram de Kaiva Studio"><svg><use href="#i-ig"/></svg></button>
+      <a class="d live d-in" href="https://www.linkedin.com/company/kaiva-studio/" target="_blank" rel="noopener" data-tip="LinkedIn" aria-label="LinkedIn de Kaiva Studio (se abre en otra pestaña)"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M5.4 8.6h2.9V18H5.4zM6.85 4.2a1.68 1.68 0 1 1 0 3.36 1.68 1.68 0 0 1 0-3.36zM10.1 8.6h2.78v1.29h.04c.39-.73 1.33-1.5 2.74-1.5 2.93 0 3.47 1.93 3.47 4.44V18h-2.89v-4.53c0-1.08-.02-2.47-1.5-2.47-1.51 0-1.74 1.18-1.74 2.39V18H10.1z"/></svg></a>
       <span class="sep" aria-hidden="true"></span>
       <span class="d deco m-hide" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#fff"/><g transform="translate(20 20)" opacity=".85"><ellipse rx="4" ry="8" cy="-7" fill="#FF9500"/><ellipse rx="4" ry="8" cy="-7" fill="#FFCC00" transform="rotate(45)"/><ellipse rx="4" ry="8" cy="-7" fill="#34C759" transform="rotate(90)"/><ellipse rx="4" ry="8" cy="-7" fill="#00C7BE" transform="rotate(135)"/><ellipse rx="4" ry="8" cy="-7" fill="#007AFF" transform="rotate(180)"/><ellipse rx="4" ry="8" cy="-7" fill="#5856D6" transform="rotate(225)"/><ellipse rx="4" ry="8" cy="-7" fill="#AF52DE" transform="rotate(270)"/><ellipse rx="4" ry="8" cy="-7" fill="#FF2D55" transform="rotate(315)"/></g></svg></span>
       <span class="d deco m-hide" aria-hidden="true"><svg viewBox="0 0 40 40"><defs><linearGradient id="st" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B8B8BE"/><stop offset="1" stop-color="#7C7C84"/></linearGradient></defs><rect width="40" height="40" rx="9" fill="url(#st)"/><circle cx="20" cy="20" r="10" fill="none" stroke="#3A3A40" stroke-width="4" stroke-dasharray="3.2 2.4"/><circle cx="20" cy="20" r="6" fill="#E6E6EA" stroke="#3A3A40" stroke-width="2"/></svg></span>
@@ -1775,7 +1777,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       ]}
   };
   // marcas: cada manual de marca es una pestaña del navegador
-  var BOOKS=[{id:'thallo',label:'Thallo Digital',url:'Brandbook · Thallo Digital',deck:SMB},{id:'atec',label:'ATEC',url:'Estrategia de marca · ATEC',grid:ATEC},{id:'logos',label:'Logofolio',url:'Logofolio · Kaiva Studio',html:logofolioHTML}];
+  var BOOKS=[{id:'thallo',label:'Thallo Digital',url:'Brandbook · Thallo Digital',deck:SMB},{id:'atec',label:'ATEC',url:'Estrategia de marca · ATEC',grid:ATEC},{id:'propuesta',label:'Presentación',url:'Propuesta comercial',quad:true,deck:P.propuesta.pages[0].deck},{id:'logos',label:'Logofolio',url:'Logofolio · Kaiva Studio',html:logofolioHTML}];
   // navegador: una pestaña por sitio, en vivo; dentro se navega con el menú de cada web
   var WEBS=[{p:P.cst,pg:P.cst.pages[0]},{p:P.thallo,pg:P.thallo.pages[0]}].map(function(x,i){return {id:'w'+i,label:x.p.name,url:x.pg.url,live:x.pg.live,frame:x.pg.frame,alt:x.pg.alt}});
 
