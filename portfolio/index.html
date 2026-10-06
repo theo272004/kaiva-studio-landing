@@ -849,6 +849,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .sc-bg img:nth-child(2){right:-8%;top:8%;transform:rotate(9deg)}
 /* barra de menú de macOS */
 .mbar{position:absolute;inset:0 0 auto 0;z-index:50;height:var(--mb);display:flex;align-items:center;gap:20px;padding:0 18px;background:var(--glass);-webkit-backdrop-filter:var(--glass-fx);backdrop-filter:var(--glass-fx);font-size:13px;font-weight:500;color:rgba(255,255,255,.92)}
+/* con ventanas abiertas, dos difuminados encimados hacen que la barra parpadee: va sólida */
+.screen.win-open .mbar,.screen.win-open .ico{background:rgba(52,44,56,.94);-webkit-backdrop-filter:none;backdrop-filter:none}
 .mbar b{font-weight:700}
 .mbar #mbApp{font-weight:600}
 .mbar .mb-r{margin-left:auto;font-variant-numeric:tabular-nums}
