@@ -363,7 +363,10 @@ section{scroll-margin-top:90px}
 .car{position:relative;margin-top:58px;height:calc((var(--aw) - 2 * var(--bz)) / 1.95 + 2 * var(--bz) + 40px);-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
 .ci{position:absolute;left:50%;top:50%;width:var(--aw);height:calc((var(--aw) - 2 * var(--bz)) / 1.95 + 2 * var(--bz));margin:0;padding:var(--bz);border-radius:30px;background:#0A0A0C;box-shadow:inset 0 0 0 2px #2B2B31,0 30px 50px -28px rgba(20,4,40,.8);transform:translate(-50%,-50%);transition:transform 1s var(--ease),opacity .7s ease,filter .7s ease;cursor:pointer;will-change:transform}
 .ci img{width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:18px;background:#fff}
-.ci::before{content:"";position:absolute;top:calc(var(--bz) / 2 - 2.5px);left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:#2A2A33}
+/* sin el marco de tablet: las fotos de las webs con bordes redondeados */
+.ci{padding:0;background:none;border-radius:18px;overflow:hidden;box-shadow:0 30px 60px -28px rgba(0,0,0,.7)}
+.ci img{border-radius:18px}
+.ci::before{display:none}
 .ci:not(.on){filter:brightness(.8) saturate(.9)}
 .ci:not(.on):hover{filter:brightness(1)}
 .ci.on{cursor:default}
@@ -827,6 +830,8 @@ h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s
 .foot ul{display:flex;flex-wrap:wrap;gap:8px 26px;list-style:none;margin:0;padding:0}
 .foot ul a{display:inline-block;opacity:.88;transition:transform .35s var(--ease),opacity .25s}
 .foot ul a:hover{opacity:1;transform:translateY(-2px)}
+/* Inicio, Portfolio y Blog justo en la mitad, como en el menú de arriba */
+@media (min-width:700px){.foot{display:grid;grid-template-columns:1fr auto 1fr}.foot>:first-child{justify-self:start}.foot ul{justify-self:center}.foot .soc{justify-self:end}}
 .foot .soc{display:flex;gap:8px}
 .foot .soc a{width:36px;height:36px}
 .foot .soc svg{width:15px;height:15px}
@@ -889,8 +894,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 @media (max-width:700px){
   :root{--r-panel:18px}
   .page{--aw:280px;--bz:7px}
-  .ci{border-radius:20px}
-  .ci img{border-radius:13px}
+  .ci{border-radius:14px}
+  .ci img{border-radius:14px}
   .nav{padding:0 20px}
   .hero{padding-top:26px}
   .nav-cta{display:none}
