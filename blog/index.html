@@ -1263,9 +1263,10 @@ a:hover .bread svg{transform:translateX(4px)}
 }
 @media (prefers-reduced-motion:reduce){.bslide-img img{transition:none}.bprog{display:none}}
 
-/* cierre del blog: casi negro, con el morado bajando desde arriba */
-.final{background:#110B18}
-.final::before{background:linear-gradient(180deg,rgba(78,30,134,.62) 0%,rgba(54,17,95,.3) 40%,rgba(30,12,52,.1) 80%,transparent 100%)}
+/* cierre del blog: al revés de la portada, empieza casi negro y se vuelve morado al bajar */
+.final{background:#0E0A14}
+.final::before{background:linear-gradient(180deg,rgba(78,30,134,.45) 0%,rgba(54,17,95,.18) 45%,transparent 90%)}
+.final::after{background:linear-gradient(180deg,var(--violet) 0%,#2A0F4A 100%)}
 </style>
 </head>
 <body>
@@ -1683,38 +1684,6 @@ a:hover .bread svg{transform:translateX(4px)}
       <div class="bmore" id="bmore"><button type="button">Más artículos <i>+21</i></button></div>
     </section>
 
-    <section class="block" id="empezar" aria-labelledby="emp-t">
-      <div class="bsec" data-reveal>
-        <span class="eye">Si solo vas a leer cuatro</span>
-        <h2 id="emp-t"><span class="dim">Para</span> empezar</h2>
-      </div>
-      <div class="bpicks" data-reveal>
-        <a class="bpick-big" href="/blog/cuanto-cuesta-una-pagina-web-en-colombia/">
-          <span class="bpb-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" style="object-position:50% 80%" loading="lazy" decoding="async"></span>
-          <span class="bpb-txt">
-            <span class="bm"><time datetime="2026-07-23">23 jul 2026</time> · <b>Precios</b> · 7 min</span>
-            <span class="brule"></span>
-            <h3>¿Cuánto cuesta una página web en Colombia?</h3>
-            <p>Los precios publicados van desde $400.000 hasta más de $50 millones. Qué hay detrás de esa diferencia y cómo saber cuánto debería costar la tuya.</p>
-            <span class="bread">Leer <svg><use href="#i-arrow"/></svg></span>
-          </span>
-        </a>
-        <div class="bpick-list">
-          <a class="bpick" href="/blog/seo-para-ia/">
-            <span><span class="bm"><time datetime="2026-07-26">26 jul 2026</time> · <b>SEO para IA</b> · 10 min</span><h3>Cómo lograr que ChatGPT recomiende tu empresa</h3></span>
-            <span class="bpick-img"><img src="/assets/blog/ia.webp" alt="Profesional usando la interfaz de ChatGPT en una laptop en una oficina moderna" width="1774" height="887" style="object-position:20% 40%" loading="lazy" decoding="async"></span>
-          </a>
-          <a class="bpick" href="/blog/google-no-encuentra-mi-pagina/">
-            <span><span class="bm"><time datetime="2026-07-28">28 jul 2026</time> · <b>Visibilidad</b> · 8 min</span><h3>Mi página no aparece en Google</h3></span>
-            <span class="bpick-img"><img src="/assets/blog/visibilidad.webp" alt="Persona revisando la visibilidad de su web en Google en una laptop en un espacio de trabajo limpio" width="1879" height="837" style="object-position:80% 50%" loading="lazy" decoding="async"></span>
-          </a>
-          <a class="bpick" href="/blog/como-aparecer-en-google-maps/">
-            <span><span class="bm"><time datetime="2026-07-27">27 jul 2026</time> · <b>Negocio local</b> · 7 min</span><h3>Cómo aparecer en Google Maps</h3></span>
-            <span class="bpick-img"><img src="/assets/blog/local.webp" alt="Manos sosteniendo un smartphone con la aplicación de Google Maps abierta sobre una mesa de madera" width="1774" height="887" style="object-position:50% 80%" loading="lazy" decoding="async"></span>
-          </a>
-        </div>
-      </div>
-    </section>
   </main>
 
     <!-- ============ CIERRE ============ -->

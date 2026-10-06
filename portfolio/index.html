@@ -1175,6 +1175,12 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .mcard:nth-child(even){--y:var(--zz);animation-delay:-2.1s}
 .mcard:hover,.mcard:focus-visible{transform:translateY(-18px) scale(1.04);box-shadow:0 0 0 1px rgba(8,8,8,.06),0 26px 44px -22px rgba(8,8,8,.55)}
 .mcard img{display:block;height:100%;width:auto}
+/* la flor de Thallo gira sola */
+.mcard.spin,.mcard.logo{display:grid;place-items:center;aspect-ratio:1;background:#F3F3F3}
+.mcard.spin img{width:62%;height:auto;mix-blend-mode:multiply;filter:grayscale(.15);animation:florGira 16s linear infinite}
+.mcard.logo img{width:58%;height:auto;max-height:62%;object-fit:contain;mix-blend-mode:multiply}
+@keyframes florGira{to{transform:rotate(360deg)}}
+.bbig .mcardlike{display:grid;place-items:center;width:min(70vh,80vw);aspect-ratio:1;background:#F3F3F3}
 @media (prefers-reduced-motion:reduce){.mcar-track,.mcard{animation:none}.mcar{overflow-x:auto}}
 /* (abanico anterior, ya no se usa) */
 .brands{overflow-x:visible}
@@ -1253,9 +1259,10 @@ html.lock{overflow:hidden}
 .in-frame .cur-mac,.in-frame .cur-plane{opacity:0!important;transition:none}
 html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
 
-/* cierre del portfolio: casi negro, con el morado bajando desde arriba */
-.final{background:#110B18}
-.final::before{background:linear-gradient(180deg,rgba(78,30,134,.62) 0%,rgba(54,17,95,.3) 40%,rgba(30,12,52,.1) 80%,transparent 100%)}
+/* cierre del portfolio: al revés de la portada, empieza casi negro y se vuelve morado al bajar */
+.final{background:#0E0A14}
+.final::before{background:linear-gradient(180deg,rgba(78,30,134,.45) 0%,rgba(54,17,95,.18) 45%,transparent 90%)}
+.final::after{background:linear-gradient(180deg,var(--violet) 0%,#2A0F4A 100%)}
 </style>
 </head>
 <body>
@@ -1363,14 +1370,14 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
     <section class="block" id="proyectos" aria-labelledby="proj-t">
       <div class="head" data-reveal>
         <h2 id="proj-t"><span class="dim">Lo que hicimos</span><br>en cada proyecto</h2>
-        <p class="sub">Cada carpeta de la pantalla es un cliente. Aquí está el resumen de cada uno.</p>
+        <p class="sub">Cada carpeta de la pantalla es un proyecto. Toca lo que quieras ver y se abre justo ahí.</p>
       </div>
       <div class="plist" data-reveal>
         <div class="pcard">
           <a class="pc-img" href="#cstravel" data-open="cst" aria-label="Abrir CS Travel Group"><img src="/assets/portfolio/cstravel-inicio-1.webp" alt="Página de inicio del sitio web de CS Travel Group" width="1440" height="900" loading="lazy"></a>
           <span>
             <h3><a href="#cstravel" data-open="cst">CS Travel Group</a></h3>
-            <p>Sitio web, páginas para empresas y para médicos, y una plataforma a medida para sus aliados.</p>
+            <p>Sitio web con páginas para empresas y para médicos, y una plataforma a medida donde sus aliados ven casos, referidos y ganancias.</p>
             <span class="tags"><button type="button" data-open="cst" data-page="inicio">Diseño web<svg><use href="#i-arrow"/></svg></button><button type="button" data-open="cst" data-page="plataforma">Software a medida<svg><use href="#i-arrow"/></svg></button></span>
           </span>
         </div>
@@ -1378,8 +1385,40 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
           <a class="pc-img" href="#thallo" data-open="thallo" aria-label="Abrir Thallo Digital"><img src="/assets/portfolio/thallo-brandbook/01-portada.webp" alt="Portada del brandbook de Thallo Digital" width="1600" height="900" loading="lazy"></a>
           <span>
             <h3><a href="#thallo" data-open="thallo">Thallo Digital</a></h3>
-            <p>Sitio web y marca: símbolo, logo, paleta, tipografía y cómo se aplica la identidad.</p>
+            <p>Sitio web y marca completa: símbolo, logo, paleta, tipografía y la identidad aplicada en papelería y pantallas.</p>
             <span class="tags"><button type="button" data-open="thallo" data-page="inicio">Diseño web<svg><use href="#i-arrow"/></svg></button><button type="button" data-open="thallo" data-page="marca">Diseño de marca<svg><use href="#i-arrow"/></svg></button></span>
+          </span>
+        </div>
+        <div class="pcard">
+          <a class="pc-img" href="#atec" data-open="atec" aria-label="Abrir ATEC"><img src="/assets/portfolio/atec/01-t.webp" alt="Portada de la estrategia de marca de ATEC" width="560" height="347" loading="lazy"></a>
+          <span>
+            <h3><a href="#atec" data-open="atec">ATEC</a></h3>
+            <p>Estrategia de marca y propuesta gráfica: benchmarking, posicionamiento, concepto, público, valores, paleta y moodboards.</p>
+            <span class="tags"><button type="button" data-open="atec" data-page="brandbook">Estrategia de marca<svg><use href="#i-arrow"/></svg></button></span>
+          </span>
+        </div>
+        <div class="pcard">
+          <a class="pc-img" href="#editorial" data-open="editorial" aria-label="Abrir Descubriendo Felinorte"><img src="/assets/portfolio/felinorte/01.webp?v=pdf2" alt="Portada del libro Descubriendo Felinorte" width="900" height="1350" loading="lazy" style="object-position:center 70%"></a>
+          <span>
+            <h3><a href="#editorial" data-open="editorial">Descubriendo Felinorte</a></h3>
+            <p>Libro ilustrado y diagramado por una de nuestras diseñadoras, como proyecto educativo en 2023.</p>
+            <span class="tags"><button type="button" data-open="editorial" data-page="felinorte">Diseño editorial<svg><use href="#i-arrow"/></svg></button><button type="button" data-open="editorial" data-page="felinorte">Ilustración<svg><use href="#i-arrow"/></svg></button></span>
+          </span>
+        </div>
+        <div class="pcard">
+          <a class="pc-img" href="#logofolio" data-open="logos" aria-label="Abrir Logofolio"><img src="/assets/portfolio/logos/folder.webp" alt="Logofolio de Kaiva Studio" width="800" height="500" loading="lazy"></a>
+          <span>
+            <h3><a href="#logofolio" data-open="logos">Logofolio</a></h3>
+            <p>Símbolos y logotipos para marcas de tecnología, consultoría, bienestar y más, mostrados como una sola colección.</p>
+            <span class="tags"><button type="button" data-open="logos" data-page="logos">Logos<svg><use href="#i-arrow"/></svg></button></span>
+          </span>
+        </div>
+        <div class="pcard">
+          <a class="pc-img" href="#propuesta" data-open="propuesta" aria-label="Abrir Propuesta comercial"><img src="/assets/portfolio/propuesta/01.webp?v=2" alt="Portada de una propuesta comercial" width="1600" height="900" loading="lazy"></a>
+          <span>
+            <h3><a href="#propuesta" data-open="propuesta">Propuesta comercial</a></h3>
+            <p>Presentación de casos de éxito para una empresa de ingeniería eléctrica, con reto, solución y resultado.</p>
+            <span class="tags"><button type="button" data-open="propuesta" data-page="presentacion">Presentación<svg><use href="#i-arrow"/></svg></button></span>
           </span>
         </div>
       </div>
@@ -1389,33 +1428,45 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
          Distinto a la web: las páginas del brandbook se muestran como cartas en abanico. -->
     <section class="block brands" id="marcas" aria-labelledby="br-t">
       <div class="mcopy" data-reveal>
-        <span class="who">Diseño de marca · Thallo Digital</span>
+        <span class="who">Marca, ilustración y editorial</span>
         <h2 id="br-t"><span class="dim">Marcas que</span><br>se reconocen</h2>
-        <p class="sub">Símbolo, patrones y la marca puesta en el mundo. Toca una pieza para verla de cerca o abre el brandbook completo.</p>
-        <button class="btn" type="button" data-brand>Ver el brandbook <svg><use href="#i-arrow"/></svg></button>
+        <p class="sub">Piezas de varios proyectos: identidades, ilustraciones, un libro y estrategia de marca. Toca una para verla de cerca.</p>
+        <button class="btn" type="button" data-brand>Abrir Marca <svg><use href="#i-arrow"/></svg></button>
       </div>
-      <div class="mcar" data-reveal aria-label="Piezas de la marca Thallo Digital">
+      <div class="mcar" data-reveal aria-label="Piezas de marca, ilustración y editorial">
         <div class="mcar-track">
+          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Portada"><img src="/assets/portfolio/felinorte/01.webp?v=pdf2" alt="Portada del libro Descubriendo Felinorte, con un gato ilustrado" width="900" height="1350" loading="lazy"></button>
           <button class="mcard" type="button" data-cap="Thallo Digital · Portada"><img src="/assets/portfolio/thallo-marca/01-portada.webp" alt="Portada del brandbook de Thallo: el símbolo iluminado sobre una pared" width="1600" height="900" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Patrón"><img src="/assets/portfolio/thallo-marca/03-patron-oliva.webp" alt="Patrón del símbolo de Thallo en blanco sobre verde oliva" width="1100" height="816" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Celular"><img src="/assets/portfolio/thallo-marca/04-celular.webp" alt="La web de Thallo en un celular sobre una mesa de madera" width="800" height="594" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Sello"><img src="/assets/portfolio/thallo-marca/02-sello.webp" alt="El símbolo de Thallo como sello dentro de un círculo" width="1000" height="1000" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="ATEC · Paleta de color"><img src="/assets/portfolio/atec/13.webp" alt="Paleta de color de la propuesta gráfica para ATEC" width="1453" height="900" loading="lazy"></button>
+          <button class="mcard spin" type="button" data-cap="Thallo Digital · Símbolo"><img src="/assets/portfolio/thallo-brandbook/id-simbolo.webp" alt="Símbolo de Thallo Digital girando" width="800" height="800" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Ilustración"><img src="/assets/portfolio/felinorte/15.webp?v=pdf2" alt="Ilustración de Natalia abrazando un gato" width="900" height="1350" loading="lazy"></button>
           <button class="mcard" type="button" data-cap="Thallo Digital · Papelería"><img src="/assets/portfolio/thallo-marca/06-credencial.webp" alt="Credencial y tarjetas de presentación de Thallo" width="984" height="472" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Símbolo"><img src="/assets/portfolio/thallo-marca/05-simbolo.webp" alt="El símbolo de Thallo en verde oliva" width="900" height="900" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Web"><img src="/assets/portfolio/thallo-marca/09-monitor.webp" alt="La web de Thallo en un monitor" width="958" height="594" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Patrón"><img src="/assets/portfolio/thallo-marca/07-patron-blanco.webp" alt="Patrón del símbolo de Thallo en verde sobre blanco" width="1100" height="815" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Papelería"><img src="/assets/portfolio/thallo-marca/10-papeleria.webp" alt="Hoja, sobre, libreta y tarjeta con la marca de Thallo" width="938" height="574" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="ATEC · Moodboard"><img src="/assets/portfolio/atec/14.webp" alt="Moodboard de la propuesta gráfica para ATEC" width="1453" height="900" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Ilustración"><img src="/assets/portfolio/felinorte/27.webp?v=pdf2" alt="Ovillos de lana ilustrados" width="900" height="1350" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Thallo Digital · Celular"><img src="/assets/portfolio/thallo-marca/04-celular.webp" alt="La web de Thallo en un celular sobre una mesa" width="800" height="594" loading="lazy"></button>
+          <button class="mcard logo" type="button" data-cap="Logofolio · Growher"><img src="/assets/portfolio/logos/growher-iso.webp" alt="Símbolo de Growher" width="240" height="255" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Contraportada"><img src="/assets/portfolio/felinorte/30.webp?v=pdf2" alt="Contraportada: la cola de un gato" width="900" height="1350" loading="lazy"></button>
           <button class="mcard" type="button" data-cap="Thallo Digital · Web"><img src="/assets/portfolio/thallo-marca/11-web.webp" alt="La web de Thallo en computador, celular y portátil" width="1600" height="525" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="ATEC · Moodboard"><img src="/assets/portfolio/atec/16.webp" alt="Moodboard de la propuesta gráfica para ATEC" width="1453" height="900" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Ilustración"><img src="/assets/portfolio/felinorte/20.webp?v=pdf2" alt="Ilustración de un chico cargando una caja" width="900" height="1350" loading="lazy"></button>
+          <button class="mcard logo" type="button" data-cap="Logofolio · Con Knots"><img src="/assets/portfolio/logos/conknots-emblema.webp" alt="Emblema de Con Knots" width="430" height="290" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Thallo Digital · Papelería"><img src="/assets/portfolio/thallo-marca/10-papeleria.webp" alt="Hoja, sobre, libreta y tarjeta con la marca de Thallo" width="938" height="574" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Portada" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/felinorte/01.webp?v=pdf2" alt="" width="900" height="1350" loading="lazy"></button>
           <button class="mcard" type="button" data-cap="Thallo Digital · Portada" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/01-portada.webp" alt="" width="1600" height="900" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Patrón" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/03-patron-oliva.webp" alt="" width="1100" height="816" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Celular" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/04-celular.webp" alt="" width="800" height="594" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Sello" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/02-sello.webp" alt="" width="1000" height="1000" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="ATEC · Paleta de color" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/atec/13.webp" alt="" width="1453" height="900" loading="lazy"></button>
+          <button class="mcard spin" type="button" data-cap="Thallo Digital · Símbolo" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-brandbook/id-simbolo.webp" alt="" width="800" height="800" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Ilustración" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/felinorte/15.webp?v=pdf2" alt="" width="900" height="1350" loading="lazy"></button>
           <button class="mcard" type="button" data-cap="Thallo Digital · Papelería" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/06-credencial.webp" alt="" width="984" height="472" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Símbolo" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/05-simbolo.webp" alt="" width="900" height="900" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Web" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/09-monitor.webp" alt="" width="958" height="594" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Patrón" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/07-patron-blanco.webp" alt="" width="1100" height="815" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Papelería" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/10-papeleria.webp" alt="" width="938" height="574" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="ATEC · Moodboard" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/atec/14.webp" alt="" width="1453" height="900" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Ilustración" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/felinorte/27.webp?v=pdf2" alt="" width="900" height="1350" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Thallo Digital · Celular" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/04-celular.webp" alt="" width="800" height="594" loading="lazy"></button>
+          <button class="mcard logo" type="button" data-cap="Logofolio · Growher" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/logos/growher-iso.webp" alt="" width="240" height="255" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Contraportada" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/felinorte/30.webp?v=pdf2" alt="" width="900" height="1350" loading="lazy"></button>
           <button class="mcard" type="button" data-cap="Thallo Digital · Web" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/11-web.webp" alt="" width="1600" height="525" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="ATEC · Moodboard" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/atec/16.webp" alt="" width="1453" height="900" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Ilustración" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/felinorte/20.webp?v=pdf2" alt="" width="900" height="1350" loading="lazy"></button>
+          <button class="mcard logo" type="button" data-cap="Logofolio · Con Knots" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/logos/conknots-emblema.webp" alt="" width="430" height="290" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Thallo Digital · Papelería" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/10-papeleria.webp" alt="" width="938" height="574" loading="lazy"></button>
         </div>
       </div>
     </section>
@@ -1878,7 +1929,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
     o.el.classList.remove('open');setTimeout(function(){o.el.remove()},450);
     dockState();
     if(stack.length){var t=stack[stack.length-1];front(t);WINS[t].el.querySelector('.lc').focus({preventScroll:true});return}
-    scr.classList.remove('win-open');mbApp.textContent='Finder';root.classList.remove('in-win');
+    scr.classList.remove('win-open');mbApp.textContent='Finder';
     if(history.replaceState)history.replaceState(null,'',location.pathname);
     if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});
   }
@@ -2055,7 +2106,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
     document.body.appendChild(mac);
     document.addEventListener('mousemove',function(e){
       mac.style.transform='translate3d('+e.clientX+'px,'+e.clientY+'px,0)';
-      root.classList.toggle('in-win',!!(e.target.closest&&e.target.closest('.pwin')));
+      root.classList.toggle('in-win',!!(e.target.closest&&e.target.closest('.screen')));
     });
     // sobre una web en vivo (iframe) esta página deja de recibir el mouse: la flecha se oculta y queda el cursor de esa web
     document.addEventListener('mouseout',function(e){var el=(e.relatedTarget&&e.relatedTarget.tagName==='IFRAME')?e.relatedTarget:document.elementFromPoint(e.clientX,e.clientY);if(el&&el.tagName==='IFRAME')root.classList.add('in-frame')});
