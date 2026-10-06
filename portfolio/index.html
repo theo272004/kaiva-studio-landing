@@ -266,7 +266,10 @@ section{scroll-margin-top:90px}
 .car{position:relative;margin-top:58px;height:calc((var(--aw) - 2 * var(--bz)) / 1.95 + 2 * var(--bz) + 40px);-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
 .ci{position:absolute;left:50%;top:50%;width:var(--aw);height:calc((var(--aw) - 2 * var(--bz)) / 1.95 + 2 * var(--bz));margin:0;padding:var(--bz);border-radius:30px;background:#0A0A0C;box-shadow:inset 0 0 0 2px #2B2B31,0 30px 50px -28px rgba(20,4,40,.8);transform:translate(-50%,-50%);transition:transform 1s var(--ease),opacity .7s ease,filter .7s ease;cursor:pointer;will-change:transform}
 .ci img{width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:18px;background:#fff}
-.ci::before{content:"";position:absolute;top:calc(var(--bz) / 2 - 2.5px);left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:#2A2A33}
+/* sin el marco de tablet: las fotos de las webs con bordes redondeados */
+.ci{padding:0;background:none;border-radius:18px;overflow:hidden;box-shadow:0 30px 60px -28px rgba(0,0,0,.7)}
+.ci img{border-radius:18px}
+.ci::before{display:none}
 .ci:not(.on){filter:brightness(.8) saturate(.9)}
 .ci:not(.on):hover{filter:brightness(1)}
 .ci.on{cursor:default}
@@ -730,6 +733,8 @@ h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s
 .foot ul{display:flex;flex-wrap:wrap;gap:8px 26px;list-style:none;margin:0;padding:0}
 .foot ul a{display:inline-block;opacity:.88;transition:transform .35s var(--ease),opacity .25s}
 .foot ul a:hover{opacity:1;transform:translateY(-2px)}
+/* Inicio, Portfolio y Blog justo en la mitad, como en el menú de arriba */
+@media (min-width:700px){.foot{display:grid;grid-template-columns:1fr auto 1fr}.foot>:first-child{justify-self:start}.foot ul{justify-self:center}.foot .soc{justify-self:end}}
 .foot .soc{display:flex;gap:8px}
 .foot .soc a{width:36px;height:36px}
 .foot .soc svg{width:15px;height:15px}
@@ -792,8 +797,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 @media (max-width:700px){
   :root{--r-panel:18px}
   .page{--aw:280px;--bz:7px}
-  .ci{border-radius:20px}
-  .ci img{border-radius:13px}
+  .ci{border-radius:14px}
+  .ci img{border-radius:14px}
   .nav{padding:0 20px}
   .hero{padding-top:26px}
   .nav-cta{display:none}
@@ -1055,6 +1060,16 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .pw-live iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0;background:#fff}
 .pw-live-tag{position:absolute;z-index:2;left:10px;bottom:10px;display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;background:rgba(18,14,24,.78);color:#fff;font-size:11px;font-weight:600;pointer-events:none}
 .pw-live-tag::before{content:"";width:6px;height:6px;border-radius:50%;background:#2ED47A;box-shadow:0 0 0 3px rgba(46,212,122,.25)}
+/* LinkedIn: encabezado de la página y sus publicaciones */
+.pw-scroll.lnk{display:flex;flex-direction:column;align-items:center;gap:12px;padding:0 12px 18px;background:#F4F2EE}
+.lnk-head{display:flex;align-items:center;gap:12px;width:100%;max-width:504px;padding:14px;border-radius:12px;background:#fff;box-shadow:0 0 0 1px #E0DFDC}
+.pw-scroll.lnk .lnk-head img{flex:none;width:52px;height:52px;max-width:none;border-radius:8px;box-shadow:none;opacity:1;transform:none;animation:none}
+.lnk-head div{display:grid;gap:2px;min-width:0}
+.lnk-head b{font-size:15px;color:#191919}
+.lnk-head span{font-size:12.5px;line-height:1.35;color:#5E5E5E}
+.lnk-follow{flex:none;margin-left:auto;padding:6px 14px;border-radius:99px;background:#0A66C2;color:#fff;font-size:13px;font-weight:600;text-decoration:none}
+.lnk-post{display:block;flex:none;width:100%;max-width:504px;height:620px;border:0;border-radius:10px;background:#fff;box-shadow:0 0 0 1px #E0DFDC}
+.lnk-more{font-size:13px;font-weight:600;color:#0A66C2;text-decoration:none;padding:6px}
 .pw-ig{flex:1;min-height:0;display:grid;place-items:center;background:#FAFAFA}
 .pw-ig iframe{width:100%;height:100%;border:0;background:#fff}
 
@@ -1159,7 +1174,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .pcard .tags{gap:8px}
 .pcard .tags button{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:0;border-radius:99px;background:var(--violet-soft);color:var(--violet-text);font:inherit;font-size:12.5px;font-weight:600;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(122,63,201,.18);transition:background .25s,color .25s,transform .3s var(--ease),box-shadow .25s}
 .pcard .tags button svg{width:12px;height:12px;transition:transform .3s var(--ease)}
-.pcard .tags button:hover,.pcard .tags button:focus-visible{background:#4E1E86;color:#fff;transform:translateY(-2px);box-shadow:0 10px 20px -12px rgba(78,30,134,.8)}
+.pcard .tags button:hover,.pcard .tags button:focus-visible{background:var(--violet);color:#fff;transform:translateY(-2px);box-shadow:none}
 .pcard .tags button:hover svg{transform:translateX(3px)}
 
 /* ---------- marcas: carrusel de piezas visuales ---------- */
@@ -1362,7 +1377,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       <button class="d live" type="button" data-app="web" data-tip="Navegador" aria-label="Abrir el navegador con los sitios web"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#fff"/><path d="M20 2a18 18 0 0 1 15.6 9H20a9 9 0 0 0-7.8 4.5L4.4 11A18 18 0 0 1 20 2z" fill="#EA4335"/><path d="M35.6 11A18 18 0 0 1 20 38l7.8-13.5A9 9 0 0 0 27.8 15.5 9 9 0 0 0 20 11z" fill="#FBBC05"/><path d="M20 38A18 18 0 0 1 4.4 11l7.8 13.5A9 9 0 0 0 27.8 24.5z" fill="#34A853"/><circle cx="20" cy="20" r="7.2" fill="#fff"/><circle cx="20" cy="20" r="5.6" fill="#4285F4"/></svg></button>
       <button class="d live d-brand" type="button" data-app="brand" data-tip="Marca" aria-label="Abrir los manuales de marca"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.8-.8 1.8-1.7 0-1.2-1-1.6-1-2.6 0-.9.7-1.6 1.7-1.6H17a4 4 0 0 0 4-4C21 6.5 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.2" fill="currentColor"/><circle cx="10" cy="7" r="1.2" fill="currentColor"/><circle cx="15" cy="7.5" r="1.2" fill="currentColor"/></g></svg></button>
       <button class="d live d-ig" type="button" data-app="ig" data-tip="Instagram" aria-label="Abrir el Instagram de Kaiva Studio"><svg><use href="#i-ig"/></svg></button>
-      <a class="d live d-in" href="https://www.linkedin.com/company/kaiva-studio/" target="_blank" rel="noopener" data-tip="LinkedIn" aria-label="LinkedIn de Kaiva Studio (se abre en otra pestaña)"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M5.4 8.6h2.9V18H5.4zM6.85 4.2a1.68 1.68 0 1 1 0 3.36 1.68 1.68 0 0 1 0-3.36zM10.1 8.6h2.78v1.29h.04c.39-.73 1.33-1.5 2.74-1.5 2.93 0 3.47 1.93 3.47 4.44V18h-2.89v-4.53c0-1.08-.02-2.47-1.5-2.47-1.51 0-1.74 1.18-1.74 2.39V18H10.1z"/></svg></a>
+      <button class="d live d-in" type="button" data-app="in" data-tip="LinkedIn" aria-label="Abrir el LinkedIn de Kaiva Studio"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M5.4 8.6h2.9V18H5.4zM6.85 4.2a1.68 1.68 0 1 1 0 3.36 1.68 1.68 0 0 1 0-3.36zM10.1 8.6h2.78v1.29h.04c.39-.73 1.33-1.5 2.74-1.5 2.93 0 3.47 1.93 3.47 4.44V18h-2.89v-4.53c0-1.08-.02-2.47-1.5-2.47-1.51 0-1.74 1.18-1.74 2.39V18H10.1z"/></svg></button>
       <span class="sep" aria-hidden="true"></span>
       <span class="d deco m-hide" aria-hidden="true"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#fff"/><g transform="translate(20 20)" opacity=".85"><ellipse rx="4" ry="8" cy="-7" fill="#FF9500"/><ellipse rx="4" ry="8" cy="-7" fill="#FFCC00" transform="rotate(45)"/><ellipse rx="4" ry="8" cy="-7" fill="#34C759" transform="rotate(90)"/><ellipse rx="4" ry="8" cy="-7" fill="#00C7BE" transform="rotate(135)"/><ellipse rx="4" ry="8" cy="-7" fill="#007AFF" transform="rotate(180)"/><ellipse rx="4" ry="8" cy="-7" fill="#5856D6" transform="rotate(225)"/><ellipse rx="4" ry="8" cy="-7" fill="#AF52DE" transform="rotate(270)"/><ellipse rx="4" ry="8" cy="-7" fill="#FF2D55" transform="rotate(315)"/></g></svg></span>
       <span class="d deco m-hide" aria-hidden="true"><svg viewBox="0 0 40 40"><defs><linearGradient id="st" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B8B8BE"/><stop offset="1" stop-color="#7C7C84"/></linearGradient></defs><rect width="40" height="40" rx="9" fill="url(#st)"/><circle cx="20" cy="20" r="10" fill="none" stroke="#3A3A40" stroke-width="4" stroke-dasharray="3.2 2.4"/><circle cx="20" cy="20" r="6" fill="#E6E6EA" stroke="#3A3A40" stroke-width="2"/></svg></span>
@@ -1979,6 +1994,17 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
     o.body.innerHTML='<div class="pw-main"><div class="pw-url">'+lock+'<span>instagram.com/kaivastudio</span><a href="https://www.instagram.com/kaivastudio/" target="_blank" rel="noopener">Abrir en Instagram ↗</a></div><div class="pw-ig"><iframe src="https://www.instagram.com/kaivastudio/embed/" title="Perfil de Instagram de Kaiva Studio" loading="lazy" allowtransparency="true"></iframe></div></div>';
   }
 
+  // LinkedIn no deja mostrar la página completa dentro de otra web, pero sí sus publicaciones
+  var LI={url:'https://www.linkedin.com/company/kaiva-studio/',posts:['activity:7490930772183498753','share:7490914507767099393','share:7490248901715972098','share:7490110410403237888']};
+  function openLinkedIn(from){
+    var r=ensure('in','ig','LinkedIn',from),o=r.o;if(!r.fresh)return;
+    o.live=LI.url;o.title.textContent='LinkedIn — Kaiva Studio';o.body.className='pw-body full';
+    o.body.innerHTML='<div class="pw-main"><div class="pw-url">'+lock+'<span>linkedin.com/company/kaiva-studio</span><a href="'+LI.url+'" target="_blank" rel="noopener">Abrir en LinkedIn ↗</a></div>'+
+      '<div class="pw-scroll lnk" tabindex="0"><div class="lnk-head"><img src="/assets/portfolio/linkedin/logo.webp" alt="" width="200" height="200"><div><b>Kaiva Studio</b><span>Construimos la próxima generación de presencia digital.</span></div>'+
+      '<a class="lnk-follow" href="'+LI.url+'" target="_blank" rel="noopener">Seguir</a></div>'+
+      LI.posts.map(function(p,i){return '<iframe class="lnk-post" src="https://www.linkedin.com/embed/feed/update/urn:li:'+p+'" title="Publicación de Kaiva Studio en LinkedIn '+(i+1)+'" loading="lazy" allowfullscreen></iframe>'}).join('')+
+      '<a class="lnk-more" href="'+LI.url+'posts/" target="_blank" rel="noopener">Ver todas las publicaciones en LinkedIn ↗</a></div></div>';
+  }
   document.addEventListener('keydown',function(e){
     if(e.key!=='Escape')return;
     if(bov.classList.contains('open'))closeBig();
@@ -2004,6 +2030,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       if(a==='web')openBrowser(WEBS,'web','Navegador',d);
       else if(a==='brand')openBrowser(BOOKS,'brand','Marca',d);
       else if(a==='ig')openInstagram(d);
+      else if(a==='in')openLinkedIn(d);
     });
   });
   document.querySelectorAll('[data-brand]').forEach(function(b){b.addEventListener('click',function(){fromBelow(function(){openBrowser(BOOKS,'brand','Marca',document.querySelector('.pdock [data-app="brand"]'))})})});
