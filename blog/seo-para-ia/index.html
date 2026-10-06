@@ -782,6 +782,9 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 @media (max-width:980px){
   .page{--aw:470px;--bz:10px}
   .nav-links,.float-nav ul{display:none}
+  .burger{display:block}
+  .float-nav>.btn{display:none}
+  .laptop .base{width:106%;margin-left:-3%}
   .features{grid-template-columns:1fr}
   .studio-grid{grid-template-columns:1fr 1fr}
   .me{grid-column:1/-1;grid-row:auto}
@@ -848,7 +851,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .art-crumbs b{font-weight:500;color:var(--violet-text)}
 .art-head h1{margin:0;font-size:clamp(2.2rem,5vw,3.9rem);line-height:1.02;letter-spacing:-.05em;text-wrap:balance}
 .art-lead{margin:0;max-width:62ch;font-size:clamp(17px,1.6vw,19.5px);line-height:1.6;color:var(--ink-2);text-wrap:pretty}
-.art-meta{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink-3)}
+.art-meta{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 10px;text-align:center;font-size:13.5px;color:var(--ink-3)}
 .art-meta .k{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--ink);color:var(--paper);font-size:12px;font-weight:700;letter-spacing:-.04em}
 .art-meta b{font-weight:600;color:var(--ink)}
 .art-hero{max-width:1120px;margin:clamp(36px,5vw,56px) auto 0;padding:0 20px}
@@ -920,6 +923,16 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 @media (max-width:600px){
   .art{padding-top:104px}
   .articulo{font-size:17px}
+  .art-meta .k{display:none}
+  /* tablas como tarjetas apiladas */
+  .articulo div:has(>table.tcards){box-shadow:none;border-radius:0;overflow:visible}
+  .articulo table.tcards,.tcards tbody,.tcards tr,.tcards td{display:block;width:100%}
+  .tcards thead{display:none}
+  .tcards tr{margin:0 0 12px;padding:14px 16px;border-radius:16px;background:var(--mist)}
+  .articulo .tcards td{padding:4px 0;border:0;font-size:15px}
+  .articulo .tcards td::before{content:attr(data-label);display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .articulo .tcards td:first-child{font-size:16.5px;padding-bottom:6px}
+  .articulo .tcards td:first-child::before{display:none}
   .art-hero img{aspect-ratio:4/3}
   .art-more-grid{grid-template-columns:1fr}.art-more-grid .amc:nth-child(3){display:flex}
   .art-more-head{flex-direction:column;align-items:flex-start}
@@ -985,13 +998,13 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 <h2>SEO, GEO, AEO: qué significa cada sigla</h2>
 <p>Las tres describen dónde quieres aparecer, no técnicas distintas:</p>
 <div style="overflow-x:auto;margin-top:1.4rem">
-<table>
+<table class="tcards">
 <thead>
 <tr> <th>Sigla</th> <th>Qué persigue</th> <th>Dónde se ve</th> </tr> </thead>
 <tbody>
-<tr> <td><strong>SEO</strong><br><span style="font-size:13px">Search engine optimization</span></td> <td>Que tu página salga en la lista de resultados</td> <td>Los enlaces azules de siempre</td> </tr>
-<tr> <td><strong>AEO</strong><br><span style="font-size:13px">Answer engine optimization</span></td> <td>Que tu contenido <em>sea</em> la respuesta, sin que haya que hacer clic</td> <td>El recuadro destacado, la respuesta directa, los asistentes de voz</td> </tr>
-<tr> <td><strong>GEO</strong><br><span style="font-size:13px">Generative engine optimization</span></td> <td>Que un modelo te cite dentro de la respuesta que redacta</td> <td>ChatGPT, Gemini, Perplexity, los resúmenes de IA de Google</td> </tr> </tbody> </table> </div>
+<tr> <td data-label="Sigla"><strong>SEO</strong><br><span style="font-size:13px">Search engine optimization</span></td> <td data-label="Qué persigue">Que tu página salga en la lista de resultados</td> <td data-label="Dónde se ve">Los enlaces azules de siempre</td> </tr>
+<tr> <td data-label="Sigla"><strong>AEO</strong><br><span style="font-size:13px">Answer engine optimization</span></td> <td data-label="Qué persigue">Que tu contenido <em>sea</em> la respuesta, sin que haya que hacer clic</td> <td data-label="Dónde se ve">El recuadro destacado, la respuesta directa, los asistentes de voz</td> </tr>
+<tr> <td data-label="Sigla"><strong>GEO</strong><br><span style="font-size:13px">Generative engine optimization</span></td> <td data-label="Qué persigue">Que un modelo te cite dentro de la respuesta que redacta</td> <td data-label="Dónde se ve">ChatGPT, Gemini, Perplexity, los resúmenes de IA de Google</td> </tr> </tbody> </table> </div>
 <p style="margin-top:1.2rem">Fíjate en que las tres necesitan lo mismo por debajo: que tu sitio se pueda rastrear, que el contenido responda algo concreto y que quede claro quién eres. Si alguien te vende «GEO» como un servicio separado que cuesta aparte del SEO, vale la pena preguntar qué hace exactamente que sea distinto.</p>
 <h2>Lo que dice Google, textualmente</h2>
 <p>Google publicó una guía sobre cómo aparecer en sus funciones de IA, y es sorprendentemente corta. La frase que más discusión ahorra es esta:</p>
@@ -1011,16 +1024,16 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 <h2>Lo que sí correlaciona, con números</h2>
 <p>Aquí está la parte útil. Ahrefs analizó <strong>75.000 marcas</strong> en diciembre de 2025 para medir qué factores acompañan a la visibilidad en respuestas de IA. Estas son las correlaciones que encontraron:</p>
 <div style="overflow-x:auto;margin-top:1.4rem">
-<table>
+<table class="tcards">
 <thead>
 <tr> <th>Factor</th> <th>ChatGPT</th> <th>AI Mode</th> <th>Resúmenes de IA</th> </tr> </thead>
 <tbody>
-<tr> <td>Menciones en YouTube</td> <td colspan="3">~0,737 — la más alta de todo el estudio</td> </tr>
-<tr> <td><strong>Menciones de marca en la web</strong></td> <td>0,664</td> <td>0,709</td> <td>0,656</td> </tr>
-<tr> <td>Enlaces con tu nombre de marca</td> <td>0,511</td> <td>0,628</td> <td>0,527</td> </tr>
-<tr> <td>Búsquedas de tu marca</td> <td>0,352</td> <td>0,466</td> <td>0,392</td> </tr>
-<tr> <td>Autoridad del dominio</td> <td>0,266</td> <td>0,285</td> <td>0,326</td> </tr>
-<tr> <td>Número de enlaces entrantes</td> <td colspan="3">Correlación débil en las tres</td> </tr> </tbody> </table> </div>
+<tr> <td data-label="Factor">Menciones en YouTube</td> <td data-label="ChatGPT" colspan="3">~0,737 — la más alta de todo el estudio</td> </tr>
+<tr> <td data-label="Factor"><strong>Menciones de marca en la web</strong></td> <td data-label="ChatGPT">0,664</td> <td data-label="AI Mode">0,709</td> <td data-label="Resúmenes de IA">0,656</td> </tr>
+<tr> <td data-label="Factor">Enlaces con tu nombre de marca</td> <td data-label="ChatGPT">0,511</td> <td data-label="AI Mode">0,628</td> <td data-label="Resúmenes de IA">0,527</td> </tr>
+<tr> <td data-label="Factor">Búsquedas de tu marca</td> <td data-label="ChatGPT">0,352</td> <td data-label="AI Mode">0,466</td> <td data-label="Resúmenes de IA">0,392</td> </tr>
+<tr> <td data-label="Factor">Autoridad del dominio</td> <td data-label="ChatGPT">0,266</td> <td data-label="AI Mode">0,285</td> <td data-label="Resúmenes de IA">0,326</td> </tr>
+<tr> <td data-label="Factor">Número de enlaces entrantes</td> <td data-label="ChatGPT" colspan="3">Correlación débil en las tres</td> </tr> </tbody> </table> </div>
 <p style="margin-top:1.2rem;font-size:14.5px;color:var(--ink-faint)">Fuente: <a href="https://ahrefs.com/blog/ai-brand-visibility-correlations/" target="_blank" rel="noopener">Ahrefs, estudio de correlaciones de visibilidad de marca en IA</a>, diciembre de 2025. Correlación no es causalidad: son señales que acompañan a la visibilidad, no recetas garantizadas.</p>
 <p>Léelo otra vez y fíjate en el patrón: <strong>los cuatro factores de arriba están fuera de tu sitio web</strong>. No son cosas que puedas escribir en tu propia página. Son cosas que otras personas dicen sobre ti en lugares que no controlas.</p>
 <p>Y hay un detalle que le duele al gremio: que te <em>mencionen</em> pesa bastante más que que te <em>enlacen</em>. Un artículo que nombra tu empresa sin poner un enlace, que durante veinte años se consideró una oportunidad perdida, hoy es de las señales más fuertes que existen.</p>

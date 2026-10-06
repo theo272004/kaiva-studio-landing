@@ -765,6 +765,9 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 @media (max-width:980px){
   .page{--aw:470px;--bz:10px}
   .nav-links,.float-nav ul{display:none}
+  .burger{display:block}
+  .float-nav>.btn{display:none}
+  .laptop .base{width:106%;margin-left:-3%}
   .features{grid-template-columns:1fr}
   .studio-grid{grid-template-columns:1fr 1fr}
   .me{grid-column:1/-1;grid-row:auto}
@@ -831,7 +834,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .art-crumbs b{font-weight:500;color:var(--violet-text)}
 .art-head h1{margin:0;font-size:clamp(2.2rem,5vw,3.9rem);line-height:1.02;letter-spacing:-.05em;text-wrap:balance}
 .art-lead{margin:0;max-width:62ch;font-size:clamp(17px,1.6vw,19.5px);line-height:1.6;color:var(--ink-2);text-wrap:pretty}
-.art-meta{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink-3)}
+.art-meta{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 10px;text-align:center;font-size:13.5px;color:var(--ink-3)}
 .art-meta .k{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--ink);color:var(--paper);font-size:12px;font-weight:700;letter-spacing:-.04em}
 .art-meta b{font-weight:600;color:var(--ink)}
 .art-hero{max-width:1120px;margin:clamp(36px,5vw,56px) auto 0;padding:0 20px}
@@ -903,6 +906,16 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 @media (max-width:600px){
   .art{padding-top:104px}
   .articulo{font-size:17px}
+  .art-meta .k{display:none}
+  /* tablas como tarjetas apiladas */
+  .articulo div:has(>table.tcards){box-shadow:none;border-radius:0;overflow:visible}
+  .articulo table.tcards,.tcards tbody,.tcards tr,.tcards td{display:block;width:100%}
+  .tcards thead{display:none}
+  .tcards tr{margin:0 0 12px;padding:14px 16px;border-radius:16px;background:var(--mist)}
+  .articulo .tcards td{padding:4px 0;border:0;font-size:15px}
+  .articulo .tcards td::before{content:attr(data-label);display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .articulo .tcards td:first-child{font-size:16.5px;padding-bottom:6px}
+  .articulo .tcards td:first-child::before{display:none}
   .art-hero img{aspect-ratio:4/3}
   .art-more-grid{grid-template-columns:1fr}.art-more-grid .amc:nth-child(3){display:flex}
   .art-more-head{flex-direction:column;align-items:flex-start}
@@ -968,13 +981,13 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 <h2>Los tres factores, según el propio Google</h2>
 <p>Google <a href="https://support.google.com/business/answer/7091" target="_blank" rel="noopener">publica abiertamente</a> qué decide el orden del paquete local. Son tres, y conviene entenderlos porque solo dos dependen de ti.</p>
 <div style="overflow-x:auto;margin-top:1.4rem">
-<table>
+<table class="tcards">
 <thead>
 <tr> <th>Factor</th> <th>Qué significa</th> <th>¿Lo controlas?</th> </tr> </thead>
 <tbody>
-<tr> <td><strong>Relevancia</strong></td> <td>Qué tanto encaja tu negocio con lo que la persona buscó.</td> <td>Sí, completamente</td> </tr>
-<tr> <td><strong>Distancia</strong></td> <td>Qué tan cerca estás de quien está buscando.</td> <td>No</td> </tr>
-<tr> <td><strong>Prominencia</strong></td> <td>Qué tan conocido y respaldado es tu negocio.</td> <td>Sí, pero toma tiempo</td> </tr> </tbody> </table> </div>
+<tr> <td data-label="Factor"><strong>Relevancia</strong></td> <td data-label="Qué significa">Qué tanto encaja tu negocio con lo que la persona buscó.</td> <td data-label="¿Lo controlas?">Sí, completamente</td> </tr>
+<tr> <td data-label="Factor"><strong>Distancia</strong></td> <td data-label="Qué significa">Qué tan cerca estás de quien está buscando.</td> <td data-label="¿Lo controlas?">No</td> </tr>
+<tr> <td data-label="Factor"><strong>Prominencia</strong></td> <td data-label="Qué significa">Qué tan conocido y respaldado es tu negocio.</td> <td data-label="¿Lo controlas?">Sí, pero toma tiempo</td> </tr> </tbody> </table> </div>
 <h3>Distancia: la que no puedes cambiar</h3>
 <p>Si alguien busca desde el norte de la ciudad, Google le muestra primero lo que está cerca de él. No hay técnica que evite eso, y por eso <strong>«ser el primero en Google Maps» no existe como estado fijo</strong>: eres primero para unos y no apareces para otros, según dónde estén parados.</p>
 <p>De ahí sale la confusión más común: buscas tu propio negocio, te ves de primero y crees que estás bien. Estás buscando desde tu oficina y con tu historial de por medio. <strong>Tu propia búsqueda nunca es una prueba válida.</strong></p>

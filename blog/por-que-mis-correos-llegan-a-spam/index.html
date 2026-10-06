@@ -782,6 +782,9 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 @media (max-width:980px){
   .page{--aw:470px;--bz:10px}
   .nav-links,.float-nav ul{display:none}
+  .burger{display:block}
+  .float-nav>.btn{display:none}
+  .laptop .base{width:106%;margin-left:-3%}
   .features{grid-template-columns:1fr}
   .studio-grid{grid-template-columns:1fr 1fr}
   .me{grid-column:1/-1;grid-row:auto}
@@ -848,7 +851,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .art-crumbs b{font-weight:500;color:var(--violet-text)}
 .art-head h1{margin:0;font-size:clamp(2.2rem,5vw,3.9rem);line-height:1.02;letter-spacing:-.05em;text-wrap:balance}
 .art-lead{margin:0;max-width:62ch;font-size:clamp(17px,1.6vw,19.5px);line-height:1.6;color:var(--ink-2);text-wrap:pretty}
-.art-meta{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink-3)}
+.art-meta{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 10px;text-align:center;font-size:13.5px;color:var(--ink-3)}
 .art-meta .k{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--ink);color:var(--paper);font-size:12px;font-weight:700;letter-spacing:-.04em}
 .art-meta b{font-weight:600;color:var(--ink)}
 .art-hero{max-width:1120px;margin:clamp(36px,5vw,56px) auto 0;padding:0 20px}
@@ -920,6 +923,16 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 @media (max-width:600px){
   .art{padding-top:104px}
   .articulo{font-size:17px}
+  .art-meta .k{display:none}
+  /* tablas como tarjetas apiladas */
+  .articulo div:has(>table.tcards){box-shadow:none;border-radius:0;overflow:visible}
+  .articulo table.tcards,.tcards tbody,.tcards tr,.tcards td{display:block;width:100%}
+  .tcards thead{display:none}
+  .tcards tr{margin:0 0 12px;padding:14px 16px;border-radius:16px;background:var(--mist)}
+  .articulo .tcards td{padding:4px 0;border:0;font-size:15px}
+  .articulo .tcards td::before{content:attr(data-label);display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .articulo .tcards td:first-child{font-size:16.5px;padding-bottom:6px}
+  .articulo .tcards td:first-child::before{display:none}
   .art-hero img{aspect-ratio:4/3}
   .art-more-grid{grid-template-columns:1fr}.art-more-grid .amc:nth-child(3){display:flex}
   .art-more-head{flex-direction:column;align-items:flex-start}
@@ -987,16 +1000,16 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 <p>Durante años, autenticar el correo fue una buena práctica opcional. En febrero de 2024 dejó de serlo. Google y Yahoo empezaron a exigir requisitos mínimos a todo el que les envíe correo, y a rechazar o mandar a spam lo que no los cumpla.</p>
 <p>Estos son los requisitos vigentes, según la <a href="https://support.google.com/a/answer/81126" target="_blank" rel="noopener">guía oficial de Google para remitentes de correo</a>:</p>
 <div style="overflow-x:auto;margin-top:1.4rem">
-<table>
+<table class="tcards">
 <thead>
 <tr> <th>Requisito</th> <th>Todos los remitentes</th> <th>Más de 5.000 mensajes diarios a Gmail</th> </tr> </thead>
 <tbody>
-<tr> <td>Autenticación del dominio</td> <td>SPF <em>o</em> DKIM</td> <td>SPF <strong>y</strong> DKIM <strong>y</strong> DMARC</td> </tr>
-<tr> <td>Alineación DMARC</td> <td>—</td> <td>El dominio del «De:» debe alinear con SPF o DKIM</td> </tr>
-<tr> <td>Registro PTR (DNS inverso)</td> <td>Obligatorio</td> <td>Obligatorio</td> </tr>
-<tr> <td>Conexión cifrada TLS</td> <td>Obligatoria</td> <td>Obligatoria</td> </tr>
-<tr> <td>Tasa de spam reportado</td> <td>Por debajo de 0,3%</td> <td>Por debajo de 0,3%</td> </tr>
-<tr> <td>Cancelar suscripción con un clic</td> <td>—</td> <td>Obligatorio en mensajes comerciales</td> </tr> </tbody> </table> </div>
+<tr> <td data-label="Requisito">Autenticación del dominio</td> <td data-label="Todos los remitentes">SPF <em>o</em> DKIM</td> <td data-label="Más de 5.000 mensajes diarios a Gmail">SPF <strong>y</strong> DKIM <strong>y</strong> DMARC</td> </tr>
+<tr> <td data-label="Requisito">Alineación DMARC</td> <td data-label="Todos los remitentes">—</td> <td data-label="Más de 5.000 mensajes diarios a Gmail">El dominio del «De:» debe alinear con SPF o DKIM</td> </tr>
+<tr> <td data-label="Requisito">Registro PTR (DNS inverso)</td> <td data-label="Todos los remitentes">Obligatorio</td> <td data-label="Más de 5.000 mensajes diarios a Gmail">Obligatorio</td> </tr>
+<tr> <td data-label="Requisito">Conexión cifrada TLS</td> <td data-label="Todos los remitentes">Obligatoria</td> <td data-label="Más de 5.000 mensajes diarios a Gmail">Obligatoria</td> </tr>
+<tr> <td data-label="Requisito">Tasa de spam reportado</td> <td data-label="Todos los remitentes">Por debajo de 0,3%</td> <td data-label="Más de 5.000 mensajes diarios a Gmail">Por debajo de 0,3%</td> </tr>
+<tr> <td data-label="Requisito">Cancelar suscripción con un clic</td> <td data-label="Todos los remitentes">—</td> <td data-label="Más de 5.000 mensajes diarios a Gmail">Obligatorio en mensajes comerciales</td> </tr> </tbody> </table> </div>
 <p style="margin-top:1.2rem;font-size:14.5px;color:var(--ink-faint)">Los requisitos de Google entraron en vigor el 1 de febrero de 2024 y siguen vigentes. Yahoo publicó exigencias equivalentes en la misma fecha.</p>
 <p>Fíjate en el detalle que a casi nadie le cae en cuenta: <strong>el umbral de 0,3% no es de spam enviado, es de spam reportado</strong>. Si de cada mil personas a las que escribes, tres marcan tu correo como spam, ya estás en el límite. Y en una lista comprada o vieja, tres de mil es poquísimo.</p>
 <h2>Los tres registros, sin jerga</h2>
@@ -1023,15 +1036,15 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 <li>Se abre una pestaña con tres líneas arriba: <strong>SPF</strong>, <strong>DKIM</strong> y <strong>DMARC</strong>. Cada una dice <em>PASS</em> o <em>FAIL</em>.</li> </ol>
 <p>Lo que estás buscando son tres PASS. Así se leen los resultados:</p>
 <div style="overflow-x:auto;margin-top:1.4rem">
-<table>
+<table class="tcards">
 <thead>
 <tr> <th>Lo que ves</th> <th>Qué significa</th> <th>Qué tan grave</th> </tr> </thead>
 <tbody>
-<tr> <td>Los tres en PASS</td> <td>Tu dominio está autenticado correctamente</td> <td>Todo bien</td> </tr>
-<tr> <td>DMARC no aparece</td> <td>No tienes el registro. Nadie sabe qué hacer con quien te suplante</td> <td>Alto — es el más común</td> </tr>
-<tr> <td>SPF en FAIL</td> <td>Estás enviando desde un servidor que tu propio dominio no autoriza</td> <td>Alto — es la causa directa de caer en spam</td> </tr>
-<tr> <td>DKIM en FAIL</td> <td>La firma no cuadra: mal configurada, o el mensaje se alteró</td> <td>Medio-alto</td> </tr>
-<tr> <td>SPF en SOFTFAIL</td> <td>Tu SPF termina en <code>~all</code> en vez de <code>-all</code>: falla, pero pide que lo dejen pasar</td> <td>Medio — funciona hasta que deja de funcionar</td> </tr> </tbody> </table> </div>
+<tr> <td data-label="Lo que ves">Los tres en PASS</td> <td data-label="Qué significa">Tu dominio está autenticado correctamente</td> <td data-label="Qué tan grave">Todo bien</td> </tr>
+<tr> <td data-label="Lo que ves">DMARC no aparece</td> <td data-label="Qué significa">No tienes el registro. Nadie sabe qué hacer con quien te suplante</td> <td data-label="Qué tan grave">Alto — es el más común</td> </tr>
+<tr> <td data-label="Lo que ves">SPF en FAIL</td> <td data-label="Qué significa">Estás enviando desde un servidor que tu propio dominio no autoriza</td> <td data-label="Qué tan grave">Alto — es la causa directa de caer en spam</td> </tr>
+<tr> <td data-label="Lo que ves">DKIM en FAIL</td> <td data-label="Qué significa">La firma no cuadra: mal configurada, o el mensaje se alteró</td> <td data-label="Qué tan grave">Medio-alto</td> </tr>
+<tr> <td data-label="Lo que ves">SPF en SOFTFAIL</td> <td data-label="Qué significa">Tu SPF termina en <code>~all</code> en vez de <code>-all</code>: falla, pero pide que lo dejen pasar</td> <td data-label="Qué tan grave">Medio — funciona hasta que deja de funcionar</td> </tr> </tbody> </table> </div>
 <h2>Los cinco errores que más nos encontramos</h2>
 <p>Estos cinco explican la enorme mayoría de los casos que revisamos:</p>
 <ul>
@@ -1043,13 +1056,13 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 <h2>Los tres modos de DMARC, y en qué orden se pasan</h2>
 <p>DMARC tiene una sola instrucción que importa: la política. Son tres valores.</p>
 <div style="overflow-x:auto;margin-top:1.4rem">
-<table>
+<table class="tcards">
 <thead>
 <tr> <th>Política</th> <th>Qué hace el servidor que recibe</th> <th>Cuándo usarla</th> </tr> </thead>
 <tbody>
-<tr> <td><code>p=none</code></td> <td>Entrega el correo igual, pero te manda reportes</td> <td>Las primeras semanas, para ver quién envía en tu nombre</td> </tr>
-<tr> <td><code>p=quarantine</code></td> <td>Manda a spam lo que no autentique</td> <td>Cuando ya sabes que todos tus envíos legítimos pasan</td> </tr>
-<tr> <td><code>p=reject</code></td> <td>Rechaza el mensaje: ni siquiera llega a spam</td> <td>El destino final. Es el que de verdad frena la suplantación</td> </tr> </tbody> </table> </div>
+<tr> <td data-label="Política"><code>p=none</code></td> <td data-label="Qué hace el servidor que recibe">Entrega el correo igual, pero te manda reportes</td> <td data-label="Cuándo usarla">Las primeras semanas, para ver quién envía en tu nombre</td> </tr>
+<tr> <td data-label="Política"><code>p=quarantine</code></td> <td data-label="Qué hace el servidor que recibe">Manda a spam lo que no autentique</td> <td data-label="Cuándo usarla">Cuando ya sabes que todos tus envíos legítimos pasan</td> </tr>
+<tr> <td data-label="Política"><code>p=reject</code></td> <td data-label="Qué hace el servidor que recibe">Rechaza el mensaje: ni siquiera llega a spam</td> <td data-label="Cuándo usarla">El destino final. Es el que de verdad frena la suplantación</td> </tr> </tbody> </table> </div>
 <p>El orden importa y no se puede saltar. Si pones <code>p=reject</code> el primer día sin haber revisado los reportes, corres el riesgo de bloquear tu propia facturación electrónica, tus notificaciones o el sistema que le manda las citas a tus clientes. El camino sensato es <strong>none durante cuatro a seis semanas, luego quarantine, luego reject</strong>, revisando los reportes en cada paso.</p>
 <div class="nota">
 <p><strong>El detalle técnico que importa:</strong> DMARC exige «alineación». No basta con que SPF pase; el dominio que pasa SPF tiene que ser <em>el mismo</em> que aparece en el «De:» que ve tu cliente. Por eso hay correos que muestran SPF en PASS y DMARC en FAIL al mismo tiempo, y por eso revisar solo SPF no alcanza.</p> </div>
