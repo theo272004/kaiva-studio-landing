@@ -1165,7 +1165,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .mcopy .who{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
 .mcopy .btn{background:var(--ink);color:var(--paper)}
 .mcar{--h:clamp(140px,14vw,200px);--zz:12px;overflow:hidden;width:100vw;margin-left:calc(50% - 50vw);padding:calc(var(--zz) + 26px) 0 calc(var(--zz) + 30px);-webkit-mask:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
-.mcar-track{display:flex;align-items:center;gap:14px;width:max-content;animation:mroll 70s linear infinite}
+.mcar-track{display:flex;align-items:center;gap:14px;width:max-content;animation:mroll 150s linear infinite}
 @keyframes mroll{to{transform:translateX(calc(-50% - 7px))}}
 .mcard{flex:none;height:var(--h);padding:0;border:0;border-radius:16px;overflow:hidden;background:#fff;cursor:pointer;box-shadow:0 0 0 1px rgba(8,8,8,.06),0 18px 34px -22px rgba(8,8,8,.45);translate:0 var(--y,0);animation:levita 4.2s ease-in-out infinite;transition:transform .5s var(--ease),box-shadow .45s}
 /* levitan: suben y bajan despacio, una al revés de la otra */
@@ -1174,11 +1174,14 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .mcard:nth-child(odd){--y:calc(var(--zz) * -1)}
 .mcard:nth-child(even){--y:var(--zz);animation-delay:-2.1s}
 .mcard:hover,.mcard:focus-visible{transform:translateY(-18px) scale(1.04);box-shadow:0 0 0 1px rgba(8,8,8,.06),0 26px 44px -22px rgba(8,8,8,.55)}
-.mcard img{display:block;height:100%;width:auto}
+.mcard{aspect-ratio:4/3}
+.mcard.wide{aspect-ratio:16/9}
+.mcard img{display:block;width:100%;height:100%;object-fit:cover}
 /* la flor de Thallo gira sola */
 .mcard.spin,.mcard.logo{display:grid;place-items:center;aspect-ratio:1;background:#F3F3F3}
-.mcard.spin img{width:62%;height:auto;mix-blend-mode:multiply;filter:grayscale(.15);animation:florGira 16s linear infinite}
-.mcard.logo img{width:58%;height:auto;max-height:62%;object-fit:contain;mix-blend-mode:multiply}
+.pw-ov .bbig img{object-fit:contain}
+.mcard.spin img{width:62%;height:auto;object-fit:contain;mix-blend-mode:multiply;filter:grayscale(.15);animation:florGira 16s linear infinite}
+.mcard.logo img{width:62%;height:62%;object-fit:contain}
 @keyframes florGira{to{transform:rotate(360deg)}}
 .bbig .mcardlike{display:grid;place-items:center;width:min(70vh,80vw);aspect-ratio:1;background:#F3F3F3}
 @media (prefers-reduced-motion:reduce){.mcar-track,.mcard{animation:none}.mcar{overflow-x:auto}}
@@ -1329,7 +1332,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
         <span class="ico-name">Thallo Digital<small>Web y marca</small></span>
       </button>
       <button class="ico" type="button" data-open="logos" style="--x:36%;--y:7%">
-        <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/logos/folder.webp" alt="" width="800" height="500"><span class="ff"></span></span>
+        <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/logos/folder.webp?v=3" alt="" width="800" height="500"><span class="ff"></span></span>
         <span class="ico-name">Logofolio<small>Logos</small></span>
       </button>
       <button class="ico" type="button" data-open="atec" style="--x:84%;--y:9%">
@@ -1406,7 +1409,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
           </span>
         </div>
         <div class="pcard">
-          <a class="pc-img" href="#logofolio" data-open="logos" aria-label="Abrir Logofolio"><img src="/assets/portfolio/logos/folder.webp" alt="Logofolio de Kaiva Studio" width="800" height="500" loading="lazy"></a>
+          <a class="pc-img" href="#logofolio" data-open="logos" aria-label="Abrir Logofolio"><img src="/assets/portfolio/logos/logofolio.webp" alt="Logofolio de Kaiva Studio" width="800" height="500" loading="lazy"></a>
           <span>
             <h3><a href="#logofolio" data-open="logos">Logofolio</a></h3>
             <p>Símbolos y logotipos para marcas de tecnología, consultoría, bienestar y más, mostrados como una sola colección.</p>
@@ -1435,38 +1438,36 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       </div>
       <div class="mcar" data-reveal aria-label="Piezas de marca, ilustración y editorial">
         <div class="mcar-track">
-          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Portada"><img src="/assets/portfolio/felinorte/01.webp?v=pdf2" alt="Portada del libro Descubriendo Felinorte, con un gato ilustrado" width="900" height="1350" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Portada"><img src="/assets/portfolio/thallo-marca/01-portada.webp" alt="Portada del brandbook de Thallo: el símbolo iluminado sobre una pared" width="1600" height="900" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="ATEC · Paleta de color"><img src="/assets/portfolio/atec/13.webp" alt="Paleta de color de la propuesta gráfica para ATEC" width="1453" height="900" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Portada"><img src="/assets/portfolio/felinorte/01.webp?v=pdf2" alt="Gato ilustrado de la portada de Descubriendo Felinorte" width="900" height="1350" loading="lazy" style="object-position:50% 72%"></button>
+          <button class="mcard wide" type="button" data-cap="Thallo Digital · Portada"><img src="/assets/portfolio/thallo-marca/01-portada.webp" alt="Portada del brandbook de Thallo: el símbolo iluminado sobre una pared" width="1600" height="900" loading="lazy"></button>
+          <button class="mcard wide" type="button" data-cap="ATEC · Paleta de color"><img src="/assets/portfolio/atec/13.webp" alt="Paleta de color de la propuesta gráfica para ATEC" width="1453" height="900" loading="lazy"></button>
           <button class="mcard spin" type="button" data-cap="Thallo Digital · Símbolo"><img src="/assets/portfolio/thallo-brandbook/id-simbolo.webp" alt="Símbolo de Thallo Digital girando" width="800" height="800" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Ilustración"><img src="/assets/portfolio/felinorte/15.webp?v=pdf2" alt="Ilustración de Natalia abrazando un gato" width="900" height="1350" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Papelería"><img src="/assets/portfolio/thallo-marca/06-credencial.webp" alt="Credencial y tarjetas de presentación de Thallo" width="984" height="472" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="ATEC · Moodboard"><img src="/assets/portfolio/atec/14.webp" alt="Moodboard de la propuesta gráfica para ATEC" width="1453" height="900" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Ilustración"><img src="/assets/portfolio/felinorte/27.webp?v=pdf2" alt="Ovillos de lana ilustrados" width="900" height="1350" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Ilustración"><img src="/assets/portfolio/felinorte/15.webp?v=pdf2" alt="Ilustración de Natalia abrazando un gato" width="900" height="1350" loading="lazy" style="object-position:50% 42%"></button>
+          <button class="mcard wide" type="button" data-cap="Thallo Digital · Papelería"><img src="/assets/portfolio/thallo-marca/06-credencial.webp" alt="Credencial y tarjetas de presentación de Thallo" width="984" height="472" loading="lazy"></button>
+          <button class="mcard wide" type="button" data-cap="ATEC · Moodboard"><img src="/assets/portfolio/atec/14.webp" alt="Moodboard de la propuesta gráfica para ATEC" width="1453" height="900" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Ilustración"><img src="/assets/portfolio/felinorte/27.webp?v=pdf2" alt="Ovillos de lana ilustrados" width="900" height="1350" loading="lazy" style="object-position:50% 78%"></button>
           <button class="mcard" type="button" data-cap="Thallo Digital · Celular"><img src="/assets/portfolio/thallo-marca/04-celular.webp" alt="La web de Thallo en un celular sobre una mesa" width="800" height="594" loading="lazy"></button>
           <button class="mcard logo" type="button" data-cap="Logofolio · Growher"><img src="/assets/portfolio/logos/growher-iso.webp" alt="Símbolo de Growher" width="240" height="255" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Contraportada"><img src="/assets/portfolio/felinorte/30.webp?v=pdf2" alt="Contraportada: la cola de un gato" width="900" height="1350" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Web"><img src="/assets/portfolio/thallo-marca/11-web.webp" alt="La web de Thallo en computador, celular y portátil" width="1600" height="525" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="ATEC · Moodboard"><img src="/assets/portfolio/atec/16.webp" alt="Moodboard de la propuesta gráfica para ATEC" width="1453" height="900" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Ilustración"><img src="/assets/portfolio/felinorte/20.webp?v=pdf2" alt="Ilustración de un chico cargando una caja" width="900" height="1350" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Contraportada"><img src="/assets/portfolio/felinorte/30.webp?v=pdf2" alt="Contraportada: la cola de un gato" width="900" height="1350" loading="lazy" style="object-position:50% 62%"></button>
+          <button class="mcard wide" type="button" data-cap="Thallo Digital · Web"><img src="/assets/portfolio/thallo-marca/11-web.webp" alt="La web de Thallo en computador, celular y portátil" width="1600" height="525" loading="lazy" style="object-position:50% 60%"></button>
+          <button class="mcard wide" type="button" data-cap="ATEC · Moodboard"><img src="/assets/portfolio/atec/16.webp" alt="Moodboard de la propuesta gráfica para ATEC" width="1453" height="900" loading="lazy"></button>
           <button class="mcard logo" type="button" data-cap="Logofolio · Con Knots"><img src="/assets/portfolio/logos/conknots-emblema.webp" alt="Emblema de Con Knots" width="430" height="290" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Papelería"><img src="/assets/portfolio/thallo-marca/10-papeleria.webp" alt="Hoja, sobre, libreta y tarjeta con la marca de Thallo" width="938" height="574" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Portada" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/felinorte/01.webp?v=pdf2" alt="" width="900" height="1350" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Portada" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/01-portada.webp" alt="" width="1600" height="900" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="ATEC · Paleta de color" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/atec/13.webp" alt="" width="1453" height="900" loading="lazy"></button>
+          <button class="mcard wide" type="button" data-cap="Thallo Digital · Papelería"><img src="/assets/portfolio/thallo-marca/10-papeleria.webp" alt="Hoja, sobre, libreta y tarjeta con la marca de Thallo" width="938" height="574" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Portada" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/felinorte/01.webp?v=pdf2" alt="" width="900" height="1350" loading="lazy" style="object-position:50% 72%"></button>
+          <button class="mcard wide" type="button" data-cap="Thallo Digital · Portada" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/01-portada.webp" alt="" width="1600" height="900" loading="lazy"></button>
+          <button class="mcard wide" type="button" data-cap="ATEC · Paleta de color" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/atec/13.webp" alt="" width="1453" height="900" loading="lazy"></button>
           <button class="mcard spin" type="button" data-cap="Thallo Digital · Símbolo" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-brandbook/id-simbolo.webp" alt="" width="800" height="800" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Ilustración" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/felinorte/15.webp?v=pdf2" alt="" width="900" height="1350" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Papelería" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/06-credencial.webp" alt="" width="984" height="472" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="ATEC · Moodboard" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/atec/14.webp" alt="" width="1453" height="900" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Ilustración" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/felinorte/27.webp?v=pdf2" alt="" width="900" height="1350" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Ilustración" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/felinorte/15.webp?v=pdf2" alt="" width="900" height="1350" loading="lazy" style="object-position:50% 42%"></button>
+          <button class="mcard wide" type="button" data-cap="Thallo Digital · Papelería" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/06-credencial.webp" alt="" width="984" height="472" loading="lazy"></button>
+          <button class="mcard wide" type="button" data-cap="ATEC · Moodboard" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/atec/14.webp" alt="" width="1453" height="900" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Ilustración" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/felinorte/27.webp?v=pdf2" alt="" width="900" height="1350" loading="lazy" style="object-position:50% 78%"></button>
           <button class="mcard" type="button" data-cap="Thallo Digital · Celular" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/04-celular.webp" alt="" width="800" height="594" loading="lazy"></button>
           <button class="mcard logo" type="button" data-cap="Logofolio · Growher" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/logos/growher-iso.webp" alt="" width="240" height="255" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Contraportada" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/felinorte/30.webp?v=pdf2" alt="" width="900" height="1350" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Web" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/11-web.webp" alt="" width="1600" height="525" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="ATEC · Moodboard" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/atec/16.webp" alt="" width="1453" height="900" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Ilustración" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/felinorte/20.webp?v=pdf2" alt="" width="900" height="1350" loading="lazy"></button>
+          <button class="mcard" type="button" data-cap="Descubriendo Felinorte · Contraportada" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/felinorte/30.webp?v=pdf2" alt="" width="900" height="1350" loading="lazy" style="object-position:50% 62%"></button>
+          <button class="mcard wide" type="button" data-cap="Thallo Digital · Web" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/11-web.webp" alt="" width="1600" height="525" loading="lazy" style="object-position:50% 60%"></button>
+          <button class="mcard wide" type="button" data-cap="ATEC · Moodboard" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/atec/16.webp" alt="" width="1453" height="900" loading="lazy"></button>
           <button class="mcard logo" type="button" data-cap="Logofolio · Con Knots" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/logos/conknots-emblema.webp" alt="" width="430" height="290" loading="lazy"></button>
-          <button class="mcard" type="button" data-cap="Thallo Digital · Papelería" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/10-papeleria.webp" alt="" width="938" height="574" loading="lazy"></button>
+          <button class="mcard wide" type="button" data-cap="Thallo Digital · Papelería" tabindex="-1" aria-hidden="true"><img src="/assets/portfolio/thallo-marca/10-papeleria.webp" alt="" width="938" height="574" loading="lazy"></button>
         </div>
       </div>
     </section>

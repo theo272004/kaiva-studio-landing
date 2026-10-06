@@ -1126,18 +1126,16 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
    tarjetas recortadas y una selección para empezar.
    ===================================================================== */
 /* portada clara: el menú flota arriba como en el portfolio */
-.bintro{padding-top:clamp(120px,13vw,150px)}
-.bintro-copy{display:grid;justify-items:center;gap:20px;text-align:center;padding:0 16px}
-.bpill{white-space:nowrap;display:inline-flex;align-items:center;gap:8px;height:30px;margin:0;padding:0 14px 0 6px;border-radius:999px;background:var(--mist);box-shadow:inset 0 0 0 1px var(--line);font-size:13px;font-weight:500;color:var(--ink-2)}
-.bpill b{display:inline-grid;place-items:center;height:20px;padding:0 8px;border-radius:99px;background:var(--ink);color:var(--paper);font-weight:600;font-size:11.5px}
-.bpill .short{display:none}
-.bintro h1{font-size:clamp(2.6rem,6.4vw,5.1rem);line-height:.98;letter-spacing:-.05em;max-width:16ch;margin:0}
-.bintro h1 .dim{color:#A3A3AB}
-.bintro .lede{max-width:52ch;margin:0;font-size:16px;line-height:1.6;color:var(--ink-2)}
+/* portada: la tarjeta oscura de la home, debajo del menú flotante, y todo en una sola pantalla */
+.hero.bintro{display:flex;flex-direction:column;gap:clamp(18px,2.6vh,30px);max-width:1440px;height:calc(100svh - 100px);min-height:600px;max-height:900px;margin:80px auto 0;padding:clamp(28px,4.5vh,48px) clamp(20px,3vw,40px) clamp(20px,3vh,32px)}
+.bintro-copy{flex:none;display:grid;justify-items:center;gap:clamp(10px,1.6vh,16px);text-align:center;padding:0 16px}
+.hero.bintro h1{font-size:clamp(2.2rem,min(4.6vw,7.2vh),4.2rem);max-width:18ch;margin:0}
+.hero.bintro .lede{max-width:60ch;margin:0;font-size:15px;line-height:1.55}
 
 /* ---------- menú de temas: texto, como el índice de una revista ---------- */
-.bbar{display:flex;align-items:center;justify-content:space-between;gap:24px;margin:-6px 0 38px;padding:10px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.btemas{display:flex;flex-wrap:wrap;align-items:center;gap:2px;min-width:0;margin-left:-10px}
+.bbar{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px 24px;margin:-6px 0 38px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.bbar::before{content:"Temas";grid-column:1;grid-row:1;font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.btemas{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:repeat(5,auto);justify-content:space-between;gap:4px 8px;min-width:0;margin:0 -10px}
 .btema{position:relative;display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 10px;border:0;background:none;color:var(--ink-3);font:inherit;font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:color .25s}
 .btema i{font-style:normal;font-size:10.5px;opacity:.55}
 .btema::after{content:"";position:absolute;left:10px;right:10px;bottom:3px;height:2px;border-radius:2px;background:var(--violet-text);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
@@ -1145,7 +1143,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .btema:hover::after{transform:scaleX(.5)}
 .btema[aria-pressed="true"]{color:var(--violet-text)}
 .btema[aria-pressed="true"]::after{transform:scaleX(1)}
-.bsearch{flex:none;align-self:center;display:flex;align-items:center;gap:8px;width:210px;height:40px;padding:0 6px 0 14px;border-radius:999px;background:var(--mist);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line);transition:width .45s var(--ease),background .3s}
+.bsearch{grid-column:2;grid-row:1;flex:none;align-self:center;display:flex;align-items:center;gap:8px;width:210px;height:40px;padding:0 6px 0 14px;border-radius:999px;background:var(--mist);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line);transition:width .45s var(--ease),background .3s}
 .bsearch:focus-within{width:300px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--violet-text)}
 .bsearch svg{width:15px;height:15px;flex:none;opacity:.7}
 .bsearch input{flex:1;min-width:0;height:100%;border:0;background:none;font:inherit;font-size:13.5px;color:var(--ink);outline:none}
@@ -1153,13 +1151,14 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .bsearch kbd{flex:none;padding:2px 7px;border-radius:6px;background:#fff;box-shadow:inset 0 0 0 1px var(--line);font-family:var(--f-mono);font-size:10.5px;color:var(--ink-2)}
 
 /* ---------- destacados: panel oscuro, foto a la derecha y tarjeta blanca encima ---------- */
-.bfeat{position:relative;width:min(1180px,calc(100% - 32px));margin:clamp(40px,5vw,60px) auto 0;aspect-ratio:2.25/1;min-height:380px;border-radius:var(--r-card);overflow:hidden;background:#2C2C33}
-.bslide{position:absolute;inset:0;display:grid;grid-template-columns:38% 1fr;opacity:0;visibility:hidden;transition:opacity .8s ease,visibility 0s linear .8s;color:inherit;text-decoration:none}
+.bfeat{position:relative;flex:1;min-height:0;width:100%;margin:0;border-radius:calc(var(--r-panel) - 4px);overflow:hidden;background:#17171B}
+.bslide{position:absolute;inset:0;display:grid;grid-template-columns:1fr;opacity:0;visibility:hidden;transition:opacity .8s ease,visibility 0s linear .8s;color:inherit;text-decoration:none}
 .bslide.on{opacity:1;visibility:visible;transition:opacity .8s ease;z-index:1}
-.bslide-img{grid-column:2;position:relative;overflow:hidden}
+.bslide-img{grid-column:1;position:relative;overflow:hidden}
 .bslide-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 7s linear}
 .bslide.on .bslide-img img{transform:scale(1)}
-.bslide-card{position:absolute;z-index:2;left:7%;top:50%;width:min(470px,46%);display:flex;flex-direction:column;gap:12px;padding:clamp(24px,3vw,40px);border-radius:16px;background:var(--paper);color:var(--ink);box-shadow:0 40px 70px -40px rgba(0,0,0,.8);transform:translateY(-44%);opacity:0;transition:transform .9s var(--ease) .15s,opacity .6s ease .15s}
+.bslide-img::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,8,10,.55),rgba(8,8,10,0) 55%)}
+.bslide-card{position:absolute;z-index:2;left:4%;top:50%;width:min(440px,44%);display:flex;flex-direction:column;gap:12px;padding:clamp(24px,3vw,40px);border-radius:16px;background:var(--paper);color:var(--ink);box-shadow:0 40px 70px -40px rgba(0,0,0,.8);transform:translateY(-44%);opacity:0;transition:transform .9s var(--ease) .15s,opacity .6s ease .15s}
 .bslide.on .bslide-card{transform:translateY(-50%);opacity:1}
 .bslide-card h2{font-size:clamp(1.45rem,2.3vw,2.05rem);line-height:1.06;letter-spacing:-.045em;margin:0}
 .bslide-card p{margin:0;color:var(--ink-2);font-size:14.5px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
@@ -1239,7 +1238,7 @@ a:hover .bread svg{transform:translateX(4px)}
 @media (max-width:980px){
   .bgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .bpicks{grid-template-columns:1fr}
-  .bfeat{aspect-ratio:auto;height:560px}
+  .hero.bintro .bfeat{flex:none;height:540px}
   .bslide{grid-template-columns:1fr;grid-template-rows:1fr 1fr}
   .bslide-img{grid-column:1;grid-row:1}
   .bslide-card{left:16px;right:16px;width:auto;top:auto;bottom:22px;transform:translateY(12px)}
@@ -1249,9 +1248,10 @@ a:hover .bread svg{transform:translateX(4px)}
 }
 @media (max-width:700px){
   .bbar{flex-direction:column;align-items:stretch;gap:12px;padding:10px 0 14px}
-  .bpill .long{display:none}.bpill .short{display:inline}
-  .bintro{padding-top:110px}
-  .btemas{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 10px}
+  .hero.bintro{height:auto;min-height:0;max-height:none;margin-top:72px}
+  .hero.bintro .bfeat{flex:none;height:520px}
+  .btemas{display:flex;flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 10px}
+  .bbar{grid-template-columns:1fr}.bbar::before{display:none}.bsearch{grid-column:1}
   .btema{flex:none}
   .bsearch,.bsearch:focus-within{width:100%;height:44px}
   .bsearch kbd{display:none}
@@ -1307,9 +1307,9 @@ a:hover .bread svg{transform:translateX(4px)}
 <div class="page">
 
   <!-- ============ PORTADA: textos sobre fondo claro y destacados ============ -->
-  <header class="bintro" id="inicio">
+  <header class="hero bintro" id="inicio">
     <div class="bintro-copy">
-      <p class="bpill"><b>Blog</b> <span class="long">Guías claras de web, marca y Google</span><span class="short">Guías sin jerga</span></p>
+      <p class="pill"><b>Blog</b> <span class="long">Guías claras de web, marca y Google</span><span class="short">Guías sin jerga</span></p>
       <h1><span class="dim">Lo que nadie te explica</span> sin cobrarte</h1>
       <p class="lede">Escribimos sobre lo que de verdad nos preguntan los clientes: cuánto cuesta una web, por qué no apareces en Google, qué vale la pena y qué no. Sin jerga y sin vender humo.</p>
     </div>
