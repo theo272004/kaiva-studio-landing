@@ -1400,17 +1400,17 @@ html.lock{overflow:hidden}
   .widget{padding:16px 18px}
   .widget h1{font-size:2rem}
   .widget p{font-size:13.5px}
-  /* carpetas pequeñas, en tres columnas, para que se vea el escritorio */
-  .ico{width:96px;padding:7px 4px 6px;gap:5px;border-radius:12px}
-  .ico-name{max-width:90px;font-size:10.5px;line-height:1.25}
+  /* carpetas pequeñas, en tres columnas y abajo, sobre el dock: así nunca tapan el texto de arriba */
+  .ico{width:106px;padding:7px 4px 6px;gap:5px;border-radius:12px}
+  .ico-name{max-width:100px;font-size:10.5px;line-height:1.25}
   .ico-name small{font-size:9px}
   .folder{width:52px;height:40px}
-  .desk-area .ico:nth-child(1){--x:calc(50% - 154px)!important;--y:36%!important}
-  .desk-area .ico:nth-child(2){--x:calc(50% - 48px)!important;--y:36%!important}
-  .desk-area .ico:nth-child(3){--x:calc(50% + 58px)!important;--y:36%!important}
-  .desk-area .ico:nth-child(4){--x:calc(50% - 154px)!important;--y:58%!important}
-  .desk-area .ico:nth-child(5){--x:calc(50% - 48px)!important;--y:58%!important}
-  .desk-area .ico:nth-child(6){--x:calc(50% + 58px)!important;--y:58%!important}
+  .desk-area .ico:nth-child(1){--x:calc(50% - 165px)!important;--y:calc(100% - 222px)!important}
+  .desk-area .ico:nth-child(2){--x:calc(50% - 53px)!important;--y:calc(100% - 222px)!important}
+  .desk-area .ico:nth-child(3){--x:calc(50% + 59px)!important;--y:calc(100% - 222px)!important}
+  .desk-area .ico:nth-child(4){--x:calc(50% - 165px)!important;--y:calc(100% - 110px)!important}
+  .desk-area .ico:nth-child(5){--x:calc(50% - 53px)!important;--y:calc(100% - 110px)!important}
+  .desk-area .ico:nth-child(6){--x:calc(50% + 59px)!important;--y:calc(100% - 110px)!important}
   .pdock{gap:6px;padding:7px 8px;border-radius:18px;bottom:10px}
   .pdock .d{width:40px;height:40px;border-radius:10px}
   /* web en vivo en celular: con la forma de una pantalla de computador, justo debajo de la dirección */
