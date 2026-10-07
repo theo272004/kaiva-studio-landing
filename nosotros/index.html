@@ -34,8 +34,8 @@
        se pegan las dos últimas palabras con un espacio que no se parte. -->
   <script>document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('p,li,dd,figcaption,blockquote,small,label,td,h1,h2,h3,.desc').forEach(function(e){var w=document.createTreeWalker(e,4),n,l=null;while(n=w.nextNode())if(n.nodeValue.trim())l=n;if(!l||e.textContent.trim().split(/\s+/).length<3)return;var o=l.nodeValue;l.nodeValue=o.replace(/ (\S+\s*)$/,'\u00a0$1');if(e.scrollWidth>e.clientWidth+1)l.nodeValue=o})})</script>
 
-  <title>Quiénes somos | Kaiva Studio</title>
-  <meta name="description" content="Kaiva Studio es un estudio digital pequeño en Barranquilla: diseño y código en el mismo equipo, con trato directo con quien hace tu proyecto.">
+  <title>Quiénes somos | Kaiva Studio, estudio digital en Barranquilla</title>
+  <meta name="description" content="Kaiva Studio es un estudio digital de Barranquilla: diseñamos y construimos páginas web, software a medida y marcas para empresas, sin plantillas.">
   <link rel="canonical" href="https://kaivastudio.com/nosotros/">
   <meta name="robots" content="index, follow">
   <meta property="og:title" content="Quiénes somos | Kaiva Studio">
@@ -951,69 +951,83 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 </style>
 <style>
 /* ---------- quiénes somos ---------- */
-.ns{max-width:1240px;margin:0 auto;padding:clamp(104px,10vw,128px) clamp(16px,3vw,28px) 0}
-/* mosaico: la ilustración partida en una cuadrícula de 8 x 5 con tarjetas encima, como una pared de fotos */
-.ns-board{--g:8px;--H:calc(100cqw * 883 / 1434);position:relative;container-type:inline-size}
-.ns-mosaic{position:relative;aspect-ratio:1434/883;border-radius:20px;background:url(/assets/inicio/equipo-cafe.webp) center/cover}
-.js .ns-mosaic{background:none}
-.ns-cell,.ns-card{position:absolute;left:calc(var(--c) * (100cqw + var(--g)) / 8);top:calc(var(--r) * (var(--H) + var(--g)) / 5);width:calc(var(--w,1) * (100cqw + var(--g)) / 8 - var(--g));height:calc(var(--h,1) * (var(--H) + var(--g)) / 5 - var(--g));border-radius:14px}
-.ns-cell{background:url(/assets/inicio/equipo-cafe.webp) no-repeat;background-size:100cqw var(--H);background-position:calc(var(--c) * (100cqw + var(--g)) / -8) calc(var(--r) * (var(--H) + var(--g)) / -5);opacity:0;scale:.94;transition:opacity .7s var(--ease),scale .7s var(--ease),filter .4s;transition-delay:var(--d,0s)}
-.ns-board.in .ns-cell{opacity:1;scale:1}
-.ns-cell:hover{filter:brightness(1.08) saturate(1.1)}
-.ns-tag{position:absolute;left:12px;top:12px;z-index:3;padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.88);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--ink);font-size:12px;font-weight:600}
-.ns-card{z-index:2;display:flex;flex-direction:column;justify-content:space-between;gap:10px;padding:clamp(12px,1.6cqw,22px);overflow:hidden;opacity:0;translate:0 14px;transition:opacity .8s var(--ease),translate .8s var(--ease);transition-delay:.5s}
-.ns-board.in .ns-card{opacity:1;translate:0 0}
-.ns-card b{display:block;font-size:clamp(15px,1.75cqw,22px);font-weight:600;letter-spacing:-.03em;line-height:1.1}
-.ns-card span{font-size:clamp(11.5px,1.1cqw,13.5px);line-height:1.45;opacity:.75}
-.ns-card.k{background:var(--ink);color:var(--paper)}
-.ns-card.v{background:var(--violet);color:var(--paper)}
-.ns-card.w{background:var(--violet-soft);color:var(--violet)}
-.ns-card.w b{color:var(--violet-text)}
-/* las celdas tapadas por tarjetas solo se ven en celular, donde las tarjetas van abajo */
-@media (min-width:701px){.ns-cell.sk{display:none}}
-/* fila bajo el mosaico */
-.ns-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px 32px;margin-top:16px;font-size:13.5px;color:var(--ink-2)}
-.ns-foot p{margin:0;max-width:44ch}
-.ns-foot ul{display:flex;flex-wrap:wrap;gap:8px 22px;margin:0;padding:0;list-style:none}
-.ns-foot li{display:flex;align-items:center;gap:7px}
-.ns-foot li::before{content:"";flex:none;width:14px;height:14px;border-radius:50%;background:var(--violet-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4 7.2l2 2 4-4.4' fill='none' stroke='%237A3FC9' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat}
-.ns-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(48px,6vw,72px)}
-.ns-acts .btn{height:40px;padding:0 18px;font-size:13.5px}
+.ns{max-width:1120px;margin:0 auto;padding:clamp(120px,12vw,150px) clamp(16px,3vw,28px) 0}
+/* introducción */
+.ns-intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:end}
+.ns-pill{display:inline-flex;align-items:center;gap:8px;margin:0 0 22px;padding:5px 12px 5px 6px;border-radius:99px;background:var(--mist);font-size:12.5px;font-weight:600}
+.ns-pill b{padding:2px 8px;border-radius:99px;background:var(--ink);color:var(--paper);font-size:11.5px}
+.ns-h{margin:0;font-size:clamp(2.3rem,5vw,4.1rem);line-height:1;letter-spacing:-.055em;text-wrap:balance}
+.ns-h .dim{color:var(--ink-3)}
+.ns-lead{display:grid;gap:16px}
+.ns-lead p{margin:0;font-size:clamp(16px,1.35vw,18px);line-height:1.6;color:var(--ink-2);max-width:46ch}
+.ns-lead p strong{color:var(--ink);font-weight:600}
+.ns-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.ns-acts .btn{height:42px;padding:0 18px;font-size:13.5px}
 .btn-line{box-shadow:inset 0 0 0 1px var(--line);color:var(--ink)}
 .btn-line:hover{box-shadow:inset 0 0 0 1px var(--ink)}
-.ns-h{margin:22px 0 0;font-size:clamp(2.4rem,6vw,5rem);line-height:1;letter-spacing:-.055em;text-wrap:balance}
-.ns-h .dim{color:var(--ink-3)}
-/* fichas "Hola, soy…" */
-.ns-team{margin-top:clamp(80px,10vw,120px)}
-.ns-eyebrow{margin:0 0 18px;font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
-.ns-people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.ns-me{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.85fr);min-height:340px;border-radius:24px;background:var(--mist);overflow:hidden}
-.ns-me.dark{background:var(--ink);color:var(--paper)}
-.ns-me-txt{display:flex;flex-direction:column;justify-content:space-between;gap:22px;padding:clamp(22px,2.6vw,32px)}
-.ns-me .ns-hey,.ns-me.dark .ns-hey{margin:0;max-width:none;font-size:clamp(1.9rem,3.2vw,2.7rem);font-weight:600;line-height:1;letter-spacing:-.05em;color:inherit}
-.ns-hey small{display:block;font-size:.5em;font-weight:500;letter-spacing:-.02em;color:var(--ink-3);margin-bottom:6px}
-.ns-me.dark .ns-hey small{color:rgba(255,255,255,.55)}
-.ns-me p{margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2);max-width:30ch}
-.ns-me.dark p{color:rgba(255,255,255,.75)}
-.ns-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
-.ns-chips li{padding:5px 11px;border-radius:99px;background:var(--paper);font-size:12px;font-weight:600;color:var(--ink)}
-.ns-me.dark .ns-chips li{background:rgba(255,255,255,.12);color:var(--paper)}
-/* espacio para la foto de cada uno (llega después) */
-.ns-ph{position:relative;margin:10px;border-radius:16px;background:linear-gradient(160deg,var(--violet-soft),#D9CCEB);display:grid;place-items:center;overflow:hidden}
-.ns-me.dark .ns-ph{background:linear-gradient(160deg,#2A1747,#1A0F2C)}
-.ns-ph svg{width:46%;max-width:150px;opacity:.55}
+/* datos que se pueden afirmar */
+.ns-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:clamp(48px,6vw,72px) 0 0;padding:0;list-style:none}
+.ns-facts li{display:grid;gap:6px;padding:18px 18px 20px;border-radius:18px;background:var(--mist)}
+.ns-facts b{font-size:clamp(1.5rem,2.4vw,2rem);font-weight:600;letter-spacing:-.05em;line-height:1}
+.ns-facts b small{font-size:.5em;letter-spacing:-.02em;margin-left:3px;color:var(--violet-text)}
+.ns-facts span{font-size:13.5px;line-height:1.45;color:var(--ink-2)}
+/* mosaico: la ilustración partida en cuadritos; algunos se blanquean al azar y vuelven */
+.ns-board{--g:6px;--H:calc(100cqw * 1113 / 2436);position:relative;container-type:inline-size;margin-top:clamp(56px,7vw,88px)}
+.ns-mosaic{position:relative;aspect-ratio:2436/1113;border-radius:18px;background:url(/assets/inicio/equipo-cafe.webp) center/cover}
+.js .ns-mosaic{background:none}
+.ns-cell,.ns-card{position:absolute;left:calc(var(--c) * (100cqw + var(--g)) / 10);top:calc(var(--r) * (var(--H) + var(--g)) / 4);width:calc(var(--w,1) * (100cqw + var(--g)) / 10 - var(--g));height:calc(var(--h,1) * (var(--H) + var(--g)) / 4 - var(--g));border-radius:12px}
+.ns-cell{overflow:hidden;background:url(/assets/inicio/equipo-cafe.webp) no-repeat;background-size:100cqw var(--H);background-position:calc(var(--c) * (100cqw + var(--g)) / -10) calc(var(--r) * (var(--H) + var(--g)) / -4);opacity:0;scale:.92;transition:opacity .7s var(--ease),scale .7s var(--ease);transition-delay:var(--d,0s)}
+.ns-cell::after{content:"";position:absolute;inset:0;background:var(--paper);opacity:0;transition:opacity .9s ease}
+.ns-cell.blank::after{opacity:.94}
+.ns-board.in .ns-cell{opacity:1;scale:1}
+.ns-tag{position:absolute;left:10px;top:10px;z-index:3;padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--ink);font-size:12px;font-weight:600}
+.ns-card{z-index:2;display:flex;flex-direction:column;justify-content:space-between;gap:8px;padding:clamp(12px,1.6cqw,20px);background:var(--ink);color:var(--paper);opacity:0;translate:0 12px;transition:opacity .8s var(--ease),translate .8s var(--ease);transition-delay:.5s}
+.ns-board.in .ns-card{opacity:1;translate:0 0}
+.ns-card b{font-size:clamp(15px,1.7cqw,20px);font-weight:600;letter-spacing:-.03em;line-height:1.12}
+.ns-card span{font-size:clamp(11.5px,1.1cqw,13px);line-height:1.45;opacity:.72}
+.ns-cap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;margin-top:12px;font-size:13px;color:var(--ink-3)}
+/* fichas "Hola, soy…", al estilo de la referencia: la foto ocupa la tarjeta y los datos van alrededor */
+.ns-team{margin-top:clamp(90px,11vw,130px)}
+.ns-eyebrow{margin:0 0 10px;font-size:clamp(1.8rem,3.4vw,2.7rem);line-height:1.05;letter-spacing:-.05em}
+.ns-eyebrow .dim{color:var(--ink-3)}
+.ns-sub{margin:0 0 28px;font-size:15px;color:var(--ink-2)}
+.ns-people{display:grid;gap:16px}
+.ns-me{position:relative;aspect-ratio:16/8;border-radius:24px;overflow:hidden;background:linear-gradient(160deg,#EFE8F7,#DCCDEE);isolation:isolate}
+.ns-me.dark{background:linear-gradient(160deg,#2A1747,#120A1F);color:var(--paper)}
+.ns-ph{position:absolute;inset:0;z-index:-1;display:grid;place-items:end center}
+.ns-ph svg{width:min(42%,340px);height:auto;opacity:.5}
 .ns-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-@media (max-width:860px){.ns-people{grid-template-columns:1fr}}
+.ns-me>*:not(.ns-ph){position:absolute}
+.ns-kit{left:22px;top:20px;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600}
+.ns-kit b{padding:4px 10px;border-radius:99px;background:var(--ink);color:var(--paper)}
+.ns-me.dark .ns-kit b{background:var(--paper);color:var(--ink)}
+.ns-hey{left:22px;top:50%;translate:0 -50%;margin:0;font-size:clamp(2.2rem,5.4vw,4.4rem);font-weight:600;line-height:.95;letter-spacing:-.06em}
+.ns-hey small{display:block;font-size:.42em;font-weight:500;letter-spacing:-.02em;opacity:.6;margin-bottom:8px}
+.ns-hey em{display:inline-block;margin-top:14px;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.75);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:13px;font-style:normal;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+.ns-big{right:24px;top:20px;margin:0;text-align:right}
+.ns-big b{display:block;font-size:clamp(2rem,4.4vw,3.6rem);font-weight:600;line-height:.95;letter-spacing:-.06em;color:var(--violet-text)}
+.ns-me.dark .ns-big b{color:var(--violet-light)}
+.ns-big span{display:block;margin-top:6px;font-size:13px;line-height:1.4;opacity:.7;max-width:22ch;margin-left:auto}
+.ns-tags{right:22px;bottom:20px;display:grid;justify-items:end;gap:6px;margin:0;padding:0;list-style:none}
+.ns-tags li{padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.8);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:12.5px;font-weight:600;color:var(--ink)}
+.ns-me.dark .ns-tags li{background:rgba(255,255,255,.12);color:var(--paper)}
+.ns-handle{left:22px;bottom:20px;display:flex;align-items:center;gap:8px;padding:5px 12px 5px 5px;border-radius:99px;background:rgba(255,255,255,.8);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:12.5px;font-weight:600;color:var(--ink)}
+.ns-me.dark .ns-handle{background:rgba(255,255,255,.12);color:var(--paper)}
+.ns-handle i{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--violet);color:#fff;font-style:normal;font-size:11px;font-weight:700}
+@media (max-width:900px){.ns-intro{grid-template-columns:1fr}.ns-facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:700px){
-  .ns-board{--g:4px}
-  .ns-cell{border-radius:7px}
-  .ns-tag{left:8px;top:8px;font-size:10.5px;padding:4px 8px}
-  /* en celular las tarjetas van debajo del mosaico, una tras otra */
+  .ns-board{--g:3px}
+  .ns-cell{border-radius:5px}
+  .ns-tag{left:6px;top:6px;font-size:10.5px;padding:3px 8px}
   .ns-card{position:relative;left:auto;top:auto;width:auto;height:auto;margin-top:8px;border-radius:16px;padding:18px}
   .ns-card b{font-size:18px}.ns-card span{font-size:13px}
-  .ns-me{grid-template-columns:1fr;min-height:0}
-  .ns-ph{aspect-ratio:4/3}
+  .ns-me{aspect-ratio:auto;min-height:520px}
+  .ns-hey{top:64px;translate:none}
+  .ns-big{top:auto;bottom:132px;right:auto;left:22px;text-align:left}
+  .ns-big span{margin-left:0}
+  .ns-tags{justify-items:start;left:22px;right:auto;bottom:62px;display:flex;flex-wrap:wrap}
 }
+@media (min-width:701px){.ns-cell.sk{display:none}}
 @media (prefers-reduced-motion:reduce){.ns-cell,.ns-card{transition:none;opacity:1;scale:1;translate:0 0}}
 </style>
 </head>
@@ -1053,50 +1067,69 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 
 <div class="page">
   <main class="ns" id="top">
+    <header class="ns-intro">
+      <div>
+        <p class="ns-pill"><b>Quiénes somos</b> Barranquilla, Colombia</p>
+        <h1 class="ns-h"><span class="dim">Somos Kaiva:</span> diseño y tecnología en el mismo equipo.</h1>
+      </div>
+      <div class="ns-lead">
+        <p><strong>Kaiva Studio es un estudio digital de Barranquilla.</strong> Diseñamos y construimos páginas web, software a medida y marcas para empresas, desde la estrategia hasta que todo está en línea.</p>
+        <p>No somos una agencia de publicidad ni de redes. Somos el equipo que piensa, diseña y programa lo que tu empresa necesita.</p>
+        <div class="ns-acts"><a class="btn btn-ink" href="/agendar/">Agendar llamada</a><a class="btn btn-line" href="/portfolio/">Ver portfolio</a></div>
+      </div>
+    </header>
+
+    <ul class="ns-facts">
+      <li><b>0<small>plantillas</small></b><span>Cada proyecto se diseña desde cero.</span></li>
+      <li><b>3–5<small>semanas</small></b><span>Lo que toma una web estándar desde que apruebas el alcance.</span></li>
+      <li><b>20<small>minutos</small></b><span>La primera llamada, y sales con un alcance por escrito.</span></li>
+      <li><b>100 %<small>remoto</small></b><span>Con empresas de toda Colombia y Latinoamérica.</span></li>
+    </ul>
+
     <div class="ns-board" id="nsBoard">
       <div class="ns-mosaic" role="img" aria-label="Ilustración del equipo de Kaiva Studio con el equipo de Thallo Digital en un café"><span class="ns-tag">Con el equipo de Thallo Digital</span></div>
-      <div class="ns-card k" style="--c:0;--r:3;--w:2;--h:2"><b>Diseño y código, en el mismo equipo.</b><span>Quien diseña tu web habla todos los días con quien la programa.</span></div>
-      <div class="ns-card v" style="--c:3;--r:4;--w:2;--h:1"><b>Barranquilla, Colombia</b><span>Trabajamos con todo LATAM en remoto.</span></div>
-      <div class="ns-card w" style="--c:6;--r:4;--w:2;--h:1"><span>Un estudio,</span><b>dos personas.</b></div>
+      <div class="ns-card" style="--c:0;--r:2;--w:2;--h:2"><b>Thallo Digital</b><span>Les hicimos el sitio web y la marca. Aquí, con su equipo.</span></div>
     </div>
-    <div class="ns-foot">
-      <p>Somos Kaiva Studio: diseñamos y programamos páginas web, software y marcas para empresas.</p>
-      <ul><li>Trato directo con quien hace tu proyecto</li><li>Diseño y desarrollo en casa</li></ul>
-    </div>
-    <div class="ns-acts"><a class="btn btn-ink" href="/agendar/">Agendar llamada</a><a class="btn btn-line" href="/portfolio/">Ver portfolio</a></div>
-    <h1 class="ns-h"><span class="dim">Un estudio pequeño,</span> a propósito.</h1>
 
     <section class="ns-team" aria-labelledby="ns-team-t">
-      <h2 class="ns-eyebrow" id="ns-team-t">Quiénes están detrás</h2>
+      <h2 class="ns-eyebrow" id="ns-team-t"><span class="dim">Las caras</span> detrás de Kaiva</h2>
+      <p class="ns-sub">Hablas directo con quien diseña y con quien programa tu proyecto.</p>
       <div class="ns-people">
         <article class="ns-me">
-          <div class="ns-me-txt">
-            <p class="ns-hey"><small>Hola, soy</small>Mateo.</p>
-            <p>Programo las páginas web y el software de cada proyecto, para que todo funcione rápido y sin enredos.</p>
-            <ul class="ns-chips"><li>Desarrollo web</li><li>Software a medida</li></ul>
-          </div>
-          <div class="ns-ph" data-foto="mateo"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="36" r="18" fill="#A580D6"/><path d="M14 92c4-20 19-31 36-31s32 11 36 31z" fill="#A580D6"/></svg></div>
+          <div class="ns-ph" data-foto="mateo"><svg viewBox="0 0 100 80" aria-hidden="true"><circle cx="50" cy="30" r="17" fill="#A580D6"/><path d="M12 80c3-19 19-31 38-31s35 12 38 31z" fill="#A580D6"/></svg></div>
+          <p class="ns-kit"><b>Kaiva Studio</b> Desarrollo</p>
+          <p class="ns-hey"><small>Hola, soy</small>Mateo.<br><em>Programo lo que diseñamos</em></p>
+          <p class="ns-big"><b>Código</b><span>Páginas web y software a medida</span></p>
+          <ul class="ns-tags"><li>Webs rápidas</li><li>Plataformas</li><li>Integraciones</li></ul>
+          <p class="ns-handle"><i>K.</i>@kaivastudio</p>
         </article>
         <article class="ns-me dark">
-          <div class="ns-me-txt">
-            <p class="ns-hey"><small>Hola, soy</small>la diseñadora.</p>
-            <p>Hago las marcas, las páginas web y una que otra ilustración. Si se ve bonito, pasó por aquí.</p>
-            <ul class="ns-chips"><li>Marca</li><li>Diseño web</li><li>Ilustración</li></ul>
-          </div>
-          <div class="ns-ph" data-foto="disenadora"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="36" r="18" fill="#A580D6"/><path d="M14 92c4-20 19-31 36-31s32 11 36 31z" fill="#A580D6"/></svg></div>
+          <div class="ns-ph" data-foto="disenadora"><svg viewBox="0 0 100 80" aria-hidden="true"><circle cx="50" cy="30" r="17" fill="#A580D6"/><path d="M12 80c3-19 19-31 38-31s35 12 38 31z" fill="#A580D6"/></svg></div>
+          <p class="ns-kit"><b>Kaiva Studio</b> Diseño</p>
+          <p class="ns-hey"><small>Hola, soy</small>la diseñadora.<br><em>Le doy forma a cada marca</em></p>
+          <p class="ns-big"><b>Diseño</b><span>Marcas, páginas web e ilustración</span></p>
+          <ul class="ns-tags"><li>Logo e identidad</li><li>Diseño web</li><li>Ilustración</li></ul>
+          <p class="ns-handle"><i>K.</i>@kaivastudio</p>
         </article>
       </div>
     </section>
   </main>
   <script>
   (function(){
-    /* el mosaico: una celda por cuadro, que aparecen en desorden al llegar */
-    var b=document.getElementById('nsBoard'),m=b.querySelector('.ns-mosaic'),skip={'0,3':1,'1,3':1,'0,4':1,'1,4':1,'3,4':1,'4,4':1,'6,4':1,'7,4':1};
+    /* el mosaico: un cuadrito por celda; aparecen en desorden y luego se blanquean y vuelven, de a uno */
+    var b=document.getElementById('nsBoard'),m=b.querySelector('.ns-mosaic'),skip={'0,2':1,'1,2':1,'0,3':1,'1,3':1},cells=[];
     var f=document.createDocumentFragment();
-    for(var r=0;r<5;r++)for(var c=0;c<8;c++){var d=document.createElement('div');d.className='ns-cell'+(skip[c+','+r]?' sk':'');d.style.cssText='--c:'+c+';--r:'+r+';--d:'+(Math.random()*.45).toFixed(2)+'s';f.appendChild(d)}
+    for(var r=0;r<4;r++)for(var c=0;c<10;c++){var d=document.createElement('div');d.className='ns-cell'+(skip[c+','+r]?' sk':'');d.style.cssText='--c:'+c+';--r:'+r+';--d:'+(Math.random()*.45).toFixed(2)+'s';f.appendChild(d);if(!skip[c+','+r])cells.push(d)}
     m.appendChild(f);
-    if(!('IntersectionObserver' in window)){b.classList.add('in');return}
-    new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){b.classList.add('in');o.disconnect()}})},{threshold:.15}).observe(b);
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches,timer=0;
+    function twinkle(){
+      var n=1+Math.floor(Math.random()*2);
+      for(var i=0;i<n;i++){(function(x){if(x.classList.contains('blank'))return;x.classList.add('blank');setTimeout(function(){x.classList.remove('blank')},900+Math.random()*900)})(cells[Math.floor(Math.random()*cells.length)])}
+    }
+    function start(){b.classList.add('in');if(!reduce&&!timer)timer=setInterval(twinkle,420)}
+    function stop(){clearInterval(timer);timer=0}
+    if(!('IntersectionObserver' in window)){start();return}
+    new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)start();else stop()})},{threshold:.15}).observe(b);
   })();
   </script>
 
