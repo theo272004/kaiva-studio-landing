@@ -1324,7 +1324,8 @@ a:hover .bread svg{transform:translateX(4px)}
 }
 @media (max-width:700px){
   .bbar{flex-direction:column;align-items:stretch;gap:12px;padding:10px 0 14px}
-  .hero.bintro{height:auto;min-height:0;max-height:none;margin-top:72px}
+  /* el panel llega hasta arriba (detrás del menú) y a los dos bordes, como en la portada */
+  .hero.bintro{height:auto;min-height:0;max-height:none;margin:-12px calc(var(--gutter) * -1) 0;border-radius:0;padding-top:104px}
   .hero.bintro .bfeat{flex:none;height:520px}
   .btemas{display:flex;flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 10px}
   .bbreak{display:none}
@@ -1337,7 +1338,8 @@ a:hover .bread svg{transform:translateX(4px)}
   .bslide{position:relative;inset:auto;grid-area:1/1;display:flex;flex-direction:column;gap:10px}
   .bslide-img{flex:none;aspect-ratio:16/10;border-radius:16px}
   .bslide-img::after{display:none}
-  .bslide-card,.bslide.on .bslide-card{position:relative;left:auto;right:auto;top:auto;bottom:auto;width:auto;gap:8px;padding:18px 20px;border-radius:16px;box-shadow:none;transform:none}
+  /* la tarjeta sube sobre la foto, del mismo ancho, como si flotara encima */
+  .bslide-card,.bslide.on .bslide-card{position:relative;left:auto;right:auto;top:auto;bottom:auto;width:auto;margin-top:-64px;gap:8px;padding:18px 20px;border-radius:16px;box-shadow:0 26px 44px -26px rgba(0,0,0,.75);transform:none}
   .bslide-card h2{font-size:1.3rem}
   .bslide-card p{-webkit-line-clamp:2}
   .bdots{top:12px;right:12px}

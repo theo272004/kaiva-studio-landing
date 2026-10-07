@@ -402,6 +402,8 @@ section{scroll-margin-top:90px}
 .hero.editing .hgrid{opacity:1}
 .hglow{position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;background:radial-gradient(130% 88% at 50% 100%,rgba(122,63,201,.62) 0%,rgba(78,30,134,.48) 38%,rgba(54,17,95,.22) 64%,transparent 86%);opacity:0;transform:translateY(12%);transition:opacity 1s var(--ease),transform 1.2s var(--ease)}
 .hero.hfon .hglow{opacity:1;transform:none}
+/* en celular, en lugar de las carpetas: un enlace pequeño y gris arriba de la etiqueta */
+.hpf{display:none}
 /* carpetas de "Estudio digital": salen de la etiqueta y vuelven a ella */
 .hfold{position:absolute;left:0;top:0;z-index:4;display:grid;justify-items:center;gap:16px;color:#fff;text-decoration:none;opacity:0;pointer-events:none;transform:translate(var(--dx,0),var(--dy,0)) scale(.15);transition:transform .8s cubic-bezier(.34,1.35,.64,1),opacity .35s;transition-delay:calc(var(--i) * 70ms)}
 .hero.hfon .hfold{opacity:1;pointer-events:auto;transform:rotate(var(--r,0deg))}
@@ -991,7 +993,14 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   .final{margin-inline:calc(var(--gutter) * -1);margin-bottom:-16px;border-radius:0}
   .logo img{height:44px}
   .logo img{height:40px}
-  .hero-copy{padding-top:44px}
+  .hero-copy{padding-top:44px;position:relative}
+  .hpf{display:block;position:absolute;left:0;right:0;top:-4px;width:max-content;margin:0 auto;padding:4px 8px;font-size:12px;font-weight:500;letter-spacing:.01em;color:rgba(255,255,255,.55);text-decoration:none;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .4s ease,transform .5s var(--ease),color .25s;animation:none!important}
+  .hero.hfon .hpf{opacity:1;transform:none;pointer-events:auto}
+  .hpf:active{color:#fff}
+  /* el giro: las webs más grandes, casi de borde a borde y un poco más altas */
+  .page{--aw:calc(100vw - 20px)}
+  .car{height:calc(var(--aw) / 1.6 + 30px)}
+  .ci{height:calc(var(--aw) / 1.6)}
   .pill{font-size:11.5px}
   .pill .long{display:none}
   .pill .short{display:inline}
@@ -1089,6 +1098,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
         <a class="btn btn-white dz" data-layer="Botón" href="#contacto">Cuéntanos tu proyecto</a>
         <a class="btn btn-ghost dz" data-layer="Botón" href="#servicios">Ver qué hacemos <svg><use href="#i-arrow"/></svg></a>
       </div>
+      <a class="hpf" href="/portfolio/" tabindex="-1" aria-hidden="true">Mirar portfolio →</a>
     </div>
 
     <h2 class="sr-only">Proyectos de Kaiva Studio</h2>
@@ -1724,6 +1734,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       pi=1-pi;segs.forEach(function(g,i){g.classList.toggle('on',i===pi)});pill.setAttribute('aria-pressed',pi===1?'true':'false');pillPos();
       foldPos();hero.classList.toggle('hfon',pi===1);
       folds.forEach(function(f){f.tabIndex=pi===1?0:-1;f.setAttribute('aria-hidden',pi===1?'false':'true')});
+      var pf=hero.querySelector('.hpf');if(pf){pf.tabIndex=pi===1?0:-1;pf.setAttribute('aria-hidden',pi===1?'false':'true')}
     });
   })();
 
