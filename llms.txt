@@ -15,6 +15,8 @@
 - [Diseño de marca](https://kaivastudio.com/#servicios): identidad de marca,
   logos, presentaciones y diseño editorial.
 - [Portfolio](https://kaivastudio.com/portfolio/): proyectos reales del estudio.
+- [Agendar llamada](https://kaivastudio.com/agendar/): contacto directo para
+  contar un proyecto y agendar una videollamada con el equipo.
 - [Quiénes somos](https://kaivastudio.com/nosotros/): el equipo de Kaiva Studio,
   cómo trabajamos y por qué cada proyecto se diseña desde cero.
 - [Blog](https://kaivastudio.com/blog/): artículos sobre web, SEO e IA para

@@ -507,6 +507,10 @@ h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s
 .meter{height:6px;border-radius:99px;background:var(--mist);overflow:hidden;margin-top:4px}
 .meter i{display:block;height:100%;width:100%;border-radius:inherit;background:var(--ink);transform-origin:left;transform:scaleX(var(--p,1));transition:transform 1.6s var(--ease)}
 .meter.v i{background:var(--violet-text)}
+/* las tarjetas de cifras se pueden tocar para que vuelvan a contar */
+.stat.replay{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.stat.replay:active{transform:translateY(-2px) scale(.985)}
+.stat.replay:focus-visible{outline:2px solid var(--violet-text);outline-offset:3px}
 .weeks{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:4px}
 .weeks i{height:6px;border-radius:99px;background:var(--mist);transition:background .35s ease calc(var(--k,0) * .22s)}
 .weeks i.on{background:var(--ink)}
@@ -999,7 +1003,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   .hpf:active{color:#fff}
   /* el giro: las webs más grandes, casi de borde a borde y un poco más altas */
   .page{--aw:calc(100vw - 20px)}
-  .car{height:calc(var(--aw) / 1.6 + 30px)}
+  .car{height:calc(var(--aw) / 1.6 + 30px);touch-action:pan-y}
+  .ci{transition:transform .55s var(--ease),opacity .4s ease,filter .4s ease}
   .ci{height:calc(var(--aw) / 1.6)}
   .pill{font-size:11.5px}
   .pill .long{display:none}
@@ -1054,7 +1059,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 <div class="mmenu" id="mmenu" aria-label="Menú">
   <div class="mm-top"><a class="logo" href="#top"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a><button class="mm-close" type="button" aria-label="Cerrar menú"><span></span><span></span></button></div>
   <nav class="mm-links">
-    <a href="#top" aria-current="page">Inicio</a><a href="/portfolio/">Portfolio</a><a href="/blog/">Blog</a><a href="#contacto">Contacto</a>
+    <a href="#top" aria-current="page">Inicio</a><a href="/portfolio/">Portfolio</a><a href="/blog/">Blog</a><a href="/agendar/">Contacto</a>
   </nav>
   <div class="mm-foot">
     <a class="btn btn-white" href="/agendar/">Agendar llamada</a>
@@ -1095,7 +1100,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       <h1 class="dz" data-layer="Título"><span class="dim">Páginas web</span> y software a medida</h1>
       <p class="lede dz" data-layer="Texto">Diseñamos y programamos sitios, plataformas y marcas para empresas que quieren verse tan bien como trabajan.</p>
       <div class="actions">
-        <a class="btn btn-white dz" data-layer="Botón" href="#contacto">Cuéntanos tu proyecto</a>
+        <a class="btn btn-white dz" data-layer="Botón" href="/agendar/">Cuéntanos tu proyecto</a>
         <a class="btn btn-ghost dz" data-layer="Botón" href="#servicios">Ver qué hacemos <svg><use href="#i-arrow"/></svg></a>
       </div>
       <a class="hpf" href="/portfolio/" tabindex="-1" aria-hidden="true">Mirar portfolio →</a>
@@ -1133,7 +1138,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
           <div class="me-top"><span class="chip">K.</span><span>Estudio digital<br>Barranquilla, Colombia</span></div>
           <h3>Tú apruebas,<br>nosotros lo hacemos</h3>
           <p>Nos cuentas qué necesita tu empresa y nosotros nos encargamos del resto: lo diseñamos, lo construimos y lo dejamos en línea. Tú solo revisas y apruebas.</p>
-          <a class="btn" href="#contacto">Hablemos de tu empresa</a>
+          <a class="btn" href="/agendar/">Hablemos de tu empresa</a>
         </article>
         <div class="stat lift" data-stat="weeks">
           <div class="num"><span class="val">2–3</span><small>semanas</small></div>
@@ -1658,7 +1663,17 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   }
   function go(d){act=((act+d)%M+M)%M;layout();caption()}
   function goTo(i){var d=((i-act)%M+M)%M;if(d>M/2)d-=M;if(d)go(d)}
-  items.forEach(function(it,i){it.addEventListener('click',function(){if(!it.classList.contains('on')){goTo(i);restart()}})});
+  // deslizar con el dedo (o arrastrar con el mouse): cada pasada mueve un proyecto, y se pueden encadenar rápido
+  var sx=null,sy=0,swiped=false;
+  car.addEventListener('pointerdown',function(e){sx=e.clientX;sy=e.clientY;swiped=false});
+  car.addEventListener('pointermove',function(e){
+    if(sx===null)return;
+    var dx=e.clientX-sx;
+    if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(e.clientY-sy)){go(dx<0?1:-1);restart();swiped=true;sx=null}
+  });
+  ['pointerup','pointercancel','pointerleave'].forEach(function(t){car.addEventListener(t,function(){sx=null})});
+  car.addEventListener('dragstart',function(e){e.preventDefault()});
+  items.forEach(function(it,i){it.addEventListener('click',function(){if(swiped){swiped=false;return}if(!it.classList.contains('on')){goTo(i);restart()}})});
   document.getElementById('carNext').addEventListener('click',function(){go(1);restart()});
   document.getElementById('carPrev').addEventListener('click',function(){go(-1);restart()});
   var carTimer=null,paused=false;
@@ -1821,9 +1836,9 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       setTimeout(function(){
         if(id!==statsRun)return;
         fillMeter(st,true);
-        var t0=null;
+        var t0=null,mine=st._run||0;
         function step(ts){
-          if(id!==statsRun)return;
+          if(id!==statsRun||(st._run||0)!==mine)return;
           if(!t0)t0=ts;
           var q=Math.min(1,(ts-t0)/1400),e=1-Math.pow(1-q,3);setStat(st,e);
           if(q<1)requestAnimationFrame(step);
@@ -1833,6 +1848,29 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     });
   }
   function resetStats(){statsRun++;statsPlayed=false;setStats(0);fillMeters(false)}
+  /* con un clic, la tarjeta vuelve a contar desde el principio (como en Thallo) */
+  function replayStat(st){
+    var mine=st._run=(st._run||0)+1,bar=st.querySelector('.meter i');
+    if(bar){bar.style.transition='none';fillMeter(st,false);void bar.offsetWidth;bar.style.transition=''}
+    setStat(st,0);
+    requestAnimationFrame(function(){
+      if(st._run!==mine)return;
+      fillMeter(st,true);
+      var t0=null;
+      (function step(ts){
+        if(st._run!==mine)return;
+        if(!t0)t0=ts;
+        var q=Math.min(1,(ts-t0)/1400),e=1-Math.pow(1-q,3);setStat(st,e);
+        if(q<1)requestAnimationFrame(step);
+      })(performance.now());
+    });
+  }
+  if(!reduce)stats.forEach(function(st){
+    st.classList.add('replay');st.tabIndex=0;st.setAttribute('role','button');
+    st.setAttribute('aria-label','Volver a contar: '+st.querySelector('.num').textContent.replace(/\s+/g,' ').trim());
+    st.addEventListener('click',function(){if(!String(window.getSelection&&window.getSelection())){replayStat(st)}});
+    st.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();replayStat(st)}});
+  });
   if(!reduce&&io){
     resetStats();
     new IntersectionObserver(function(es){es.forEach(function(e){
