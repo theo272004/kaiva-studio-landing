@@ -1713,8 +1713,12 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     foldPos();setTimeout(foldPos,1300);window.addEventListener('resize',foldPos);
     var dim=hero.querySelector('h1 .dim');
     if(dim)dim.addEventListener('click',function(e){var w=e.target.closest('.w');if(w)w.classList.toggle('lit')});
+    // se tambalea al tocarla y cada vez que el mouse pasa; mientras nadie la toque, da un toquecito cada pocos segundos
+    function wob(){pill.classList.remove('wob');void pill.offsetWidth;pill.classList.add('wob')}
+    pill.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')wob()});
+    var nudge=reduce?0:setInterval(function(){if(window.pageYOffset<300&&!document.hidden)wob()},4500);
     pill.addEventListener('click',function(){
-      pill.classList.remove('wob');void pill.offsetWidth;pill.classList.add('wob');
+      clearInterval(nudge);wob();
       pi=1-pi;segs.forEach(function(g,i){g.classList.toggle('on',i===pi)});pill.setAttribute('aria-pressed',pi===1?'true':'false');pillPos();
       foldPos();hero.classList.toggle('hfon',pi===1);
       folds.forEach(function(f){f.tabIndex=pi===1?0:-1;f.setAttribute('aria-hidden',pi===1?'false':'true')});
