@@ -979,7 +979,24 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .ns-foot li{display:flex;align-items:center;gap:7px}
 .ns-foot li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--violet-text)}
 @media (min-width:701px){.ns-cell.sk{display:none}}
-@media (prefers-reduced-motion:reduce){.ns-cell,.ns-card{transition:none;opacity:1;scale:1;translate:0 0}}position:absolute;left:14px;top:14px;z-index:2;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--ink);font-size:12.5px;font-weight:600}
+@media (prefers-reduced-motion:reduce){.ns-cell,.ns-card{transition:none;opacity:1;scale:1;translate:0 0}}
+/* etiqueta Quiénes somos / Kaiva Studio y los archivos que salen de ella */
+.ns-hero .hglow{background:radial-gradient(140% 100% at 50% 100%,rgba(122,63,201,.78) 0%,rgba(92,40,160,.6) 34%,rgba(54,17,95,.32) 62%,transparent 88%)}
+.nsf{position:absolute;left:0;top:0;z-index:4;display:grid;justify-items:center;gap:14px;color:#fff;text-decoration:none;opacity:0;pointer-events:none;transform:translate(var(--dx,0),var(--dy,0)) scale(.15);transition:transform .8s cubic-bezier(.34,1.35,.64,1),opacity .35s;transition-delay:calc(var(--i) * 90ms)}
+.ns-hero.hfon .nsf{opacity:1;pointer-events:auto;transform:rotate(var(--r,0deg))}
+.nsf-doc{position:relative;display:block;width:96px;height:122px;filter:drop-shadow(0 12px 18px rgba(10,0,30,.55));animation:hfl 3.6s ease-in-out infinite alternate;animation-delay:calc(var(--i) * -1.2s);transition:scale .35s var(--ease)}
+.nsf-doc::before{content:"";position:absolute;inset:0;background:#fff;border-radius:7px;clip-path:polygon(0 0,74% 0,100% 20%,100% 100%,0 100%)}
+.nsf-doc::after{content:"";position:absolute;right:0;top:0;width:26%;height:20%;background:linear-gradient(225deg,transparent 50%,#DCD6E4 50%);border-radius:0 0 0 4px}
+.nsf-pv{position:absolute;left:10px;right:10px;top:28px;bottom:12px;border-radius:4px;overflow:hidden;background:linear-gradient(160deg,#EFE8F7,#D6C5EC);display:grid;place-items:end center}
+.nsf-pv svg{width:78%;height:auto;opacity:.6}
+.nsf-ext{position:absolute;left:10px;top:9px;padding:2px 6px;border-radius:4px;background:var(--violet-text);color:#fff;font-size:9px;font-weight:700;letter-spacing:.04em}
+.nsf b{padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:12.5px;font-weight:600;transition:background .3s}
+.nsf small{display:block;margin-top:-8px;font-size:11.5px;opacity:.65}
+.nsf:hover .nsf-doc{scale:1.07}
+.nsf:hover b{background:var(--violet-text)}
+@media (max-width:1099px){.nsf-doc{width:70px;height:89px}.nsf-pv{top:22px;left:7px;right:7px}.nsf b{font-size:11px}}
+@media (max-width:700px){.nsf{display:none}}
+@media (prefers-reduced-motion:reduce){.nsf,.nsf-doc{animation:none;transition:opacity .2s}}
 /* por qué Kaiva */
 .ns-sec{max-width:1120px;margin:clamp(100px,12vw,150px) auto 0;padding:0 clamp(16px,3vw,28px)}
 .ns-sec h2{margin:0;font-size:clamp(2.2rem,4.6vw,3.8rem);line-height:1;letter-spacing:-.055em;text-wrap:balance}
@@ -1074,8 +1091,13 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 <div class="page">
   <main id="top">
     <header class="hero ns-hero" id="nsHero">
+      <div class="hglow" aria-hidden="true"></div>
+      <div class="nsfs">
+        <a class="nsf" href="#ns-desarrollador" tabindex="-1" aria-hidden="true" style="--i:0;--r:-5deg"><span class="nsf-doc"><span class="nsf-pv"><svg viewBox="0 0 100 80" aria-hidden="true"><circle cx="50" cy="30" r="17" fill="#A580D6"/><path d="M12 80c3-19 19-31 38-31s35 12 38 31z" fill="#A580D6"/></svg></span><span class="nsf-ext">PNG</span></span><b>Mateo.png</b><small>Desarrollador web</small></a>
+        <a class="nsf" href="#ns-disenadora" tabindex="-1" aria-hidden="true" style="--i:1;--r:4deg"><span class="nsf-doc"><span class="nsf-pv"><svg viewBox="0 0 100 80" aria-hidden="true"><circle cx="50" cy="30" r="17" fill="#A580D6"/><path d="M12 80c3-19 19-31 38-31s35 12 38 31z" fill="#A580D6"/></svg></span><span class="nsf-ext">PNG</span></span><b>Sara.png</b><small>Diseñadora gráfica</small></a>
+      </div>
       <div class="hero-copy">
-        <p class="pill"><b>Quiénes somos</b> Barranquilla, Colombia</p>
+        <button class="pill ptog" type="button" aria-pressed="false" aria-label="Cambiar entre Quiénes somos y Kaiva Studio"><i class="pill-thumb" aria-hidden="true"></i><span class="seg on">Quiénes somos</span><span class="seg">Kaiva Studio</span></button>
         <h1><span class="dim">Diseño y tecnología,</span> en un mismo equipo</h1>
         <p class="lede">Kaiva Studio es un estudio digital de Barranquilla. Diseñamos y construimos páginas web, software a medida y marcas para empresas.</p>
         <div class="actions"><a class="btn btn-white" href="/agendar/">Agendar llamada</a><a class="btn btn-ghost" href="/portfolio/">Ver portfolio <svg><use href="#i-arrow"/></svg></a></div>
@@ -1099,7 +1121,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       <h2 id="ns-team-t"><span class="dim">Las caras</span> detrás de Kaiva</h2>
       <p class="ns-sub">Hablas directo con quien diseña y con quien programa tu proyecto.</p>
       <div class="ns-people">
-        <article class="ns-me">
+        <article class="ns-me" id="ns-desarrollador">
           <div class="ns-ph" data-foto="desarrollador"><svg viewBox="0 0 100 80" aria-hidden="true"><circle cx="50" cy="30" r="17" fill="#A580D6"/><path d="M12 80c3-19 19-31 38-31s35 12 38 31z" fill="#A580D6"/></svg></div>
           <p class="ns-kit"><b>Kaiva Studio</b><span>Desarrollo</span></p>
           <h3>Desarrollador web</h3>
@@ -1108,7 +1130,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
           <ul class="ns-tags"><li>Desarrollo web</li><li>Software a medida</li><li>Integraciones</li></ul>
           <p class="ns-badge"><i>K.</i><span>@kaivastudio<small>Barranquilla, Colombia</small></span></p>
         </article>
-        <article class="ns-me alt">
+        <article class="ns-me alt" id="ns-disenadora">
           <div class="ns-ph" data-foto="disenadora"><svg viewBox="0 0 100 80" aria-hidden="true"><circle cx="50" cy="30" r="17" fill="#A580D6"/><path d="M12 80c3-19 19-31 38-31s35 12 38 31z" fill="#A580D6"/></svg></div>
           <p class="ns-kit"><b>Kaiva Studio</b><span>Diseño</span></p>
           <h3>Diseñadora gráfica</h3>
@@ -1136,6 +1158,29 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     var h=document.getElementById('nsHero');
     function hp(){var r=h.getBoundingClientRect();h.style.setProperty('--hp',Math.max(0,Math.min(1,-(r.top-76)/(r.height*.6))).toFixed(3))}
     window.addEventListener('scroll',hp,{passive:true});hp();
+    /* etiqueta Quiénes somos / Kaiva Studio */
+    var pill=h.querySelector('.ptog'),segs=[].slice.call(pill.querySelectorAll('.seg')),thumb=pill.querySelector('.pill-thumb'),pi=0,files=[].slice.call(h.querySelectorAll('.nsf'));
+    var still=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function pillPos(){var p=pill.getBoundingClientRect(),g=segs[pi].getBoundingClientRect(),z=p.width/pill.offsetWidth||1;thumb.style.transform='translateX('+((g.left-p.left)/z)+'px)';thumb.style.width=(g.width/z)+'px'}
+    pillPos();setTimeout(function(){pillPos();pill.classList.add('ready')},60);
+    if(window.ResizeObserver)new ResizeObserver(function(){pillPos();filePos()}).observe(segs[0]);
+    function wob(){pill.classList.remove('wob');void pill.offsetWidth;pill.classList.add('wob')}
+    pill.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')wob()});
+    var nudge=still?0:setInterval(function(){if(window.pageYOffset<300&&!document.hidden)wob()},4500);
+    function filePos(){
+      var hr=h.getBoundingClientRect(),t=h.querySelector('h1').getBoundingClientRect(),p=pill.getBoundingClientRect();
+      var w=files[0].offsetWidth,fh=files[0].offsetHeight,L=t.left-hr.left,R=hr.right-t.right;
+      var y=t.top-hr.top+t.height/2-fh/2,pos=[[Math.max(12,L/2-w/2),y-10],[hr.width-Math.max(12,R/2)-w/2,y+16]];
+      var cx=p.left-hr.left+p.width/2,cy=p.top-hr.top+p.height/2;
+      files.forEach(function(f,i){f.style.left=Math.round(pos[i][0])+'px';f.style.top=Math.round(pos[i][1])+'px';f.style.setProperty('--dx',Math.round(cx-pos[i][0]-w/2)+'px');f.style.setProperty('--dy',Math.round(cy-pos[i][1]-fh/2)+'px')});
+    }
+    filePos();setTimeout(filePos,1300);window.addEventListener('resize',function(){pillPos();filePos()});
+    pill.addEventListener('click',function(){
+      clearInterval(nudge);wob();
+      pi=1-pi;segs.forEach(function(g,i){g.classList.toggle('on',i===pi)});pill.setAttribute('aria-pressed',pi===1?'true':'false');pillPos();
+      filePos();h.classList.toggle('hfon',pi===1);
+      files.forEach(function(f){f.tabIndex=pi===1?0:-1;f.setAttribute('aria-hidden',pi===1?'false':'true')});
+    });
     /* mosaico: un cuadrito por celda; aparecen en desorden y luego se blanquean y vuelven, de a uno o dos */
     var b=document.getElementById('nsBoard'),m=b.querySelector('.ns-mosaic'),skip={'0,2':1,'1,2':1,'0,3':1,'1,3':1,'8,3':1,'9,3':1},cells=[];
     var f=document.createDocumentFragment();
