@@ -956,12 +956,30 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .ns-hero h1{max-width:15ch}
 /* la ilustración completa, de punta a punta del panel, sin recortar ni estirar */
 /* la foto del equipo va al final, suelta sobre la página y de punta a punta */
-.ns-pic{position:relative;margin:clamp(90px,11vw,130px) 0 0;border-radius:var(--r-panel);overflow:hidden;background:#2A1B10}
-.ns-pic img{display:block;width:100%;height:auto;aspect-ratio:2436/1113}
-.ns-tw{position:absolute;inset:0;display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(5,1fr);pointer-events:none}
-.ns-tw i{background:var(--paper);opacity:0;transition:opacity .9s ease}
-.ns-tw i.blank{opacity:.9}
-.ns-tag{position:absolute;left:14px;top:14px;z-index:2;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--ink);font-size:12.5px;font-weight:600}
+/* la foto del equipo al final: mosaico de punta a punta; los cuadritos aparecen en desorden y luego se blanquean al azar */
+.ns-board{--g:8px;--H:calc(100cqw * 960 / 2436);position:relative;container-type:inline-size;margin-top:clamp(90px,11vw,130px)}
+.ns-mosaic{position:relative;aspect-ratio:2436/960;border-radius:20px;background:url(/assets/inicio/equipo-mosaico.webp) center/cover}
+.js .ns-mosaic{background:none}
+.ns-cell,.ns-card{position:absolute;left:calc(var(--c) * (100cqw + var(--g)) / 10);top:calc(var(--r) * (var(--H) + var(--g)) / 4);width:calc(var(--w,1) * (100cqw + var(--g)) / 10 - var(--g));height:calc(var(--h,1) * (var(--H) + var(--g)) / 4 - var(--g));border-radius:14px}
+.ns-cell{overflow:hidden;background:url(/assets/inicio/equipo-mosaico.webp) no-repeat;background-size:100cqw var(--H);background-position:calc(var(--c) * (100cqw + var(--g)) / -10) calc(var(--r) * (var(--H) + var(--g)) / -4);opacity:0;scale:.92;transition:opacity .7s var(--ease),scale .7s var(--ease),filter .4s;transition-delay:var(--d,0s)}
+.ns-cell::after{content:"";position:absolute;inset:0;background:var(--paper);opacity:0;transition:opacity .9s ease}
+.ns-cell.blank::after{opacity:.92}
+.ns-cell:hover{filter:brightness(1.08) saturate(1.1)}
+.ns-board.in .ns-cell{opacity:1;scale:1}
+.ns-tag{position:absolute;left:12px;top:12px;z-index:3;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--ink);font-size:12.5px;font-weight:600}
+.ns-card{z-index:2;display:flex;flex-direction:column;justify-content:space-between;gap:10px;padding:clamp(14px,1.6cqw,22px);overflow:hidden;opacity:0;translate:0 14px;transition:opacity .8s var(--ease),translate .8s var(--ease);transition-delay:.5s}
+.ns-board.in .ns-card{opacity:1;translate:0 0}
+.ns-card b{display:block;font-size:clamp(15px,1.7cqw,22px);font-weight:600;letter-spacing:-.03em;line-height:1.12}
+.ns-card span{font-size:clamp(11.5px,1.05cqw,13.5px);line-height:1.45;opacity:.75}
+.ns-card.k{background:var(--ink);color:var(--paper)}
+.ns-card.v{background:var(--violet);color:var(--paper)}
+.ns-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px 32px;margin-top:16px;font-size:13.5px;color:var(--ink-2)}
+.ns-foot p{margin:0;max-width:52ch}
+.ns-foot ul{display:flex;flex-wrap:wrap;gap:8px 22px;margin:0;padding:0;list-style:none}
+.ns-foot li{display:flex;align-items:center;gap:7px}
+.ns-foot li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--violet-text)}
+@media (min-width:701px){.ns-cell.sk{display:none}}
+@media (prefers-reduced-motion:reduce){.ns-cell,.ns-card{transition:none;opacity:1;scale:1;translate:0 0}}position:absolute;left:14px;top:14px;z-index:2;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--ink);font-size:12.5px;font-weight:600}
 /* por qué Kaiva */
 .ns-sec{max-width:1120px;margin:clamp(100px,12vw,150px) auto 0;padding:0 clamp(16px,3vw,28px)}
 .ns-sec h2{margin:0;font-size:clamp(2.2rem,4.6vw,3.8rem);line-height:1;letter-spacing:-.055em;text-wrap:balance}
@@ -1008,7 +1026,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .ns-badge small{font-size:.88em;font-weight:500;color:var(--ink-3)}
 @media (max-width:900px){.ns-row{grid-template-columns:1fr}.ns-facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){.ns-people{grid-template-columns:1fr}}
-@media (max-width:700px){.ns-pic{margin-top:80px;border-radius:18px}.ns-tag{left:8px;top:8px;font-size:11px;padding:4px 9px}.ns-hero{margin-top:84px}}
+@media (max-width:700px){.ns-board{--g:3px;margin-top:80px}.ns-cell{border-radius:5px}.ns-card{position:relative;left:auto;top:auto;width:auto;height:auto;margin-top:8px;border-radius:16px;padding:18px}.ns-card b{font-size:18px}.ns-card span{font-size:13px}.ns-tag{left:8px;top:8px;font-size:11px;padding:4px 9px}.ns-hero{margin-top:84px}}
 @media (max-width:480px){
   .ns-me{aspect-ratio:auto;min-height:440px}
   .ns-me h3{top:64px;font-size:1.75rem}
@@ -1100,10 +1118,14 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       </div>
     </section>
 
-    <div class="ns-pic" id="nsPic">
-      <img src="/assets/inicio/equipo-cafe.webp" alt="Ilustración del equipo de Kaiva Studio con el equipo de Thallo Digital en un café" width="1800" height="822" fetchpriority="high">
-      <div class="ns-tw" aria-hidden="true"></div>
-      <span class="ns-tag">Con el equipo de Thallo Digital</span>
+    <div class="ns-board" id="nsBoard">
+      <div class="ns-mosaic" role="img" aria-label="Ilustración del equipo de Kaiva Studio con el equipo de Thallo Digital en un café de Barranquilla"><span class="ns-tag">Con el equipo de Thallo Digital</span></div>
+      <div class="ns-card k" style="--c:0;--r:2;--w:2;--h:2"><b>Diseño web y de marca para Thallo&nbsp;Digital</b><span>Les hicimos el sitio web y la identidad de marca. Así terminó el proyecto: con los dos equipos juntos.</span></div>
+      <div class="ns-card v" style="--c:8;--r:3;--w:2;--h:1"><b>Barranquilla, Colombia</b><span>Estudio digital para empresas de toda Latinoamérica.</span></div>
+    </div>
+    <div class="ns-foot">
+      <p>Kaiva Studio es un estudio de diseño web, desarrollo de software y branding en Barranquilla. Trabajamos en remoto con empresas de Colombia y Latinoamérica.</p>
+      <ul><li>Páginas web sin plantillas</li><li>Software a medida</li><li>Diseño de marca</li></ul>
     </div>
   </main>
   <script>
@@ -1112,15 +1134,15 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     var h=document.getElementById('nsHero');
     function hp(){var r=h.getBoundingClientRect();h.style.setProperty('--hp',Math.max(0,Math.min(1,-(r.top-76)/(r.height*.6))).toFixed(3))}
     window.addEventListener('scroll',hp,{passive:true});hp();
-    /* cuadritos que se blanquean al azar sobre la ilustración y vuelven */
-    var tw=document.querySelector('#nsPic .ns-tw'),cells=[];
-    for(var i=0;i<55;i++){var c=document.createElement('i');tw.appendChild(c);cells.push(c)}
-    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    var t=0;
+    /* mosaico: un cuadrito por celda; aparecen en desorden y luego se blanquean y vuelven, de a uno o dos */
+    var b=document.getElementById('nsBoard'),m=b.querySelector('.ns-mosaic'),skip={'0,2':1,'1,2':1,'0,3':1,'1,3':1,'8,3':1,'9,3':1},cells=[];
+    var f=document.createDocumentFragment();
+    for(var r=0;r<4;r++)for(var c=0;c<10;c++){var d=document.createElement('div');d.className='ns-cell'+(skip[c+','+r]?' sk':'');d.style.cssText='--c:'+c+';--r:'+r+';--d:'+(Math.random()*.45).toFixed(2)+'s';f.appendChild(d);if(!skip[c+','+r])cells.push(d)}
+    m.appendChild(f);
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches,t=0;
     function twinkle(){for(var n=1+Math.floor(Math.random()*2);n--;){var x=cells[Math.floor(Math.random()*cells.length)];if(x.classList.contains('blank'))continue;x.classList.add('blank');(function(x){setTimeout(function(){x.classList.remove('blank')},800+Math.random()*900)})(x)}}
-    var pic=document.getElementById('nsPic');
-    function go(on){if(on&&!t)t=setInterval(twinkle,420);if(!on){clearInterval(t);t=0}}
-    if('IntersectionObserver' in window)new IntersectionObserver(function(es){go(es[0].isIntersecting)}).observe(pic);else go(true);
+    function go(on){if(on){b.classList.add('in');if(!reduce&&!t)t=setInterval(twinkle,420)}else{clearInterval(t);t=0}}
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){go(es[0].isIntersecting)},{threshold:.15}).observe(b);else go(true);
   })();
   </script>
 
