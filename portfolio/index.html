@@ -1286,11 +1286,13 @@ a.lnk-head:hover .lnk-follow{background:#004182}
 .atg-count{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);font-size:12px;font-weight:600;color:rgba(255,255,255,.75)}
 
 /* ---------- logofolio (ventana) ---------- */
-.pw-scroll.lfw{display:block;padding:0 0 22px;container-type:inline-size}
-.lfw .lf-band{position:sticky;top:0;z-index:2;overflow:hidden;background:#E03E85;color:#fff;margin-bottom:18px}
+.pw-scroll.lfw{display:block;padding:0 0 22px;container-type:inline-size;overflow-x:hidden}
+.lfw .lf-band{position:sticky;top:0;z-index:2;overflow:hidden;width:100%;contain:inline-size;background:#E03E85;color:#fff;margin-bottom:18px}
 .pw-main:has(.lfw){padding-top:0}
-.lf-track{display:flex;align-items:center;gap:18px;width:max-content;padding:9px 0;animation:lfroll 32s linear infinite;font-family:Montserrat,var(--f-sans),sans-serif;font-weight:700;font-size:15px;letter-spacing:.02em}
+/* sin gap: cada palabra lleva su margen, así las dos mitades miden igual y la vuelta no se nota */
+.lf-track{display:flex;align-items:center;gap:0;width:max-content;padding:9px 0;animation:lfroll 32s linear infinite;font-family:Montserrat,var(--f-sans),sans-serif;font-weight:700;font-size:15px;letter-spacing:.02em}
 .lf-track i{font-style:normal;opacity:.7}
+.lf-track>*{flex:none;margin-right:18px}
 @keyframes lfroll{to{transform:translateX(-50%)}}
 .lfw .lf-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:0 18px}
 .lfw .lf-tile{position:relative;display:grid;place-items:center;aspect-ratio:4/3;margin:0;border-radius:14px;background:#F3F3F3;overflow:hidden;cursor:default;outline:none;box-shadow:0 0 0 1px rgba(8,8,8,.04);transition:transform .45s var(--ease),box-shadow .45s}
@@ -1445,6 +1447,29 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
 .final{background:#36115F}
 .final::before{background:linear-gradient(180deg,rgba(78,30,134,.55) 0%,rgba(54,17,95,.2) 45%,transparent 90%)}
 .final::after{background:#07050B;opacity:calc(.35 + var(--fp,0))}
+
+/* ---------- entrar a la pantalla: al bajar crece hasta cubrir toda la ventana del navegador ---------- */
+.sc-stage{position:relative;height:calc(100svh + 75svh)}
+.sc-pin{position:sticky;top:0;height:100svh;display:flow-root}
+.sc-stage .screen{--p:0;left:50%;translate:-50% 0;margin:calc(80px * (1 - var(--p))) 0 0;width:calc(100% + 2 * var(--gutter,16px) * var(--p));max-width:calc(1440px + 4000px * var(--p));height:calc(100svh - 128px * (1 - var(--p)));max-height:calc(872px + 4000px * var(--p));border-radius:calc(var(--r-panel) * (1 - var(--p)))}
+.sc-hint,.sc-next{position:absolute;z-index:40;display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;text-decoration:none;transition:opacity .35s ease,translate .35s ease}
+.sc-hint{left:50%;top:calc(100svh - 44px);translate:-50% 0;color:var(--ink-2);opacity:calc(1 - var(--p,0) * 3)}
+.sc-hint svg,.sc-next svg{width:15px;height:15px;animation:scbob 1.6s ease-in-out infinite}
+.sc-next{right:22px;bottom:22px;padding:9px 14px 9px 16px;border-radius:99px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--ink);box-shadow:0 10px 30px -14px rgba(0,0,0,.5);opacity:0;pointer-events:none}
+.sc-stage.full .sc-next{opacity:1;pointer-events:auto}
+.sc-next:hover{background:#fff}
+@keyframes scbob{0%,100%{translate:0 -2px}50%{translate:0 3px}}
+/* mientras está a pantalla completa, el menú flotante se aparta */
+.pf-full .float-nav{opacity:0;pointer-events:none;translate:0 -12px}
+.float-nav{transition:opacity .35s ease,translate .35s ease}
+/* clic en el fondo oscurecido: cierra lo que esté abierto */
+.screen.win-open .sc-ov{pointer-events:auto;cursor:pointer}
+@media (max-width:700px),(prefers-reduced-motion:reduce){
+  .sc-stage{height:auto}
+  .sc-pin{position:static;height:auto}
+  .sc-stage .screen{left:auto;translate:none;width:100%;margin-top:70px;height:calc(100svh - 84px);max-height:none;border-radius:var(--r-panel)}
+  .sc-hint,.sc-next{display:none}
+}
 </style>
 </head>
 <body>
@@ -1487,6 +1512,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
   <!-- ============ LA PANTALLA ============
        Una Mac sin el aparato: morada, completa en la ventana, con el menú del sitio afuera.
        Una carpeta por marca; las ventanas se abren dentro y el dock sigue a la vista. -->
+  <div class="sc-stage" id="scStage"><div class="sc-pin">
   <header class="screen" id="inicio">
     <div class="sc-bg" aria-hidden="true">
       <img src="/assets/portfolio/thumbs/cst.webp" alt="" width="320" height="200">
@@ -1545,6 +1571,9 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       <span class="d deco" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M10 9h20l-2 27H12z" fill="rgba(255,255,255,.65)" stroke="#9A9AA2" stroke-width="1.2"/><path d="M8 8h24" stroke="#9A9AA2" stroke-width="2" stroke-linecap="round"/><path d="M15 13v19M20 13v19M25 13v19" stroke="#B4B4BC" stroke-width="1"/></svg></span>
       </nav>
   </header>
+  <a class="sc-hint" href="#proyectos"><span>Desliza para entrar</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9M4 8.5L8 12.5 12 8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <a class="sc-next" href="#proyectos">Sigue bajando<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9M4 8.5L8 12.5 12 8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div></div>
 
   <main class="wrap">
 
@@ -1994,6 +2023,16 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
     return {w:scr.clientWidth,top:mb+(small()?8:12),bottom:scr.clientHeight-dk-6};
   }
   // tamaño según el contenido y posición en cascada para que se vean las de atrás
+  // ventanas con poco contenido (el logofolio): se encogen al alto justo para no dejar espacio vacío
+  function shrink(o,now){
+    if(small())return;
+    var bar=o.el.querySelector('.pw-bar'),side=o.body.querySelector('.pw-side'),sc=o.body.querySelector('.pw-scroll');if(!sc)return;
+    // se mide lo que ocupa el contenido (la ventana puede estar animando su escala al abrir)
+    var k=o.el.getBoundingClientRect().height/o.el.offsetHeight||1;
+    function content(box,pad){var last=box.lastElementChild;if(!last)return 0;return (last.getBoundingClientRect().bottom-box.getBoundingClientRect().top)/k+pad}
+    var need=bar.offsetHeight+Math.max(side?content(side,20):0,content(sc,24))+2;
+    if(need<o.el.offsetHeight-8){o.el.style.transition=now?'none':'height .45s cubic-bezier(.2,.8,.2,1)';o.el.style.height=need+'px';setTimeout(function(){o.el.style.transition=''},500)}
+  }
   function fit(o,n){
     var b=bounds(),el=o.el,m=small(),avail=b.bottom-b.top;
     var w=m?b.w-16:Math.min(SIZE[o.kind],b.w-32);
@@ -2010,7 +2049,8 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
     el.style.left=(m?8:Math.max(-w+140,Math.min(b.w-140,el.offsetLeft)))+'px';
     el.style.top=Math.max(b.top,Math.min(b.bottom-42,el.offsetTop))+'px';
   }
-  window.addEventListener('resize',function(){stack.forEach(function(k){keep(WINS[k])})});
+  window.addEventListener('resize',refit);
+  function refit(){stack.forEach(function(k){keep(WINS[k]);if(WINS[k].fitC)shrink(WINS[k],true)})}
   function scaleLive(box){
     var f=box.querySelector('iframe');if(!f)return;
     var w=box.clientWidth,h=box.clientHeight;
@@ -2104,6 +2144,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
     setTimeout(function(){o.el.querySelector('.lc').focus({preventScroll:true})},60);
     return {o:o,fresh:true};
   }
+  document.getElementById('scOv').addEventListener('click',function(){stack.slice().forEach(closeWin)});
   function closeWin(key){
     var o=WINS[key];if(!o)return;
     delete WINS[key];stack.splice(stack.indexOf(key),1);
@@ -2124,7 +2165,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
     function page(id){
       var pg=p.pages.filter(function(x){return x.id===id})[0]||p.pages[0];
       o.body.querySelectorAll('.pw-pages button').forEach(function(b){b.classList.toggle('on',b.dataset.id===pg.id)});
-      o.body.querySelector('.pw-main').innerHTML=screensHTML(pg);o.live=pg.live||p.live;watchLive(o.body);watchDeck(o.body);watchGrid(o.body);watchBook(o.body);watchGrid(o.body);
+      o.body.querySelector('.pw-main').innerHTML=screensHTML(pg);o.fitC=!!pg.html;if(pg.html)setTimeout(function(){shrink(o)},620);o.live=pg.live||p.live;watchLive(o.body);watchDeck(o.body);watchGrid(o.body);watchBook(o.body);watchGrid(o.body);
     }
     if(fresh){
       o.title.textContent=p.name;
@@ -2237,6 +2278,22 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
     });
   });
   bov.addEventListener('click',function(e){if(e.target===bov||e.target.closest('.pw-x'))closeBig()});
+
+  // al bajar, la pantalla crece hasta cubrir toda la ventana; al terminar, se puede seguir bajando
+  (function(){
+    var st=document.getElementById('scStage');if(!st)return;
+    var on=window.matchMedia('(min-width:701px)').matches&&!reduce,last=-1,t=0;
+    function upd(){
+      if(!on)return;
+      var r=st.getBoundingClientRect(),vh=window.innerHeight,p=Math.max(0,Math.min(1,-r.top/(vh*.6)));
+      if(Math.abs(p-last)<.002)return;last=p;
+      scr.style.setProperty('--p',p.toFixed(4));st.style.setProperty('--p',p.toFixed(4));
+      var full=p>.98&&r.bottom>vh*.6;st.classList.toggle('full',full);root.classList.toggle('pf-full',p>.6&&r.bottom>vh*.6);
+      // las ventanas abiertas se acomodan al nuevo tamaño cuando el movimiento se detiene
+      clearTimeout(t);if(stack.length)t=setTimeout(refit,120);
+    }
+    window.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',function(){on=window.matchMedia('(min-width:701px)').matches&&!reduce;if(!on){scr.style.removeProperty('--p');root.classList.remove('pf-full')}last=-1;upd()});upd();
+  })();
 
   // enlace directo a un proyecto: /portfolio/#cstravel o /portfolio/#thallo
   var h=location.hash.slice(1);
