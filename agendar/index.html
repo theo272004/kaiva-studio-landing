@@ -34,97 +34,14 @@
        se pegan las dos últimas palabras con un espacio que no se parte. -->
   <script>document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('p,li,dd,figcaption,blockquote,small,label,td,h1,h2,h3,.desc').forEach(function(e){var w=document.createTreeWalker(e,4),n,l=null;while(n=w.nextNode())if(n.nodeValue.trim())l=n;if(l)l.nodeValue=l.nodeValue.replace(/ (\S+\s*)$/,'\u00a0$1')})})</script>
 
-  <title>Chatbots de IA para atención al cliente: lo que nadie pone en la cotización</title>
-  <meta name="description"
-    content="Gorgias cobra $1,50 por interacción, Freshdesk $0,49 por sesión, Intercom Fin $0,99 por resolución. Lo que de verdad cuesta un chatbot de IA y cuándo no vale la pena.">
-  <link rel="canonical" href="https://kaivastudio.com/blog/chatbots-ia-atencion-al-cliente-costos-reales/">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <title>Agendar llamada | Kaiva Studio</title>
+  <meta name="description" content="Agenda una llamada con Kaiva Studio: déjanos tu correo y te contestamos el mismo día o el siguiente para hablar de la web, la marca o el software de tu empresa.">
+  <link rel="canonical" href="https://kaivastudio.com/agendar/">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Agendar llamada | Kaiva Studio">
+  <meta property="og:url" content="https://kaivastudio.com/agendar/">
+  <meta property="og:image" content="https://kaivastudio.com/assets/kaiva-og-hero.jpg">
   <meta name="theme-color" content="#FBFBFB">
-
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="Kaiva Studio">
-  <meta property="og:locale" content="es_CO">
-  <meta property="og:url" content="https://kaivastudio.com/blog/chatbots-ia-atencion-al-cliente-costos-reales/">
-  <meta property="og:title" content="Chatbots de IA para atención al cliente: lo que nadie pone en la cotización">
-  <meta property="og:description"
-    content="Tres proveedores, tres formas distintas de cobrar la misma conversación. Los precios reales de 2026, el costo oculto de WhatsApp Business API, y cuándo un negocio pequeño no lo necesita.">
-  <meta property="og:image" content="https://kaivastudio.com/assets/blog/ia.webp">
-  <meta property="article:published_time" content="2026-08-30">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Chatbots de IA para atención al cliente: lo que nadie pone en la cotización">
-  <meta name="twitter:image" content="https://kaivastudio.com/assets/blog/ia.webp">
-
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "BlogPosting",
-      "@id": "https://kaivastudio.com/blog/chatbots-ia-atencion-al-cliente-costos-reales/#post",
-      "headline": "Chatbots de IA para atención al cliente: lo que nadie pone en la cotización",
-      "description": "Los precios reales de 2026 por proveedor, el costo que Meta cobra aparte por WhatsApp Business API, y el volumen de conversaciones al mes en el que un chatbot de IA deja de tener sentido.",
-      "datePublished": "2026-08-30",
-      "dateModified": "2026-08-30",
-      "inLanguage": "es-CO",
-      "image": "https://kaivastudio.com/assets/blog/ia.webp",
-      "mainEntityOfPage": "https://kaivastudio.com/blog/chatbots-ia-atencion-al-cliente-costos-reales/",
-      "author": {
-        "@type": "Organization",
-        "@id": "https://kaivastudio.com/#studio",
-        "name": "Kaiva Studio",
-        "url": "https://kaivastudio.com/"
-      },
-      "publisher": { "@id": "https://kaivastudio.com/#studio" },
-      "isPartOf": { "@id": "https://kaivastudio.com/blog/#blog" }
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://kaivastudio.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://kaivastudio.com/blog/" },
-        { "@type": "ListItem", "position": 3, "name": "Chatbots de IA para atención al cliente", "item": "https://kaivastudio.com/blog/chatbots-ia-atencion-al-cliente-costos-reales/" }
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "¿Cuánto cuesta un chatbot de IA para atención al cliente?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Depende de qué cuenta el proveedor como una unidad facturable. Gorgias cobra $1,50 por interacción automatizada por encima de su paquete, Freshdesk $0,49 por sesión tras 500 incluidas al mes, eesel $0,40 por ticket resuelto, e Intercom Fin $0,99 por resolución con un plan base de $49/mes que incluye 50. La misma conversación puede costar cuatro veces más en un proveedor que en otro, según cómo cuenten."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Qué es \"contención\" y por qué no es lo mismo que resolver el problema?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "La contención mide cuántas conversaciones no llegaron a un humano. Un cliente que se rinde y cierra la ventana también cuenta como \"contenido\" en la mayoría de paneles, aunque el bot no haya resuelto nada. Medir solo contención sin cruzarla con si el cliente regresa o se va a la competencia es la forma más común de creer que un chatbot funciona cuando en realidad está espantando gente."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cuánto cuesta un chatbot de WhatsApp para una pyme en Latinoamérica?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "En México, el nivel básico para hasta 500 conversaciones al mes cuesta entre 8.000 y 15.000 MXN de configuración inicial y 6.000-12.000 MXN/mes de operación, según Uniamos. A eso se suma lo que Meta cobra directamente por WhatsApp Business API: las conversaciones que inicia el cliente son gratis las primeras 24 horas, pero las que inicia la empresa (una promoción, un recordatorio) cuestan entre 0,01 y 0,10 USD cada una, y esa factura no aparece en la cotización del proveedor del bot."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cuándo no conviene un chatbot de IA para atención al cliente?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Cuando el volumen de conversaciones es bajo. Con unos 80 tickets al mes, un buen centro de ayuda con preguntas frecuentes bien escritas resuelve más por menos dinero que cualquier chatbot, porque casi todos los proveedores cobran un mínimo mensual fijo que a ese volumen nunca se amortiza. También conviene evitarlo en cualquier conversación con consecuencias legales, médicas o financieras, donde una respuesta incorrecta pero segura de sí misma sale más caro que no responder."
-          }
-        }
-      ]
-    }
-  ]
-}
-</script>
   <link rel="icon" href="/favicon.ico?v=20261006k" sizes="48x48">
   <link rel="icon" href="/assets/favicon-96.png?v=20261006k" type="image/png" sizes="96x96">
   <link rel="icon" href="/assets/favicon-192.png?v=20261006k" type="image/png" sizes="192x192">
@@ -837,7 +754,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   .manifesto .pin{position:static;height:auto}
 }
 
-/* ---------- artículos del blog ---------- */
+/* ---------- lectura ---------- */
 /* =====================================================================
    ARTÍCULOS DEL BLOG: lectura tranquila, al estilo de la portada.
    Una columna centrada, letra grande, índice al lado en pantallas anchas.
@@ -938,12 +855,38 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 }
 
 
+/* ---------- páginas legales ---------- */
+.articulo .btn-pref{display:inline-flex;padding:10px 18px;border-radius:99px;background:var(--violet-soft);color:var(--violet-text);font-size:15px;font-weight:600;text-decoration:none}
+.articulo .btn-pref:hover{background:var(--violet);color:#fff}
+/* los cuatro enlaces en una sola fila bajo el título; en celular se desliza de lado */
+.legal-links{display:flex;flex-wrap:nowrap;gap:8px;width:calc(100% + 40px);margin:6px -20px 0;padding:2px 20px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.legal-links::-webkit-scrollbar{display:none}
+.legal-links a:first-child{margin-left:auto}.legal-links a:last-child{margin-right:auto}
+.legal-links a{flex:none;white-space:nowrap;padding:8px 14px;border-radius:99px;background:var(--mist);color:var(--ink-2);font-size:14px;font-weight:500;text-decoration:none;transition:background .25s,color .25s}
+.legal-links .ll-s{display:none}
+@media (max-width:600px){.legal-links{gap:4px;width:calc(100% + 40px);margin:6px -20px 0;padding:2px 0}.legal-links a{padding:6px 9px;font-size:12px}.legal-links .ll-l{display:none}.legal-links .ll-s{display:inline}}
+.legal-links a:hover,.legal-links a[aria-current]{background:var(--violet-soft);color:var(--violet-text)}
+/* ---------- 404 ---------- */
+.nf{display:grid;justify-items:center;gap:22px;min-height:78vh;align-content:center;padding:clamp(140px,16vw,180px) 20px 40px;text-align:center}
+.nf-code{font-size:clamp(5rem,16vw,11rem);font-weight:600;line-height:.9;letter-spacing:-.07em;color:var(--violet)}
+.nf h1{margin:0;font-size:clamp(2rem,4.6vw,3.4rem);line-height:1.04;letter-spacing:-.05em;text-wrap:balance}
+.nf p{margin:0;max-width:46ch;font-size:clamp(16px,1.5vw,18.5px);line-height:1.6;color:var(--ink-2)}
+.nf-acc{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:6px}
+.nf-acc .btn:not(.btn-ink){background:var(--mist);color:var(--ink)}
+.nf-acc .btn:not(.btn-ink):hover{background:var(--violet-soft);color:var(--violet-text)}
+
 /* cierre del blog: empieza morado oscuro y se vuelve casi negro al bajar */
 .final{background:#36115F}
 .final::before{background:linear-gradient(180deg,rgba(78,30,134,.55) 0%,rgba(54,17,95,.2) 45%,transparent 90%)}
 .final::after{background:#07050B;opacity:calc(.35 + var(--fp,0))}
 </style>
-  <script defer src="/assets/indice-blog.js?v=20261006"></script>
+<style>
+.final{margin-top:clamp(96px,9vw,110px);min-height:calc(100svh - clamp(96px,9vw,110px) - 16px);display:flex;flex-direction:column;justify-content:space-between;gap:56px;padding-top:clamp(56px,7vw,90px)}
+.final::before{background:linear-gradient(180deg,rgba(122,63,201,.5) 0%,rgba(122,63,201,.28) 40%,rgba(122,63,201,.08) 80%,transparent 100%)}
+.final::after{opacity:0}
+.final .ag-h{font-size:clamp(2.4rem,5.6vw,4.4rem);letter-spacing:-.05em;max-width:15ch;line-height:1}
+.final .ag-h .dim{color:rgba(255,255,255,.55)}
+</style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -957,22 +900,21 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   <symbol id="i-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="7" y="2.5" width="10" height="19" rx="2.6"/><path d="M11 18.5h2"/></g></symbol>
   <symbol id="i-cursor" viewBox="0 0 24 24"><path d="M4 2l16 10-7 1.5L9.5 21z" fill="currentColor" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></symbol>
 </svg>
-<span class="art-prog" aria-hidden="true"></span>
 <nav class="float-nav show" id="floatNav" aria-label="Navegación rápida">
   <a class="logo" href="/#top"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a>
   <ul>
         <li><a href="/#top">Inicio</a></li>
         <li><a href="/portfolio/">Portfolio</a></li>
-        <li><a href="/blog/" aria-current="page">Blog</a></li>
+        <li><a href="/blog/">Blog</a></li>
       </ul>
-  <a class="btn btn-ink" href="/agendar/">Agendar llamada</a>
+  <a class="btn btn-ink" href="/agendar/" aria-current="page">Agendar llamada</a>
   <button class="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mmenu"><span></span><span></span></button>
 </nav>
 
 <div class="mmenu" id="mmenu" aria-label="Menú">
   <div class="mm-top"><a class="logo" href="/#top"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a><button class="mm-close" type="button" aria-label="Cerrar menú"><span></span><span></span></button></div>
   <nav class="mm-links">
-    <a href="/#top">Inicio</a><a href="/portfolio/">Portfolio</a><a href="/blog/" aria-current="page">Blog</a><a href="#contacto">Contacto</a>
+    <a href="/#top">Inicio</a><a href="/portfolio/">Portfolio</a><a href="/blog/">Blog</a><a href="#contacto">Contacto</a>
   </nav>
   <div class="mm-foot">
     <a class="btn btn-white" href="/agendar/">Agendar llamada</a>
@@ -981,89 +923,15 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 </div>
 
 <div class="page">
-  <main class="art" id="top">
-    <article>
-      <header class="art-head">
-        <nav class="art-crumbs" aria-label="Ruta de navegación"><a href="/blog/">Blog</a><span aria-hidden="true">/</span><b>IA y tecnología</b></nav>
-        <h1>Chatbots de IA para atención al cliente<span class="dot">:</span> lo que nadie pone en la cotización</h1>
-        <p class="art-lead">Gorgias cobra $1,50 por cada intercambio que su IA resuelve. Freshdesk, $0,49. Intercom Fin, $0,99. Tres proveedores, tres formas distintas de contar la misma conversación, y ninguna cotización te explica la diferencia hasta que ya firmaste.</p>
-        <p class="art-meta"><span class="k" aria-hidden="true">K.</span><span><b>Kaiva Studio</b> · <time datetime="2026-08-30">30 ago 2026</time> · 8 min de lectura</span></p>
-      </header>
-      <figure class="art-hero"><img src="/assets/blog/ia.webp" alt="Profesional revisando en una laptop el panel de un chatbot de inteligencia artificial en una oficina moderna" width="1600" height="800" fetchpriority="high" decoding="async"></figure>
-      <div class="art-body">
-        <div class="articulo">
-<p>Un dueño de comercio electrónico contó en Reddit que su factura de soporte con IA saltó de 4.000 a 9.000 dólares al mes sin que él cambiara nada. Otro, en la misma discusión, hizo la cuenta de cabeza durante una llamada de ventas y llegó a 30.000 dólares mensuales antes de que terminara la demo. Ninguno de los dos había leído mal el precio. Habían leído el precio de venta, que es distinto del precio real.</p>
-<p>La razón es que cada proveedor eligió una unidad distinta para cobrar, y esas unidades no son intercambiables aunque las páginas de precios las muestren una al lado de la otra como si lo fueran.</p>
-<h2>Nadie te está cobrando por «el chatbot»</h2>
-<p>Gorgias cuenta interacciones: cada mensaje de ida y vuelta dentro de una conversación es una unidad, a $1,50 por encima de lo incluido en el plan. Un cliente que escribe cuatro veces antes de darse por resuelto son cuatro cargos, no uno.</p>
-<p>Freshdesk cuenta sesiones: toda la conversación, sin importar cuántos mensajes tenga, es una sola unidad, a $0,49 después de las 500 sesiones que ya vienen incluidas en cualquiera de sus planes. eesel cuenta tickets resueltos, a $0,40, sin cobro por puesto de agente. Intercom Fin —que en junio de 2026 se convirtió en el objetivo de una compra de Salesforce por unos 3.600 millones de dólares— cuenta resoluciones, a $0,99 cada una, con un plan base de $49 al mes que trae 50 incluidas.</p>
-<table class="tcards">
-<thead>
-<tr><th>Proveedor</th><th>Qué cobra</th><th>Tarifa</th></tr> </thead>
-<tbody>
-<tr><td data-label="Proveedor">eesel AI</td><td data-label="Qué cobra">Ticket resuelto</td><td data-label="Tarifa">$0,40</td></tr>
-<tr><td data-label="Proveedor">Freshdesk (Freddy)</td><td data-label="Qué cobra">Sesión, tras 500/mes incluidas</td><td data-label="Tarifa">$0,49</td></tr>
-<tr><td data-label="Proveedor">HubSpot Breeze</td><td data-label="Qué cobra">Conversación resuelta (50 créditos)</td><td data-label="Tarifa">≈ $0,50</td></tr>
-<tr><td data-label="Proveedor">Tidio (Lyro)</td><td data-label="Qué cobra">Conversación, desde 200/mes</td><td data-label="Tarifa">$0,70</td></tr>
-<tr><td data-label="Proveedor">Intercom Fin</td><td data-label="Qué cobra">Resolución, con base de $49/mes por 50</td><td data-label="Tarifa">$0,99</td></tr>
-<tr><td data-label="Proveedor">Gorgias</td><td data-label="Qué cobra">Interacción automatizada</td><td data-label="Tarifa">$1,50</td></tr> </tbody> </table>
-<p>La misma conversación de soporte, según quién la factura, puede costar cuatro veces más. Y ninguno de esos números incluye lo que cuesta el puesto del agente humano que sigue ahí detrás para lo que el bot no resuelve.</p>
-<h2>En el sitio de Kaiva no hay un chatbot</h2>
-<p>Es una elección, no un descuido. En kaivastudio.com no atendemos preguntas con un modelo conversacional: usamos una herramienta que analiza el dominio de quien llega y le devuelve un informe con hallazgos concretos, sin abrir una conversación de ida y vuelta con nadie. La persona escribe su dominio una sola vez y recibe algo que puede leer, no algo con lo que tiene que negociar.</p>
-<p>La diferencia no es cosmética. Un chatbot conversacional cobra por cada intercambio o por cada resolución, así que entre más gente lo usa, más sube la factura variable. Una herramienta que responde con un informe fijo cuesta lo mismo la use una persona o mil: el gasto está en construirla una vez, no en cada conversación que sostiene después. Para un negocio con tráfico bajo o irregular —que es la mayoría de las pymes en Barranquilla o en cualquier ciudad intermedia de la región— esa diferencia de estructura de costos importa más que cualquier funcionalidad del bot.</p>
-<h2>WhatsApp cobra aparte, y esa factura no la ves en la cotización</h2>
-<p>En Latinoamérica el canal de atención no es el chat de una web: es WhatsApp. Y ahí hay una segunda factura que casi ninguna propuesta comercial menciona con claridad.</p>
-<p>Un chatbot básico de WhatsApp para una pyme mexicana, con hasta 500 conversaciones al mes y sin integraciones a un CRM, cuesta entre 8.000 y 15.000 pesos mexicanos de configuración inicial y entre 6.000 y 12.000 pesos al mes de operación, según una guía de precios de la agencia Uniamos publicada en junio de 2026. Ese es el cargo del proveedor del bot.</p>
-<p>Aparte, Meta cobra directamente por el uso de WhatsApp Business API. Si el cliente escribe primero, la empresa tiene 24 horas gratis para responder. Si la empresa es la que escribe primero —para avisar que el pedido está listo, para recordar una cita, para ofrecer algo— cada conversación de ese tipo cuesta entre 0,01 y 0,10 dólares, según sea de servicio, utilidad o marketing. Con 3.000 conversaciones mensuales mixtas, esa factura de Meta sola puede llegar a 2.500-4.500 pesos mexicanos, y llega separada, no incluida en lo que cotizó la agencia.</p>
-<div class="nota">
-<p><strong>El dato que cambia la cuenta:</strong> a esos dos cargos casi siempre se suma un tercero, el de la plataforma intermediaria (360dialog, Twilio, Gupshup) que conecta el bot con la API de WhatsApp, entre 0 y 1.000 dólares mensuales según volumen. Tres facturas de tres empresas distintas por un solo chatbot.</p> </div>
-<h2>El volumen decide, no la tecnología</h2>
-<p>La adopción de IA en la región ya no es un experimento. En Brasil el 76% de los usuarios digitales usa alguna herramienta de inteligencia artificial, y en México el 70%, según cifras citadas en agosto de 2026 durante un coloquio de El Colegio de México recogido por la agencia EFE. La pregunta ya no es si tu competencia está usando IA en algún punto de su operación. Es si tu volumen de conversaciones justifica pagar por ella en atención al cliente específicamente.</p>
-<p>La respuesta tiene un umbral bastante claro. Con unas 80 conversaciones al mes, un buen centro de ayuda con las preguntas reales de tus clientes bien escritas —no las que a ti te parece que preguntan, sino las que de verdad llegan— resuelve más por menos dinero que cualquier chatbot con medidor de uso. La razón es aritmética: la mayoría de proveedores tiene un mínimo mensual fijo, y a ese volumen ese mínimo nunca se amortiza contra lo que ahorrarías en tiempo de un agente humano.</p>
-<p>Donde el cálculo cambia es en volumen alto y repetitivo: estado de un pedido, restablecer una contraseña, confirmar un horario. Esas preguntas no necesitan criterio, solo velocidad, y son las que de verdad justifican automatizar primero.</p>
-<h2>Lo que ningún panel de métricas te dice solo</h2>
-<p>Hay una trampa de medición que vale la pena conocer antes de comprar cualquiera de estas herramientas: la contención no es lo mismo que resolver el problema.</p>
-<p>Un ticket cuenta como «contenido» en la mayoría de paneles cuando el cliente simplemente deja de responder durante 24 horas después de la última respuesta del bot. Eso incluye a la persona que de verdad quedó satisfecha, pero también incluye a la que se hartó, cerró la pestaña y buscó a otro proveedor. La práctica recomendada en la industria corrige justo eso: una sesión que termina sin escalar se cuenta como contenida solo <em>provisionalmente</em>, y si el cliente vuelve a escribir por el mismo asunto dentro de las 24 horas siguientes, se reclasifica como no resuelta. Casi ningún panel viene configurado así de fábrica, y la diferencia entre las dos formas de contar no es cosmética: es la que decide si el chatbot te está ahorrando trabajo o solo moviéndolo de sitio.</p>
-<p>Eso es lo que separa un chatbot que ahorra plata de uno que solo la esconde en otro renglón: no cuánto desvía, sino qué le pasa después al cliente que desvió.</p>
-<p>El riesgo más caro tampoco es que el bot diga «no sé». Eso lo perdona cualquier cliente. El riesgo caro es que responda mal con total seguridad —que le confirme un descuento que no existe, o le diga que un producto tiene garantía que no tiene— porque tu documentación tenía una ambigüedad que un agente humano habría interpretado bien y el bot leyó de forma literal. Esa clase de error no sale en ninguna métrica de desvío. Sale semanas después, cuando alguien tiene que disculparse por lo que dijo la máquina.</p>
-<p>Antes de firmar cualquier contrato de estos, la pregunta que de verdad importa no es qué modelo de lenguaje usa el proveedor. Es qué unidad factura, cuánto cuesta esa unidad a tu volumen real, y qué hace el bot cuando no está seguro. Si la respuesta a esa última pregunta es «adivina», ya sabes cuánto va a costar de verdad — solo que todavía no en dinero.</p>
-        </div>
-      </div>
-    </article>
-
-    <section class="art-more" aria-labelledby="mas-t">
-      <div class="art-more-head">
-        <h2 id="mas-t"><span class="dim">Sigue</span> leyendo</h2>
-        <a href="/blog/">Ver todo el blog <svg><use href="#i-arrow"/></svg></a>
-      </div>
-      <div class="art-more-grid">
-      <a class="amc" href="/blog/cuanto-cuesta-una-tarea-con-ia/">
-        <span class="amc-img"><img src="/assets/blog/precios.webp" alt="Laptop abierta mostrando una propuesta de presupuesto de desarrollo web en un escritorio de roble" width="1024" height="1024" loading="lazy" decoding="async"></span>
-        <span class="bm">8 ago 2026 · <b>IA y tecnología</b></span>
-        <h3>El token bajó un 99% y la factura de IA subió</h3>
-      </a>
-      <a class="amc" href="/blog/mejores-agencias-diseno-web-lima/">
-        <span class="amc-img"><img src="/assets/blog/elegir.webp" alt="Laptop sobre un escritorio mostrando un directorio de portafolios de estudios de diseño web" width="1200" height="800" loading="lazy" decoding="async"></span>
-        <span class="bm">23 sep 2026 · <b>Cómo elegir</b></span>
-        <h3>Agencias de diseño web en Lima: guía para elegir</h3>
-      </a>
-      <a class="amc" href="/blog/por-que-comprar-backlinks-ya-no-funciona/">
-        <span class="amc-img"><img src="/assets/blog/visibilidad.webp" alt="Laptop sobre un escritorio mostrando la página de inicio de Google con sugerencias de búsqueda desplegadas" width="1879" height="837" loading="lazy" decoding="async"></span>
-        <span class="bm">8 sep 2026 · <b>Marketing y SEO</b></span>
-        <h3>Por qué comprar backlinks ya casi no funciona</h3>
-      </a>
-      </div>
-    </section>
-  </main>
-
+  <main id="top">
     <!-- ============ CIERRE ============ -->
-  <footer class="final" id="contacto">
+  <section class="final" id="contacto" aria-labelledby="ag-t">
     <div class="final-core">
       <div class="note-wrap" id="note" aria-hidden="true">
         <div class="note-shadow"><i></i></div>
         <div class="sticky"><b>¿Tienes un proyecto?</b><span>Cuéntanos qué necesitas.<br><i>— Kaiva Studio</i></span></div>
       </div>
-      <h2><span class="dim">Hablemos de</span> tu empresa</h2>
+      <h1 class="ag-h" id="ag-t"><span class="dim">Hablemos de</span> tu empresa</h1>
       <form class="mail-form" id="mailForm" novalidate>
         <label class="sr-only" for="email">Tu correo de trabajo</label>
         <input id="email" name="email" type="email" placeholder="Tu correo de trabajo" autocomplete="email" required>
@@ -1096,7 +964,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       <span>© 2026 Kaiva Studio · Barranquilla, Colombia</span>
       <span><a href="/privacidad/">Privacidad</a> · <a href="/terminos/">Términos</a></span>
     </div>
-  </footer>
+  </section>
+  </main>
 </div>
 <script>
 (function(){
@@ -1163,25 +1032,19 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   /* ---------- Progreso de lectura y cierre que se oscurece al bajar ---------- */
   var fin=document.getElementById('contacto'),art=document.querySelector('.articulo');
   function onScroll(){
-    var a=art.getBoundingClientRect(),vh=window.innerHeight;
-    root.style.setProperty('--rp',Math.max(0,Math.min(1,(vh*.35-a.top)/Math.max(1,a.height-vh*.5))).toFixed(4));
+    var vh=window.innerHeight;
+    if(art){var a=art.getBoundingClientRect();root.style.setProperty('--rp',Math.max(0,Math.min(1,(vh*.35-a.top)/Math.max(1,a.height-vh*.5))).toFixed(4))}
     var fr=fin.getBoundingClientRect(),fp=(vh-fr.top)/Math.min(fr.height,vh);
     fin.style.setProperty('--fp',(Math.max(0,Math.min(1,fp))*.82).toFixed(3));
   }
   window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);onScroll();
 
-  /* ---------- Enlaces internos (índice y #contacto) ---------- */
+  /* ---------- Enlaces internos (#contacto) ---------- */
   document.addEventListener('click',function(e){
     var a=e.target.closest('a[href^="#"]');if(!a)return;
     var t=document.getElementById(a.getAttribute('href').slice(1));if(!t)return;
     e.preventDefault();var y=t.getBoundingClientRect().top+window.pageYOffset-(t.id==='contacto'?20:100);
     if(smoothTo)smoothTo(y);else window.scrollTo({top:y,behavior:reduce?'auto':'smooth'});
-    if(t.id!=='contacto'&&history.replaceState)history.replaceState(null,'','#'+t.id);
-  });
-
-  /* ---------- La parte gris de los títulos se enciende al pasar el mouse ---------- */
-  document.querySelectorAll('h2 .dim').forEach(function(d){
-    d.innerHTML=d.textContent.trim().split(/\s+/).map(function(w){return '<span class="w">'+w+'</span>'}).join(' ');
   });
 
   /* ---------- Cursor propio: avión de papel dibujado a mano + destello al hacer clic ---------- */
@@ -1228,7 +1091,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     var v=email.value.trim();
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){note.textContent='Escribe un correo válido, por ejemplo nombre@tuempresa.com.';email.focus();return}
     if(!casilla.checked){note.textContent='Marca la casilla de autorización para poder escribirte.';casilla.focus();return}
-    var autorizada=new Date().toISOString(),mensaje='Quiere agendar una llamada desde un artículo del blog.';
+    var autorizada=new Date().toISOString(),mensaje='Quiere agendar una llamada desde la página de agendar llamada.';
     fBtn.disabled=true;fBtn.textContent='Enviando…';
     fetch(HOJA_LEADS,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({nombre:'',correo:v,telefono:'',interes:'Agendar llamada',mensaje:mensaje,origen:location.href,referente:document.referrer||'directo',autorizacion:autorizada})}).catch(function(){});
     fetch(EJS.endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:EJS.service,template_id:EJS.template,user_id:EJS.key,template_params:{
