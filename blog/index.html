@@ -29,6 +29,10 @@
   <script defer src="/assets/consentimiento.js?v=20261005"></script>
   <script defer src="/assets/eventos.js?v=20260807"></script>
   <script defer src="/assets/clarity.js?v=20260729"></script>
+  <!-- Regla de la casa: ningún texto termina con una palabra sola en la última línea.
+       El CSS ayuda con text-wrap:pretty y, por si el navegador no lo cumple,
+       se pegan las dos últimas palabras con un espacio que no se parte. -->
+  <script>document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('p,li,dd,figcaption,blockquote,small,label,td,h1,h2,h3,.desc').forEach(function(e){var w=document.createTreeWalker(e,4),n,l=null;while(n=w.nextNode())if(n.nodeValue.trim())l=n;if(l)l.nodeValue=l.nodeValue.replace(/ (\S+\s*)$/,'\u00a0$1')})})</script>
 
   <title>Blog de Kaiva Studio: guías claras de web y marca</title>
   <meta name="description" content="Explicamos sin jerga cómo funciona la presencia digital de una empresa: cuánto cuesta una web, por qué no apareces en Google y qué priorizar primero.">
@@ -46,13 +50,13 @@
   <meta property="og:url" content="https://kaivastudio.com/blog/">
   <meta property="og:title" content="Blog de Kaiva Studio: guías claras de web y marca">
   <meta property="og:description" content="Explicamos sin jerga cómo funciona la presencia digital de una empresa: cuánto cuesta una web, por qué no apareces en Google y qué priorizar primero.">
-  <meta property="og:image" content="https://kaivastudio.com/assets/kaiva-og-hero.jpg">
+  <meta property="og:image" content="https://kaivastudio.com/assets/kaiva-og.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Blog de Kaiva Studio: guías claras de web y marca">
   <meta name="twitter:description" content="Explicamos sin jerga cómo funciona la presencia digital de una empresa: cuánto cuesta una web, por qué no apareces en Google y qué priorizar primero.">
-  <meta name="twitter:image" content="https://kaivastudio.com/assets/kaiva-og-hero.jpg">
+  <meta name="twitter:image" content="https://kaivastudio.com/assets/kaiva-og.jpg">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -458,6 +462,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 .wrap{max-width:var(--wrap);margin-inline:auto}
 
 h1,h2,h3{font-family:var(--f-sans);font-weight:600;letter-spacing:-.04em;line-height:1.04;margin:0;text-wrap:balance}
+/* sin palabras solas en la última línea */
+p,li,dd,dt,figcaption,blockquote,small,label,summary,td,th{text-wrap:pretty}
 h2{font-size:clamp(2.1rem,4.4vw,3.3rem)}
 h2 .dim{color:var(--ink-3)}
 p{margin:0}
