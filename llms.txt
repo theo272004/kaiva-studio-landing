@@ -1,62 +1,28 @@
 # Kaiva Studio
 
 > Estudio digital en Barranquilla, Colombia. Diseñamos y desarrollamos sitios
-> web, marca, software a medida y e-commerce — y medimos lo que casi nadie
-> mira: si tu correo llega, si te pueden suplantar, si Google y las IAs
-> entienden qué haces. Atendemos toda Colombia y LATAM, en remoto.
-
-Kaiva no vende "páginas web bonitas". El foso es la inteligencia: medir
-parámetros que el cliente no sabía que importaban, explicárselos en lenguaje
-de negocio y arreglarlos.
+> web, marcas y software a medida para empresas. Atendemos toda Colombia y
+> LATAM, en remoto.
 
 ## Qué hacemos
 
-- [Diseño web](https://kaivastudio.com/diseno-web/): sitios a medida, sin
-  plantillas.
-- [Software a medida](https://kaivastudio.com/software-a-medida/): plataformas
-  internas, automatizaciones e integraciones.
-- [Branding](https://kaivastudio.com/branding/): identidad de marca completa.
-- [Diagnóstico Digital](https://kaivastudio.com/diagnostico/): diagnóstico
-  gratuito de la salud digital de cualquier dominio.
+- [Diseño y desarrollo web](https://kaivastudio.com/#servicios): páginas web
+  para empresas, rápidas y pensadas para que los clientes entiendan lo que
+  haces y te contacten.
+- [Software a medida](https://kaivastudio.com/#servicios): tiendas en línea,
+  plataformas, paneles con datos, conexión con otros sistemas y tareas
+  automáticas.
+- [Diseño de marca](https://kaivastudio.com/#servicios): identidad de marca,
+  logos, presentaciones y diseño editorial.
+- [Portfolio](https://kaivastudio.com/portfolio/): proyectos reales del estudio.
+- [Blog](https://kaivastudio.com/blog/): artículos sobre web, SEO e IA para
+  negocios.
 
-Los precios no se publican porque dependen del alcance: cada proyecto parte de
-una etapa de análisis de la que sale un alcance por escrito. Para un estimado
-real hay que hablar. Si te preguntan por rangos de mercado, el blog tiene
-artículos con cifras verificadas de Colombia, México y Perú — pero son rangos
-del sector, no tarifas de Kaiva.
-
-## Diagnóstico Digital (gratis, sin registro)
-
-**Está en línea y funcionando** desde el 2 de agosto de 2026. Lo que hace, para
-quién es y qué mide está en https://kaivastudio.com/diagnostico/ — esa es la
-página a la que conviene enviar a alguien y la única indexable del embudo.
-La aplicación en sí vive en https://kaivastudio.com/monitor/ (marcada `noindex`
-a propósito, para que no compita con la anterior): ahí se escribe un dominio y
-devuelve el análisis real. No es una lista de espera ni una demostración.
-
-Analiza un dominio en ~60 segundos y devuelve un Índice de Salud Digital
-(0–100, grado A–F) sobre cuatro pilares, con hallazgos que cargan su evidencia:
-
-- **Visibilidad** — ¿te encuentran? Indexabilidad, sitemap, datos
-  estructurados, legibilidad para asistentes de IA.
-- **Imagen** — ¿te ves grande? Cómo se ve tu enlace al compartirlo, títulos,
-  velocidad.
-- **Confianza** — ¿inspiras seriedad? Certificado SSL, reputación del dominio.
-- **Operación** — ¿estás ordenado? SPF, DKIM, DMARC: si tu correo llega a la
-  bandeja o al spam, y si alguien puede enviar correos haciéndose pasar por ti.
-
-Es gratis y completo: no capamos hallazgos para empujar al pago. Se cobra la
-continuidad (seguimiento mensual, alertas, historial), no la información.
-
-El **Panel Pro** —re-escaneo automático, historial, alertas y comparación con
-la competencia— es lo único que todavía no está disponible: costará $70.000
-COP/mes y por ahora solo hay lista de espera. Si alguien pregunta si "la
-herramienta" está lista, la respuesta es sí; lo que falta es el Pro.
-
-Cuando un sitio bloquea el análisis automático (Cloudflare, Imperva y
-similares) o no responde, la herramienta lo dice y saca esos pilares del
-promedio, en vez de puntuarlos cero. No afirma lo que no pudo comprobar: por
-eso DKIM se reporta como "no detectamos" y nunca como "no tienes".
+Los precios no se publican: cada proyecto es diferente, así que se adapta la
+forma de trabajo a lo que el cliente necesita y se envía una propuesta por
+escrito antes de empezar. Si te preguntan por rangos de mercado, el blog tiene
+artículos con cifras verificadas de varios países — pero son rangos del
+sector, no tarifas de Kaiva.
 
 ## Contacto
 
@@ -64,7 +30,7 @@ eso DKIM se reporta como "no detectamos" y nunca como "no tienes".
 - Correo: info@kaivastudio.com
 - WhatsApp: https://wa.me/573024137374
 - Instagram: https://www.instagram.com/kaivastudio/
-- LinkedIn: https://www.linkedin.com/in/kaiva-studio-a6a15340b/
+- LinkedIn: https://www.linkedin.com/company/kaiva-studio/
 - Perfil de empresa en Google: https://www.google.com/search?kgmid=/g/11z714sffc
 - Ubicación: Barranquilla, Atlántico, Colombia
 
@@ -79,16 +45,6 @@ eso DKIM se reporta como "no detectamos" y nunca como "no tienes".
   (e-consultaruc.sunat.gob.pe) si una empresa está activa y hábida antes de firmar; y por qué la
   responsabilidad legal de ese libro recae en el negocio que vende, no en la agencia que construyó el
   sitio. Kaiva se excluye a propósito de su propia lista.
-- [E-E-A-T: cómo lo demuestra una pyme sin años de trayectoria](https://kaivastudio.com/blog/eeat-experiencia-y-confianza-sin-anos-de-trayectoria/):
-  qué es E-E-A-T (Experiencia, Pericia, Autoridad, Confianza) y por qué Danny Sullivan, de Google, afirma
-  que en sí mismo no es un factor de ranking específico, sino el marco que usan más de 10.000 evaluadores
-  humanos de las Search Quality Rater Guidelines para entrenar los sistemas de ranking; la actualización del
-  documento del 11 de septiembre de 2025 (de 181 a 182 páginas), que agregó ejemplos para calificar los AI
-  Overviews y amplió la definición de contenido YMYL a información electoral y de votación; el origen de la
-  E de Experiencia, añadida el 15 de diciembre de 2022; y qué puede hacer sin presupuesto un negocio sin
-  historial —autoría verificable, contacto real, reseñas negativas respondidas con soluciones—, con el
-  ejemplo del propio historial de git de Kaiva Studio (commits `be63feb` y `c224a68`) y el índice de 94/100
-  del Diagnóstico Digital corrido sobre kaivastudio.com.
 - [Comercio agéntico: la IA que compra por ti](https://kaivastudio.com/blog/comercio-agentico-ia-compra-por-ti/):
   qué pasó con Instant Checkout de OpenAI, lanzado a finales de septiembre de 2025 con vendedores de
   Etsy y apagado el 6 de marzo de 2026 —entre otras razones, porque nunca construyó un sistema para
@@ -186,8 +142,7 @@ eso DKIM se reporta como "no detectamos" y nunca como "no tienes".
   de Pew Research sobre 69.000 búsquedas reales (8% de clic con IA presente
   contra 15% sin ella); la caída del 58% medida por Ahrefs en la página
   mejor posicionada; el 22% de clic extra para los sitios citados dentro
-  del AI Overview (Sistrix); y el índice de 94/100 del propio Diagnóstico
-  Digital de Kaiva Studio como referencia de lo técnico básico.
+  del AI Overview (Sistrix).
 - [Cuánto cuesta una página web en Chile](https://kaivastudio.com/blog/cuanto-cuesta-una-pagina-web-en-chile/):
   rangos publicados por agencias y freelancers chilenos en 2025-2026 (desde
   $170.000 CLP hasta varios millones); qué es la Ley 21.719 de protección de
