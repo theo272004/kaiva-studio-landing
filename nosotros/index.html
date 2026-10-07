@@ -255,6 +255,10 @@ section{scroll-margin-top:90px}
 .pill.ptog{transform-origin:50% 90%}
 .pill.ptog.wob{animation:pwob .7s cubic-bezier(.3,.6,.3,1)}
 @keyframes pwob{0%{rotate:0deg}18%{rotate:-6deg}38%{rotate:4.5deg}58%{rotate:-2.5deg}78%{rotate:1.2deg}100%{rotate:0deg}}
+/* en pantallas táctiles no hay mouse: un toque late sobre la otra opción y la etiqueta se tambalea, hasta que la tocan */
+.pill.ptog .tap{position:absolute;z-index:2;left:0;top:0;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;background:rgba(255,255,255,.75);box-shadow:0 0 0 2px rgba(255,255,255,.9);pointer-events:none;opacity:0}
+.pill.ptog.hint .tap{animation:ptap 1.8s ease-out infinite}
+@keyframes ptap{0%{opacity:0;transform:scale(1.5)}18%{opacity:.85;transform:scale(.62)}30%{opacity:.85;transform:scale(.55)}75%{opacity:0;transform:scale(2)}100%{opacity:0;transform:scale(2)}}
 
 /* ---------- barra flotante ---------- */
 .float-nav{position:fixed;z-index:50;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:22px;padding:7px 7px 7px 18px;border-radius:999px;background:rgba(251,251,251,.82);backdrop-filter:saturate(1.6) blur(18px);-webkit-backdrop-filter:saturate(1.6) blur(18px);box-shadow:0 0 0 1px rgba(8,8,8,.06),0 14px 40px -18px rgba(8,8,8,.35);transform:translate(-50%,-140%);transition:transform .6s var(--ease);max-width:calc(100% - 32px)}
@@ -1172,6 +1176,15 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     function wob(){pill.classList.remove('wob');void pill.offsetWidth;pill.classList.add('wob')}
     pill.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')wob()});
     var nudge=still?0:setInterval(function(){if(window.pageYOffset<300&&!document.hidden)wob()},4500);
+    // en celular (sin mouse) se nota más que hay que tocarla: un toque que late encima de la otra opción y la etiqueta se tambalea a la vez
+    if(!window.matchMedia('(hover: hover) and (pointer: fine)').matches&&!still){
+      var tap=document.createElement('i');tap.className='tap';tap.setAttribute('aria-hidden','true');pill.appendChild(tap);
+      var tapPos=function(){var g=segs[1];tap.style.left=(g.offsetLeft+g.offsetWidth/2)+'px';tap.style.top=(g.offsetTop+g.offsetHeight/2)+'px'};
+      tapPos();setTimeout(tapPos,600);window.addEventListener('resize',tapPos);
+      pill.classList.add('hint');clearInterval(nudge);
+      setTimeout(function(){if(!pill.classList.contains('hint'))return;wob();nudge=setInterval(function(){if(window.pageYOffset<400&&!document.hidden)wob()},1800)},330);
+      pill.addEventListener('click',function(){pill.classList.remove('hint')},{once:true});
+    }
     function filePos(){
       var hr=h.getBoundingClientRect(),t=h.querySelector('h1').getBoundingClientRect(),p=pill.getBoundingClientRect();
       var w=files[0].offsetWidth,fh=files[0].offsetHeight,L=t.left-hr.left,R=hr.right-t.right;
