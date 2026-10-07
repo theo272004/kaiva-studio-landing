@@ -373,14 +373,16 @@ h1 .dim .w,h2 .dim .w{transition:color 1.1s ease}
 h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s}
 /* "Páginas web": con un clic se queda morado y con otro vuelve a gris */
 .hero h1 .dim{cursor:pointer}
-.hero h1 .dim.lit .w{color:var(--violet-text);transition:color .08s}
+.hero h1 .dim .w.lit{color:var(--violet-text);transition:color .08s}
 .final h2 .dim .w:hover{color:var(--violet-light)}
 /* menú del hero: cada palabra, el logo y los íconos se encienden en morado al pasar y se apagan despacio */
 .hero .nav .w{transition:color 1.1s ease}
 .hero .nav .w:hover{color:var(--violet-text);transition:color .08s}
 .hero .nav>.logo{position:relative}
-.hero .nav>.logo::after{content:"";position:absolute;inset:0;background:var(--violet-text);-webkit-mask:url(/assets/inicio/logo-kaiva.png) center/contain no-repeat;mask:url(/assets/inicio/logo-kaiva.png) center/contain no-repeat;opacity:0;transition:opacity 1.1s ease;pointer-events:none}
-.hero .nav>.logo:hover::after{opacity:1;transition:opacity .08s}
+.hero .nav>.logo .lg{position:absolute;left:0;right:0;height:50%;background:var(--violet-text);-webkit-mask:url(/assets/inicio/logo-kaiva.png) no-repeat;mask:url(/assets/inicio/logo-kaiva.png) no-repeat;-webkit-mask-size:100% 200%;mask-size:100% 200%;opacity:0;transition:opacity 1.1s ease}
+.hero .nav>.logo .lg.t{top:0;-webkit-mask-position:0 0;mask-position:0 0}
+.hero .nav>.logo .lg.b{bottom:0;-webkit-mask-position:0 100%;mask-position:0 100%}
+.hero .nav>.logo .lg:hover{opacity:1;transition:opacity .08s}
 .hero .nav-end .circle{transition:transform .35s var(--ease),box-shadow .35s var(--ease),color 1.1s ease}
 .hero .nav-end .circle:hover{color:var(--violet-text);transition:transform .35s var(--ease),box-shadow .35s var(--ease),color .08s}
 
