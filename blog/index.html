@@ -1332,8 +1332,20 @@ a:hover .bread svg{transform:translateX(4px)}
   .bsearch,.bsearch:focus-within{width:100%;height:44px}
   .bsearch kbd{display:none}
   .bgrid{grid-template-columns:1fr;gap:44px}
-  .bfeat{height:520px}
-  .bslide-card h2{font-size:1.35rem}
+  /* destacado en celular: sin el panel gris, la foto entera con sus bordes y la tarjeta a lo ancho debajo */
+  .hero.bintro .bfeat,.bfeat{display:grid;height:auto;overflow:visible;border-radius:0;background:none}
+  .bslide{position:relative;inset:auto;grid-area:1/1;display:flex;flex-direction:column;gap:10px}
+  .bslide-img{flex:none;aspect-ratio:16/10;border-radius:16px}
+  .bslide-img::after{display:none}
+  .bslide-card,.bslide.on .bslide-card{position:relative;left:auto;right:auto;top:auto;bottom:auto;width:auto;gap:8px;padding:18px 20px;border-radius:16px;box-shadow:none;transform:none}
+  .bslide-card h2{font-size:1.3rem}
+  .bslide-card p{-webkit-line-clamp:2}
+  .bdots{top:12px;right:12px}
+  .bprog{display:none}
+  /* lo más reciente: foto a todo el ancho y el texto debajo, sin recortes encima */
+  .bcard-img{margin-left:0;aspect-ratio:16/9;border-radius:16px}
+  .bcard-txt{width:100%;margin-top:14px;padding:0;border-radius:0;gap:10px}
+  .bcard:hover .bcard-txt{transform:none}
   .bpick{grid-template-columns:auto 1fr 84px;gap:14px}
   .bpick::before{font-size:28px}
 }
@@ -1750,6 +1762,7 @@ a:hover .bread svg{transform:translateX(4px)}
         <a href="mailto:info@kaivastudio.com">info@kaivastudio.com</a>
         <a href="https://wa.me/573024137374" target="_blank" rel="noopener">WhatsApp +57 302 413 7374</a>
       </div>
+      <a class="ns-link" href="/nosotros/">Conoce quiénes somos <svg><use href="#i-arrow"/></svg></a>
     </div>
 
     <div class="foot">
