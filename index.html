@@ -1711,6 +1711,17 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       el.addEventListener('pointerenter',function(e){if(e.pointerType!=='mouse')return;on(k,true)});
       el.addEventListener('pointerleave',function(e){if(e.pointerType!=='mouse')return;on(k,false)});
     });
+    // en celular (toque): la pieza que tocas queda seleccionada como en Figma; se suelta sola o al tocar otra cosa
+    var tapT=0;
+    function clearTap(){clearTimeout(tapT);boxes.forEach(function(b,i){if(b.classList.contains('on'))on(i,false)})}
+    pieces.forEach(function(el,k){
+      el.addEventListener('pointerdown',function(e){
+        if(e.pointerType==='mouse')return;
+        clearTap();placeAll();on(k,true);tapT=setTimeout(clearTap,2600);
+      });
+    });
+    document.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse'&&!e.target.closest('.dz'))clearTap()},{passive:true});
+    window.addEventListener('scroll',function(){if(window.pageYOffset>window.innerHeight)clearTap()},{passive:true});
     // la etiqueta: Colombia / Estudio digital
     var pill=hero.querySelector('.pill'),segs=[].slice.call(pill.querySelectorAll('.seg')),thumb=pill.querySelector('.pill-thumb'),pi=0;
     function pillPos(){var p=pill.getBoundingClientRect(),g=segs[pi].getBoundingClientRect(),z=p.width/pill.offsetWidth||1;thumb.style.transform='translateX('+((g.left-p.left)/z)+'px)';thumb.style.width=(g.width/z)+'px'}
