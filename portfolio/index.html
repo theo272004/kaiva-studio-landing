@@ -1400,16 +1400,17 @@ html.lock{overflow:hidden}
   .widget{padding:16px 18px}
   .widget h1{font-size:2rem}
   .widget p{font-size:13.5px}
-  .ico{width:116px;padding:8px 5px 7px;gap:6px;border-radius:14px}
-  .ico-name{max-width:110px;font-size:11.5px}
-  .ico-name small{font-size:10px}
-  .folder{width:74px;height:57px}
-  .desk-area .ico:nth-child(1){--x:calc(50% - 124px)!important;--y:32%!important}
-  .desk-area .ico:nth-child(2){--x:calc(50% + 8px)!important;--y:32%!important}
-  .desk-area .ico:nth-child(3){--x:calc(50% - 124px)!important;--y:53%!important}
-  .desk-area .ico:nth-child(4){--x:calc(50% + 8px)!important;--y:53%!important}
-  .desk-area .ico:nth-child(5){--x:calc(50% - 124px)!important;--y:74%!important}
-  .desk-area .ico:nth-child(6){--x:calc(50% + 8px)!important;--y:74%!important}
+  /* carpetas pequeñas, en tres columnas y abajo, sobre el dock: así nunca tapan el texto de arriba */
+  .ico{width:106px;padding:7px 4px 6px;gap:5px;border-radius:12px}
+  .ico-name{max-width:100px;font-size:10.5px;line-height:1.25}
+  .ico-name small{font-size:9px}
+  .folder{width:52px;height:40px}
+  .desk-area .ico:nth-child(1){--x:calc(50% - 165px)!important;--y:calc(100% - 222px)!important}
+  .desk-area .ico:nth-child(2){--x:calc(50% - 53px)!important;--y:calc(100% - 222px)!important}
+  .desk-area .ico:nth-child(3){--x:calc(50% + 59px)!important;--y:calc(100% - 222px)!important}
+  .desk-area .ico:nth-child(4){--x:calc(50% - 165px)!important;--y:calc(100% - 110px)!important}
+  .desk-area .ico:nth-child(5){--x:calc(50% - 53px)!important;--y:calc(100% - 110px)!important}
+  .desk-area .ico:nth-child(6){--x:calc(50% + 59px)!important;--y:calc(100% - 110px)!important}
   .pdock{gap:6px;padding:7px 8px;border-radius:18px;bottom:10px}
   .pdock .d{width:40px;height:40px;border-radius:10px}
   /* web en vivo en celular: con la forma de una pantalla de computador, justo debajo de la dirección */
@@ -1702,6 +1703,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
         <a href="mailto:info@kaivastudio.com">info@kaivastudio.com</a>
         <a href="https://wa.me/573024137374" target="_blank" rel="noopener">WhatsApp +57 302 413 7374</a>
       </div>
+      <a class="ns-link" href="/nosotros/">Conoce quiénes somos <svg><use href="#i-arrow"/></svg></a>
     </div>
 
     <div class="foot">
