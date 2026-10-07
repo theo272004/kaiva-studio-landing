@@ -954,6 +954,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .ns-hero{margin-top:76px;padding:clamp(56px,7vw,88px) 0 clamp(56px,7vw,88px)}
 .ns-hero .hero-copy{padding-top:0}
 .ns-hero h1{max-width:15ch}
+/* celular: el panel llega hasta arriba (detrás del menú) y a los dos bordes, como en la portada */
+@media (max-width:700px){.ns-hero{margin:-12px calc(var(--gutter) * -1) 0;border-radius:0;padding-top:112px}}
 /* la ilustración completa, de punta a punta del panel, sin recortar ni estirar */
 /* la foto del equipo va al final, suelta sobre la página y de punta a punta */
 /* la foto del equipo al final: mosaico de punta a punta; los cuadritos aparecen en desorden y luego se blanquean al azar */
@@ -1058,7 +1060,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .ns-badge small{font-size:.88em;font-weight:500;color:var(--ink-3)}
 @media (max-width:900px){.ns-row{grid-template-columns:1fr}.ns-facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){.ns-people{grid-template-columns:1fr}}
-@media (max-width:700px){.ns-board{--g:3px;margin-top:80px}.ns-cell{border-radius:5px}.ns-card{position:relative;left:auto;top:auto;width:auto;height:auto;margin-top:8px;border-radius:16px;padding:18px}.ns-card b{font-size:18px}.ns-card span{font-size:13px}.ns-tag{left:8px;top:8px;font-size:11px;padding:4px 9px}.ns-hero{margin-top:84px}}
+@media (max-width:700px){.ns-board{--g:3px;margin-top:80px}.ns-cell{border-radius:5px}.ns-card{position:relative;left:auto;top:auto;width:auto;height:auto;margin-top:8px;border-radius:16px;padding:18px}.ns-card b{font-size:18px}.ns-card span{font-size:13px}.ns-tag{left:8px;top:8px;font-size:11px;padding:4px 9px}.ns-hero{margin-top:-12px}}
 @media (max-width:480px){
   .ns-me{aspect-ratio:auto;min-height:440px}
   .ns-me h3{top:64px;font-size:1.75rem}
