@@ -447,6 +447,8 @@ section{scroll-margin-top:90px}
 .pill.ptog:active{scale:.97}
 /* al tocarla se tambalea un poquito */
 .pill.ptog{transform-origin:50% 90%}
+/* se cambia tocando en cualquier parte de la etiqueta, y un poco más allá del borde, para que ningún toque falle */
+.pill.ptog::after{content:"";position:absolute;inset:-12px -8px}
 .pill.ptog.wob{animation:pwob .7s cubic-bezier(.3,.6,.3,1)}
 @keyframes pwob{0%{rotate:0deg}18%{rotate:-6deg}38%{rotate:4.5deg}58%{rotate:-2.5deg}78%{rotate:1.2deg}100%{rotate:0deg}}
 /* en pantallas táctiles no hay mouse: un toque late sobre la otra opción y la etiqueta se tambalea, hasta que la tocan */
@@ -514,6 +516,7 @@ h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s
 .meter i{display:block;height:100%;width:100%;border-radius:inherit;background:var(--ink);transform-origin:left;transform:scaleX(var(--p,1));transition:transform 1.6s var(--ease)}
 .meter.v i{background:var(--violet-text)}
 /* las tarjetas de cifras se pueden tocar para que vuelvan a contar */
+.stat .val{white-space:nowrap}
 .stat.replay{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .stat.replay:active{transform:translateY(-2px) scale(.985)}
 .stat.replay:focus-visible{outline:2px solid var(--violet-text);outline-offset:3px}
@@ -1163,8 +1166,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
           <p>Cada proyecto se diseña desde cero, según lo que tu negocio necesita vender.</p>
           <div class="meter down"><i></i></div>
         </div>
-        <div class="stat lift" data-stat="count" data-from="0" data-to="100" data-suffix=" %">
-          <div class="num"><span class="val">100 %</span><small>remoto</small></div>
+        <div class="stat lift" data-stat="count" data-from="0" data-to="100" data-suffix="&nbsp;%">
+          <div class="num"><span class="val">100&nbsp;%</span><small>remoto</small></div>
           <p>Por videollamada, correo y WhatsApp, con empresas de toda Colombia y Latinoamérica.</p>
           <div class="meter"><i></i></div>
         </div>
