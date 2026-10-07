@@ -950,85 +950,71 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .final::after{background:#07050B;opacity:calc(.35 + var(--fp,0))}
 </style>
 <style>
-/* ---------- quiénes somos ---------- */
-.ns{max-width:1120px;margin:0 auto;padding:clamp(120px,12vw,150px) clamp(16px,3vw,28px) 0}
-/* introducción */
-.ns-intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:end}
-.ns-pill{display:inline-flex;align-items:center;gap:8px;margin:0 0 22px;padding:5px 12px 5px 6px;border-radius:99px;background:var(--mist);font-size:12.5px;font-weight:600}
-.ns-pill b{padding:2px 8px;border-radius:99px;background:var(--ink);color:var(--paper);font-size:11.5px}
-.ns-h{margin:0;font-size:clamp(2.3rem,5vw,4.1rem);line-height:1;letter-spacing:-.055em;text-wrap:balance}
-.ns-h .dim{color:var(--ink-3)}
-.ns-lead{display:grid;gap:16px}
-.ns-lead p{margin:0;font-size:clamp(16px,1.35vw,18px);line-height:1.6;color:var(--ink-2);max-width:46ch}
-.ns-lead p strong{color:var(--ink);font-weight:600}
-.ns-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
-.ns-acts .btn{height:42px;padding:0 18px;font-size:13.5px}
-.btn-line{box-shadow:inset 0 0 0 1px var(--line);color:var(--ink)}
-.btn-line:hover{box-shadow:inset 0 0 0 1px var(--ink)}
-/* datos que se pueden afirmar */
-.ns-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:clamp(48px,6vw,72px) 0 0;padding:0;list-style:none}
-.ns-facts li{display:grid;gap:6px;padding:18px 18px 20px;border-radius:18px;background:var(--mist)}
-.ns-facts b{font-size:clamp(1.5rem,2.4vw,2rem);font-weight:600;letter-spacing:-.05em;line-height:1}
-.ns-facts b small{font-size:.5em;letter-spacing:-.02em;margin-left:3px;color:var(--violet-text)}
+/* ---------- quiénes somos: como la portada ---------- */
+.ns-hero{margin-top:76px;padding:clamp(40px,6vw,64px) 0 16px}
+.ns-hero .hero-copy{padding-top:0}
+.ns-hero h1{max-width:15ch}
+/* la ilustración completa, de punta a punta del panel, sin recortar ni estirar */
+.ns-pic{position:relative;margin:clamp(40px,5vw,60px) 16px 0;border-radius:22px;overflow:hidden;background:#2A1B10}
+.ns-pic img{display:block;width:100%;height:auto;aspect-ratio:2436/1113}
+.ns-tw{position:absolute;inset:0;display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(5,1fr);pointer-events:none}
+.ns-tw i{background:var(--paper);opacity:0;transition:opacity .9s ease}
+.ns-tw i.blank{opacity:.9}
+.ns-tag{position:absolute;left:14px;top:14px;z-index:2;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--ink);font-size:12.5px;font-weight:600}
+.js .ns-pic{animation:fade 1.2s var(--ease) .35s both}
+/* por qué Kaiva */
+.ns-sec{max-width:1120px;margin:clamp(100px,12vw,150px) auto 0;padding:0 clamp(16px,3vw,28px)}
+.ns-sec h2{margin:0;font-size:clamp(2.2rem,4.6vw,3.8rem);line-height:1;letter-spacing:-.055em;text-wrap:balance}
+.ns-sec h2 .dim{color:var(--ink-3)}
+.ns-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:end}
+.ns-row p{margin:0;font-size:clamp(16px,1.35vw,18px);line-height:1.6;color:var(--ink-2);max-width:46ch}
+.ns-row p strong{color:var(--ink);font-weight:600}
+.ns-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:clamp(40px,5vw,56px) 0 0;padding:0;list-style:none}
+.ns-facts li{display:grid;gap:8px;padding:22px 20px 24px;border-radius:20px;background:var(--mist);transition:transform .4s var(--ease)}
+.ns-facts li:hover{transform:translateY(-6px)}
+.ns-facts b{font-size:clamp(1.9rem,3vw,2.6rem);font-weight:600;letter-spacing:-.06em;line-height:1}
+.ns-facts b small{font-size:.42em;letter-spacing:-.02em;margin-left:4px;color:var(--violet-text)}
 .ns-facts span{font-size:13.5px;line-height:1.45;color:var(--ink-2)}
-/* mosaico: la ilustración partida en cuadritos; algunos se blanquean al azar y vuelven */
-.ns-board{--g:6px;--H:calc(100cqw * 1113 / 2436);position:relative;container-type:inline-size;margin-top:clamp(56px,7vw,88px)}
-.ns-mosaic{position:relative;aspect-ratio:2436/1113;border-radius:18px;background:url(/assets/inicio/equipo-cafe.webp) center/cover}
-.js .ns-mosaic{background:none}
-.ns-cell,.ns-card{position:absolute;left:calc(var(--c) * (100cqw + var(--g)) / 10);top:calc(var(--r) * (var(--H) + var(--g)) / 4);width:calc(var(--w,1) * (100cqw + var(--g)) / 10 - var(--g));height:calc(var(--h,1) * (var(--H) + var(--g)) / 4 - var(--g));border-radius:12px}
-.ns-cell{overflow:hidden;background:url(/assets/inicio/equipo-cafe.webp) no-repeat;background-size:100cqw var(--H);background-position:calc(var(--c) * (100cqw + var(--g)) / -10) calc(var(--r) * (var(--H) + var(--g)) / -4);opacity:0;scale:.92;transition:opacity .7s var(--ease),scale .7s var(--ease);transition-delay:var(--d,0s)}
-.ns-cell::after{content:"";position:absolute;inset:0;background:var(--paper);opacity:0;transition:opacity .9s ease}
-.ns-cell.blank::after{opacity:.94}
-.ns-board.in .ns-cell{opacity:1;scale:1}
-.ns-tag{position:absolute;left:10px;top:10px;z-index:3;padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--ink);font-size:12px;font-weight:600}
-.ns-card{z-index:2;display:flex;flex-direction:column;justify-content:space-between;gap:8px;padding:clamp(12px,1.6cqw,20px);background:var(--ink);color:var(--paper);opacity:0;translate:0 12px;transition:opacity .8s var(--ease),translate .8s var(--ease);transition-delay:.5s}
-.ns-board.in .ns-card{opacity:1;translate:0 0}
-.ns-card b{font-size:clamp(15px,1.7cqw,20px);font-weight:600;letter-spacing:-.03em;line-height:1.12}
-.ns-card span{font-size:clamp(11.5px,1.1cqw,13px);line-height:1.45;opacity:.72}
-.ns-cap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;margin-top:12px;font-size:13px;color:var(--ink-3)}
-/* fichas "Hola, soy…", al estilo de la referencia: la foto ocupa la tarjeta y los datos van alrededor */
-.ns-team{margin-top:clamp(90px,11vw,130px)}
-.ns-eyebrow{margin:0 0 10px;font-size:clamp(1.8rem,3.4vw,2.7rem);line-height:1.05;letter-spacing:-.05em}
-.ns-eyebrow .dim{color:var(--ink-3)}
-.ns-sub{margin:0 0 28px;font-size:15px;color:var(--ink-2)}
-.ns-people{display:grid;gap:16px}
-.ns-me{position:relative;aspect-ratio:16/8;border-radius:24px;overflow:hidden;background:linear-gradient(160deg,#EFE8F7,#DCCDEE);isolation:isolate}
-.ns-me.dark{background:linear-gradient(160deg,#2A1747,#120A1F);color:var(--paper)}
+.ns-facts li.k{background:var(--ink);color:var(--paper)}
+.ns-facts li.k span{color:rgba(255,255,255,.7)}
+.ns-facts li.k b small{color:var(--violet-light)}
+/* el equipo: dos fichas lado a lado, como la referencia de media kit: la foto al centro y los datos alrededor */
+.ns-people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:clamp(32px,4vw,44px)}
+.ns-me{--b:rgba(8,8,8,.14);position:relative;container-type:inline-size;aspect-ratio:3/2;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#F6F3EE 0%,#ECE6F3 100%);color:var(--ink);isolation:isolate;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.ns-me.alt{background:linear-gradient(180deg,#F3EEF8 0%,#E4D8F1 100%)}
+.ns-me:hover{transform:translateY(-6px);box-shadow:0 30px 50px -34px rgba(54,17,95,.5)}
 .ns-ph{position:absolute;inset:0;z-index:-1;display:grid;place-items:end center}
-.ns-ph svg{width:min(42%,340px);height:auto;opacity:.5}
+.ns-ph svg{width:44%;height:auto;opacity:.45}
 .ns-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.ns-me>*:not(.ns-ph){position:absolute}
-.ns-kit{left:22px;top:20px;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600}
-.ns-kit b{padding:4px 10px;border-radius:99px;background:var(--ink);color:var(--paper)}
-.ns-me.dark .ns-kit b{background:var(--paper);color:var(--ink)}
-.ns-hey{left:22px;top:50%;translate:0 -50%;margin:0;font-size:clamp(2.2rem,5.4vw,4.4rem);font-weight:600;line-height:.95;letter-spacing:-.06em}
-.ns-hey small{display:block;font-size:.42em;font-weight:500;letter-spacing:-.02em;opacity:.6;margin-bottom:8px}
-.ns-hey em{display:inline-block;margin-top:14px;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.75);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:13px;font-style:normal;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
-.ns-big{right:24px;top:20px;margin:0;text-align:right}
-.ns-big b{display:block;font-size:clamp(2rem,4.4vw,3.6rem);font-weight:600;line-height:.95;letter-spacing:-.06em;color:var(--violet-text)}
-.ns-me.dark .ns-big b{color:var(--violet-light)}
-.ns-big span{display:block;margin-top:6px;font-size:13px;line-height:1.4;opacity:.7;max-width:22ch;margin-left:auto}
-.ns-tags{right:22px;bottom:20px;display:grid;justify-items:end;gap:6px;margin:0;padding:0;list-style:none}
-.ns-tags li{padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.8);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:12.5px;font-weight:600;color:var(--ink)}
-.ns-me.dark .ns-tags li{background:rgba(255,255,255,.12);color:var(--paper)}
-.ns-handle{left:22px;bottom:20px;display:flex;align-items:center;gap:8px;padding:5px 12px 5px 5px;border-radius:99px;background:rgba(255,255,255,.8);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:12.5px;font-weight:600;color:var(--ink)}
-.ns-me.dark .ns-handle{background:rgba(255,255,255,.12);color:var(--paper)}
-.ns-handle i{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--violet);color:#fff;font-style:normal;font-size:11px;font-weight:700}
-@media (max-width:900px){.ns-intro{grid-template-columns:1fr}.ns-facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:700px){
-  .ns-board{--g:3px}
-  .ns-cell{border-radius:5px}
-  .ns-tag{left:6px;top:6px;font-size:10.5px;padding:3px 8px}
-  .ns-card{position:relative;left:auto;top:auto;width:auto;height:auto;margin-top:8px;border-radius:16px;padding:18px}
-  .ns-card b{font-size:18px}.ns-card span{font-size:13px}
-  .ns-me{aspect-ratio:auto;min-height:520px}
-  .ns-hey{top:64px;translate:none}
-  .ns-big{top:auto;bottom:132px;right:auto;left:22px;text-align:left}
-  .ns-big span{margin-left:0}
-  .ns-tags{justify-items:start;left:22px;right:auto;bottom:62px;display:flex;flex-wrap:wrap}
+.ns-me>*:not(.ns-ph){position:absolute;margin:0}
+/* arriba a la izquierda: etiqueta en dos partes */
+.ns-kit{left:4.4cqw;top:4.4cqw;display:flex;align-items:center;font-size:clamp(10.5px,2.1cqw,12.5px);font-weight:600;border:1px solid var(--b);border-radius:7px;background:rgba(255,255,255,.75);overflow:hidden}
+.ns-kit b{padding:4px 9px;background:var(--ink);color:var(--paper)}
+.ns-kit span{padding:4px 9px}
+/* el título grande y la línea debajo */
+.ns-me h3{left:4.4cqw;top:21cqw;max-width:52%;font-size:clamp(1.5rem,7.4cqw,2.9rem);line-height:.95;letter-spacing:-.06em;text-wrap:balance}
+.ns-line{left:4.4cqw;top:41cqw;padding:5px 11px;border:1px solid var(--b);border-radius:99px;background:rgba(255,255,255,.75);font-size:clamp(11px,2.2cqw,13px);font-weight:600}
+/* arriba a la derecha: la palabra grande y su texto */
+.ns-stat{right:4.4cqw;top:4.4cqw;width:34%;text-align:right}
+.ns-stat b{display:block;font-size:clamp(1.3rem,6cqw,2.3rem);font-weight:600;line-height:1;letter-spacing:-.06em;color:var(--violet-text)}
+.ns-stat span{display:block;margin-top:6px;font-size:clamp(10.5px,2cqw,12.5px);line-height:1.4;color:var(--ink-2)}
+/* abajo a la derecha: los servicios, uno encima del otro */
+.ns-tags{right:4.4cqw;bottom:4.4cqw;display:grid;justify-items:end;gap:5px;padding:0;list-style:none}
+.ns-tags li{padding:5px 11px;border:1px solid var(--b);border-radius:8px;background:rgba(255,255,255,.85);font-size:clamp(10.5px,2.1cqw,12.5px);font-weight:600}
+/* abajo a la izquierda: la insignia */
+.ns-badge{left:4.4cqw;bottom:4.4cqw;display:flex;align-items:center;gap:8px;padding:5px 12px 5px 5px;border:1px solid var(--b);border-radius:99px;background:rgba(255,255,255,.85)}
+.ns-badge i{display:grid;place-items:center;flex:none;width:clamp(24px,5.4cqw,32px);aspect-ratio:1;border-radius:50%;background:var(--violet);color:#fff;font-style:normal;font-size:11px;font-weight:700}
+.ns-badge span{display:grid;font-size:clamp(10.5px,2cqw,12px);font-weight:600;line-height:1.2}
+.ns-badge small{font-size:.88em;font-weight:500;color:var(--ink-3)}
+@media (max-width:900px){.ns-row{grid-template-columns:1fr}.ns-facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.ns-people{grid-template-columns:1fr}}
+@media (max-width:700px){.ns-pic{margin:32px 10px 0;border-radius:16px}.ns-tag{left:8px;top:8px;font-size:11px;padding:4px 9px}.ns-hero{margin-top:84px}}
+@media (max-width:480px){
+  .ns-me{aspect-ratio:auto;min-height:440px}
+  .ns-me h3{top:64px;max-width:70%;font-size:2rem}
+  .ns-line{top:150px}
+  .ns-stat{top:auto;bottom:150px;right:auto;left:16px;width:60%;text-align:left}
 }
-@media (min-width:701px){.ns-cell.sk{display:none}}
-@media (prefers-reduced-motion:reduce){.ns-cell,.ns-card{transition:none;opacity:1;scale:1;translate:0 0}}
 </style>
 </head>
 <body>
@@ -1066,70 +1052,74 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 </div>
 
 <div class="page">
-  <main class="ns" id="top">
-    <header class="ns-intro">
-      <div>
-        <p class="ns-pill"><b>Quiénes somos</b> Barranquilla, Colombia</p>
-        <h1 class="ns-h"><span class="dim">Somos Kaiva:</span> diseño y tecnología en el mismo equipo.</h1>
+  <main id="top">
+    <header class="hero ns-hero" id="nsHero">
+      <div class="hero-copy">
+        <p class="pill"><b>Quiénes somos</b> Barranquilla, Colombia</p>
+        <h1><span class="dim">Diseño y tecnología,</span> en un mismo equipo</h1>
+        <p class="lede">Kaiva Studio es un estudio digital de Barranquilla. Diseñamos y construimos páginas web, software a medida y marcas para empresas.</p>
+        <div class="actions"><a class="btn btn-white" href="/agendar/">Agendar llamada</a><a class="btn btn-ghost" href="/portfolio/">Ver portfolio <svg><use href="#i-arrow"/></svg></a></div>
       </div>
-      <div class="ns-lead">
-        <p><strong>Kaiva Studio es un estudio digital de Barranquilla.</strong> Diseñamos y construimos páginas web, software a medida y marcas para empresas, desde la estrategia hasta que todo está en línea.</p>
-        <p>No somos una agencia de publicidad ni de redes. Somos el equipo que piensa, diseña y programa lo que tu empresa necesita.</p>
-        <div class="ns-acts"><a class="btn btn-ink" href="/agendar/">Agendar llamada</a><a class="btn btn-line" href="/portfolio/">Ver portfolio</a></div>
+      <div class="ns-pic" id="nsPic">
+        <img src="/assets/inicio/equipo-cafe.webp" alt="Ilustración del equipo de Kaiva Studio con el equipo de Thallo Digital en un café" width="1800" height="822" fetchpriority="high">
+        <div class="ns-tw" aria-hidden="true"></div>
+        <span class="ns-tag">Con el equipo de Thallo Digital</span>
       </div>
     </header>
 
-    <ul class="ns-facts">
-      <li><b>0<small>plantillas</small></b><span>Cada proyecto se diseña desde cero.</span></li>
-      <li><b>3–5<small>semanas</small></b><span>Lo que toma una web estándar desde que apruebas el alcance.</span></li>
-      <li><b>20<small>minutos</small></b><span>La primera llamada, y sales con un alcance por escrito.</span></li>
-      <li><b>100 %<small>remoto</small></b><span>Con empresas de toda Colombia y Latinoamérica.</span></li>
-    </ul>
+    <section class="ns-sec" aria-labelledby="ns-why-t">
+      <div class="ns-row">
+        <h2 id="ns-why-t"><span class="dim">No somos</span> una agencia más</h2>
+        <p><strong>Ni de publicidad ni de redes.</strong> Somos el equipo que piensa, diseña y programa lo que tu empresa necesita, y nos encargamos de la ejecución completa.</p>
+      </div>
+      <ul class="ns-facts">
+        <li class="k"><b>0<small>plantillas</small></b><span>Cada proyecto se diseña desde cero.</span></li>
+        <li><b>3–5<small>semanas</small></b><span>Lo que toma una web estándar desde que apruebas el alcance.</span></li>
+        <li><b>20<small>minutos</small></b><span>La primera llamada, y sales con un alcance por escrito.</span></li>
+        <li><b>100 %<small>remoto</small></b><span>Con empresas de toda Colombia y Latinoamérica.</span></li>
+      </ul>
+    </section>
 
-    <div class="ns-board" id="nsBoard">
-      <div class="ns-mosaic" role="img" aria-label="Ilustración del equipo de Kaiva Studio con el equipo de Thallo Digital en un café"><span class="ns-tag">Con el equipo de Thallo Digital</span></div>
-      <div class="ns-card" style="--c:0;--r:2;--w:2;--h:2"><b>Thallo Digital</b><span>Les hicimos el sitio web y la marca. Aquí, con su equipo.</span></div>
-    </div>
-
-    <section class="ns-team" aria-labelledby="ns-team-t">
-      <h2 class="ns-eyebrow" id="ns-team-t"><span class="dim">Las caras</span> detrás de Kaiva</h2>
+    <section class="ns-sec" aria-labelledby="ns-team-t">
+      <h2 id="ns-team-t"><span class="dim">Las caras</span> detrás de Kaiva</h2>
       <p class="ns-sub">Hablas directo con quien diseña y con quien programa tu proyecto.</p>
       <div class="ns-people">
         <article class="ns-me">
-          <div class="ns-ph" data-foto="mateo"><svg viewBox="0 0 100 80" aria-hidden="true"><circle cx="50" cy="30" r="17" fill="#A580D6"/><path d="M12 80c3-19 19-31 38-31s35 12 38 31z" fill="#A580D6"/></svg></div>
-          <p class="ns-kit"><b>Kaiva Studio</b> Desarrollo</p>
-          <p class="ns-hey"><small>Hola, soy</small>Mateo.<br><em>Programo lo que diseñamos</em></p>
-          <p class="ns-big"><b>Código</b><span>Páginas web y software a medida</span></p>
-          <ul class="ns-tags"><li>Webs rápidas</li><li>Plataformas</li><li>Integraciones</li></ul>
-          <p class="ns-handle"><i>K.</i>@kaivastudio</p>
+          <div class="ns-ph" data-foto="desarrollador"><svg viewBox="0 0 100 80" aria-hidden="true"><circle cx="50" cy="30" r="17" fill="#A580D6"/><path d="M12 80c3-19 19-31 38-31s35 12 38 31z" fill="#A580D6"/></svg></div>
+          <p class="ns-kit"><b>Kaiva Studio</b><span>Desarrollo</span></p>
+          <h3>Desarrollador web</h3>
+          <p class="ns-line">Desarrollo web en Barranquilla</p>
+          <p class="ns-stat"><b>Código</b><span>Programa páginas web rápidas, plataformas y software a medida para empresas de Colombia y Latinoamérica.</span></p>
+          <ul class="ns-tags"><li>Desarrollo web</li><li>Software a medida</li><li>Integraciones</li></ul>
+          <p class="ns-badge"><i>K.</i><span>@kaivastudio<small>Barranquilla, Colombia</small></span></p>
         </article>
-        <article class="ns-me dark">
+        <article class="ns-me alt">
           <div class="ns-ph" data-foto="disenadora"><svg viewBox="0 0 100 80" aria-hidden="true"><circle cx="50" cy="30" r="17" fill="#A580D6"/><path d="M12 80c3-19 19-31 38-31s35 12 38 31z" fill="#A580D6"/></svg></div>
-          <p class="ns-kit"><b>Kaiva Studio</b> Diseño</p>
-          <p class="ns-hey"><small>Hola, soy</small>la diseñadora.<br><em>Le doy forma a cada marca</em></p>
-          <p class="ns-big"><b>Diseño</b><span>Marcas, páginas web e ilustración</span></p>
+          <p class="ns-kit"><b>Kaiva Studio</b><span>Diseño</span></p>
+          <h3>Diseñadora gráfica</h3>
+          <p class="ns-line">Diseño de marca y diseño web</p>
+          <p class="ns-stat"><b>Diseño</b><span>Crea logos, identidades de marca, páginas web e ilustraciones para empresas que quieren verse tan bien como trabajan.</span></p>
           <ul class="ns-tags"><li>Logo e identidad</li><li>Diseño web</li><li>Ilustración</li></ul>
-          <p class="ns-handle"><i>K.</i>@kaivastudio</p>
+          <p class="ns-badge"><i>K.</i><span>@kaivastudio<small>Barranquilla, Colombia</small></span></p>
         </article>
       </div>
     </section>
   </main>
   <script>
   (function(){
-    /* el mosaico: un cuadrito por celda; aparecen en desorden y luego se blanquean y vuelven, de a uno */
-    var b=document.getElementById('nsBoard'),m=b.querySelector('.ns-mosaic'),skip={'0,2':1,'1,2':1,'0,3':1,'1,3':1},cells=[];
-    var f=document.createDocumentFragment();
-    for(var r=0;r<4;r++)for(var c=0;c<10;c++){var d=document.createElement('div');d.className='ns-cell'+(skip[c+','+r]?' sk':'');d.style.cssText='--c:'+c+';--r:'+r+';--d:'+(Math.random()*.45).toFixed(2)+'s';f.appendChild(d);if(!skip[c+','+r])cells.push(d)}
-    m.appendChild(f);
-    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches,timer=0;
-    function twinkle(){
-      var n=1+Math.floor(Math.random()*2);
-      for(var i=0;i<n;i++){(function(x){if(x.classList.contains('blank'))return;x.classList.add('blank');setTimeout(function(){x.classList.remove('blank')},900+Math.random()*900)})(cells[Math.floor(Math.random()*cells.length)])}
-    }
-    function start(){b.classList.add('in');if(!reduce&&!timer)timer=setInterval(twinkle,420)}
-    function stop(){clearInterval(timer);timer=0}
-    if(!('IntersectionObserver' in window)){start();return}
-    new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)start();else stop()})},{threshold:.15}).observe(b);
+    /* el panel se pone morado al bajar, como en la portada */
+    var h=document.getElementById('nsHero');
+    function hp(){var r=h.getBoundingClientRect();h.style.setProperty('--hp',Math.max(0,Math.min(1,-(r.top-76)/(r.height*.6))).toFixed(3))}
+    window.addEventListener('scroll',hp,{passive:true});hp();
+    /* cuadritos que se blanquean al azar sobre la ilustración y vuelven */
+    var tw=h.querySelector('.ns-tw'),cells=[];
+    for(var i=0;i<55;i++){var c=document.createElement('i');tw.appendChild(c);cells.push(c)}
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    var t=0;
+    function twinkle(){for(var n=1+Math.floor(Math.random()*2);n--;){var x=cells[Math.floor(Math.random()*cells.length)];if(x.classList.contains('blank'))continue;x.classList.add('blank');(function(x){setTimeout(function(){x.classList.remove('blank')},800+Math.random()*900)})(x)}}
+    var pic=document.getElementById('nsPic');
+    function go(on){if(on&&!t)t=setInterval(twinkle,420);if(!on){clearInterval(t);t=0}}
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){go(es[0].isIntersecting)}).observe(pic);else go(true);
   })();
   </script>
 
