@@ -957,10 +957,16 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .final-core{gap:clamp(12px,2.1vh,20px);margin-top:auto}
 .final .foot{display:none}
 .final .legal{margin-top:auto}
-.final .note-wrap{zoom:.82}
-@media (max-height:820px){.final .note-wrap{zoom:.68}}
-@media (max-height:700px){.final .note-wrap{zoom:.55}}
-@media (max-width:700px){.final .note-wrap{zoom:.62}.final{gap:10px}}
+/* la nota se achica con una escala (--z) en vez de zoom: en iPhone, zoom achicaba el papel pero no la letra */
+.final .note-wrap{--z:.82;width:calc(180px * var(--z));height:calc(180px * var(--z))}
+.final .note-shadow{transform:scale(var(--z));transform-origin:0 0}
+.final .sticky{padding:calc(22px * var(--z)) calc(20px * var(--z));gap:calc(10px * var(--z))}
+.final .sticky::before{top:calc(-12px * var(--z));width:calc(74px * var(--z));height:calc(24px * var(--z));margin-left:calc(-37px * var(--z))}
+.final .sticky b{font-size:calc(23px * var(--z))}
+.final .sticky span{font-size:calc(12.5px * var(--z))}
+@media (max-height:820px){.final .note-wrap{--z:.68}}
+@media (max-height:700px){.final .note-wrap{--z:.55}}
+@media (max-width:700px){.final .note-wrap{--z:.62}.final{gap:10px}}
 .final::before{background:linear-gradient(180deg,rgba(122,63,201,.5) 0%,rgba(122,63,201,.28) 40%,rgba(122,63,201,.08) 80%,transparent 100%)}
 /* más oscura, como el cierre de la portada cuando ya bajaste */
 .final::after{opacity:.55}
