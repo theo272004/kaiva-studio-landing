@@ -1038,6 +1038,10 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .ns-facts li.k{background:var(--ink);color:var(--paper)}
 .ns-facts li.k span{color:rgba(255,255,255,.7)}
 .ns-facts li.k b small{color:var(--violet-light)}
+/* las cifras cuentan al llegar y vuelven a contar al tocarlas, como en la portada */
+.ns-facts li.replay{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ns-facts li.replay:active{transform:translateY(-2px) scale(.985)}
+.ns-facts li.replay:focus-visible{outline:2px solid var(--violet-text);outline-offset:3px}
 /* el equipo: dos fichas lado a lado, como la referencia de media kit: la foto al centro y los datos alrededor */
 .ns-people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:clamp(32px,4vw,44px)}
 .ns-me{--b:rgba(8,8,8,.14);position:relative;container-type:inline-size;aspect-ratio:3/2;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#F6F3EE 0%,#ECE6F3 100%);color:var(--ink);isolation:isolate;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
@@ -1135,10 +1139,10 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
         <p><strong>Ni de publicidad ni de redes.</strong> Somos el equipo que piensa, diseña y programa lo que tu empresa necesita, y nos encargamos de la ejecución completa.</p>
       </div>
       <ul class="ns-facts">
-        <li class="k"><b>0<small>plantillas</small></b><span>Cada proyecto se diseña desde cero, según lo que tu negocio necesita vender.</span></li>
-        <li><b>2–3<small>semanas</small></b><span>Lo que toma tener tu web lista desde que apruebas la propuesta.</span></li>
-        <li><b>1<small>llamada</small></b><span>Nos cuentas tu idea y armamos una propuesta a tu medida.</span></li>
-        <li><b>100 %<small>remoto</small></b><span>Por videollamada, correo y WhatsApp, con empresas de toda Colombia y Latinoamérica.</span></li>
+        <li class="k" data-from="40" data-to="0"><b><span class="val">0</span><small>plantillas</small></b><span>Cada proyecto se diseña desde cero, según lo que tu negocio necesita vender.</span></li>
+        <li data-weeks><b><span class="val">2–3</span><small>semanas</small></b><span>Lo que toma tener tu web lista desde que apruebas la propuesta.</span></li>
+        <li data-from="0" data-to="1"><b><span class="val">1</span><small>llamada</small></b><span>Nos cuentas tu idea y armamos una propuesta a tu medida.</span></li>
+        <li data-from="0" data-to="100" data-suffix=" %"><b><span class="val">100 %</span><small>remoto</small></b><span>Por videollamada, correo y WhatsApp, con empresas de toda Colombia y Latinoamérica.</span></li>
       </ul>
     </section>
 
@@ -1368,6 +1372,34 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   }
 
 })();
+
+  /* cifras: cuentan una vez al llegar y vuelven a contar con un toque */
+  (function(){
+    var lis=[].slice.call(document.querySelectorAll('.ns-facts li'));
+    if(!lis.length||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    function set(li,p){
+      var v=li.querySelector('.val');
+      if(li.hasAttribute('data-weeks'))v.textContent=Math.round(2*p)+'–'+Math.round(3*p);
+      else{var a=+li.dataset.from,b=+li.dataset.to;v.textContent=Math.round(a+(b-a)*p)+(li.dataset.suffix||'')}
+    }
+    function play(li,delay){
+      var mine=li._run=(li._run||0)+1;set(li,0);
+      setTimeout(function(){
+        var t0=null;
+        (function step(ts){if(li._run!==mine)return;if(!t0)t0=ts;var q=Math.min(1,(ts-t0)/1400);set(li,1-Math.pow(1-q,3));if(q<1)requestAnimationFrame(step)})(performance.now());
+      },delay||0);
+    }
+    lis.forEach(function(li){
+      li.classList.add('replay');li.tabIndex=0;li.setAttribute('role','button');
+      li.setAttribute('aria-label','Volver a contar: '+li.querySelector('b').textContent.replace(/\s+/g,' ').trim());
+      li.addEventListener('click',function(){if(!String(window.getSelection&&window.getSelection()))play(li)});
+      li.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();play(li)}});
+    });
+    if('IntersectionObserver' in window){
+      lis.forEach(function(li){set(li,0)});
+      new IntersectionObserver(function(es,o){if(es[0].isIntersecting){lis.forEach(function(li,k){play(li,k*180)});o.disconnect()}},{threshold:.35}).observe(lis[0].parentNode);
+    }
+  })();
 </script>
 </body>
 </html>
