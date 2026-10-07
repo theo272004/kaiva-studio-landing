@@ -962,13 +962,14 @@ h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s
 .plan li{display:flex;gap:10px;align-items:flex-start}
 .plan li::before{content:"";flex:none;width:6px;height:6px;margin-top:8px;border-radius:50%;background:var(--violet)}
 .plan .btn{justify-content:center;background:var(--ink);color:var(--paper)}
-.plan .tagline{position:absolute;top:14px;right:14px;font-size:10.5px;font-weight:600;padding:4px 9px;border-radius:99px;background:var(--violet-text);color:#fff;opacity:0;transform:translateY(-4px);transition:opacity .4s,transform .4s var(--ease)}
+.plan .tagline{position:absolute;top:14px;right:14px;font-size:10.5px;font-weight:600;padding:4px 9px;border-radius:99px;background:var(--violet-text);color:#fff;opacity:0;transform:translateY(-4px) scale(1.0638);transform-origin:100% 0;transition:opacity .4s,transform .6s var(--ease)}
 .plan.featured .price small,.plan.featured p.desc{color:#B4B4BC}
 .plan.featured ul{border-color:#26262A}
 .plan.featured li::before{background:var(--violet-light)}
 .plan.featured .btn{background:var(--paper);color:var(--ink)}
 .plan.featured .btn:hover{box-shadow:0 0 0 5px rgba(255,255,255,.16)}
 .plan.featured .tagline{opacity:1;transform:none}
+@media (max-width:980px){.plan .tagline{transform:translateY(-4px)}.plan.featured .tagline{transform:none}}
 
 /* ---------- cierre ---------- */
 .final{position:relative;margin-top:clamp(110px,13vw,160px);background:var(--violet);color:var(--paper);border-radius:var(--r-panel);padding:clamp(80px,10vw,120px) clamp(20px,3.4vw,44px) 24px;overflow:hidden;isolation:isolate}
