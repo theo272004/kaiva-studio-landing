@@ -1748,7 +1748,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       var w=folds[0].offsetWidth,fh=folds[0].offsetHeight,L=t.left-h.left,R=h.right-t.right,pos;
       if(L>=170&&R>=170){
         var y1=t.top-h.top-10,y2=a.top-h.top-20;
-        pos=[[L*.28-w/2,y1],[L*.62-w/2,y2],[h.width-R*.28-w/2,y1+14],[h.width-R*.62-w/2,y2-8]];
+        // cerca del título, sin irse hasta los bordes de la pantalla
+        pos=[[L*.72-w/2,y1],[L*.9-w/2,y2],[h.width-R*.72-w/2,y1+14],[h.width-R*.9-w/2,y2-8]];
       }else{
         var sp=p.left-h.left,sa=a.left-h.left,yp=p.top-h.top+p.height/2-fh/2,ya=a.top-h.top+a.height/2-fh/2;
         pos=[[sp/2-w/2,yp],[sa/2-w/2,ya],[h.width-sp/2-w/2,yp],[h.width-sa/2-w/2,ya]];
