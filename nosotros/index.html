@@ -974,8 +974,10 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .ns-card.k{background:var(--ink);color:var(--paper)}
 .ns-card.v{background:var(--violet);color:var(--paper)}
 .ns-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px 32px;margin-top:16px;font-size:13.5px;color:var(--ink-2)}
-.ns-foot{flex-direction:column;gap:10px}
-.ns-foot p{margin:0;max-width:none}
+.ns-foot{flex-wrap:nowrap;align-items:flex-start}
+.ns-foot ul{flex:none}
+.ns-foot p{margin:0;max-width:none;flex:1}
+@media (max-width:900px){.ns-foot{flex-direction:column;gap:10px}}
 .ns-foot ul{display:flex;flex-wrap:wrap;gap:8px 22px;margin:0;padding:0;list-style:none}
 .ns-foot li{display:flex;align-items:center;gap:7px}
 .ns-foot li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--violet-text)}
