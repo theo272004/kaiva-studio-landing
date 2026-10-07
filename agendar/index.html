@@ -950,10 +950,20 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .final::after{background:#07050B;opacity:calc(.35 + var(--fp,0))}
 </style>
 <style>
-.final{margin-top:clamp(96px,9vw,110px);min-height:calc(100svh - clamp(96px,9vw,110px) - 16px);display:flex;flex-direction:column;justify-content:space-between;gap:56px;padding-top:clamp(56px,7vw,90px)}
+/* una sola pantalla, sin scroll: el bloque ocupa el alto que queda bajo el menú */
+.page{padding-bottom:0}
+.final{margin-top:76px;height:calc(100svh - 88px);min-height:540px;display:flex;flex-direction:column;justify-content:center;gap:16px;padding:clamp(20px,4vh,44px) clamp(20px,3.4vw,44px) 16px}
+.final-core{gap:clamp(12px,2.1vh,20px);margin-top:auto}
+.final .foot{display:none}
+.final .legal{margin-top:auto}
+.final .note-wrap{zoom:.82}
+@media (max-height:820px){.final .note-wrap{zoom:.68}}
+@media (max-height:700px){.final .note-wrap{zoom:.55}}
+@media (max-width:700px){.final .note-wrap{zoom:.62}.final{gap:10px}}
 .final::before{background:linear-gradient(180deg,rgba(122,63,201,.5) 0%,rgba(122,63,201,.28) 40%,rgba(122,63,201,.08) 80%,transparent 100%)}
-.final::after{opacity:0}
-.final .ag-h{font-size:clamp(2.4rem,5.6vw,4.4rem);letter-spacing:-.05em;max-width:15ch;line-height:1}
+/* más oscura, como el cierre de la portada cuando ya bajaste */
+.final::after{opacity:.55}
+.final .ag-h{font-size:clamp(2.1rem,min(5.2vw,7.2vh),4.2rem);letter-spacing:-.05em;max-width:15ch;line-height:1}
 .final .ag-h .dim{color:rgba(255,255,255,.55)}
 </style>
 </head>
