@@ -849,8 +849,13 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 /* ---------- páginas legales ---------- */
 .articulo .btn-pref{display:inline-flex;padding:10px 18px;border-radius:99px;background:var(--violet-soft);color:var(--violet-text);font-size:15px;font-weight:600;text-decoration:none}
 .articulo .btn-pref:hover{background:var(--violet);color:#fff}
-.legal-links{display:flex;flex-wrap:wrap;gap:10px;margin:clamp(48px,6vw,64px) 0 0;padding-top:24px;border-top:1px solid var(--line)}
-.legal-links a{padding:8px 14px;border-radius:99px;background:var(--mist);color:var(--ink-2);font-size:14px;font-weight:500;text-decoration:none;transition:background .25s,color .25s}
+/* los cuatro enlaces en una sola fila bajo el título; en celular se desliza de lado */
+.legal-links{display:flex;flex-wrap:nowrap;gap:8px;width:calc(100% + 40px);margin:6px -20px 0;padding:2px 20px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.legal-links::-webkit-scrollbar{display:none}
+.legal-links a:first-child{margin-left:auto}.legal-links a:last-child{margin-right:auto}
+.legal-links a{flex:none;white-space:nowrap;padding:8px 14px;border-radius:99px;background:var(--mist);color:var(--ink-2);font-size:14px;font-weight:500;text-decoration:none;transition:background .25s,color .25s}
+.legal-links .ll-s{display:none}
+@media (max-width:600px){.legal-links{gap:4px;width:calc(100% + 40px);margin:6px -20px 0;padding:2px 0}.legal-links a{padding:6px 9px;font-size:12px}.legal-links .ll-l{display:none}.legal-links .ll-s{display:inline}}
 .legal-links a:hover,.legal-links a[aria-current]{background:var(--violet-soft);color:var(--violet-text)}
 /* ---------- 404 ---------- */
 .nf{display:grid;justify-items:center;gap:22px;min-height:78vh;align-content:center;padding:clamp(140px,16vw,180px) 20px 40px;text-align:center}
@@ -908,6 +913,12 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
         <nav class="art-crumbs" aria-label="Ruta de navegación"><a href="/#top">Inicio</a><span aria-hidden="true">/</span><b>Legal</b></nav>
         <h1>Términos y Condiciones<span class="dot">.</span></h1>
         <p class="art-meta"><span>Última actualización: 6 de octubre de 2026</span></p>
+        <nav class="legal-links" aria-label="Páginas legales">
+          <a href="/privacidad/"><span class="ll-l">Política de privacidad</span><span class="ll-s">Privacidad</span></a>
+          <a href="/terminos/" aria-current="page"><span class="ll-l">Términos y condiciones</span><span class="ll-s">Términos</span></a>
+          <a href="/cookies/"><span class="ll-l">Política de cookies</span><span class="ll-s">Cookies</span></a>
+          <a href="/cookies/" data-kv-cookies><span class="ll-l">Preferencias de cookies</span><span class="ll-s">Preferencias</span></a>
+        </nav>
       </header>
       <div class="art-body">
         <div class="articulo">
@@ -978,12 +989,6 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 
     <h2>10. Contacto</h2>
     <p>Para dudas sobre estos términos: <a href="mailto:info@kaivastudio.com">info@kaivastudio.com</a>.</p>
-        <nav class="legal-links" aria-label="Páginas legales">
-          <a href="/privacidad/">Política de privacidad</a>
-          <a href="/terminos/" aria-current="page">Términos y condiciones</a>
-          <a href="/cookies/">Política de cookies</a>
-          <a href="/cookies/" data-kv-cookies>Preferencias de cookies</a>
-        </nav>
         </div>
       </div>
     </article>
