@@ -316,8 +316,7 @@ section{scroll-margin-top:90px}
 @media (max-width:700px){.hfolds{display:none}}
 @media (prefers-reduced-motion:reduce){.hfold,.hfold .folder{animation:none;transition:opacity .2s}}
 .hbox{position:absolute;left:0;top:0;z-index:6;pointer-events:none;border:1.5px solid var(--violet-light);border-radius:4px;opacity:0;transition:opacity .35s}
-.can-hover .hbox.ready{opacity:.14}
-.hbox.on,.can-hover .hbox.on{opacity:1}
+.hbox.on{opacity:1}
 .hbox i{position:absolute;width:8px;height:8px;background:#fff;border:1.5px solid var(--violet-light);border-radius:2px}
 .hbox i:nth-child(1){left:-5px;top:-5px}.hbox i:nth-child(2){right:-5px;top:-5px}.hbox i:nth-child(3){left:-5px;bottom:-5px}.hbox i:nth-child(4){right:-5px;bottom:-5px}
 .hbox b,.hbox em{position:absolute;font:600 10.5px/1 var(--f-mono);letter-spacing:.04em;font-style:normal;white-space:nowrap;padding:4px 6px;border-radius:4px;background:var(--violet-light);color:var(--ink);opacity:0;transition:opacity .25s}
@@ -361,6 +360,14 @@ section{scroll-margin-top:90px}
 h1 .dim .w,h2 .dim .w{transition:color 1.1s ease}
 h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s}
 .final h2 .dim .w:hover{color:var(--violet-light)}
+/* menú del hero: cada palabra, el logo y los íconos se encienden en morado al pasar y se apagan despacio */
+.hero .nav .w{transition:color 1.1s ease}
+.hero .nav .w:hover{color:var(--violet-text);transition:color .08s}
+.hero .nav>.logo{position:relative}
+.hero .nav>.logo::after{content:"";position:absolute;inset:0;background:var(--violet-text);-webkit-mask:url(/assets/inicio/logo-kaiva.png) center/contain no-repeat;mask:url(/assets/inicio/logo-kaiva.png) center/contain no-repeat;opacity:0;transition:opacity 1.1s ease;pointer-events:none}
+.hero .nav>.logo:hover::after{opacity:1;transition:opacity .08s}
+.hero .nav-end .circle{transition:transform .35s var(--ease),box-shadow .35s var(--ease),color 1.1s ease}
+.hero .nav-end .circle:hover{color:var(--violet-text);transition:transform .35s var(--ease),box-shadow .35s var(--ease),color .08s}
 
 /* ---------- estudio (cifras) ---------- */
 .studio{background:var(--mist);border-radius:var(--r-panel);padding:clamp(48px,7vw,90px) clamp(18px,4vw,56px)}
