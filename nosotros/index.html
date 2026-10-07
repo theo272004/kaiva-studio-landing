@@ -951,17 +951,17 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 </style>
 <style>
 /* ---------- quiénes somos: como la portada ---------- */
-.ns-hero{margin-top:76px;padding:clamp(40px,6vw,64px) 0 16px}
+.ns-hero{margin-top:76px;padding:clamp(56px,7vw,88px) 0 clamp(56px,7vw,88px)}
 .ns-hero .hero-copy{padding-top:0}
 .ns-hero h1{max-width:15ch}
 /* la ilustración completa, de punta a punta del panel, sin recortar ni estirar */
-.ns-pic{position:relative;margin:clamp(40px,5vw,60px) 16px 0;border-radius:22px;overflow:hidden;background:#2A1B10}
+/* la foto del equipo va al final, suelta sobre la página y de punta a punta */
+.ns-pic{position:relative;margin:clamp(90px,11vw,130px) 0 0;border-radius:var(--r-panel);overflow:hidden;background:#2A1B10}
 .ns-pic img{display:block;width:100%;height:auto;aspect-ratio:2436/1113}
 .ns-tw{position:absolute;inset:0;display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(5,1fr);pointer-events:none}
 .ns-tw i{background:var(--paper);opacity:0;transition:opacity .9s ease}
 .ns-tw i.blank{opacity:.9}
 .ns-tag{position:absolute;left:14px;top:14px;z-index:2;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--ink);font-size:12.5px;font-weight:600}
-.js .ns-pic{animation:fade 1.2s var(--ease) .35s both}
 /* por qué Kaiva */
 .ns-sec{max-width:1120px;margin:clamp(100px,12vw,150px) auto 0;padding:0 clamp(16px,3vw,28px)}
 .ns-sec h2{margin:0;font-size:clamp(2.2rem,4.6vw,3.8rem);line-height:1;letter-spacing:-.055em;text-wrap:balance}
@@ -1008,7 +1008,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .ns-badge small{font-size:.88em;font-weight:500;color:var(--ink-3)}
 @media (max-width:900px){.ns-row{grid-template-columns:1fr}.ns-facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){.ns-people{grid-template-columns:1fr}}
-@media (max-width:700px){.ns-pic{margin:32px 10px 0;border-radius:16px}.ns-tag{left:8px;top:8px;font-size:11px;padding:4px 9px}.ns-hero{margin-top:84px}}
+@media (max-width:700px){.ns-pic{margin-top:80px;border-radius:18px}.ns-tag{left:8px;top:8px;font-size:11px;padding:4px 9px}.ns-hero{margin-top:84px}}
 @media (max-width:480px){
   .ns-me{aspect-ratio:auto;min-height:440px}
   .ns-me h3{top:64px;font-size:1.75rem}
@@ -1060,11 +1060,6 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
         <p class="lede">Kaiva Studio es un estudio digital de Barranquilla. Diseñamos y construimos páginas web, software a medida y marcas para empresas.</p>
         <div class="actions"><a class="btn btn-white" href="/agendar/">Agendar llamada</a><a class="btn btn-ghost" href="/portfolio/">Ver portfolio <svg><use href="#i-arrow"/></svg></a></div>
       </div>
-      <div class="ns-pic" id="nsPic">
-        <img src="/assets/inicio/equipo-cafe.webp" alt="Ilustración del equipo de Kaiva Studio con el equipo de Thallo Digital en un café" width="1800" height="822" fetchpriority="high">
-        <div class="ns-tw" aria-hidden="true"></div>
-        <span class="ns-tag">Con el equipo de Thallo Digital</span>
-      </div>
     </header>
 
     <section class="ns-sec" aria-labelledby="ns-why-t">
@@ -1104,6 +1099,12 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
         </article>
       </div>
     </section>
+
+    <div class="ns-pic" id="nsPic">
+      <img src="/assets/inicio/equipo-cafe.webp" alt="Ilustración del equipo de Kaiva Studio con el equipo de Thallo Digital en un café" width="1800" height="822" fetchpriority="high">
+      <div class="ns-tw" aria-hidden="true"></div>
+      <span class="ns-tag">Con el equipo de Thallo Digital</span>
+    </div>
   </main>
   <script>
   (function(){
@@ -1112,7 +1113,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     function hp(){var r=h.getBoundingClientRect();h.style.setProperty('--hp',Math.max(0,Math.min(1,-(r.top-76)/(r.height*.6))).toFixed(3))}
     window.addEventListener('scroll',hp,{passive:true});hp();
     /* cuadritos que se blanquean al azar sobre la ilustración y vuelven */
-    var tw=h.querySelector('.ns-tw'),cells=[];
+    var tw=document.querySelector('#nsPic .ns-tw'),cells=[];
     for(var i=0;i<55;i++){var c=document.createElement('i');tw.appendChild(c);cells.push(c)}
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
     var t=0;
