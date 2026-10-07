@@ -962,7 +962,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .js .ns-mosaic{background:none}
 .ns-cell,.ns-card{position:absolute;left:calc(var(--c) * (100cqw + var(--g)) / 10);top:calc(var(--r) * (var(--H) + var(--g)) / 4);width:calc(var(--w,1) * (100cqw + var(--g)) / 10 - var(--g));height:calc(var(--h,1) * (var(--H) + var(--g)) / 4 - var(--g));border-radius:14px}
 .ns-cell{overflow:hidden;background:url(/assets/inicio/equipo-mosaico.webp) no-repeat;background-size:100cqw var(--H);background-position:calc(var(--c) * (100cqw + var(--g)) / -10) calc(var(--r) * (var(--H) + var(--g)) / -4);opacity:0;scale:.92;transition:opacity .7s var(--ease),scale .7s var(--ease),filter .4s;transition-delay:var(--d,0s)}
-.ns-cell::after{content:"";position:absolute;inset:0;background:var(--paper);opacity:0;transition:opacity .9s ease}
+.ns-cell::after{content:"";position:absolute;inset:0;background:var(--paper);opacity:0;transition:opacity .45s ease}
 .ns-cell.blank::after{opacity:.92}
 .ns-cell:hover{filter:brightness(1.08) saturate(1.1)}
 .ns-board.in .ns-cell{opacity:1;scale:1}
@@ -984,17 +984,28 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .ns-hero .hglow{background:radial-gradient(140% 100% at 50% 100%,rgba(122,63,201,.78) 0%,rgba(92,40,160,.6) 34%,rgba(54,17,95,.32) 62%,transparent 88%)}
 .nsf{position:absolute;left:0;top:0;z-index:4;display:grid;justify-items:center;gap:14px;color:#fff;text-decoration:none;opacity:0;pointer-events:none;transform:translate(var(--dx,0),var(--dy,0)) scale(.15);transition:transform .8s cubic-bezier(.34,1.35,.64,1),opacity .35s;transition-delay:calc(var(--i) * 90ms)}
 .ns-hero.hfon .nsf{opacity:1;pointer-events:auto;transform:rotate(var(--r,0deg))}
-.nsf-doc{position:relative;display:block;width:96px;height:122px;filter:drop-shadow(0 12px 18px rgba(10,0,30,.55));animation:hfl 3.6s ease-in-out infinite alternate;animation-delay:calc(var(--i) * -1.2s);transition:scale .35s var(--ease)}
-.nsf-doc::before{content:"";position:absolute;inset:0;background:#fff;border-radius:7px;clip-path:polygon(0 0,74% 0,100% 20%,100% 100%,0 100%)}
-.nsf-doc::after{content:"";position:absolute;right:0;top:0;width:26%;height:20%;background:linear-gradient(225deg,transparent 50%,#DCD6E4 50%);border-radius:0 0 0 4px}
-.nsf-pv{position:absolute;left:10px;right:10px;top:28px;bottom:12px;border-radius:4px;overflow:hidden;background:linear-gradient(160deg,#EFE8F7,#D6C5EC);display:grid;place-items:end center}
-.nsf-pv svg{width:78%;height:auto;opacity:.6}
-.nsf-ext{position:absolute;left:10px;top:9px;padding:2px 6px;border-radius:4px;background:var(--violet-text);color:#fff;font-size:9px;font-weight:700;letter-spacing:.04em}
+.nsf{cursor:pointer;border:0;background:none;font:inherit;padding:0}
+.nsf-doc{position:relative;display:block;width:150px;aspect-ratio:16/9;padding:4px;border-radius:6px;background:#fff;box-shadow:0 14px 26px -10px rgba(10,0,30,.6);animation:hfl 3.6s ease-in-out infinite alternate;animation-delay:calc(var(--i) * -1.2s);transition:scale .35s var(--ease)}
+.nsf-pv{display:block;width:100%;height:100%;border-radius:3px;overflow:hidden;background:#EFE8F7}
+.nsf-pv img{display:block;width:100%;height:100%;object-fit:cover}
+.nsf-ext{position:absolute;left:8px;top:8px;padding:2px 6px;border-radius:4px;background:var(--violet-text);color:#fff;font-size:9px;font-weight:700;letter-spacing:.04em}
 .nsf b{padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:12.5px;font-weight:600;transition:background .3s}
 .nsf small{display:block;margin-top:-8px;font-size:11.5px;opacity:.65}
 .nsf:hover .nsf-doc{scale:1.07}
 .nsf:hover b{background:var(--violet-text)}
-@media (max-width:1099px){.nsf-doc{width:70px;height:89px}.nsf-pv{top:22px;left:7px;right:7px}.nsf b{font-size:11px}}
+@media (max-width:1099px){.nsf-doc{width:104px;padding:3px}.nsf b{font-size:11px}}
+/* vista previa de Mac (Quick Look) al abrir un archivo */
+.ql{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:24px;background:rgba(8,6,14,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:opacity .3s ease,visibility 0s linear .3s}
+.ql.open{opacity:1;visibility:visible;transition:opacity .3s ease}
+.ql-win{width:min(1100px,100%);border-radius:14px;overflow:hidden;background:#F6F5F8;box-shadow:0 0 0 1px rgba(0,0,0,.18),0 50px 100px -30px rgba(0,0,0,.7);transform:scale(.92);transition:transform .45s var(--ease)}
+.ql.open .ql-win{transform:none}
+.ql-bar{position:relative;display:flex;align-items:center;height:40px;padding:0 14px;border-bottom:1px solid #E2E0E6;font-size:13px;font-weight:600;color:#3A3A40}
+.ql-bar span{position:absolute;left:0;right:0;text-align:center;pointer-events:none}
+.ql-lights{display:flex;gap:8px;position:relative;z-index:1}
+.ql-lights i{display:block;width:12px;height:12px;border-radius:50%;background:#FEBC2E}
+.ql-lights i:last-child{background:#28C840}
+.ql-lights button{width:12px;height:12px;padding:0;border:0;border-radius:50%;background:#FF5F57;cursor:pointer}
+.ql-win img{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#EFE8F7}
 @media (max-width:700px){.nsf{display:none}}
 @media (prefers-reduced-motion:reduce){.nsf,.nsf-doc{animation:none;transition:opacity .2s}}
 /* por qué Kaiva */
@@ -1093,8 +1104,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     <header class="hero ns-hero" id="nsHero">
       <div class="hglow" aria-hidden="true"></div>
       <div class="nsfs">
-        <a class="nsf" href="#ns-desarrollador" tabindex="-1" aria-hidden="true" style="--i:0;--r:-5deg"><span class="nsf-doc"><span class="nsf-pv"><svg viewBox="0 0 100 80" aria-hidden="true"><circle cx="50" cy="30" r="17" fill="#A580D6"/><path d="M12 80c3-19 19-31 38-31s35 12 38 31z" fill="#A580D6"/></svg></span><span class="nsf-ext">PNG</span></span><b>Mateo.png</b><small>Desarrollador web</small></a>
-        <a class="nsf" href="#ns-disenadora" tabindex="-1" aria-hidden="true" style="--i:1;--r:4deg"><span class="nsf-doc"><span class="nsf-pv"><svg viewBox="0 0 100 80" aria-hidden="true"><circle cx="50" cy="30" r="17" fill="#A580D6"/><path d="M12 80c3-19 19-31 38-31s35 12 38 31z" fill="#A580D6"/></svg></span><span class="nsf-ext">PNG</span></span><b>Sara.png</b><small>Diseñadora gráfica</small></a>
+        <button class="nsf" type="button" data-ql="mateo" tabindex="-1" aria-hidden="true" style="--i:0;--r:-5deg"><span class="nsf-doc"><span class="nsf-pv"><img src="/assets/inicio/ficha-mateo-min.webp" alt="" width="360" height="203" loading="lazy"></span><span class="nsf-ext">PNG</span></span><b>Mateo.png</b><small>Desarrollador web</small></button>
+        <button class="nsf" type="button" data-ql="disenadora" tabindex="-1" aria-hidden="true" style="--i:1;--r:4deg"><span class="nsf-doc"><span class="nsf-pv"><img src="/assets/inicio/ficha-disenadora-min.webp" alt="" width="360" height="203" loading="lazy"></span><span class="nsf-ext">PNG</span></span><b>Sara.png</b><small>Diseñadora gráfica</small></button>
       </div>
       <div class="hero-copy">
         <button class="pill ptog" type="button" aria-pressed="false" aria-label="Cambiar entre Quiénes somos y Kaiva Studio"><i class="pill-thumb" aria-hidden="true"></i><span class="seg on">Quiénes somos</span><span class="seg">Kaiva Studio</span></button>
@@ -1117,31 +1128,6 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       </ul>
     </section>
 
-    <section class="ns-sec" aria-labelledby="ns-team-t">
-      <h2 id="ns-team-t"><span class="dim">Las caras</span> detrás de Kaiva</h2>
-      <p class="ns-sub">Hablas directo con quien diseña y con quien programa tu proyecto.</p>
-      <div class="ns-people">
-        <article class="ns-me" id="ns-desarrollador">
-          <div class="ns-ph" data-foto="desarrollador"><svg viewBox="0 0 100 80" aria-hidden="true"><circle cx="50" cy="30" r="17" fill="#A580D6"/><path d="M12 80c3-19 19-31 38-31s35 12 38 31z" fill="#A580D6"/></svg></div>
-          <p class="ns-kit"><b>Kaiva Studio</b><span>Desarrollo</span></p>
-          <h3>Desarrollador web</h3>
-          <p class="ns-line">Desarrollo web en Barranquilla</p>
-          <p class="ns-stat"><b>Código</b><span>Programa páginas web rápidas, plataformas y software a medida para empresas de Colombia y Latinoamérica.</span></p>
-          <ul class="ns-tags"><li>Desarrollo web</li><li>Software a medida</li><li>Integraciones</li></ul>
-          <p class="ns-badge"><i>K.</i><span>@kaivastudio<small>Barranquilla, Colombia</small></span></p>
-        </article>
-        <article class="ns-me alt" id="ns-disenadora">
-          <div class="ns-ph" data-foto="disenadora"><svg viewBox="0 0 100 80" aria-hidden="true"><circle cx="50" cy="30" r="17" fill="#A580D6"/><path d="M12 80c3-19 19-31 38-31s35 12 38 31z" fill="#A580D6"/></svg></div>
-          <p class="ns-kit"><b>Kaiva Studio</b><span>Diseño</span></p>
-          <h3>Diseñadora gráfica</h3>
-          <p class="ns-line">Diseño de marca y diseño web</p>
-          <p class="ns-stat"><b>Diseño</b><span>Crea logos, identidades de marca, páginas web e ilustraciones para empresas que quieren verse tan bien como trabajan.</span></p>
-          <ul class="ns-tags"><li>Logo e identidad</li><li>Diseño web</li><li>Ilustración</li></ul>
-          <p class="ns-badge"><i>K.</i><span>@kaivastudio<small>Barranquilla, Colombia</small></span></p>
-        </article>
-      </div>
-    </section>
-
     <div class="ns-board" id="nsBoard">
       <div class="ns-mosaic" role="img" aria-label="Ilustración del equipo de Kaiva Studio con el equipo de Thallo Digital en un café de Barranquilla"><span class="ns-tag">Con el equipo de Thallo Digital</span></div>
       <div class="ns-card k" style="--c:0;--r:2;--w:2;--h:2"><b>Diseño web y de marca para Thallo&nbsp;Digital</b><span>Les hicimos el sitio web y la identidad de marca. Así terminó el proyecto: con los dos equipos juntos.</span></div>
@@ -1152,6 +1138,9 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       <ul><li>Páginas web sin plantillas</li><li>Software a medida</li><li>Diseño de marca</li></ul>
     </div>
   </main>
+  <div class="ql" id="ql" role="dialog" aria-modal="true" aria-label="Vista previa" hidden>
+    <div class="ql-win"><div class="ql-bar"><div class="ql-lights"><button type="button" aria-label="Cerrar vista previa"></button><i></i><i></i></div><span id="qlName"></span></div><img id="qlImg" alt="" width="2000" height="1125"></div>
+  </div>
   <script>
   (function(){
     /* el panel se pone morado al bajar, como en la portada */
@@ -1175,6 +1164,14 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       files.forEach(function(f,i){f.style.left=Math.round(pos[i][0])+'px';f.style.top=Math.round(pos[i][1])+'px';f.style.setProperty('--dx',Math.round(cx-pos[i][0]-w/2)+'px');f.style.setProperty('--dy',Math.round(cy-pos[i][1]-fh/2)+'px')});
     }
     filePos();setTimeout(filePos,1300);window.addEventListener('resize',function(){pillPos();filePos()});
+    /* abrir un archivo = vista previa como en el Mac */
+    var QL={mateo:{src:'/assets/inicio/ficha-mateo.webp',name:'Mateo.png',alt:'Ficha de Mateo, desarrollador web de Kaiva Studio'},disenadora:{src:'/assets/inicio/ficha-disenadora.webp',name:'Sara.png',alt:'Ficha de la diseñadora gráfica de Kaiva Studio'}};
+    var ql=document.getElementById('ql'),qlImg=document.getElementById('qlImg'),qlName=document.getElementById('qlName'),qlFrom=null;
+    function qlOpen(k,from){var d=QL[k];if(!d)return;qlFrom=from;qlImg.src=d.src;qlImg.alt=d.alt;qlName.textContent=d.name;ql.hidden=false;requestAnimationFrame(function(){ql.classList.add('open')});ql.querySelector('.ql-lights button').focus({preventScroll:true})}
+    function qlClose(){ql.classList.remove('open');setTimeout(function(){ql.hidden=true},300);if(qlFrom)qlFrom.focus({preventScroll:true})}
+    files.forEach(function(fl){fl.addEventListener('click',function(){qlOpen(fl.dataset.ql,fl)})});
+    ql.addEventListener('click',function(e){if(e.target===ql||e.target.closest('.ql-lights button'))qlClose()});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!ql.hidden)qlClose()});
     pill.addEventListener('click',function(){
       clearInterval(nudge);wob();
       pi=1-pi;segs.forEach(function(g,i){g.classList.toggle('on',i===pi)});pill.setAttribute('aria-pressed',pi===1?'true':'false');pillPos();
@@ -1188,6 +1185,18 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     m.appendChild(f);
     var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches,t=0;
     function twinkle(){for(var n=1+Math.floor(Math.random()*2);n--;){var x=cells[Math.floor(Math.random()*cells.length)];if(x.classList.contains('blank'))continue;x.classList.add('blank');(function(x){setTimeout(function(){x.classList.remove('blank')},800+Math.random()*900)})(x)}}
+    /* con el mouse encima, los cuadros por donde pasa se blanquean (y a veces un vecino) */
+    function blank(x,ms){if(!x||x.classList.contains('blank'))return;x.classList.add('blank');setTimeout(function(){x.classList.remove('blank')},ms)}
+    if(!reduce&&matchMedia('(hover: hover)').matches){
+      var lastCell=null;
+      b.addEventListener('pointermove',function(e){
+        var x=e.target.closest('.ns-cell');if(!x||x===lastCell)return;lastCell=x;
+        blank(x,700+Math.random()*500);
+        if(Math.random()<.45){var c=+x.style.getPropertyValue('--c'),r=+x.style.getPropertyValue('--r'),dc=Math.round(Math.random()*2-1),dr=Math.round(Math.random()*2-1);
+          blank(cells.filter(function(y){return +y.style.getPropertyValue('--c')===c+dc&&+y.style.getPropertyValue('--r')===r+dr})[0],600+Math.random()*500)}
+      });
+      b.addEventListener('pointerleave',function(){lastCell=null});
+    }
     function go(on){if(on){b.classList.add('in');if(!reduce&&!t)t=setInterval(twinkle,420)}else{clearInterval(t);t=0}}
     if('IntersectionObserver' in window)new IntersectionObserver(function(es){go(es[0].isIntersecting)},{threshold:.15}).observe(b);else go(true);
   })();
