@@ -253,6 +253,8 @@ section{scroll-margin-top:90px}
 .pill.ptog:active{scale:.97}
 /* al tocarla se tambalea un poquito */
 .pill.ptog{transform-origin:50% 90%}
+/* se cambia tocando en cualquier parte de la etiqueta, y un poco más allá del borde, para que ningún toque falle */
+.pill.ptog::after{content:"";position:absolute;inset:-12px -8px}
 .pill.ptog.wob{animation:pwob .7s cubic-bezier(.3,.6,.3,1)}
 @keyframes pwob{0%{rotate:0deg}18%{rotate:-6deg}38%{rotate:4.5deg}58%{rotate:-2.5deg}78%{rotate:1.2deg}100%{rotate:0deg}}
 /* en pantallas táctiles no hay mouse: un toque late sobre la otra opción y la etiqueta se tambalea, hasta que la tocan */
@@ -1039,6 +1041,10 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .ns-facts li.k span{color:rgba(255,255,255,.7)}
 .ns-facts li.k b small{color:var(--violet-light)}
 /* las cifras cuentan al llegar y vuelven a contar al tocarlas, como en la portada */
+.ns-facts li b .val{font-size:inherit;line-height:inherit;color:inherit;white-space:nowrap}
+/* si no cabe, la palabra pequeña pasa entera a la línea de abajo (nunca el %) */
+.ns-facts b{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:4px}
+.ns-facts b small{margin-left:0}
 .ns-facts li.replay{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .ns-facts li.replay:active{transform:translateY(-2px) scale(.985)}
 .ns-facts li.replay:focus-visible{outline:2px solid var(--violet-text);outline-offset:3px}
@@ -1142,7 +1148,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
         <li class="k" data-from="40" data-to="0"><b><span class="val">0</span><small>plantillas</small></b><span>Cada proyecto se diseña desde cero, según lo que tu negocio necesita vender.</span></li>
         <li data-weeks><b><span class="val">2–3</span><small>semanas</small></b><span>Lo que toma tener tu web lista desde que apruebas la propuesta.</span></li>
         <li data-from="0" data-to="1"><b><span class="val">1</span><small>llamada</small></b><span>Nos cuentas tu idea y armamos una propuesta a tu medida.</span></li>
-        <li data-from="0" data-to="100" data-suffix=" %"><b><span class="val">100 %</span><small>remoto</small></b><span>Por videollamada, correo y WhatsApp, con empresas de toda Colombia y Latinoamérica.</span></li>
+        <li data-from="0" data-to="100" data-suffix="&nbsp;%"><b><span class="val">100&nbsp;%</span><small>remoto</small></b><span>Por videollamada, correo y WhatsApp, con empresas de toda Colombia y Latinoamérica.</span></li>
       </ul>
     </section>
 
