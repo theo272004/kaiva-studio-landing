@@ -952,7 +952,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 <style>
 /* una sola pantalla, sin scroll: el bloque ocupa el alto que queda bajo el menú */
 .page{padding-bottom:0}
-.final{margin-top:76px;height:calc(100svh - 88px);min-height:540px;display:flex;flex-direction:column;justify-content:center;gap:16px;padding:clamp(20px,4vh,44px) clamp(20px,3.4vw,44px) 16px}
+/* el morado ocupa toda la pantalla: de arriba abajo (detrás del menú) y de lado a lado */
+.final{margin:-12px calc(var(--gutter) * -1) 0;border-radius:0;height:100svh;min-height:600px;display:flex;flex-direction:column;justify-content:center;gap:16px;padding:88px clamp(20px,3.4vw,44px) 16px}
 .final-core{gap:clamp(12px,2.1vh,20px);margin-top:auto}
 .final .foot{display:none}
 .final .legal{margin-top:auto}
@@ -993,7 +994,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 <div class="mmenu" id="mmenu" aria-label="Menú">
   <div class="mm-top"><a class="logo" href="/#top"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a><button class="mm-close" type="button" aria-label="Cerrar menú"><span></span><span></span></button></div>
   <nav class="mm-links">
-    <a href="/#top">Inicio</a><a href="/portfolio/">Portfolio</a><a href="/blog/">Blog</a><a href="#contacto">Contacto</a>
+    <a href="/#top">Inicio</a><a href="/portfolio/">Portfolio</a><a href="/blog/">Blog</a><a href="/agendar/">Contacto</a>
   </nav>
   <div class="mm-foot">
     <a class="btn btn-white" href="/agendar/">Agendar llamada</a>
