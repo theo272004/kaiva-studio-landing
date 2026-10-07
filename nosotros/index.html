@@ -1015,6 +1015,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .ns-sec{max-width:1120px;margin:clamp(100px,12vw,150px) auto 0;padding:0 clamp(16px,3vw,28px)}
 .ns-sec h2{margin:0;font-size:clamp(2.2rem,4.6vw,3.8rem);line-height:1;letter-spacing:-.055em;text-wrap:balance}
 .ns-sec h2 .dim{color:var(--ink-3)}
+.ns-sec h2 .dim .w.lit,.ns-hero h1 .dim .w.lit{color:var(--violet-text);transition:color .08s}
 .ns-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:end}
 .ns-row p{margin:0;font-size:clamp(16px,1.35vw,18px);line-height:1.6;color:var(--ink-2);max-width:46ch}
 .ns-row p strong{color:var(--ink);font-weight:600}
@@ -1146,6 +1147,12 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   </div>
   <script>
   (function(){
+    /* lo gris de los títulos se enciende en morado al pasar; con un clic la palabra se queda morada */
+    document.querySelectorAll('h1 .dim,h2 .dim').forEach(function(d){
+      d.innerHTML=d.textContent.trim().split(/\s+/).map(function(w){return '<span class="w">'+w+'</span>'}).join(' ');
+      d.style.cursor='pointer';
+      d.addEventListener('click',function(e){var w=e.target.closest('.w');if(w)w.classList.toggle('lit')});
+    });
     /* el panel se pone morado al bajar, como en la portada */
     var h=document.getElementById('nsHero');
     function hp(){var r=h.getBoundingClientRect();h.style.setProperty('--hp',Math.max(0,Math.min(1,-(r.top-76)/(r.height*.6))).toFixed(3))}
