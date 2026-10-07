@@ -2171,6 +2171,11 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
   // enlace directo a un proyecto: /portfolio/#cstravel o /portfolio/#thallo
   var h=location.hash.slice(1);
   Object.keys(P).forEach(function(k){if(P[k].hash===h)setTimeout(function(){openProject(k,null,document.querySelector('.ico[data-open="'+k+'"]'))},400)});
+  // enlaces de los servicios de la portada: web abre el navegador, software las pantallas de la plataforma, marca el brandbook de Thallo
+  var DEEP={web:function(){openBrowser(WEBS,'web','Navegador',document.querySelector('.pdock .live[data-app="web"]'))},
+    software:function(){openProject('cst','plataforma',document.querySelector('.ico[data-open="cst"]'))},
+    brandbook:function(){openProject('thallo','marca',document.querySelector('.ico[data-open="thallo"]'))}};
+  if(DEEP[h])setTimeout(DEEP[h],400);
 
   /* ---------- Cursor propio: avión de papel dibujado a mano + destello al hacer clic ---------- */
   if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
