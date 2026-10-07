@@ -958,7 +958,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 /* la foto del equipo va al final, suelta sobre la página y de punta a punta */
 /* la foto del equipo al final: mosaico de punta a punta; los cuadritos aparecen en desorden y luego se blanquean al azar */
 .ns-board{--g:8px;--H:calc(100cqw * 960 / 2436);position:relative;container-type:inline-size;margin-top:clamp(90px,11vw,130px)}
-.ns-mosaic{position:relative;aspect-ratio:2436/960;border-radius:20px;background:url(/assets/inicio/equipo-mosaico.webp) center/cover}
+.ns-mosaic{position:relative;aspect-ratio:2436/960;border-radius:20px}
 .js .ns-mosaic{background:none}
 .ns-cell,.ns-card{position:absolute;left:calc(var(--c) * (100cqw + var(--g)) / 10);top:calc(var(--r) * (var(--H) + var(--g)) / 4);width:calc(var(--w,1) * (100cqw + var(--g)) / 10 - var(--g));height:calc(var(--h,1) * (var(--H) + var(--g)) / 4 - var(--g));border-radius:14px}
 .ns-cell{overflow:hidden;background:url(/assets/inicio/equipo-mosaico.webp) no-repeat;background-size:100cqw var(--H);background-position:calc(var(--c) * (100cqw + var(--g)) / -10) calc(var(--r) * (var(--H) + var(--g)) / -4);opacity:0;scale:.92;transition:opacity .7s var(--ease),scale .7s var(--ease),filter .4s;transition-delay:var(--d,0s)}
@@ -1064,7 +1064,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   .ns-line{top:112px}
   .ns-stat{top:170px;bottom:auto;right:auto;left:16px;width:60%;text-align:left}
 }
-.final{margin-top:clamp(48px,6vw,72px);padding-top:clamp(40px,5vw,56px)}
+.final{margin-top:28px;padding-top:24px}
 .final .foot{margin-top:0}
 </style>
 </head>
@@ -1133,8 +1133,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 
     <div class="ns-board" id="nsBoard">
       <div class="ns-mosaic" role="img" aria-label="Ilustración del equipo de Kaiva Studio con el equipo de Thallo Digital en un café de Barranquilla"><span class="ns-tag">Con el equipo de Thallo Digital</span></div>
-      <div class="ns-card k" style="--c:0;--r:2;--w:2;--h:2"><b>Diseño web y de marca para Thallo&nbsp;Digital</b><span>Les hicimos el sitio web y la identidad de marca. Así terminó el proyecto: con los dos equipos juntos.</span></div>
-      <div class="ns-card v" style="--c:8;--r:3;--w:2;--h:1"><b>Barranquilla, Colombia</b><span>Estudio digital para empresas de toda Latinoamérica.</span></div>
+      <div class="ns-card k" style="--c:0;--r:2;--w:2;--h:2"><b>Diseño web y de marca para Thallo&nbsp;Digital</b><span>Les hicimos el sitio web y la identidad de marca. Así terminó el proyecto: con los dos equipos&nbsp;juntos.</span></div>
+      <div class="ns-card v" style="--c:8;--r:3;--w:2;--h:1"><b>Barranquilla,&nbsp;Colombia</b><span>Estudio digital para empresas de toda&nbsp;Latinoamérica.</span></div>
     </div>
     <div class="ns-foot">
       <p>Kaiva Studio es un estudio de diseño web, desarrollo de software y branding en Barranquilla. Trabajamos en remoto con empresas de Colombia y Latinoamérica.</p>
@@ -1185,7 +1185,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     var b=document.getElementById('nsBoard'),m=b.querySelector('.ns-mosaic'),skip={'0,2':1,'1,2':1,'0,3':1,'1,3':1,'8,3':1,'9,3':1},cells=[];
     var f=document.createDocumentFragment();
     for(var r=0;r<4;r++)for(var c=0;c<10;c++){var d=document.createElement('div');d.className='ns-cell'+(skip[c+','+r]?' sk':'');d.style.cssText='--c:'+c+';--r:'+r+';--d:'+(Math.random()*.45).toFixed(2)+'s';f.appendChild(d);if(!skip[c+','+r])cells.push(d)}
-    m.appendChild(f);
+    /* la foto (450 KB) se pide solo cuando el mosaico está por llegar a la pantalla */
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es,o){if(es[0].isIntersecting){m.appendChild(f);o.disconnect()}},{rootMargin:'300px 0px'}).observe(b);else m.appendChild(f);
     var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches,t=0;
     function twinkle(){for(var n=1+Math.floor(Math.random()*2);n--;){var x=cells[Math.floor(Math.random()*cells.length)];if(x.classList.contains('blank'))continue;x.classList.add('blank');(function(x){setTimeout(function(){x.classList.remove('blank')},800+Math.random()*900)})(x)}}
     /* con el mouse encima, los cuadros por donde pasa se blanquean (y a veces un vecino) */
