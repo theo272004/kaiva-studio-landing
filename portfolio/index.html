@@ -997,7 +997,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 
 
 /* ---------- la pantalla ---------- */
-.screen{--glass:rgba(20,16,26,.5);--glass-fx:blur(22px) saturate(1.3);--mb:30px;--dk:86px;position:relative;isolation:isolate;overflow:hidden;width:100%;max-width:1440px;height:calc(100svh - 128px);min-height:520px;max-height:872px;margin:80px auto 0;border-radius:var(--r-panel);color:#fff;
+.screen{--glass:rgba(20,16,26,.5);--glass-fx:blur(14px);--mb:30px;--dk:86px;position:relative;isolation:isolate;overflow:hidden;width:100%;max-width:1440px;height:calc(100svh - 128px);min-height:520px;max-height:872px;margin:80px auto 0;border-radius:var(--r-panel);color:#fff;
   background:#CFC3AE}
 /* fondo de pantalla: ilustración propia, nítida */
 .screen::before{content:"";position:absolute;inset:0;z-index:-1;background:#8C7F6E url(/assets/portfolio/fondo-portfolio.webp?v=2) center/cover no-repeat;pointer-events:none}
@@ -1029,7 +1029,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .ico-art{transition:transform .35s var(--ease),filter .35s;filter:drop-shadow(0 14px 20px rgba(10,0,30,.55))}
 .ico:hover .ico-art{transform:translateY(-5px) scale(1.05)}
 .ico.drag .ico-art{transform:scale(1.07);filter:drop-shadow(0 24px 30px rgba(10,0,30,.6))}
-.ico{border-radius:18px;background:var(--glass);-webkit-backdrop-filter:var(--glass-fx);backdrop-filter:var(--glass-fx);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 18px 40px -26px rgba(0,0,0,.6)}
+/* las carpetas no llevan difuminado propio: con seis capas de vidrio encima del fondo, Safari a veces dejaba de pintarlas */
+.ico{border-radius:18px;background:rgba(26,20,32,.58);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 18px 40px -26px rgba(0,0,0,.6)}
 .ico-name{max-width:140px;padding:2px 6px;border-radius:7px;font-size:14px;font-weight:600;line-height:1.3;text-align:center;letter-spacing:-.01em;text-shadow:0 1px 3px rgba(0,0,0,.6);transition:background .2s}
 .ico-name small{display:block;font-weight:500;opacity:.75;font-size:12px}
 .ico:focus-visible{outline:none}
@@ -1064,7 +1065,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 .pdock .d-brand svg,.pdock .d-ig svg{width:58%;height:58%}
 
 /* ---------- ventana dentro de la pantalla ---------- */
-.sc-ov{position:absolute;z-index:20;pointer-events:none;inset:var(--mb) 0 0 0;background:rgba(14,12,18,.3);-webkit-backdrop-filter:blur(16px) saturate(1.1);backdrop-filter:blur(16px) saturate(1.1);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s linear .35s}
+.sc-ov{position:absolute;z-index:20;pointer-events:none;inset:var(--mb) 0 0 0;background:rgba(14,12,18,.3);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s linear .35s}
 .screen.win-open .sc-ov{opacity:1;visibility:visible;transition:opacity .35s ease}
 .pwin{position:absolute;z-index:25;display:flex;flex-direction:column;border-radius:13px;overflow:hidden;background:#fff;color:var(--ink);box-shadow:0 0 0 1px rgba(0,0,0,.18),0 50px 100px -30px rgba(0,0,0,.7);opacity:0;visibility:hidden;transform:scale(.5);transform-origin:var(--ox,50%) var(--oy,100%);transition:transform .55s var(--ease),opacity .3s ease,visibility 0s linear .55s}
 .pw-url span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -1383,6 +1384,9 @@ a.lnk-head:hover .lnk-follow{background:#004182}
 .bcap{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);padding:7px 14px;border-radius:99px;background:rgba(255,255,255,.92);color:var(--ink);font-size:13px;font-weight:600;white-space:nowrap;box-shadow:0 10px 24px -12px rgba(0,0,0,.5)}
 .pw-x{position:fixed;top:18px;right:18px;width:42px;height:42px;border:0;border-radius:50%;background:rgba(255,255,255,.9);color:var(--ink);font-size:22px;line-height:1;cursor:pointer}
 html.lock{overflow:hidden}
+/* con una ventana abierta y el mouse sobre la pantalla, la página de atrás no se mueve: la rueda es solo para lo de adentro (también cuando una web en vivo llega a su final) */
+html{scrollbar-gutter:stable}
+html.lock-win{overflow:hidden}
 
 @media (max-width:980px){
   .plist{grid-template-columns:1fr}
@@ -1452,16 +1456,21 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
 .final::after{background:#07050B;opacity:calc(.35 + var(--fp,0))}
 
 /* ---------- entrar a la pantalla: al bajar crece hasta cubrir toda la ventana del navegador ---------- */
-.sc-stage{position:relative;height:calc(100svh + 140svh)}
+.sc-stage{position:relative;height:calc(100svh + 170svh)}
 .sc-pin{position:sticky;top:0;height:100svh;display:flow-root}
 .sc-stage .screen{--p:0;left:50%;translate:-50% 0;margin:calc(80px * (1 - var(--p))) 0 0;width:calc(100% + 2 * var(--gutter,16px) * var(--p));max-width:calc(1760px + 4000px * var(--p));height:calc(100svh - 128px * (1 - var(--p)));max-height:calc(872px + 4000px * var(--p));border-radius:calc(var(--r-panel) * (1 - var(--p)))}
 .sc-hint,.sc-next{position:absolute;z-index:40;display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;text-decoration:none;transition:opacity .35s ease,translate .35s ease}
 .sc-hint{left:50%;top:calc(100svh - 44px);translate:-50% 0;color:var(--ink-2);opacity:calc(1 - var(--p,0) * 3)}
 .sc-hint svg,.sc-next svg{width:15px;height:15px;animation:scbob 1.6s ease-in-out infinite}
-.sc-next{right:22px;bottom:22px;padding:9px 14px 9px 16px;border-radius:99px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--ink);box-shadow:0 10px 30px -14px rgba(0,0,0,.5);opacity:0;pointer-events:none}
+.sc-next{right:24px;bottom:24px;padding:13px 20px 13px 24px;gap:10px;font-size:15px;border-radius:99px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--ink);box-shadow:0 10px 30px -14px rgba(0,0,0,.5);opacity:0;pointer-events:none}
 .sc-stage.full .sc-next{opacity:1;pointer-events:auto}
 .sc-next:hover{background:#fff}
+.sc-next svg{width:18px;height:18px}
 @keyframes scbob{0%,100%{translate:0 -2px}50%{translate:0 3px}}
+/* mientras la pantalla está creciendo no se recalcula el vidrio en cada cuadro: queda un fondo opaco y el difuminado vuelve al quedar quieta */
+.screen.growing .mbar,.screen.growing .widget,.screen.growing .pdock{-webkit-backdrop-filter:none;backdrop-filter:none}
+.screen.growing .mbar,.screen.growing .widget{background:rgba(38,30,44,.82)}
+.screen.growing .pdock{background:rgba(236,232,240,.78)}
 /* mientras está a pantalla completa, el menú flotante se aparta */
 .pf-full .float-nav{opacity:0;pointer-events:none;translate:0 -12px}
 .float-nav{transition:opacity .35s ease,translate .35s ease}
@@ -1551,7 +1560,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
         <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/thumbs/felinorte.webp" alt="" width="320" height="200"><span class="ff"></span></span>
         <span class="ico-name">Editorial<small>Libro ilustrado</small></span>
       </button>
-      <button class="ico" type="button" data-open="propuesta" style="--x:3%;--y:44%">
+      <button class="ico" type="button" data-open="propuesta" style="--x:3%;--y:58%">
         <span class="ico-art folder"><span class="fb"></span><img src="/assets/portfolio/thumbs/propuesta.webp" alt="" width="320" height="200"><span class="ff"></span></span>
         <span class="ico-name">Propuesta<small>Presentación</small></span>
       </button>
@@ -1753,6 +1762,10 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       raf=cur===target?0:requestAnimationFrame(tick);
     }
     function go(y,k){target=Math.max(0,Math.min(max(),y));ease=k;if(!raf){cur=window.pageYOffset;raf=requestAnimationFrame(tick)}}
+    if(window.matchMedia('(hover: hover) and (pointer: fine)').matches)document.addEventListener('mouseover',function(e){
+      var sc=document.getElementById('inicio');
+      root.classList.toggle('lock-win',!!(sc&&sc.classList.contains('win-open')&&sc.contains(e.target)));
+    });
     window.addEventListener('wheel',function(e){
       if(e.ctrlKey||e.defaultPrevented||Math.abs(e.deltaX)>Math.abs(e.deltaY)||root.classList.contains('lock'))return;
       var dy=e.deltaY*(e.deltaMode===1?40:e.deltaMode===2?window.innerHeight:1);
@@ -2154,7 +2167,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
     o.el.classList.remove('open');setTimeout(function(){o.el.remove()},450);
     dockState();
     if(stack.length){var t=stack[stack.length-1];front(t);WINS[t].el.querySelector('.lc').focus({preventScroll:true});return}
-    scr.classList.remove('win-open');mbApp.textContent='Finder';
+    scr.classList.remove('win-open');root.classList.remove('lock-win');mbApp.textContent='Finder';
     if(history.replaceState)history.replaceState(null,'',location.pathname);
     if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});
   }
@@ -2285,16 +2298,24 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
   // al bajar, la pantalla crece hasta cubrir toda la ventana; al terminar, se puede seguir bajando
   (function(){
     var st=document.getElementById('scStage');if(!st)return;
-    var on=window.matchMedia('(min-width:701px)').matches&&!reduce,last=-1,t=0;
-    function upd(){
-      if(!on)return;
-      var r=st.getBoundingClientRect(),vh=window.innerHeight,q=Math.max(0,Math.min(1,-r.top/(vh*1.15))),p=q*q*(3-2*q); // más recorrido y con suavizado al empezar y al terminar
-      if(Math.abs(p-last)<.002)return;last=p;
+    var on=window.matchMedia('(min-width:701px)').matches&&!reduce,last=-1,t=0,cur=-1,goal=0,raf=0,still=0;
+    // la meta sale del scroll; la pantalla la persigue cuadro a cuadro, así los saltos de la rueda del mouse se ven suaves
+    function target(){var r=st.getBoundingClientRect(),vh=window.innerHeight,q=Math.max(0,Math.min(1,-r.top/(vh*1.4)));return q*q*(3-2*q)}
+    function paint(p){
+      var r=st.getBoundingClientRect(),vh=window.innerHeight;
       scr.style.setProperty('--p',p.toFixed(4));st.style.setProperty('--p',p.toFixed(4));
       var full=p>.98&&r.bottom>vh*.6;st.classList.toggle('full',full);root.classList.toggle('pf-full',p>.6&&r.bottom>vh*.6);
       // las ventanas abiertas se acomodan al nuevo tamaño cuando el movimiento se detiene
       clearTimeout(t);if(stack.length)t=setTimeout(refit,120);
     }
+    function loop(){
+      raf=0;if(!on)return;
+      if(cur<0)cur=goal;
+      cur+=(goal-cur)*.16;if(Math.abs(goal-cur)<.0015)cur=goal;
+      if(Math.abs(cur-last)>=.0008){last=cur;paint(cur);scr.classList.add('growing');clearTimeout(still);still=setTimeout(function(){scr.classList.remove('growing')},160)}
+      if(cur!==goal)raf=requestAnimationFrame(loop);
+    }
+    function upd(){if(!on)return;goal=target();if(!raf)raf=requestAnimationFrame(loop)}
     window.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',function(){on=window.matchMedia('(min-width:701px)').matches&&!reduce;if(!on){scr.style.removeProperty('--p');root.classList.remove('pf-full')}last=-1;upd()});upd();
   })();
 
