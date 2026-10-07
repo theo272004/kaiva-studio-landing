@@ -790,6 +790,11 @@ h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s
 .contacts{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;font-size:13.5px;font-weight:500}
 .contacts a{display:inline-block;border-bottom:1px solid rgba(255,255,255,.45);transition:transform .35s var(--ease),border-color .25s}
 .contacts a:hover{border-color:var(--paper);transform:translateY(-2px)}
+/* enlace a quiénes somos, debajo del correo y el WhatsApp */
+.ns-link{display:inline-flex;align-items:center;gap:7px;margin-top:-8px;padding:7px 14px;border-radius:99px;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);color:var(--paper);font-size:13px;font-weight:600;transition:background .3s,transform .35s var(--ease)}
+.ns-link svg{width:13px;height:13px;transition:transform .3s var(--ease)}
+.ns-link:hover{background:rgba(255,255,255,.2);transform:translateY(-2px)}
+.ns-link:hover svg{transform:translateX(3px)}
 .foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;margin-top:clamp(80px,10vw,120px);padding-top:22px;border-top:1px solid rgba(255,255,255,.22);font-size:13.5px;font-weight:500}
 .foot ul{display:flex;flex-wrap:wrap;gap:8px 26px;list-style:none;margin:0;padding:0}
 .foot ul a{display:inline-block;opacity:.88;transition:transform .35s var(--ease),opacity .25s}
@@ -1170,6 +1175,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
         <a href="mailto:info@kaivastudio.com">info@kaivastudio.com</a>
         <a href="https://wa.me/573024137374" target="_blank" rel="noopener">WhatsApp +57 302 413 7374</a>
       </div>
+      <a class="ns-link" href="/nosotros/">Conoce quiénes somos <svg><use href="#i-arrow"/></svg></a>
     </div>
 
     <div class="foot">
