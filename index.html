@@ -394,6 +394,26 @@ section{scroll-margin-top:90px}
 .js .hero-copy>:nth-child(4){animation-delay:.26s}
 .js .car,.js .car-cap{animation:fade 1.2s var(--ease) .35s both}
 @keyframes fade{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+/* el hero como mesa de diseño: al pasar el mouse cada pieza muestra su recuadro de selección,
+   se puede arrastrar y al soltarla vuelve a su sitio con un rebote (usa translate/rotate, no transform,
+   para no pelear con la animación de entrada) */
+.hgrid{position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .6s var(--ease);background-image:radial-gradient(rgba(255,255,255,.13) 1px,transparent 1.4px);background-size:22px 22px;-webkit-mask-image:radial-gradient(80% 70% at 50% 34%,#000,transparent 75%);mask-image:radial-gradient(80% 70% at 50% 34%,#000,transparent 75%)}
+.hero.editing .hgrid{opacity:1}
+.hero .dz{position:relative;translate:0 0;rotate:0deg;transition:translate .95s cubic-bezier(.34,1.56,.64,1),rotate .95s cubic-bezier(.34,1.56,.64,1),transform .4s var(--ease),background .25s,color .25s,box-shadow .4s var(--ease)}
+.hero .dz.drag{transition:none;z-index:5}
+.can-drag .hero .dz{cursor:grab;touch-action:none;-webkit-user-drag:none;user-select:none}
+.can-drag .hero .dz.drag{cursor:grabbing}
+.hsel{position:absolute;left:0;top:0;z-index:6;pointer-events:none;border:1.5px solid var(--violet-light);border-radius:4px;opacity:0;transition:opacity .25s}
+.hsel.on{opacity:1}
+.hsel i{position:absolute;width:8px;height:8px;background:#fff;border:1.5px solid var(--violet-light);border-radius:2px}
+.hsel i:nth-child(1){left:-5px;top:-5px}.hsel i:nth-child(2){right:-5px;top:-5px}.hsel i:nth-child(3){left:-5px;bottom:-5px}.hsel i:nth-child(4){right:-5px;bottom:-5px}
+.hsel b,.hsel em{position:absolute;font:600 10.5px/1 var(--f-mono);letter-spacing:.04em;font-style:normal;white-space:nowrap;padding:4px 6px;border-radius:4px;background:var(--violet-light);color:var(--ink)}
+.hsel b{left:-1.5px;top:-24px}
+.hsel em{left:50%;bottom:-25px;transform:translateX(-50%);font-weight:500}
+.hcur{position:absolute;left:0;top:0;z-index:7;pointer-events:none;opacity:0;transition:opacity .4s}
+.hcur.on{opacity:1}
+.hcur svg{display:block;width:20px;height:22px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+.hcur span{position:absolute;left:16px;top:18px;padding:3px 8px;border-radius:99px;background:var(--violet-light);color:var(--ink);font-size:11.5px;font-weight:600;white-space:nowrap}
 
 /* ---------- barra flotante ---------- */
 .float-nav{position:fixed;z-index:50;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:22px;padding:7px 7px 7px 18px;border-radius:999px;background:rgba(251,251,251,.82);backdrop-filter:saturate(1.6) blur(18px);-webkit-backdrop-filter:saturate(1.6) blur(18px);box-shadow:0 0 0 1px rgba(8,8,8,.06),0 14px 40px -18px rgba(8,8,8,.35);transform:translate(-50%,-140%);transition:transform .6s var(--ease);max-width:calc(100% - 32px)}
@@ -987,6 +1007,9 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 
   <!-- ============ HERO ============ -->
   <header class="hero" id="inicio">
+    <div class="hgrid" aria-hidden="true"></div>
+    <div class="hsel" aria-hidden="true"><i></i><i></i><i></i><i></i><b></b><em></em></div>
+    <div class="hcur" aria-hidden="true"><svg viewBox="0 0 20 22"><path d="M2 2l15 8.2-6.6 1.6-3.4 6.4z" fill="#A580D6" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Kaiva</span></div>
     <nav class="nav" aria-label="Principal">
       <a class="logo" href="#top"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125"></a>
       <ul class="nav-links">
@@ -1003,12 +1026,12 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     </nav>
 
     <div class="hero-copy">
-      <p class="pill"><b>Colombia</b> <span class="long">Estudio digital</span><span class="short">Estudio digital</span></p>
-      <h1><span class="dim">Páginas web</span> y software a medida</h1>
-      <p class="lede">Diseñamos y programamos sitios, plataformas y marcas para empresas que quieren verse tan bien como trabajan.</p>
+      <p class="pill dz" data-layer="Etiqueta"><b>Colombia</b> <span class="long">Estudio digital</span><span class="short">Estudio digital</span></p>
+      <h1 class="dz" data-layer="Título"><span class="dim">Páginas web</span> y software a medida</h1>
+      <p class="lede dz" data-layer="Texto">Diseñamos y programamos sitios, plataformas y marcas para empresas que quieren verse tan bien como trabajan.</p>
       <div class="actions">
-        <a class="btn btn-white" href="#contacto">Cuéntanos tu proyecto</a>
-        <a class="btn btn-ghost" href="#servicios">Ver qué hacemos <svg><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-white dz" data-layer="Botón" href="#contacto">Cuéntanos tu proyecto</a>
+        <a class="btn btn-ghost dz" data-layer="Botón" href="#servicios">Ver qué hacemos <svg><use href="#i-arrow"/></svg></a>
       </div>
     </div>
 
@@ -1577,6 +1600,78 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   car.addEventListener('mouseleave',function(){paused=false});
   window.addEventListener('resize',layout);
   layout();restart();
+
+  /* ---------- Hero como mesa de diseño ---------- */
+  (function(){
+    var hero=document.getElementById('inicio');if(!hero)return;
+    var sel=hero.querySelector('.hsel'),tag=sel.querySelector('b'),size=sel.querySelector('em'),kc=hero.querySelector('.hcur');
+    var pieces=[].slice.call(hero.querySelectorAll('.dz'));
+    var canDrag=window.matchMedia('(hover: hover) and (pointer: fine)').matches&&!reduce;
+    if(canDrag)root.classList.add('can-drag');
+    var cur=null,raf=0;
+    function place(){
+      if(!cur){sel.classList.remove('on');return}
+      var h=hero.getBoundingClientRect(),b=cur.getBoundingClientRect(),p=6;
+      sel.style.transform='translate('+(b.left-h.left-p)+'px,'+(b.top-h.top-p)+'px)';
+      sel.style.width=(b.width+p*2)+'px';sel.style.height=(b.height+p*2)+'px';
+      tag.textContent=cur.dataset.layer;size.textContent=Math.round(cur.offsetWidth)+' × '+Math.round(cur.offsetHeight);
+      sel.classList.add('on');
+    }
+    function loop(){place();raf=cur?requestAnimationFrame(loop):0}
+    function select(el){cur=el;hero.classList.toggle('editing',!!el);if(el&&!raf)raf=requestAnimationFrame(loop);if(!el)place()}
+    var demoOff=false;
+    // si la persona toca algo, la demostración se va de una
+    function endDemo(){
+      if(demoOff)return;demoOff=true;kc.classList.remove('on');
+      var t=hero.querySelector('h1');if(t.style.translate){t.classList.remove('drag');t.style.transition='';t.style.translate='';t.style.rotate=''}
+    }
+    if(canDrag){
+      pieces.forEach(function(el){
+        el.addEventListener('pointerenter',function(){endDemo();if(!hero.querySelector('.dz.drag'))select(el)});
+        el.addEventListener('pointerleave',function(){if(!el.classList.contains('drag')&&cur===el)select(null)});
+        el.setAttribute('draggable','false');el.addEventListener('dragstart',function(e){e.preventDefault()});
+        el.addEventListener('pointerdown',function(e){
+          if(e.button!==0)return;endDemo();e.preventDefault();
+          var x0=e.clientX,y0=e.clientY,moved=false;
+          el.setPointerCapture(e.pointerId);select(el);
+          function mv(ev){
+            var dx=ev.clientX-x0,dy=ev.clientY-y0;
+            if(!moved&&Math.abs(dx)+Math.abs(dy)<5)return;
+            if(!moved){moved=true;el.classList.add('drag')}
+            el.style.translate=dx+'px '+dy+'px';el.style.rotate=Math.max(-6,Math.min(6,dx*.02))+'deg';
+          }
+          function up(){
+            el.removeEventListener('pointermove',mv);el.removeEventListener('pointerup',up);el.removeEventListener('pointercancel',up);
+            if(!moved)return;
+            el.classList.remove('drag');el.style.translate='';el.style.rotate='';
+            // si se arrastró, el soltar no cuenta como clic
+            var stop=function(c){c.preventDefault();c.stopImmediatePropagation()};el.addEventListener('click',stop,true);setTimeout(function(){el.removeEventListener('click',stop,true)},80);
+            setTimeout(function(){if(!el.matches(':hover'))select(null)},950);
+          }
+          el.addEventListener('pointermove',mv);el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up);
+        });
+      });
+    }
+    // al cargar, el cursor de Kaiva entra, agarra el título, lo mueve un poco y lo suelta
+    if(reduce)return;
+    var h1=hero.querySelector('h1'),btn=hero.querySelector('.actions .dz');
+    function at(el,fx,fy){var h=hero.getBoundingClientRect(),b=el.getBoundingClientRect();return [b.left-h.left+b.width*fx,b.top-h.top+b.height*fy]}
+    function go(p,ms){kc.style.transition='transform '+ms+'ms cubic-bezier(.45,0,.2,1),opacity .4s';kc.style.transform='translate('+p[0]+'px,'+p[1]+'px)'}
+    var steps=[
+      [0,function(){var h=hero.getBoundingClientRect();kc.style.transition='none';kc.style.transform='translate('+(h.width*.78)+'px,'+(h.height*.62)+'px)';kc.classList.add('on')}],
+      [80,function(){go(at(h1,.62,.55),1000)}],
+      [1100,function(){select(h1)}],
+      [1500,function(){h1.classList.add('drag');h1.style.transition='translate .7s cubic-bezier(.45,0,.2,1),rotate .7s cubic-bezier(.45,0,.2,1)';h1.style.translate='46px -18px';h1.style.rotate='2.5deg';var p=at(h1,.62,.55);go([p[0]+46,p[1]-18],700)}],
+      [2400,function(){h1.classList.remove('drag');h1.style.transition='';h1.style.translate='';h1.style.rotate=''}],
+      [3300,function(){select(null);go(at(btn,.7,.6),800)}],
+      [4100,function(){select(btn)}],
+      [5200,function(){select(null);kc.classList.remove('on')}]
+    ];
+    function run(){
+      steps.forEach(function(st){setTimeout(function(){if(!demoOff)st[1]()},st[0])});
+    }
+    setTimeout(function(){if(!demoOff&&window.pageYOffset<200)run()},1700);
+  })();
 
   /* ---------- Barra flotante ---------- */
   var fn=document.getElementById('floatNav'),hero=document.getElementById('inicio');
