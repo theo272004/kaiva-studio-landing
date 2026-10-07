@@ -794,12 +794,14 @@ h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s
 .consent input:checked::after{transform:translateY(-1px) rotate(-45deg) scale(1)}
 .consent input:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .consent a{text-decoration:underline;text-underline-offset:2px}
+/* en celular la autorización va centrada, como todo el cierre, con la casilla al inicio de la primera línea */
+@media (max-width:700px){.consent{display:block;text-align:center;margin-inline:auto}.consent input{display:inline-block;vertical-align:middle;position:relative;top:-2px;margin-right:4px}.consent input::after{position:absolute;left:4px;top:5px}}
 .form-note{font-size:12.5px;opacity:.85;min-height:1.2em}
 .contacts{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;font-size:13.5px;font-weight:500}
 .contacts a{display:inline-block;border-bottom:1px solid rgba(255,255,255,.45);transition:transform .35s var(--ease),border-color .25s}
 .contacts a:hover{border-color:var(--paper);transform:translateY(-2px)}
 /* enlace a quiénes somos, debajo del correo y el WhatsApp */
-.ns-link{display:inline-flex;align-items:center;gap:7px;margin-top:-8px;padding:7px 14px;border-radius:99px;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);color:var(--paper);font-size:13px;font-weight:600;transition:background .3s,transform .35s var(--ease)}
+.ns-link{display:inline-flex;align-items:center;gap:7px;margin-top:10px;padding:7px 14px;border-radius:99px;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);color:var(--paper);font-size:13px;font-weight:600;transition:background .3s,transform .35s var(--ease)}
 .ns-link svg{width:13px;height:13px;transition:transform .3s var(--ease)}
 .ns-link:hover{background:rgba(255,255,255,.2);transform:translateY(-2px)}
 .ns-link:hover svg{transform:translateX(3px)}
