@@ -1455,32 +1455,18 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
 .final::before{background:linear-gradient(180deg,rgba(78,30,134,.55) 0%,rgba(54,17,95,.2) 45%,transparent 90%)}
 .final::after{background:#07050B;opacity:calc(.35 + var(--fp,0))}
 
-/* ---------- entrar a la pantalla: al bajar crece hasta cubrir toda la ventana del navegador ---------- */
-.sc-stage{position:relative;height:calc(100svh + 170svh)}
-.sc-pin{position:sticky;top:0;height:100svh;display:flow-root}
-.sc-stage .screen{--p:0;left:50%;translate:-50% 0;margin:calc(80px * (1 - var(--p))) 0 0;width:calc(100% + 2 * var(--gutter,16px) * var(--p));max-width:calc(1760px + 4000px * var(--p));height:calc(100svh - 128px * (1 - var(--p)));max-height:calc(872px + 4000px * var(--p));border-radius:calc(var(--r-panel) * (1 - var(--p)))}
-.sc-hint,.sc-next{position:absolute;z-index:40;display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;text-decoration:none;transition:opacity .35s ease,translate .35s ease}
-.sc-hint{left:50%;top:calc(100svh - 44px);translate:-50% 0;color:var(--ink-2);opacity:calc(1 - var(--p,0) * 3)}
-.sc-hint svg,.sc-next svg{width:15px;height:15px;animation:scbob 1.6s ease-in-out infinite}
-.sc-next{right:24px;bottom:24px;padding:13px 20px 13px 24px;gap:10px;font-size:15px;border-radius:99px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--ink);box-shadow:0 10px 30px -14px rgba(0,0,0,.5);opacity:0;pointer-events:none}
-.sc-stage.full .sc-next{opacity:1;pointer-events:auto}
+/* ---------- la pantalla queda en su tamaño; «Sigue bajando» avisa que hay más abajo ---------- */
+.sc-stage{position:relative}
+.sc-pin{display:flow-root}
+.sc-next{position:absolute;z-index:40;right:24px;bottom:24px;display:inline-flex;align-items:center;gap:10px;padding:13px 20px 13px 24px;font-size:15px;font-weight:600;text-decoration:none;border-radius:99px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--ink);box-shadow:0 10px 30px -14px rgba(0,0,0,.5);transition:background .3s ease}
 .sc-next:hover{background:#fff}
-.sc-next svg{width:18px;height:18px}
+.sc-next svg{width:18px;height:18px;animation:scbob 1.6s ease-in-out infinite}
 @keyframes scbob{0%,100%{translate:0 -2px}50%{translate:0 3px}}
-/* mientras la pantalla está creciendo no se recalcula el vidrio en cada cuadro: queda un fondo opaco y el difuminado vuelve al quedar quieta */
-.screen.growing .mbar,.screen.growing .widget,.screen.growing .pdock{-webkit-backdrop-filter:none;backdrop-filter:none}
-.screen.growing .mbar,.screen.growing .widget{background:rgba(38,30,44,.82)}
-.screen.growing .pdock{background:rgba(236,232,240,.78)}
-/* mientras está a pantalla completa, el menú flotante se aparta */
-.pf-full .float-nav{opacity:0;pointer-events:none;translate:0 -12px}
-.float-nav{transition:opacity .35s ease,translate .35s ease}
 /* clic en el fondo oscurecido: cierra lo que esté abierto */
 .screen.win-open .sc-ov{pointer-events:auto;cursor:pointer}
-@media (max-width:700px),(prefers-reduced-motion:reduce){
-  .sc-stage{height:auto}
-  .sc-pin{position:static;height:auto}
-  .sc-stage .screen{left:auto;translate:none;width:100%;margin-top:70px;height:calc(100svh - 84px);max-height:none;border-radius:var(--r-panel)}
-  .sc-hint,.sc-next{display:none}
+@media (max-width:700px){
+  .sc-stage .screen{margin-top:70px;height:calc(100svh - 84px);max-height:none}
+  .sc-next{display:none}
 }
 </style>
 </head>
@@ -1583,7 +1569,6 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       <span class="d deco" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M10 9h20l-2 27H12z" fill="rgba(255,255,255,.65)" stroke="#9A9AA2" stroke-width="1.2"/><path d="M8 8h24" stroke="#9A9AA2" stroke-width="2" stroke-linecap="round"/><path d="M15 13v19M20 13v19M25 13v19" stroke="#B4B4BC" stroke-width="1"/></svg></span>
       </nav>
   </header>
-  <a class="sc-hint" href="#proyectos"><span>Desliza para entrar</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9M4 8.5L8 12.5 12 8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   <a class="sc-next" href="#proyectos">Sigue bajando<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v9M4 8.5L8 12.5 12 8.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   </div></div>
 
@@ -2047,7 +2032,8 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
     var k=o.el.getBoundingClientRect().height/o.el.offsetHeight||1;
     function content(box,pad){var last=box.lastElementChild;if(!last)return 0;return (last.getBoundingClientRect().bottom-box.getBoundingClientRect().top)/k+pad}
     var need=bar.offsetHeight+Math.max(side?content(side,20):0,content(sc,24))+2;
-    if(need<o.el.offsetHeight-8){o.el.style.transition=now?'none':'height .45s cubic-bezier(.2,.8,.2,1)';o.el.style.height=need+'px';setTimeout(function(){o.el.style.transition=''},500)}
+    // y queda centrada de alto en el escritorio, no pegada arriba
+    if(need<o.el.offsetHeight-8){var bd=bounds(),top=bd.top+Math.max(0,Math.round((bd.bottom-bd.top-need)/2));o.el.style.transition=now?'none':'height .45s cubic-bezier(.2,.8,.2,1),top .45s cubic-bezier(.2,.8,.2,1)';o.el.style.height=need+'px';o.el.style.top=top+'px';setTimeout(function(){o.el.style.transition=''},500)}
   }
   function fit(o,n){
     var b=bounds(),el=o.el,m=small(),avail=b.bottom-b.top;
@@ -2294,30 +2280,6 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
     });
   });
   bov.addEventListener('click',function(e){if(e.target===bov||e.target.closest('.pw-x'))closeBig()});
-
-  // al bajar, la pantalla crece hasta cubrir toda la ventana; al terminar, se puede seguir bajando
-  (function(){
-    var st=document.getElementById('scStage');if(!st)return;
-    var on=window.matchMedia('(min-width:701px)').matches&&!reduce,last=-1,t=0,cur=-1,goal=0,raf=0,still=0;
-    // la meta sale del scroll; la pantalla la persigue cuadro a cuadro, así los saltos de la rueda del mouse se ven suaves
-    function target(){var r=st.getBoundingClientRect(),vh=window.innerHeight,q=Math.max(0,Math.min(1,-r.top/(vh*1.4)));return q*q*(3-2*q)}
-    function paint(p){
-      var r=st.getBoundingClientRect(),vh=window.innerHeight;
-      scr.style.setProperty('--p',p.toFixed(4));st.style.setProperty('--p',p.toFixed(4));
-      var full=p>.98&&r.bottom>vh*.6;st.classList.toggle('full',full);root.classList.toggle('pf-full',p>.6&&r.bottom>vh*.6);
-      // las ventanas abiertas se acomodan al nuevo tamaño cuando el movimiento se detiene
-      clearTimeout(t);if(stack.length)t=setTimeout(refit,120);
-    }
-    function loop(){
-      raf=0;if(!on)return;
-      if(cur<0)cur=goal;
-      cur+=(goal-cur)*.16;if(Math.abs(goal-cur)<.0015)cur=goal;
-      if(Math.abs(cur-last)>=.0008){last=cur;paint(cur);scr.classList.add('growing');clearTimeout(still);still=setTimeout(function(){scr.classList.remove('growing')},160)}
-      if(cur!==goal)raf=requestAnimationFrame(loop);
-    }
-    function upd(){if(!on)return;goal=target();if(!raf)raf=requestAnimationFrame(loop)}
-    window.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',function(){on=window.matchMedia('(min-width:701px)').matches&&!reduce;if(!on){scr.style.removeProperty('--p');root.classList.remove('pf-full')}last=-1;upd()});upd();
-  })();
 
   // enlace directo a un proyecto: /portfolio/#cstravel o /portfolio/#thallo
   var h=location.hash.slice(1);
