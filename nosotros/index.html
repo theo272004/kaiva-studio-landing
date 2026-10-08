@@ -1136,8 +1136,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     <header class="hero ns-hero" id="nsHero">
       <div class="hglow" aria-hidden="true"></div>
       <div class="nsfs">
-        <button class="nsf" type="button" data-ql="mateo" tabindex="-1" aria-hidden="true" style="--i:0;--r:-5deg"><span class="nsf-doc"><span class="nsf-pv"><img src="/assets/inicio/ficha-mateo-min.webp?v=2" alt="" width="360" height="203" loading="lazy"></span><span class="nsf-ext">PNG</span></span><b>Mateo.png</b><small>Desarrollador web</small></button>
-        <button class="nsf" type="button" data-ql="disenadora" tabindex="-1" aria-hidden="true" style="--i:1;--r:4deg"><span class="nsf-doc"><span class="nsf-pv"><img src="/assets/inicio/ficha-disenadora-min.webp?v=2" alt="" width="360" height="203" loading="lazy"></span><span class="nsf-ext">PNG</span></span><b>Sara.png</b><small>Diseñadora gráfica</small></button>
+        <button class="nsf" type="button" data-ql="mateo" tabindex="-1" aria-hidden="true" style="--i:0;--r:-5deg"><span class="nsf-doc"><span class="nsf-pv"><img src="/assets/inicio/ficha-mateo-min.webp?v=2" alt="" width="360" height="203" loading="lazy"></span><span class="nsf-ext">PNG</span></span><b>Código.png</b><small>Desarrollo web</small></button>
+        <button class="nsf" type="button" data-ql="disenadora" tabindex="-1" aria-hidden="true" style="--i:1;--r:4deg"><span class="nsf-doc"><span class="nsf-pv"><img src="/assets/inicio/ficha-disenadora-min.webp?v=2" alt="" width="360" height="203" loading="lazy"></span><span class="nsf-ext">PNG</span></span><b>Diseño.png</b><small>Diseño gráfico</small></button>
       </div>
       <div class="hero-copy">
         <button class="pill ptog" type="button" aria-pressed="false" aria-label="Cambiar entre Quiénes somos y Kaiva Studio"><i class="pill-thumb" aria-hidden="true"></i><span class="seg on">Quiénes somos</span><span class="seg">Kaiva Studio</span></button>
@@ -1214,7 +1214,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     }
     filePos();setTimeout(filePos,1300);window.addEventListener('resize',function(){pillPos();filePos()});
     /* abrir un archivo = vista previa como en el Mac */
-    var QL={mateo:{src:'/assets/inicio/ficha-mateo.webp?v=3',name:'Mateo.png',alt:'Ficha de Mateo, desarrollador web de Kaiva Studio',st:['/assets/inicio/sello-mateo.webp?v=1',64.5,19.82,26.25]},disenadora:{src:'/assets/inicio/ficha-disenadora.webp?v=3',name:'Sara.png',alt:'Ficha de la diseñadora gráfica de Kaiva Studio',st:['/assets/inicio/sello-disenadora.webp?v=1',68.1,44.36,22.3]}};
+    var QL={mateo:{src:'/assets/inicio/ficha-mateo.webp?v=3',name:'Código.png',alt:'Ficha de código de Kaiva Studio',st:['/assets/inicio/sello-mateo.webp?v=1',64.5,19.82,26.25]},disenadora:{src:'/assets/inicio/ficha-disenadora.webp?v=3',name:'Diseño.png',alt:'Ficha de diseño de Kaiva Studio',st:['/assets/inicio/sello-disenadora.webp?v=1',68.1,44.36,22.3]}};
     var qlStamp=document.getElementById('qlStamp'),qlPic=qlStamp.parentNode;
     function qlSeal(d){var t=d.st;qlStamp.classList.remove('go');qlPic.classList.remove('go');qlStamp.src=t[0];qlStamp.style.left=t[1]+'%';qlStamp.style.top=t[2]+'%';qlStamp.style.width=t[3]+'%';void qlStamp.offsetWidth;qlStamp.classList.add('go');qlPic.classList.add('go')}
     var ql=document.getElementById('ql'),qlImg=document.getElementById('qlImg'),qlName=document.getElementById('qlName'),qlFrom=null;
