@@ -695,6 +695,7 @@ h1 .dim .w:hover,h2 .dim .w:hover{color:var(--violet-text);transition:color .08s
 .progress{height:2px;margin:0 22px 16px;border-radius:2px;background:var(--mist);overflow:hidden}
 .progress i{display:block;height:100%;width:100%;background:var(--violet-text);transform-origin:left;transform:scaleX(0)}
 .acc-item.open.auto .progress i{animation:prog 7s linear forwards}
+.acc-item.open.hold .progress i{animation-play-state:paused}
 .acc-item:not(.open) .progress,.acc-item.open:not(.auto) .progress{display:none}
 @keyframes prog{to{transform:scaleX(1)}}
 
@@ -1912,7 +1913,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   }else{setStats(1);fillMeters(true)}
 
   /* ---------- Maquetas interactivas de servicios ---------- */
-  function stopAuto(){if(typeof auto!=='undefined'){auto=false;clearTimeout(accTimer);accItems.forEach(function(it){it.classList.remove('auto')})}}
+  // al tocar una maqueta, la barra de carga se queda quieta donde va (no desaparece)
+  function stopAuto(){if(accItems)accItems.forEach(function(it){it.classList.add('hold')})}
   var mw=document.getElementById('mw');
   // software: pestañas, barras y menú lateral
   var swData={
@@ -2030,17 +2032,18 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   /* ---------- Acordeón de servicios + pantalla de la laptop ---------- */
   var accItems=[].slice.call(document.querySelectorAll('#acc .acc-item'));
   var panes=[].slice.call(document.querySelectorAll('#featScreen .pane'));
-  var cur=0,auto=!reduce,accTimer=null;
+  var cur=0,auto=!reduce;
+  // la tarjeta nunca cambia sola: la barra se llena una vez y se queda llena
   function openItem(i,byUser){
     accItems.forEach(function(it,j){
       var on=j===i;
-      it.classList.toggle('open',on);it.classList.remove('auto');
+      it.classList.toggle('open',on);it.classList.remove('auto','hold');
       it.querySelector('.acc-btn').setAttribute('aria-expanded',on);
       panes[j].classList.toggle('on',on);
     });
     cur=i;
-    if(byUser){auto=false;clearTimeout(accTimer)}
-    if(auto){void accItems[i].offsetWidth;accItems[i].classList.add('auto');clearTimeout(accTimer);accTimer=setTimeout(function(){openItem((cur+1)%accItems.length)},7000)}
+    if(byUser)auto=false;
+    if(auto){void accItems[i].offsetWidth;accItems[i].classList.add('auto');auto=false}
   }
   accItems.forEach(function(it,i){it.querySelector('.acc-btn').addEventListener('click',function(){openItem(i,true)})});
   if(auto&&io){
@@ -2057,7 +2060,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   var names=['Diseño','Editor','Navegador'];
   var lines=[].slice.call(document.getElementById('codeBody').children);
   var layers=[].slice.call(disp.querySelectorAll('.ds-layer'));
-  var run=0;
+  var run=0,playing=-1;
   var now=new Date(),mon=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'],dia=['dom','lun','mar','mié','jue','vie','sáb'];
   document.getElementById('calMon').textContent=mon[now.getMonth()];
   document.getElementById('calDay').textContent=now.getDate();
@@ -2094,6 +2097,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     markStep(i);
   }
   async function playStep(i,id){
+    playing=i;
     moveCursor(apps[i]);await sleep(850);if(id!==run)return false;
     cursor.classList.add('click');await sleep(160);cursor.classList.remove('click');
     openWin(i);await sleep(700);if(id!==run)return false;
@@ -2141,6 +2145,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     await sleep(150);
     for(var i=from;i<3;i++){if(!(await playStep(i,id)))return}
     await sleep(1200);if(id!==run)return;
+    playing=-1;
     wins.forEach(function(w){w.classList.remove('open','front','back')});
     apps.forEach(function(a){a.classList.remove('live')});
     await sleep(900);if(id!==run)return;
@@ -2149,6 +2154,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   }
   function jumpTo(i){
     if(reduce){wins.forEach(function(w,j){w.classList.toggle('open',j<=i);w.classList.toggle('front',j===i);w.classList.toggle('back',j<i);w.classList.add('done','built','published')});markStep(i);return}
+    // si ese paso ya se está mostrando, sigue: no se cierra y se vuelve a abrir
+    if(i===playing)return;
     sequence(i);
   }
   stepBtns.forEach(function(b){b.addEventListener('click',function(){jumpTo(+b.dataset.step)})});
