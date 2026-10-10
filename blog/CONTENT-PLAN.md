@@ -141,8 +141,8 @@ se comparten — la redacción, no.
 | 16| 2026-09-08  | Marketing   | Por qué comprar backlinks ya casi no funciona, y qué hace Google en 2026 para detectarlos | Marketing y SEO | Publicado |
 | 17| 2026-09-18  | Localizado  | Cuánto cuesta una página web en **España**                        | Precios          | Publicado  |
 | 18| 2026-09-20  | IA          | Comercio agéntico: qué pasó con Instant Checkout de OpenAI (apagado el 6 de marzo de 2026) y qué le toca hacer a una pyme | IA y tecnología | Publicado |
-| 19| 2026-09-22  | Marketing   | E-E-A-T: cómo demuestra una pyme sin años de trayectoria que tiene experiencia y confianza | Marketing y SEO | Publicado |
-| 20| pendiente   | Localizado  | Mejores agencias de diseño web en **Lima**                        | Cómo elegir      | Pendiente  |
+| 19| 2026-09-25  | Marketing   | E-E-A-T: cómo demuestra una pyme sin años de trayectoria que tiene experiencia y confianza | Marketing y SEO | Publicado |
+| 20| 2026-09-23  | Localizado  | Mejores agencias de diseño web en **Lima**                        | Cómo elegir      | Publicado  |
 | 21| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
 | 22| pendiente   | Marketing   | Reseñas de Google: cuántas necesitas, qué tan rápido responder, y el efecto real en el ranking local | Marketing y SEO | Pendiente |
 | 23| pendiente   | Localizado  | Cuánto cuesta una página web en **Costa Rica**                    | Precios          | Pendiente  |
