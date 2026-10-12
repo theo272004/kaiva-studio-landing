@@ -77,27 +77,35 @@
     return (document.title || p).slice(0, 120);
   }
 
-  /* ---------- Estilos de la animación (uno solo para las 37 páginas) ---------- */
+  /* ---------- Estilos de la animación (uno solo para las 37 páginas) ----------
+     MOTION.md (2026-10-12), en corto: lo que sale (el campo) se va rápido y
+     acelerando; lo que llega (el "Recibido") entra con la curva de llegada
+     (.16,1,.3,1); el chulo es EL momento de deleite y es el único con rebote;
+     el error es un "no" que se apaga, no un temblor parejo; y el sello cae y
+     pega, como un sello de verdad: acelera hasta el papel y se frena en seco. */
   var css = [
     '.mail-form{position:relative}',
-    '.mail-form .kv-ok{position:absolute;inset:6px;display:flex;align-items:center;justify-content:center;gap:10px;padding:0 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--ink,#080808);opacity:0;pointer-events:none;transform:translateY(6px);transition:opacity .45s ease .35s,transform .45s cubic-bezier(.2,.8,.2,1) .35s}',
-    '.mail-form .kv-ok svg{flex:none;width:26px;height:26px}',
+    '.mail-form .kv-ok{position:absolute;inset:6px;display:flex;align-items:center;justify-content:center;gap:10px;padding:0 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--ink,#080808);opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .32s cubic-bezier(.16,1,.3,1) .2s,transform .4s cubic-bezier(.16,1,.3,1) .2s}',
+    '.mail-form .kv-ok svg{flex:none;width:26px;height:26px;transform:scale(.6);transition:transform .56s cubic-bezier(.16,1,.3,1) .3s}',
+    '@supports (transition-timing-function:linear(0,1)){.mail-form .kv-ok svg{transition-timing-function:linear(0,.044,.149,.283,.424,.558,.677,.776,.856,.917,.961,.992,1.011,1.022,1.027,1.028,1.027,1.023,1.019,1.015,1.012,1.008,1.006,1.004,1)}}',
+    '.mail-form.kv-enviado .kv-ok svg{transform:none}',
     '.mail-form .kv-ok circle{fill:#16a34a}',
-    '.mail-form .kv-ok path{fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:20;stroke-dashoffset:20;transition:stroke-dashoffset .45s ease .7s}',
-    '.mail-form.kv-enviado input,.mail-form.kv-enviado button{opacity:0;transition:opacity .25s ease;pointer-events:none}',
+    '.mail-form .kv-ok path{fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:20;stroke-dashoffset:20;transition:stroke-dashoffset .32s cubic-bezier(.16,1,.3,1) .55s}',
+    '.mail-form.kv-enviado input,.mail-form.kv-enviado button{opacity:0;transition:opacity .2s cubic-bezier(.3,0,.8,.15);pointer-events:none}',
+    '.mail-form button:active:not(:disabled){transform:scale(.97);transition-duration:.25s,.1s}',
     '.mail-form.kv-enviado .kv-ok{opacity:1;transform:none;pointer-events:auto}',
     '.mail-form.kv-enviado .kv-ok path{stroke-dashoffset:0}',
     '.mail-form.kv-enviado{transform:none!important}',
     '.kv-avion{position:fixed;z-index:9999;width:30px;height:30px;margin:-15px 0 0 -15px;pointer-events:none;color:#fff;filter:drop-shadow(0 6px 10px rgba(20,2,40,.45));animation:kvVuela 1s cubic-bezier(.5,0,.75,0) forwards}',
     '@keyframes kvVuela{0%{transform:translate(0,0) rotate(0) scale(1);opacity:1}25%{transform:translate(-18px,8px) rotate(-12deg) scale(1.05)}100%{transform:translate(260px,-320px) rotate(18deg) scale(.4);opacity:0}}',
-    '.mail-form.kv-error{animation:kvNo .45s ease}',
-    '@keyframes kvNo{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}',
+    '.mail-form.kv-error{animation:kvNo .5s ease-out}',
+    '@keyframes kvNo{15%{transform:translateX(-8px)}30%{transform:translateX(7px)}45%{transform:translateX(-5px)}60%{transform:translateX(3px)}75%{transform:translateX(-1.5px)}}',
     '.mail-form button.kv-enviando{position:relative;color:transparent!important}',
     '.mail-form button.kv-enviando::after{content:"";position:absolute;left:50%;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:kvGira .7s linear infinite}',
     '@keyframes kvGira{to{transform:rotate(360deg)}}',
-    '.kv-sello{position:absolute;right:-14px;bottom:-12px;z-index:2;padding:6px 10px;border:2px solid #16a34a;border-radius:8px;background:rgba(255,255,255,.92);color:#15803d;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;transform:rotate(-12deg) scale(2.2);opacity:0;animation:kvSello .45s cubic-bezier(.2,1.4,.4,1) .55s forwards}',
-    '@keyframes kvSello{to{transform:rotate(-12deg) scale(1);opacity:1}}',
-    '@media (prefers-reduced-motion:reduce){.mail-form .kv-ok,.mail-form .kv-ok path,.mail-form.kv-enviado input,.mail-form.kv-enviado button{transition:none}.kv-sello{animation:none;opacity:1;transform:rotate(-12deg)}.mail-form.kv-error{animation:none}}'
+    '.kv-sello{position:absolute;right:-14px;bottom:-12px;z-index:2;padding:6px 10px;border:2px solid #16a34a;border-radius:8px;background:rgba(255,255,255,.92);color:#15803d;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;transform:rotate(-12deg) scale(1.8);opacity:0;animation:kvSello .46s .6s forwards}',
+    '@keyframes kvSello{0%{transform:rotate(-12deg) scale(1.8);opacity:0;animation-timing-function:cubic-bezier(.55,0,1,.45)}55%{transform:rotate(-12deg) scale(.95);opacity:1;animation-timing-function:cubic-bezier(.16,1,.3,1)}100%{transform:rotate(-12deg) scale(1);opacity:1}}',
+    '@media (prefers-reduced-motion:reduce){.mail-form .kv-ok,.mail-form .kv-ok path,.mail-form .kv-ok svg,.mail-form.kv-enviado input,.mail-form.kv-enviado button{transition:none}.mail-form .kv-ok svg{transform:none}.kv-sello{animation:none;opacity:1;transform:rotate(-12deg)}.mail-form.kv-error{animation:none}}'
   ].join('');
   var st = document.createElement('style');
   st.textContent = css;

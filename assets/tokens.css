@@ -285,6 +285,18 @@
   --d-base: 200ms;                  /* cambio de estado, entrada de capas */
   --d-slow: 400ms;                  /* narración de dato: barras, anillos, contadores */
 
+  /* Dos papeles que el sistema no tenía (MOTION.md, 2026-10-12). Regla 6:
+     no amplían una escala, cubren huecos que se estaban rellenando a mano.
+     · SALIR. Todo salía con la curva de entrar y en el mismo tiempo, así que
+       lo que se iba frenaba en la cara del usuario. Lo que sale acelera y se
+       va en ~70 % de lo que tardó en entrar (NN/g, Material 3).
+     · EL RESORTE. Un solo momento de deleite por flujo (el check, abrir la
+       Recap). Pico de 1,028: 2,8 % de rebote, el tope de Apple para algo que
+       no sea un juego. Sin linear() cae a --ease-reveal, sin rebote.
+       Solo para transform, nunca para color ni opacidad. */
+  --ease-sale: cubic-bezier(0.3, 0, 0.8, 0.15);    /* salidas: acelera y se va */
+  --ease-resorte: cubic-bezier(0.16, 1, 0.3, 1);   /* respaldo; el resorte real abajo */
+
   /* --- FOCO ---------------------------------------------------------------
      El foco visible existía en la mitad de los controles, superficie por
      superficie, sin token y sin regla global. Ahora es una sola regla, más
@@ -447,6 +459,17 @@ button[aria-disabled='true']:hover {
 
 .lbl--acento {
   color: var(--violet);
+}
+
+/* El resorte de verdad, para los navegadores con linear() (Baseline desde
+   diciembre de 2023). 560 ms; generado con la fórmula del oscilador amortiguado
+   con rebote 0,25 (el mismo modelo de Apple, WWDC23). */
+@supports (animation-timing-function: linear(0, 1)) {
+  :root {
+    --ease-resorte: linear(0, 0.044, 0.149, 0.283, 0.424, 0.558, 0.677, 0.776, 0.856,
+      0.917, 0.961, 0.992, 1.011, 1.022, 1.027, 1.028, 1.027, 1.023, 1.019,
+      1.015, 1.012, 1.008, 1.006, 1.004, 1);
+  }
 }
 
 /* --- MOVIMIENTO REDUCIDO ---------------------------------------------------
