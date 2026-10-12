@@ -1175,8 +1175,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       </div>
       <h2><span class="dim">Hablemos de</span> tu empresa</h2>
       <form class="mail-form" id="mailForm" novalidate>
-        <label class="sr-only" for="email">Tu correo de trabajo</label>
-        <input id="email" name="email" type="email" placeholder="Tu correo de trabajo" autocomplete="email" required>
+        <label class="sr-only" for="email">Tu correo empresarial</label>
+        <input id="email" name="email" type="email" placeholder="Tu correo empresarial" autocomplete="email" required>
         <input class="hp" type="text" id="cWebsite" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button type="submit">Agendar llamada</button>
       </form>
@@ -1326,31 +1326,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     document.addEventListener('mousedown',function(e){plane.classList.add('gone');if(!reduce)burst(e.clientX,e.clientY);clearTimeout(goneT);goneT=setTimeout(function(){plane.classList.remove('gone')},200)});
   }
 
-  /* ---------- Formulario: copia en la hoja de leads y aviso por correo (EmailJS) ---------- */
-  var form=document.getElementById('mailForm'),email=document.getElementById('email'),note=document.getElementById('formNote'),casilla=document.getElementById('cPrivacy');
-  var fBtn=form.querySelector('button[type="submit"]'),fLabel=fBtn.textContent;
-  var HOJA_LEADS='https://script.google.com/macros/s/AKfycbwqEv37I6bl8g7xdZxrTHgMWswDPAGO6bDbHH70JgLFeqhfLwE0NrJEc_iGTnU-zwEZTA/exec';
-  var EJS={service:'service_94uqq2e',template:'template_brvipe9',key:'7bRjr4NU9L0Y5gDsy',endpoint:'https://api.emailjs.com/api/v1.0/email/send'};
-  var fallo='No pudimos enviarlo. Escríbenos a info@kaivastudio.com o por WhatsApp al +57 302 413 7374.';
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    if(fBtn.disabled)return;
-    if(document.getElementById('cWebsite').value){note.textContent='Listo, recibimos tu correo.';form.reset();return}
-    var v=email.value.trim();
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){note.textContent='Escribe un correo válido, por ejemplo nombre@tuempresa.com.';email.focus();return}
-    if(!casilla.checked){note.textContent='Marca la casilla de autorización para poder escribirte.';casilla.focus();return}
-    var autorizada=new Date().toISOString(),mensaje='Quiere agendar una llamada desde un artículo del blog.';
-    fBtn.disabled=true;fBtn.textContent='Enviando…';
-    fetch(HOJA_LEADS,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({nombre:'',correo:v,telefono:'',interes:'Agendar llamada',mensaje:mensaje,origen:location.href,referente:document.referrer||'directo',autorizacion:autorizada})}).catch(function(){});
-    fetch(EJS.endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:EJS.service,template_id:EJS.template,user_id:EJS.key,template_params:{
-      name:v.split('@')[0],email:v,message:mensaje,phone:'No indicado',interest:'Agendar llamada',
-      subject:'Nuevo contacto desde kaivastudio.com — Agendar llamada',
-      time:new Date().toLocaleString('es-CO',{dateStyle:'medium',timeStyle:'short'}),page_url:location.href,privacy:'Autorizada el '+autorizada}})})
-    .then(function(r){if(!r.ok)throw new Error(r.status);note.textContent='Listo, recibimos tu correo. Te escribimos el mismo día o el siguiente, de lunes a viernes.';form.reset();casilla.checked=false})
-    .catch(function(){note.textContent=fallo})
-    .then(function(){fBtn.disabled=false;fBtn.textContent=fLabel});
-  });
 })();
 </script>
+<script src="/assets/contacto.js?v=1" defer></script>
 </body>
 </html>
