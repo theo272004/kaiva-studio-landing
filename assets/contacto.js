@@ -9,16 +9,12 @@
    "Listo" dependía solo de EmailJS: si EmailJS fallaba pero el panel lo
    había guardado, la persona veía un error y probablemente se iba.
 
-   Ahora hay un solo archivo, y cada envío va a tres sitios a la vez:
-
-     1. El panel (diagnostico.kaivastudio.com/api/contacto.php), con el
-        canal del que vino la visita. Es el registro principal.
-     2. La hoja de Google, de respaldo.
-     3. EmailJS, el aviso por correo.
-
-   Se da por recibido si llegó al panel O al correo: con cualquiera de los
-   dos el contacto ya no se pierde. Solo si fallan ambos se pide escribir
-   por WhatsApp.
+   Ahora hay un solo archivo. Cada envío va al panel
+   (diagnostico.kaivastudio.com/api/contacto.php), que guarda el contacto
+   con su canal y manda los dos correos —la confirmación a quien escribió y
+   el aviso al equipo— por el correo de Hostinger. Una copia va también a la
+   hoja de Google. EmailJS queda solo de emergencia, si el panel no responde.
+   Solo si fallan los dos se pide escribir por WhatsApp.
 
    También manda `generate_lead` a Analytics. La portada nueva lo había
    perdido (la vieja sí lo enviaba) y por eso Analytics marcaba cero
@@ -176,11 +172,15 @@
         .then(function (r) { if (!r.ok) throw new Error(r.status); return true; });
     };
 
-    var alPanel = json(CRM, {
-      email: v, origen: 'landing', pagina: location.href,
-      utm_source: canal, utm_medium: leer('kv_utm_med'), utm_campaign: leer('kv_utm_camp'),
-      referente: document.referrer || 'directo'
-    });
+    /* Se cierra el envío con éxito o con el aviso de escribir por WhatsApp. */
+    var cerrar = function (bien) {
+      btn.classList.remove('kv-enviando');
+      btn.removeAttribute('aria-label');
+      if (bien) { listo(); return; }
+      btn.disabled = false;
+      btn.textContent = etiqueta;
+      fallo(FALLO);
+    };
 
     /* text/plain a propósito: así el navegador no pide el OPTIONS previo, que
        Apps Script no sabe responder. Es respaldo: su fallo no cuenta. */
@@ -189,37 +189,26 @@
       origen: location.href, referente: document.referrer || 'directo', autorizacion: autorizada
     }, 'text/plain;charset=utf-8').catch(function () {});
 
-    var alCorreo = json(EJS.endpoint, {
-      service_id: EJS.service, template_id: EJS.template, user_id: EJS.key,
-      template_params: {
-        name: v.split('@')[0], email: v, message: mensaje + ' [Canal: ' + canal + ']', phone: 'No indicado',
-        interest: 'Agendar llamada', subject: 'Nuevo contacto desde kaivastudio.com [' + canal + '] — Agendar llamada',
-        time: new Date().toLocaleString('es-CO', { dateStyle: 'medium', timeStyle: 'short' }),
-        page_url: location.href, privacy: 'Autorizada el ' + autorizada
-      }
+    /* EL PANEL ES EL CAMINO. Guarda el contacto, le manda la confirmación a
+       quien escribió y el aviso al equipo, los dos desde info@kaivastudio.com
+       por Hostinger (firmados con la DKIM del dominio). EmailJS mandaba el
+       aviso "desde info@" por sus propios servidores, fallaba el DMARC del
+       dominio y llegaba a spam: ahora solo se usa si el panel no responde,
+       para que el contacto no se pierda. */
+    json(CRM, {
+      email: v, origen: 'landing', pagina: location.href, mensaje: mensaje, autorizacion: autorizada,
+      utm_source: canal, utm_medium: leer('kv_utm_med'), utm_campaign: leer('kv_utm_camp'),
+      referente: document.referrer || 'directo'
+    }).then(function () { cerrar(true); }, function () {
+      json(EJS.endpoint, {
+        service_id: EJS.service, template_id: EJS.template, user_id: EJS.key,
+        template_params: {
+          name: v.split('@')[0], email: v, message: mensaje + ' [Canal: ' + canal + ']', phone: 'No indicado',
+          interest: 'Agendar llamada', subject: 'Nuevo contacto desde kaivastudio.com [' + canal + '] — Agendar llamada',
+          time: new Date().toLocaleString('es-CO', { dateStyle: 'medium', timeStyle: 'short' }),
+          page_url: location.href, privacy: 'Autorizada el ' + autorizada
+        }
+      }).then(function () { cerrar(true); }, function () { cerrar(false); });
     });
-
-    /* Recibido si llegó a cualquiera de los dos que importan. */
-    var resuelto = false;
-    var fallidos = 0;
-    var terminar = function (bien) {
-      if (resuelto) return;
-      if (bien) {
-        resuelto = true;
-        btn.classList.remove('kv-enviando');
-        btn.removeAttribute('aria-label');
-        listo();
-        return;
-      }
-      if (++fallidos < 2) return;
-      resuelto = true;
-      btn.disabled = false;
-      btn.classList.remove('kv-enviando');
-      btn.removeAttribute('aria-label');
-      btn.textContent = etiqueta;
-      fallo(FALLO);
-    };
-    alPanel.then(function () { terminar(true); }, function () { terminar(false); });
-    alCorreo.then(function () { terminar(true); }, function () { terminar(false); });
   });
 })();
