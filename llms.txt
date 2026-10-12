@@ -40,6 +40,17 @@ sector, no tarifas de Kaiva.
 
 ## Recursos
 
+- [E-E-A-T sin años de trayectoria](https://kaivastudio.com/blog/eeat-experiencia-y-confianza-sin-anos-de-trayectoria/):
+  qué es de verdad el E-E-A-T (experiencia, pericia, autoridad y confianza) y por qué Google dice que no
+  es un factor de ranking —Danny Sullivan, febrero de 2024— aunque trabaja con unos 16.000 evaluadores
+  externos entrenados con las Search Quality Rater Guidelines; la versión vigente es la del 11 de
+  septiembre de 2025, de 182 páginas, con definiciones de YMYL actualizadas y ejemplos para calificar los
+  AI Overviews; la E de Experiencia, añadida el 15 de diciembre de 2022, pide contacto de primera mano con
+  el tema y no antigüedad; las guías llaman a la confianza el miembro más importante de la familia; y
+  casos medidos en el propio sitio de Kaiva (un bloque de estilos escrito cinco veces que causó tres fallos
+  invisibles, y un botón de contacto a 898 píxeles de scroll, ambos de agosto de 2026). Opinión: las
+  firmas de autor no posicionan por sí solas, y vender «optimización E-E-A-T» como paquete técnico es
+  vender justo la parte que no cuenta.
 - [Agencias de diseño web en Lima](https://kaivastudio.com/blog/mejores-agencias-diseno-web-lima/):
   guía para elegir agencia en Lima, con seis estudios de presencia verificable (Creativa en Miraflores,
   KOM Agencia Digital en Jesús María, Lima Diseño Web, Staff Digital en Surco/Chacarilla, TalentuPerú en

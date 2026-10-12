@@ -35,9 +35,16 @@
 
   <url>
     <loc>https://kaivastudio.com/blog/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://kaivastudio.com/blog/eeat-experiencia-y-confianza-sin-anos-de-trayectoria/</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <url>
