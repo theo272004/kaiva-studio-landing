@@ -21,26 +21,33 @@
    hasta que se cierre la pestaña. Nada viaja. Ver el encabezado de
    consentimiento.js.
 
-   Eventos que manda
+   Eventos que manda (revisados el 2026-10-12 contra el sitio de hoy)
    -----------------
-   · clic_cta_principal  — clic en el botón principal del hero (el único
-                           botón de la primera pantalla). Separa "nadie
-                           pulsa" de "pulsan y no envían".
-   · inicia_diagnostico  — clic hacia /monitor/ o /diagnostico/. Es el
-                           evento que más importa: el lead magnet.
-   · contacto_whatsapp   — clic en el enlace de WhatsApp.
-   · contacto_correo     — clic en un mailto:.
-   · abre_chat           — abre el asistente de la portada.
-   · pregunta_chat       — escribe una pregunta (con el tema detectado y
-                           si se entendió: sirve para saber qué le falta
-                           al bot).
-   · lista_espera_panel  — pide entrar a la lista del Panel Pro.
-   · ve_trabajo          — abre el sitio de un cliente de la vitrina.
+   La portada nueva (oct 2026) ya no tiene diagnóstico, chat, vitrina ni
+   lista de espera, y medía exactamente eso: la mitad de los eventos
+   apuntaba a elementos que no existen y lo que hoy importa no se medía.
+
+   · cta_agendar         — clic en cualquier "Agendar llamada" / "Cuéntanos
+                           tu proyecto". Lleva la ZONA (hero, nav, planes,
+                           cierre…) y, si salió de una tarjeta de planes,
+                           el PLAN y la situación del interruptor ("estoy
+                           empezando" / "quiero crecer"). El plan además se
+                           guarda en la pestaña y viaja con el contacto al
+                           panel (contacto.js): llega diciendo qué quiere.
+   · contacto_whatsapp   — clic en el enlace de WhatsApp.      [evento clave]
+   · contacto_correo     — clic en un mailto:.                 [evento clave]
+   · ve_portafolio       — clic hacia /portfolio/, con la categoría (#web…).
+   · abre_servicio       — abre un servicio del acordeón: qué interesa.
+   · interactua_demo     — juega con una demo de la portada (colores, letra,
+                           periodo, pasos del proceso). Una vez por demo y
+                           visita: es señal de interés, no un contador.
+   · red_social          — sale a Instagram, LinkedIn o Behance.
+   · conoce_equipo       — clic hacia /nosotros/.
    · profundidad_lectura — 25/50/75/100% de la página, una vez cada uno.
 
-   generate_lead (envío del formulario) NO está aquí: ya lo dispara el
-   propio manejador del formulario en index.html, que es donde se sabe
-   si el correo salió bien.
+   generate_lead (envío del formulario) NO está aquí: lo dispara
+   contacto.js cuando el panel confirma que el contacto quedó guardado,
+   con el plan que traía. Es EL evento clave del sitio.
    =================================================================== */
 
 (function () {
@@ -65,97 +72,89 @@
      clics del hero salían como "sin-seccion", que es justo la zona que
      más importa medir. */
   function zona(el) {
-    var s = el.closest ? el.closest('[id]') : null;
+    /* El menú primero: el botón "Agendar llamada" de arriba vive dentro del
+       hero en el marcado y se contaba como si fuera el del hero. */
+    if (el.closest && el.closest('nav, .float-nav')) return 'menu';
+    var nombres = { top: 'hero', inicio: 'hero', plans: 'planes', mmenu: 'menu-movil', note: 'contacto' };
+    var s = el.parentElement && el.parentElement.closest ? el.parentElement.closest('[id]') : null;
     while (s) {
-      if (s.id === 'top') return 'hero';
-      if (s.id) return s.id;
+      if (s.id) return nombres[s.id] || s.id;
       s = s.parentElement && s.parentElement.closest ? s.parentElement.closest('[id]') : null;
     }
     return 'sin-seccion';
   }
+
+  /* El plan de la tarjeta y la situación del interruptor de Planes. */
+  function planDe(el) {
+    var t = el.closest ? el.closest('[data-plan]') : null;
+    if (!t) return null;
+    var n = t.querySelector('.pname');
+    var sw = document.getElementById('switch');
+    return {
+      plan: (n ? n.textContent.trim() : t.getAttribute('data-plan')).slice(0, 40),
+      situacion: sw && sw.getAttribute('aria-checked') === 'true' ? 'quiere crecer' : 'está empezando'
+    };
+  }
+
+  var demosVistas = {};
 
   document.addEventListener('click', function (e) {
     var a = e.target.closest ? e.target.closest('a, button') : null;
     if (!a) return;
 
     var href = a.getAttribute('href') || '';
-    var texto = (a.textContent || '').trim().slice(0, 60);
-
-    if (href.indexOf('/monitor') === 0 || href.indexOf('/diagnostico') === 0) {
-      mandar('inicia_diagnostico', { zona: zona(a), etiqueta: texto });
-      return;
-    }
+    var texto = (a.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 60);
 
     if (href.indexOf('wa.me') !== -1 || href.indexOf('whatsapp') !== -1) {
       mandar('contacto_whatsapp', { zona: zona(a) });
       return;
     }
-
     if (href.indexOf('mailto:') === 0) {
       mandar('contacto_correo', { zona: zona(a) });
       return;
     }
 
-    /* Botón principal del hero. Hace falta medirlo aparte del envío del
-       formulario: el panel decía "175 sesiones, 0 conversiones" y con solo
-       generate_lead no hay forma de saber si el problema es que nadie pulsa
-       el botón o que lo pulsan y luego abandonan el formulario. Son dos
-       arreglos distintos y sin este evento no se distinguen.
-       Se engancha a data-cta y no al href para que siga midiendo si mañana
-       el botón apunta a otro sitio. */
-    if (a.hasAttribute && a.hasAttribute('data-cta')) {
-      mandar('clic_cta_principal', { zona: a.getAttribute('data-cta'), etiqueta: texto });
+    /* "Agendar llamada": desde dónde, y con qué plan en la cabeza. El plan se
+       guarda en la pestaña aunque no haya permiso de cookies: no es medición,
+       es para que el contacto que llegue al panel diga qué le interesa. */
+    if (href.indexOf('/agendar') === 0) {
+      var pl = planDe(a);
+      if (pl) { try { sessionStorage.setItem('kv_plan', pl.plan + ' (' + pl.situacion + ')'); } catch (er) {} }
+      mandar('cta_agendar', { zona: zona(a), etiqueta: texto, plan: pl ? pl.plan : '', situacion: pl ? pl.situacion : '' });
       return;
     }
 
-    /* Vitrina del hero: los enlaces salen al sitio del cliente. Saber
-       cuáles se abren dice qué trabajo engancha más, y por eso vale la
-       pena revisar el orden de la baraja con datos y no a ojo. */
-    var ficha = a.closest ? a.closest('.sc-item') : null;
-    if (ficha) {
-      var pie = ficha.querySelector('.sc-caption');
-      mandar('ve_trabajo', { cliente: pie ? pie.textContent.trim().slice(0, 60) : 'sin-nombre' });
+    if (href.indexOf('/portfolio') === 0) {
+      mandar('ve_portafolio', { zona: zona(a), categoria: (href.split('#')[1] || 'todo') });
+      return;
+    }
+    if (href.indexOf('/nosotros') === 0) {
+      mandar('conoce_equipo', { zona: zona(a) });
+      return;
+    }
+    var red = /instagram\.com/.test(href) ? 'instagram' : /linkedin\.com/.test(href) ? 'linkedin' : /behance\.net/.test(href) ? 'behance' : '';
+    if (red) {
+      mandar('red_social', { red: red, zona: zona(a) });
       return;
     }
 
-    if (a.id === 'faqFab') {
-      /* El botón alterna abierto/cerrado y solo interesa la apertura.
-         Ojo con el orden: el manejador del chat vive en un script inline
-         de index.html, así que ya corrió y ya alternó la clase cuando
-         este listener delegado recibe el clic. Por eso se cuenta cuando
-         la ventana QUEDÓ abierta, no cuando estaba cerrada. */
-      var v = document.getElementById('faqWindow');
-      if (v && v.classList.contains('open')) mandar('abre_chat', {});
+    if (a.classList && a.classList.contains('acc-btn')) {
+      mandar('abre_servicio', { servicio: texto });
       return;
     }
 
-    if (a.id === 'btnEsperaPanel' || /lista de espera/i.test(texto)) {
-      mandar('lista_espera_panel', { zona: zona(a) });
+    /* Las demos: cualquier botón dentro de servicios o proceso que no sea
+       del acordeón. Una vez por demo (por zona) en cada visita. */
+    if (a.tagName === 'BUTTON' && a.closest && a.closest('#servicios, #proceso')) {
+      var caja = a.closest('#mw, #sw, #br, #steps, #display, #st, #as');
+      var nombres = { mw: 'web', sw: 'software', br: 'marca', steps: 'proceso', display: 'proceso', st: 'proceso', as: 'proceso' };
+      var demo = caja ? nombres[caja.id] : zona(a);
+      if (!demosVistas[demo]) {
+        demosVistas[demo] = true;
+        mandar('interactua_demo', { demo: demo, control: texto || (a.className || '').slice(0, 30) });
+      }
     }
   });
-
-  /* -----------------------------------------------------------------
-     Preguntas al chat
-     -----------------------------------------------------------------
-     Interesa el tema que se detectó y, sobre todo, cuándo NO se detectó
-     ninguno: cada "no entendí" es una respuesta que le falta al bot o
-     una señal de que hay que pasar a un modelo de verdad. */
-  /* Va en el documento y en FASE DE CAPTURA, no en el formulario. Tiene
-     que ser así: el manejador del chat vive en un <script> inline al
-     final del body, que se ejecuta durante el parseo, o sea antes que
-     este archivo (que va con defer). Si escucháramos el submit en el
-     formulario, el suyo correría primero, haría input.value = '' y aquí
-     llegaría el campo vacío. La captura en un ancestro corre antes que
-     cualquier escucha del elemento destino, así que se lee el texto
-     todavía intacto. */
-  document.addEventListener('submit', function (e) {
-    var f = e.target;
-    if (!f || f.id !== 'faqForm') return;
-    var caja = document.getElementById('faqInput');
-    var txt = caja ? caja.value.trim() : '';
-    if (!txt) return;
-    mandar('pregunta_chat', { texto: txt.slice(0, 100) });
-  }, true);
 
   /* -----------------------------------------------------------------
      Profundidad de lectura

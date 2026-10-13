@@ -144,7 +144,7 @@
     sellar();
     nota.textContent = 'Listo, recibimos tu correo. Te escribimos el mismo día o el siguiente, de lunes a viernes.';
     if (typeof window.gtag === 'function') {
-      window.gtag('event', 'generate_lead', { form: 'contacto', pagina: location.pathname, canal: leer('kv_utm_src') || 'directo' });
+      window.gtag('event', 'generate_lead', { form: 'contacto', pagina: location.pathname, canal: leer('kv_utm_src') || 'directo', plan: leer('kv_plan') });
     }
   }
 
@@ -170,7 +170,12 @@
 
     var autorizada = new Date().toISOString();
     var canal = leer('kv_utm_src') || 'directo';
-    var mensaje = 'Quiere agendar una llamada desde ' + desde() + '.';
+    /* El plan que pulsó en Planes (eventos.js lo guarda en la pestaña) o el
+       ?plan= de un enlace: así el contacto llega al panel diciendo qué quiere. */
+    var plan = leer('kv_plan');
+    try { plan = plan || new URLSearchParams(location.search).get('plan') || ''; } catch (er) {}
+    plan = String(plan || '').slice(0, 80);
+    var mensaje = 'Quiere agendar una llamada desde ' + desde() + '.' + (plan ? ' Le interesa: ' + plan + '.' : '');
     btn.disabled = true;
     btn.classList.add('kv-enviando');
     btn.setAttribute('aria-label', 'Enviando');
