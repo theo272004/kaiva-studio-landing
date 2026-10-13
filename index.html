@@ -1809,10 +1809,11 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 
   /* ---------- Manifiesto: se enciende palabra por palabra ---------- */
   var man=document.getElementById('manifesto'),manSec=man.closest('.manifesto');
-  // «Somos un estudio digital» va en negro y «tu web, tu software y tu marca.» siempre en morado;
+  // Las 4 primeras palabras van en negro y la última oración (el remate) siempre en morado;
   // el resto está en gris y cada palabra se enciende al pasar el mouse.
-  // Cada idea arranca en su propia línea: la frase principal, lo que hacemos y el remate morado.
-  var words=man.textContent.trim().split(/\s+/),start=words.indexOf('web,')-1,last=words.length-1;
+  // Cada idea arranca en su propia línea: la frase principal, la del medio y el remate morado.
+  var words=man.textContent.trim().split(/\s+/),last=words.length-1,start=last;
+  while(start>0&&!/[.:]$/.test(words[start-1]))start--;
   var brk=0;while(brk<last&&!/\.$/.test(words[brk]))brk++;
   function manWord(w,i){
     var cls='w'+(i<4?' ink':'')+(i>=start?' v key':'');
