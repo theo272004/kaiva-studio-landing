@@ -373,22 +373,22 @@ section{scroll-margin-top:90px}
 .hglow{position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;background:radial-gradient(130% 88% at 50% 100%,rgba(122,63,201,.62) 0%,rgba(78,30,134,.48) 38%,rgba(54,17,95,.22) 64%,transparent 86%);opacity:0;transform:translateY(12%);transition:opacity 1s var(--ease),transform 1.2s var(--ease)}
 .hero.hfon .hglow{opacity:1;transform:none}
 /* carpetas de "Estudio digital": salen de la etiqueta y vuelven a ella */
-.hfold{position:absolute;left:0;top:0;z-index:4;display:grid;justify-items:center;gap:16px;color:#fff;text-decoration:none;opacity:0;pointer-events:none;transform:translate(var(--dx,0),var(--dy,0)) scale(.15);transition:transform .8s cubic-bezier(.34,1.35,.64,1),opacity .35s;transition-delay:calc(var(--i) * 70ms)}
+.hfold{--fw:clamp(60px,6.7vw,96px);position:absolute;left:0;top:0;z-index:4;display:grid;justify-items:center;gap:clamp(12px,1.1vw,16px);color:#fff;text-decoration:none;opacity:0;pointer-events:none;transform:translate(var(--dx,0),var(--dy,0)) scale(.15);transition:transform .8s cubic-bezier(.34,1.35,.64,1),opacity .35s;transition-delay:calc(var(--i) * 70ms)}
 .hero.hfon .hfold{opacity:1;pointer-events:auto;transform:rotate(var(--r,0deg))}
-.hfold .folder{position:relative;display:block;width:96px;height:74px;filter:drop-shadow(0 10px 14px rgba(10,0,30,.5));animation:hfl 3.6s ease-in-out infinite alternate;animation-delay:calc(var(--i) * -.9s);transition:scale .35s var(--ease)}
+.hfold .folder{position:relative;display:block;width:var(--fw);height:calc(var(--fw) * .77);filter:drop-shadow(0 10px 14px rgba(10,0,30,.5));animation:hfl 3.6s ease-in-out infinite alternate;animation-delay:calc(var(--i) * -.9s);transition:scale .35s var(--ease)}
 .hfold .folder::before{content:"";position:absolute;left:0;top:0;width:40%;height:24%;border-radius:6px 6px 0 0;background:#A580D6}
 .hfold .fb{position:absolute;inset:11% 0 0;border-radius:4px 8px 8px 8px;background:#A580D6}
 .hfold img{position:absolute;left:9%;top:4%;width:82%;height:62%;object-fit:cover;object-position:top;border-radius:3px;box-shadow:0 1px 5px rgba(0,0,0,.35);transition:transform .35s var(--ease)}
 .hfold .ff{position:absolute;left:0;right:0;bottom:0;height:70%;border-radius:5px 5px 8px 8px;background:linear-gradient(180deg,#FFFFFF,#EAE2F4);box-shadow:inset 0 1px 0 #fff}
-.hfold b{padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:12px;font-weight:600;letter-spacing:-.01em;transition:background .3s,color .3s}
+.hfold b{padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:clamp(11px,.84vw,12px);font-weight:600;letter-spacing:-.01em;transition:background .3s,color .3s}
 /* sombra en el piso: se achica cuando la carpeta sube */
-.hfold::before{content:"";position:absolute;left:50%;top:84px;width:70px;height:10px;margin-left:-35px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.55),transparent);animation:hsh 3.6s ease-in-out infinite alternate;animation-delay:calc(var(--i) * -.9s)}
+.hfold::before{content:"";position:absolute;left:50%;top:calc(var(--fw) * .875);width:calc(var(--fw) * .73);height:10px;margin-left:calc(var(--fw) * -.365);border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.55),transparent);animation:hsh 3.6s ease-in-out infinite alternate;animation-delay:calc(var(--i) * -.9s)}
 .hfold:hover b{background:var(--violet-text)}
 .hfold:hover img{transform:translateY(-6px) rotate(-3deg)}
 .hfold:hover .folder{scale:1.08}
 @keyframes hfl{from{translate:0 -9px;rotate:-1.5deg}to{translate:0 3px;rotate:1.5deg}}
 @keyframes hsh{from{scale:.7;opacity:.55}to{scale:1;opacity:1}}
-@media (max-width:1099px){.hfold .folder{width:60px;height:46px}.hfold b{font-size:11px;padding:3px 8px}.hfold{gap:12px}.hfold::before{top:52px;width:46px;margin-left:-23px}}
+@media (max-width:1099px){.hfold b{padding:3px 8px}}
 /* en celular basta con el cambio de la etiqueta */
 @media (max-width:700px){.hfolds{display:none}}
 @media (prefers-reduced-motion:reduce){.hfold,.hfold .folder,.hfold::before{animation:none;transition:opacity .2s}}
@@ -1024,18 +1024,20 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 /* con una ventana abierta, las carpetas se esconden */
 .screen.win-open .desk-area{opacity:0;visibility:hidden;transition:opacity .3s ease,visibility 0s linear .3s}
 .desk-area{transition:opacity .4s ease .1s;position:absolute;z-index:22;inset:var(--mb) 0 var(--dk) 0}
-.ico{position:absolute;left:var(--x);top:var(--y);display:grid;justify-items:center;gap:9px;width:150px;padding:12px 8px 10px;border:0;border-radius:12px;background:none;color:#fff;font:inherit;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none}
+.ico{position:absolute;left:var(--x);top:var(--y);display:grid;justify-items:center;gap:9px;width:clamp(90px,10.4vw,150px);padding:12px 8px 10px;border:0;border-radius:12px;background:none;color:#fff;font:inherit;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none}
 .ico.drag{z-index:6}
 .ico-art{transition:transform .35s var(--ease),filter .35s;filter:drop-shadow(0 14px 20px rgba(10,0,30,.55))}
 .ico:hover .ico-art{transform:translateY(-5px) scale(1.05)}
 .ico.drag .ico-art{transform:scale(1.07);filter:drop-shadow(0 24px 30px rgba(10,0,30,.6))}
 /* las carpetas no llevan difuminado propio: con seis capas de vidrio encima del fondo, Safari a veces dejaba de pintarlas */
 .ico{border-radius:18px;background:rgba(26,20,32,.58);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 18px 40px -26px rgba(0,0,0,.6)}
-.ico-name{max-width:140px;padding:2px 6px;border-radius:7px;font-size:14px;font-weight:600;line-height:1.3;text-align:center;letter-spacing:-.01em;text-shadow:0 1px 3px rgba(0,0,0,.6);transition:background .2s}
-.ico-name small{display:block;font-weight:500;opacity:.75;font-size:12px}
+.ico-name{max-width:clamp(84px,9.7vw,140px);padding:2px 6px;border-radius:7px;font-size:clamp(11px,.97vw,14px);font-weight:600;line-height:1.3;text-align:center;letter-spacing:-.01em;text-shadow:0 1px 3px rgba(0,0,0,.6);transition:background .2s}
+.ico-name small{display:block;font-weight:500;opacity:.75;font-size:clamp(10px,.83vw,12px)}
 .ico:focus-visible{outline:none}
 .ico:focus-visible .ico-name,.ico.sel .ico-name{background:#4E1E86;text-shadow:none}
-.folder{position:relative;width:124px;height:96px}
+.folder{position:relative;width:clamp(56px,8.6vw,124px);height:auto;aspect-ratio:124/96}
+/* en pantallas medianas el texto de "Nuestro portfolio" ocupa más ancho: Logofolio baja para no taparlo */
+@media (min-width:701px) and (max-width:1180px){.desk-area .ico[data-open="logos"]{--y:max(40%,240px)!important}.desk-area .ico[data-open="cst"]{--x:max(55%,420px)!important}.desk-area .ico[data-open="atec"]{--x:min(84%,calc(100% - 124px))!important}}
 .folder::before{content:"";position:absolute;left:0;top:0;width:40%;height:24%;border-radius:7px 7px 0 0;background:#A580D6}
 .folder .fb{position:absolute;inset:11% 0 0;border-radius:4px 9px 9px 9px;background:#A580D6}
 .folder img{position:absolute;left:9%;top:4%;width:82%;height:62%;object-fit:cover;object-position:top;border-radius:3px;box-shadow:0 1px 5px rgba(0,0,0,.35);transition:transform .35s var(--ease)}
@@ -1342,7 +1344,8 @@ a.lnk-head:hover .lnk-follow{background:#004182}
 .mcopy{display:grid;justify-items:center;gap:14px;max-width:620px;margin:0 auto 34px;text-align:center}
 .mcopy .who{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
 .mcopy .btn{background:var(--ink);color:var(--paper)}
-.mcar{--h:clamp(140px,14vw,200px);--zz:12px;overflow:hidden;width:100vw;margin-left:calc(50% - 50vw);padding:calc(var(--zz) + 26px) 0 calc(var(--zz) + 30px)}
+/* la sombra de cada pieza baja hasta 49 px (12 de zigzag + 7 de flotar + 30 de sombra): el margen de abajo la deja entera, sin la raya del corte */
+.mcar{--h:clamp(110px,11vw,160px);--zz:12px;overflow:hidden;width:100vw;margin-left:calc(50% - 50vw);padding:calc(var(--zz) + 30px) 0 calc(var(--zz) + 52px)}
 .mcar-track{display:flex;align-items:center;gap:14px;width:max-content;animation:mroll 150s linear infinite}
 @keyframes mroll{to{transform:translateX(calc(-50% - 7px))}}
 .mcard{flex:none;height:var(--h);padding:0;border:0;border-radius:16px;overflow:hidden;background:#fff;cursor:pointer;box-shadow:0 0 0 1px rgba(8,8,8,.06),0 18px 34px -22px rgba(8,8,8,.45);translate:0 var(--y,0);animation:levita 4.2s ease-in-out infinite;transition:transform .5s var(--ease),box-shadow .45s}
@@ -1609,7 +1612,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
           <a class="pc-img" href="#editorial" data-open="editorial" aria-label="Abrir Descubriendo Felinorte"><img src="/assets/portfolio/thumbs/felinorte-gato.webp?v=2" alt="Portada del libro Descubriendo Felinorte" width="320" height="200" loading="lazy"></a>
           <span>
             <h3><a href="#editorial" data-open="editorial">Descubriendo Felinorte</a></h3>
-            <p>Libro ilustrado y diagramado por una de nuestras diseñadoras, como proyecto educativo en 2023.</p>
+            <p>Libro ilustrado y diagramado por nuestra diseñadora, como proyecto educativo en 2023.</p>
             <span class="tags"><button type="button" data-open="editorial" data-page="felinorte">Diseño editorial<svg><use href="#i-arrow"/></svg></button><button type="button" data-open="editorial" data-page="felinorte">Ilustración<svg><use href="#i-arrow"/></svg></button></span>
           </span>
         </div>
@@ -1909,7 +1912,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
       '<div class="bk-leaf"><div class="bk-f"><img alt=""></div><div class="bk-b"><img alt=""></div></div>'+
       '<button type="button" class="bk-hit prev" aria-label="Página anterior"></button><button type="button" class="bk-hit next" aria-label="Página siguiente"></button></div>'+
       '<div class="bk-nav"><button type="button" class="bk-btn prev" aria-label="Página anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="bk-count" aria-live="polite"></span><button type="button" class="bk-btn next" aria-label="Página siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>'+
-      '<p class="bk-note"><b>Proyecto educativo · 2023.</b> Ilustrado y diagramado por una de nuestras diseñadoras para un trabajo universitario. Sin fines comerciales.</p></div>';
+      '<p class="bk-note"><b>Proyecto educativo · 2023.</b> Ilustrado y diagramado por nuestra diseñadora para un trabajo universitario. Sin fines comerciales.</p></div>';
   }
   function watchBook(root){
     var bk=root.querySelector('.bk');if(!bk)return;
@@ -1967,7 +1970,7 @@ html.has-cursor.in-frame,html.has-cursor.in-frame *{cursor:auto!important}
         {src:'/assets/portfolio/propuesta/03.webp?v=2',alt:'Caso de éxito 02: generación solar para un autogenerador industrial'},
         {src:'/assets/portfolio/propuesta/04.webp?v=2',alt:'Cierre: Hablemos de su próximo proyecto'}]}]},
     editorial:{name:'Editorial',kind:'Diseño editorial · Ilustración',hash:'editorial',
-      desc:'Descubriendo Felinorte (2023): libro sobre el grupo estudiantil que cuida la colonia de gatos de la Universidad del Norte. Proyecto totalmente educativo, ilustrado y diagramado por una de nuestras diseñadoras.',
+      desc:'Descubriendo Felinorte (2023): libro sobre el grupo estudiantil que cuida la colonia de gatos de la Universidad del Norte. Proyecto totalmente educativo, ilustrado y diagramado por nuestra diseñadora.',
       done:['Ilustración de portada e interiores','Diagramación del libro','Tipografía y paleta','Proyecto académico, sin fines comerciales'],
       pages:[{id:'felinorte',label:'Descubriendo Felinorte',url:'Descubriendo Felinorte',book:true}]},
     atec:{name:'ATEC',kind:'Estrategia de marca · Propuesta gráfica',hash:'atec',
