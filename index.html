@@ -190,7 +190,7 @@
           "name": "¿Cuánto cuesta una página web?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No publicamos precios porque cada proyecto se diseña según lo que necesitas. Nos cuentas tu proyecto, lo hablamos y te enviamos una propuesta por escrito con el valor y las fechas, sin sorpresas después."
+            "text": "No publicamos precios porque cada proyecto se diseña según lo que necesitas. Nos cuentas tu proyecto, lo hablamos y te enviamos una propuesta por escrito con el valor y las fechas, sin sorpresas después. La primera llamada es gratis."
           }
         },
         {
@@ -415,22 +415,22 @@ section{scroll-margin-top:90px}
 /* en celular, en lugar de las carpetas: un enlace pequeño y gris arriba de la etiqueta */
 .hpf{display:none}
 /* carpetas de "Estudio digital": salen de la etiqueta y vuelven a ella */
-.hfold{position:absolute;left:0;top:0;z-index:4;display:grid;justify-items:center;gap:16px;color:#fff;text-decoration:none;opacity:0;pointer-events:none;transform:translate(var(--dx,0),var(--dy,0)) scale(.15);transition:transform .8s cubic-bezier(.34,1.35,.64,1),opacity .35s;transition-delay:calc(var(--i) * 70ms)}
+.hfold{--fw:clamp(60px,6.7vw,96px);position:absolute;left:0;top:0;z-index:4;display:grid;justify-items:center;gap:clamp(12px,1.1vw,16px);color:#fff;text-decoration:none;opacity:0;pointer-events:none;transform:translate(var(--dx,0),var(--dy,0)) scale(.15);transition:transform .8s cubic-bezier(.34,1.35,.64,1),opacity .35s;transition-delay:calc(var(--i) * 70ms)}
 .hero.hfon .hfold{opacity:1;pointer-events:auto;transform:rotate(var(--r,0deg))}
-.hfold .folder{position:relative;display:block;width:96px;height:74px;filter:drop-shadow(0 10px 14px rgba(10,0,30,.5));animation:hfl 3.6s ease-in-out infinite alternate;animation-delay:calc(var(--i) * -.9s);transition:scale .35s var(--ease)}
+.hfold .folder{position:relative;display:block;width:var(--fw);height:calc(var(--fw) * .77);filter:drop-shadow(0 10px 14px rgba(10,0,30,.5));animation:hfl 3.6s ease-in-out infinite alternate;animation-delay:calc(var(--i) * -.9s);transition:scale .35s var(--ease)}
 .hfold .folder::before{content:"";position:absolute;left:0;top:0;width:40%;height:24%;border-radius:6px 6px 0 0;background:#A580D6}
 .hfold .fb{position:absolute;inset:11% 0 0;border-radius:4px 8px 8px 8px;background:#A580D6}
 .hfold img{position:absolute;left:9%;top:4%;width:82%;height:62%;object-fit:cover;object-position:top;border-radius:3px;box-shadow:0 1px 5px rgba(0,0,0,.35);transition:transform .35s var(--ease)}
 .hfold .ff{position:absolute;left:0;right:0;bottom:0;height:70%;border-radius:5px 5px 8px 8px;background:linear-gradient(180deg,#FFFFFF,#EAE2F4);box-shadow:inset 0 1px 0 #fff}
-.hfold b{padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:12px;font-weight:600;letter-spacing:-.01em;transition:background .3s,color .3s}
+.hfold b{padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:clamp(11px,.84vw,12px);font-weight:600;letter-spacing:-.01em;transition:background .3s,color .3s}
 /* sombra en el piso: se achica cuando la carpeta sube */
-.hfold::before{content:"";position:absolute;left:50%;top:84px;width:70px;height:10px;margin-left:-35px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.55),transparent);animation:hsh 3.6s ease-in-out infinite alternate;animation-delay:calc(var(--i) * -.9s)}
+.hfold::before{content:"";position:absolute;left:50%;top:calc(var(--fw) * .875);width:calc(var(--fw) * .73);height:10px;margin-left:calc(var(--fw) * -.365);border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.55),transparent);animation:hsh 3.6s ease-in-out infinite alternate;animation-delay:calc(var(--i) * -.9s)}
 .hfold:hover b{background:var(--violet-text)}
 .hfold:hover img{transform:translateY(-6px) rotate(-3deg)}
 .hfold:hover .folder{scale:1.08}
 @keyframes hfl{from{translate:0 -9px;rotate:-1.5deg}to{translate:0 3px;rotate:1.5deg}}
 @keyframes hsh{from{scale:.7;opacity:.55}to{scale:1;opacity:1}}
-@media (max-width:1099px){.hfold .folder{width:60px;height:46px}.hfold b{font-size:11px;padding:3px 8px}.hfold{gap:12px}.hfold::before{top:52px;width:46px;margin-left:-23px}}
+@media (max-width:1099px){.hfold b{padding:3px 8px}}
 /* en celular basta con el cambio de la etiqueta */
 @media (max-width:700px){.hfolds{display:none}}
 @media (prefers-reduced-motion:reduce){.hfold,.hfold .folder,.hfold::before{animation:none;transition:opacity .2s}}
@@ -1520,7 +1520,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       <div class="faq" data-reveal>
         <details class="faq-item">
           <summary><h3>¿Cuánto cuesta una página web?</h3><span class="ic" aria-hidden="true"><svg><use href="#i-chev"/></svg></span></summary>
-          <div class="faq-a"><p>No publicamos precios porque cada proyecto se diseña según lo que necesitas. Nos cuentas tu proyecto, lo hablamos y te enviamos una propuesta por escrito con el valor y las fechas, sin sorpresas después.</p></div>
+          <div class="faq-a"><p>No publicamos precios porque cada proyecto se diseña según lo que necesitas. Nos cuentas tu proyecto, lo hablamos y te enviamos una propuesta por escrito con el valor y las fechas, sin sorpresas después. La primera llamada es gratis.</p></div>
         </details>
         <details class="faq-item">
           <summary><h3>¿Cuánto tarda una página web?</h3><span class="ic" aria-hidden="true"><svg><use href="#i-chev"/></svg></span></summary>

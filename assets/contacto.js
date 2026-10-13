@@ -105,11 +105,47 @@
     '@keyframes kvGira{to{transform:rotate(360deg)}}',
     '.kv-sello{position:absolute;right:-14px;bottom:-12px;z-index:2;padding:6px 10px;border:2px solid #16a34a;border-radius:8px;background:rgba(255,255,255,.92);color:#15803d;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;transform:rotate(-12deg) scale(1.8);opacity:0;animation:kvSello .46s .6s forwards}',
     '@keyframes kvSello{0%{transform:rotate(-12deg) scale(1.8);opacity:0;animation-timing-function:cubic-bezier(.55,0,1,.45)}55%{transform:rotate(-12deg) scale(.95);opacity:1;animation-timing-function:cubic-bezier(.16,1,.3,1)}100%{transform:rotate(-12deg) scale(1);opacity:1}}',
+    /* Los datos de la marca: se abren debajo de la píldora al empezar a escribir el correo. */
+    '.kv-mas{display:none;width:min(460px,100%);gap:8px;text-align:left}',
+    '.kv-mas.abierto{display:grid;animation:kvAbre .45s cubic-bezier(.16,1,.3,1)}',
+    '@keyframes kvAbre{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}',
+    '.kv-mas p{margin:0 0 2px;font-size:13px;font-weight:600;color:#fff;text-align:center}',
+    '.kv-mas input{width:100%;height:44px;padding:0 18px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);color:#fff;font:inherit;font-size:14.5px;outline:none;transition:border-color .25s,background .25s}',
+    '.kv-mas input::placeholder{color:rgba(255,255,255,.62)}',
+    '.kv-mas input:focus{border-color:#fff;background:rgba(255,255,255,.14)}',
+    '.kv-mas.listo{display:none}',
+    '@media (prefers-reduced-motion:reduce){.kv-mas.abierto{animation:none}}',
     '@media (prefers-reduced-motion:reduce){.mail-form .kv-ok,.mail-form .kv-ok path,.mail-form .kv-ok svg,.mail-form.kv-enviado input,.mail-form.kv-enviado button{transition:none}.mail-form .kv-ok svg{transform:none}.kv-sello{animation:none;opacity:1;transform:rotate(-12deg)}.mail-form.kv-error{animation:none}}'
   ].join('');
   var st = document.createElement('style');
   st.textContent = css;
   document.head.appendChild(st);
+
+  /* ---------- Datos de la marca ----------
+     Para llegar a la llamada sabiendo con quién hablamos: a qué se dedica,
+     su Instagram y su web. Viven en este archivo para no tocar las 37
+     páginas, y se abren cuando la persona empieza a escribir su correo. */
+  var mas = document.createElement('div');
+  mas.className = 'kv-mas';
+  mas.innerHTML = '<p>Cuéntanos de tu marca</p>' +
+    '<label class="sr-only" for="kvTipo">¿A qué se dedica tu marca?</label><input id="kvTipo" type="text" maxlength="120" autocomplete="organization-title" placeholder="¿A qué se dedica? (ej.: agencia de viajes)">' +
+    '<label class="sr-only" for="kvInsta">Instagram de la marca</label><input id="kvInsta" type="text" maxlength="120" autocomplete="off" placeholder="Instagram de la marca (@tumarca)">' +
+    '<label class="sr-only" for="kvWeb">Página web, si tienen</label><input id="kvWeb" type="text" inputmode="url" maxlength="200" autocomplete="url" placeholder="Página web, si tienen (opcional)">';
+  form.parentNode.insertBefore(mas, form.nextSibling);
+  var tipo = document.getElementById('kvTipo');
+  var insta = document.getElementById('kvInsta');
+  var web = document.getElementById('kvWeb');
+  function abrir() { if (!mas.classList.contains('abierto')) mas.classList.add('abierto'); }
+  email.addEventListener('input', function () { if (email.value.trim()) abrir(); });
+  /* Enter en los campos nuevos envía el formulario, igual que en el correo. */
+  [tipo, insta, web].forEach(function (c) {
+    c.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); form.requestSubmit ? form.requestSubmit() : btn.click(); } });
+  });
+
+  /* La primera llamada es gratis: se dice junto al formulario en todas las páginas. */
+  if (nota && /^Te contestamos/.test(nota.textContent.trim())) {
+    nota.textContent = 'La primera llamada es gratis. ' + nota.textContent.trim();
+  }
 
   var ok = document.createElement('div');
   ok.className = 'kv-ok';
@@ -141,6 +177,7 @@
   function listo() {
     despegar();
     form.classList.add('kv-enviado');
+    mas.classList.add('listo');
     sellar();
     nota.textContent = 'Listo, recibimos tu correo. Te escribimos el mismo día o el siguiente, de lunes a viernes.';
     if (typeof window.gtag === 'function') {
@@ -166,6 +203,10 @@
 
     var v = email.value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { fallo('Escribe un correo válido, por ejemplo nombre@tuempresa.com.'); email.focus(); return; }
+    abrir();
+    var vTipo = tipo.value.trim().slice(0, 120), vInsta = insta.value.trim().slice(0, 120), vWeb = web.value.trim().slice(0, 200);
+    if (!vTipo) { fallo('Cuéntanos a qué se dedica tu marca.'); tipo.focus(); return; }
+    if (!vInsta) { fallo('Escribe el Instagram de tu marca, por ejemplo @tumarca.'); insta.focus(); return; }
     if (casilla && !casilla.checked) { fallo('Marca la casilla de autorización para poder escribirte.'); casilla.focus(); return; }
 
     var autorizada = new Date().toISOString();
@@ -175,7 +216,8 @@
     var plan = leer('kv_plan');
     try { plan = plan || new URLSearchParams(location.search).get('plan') || ''; } catch (er) {}
     plan = String(plan || '').slice(0, 80);
-    var mensaje = 'Quiere agendar una llamada desde ' + desde() + '.' + (plan ? ' Le interesa: ' + plan + '.' : '');
+    var mensaje = 'Quiere agendar una llamada desde ' + desde() + '.' + (plan ? ' Le interesa: ' + plan + '.' : '') +
+      ' Marca: ' + vTipo + '. Instagram: ' + vInsta + '. Web: ' + (vWeb || 'no tiene') + '.';
     btn.disabled = true;
     btn.classList.add('kv-enviando');
     btn.setAttribute('aria-label', 'Enviando');
@@ -210,6 +252,7 @@
        para que el contacto no se pierda. */
     json(CRM, {
       email: v, origen: 'landing', pagina: location.href, mensaje: mensaje, autorizacion: autorizada,
+      marca: vTipo, instagram: vInsta, web: vWeb,
       utm_source: canal, utm_medium: leer('kv_utm_med'), utm_campaign: leer('kv_utm_camp'),
       referente: document.referrer || 'directo'
     }).then(function () { cerrar(true); }, function () {
