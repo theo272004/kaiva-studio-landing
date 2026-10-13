@@ -142,9 +142,9 @@
     c.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); form.requestSubmit ? form.requestSubmit() : btn.click(); } });
   });
 
-  /* La primera llamada es gratis: se dice junto al formulario en todas las páginas. */
+  /* La consulta es gratis: se dice junto al formulario en todas las páginas. */
   if (nota && /^Te contestamos/.test(nota.textContent.trim())) {
-    nota.textContent = 'La primera llamada es gratis. ' + nota.textContent.trim();
+    nota.textContent = 'La consulta es gratis. ' + nota.textContent.trim();
   }
 
   var ok = document.createElement('div');
