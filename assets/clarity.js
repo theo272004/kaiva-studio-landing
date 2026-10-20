@@ -53,7 +53,8 @@
   var cargado = false;
 
   function cargar() {
-    if (cargado || !PROYECTO) return;
+    // Solo el sitio de verdad: no grabar las sesiones de los servidores de prueba (2026-10-19).
+    if (cargado || !PROYECTO || !/(^|\.)kaivastudio\.com$/.test(location.hostname)) return;
     cargado = true;
 
     /* Este es el fragmento oficial de Clarity, con una diferencia: el

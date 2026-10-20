@@ -11,9 +11,11 @@ behance.net/kaivastudio y linkedin.com/company/kaiva-studio.
 
 ## Qué hacemos
 
-- [Diseño y desarrollo web](https://kaivastudio.com/#servicios): páginas web
+- [Diseño y desarrollo web](https://kaivastudio.com/diseno-web/): páginas web
   para empresas, rápidas y pensadas para que los clientes entiendan lo que
-  haces y te contacten.
+  haces y te contacten. La página cuenta qué incluye, cuánto tarda (2 a 3
+  semanas), qué queda a tu nombre y cómo trabajamos con empresas de
+  Barranquilla, de Colombia y de cualquier país, en remoto.
 - [Software a medida](https://kaivastudio.com/#servicios): tiendas en línea,
   plataformas, paneles con datos, conexión con otros sistemas y tareas
   automáticas.
