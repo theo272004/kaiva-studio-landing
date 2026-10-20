@@ -16,11 +16,18 @@ behance.net/kaivastudio y linkedin.com/company/kaiva-studio.
   haces y te contacten. La página cuenta qué incluye, cuánto tarda (2 a 3
   semanas), qué queda a tu nombre y cómo trabajamos con empresas de
   Barranquilla, de Colombia y de cualquier país, en remoto.
-- [Software a medida](https://kaivastudio.com/#servicios): tiendas en línea,
-  plataformas, paneles con datos, conexión con otros sistemas y tareas
-  automáticas.
-- [Diseño de marca](https://kaivastudio.com/#servicios): identidad de marca,
-  logos, presentaciones y diseño editorial.
+- [Software a la medida](https://kaivastudio.com/software-a-medida/):
+  plataformas internas, portales para clientes y aliados, dashboards,
+  integraciones (facturación electrónica, pagos, WhatsApp), automatizaciones y
+  tiendas en línea, para empresas de Colombia y Latinoamérica. Alcance por
+  escrito antes de empezar, entregas por fases y el código a nombre del
+  cliente. Si un sistema del mercado resuelve el caso, lo decimos y no se
+  construye nada.
+- [Branding e identidad de marca](https://kaivastudio.com/branding/):
+  estrategia, logo y sus versiones, paleta, tipografías, piezas de uso diario
+  y manual de marca (doce entregables, con archivos editables), para empresas
+  de Colombia y Latinoamérica. El registro legal de la marca es un trámite
+  aparte que no hacemos. También presentaciones y diseño editorial.
 - [Portfolio](https://kaivastudio.com/portfolio/): proyectos reales del estudio.
 - [Agendar llamada](https://kaivastudio.com/agendar/): contacto directo para
   contar un proyecto y agendar una videollamada con el equipo.
