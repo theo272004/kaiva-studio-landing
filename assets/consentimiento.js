@@ -93,8 +93,23 @@
 
   var gtagCargado = false;
 
+  /* Solo se mide el sitio de verdad (2026-10-19). Analytics venía contando los servidores de prueba
+     del equipo (localhost:8123, :4321, :4173…) como si fueran visitas. */
+  var PRODUCCION = /(^|\.)kaivastudio\.com$/.test(location.hostname);
+
+  /* Tráfico del equipo: abrir el sitio una vez con ?interno=1 marca ese navegador, y desde entonces sus
+     visitas llegan con traffic_type=internal, que el filtro «Tráfico interno» de GA4 deja fuera.
+     ?interno=0 lo quita. Antes, 363 de unas 400 sesiones eran de Barranquilla y casi todas del equipo. */
+  var INTERNO = false;
+  try {
+    var pi = new URLSearchParams(location.search).get('interno');
+    if (pi === '1') localStorage.setItem('kv-interno', '1');
+    if (pi === '0') localStorage.removeItem('kv-interno');
+    INTERNO = localStorage.getItem('kv-interno') === '1';
+  } catch (e) { }
+
   function cargarGtag() {
-    if (gtagCargado) return;
+    if (gtagCargado || !PRODUCCION) return;
     gtagCargado = true;
     var s = document.createElement('script');
     s.async = true;
@@ -104,7 +119,7 @@
        que la primera vista de página ya salga con permiso concedido y
        no se pierda. */
     window.gtag('js', new Date());
-    window.gtag('config', MEDICION, { anonymize_ip: true });
+    window.gtag('config', MEDICION, INTERNO ? { anonymize_ip: true, traffic_type: 'internal' } : { anonymize_ip: true });
   }
 
   function aplicar(d) {
