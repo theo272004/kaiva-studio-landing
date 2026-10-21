@@ -43,11 +43,36 @@
   var etiqueta = btn ? btn.textContent : 'Agendar llamada';
   var quieto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- De dónde vino la visita, recordado durante la pestaña ---------- */
-  var ss = null;
+  /* ---------- De dónde vino la visita ----------
+     Antes se recordaba solo mientras la pestaña seguía abierta. Pero quien ve un carrusel hoy suele
+     escribir días después, y ese contacto llegaba sin saber de qué publicación venía (2026-10-20, «de la
+     pieza al pago» en Kaiva OS). Ahora, si la persona aceptó las cookies de análisis, también queda en
+     este navegador 90 días: de dónde vino (la campaña de su enlace), nada personal. Sin ese permiso,
+     solo dura la pestaña, como antes. */
+  var ss = null, ls = null, VIDA = 90 * 864e5;
   try { ss = window.sessionStorage; } catch (e) {}
-  function guardar(k, v) { try { if (ss && v) ss.setItem(k, v); } catch (e) {} }
-  function leer(k) { try { return (ss && ss.getItem(k)) || ''; } catch (e) { return ''; } }
+  try { ls = window.localStorage; } catch (e) {}
+  function conPermiso() {
+    try { var d = window.kaivaCookies && window.kaivaCookies.estado(); return !!(d && d.analitica); } catch (e) { return false; }
+  }
+  function guardar(k, v) {
+    try { if (ss && v) ss.setItem(k, v); } catch (e) {}
+    try { if (ls && v && conPermiso()) ls.setItem(k, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {}
+  }
+  // Si acepta las cookies después de llegar, lo de esta pestaña se guarda para la próxima visita.
+  window.addEventListener('kv-consent', function () {
+    ['kv_utm_src', 'kv_utm_med', 'kv_utm_camp'].forEach(function (k) {
+      try { var v = ss && ss.getItem(k); if (v) guardar(k, v); } catch (e) {}
+    });
+  });
+  function leer(k) {
+    try { var a = ss && ss.getItem(k); if (a) return a; } catch (e) {}
+    try {
+      var b = ls && JSON.parse(ls.getItem(k) || 'null');
+      if (b && b.v && Date.now() - b.t < VIDA) return b.v;
+    } catch (e) {}
+    return '';
+  }
   try {
     var q = new URLSearchParams(location.search);
     var ref = document.referrer || '';
