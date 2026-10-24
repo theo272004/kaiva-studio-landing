@@ -234,7 +234,8 @@
       '4 4 0 0 1-5-5 4 4 0 0 1-5-5Z"/><path d="M8.5 9.5h.01M12 14h.01M16 12h.01M9 16h.01"/></svg>' +
       'Cookies</h2>' +
       '<p>Usamos cookies necesarias para que el sitio funcione. Las de análisis ' +
-      'nos dicen qué páginas sirven y cuáles no, y solo se activan si las autorizas. ' +
+      'nos dicen qué páginas sirven y cuáles no, y las de marketing miden nuestras campañas en redes. ' +
+      'Ninguna se activa si no la autorizas. ' +
       'Puedes ver el detalle en la <a href="/cookies/">política de cookies</a>.</p>' +
 
       '<div class="kvck-panel">' +
@@ -251,8 +252,8 @@
       '  </div>' +
       '  <div class="kvck-fila">' +
       '    <label class="kvck-sw"><input type="checkbox" id="kvck-mk"><i></i></label>' +
-      '    <span><b>Marketing</b><s>Para medir campañas de pago. Hoy no hay ninguna activa; ' +
-      'el interruptor queda listo para cuando la haya.</s></span>' +
+      '    <span><b>Marketing</b><s>El píxel de Meta, para medir si las campañas de Facebook ' +
+      'e Instagram traen gente al sitio y mostrar anuncios a quien ya nos visitó.</s></span>' +
       '  </div>' +
       '</div>' +
 
