@@ -57,8 +57,8 @@ sector, no tarifas de Kaiva.
 - [Vulnerabilidad de PHP (PHP2Shell)](https://kaivastudio.com/blog/vulnerabilidad-php-php2shell-como-proteger-tu-sitio/):
   qué pasó con las fallas críticas CVE-2026-109618 y CVE-2026-109619 (9,2 sobre 10), parchadas el 21 de
   octubre de 2026 en PHP 8.5.12, 8.4.27, 8.3.36 y 8.2.35, y por qué la NSA y la primera ministra de Japón
-  pidieron parchar o sacar los sitios de línea; por qué actualizar WordPress y los plugins no basta, qué
-  hacer con PHP 8.1 y anteriores (sin parche oficial), cómo saber si un sitio ya fue atacado y cómo
+  pidieron parchar o sacar los sitios de línea (también CISA, el FBI, el NCSC británico y la agencia de Singapur);
+  por qué actualizar WordPress y los plugins no basta, qué hacer con PHP 8.1 y anteriores (sin versión corregida oficial), cómo saber si un sitio ya fue atacado y cómo
   limpiarlo, y el reporte de incidentes a la SIC en Colombia.
 - [E-E-A-T sin años de trayectoria](https://kaivastudio.com/blog/eeat-experiencia-y-confianza-sin-anos-de-trayectoria/):
   qué es de verdad el E-E-A-T (experiencia, pericia, autoridad y confianza) y por qué Google dice que no

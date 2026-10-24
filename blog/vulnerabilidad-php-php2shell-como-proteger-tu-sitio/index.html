@@ -35,9 +35,9 @@
        se pegan las dos últimas palabras con un espacio que no se parte. -->
   <script>document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('p,li,dd,figcaption,blockquote,small,label,td,h1,h2,h3,.desc').forEach(function(e){var w=document.createTreeWalker(e,4),n,l=null;while(n=w.nextNode())if(n.nodeValue.trim())l=n;if(!l||e.textContent.trim().split(/\s+/).length<3)return;var o=l.nodeValue;l.nodeValue=o.replace(/ (\S+\s*)$/,'\u00a0$1');if(e.scrollWidth>e.clientWidth+1)l.nodeValue=o})})</script>
 
-  <title>Vulnerabilidad de PHP (PHP2Shell): qué pasó, por qué y cómo proteger tu sitio web</title>
+  <title>Vulnerabilidad en PHP: tu web no se protege sola</title>
   <meta name="description"
-    content="Dos fallas críticas en PHP (PHP2Shell) hicieron que la NSA y Japón pidieran parchar o apagar. Qué pasó, por qué, cómo proteger tu sitio y qué hacer si ya te atacaron.">
+    content="Dos fallas críticas en PHP (PHP2Shell) y alertas de la NSA, CISA, el FBI y Japón. Qué pasó, por qué, cómo proteger tu sitio y qué hacer si ya te atacaron.">
   <link rel="canonical" href="https://kaivastudio.com/blog/vulnerabilidad-php-php2shell-como-proteger-tu-sitio/">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#FBFBFB">
@@ -46,13 +46,13 @@
   <meta property="og:site_name" content="Kaiva Studio">
   <meta property="og:locale" content="es_CO">
   <meta property="og:url" content="https://kaivastudio.com/blog/vulnerabilidad-php-php2shell-como-proteger-tu-sitio/">
-  <meta property="og:title" content="Vulnerabilidad de PHP (PHP2Shell): qué pasó, por qué y cómo proteger tu sitio web">
+  <meta property="og:title" content="Vulnerabilidad en PHP: tu web no se protege sola">
   <meta property="og:description"
     content="El 21 de octubre de 2026 PHP publicó parches de emergencia para dos fallas críticas. Qué pasó, por qué ocurre, cómo proteger tu sitio y cómo limpiarlo si ya entraron.">
   <meta property="og:image" content="https://kaivastudio.com/assets/blog/elegir.webp">
   <meta property="article:published_time" content="2026-10-24">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Vulnerabilidad de PHP (PHP2Shell): qué pasó, por qué y cómo proteger tu sitio web">
+  <meta name="twitter:title" content="Vulnerabilidad en PHP: tu web no se protege sola">
   <meta name="twitter:image" content="https://kaivastudio.com/assets/blog/elegir.webp">
 
   <script type="application/ld+json">
@@ -62,7 +62,7 @@
     {
       "@type": "BlogPosting",
       "@id": "https://kaivastudio.com/blog/vulnerabilidad-php-php2shell-como-proteger-tu-sitio/#post",
-      "headline": "Vulnerabilidad de PHP (PHP2Shell): qué pasó, por qué y cómo proteger tu sitio web",
+      "headline": "Vulnerabilidad en PHP: tu web no se protege sola",
       "description": "El 21 de octubre de 2026 PHP publicó parches de emergencia para dos fallas críticas. Qué pasó, por qué ocurre, cómo proteger tu sitio y cómo limpiarlo si ya entraron.",
       "datePublished": "2026-10-24",
       "dateModified": "2026-10-24",
@@ -121,7 +121,7 @@
           "name": "¿Cómo sé si mi sitio web está afectado?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Si tu sitio corre en PHP (WordPress, PrestaShop, Laravel y muchos sistemas a medida), averigua tu versión: en el panel del hosting (en cPanel, «Select PHP Version») o con php -v en un servidor propio. Las versiones corregidas son 8.5.12, 8.4.27, 8.3.36 y 8.2.35. Cualquier versión anterior de esas ramas está sin parchear, y para PHP 8.1 y anteriores no hay parche oficial."
+            "text": "Si tu sitio corre en PHP (WordPress, PrestaShop, Laravel y muchos sistemas a medida), averigua tu versión: en el panel del hosting (en cPanel, «Select PHP Version») o con php -v en un servidor propio. Las versiones corregidas son 8.5.12, 8.4.27, 8.3.36 y 8.2.35. Cualquier versión anterior de esas ramas está sin parchear, y para PHP 8.1 y anteriores no hay versión corregida oficial (solo respaldos en código fuente y paquetes de algunas distribuciones)."
           }
         },
         {
@@ -1083,9 +1083,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     <article>
       <header class="art-head">
         <nav class="art-crumbs" aria-label="Ruta de navegación"><a href="/blog/">Blog</a><span aria-hidden="true">/</span><b>Seguridad web</b></nav>
-        <h1>Dos gobiernos dijeron «parcha o apaga tu web»<span class="dot">.</span>
-                ¿Sabes qué versión de PHP corre la tuya?</h1>
-        <p class="art-lead">El 21 de octubre de 2026, PHP publicó parches de emergencia para dos fallas críticas que la NSA y la primera ministra de Japón pidieron atender de inmediato. Qué pasó, por qué ocurre, cómo proteger tu sitio y qué hacer si ya entraron.</p>
+        <h1>Vulnerabilidad en PHP:<br>tu web no se protege sola<span class="dot">.</span></h1>
+        <p class="art-lead">El 21 de octubre de 2026, PHP publicó parches de emergencia para dos fallas críticas, y agencias de Estados Unidos, Reino Unido, Singapur y Japón pidieron actuar. Qué pasó, por qué ocurre, cómo proteger tu sitio y qué hacer si ya entraron.</p>
         <p class="art-meta"><span class="k" aria-hidden="true">K.</span><span><b>Kaiva Studio</b> · <time datetime="2026-10-24">24 oct 2026</time> · 12 min de lectura</span></p>
       </header>
       <figure class="art-hero"><img src="/assets/blog/elegir.webp" alt="Laptop abierta sobre un escritorio de madera mostrando un sitio web en pantalla" width="1200" height="800" fetchpriority="high" decoding="async"></figure>
@@ -1093,11 +1092,14 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
         <div class="articulo">
 <p>Tu web puede verse perfecta, cargar rápido y no dar ningún error, y aun así tener una puerta abierta. Eso fue lo que pasó el 21 de octubre de 2026, cuando el equipo de PHP publicó actualizaciones de emergencia para dos fallas críticas conocidas como <strong>PHP2Shell</strong>. Bajo ciertas condiciones, permiten que alguien ejecute código en el servidor donde vive tu página sin necesidad de iniciar sesión.</p>
 <p>Si tu sitio usa PHP, toca revisar qué versión tiene, comprobar si está afectada y actualizar. Aquí va qué pasó, por qué pasa, qué riesgos hay y cómo mantener tu página protegida.</p>
-<h2>Qué pasó: dos fallas críticas y dos gobiernos diciendo «parcha o apaga»</h2>
+<h2>Qué pasó: dos fallas críticas y alertas en varios países</h2>
 <p>PHP es el lenguaje en el que corren páginas dinámicas, tiendas en línea y aplicaciones de empresa. Está debajo de WordPress, Joomla y Drupal, y de miles de desarrollos a medida. Las dos fallas están en el propio PHP, no en un plugin ni en una plataforma concreta, por eso una web puede estar expuesta aunque funcione perfecto.</p>
 <p>Son <strong>CVE-2026-109618</strong> y <strong>CVE-2026-109619</strong>, y las dos tienen una calificación de 9,2 sobre 10 (CVSS v4.0). Los parches salieron en las versiones <strong>8.5.12, 8.4.27, 8.3.36 y 8.2.35</strong>. La agencia de ciberseguridad de Estados Unidos (<a href="https://www.cisa.gov/news-events/alerts/2026/10/21/critical-vulnerabilities-php-require-immediate-patching" target="_blank" rel="noopener">CISA</a>) advirtió que afectan a las instalaciones de PHP que atienden peticiones web: Apache con mod_php, PHP-FPM, php-cgi, FrankenPHP y LiteSpeed.</p>
+<p>El propio PHP avisó antes. El 20 de octubre, su equipo de seguridad anunció —en un mensaje que difundió <a href="https://x.com/ThePHPF/status/2112633155631108544" target="_blank" rel="noopener">la PHP Foundation en X</a>— un lanzamiento de seguridad para el día siguiente a las 14:00 UTC, con «dos vulnerabilidades críticas, ambas CVSSv4 9.2». Pidió a los usuarios que se prepararan y advirtió que lo adelantaría si los detalles se hacían públicos. Según varios medios, se hicieron públicos antes de lo previsto.</p>
 <p>La alarma llegó desde arriba. El mismo día del parche, la <a href="https://x.com/NSACyber/status/2112903220209098897" target="_blank" rel="noopener">NSA escribió en X</a> que todas las organizaciones que usan PHP debían prepararse y que, si no podían actualizar de inmediato, la recomendación era <strong>sacar el sistema de línea</strong> hasta mitigarlo del todo. Esa misma noche, la primera ministra de Japón, Sanae Takaichi, <a href="https://x.com/takaichi_sanae/status/2112890642590564386" target="_blank" rel="noopener">publicó en X</a> una petición que el medio ITmedia calificó de inusual: revisar si los sitios públicos usan PHP, prepararse para aplicar el parche esa noche y, si era difícil hacerlo rápido, <strong>suspender temporalmente el sitio</strong> como medida válida para reducir el riesgo (traducción nuestra del japonés).</p>
-<p>No fueron solo palabras. Según <a href="https://www.japantimes.co.jp/business/2026/10/22/tech/japan-php-vulnerabilities/" target="_blank" rel="noopener">The Japan Times</a>, el acceso público a parte de los sitios de los ministerios de Salud y Trabajo y de Finanzas se suspendió temporalmente, y también hubo bancos y empresas que apagaron sitios. El FBI y el centro de ciberseguridad del Reino Unido dieron guías parecidas, según <a href="https://www.newsweek.com/fbi-issues-advice-as-security-issue-hits-global-websites-12603155" target="_blank" rel="noopener">Newsweek</a>, y el servicio de salud de Inglaterra publicó su propia <a href="https://digital.nhs.uk/cyber-alerts/2026/cc-4875" target="_blank" rel="noopener">alerta</a>.</p>
+<p>No fueron solo palabras. Según <a href="https://www.japantimes.co.jp/business/2026/10/22/tech/japan-php-vulnerabilities/" target="_blank" rel="noopener">The Japan Times</a>, el acceso público a parte de los sitios de los ministerios de Salud y Trabajo y de Finanzas se suspendió temporalmente, y también hubo bancos y empresas que apagaron sitios.</p>
+<p>Y no fueron solo ellos dos. El mismo día, <a href="https://www.cisa.gov/news-events/alerts/2026/10/21/critical-vulnerabilities-php-require-immediate-patching" target="_blank" rel="noopener">CISA</a> pidió parchar de inmediato, empezando por lo que está expuesto a internet, y recomendó sacar de línea lo que no se pueda actualizar o siga en PHP 8.1 o anterior. El FBI aconsejó vigilar los servidores web por si procesos de PHP lanzan shells o descargan archivos, y el centro de ciberseguridad del Reino Unido (NCSC) pidió inventariar todas las instalaciones de PHP, no solo las viejas (según <a href="https://www.newsweek.com/fbi-issues-advice-as-security-issue-hits-global-websites-12603155" target="_blank" rel="noopener">Newsweek</a> y <a href="https://www.securityweek.com/tech-and-security-companies-respond-to-php2shell-vulnerabilities/" target="_blank" rel="noopener">SecurityWeek</a>). La agencia de ciberseguridad de Singapur emitió su <a href="https://www.csa.gov.sg/alerts-and-advisories/alerts/al-2026-151/" target="_blank" rel="noopener">propia alerta</a>, el servicio de salud de Inglaterra otra (<a href="https://digital.nhs.uk/cyber-alerts/2026/cc-4875" target="_blank" rel="noopener">NHS England Digital</a>) y el equipo de respuesta de las instituciones europeas, <a href="https://cert.europa.eu/publications/security-advisories/2026-018" target="_blank" rel="noopener">CERT-EU</a>, también.</p>
+<p>Entre las empresas, <a href="https://blog.cloudflare.com/php-vulnerabilities-waf-protection/" target="_blank" rel="noopener">Cloudflare</a> activó reglas de protección por defecto para todos sus clientes, gratuitos y de pago, y Amazon reportó un intento de ataque desde el 17 de octubre, <a href="https://thehackernews.com/2026/10/someone-tried-to-exploit-php2shell-4.html" target="_blank" rel="noopener">cuatro días antes</a> de la divulgación pública.</p>
 <p>Los investigadores de <a href="https://www.wiz.io/blog/php2shell-php-rce" target="_blank" rel="noopener">Wiz</a> compararon la falla con Heartbleed, el error de 2014 que sacudió a medio internet, y escribieron que está «entre las vulnerabilidades más graves descubiertas en PHP y, posiblemente, en la historia del software» (traducción nuestra). Y los ataques no esperaron: <a href="https://watchtowr.com/intelligence/php-remote-code-execution-php2shell/" target="_blank" rel="noopener">watchTowr</a> reportó explotación real el 21 de octubre en sus sistemas trampa, y otros equipos ubican los primeros intentos desde el 17, cuatro días antes del parche.</p>
 <p>Ahora, para no exagerar: el mismo watchTowr y <a href="https://www.rapid7.com/blog/post/etr-cve-2026-109618-and-cve-2026-109619-critical-unauthenticated-remote-code-execution-in-php/" target="_blank" rel="noopener">Rapid7</a> señalan que la mayoría de los exploits públicos que circulan no logran ejecutar código de forma fiable: cada uno apunta a una combinación concreta de sistema operativo, versión de PHP y servidor web. Eso no es un alivio, es una ventana. Lo que hoy es artesanal mañana se vuelve automático.</p>
 <aside class="cta-lectura">
@@ -1136,8 +1138,8 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 <tr> <td data-label="Rama que usas">PHP 8.3</td> <td data-label="Versión corregida"><strong>8.3.36</strong></td> </tr>
 <tr> <td data-label="Rama que usas">PHP 8.2</td> <td data-label="Versión corregida"><strong>8.2.35</strong></td> </tr> </tbody> </table> </div>
 <p>Una versión anterior dentro de la misma rama, por ejemplo 8.3.35, está sin parchear.</p>
-<h3>Si tienes PHP 8.1 o anterior, no hay parche oficial</h3>
-<p>Esas versiones también están afectadas y el proyecto dejó de mantenerlas. Lo único que existe es lo que alguna distribución de Linux o un proveedor de soporte extendido decida respaldar por su cuenta. Hay muchos sitios ahí, casi siempre por la misma razón: un plugin o un desarrollo a medida que «se rompe» al subir de versión, y nadie quiso pagar el arreglo. Parece ahorro y funciona como deuda. Esta semana llegó el cobro. Migrar cuesta una fracción de lo que cuesta limpiar un sitio comprometido.</p>
+<h3>Si tienes PHP 8.1 o anterior, no hay versión corregida oficial</h3>
+<p>Esas versiones también están afectadas y el proyecto dejó de mantenerlas, así que no hay una versión corregida oficial. El equipo de PHP sí publicó respaldos mínimos en código fuente para 7.4, 8.0 y 8.1, <a href="https://www.helpnetsecurity.com/2026/10/21/php2shell-php-vulnerabilities-patched-cve-2026-109618-cve-2026-109619/" target="_blank" rel="noopener">según Help Net Security</a>, pensados para quien compila PHP por su cuenta; fuera de eso, depende de lo que alguna distribución de Linux o un proveedor de soporte extendido respalde. Si no compilas tu PHP, tu hosting es quien debe ofrecerte esa opción o ayudarte a migrar. Hay muchos sitios ahí, casi siempre por la misma razón: un plugin o un desarrollo a medida que «se rompe» al subir de versión, y nadie quiso pagar el arreglo. Parece ahorro y funciona como deuda. Esta semana llegó el cobro. Migrar cuesta una fracción de lo que cuesta limpiar un sitio comprometido.</p>
 <h3>Y PHP 8.2 se acaba pronto</h3>
 <p>Según la <a href="https://www.php.net/supported-versions.php" target="_blank" rel="noopener">tabla oficial de versiones soportadas</a>, la rama 8.2 solo recibe parches de seguridad hasta el 31 de diciembre de 2026. Si estás ahí, instala el parche de hoy y planea el salto a una rama más nueva antes de que se acabe el año.</p>
 <h3>Descarga solo de fuentes oficiales</h3>
@@ -1219,12 +1221,13 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 <h2>De dónde sale esta información</h2>
 <p>Todo lo de este artículo viene de fuentes que puedes abrir. Los mensajes en X están enlazados a su publicación original; las traducciones son nuestras.</p>
 <ul>
-<li><a href="https://x.com/NSACyber/status/2112903220209098897" target="_blank" rel="noopener">NSA Cyber en X</a> y su <a href="https://www.nsa.gov/Press-Room/Press-Releases-Statements/Press-Release-View/Article/4630238/nsa-advisory-php-updates/" target="_blank" rel="noopener">comunicado</a>.</li>
+<li><a href="https://x.com/NSACyber/status/2112903220209098897" target="_blank" rel="noopener">NSA Cyber en X</a> y su <a href="https://www.nsa.gov/Press-Room/Press-Releases-Statements/Press-Release-View/Article/4630238/nsa-advisory-critical-patches-recommended-for-php-vulnerabilities/" target="_blank" rel="noopener">comunicado</a>.</li>
 <li><a href="https://x.com/takaichi_sanae/status/2112890642590564386" target="_blank" rel="noopener">Sanae Takaichi en X</a> y <a href="https://www.japantimes.co.jp/business/2026/10/22/tech/japan-php-vulnerabilities/" target="_blank" rel="noopener">The Japan Times</a>.</li>
-<li><a href="https://www.php.net/downloads.php" target="_blank" rel="noopener">PHP: descargas oficiales</a> y <a href="https://www.php.net/supported-versions.php" target="_blank" rel="noopener">versiones soportadas</a>.</li>
-<li><a href="https://www.cisa.gov/news-events/alerts/2026/10/21/critical-vulnerabilities-php-require-immediate-patching" target="_blank" rel="noopener">CISA</a>, <a href="https://cert.europa.eu/publications/security-advisories/2026-018" target="_blank" rel="noopener">CERT-EU</a> y <a href="https://digital.nhs.uk/cyber-alerts/2026/cc-4875" target="_blank" rel="noopener">NHS England Digital</a>.</li>
+<li><a href="https://x.com/ThePHPF/status/2112633155631108544" target="_blank" rel="noopener">Aviso previo del equipo de seguridad de PHP</a> (difundido por la PHP Foundation en X), <a href="https://www.php.net/downloads.php" target="_blank" rel="noopener">descargas oficiales</a> y <a href="https://www.php.net/supported-versions.php" target="_blank" rel="noopener">versiones soportadas</a>.</li>
+<li><a href="https://www.cisa.gov/news-events/alerts/2026/10/21/critical-vulnerabilities-php-require-immediate-patching" target="_blank" rel="noopener">CISA</a>, <a href="https://cert.europa.eu/publications/security-advisories/2026-018" target="_blank" rel="noopener">CERT-EU</a>, <a href="https://digital.nhs.uk/cyber-alerts/2026/cc-4875" target="_blank" rel="noopener">NHS England Digital</a> y <a href="https://www.csa.gov.sg/alerts-and-advisories/alerts/al-2026-151/" target="_blank" rel="noopener">la agencia de ciberseguridad de Singapur</a>.</li>
 <li><a href="https://www.wiz.io/blog/php2shell-php-rce" target="_blank" rel="noopener">Wiz</a>, <a href="https://watchtowr.com/intelligence/php-remote-code-execution-php2shell/" target="_blank" rel="noopener">watchTowr</a> y <a href="https://www.rapid7.com/blog/post/etr-cve-2026-109618-and-cve-2026-109619-critical-unauthenticated-remote-code-execution-in-php/" target="_blank" rel="noopener">Rapid7</a>.</li>
 <li><a href="https://cloud.google.com/blog/products/identity-security/responding-to-core-php-vulnerabilities-cve-2026-109618-cve-2026-109619" target="_blank" rel="noopener">Google Cloud: cómo responder a PHP2Shell</a>.</li>
+<li><a href="https://www.securityweek.com/tech-and-security-companies-respond-to-php2shell-vulnerabilities/" target="_blank" rel="noopener">SecurityWeek</a>, <a href="https://blog.cloudflare.com/php-vulnerabilities-waf-protection/" target="_blank" rel="noopener">Cloudflare</a> y <a href="https://thehackernews.com/2026/10/someone-tried-to-exploit-php2shell-4.html" target="_blank" rel="noopener">The Hacker News</a> (reacción de las empresas y primeros intentos de ataque).</li>
 <li><a href="https://fortune.com/2026/10/21/ai-tools-discovered-the-php-vulnerability-that-could-take-down-70-of-the-internet-now-the-race-is-on-to-patch-it-before-ai-powered-hackers-attack/" target="_blank" rel="noopener">Fortune</a>, <a href="https://www.newsweek.com/fbi-issues-advice-as-security-issue-hits-global-websites-12603155" target="_blank" rel="noopener">Newsweek</a> y <a href="https://www.techmeme.com/261021/p32" target="_blank" rel="noopener">Techmeme (Cloudflare)</a>.</li>
 <li><a href="https://success.trendmicro.com/en-US/solution/KA-0024789" target="_blank" rel="noopener">Trend Micro</a> y <a href="https://aws.amazon.com/blogs/security/using-aws-waf-to-apply-mitigations-for-php2shell-rce-vulnerabilities-cve-2026-109618-and-cve-2026-109619/" target="_blank" rel="noopener">AWS</a> (aviso del 23 de octubre).</li>
 </ul>
