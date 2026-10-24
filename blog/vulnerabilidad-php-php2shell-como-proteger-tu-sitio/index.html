@@ -1086,17 +1086,18 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
         <h1>Dos gobiernos dijeron «parcha o apaga tu web»<span class="dot">.</span>
                 ¿Sabes qué versión de PHP corre la tuya?</h1>
         <p class="art-lead">El 21 de octubre de 2026, PHP publicó parches de emergencia para dos fallas críticas que la NSA y la primera ministra de Japón pidieron atender de inmediato. Qué pasó, por qué ocurre, cómo proteger tu sitio y qué hacer si ya entraron.</p>
-        <p class="art-meta"><span class="k" aria-hidden="true">K.</span><span><b>Kaiva Studio</b> · <time datetime="2026-10-24">24 oct 2026</time> · 10 min de lectura</span></p>
+        <p class="art-meta"><span class="k" aria-hidden="true">K.</span><span><b>Kaiva Studio</b> · <time datetime="2026-10-24">24 oct 2026</time> · 12 min de lectura</span></p>
       </header>
       <figure class="art-hero"><img src="/assets/blog/elegir.webp" alt="Laptop abierta sobre un escritorio de madera mostrando un sitio web en pantalla" width="1200" height="800" fetchpriority="high" decoding="async"></figure>
       <div class="art-body">
         <div class="articulo">
-<p>El 21 de octubre de 2026, el equipo de PHP publicó parches de emergencia para dos fallas críticas en el núcleo del lenguaje en el que corre buena parte de la web: WordPress, PrestaShop, Laravel y miles de sistemas a medida. La prensa de seguridad las bautizó <strong>PHP2Shell</strong>. Permiten que alguien, sin usuario ni contraseña, ejecute código en el servidor donde vive tu página.</p>
-<p>Si no sabes qué versión de PHP corre tu sitio, este es el momento de averiguarlo. Aquí va qué pasó, por qué pasa, cómo protegerte y qué hacer si ya entraron.</p>
+<p>Tu web puede verse perfecta, cargar rápido y no dar ningún error, y aun así tener una puerta abierta. Eso fue lo que pasó el 21 de octubre de 2026, cuando el equipo de PHP publicó actualizaciones de emergencia para dos fallas críticas conocidas como <strong>PHP2Shell</strong>. Bajo ciertas condiciones, permiten que alguien ejecute código en el servidor donde vive tu página sin necesidad de iniciar sesión.</p>
+<p>Si tu sitio usa PHP, toca revisar qué versión tiene, comprobar si está afectada y actualizar. Aquí va qué pasó, por qué pasa, qué riesgos hay y cómo mantener tu página protegida.</p>
 <h2>Qué pasó: dos fallas críticas y dos gobiernos diciendo «parcha o apaga»</h2>
-<p>Son dos vulnerabilidades, <strong>CVE-2026-109618</strong> y <strong>CVE-2026-109619</strong>, y las dos tienen una calificación de 9,2 sobre 10 (CVSS v4.0). Los parches salieron en las versiones <strong>8.5.12, 8.4.27, 8.3.36 y 8.2.35</strong>. La agencia de ciberseguridad de Estados Unidos (<a href="https://www.cisa.gov/news-events/alerts/2026/10/21/critical-vulnerabilities-php-require-immediate-patching" target="_blank" rel="noopener">CISA</a>) advirtió que afectan a las instalaciones de PHP que atienden peticiones web: Apache con mod_php, PHP-FPM, php-cgi, FrankenPHP y LiteSpeed.</p>
-<p>La alarma llegó desde arriba. El mismo día del parche, la <a href="https://x.com/NSACyber/status/2112903220209098897" target="_blank" rel="noopener">NSA escribió en X</a> que todas las organizaciones que usan PHP debían prepararse y que, si no podían actualizar de inmediato, la recomendación era <strong>sacar el sistema de línea</strong> hasta mitigarlo del todo. La misma noche, la primera ministra de Japón, Sanae Takaichi, <a href="https://x.com/takaichi_sanae/status/2112890642590564386" target="_blank" rel="noopener">publicó en X</a> una petición que el medio ITmedia calificó de inusual: revisar si los sitios públicos usan PHP, prepararse para aplicar el parche esa misma noche y, si era difícil hacerlo rápido, <strong>suspender temporalmente el sitio</strong> como medida válida para reducir el riesgo (traducción nuestra del japonés).</p>
-<p>No fue solo palabras. Según <a href="https://www.japantimes.co.jp/business/2026/10/22/tech/japan-php-vulnerabilities/" target="_blank" rel="noopener">The Japan Times</a>, el acceso público a parte de los sitios de los ministerios de Salud y Trabajo y de Finanzas se suspendió temporalmente, y también hubo bancos y empresas que apagaron sitios. El FBI y el centro de ciberseguridad del Reino Unido dieron guías parecidas, según <a href="https://www.newsweek.com/fbi-issues-advice-as-security-issue-hits-global-websites-12603155" target="_blank" rel="noopener">Newsweek</a>.</p>
+<p>PHP es el lenguaje en el que corren páginas dinámicas, tiendas en línea y aplicaciones de empresa. Está debajo de WordPress, Joomla y Drupal, y de miles de desarrollos a medida. Las dos fallas están en el propio PHP, no en un plugin ni en una plataforma concreta, por eso una web puede estar expuesta aunque funcione perfecto.</p>
+<p>Son <strong>CVE-2026-109618</strong> y <strong>CVE-2026-109619</strong>, y las dos tienen una calificación de 9,2 sobre 10 (CVSS v4.0). Los parches salieron en las versiones <strong>8.5.12, 8.4.27, 8.3.36 y 8.2.35</strong>. La agencia de ciberseguridad de Estados Unidos (<a href="https://www.cisa.gov/news-events/alerts/2026/10/21/critical-vulnerabilities-php-require-immediate-patching" target="_blank" rel="noopener">CISA</a>) advirtió que afectan a las instalaciones de PHP que atienden peticiones web: Apache con mod_php, PHP-FPM, php-cgi, FrankenPHP y LiteSpeed.</p>
+<p>La alarma llegó desde arriba. El mismo día del parche, la <a href="https://x.com/NSACyber/status/2112903220209098897" target="_blank" rel="noopener">NSA escribió en X</a> que todas las organizaciones que usan PHP debían prepararse y que, si no podían actualizar de inmediato, la recomendación era <strong>sacar el sistema de línea</strong> hasta mitigarlo del todo. Esa misma noche, la primera ministra de Japón, Sanae Takaichi, <a href="https://x.com/takaichi_sanae/status/2112890642590564386" target="_blank" rel="noopener">publicó en X</a> una petición que el medio ITmedia calificó de inusual: revisar si los sitios públicos usan PHP, prepararse para aplicar el parche esa noche y, si era difícil hacerlo rápido, <strong>suspender temporalmente el sitio</strong> como medida válida para reducir el riesgo (traducción nuestra del japonés).</p>
+<p>No fueron solo palabras. Según <a href="https://www.japantimes.co.jp/business/2026/10/22/tech/japan-php-vulnerabilities/" target="_blank" rel="noopener">The Japan Times</a>, el acceso público a parte de los sitios de los ministerios de Salud y Trabajo y de Finanzas se suspendió temporalmente, y también hubo bancos y empresas que apagaron sitios. El FBI y el centro de ciberseguridad del Reino Unido dieron guías parecidas, según <a href="https://www.newsweek.com/fbi-issues-advice-as-security-issue-hits-global-websites-12603155" target="_blank" rel="noopener">Newsweek</a>, y el servicio de salud de Inglaterra publicó su propia <a href="https://digital.nhs.uk/cyber-alerts/2026/cc-4875" target="_blank" rel="noopener">alerta</a>.</p>
 <p>Los investigadores de <a href="https://www.wiz.io/blog/php2shell-php-rce" target="_blank" rel="noopener">Wiz</a> compararon la falla con Heartbleed, el error de 2014 que sacudió a medio internet, y escribieron que está «entre las vulnerabilidades más graves descubiertas en PHP y, posiblemente, en la historia del software» (traducción nuestra). Y los ataques no esperaron: <a href="https://watchtowr.com/intelligence/php-remote-code-execution-php2shell/" target="_blank" rel="noopener">watchTowr</a> reportó explotación real el 21 de octubre en sus sistemas trampa, y otros equipos ubican los primeros intentos desde el 17, cuatro días antes del parche.</p>
 <p>Ahora, para no exagerar: el mismo watchTowr y <a href="https://www.rapid7.com/blog/post/etr-cve-2026-109618-and-cve-2026-109619-critical-unauthenticated-remote-code-execution-in-php/" target="_blank" rel="noopener">Rapid7</a> señalan que la mayoría de los exploits públicos que circulan no logran ejecutar código de forma fiable: cada uno apunta a una combinación concreta de sistema operativo, versión de PHP y servidor web. Eso no es un alivio, es una ventana. Lo que hoy es artesanal mañana se vuelve automático.</p>
 <aside class="cta-lectura">
@@ -1113,32 +1114,87 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 <p>Son errores de manejo de memoria, de los más difíciles de ver en código que lleva años funcionando. Varias fuentes los describen como un error que llevaba cerca de una década dormido. Y lo que cambió esta vez es quién lo encontró: según <a href="https://fortune.com/2026/10/21/ai-tools-discovered-the-php-vulnerability-that-could-take-down-70-of-the-internet-now-the-race-is-on-to-patch-it-before-ai-powered-hackers-attack/" target="_blank" rel="noopener">Fortune</a> y Wiz, fueron herramientas de IA. El crédito está en disputa entre varios equipos que dicen haberlo hallado por su cuenta, pero el dato de fondo no: <strong>una IA puede encontrar en semanas lo que a los humanos se les escapó durante años</strong>, y los atacantes tienen acceso a las mismas herramientas.</p>
 <p>Para un negocio, esto se traduce en algo concreto: el tiempo entre «se descubre la falla» y «alguien la usa contra tu sitio» se está acortando. Esperar al fin de mes para actualizar dejó de ser una opción razonable.</p>
 <p>Y una aclaración que evita un falso sentido de seguridad: tener WordPress en su última versión y los plugins al día <strong>no te protege de esto</strong>. La falla está debajo, en el lenguaje en el que corre todo lo demás. Wiz y la agencia Kyodo hablan de cerca de un 70 % de la web usando PHP, así que no es un problema de nicho.</p>
-<h2>Cómo saber si te afecta y qué hacer hoy, en este orden</h2>
+<h2>Que tu web esté expuesta no significa que ya la atacaron</h2>
+<p>Una vulnerabilidad no es un ataque: es una condición que alguien podría aprovechar. Pero conviene saber qué hay en juego si lo logra:</p>
+<ul>
+<li><strong>Acceso no autorizado al servidor.</strong> El atacante podría ejecutar instrucciones con los permisos del proceso vulnerable.</li>
+<li><strong>Exposición de información.</strong> Archivos de configuración, credenciales, llaves o datos a los que tenga acceso ese proceso. Algunos análisis también advierten de datos temporales que quedan en la memoria de PHP.</li>
+<li><strong>Cambios en tu página.</strong> Redirecciones, contenido que tú no publicaste o archivos maliciosos.</li>
+<li><strong>Interrupción del servicio.</strong> Un ataque puede tumbar tu web y las aplicaciones alojadas en el mismo servidor.</li>
+<li><strong>Costos para tu empresa.</strong> Recuperarse, perder la confianza de tus clientes y frenar procesos comerciales.</li>
+</ul>
+<p>El alcance real depende de los permisos, la configuración y los sistemas conectados. Por eso, además de actualizar, hay que revisar que no haya señales de una intrusión previa.</p>
+<h2>Qué versión de PHP debes tener</h2>
+<p>Los parches salieron solo para las ramas que todavía reciben soporte. Si tu instalación es de una de ellas, debes llegar como mínimo a la versión de esta tabla:</p>
+<div style="overflow-x:auto;margin-top:1.4rem">
+<table class="tcards">
+<thead>
+<tr> <th>Rama que usas</th> <th>Versión corregida</th> </tr> </thead>
+<tbody>
+<tr> <td data-label="Rama que usas">PHP 8.5</td> <td data-label="Versión corregida"><strong>8.5.12</strong></td> </tr>
+<tr> <td data-label="Rama que usas">PHP 8.4</td> <td data-label="Versión corregida"><strong>8.4.27</strong></td> </tr>
+<tr> <td data-label="Rama que usas">PHP 8.3</td> <td data-label="Versión corregida"><strong>8.3.36</strong></td> </tr>
+<tr> <td data-label="Rama que usas">PHP 8.2</td> <td data-label="Versión corregida"><strong>8.2.35</strong></td> </tr> </tbody> </table> </div>
+<p>Una versión anterior dentro de la misma rama, por ejemplo 8.3.35, está sin parchear.</p>
+<h3>Si tienes PHP 8.1 o anterior, no hay parche oficial</h3>
+<p>Esas versiones también están afectadas y el proyecto dejó de mantenerlas. Lo único que existe es lo que alguna distribución de Linux o un proveedor de soporte extendido decida respaldar por su cuenta. Hay muchos sitios ahí, casi siempre por la misma razón: un plugin o un desarrollo a medida que «se rompe» al subir de versión, y nadie quiso pagar el arreglo. Parece ahorro y funciona como deuda. Esta semana llegó el cobro. Migrar cuesta una fracción de lo que cuesta limpiar un sitio comprometido.</p>
+<h3>Y PHP 8.2 se acaba pronto</h3>
+<p>Según la <a href="https://www.php.net/supported-versions.php" target="_blank" rel="noopener">tabla oficial de versiones soportadas</a>, la rama 8.2 solo recibe parches de seguridad hasta el 31 de diciembre de 2026. Si estás ahí, instala el parche de hoy y planea el salto a una rama más nueva antes de que se acabe el año.</p>
+<h3>Descarga solo de fuentes oficiales</h3>
+<p>Si administras tu propio servidor, usa la <a href="https://www.php.net/downloads.php" target="_blank" rel="noopener">página oficial de descargas de PHP</a> o el gestor de paquetes de tu sistema, y evita instaladores de páginas desconocidas. Si tu web está en un hosting compartido o administrado, normalmente no tienes que instalar nada: el proveedor lo hace desde su infraestructura. Lo que sí debes pedirle es que active una versión corregida en el entorno que realmente ejecuta tu web.</p>
+<h2>Cómo comprobar qué versión usa tu web, aunque no seas técnico</h2>
+<h3>Si tu página usa WordPress</h3>
 <ol>
-<li><strong>Averigua tu versión de PHP.</strong> En la mayoría de los hostings compartidos está en el panel (en cPanel, «Select PHP Version» o «MultiPHP Manager»). Con servidor propio, <code>php -v</code>. Si nada de eso te suena, escríbele a quien te hospeda o a quien te hizo el sitio.</li>
-<li><strong>Compárala con las versiones corregidas:</strong> 8.5.12, 8.4.27, 8.3.36 y 8.2.35. Una versión anterior dentro de la misma rama, por ejemplo 8.3.35, está sin parchear.</li>
-<li><strong>Haz una copia de seguridad antes de tocar nada,</strong> y guárdala fuera del servidor. Si algo sale mal con la actualización, o si luego descubres que ya habían entrado, la vas a necesitar.</li>
-<li><strong>Actualiza, o pídele al hosting que lo haga, y reinicia PHP.</strong> Un servidor sigue expuesto hasta que se instala la versión corregida y se reinician los procesos de PHP. Instalar sin reiniciar no cuenta.</li>
-<li><strong>Si no puedes actualizar hoy,</strong> considera lo que pidieron la NSA y Japón: poner el sitio en mantenimiento hasta hacerlo. Un cortafuegos web (WAF) ayuda, y <a href="https://www.techmeme.com/261021/p32" target="_blank" rel="noopener">Cloudflare</a> activó reglas de protección por defecto antes de la divulgación pública, pero PHP mismo dice que ninguna configuración mitiga estas fallas por completo. Es un cinturón de emergencia, no el parche.</li>
+<li>Entra al panel de WordPress.</li>
+<li>Ve a <strong>Herramientas → Salud del sitio → Información</strong>.</li>
+<li>Abre el apartado <strong>Servidor</strong>.</li>
+<li>Busca la versión de PHP y compárala con la tabla de arriba.</li>
 </ol>
-<h2>Si tu versión de PHP ya no recibe parches, no hay parche</h2>
-<p>Los parches salieron para las ramas 8.5, 8.4, 8.3 y 8.2. Para PHP 8.1, 8.0 y 7.4 <strong>no hay versión oficial corregida</strong>: el proyecto dejó de mantenerlas. Si tu sitio corre en una de ellas, lo único que existe es lo que alguna distribución de Linux o un proveedor de soporte extendido decida respaldar por su cuenta.</p>
-<p>Hay muchos sitios en esas versiones, casi siempre por la misma razón: un plugin o un desarrollo a medida que «se rompe» al subir de versión, y nadie quiso pagar el arreglo. Parece ahorro y funciona como deuda. Esta semana llegó el cobro. Migrar de versión cuesta una fracción de lo que cuesta limpiar un sitio comprometido.</p>
+<p>La ruta puede cambiar un poco según el idioma o la versión de WordPress.</p>
+<h3>Si usas otro CMS o una web a medida</h3>
+<ol>
+<li>Entra al panel de tu hosting.</li>
+<li>Busca una sección llamada PHP, «Configuración de PHP» o «Selector de PHP» (en cPanel, «Select PHP Version» o «MultiPHP Manager»).</li>
+<li>Mira qué versión está asignada a tu dominio.</li>
+<li>Si no encuentras el dato, pídele confirmación por escrito al proveedor o a quien te hizo el sitio.</li>
+</ol>
+<p>Con servidor propio, <code>php -v</code> muestra la versión de la línea de comandos, que puede ser distinta de la que usa el servidor web. Comprueba también la del entorno que atiende las peticiones de tu página.</p>
+<h2>Cómo actualizar PHP sin romper tu web</h2>
+<p>Antes de tocar nada, haz una <strong>copia de seguridad guardada fuera del servidor</strong> y, si puedes, prueba el cambio en un entorno de pruebas. Comprueba que la versión elegida sea compatible con tu web, tus plugins, tus extensiones y tus dependencias. Si el servidor está expuesto, coordina una actualización urgente; no la pospongas por comodidad.</p>
+<h3>Con hosting administrado</h3>
+<ol>
+<li>Escribe al soporte técnico e indica que necesitas corregir CVE-2026-109618 y CVE-2026-109619.</li>
+<li>Pide la actualización a una versión corregida y compatible.</li>
+<li>Pide confirmación de que el cambio está activo para tu dominio y para todos sus entornos.</li>
+<li>Comprueba que tu web, tus formularios y tus funciones sigan trabajando.</li>
+</ol>
+<h3>Con servidor propio</h3>
+<ol>
+<li>Identifica todas las aplicaciones y versiones de PHP instaladas.</li>
+<li>Actualiza con el gestor de paquetes o el mecanismo oficial de tu sistema operativo.</li>
+<li>Reinicia o recarga los servicios para activar el cambio. Instalar sin reiniciar no cuenta: el servidor sigue expuesto hasta que los procesos de PHP se reinician.</li>
+<li>Verifica la versión efectiva del entorno web y revisa los registros de errores.</li>
+</ol>
+<p>Si no tienes experiencia administrando servidores, lo más sensato es coordinar esto con tu proveedor o con un profesional técnico.</p>
+<h3>Si hoy no puedes actualizar</h3>
+<p>Haz lo que pidieron la NSA y Japón: reduce la exposición, por ejemplo poniendo el sitio en mantenimiento, y consulta con tu responsable técnico cómo aislar el servicio hasta aplicar el parche. Un cortafuegos web (WAF) ayuda, y <a href="https://www.techmeme.com/261021/p32" target="_blank" rel="noopener">Cloudflare</a> activó reglas de protección por defecto antes de la divulgación pública, pero PHP mismo dice que ninguna configuración mitiga estas fallas por completo. Es un cinturón de emergencia, no el parche.</p>
 <h2>El segundo aviso, del 23 de octubre</h2>
 <p>Dos días después, PHP divulgó otra falla de ejecución remota. Según <a href="https://cert.europa.eu/publications/security-advisories/2026-018" target="_blank" rel="noopener">CERT-EU</a>, afecta solo a aplicaciones configuradas de forma poco habitual y el proyecto la considera de bajo riesgo, así que <strong>no habrá versión de emergencia</strong>: lo que recomiendan es mitigar. <a href="https://success.trendmicro.com/en-US/solution/KA-0024789" target="_blank" rel="noopener">Trend Micro</a> y <a href="https://aws.amazon.com/blogs/security/using-aws-waf-to-apply-mitigations-for-php2shell-rce-vulnerabilities-cve-2026-109618-and-cve-2026-109619/" target="_blank" rel="noopener">AWS</a> la identifican como CVE-2026-115560, relacionada con el seguimiento de la carga de archivos en sesiones, y coinciden en que el ajuste temporal es desactivar esa función con <code>session.upload_progress.enabled=0</code>.</p>
 <p>Casi ningún sitio de una pyme usa barras de progreso de subida basadas en sesiones, así que apagarlo no te quita nada. Pídeselo a quien administra el servidor mientras llega una corrección definitiva.</p>
-<h2>Cómo evitar que el próximo titular te agarre desprevenido</h2>
-<p>PHP2Shell pasará. Dentro de unos meses habrá otro titular con otro nombre, y quien esté preparado lo leerá con calma. Lo que prepara no es una herramienta mágica, son costumbres aburridas:</p>
-<ul>
-<li><strong>Usa una versión de PHP con soporte,</strong> y planea el salto de versión antes de que se acabe el soporte, no después.</li>
-<li><strong>Actualiza el CMS, los temas y los plugins,</strong> y borra los que no uses. Un plugin desactivado sigue siendo código que alguien puede atacar.</li>
-<li><strong>Copias de seguridad fuera del servidor y probadas.</strong> Una copia que nunca restauraste es una suposición, no una copia.</li>
-<li><strong>Acceso mínimo:</strong> cada persona con su usuario, verificación en dos pasos para los administradores, y permisos de archivos que no dejen al usuario del servidor escribir donde no debe. En WordPress, el editor de archivos del panel se puede desactivar.</li>
-<li><strong>Nada de PHP ejecutable en la carpeta de subidas,</strong> y ningún <code>phpinfo()</code> olvidado en producción: le regala al atacante el mapa del servidor.</li>
-<li><strong>Un hosting que te diga qué versión corres y te deje cambiarla.</strong> Si preguntas y no te responden, esa es la respuesta.</li>
-</ul>
+<h2>Cómo mantener tu web segura después del parche</h2>
+<p>PHP2Shell pasará. Dentro de unos meses habrá otro titular con otro nombre, y quien esté preparado lo leerá con calma. Lo que prepara no es una herramienta mágica, son costumbres aburridas.</p>
+<h3>Mantén todo actualizado</h3>
+<p>Revisa cada cierto tiempo la versión de PHP y su estado de soporte, el CMS, los temas, los plugins, los frameworks, el sistema operativo y las extensiones de terceros. Borra lo que no uses: un plugin desactivado sigue siendo código que alguien puede atacar. Y si un componente dejó de recibir soporte, busca una alternativa o planifica su reemplazo.</p>
+<h3>Protege los accesos</h3>
+<p>Contraseñas únicas y robustas, verificación en dos pasos para los administradores, y cada persona con su propio usuario y solo los permisos que necesita. Revisa también las cuentas administrativas, los accesos al hosting, las credenciales de la base de datos y los permisos de los archivos. En WordPress, el editor de archivos del panel se puede desactivar.</p>
+<h3>Haz copias que de verdad puedas recuperar</h3>
+<p>Guarda copias de los archivos y de la base de datos en un lugar separado del servidor principal, con una frecuencia que tenga sentido para tu negocio, y pruébalas restaurándolas. Una copia que nunca restauraste es una suposición, no una copia.</p>
+<h3>Cuida lo que recibe tu web</h3>
+<p>Si tu página deja subir documentos o imágenes, valida los tipos permitidos, limita los tamaños y evita que lo subido pueda ejecutarse como código: nada de PHP ejecutable en la carpeta de subidas. En formularios y aplicaciones, usa validaciones, consultas parametrizadas y permisos restringidos. Y no dejes un <code>phpinfo()</code> olvidado en producción: le regala al atacante el mapa del servidor.</p>
+<h3>Vigila</h3>
+<p>Un WAF, los límites de solicitudes, los registros de actividad y las alertas ayudan a detectar comportamientos raros. Complementan el mantenimiento; no convierten una versión vulnerable en una segura.</p>
 <h2>Si ya te atacaron: cómo parchar y limpiar de verdad</h2>
-<p>La respuesta incómoda: la ausencia de señales no prueba que estés limpio, porque quien ejecuta comandos como el usuario del servidor web puede hacerlo sin que nada se caiga. Estas son las pistas que los equipos de respuesta recomiendan revisar, empezando por el 17 de octubre:</p>
+<p>Si tu sitio estuvo expuesto, no des por hecho que todo está resuelto después de actualizar. La ausencia de señales tampoco prueba que estés limpio, porque quien ejecuta comandos como el usuario del servidor web puede hacerlo sin que nada se caiga. Estas son las pistas que los equipos de respuesta recomiendan revisar, empezando por el 17 de octubre:</p>
 <ul>
 <li>Archivos <code>.php</code> que no reconoces, sobre todo en carpetas de subidas, caché o temporales.</li>
 <li>Procesos del servidor web (php-fpm, apache) lanzando shells o descargando cosas con <code>curl</code> o <code>wget</code>.</li>
@@ -1154,21 +1210,27 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
 <li><strong>Prefiere restaurar sobre «limpiar a mano».</strong> Una copia anterior al 17 de octubre, más el núcleo y los plugins reinstalados desde su fuente oficial, es más seguro que cazar archivos infectados uno por uno.</li>
 <li><strong>Revisa lo que no se ve:</strong> usuarios, tareas programadas, el archivo <code>.htaccess</code> y el contenido de la base de datos, donde se suelen esconder enlaces y redirecciones.</li>
 <li><strong>Mira Google Search Console.</strong> Si el atacante inyectó spam, ahí aparece como problema de seguridad, y hay que pedir revisión cuando esté limpio.</li>
+<li><strong>Pide ayuda especializada</strong> si hay señales de intrusión: hace falta determinar el alcance y eliminar accesos que hayan quedado escondidos.</li>
 </ol>
 <p>Si en ese servidor había datos personales de clientes, hay una obligación aparte. En Colombia, quien trata datos personales debe reportar los incidentes de seguridad a la Superintendencia de Industria y Comercio a través del Registro Nacional de Bases de Datos, dentro de los 15 días hábiles siguientes a que los detecta, según lo que publican varias firmas de abogados. Verifica el plazo vigente con la SIC o con tu abogado antes de actuar.</p>
-<h2>La pregunta que nadie hace hasta que es tarde</h2>
-<p>Mucha gente cree que el hosting «se encarga de eso», y muchas agencias entregan el sitio, cobran el último pago y desaparecen. Cuando un parche así sale en la mañana de un miércoles, nadie en esa cadena tiene la obligación de avisarte, y en un hosting compartido barato puede que ni siquiera tengas permiso para subir de versión.</p>
-<p>Antes de que haya un incidente, pregunta quién parcha tu sitio, cada cuánto y qué pasa si sale un aviso como este un viernes en la noche. Pídelo por escrito. Si la respuesta es «nadie», ya sabes cuál es el verdadero riesgo.</p>
+<h2>Una web publicada también necesita mantenimiento</h2>
+<p>Una página no termina el día que sale a internet. Con el tiempo salen versiones nuevas, cambian las tecnologías y se descubren vulnerabilidades. Mucha gente cree que el hosting «se encarga de eso», y muchas agencias entregan el sitio, cobran el último pago y desaparecen. Cuando un parche así sale un miércoles en la mañana, nadie en esa cadena tiene la obligación de avisarte, y en un hosting compartido barato puede que ni siquiera tengas permiso para subir de versión.</p>
+<p>Antes de que haya un incidente, pregunta quién parcha tu sitio, cada cuánto y qué pasa si sale un aviso como este un viernes en la noche. Pídelo por escrito. Si no sabes qué versión de PHP usa tu página, quién la actualiza o cuándo se revisó su seguridad por última vez, empieza por ahí. Si la respuesta es «nadie», ya sabes cuál es el verdadero riesgo.</p>
 <h2>De dónde sale esta información</h2>
 <p>Todo lo de este artículo viene de fuentes que puedes abrir. Los mensajes en X están enlazados a su publicación original; las traducciones son nuestras.</p>
 <ul>
 <li><a href="https://x.com/NSACyber/status/2112903220209098897" target="_blank" rel="noopener">NSA Cyber en X</a> y su <a href="https://www.nsa.gov/Press-Room/Press-Releases-Statements/Press-Release-View/Article/4630238/nsa-advisory-php-updates/" target="_blank" rel="noopener">comunicado</a>.</li>
 <li><a href="https://x.com/takaichi_sanae/status/2112890642590564386" target="_blank" rel="noopener">Sanae Takaichi en X</a> y <a href="https://www.japantimes.co.jp/business/2026/10/22/tech/japan-php-vulnerabilities/" target="_blank" rel="noopener">The Japan Times</a>.</li>
-<li><a href="https://www.cisa.gov/news-events/alerts/2026/10/21/critical-vulnerabilities-php-require-immediate-patching" target="_blank" rel="noopener">CISA</a> y <a href="https://cert.europa.eu/publications/security-advisories/2026-018" target="_blank" rel="noopener">CERT-EU</a>.</li>
+<li><a href="https://www.php.net/downloads.php" target="_blank" rel="noopener">PHP: descargas oficiales</a> y <a href="https://www.php.net/supported-versions.php" target="_blank" rel="noopener">versiones soportadas</a>.</li>
+<li><a href="https://www.cisa.gov/news-events/alerts/2026/10/21/critical-vulnerabilities-php-require-immediate-patching" target="_blank" rel="noopener">CISA</a>, <a href="https://cert.europa.eu/publications/security-advisories/2026-018" target="_blank" rel="noopener">CERT-EU</a> y <a href="https://digital.nhs.uk/cyber-alerts/2026/cc-4875" target="_blank" rel="noopener">NHS England Digital</a>.</li>
 <li><a href="https://www.wiz.io/blog/php2shell-php-rce" target="_blank" rel="noopener">Wiz</a>, <a href="https://watchtowr.com/intelligence/php-remote-code-execution-php2shell/" target="_blank" rel="noopener">watchTowr</a> y <a href="https://www.rapid7.com/blog/post/etr-cve-2026-109618-and-cve-2026-109619-critical-unauthenticated-remote-code-execution-in-php/" target="_blank" rel="noopener">Rapid7</a>.</li>
+<li><a href="https://cloud.google.com/blog/products/identity-security/responding-to-core-php-vulnerabilities-cve-2026-109618-cve-2026-109619" target="_blank" rel="noopener">Google Cloud: cómo responder a PHP2Shell</a>.</li>
 <li><a href="https://fortune.com/2026/10/21/ai-tools-discovered-the-php-vulnerability-that-could-take-down-70-of-the-internet-now-the-race-is-on-to-patch-it-before-ai-powered-hackers-attack/" target="_blank" rel="noopener">Fortune</a>, <a href="https://www.newsweek.com/fbi-issues-advice-as-security-issue-hits-global-websites-12603155" target="_blank" rel="noopener">Newsweek</a> y <a href="https://www.techmeme.com/261021/p32" target="_blank" rel="noopener">Techmeme (Cloudflare)</a>.</li>
 <li><a href="https://success.trendmicro.com/en-US/solution/KA-0024789" target="_blank" rel="noopener">Trend Micro</a> y <a href="https://aws.amazon.com/blogs/security/using-aws-waf-to-apply-mitigations-for-php2shell-rce-vulnerabilities-cve-2026-109618-and-cve-2026-109619/" target="_blank" rel="noopener">AWS</a> (aviso del 23 de octubre).</li>
 </ul>
+<div class="nota">
+<p>Este artículo es informativo. La versión adecuada y el procedimiento de actualización dependen del entorno técnico de cada sitio. Ante indicios de intrusión, pide una evaluación especializada.</p>
+</div>
         </div>
       </div>
     </article>
