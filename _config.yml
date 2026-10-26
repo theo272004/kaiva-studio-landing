@@ -1,0 +1,10 @@
+# GitHub Pages publica este repo desde la rama main con Jekyll (modo «legacy»), no con
+# .github/workflows/deploy.yml. Ningún archivo usa Jekyll (no hay front matter ni Liquid):
+# esto solo sirve para que los documentos internos no se publiquen (auditoría del 2026-10-25).
+# CONTENT-PLAN.md contaba en público cómo se arman las variantes por país.
+exclude:
+  - CORREO-DE-CONFIRMACION.md
+  - DESIGN.md
+  - LEADS-GOOGLE-SHEETS.md
+  - MOTION.md
+  - blog/CONTENT-PLAN.md
