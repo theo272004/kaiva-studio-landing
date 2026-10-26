@@ -30,7 +30,7 @@ jobs:
       # describen el formulario, el correo y el diseño. llms.txt y robots.txt sí van.
       - name: Quitar documentos internos
         run: |
-          find . -path ./.git -prune -o -name '*.md' -type f -print -delete
+          find . -name '*.md' -type f -not -path './.git/*' -print -delete
           rm -rf .github .claude .agents
 
       - name: Upload artifact
