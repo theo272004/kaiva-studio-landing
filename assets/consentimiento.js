@@ -122,7 +122,24 @@
     window.gtag('config', MEDICION, INTERNO ? { anonymize_ip: true, traffic_type: 'internal' } : { anonymize_ip: true });
   }
 
+  /* Retirar el permiso tiene que borrar lo que ya se guardó (2026-10-25, auditoría): antes, quien
+     aceptaba y después rechazaba seguía con _ga, _clck y _fbp en su navegador. Se borran en el host
+     y en .kaivastudio.com, que es donde los dejan Google, Clarity y Meta. */
+  function borrarCookies(prefijos) {
+    var dominios = ['', location.hostname, '.' + location.hostname.replace(/^www\./, '')];
+    document.cookie.split(';').forEach(function (c) {
+      var nombre = c.split('=')[0].trim();
+      if (!prefijos.some(function (p) { return nombre.indexOf(p) === 0; })) return;
+      dominios.forEach(function (dom) {
+        document.cookie = nombre + '=; Max-Age=0; path=/' + (dom ? '; domain=' + dom : '');
+      });
+    });
+  }
+
   function aplicar(d) {
+    if (!d.analitica) borrarCookies(['_ga', '_gid', '_clck', '_clsk']);
+    if (!d.marketing) borrarCookies(['_fbp', '_fbc', '_gcl']);
+
     /* Lo de Google va aparte y va primero, pero si gtag no existe no se
        puede abortar la función entera: antes el `return` estaba arriba del
        todo y se llevaba por delante el aviso a los demás scripts, así que

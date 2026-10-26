@@ -25,6 +25,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Los documentos internos viven en el repo pero no se publican (2026-10-25, auditoría):
+      # CONTENT-PLAN.md contaba en público cómo se arman las variantes por país, y los demás
+      # describen el formulario, el correo y el diseño. llms.txt y robots.txt sí van.
+      - name: Quitar documentos internos
+        run: |
+          find . -path ./.git -prune -o -name '*.md' -type f -print -delete
+          rm -rf .github .claude .agents
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

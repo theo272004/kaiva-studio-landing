@@ -199,13 +199,15 @@
     n.appendChild(s);
   }
 
-  function listo() {
+  function listo(esBot) {
     despegar();
     form.classList.add('kv-enviado');
     mas.classList.add('listo');
     sellar();
     nota.textContent = 'Listo, recibimos tu correo. Te escribimos el mismo día o el siguiente, de lunes a viernes.';
-    if (typeof window.gtag === 'function') {
+    /* Al bot se le finge el éxito, pero no se cuenta como contacto (2026-10-25, auditoría:
+       el campo trampa disparaba generate_lead e inflaba las conversiones de Analytics). */
+    if (!esBot && typeof window.gtag === 'function') {
       window.gtag('event', 'generate_lead', { form: 'contacto', pagina: location.pathname, canal: leer('kv_utm_src') || 'directo', plan: leer('kv_plan') });
     }
   }
@@ -224,7 +226,7 @@
     if (!btn || btn.disabled || form.classList.contains('kv-enviado')) return;
 
     /* Un bot llenó el campo trampa: se finge el éxito y no se envía nada. */
-    if (trampa && trampa.value) { listo(); return; }
+    if (trampa && trampa.value) { listo(true); return; }
 
     var v = email.value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { fallo('Escribe un correo válido, por ejemplo nombre@tuempresa.com.'); email.focus(); return; }
