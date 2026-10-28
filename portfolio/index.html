@@ -1822,9 +1822,11 @@ html.lock-win{overflow:hidden}
   /* ---------- Contenido de las ventanas ----------
      Solo datos confirmados. Las pantallas son de los sitios reales, sección por sección,
      y las páginas de marca salen del brandbook que entregamos. */
-  var shots=function(p,n,ext){var a=[];for(var i=1;i<=n;i++)a.push('/assets/portfolio/'+p+'-'+(ext?String(i).padStart(2,'0'):i)+'.webp');return a};
+  // las carpetas se arman por partes: Google lee las cadenas con forma de ruta como enlaces y las rastreaba (404)
+  var PF=['','assets','portfolio',''].join('/');
+  var shots=function(p,n,ext){var a=[];for(var i=1;i<=n;i++)a.push(PF+p+'-'+(ext?String(i).padStart(2,'0'):i)+'.webp');return a};
   // súper mini brandbook de Thallo: sale de sus Canva; las páginas con animación van en video
-  var BB='/assets/portfolio/thallo-brandbook/';
+  var BB=PF+'thallo-brandbook'+'/';
   var SMB=[
     {v:'01-portada',loop:.6,alt:'Portada del brandbook de Thallo Digital: el símbolo iluminado sobre una pared'},
     {v:'02-nombre',alt:'El nombre: θάλλειν, brotar, florecer; en la mitología griega Thallo es la diosa de los brotes jóvenes'},
@@ -1864,7 +1866,7 @@ html.lock-win{overflow:hidden}
     {fn:tplGoals,cls:'tpl',alt:'Plantilla de presupuesto personal: metas de ahorro por trimestre, datos de ejemplo'}
   ];
   // logofolio: logos en gris para que combinen entre sí; símbolo y, al pasar el mouse, el logo completo
-  var LG='/assets/portfolio/logos/';
+  var LG=PF+'logos'+'/';
   var LOGOS=[
     ['Thallo Digital',LG+'thallo-iso.webp',800,800,LG+'thallo-logo.webp',920,240],
     ['SEO4Startups',LG+'seo4-iso.webp',200,200,LG+'seo4-logo.webp',980,200],
@@ -1885,7 +1887,7 @@ html.lock-win{overflow:hidden}
           '<figcaption>'+x[0]+'</figcaption></figure>'}).join('')+'</div>';
   }
   // ATEC: todas las diapositivas a la vista, como una mesa de trabajo; al tocar una se ve en grande
-  var ATEC={base:'/assets/portfolio/atec/',titles:['Portada: ATEC, estrategia de marca y propuesta gráfica','Benchmarking','Referentes de marcas del mercado','Posicionamiento en el mercado','Conclusiones generales','Concepto de marca','Concepto de marca','Promesa de marca','Arquetipo: Ciudadano y Bufón','¿A quién nos dirigimos?','Etiquetas y valores','Propuesta gráfica','Paleta de color','Moodboard','Moodboard','Moodboard','Moodboard','Moodboard','Cierre: Natto Estudio x Kaiva Studio']};
+  var ATEC={base:PF+'atec'+'/',titles:['Portada: ATEC, estrategia de marca y propuesta gráfica','Benchmarking','Referentes de marcas del mercado','Posicionamiento en el mercado','Conclusiones generales','Concepto de marca','Concepto de marca','Promesa de marca','Arquetipo: Ciudadano y Bufón','¿A quién nos dirigimos?','Etiquetas y valores','Propuesta gráfica','Paleta de color','Moodboard','Moodboard','Moodboard','Moodboard','Moodboard','Cierre: Natto Estudio x Kaiva Studio']};
   function gridHTML(g){
     return '<div class="atg-head"><b>ATEC · Estrategia de marca</b><span>'+g.titles.length+' páginas</span></div>'+
       '<div class="atg-grid">'+g.titles.map(function(t,i){var n=String(i+1).padStart(2,'0');
@@ -1893,7 +1895,7 @@ html.lock-win{overflow:hidden}
       '<div class="atg-view" hidden><button type="button" class="atg-x" aria-label="Volver a todas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="atg-nav prev" aria-label="Anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><img alt=""><button type="button" class="atg-nav next" aria-label="Siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="atg-count"></span></div>';
   }
   // libro: 28 páginas; se ve de a dos como un libro abierto (portada sola a la derecha, contraportada sola a la izquierda)
-  var BOOK={base:'/assets/portfolio/felinorte/',pages:30,title:'Descubriendo Felinorte'};
+  var BOOK={base:PF+'felinorte'+'/',pages:30,title:'Descubriendo Felinorte'};
   function bookHTML(){
     return '<div class="bk"><div class="bk-book" data-v="0">'+
       '<div class="bk-p bk-l"><img alt=""></div><div class="bk-p bk-r"><img alt=""></div>'+
