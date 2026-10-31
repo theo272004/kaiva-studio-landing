@@ -6,8 +6,10 @@
        mostrando para "diseno web barranquilla" aunque era una redireccion vacia.
        /software-a-medida/ y /branding/ volvieron el 2026-10-19 por la misma razon,
        como paginas de servicio para Colombia y Latinoamerica.
-       Las demas URLs de la web anterior (/servicios/, /diseno-web-barranquilla/...)
-       son redirecciones y no van aqui. -->
+       El 2026-10-31 se separaron: /diseno-web/ pasa a ser la general (Colombia y
+       Latinoamerica) y /diseno-web-barranquilla/ vuelve a ser pagina, con el
+       contenido local. Las demas URLs de la web anterior (/servicios/...) son
+       redirecciones y no van aqui. -->
 
   <url>
     <loc>https://kaivastudio.com/</loc>
@@ -18,9 +20,16 @@
 
   <url>
     <loc>https://kaivastudio.com/diseno-web/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://kaivastudio.com/diseno-web-barranquilla/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <url>
