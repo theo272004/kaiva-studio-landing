@@ -1667,7 +1667,10 @@ input,textarea{cursor:text}
       var s=[1,.72,.52,.4][Math.min(ad,3)];
       var x=[0,.56,.94,1.2][Math.min(ad,3)]*w*sg;
       it.style.transform='translate(-50%,-50%) translateX('+x+'px) scale('+s+')';
-      it.style.zIndex=String(10-ad);
+      // el que deja el centro se achica más rápido y va detrás: si no, por un instante es más grande que el que entra
+      // y se asoma debajo de él (se veía la franja de CS Travel bajo Thallo)
+      if(it.classList.contains('on')&&ad!==0){it.style.transitionDuration='.5s,.4s,.4s';clearTimeout(it._t);it._t=setTimeout(function(){it.style.transitionDuration=''},900)}
+      it.style.zIndex=String(ad===0?10:(it.classList.contains('on')?6:10-ad));
       // con tres proyectos se ven los tres (uno a cada lado), sin repetir ninguno
       it.style.opacity=ad>vis?'0':'1';
       it.style.pointerEvents=ad>vis?'none':'auto';

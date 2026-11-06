@@ -2165,7 +2165,7 @@ html.lock-win{overflow:hidden}
     function page(id){
       var pg=p.pages.filter(function(x){return x.id===id})[0]||p.pages[0];
       o.body.querySelectorAll('.pw-pages button').forEach(function(b){b.classList.toggle('on',b.dataset.id===pg.id)});
-      o.body.querySelector('.pw-main').innerHTML=screensHTML(pg);o.fitC=!!pg.html;if(pg.html)setTimeout(function(){shrink(o)},620);o.live=pg.live||p.live;watchLive(o.body);watchDeck(o.body);watchGrid(o.body);watchBook(o.body);watchGrid(o.body);
+      o.body.querySelector('.pw-main').innerHTML=screensHTML(pg);o.fitC=!!pg.html;if(pg.html){var t0=o.el.offsetTop;shrink(o,true);var dt=o.el.offsetTop-t0,oy=parseFloat(o.el.style.getPropertyValue('--oy'));if(dt&&!isNaN(oy))o.el.style.setProperty('--oy',(oy-dt)+'px');setTimeout(function(){shrink(o)},620)}o.live=pg.live||p.live;watchLive(o.body);watchDeck(o.body);watchGrid(o.body);watchBook(o.body);watchGrid(o.body);
     }
     if(fresh){
       o.title.textContent=p.name;
