@@ -144,6 +144,7 @@ se comparten — la redacción, no.
 | 19| 2026-10-12  | Marketing   | E-E-A-T: cómo demuestra una pyme sin años de trayectoria que tiene experiencia y confianza | Marketing y SEO | Publicado (escrito el 2026-09-22, sin subir hasta el 2026-10-12) |
 | 20| 2026-09-23  | Localizado  | Mejores agencias de diseño web en **Lima**                        | Cómo elegir      | Publicado  |
 | 20b| 2026-10-24 | Seguridad   | Vulnerabilidad de PHP (PHP2Shell): qué pasó, por qué y cómo proteger tu sitio | Seguridad web | Escrito, pendiente de publicar |
+| 20c| 2026-11-14 | Correo      | Caída de Outlook y Microsoft 365 (12-14 nov 2026): qué pasó y el formulario que depende solo del correo | Correo | Publicado |
 | 21| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
 | 22| pendiente   | Marketing   | Reseñas de Google: cuántas necesitas, qué tan rápido responder, y el efecto real en el ranking local | Marketing y SEO | Pendiente |
 | 23| pendiente   | Localizado  | Cuánto cuesta una página web en **Costa Rica**                    | Precios          | Pendiente  |
@@ -177,6 +178,7 @@ se comparten — la redacción, no.
 | 51| pendiente   | IA          | Reporte/noticia relevante de la semana (investigar el día de publicación) | IA y tecnología | Pendiente |
 | 52| pendiente   | Marketing   | El efecto real de las estrellas de reseña en el CTR: cuánto sube el clic un punto extra de calificación, con datos reales | Marketing y SEO | Pendiente |
 | 53| pendiente   | Localizado  | Mejores agencias de diseño web en **Guadalajara**                 | Cómo elegir      | Pendiente  |
+| 54| pendiente   | Marketing   | Formularios de contacto que pierden clientes en silencio: dónde queda el mensaje cuando falla el correo | Marketing y SEO | Pendiente |
 
 Cuando la cola llegue al final, seguir el mismo patrón de tercios: más países
 (Guatemala, República Dominicana, Uruguay...), más ciudades (Buenos Aires,
