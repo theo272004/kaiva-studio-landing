@@ -54,6 +54,11 @@ sector, no tarifas de Kaiva.
 
 ## Recursos
 
+- [Caída de Outlook y Microsoft 365 (noviembre de 2026)](https://kaivastudio.com/blog/caida-de-outlook-microsoft-365-que-paso/):
+  qué pasó entre el 12 y el 14 de noviembre de 2026, la causa que dio Microsoft (un problema en una ampliación
+  de capacidad de su red, sin indicios de ataque), por qué los correos llegaron tarde pero no se perdieron
+  (reintentos de entrega ampliados a 48 horas), y por qué el riesgo real está en los formularios de contacto que
+  solo envían un correo: el caso del propio formulario de Kaiva Studio y cinco cosas para revisar.
 - [Vulnerabilidad de PHP (PHP2Shell)](https://kaivastudio.com/blog/vulnerabilidad-php-php2shell-como-proteger-tu-sitio/):
   qué pasó con las fallas críticas CVE-2026-109618 y CVE-2026-109619 (9,2 sobre 10), parchadas el 21 de
   octubre de 2026 en PHP 8.5.12, 8.4.27, 8.3.36 y 8.2.35, y por qué la NSA y la primera ministra de Japón
