@@ -616,7 +616,7 @@ window.KV_EN = {
 "Pedidos":"Orders",
 "Pedidos por día":"Orders per day",
 "Piezas de marca, ilustración y editorial":"Brand, illustration and editorial pieces",
-"Piezas de varios proyectos: identidades, ilustraciones, un libro y estrategia de marca. Toca una para verla de cerca.":"Pieces from several projects: identities, illustrations, a book and brand strategy. Tap one to see it up close.",
+"Piezas de varios proyectos: identidades, ilustraciones, un libro y estrategia de marca.":"Pieces from several projects: identities, illustrations, a book and brand strategy.",
 "Plantilla de factura o documento":"Invoice or document template",
 "Plataforma a medida de CS Travel Group para sus aliados":"CS Travel Group's custom platform for its partners",
 "Plataforma a medida para aliados":"Custom platform for partners",
