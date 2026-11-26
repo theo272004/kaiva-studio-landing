@@ -12,8 +12,9 @@
    Ahora hay un solo archivo. Cada envío va al panel
    (diagnostico.kaivastudio.com/api/contacto.php), que guarda el contacto
    con su canal y manda los dos correos —la confirmación a quien escribió y
-   el aviso al equipo— por el correo de Hostinger. Una copia va también a la
-   hoja de Google. EmailJS queda solo de emergencia, si el panel no responde.
+   el aviso al equipo— por el correo de Hostinger. La copia en la hoja de
+   Google también la hace el panel, ya no el navegador (2026-11-25). EmailJS
+   queda solo de emergencia, si el panel no responde.
    Solo si fallan los dos se pide escribir por WhatsApp.
 
    También manda `generate_lead` a Analytics. La portada nueva lo había
@@ -31,7 +32,6 @@
   if (!form) return;
 
   var CRM = 'https://diagnostico.kaivastudio.com/api/contacto.php';
-  var HOJA_LEADS = 'https://script.google.com/macros/s/AKfycbwqEv37I6bl8g7xdZxrTHgMWswDPAGO6bDbHH70JgLFeqhfLwE0NrJEc_iGTnU-zwEZTA/exec';
   var EJS = { service: 'service_94uqq2e', template: 'template_brvipe9', key: '7bRjr4NU9L0Y5gDsy', endpoint: 'https://api.emailjs.com/api/v1.0/email/send' };
   var FALLO = 'No pudimos enviarlo. Escríbenos a info@kaivastudio.com o por WhatsApp al +57 302 413 7374.';
 
@@ -263,13 +263,6 @@
       btn.textContent = etiqueta;
       fallo(FALLO);
     };
-
-    /* text/plain a propósito: así el navegador no pide el OPTIONS previo, que
-       Apps Script no sabe responder. Es respaldo: su fallo no cuenta. */
-    json(HOJA_LEADS, {
-      nombre: '', correo: v, telefono: '', interes: 'Agendar llamada (' + canal + ')', mensaje: mensaje,
-      origen: location.href, referente: document.referrer || 'directo', autorizacion: autorizada
-    }, 'text/plain;charset=utf-8').catch(function () {});
 
     /* EL PANEL ES EL CAMINO. Guarda el contacto, le manda la confirmación a
        quien escribió y el aviso al equipo, los dos desde info@kaivastudio.com
