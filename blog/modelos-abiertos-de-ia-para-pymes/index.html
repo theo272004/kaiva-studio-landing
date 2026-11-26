@@ -35,9 +35,9 @@
        se pegan las dos últimas palabras con un espacio que no se parte. -->
   <script>document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('p,li,dd,figcaption,blockquote,small,label,td,h1,h2,h3,.desc').forEach(function(e){var w=document.createTreeWalker(e,4),n,l=null;while(n=w.nextNode())if(n.nodeValue.trim())l=n;if(!l||e.textContent.trim().split(/\s+/).length<3)return;var o=l.nodeValue;l.nodeValue=o.replace(/ (\S+\s*)$/,'\u00a0$1');if(e.scrollWidth>e.clientWidth+1)l.nodeValue=o})})</script>
 
-  <title>Modelos abiertos de IA (DeepSeek, Qwen, Llama): qué cambia para una pyme</title>
+  <title>DeepSeek vs Qwen y Llama: costos reales y qué elegir en una pyme</title>
   <meta name="description"
-    content="DeepSeek V4-Flash, Qwen 3.8-Max y Llama hacen las tareas normales de un negocio por una fracción de lo que cuesta un modelo de punta. Actualizado a agosto de 2026.">
+    content="¿Cuál es más caro entre Qwen y DeepSeek? Precios reales por millón de tokens, diferencias de licencia (MIT y Apache 2.0) y qué conviene usar en tu empresa.">
   <link rel="canonical" href="https://kaivastudio.com/blog/modelos-abiertos-de-ia-para-pymes/">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#FBFBFB">
@@ -46,13 +46,13 @@
   <meta property="og:site_name" content="Kaiva Studio">
   <meta property="og:locale" content="es_CO">
   <meta property="og:url" content="https://kaivastudio.com/blog/modelos-abiertos-de-ia-para-pymes/">
-  <meta property="og:title" content="Modelos abiertos de IA (DeepSeek, Qwen, Llama): qué cambia para una pyme">
+  <meta property="og:title" content="DeepSeek vs Qwen y Llama: costos reales y qué elegir en una pyme">
   <meta property="og:description"
     content="DeepSeek V4-Flash, Qwen 3.8-Max y Llama hacen las tareas normales de un negocio por una fracción de lo que cuesta un modelo de punta.">
   <meta property="og:image" content="https://kaivastudio.com/assets/blog/ia.webp">
   <meta property="article:published_time" content="2026-08-02">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Modelos abiertos de IA (DeepSeek, Qwen, Llama): qué cambia para una pyme">
+  <meta name="twitter:title" content="DeepSeek vs Qwen y Llama: costos reales y qué elegir en una pyme">
   <meta name="twitter:image" content="https://kaivastudio.com/assets/blog/ia.webp">
 
   <script type="application/ld+json">
@@ -63,9 +63,9 @@
       "@type": "BlogPosting",
       "@id": "https://kaivastudio.com/blog/modelos-abiertos-de-ia-para-pymes/#post",
       "headline": "Modelos abiertos de IA (DeepSeek, Qwen, Llama): qué cambia para una pyme",
-      "description": "DeepSeek V4-Flash, Qwen 3.8-Max y Llama hacen las tareas normales de un negocio por una fracción de lo que cuesta un modelo de punta. Actualizado a agosto de 2026.",
+      "description": "¿Cuál es más caro entre Qwen y DeepSeek? Precios reales por millón de tokens, diferencias de licencia (MIT y Apache 2.0) y qué conviene usar en tu empresa.",
       "datePublished": "2026-08-02",
-      "dateModified": "2026-08-08",
+      "dateModified": "2026-11-25",
       "inLanguage": "es-CO",
       "image": "https://kaivastudio.com/assets/blog/ia.webp",
       "mainEntityOfPage": "https://kaivastudio.com/blog/modelos-abiertos-de-ia-para-pymes/",
@@ -103,6 +103,14 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Por token, sí, y por un margen amplio. DeepSeek V4-Flash cobra 0,14 dólares por millón de tokens de entrada y 0,28 de salida; Gemini 3.6 Flash, que es cerrado, cobra 1,50 y 7,50 por lo mismo. La diferencia se nota sobre todo en tareas de alto volumen: resúmenes automáticos, clasificación de correos, primeras respuestas de soporte. En una consulta suelta no se nota nada, porque las dos cuestan una fracción de centavo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es más caro entre Qwen y DeepSeek?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Por API, DeepSeek V4-Flash cobra 0,14 dólares por millón de tokens de entrada y 0,28 de salida, mientras que Qwen 3.8-Max cobra 2 y 6: entre catorce y veintiún veces más. Si se corren los pesos en un equipo propio (Qwen bajo Apache 2.0, DeepSeek bajo MIT) ya no se paga por token sino por el hardware, y eso solo compensa con mucho volumen. En la factura pesa más cuántos tokens necesita cada modelo para terminar la tarea que el precio por token."
           }
         },
         {
@@ -1078,6 +1086,8 @@ input,textarea{cursor:text}
 <p>Qwen, del lado chino de Alibaba, se volvió una referencia para quien necesita atender a clientes en varios idiomas sin pagar de más: las versiones que ya tienen los pesos publicados salen con licencia Apache 2.0, que permite uso comercial sin regalías, algo que no todos los modelos ofrecen. Llama, de Meta, sigue siendo el modelo abierto más desplegado dentro de empresas grandes, justamente porque llegó primero y el ecosistema de herramientas alrededor ya está maduro.</p>
 <div class="nota">
 <p><strong>Lo que estos nombres no significan para ti:</strong> no hace falta que sepas cuál es "mejor" en abstracto, igual que no necesitas saber qué procesador tiene tu laptop para usarla. Lo que importa es que la herramienta que uses —<a href="/blog/que-es-un-agente-de-ia/">un chatbot de soporte</a>, un asistente de redacción, un buscador interno— probablemente corre sobre uno de estos modelos por debajo, sin que la marca que te lo vende te lo diga.</p> </div>
+<h2>¿Cuál es más caro entre Qwen y DeepSeek?</h2>
+<p>Depende de qué versión compares y de cómo la pagues. Por API, DeepSeek V4-Flash cobra <strong>0,14 dólares por millón de tokens</strong> de entrada y 0,28 de salida; Qwen 3.8-Max cobra 2 y 6 por lo mismo, entre catorce y veintiún veces más. Si en cambio corres los pesos en tu propio equipo —Qwen bajo Apache 2.0, DeepSeek bajo MIT—, ya no pagas por token sino por el hardware, y eso solo compensa con mucho volumen, como se ve en la siguiente sección. Y ojo: lo que más pesa en la factura no es el precio por token sino cuántos tokens necesita cada modelo para terminar la misma tarea.</p>
 <h2>¿Debería tu negocio instalar uno de estos modelos?</h2>
 <p>Casi seguro que no directamente. Autoalojar un modelo abierto —tenerlo corriendo en tu propio servidor— exige comprar o rentar tarjetas gráficas costosas y a alguien que las mantenga. Eso solo compensa cuando el volumen de consultas es altísimo y constante, algo que aplica a pocas empresas medianas y a casi ninguna pyme.</p>
 <p>El hardware necesario bajó mucho desde que se escribió esto: con <a href="/blog/qwen-3-8-27b-ia-local/">Qwen3.8-27B ya cabe un modelo bueno en una tarjeta de consumo</a>. La conclusión, sin embargo, no cambia — hicimos la cuenta con nuestro propio consumo y el punto de equilibrio está alrededor de quinientos mensajes diarios.</p>
