@@ -31,7 +31,7 @@ jobs:
       - name: Quitar documentos internos
         run: |
           find . -name '*.md' -type f -not -path './.git/*' -print -delete
-          rm -rf .github .claude .agents
+          rm -rf .github .claude .agents scripts
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

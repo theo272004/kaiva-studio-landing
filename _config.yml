@@ -8,3 +8,4 @@ exclude:
   - LEADS-GOOGLE-SHEETS.md
   - MOTION.md
   - blog/CONTENT-PLAN.md
+  - scripts
