@@ -26,7 +26,7 @@
       wait_for_update: 500
     });
   </script>
-  <script defer src="/assets/consentimiento.js?v=20261005"></script>
+  <script defer src="/assets/consentimiento.js?v=20261125"></script>
   <script defer src="/assets/eventos.js?v=20261012"></script>
   <script defer src="/assets/clarity.js?v=20260729"></script>
   <!-- Regla de la casa: ningún texto termina con una palabra sola en la última línea.
@@ -1264,7 +1264,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
       <ol class="dw-pasos">
         <li><span>01</span><h3>Una llamada de 20 minutos</h3><p>Nos cuentas qué vendes y a quién. Si la página que tienes se arregla, te lo decimos. La consulta no cuesta nada.</p></li>
         <li><span>02</span><h3>Propuesta por escrito</h3><p>Con lo que incluye, las fechas y el valor en pesos colombianos. Sin precios sorpresa después.</p></li>
-        <li><span>03</span><h3>Diseño que apruebas</h3><p>Te mostramos cada pantalla y ajustamos sobre lo que ves, no sobre descripciones, hasta que te guste.</p></li>
+        <li><span>03</span><h3>Diseño que apruebas</h3><p>Te mostramos cada pantalla y ajustamos sobre lo que ves, no sobre descripciones, con dos rondas de ajustes incluidas antes de pasar a código.</p></li>
         <li><span>04</span><h3>Programación y publicación</h3><p>La programamos, la probamos en dispositivos reales, la publicamos en tu dominio y la dejamos midiendo.</p></li>
       </ol>
     </section>
@@ -1298,7 +1298,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
         <li><time>Junio de 2025</time><h3>La accesibilidad pasó a ser ley</h3><p>En la Unión Europea las tiendas y servicios digitales tienen que ser accesibles, también los de fuera que vendan allá.</p></li>
         <li><time>Ahora</time><h3>Responde una IA por ti</h3><p>Cada vez más gente le pregunta a ChatGPT en vez de buscar, y la respuesta se arma con lo que encuentra escrito de ti. Lo que no está donde la máquina lee, para la máquina no existe.</p></li>
       </ol>
-      <p class="dw-mas">¿Tu página está al día? <a href="/diagnostico/">Revísala gratis en menos de un minuto <svg><use href="#i-arrow"/></svg></a></p>
+      <p class="dw-mas">¿Tu página está al día? <a href="#contacto">Pide una revisión gratuita de tu sitio <svg><use href="#i-arrow"/></svg></a></p>
     </section>
 
     <section class="block" id="faq" aria-labelledby="faq-t">
@@ -1359,9 +1359,24 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
   <!-- ============ CIERRE ============ -->
   <footer class="final" id="contacto">
     <div class="final-core">
+      <div class="note-wrap" id="note" aria-hidden="true">
+        <div class="note-shadow"><i></i></div>
+        <div class="sticky"><b>¿Tienes un proyecto?</b><span>Cuéntanos qué necesitas.<br><i>— Kaiva Studio</i></span></div>
+      </div>
       <h2><span class="dim">Hablemos de</span> tu página web</h2>
       <p>Cuéntanos qué vendes y a quién. Con eso te decimos si necesitas una web nueva o si la que tienes se arregla. Respondemos el mismo día hábil.</p>
-      <div class="actions"><a class="btn btn-white" href="/agendar/">Agendar llamada</a><a class="btn btn-ghost" href="https://wa.me/573024137374" target="_blank" rel="noopener">WhatsApp <svg><use href="#i-wa"/></svg></a></div>
+      <form class="mail-form" id="mailForm" novalidate>
+        <label class="sr-only" for="email">Tu correo empresarial</label>
+        <input id="email" name="email" type="email" placeholder="Tu correo empresarial" autocomplete="email" required>
+        <input class="hp" type="text" id="cWebsite" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit">Agendar llamada</button>
+      </form>
+      <label class="consent" for="cPrivacy"><input type="checkbox" id="cPrivacy" required> <span>Autorizo a Kaiva Studio a tratar mis datos para responder mi solicitud, según la <a href="/privacidad/">política de privacidad</a>.</span></label>
+      <p class="form-note" id="formNote" aria-live="polite">Te contestamos el mismo día o el siguiente, de lunes a viernes, de 8:00 a. m. a 6:00 p. m.</p>
+      <div class="contacts">
+        <a href="mailto:info@kaivastudio.com">info@kaivastudio.com</a>
+        <a href="https://wa.me/573024137374" target="_blank" rel="noopener">WhatsApp +57 302 413 7374</a>
+      </div>
     </div>
     <div class="foot">
       <a class="logo" href="/#top"><img src="/assets/inicio/logo-kaiva.png" alt="Kaiva Studio" width="299" height="125" loading="lazy"></a>
@@ -1379,7 +1394,7 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     </div>
     <div class="legal">
       <span>© 2026 Kaiva Studio · Barranquilla, Colombia</span>
-      <span><a href="/privacidad/">Privacidad</a> · <a href="/terminos/">Términos</a></span>
+      <span><a href="/privacidad/">Privacidad</a> · <a href="/terminos/">Términos</a> · <a href="/cookies/">Cookies</a> · <a href="/cookies/" data-kv-cookies>Preferencias de cookies</a></span>
     </div>
   </footer>
 </div>
@@ -1524,5 +1539,6 @@ html.has-cursor input,html.has-cursor textarea{cursor:text!important}
     }
   })();
 </script>
+<script src="/assets/contacto.js?v=4" defer></script>
 </body>
 </html>
