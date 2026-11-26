@@ -35,9 +35,9 @@
        se pegan las dos últimas palabras con un espacio que no se parte. -->
   <script>document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('p,li,dd,figcaption,blockquote,small,label,td,h1,h2,h3,.desc').forEach(function(e){var w=document.createTreeWalker(e,4),n,l=null;while(n=w.nextNode())if(n.nodeValue.trim())l=n;if(!l||e.textContent.trim().split(/\s+/).length<3)return;var o=l.nodeValue;l.nodeValue=o.replace(/ (\S+\s*)$/,'\u00a0$1');if(e.scrollWidth>e.clientWidth+1)l.nodeValue=o})})</script>
 
-  <title>De dónde vienen tus visitas: lo que Analytics no te está diciendo</title>
+  <title>De dónde vienen tus visitas: lo que Google Analytics oculta</title>
   <meta name="description"
-    content="Por qué «Directo» casi nunca es directo, dónde esconde Analytics el tráfico de Instagram y de ChatGPT, y cómo etiquetar tus enlaces para verlo. Comprobado midiendo nuestro sitio.">
+    content="Por qué «Directo» casi nunca es directo, dónde esconde GA4 las visitas de Instagram y ChatGPT, y cómo etiquetar tus enlaces para medirlas bien.">
   <link rel="canonical" href="https://kaivastudio.com/blog/de-donde-vienen-las-visitas-de-mi-web/">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#FBFBFB">
@@ -46,13 +46,13 @@
   <meta property="og:site_name" content="Kaiva Studio">
   <meta property="og:locale" content="es_CO">
   <meta property="og:url" content="https://kaivastudio.com/blog/de-donde-vienen-las-visitas-de-mi-web/">
-  <meta property="og:title" content="De dónde vienen tus visitas: lo que Analytics no te está diciendo">
+  <meta property="og:title" content="De dónde vienen tus visitas: lo que Google Analytics oculta">
   <meta property="og:description"
     content="Por qué «Directo» casi nunca es directo y dónde esconde Analytics el tráfico de Instagram y de ChatGPT. Lo que encontramos midiendo nuestro propio sitio.">
   <meta property="og:image" content="https://kaivastudio.com/assets/blog/visibilidad.webp">
   <meta property="article:published_time" content="2026-08-06">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="De dónde vienen tus visitas: lo que Analytics no te está diciendo">
+  <meta name="twitter:title" content="De dónde vienen tus visitas: lo que Google Analytics oculta">
   <meta name="twitter:image" content="https://kaivastudio.com/assets/blog/visibilidad.webp">
 
   <script type="application/ld+json">
@@ -63,7 +63,7 @@
       "@type": "BlogPosting",
       "@id": "https://kaivastudio.com/blog/de-donde-vienen-las-visitas-de-mi-web/#post",
       "headline": "De dónde vienen tus visitas: lo que Analytics no te está diciendo",
-      "description": "Por qué «Directo» casi nunca es directo, dónde esconde Analytics el tráfico de Instagram y de ChatGPT, y cómo etiquetar tus enlaces para verlo. Comprobado midiendo nuestro sitio.",
+      "description": "Por qué «Directo» casi nunca es directo, dónde esconde GA4 las visitas de Instagram y ChatGPT, y cómo etiquetar tus enlaces para medirlas bien.",
       "datePublished": "2026-08-06",
       "dateModified": "2026-08-06",
       "inLanguage": "es-CO",
