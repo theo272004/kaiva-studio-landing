@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /panel/
+Disallow: /anterior/
+Disallow: /nueva/
 
 Sitemap: https://kaivastudio.com/sitemap.xml
