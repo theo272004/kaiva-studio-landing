@@ -27,7 +27,7 @@
       wait_for_update: 500
     });
   </script>
-  <script defer src="/assets/consentimiento.js?v=20261023"></script>
+  <script defer src="/assets/consentimiento.js?v=20261125"></script>
   <script defer src="/assets/eventos.js?v=20261012"></script>
   <script defer src="/assets/clarity.js?v=20261019"></script>
   <script defer src="/assets/meta-pixel.js?v=20261023"></script>
@@ -982,7 +982,7 @@ input,textarea{cursor:text}
       <header class="art-head">
         <nav class="art-crumbs" aria-label="Ruta de navegación"><a href="/#top">Inicio</a><span aria-hidden="true">/</span><b>Legal</b></nav>
         <h1>Política de Privacidad y Tratamiento de Datos Personales<span class="dot">.</span></h1>
-        <p class="art-meta"><span>Última actualización: 23 de octubre de 2026</span></p>
+        <p class="art-meta"><span>Última actualización: 25 de noviembre de 2026</span></p>
         <nav class="legal-links" aria-label="Páginas legales">
           <a href="/privacidad/" aria-current="page"><span class="ll-l">Política de privacidad</span><span class="ll-s">Privacidad</span></a>
           <a href="/terminos/"><span class="ll-l">Términos y condiciones</span><span class="ll-s">Términos</span></a>
@@ -1017,8 +1017,9 @@ input,textarea{cursor:text}
         <tbody>
           <tr>
             <td>Formulario de contacto</td>
-            <td>Nombre, correo electrónico, teléfono (opcional), servicio de interés y el mensaje
-              que escribas</td>
+            <td>Correo electrónico, actividad de tu marca, perfil de Instagram, página web (opcional),
+              plan o página de interés, parámetros de origen (UTM/referente) y fecha y hora de tu
+              autorización</td>
             <td>Responder tu solicitud, preparar una propuesta y dar seguimiento comercial</td>
           </tr>
           <tr>
@@ -1056,9 +1057,14 @@ input,textarea{cursor:text}
     <p>No vendemos ni cedemos tus datos. Para operar el sitio usamos proveedores que actúan como
       encargados del tratamiento y que pueden almacenar información fuera de Colombia:</p>
     <ul>
-      <li><strong>EmailJS</strong> — entrega a nuestro correo los mensajes del formulario.</li>
-      <li><strong>Google (Sheets y Analytics)</strong> — registro de solicitudes y estadísticas de
-        uso del sitio.</li>
+      <li><strong>Kaiva OS / Servidor propio (VPS en Hostinger)</strong> — almacena las solicitudes de
+        contacto y envía el acuse de recibo y el aviso al equipo desde
+        <code>info@kaivastudio.com</code>.</li>
+      <li><strong>Google (Sheets y Analytics)</strong> — respaldo del registro de solicitudes y
+        estadísticas agregadas de uso del sitio (Analytics solo si autorizas las cookies de
+        análisis).</li>
+      <li><strong>EmailJS</strong> — canal de respaldo únicamente si nuestro servidor principal no
+        responde, para evitar la pérdida de tu mensaje.</li>
       <li><strong>Microsoft Clarity</strong> — el mapa de calor, solo si autorizaste las cookies de
         análisis. Enmascara el contenido de los campos de los formularios, así que lo que escribes
         no queda en la grabación.</li>
@@ -1144,7 +1150,7 @@ input,textarea{cursor:text}
     </div>
     <div class="legal">
       <span>© 2026 Kaiva Studio · Barranquilla, Colombia</span>
-      <span><a href="/privacidad/">Privacidad</a> · <a href="/terminos/">Términos</a></span>
+      <span><a href="/privacidad/">Privacidad</a> · <a href="/terminos/">Términos</a> · <a href="/cookies/">Cookies</a> · <a href="/cookies/" data-kv-cookies>Preferencias de cookies</a></span>
     </div>
   </footer>
 </div>
